@@ -1,0 +1,10 @@
+syntax: glob
+desktop.ini
+*.suo
+*.sln.cache
+*.orig
+*.user
+*Thumbs.db
+syntax: regexp
+(?i)Src/.*bin/.*
+(?i)Src/.*obj/.*
