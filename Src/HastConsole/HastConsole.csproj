@@ -35,12 +35,6 @@
     <Reference Include="CommandLine">
       <HintPath>..\..\Libs\libcmdline\CommandLine.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.Decompiler">
-      <HintPath>..\..\Libs\ILSpy\ICSharpCode.Decompiler.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\..\Libs\ILSpy\Mono.Cecil.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

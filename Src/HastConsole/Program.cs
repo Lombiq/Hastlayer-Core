@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
-using ICSharpCode.Decompiler;
-using ICSharpCode.Decompiler.Ast;
-using Mono.Cecil;
+using HastTranspiler;
+using HastTranspiler.Vhdl;
 
 namespace HastConsole
 {
@@ -24,17 +23,20 @@ namespace HastConsole
                 return;
             }
 
+            var transpiler = new Transpiler(new TranspilingEngine());
+            var csharp = @"
+                public class SimpleClass
+                {
+                    public int CalcMethod(int number)
+                    {
+                        return number + 5;
+                    }
+                }";
 
-            var path = Path.GetFullPath(options.InputFilePath);
+            var vhdl = transpiler.Transpile(csharp, Language.CSharp);
 
-            var assembly = AssemblyDefinition.ReadAssembly(path);
-            var astBuilder = new AstBuilder(new DecompilerContext(assembly.MainModule)) { DecompileMethodBodies = true };
-            astBuilder.AddAssembly(assembly, onlyAssemblyLevel: false);
-            astBuilder.RunTransformations();
-            var output = new StringWriter();
-            astBuilder.GenerateCode(new PlainTextOutput(output));
-            var code = output.ToString();
-            Console.Write(code);
+            //var vhdl = transpiler.Transpile(options.InputFilePath);
+            Console.Write(vhdl);
             Console.ReadKey();
         }
     }
