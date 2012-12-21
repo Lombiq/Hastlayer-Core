@@ -39,19 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Architecture.cs" />
-    <Compile Include="Document.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="IVhdlElement.cs" />
-    <Compile Include="Library.cs" />
-    <Compile Include="Port.cs" />
+    <Compile Include="ClockUtility.cs" />
+    <Compile Include="Representation\Architecture.cs" />
+    <Compile Include="Representation\ElementCollection.cs" />
+    <Compile Include="Representation\Module.cs" />
+    <Compile Include="Representation\Entity.cs" />
+    <Compile Include="Representation\IVhdlElement.cs" />
+    <Compile Include="Representation\Library.cs" />
+    <Compile Include="Representation\Port.cs" />
+    <Compile Include="Representation\Process.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataType.cs" />
-    <Compile Include="RangedDataType.cs" />
-    <Compile Include="Raw.cs" />
-    <Compile Include="SizedDataType.cs" />
-    <Compile Include="Type.cs" />
-    <Compile Include="VhdlElementEnumerableExtensions.cs" />
+    <Compile Include="Representation\DataType.cs" />
+    <Compile Include="Representation\RangedDataType.cs" />
+    <Compile Include="Representation\Raw.cs" />
+    <Compile Include="Representation\SizedDataType.cs" />
+    <Compile Include="Representation\Type.cs" />
+    <Compile Include="Representation\Variable.cs" />
+    <Compile Include="Representation\VhdlElementEnumerableExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

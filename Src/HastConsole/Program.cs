@@ -29,7 +29,10 @@ namespace HastConsole
                 {
                     public int CalcMethod(int number)
                     {
-                        return number + 5;
+                        var temp = 10;
+                        temp += number + 15;
+                        temp++;
+                        return temp;
                     }
                 }";
 

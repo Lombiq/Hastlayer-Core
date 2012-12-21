@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VhdlBuilder
+namespace VhdlBuilder.Representation
 {
     public enum PortMode
     {
@@ -18,7 +18,7 @@ namespace VhdlBuilder
     {
         public string Name { get; set; }
         public PortMode Mode { get; set; }
-        public DataType Type { get; set; }
+        public DataType DataType { get; set; }
 
         public string ToVhdl()
         {
@@ -28,7 +28,7 @@ namespace VhdlBuilder
                 .Append(": ")
                 .Append(Mode)
                 .Append(" ")
-                .Append(Type.ToVhdl())
+                .Append(DataType.ToVhdl())
                 .Append(";");
 
             return builder.ToString();

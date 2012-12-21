@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VhdlBuilder
+namespace VhdlBuilder.Representation
 {
     /// <summary>
     /// Represents an entity in a VHDL source

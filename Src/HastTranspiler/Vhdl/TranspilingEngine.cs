@@ -1,21 +1,32 @@
 ﻿using System.Collections.Generic;
 using ICSharpCode.NRefactory.CSharp;
-using VhdlBuilder;
+using VhdlBuilder.Representation;
 using System.Linq;
+using VhdlBuilder;
 
 namespace HastTranspiler.Vhdl
 {
     public class TranspilingEngine : ITranspilingEngine
     {
         private readonly Dictionary<string, Entity> _entities = new Dictionary<string, Entity>();
+        private readonly Module _module = new Module { Architecture = new Architecture { Name = "Behavioural" } };
 
 
         public string Transpile(SyntaxTree syntaxTree)
         {
-            var z = new Library().ToString();
-            var y = z;
             Traverse(syntaxTree);
-            return "";
+
+            _module.Libraries.Add(new Library
+            {
+                Name = "IEEE",
+                Uses = new List<string> { "IEEE.STD_LOGIC_1164.ALL", "IEEE.STD_LOGIC_ARITH.ALL", "IEEE.STD_LOGIC_UNSIGNED.ALL" }
+            });
+
+            _module.Architecture.Entity = _module.Entity;
+
+            ClockUtility.AddClockSignal(_module, "clk");
+
+            return _module.ToVhdl();
         }
 
 
@@ -30,56 +41,13 @@ namespace HastTranspiler.Vhdl
                 case NodeType.Member:
                     if (node is MethodDeclaration)
                     {
-                        var methodDeclaration = node as MethodDeclaration;
+                        var method = node as MethodDeclaration;
 
-                        // Every public class's public method is a circuit interface
-                        if (methodDeclaration.Modifiers == Modifiers.Public && methodDeclaration.Parent is TypeDeclaration)
-                        {
-                            var parent = methodDeclaration.Parent as TypeDeclaration;
+                        var entity = MethodTranspiler.CreateEntityIfPublic(method);
 
-                            if (parent.ClassType == ClassType.Class &&  parent.Modifiers == Modifiers.Public)
-                            {
-                                var ports = new List<Port>();
+                        if (entity != null) _module.Entity = entity;
 
-                                if (methodDeclaration.ReturnType is PrimitiveType)
-                                {
-                                    var type = methodDeclaration.ReturnType as PrimitiveType;
-                                    if (type.KnownTypeCode != ICSharpCode.NRefactory.TypeSystem.KnownTypeCode.Void)
-                                    {
-                                        var vhdlType = PrimitiveTypeConverter.Convert(type.KnownTypeCode);
-                                        ports.Add(new Port { Type = vhdlType, Mode = PortMode.Out, Name = "Output" }); 
-                                    }
-                                }
-
-                                if (methodDeclaration.Parameters.Count != 0)
-                                {
-                                    foreach (var parameter in methodDeclaration.Parameters)
-                                    {
-                                        DataType vhdlType;
-
-                                        if (parameter.Type is PrimitiveType) vhdlType = PrimitiveTypeConverter.Convert(((PrimitiveType)parameter.Type).KnownTypeCode);
-                                        else vhdlType = null;
-
-                                        ports.Add(new Port { Type = vhdlType, Mode = PortMode.In, Name = parameter.Name });
-                                    }
-                                }
-
-                                var fullName = parent.Name + "." + methodDeclaration.Name;
-                                _entities[fullName] = new Entity { Name = fullName, Ports = ports.ToArray() };
-
-                                var z = new Document
-                                {
-                                    Entity = _entities[fullName],
-                                    Architecture = new Architecture
-                                    {
-                                        Entity = _entities[fullName],
-                                        Name = "Behavioural"
-                                    }
-                                }.ToVhdl();
-
-                                var y = z;
-                            }
-                        }
+                        _module.Architecture.Body.Add(MethodTranspiler.Transpile(method));
                     }
                     break;
                 case NodeType.Pattern:

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VhdlBuilder
+namespace VhdlBuilder.Representation
 {
     public class SizedDataType : DataType
     {

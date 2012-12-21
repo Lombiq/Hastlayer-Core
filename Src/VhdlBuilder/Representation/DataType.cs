@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VhdlBuilder
+namespace VhdlBuilder.Representation
 {
     /// <summary>
     /// VHDL object data type, e.g. std_logic or std_logic_vector.

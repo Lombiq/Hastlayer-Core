@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VhdlBuilder
+namespace VhdlBuilder.Representation
 {
     public class Architecture : IVhdlElement
     {
         public string Name { get; set; }
         public Entity Entity { get; set; }
-        public IVhdlElement[] Declarations { get; set; }
-        public IVhdlElement[] Body { get; set; }
+        public List<IVhdlElement> Declarations { get; set; }
+        public List<IVhdlElement> Body { get; set; }
 
 
         public Architecture()
         {
-            Declarations = new IVhdlElement[] { };
-            Body = new IVhdlElement[] { };
+            Declarations = new List<IVhdlElement>();
+            Body = new List<IVhdlElement>();
         }
 
 

@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
-using VhdlBuilder;
+using VhdlBuilder.Representation;
 
 namespace HastTranspiler.Vhdl
 {
-    static class PrimitiveTypeConverter
+    static class TypeConverter
     {
-        public static DataType Convert(KnownTypeCode typeCode)
+        public static DataType Convert(AstType type)
+        {
+            if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
+            return null;
+        }
+
+        public static DataType ConvertPrimitive(KnownTypeCode typeCode)
         {
             switch (typeCode)
             {
@@ -61,9 +68,10 @@ namespace HastTranspiler.Vhdl
                 case KnownTypeCode.Int16:
                     return new RangedDataType { Name = "integer", RangeMin = -32768, RangeMax = 32767 };
                 case KnownTypeCode.Int32:
-                    return new RangedDataType { Name = "integer", RangeMin = -2147483648, RangeMax = 2147483647 };
+                    // The lower barrier for VHDL integers is one shorter...
+                    return new RangedDataType { Name = "integer", RangeMin = -2147483647, RangeMax = 2147483647 };
                 case KnownTypeCode.Int64:
-                    return new RangedDataType { Name = "integer", RangeMin = -2147483648, RangeMax = 2147483647 };
+                    return new RangedDataType { Name = "integer", RangeMin = -2147483647, RangeMax = 2147483647 };
                 case KnownTypeCode.IntPtr:
                     break;
                 case KnownTypeCode.MulticastDelegate:
@@ -97,7 +105,7 @@ namespace HastTranspiler.Vhdl
                 case KnownTypeCode.ValueType:
                     break;
                 case KnownTypeCode.Void:
-                    break;
+                    return new DataType { Name = "void" };
                 default:
                     break;
             }

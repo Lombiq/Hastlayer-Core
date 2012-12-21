@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VhdlBuilder
+namespace VhdlBuilder.Representation
 {
-    public class Document : IVhdlElement
+    public class Module : IVhdlElement
     {
-        public Library[] Libraries { get; set; }
+        public List<Library> Libraries { get; set; }
         public Entity Entity { get; set; }
         public Architecture Architecture { get; set; }
 
 
-        public Document()
+        public Module()
         {
-            Libraries = new Library[] { };
+            Libraries = new List<Library>();
         }
 
 

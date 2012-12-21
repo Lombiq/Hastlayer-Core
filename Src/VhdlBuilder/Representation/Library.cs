@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VhdlBuilder
+namespace VhdlBuilder.Representation
 {
     public class Library : IVhdlElement
     {
         public string Name { get; set; }
-        public string[] Uses { get; set; }
+        public List<string> Uses { get; set; }
 
 
         public Library()
         {
-            Uses = new string[0];
+            Uses = new List<string>();
         }
 
 
@@ -22,7 +22,7 @@ namespace VhdlBuilder
         {
             if (String.IsNullOrEmpty(Name)) return String.Empty;
 
-            var builder = new StringBuilder(3 + Uses.Length * 3);
+            var builder = new StringBuilder(3 + Uses.Count * 3);
 
             builder
                 .Append("library ")
