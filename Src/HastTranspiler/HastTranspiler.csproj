@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IHardwareDefinition.cs" />
     <Compile Include="ITranspiler.cs" />
     <Compile Include="ITranspilingEngine.cs" />
     <Compile Include="Transpiler.cs" />
@@ -60,9 +61,9 @@
     <Compile Include="TranspilerExtensions.cs" />
     <Compile Include="Vhdl\ExpressionTranspiler.cs" />
     <Compile Include="Vhdl\MethodTranspiler.cs" />
+    <Compile Include="Vhdl\NameUtility.cs" />
     <Compile Include="Vhdl\TypeConverter.cs" />
     <Compile Include="Vhdl\TranspilingEngine.cs" />
-    <Compile Include="Vhdl\VhdlManifest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VhdlBuilder\VhdlBuilder.csproj">

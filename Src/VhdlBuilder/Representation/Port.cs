@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VhdlBuilder;
 
 namespace VhdlBuilder.Representation
 {
@@ -24,7 +25,7 @@ namespace VhdlBuilder.Representation
         {
             var builder = new StringBuilder();
             builder
-                .Append(Name)
+                .Append(Name.ToVhdlId())
                 .Append(": ")
                 .Append(Mode)
                 .Append(" ")

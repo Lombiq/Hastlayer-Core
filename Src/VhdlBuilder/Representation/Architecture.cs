@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VhdlBuilder;
 
 namespace VhdlBuilder.Representation
 {
@@ -27,15 +28,15 @@ namespace VhdlBuilder.Representation
 
             builder
                 .Append("architecture ")
-                .Append(Name)
+                .Append(Name.ToVhdlId())
                 .Append(" of ")
-                .Append(Entity.Name)
+                .Append(Entity.Name.ToVhdlId())
                 .Append(" is ")
                 .Append(Declarations.ToVhdl())
                 .Append(" begin ")
                 .Append(Body.ToVhdl())
                 .Append(" end ")
-                .Append(Name)
+                .Append(Name.ToVhdlId())
                 .Append(";");
 
             return builder.ToString();

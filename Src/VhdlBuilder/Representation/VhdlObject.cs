@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VhdlBuilder;
 
 namespace VhdlBuilder.Representation
 {
-    public class Variable : IVhdlElement
+    public enum ObjectType
     {
+        Constant,
+        Variable,
+        Signal,
+        File
+    }
+
+    public class VhdlObject : IVhdlElement
+    {
+        public ObjectType Type { get; set; }
         public string Name { get; set; }
         public DataType DataType { get; set; }
         public string Value { get; set; }
@@ -17,8 +27,9 @@ namespace VhdlBuilder.Representation
             var builder = new StringBuilder(8);
 
             builder
-                .Append("variable ")
-                .Append(Name)
+                .Append(Type)
+                .Append(" ")
+                .Append(Name.ToVhdlId())
                 .Append(": ")
                 .Append(DataType.ToVhdl());
 

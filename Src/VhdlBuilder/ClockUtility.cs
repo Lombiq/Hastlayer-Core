@@ -21,7 +21,7 @@ namespace VhdlBuilder
             foreach (var process in module.Architecture.Body.Where(element => element is Process).Select(element => element as Process))
             {
                 process.SesitivityList.Add(clkName);
-                process.Body.Insert(0, new Raw { Source = "if " + clkName + "'event and " + clkName + " = '1' then " });
+                process.Body.Insert(0, new Raw { Source = "if rising_edge(" + clkName.ToVhdlId() + ") then " });
                 process.Body.Add(new Raw { Source = "end if;" });
             }
         }

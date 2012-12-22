@@ -18,25 +18,26 @@ namespace HastTranspiler.Vhdl
 
             if (parent.ClassType != ClassType.Class || parent.Modifiers != Modifiers.Public) return null;
 
+            var methodFullName = NameUtility.GetFullName(method);
             var ports = new List<Port>();
 
             var returnType = TypeConverter.Convert(method.ReturnType);
-            if (returnType.Name != "void") ports.Add(new Port { DataType = returnType, Mode = PortMode.Out, Name = "output" });
+            if (returnType.Name != "void") ports.Add(new Port { DataType = returnType, Mode = PortMode.Out, Name = methodFullName + ".output" });
 
             if (method.Parameters.Count != 0)
             {
                 foreach (var parameter in method.Parameters)
                 {
-                    ports.Add(new Port { DataType = TypeConverter.Convert(parameter.Type), Mode = PortMode.In, Name = parameter.Name });
+                    ports.Add(new Port { DataType = TypeConverter.Convert(parameter.Type), Mode = PortMode.In, Name = NameUtility.GetFullName(parameter) });
                 }
             }
 
-            return new Entity { Name = parent.Name + "_" + method.Name, Ports = ports };
+            return new Entity { Name = methodFullName, Ports = ports };
         }
 
         public static IVhdlElement Transpile(MethodDeclaration method)
         {
-            var process = new Process();
+            var process = new Process { Name = method.Name };
 
             foreach (var statement in method.Body.Statements)
             {
@@ -44,8 +45,9 @@ namespace HastTranspiler.Vhdl
                 {
                     var variableStatement = statement as VariableDeclarationStatement;
                     
-                    process.Declarations.Add(new Variable
+                    process.Declarations.Add(new VhdlObject
                     {
+                        Type = ObjectType.Variable,
                         Name = String.Join(", ", variableStatement.Variables.Select(v => v.Name)),
                         DataType = TypeConverter.Convert(variableStatement.Type)
                     });

@@ -7,13 +7,13 @@ using VhdlBuilder;
 
 namespace VhdlBuilder.Representation
 {
-    public class Entity : IVhdlElement
+    public class Component : IVhdlElement
     {
         public string Name { get; set; }
         public List<Port> Ports { get; set; }
 
 
-        public Entity()
+        public Component()
         {
             Ports = new List<Port>();
         }
@@ -26,15 +26,12 @@ namespace VhdlBuilder.Representation
             var portsVhdl = Ports.ToVhdl();
 
             builder
-                .Append("entity ")
+                .Append("component ")
                 .Append(Name.ToVhdlId())
-                .Append(" is ")
-                .Append("port(")
+                .Append(" port(")
                 .Append(portsVhdl.Substring(0, portsVhdl.Length - 1)) // Cutting off trailing semicolon
                 .Append(");")
-                .Append("end ")
-                .Append(Name.ToVhdlId())
-                .Append(";");
+                .Append("end component;");
 
             return builder.ToString();
         }

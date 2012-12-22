@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 using VhdlBuilder.Representation;
+using VhdlBuilder;
 
 namespace HastTranspiler.Vhdl
 {
@@ -22,8 +23,7 @@ namespace HastTranspiler.Vhdl
             }
             else if (expression is IdentifierExpression)
             {
-                var identifier = expression as IdentifierExpression;
-                raw.Source = identifier.Identifier;
+                raw.Source = NameUtility.GetFullName(expression).ToVhdlId();
             }
             else if (expression is PrimitiveExpression)
             {

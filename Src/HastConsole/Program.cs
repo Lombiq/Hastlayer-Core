@@ -25,14 +25,17 @@ namespace HastConsole
 
             var transpiler = new Transpiler(new TranspilingEngine());
             var csharp = @"
-                public class SimpleClass
+                namespace TestNamespace
                 {
-                    public int CalcMethod(int number)
+                    public class SimpleClass
                     {
-                        var temp = 10;
-                        temp += number + 15;
-                        temp++;
-                        return temp;
+                        public int CalcMethod(int number)
+                        {
+                            var temp = 10;
+                            temp += number + 15;
+                            temp++;
+                            return temp;
+                        }
                     }
                 }";
 
