@@ -7,6 +7,8 @@ using HastTranspiler.Vhdl.SubTranspilers;
 using ICSharpCode.NRefactory.CSharp;
 using VhdlBuilder;
 using VhdlBuilder.Representation;
+using VhdlBuilder.Representation.Declaration;
+using VhdlBuilder.Representation.Expression;
 
 namespace HastTranspiler.Vhdl
 {
@@ -48,7 +50,7 @@ namespace HastTranspiler.Vhdl
 
             var callIdTable = ProcessInterfaceMethods();
 
-            ClockUtility.AddClockSignalToProcesses(module, "clk");
+            ProcessUtility.AddClockToProcesses(module, "clk");
 
             return new HardwareDefinition(new VhdlManifest { TopModule = module }, callIdTable);
         }
@@ -140,9 +142,8 @@ namespace HastTranspiler.Vhdl
                 foreach (var port in method.Ports)
                 {
                     var variableName = port.Name + ".var";
-                    proxyProcess.Declarations.Add(new DataObject
+                    proxyProcess.Declarations.Add(new Variable
                     {
-                        Type = ObjectType.Variable,
                         Name = variableName,
                         DataType = port.DataType
                     });

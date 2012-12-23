@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
-using VhdlBuilder.Representation;
+using VhdlBuilder.Representation.Declaration;
 using VhdlBuilder;
+using VhdlBuilder.Representation.Expression;
+using VhdlBuilder.Representation;
 
 namespace HastTranspiler.Vhdl.SubTranspilers
 {

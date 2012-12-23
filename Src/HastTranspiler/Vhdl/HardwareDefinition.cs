@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using VhdlBuilder.Representation;
+using VhdlBuilder.Representation.Declaration;
 
 namespace HastTranspiler.Vhdl
 {

@@ -5,18 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using VhdlBuilder;
 
-namespace VhdlBuilder.Representation
+namespace VhdlBuilder.Representation.Declaration
 {
-    public class Architecture : IVhdlElement
+    public class Process : ISubProgram
     {
         public string Name { get; set; }
-        public Entity Entity { get; set; }
+        public List<IDataObject> SesitivityList { get; set; }
         public List<IVhdlElement> Declarations { get; set; }
         public List<IVhdlElement> Body { get; set; }
 
 
-        public Architecture()
+        public Process()
         {
+            SesitivityList = new List<IDataObject>();
             Declarations = new List<IVhdlElement>();
             Body = new List<IVhdlElement>();
         }
@@ -24,18 +25,18 @@ namespace VhdlBuilder.Representation
 
         public string ToVhdl()
         {
+            var vhdl = "";
+
+            if (!string.IsNullOrEmpty(Name)) vhdl += Name.ToVhdlId() + ": ";
+
             return
-                "architecture " +
-                Name.ToVhdlId() +
-                " of " +
-                Entity.Name.ToVhdlId() +
-                " is " +
+                "process (" +
+                string.Join("; ", SesitivityList.Select(signal => signal.Name.ToVhdlId())) +
+                ") " +
                 Declarations.ToVhdl() +
                 " begin " +
                 Body.ToVhdl() +
-                " end " +
-                Name.ToVhdlId() +
-                ";";
+                " end process;";
         }
     }
 }

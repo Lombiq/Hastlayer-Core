@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VhdlBuilder;
+using VhdlBuilder.Representation.Expression;
 
-namespace VhdlBuilder.Representation
+namespace VhdlBuilder.Representation.Declaration
 {
     public class Enum : DataType
     {

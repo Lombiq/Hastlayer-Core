@@ -41,6 +41,11 @@ namespace HastConsole
                         {
                             return 5;
                         }
+
+                        int Two()
+                        {
+                            return 2;
+                        }
                     }
                 }";
 

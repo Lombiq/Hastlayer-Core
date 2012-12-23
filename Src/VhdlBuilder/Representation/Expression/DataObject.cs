@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using VhdlBuilder.Representation.Declaration;
 
-namespace HastTranspiler.Vhdl
+namespace VhdlBuilder.Representation.Expression
 {
-    public class HardwareRepresentationComposer
+    public class DataObject : DataObjectBase
     {
-        public void Compose(params HardwareDefinition[] hardwareDefinitions)
+        public override string ToVhdl()
         {
+            return Name.ToVhdlId();
         }
     }
 }

@@ -39,38 +39,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClockUtility.cs" />
-    <Compile Include="Representation\Architecture.cs" />
-    <Compile Include="Representation\Case.cs" />
-    <Compile Include="Representation\Component.cs" />
-    <Compile Include="Representation\ComponentInstance.cs" />
-    <Compile Include="Representation\DataTypes.cs" />
-    <Compile Include="Representation\ElementCollection.cs" />
-    <Compile Include="Representation\Function.cs" />
-    <Compile Include="Representation\IDataObject.cs" />
-    <Compile Include="Representation\Identifier.cs" />
-    <Compile Include="Representation\ISubProgram.cs" />
-    <Compile Include="Representation\Module.cs" />
-    <Compile Include="Representation\Entity.cs" />
+    <Compile Include="Representation\Declaration\DataObjectBase.cs" />
+    <Compile Include="Representation\Declaration\Signal.cs" />
+    <Compile Include="Representation\Declaration\Variable.cs" />
+    <Compile Include="Representation\Expression\Assignment.cs" />
+    <Compile Include="Representation\Expression\DataObject.cs" />
+    <Compile Include="ProcessUtility.cs" />
+    <Compile Include="Representation\Declaration\Architecture.cs" />
+    <Compile Include="Representation\Expression\Case.cs" />
+    <Compile Include="Representation\Declaration\Component.cs" />
+    <Compile Include="Representation\Declaration\ComponentInstance.cs" />
+    <Compile Include="Representation\Declaration\DataTypes.cs" />
+    <Compile Include="Representation\Declaration\ElementCollection.cs" />
+    <Compile Include="Representation\Declaration\Function.cs" />
+    <Compile Include="Representation\Declaration\IDataObject.cs" />
+    <Compile Include="Representation\Declaration\Identifier.cs" />
+    <Compile Include="Representation\Declaration\ISubProgram.cs" />
+    <Compile Include="Representation\Declaration\Module.cs" />
+    <Compile Include="Representation\Declaration\Entity.cs" />
     <Compile Include="Representation\IVhdlElement.cs" />
-    <Compile Include="Representation\Library.cs" />
-    <Compile Include="Representation\Procedure.cs" />
-    <Compile Include="Representation\Process.cs" />
+    <Compile Include="Representation\Declaration\Library.cs" />
+    <Compile Include="Representation\Declaration\Procedure.cs" />
+    <Compile Include="Representation\Declaration\Process.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Representation\DataType.cs" />
-    <Compile Include="Representation\RangedDataType.cs" />
+    <Compile Include="Representation\Declaration\DataType.cs" />
+    <Compile Include="Representation\Declaration\RangedDataType.cs" />
     <Compile Include="Representation\Raw.cs" />
-    <Compile Include="Representation\Record.cs" />
-    <Compile Include="Representation\SizedDataType.cs" />
-    <Compile Include="Representation\String.cs" />
+    <Compile Include="Representation\Declaration\Record.cs" />
+    <Compile Include="Representation\Declaration\SizedDataType.cs" />
+    <Compile Include="Representation\Declaration\String.cs" />
     <Compile Include="Representation\Terminated.cs" />
-    <Compile Include="Representation\Value.cs" />
+    <Compile Include="Representation\Expression\Value.cs" />
     <Compile Include="StringExtensions.cs" />
-    <Compile Include="Representation\Enum.cs" />
-    <Compile Include="Representation\DataObject.cs" />
+    <Compile Include="Representation\Declaration\Enum.cs" />
+    <Compile Include="Representation\Declaration\DataObject.cs" />
     <Compile Include="VhdlElementEnumerableExtensions.cs" />
-    <Compile Include="Representation\VhdlManifest.cs" />
+    <Compile Include="Representation\Declaration\VhdlManifest.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

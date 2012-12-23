@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VhdlBuilder.Representation;
+using VhdlBuilder.Representation.Declaration;
 
 namespace VhdlBuilder
 {

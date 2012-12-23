@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VhdlBuilder;
+using VhdlBuilder.Representation.Declaration;
 
 namespace VhdlBuilder.Representation
 {
     /// <summary>
-    /// Any VHDL entity that's not implemented as a class
+    /// Any VHDL code that's not implemented as a class
     /// </summary>
     public class Raw : IVhdlElement
     {

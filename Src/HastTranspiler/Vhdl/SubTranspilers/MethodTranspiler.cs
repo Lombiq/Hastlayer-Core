@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
-using VhdlBuilder.Representation;
+using VhdlBuilder.Representation.Declaration;
 using VhdlBuilder;
+using VhdlBuilder.Representation.Expression;
+using VhdlBuilder.Representation;
 
 namespace HastTranspiler.Vhdl.SubTranspilers
 {
@@ -56,7 +58,8 @@ namespace HastTranspiler.Vhdl.SubTranspilers
             ProcedureParameter outputParam = null;
             if (returnType.Name != "void")
             {
-                outputParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output" };
+                // Since this way there's a dot in the output var's name, it can't clash with normal variables.
+                outputParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.variable" };
 
                 if (interfaceMethod != null)
                 {
@@ -97,9 +100,9 @@ namespace HastTranspiler.Vhdl.SubTranspilers
                 {
                     var variableStatement = statement as VariableDeclarationStatement;
 
-                    procedure.Declarations.Add(new DataObject
+                    procedure.Declarations.Add(new VhdlBuilder.Representation.Declaration.DataObject
                     {
-                        Type = ObjectType.Variable,
+                        ObjectType = ObjectType.Variable,
                         Name = string.Join(", ", variableStatement.Variables.Select(v => v.Name)),
                         DataType = _typeConverter.Convert(variableStatement.Type)
                     });

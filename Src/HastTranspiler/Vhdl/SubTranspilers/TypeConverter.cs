@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
-using VhdlBuilder.Representation;
+using VhdlBuilder.Representation.Declaration;
 
 namespace HastTranspiler.Vhdl.SubTranspilers
 {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VhdlBuilder;
 
-namespace VhdlBuilder.Representation
+namespace VhdlBuilder.Representation.Declaration
 {
     public enum DataTypeCategory
     {

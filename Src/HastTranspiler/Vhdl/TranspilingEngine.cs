@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using ICSharpCode.NRefactory.CSharp;
-using VhdlBuilder.Representation;
+using VhdlBuilder.Representation.Declaration;
 using System.Linq;
 using VhdlBuilder;
 using HastTranspiler.Vhdl.SubTranspilers;

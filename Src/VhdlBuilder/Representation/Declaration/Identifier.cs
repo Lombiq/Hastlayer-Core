@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VhdlBuilder.Representation
+namespace VhdlBuilder.Representation.Declaration
 {
     public class Identifier : DataType
     {

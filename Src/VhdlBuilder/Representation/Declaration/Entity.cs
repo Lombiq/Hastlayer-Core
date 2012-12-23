@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VhdlBuilder;
 
-namespace VhdlBuilder.Representation
+namespace VhdlBuilder.Representation.Declaration
 {
     public class Entity : IVhdlElement
     {
@@ -44,13 +44,16 @@ namespace VhdlBuilder.Representation
         InOut
     }
 
-    public class Port : IDataObject
+    public class Port : DataObjectBase
     {
-        public string Name { get; set; }
         public PortMode Mode { get; set; }
-        public DataType DataType { get; set; }
 
-        public string ToVhdl()
+        public Port()
+        {
+            this.ObjectType = ObjectType.Signal;
+        }
+
+        public override string ToVhdl()
         {
             return
                 Name.ToVhdlId() +

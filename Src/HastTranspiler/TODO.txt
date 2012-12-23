@@ -1,0 +1,6 @@
+﻿- if/else
+- for
+- while
+- arrays
+- parallelism
+- basic math function mappings
