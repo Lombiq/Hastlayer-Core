@@ -9,7 +9,7 @@ namespace VhdlBuilder.Representation
 {
     public enum ObjectType
     {
-        staticant,
+        Constant,
         Variable,
         Signal,
         File

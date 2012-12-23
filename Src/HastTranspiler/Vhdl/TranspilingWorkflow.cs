@@ -44,11 +44,11 @@ namespace HastTranspiler.Vhdl
 
             module.Architecture.Entity = module.Entity;
 
-            var maxCallId = ProcessInterfaceMethods();
+            var callIdTable = ProcessInterfaceMethods();
 
             ClockUtility.AddClockSignalToProcesses(module, "clk");
 
-            return new HardwareDefinition(new VhdlManifest { TopModule = module }, maxCallId);
+            return new HardwareDefinition(new VhdlManifest { TopModule = module }, callIdTable);
         }
 
         private void Traverse(AstNode node)
@@ -107,12 +107,13 @@ namespace HastTranspiler.Vhdl
             }
         }
 
-        private int ProcessInterfaceMethods()
+        private CallIdTable ProcessInterfaceMethods()
         {
-            if (_context.InterfaceMethods.Count == 0) return 0;
+            if (_context.InterfaceMethods.Count == 0) return CallIdTable.Empty;
 
             var proxyProcess = new Process { Name = "CallProxy" };
             var ports = _context.Module.Entity.Ports;
+            var callIdTable = new CallIdTable();
 
             var callIdPort = new Port
             {
@@ -131,20 +132,44 @@ namespace HastTranspiler.Vhdl
             {
                 ports.AddRange(method.Ports);
 
+                string source = string.Empty;
+
+                // Copying signals to variables and vice versa
+                foreach (var port in method.Ports)
+                {
+                    var variableName = port.Name + ".var";
+                    proxyProcess.Declarations.Add(new DataObject
+                    {
+                        Type = ObjectType.Variable,
+                        Name = variableName,
+                        DataType = port.DataType
+                    });
+
+                    if (port.Mode == PortMode.In) source += variableName.ToVhdlId() + " := " + port.Name.ToVhdlId() + ";";
+                }
+
                 var when = new When { Expression = id.ToString() };
-                var source = method.Name.ToVhdlId() + "(";
+                source += method.Name.ToVhdlId() + "(";
                 source += string.Join(
                     ", ",
-                    method.Ports.Select(port =>
+                    method.ParameterMappings.Select(mapping =>
                         {
                             // Using named parameters as the order of ports is not necessarily right
-                            var name = port.Name.ToVhdlId();
-                            return name + " => " + name;
+                            return mapping.Parameter.Name.ToVhdlId() + " => " + (mapping.Port.Name + ".var").ToVhdlId();
                         }));
                 source += ");";
+
+                foreach (var port in method.Ports.Where(p => p.Mode == PortMode.Out))
+                {
+                    var variableName = port.Name + ".var";
+                    source += port.Name.ToVhdlId() + " <=" + variableName.ToVhdlId() + ";";
+                }
+
                 when.Body.Add(new Raw(source));
                 caseExpression.Whens.Add(when);
 
+                
+                callIdTable[method.Name] = id;
                 id++;
             }
 
@@ -154,7 +179,7 @@ namespace HastTranspiler.Vhdl
 
             _context.Module.Architecture.Body.Add(proxyProcess);
 
-            return _context.InterfaceMethods.Count;
+            return callIdTable;
         }
     }
 }
