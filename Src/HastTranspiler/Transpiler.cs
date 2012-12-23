@@ -18,18 +18,18 @@ namespace HastTranspiler
         }
 
 
-        public string Transpile(string assemplyPath)
+        public IHardwareDefinition Transpile(string assemplyPath)
         {
             assemplyPath = Path.GetFullPath(assemplyPath);
 
             var assembly = AssemblyDefinition.ReadAssembly(assemplyPath);
-            var astBuilder = new AstBuilder(new DecompilerContext(assembly.MainModule)) { DecompileMethodBodies = true };
+            var astBuilder = new AstBuilder(new DecompilerContext(assembly.MainModule));
             astBuilder.AddAssembly(assembly, onlyAssemblyLevel: false);
 
-            return _engine.Transpile(astBuilder.SyntaxTree);
+            return _engine.Transpile(assembly.Name.Name, astBuilder.SyntaxTree);
         }
 
-        public string Transpile(Assembly assembly)
+        public IHardwareDefinition Transpile(Assembly assembly)
         {
             if (String.IsNullOrEmpty(assembly.Location)) throw new ArgumentException("The assembly can't be an in-memory one.");
 

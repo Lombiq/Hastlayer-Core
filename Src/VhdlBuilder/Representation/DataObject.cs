@@ -9,35 +9,37 @@ namespace VhdlBuilder.Representation
 {
     public enum ObjectType
     {
-        Constant,
+        staticant,
         Variable,
         Signal,
         File
     }
 
-    public class VhdlObject : IVhdlElement
+    public class DataObject : IDataObject
     {
         public ObjectType Type { get; set; }
         public string Name { get; set; }
         public DataType DataType { get; set; }
-        public string Value { get; set; }
+        public Value Value { get; set; }
 
         public string ToVhdl()
         {
-            var builder = new StringBuilder(8);
+            var builder = new StringBuilder();
 
             builder
                 .Append(Type)
                 .Append(" ")
                 .Append(Name.ToVhdlId())
-                .Append(": ")
-                .Append(DataType.ToVhdl());
+                .Append(": ");
 
-            if (!String.IsNullOrEmpty(Value))
+            if (DataType != null) builder.Append(DataType.ToVhdl());
+            else if (Value != null) builder.Append(Value.DataType.ToVhdl());
+
+            if (Value != null)
             {
                 builder
                     .Append(" := ")
-                    .Append(Value);
+                    .Append(Value.ToVhdl());
             }
 
             builder.Append(";");

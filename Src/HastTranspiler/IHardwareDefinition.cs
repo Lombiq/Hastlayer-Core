@@ -9,7 +9,8 @@ namespace HastTranspiler
 {
     public interface IHardwareDefinition
     {
-        void WriteOut(Stream stream);
-        void ReadIng(Stream stream);
+        string Language { get; }
+        void Save(Stream stream);
+        void Load(Stream stream);
     }
 }

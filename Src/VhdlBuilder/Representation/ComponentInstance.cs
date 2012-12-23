@@ -22,17 +22,13 @@ namespace VhdlBuilder.Representation
 
         public string ToVhdl()
         {
-            var builder = new StringBuilder(8);
-
-            builder
-                .Append(Label)
-                .Append(" : ")
-                .Append(Component.Name.ToVhdlId())
-                .Append(" port map (")
-                .Append(String.Join(", ", PortMappings.Select(mapping => mapping.ToVhdl())))
-                .Append(");");
-
-            return builder.ToString();
+            return
+                Label +
+                " : " +
+                Component.Name.ToVhdlId() +
+                " port map (" +
+                string.Join(", ", PortMappings.Select(mapping => mapping.ToVhdl())) +
+                ");";
         }
     }
 

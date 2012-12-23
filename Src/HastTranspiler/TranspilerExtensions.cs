@@ -15,11 +15,16 @@ namespace HastTranspiler
 
     public static class TranspilerExtensions
     {
-        public static string Transpile(this ITranspiler transpiler, string sourceCode, Language language)
+        public static IHardwareDefinition Transpile(this ITranspiler transpiler, string sourceCode, Language language)
         {
             CompilerResults result;
             var providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };
-            var parameters = new CompilerParameters { GenerateInMemory = false, TreatWarningsAsErrors = false };
+            var parameters = new CompilerParameters()
+            {
+                GenerateInMemory = false,
+                TreatWarningsAsErrors = false,
+                OutputAssembly = "DynamicHastAssembly" + sourceCode.GetHashCode()
+            };
 
             switch (language)
             {

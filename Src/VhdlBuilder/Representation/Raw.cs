@@ -14,6 +14,17 @@ namespace VhdlBuilder.Representation
     {
         public string Source { get; set; }
 
+
+        public Raw()
+        {
+        }
+
+        public Raw(string source)
+        {
+            Source = source;
+        }
+
+
         public string ToVhdl()
         {
             return Source;

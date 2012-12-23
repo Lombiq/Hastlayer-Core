@@ -21,19 +21,13 @@ namespace VhdlBuilder.Representation
 
         public string ToVhdl()
         {
-            var builder = new StringBuilder(8);
-
-            var portsVhdl = Ports.ToVhdl();
-
-            builder
-                .Append("component ")
-                .Append(Name.ToVhdlId())
-                .Append(" port(")
-                .Append(portsVhdl.Substring(0, portsVhdl.Length - 1)) // Cutting off trailing semicolon
-                .Append(");")
-                .Append("end component;");
-
-            return builder.ToString();
+            return
+                "component " +
+                Name.ToVhdlId() +
+                " port(" +
+                string.Join(", ", Ports.Select(parameter => parameter.ToVhdl())) +
+                ");" +
+                "end component;";
         }
     }
 }

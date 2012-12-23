@@ -11,9 +11,9 @@ namespace VhdlBuilder
     {
         public static string ToVhdl(this IEnumerable<IVhdlElement> elements)
         {
-            if (elements == null || elements.Count() == 0) return String.Empty;
+            if (elements == null || elements.Count() == 0) return string.Empty;
 
-            var builder = new StringBuilder(elements.Count());
+            var builder = new StringBuilder();
             foreach (var element in elements) builder.Append(element.ToVhdl());
             return builder.ToString();
         }

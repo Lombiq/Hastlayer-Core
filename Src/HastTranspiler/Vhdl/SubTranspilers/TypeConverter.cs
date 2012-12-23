@@ -7,17 +7,17 @@ using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using VhdlBuilder.Representation;
 
-namespace HastTranspiler.Vhdl
+namespace HastTranspiler.Vhdl.SubTranspilers
 {
-    static class TypeConverter
+    public class TypeConverter
     {
-        public static DataType Convert(AstType type)
+        public DataType Convert(AstType type)
         {
             if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
             return null;
         }
 
-        public static DataType ConvertPrimitive(KnownTypeCode typeCode)
+        public DataType ConvertPrimitive(KnownTypeCode typeCode)
         {
             switch (typeCode)
             {
@@ -26,11 +26,11 @@ namespace HastTranspiler.Vhdl
                 case KnownTypeCode.Attribute:
                     break;
                 case KnownTypeCode.Boolean:
-                    break;
+                    return DataTypes.Boolean;
                 case KnownTypeCode.Byte:
                     break;
                 case KnownTypeCode.Char:
-                    break;
+                    return DataTypes.Character;
                 case KnownTypeCode.DBNull:
                     break;
                 case KnownTypeCode.DateTime:
@@ -40,9 +40,9 @@ namespace HastTranspiler.Vhdl
                 case KnownTypeCode.Delegate:
                     break;
                 case KnownTypeCode.Double:
-                    break;
+                    return DataTypes.Real;
                 case KnownTypeCode.Enum:
-                    break;
+                    return DataTypes.Enum;
                 case KnownTypeCode.Exception:
                     break;
                 case KnownTypeCode.ICollection:
@@ -66,12 +66,12 @@ namespace HastTranspiler.Vhdl
                 case KnownTypeCode.IReadOnlyListOfT:
                     break;
                 case KnownTypeCode.Int16:
-                    return new RangedDataType { Name = "integer", RangeMin = -32768, RangeMax = 32767 };
+                    return DataTypes.Int16;
                 case KnownTypeCode.Int32:
                     // The lower barrier for VHDL integers is one shorter...
-                    return new RangedDataType { Name = "integer", RangeMin = -2147483647, RangeMax = 2147483647 };
+                    return DataTypes.Int32;
                 case KnownTypeCode.Int64:
-                    return new RangedDataType { Name = "integer", RangeMin = -2147483647, RangeMax = 2147483647 };
+                    break;
                 case KnownTypeCode.IntPtr:
                     break;
                 case KnownTypeCode.MulticastDelegate:
@@ -87,7 +87,7 @@ namespace HastTranspiler.Vhdl
                 case KnownTypeCode.Single:
                     break;
                 case KnownTypeCode.String:
-                    return new SizedDataType { Name = "string", Size = int.MaxValue };
+                    return DataTypes.String;
                 case KnownTypeCode.Task:
                     break;
                 case KnownTypeCode.TaskOfT:
@@ -95,9 +95,9 @@ namespace HastTranspiler.Vhdl
                 case KnownTypeCode.Type:
                     break;
                 case KnownTypeCode.UInt16:
-                    break;
+                    return DataTypes.Natural;
                 case KnownTypeCode.UInt32:
-                    break;
+                    return DataTypes.Natural;
                 case KnownTypeCode.UInt64:
                     break;
                 case KnownTypeCode.UIntPtr:

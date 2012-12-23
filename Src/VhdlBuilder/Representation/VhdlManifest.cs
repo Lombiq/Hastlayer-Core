@@ -8,7 +8,6 @@ namespace VhdlBuilder.Representation
 {
     public class VhdlManifest
     {
-        public string Name { get; set; }
         public Module TopModule { get; set; }
         public List<Module> Modules { get; set; }
 

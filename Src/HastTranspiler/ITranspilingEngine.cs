@@ -4,6 +4,6 @@ namespace HastTranspiler
 {
     public interface ITranspilingEngine
     {
-        string Transpile(SyntaxTree syntaxTree);
+        IHardwareDefinition Transpile(string id, SyntaxTree syntaxTree);
     }
 }

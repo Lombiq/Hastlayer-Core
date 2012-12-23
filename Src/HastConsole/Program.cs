@@ -23,26 +23,37 @@ namespace HastConsole
                 return;
             }
 
-            var transpiler = new Transpiler(new TranspilingEngine());
+            var transpiler = new Transpiler(new TranspilingEngine(new TranspilingSettings { MaxDegreeOfParallelism = 10 }));
             var csharp = @"
                 namespace TestNamespace
                 {
                     public class SimpleClass
                     {
-                        public int CalcMethod(int number)
+                        public virtual int CalcMethod(int number)
                         {
                             var temp = 10;
                             temp += number + 15;
                             temp++;
                             return temp;
                         }
+
+                        public virtual int StaticMethod()
+                        {
+                            return 5;
+                        }
                     }
                 }";
 
-            var vhdl = transpiler.Transpile(csharp, Language.CSharp);
-
-            //var vhdl = transpiler.Transpile(options.InputFilePath);
-            Console.Write(vhdl);
+            var hardwareDefinition = transpiler.Transpile(csharp, Language.CSharp);
+            //var hardwareDefinition = transpiler.Transpile(options.InputFilePath);
+            if (hardwareDefinition.Language == "VHDL")
+            {
+                var vhdlHardwareDefiniont = (HardwareDefinition)hardwareDefinition;
+                var vhdl = vhdlHardwareDefiniont.Manifest.TopModule.ToVhdl();
+                File.WriteAllText("test.txt", vhdl);
+                new HardwareRepresentationComposer().Compose(vhdlHardwareDefiniont);
+            }
+            
             Console.ReadKey();
         }
     }

@@ -17,7 +17,7 @@ namespace HastTranspilerTests
 
         public VhdlTests()
         {
-            _transpiler = new Transpiler(new TranspilingEngine());
+            _transpiler = new Transpiler(new TranspilingEngine(new TranspilingSettings { MaxDegreeOfParallelism = 10 }));
         }
 
 
@@ -33,8 +33,7 @@ namespace HastTranspilerTests
                     }
                 }";
 
-            var vhdl = _transpiler.Transpile(csharp, Language.CSharp);
-            Assert.IsNotNullOrEmpty(vhdl);
+            var hardwareDef = _transpiler.Transpile(csharp, Language.CSharp);
         }
     }
 }

@@ -9,20 +9,22 @@ namespace VhdlBuilder
 {
     public static class ClockUtility
     {
-        public static void AddClockSignal(Module module, string clkName)
+        public static void AddClockSignalToProcesses(Module module, string signalName)
         {
-            module.Entity.Ports.Add(new Port
+            var clockPort = new Port
             {
                 Mode = PortMode.In,
-                Name = clkName,
+                Name = signalName,
                 DataType = new DataType { Name = "std_logic" }
-            });
+            };
+
+            module.Entity.Ports.Add(clockPort);
 
             foreach (var process in module.Architecture.Body.Where(element => element is Process).Select(element => element as Process))
             {
-                process.SesitivityList.Add(clkName);
-                process.Body.Insert(0, new Raw { Source = "if rising_edge(" + clkName.ToVhdlId() + ") then " });
-                process.Body.Add(new Raw { Source = "end if;" });
+                process.SesitivityList.Add(clockPort);
+                process.Body.Insert(0, new Raw("if rising_edge(" + signalName.ToVhdlId() + ") then "));
+                process.Body.Add(new Raw("end if;"));
             }
         }
     }

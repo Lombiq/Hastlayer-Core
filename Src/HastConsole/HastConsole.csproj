@@ -56,6 +56,10 @@
       <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
       <Name>HastTranspiler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VhdlBuilder\VhdlBuilder.csproj">
+      <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
+      <Name>VhdlBuilder</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

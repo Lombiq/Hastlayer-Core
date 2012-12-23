@@ -44,6 +44,9 @@
     <Reference Include="Mono.Cecil">
       <HintPath>..\..\Libs\ILSpy\Mono.Cecil.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Libs\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,11 +62,17 @@
     <Compile Include="Transpiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranspilerExtensions.cs" />
-    <Compile Include="Vhdl\ExpressionTranspiler.cs" />
-    <Compile Include="Vhdl\MethodTranspiler.cs" />
+    <Compile Include="Vhdl\HardwareRepresentationComposer.cs" />
+    <Compile Include="Vhdl\InterfaceMethodDefinition.cs" />
+    <Compile Include="Vhdl\SubTranspilers\ExpressionTranspiler.cs" />
+    <Compile Include="Vhdl\HardwareDefinition.cs" />
+    <Compile Include="Vhdl\SubTranspilers\MethodTranspiler.cs" />
     <Compile Include="Vhdl\NameUtility.cs" />
-    <Compile Include="Vhdl\TypeConverter.cs" />
+    <Compile Include="Vhdl\TranspilingContext.cs" />
+    <Compile Include="Vhdl\TranspilingSettings.cs" />
+    <Compile Include="Vhdl\SubTranspilers\TypeConverter.cs" />
     <Compile Include="Vhdl\TranspilingEngine.cs" />
+    <Compile Include="Vhdl\TranspilingWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VhdlBuilder\VhdlBuilder.csproj">

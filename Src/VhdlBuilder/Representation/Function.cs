@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace VhdlBuilder.Representation
 {
-    public class Procedure : ISubProgram
+    public class Function : ISubProgram
     {
         public string Name { get; set; }
-        public List<ProcedureParameter> Parameters { get; set; }
+        public List<FunctionArgument> Arguments { get; set; }
+        public DataType Return { get; set; }
         public List<IVhdlElement> Declarations { get; set; }
         public List<IVhdlElement> Body { get; set; }
 
 
-        public Procedure()
+        public Function()
         {
-            Parameters = new List<ProcedureParameter>();
+            Arguments = new List<FunctionArgument>();
             Declarations = new List<IVhdlElement>();
             Body = new List<IVhdlElement>();
         }
@@ -25,32 +26,27 @@ namespace VhdlBuilder.Representation
         public string ToVhdl()
         {
             return
-                "procedure " +
+                "function " +
                 Name.ToVhdlId() +
                 " (" +
-                string.Join("; ", Parameters.Select(parameter => parameter.ToVhdl())) +
-                ") is " +
+                string.Join("; ", Arguments.Select(parameter => parameter.ToVhdl())) +
+                ") return " +
+                Return.ToVhdl() +
+                " is " +
                 Declarations.ToVhdl() +
                 " begin " +
                 Body.ToVhdl() +
-                " end procedure " +
+                " end " +
                 Name.ToVhdlId() +
                 ";";
         }
     }
 
-    public enum ProcedureParameterType
-    {
-        In,
-        Out,
-        InOut
-    }
 
-    public class ProcedureParameter : IVhdlElement
+    public class FunctionArgument : IVhdlElement
     {
         public ObjectType ObjectType { get; set; }
         public string Name { get; set; }
-        public ProcedureParameterType ParameterType { get; set; }
         public DataType DataType { get; set; }
 
         public string ToVhdl()
@@ -59,8 +55,6 @@ namespace VhdlBuilder.Representation
                 (ObjectType.ToString() ?? string.Empty) +
                 Name.ToVhdlId() +
                 ": " +
-                ParameterType +
-                " " +
                 DataType.ToVhdl();
         }
     }

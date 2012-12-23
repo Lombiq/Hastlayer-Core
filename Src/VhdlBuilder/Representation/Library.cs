@@ -21,9 +21,9 @@ namespace VhdlBuilder.Representation
 
         public string ToVhdl()
         {
-            if (String.IsNullOrEmpty(Name)) return String.Empty;
+            if (string.IsNullOrEmpty(Name)) return string.Empty;
 
-            var builder = new StringBuilder(3 + Uses.Count * 3);
+            var builder = new StringBuilder();
 
             builder
                 .Append("library ")

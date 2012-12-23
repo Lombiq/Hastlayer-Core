@@ -10,33 +10,54 @@ namespace VhdlBuilder.Representation
     public class Entity : IVhdlElement
     {
         public string Name { get; set; }
+        public List<IVhdlElement> Declarations { get; set; }
         public List<Port> Ports { get; set; }
 
 
         public Entity()
         {
             Ports = new List<Port>();
+            Declarations = new List<IVhdlElement>();
         }
 
 
         public string ToVhdl()
         {
-            var builder = new StringBuilder(8);
+            return
+                "entity " +
+                Name.ToVhdlId() +
+                " is port(" +
+                string.Join("; ", Ports.Select(parameter => parameter.ToVhdl())) +
+                ");" +
+                Declarations.ToVhdl() +
+                "end " +
+                Name.ToVhdlId() +
+                ";";
+        }
+    }
 
-            var portsVhdl = Ports.ToVhdl();
+    public enum PortMode
+    {
+        In,
+        Out,
+        Buffer,
+        InOut
+    }
 
-            builder
-                .Append("entity ")
-                .Append(Name.ToVhdlId())
-                .Append(" is ")
-                .Append("port(")
-                .Append(portsVhdl.Substring(0, portsVhdl.Length - 1)) // Cutting off trailing semicolon
-                .Append(");")
-                .Append("end ")
-                .Append(Name.ToVhdlId())
-                .Append(";");
+    public class Port : IDataObject
+    {
+        public string Name { get; set; }
+        public PortMode Mode { get; set; }
+        public DataType DataType { get; set; }
 
-            return builder.ToString();
+        public string ToVhdl()
+        {
+            return
+                Name.ToVhdlId() +
+                ": " +
+                Mode +
+                " " +
+                DataType.ToVhdl();
         }
     }
 }

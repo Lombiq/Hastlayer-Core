@@ -7,17 +7,17 @@ using VhdlBuilder;
 
 namespace VhdlBuilder.Representation
 {
-    public class Process : IVhdlElement
+    public class Process : ISubProgram
     {
         public string Name { get; set; }
-        public List<string> SesitivityList { get; set; }
+        public List<IDataObject> SesitivityList { get; set; }
         public List<IVhdlElement> Declarations { get; set; }
         public List<IVhdlElement> Body { get; set; }
 
 
         public Process()
         {
-            SesitivityList = new List<string>();
+            SesitivityList = new List<IDataObject>();
             Declarations = new List<IVhdlElement>();
             Body = new List<IVhdlElement>();
         }
@@ -25,25 +25,18 @@ namespace VhdlBuilder.Representation
 
         public string ToVhdl()
         {
-            var builder = new StringBuilder(11);
+            var vhdl = "";
 
-            if (!String.IsNullOrEmpty(Name))
-            {
-                builder
-                    .Append(Name.ToVhdlId())
-                    .Append(": ");
-            }
+            if (!string.IsNullOrEmpty(Name)) vhdl += Name.ToVhdlId() + ": ";
 
-            builder
-                .Append("process (")
-                .Append(String.Join(", ", SesitivityList.Select(signal => signal.ToVhdlId())))
-                .Append(") ")
-                .Append(Declarations.ToVhdl())
-                .Append(" begin ")
-                .Append(Body.ToVhdl())
-                .Append(" end process;");
-
-            return builder.ToString();
+            return
+                "process (" +
+                string.Join("; ", SesitivityList.Select(signal => signal.Name.ToVhdlId())) +
+                ") " +
+                Declarations.ToVhdl() +
+                " begin " +
+                Body.ToVhdl() +
+                " end process;";
         }
     }
 }

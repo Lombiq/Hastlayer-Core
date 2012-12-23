@@ -24,22 +24,18 @@ namespace VhdlBuilder.Representation
 
         public string ToVhdl()
         {
-            var builder = new StringBuilder(11);
-
-            builder
-                .Append("architecture ")
-                .Append(Name.ToVhdlId())
-                .Append(" of ")
-                .Append(Entity.Name.ToVhdlId())
-                .Append(" is ")
-                .Append(Declarations.ToVhdl())
-                .Append(" begin ")
-                .Append(Body.ToVhdl())
-                .Append(" end ")
-                .Append(Name.ToVhdlId())
-                .Append(";");
-
-            return builder.ToString();
+            return
+                "architecture " +
+                Name.ToVhdlId() +
+                " of " +
+                Entity.Name.ToVhdlId() +
+                " is " +
+                Declarations.ToVhdl() +
+                " begin " +
+                Body.ToVhdl() +
+                " end " +
+                Name.ToVhdlId() +
+                ";";
         }
     }
 }
