@@ -11,14 +11,18 @@ namespace HastTranspiler.Vhdl.SubTranspilers
 {
     public class MethodTranspiler
     {
-        public TypeConverter TypeConverter { get; set; }
-        public ExpressionTranspiler ExpressionTranspiler { get; set; }
+        private readonly TypeConverter _typeConverter;
+        private readonly ExpressionTranspiler _expressionTranspiler;
 
 
-        public MethodTranspiler()
+        public MethodTranspiler() : this(new TypeConverter(), new ExpressionTranspiler())
         {
-            TypeConverter = new TypeConverter();
-            ExpressionTranspiler = new ExpressionTranspiler();
+        }
+
+        public MethodTranspiler(TypeConverter typeConverter, ExpressionTranspiler expressionTranspiler)
+        {
+            _typeConverter = typeConverter;
+            _expressionTranspiler = expressionTranspiler;
         }
 
 
@@ -48,7 +52,7 @@ namespace HastTranspiler.Vhdl.SubTranspilers
             var parameters = new List<ProcedureParameter>();
 
             // Handling return type
-            var returnType = TypeConverter.Convert(method.ReturnType);
+            var returnType = _typeConverter.Convert(method.ReturnType);
             ProcedureParameter outputParam = null;
             if (returnType.Name != "void")
             {
@@ -69,7 +73,7 @@ namespace HastTranspiler.Vhdl.SubTranspilers
             {
                 foreach (var parameter in method.Parameters)
                 {
-                    var type = TypeConverter.Convert(parameter.Type);
+                    var type = _typeConverter.Convert(parameter.Type);
                     var procedureParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = parameter.Name };
 
                     if (interfaceMethod != null)
@@ -97,14 +101,14 @@ namespace HastTranspiler.Vhdl.SubTranspilers
                     {
                         Type = ObjectType.Variable,
                         Name = string.Join(", ", variableStatement.Variables.Select(v => v.Name)),
-                        DataType = TypeConverter.Convert(variableStatement.Type)
+                        DataType = _typeConverter.Convert(variableStatement.Type)
                     });
                 }
                 else if (statement is ExpressionStatement)
                 {
                     var expressionStatement = statement as ExpressionStatement;
 
-                    procedure.Body.Add(new Terminated(ExpressionTranspiler.Transpile(expressionStatement.Expression)));
+                    procedure.Body.Add(new Terminated(_expressionTranspiler.Transpile(expressionStatement.Expression)));
                 }
                 else if (statement is ReturnStatement)
                 {
@@ -113,7 +117,7 @@ namespace HastTranspiler.Vhdl.SubTranspilers
                         new Raw(
                             outputParam.Name.ToVhdlId() +
                                 (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
-                                ExpressionTranspiler.Transpile(returnStatement.Expression).ToVhdl() +
+                                _expressionTranspiler.Transpile(returnStatement.Expression).ToVhdl() +
                                 ";"
                         ));
                 }

@@ -14,18 +14,20 @@ namespace HastTranspiler.Vhdl
     {
         private readonly TranspilingSettings _settings;
         private readonly string _id;
+        private readonly MethodTranspiler _methodTranspiler;
         private TranspilingContext _context;
 
-        public MethodTranspiler MethodTranspiler { get; set; }
 
+        public TranspilingWorkflow(TranspilingSettings settings, string id) : this(settings, id, new MethodTranspiler())
+        {
+        }
 
-        public TranspilingWorkflow(TranspilingSettings settings, string id)
+        public TranspilingWorkflow(TranspilingSettings settings, string id, MethodTranspiler methodTranspiler)
         {
             _settings = settings;
             _id = id;
+            _methodTranspiler = methodTranspiler;
             _context = new TranspilingContext(new Module { Architecture = new Architecture { Name = "Behavioural" } });
-
-            MethodTranspiler = new MethodTranspiler();
         }
 
 
@@ -63,7 +65,7 @@ namespace HastTranspiler.Vhdl
                     if (node is MethodDeclaration)
                     {
                         var method = node as MethodDeclaration;
-                        MethodTranspiler.Transpile(method, _context);
+                        _methodTranspiler.Transpile(method, _context);
                     }
                     break;
                 case NodeType.Pattern:
