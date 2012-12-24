@@ -65,10 +65,9 @@ namespace HastTranspiler.Vhdl.SubTranspilers
             else if (expression is UnaryOperatorExpression)
             {
                 var unary = expression as UnaryOperatorExpression;
-                return "NOT " + TranspileInner(unary.Expression, context, block);
+                return "not (" + TranspileInner(unary.Expression, context, block) + ")";
             }
-
-            return string.Empty;
+            else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
 
         private string TranspileBinaryOperatorExpression(BinaryOperatorExpression expression, SubTranspilerContext context, IBlockElement block)

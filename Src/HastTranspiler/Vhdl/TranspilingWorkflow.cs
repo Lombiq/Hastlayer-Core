@@ -200,6 +200,9 @@ namespace HastTranspiler.Vhdl
                 if (!(declarations[i] is Procedure)) continue;
 
                 var procedure = declarations[i] as Procedure;
+
+                if (!chains.ContainsKey(procedure.Name)) continue;
+
                 var targets = chains[procedure.Name].Targets.ToDictionary(chain => chain.ProcedureName);
 
                 for (int x = i + 1; x < declarations.Count; x++)

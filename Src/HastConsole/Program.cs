@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CommandLine;
 using HastTranspiler;
 using HastTranspiler.Vhdl;
+using System.Diagnostics;
 
 namespace HastConsole
 {
@@ -14,6 +15,11 @@ namespace HastConsole
     {
         static void Main(string[] args)
         {
+            var sw = Stopwatch.StartNew();
+            var z = IsPrimeNumber(893428937);
+            sw.Stop();
+            var nanoseconds = (1.0 / Stopwatch.Frequency) * sw.ElapsedTicks * 1000000000;
+            var y = z;
             var options = new Options();
 
             if (!new CommandLineParser().ParseArguments(args, options))
@@ -29,28 +35,17 @@ namespace HastConsole
                 {
                     public class SimpleClass
                     {
-                        public virtual int CalcMethod(int number)
+                        public virtual bool IsPrimeNumber(int num)
                         {
-                            if (number < Two() + 2)
-                            {
-                                number += 5 + Two();
-                            }
-                            else
-                            {
-                                number += 1;
-                            }
-                            number += Two();
-                            return number;
-                        }
+                            var isPrime = true;
+                            int factor = num / 2;
 
-                        public virtual int StaticMethod()
-                        {
-                            return CalcMethod(Two());
-                        }
+                            for (int i = 2; i <= factor; i++)
+                            {
+                                if ((num % i) == 0) isPrime = false;
+                            }
 
-                        int Two()
-                        {
-                            return 2;
+                            return isPrime;
                         }
                     }
                 }";
@@ -64,8 +59,21 @@ namespace HastConsole
                 File.WriteAllText("test.txt", vhdl);
                 new HardwareRepresentationComposer().Compose(vhdlHardwareDefiniont);
             }
-            
+
             //Console.ReadKey();
+        }
+
+        static bool IsPrimeNumber(int num)
+        {
+            var isPrime = true;
+            int factor = num / 2;
+
+            for (int i = 2; i <= factor; i++)
+            {
+                if ((num % i) == 0) isPrime = false;
+            }
+
+            return isPrime;
         }
     }
 }

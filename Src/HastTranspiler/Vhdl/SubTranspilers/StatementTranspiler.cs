@@ -102,6 +102,19 @@ namespace HastTranspiler.Vhdl.SubTranspilers
 
                 block.Body.Add(statementBlock);
             }
+            else if (statement is WhileStatement)
+            {
+                var whileStatement = statement as WhileStatement;
+
+                var whileElement = new While { Condition = _expressionTranspiler.Transpile(whileStatement.Condition, context, block).ToVhdl() };
+
+                var bodyBlock = new InlineBlock();
+                Transpile(whileStatement.EmbeddedStatement, context, bodyBlock);
+                whileElement.Body.Add(bodyBlock);
+
+                block.Body.Add(whileElement);
+            }
+            else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported.");
         }
     }
 }
