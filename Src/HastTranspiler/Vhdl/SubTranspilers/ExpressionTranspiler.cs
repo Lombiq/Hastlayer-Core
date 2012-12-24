@@ -28,17 +28,17 @@ namespace HastTranspiler.Vhdl.SubTranspilers
 
         //  Would need to decide between + and & or sll/srl and sra/sla
         // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
-        public IVhdlElement Transpile(Expression expression, MethodBodyContext context)
+        public IVhdlElement Transpile(Expression expression, SubTranspilerContext context, IBlockElement block)
         {
-            return new Raw(TranspileInner(expression, context));
+            return new Raw(TranspileInner(expression, context, block));
         }
 
-        private string TranspileInner(Expression expression, MethodBodyContext context)
+        private string TranspileInner(Expression expression, SubTranspilerContext context, IBlockElement block)
         {
             if (expression is AssignmentExpression)
             {
                 var assignment = expression as AssignmentExpression;
-                return TranspileInner(assignment.Left, context) + " := " + TranspileInner(assignment.Right, context);
+                return TranspileInner(assignment.Left, context, block) + " := " + TranspileInner(assignment.Right, context, block);
             }
             else if (expression is IdentifierExpression)
             {
@@ -50,25 +50,30 @@ namespace HastTranspiler.Vhdl.SubTranspilers
                 var primitive = expression as PrimitiveExpression;
                 return primitive.Value.ToString();
             }
-            else if (expression is BinaryOperatorExpression) return TranspileBinaryOperatorExpression((BinaryOperatorExpression)expression, context);
-            else if (expression is InvocationExpression) return TranspileInvocationExpression((InvocationExpression)expression, context);
+            else if (expression is BinaryOperatorExpression) return TranspileBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
+            else if (expression is InvocationExpression) return TranspileInvocationExpression((InvocationExpression)expression, context, block);
             else if (expression is MemberReferenceExpression)
             {
                 var member = expression as MemberReferenceExpression;
-                return TranspileInner(member.Target, context) + "." + member.MemberName;
+                return TranspileInner(member.Target, context, block) + "." + member.MemberName;
             }
             else if (expression is ThisReferenceExpression)
             {
                 var thisRef = expression as ThisReferenceExpression;
-                return NameUtility.GetFullName(context.Scope.Method.Parent);
+                return NameUtility.GetFullName(context.Scope.Node.Parent);
+            }
+            else if (expression is UnaryOperatorExpression)
+            {
+                var unary = expression as UnaryOperatorExpression;
+                return "NOT " + TranspileInner(unary.Expression, context, block);
             }
 
             return string.Empty;
         }
 
-        private string TranspileBinaryOperatorExpression(BinaryOperatorExpression expression, MethodBodyContext context)
+        private string TranspileBinaryOperatorExpression(BinaryOperatorExpression expression, SubTranspilerContext context, IBlockElement block)
         {
-            var source = TranspileInner(expression.Left, context) + " ";
+            var source = TranspileInner(expression.Left, context, block) + " ";
 
             switch (expression.Operator)
             {
@@ -128,18 +133,18 @@ namespace HastTranspiler.Vhdl.SubTranspilers
                     break;
             }
 
-            return source + " " + TranspileInner(expression.Right, context);
+            return source + " " + TranspileInner(expression.Right, context, block);
         }
 
-        private string TranspileInvocationExpression(InvocationExpression expression, MethodBodyContext context)
+        private string TranspileInvocationExpression(InvocationExpression expression, SubTranspilerContext context, IBlockElement block)
         {
-            var procedure = context.Scope.Procedure;
-            var targetName = TranspileInner(expression.Target, context);
+            var procedure = context.Scope.SubProgram;
+            var targetName = TranspileInner(expression.Target, context, block);
             var hasArguments = expression.Arguments.Count > 0;
             var hasReturnValue = !(expression.Parent is ExpressionStatement); // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method)
             var needsParenthesis = hasArguments || hasReturnValue;
 
-            context.TranspilingContext.CallChainTable.AddTarget(context.Scope.Procedure.Name, targetName);
+            context.TranspilingContext.CallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
 
             var source = targetName.ToVhdlId();
 
@@ -147,9 +152,8 @@ namespace HastTranspiler.Vhdl.SubTranspilers
 
             if (hasArguments)
             {
-                source += string.Join(", ", expression.Arguments.Select(argument => TranspileInner(argument, context)));
+                source += string.Join(", ", expression.Arguments.Select(argument => TranspileInner(argument, context, block)));
             }
-
 
             if (hasReturnValue)
             {
@@ -186,7 +190,7 @@ namespace HastTranspiler.Vhdl.SubTranspilers
             if (hasReturnValue)
             {
                 source += ";";
-                procedure.Body.Add(new Raw(source));
+                block.Body.Add(new Raw(source));
                 source = (targetName + ".ret").ToVhdlId();
             }
 

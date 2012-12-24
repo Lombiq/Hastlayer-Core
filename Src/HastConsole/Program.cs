@@ -31,7 +31,14 @@ namespace HastConsole
                     {
                         public virtual int CalcMethod(int number)
                         {
-                            number += 1;
+                            if (number < Two() + 2)
+                            {
+                                number += 5 + Two();
+                            }
+                            else
+                            {
+                                number += 1;
+                            }
                             number += Two();
                             return number;
                         }

@@ -94,18 +94,18 @@ namespace HastTranspiler.Vhdl.SubTranspilers
 
 
             // Processing method body
-            var bodyContext = new MethodBodyContext
+            var bodyContext = new SubTranspilerContext
             {
                 TranspilingContext = context,
-                Scope = new MethodBodyScope
+                Scope = new SubTranspilerScope
                 {
-                    Method = method,
-                    Procedure = procedure
+                    Node = method,
+                    SubProgram = procedure
                 }
             };
             foreach (var statement in method.Body.Statements)
             {
-                _statementTranspiler.Transpile(statement, bodyContext);
+                _statementTranspiler.Transpile(statement, bodyContext, procedure);
             }
 
 

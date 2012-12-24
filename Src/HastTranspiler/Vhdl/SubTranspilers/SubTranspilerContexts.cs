@@ -8,16 +8,15 @@ using VhdlBuilder.Representation.Declaration;
 
 namespace HastTranspiler.Vhdl.SubTranspilers
 {
-    public class MethodBodyContext
+    public class SubTranspilerContext
     {
         public TranspilingContext TranspilingContext { get; set; }
-        public MethodBodyScope Scope { get; set; }
+        public SubTranspilerScope Scope { get; set; }
     }
 
-    public class MethodBodyScope
+    public class SubTranspilerScope
     {
-        public MethodDeclaration Method { get; set; }
-        public Procedure Procedure { get; set; }
-        public IBlockElement Block { get; set; }
+        public AstNode Node { get; set; }
+        public ISubProgram SubProgram { get; set; }
     }
 }

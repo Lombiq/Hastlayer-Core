@@ -7,6 +7,7 @@ using ICSharpCode.NRefactory.CSharp;
 using VhdlBuilder.Representation;
 using VhdlBuilder.Representation.Declaration;
 using VhdlBuilder;
+using VhdlBuilder.Representation.Expression;
 
 namespace HastTranspiler.Vhdl.SubTranspilers
 {
@@ -27,15 +28,15 @@ namespace HastTranspiler.Vhdl.SubTranspilers
             _expressionTranspiler = expressionTranspiler;
         }
 
-        public void Transpile(Statement statement, MethodBodyContext context)
+        public void Transpile(Statement statement, SubTranspilerContext context, IBlockElement block)
         {
-            var procedure = context.Scope.Procedure;
+            var subProgram = context.Scope.SubProgram;
 
             if (statement is VariableDeclarationStatement)
             {
                 var variableStatement = statement as VariableDeclarationStatement;
 
-                procedure.Declarations.Add(new Variable
+                subProgram.Declarations.Add(new Variable
                 {
                     Name = string.Join(", ", variableStatement.Variables.Select(v => v.Name)),
                     DataType = _typeConverter.Convert(variableStatement.Type)
@@ -45,24 +46,61 @@ namespace HastTranspiler.Vhdl.SubTranspilers
             {
                 var expressionStatement = statement as ExpressionStatement;
 
-                procedure.Body.Add(new Terminated(_expressionTranspiler.Transpile(expressionStatement.Expression, context)));
+                block.Body.Add(new Terminated(_expressionTranspiler.Transpile(expressionStatement.Expression, context, block)));
             }
             else if (statement is ReturnStatement)
             {
                 var returnStatement = statement as ReturnStatement;
 
-                if (_typeConverter.Convert(context.Scope.Method.ReturnType).Name == "void") procedure.Body.Add(new Raw("return;"));
-                else
+                if (context.Scope.Node is MethodDeclaration)
                 {
-                    var outputParam = procedure.Parameters.Where(param => param.ParameterType == ProcedureParameterType.Out).Single();
+                    if (_typeConverter.Convert(((MethodDeclaration)context.Scope.Node).ReturnType).Name == "void") block.Body.Add(new Raw("return;"));
+                    else if (subProgram is Procedure)
+                    {
+                        var procedure = subProgram as Procedure;
 
-                    var source = outputParam.Name.ToVhdlId() +
-                                 (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
-                                 _expressionTranspiler.Transpile(returnStatement.Expression, context).ToVhdl() +
-                                 "; return;";
+                        var outputParam = procedure.Parameters.Where(param => param.ParameterType == ProcedureParameterType.Out).Single();
 
-                    procedure.Body.Add(new Raw(source));
+                        var source = outputParam.Name.ToVhdlId() +
+                                     (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
+                                     _expressionTranspiler.Transpile(returnStatement.Expression, context, block).ToVhdl() +
+                                     "; return;";
+
+                        procedure.Body.Add(new Raw(source));
+                    }
                 }
+            }
+            else if (statement is IfElseStatement)
+            {
+                var ifElse = statement as IfElseStatement;
+
+                var ifElseElement = new IfElse { Condition = _expressionTranspiler.Transpile(ifElse.Condition, context, block).ToVhdl() };
+
+                var trueBlock = new InlineBlock();
+                Transpile(ifElse.TrueStatement, context, trueBlock);
+                ifElseElement.TrueElements.Add(trueBlock);
+
+                if (ifElse.FalseStatement != Statement.Null)
+                {
+                    var falseBlock = new InlineBlock();
+                    Transpile(ifElse.TrueStatement, context, falseBlock);
+                    ifElseElement.ElseElements.Add(falseBlock);
+                }
+
+                block.Body.Add(ifElseElement);
+            }
+            else if (statement is BlockStatement)
+            {
+                var blockStatement = statement as BlockStatement;
+
+                var statementBlock = new InlineBlock();
+
+                foreach (var stmt in blockStatement.Statements)
+                {
+                    Transpile(stmt, context, statementBlock);
+                }
+
+                block.Body.Add(statementBlock);
             }
         }
     }
