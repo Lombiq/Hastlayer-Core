@@ -55,7 +55,7 @@ namespace HastTranspiler.Vhdl.SubTranspilers
             if (!isVoid)
             {
                 // Since this way there's a dot in the output var's name, it can't clash with normal variables.
-                outputParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.variable" };
+                outputParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.var" };
 
                 if (interfaceMethod != null)
                 {
@@ -73,7 +73,11 @@ namespace HastTranspiler.Vhdl.SubTranspilers
                 foreach (var parameter in method.Parameters)
                 {
                     var type = _typeConverter.Convert(parameter.Type);
-                    var procedureParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = type, ParameterType = ProcedureParameterType.InOut, Name = parameter.Name };
+                    var procedureParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = parameter.Name + ".param" };
+
+                    // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables
+                    procedure.Declarations.Add(new Variable { DataType = type, Name = parameter.Name });
+                    procedure.Body.Add(new Raw(parameter.Name.ToVhdlId() + " := " + procedureParam.Name.ToVhdlId() + ";"));
 
                     if (interfaceMethod != null)
                     {
