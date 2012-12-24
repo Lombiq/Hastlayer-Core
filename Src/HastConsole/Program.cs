@@ -31,15 +31,14 @@ namespace HastConsole
                     {
                         public virtual int CalcMethod(int number)
                         {
-                            var temp = 10;
-                            temp += number + 15;
-                            temp++;
-                            return temp;
+                            number += 1;
+                            number += Two();
+                            return number;
                         }
 
                         public virtual int StaticMethod()
                         {
-                            return 5;
+                            return CalcMethod(Two());
                         }
 
                         int Two()
@@ -59,7 +58,7 @@ namespace HastConsole
                 new HardwareRepresentationComposer().Compose(vhdlHardwareDefiniont);
             }
             
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

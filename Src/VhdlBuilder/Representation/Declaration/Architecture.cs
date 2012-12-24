@@ -7,7 +7,9 @@ using VhdlBuilder;
 
 namespace VhdlBuilder.Representation.Declaration
 {
-    public class Architecture : IVhdlElement
+    // Although by implementing INamedElement and IStructuredElement Architecture is in the end implementing ISubProgram. However the
+    // architecture is not a subprogram, so implementing ISubProgram directly would be semantically incorrect.
+    public class Architecture : INamedElement, IStructuredElement
     {
         public string Name { get; set; }
         public Entity Entity { get; set; }

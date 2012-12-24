@@ -7,7 +7,7 @@ using VhdlBuilder;
 
 namespace VhdlBuilder.Representation.Declaration
 {
-    public class Component : IVhdlElement
+    public class Component : INamedElement
     {
         public string Name { get; set; }
         public List<Port> Ports { get; set; }

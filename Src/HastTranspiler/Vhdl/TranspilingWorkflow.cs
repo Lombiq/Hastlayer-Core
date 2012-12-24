@@ -20,7 +20,8 @@ namespace HastTranspiler.Vhdl
         private TranspilingContext _context;
 
 
-        public TranspilingWorkflow(TranspilingSettings settings, string id) : this(settings, id, new MethodTranspiler())
+        public TranspilingWorkflow(TranspilingSettings settings, string id)
+            : this(settings, id, new MethodTranspiler())
         {
         }
 
@@ -29,12 +30,17 @@ namespace HastTranspiler.Vhdl
             _settings = settings;
             _id = id;
             _methodTranspiler = methodTranspiler;
-            _context = new TranspilingContext(new Module { Architecture = new Architecture { Name = "Behavioural" } });
         }
 
 
         public IHardwareDefinition Transpile(SyntaxTree syntaxTree)
         {
+            _context =
+                new TranspilingContext(
+                    syntaxTree,
+                    new Module { Architecture = new Architecture { Name = "Behavioural" } },
+                    new CallChainTable());
+
             var module = _context.Module;
             module.Entity = new Entity { Name = _id };
 
@@ -48,6 +54,7 @@ namespace HastTranspiler.Vhdl
 
             module.Architecture.Entity = module.Entity;
 
+            ProcessCallChainTable();
             var callIdTable = ProcessInterfaceMethods();
 
             ProcessUtility.AddClockToProcesses(module, "clk");
@@ -100,8 +107,6 @@ namespace HastTranspiler.Vhdl
                 case NodeType.Unknown:
                     break;
                 case NodeType.Whitespace:
-                    break;
-                default:
                     break;
             }
 
@@ -171,8 +176,8 @@ namespace HastTranspiler.Vhdl
                 when.Body.Add(new Raw(source));
                 caseExpression.Whens.Add(when);
 
-                
-                callIdTable[method.Name] = id;
+
+                callIdTable.SetMapping(method.Name, id);
                 id++;
             }
 
@@ -183,6 +188,38 @@ namespace HastTranspiler.Vhdl
             _context.Module.Architecture.Body.Add(proxyProcess);
 
             return callIdTable;
+        }
+
+        private void ProcessCallChainTable()
+        {
+            var chains = _context.CallChainTable.Values.ToDictionary(chain => chain.ProcedureName);
+
+            var declarations = _context.Module.Architecture.Declarations;
+            for (int i = 0; i < declarations.Count; i++)
+            {
+                if (!(declarations[i] is Procedure)) continue;
+
+                var procedure = declarations[i] as Procedure;
+                var targets = chains[procedure.Name].Targets.ToDictionary(chain => chain.ProcedureName);
+
+                for (int x = i + 1; x < declarations.Count; x++)
+                {
+                    if (!(declarations[x] is Procedure)) continue;
+
+                    var otherProcedure = declarations[x] as Procedure;
+                    if (targets.ContainsKey(otherProcedure.Name)) declarations.MoveBefore(x, i);
+                }
+            }
+        }
+    }
+
+    static class ListExtensions
+    {
+        public static void MoveBefore<T>(this List<T> list, int itemIndex, int beforeIndex)
+        {
+            var item = list[itemIndex];
+            list.RemoveAt(itemIndex);
+            list.Insert(beforeIndex, item);
         }
     }
 }

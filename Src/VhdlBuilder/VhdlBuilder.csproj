@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
+    <Compile Include="Representation\Declaration\IBlockElement.cs" />
+    <Compile Include="Representation\Declaration\INamedElement.cs" />
+    <Compile Include="Representation\Declaration\IStructuredElement.cs" />
     <Compile Include="Representation\Declaration\Signal.cs" />
     <Compile Include="Representation\Declaration\Variable.cs" />
     <Compile Include="Representation\Expression\Assignment.cs" />

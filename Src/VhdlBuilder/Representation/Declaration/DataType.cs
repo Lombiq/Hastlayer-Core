@@ -20,7 +20,7 @@ namespace VhdlBuilder.Representation.Declaration
     /// <summary>
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
     /// </summary>
-    public class DataType : IVhdlElement
+    public class DataType : INamedElement
     {
         public DataTypeCategory TypeCategory { get; set; }
         public string Name { get; set; }

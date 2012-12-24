@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 
 namespace HastTranspiler.Vhdl
 {
-    public class CallIdTable : IEnumerable<KeyValuePair<string, int>>
+    public class CallMapping
+    {
+        public string MethodName { get; set; }
+        public int Id { get; set; }
+    }
+
+    public class CallIdTable
     {
         private static CallIdTable _emptyInstance;
-        private readonly Dictionary<string, int> _mappings = new Dictionary<string, int>();
+        private readonly Dictionary<string, CallMapping> _mappings = new Dictionary<string, CallMapping>();
 
         public static CallIdTable Empty
         {
@@ -21,28 +27,16 @@ namespace HastTranspiler.Vhdl
             }
         }
 
-        public int this[string methodName]
-        {
-            get { return _mappings[methodName]; }
-
-            set
-            {
-                if (value > MaxId) MaxId = value;
-                _mappings[methodName] = value;
-            }
-        }
-
         public int MaxId { get; private set; }
 
+        public IEnumerable<CallMapping> Values { get { return _mappings.Values; } }
 
-        public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
-        {
-            return _mappings.GetEnumerator();
-        }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public void SetMapping(string methodName, int id)
         {
-            return GetEnumerator();
+            if (id > MaxId) MaxId = id;
+            if (!_mappings.ContainsKey(methodName)) _mappings[methodName] = new CallMapping { MethodName = methodName, Id = id };
+            else _mappings[methodName].Id = id;
         }
     }
 }

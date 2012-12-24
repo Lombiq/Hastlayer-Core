@@ -10,7 +10,7 @@ namespace VhdlBuilder.Representation.Declaration
     {
         public string Name { get; set; }
         public List<FunctionArgument> Arguments { get; set; }
-        public DataType Return { get; set; }
+        public DataType ReturnType { get; set; }
         public List<IVhdlElement> Declarations { get; set; }
         public List<IVhdlElement> Body { get; set; }
 
@@ -31,7 +31,7 @@ namespace VhdlBuilder.Representation.Declaration
                 " (" +
                 string.Join("; ", Arguments.Select(parameter => parameter.ToVhdl())) +
                 ") return " +
-                Return.ToVhdl() +
+                ReturnType.Name +
                 " is " +
                 Declarations.ToVhdl() +
                 " begin " +
@@ -43,13 +43,9 @@ namespace VhdlBuilder.Representation.Declaration
     }
 
 
-    public class FunctionArgument : IVhdlElement
+    public class FunctionArgument : DataObjectBase
     {
-        public ObjectType ObjectType { get; set; }
-        public string Name { get; set; }
-        public DataType DataType { get; set; }
-
-        public string ToVhdl()
+        public override string ToVhdl()
         {
             return
                 (ObjectType.ToString() ?? string.Empty) +

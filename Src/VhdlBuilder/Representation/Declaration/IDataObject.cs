@@ -14,10 +14,9 @@ namespace VhdlBuilder.Representation.Declaration
         File
     }
 
-    public interface IDataObject : IVhdlElement
+    public interface IDataObject : INamedElement
     {
         ObjectType ObjectType { get; set; }
-        string Name { get; set; }
         DataType DataType { get; set; }
     }
 }

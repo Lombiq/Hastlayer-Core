@@ -27,9 +27,12 @@ namespace VhdlBuilder.Representation.Declaration
             return
                 "procedure " +
                 Name.ToVhdlId() +
-                " (" +
-                string.Join("; ", Parameters.Select(parameter => parameter.ToVhdl())) +
-                ") is " +
+                (Parameters.Count > 0 ? " (" : " ") +
+                // Out params at the end
+
+                string.Join("; ", Parameters.OrderBy(parameter => parameter.ParameterType).Select(parameter => parameter.ToVhdl())) +
+                (Parameters.Count > 0 ? ")" : string.Empty)  +
+                " is " +
                 Declarations.ToVhdl() +
                 " begin " +
                 Body.ToVhdl() +
@@ -42,18 +45,15 @@ namespace VhdlBuilder.Representation.Declaration
     public enum ProcedureParameterType
     {
         In,
-        Out,
-        InOut
+        InOut,
+        Out
     }
 
-    public class ProcedureParameter : IVhdlElement
+    public class ProcedureParameter : DataObjectBase
     {
-        public ObjectType ObjectType { get; set; }
-        public string Name { get; set; }
         public ProcedureParameterType ParameterType { get; set; }
-        public DataType DataType { get; set; }
 
-        public string ToVhdl()
+        public override string ToVhdl()
         {
             return
                 (ObjectType.ToString() ?? string.Empty) +

@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Vhdl\CallChainTable.cs" />
     <Compile Include="IHardwareDefinition.cs" />
     <Compile Include="ITranspiler.cs" />
     <Compile Include="ITranspilingEngine.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="Vhdl\HardwareDefinition.cs" />
     <Compile Include="Vhdl\SubTranspilers\MethodTranspiler.cs" />
     <Compile Include="Vhdl\NameUtility.cs" />
+    <Compile Include="Vhdl\SubTranspilers\StatementTranspiler.cs" />
+    <Compile Include="Vhdl\SubTranspilers\SubTranspilerContexts.cs" />
     <Compile Include="Vhdl\TranspilingContext.cs" />
     <Compile Include="Vhdl\TranspilingSettings.cs" />
     <Compile Include="Vhdl\SubTranspilers\TypeConverter.cs" />

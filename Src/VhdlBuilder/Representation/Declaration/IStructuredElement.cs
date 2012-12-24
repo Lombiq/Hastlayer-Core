@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace VhdlBuilder.Representation.Declaration
 {
-    public interface ISubProgram : IStructuredElement, INamedElement
+    public interface IStructuredElement : IBlockElement
     {
+        List<IVhdlElement> Declarations { get; set; }
     }
 }

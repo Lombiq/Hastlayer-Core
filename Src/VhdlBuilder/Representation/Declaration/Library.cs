@@ -7,7 +7,7 @@ using VhdlBuilder;
 
 namespace VhdlBuilder.Representation.Declaration
 {
-    public class Library : IVhdlElement
+    public class Library : INamedElement
     {
         public string Name { get; set; }
         public List<string> Uses { get; set; }

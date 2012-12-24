@@ -3,4 +3,6 @@
 - while
 - arrays
 - parallelism
+- out method arguments
 - basic math function mappings
+- transpiler events/transformation hooks

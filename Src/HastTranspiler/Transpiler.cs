@@ -26,6 +26,13 @@ namespace HastTranspiler
             var astBuilder = new AstBuilder(new DecompilerContext(assembly.MainModule));
             astBuilder.AddAssembly(assembly, onlyAssemblyLevel: false);
 
+            //using (var output = new StringWriter())
+            //{
+            //    astBuilder.GenerateCode(new PlainTextOutput(output));
+            //    var z = output.ToString();
+            //    var y = z;
+            //}
+
             return _engine.Transpile(assembly.Name.Name, astBuilder.SyntaxTree);
         }
 

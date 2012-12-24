@@ -16,7 +16,7 @@ namespace HastTranspiler.Vhdl
 
         public string Language { get { return "VHDL"; } }
         public VhdlManifest Manifest { get { return _manifest; } }
-        public CallIdTable MaxCallId { get { return _callIdTable; } }
+        public CallIdTable CallIdTable { get { return _callIdTable; } }
 
 
         public HardwareDefinition()
@@ -39,7 +39,7 @@ namespace HastTranspiler.Vhdl
                 var storage = new Storage
                 {
                     Manifest = _manifest,
-                    CallIdTable = _callIdTable
+                    CallIdTable = _callIdTable,
                 };
 
                 await writer.WriteAsync(await JsonConvert.SerializeObjectAsync(storage, Formatting.None, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
@@ -51,6 +51,7 @@ namespace HastTranspiler.Vhdl
             using (var reader = new StreamReader(stream))
             {
                 var storage = await JsonConvert.DeserializeObjectAsync<Storage>(await reader.ReadToEndAsync(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
+                
                 _manifest = storage.Manifest;
                 _callIdTable = storage.CallIdTable;
             }

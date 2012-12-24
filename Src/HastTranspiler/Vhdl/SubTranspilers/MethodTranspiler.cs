@@ -14,25 +14,20 @@ namespace HastTranspiler.Vhdl.SubTranspilers
     public class MethodTranspiler
     {
         private readonly TypeConverter _typeConverter;
-        private readonly ExpressionTranspiler _expressionTranspiler;
+        private readonly StatementTranspiler _statementTranspiler;
 
 
-        public MethodTranspiler() : this(new TypeConverter(), new ExpressionTranspiler())
+        public MethodTranspiler()
+            : this(new TypeConverter(), new StatementTranspiler())
         {
         }
 
-        public MethodTranspiler(TypeConverter typeConverter, ExpressionTranspiler expressionTranspiler)
+        public MethodTranspiler(TypeConverter typeConverter, StatementTranspiler statementTranspiler)
         {
             _typeConverter = typeConverter;
-            _expressionTranspiler = expressionTranspiler;
+            _statementTranspiler = statementTranspiler;
         }
 
-
-        // TODO: which Transpile() works better?
-        public IVhdlElement Transpile(MethodDeclaration method)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Transpile(MethodDeclaration method, TranspilingContext context)
         {
@@ -55,8 +50,9 @@ namespace HastTranspiler.Vhdl.SubTranspilers
 
             // Handling return type
             var returnType = _typeConverter.Convert(method.ReturnType);
+            var isVoid = returnType.Name == "void";
             ProcedureParameter outputParam = null;
-            if (returnType.Name != "void")
+            if (!isVoid)
             {
                 // Since this way there's a dot in the output var's name, it can't clash with normal variables.
                 outputParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.variable" };
@@ -77,7 +73,7 @@ namespace HastTranspiler.Vhdl.SubTranspilers
                 foreach (var parameter in method.Parameters)
                 {
                     var type = _typeConverter.Convert(parameter.Type);
-                    var procedureParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = parameter.Name };
+                    var procedureParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = type, ParameterType = ProcedureParameterType.InOut, Name = parameter.Name };
 
                     if (interfaceMethod != null)
                     {
@@ -94,36 +90,18 @@ namespace HastTranspiler.Vhdl.SubTranspilers
 
 
             // Processing method body
+            var bodyContext = new MethodBodyContext
+            {
+                TranspilingContext = context,
+                Scope = new MethodBodyScope
+                {
+                    Method = method,
+                    Procedure = procedure
+                }
+            };
             foreach (var statement in method.Body.Statements)
             {
-                if (statement is VariableDeclarationStatement)
-                {
-                    var variableStatement = statement as VariableDeclarationStatement;
-
-                    procedure.Declarations.Add(new VhdlBuilder.Representation.Declaration.DataObject
-                    {
-                        ObjectType = ObjectType.Variable,
-                        Name = string.Join(", ", variableStatement.Variables.Select(v => v.Name)),
-                        DataType = _typeConverter.Convert(variableStatement.Type)
-                    });
-                }
-                else if (statement is ExpressionStatement)
-                {
-                    var expressionStatement = statement as ExpressionStatement;
-
-                    procedure.Body.Add(new Terminated(_expressionTranspiler.Transpile(expressionStatement.Expression)));
-                }
-                else if (statement is ReturnStatement)
-                {
-                    var returnStatement = statement as ReturnStatement;
-                    procedure.Body.Add(
-                        new Raw(
-                            outputParam.Name.ToVhdlId() +
-                                (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
-                                _expressionTranspiler.Transpile(returnStatement.Expression).ToVhdl() +
-                                ";"
-                        ));
-                }
+                _statementTranspiler.Transpile(statement, bodyContext);
             }
 
 
