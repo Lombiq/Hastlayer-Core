@@ -14,10 +14,24 @@ namespace HastTranspiler.Vhdl.SubTranspilers
         public DataType Convert(AstType type)
         {
             if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
-            return null;
+            else if (type is ComposedType) return ConvertComposed((ComposedType)type);
+
+            throw new NotSupportedException("This type is not supported for transpiling.");
         }
 
-        public DataType ConvertPrimitive(KnownTypeCode typeCode)
+        public DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable)
+        {
+            var vhdlType = Convert(type);
+
+            if (vhdlType.TypeCategory == DataTypeCategory.Array || vhdlType.TypeCategory == DataTypeCategory.Composite)
+            {
+                declarable.Declarations.Add(vhdlType);
+            }
+
+            return vhdlType;
+        }
+
+        private DataType ConvertPrimitive(KnownTypeCode typeCode)
         {
             switch (typeCode)
             {
@@ -106,8 +120,17 @@ namespace HastTranspiler.Vhdl.SubTranspilers
                     break;
                 case KnownTypeCode.Void:
                     return new DataType { Name = "void" };
-                default:
-                    break;
+            }
+
+            return null;
+        }
+
+        private DataType ConvertComposed(ComposedType type)
+        {
+            if (type.ArraySpecifiers.Count != 0)
+            {
+                var storedType = Convert(type.BaseType);
+                return new VhdlBuilder.Representation.Declaration.Array { StoredType = storedType, Name = storedType.Name + "_array" };
             }
 
             return null;

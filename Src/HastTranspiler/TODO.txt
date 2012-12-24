@@ -1,8 +1,7 @@
-﻿- if/else
-- for
-- while
-- arrays
+﻿- arrays
+- objects
 - parallelism
 - out method arguments
 - basic math function mappings
+- handling class inheritance
 - transpiler events/transformation hooks

@@ -15,11 +15,6 @@ namespace HastConsole
     {
         static void Main(string[] args)
         {
-            var sw = Stopwatch.StartNew();
-            var z = IsPrimeNumber(893428937);
-            sw.Stop();
-            var nanoseconds = (1.0 / Stopwatch.Frequency) * sw.ElapsedTicks * 1000000000;
-            var y = z;
             var options = new Options();
 
             if (!new CommandLineParser().ParseArguments(args, options))
@@ -31,6 +26,7 @@ namespace HastConsole
 
             var transpiler = new Transpiler(new TranspilingEngine(new TranspilingSettings { MaxDegreeOfParallelism = 10 }));
             var csharp = @"
+using System;
                 namespace TestNamespace
                 {
                     public class SimpleClass
@@ -47,6 +43,26 @@ namespace HastConsole
 
                             return isPrime;
                         }
+
+                        public virtual int[] PrimeFactors(int num)
+                        {
+                            var i = 0;
+                            var result = new int[50];
+
+                            int divisor = 2;
+
+                            while (divisor <= num)
+                            {
+                                if (num % divisor == 0)
+                                {
+                                    result[i++] = divisor;
+                                    num /= divisor;
+                                }
+                                else divisor++;
+                            }
+
+                            return result;
+                        }
                     }
                 }";
 
@@ -61,19 +77,6 @@ namespace HastConsole
             }
 
             //Console.ReadKey();
-        }
-
-        static bool IsPrimeNumber(int num)
-        {
-            var isPrime = true;
-            int factor = num / 2;
-
-            for (int i = 2; i <= factor; i++)
-            {
-                if ((num % i) == 0) isPrime = false;
-            }
-
-            return isPrime;
         }
     }
 }

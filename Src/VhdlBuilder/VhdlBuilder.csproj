@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Representation\Declaration\Array.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
     <Compile Include="Representation\Declaration\IBlockElement.cs" />
+    <Compile Include="Representation\Declaration\IDeclarableElement.cs" />
     <Compile Include="Representation\Declaration\INamedElement.cs" />
     <Compile Include="Representation\Declaration\InlineBlock.cs" />
     <Compile Include="Representation\Declaration\IStructuredElement.cs" />
