@@ -15,6 +15,8 @@ Notes:
 	- synchronising "finished" signal
 	- if MaxDegreeOfParallelism is too small then after return reload signals and rerun
 	- if there's an await/callback divide method into three parts: method's beginning, parallelised, end/callback
+	- also the whole algorithm can be implemented on the FPGA multiple times for simultaneous execution
+	- also in-algorithm parallelisation can happen by processing .NET parallel constructs
 - Class = record (private fields included) + procedures
 - Static members can't be interface (static can't be proxied)
 - External types (like Math class calls) can be added to the AstBuilder so their relevant parts can be transpiled too
