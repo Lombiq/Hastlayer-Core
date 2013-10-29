@@ -59,7 +59,7 @@ namespace HastTranspiler.Vhdl
 
             ProcessUtility.AddClockToProcesses(module, "clk");
 
-            return new HardwareDefinition(new VhdlManifest { TopModule = module }, callIdTable);
+            return new VhdlHardwareDefinition(new VhdlManifest { TopModule = module }, callIdTable);
         }
 
         private void Traverse(AstNode node)

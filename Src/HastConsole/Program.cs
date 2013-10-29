@@ -70,7 +70,7 @@ using System;
             //var hardwareDefinition = transpiler.Transpile(options.InputFilePath);
             if (hardwareDefinition.Language == "VHDL")
             {
-                var vhdlHardwareDefinion = (HardwareDefinition)hardwareDefinition;
+                var vhdlHardwareDefinion = (VhdlHardwareDefinition)hardwareDefinition;
                 var vhdl = vhdlHardwareDefinion.Manifest.TopModule.ToVhdl();
                 File.WriteAllText(@"d:\Users\Zoltán\Projects\Saját\Hast\sigasi\Workspace\HastTest\Test.vhd", vhdl);
                 new HardwareRepresentationComposer().Compose(vhdlHardwareDefinion);

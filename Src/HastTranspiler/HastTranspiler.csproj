@@ -67,7 +67,7 @@
     <Compile Include="Vhdl\HardwareRepresentationComposer.cs" />
     <Compile Include="Vhdl\InterfaceMethodDefinition.cs" />
     <Compile Include="Vhdl\SubTranspilers\ExpressionTranspiler.cs" />
-    <Compile Include="Vhdl\HardwareDefinition.cs" />
+    <Compile Include="Vhdl\VhdlHardwareDefinition.cs" />
     <Compile Include="Vhdl\SubTranspilers\MethodTranspiler.cs" />
     <Compile Include="Vhdl\NameUtility.cs" />
     <Compile Include="Vhdl\SubTranspilers\StatementTranspiler.cs" />

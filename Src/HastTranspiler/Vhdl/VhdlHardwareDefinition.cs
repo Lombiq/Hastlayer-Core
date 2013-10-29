@@ -9,7 +9,7 @@ using VhdlBuilder.Representation.Declaration;
 
 namespace HastTranspiler.Vhdl
 {
-    public class HardwareDefinition : IHardwareDefinition
+    public class VhdlHardwareDefinition : IHardwareDefinition
     {
         private VhdlManifest _manifest;
         private CallIdTable _callIdTable;
@@ -19,11 +19,11 @@ namespace HastTranspiler.Vhdl
         public CallIdTable CallIdTable { get { return _callIdTable; } }
 
 
-        public HardwareDefinition()
+        public VhdlHardwareDefinition()
         {
         }
 
-        public HardwareDefinition(VhdlManifest manifest, CallIdTable callIdTable)
+        public VhdlHardwareDefinition(VhdlManifest manifest, CallIdTable callIdTable)
         {
             _manifest = manifest;
             _callIdTable = callIdTable;
