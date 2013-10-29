@@ -70,10 +70,10 @@ using System;
             //var hardwareDefinition = transpiler.Transpile(options.InputFilePath);
             if (hardwareDefinition.Language == "VHDL")
             {
-                var vhdlHardwareDefiniont = (HardwareDefinition)hardwareDefinition;
-                var vhdl = vhdlHardwareDefiniont.Manifest.TopModule.ToVhdl();
-                File.WriteAllText("test.txt", vhdl);
-                new HardwareRepresentationComposer().Compose(vhdlHardwareDefiniont);
+                var vhdlHardwareDefinion = (HardwareDefinition)hardwareDefinition;
+                var vhdl = vhdlHardwareDefinion.Manifest.TopModule.ToVhdl();
+                File.WriteAllText(@"d:\Users\Zoltán\Projects\Saját\Hast\sigasi\Workspace\HastTest\Test.vhd", vhdl);
+                new HardwareRepresentationComposer().Compose(vhdlHardwareDefinion);
             }
 
             //Console.ReadKey();
