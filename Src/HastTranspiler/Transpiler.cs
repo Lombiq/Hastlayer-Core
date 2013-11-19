@@ -4,6 +4,8 @@ using System.Reflection;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
 using Mono.Cecil;
+using System.Linq;
+using ICSharpCode.NRefactory.CSharp;
 
 namespace HastTranspiler
 {
@@ -26,6 +28,7 @@ namespace HastTranspiler
             var astBuilder = new AstBuilder(new DecompilerContext(assembly.MainModule));
             astBuilder.AddAssembly(assembly, onlyAssemblyLevel: false);
 
+            //This would be the decompiled output
             //using (var output = new StringWriter())
             //{
             //    astBuilder.GenerateCode(new PlainTextOutput(output));

@@ -26,7 +26,7 @@ namespace HastConsole
 
             var transpiler = new Transpiler(new TranspilingEngine(new TranspilingSettings { MaxDegreeOfParallelism = 10 }));
             var csharp = @"
-using System;
+                using System;
                 namespace TestNamespace
                 {
                     public class SimpleClass
@@ -35,6 +35,7 @@ using System;
                         {
                             var isPrime = true;
                             int factor = num / 2;
+                            //var factor = Math.Sqrt(num); Math.Sqrt() can't be processed yet
 
                             for (int i = 2; i <= factor; i++)
                             {
@@ -44,7 +45,7 @@ using System;
                             return isPrime;
                         }
 
-                        public virtual int[] PrimeFactors(int num)
+                        /*public virtual int[] PrimeFactors(int num)
                         {
                             var i = 0;
                             var result = new int[50];
@@ -62,7 +63,7 @@ using System;
                             }
 
                             return result;
-                        }
+                        }*/
                     }
                 }";
 
@@ -72,7 +73,7 @@ using System;
             {
                 var vhdlHardwareDefinion = (VhdlHardwareDefinition)hardwareDefinition;
                 var vhdl = vhdlHardwareDefinion.Manifest.TopModule.ToVhdl();
-                File.WriteAllText(@"d:\Users\Zoltán\Projects\Saját\Hast\sigasi\Workspace\HastTest\Test.vhd", vhdl);
+                File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
                 new HardwareRepresentationComposer().Compose(vhdlHardwareDefinion);
             }
 
