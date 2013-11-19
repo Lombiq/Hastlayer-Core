@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
 using HastTranspiler;
-using HastTranspiler.Vhdl;
 using System.Diagnostics;
 
 namespace HastConsole
@@ -24,7 +23,7 @@ namespace HastConsole
                 return;
             }
 
-            var transpiler = new Transpiler(new TranspilingEngine(new TranspilingSettings { MaxDegreeOfParallelism = 10 }));
+            var transpiler = new Transpiler(new HastTranspiler.Vhdl.TranspilingEngine(new HastTranspiler.Vhdl.TranspilingSettings { MaxDegreeOfParallelism = 10 }));
             var csharp = @"
                 using System;
                 namespace TestNamespace
@@ -45,6 +44,7 @@ namespace HastConsole
                             return isPrime;
                         }
 
+                        // Arrays not yet supported
                         /*public virtual int[] PrimeFactors(int num)
                         {
                             var i = 0;
@@ -71,10 +71,10 @@ namespace HastConsole
             //var hardwareDefinition = transpiler.Transpile(options.InputFilePath);
             if (hardwareDefinition.Language == "VHDL")
             {
-                var vhdlHardwareDefinion = (VhdlHardwareDefinition)hardwareDefinition;
+                var vhdlHardwareDefinion = (HastTranspiler.Vhdl.VhdlHardwareDefinition)hardwareDefinition;
                 var vhdl = vhdlHardwareDefinion.Manifest.TopModule.ToVhdl();
                 File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
-                new HardwareRepresentationComposer().Compose(vhdlHardwareDefinion);
+                new HastTranspiler.Vhdl.HardwareRepresentationComposer().Compose(vhdlHardwareDefinion);
             }
 
             //Console.ReadKey();

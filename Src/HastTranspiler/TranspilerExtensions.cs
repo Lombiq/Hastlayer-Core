@@ -10,7 +10,7 @@ namespace HastTranspiler
     public enum Language
 	{
         CSharp,
-        VB
+        VisualBasic
 	}
 
     public static class TranspilerExtensions
@@ -31,7 +31,7 @@ namespace HastTranspiler
                 case Language.CSharp:
                     result = new CSharpCodeProvider(providerOptions).CompileAssemblyFromSource(parameters, sourceCode);
                     break;
-                case Language.VB:
+                case Language.VisualBasic:
                     result = new VBCodeProvider(providerOptions).CompileAssemblyFromSource(parameters, sourceCode);
                     break;
                 default:
