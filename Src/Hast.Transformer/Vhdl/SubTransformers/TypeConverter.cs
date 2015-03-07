@@ -7,7 +7,7 @@ using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using Hast.VhdlBuilder.Representation.Declaration;
 
-namespace Hast.Transformer.Vhdl.SubTranspilers
+namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class TypeConverter
     {
@@ -16,7 +16,7 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
             if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
             else if (type is ComposedType) return ConvertComposed((ComposedType)type);
 
-            throw new NotSupportedException("This type is not supported for transpiling.");
+            throw new NotSupportedException("This type is not supported for transforming.");
         }
 
         public DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable)

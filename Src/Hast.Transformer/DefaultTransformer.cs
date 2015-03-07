@@ -9,18 +9,18 @@ using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer
 {
-    public class Transpiler : ITranspiler
+    public class DefaultTransformer : ITransformer
     {
-        private readonly ITranspilingEngine _engine;
+        private readonly ITransformingEngine _engine;
 
 
-        public Transpiler(ITranspilingEngine engine)
+        public DefaultTransformer(ITransformingEngine engine)
         {
             _engine = engine;
         }
 
 
-        public IHardwareDefinition Transpile(string assemplyPath)
+        public IHardwareDefinition Transform(string assemplyPath)
         {
             assemplyPath = Path.GetFullPath(assemplyPath);
 
@@ -36,14 +36,14 @@ namespace Hast.Transformer
             //    var y = z;
             //}
 
-            return _engine.Transpile(assembly.Name.Name, astBuilder.SyntaxTree);
+            return _engine.Transform(assembly.Name.Name, astBuilder.SyntaxTree);
         }
 
-        public IHardwareDefinition Transpile(Assembly assembly)
+        public IHardwareDefinition Transform(Assembly assembly)
         {
             if (String.IsNullOrEmpty(assembly.Location)) throw new ArgumentException("The assembly can't be an in-memory one.");
 
-            return Transpile(assembly.Location);
+            return Transform(assembly.Location);
         }
     }
 }

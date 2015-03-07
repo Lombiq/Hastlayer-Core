@@ -8,7 +8,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl
 {
-    public class TranspilingContext
+    public class TransformingContext
     {
         public SyntaxTree SyntaxTree { get; private set; }
         public Module Module { get; private set; }
@@ -16,7 +16,7 @@ namespace Hast.Transformer.Vhdl
         public CallChainTable CallChainTable { get; private set; }
 
 
-        public TranspilingContext(SyntaxTree syntaxTree, Module module, CallChainTable callChainTable)
+        public TransformingContext(SyntaxTree syntaxTree, Module module, CallChainTable callChainTable)
         {
             SyntaxTree = syntaxTree;
             Module = module;

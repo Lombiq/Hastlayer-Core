@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder.Representation.Declaration;
 
-namespace Hast.Transformer.Vhdl.SubTranspilers
+namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class SubTranspilerContext
+    public class SubTransformerContext
     {
-        public TranspilingContext TranspilingContext { get; set; }
-        public SubTranspilerScope Scope { get; set; }
+        public TransformingContext TransformingContext { get; set; }
+        public SubTransformerScope Scope { get; set; }
     }
 
-    public class SubTranspilerScope
+
+    public class SubTransformerScope
     {
         public AstNode Node { get; set; }
         public ISubProgram SubProgram { get; set; }

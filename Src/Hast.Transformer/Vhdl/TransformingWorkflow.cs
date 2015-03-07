@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hast.Transformer.Vhdl.SubTranspilers;
+using Hast.Transformer.Vhdl.SubTransformers;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation;
@@ -12,31 +12,31 @@ using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.Transformer.Vhdl
 {
-    public class TranspilingWorkflow
+    public class TransformingWorkflow
     {
-        private readonly TranspilingSettings _settings;
+        private readonly TransformingSettings _settings;
         private readonly string _id;
-        private readonly MethodTranspiler _methodTranspiler;
-        private TranspilingContext _context;
+        private readonly MethodTransformer _methodTransformr;
+        private TransformingContext _context;
 
 
-        public TranspilingWorkflow(TranspilingSettings settings, string id)
-            : this(settings, id, new MethodTranspiler())
+        public TransformingWorkflow(TransformingSettings settings, string id)
+            : this(settings, id, new MethodTransformer())
         {
         }
 
-        public TranspilingWorkflow(TranspilingSettings settings, string id, MethodTranspiler methodTranspiler)
+        public TransformingWorkflow(TransformingSettings settings, string id, MethodTransformer methodTransformr)
         {
             _settings = settings;
             _id = id;
-            _methodTranspiler = methodTranspiler;
+            _methodTransformr = methodTransformr;
         }
 
 
-        public IHardwareDefinition Transpile(SyntaxTree syntaxTree)
+        public IHardwareDefinition Transform(SyntaxTree syntaxTree)
         {
             _context =
-                new TranspilingContext(
+                new TransformingContext(
                     syntaxTree,
                     new Module { Architecture = new Architecture { Name = "Behavioural" } },
                     new CallChainTable());
@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl
                     if (node is MethodDeclaration)
                     {
                         var method = node as MethodDeclaration;
-                        _methodTranspiler.Transpile(method, _context);
+                        _methodTransformr.Transform(method, _context);
                     }
                     break;
                 case NodeType.Pattern:
@@ -215,6 +215,7 @@ namespace Hast.Transformer.Vhdl
             }
         }
     }
+
 
     static class ListExtensions
     {

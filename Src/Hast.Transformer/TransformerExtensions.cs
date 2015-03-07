@@ -8,14 +8,15 @@ using Microsoft.VisualBasic;
 namespace Hast.Transformer
 {
     public enum Language
-	{
+    {
         CSharp,
         VisualBasic
-	}
+    }
 
-    public static class TranspilerExtensions
+
+    public static class TransformerExtensions
     {
-        public static IHardwareDefinition Transpile(this ITranspiler transpiler, string sourceCode, Language language)
+        public static IHardwareDefinition Transform(this ITransformer transformer, string sourceCode, Language language)
         {
             CompilerResults result;
             var providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };
@@ -45,7 +46,7 @@ namespace Hast.Transformer
                 throw new ArgumentException("The provided source code is invalid and has the following errors: " + builder.ToString());
             }
 
-            return transpiler.Transpile(result.CompiledAssembly);
+            return transformer.Transform(result.CompiledAssembly);
         }
     }
 }

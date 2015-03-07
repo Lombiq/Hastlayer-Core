@@ -22,6 +22,7 @@ namespace Hast.Transformer.Vhdl
         }
     }
 
+
     public class ParameterMapping
     {
         public ProcedureParameter Parameter { get; set; }

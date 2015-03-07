@@ -23,7 +23,7 @@ namespace Hast.Console
                 return;
             }
 
-            var transpiler = new Transpiler(new Hast.Transformer.Vhdl.TranspilingEngine(new Hast.Transformer.Vhdl.TranspilingSettings { MaxDegreeOfParallelism = 10 }));
+            var transformer = new DefaultTransformer(new Hast.Transformer.Vhdl.VhdlTransformingEngine(new Hast.Transformer.Vhdl.TransformingSettings { MaxDegreeOfParallelism = 10 }));
             var csharp = @"
                 using System;
                 namespace TestNamespace
@@ -67,8 +67,8 @@ namespace Hast.Console
                     }
                 }";
 
-            var hardwareDefinition = transpiler.Transpile(csharp, Language.CSharp);
-            //var hardwareDefinition = transpiler.Transpile(options.InputFilePath);
+            var hardwareDefinition = transformer.Transform(csharp, Language.CSharp);
+            //var hardwareDefinition = transformer.Transform(options.InputFilePath);
             if (hardwareDefinition.Language == "VHDL")
             {
                 var vhdlHardwareDefinion = (Hast.Transformer.Vhdl.VhdlHardwareDefinition)hardwareDefinition;

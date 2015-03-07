@@ -12,12 +12,12 @@ namespace Hast.Transformer.Tests
     [TestFixture]
     public class VhdlTests
     {
-        private readonly ITranspiler _transpiler;
+        private readonly ITransformer _transformer;
 
 
         public VhdlTests()
         {
-            _transpiler = new Transpiler(new TranspilingEngine(new TranspilingSettings { MaxDegreeOfParallelism = 10 }));
+            _transformer = new DefaultTransformer(new VhdlTransformingEngine(new TransformingSettings { MaxDegreeOfParallelism = 10 }));
         }
 
 
@@ -33,7 +33,7 @@ namespace Hast.Transformer.Tests
                     }
                 }";
 
-            var hardwareDef = _transpiler.Transpile(csharp, Language.CSharp);
+            var hardwareDef = _transformer.Transform(csharp, Language.CSharp);
         }
     }
 }

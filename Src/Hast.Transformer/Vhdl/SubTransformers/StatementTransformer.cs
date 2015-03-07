@@ -9,26 +9,26 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
 
-namespace Hast.Transformer.Vhdl.SubTranspilers
+namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class StatementTranspiler
+    public class StatementTransformer
     {
         private readonly TypeConverter _typeConverter;
-        private readonly ExpressionTranspiler _expressionTranspiler;
+        private readonly ExpressionTransformer _expressionTransformr;
 
 
-        public StatementTranspiler()
-            : this(new TypeConverter(), new ExpressionTranspiler())
+        public StatementTransformer()
+            : this(new TypeConverter(), new ExpressionTransformer())
         {
         }
 
-        public StatementTranspiler(TypeConverter typeConverter, ExpressionTranspiler expressionTranspiler)
+        public StatementTransformer(TypeConverter typeConverter, ExpressionTransformer expressionTransformr)
         {
             _typeConverter = typeConverter;
-            _expressionTranspiler = expressionTranspiler;
+            _expressionTransformr = expressionTransformr;
         }
 
-        public void Transpile(Statement statement, SubTranspilerContext context, IBlockElement block)
+        public void Transform(Statement statement, SubTransformerContext context, IBlockElement block)
         {
             var subProgram = context.Scope.SubProgram;
 
@@ -46,7 +46,7 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
             {
                 var expressionStatement = statement as ExpressionStatement;
 
-                block.Body.Add(new Terminated(_expressionTranspiler.Transpile(expressionStatement.Expression, context, block)));
+                block.Body.Add(new Terminated(_expressionTransformr.Transform(expressionStatement.Expression, context, block)));
             }
             else if (statement is ReturnStatement)
             {
@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
 
                         var source = outputParam.Name.ToVhdlId() +
                                      (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
-                                     _expressionTranspiler.Transpile(returnStatement.Expression, context, block).ToVhdl() +
+                                     _expressionTransformr.Transform(returnStatement.Expression, context, block).ToVhdl() +
                                      "; return;";
 
                         procedure.Body.Add(new Raw(source));
@@ -74,16 +74,16 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
             {
                 var ifElse = statement as IfElseStatement;
 
-                var ifElseElement = new IfElse { Condition = _expressionTranspiler.Transpile(ifElse.Condition, context, block).ToVhdl() };
+                var ifElseElement = new IfElse { Condition = _expressionTransformr.Transform(ifElse.Condition, context, block).ToVhdl() };
 
                 var trueBlock = new InlineBlock();
-                Transpile(ifElse.TrueStatement, context, trueBlock);
+                Transform(ifElse.TrueStatement, context, trueBlock);
                 ifElseElement.TrueElements.Add(trueBlock);
 
                 if (ifElse.FalseStatement != Statement.Null)
                 {
                     var falseBlock = new InlineBlock();
-                    Transpile(ifElse.TrueStatement, context, falseBlock);
+                    Transform(ifElse.TrueStatement, context, falseBlock);
                     ifElseElement.ElseElements.Add(falseBlock);
                 }
 
@@ -97,7 +97,7 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
 
                 foreach (var stmt in blockStatement.Statements)
                 {
-                    Transpile(stmt, context, statementBlock);
+                    Transform(stmt, context, statementBlock);
                 }
 
                 block.Body.Add(statementBlock);
@@ -106,10 +106,10 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
             {
                 var whileStatement = statement as WhileStatement;
 
-                var whileElement = new While { Condition = _expressionTranspiler.Transpile(whileStatement.Condition, context, block).ToVhdl() };
+                var whileElement = new While { Condition = _expressionTransformr.Transform(whileStatement.Condition, context, block).ToVhdl() };
 
                 var bodyBlock = new InlineBlock();
-                Transpile(whileStatement.EmbeddedStatement, context, bodyBlock);
+                Transform(whileStatement.EmbeddedStatement, context, bodyBlock);
                 whileElement.Body.Add(bodyBlock);
 
                 block.Body.Add(whileElement);

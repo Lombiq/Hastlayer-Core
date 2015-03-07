@@ -9,27 +9,27 @@ using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Representation;
 
-namespace Hast.Transformer.Vhdl.SubTranspilers
+namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class MethodTranspiler
+    public class MethodTransformer
     {
         private readonly TypeConverter _typeConverter;
-        private readonly StatementTranspiler _statementTranspiler;
+        private readonly StatementTransformer _statementTransformr;
 
 
-        public MethodTranspiler()
-            : this(new TypeConverter(), new StatementTranspiler())
+        public MethodTransformer()
+            : this(new TypeConverter(), new StatementTransformer())
         {
         }
 
-        public MethodTranspiler(TypeConverter typeConverter, StatementTranspiler statementTranspiler)
+        public MethodTransformer(TypeConverter typeConverter, StatementTransformer statementTransformr)
         {
             _typeConverter = typeConverter;
-            _statementTranspiler = statementTranspiler;
+            _statementTransformr = statementTransformr;
         }
 
 
-        public void Transpile(MethodDeclaration method, TranspilingContext context)
+        public void Transform(MethodDeclaration method, TransformingContext context)
         {
             var fullName = NameUtility.GetFullName(method);
             var procedure = new Procedure { Name = fullName };
@@ -94,10 +94,10 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
 
 
             // Processing method body
-            var bodyContext = new SubTranspilerContext
+            var bodyContext = new SubTransformerContext
             {
-                TranspilingContext = context,
-                Scope = new SubTranspilerScope
+                TransformingContext = context,
+                Scope = new SubTransformerScope
                 {
                     Node = method,
                     SubProgram = procedure
@@ -105,7 +105,7 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
             };
             foreach (var statement in method.Body.Statements)
             {
-                _statementTranspiler.Transpile(statement, bodyContext, procedure);
+                _statementTransformr.Transform(statement, bodyContext, procedure);
             }
 
 

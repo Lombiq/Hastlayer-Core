@@ -10,11 +10,11 @@ namespace Hast.Console
 {
     class Options : CommandLineOptionsBase
     {
-        [Option("i", "input", Required = true, HelpText = "Path to the input file to transpile.")]
+        [Option("i", "input", Required = true, HelpText = "Path to the input file to transform.")]
         public string InputFilePath { get; set; }
 
         // For future use
-        [Option("f", "full", HelpText = "Full transpiling.")]
+        [Option("f", "full", HelpText = "Full transforming.")]
         public bool Full { get; set; }
 
         [HelpOption]

@@ -17,6 +17,7 @@ namespace Hast.Transformer.Vhdl
         }
     }
 
+
     public class CallChainTable
     {
         private readonly Dictionary<string, CallChain> _chains = new Dictionary<string, CallChain>();

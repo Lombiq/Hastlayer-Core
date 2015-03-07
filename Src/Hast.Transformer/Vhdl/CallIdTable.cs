@@ -13,6 +13,7 @@ namespace Hast.Transformer.Vhdl
         public int Id { get; set; }
     }
 
+
     public class CallIdTable
     {
         private static CallIdTable _emptyInstance;

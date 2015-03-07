@@ -4,7 +4,7 @@
 - parallelism
 - out method arguments
 - handling class inheritance
-- transpiler events/transformation hooks
+- transformr events/transformation hooks
 
 
 Notes:
@@ -19,6 +19,6 @@ Notes:
 	- also in-algorithm parallelisation can happen by processing .NET parallel constructs
 - Class = record (private fields included) + procedures
 - Static members can't be interface (static can't be proxied)
-- External types (like Math class calls) can be added to the AstBuilder so their relevant parts can be transpiled too
-- Statically sized entities (like variables, fixed-sized arrays...) can be directly transpiled, dynamically sized ones (like arrays having a 
+- External types (like Math class calls) can be added to the AstBuilder so their relevant parts can be transformd too
+- Statically sized entities (like variables, fixed-sized arrays...) can be directly transformd, dynamically sized ones (like arrays having a 
 runtime size) should be transformed into memory allocations

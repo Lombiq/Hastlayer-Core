@@ -9,18 +9,18 @@ using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Representation;
 
-namespace Hast.Transformer.Vhdl.SubTranspilers
+namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class ExpressionTranspiler
+    public class ExpressionTransformer
     {
         private readonly TypeConverter _typeConverter;
 
-        public ExpressionTranspiler()
+        public ExpressionTransformer()
             : this(new TypeConverter())
         {
         }
 
-        public ExpressionTranspiler(TypeConverter typeConverter)
+        public ExpressionTransformer(TypeConverter typeConverter)
         {
             _typeConverter = typeConverter;
         }
@@ -28,17 +28,17 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
 
         //  Would need to decide between + and & or sll/srl and sra/sla
         // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
-        public IVhdlElement Transpile(Expression expression, SubTranspilerContext context, IBlockElement block)
+        public IVhdlElement Transform(Expression expression, SubTransformerContext context, IBlockElement block)
         {
-            return new Raw(TranspileInner(expression, context, block));
+            return new Raw(TransformInner(expression, context, block));
         }
 
-        private string TranspileInner(Expression expression, SubTranspilerContext context, IBlockElement block)
+        private string TransformInner(Expression expression, SubTransformerContext context, IBlockElement block)
         {
             if (expression is AssignmentExpression)
             {
                 var assignment = expression as AssignmentExpression;
-                return TranspileInner(assignment.Left, context, block) + " := " + TranspileInner(assignment.Right, context, block);
+                return TransformInner(assignment.Left, context, block) + " := " + TransformInner(assignment.Right, context, block);
             }
             else if (expression is IdentifierExpression)
             {
@@ -50,12 +50,12 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
                 var primitive = expression as PrimitiveExpression;
                 return primitive.Value.ToString();
             }
-            else if (expression is BinaryOperatorExpression) return TranspileBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
-            else if (expression is InvocationExpression) return TranspileInvocationExpression((InvocationExpression)expression, context, block);
+            else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
+            else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
             else if (expression is MemberReferenceExpression)
             {
                 var member = expression as MemberReferenceExpression;
-                return TranspileInner(member.Target, context, block) + "." + member.MemberName;
+                return TransformInner(member.Target, context, block) + "." + member.MemberName;
             }
             else if (expression is ThisReferenceExpression)
             {
@@ -65,14 +65,14 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
             else if (expression is UnaryOperatorExpression)
             {
                 var unary = expression as UnaryOperatorExpression;
-                return "not (" + TranspileInner(unary.Expression, context, block) + ")";
+                return "not (" + TransformInner(unary.Expression, context, block) + ")";
             }
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
 
-        private string TranspileBinaryOperatorExpression(BinaryOperatorExpression expression, SubTranspilerContext context, IBlockElement block)
+        private string TransformBinaryOperatorExpression(BinaryOperatorExpression expression, SubTransformerContext context, IBlockElement block)
         {
-            var source = TranspileInner(expression.Left, context, block) + " ";
+            var source = TransformInner(expression.Left, context, block) + " ";
 
             switch (expression.Operator)
             {
@@ -132,18 +132,18 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
                     break;
             }
 
-            return source + " " + TranspileInner(expression.Right, context, block);
+            return source + " " + TransformInner(expression.Right, context, block);
         }
 
-        private string TranspileInvocationExpression(InvocationExpression expression, SubTranspilerContext context, IBlockElement block)
+        private string TransformInvocationExpression(InvocationExpression expression, SubTransformerContext context, IBlockElement block)
         {
             var procedure = context.Scope.SubProgram;
-            var targetName = TranspileInner(expression.Target, context, block);
+            var targetName = TransformInner(expression.Target, context, block);
             var hasArguments = expression.Arguments.Count > 0;
             var hasReturnValue = !(expression.Parent is ExpressionStatement); // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method)
             var needsParenthesis = hasArguments || hasReturnValue;
 
-            context.TranspilingContext.CallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
+            context.TransformingContext.CallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
 
             var source = targetName.ToVhdlId();
 
@@ -151,7 +151,7 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
 
             if (hasArguments)
             {
-                source += string.Join(", ", expression.Arguments.Select(argument => TranspileInner(argument, context, block)));
+                source += string.Join(", ", expression.Arguments.Select(argument => TransformInner(argument, context, block)));
             }
 
             if (hasReturnValue)
@@ -168,7 +168,7 @@ namespace Hast.Transformer.Vhdl.SubTranspilers
                     }))
                 {
                     // This is expensive, any better way?
-                    var targetNode = context.TranspilingContext.SyntaxTree.Descendants
+                    var targetNode = context.TransformingContext.SyntaxTree.Descendants
                                         .Where(node => node is MethodDeclaration)
                                         .Where(node => NameUtility.GetFullName(node) == targetName)
                                         .Single();

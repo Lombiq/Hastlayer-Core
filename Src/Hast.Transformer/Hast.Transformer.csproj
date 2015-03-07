@@ -58,25 +58,25 @@
   <ItemGroup>
     <Compile Include="Vhdl\CallChainTable.cs" />
     <Compile Include="IHardwareDefinition.cs" />
-    <Compile Include="ITranspiler.cs" />
-    <Compile Include="ITranspilingEngine.cs" />
-    <Compile Include="Transpiler.cs" />
+    <Compile Include="ITransformer.cs" />
+    <Compile Include="ITransformingEngine.cs" />
+    <Compile Include="DefaultTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TranspilerExtensions.cs" />
+    <Compile Include="TransformerExtensions.cs" />
     <Compile Include="Vhdl\CallIdTable.cs" />
     <Compile Include="Vhdl\HardwareRepresentationComposer.cs" />
     <Compile Include="Vhdl\InterfaceMethodDefinition.cs" />
-    <Compile Include="Vhdl\SubTranspilers\ExpressionTranspiler.cs" />
+    <Compile Include="Vhdl\SubTransformers\ExpressionTransformer.cs" />
     <Compile Include="Vhdl\VhdlHardwareDefinition.cs" />
-    <Compile Include="Vhdl\SubTranspilers\MethodTranspiler.cs" />
+    <Compile Include="Vhdl\SubTransformers\MethodTransformer.cs" />
     <Compile Include="Vhdl\NameUtility.cs" />
-    <Compile Include="Vhdl\SubTranspilers\StatementTranspiler.cs" />
-    <Compile Include="Vhdl\SubTranspilers\SubTranspilerContexts.cs" />
-    <Compile Include="Vhdl\TranspilingContext.cs" />
-    <Compile Include="Vhdl\TranspilingSettings.cs" />
-    <Compile Include="Vhdl\SubTranspilers\TypeConverter.cs" />
-    <Compile Include="Vhdl\TranspilingEngine.cs" />
-    <Compile Include="Vhdl\TranspilingWorkflow.cs" />
+    <Compile Include="Vhdl\SubTransformers\StatementTransformer.cs" />
+    <Compile Include="Vhdl\SubTransformers\SubTransformerContexts.cs" />
+    <Compile Include="Vhdl\TransformingContext.cs" />
+    <Compile Include="Vhdl\TransformingSettings.cs" />
+    <Compile Include="Vhdl\SubTransformers\TypeConverter.cs" />
+    <Compile Include="Vhdl\VhdlTransformingEngine.cs" />
+    <Compile Include="Vhdl\TransformingWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
