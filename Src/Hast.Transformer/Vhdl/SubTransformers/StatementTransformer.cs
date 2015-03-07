@@ -14,7 +14,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public class StatementTransformer
     {
         private readonly TypeConverter _typeConverter;
-        private readonly ExpressionTransformer _expressionTransformr;
+        private readonly ExpressionTransformer _expressionTransformer;
 
 
         public StatementTransformer()
@@ -22,10 +22,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
         }
 
-        public StatementTransformer(TypeConverter typeConverter, ExpressionTransformer expressionTransformr)
+        public StatementTransformer(TypeConverter typeConverter, ExpressionTransformer expressionTransformer)
         {
             _typeConverter = typeConverter;
-            _expressionTransformr = expressionTransformr;
+            _expressionTransformer = expressionTransformer;
         }
 
         public void Transform(Statement statement, SubTransformerContext context, IBlockElement block)
@@ -46,7 +46,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var expressionStatement = statement as ExpressionStatement;
 
-                block.Body.Add(new Terminated(_expressionTransformr.Transform(expressionStatement.Expression, context, block)));
+                block.Body.Add(new Terminated(_expressionTransformer.Transform(expressionStatement.Expression, context, block)));
             }
             else if (statement is ReturnStatement)
             {
@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         var source = outputParam.Name.ToVhdlId() +
                                      (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
-                                     _expressionTransformr.Transform(returnStatement.Expression, context, block).ToVhdl() +
+                                     _expressionTransformer.Transform(returnStatement.Expression, context, block).ToVhdl() +
                                      "; return;";
 
                         procedure.Body.Add(new Raw(source));
@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var ifElse = statement as IfElseStatement;
 
-                var ifElseElement = new IfElse { Condition = _expressionTransformr.Transform(ifElse.Condition, context, block).ToVhdl() };
+                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context, block).ToVhdl() };
 
                 var trueBlock = new InlineBlock();
                 Transform(ifElse.TrueStatement, context, trueBlock);
@@ -106,7 +106,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var whileStatement = statement as WhileStatement;
 
-                var whileElement = new While { Condition = _expressionTransformr.Transform(whileStatement.Condition, context, block).ToVhdl() };
+                var whileElement = new While { Condition = _expressionTransformer.Transform(whileStatement.Condition, context, block).ToVhdl() };
 
                 var bodyBlock = new InlineBlock();
                 Transform(whileStatement.EmbeddedStatement, context, bodyBlock);

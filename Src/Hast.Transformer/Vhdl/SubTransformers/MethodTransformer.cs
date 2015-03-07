@@ -14,7 +14,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public class MethodTransformer
     {
         private readonly TypeConverter _typeConverter;
-        private readonly StatementTransformer _statementTransformr;
+        private readonly StatementTransformer _statementTransformer;
 
 
         public MethodTransformer()
@@ -22,10 +22,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
         }
 
-        public MethodTransformer(TypeConverter typeConverter, StatementTransformer statementTransformr)
+        public MethodTransformer(TypeConverter typeConverter, StatementTransformer statementTransformer)
         {
             _typeConverter = typeConverter;
-            _statementTransformr = statementTransformr;
+            _statementTransformer = statementTransformer;
         }
 
 
@@ -105,7 +105,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
             foreach (var statement in method.Body.Statements)
             {
-                _statementTransformr.Transform(statement, bodyContext, procedure);
+                _statementTransformer.Transform(statement, bodyContext, procedure);
             }
 
 

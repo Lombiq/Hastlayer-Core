@@ -16,7 +16,7 @@ namespace Hast.Transformer.Vhdl
     {
         private readonly TransformingSettings _settings;
         private readonly string _id;
-        private readonly MethodTransformer _methodTransformr;
+        private readonly MethodTransformer _methodTransformer;
         private TransformingContext _context;
 
 
@@ -25,11 +25,11 @@ namespace Hast.Transformer.Vhdl
         {
         }
 
-        public TransformingWorkflow(TransformingSettings settings, string id, MethodTransformer methodTransformr)
+        public TransformingWorkflow(TransformingSettings settings, string id, MethodTransformer methodTransformer)
         {
             _settings = settings;
             _id = id;
-            _methodTransformr = methodTransformr;
+            _methodTransformer = methodTransformer;
         }
 
 
@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl
                     if (node is MethodDeclaration)
                     {
                         var method = node as MethodDeclaration;
-                        _methodTransformr.Transform(method, _context);
+                        _methodTransformer.Transform(method, _context);
                     }
                     break;
                 case NodeType.Pattern:

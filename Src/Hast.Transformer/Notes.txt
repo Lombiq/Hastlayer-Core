@@ -4,7 +4,7 @@
 - parallelism
 - out method arguments
 - handling class inheritance
-- transformr events/transformation hooks
+- transformer events/transformation hooks
 
 
 Notes:
