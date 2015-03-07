@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{131E80D3-29BD-496C-BE31-45A329AE3E67}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hast.VhdlBuilder</RootNamespace>
+    <AssemblyName>Hast.VhdlBuilder</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Representation\Declaration\Array.cs" />
+    <Compile Include="Representation\Declaration\DataObjectBase.cs" />
+    <Compile Include="Representation\Declaration\IBlockElement.cs" />
+    <Compile Include="Representation\Declaration\IDeclarableElement.cs" />
+    <Compile Include="Representation\Declaration\INamedElement.cs" />
+    <Compile Include="Representation\Declaration\InlineBlock.cs" />
+    <Compile Include="Representation\Declaration\IStructuredElement.cs" />
+    <Compile Include="Representation\Declaration\Signal.cs" />
+    <Compile Include="Representation\Declaration\Variable.cs" />
+    <Compile Include="Representation\Expression\Assignment.cs" />
+    <Compile Include="Representation\Expression\DataObject.cs" />
+    <Compile Include="ProcessUtility.cs" />
+    <Compile Include="Representation\Declaration\Architecture.cs" />
+    <Compile Include="Representation\Expression\Case.cs" />
+    <Compile Include="Representation\Declaration\Component.cs" />
+    <Compile Include="Representation\Declaration\ComponentInstance.cs" />
+    <Compile Include="Representation\Declaration\DataTypes.cs" />
+    <Compile Include="Representation\Declaration\ElementCollection.cs" />
+    <Compile Include="Representation\Declaration\Function.cs" />
+    <Compile Include="Representation\Declaration\IDataObject.cs" />
+    <Compile Include="Representation\Declaration\Identifier.cs" />
+    <Compile Include="Representation\Declaration\ISubProgram.cs" />
+    <Compile Include="Representation\Declaration\Module.cs" />
+    <Compile Include="Representation\Declaration\Entity.cs" />
+    <Compile Include="Representation\Expression\IfElse.cs" />
+    <Compile Include="Representation\Expression\While.cs" />
+    <Compile Include="Representation\IVhdlElement.cs" />
+    <Compile Include="Representation\Declaration\Library.cs" />
+    <Compile Include="Representation\Declaration\Procedure.cs" />
+    <Compile Include="Representation\Declaration\Process.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Representation\Declaration\DataType.cs" />
+    <Compile Include="Representation\Declaration\RangedDataType.cs" />
+    <Compile Include="Representation\Raw.cs" />
+    <Compile Include="Representation\Declaration\Record.cs" />
+    <Compile Include="Representation\Declaration\SizedDataType.cs" />
+    <Compile Include="Representation\Declaration\String.cs" />
+    <Compile Include="Representation\Terminated.cs" />
+    <Compile Include="Representation\Expression\Value.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Representation\Declaration\Enum.cs" />
+    <Compile Include="Representation\Declaration\DataObject.cs" />
+    <Compile Include="VhdlElementEnumerableExtensions.cs" />
+    <Compile Include="Representation\Declaration\VhdlManifest.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
