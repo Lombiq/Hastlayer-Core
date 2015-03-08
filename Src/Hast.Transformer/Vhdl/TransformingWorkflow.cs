@@ -35,6 +35,7 @@ namespace Hast.Transformer.Vhdl
 
         public IHardwareDefinition Transform(SyntaxTree syntaxTree)
         {
+            // The top module should have as few and as small inputs as possible. It's name can't be an extended identifier.
             _context =
                 new TransformingContext(
                     syntaxTree,
