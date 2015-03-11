@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hastlayer.cs" />
     <Compile Include="IHastLayer.cs" />
     <Compile Include="IHardwareAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -48,6 +49,14 @@
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj">
       <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
       <Name>Hast.Transformer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
+      <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
+      <Name>Hast.VhdlBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj">
+      <Project>{3e852853-2d19-49bb-b6c9-39b01d6e9785}</Project>
+      <Name>Lombiq.OrchardAppHost</Name>
     </ProjectReference>
     <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>

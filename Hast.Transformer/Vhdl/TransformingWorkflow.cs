@@ -33,34 +33,37 @@ namespace Hast.Transformer.Vhdl
         }
 
 
-        public IHardwareDefinition Transform(SyntaxTree syntaxTree)
+        public Task<IHardwareDefinition> Transform(SyntaxTree syntaxTree)
         {
-            // The top module should have as few and as small inputs as possible. It's name can't be an extended identifier.
-            _context =
-                new TransformingContext(
-                    syntaxTree,
-                    new Module { Architecture = new Architecture { Name = "Behavioural" } },
-                    new CallChainTable());
+            return Task.Run<IHardwareDefinition>(() =>
+                {
+                    // The top module should have as few and as small inputs as possible. It's name can't be an extended identifier.
+                    _context =
+                        new TransformingContext(
+                            syntaxTree,
+                            new Module { Architecture = new Architecture { Name = "Behavioural" } },
+                            new CallChainTable());
 
-            var module = _context.Module;
-            module.Entity = new Entity { Name = _id };
+                    var module = _context.Module;
+                    module.Entity = new Entity { Name = _id };
 
-            Traverse(syntaxTree);
+                    Traverse(syntaxTree);
 
-            module.Libraries.Add(new Library
-            {
-                Name = "IEEE",
-                Uses = new List<string> { "IEEE.STD_LOGIC_1164.ALL", "IEEE.NUMERIC_STD.ALL" }
-            });
+                    module.Libraries.Add(new Library
+                    {
+                        Name = "IEEE",
+                        Uses = new List<string> { "IEEE.STD_LOGIC_1164.ALL", "IEEE.NUMERIC_STD.ALL" }
+                    });
 
-            module.Architecture.Entity = module.Entity;
+                    module.Architecture.Entity = module.Entity;
 
-            ProcessCallChainTable();
-            var callIdTable = ProcessInterfaceMethods();
+                    ProcessCallChainTable();
+                    var callIdTable = ProcessInterfaceMethods();
 
-            ProcessUtility.AddClockToProcesses(module, "clk");
+                    ProcessUtility.AddClockToProcesses(module, "clk");
 
-            return new VhdlHardwareDefinition(new VhdlManifest { TopModule = module }, callIdTable);
+                    return new VhdlHardwareDefinition(new VhdlManifest { TopModule = module }, callIdTable);
+                });
         }
 
         private void Traverse(AstNode node)

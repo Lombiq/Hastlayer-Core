@@ -1,11 +1,15 @@
 ﻿using System.Reflection;
+using System.Threading.Tasks;
 using Orchard;
 
 namespace Hast.Transformer
 {
-    public interface ITransformer
+    /// <summary>
+    /// Service for transforming a .NET assembly into hardware definition.
+    /// </summary>
+    public interface ITransformer : IDependency
     {
-        IHardwareDefinition Transform(string assemplyPath);
-        IHardwareDefinition Transform(Assembly assembly);
+        Task<IHardwareDefinition> Transform(string assemplyPath);
+        Task<IHardwareDefinition> Transform(Assembly assembly);
     }
 }

@@ -6,6 +6,7 @@ using ICSharpCode.Decompiler.Ast;
 using Mono.Cecil;
 using System.Linq;
 using ICSharpCode.NRefactory.CSharp;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer
 {
@@ -20,7 +21,7 @@ namespace Hast.Transformer
         }
 
 
-        public IHardwareDefinition Transform(string assemplyPath)
+        public Task<IHardwareDefinition> Transform(string assemplyPath)
         {
             assemplyPath = Path.GetFullPath(assemplyPath);
 
@@ -39,7 +40,7 @@ namespace Hast.Transformer
             return _engine.Transform(assembly.Name.Name, astBuilder.SyntaxTree);
         }
 
-        public IHardwareDefinition Transform(Assembly assembly)
+        public Task<IHardwareDefinition> Transform(Assembly assembly)
         {
             if (String.IsNullOrEmpty(assembly.Location)) throw new ArgumentException("The assembly can't be an in-memory one.");
 

@@ -53,14 +53,6 @@
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
-      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
-      <Name>Hast.Transformer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
-      <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
-      <Name>Hast.VhdlBuilder</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
       <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
       <Name>Hast.Samples.SampleAssembly</Name>

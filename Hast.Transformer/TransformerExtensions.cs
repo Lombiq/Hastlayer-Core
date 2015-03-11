@@ -2,6 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.CSharp;
 using Microsoft.VisualBasic;
 
@@ -16,7 +17,7 @@ namespace Hast.Transformer
 
     public static class TransformerExtensions
     {
-        public static IHardwareDefinition Transform(this ITransformer transformer, string sourceCode, Language language)
+        public static Task<IHardwareDefinition> Transform(this ITransformer transformer, string sourceCode, Language language)
         {
             CompilerResults result;
             var providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };

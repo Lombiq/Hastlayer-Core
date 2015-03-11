@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orchard", "Orchard", "{9E6F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.Framework", "Orchard\src\Orchard\Orchard.Framework.csproj", "{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lombiq.OrchardAppHost", "Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj", "{3E852853-2D19-49BB-B6C9-39B01D6E9785}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E852853-2D19-49BB-B6C9-39B01D6E9785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E852853-2D19-49BB-B6C9-39B01D6E9785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E852853-2D19-49BB-B6C9-39B01D6E9785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E852853-2D19-49BB-B6C9-39B01D6E9785}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
