@@ -5,6 +5,5 @@ desktop.ini
 *.orig
 *.user
 *Thumbs.db
-syntax: regexp
-(?i)Src/.*bin/.*
-(?i)Src/.*obj/.*
+bin/
+obj/
