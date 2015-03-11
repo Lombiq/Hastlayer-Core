@@ -9,7 +9,7 @@ namespace Hast.Transformer.Vhdl
 {
     public class HardwareRepresentationComposer
     {
-        public void Compose(params VhdlHardwareDefinition[] hardwareDefinitions)
+        public void Compose(params VhdlHardwareDescription[] hardwareDescriptions)
         {
         }
     }

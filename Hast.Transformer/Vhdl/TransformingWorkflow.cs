@@ -34,9 +34,9 @@ namespace Hast.Transformer.Vhdl
         }
 
 
-        public Task<IHardwareDefinition> Transform(SyntaxTree syntaxTree)
+        public Task<IHardwareDescription> Transform(SyntaxTree syntaxTree)
         {
-            return Task.Run<IHardwareDefinition>(() =>
+            return Task.Run<IHardwareDescription>(() =>
                 {
                     // The top module should have as few and as small inputs as possible. It's name can't be an extended identifier.
                     _context =
@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl
 
                     ProcessUtility.AddClockToProcesses(module, "clk");
 
-                    return new VhdlHardwareDefinition(new VhdlManifest { TopModule = module }, callIdTable);
+                    return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, callIdTable);
                 });
         }
 

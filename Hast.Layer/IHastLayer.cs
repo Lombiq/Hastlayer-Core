@@ -11,12 +11,24 @@ namespace Hast.Layer
 {
     public interface IHastLayer : IDisposable
     {
-        // Either this...
+        /// <summary>
+        /// Generates and implements a hardware representation of the give assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly that should be implemented as hardware.</param>
+        /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
+        /// <returns>The representation of the assembly implemented as hardware.</returns>
         Task<IHardwareAssembly> GenerateHardware(Assembly assembly, IHardwareGenerationConfiguration configuration);
 
-        // ...or this:
+        // Maybe this as well?
         //Task<IHardwareAssembly> GenerateHardware(Type type); // Would only transform this type and its dependencies.
 
+        /// <summary>
+        /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation.
+        /// </summary>
+        /// <typeparam name="T">Type of the object to generate a proxy for.</typeparam>
+        /// <param name="hardwareAssembly">The representation of the assembly implemented as hardware.</param>
+        /// <param name="hardwareObject">The object to generate the proxy for.</param>
+        /// <returns>The generated proxy object.</returns>
         T GenerateProxy<T>(IHardwareAssembly hardwareAssembly, T hardwareObject);
     }
 }

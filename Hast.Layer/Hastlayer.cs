@@ -19,24 +19,35 @@ namespace Hast.Layer
         private IOrchardAppHost _host;
 
 
+        // Private so the static factory should be used.
+        private Hastlayer()
+        {
+        }
+
+        // Point of this factory is that it returns an interface type instead of the implemantation.
+        public static IHastLayer Create()
+        {
+            return new Hastlayer();
+        }
+
         /*
          * Steps to be implemented:
-         * - Transform into hardware definition through ITransformer.
-         * - Save hardware definition for re-use (cache file, stream supplied from the outside).
+         * - Transform into hardware description through ITransformer.
+         * - Save hardware description for re-use (cache file, stream supplied from the outside).
          * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary communication 
          *   implementation (currently partially implemented with a call chain table).
          * - Cache hardware implementation to be able to re-load it onto the FPGA later.
          */
         public async Task<IHardwareAssembly> GenerateHardware(Assembly assembly, IHardwareGenerationConfiguration configuration)
         {
-             var hardwareDefinition = await (await GetHost()).RunGet(scope => scope.Resolve<ITransformer>().Transform(assembly, configuration), ShellName, false);
-             if (hardwareDefinition.Language == "VHDL")
-             {
-                 var vhdlHardwareDefinion = (Hast.Transformer.Vhdl.VhdlHardwareDefinition)hardwareDefinition;
-                 var vhdl = vhdlHardwareDefinion.Manifest.TopModule.ToVhdl();
-                 //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
-                 new Hast.Transformer.Vhdl.HardwareRepresentationComposer().Compose(vhdlHardwareDefinion);
-             }
+            var hardwareDescription = await (await GetHost()).RunGet(scope => scope.Resolve<ITransformer>().Transform(assembly, configuration), ShellName, false);
+            if (hardwareDescription.Language == "VHDL")
+            {
+                var vhdlHardwareDescription = (Hast.Transformer.Vhdl.VhdlHardwareDescription)hardwareDescription;
+                var vhdl = vhdlHardwareDescription.Manifest.TopModule.ToVhdl();
+                //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
+                new Hast.Transformer.Vhdl.HardwareRepresentationComposer().Compose(vhdlHardwareDescription);
+            }
 
             throw new NotImplementedException();
         }

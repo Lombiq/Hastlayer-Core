@@ -22,11 +22,11 @@ namespace Hast.Transformer
         }
 
 
-        public Task<IHardwareDefinition> Transform(string assemplyPath, IHardwareGenerationConfiguration configuration)
+        public Task<IHardwareDescription> Transform(string assemblyPath, IHardwareGenerationConfiguration configuration)
         {
-            assemplyPath = Path.GetFullPath(assemplyPath);
+            assemblyPath = Path.GetFullPath(assemblyPath);
 
-            var assembly = AssemblyDefinition.ReadAssembly(assemplyPath);
+            var assembly = AssemblyDefinition.ReadAssembly(assemblyPath);
             var astBuilder = new AstBuilder(new DecompilerContext(assembly.MainModule));
             astBuilder.AddAssembly(assembly, onlyAssemblyLevel: false);
 
@@ -41,7 +41,7 @@ namespace Hast.Transformer
             return _engine.Transform(assembly.Name.Name, astBuilder.SyntaxTree, configuration);
         }
 
-        public Task<IHardwareDefinition> Transform(Assembly assembly, IHardwareGenerationConfiguration configuration)
+        public Task<IHardwareDescription> Transform(Assembly assembly, IHardwareGenerationConfiguration configuration)
         {
             if (String.IsNullOrEmpty(assembly.Location)) throw new ArgumentException("The assembly can't be an in-memory one.");
 

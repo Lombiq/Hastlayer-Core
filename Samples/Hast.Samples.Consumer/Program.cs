@@ -16,7 +16,7 @@ namespace Hast.Samples.Consumer
             Task.Run(async () =>
                 {
 
-                    using (var hastLayer = new Hastlayer())
+                    using (var hastLayer = Hastlayer.Create())
                     {
                         var configuration = new HardwareGenerationConfiguration
                         {

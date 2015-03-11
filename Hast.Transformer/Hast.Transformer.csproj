@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Vhdl\CallChainTable.cs" />
-    <Compile Include="IHardwareDefinition.cs" />
+    <Compile Include="IHardwareDescription.cs" />
     <Compile Include="ITransformer.cs" />
     <Compile Include="ITransformingEngine.cs" />
     <Compile Include="DefaultTransformer.cs" />
@@ -66,7 +66,7 @@
     <Compile Include="Vhdl\HardwareRepresentationComposer.cs" />
     <Compile Include="Vhdl\InterfaceMethodDefinition.cs" />
     <Compile Include="Vhdl\SubTransformers\ExpressionTransformer.cs" />
-    <Compile Include="Vhdl\VhdlHardwareDefinition.cs" />
+    <Compile Include="Vhdl\VhdlHardwareDescription.cs" />
     <Compile Include="Vhdl\SubTransformers\MethodTransformer.cs" />
     <Compile Include="Vhdl\NameUtility.cs" />
     <Compile Include="Vhdl\SubTransformers\StatementTransformer.cs" />

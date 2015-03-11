@@ -9,7 +9,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl
 {
-    public class VhdlHardwareDefinition : IHardwareDefinition
+    public class VhdlHardwareDescription : IHardwareDescription
     {
         private VhdlManifest _manifest;
         private CallIdTable _callIdTable;
@@ -19,11 +19,11 @@ namespace Hast.Transformer.Vhdl
         public CallIdTable CallIdTable { get { return _callIdTable; } }
 
 
-        public VhdlHardwareDefinition()
+        public VhdlHardwareDescription()
         {
         }
 
-        public VhdlHardwareDefinition(VhdlManifest manifest, CallIdTable callIdTable)
+        public VhdlHardwareDescription(VhdlManifest manifest, CallIdTable callIdTable)
         {
             _manifest = manifest;
             _callIdTable = callIdTable;
@@ -42,7 +42,7 @@ namespace Hast.Transformer.Vhdl
                     CallIdTable = _callIdTable,
                 };
 
-                await writer.WriteAsync(await JsonConvert.SerializeObjectAsync(storage, Formatting.None, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+                await writer.WriteAsync(JsonConvert.SerializeObject(storage, Formatting.None, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
             }
         }
 
