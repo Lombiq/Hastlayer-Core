@@ -7,6 +7,7 @@ using Mono.Cecil;
 using System.Linq;
 using ICSharpCode.NRefactory.CSharp;
 using System.Threading.Tasks;
+using Hast.Common.Configuration;
 
 namespace Hast.Transformer
 {
@@ -21,7 +22,7 @@ namespace Hast.Transformer
         }
 
 
-        public Task<IHardwareDefinition> Transform(string assemplyPath)
+        public Task<IHardwareDefinition> Transform(string assemplyPath, IHardwareGenerationConfiguration configuration)
         {
             assemplyPath = Path.GetFullPath(assemplyPath);
 
@@ -37,14 +38,14 @@ namespace Hast.Transformer
             //    var y = z;
             //}
 
-            return _engine.Transform(assembly.Name.Name, astBuilder.SyntaxTree);
+            return _engine.Transform(assembly.Name.Name, astBuilder.SyntaxTree, configuration);
         }
 
-        public Task<IHardwareDefinition> Transform(Assembly assembly)
+        public Task<IHardwareDefinition> Transform(Assembly assembly, IHardwareGenerationConfiguration configuration)
         {
             if (String.IsNullOrEmpty(assembly.Location)) throw new ArgumentException("The assembly can't be an in-memory one.");
 
-            return Transform(assembly.Location);
+            return Transform(assembly.Location, configuration);
         }
     }
 }

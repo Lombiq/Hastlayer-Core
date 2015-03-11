@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Configuration;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 
@@ -17,7 +18,12 @@ namespace Hast.Samples.Consumer
 
                     using (var hastLayer = new Hastlayer())
                     {
-                        var hardwareAssembly = await hastLayer.GenerateHardware(typeof(PrimeCalculator).Assembly);
+                        var configuration = new HardwareGenerationConfiguration
+                        {
+                            MaxDegreeOfParallelism = 10
+                        };
+
+                        var hardwareAssembly = await hastLayer.GenerateHardware(typeof(PrimeCalculator).Assembly, configuration);
 
                         var primeCalculator = hastLayer.GenerateProxy(hardwareAssembly, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15); // Maybe only allow methods that return a Task or its derivatives?

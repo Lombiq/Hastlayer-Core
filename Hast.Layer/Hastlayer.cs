@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Configuration;
 using Hast.Transformer;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
@@ -26,9 +27,9 @@ namespace Hast.Layer
          *   implementation (currently partially implemented with a call chain table).
          * - Cache hardware implementation to be able to re-load it onto the FPGA later.
          */
-        public async Task<IHardwareAssembly> GenerateHardware(Assembly assembly)
+        public async Task<IHardwareAssembly> GenerateHardware(Assembly assembly, IHardwareGenerationConfiguration configuration)
         {
-             var hardwareDefinition = await (await GetHost()).RunGet(scope => scope.Resolve<ITransformer>().Transform(assembly), ShellName, false);
+             var hardwareDefinition = await (await GetHost()).RunGet(scope => scope.Resolve<ITransformer>().Transform(assembly, configuration), ShellName, false);
              if (hardwareDefinition.Language == "VHDL")
              {
                  var vhdlHardwareDefinion = (Hast.Transformer.Vhdl.VhdlHardwareDefinition)hardwareDefinition;

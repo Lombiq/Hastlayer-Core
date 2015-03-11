@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Hast.Common.Configuration;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
@@ -10,6 +11,6 @@ namespace Hast.Transformer
     /// </summary>
     public interface ITransformingEngine : IDependency
     {
-        Task<IHardwareDefinition> Transform(string id, SyntaxTree syntaxTree);
+        Task<IHardwareDefinition> Transform(string id, SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
     }
 }

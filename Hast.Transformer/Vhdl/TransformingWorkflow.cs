@@ -9,25 +9,26 @@ using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using Hast.Common.Configuration;
 
 namespace Hast.Transformer.Vhdl
 {
     public class TransformingWorkflow
     {
-        private readonly TransformingSettings _settings;
+        private readonly IHardwareGenerationConfiguration _configuration;
         private readonly string _id;
         private readonly MethodTransformer _methodTransformer;
         private TransformingContext _context;
 
 
-        public TransformingWorkflow(TransformingSettings settings, string id)
-            : this(settings, id, new MethodTransformer())
+        public TransformingWorkflow(IHardwareGenerationConfiguration configuration, string id)
+            : this(configuration, id, new MethodTransformer())
         {
         }
 
-        public TransformingWorkflow(TransformingSettings settings, string id, MethodTransformer methodTransformer)
+        public TransformingWorkflow(IHardwareGenerationConfiguration configuration, string id, MethodTransformer methodTransformer)
         {
-            _settings = settings;
+            _configuration = configuration;
             _id = id;
             _methodTransformer = methodTransformer;
         }

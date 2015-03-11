@@ -3,6 +3,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Configuration;
 using Microsoft.CSharp;
 using Microsoft.VisualBasic;
 
@@ -17,7 +18,7 @@ namespace Hast.Transformer
 
     public static class TransformerExtensions
     {
-        public static Task<IHardwareDefinition> Transform(this ITransformer transformer, string sourceCode, Language language)
+        public static Task<IHardwareDefinition> Transform(this ITransformer transformer, string sourceCode, Language language, IHardwareGenerationConfiguration configuration)
         {
             CompilerResults result;
             var providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };
@@ -47,7 +48,7 @@ namespace Hast.Transformer
                 throw new ArgumentException("The provided source code is invalid and has the following errors: " + builder.ToString());
             }
 
-            return transformer.Transform(result.CompiledAssembly);
+            return transformer.Transform(result.CompiledAssembly, configuration);
         }
     }
 }
