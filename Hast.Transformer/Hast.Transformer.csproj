@@ -40,11 +40,9 @@
     <Reference Include="ICSharpCode.NRefactory.CSharp">
       <HintPath>Libs\ILSpy\ICSharpCode.NRefactory.CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil">
+    <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\ILSpy\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Orchard\lib\newtonsoft.json\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,40 +53,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Vhdl\CallChainTable.cs" />
-    <Compile Include="IHardwareDescription.cs" />
     <Compile Include="ITransformer.cs" />
     <Compile Include="ITransformingEngine.cs" />
     <Compile Include="DefaultTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransformerExtensions.cs" />
-    <Compile Include="Vhdl\CallIdTable.cs" />
-    <Compile Include="Vhdl\HardwareRepresentationComposer.cs" />
-    <Compile Include="Vhdl\InterfaceMethodDefinition.cs" />
-    <Compile Include="Vhdl\SubTransformers\ExpressionTransformer.cs" />
-    <Compile Include="Vhdl\VhdlHardwareDescription.cs" />
-    <Compile Include="Vhdl\SubTransformers\MethodTransformer.cs" />
-    <Compile Include="Vhdl\NameUtility.cs" />
-    <Compile Include="Vhdl\SubTransformers\StatementTransformer.cs" />
-    <Compile Include="Vhdl\SubTransformers\SubTransformerContexts.cs" />
-    <Compile Include="Vhdl\TransformingContext.cs" />
-    <Compile Include="Vhdl\SubTransformers\TypeConverter.cs" />
-    <Compile Include="Vhdl\VhdlTransformingEngine.cs" />
-    <Compile Include="Vhdl\TransformingWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
-      <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
-      <Name>Hast.VhdlBuilder</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
       <Name>Orchard.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

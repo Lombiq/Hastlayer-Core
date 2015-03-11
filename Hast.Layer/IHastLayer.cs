@@ -12,7 +12,7 @@ namespace Hast.Layer
     public interface IHastLayer : IDisposable
     {
         /// <summary>
-        /// Generates and implements a hardware representation of the give assembly.
+        /// Generates and implements a hardware representation of the given assembly.
         /// </summary>
         /// <param name="assembly">The assembly that should be implemented as hardware.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
@@ -29,6 +29,6 @@ namespace Hast.Layer
         /// <param name="hardwareAssembly">The representation of the assembly implemented as hardware.</param>
         /// <param name="hardwareObject">The object to generate the proxy for.</param>
         /// <returns>The generated proxy object.</returns>
-        T GenerateProxy<T>(IHardwareAssembly hardwareAssembly, T hardwareObject);
+        Task<T> GenerateProxy<T>(IHardwareAssembly hardwareAssembly, T hardwareObject) where T : class;
     }
 }

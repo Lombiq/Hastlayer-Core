@@ -16,16 +16,17 @@ namespace Hast.Samples.Consumer
             Task.Run(async () =>
                 {
 
-                    using (var hastLayer = Hastlayer.Create())
-                    {
-                        var configuration = new HardwareGenerationConfiguration
+                    var extensions = new[]
                         {
-                            MaxDegreeOfParallelism = 10
+                            typeof(Hast.Transformer.Vhdl.VhdlTransformingEngine).Assembly,
+                            typeof(Hast.Xilinx.XilinxHardwareRepresentationComposer).Assembly
                         };
 
-                        var hardwareAssembly = await hastLayer.GenerateHardware(typeof(PrimeCalculator).Assembly, configuration);
+                    using (var hastLayer = Hastlayer.Create(extensions))
+                    {
+                        var hardwareAssembly = await hastLayer.GenerateHardware(typeof(PrimeCalculator).Assembly, HardwareGenerationConfiguration.Default);
 
-                        var primeCalculator = hastLayer.GenerateProxy(hardwareAssembly, new PrimeCalculator());
+                        var primeCalculator = await hastLayer.GenerateProxy(hardwareAssembly, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15); // Maybe only allow methods that return a Task or its derivatives?
                     }
 

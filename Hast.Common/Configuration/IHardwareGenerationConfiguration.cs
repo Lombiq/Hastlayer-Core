@@ -16,11 +16,4 @@ namespace Hast.Common.Configuration
         /// </summary>
         IDictionary<string, object> CustomConfiguration { get; }
     }
-
-
-    public class HardwareGenerationConfiguration : IHardwareGenerationConfiguration
-    {
-        public int MaxDegreeOfParallelism { get; set; }
-        public IDictionary<string, object> CustomConfiguration { get; set; }
-    }
 }

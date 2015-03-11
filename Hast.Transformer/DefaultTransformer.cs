@@ -8,6 +8,7 @@ using System.Linq;
 using ICSharpCode.NRefactory.CSharp;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
+using Hast.Common;
 
 namespace Hast.Transformer
 {

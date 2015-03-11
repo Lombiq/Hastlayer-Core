@@ -10,6 +10,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.Common.Configuration;
+using Hast.Common;
 
 namespace Hast.Transformer.Vhdl
 {

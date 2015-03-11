@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.Common;
 
 namespace Hast.Transformer.Vhdl
 {

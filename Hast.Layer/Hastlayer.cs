@@ -5,10 +5,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
+using Hast.Communication;
+using Hast.Synthesis;
 using Hast.Transformer;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
 using Orchard.Environment.Configuration;
+using Orchard.Validation;
 
 namespace Hast.Layer
 {
@@ -16,58 +19,90 @@ namespace Hast.Layer
     {
         private const string ShellName = ShellSettings.DefaultName;
 
+        private readonly IEnumerable<Assembly> _extensions;
+
         private IOrchardAppHost _host;
 
 
         // Private so the static factory should be used.
-        private Hastlayer()
+        private Hastlayer(IEnumerable<Assembly> extensions)
         {
+            _extensions = extensions;
         }
 
-        // Point of this factory is that it returns an interface type instead of the implemantation.
-        public static IHastLayer Create()
+        /// <summary>
+        /// Instantiates a new <see cref="IHastlayer"/> implementation.
+        /// </summary>
+        /// <remarks>Point of this factory is that it returns an interface type instead of the implemantation.</remarks>
+        /// <param name="extensions">
+        /// Extensions that can provide implementations for Hatlayer services or hook into the hardware generation pipeline.
+        /// </param>
+        /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
+        public static IHastLayer Create(IEnumerable<Assembly> extensions)
         {
-            return new Hastlayer();
+            Argument.ThrowIfNull(extensions, "extensions");
+
+            return new Hastlayer(extensions);
         }
 
-        /*
-         * Steps to be implemented:
-         * - Transform into hardware description through ITransformer.
-         * - Save hardware description for re-use (cache file, stream supplied from the outside).
-         * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary communication 
-         *   implementation (currently partially implemented with a call chain table).
-         * - Cache hardware implementation to be able to re-load it onto the FPGA later.
-         */
+
         public async Task<IHardwareAssembly> GenerateHardware(Assembly assembly, IHardwareGenerationConfiguration configuration)
         {
-            var hardwareDescription = await (await GetHost()).RunGet(scope => scope.Resolve<ITransformer>().Transform(assembly, configuration), ShellName, false);
-            if (hardwareDescription.Language == "VHDL")
+            /*
+             * Steps to be implemented:
+             * - Transform into hardware description through ITransformer.
+             * - Save hardware description for re-use (cache file, stream supplied from the outside).
+             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary communication 
+             *   implementation (currently partially implemented with a call chain table).
+             * - Cache hardware implementation to be able to re-load it onto the FPGA later.
+             */
+
+            try
             {
-                var vhdlHardwareDescription = (Hast.Transformer.Vhdl.VhdlHardwareDescription)hardwareDescription;
-                var vhdl = vhdlHardwareDescription.Manifest.TopModule.ToVhdl();
-                //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
-                new Hast.Transformer.Vhdl.HardwareRepresentationComposer().Compose(vhdlHardwareDescription);
+                await (await GetHost())
+                    .Run<ITransformer, IHardwareRepresentationComposer>(
+                        async (transformer, hardwareRepresentationComposer) =>
+                        {
+                            var hardwareDescription = await transformer.Transform(assembly, configuration);
+
+                            // For testing only.
+                            //if (hardwareDescription.Language == "VHDL")
+                            //{
+                            //    var vhdlHardwareDescription = (Hast.Transformer.Vhdl.VhdlHardwareDescription)hardwareDescription;
+                            //    var vhdl = vhdlHardwareDescription.Manifest.TopModule.ToVhdl();
+                            //    //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
+                            //    //new Hast.Transformer.Vhdl.HardwareRepresentationComposer().Compose(vhdlHardwareDescription);
+                            //}
+
+                            await hardwareRepresentationComposer.Compose(hardwareDescription);
+
+                        }, ShellName, false);
+            }
+            catch (NotImplementedException) // Just for testing.
+            {
             }
 
-            throw new NotImplementedException();
+            return new HardwareAssembly
+            {
+                SoftAssembly = assembly
+            };
         }
 
 
         // Maybe this should return an IDisposable? E.g. close communication to FPGA, or clean up its configuration here if no other calls for
         // this type of object is alive.
-        public T GenerateProxy<T>(IHardwareAssembly hardwareAssembly, T hardwareObject)
+        public async Task<T> GenerateProxy<T>(IHardwareAssembly hardwareAssembly, T hardwareObject) where T : class
         {
-            /*
-             * - Generate dynamic proxy for the given object.
-             * - For the type's methods implement: FPGA communication, data transformation.
-             */
+            Argument.ThrowIfNull(hardwareAssembly, "hardwareAssembly");
 
             if (hardwareAssembly.SoftAssembly != hardwareObject.GetType().Assembly)
             {
                 throw new InvalidOperationException("The supplied type is not part of this hardware assembly.");
             }
 
-            throw new NotImplementedException();
+            return await
+                (await GetHost())
+                .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareObject)));
         }
 
         public void Dispose()
@@ -85,13 +120,26 @@ namespace Hast.Layer
 
             var settings = new AppHostSettings
             {
-                ImportedExtensions = new[] { typeof(Hast.Transformer.ITransformer).Assembly },
+                // Everything loaded from here currently, but this needs an extension point for dynamic loading.
+                ImportedExtensions = new[]
+                {
+                    typeof(Hastlayer).Assembly,
+                    typeof(Hast.Communication.IProxyGenerator).Assembly,
+                    typeof(Hast.Synthesis.IHardwareRepresentationComposer).Assembly,
+                    typeof(Hast.Transformer.ITransformer).Assembly
+                }.Union(_extensions),
                 DefaultShellFeatureStates = new[]
                 {
                     new DefaultShellFeatureState
                     {
                         ShellName = ShellName,
-                        EnabledFeatures = new[] { "Hast.Transformer", "Hast.Transformer.Vhdl" }
+                        EnabledFeatures = new[]
+                        {
+                            "Hast.Layer",
+                            "Hast.Communication",
+                            "Hast.Synthesis",
+                            "Hast.Transformer"
+                        }.Union(_extensions.Select(extension => extension.ShortName()))
                     }
                 }
             };

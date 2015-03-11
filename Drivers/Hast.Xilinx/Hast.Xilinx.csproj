@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0D77AFBA-1B4D-4083-B35C-3309251039B7}</ProjectGuid>
+    <ProjectGuid>{02BE2213-F0E5-4107-BEA4-AE396525A644}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Layer</RootNamespace>
-    <AssemblyName>Hast.Layer</AssemblyName>
+    <RootNamespace>Hast.Xilinx</RootNamespace>
+    <AssemblyName>Hast.Xilinx</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -40,40 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HardwareAssembly.cs" />
-    <Compile Include="Hastlayer.cs" />
-    <Compile Include="IHastLayer.cs" />
-    <Compile Include="IHardwareAssembly.cs" />
+    <Compile Include="XilinxHardwareRepresentationComposer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hast.Common\Hast.Common.csproj">
+    <None Include="Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj">
-      <Project>{71b55241-a31c-43f5-9b46-40b53099df56}</Project>
-      <Name>Hast.Communication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
+    <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
       <Name>Hast.Synthesis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj">
-      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
-      <Name>Hast.Transformer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj">
-      <Project>{3e852853-2d19-49bb-b6c9-39b01d6e9785}</Project>
-      <Name>Lombiq.OrchardAppHost</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj">
+    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
       <Name>Orchard.Framework</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

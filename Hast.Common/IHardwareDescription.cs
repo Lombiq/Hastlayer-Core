@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer
+namespace Hast.Common
 {
     /// <summary>
     /// Represents the hardware created from a transformed assembly.

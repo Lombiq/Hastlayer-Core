@@ -5,13 +5,12 @@ using System.Linq;
 using Hast.VhdlBuilder;
 using Hast.Transformer.Vhdl.SubTransformers;
 using System;
-using Orchard.Environment.Extensions;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
+using Hast.Common;
 
 namespace Hast.Transformer.Vhdl
 {
-    [OrchardFeature("Hast.Transformer.Vhdl")]
     public class VhdlTransformingEngine : ITransformingEngine
     {
         public Task<IHardwareDescription> Transform(string id, SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
