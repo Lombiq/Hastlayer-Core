@@ -22,11 +22,11 @@ namespace Hast.Samples.Consumer
                             typeof(Hast.Xilinx.XilinxHardwareRepresentationComposer).Assembly
                         };
 
-                    using (var hastLayer = Hastlayer.Create(extensions))
+                    using (var hastlayer = Hastlayer.Create(extensions))
                     {
-                        var hardwareAssembly = await hastLayer.GenerateHardware(typeof(PrimeCalculator).Assembly, HardwareGenerationConfiguration.Default);
+                        var hardwareAssembly = await hastlayer.GenerateHardware(typeof(PrimeCalculator).Assembly, HardwareGenerationConfiguration.Default);
 
-                        var primeCalculator = await hastLayer.GenerateProxy(hardwareAssembly, new PrimeCalculator());
+                        var primeCalculator = await hastlayer.GenerateProxy(hardwareAssembly, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15); // Maybe only allow methods that return a Task or its derivatives?
                     }
 
