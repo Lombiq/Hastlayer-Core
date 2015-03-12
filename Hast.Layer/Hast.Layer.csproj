@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="HardwareAssembly.cs" />
     <Compile Include="Hastlayer.cs" />
-    <Compile Include="IHastLayer.cs" />
+    <Compile Include="IHastlayer.cs" />
     <Compile Include="IHardwareAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
