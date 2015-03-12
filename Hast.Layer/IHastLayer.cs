@@ -9,7 +9,7 @@ using Orchard;
 
 namespace Hast.Layer
 {
-    public interface IHastLayer : IDisposable
+    public interface IHastlayer : IDisposable
     {
         /// <summary>
         /// Generates and implements a hardware representation of the given assembly.

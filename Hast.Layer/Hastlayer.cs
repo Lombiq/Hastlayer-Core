@@ -15,7 +15,7 @@ using Orchard.Validation;
 
 namespace Hast.Layer
 {
-    public class Hastlayer : IHastLayer
+    public class Hastlayer : IHastlayer
     {
         private const string ShellName = ShellSettings.DefaultName;
 
@@ -38,7 +38,7 @@ namespace Hast.Layer
         /// Extensions that can provide implementations for Hatlayer services or hook into the hardware generation pipeline.
         /// </param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
-        public static IHastLayer Create(IEnumerable<Assembly> extensions)
+        public static IHastlayer Create(IEnumerable<Assembly> extensions)
         {
             Argument.ThrowIfNull(extensions, "extensions");
 
