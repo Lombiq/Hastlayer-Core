@@ -61,7 +61,7 @@
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Orchard.Tests\Orchard.Framework.Tests.csproj">
+    <ProjectReference Include="..\..\Orchard\src\Orchard.Tests\Orchard.Framework.Tests.csproj">
       <Project>{abc826d4-2fa1-4f2f-87de-e6095f653810}</Project>
       <Name>Orchard.Framework.Tests</Name>
     </ProjectReference>
