@@ -26,6 +26,10 @@ namespace Hast.Samples.Consumer
                     {
                         var hardwareAssembly = await hastlayer.GenerateHardware(typeof(PrimeCalculator).Assembly, HardwareGenerationConfiguration.Default);
 
+                        IService serviceParameter = new ServiceSample();
+                        var service = await hastlayer.GenerateProxy(hardwareAssembly, serviceParameter);
+                        service.Method();
+
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareAssembly, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);
                     }

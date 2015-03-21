@@ -21,6 +21,11 @@ namespace Hast.Communication
 
         public T CreateCommunicationProxy<T>(T target) where T : class
         {
+            if (typeof(T).IsInterface)
+            {
+                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MethodInvocationInterceptor(_methodInvocationHandlerFactory.CreateMethodInvocationHandler(target)));
+            }
+
             return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MethodInvocationInterceptor(_methodInvocationHandlerFactory.CreateMethodInvocationHandler(target)));
         }
 
