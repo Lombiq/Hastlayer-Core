@@ -39,15 +39,15 @@ namespace Hast.Transformer.Vhdl
         {
             return Task.Run<IHardwareDescription>(() =>
                 {
-                    // The top module should have as few and as small inputs as possible. It's name can't be an extended identifier.
                     _context =
                         new TransformingContext(
                             syntaxTree,
                             new Module { Architecture = new Architecture { Name = "Behavioural" } },
                             new MethodCallChainTable());
 
+                    // The top module should have as few and as small inputs as possible. Its name can't be an extended identifier.
                     var module = _context.Module;
-                    module.Entity = new Entity { Name = _id };
+                    module.Entity = new Entity { Name =  Entity.ToSafeEntityName(_id) };
 
                     Traverse(syntaxTree);
 
@@ -63,6 +63,9 @@ namespace Hast.Transformer.Vhdl
                     var callIdTable = ProcessInterfaceMethods();
 
                     ProcessUtility.AddClockToProcesses(module, "clk");
+
+                    // Just for testing.
+                    System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", module.ToVhdl());
 
                     return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, callIdTable);
                 });

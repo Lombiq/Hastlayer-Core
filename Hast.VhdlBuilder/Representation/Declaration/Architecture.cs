@@ -30,7 +30,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 "architecture " +
                 Name.ToVhdlId() +
                 " of " +
-                Entity.Name.ToVhdlId() +
+                Entity.Name + // Entity names can't be extended identifiers.
                 " is " +
                 Declarations.ToVhdl() +
                 " begin " +
