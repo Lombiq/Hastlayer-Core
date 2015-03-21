@@ -4,13 +4,22 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common;
 using Hast.Common.Configuration;
 using Orchard;
 
 namespace Hast.Layer
 {
+    public delegate void TransformedEventHandler(IHardwareDescription hardwareDescription);
+
+
     public interface IHastlayer : IDisposable
     {
+        /// <summary>
+        /// Occurs when the .NET assembly was transformed to hardware description.
+        /// </summary>
+        event TransformedEventHandler Transformed;
+
         /// <summary>
         /// Generates and implements a hardware representation of the given assembly.
         /// </summary>

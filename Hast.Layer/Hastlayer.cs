@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common;
 using Hast.Common.Configuration;
 using Hast.Communication;
 using Hast.Synthesis;
@@ -20,8 +21,9 @@ namespace Hast.Layer
         private const string ShellName = ShellSettings.DefaultName;
 
         private readonly IEnumerable<Assembly> _extensions;
-
         private IOrchardAppHost _host;
+
+        public event TransformedEventHandler Transformed;
 
 
         // Private so the static factory should be used.
@@ -65,14 +67,7 @@ namespace Hast.Layer
                         {
                             var hardwareDescription = await transformer.Transform(assembly, configuration);
 
-                            // For testing only.
-                            //if (hardwareDescription.Language == "VHDL")
-                            //{
-                            //    var vhdlHardwareDescription = (Hast.Transformer.Vhdl.VhdlHardwareDescription)hardwareDescription;
-                            //    var vhdl = vhdlHardwareDescription.Manifest.TopModule.ToVhdl();
-                            //    //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
-                            //    //new Hast.Transformer.Vhdl.HardwareRepresentationComposer().Compose(vhdlHardwareDescription);
-                            //}
+                            if (Transformed != null) Transformed(hardwareDescription);
 
                             await hardwareRepresentationComposer.Compose(hardwareDescription);
 

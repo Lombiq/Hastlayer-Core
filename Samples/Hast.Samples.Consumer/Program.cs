@@ -15,7 +15,6 @@ namespace Hast.Samples.Consumer
         {
             Task.Run(async () =>
                 {
-
                     var extensions = new[]
                         {
                             typeof(Hast.Transformer.Vhdl.VhdlTransformingEngine).Assembly,
@@ -24,6 +23,13 @@ namespace Hast.Samples.Consumer
 
                     using (var hastlayer = Hastlayer.Create(extensions))
                     {
+                        hastlayer.Transformed += hardwareDescription =>
+                            {
+                                var vhdlHardwareDescription = (Hast.Transformer.Vhdl.VhdlHardwareDescription)hardwareDescription;
+                                var vhdl = vhdlHardwareDescription.Manifest.TopModule.ToVhdl();
+                                //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
+                            };
+
                         var hardwareAssembly = await hastlayer.GenerateHardware(typeof(PrimeCalculator).Assembly, HardwareGenerationConfiguration.Default);
 
                         IService serviceParameter = new ServiceSample();
