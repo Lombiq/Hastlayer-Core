@@ -12,6 +12,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public int RangeMin { get; set; }
         public int RangeMax { get; set; }
 
+
         public override string ToVhdl()
         {
             if (RangeMin == 0 || RangeMax == 0) return Name;

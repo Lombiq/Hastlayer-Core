@@ -11,6 +11,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public int Size { get; set; }
 
+
         public override string ToVhdl()
         {
             if (Size == 0) return Name;

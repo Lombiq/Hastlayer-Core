@@ -36,6 +36,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
     }
 
+
     public enum PortMode
     {
         In,
@@ -43,6 +44,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         Buffer,
         InOut
     }
+
 
     public class Port : DataObjectBase
     {

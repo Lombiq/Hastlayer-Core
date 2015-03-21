@@ -10,6 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public List<DataObject> Members { get; set; }
 
+
         public Record()
         {
             Members = new List<DataObject>();

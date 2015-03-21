@@ -14,6 +14,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         File
     }
 
+
     public interface IDataObject : INamedElement
     {
         ObjectType ObjectType { get; set; }

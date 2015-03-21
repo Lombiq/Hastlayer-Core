@@ -12,6 +12,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Name { get; set; }
         public DataType DataType { get; set; }
 
+
         public abstract string ToVhdl();
     }
 }

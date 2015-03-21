@@ -17,6 +17,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         Composite
     }
 
+
     /// <summary>
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
     /// </summary>
@@ -24,6 +25,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public DataTypeCategory TypeCategory { get; set; }
         public string Name { get; set; }
+
 
         public virtual string ToVhdl()
         {

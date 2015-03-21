@@ -18,6 +18,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         public Value DefaultValue { get; set; }
 
+
         public override string ToVhdl()
         {
             var builder = new StringBuilder();

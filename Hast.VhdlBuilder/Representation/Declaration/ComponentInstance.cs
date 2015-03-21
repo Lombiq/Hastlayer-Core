@@ -32,10 +32,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
     }
 
+
     public class PortMapping : IVhdlElement
     {
         public string From { get; set; }
         public string To { get; set; }
+
 
         public string ToVhdl()
         {

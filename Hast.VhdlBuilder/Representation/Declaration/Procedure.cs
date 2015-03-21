@@ -42,12 +42,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
     }
 
+
     public enum ProcedureParameterType
     {
         In,
         InOut,
         Out
     }
+
 
     public class ProcedureParameter : DataObjectBase
     {
