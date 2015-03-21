@@ -2,4 +2,4 @@
 
 
 
-Component containing implementations for transforming .NET assmblies into VHDL hardware description.
+Component containing implementations for transforming .NET assemblies into VHDL hardware description.
