@@ -114,7 +114,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 block.Body.Add(whileElement);
             }
-            else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported.");
+            else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
         }
     }
 }
