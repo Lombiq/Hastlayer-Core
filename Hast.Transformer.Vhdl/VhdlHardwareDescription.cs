@@ -13,18 +13,18 @@ namespace Hast.Transformer.Vhdl
     public class VhdlHardwareDescription : IHardwareDescription
     {
         private VhdlManifest _manifest;
-        private CallIdTable _callIdTable;
+        private MethodIdTable _callIdTable;
 
         public string Language { get { return "VHDL"; } }
         public VhdlManifest Manifest { get { return _manifest; } }
-        public CallIdTable CallIdTable { get { return _callIdTable; } }
+        public MethodIdTable CallIdTable { get { return _callIdTable; } }
 
 
         public VhdlHardwareDescription()
         {
         }
 
-        public VhdlHardwareDescription(VhdlManifest manifest, CallIdTable callIdTable)
+        public VhdlHardwareDescription(VhdlManifest manifest, MethodIdTable callIdTable)
         {
             _manifest = manifest;
             _callIdTable = callIdTable;
@@ -62,7 +62,7 @@ namespace Hast.Transformer.Vhdl
         public class Storage
         {
             public VhdlManifest Manifest { get; set; }
-            public CallIdTable CallIdTable { get; set; }
+            public MethodIdTable CallIdTable { get; set; }
         }
     }
 }

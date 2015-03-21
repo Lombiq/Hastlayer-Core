@@ -13,10 +13,10 @@ namespace Hast.Transformer.Vhdl
         public SyntaxTree SyntaxTree { get; private set; }
         public Module Module { get; private set; }
         public List<InterfaceMethodDefinition> InterfaceMethods { get; private set; }
-        public CallChainTable CallChainTable { get; private set; }
+        public MethodCallChainTable CallChainTable { get; private set; }
 
 
-        public TransformingContext(SyntaxTree syntaxTree, Module module, CallChainTable callChainTable)
+        public TransformingContext(SyntaxTree syntaxTree, Module module, MethodCallChainTable callChainTable)
         {
             SyntaxTree = syntaxTree;
             Module = module;

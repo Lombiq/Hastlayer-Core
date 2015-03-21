@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CallChainTable.cs" />
-    <Compile Include="CallIdTable.cs" />
+    <Compile Include="MethodCallChainTable.cs" />
+    <Compile Include="MethodIdTable.cs" />
     <Compile Include="InterfaceMethodDefinition.cs" />
     <Compile Include="NameUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

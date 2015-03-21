@@ -44,7 +44,7 @@ namespace Hast.Transformer.Vhdl
                         new TransformingContext(
                             syntaxTree,
                             new Module { Architecture = new Architecture { Name = "Behavioural" } },
-                            new CallChainTable());
+                            new MethodCallChainTable());
 
                     var module = _context.Module;
                     module.Entity = new Entity { Name = _id };
@@ -59,7 +59,7 @@ namespace Hast.Transformer.Vhdl
 
                     module.Architecture.Entity = module.Entity;
 
-                    ProcessCallChainTable();
+                    ReorderProcedures();
                     var callIdTable = ProcessInterfaceMethods();
 
                     ProcessUtility.AddClockToProcesses(module, "clk");
@@ -67,6 +67,7 @@ namespace Hast.Transformer.Vhdl
                     return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, callIdTable);
                 });
         }
+
 
         private void Traverse(AstNode node)
         {
@@ -122,13 +123,13 @@ namespace Hast.Transformer.Vhdl
             }
         }
 
-        private CallIdTable ProcessInterfaceMethods()
+        private MethodIdTable ProcessInterfaceMethods()
         {
-            if (_context.InterfaceMethods.Count == 0) return CallIdTable.Empty;
+            if (_context.InterfaceMethods.Count == 0) return MethodIdTable.Empty;
 
             var proxyProcess = new Process { Name = "CallProxy" };
             var ports = _context.Module.Entity.Ports;
-            var callIdTable = new CallIdTable();
+            var callIdTable = new MethodIdTable();
 
             var callIdPort = new Port
             {
@@ -196,7 +197,10 @@ namespace Hast.Transformer.Vhdl
             return callIdTable;
         }
 
-        private void ProcessCallChainTable()
+        /// <summary>
+        /// In VHDL procedures should be declared before they're used. Because of this we re-order them if necessary.
+        /// </summary>
+        private void ReorderProcedures()
         {
             var chains = _context.CallChainTable.Values.ToDictionary(chain => chain.ProcedureName);
 
