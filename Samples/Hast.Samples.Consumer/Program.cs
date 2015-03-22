@@ -34,7 +34,7 @@ namespace Hast.Samples.Consumer
 
                         IService serviceParameter = new ServiceSample();
                         var service = await hastlayer.GenerateProxy(hardwareAssembly, serviceParameter);
-                        service.Method();
+                        service.Method1();
 
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareAssembly, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);

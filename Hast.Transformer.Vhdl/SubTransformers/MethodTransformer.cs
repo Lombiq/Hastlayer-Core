@@ -31,14 +31,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public void Transform(MethodDeclaration method, TransformingContext context)
         {
-            var fullName = NameUtility.GetFullName(method);
+            var fullName = method.GetFullName();
             var procedure = new Procedure { Name = fullName };
 
-            // Handling when the method is an interface method
+            // Handling when the method is an interface method, i.e. should be present in the interface of the VHDL module.
             InterfaceMethodDefinition interfaceMethod = null;
-            if (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) && method.Parent is TypeDeclaration)
+            if (method.Parent is TypeDeclaration &&
+                    (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) || // If it's a public virtual method.
+                    IsInterfaceDeclaredMethod(method, context.SyntaxTree)) // Or a public method that implements an interface.
+               )
             {
-                var parent = method.Parent as TypeDeclaration;
+                var parent = (TypeDeclaration)method.Parent;
                 if (parent.ClassType == ClassType.Class && parent.Modifiers == Modifiers.Public)
                 {
                     interfaceMethod = new InterfaceMethodDefinition { Name = fullName, Procedure = procedure };
@@ -127,6 +130,53 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             //        });
             //    }
             //}
+        }
+
+
+        private static bool IsInterfaceDeclaredMethod(MethodDeclaration method, SyntaxTree syntaxTree)
+        {
+            // Is this an explicitly implemented interface method?
+            if (method.Modifiers == Modifiers.None && 
+                method.NameToken.NextSibling != null && 
+                method.NameToken.NextSibling.NodeType == NodeType.TypeReference)
+            {
+                return true;
+            }
+
+            // Otherwise if it's not public it can't be a method declared in an interface (public virtuals are checked separately).
+            if (method.Modifiers != Modifiers.Public) return false;
+
+            // Searching for an implemented interface with the same method.
+            var parent = (TypeDeclaration)method.Parent;
+            foreach (var baseType in parent.BaseTypes) // BaseTypes are flattened, so interface inheritance is taken into account.
+            {
+                if (baseType.NodeType == NodeType.TypeReference)
+                {
+                    // baseType is a TypeReference but we need the corresponding TypeDeclaration to check for the methods.
+                    var simpleType = baseType as SimpleType;
+                    if (simpleType != null)
+                    {
+                        // It's not possible to simply retrieve the full name of the base type, so we search for interfaces that have the
+                        // same short name. Not using FirstOrDefault so if multiple interface match (but this should be very rare) we got
+                        // it covered. This should also somehow be possible with baseType.ToTypeReference().Resolve() somehow, but this should 
+                        // be good enough.
+                        var baseTypeDeclarations = syntaxTree.GetTypes().Where(typeDeclaration => 
+                            typeDeclaration.Name == simpleType.Identifier &&
+                            typeDeclaration.ClassType == ClassType.Interface);
+                        foreach (var baseTypeDeclaration in baseTypeDeclarations)
+                        {
+                            if (baseTypeDeclaration.Members.Any(entity =>
+                                entity.Name == method.Name &&
+                                entity.EntityType == ICSharpCode.NRefactory.TypeSystem.EntityType.Method))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -8,19 +8,36 @@ namespace Hast.Samples.SampleAssembly
 {
     // Sample for a type that implements an interface and is used through it, to test interface proxy generation. Will contain some
     // actual sample later.
-
-    public interface IService
+    public interface IService : IServiceBase
     {
-        void Method();
+        int Method1();
+    }
+
+
+    public interface IServiceBase
+    {
+        int Method2();
     }
 
 
     public class ServiceSample : IService
     {
-        public void Method()
+        // Explicit interface implementation.
+        int IService.Method1()
         {
-            var z = 5;
-            var y = z;
+            return PrivateMethod() + 5;
+        }
+
+        // Implicit interface implementation.
+        public int Method2()
+        {
+            return PrivateMethod() + PrivateMethod() - 3;
+        }
+
+        
+        private int PrivateMethod()
+        {
+            return 5;
         }
     }
 }

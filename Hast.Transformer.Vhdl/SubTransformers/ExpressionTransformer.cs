@@ -60,7 +60,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is ThisReferenceExpression)
             {
                 var thisRef = expression as ThisReferenceExpression;
-                return NameUtility.GetFullName(context.Scope.Node.Parent);
+                return context.Scope.Node.Parent.GetFullName();
             }
             else if (expression is UnaryOperatorExpression)
             {
@@ -143,7 +143,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var hasReturnValue = !(expression.Parent is ExpressionStatement); // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method)
             var needsParenthesis = hasArguments || hasReturnValue;
 
-            context.TransformingContext.CallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
+            context.TransformingContext.MethodCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
 
             var source = targetName.ToVhdlId();
 
@@ -170,7 +170,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // This is expensive, any better way?
                     var targetNode = context.TransformingContext.SyntaxTree.Descendants
                                         .Where(node => node is MethodDeclaration)
-                                        .Where(node => NameUtility.GetFullName(node) == targetName)
+                                        .Where(node => node.GetFullName() == targetName)
                                         .Single();
 
                     procedure.Declarations.Add(new Variable

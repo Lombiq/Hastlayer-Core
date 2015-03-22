@@ -130,7 +130,7 @@ namespace Hast.Transformer.Vhdl
 
         private MethodIdTable ProcessInterfaceMethods()
         {
-            if (_context.InterfaceMethods.Count == 0) return MethodIdTable.Empty;
+            if (!_context.InterfaceMethods.Any()) return MethodIdTable.Empty;
 
             var proxyProcess = new Process { Name = "CallProxy" };
             var ports = _context.Module.Entity.Ports;
@@ -207,7 +207,7 @@ namespace Hast.Transformer.Vhdl
         /// </summary>
         private void ReorderProcedures()
         {
-            var chains = _context.CallChainTable.Values.ToDictionary(chain => chain.ProcedureName);
+            var chains = _context.MethodCallChainTable.Values.ToDictionary(chain => chain.ProcedureName);
 
             var declarations = _context.Module.Architecture.Declarations;
             for (int i = 0; i < declarations.Count; i++)

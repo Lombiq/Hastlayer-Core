@@ -12,7 +12,7 @@ namespace Hast.Samples.SampleAssembly
         {
             var isPrime = true;
             int factor = num / 2;
-            //var factor = Math.Sqrt(num); Math.Sqrt() can't be processed yet
+            //var factor = Math.Sqrt(num); // Math.Sqrt() can't be processed yet
 
             for (int i = 2; i <= factor; i++)
             {

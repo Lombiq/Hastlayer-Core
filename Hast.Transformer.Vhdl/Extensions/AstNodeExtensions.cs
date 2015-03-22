@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ICSharpCode.NRefactory.CSharp;
 
-namespace Hast.Transformer.Vhdl
+namespace ICSharpCode.NRefactory.CSharp
 {
-    public static class NameUtility
+    public static class AstNodeExtensions
     {
-        public static string GetFullName(AstNode node)
+        public static string GetFullName(this AstNode node)
         {
             var nameBuilder = new StringBuilder();
-            
+
             var currentNode = node;
             var stop = false;
             while (!stop && !(currentNode is SyntaxTree))
