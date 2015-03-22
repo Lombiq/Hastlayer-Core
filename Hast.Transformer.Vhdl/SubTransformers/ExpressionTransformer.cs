@@ -33,6 +33,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return new Raw(TransformInner(expression, context, block));
         }
 
+
         private string TransformInner(Expression expression, SubTransformerContext context, IBlockElement block)
         {
             if (expression is AssignmentExpression)
@@ -154,17 +155,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 source += string.Join(", ", expression.Arguments.Select(argument => TransformInner(argument, context, block)));
             }
 
+            var returnVariableName = string.Empty;
+
             if (hasReturnValue)
             {
-                var returnVarName = targetName + ".ret";
-
+                // Making sure that the return variable names don't clash.
+                returnVariableName = targetName + ".ret0";
+                var returnVarNameIndex = 0;
+                while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == returnVariableName))
+                {
+                    returnVariableName = targetName + ".ret" + ++returnVarNameIndex;
+                }
+                
                 // Checking whether a variable for this return value exists
                 if (!procedure.Declarations
                     .Any(element =>
                     {
                         if (!(element is Hast.VhdlBuilder.Representation.Declaration.DataObject)) return false;
 
-                        return ((Hast.VhdlBuilder.Representation.Declaration.DataObject)element).Name == returnVarName;
+                        return ((Hast.VhdlBuilder.Representation.Declaration.DataObject)element).Name == returnVariableName;
                     }))
                 {
                     // This is expensive, any better way?
@@ -175,13 +184,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     procedure.Declarations.Add(new Variable
                     {
-                        Name = returnVarName,
+                        Name = returnVariableName,
                         DataType = _typeConverter.Convert(((MethodDeclaration)targetNode).ReturnType)
                     });
                 }
 
                 if (hasArguments) source += ",";
-                source += returnVarName.ToVhdlId();
+                source += returnVariableName.ToVhdlId();
             }
 
             if (needsParenthesis) source += ")";
@@ -190,7 +199,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 source += ";";
                 block.Body.Add(new Raw(source));
-                source = (targetName + ".ret").ToVhdlId();
+                source = returnVariableName.ToVhdlId();
             }
 
             return source;
