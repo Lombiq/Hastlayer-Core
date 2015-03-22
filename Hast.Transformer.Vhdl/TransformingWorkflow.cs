@@ -108,6 +108,8 @@ namespace Hast.Transformer.Vhdl
                             break;
                         case ClassType.Enum:
                             break;
+                        case ClassType.Interface:
+                            return; // Interfaces are irrelevant here.
                         case ClassType.Struct:
                             break;
                     }
