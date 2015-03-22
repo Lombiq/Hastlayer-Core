@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\AstNodeExtensions.cs" />
+    <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
     <Compile Include="MethodCallChainTable.cs" />
     <Compile Include="MethodIdTable.cs" />
     <Compile Include="InterfaceMethodDefinition.cs" />

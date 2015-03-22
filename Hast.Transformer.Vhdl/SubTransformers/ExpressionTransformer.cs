@@ -38,24 +38,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             if (expression is AssignmentExpression)
             {
-                var assignment = expression as AssignmentExpression;
+                var assignment = (AssignmentExpression)expression;
                 return TransformInner(assignment.Left, context, block) + " := " + TransformInner(assignment.Right, context, block);
             }
             else if (expression is IdentifierExpression)
             {
-                var identifier = expression as IdentifierExpression;
+                var identifier = (IdentifierExpression)expression;
                 return identifier.Identifier.ToVhdlId();
             }
             else if (expression is PrimitiveExpression)
             {
-                var primitive = expression as PrimitiveExpression;
+                var primitive = (PrimitiveExpression)expression;
                 return primitive.Value.ToString();
             }
             else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
             else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
             else if (expression is MemberReferenceExpression)
             {
-                var member = expression as MemberReferenceExpression;
+                var member = (MemberReferenceExpression)expression;
                 return TransformInner(member.Target, context, block) + "." + member.MemberName;
             }
             else if (expression is ThisReferenceExpression)
@@ -67,6 +67,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var unary = expression as UnaryOperatorExpression;
                 return "not (" + TransformInner(unary.Expression, context, block) + ")";
+            }
+            else if (expression is TypeReferenceExpression)
+            {
+                var simpleType = ((TypeReferenceExpression)expression).Type as SimpleType;
+
+                // This is not perfect check (since it only checks for name) but good enough for now.
+                if (!context.TransformingContext.SyntaxTree
+                        .GetMatchingTypes(simpleType.Identifier).
+                        Any(type => type.ClassType == ClassType.Class))
+                {
+                    throw new InvalidOperationException("No matching type for \"" + simpleType.Identifier + "\" found in the syntax tree. This can mean that the type's assembly was added to the syntax tree.");
+                }
+
+                return simpleType.Identifier;
             }
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
@@ -166,7 +180,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     returnVariableName = targetName + ".ret" + ++returnVarNameIndex;
                 }
-                
+
                 // Checking whether a variable for this return value exists
                 if (!procedure.Declarations
                     .Any(element =>
@@ -176,16 +190,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return ((Hast.VhdlBuilder.Representation.Declaration.DataObject)element).Name == returnVariableName;
                     }))
                 {
-                    // This is expensive, any better way?
-                    var targetNode = context.TransformingContext.SyntaxTree.Descendants
-                                        .Where(node => node is MethodDeclaration)
-                                        .Where(node => node.GetFullName() == targetName)
-                                        .Single();
+                    var targetTypeName = targetName.Substring(0, targetName.LastIndexOf('.'));
+                    // Fishing out the target method by finding its parent type.
+                    var targetMemberName = targetName.Substring(targetName.LastIndexOf('.') + 1);
+                    var targetNode = (MethodDeclaration)context.TransformingContext.SyntaxTree
+                        .GetMatchingTypes(targetTypeName)
+                        .SelectMany(type => type.Members.Where(member => member is MethodDeclaration && member.Name == targetMemberName))
+                        .First();
 
                     procedure.Declarations.Add(new Variable
                     {
                         Name = returnVariableName,
-                        DataType = _typeConverter.Convert(((MethodDeclaration)targetNode).ReturnType)
+                        DataType = _typeConverter.Convert((targetNode).ReturnType)
                     });
                 }
 

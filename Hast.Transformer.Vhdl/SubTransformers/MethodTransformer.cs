@@ -160,9 +160,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // same short name. Not using FirstOrDefault so if multiple interface match (but this should be very rare) we got
                         // it covered. This should also somehow be possible with baseType.ToTypeReference().Resolve() somehow, but this should 
                         // be good enough.
-                        var baseTypeDeclarations = syntaxTree.GetTypes().Where(typeDeclaration => 
-                            typeDeclaration.Name == simpleType.Identifier &&
-                            typeDeclaration.ClassType == ClassType.Interface);
+                        var baseTypeDeclarations = syntaxTree
+                            .GetMatchingTypes(simpleType.Identifier)
+                            .Where(type => type.ClassType == ClassType.Interface);
                         foreach (var baseTypeDeclaration in baseTypeDeclarations)
                         {
                             if (baseTypeDeclaration.Members.Any(entity =>
