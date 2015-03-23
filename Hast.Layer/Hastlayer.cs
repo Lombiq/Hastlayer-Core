@@ -35,7 +35,7 @@ namespace Hast.Layer
         /// <summary>
         /// Instantiates a new <see cref="IHastlayer"/> implementation.
         /// </summary>
-        /// <remarks>Point of this factory is that it returns an interface type instead of the implemantation.</remarks>
+        /// <remarks>Point of this factory is that it returns an interface type instead of the implementation.</remarks>
         /// <param name="extensions">
         /// Extensions that can provide implementations for Hatlayer services or hook into the hardware generation pipeline.
         /// </param>
