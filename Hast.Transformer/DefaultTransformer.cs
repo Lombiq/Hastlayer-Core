@@ -9,6 +9,8 @@ using ICSharpCode.NRefactory.CSharp;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Common;
+using System.Collections.Generic;
+using Orchard.Validation;
 
 namespace Hast.Transformer
 {
@@ -23,13 +25,24 @@ namespace Hast.Transformer
         }
 
 
-        public Task<IHardwareDescription> Transform(string assemblyPath, IHardwareGenerationConfiguration configuration)
+        public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
-            assemblyPath = Path.GetFullPath(assemblyPath);
+            var firstAssembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPaths.First()));
+            var transformationId = firstAssembly.FullName;
+            var astBuilder = new AstBuilder(new DecompilerContext(firstAssembly.MainModule));
+            astBuilder.AddAssembly(firstAssembly);
 
-            var assembly = AssemblyDefinition.ReadAssembly(assemblyPath);
-            var astBuilder = new AstBuilder(new DecompilerContext(assembly.MainModule));
-            astBuilder.AddAssembly(assembly, onlyAssemblyLevel: false);
+            foreach (var assemblyPath in assemblyPaths.Skip(1))
+            {
+                var assembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPath));
+                transformationId += "-" + assembly.FullName;
+                astBuilder.AddAssembly(assembly);
+            }
+
+            //((TypeReferenceExpression)new object()).Type.ToTypeReference().Resolve(null).GetDefinition()
+
+            //astBuilder.AddAssembly(AssemblyDefinition.ReadAssembly(typeof(Math).Assembly.Location));
+            //astBuilder.AddType(new TypeDefinition("System", "Math", Mono.Cecil.TypeAttributes.Class | Mono.Cecil.TypeAttributes.Public));
 
             //This would be the decompiled output
             //using (var output = new StringWriter())
@@ -39,14 +52,22 @@ namespace Hast.Transformer
             //    var y = z;
             //}
 
-            return _engine.Transform(assembly.Name.Name, astBuilder.SyntaxTree, configuration);
+            //astBuilder.SyntaxTree.AcceptVisitor(new UnusedTypeDefinitionCleanerAstVisitor());
+
+            return _engine.Transform(transformationId, astBuilder.SyntaxTree, configuration);
         }
 
-        public Task<IHardwareDescription> Transform(Assembly assembly, IHardwareGenerationConfiguration configuration)
+        public Task<IHardwareDescription> Transform(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
         {
-            if (String.IsNullOrEmpty(assembly.Location)) throw new ArgumentException("The assembly can't be an in-memory one.");
+            foreach (var assembly in assemblies)
+            {
+                if (string.IsNullOrEmpty(assembly.Location))
+                {
+                    throw new ArgumentException("No assembly used for hardware generation can be an in-memory one, but the assembly named \"" + assembly.FullName + "\" is.");
+                }
+            }
 
-            return Transform(assembly.Location, configuration);
+            return Transform(assemblies.Select(assembly => assembly.Location), configuration);
         }
     }
 }

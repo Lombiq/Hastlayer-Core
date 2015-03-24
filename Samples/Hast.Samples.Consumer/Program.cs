@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer
                                 //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
                             };
 
-                        var hardwareAssembly = await hastlayer.GenerateHardware(typeof(PrimeCalculator).Assembly, HardwareGenerationConfiguration.Default);
+                        var hardwareAssembly = await hastlayer.GenerateHardware(new [] { typeof(PrimeCalculator).Assembly }, HardwareGenerationConfiguration.Default);
 
                         IService serviceParameter = new ServiceSample();
                         var service = await hastlayer.GenerateProxy(hardwareAssembly, serviceParameter);

@@ -21,12 +21,12 @@ namespace Hast.Layer
         event TransformedEventHandler Transformed;
 
         /// <summary>
-        /// Generates and implements a hardware representation of the given assembly.
+        /// Generates and implements a hardware representation of the given assemblies.
         /// </summary>
-        /// <param name="assembly">The assembly that should be implemented as hardware.</param>
+        /// <param name="assemblies">The assemblies that should be implemented as hardware.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
-        /// <returns>The representation of the assembly implemented as hardware.</returns>
-        Task<IHardwareAssembly> GenerateHardware(Assembly assembly, IHardwareGenerationConfiguration configuration);
+        /// <returns>The representation of the assemblies implemented as hardware.</returns>
+        Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration);
 
         // Maybe this as well?
         //Task<IHardwareAssembly> GenerateHardware(Type type); // Would only transform this type and its dependencies.
@@ -35,9 +35,9 @@ namespace Hast.Layer
         /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation.
         /// </summary>
         /// <typeparam name="T">Type of the object to generate a proxy for.</typeparam>
-        /// <param name="hardwareAssembly">The representation of the assembly implemented as hardware.</param>
+        /// <param name="hardwareRepresentation">The representation of the assemblies implemented as hardware.</param>
         /// <param name="hardwareObject">The object to generate the proxy for.</param>
         /// <returns>The generated proxy object.</returns>
-        Task<T> GenerateProxy<T>(IHardwareAssembly hardwareAssembly, T hardwareObject) where T : class;
+        Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class;
     }
 }

@@ -49,7 +49,7 @@ namespace Hast.Transformer
                 throw new ArgumentException("The provided source code is invalid and has the following errors: " + builder.ToString());
             }
 
-            return transformer.Transform(result.CompiledAssembly, configuration);
+            return transformer.Transform(new[] { result.CompiledAssembly }, configuration);
         }
     }
 }

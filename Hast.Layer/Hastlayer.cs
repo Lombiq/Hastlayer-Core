@@ -48,8 +48,14 @@ namespace Hast.Layer
         }
 
 
-        public async Task<IHardwareAssembly> GenerateHardware(Assembly assembly, IHardwareGenerationConfiguration configuration)
+        public async Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
         {
+            Argument.ThrowIfNull(assemblies, "assemblies");
+            if (!assemblies.Any())
+            {
+                throw new ArgumentException("No assemblies were specified.");
+            }
+
             /*
              * Steps to be implemented:
              * - Transform into hardware description through ITransformer.
@@ -59,40 +65,34 @@ namespace Hast.Layer
              * - Cache hardware implementation to be able to re-configure the FPGA with it later.
              */
 
-            try
+            await (await GetHost())
+                .Run<ITransformer, IHardwareRepresentationComposer>(
+                    async (transformer, hardwareRepresentationComposer) =>
+                    {
+                        var hardwareDescription = await transformer.Transform(assemblies, configuration);
+
+                        if (Transformed != null) Transformed(hardwareDescription);
+
+                        await hardwareRepresentationComposer.Compose(hardwareDescription);
+
+                    }, ShellName, false);
+
+            return new HardwareRepresentation
             {
-                await (await GetHost())
-                    .Run<ITransformer, IHardwareRepresentationComposer>(
-                        async (transformer, hardwareRepresentationComposer) =>
-                        {
-                            var hardwareDescription = await transformer.Transform(assembly, configuration);
-
-                            if (Transformed != null) Transformed(hardwareDescription);
-
-                            await hardwareRepresentationComposer.Compose(hardwareDescription);
-
-                        }, ShellName, false);
-            }
-            catch (NotImplementedException) // Just for testing.
-            {
-            }
-
-            return new HardwareAssembly
-            {
-                SoftAssembly = assembly
+                SoftAssemblies = assemblies
             };
         }
 
 
         // Maybe this should return an IDisposable? E.g. close communication to FPGA, or clean up its configuration here if no other calls for
         // this type of object is alive.
-        public async Task<T> GenerateProxy<T>(IHardwareAssembly hardwareAssembly, T hardwareObject) where T : class
+        public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
         {
-            Argument.ThrowIfNull(hardwareAssembly, "hardwareAssembly");
+            Argument.ThrowIfNull(hardwareRepresentation, "hardwareAssembly");
 
-            if (hardwareAssembly.SoftAssembly != hardwareObject.GetType().Assembly)
+            if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
             {
-                throw new InvalidOperationException("The supplied type is not part of this hardware assembly.");
+                throw new InvalidOperationException("The supplied type is not part of any assembly that this hardware representation was generated from.");
             }
 
             return await

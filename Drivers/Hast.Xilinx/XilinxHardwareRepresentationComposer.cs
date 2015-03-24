@@ -12,7 +12,8 @@ namespace Hast.Xilinx
     {
         public Task Compose(IHardwareDescription hardwareDescription)
         {
-            throw new NotImplementedException();
+            // Not yet implemented.
+            return Task.Delay(1);
         }
     }
 }

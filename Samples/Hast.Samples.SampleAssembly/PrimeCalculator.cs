@@ -10,16 +10,17 @@ namespace Hast.Samples.SampleAssembly
     {
         public virtual bool IsPrimeNumber(int num)
         {
-            var isPrime = true;
             int factor = num / 2;
+            //var z = Math.Abs(10.3d);
+            //var y = z;
             //var factor = Math.Sqrt(num); // Math.Sqrt() can't be processed yet
 
             for (int i = 2; i <= factor; i++)
             {
-                if ((num % i) == 0) isPrime = false;
+                if ((num % i) == 0) return false;
             }
 
-            return isPrime;
+            return true;
         }
 
         // Arrays not yet supported

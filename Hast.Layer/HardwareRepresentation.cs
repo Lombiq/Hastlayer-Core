@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Hast.Layer
 {
-    internal class HardwareAssembly : IHardwareAssembly
+    internal class HardwareRepresentation : IHardwareRepresentation
     {
-        public Assembly SoftAssembly { get; set; }
+        public IEnumerable<Assembly> SoftAssemblies { get; set; }
     }
 }

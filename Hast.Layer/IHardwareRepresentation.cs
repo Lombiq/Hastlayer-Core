@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace Hast.Layer
 {
     /// <summary>
-    /// Represents a .NET assembly that was transformed to and is implemented as hardware.
+    /// Represents the hardware that was generated from .NET assemblies.
     /// </summary>
-    public interface IHardwareAssembly
+    public interface IHardwareRepresentation
     {
         /// <summary>
-        /// The original assembly this hardware assembly was generated from.
+        /// The original assemblies this hardware assembly was generated from.
         /// </summary>
-        Assembly SoftAssembly { get; }
+        IEnumerable<Assembly> SoftAssemblies { get; }
     }
 }

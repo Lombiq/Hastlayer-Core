@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnusedTypeDefinitionCleanerAstVisitor.cs" />
     <Compile Include="ITransformer.cs" />
     <Compile Include="ITransformingEngine.cs" />
     <Compile Include="DefaultTransformer.cs" />
