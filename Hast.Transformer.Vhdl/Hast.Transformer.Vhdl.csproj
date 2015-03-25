@@ -49,8 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\AstNodeExtensions.cs" />
-    <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
+    <Compile Include="IVhdlTransformationContext.cs" />
     <Compile Include="MethodCallChainTable.cs" />
     <Compile Include="MethodIdTable.cs" />
     <Compile Include="InterfaceMethodDefinition.cs" />
@@ -60,7 +59,7 @@
     <Compile Include="SubTransformers\StatementTransformer.cs" />
     <Compile Include="SubTransformers\SubTransformerContexts.cs" />
     <Compile Include="SubTransformers\TypeConverter.cs" />
-    <Compile Include="TransformingContext.cs" />
+    <Compile Include="VhdlTransformationContext.cs" />
     <Compile Include="TransformingWorkflow.cs" />
     <Compile Include="VhdlHardwareDescription.cs" />
     <Compile Include="VhdlTransformingEngine.cs" />

@@ -70,17 +70,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is TypeReferenceExpression)
             {
-                var simpleType = ((TypeReferenceExpression)expression).Type as SimpleType;
+                var type = ((TypeReferenceExpression)expression).Type;
+                var declaration = context.TransformationContext.LookupDeclaration(type);
 
-                // This is not perfect check (since it only checks for name) but good enough for now.
-                if (!context.TransformingContext.SyntaxTree
-                        .GetMatchingTypes(simpleType.Identifier).
-                        Any(type => type.ClassType == ClassType.Class))
+                if (declaration == null)
                 {
-                    throw new InvalidOperationException("No matching type for \"" + simpleType.Identifier + "\" found in the syntax tree. This can mean that the type's assembly was added to the syntax tree.");
+                    throw new InvalidOperationException("No matching type for \"" + ((SimpleType)type).Identifier + "\" found in the syntax tree. This can mean that the type's assembly was not added to the syntax tree.");
                 }
 
-                return simpleType.Identifier;
+                return declaration.GetFullName();
             }
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
@@ -158,7 +156,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var hasReturnValue = !(expression.Parent is ExpressionStatement); // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method)
             var needsParenthesis = hasArguments || hasReturnValue;
 
-            context.TransformingContext.MethodCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
+            context.TransformationContext.MethodCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
 
             var source = targetName.ToVhdlId();
 
@@ -173,37 +171,54 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (hasReturnValue)
             {
-                // Making sure that the return variable names don't clash.
+                // Making sure that the return variable names are unique per method call.
                 returnVariableName = targetName + ".ret0";
-                var returnVarNameIndex = 0;
+                var returnVariableNameIndex = 0;
                 while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == returnVariableName))
                 {
-                    returnVariableName = targetName + ".ret" + ++returnVarNameIndex;
+                    returnVariableName = targetName + ".ret" + ++returnVariableNameIndex;
                 }
 
-                // Checking whether a variable for this return value exists
-                if (!procedure.Declarations
-                    .Any(element =>
-                    {
-                        if (!(element is Hast.VhdlBuilder.Representation.Declaration.DataObject)) return false;
 
-                        return ((Hast.VhdlBuilder.Representation.Declaration.DataObject)element).Name == returnVariableName;
-                    }))
+                AstType returnType;
+                if (expression.Target is MemberReferenceExpression)
                 {
-                    var targetTypeName = targetName.Substring(0, targetName.LastIndexOf('.'));
-                    // Fishing out the target method by finding its parent type.
-                    var targetMemberName = targetName.Substring(targetName.LastIndexOf('.') + 1);
-                    var targetNode = (MethodDeclaration)context.TransformingContext.SyntaxTree
-                        .GetMatchingTypes(targetTypeName)
-                        .SelectMany(type => type.Members.Where(member => member is MethodDeclaration && member.Name == targetMemberName))
-                        .First();
+                    var target = (MemberReferenceExpression)expression.Target;
+                    TypeDeclaration type;
 
-                    procedure.Declarations.Add(new Variable
+                    if (target.Target is TypeReferenceExpression)
                     {
-                        Name = returnVariableName,
-                        DataType = _typeConverter.Convert((targetNode).ReturnType)
-                    });
+                        // The method is in a different class.
+                        type = context.TransformationContext.LookupDeclaration((TypeReferenceExpression)target.Target);
+                    }
+                    else
+                    {
+                        // The method is within this class.
+                        AstNode current = expression;
+                        while (!(current is TypeDeclaration))
+                        {
+                            current = current.Parent;
+                        }
+
+                        type = (TypeDeclaration)current;
+                    }
+
+                    var targetMemberName = target.MemberName;
+
+                    // Using First() because there can be multiple methods with the same name (overload) but these should have the same
+                    // return type.
+                    returnType = type.Members.First(member => member is MethodDeclaration && member.Name == targetMemberName).ReturnType;
                 }
+                else
+                {
+                    throw new NotSupportedException("Expressions having other than a MemberReferenceExpression as a target are not supported.");
+                }
+
+                procedure.Declarations.Add(new Variable
+                {
+                    Name = returnVariableName,
+                    DataType = _typeConverter.Convert(returnType)
+                });
 
                 if (hasArguments) source += ",";
                 source += returnVariableName.ToVhdlId();

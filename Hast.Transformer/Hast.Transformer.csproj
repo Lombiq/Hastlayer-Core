@@ -53,6 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\AstNodeExtensions.cs" />
+    <Compile Include="Extensions\AstTypeExtensions.cs" />
+    <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
+    <Compile Include="ITransformationContext.cs" />
+    <Compile Include="TransformationContext.cs" />
     <Compile Include="UnusedTypeDefinitionCleanerAstVisitor.cs" />
     <Compile Include="ITransformer.cs" />
     <Compile Include="ITransformingEngine.cs" />

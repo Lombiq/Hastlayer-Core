@@ -10,7 +10,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class SubTransformerContext
     {
-        public TransformingContext TransformingContext { get; set; }
+        public IVhdlTransformationContext TransformationContext { get; set; }
         public SubTransformerScope Scope { get; set; }
     }
 

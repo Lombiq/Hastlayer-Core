@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public void Transform(MethodDeclaration method, TransformingContext context)
+        public void Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
             var fullName = method.GetFullName();
             var procedure = new Procedure { Name = fullName };
@@ -38,7 +38,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             InterfaceMethodDefinition interfaceMethod = null;
             if (method.Parent is TypeDeclaration &&
                     (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) || // If it's a public virtual method.
-                    IsInterfaceDeclaredMethod(method, context.SyntaxTree)) // Or a public method that implements an interface.
+                    IsInterfaceDeclaredMethod(method, context)) // Or a public method that implements an interface.
                )
             {
                 var parent = (TypeDeclaration)method.Parent;
@@ -99,7 +99,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Processing method body
             var bodyContext = new SubTransformerContext
             {
-                TransformingContext = context,
+                TransformationContext = context,
                 Scope = new SubTransformerScope
                 {
                     Node = method,
@@ -115,29 +115,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             context.Module.Architecture.Declarations.Add(procedure);
         }
 
-        public void ConnectSignalsToVariables(Procedure procedure)
-        {
-            //foreach (var parameter in procedure.Parameters.Where(param => param.ObjectType == ObjectType.Signal))
-            //{
-            //    if (parameter.ParameterType != ProcedureParameterType.Out)
-            //    {
-            //        procedure.Declarations.Add(new DataObject
-            //        {
-            //            Type = ObjectType.Variable,
-            //            DataType = parameter.DataType,
-            //            Name = parameter.Name,
-            //            Value = new Value { DataType = DataTypes.Identifier, Content = parameter.Name.ToVhdlId() }
-            //        });
-            //    }
-            //}
-        }
 
-
-        private static bool IsInterfaceDeclaredMethod(MethodDeclaration method, SyntaxTree syntaxTree)
+        private static bool IsInterfaceDeclaredMethod(MethodDeclaration method, IVhdlTransformationContext context)
         {
             // Is this an explicitly implemented interface method?
-            if (method.Modifiers == Modifiers.None && 
-                method.NameToken.NextSibling != null && 
+            if (method.Modifiers == Modifiers.None &&
+                method.NameToken.NextSibling != null &&
                 method.NameToken.NextSibling.NodeType == NodeType.TypeReference)
             {
                 return true;
@@ -153,24 +136,33 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (baseType.NodeType == NodeType.TypeReference)
                 {
                     // baseType is a TypeReference but we need the corresponding TypeDeclaration to check for the methods.
-                    var simpleType = baseType as SimpleType;
-                    if (simpleType != null)
+                    var baseTypeDeclaration = context.LookupDeclaration(baseType);
+
+                    if (baseTypeDeclaration.ClassType == ClassType.Interface)
                     {
-                        // It's not possible to simply retrieve the full name of the base type, so we search for interfaces that have the
-                        // same short name. Not using FirstOrDefault so if multiple interface match (but this should be very rare) we got
-                        // it covered. This should also somehow be possible with baseType.ToTypeReference().Resolve() somehow, but this should 
-                        // be good enough.
-                        var baseTypeDeclarations = syntaxTree
-                            .GetMatchingTypes(simpleType.Identifier)
-                            .Where(type => type.ClassType == ClassType.Interface);
-                        foreach (var baseTypeDeclaration in baseTypeDeclarations)
-                        {
-                            if (baseTypeDeclaration.Members.Any(entity =>
-                                entity.Name == method.Name &&
-                                entity.EntityType == ICSharpCode.NRefactory.TypeSystem.EntityType.Method))
+                        if (baseTypeDeclaration.Members.Any(member =>
                             {
-                                return true;
-                            }
+                                if (member.Name == method.Name && member.EntityType == ICSharpCode.NRefactory.TypeSystem.EntityType.Method)
+                                {
+                                    var interfaceMethod = (MethodDeclaration)member;
+                                    if (interfaceMethod.ReturnType.TypeEquals(method.ReturnType, context.LookupDeclaration) &&
+                                        interfaceMethod.Parameters.Count == method.Parameters.Count)
+                                    {
+                                        foreach (var interfaceMethodParameter in interfaceMethod.Parameters)
+                                        {
+                                            if (!method.Parameters.Any(parameter => parameter.Type.TypeEquals(interfaceMethodParameter.Type, context.LookupDeclaration)))
+                                            {
+                                                return false;
+                                            }
+                                        }
+                                        return true;
+                                    }
+                                }
+
+                                return false;
+                            }))
+                        {
+                            return true;
                         }
                     }
                 }

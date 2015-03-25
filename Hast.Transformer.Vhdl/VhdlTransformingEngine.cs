@@ -13,10 +13,10 @@ namespace Hast.Transformer.Vhdl
 {
     public class VhdlTransformingEngine : ITransformingEngine
     {
-        public Task<IHardwareDescription> Transform(string id, SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
+        public Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
             // This proxying is needed so this engine is not holding state. This is good for e.g. running multiple Transform() calls in parallel.
-            return new TransformingWorkflow(configuration, id).Transform(syntaxTree);
+            return new TransformingWorkflow(transformationContext).Transform();
         }
     }
 }

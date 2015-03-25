@@ -16,40 +16,36 @@ namespace Hast.Transformer.Vhdl
 {
     public class TransformingWorkflow
     {
-        private readonly IHardwareGenerationConfiguration _configuration;
-        private readonly string _id;
         private readonly MethodTransformer _methodTransformer;
-        private TransformingContext _context;
+        private readonly VhdlTransformationContext _transformationContext;
 
 
-        public TransformingWorkflow(IHardwareGenerationConfiguration configuration, string id)
-            : this(configuration, id, new MethodTransformer())
+        public TransformingWorkflow(ITransformationContext transformationContext)
+            : this(transformationContext, new MethodTransformer())
         {
         }
 
-        public TransformingWorkflow(IHardwareGenerationConfiguration configuration, string id, MethodTransformer methodTransformer)
+        public TransformingWorkflow(ITransformationContext transformationContext, MethodTransformer methodTransformer)
         {
-            _configuration = configuration;
-            _id = id;
             _methodTransformer = methodTransformer;
+
+            _transformationContext = new VhdlTransformationContext(transformationContext)
+                {
+                    Module = new Module { Architecture = new Architecture { Name = "Behavioural" } },
+                    MethodCallChainTable = new MethodCallChainTable()
+                };
         }
 
 
-        public Task<IHardwareDescription> Transform(SyntaxTree syntaxTree)
+        public Task<IHardwareDescription> Transform()
         {
             return Task.Run<IHardwareDescription>(() =>
                 {
-                    _context =
-                        new TransformingContext(
-                            syntaxTree,
-                            new Module { Architecture = new Architecture { Name = "Behavioural" } },
-                            new MethodCallChainTable());
-
                     // The top module should have as few and as small inputs as possible. Its name can't be an extended identifier.
-                    var module = _context.Module;
-                    module.Entity = new Entity { Name =  Entity.ToSafeEntityName(_id) };
+                    var module = _transformationContext.Module;
+                    module.Entity = new Entity { Name = Entity.ToSafeEntityName(_transformationContext.Id) };
 
-                    Traverse(syntaxTree);
+                    Traverse(_transformationContext.SyntaxTree);
 
                     module.Libraries.Add(new Library
                     {
@@ -63,9 +59,6 @@ namespace Hast.Transformer.Vhdl
                     var callIdTable = ProcessInterfaceMethods();
 
                     ProcessUtility.AddClockToProcesses(module, "clk");
-
-                    // Just for testing.
-                    System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", module.ToVhdl());
 
                     return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, callIdTable);
                 });
@@ -84,7 +77,7 @@ namespace Hast.Transformer.Vhdl
                     if (node is MethodDeclaration)
                     {
                         var method = node as MethodDeclaration;
-                        _methodTransformer.Transform(method, _context);
+                        _methodTransformer.Transform(method, _transformationContext);
                     }
                     break;
                 case NodeType.Pattern:
@@ -130,10 +123,10 @@ namespace Hast.Transformer.Vhdl
 
         private MethodIdTable ProcessInterfaceMethods()
         {
-            if (!_context.InterfaceMethods.Any()) return MethodIdTable.Empty;
+            if (!_transformationContext.InterfaceMethods.Any()) return MethodIdTable.Empty;
 
             var proxyProcess = new Process { Name = "CallProxy" };
-            var ports = _context.Module.Entity.Ports;
+            var ports = _transformationContext.Module.Entity.Ports;
             var callIdTable = new MethodIdTable();
 
             var callIdPort = new Port
@@ -142,14 +135,13 @@ namespace Hast.Transformer.Vhdl
                 Mode = PortMode.In,
                 DataType = new RangedDataType { Name = "integer", RangeMin = 0, RangeMax = 999999 },
             };
-            //proxyProcess.SesitivityList.Add(callIdPort); // Not needed, will have clock
 
             ports.Add(callIdPort);
 
             var caseExpression = new Case { Expression = "CallId".ToVhdlId() };
 
             var id = 1;
-            foreach (var method in _context.InterfaceMethods)
+            foreach (var method in _transformationContext.InterfaceMethods)
             {
                 ports.AddRange(method.Ports);
 
@@ -197,7 +189,7 @@ namespace Hast.Transformer.Vhdl
 
             proxyProcess.Body.Add(caseExpression);
 
-            _context.Module.Architecture.Body.Add(proxyProcess);
+            _transformationContext.Module.Architecture.Body.Add(proxyProcess);
 
             return callIdTable;
         }
@@ -207,9 +199,9 @@ namespace Hast.Transformer.Vhdl
         /// </summary>
         private void ReorderProcedures()
         {
-            var chains = _context.MethodCallChainTable.Values.ToDictionary(chain => chain.ProcedureName);
+            var chains = _transformationContext.MethodCallChainTable.Values.ToDictionary(chain => chain.ProcedureName);
 
-            var declarations = _context.Module.Architecture.Declarations;
+            var declarations = _transformationContext.Module.Architecture.Declarations;
             for (int i = 0; i < declarations.Count; i++)
             {
                 if (!(declarations[i] is Procedure)) continue;

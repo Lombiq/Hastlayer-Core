@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +10,7 @@ namespace Hast.Samples.SampleAssembly
         public virtual bool IsPrimeNumber(int num)
         {
             int factor = num / 2;
-            //var z = Math.Abs(10.3d);
+            //var z = System.Math.Abs(10.3d);
             //var y = z;
             //var factor = Math.Sqrt(num); // Math.Sqrt() can't be processed yet
 

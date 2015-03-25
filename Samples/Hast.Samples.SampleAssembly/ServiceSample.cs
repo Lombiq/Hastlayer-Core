@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +36,13 @@ namespace Hast.Samples.SampleAssembly
         
         private int PrivateMethod()
         {
-            return 5;
+            return 5 + StaticMethod();
+        }
+
+
+        private static int StaticMethod()
+        {
+            return 7;
         }
     }
 }

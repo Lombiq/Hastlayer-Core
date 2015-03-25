@@ -15,10 +15,8 @@ namespace Hast.Transformer
         /// <summary>
         /// Transforms the given syntax tree to hardware description.
         /// </summary>
-        /// <param name="id">A string suitable to identify the given syntax tree.</param>
-        /// <param name="syntaxTree">The syntax tree of the code to transform.</param>
-        /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
+        /// <param name="transformationContext">The full context of the transformation, including the syntax tree to transform.</param>
         /// <returns>The hardware description created from the syntax tree.</returns>
-        Task<IHardwareDescription> Transform(string id, SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
+        Task<IHardwareDescription> Transform(ITransformationContext transformationContext);
     }
 }

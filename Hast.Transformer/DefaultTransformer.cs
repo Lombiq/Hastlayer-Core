@@ -39,22 +39,27 @@ namespace Hast.Transformer
                 astBuilder.AddAssembly(assembly);
             }
 
-            //((TypeReferenceExpression)new object()).Type.ToTypeReference().Resolve(null).GetDefinition()
-
-            //astBuilder.AddAssembly(AssemblyDefinition.ReadAssembly(typeof(Math).Assembly.Location));
-            //astBuilder.AddType(new TypeDefinition("System", "Math", Mono.Cecil.TypeAttributes.Class | Mono.Cecil.TypeAttributes.Public));
-
-            //This would be the decompiled output
-            //using (var output = new StringWriter())
-            //{
-            //    astBuilder.GenerateCode(new PlainTextOutput(output));
-            //    var z = output.ToString();
-            //    var y = z;
-            //}
 
             //astBuilder.SyntaxTree.AcceptVisitor(new UnusedTypeDefinitionCleanerAstVisitor());
 
-            return _engine.Transform(transformationId, astBuilder.SyntaxTree, configuration);
+            var typeDeclarationLookup = astBuilder.SyntaxTree
+                .GetTypes(true)
+                .ToDictionary(d => d.Annotation<TypeDefinition>().FullName);
+
+            var context = new TransformationContext
+            {
+                Id = transformationId,
+                HardwareGenerationConfiguration = configuration,
+                SyntaxTree = astBuilder.SyntaxTree,
+                LookupDeclarationDelegate = type =>
+                    {
+                        TypeDeclaration declaration;
+                        typeDeclarationLookup.TryGetValue(type.Annotation<TypeReference>().FullName, out declaration);
+                        return declaration;
+                    }
+            };
+
+            return _engine.Transform(context);
         }
 
         public Task<IHardwareDescription> Transform(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
