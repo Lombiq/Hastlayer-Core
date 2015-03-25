@@ -52,22 +52,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var returnStatement = statement as ReturnStatement;
 
-                if (context.Scope.Node is MethodDeclaration)
+                if (_typeConverter.Convert((context.Scope.Method).ReturnType).Name == "void") block.Body.Add(new Raw("return;"));
+                else if (subProgram is Procedure)
                 {
-                    if (_typeConverter.Convert(((MethodDeclaration)context.Scope.Node).ReturnType).Name == "void") block.Body.Add(new Raw("return;"));
-                    else if (subProgram is Procedure)
-                    {
-                        var procedure = subProgram as Procedure;
+                    var procedure = subProgram as Procedure;
 
-                        var outputParam = procedure.Parameters.Where(param => param.ParameterType == ProcedureParameterType.Out).Single();
+                    var outputParam = procedure.Parameters.Where(param => param.ParameterType == ProcedureParameterType.Out).Single();
 
-                        var source = outputParam.Name.ToVhdlId() +
-                                     (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
-                                     _expressionTransformer.Transform(returnStatement.Expression, context, block).ToVhdl() +
-                                     "; return;";
+                    var source = outputParam.Name.ToVhdlId() +
+                                 (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
+                                 _expressionTransformer.Transform(returnStatement.Expression, context, block).ToVhdl() +
+                                 "; return;";
 
-                        procedure.Body.Add(new Raw(source));
-                    }
+                    procedure.Body.Add(new Raw(source));
                 }
             }
             else if (statement is IfElseStatement)

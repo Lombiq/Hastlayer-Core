@@ -57,7 +57,7 @@
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
     <Compile Include="SubTransformers\MethodTransformer.cs" />
     <Compile Include="SubTransformers\StatementTransformer.cs" />
-    <Compile Include="SubTransformers\SubTransformerContexts.cs" />
+    <Compile Include="SubTransformers\SubTransformerContext.cs" />
     <Compile Include="SubTransformers\TypeConverter.cs" />
     <Compile Include="VhdlTransformationContext.cs" />
     <Compile Include="TransformingWorkflow.cs" />

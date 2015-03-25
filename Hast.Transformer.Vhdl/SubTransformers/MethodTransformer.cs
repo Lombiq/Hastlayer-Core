@@ -102,7 +102,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 TransformationContext = context,
                 Scope = new SubTransformerScope
                 {
-                    Node = method,
+                    Method = method,
                     SubProgram = procedure
                 }
             };

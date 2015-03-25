@@ -17,7 +17,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
     public class SubTransformerScope
     {
-        public AstNode Node { get; set; }
+        public MethodDeclaration Method { get; set; }
         public ISubProgram SubProgram { get; set; }
     }
 }
