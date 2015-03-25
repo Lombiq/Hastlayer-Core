@@ -18,5 +18,15 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             return memberDefinition.FullName;
         }
+
+        public static TypeDeclaration GetParentType(this AstNode node)
+        {
+            while (!(node is TypeDeclaration))
+            {
+                node = node.Parent;
+            }
+
+            return (TypeDeclaration)node;
+        }
     }
 }

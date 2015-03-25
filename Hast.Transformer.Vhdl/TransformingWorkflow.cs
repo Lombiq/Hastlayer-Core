@@ -11,6 +11,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.Common.Configuration;
 using Hast.Common;
+using Hast.Transformer.Vhdl.Helpers;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -199,27 +200,23 @@ namespace Hast.Transformer.Vhdl
         /// </summary>
         private void ReorderProcedures()
         {
-            var chains = _transformationContext.MethodCallChainTable.Values.ToDictionary(chain => chain.ProcedureName);
+            var chains = _transformationContext.MethodCallChainTable.Chains;
 
-            var declarations = _transformationContext.Module.Architecture.Declarations;
-            for (int i = 0; i < declarations.Count; i++)
-            {
-                if (!(declarations[i] is Procedure)) continue;
-
-                var procedure = declarations[i] as Procedure;
-
-                if (!chains.ContainsKey(procedure.Name)) continue;
-
-                var targets = chains[procedure.Name].Targets.ToDictionary(chain => chain.ProcedureName);
-
-                for (int x = i + 1; x < declarations.Count; x++)
+            _transformationContext.Module.Architecture.Declarations =
+                TopologicalSortHelper.Sort(
+                _transformationContext.Module.Architecture.Declarations,
+                declaration =>
                 {
-                    if (!(declarations[x] is Procedure)) continue;
+                    if (!(declaration is Procedure)) return Enumerable.Empty<IVhdlElement>();
 
-                    var otherProcedure = declarations[x] as Procedure;
-                    if (targets.ContainsKey(otherProcedure.Name)) declarations.MoveBefore(x, i);
-                }
-            }
+                    var procedure = (Procedure)declaration;
+
+                    if (!chains.ContainsKey(procedure.Name)) return Enumerable.Empty<IVhdlElement>();
+
+                    var targetNames = chains[procedure.Name].Targets.Select(chain => chain.ProcedureName);
+                    return _transformationContext.Module.Architecture.Declarations
+                        .Where(element => element is Procedure && targetNames.Contains(((Procedure)element).Name));
+                });
         }
     }
 

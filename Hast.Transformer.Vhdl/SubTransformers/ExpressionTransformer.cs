@@ -53,16 +53,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
             else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
-            else if (expression is MemberReferenceExpression)
-            {
-                var member = (MemberReferenceExpression)expression;
-                return TransformInner(member.Target, context, block) + "." + member.MemberName;
-            }
-            else if (expression is ThisReferenceExpression)
-            {
-                var thisRef = expression as ThisReferenceExpression;
-                return context.Scope.Node.Parent.GetFullName();
-            }
+            // These are not needed at the moment.
+            //else if (expression is MemberReferenceExpression)
+            //{
+            //    var memberReference = (MemberReferenceExpression)expression;
+            //    return TransformInner(memberReference.Target, context, block) + "." + memberReference.MemberName;
+            //}
+            //else if (expression is ThisReferenceExpression)
+            //{
+            //    var thisRef = expression as ThisReferenceExpression;
+            //    return context.Scope.Method.Parent.GetFullName();
+            //}
             else if (expression is UnaryOperatorExpression)
             {
                 var unary = expression as UnaryOperatorExpression;
@@ -151,7 +152,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private string TransformInvocationExpression(InvocationExpression expression, SubTransformerContext context, IBlockElement block)
         {
             var procedure = context.Scope.SubProgram;
-            var targetName = TransformInner(expression.Target, context, block);
+            var targetName = expression.GetFullName();
             var hasArguments = expression.Arguments.Count > 0;
             var hasReturnValue = !(expression.Parent is ExpressionStatement); // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method)
             var needsParenthesis = hasArguments || hasReturnValue;
@@ -200,7 +201,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             current = current.Parent;
                         }
 
-                        type = (TypeDeclaration)current;
+                        type = expression.GetParentType();
                     }
 
                     var targetMemberName = target.MemberName;

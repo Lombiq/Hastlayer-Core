@@ -25,7 +25,7 @@ namespace Hast.Transformer.Vhdl
     {
         private readonly Dictionary<string, MethodCallChain> _chains = new Dictionary<string, MethodCallChain>();
 
-        public IEnumerable<MethodCallChain> Values { get { return _chains.Values; } }
+        public IDictionary<string, MethodCallChain> Chains { get { return _chains; } }
 
 
         public void AddTarget(string procedureName, string targetProcedureName)
