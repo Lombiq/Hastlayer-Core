@@ -32,7 +32,7 @@ namespace Hast.Transformer.Vhdl
 
             _transformationContext = new VhdlTransformationContext(transformationContext)
                 {
-                    Module = new Module { Architecture = new Architecture { Name = "Behavioural" } },
+                    Module = new Module { Architecture = new Architecture { Name = "Imp" } },
                     MethodCallChainTable = new MethodCallChainTable()
                 };
         }
