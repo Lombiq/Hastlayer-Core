@@ -10,9 +10,6 @@ using Orchard;
 
 namespace Hast.Layer
 {
-    public delegate void TransformedEventHandler(IHardwareDescription hardwareDescription);
-
-
     public interface IHastlayer : IDisposable
     {
         /// <summary>

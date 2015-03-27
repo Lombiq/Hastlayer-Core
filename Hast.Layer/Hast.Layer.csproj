@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\EventHandlers.cs" />
+    <Compile Include="Events\TransformedEventArgs.cs" />
     <Compile Include="HardwareRepresentation.cs" />
     <Compile Include="Hastlayer.cs" />
     <Compile Include="IHastlayer.cs" />

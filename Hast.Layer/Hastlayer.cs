@@ -71,7 +71,7 @@ namespace Hast.Layer
                     {
                         var hardwareDescription = await transformer.Transform(assemblies, configuration);
 
-                        if (Transformed != null) Transformed(hardwareDescription);
+                        if (Transformed != null) Transformed(this, new TransformedEventArgs(hardwareDescription));
 
                         await hardwareRepresentationComposer.Compose(hardwareDescription);
 

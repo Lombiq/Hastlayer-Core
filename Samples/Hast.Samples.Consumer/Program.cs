@@ -23,9 +23,9 @@ namespace Hast.Samples.Consumer
 
                     using (var hastlayer = Hastlayer.Create(extensions))
                     {
-                        hastlayer.Transformed += hardwareDescription =>
+                        hastlayer.Transformed += (sender, e) =>
                             {
-                                var vhdlHardwareDescription = (Hast.Transformer.Vhdl.VhdlHardwareDescription)hardwareDescription;
+                                var vhdlHardwareDescription = (Hast.Transformer.Vhdl.VhdlHardwareDescription)e.HardwareDescription;
                                 var vhdl = vhdlHardwareDescription.Manifest.TopModule.ToVhdl();
                                 //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
                             };
