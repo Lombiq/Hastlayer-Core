@@ -44,7 +44,7 @@ namespace Hast.Transformer.Vhdl
                 {
                     // The top module should have as few and as small inputs as possible. Its name can't be an extended identifier.
                     var module = _transformationContext.Module;
-                    module.Entity = new Entity { Name = Entity.ToSafeEntityName(_transformationContext.Id) };
+                    module.Entity = new Entity { Name = Entity.ToSafeEntityName(_transformationContext.Id.GetHashCode().ToString()) };
 
                     Traverse(_transformationContext.SyntaxTree);
 
