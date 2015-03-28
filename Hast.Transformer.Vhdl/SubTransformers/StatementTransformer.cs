@@ -8,27 +8,30 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
+using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class StatementTransformer
+    public interface IStatementTransformer : IDependency
     {
-        private readonly TypeConverter _typeConverter;
-        private readonly ExpressionTransformer _expressionTransformer;
+        void Transform(Statement statement, ISubTransformerContext context, IBlockElement block);   
+    }
 
 
-        public StatementTransformer()
-            : this(new TypeConverter(), new ExpressionTransformer())
-        {
-        }
+    public class StatementTransformer : IStatementTransformer
+    {
+        private readonly ITypeConverter _typeConverter;
+        private readonly IExpressionTransformer _expressionTransformer;
 
-        public StatementTransformer(TypeConverter typeConverter, ExpressionTransformer expressionTransformer)
+
+        public StatementTransformer(ITypeConverter typeConverter, IExpressionTransformer expressionTransformer)
         {
             _typeConverter = typeConverter;
             _expressionTransformer = expressionTransformer;
         }
 
-        public void Transform(Statement statement, SubTransformerContext context, IBlockElement block)
+
+        public void Transform(Statement statement, ISubTransformerContext context, IBlockElement block)
         {
             var subProgram = context.Scope.SubProgram;
 

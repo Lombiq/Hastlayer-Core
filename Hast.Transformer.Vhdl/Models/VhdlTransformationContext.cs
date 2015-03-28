@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.Transformer.Models;
 
-namespace Hast.Transformer.Vhdl
+namespace Hast.Transformer.Vhdl.Models
 {
     public class VhdlTransformationContext : TransformationContext, IVhdlTransformationContext
     {

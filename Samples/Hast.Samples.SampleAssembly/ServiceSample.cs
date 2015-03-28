@@ -19,7 +19,7 @@ namespace Hast.Samples.SampleAssembly
     }
 
 
-    public class ServiceSample : IService
+    public class ServiceSample : ServiceBase, IService
     {
         // Explicit interface implementation.
         int IService.Method1()
@@ -30,7 +30,16 @@ namespace Hast.Samples.SampleAssembly
         // Implicit interface implementation.
         public int Method2()
         {
+            if (Base())
+            {
+                return 4;
+            }
             return PrivateMethod() + PrivateMethod() - 3;
+        }
+
+        public virtual bool Unused()
+        {
+            return true;
         }
 
         
@@ -43,6 +52,15 @@ namespace Hast.Samples.SampleAssembly
         private static int StaticMethod()
         {
             return 7;
+        }
+    }
+
+
+    public class ServiceBase
+    {
+        protected bool Base()
+        {
+            return true;
         }
     }
 }

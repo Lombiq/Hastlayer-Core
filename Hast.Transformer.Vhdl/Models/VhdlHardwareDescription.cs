@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.Common;
+using Hast.Common.Models;
 
-namespace Hast.Transformer.Vhdl
+namespace Hast.Transformer.Vhdl.Models
 {
     public class VhdlHardwareDescription : IHardwareDescription
     {
@@ -51,7 +52,7 @@ namespace Hast.Transformer.Vhdl
         {
             using (var reader = new StreamReader(stream))
             {
-                var storage = await JsonConvert.DeserializeObjectAsync<Storage>(await reader.ReadToEndAsync(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
+                var storage = JsonConvert.DeserializeObject<Storage>(await reader.ReadToEndAsync(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
                 
                 _manifest = storage.Manifest;
                 _callIdTable = storage.CallIdTable;

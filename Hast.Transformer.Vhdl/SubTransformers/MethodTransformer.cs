@@ -8,22 +8,30 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Representation;
+using Hast.Transformer.Vhdl.Models;
+using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class MethodTransformer
+    public interface IMethodTransformer : IDependency
     {
-        private readonly TypeConverter _typeConverter;
-        private readonly StatementTransformer _statementTransformer;
+        void Transform(MethodDeclaration method, IVhdlTransformationContext context);
+    }
 
 
-        public MethodTransformer()
-            : this(new TypeConverter(), new StatementTransformer())
+    public class MethodTransformer : IMethodTransformer
+    {
+        private readonly IMemberSuitabilityChecker _memberSuitabilityChecker;
+        private readonly ITypeConverter _typeConverter;
+        private readonly IStatementTransformer _statementTransformer;
+
+
+        public MethodTransformer(
+            IMemberSuitabilityChecker memberSuitabilityChecker,
+            ITypeConverter typeConverter,
+            IStatementTransformer statementTransformer)
         {
-        }
-
-        public MethodTransformer(TypeConverter typeConverter, StatementTransformer statementTransformer)
-        {
+            _memberSuitabilityChecker = memberSuitabilityChecker;
             _typeConverter = typeConverter;
             _statementTransformer = statementTransformer;
         }
@@ -34,20 +42,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var fullName = method.GetFullName();
             var procedure = new Procedure { Name = fullName };
 
+
             // Handling when the method is an interface method, i.e. should be present in the interface of the VHDL module.
             InterfaceMethodDefinition interfaceMethod = null;
-            if (method.Parent is TypeDeclaration &&
-                    (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) || // If it's a public virtual method.
-                    IsInterfaceDeclaredMethod(method, context)) // Or a public method that implements an interface.
-               )
+            if (_memberSuitabilityChecker.IsSuitableInterfaceMember(method, context.TypeDeclarationLookupTable))
             {
-                var parent = (TypeDeclaration)method.Parent;
-                if (parent.ClassType == ClassType.Class && parent.Modifiers == Modifiers.Public)
-                {
-                    interfaceMethod = new InterfaceMethodDefinition { Name = fullName, Procedure = procedure };
-                    context.InterfaceMethods.Add(interfaceMethod);
-                }
+                interfaceMethod = new InterfaceMethodDefinition { Name = procedure.Name, Procedure = procedure };
+                context.InterfaceMethods.Add(interfaceMethod);
             }
+
 
             var parameters = new List<ProcedureParameter>();
 
@@ -69,6 +72,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 parameters.Add(outputParam);
             }
+
 
             // Handling input parameters
             if (method.Parameters.Count != 0)
@@ -113,62 +117,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             context.Module.Architecture.Declarations.Add(procedure);
-        }
-
-
-        private static bool IsInterfaceDeclaredMethod(MethodDeclaration method, IVhdlTransformationContext context)
-        {
-            // Is this an explicitly implemented interface method?
-            if (method.Modifiers == Modifiers.None &&
-                method.NameToken.NextSibling != null &&
-                method.NameToken.NextSibling.NodeType == NodeType.TypeReference)
-            {
-                return true;
-            }
-
-            // Otherwise if it's not public it can't be a method declared in an interface (public virtuals are checked separately).
-            if (method.Modifiers != Modifiers.Public) return false;
-
-            // Searching for an implemented interface with the same method.
-            var parent = (TypeDeclaration)method.Parent;
-            foreach (var baseType in parent.BaseTypes) // BaseTypes are flattened, so interface inheritance is taken into account.
-            {
-                if (baseType.NodeType == NodeType.TypeReference)
-                {
-                    // baseType is a TypeReference but we need the corresponding TypeDeclaration to check for the methods.
-                    var baseTypeDeclaration = context.LookupDeclaration(baseType);
-
-                    if (baseTypeDeclaration.ClassType == ClassType.Interface)
-                    {
-                        if (baseTypeDeclaration.Members.Any(member =>
-                            {
-                                if (member.Name == method.Name && member.EntityType == ICSharpCode.NRefactory.TypeSystem.EntityType.Method)
-                                {
-                                    var interfaceMethod = (MethodDeclaration)member;
-                                    if (interfaceMethod.ReturnType.TypeEquals(method.ReturnType, context.LookupDeclaration) &&
-                                        interfaceMethod.Parameters.Count == method.Parameters.Count)
-                                    {
-                                        foreach (var interfaceMethodParameter in interfaceMethod.Parameters)
-                                        {
-                                            if (!method.Parameters.Any(parameter => parameter.Type.TypeEquals(interfaceMethodParameter.Type, context.LookupDeclaration)))
-                                            {
-                                                return false;
-                                            }
-                                        }
-                                        return true;
-                                    }
-                                }
-
-                                return false;
-                            }))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
         }
     }
 }

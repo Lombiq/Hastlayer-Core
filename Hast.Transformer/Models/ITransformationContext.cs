@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using ICSharpCode.NRefactory.CSharp;
 
-namespace Hast.Transformer
+namespace Hast.Transformer.Models
 {
     public interface ITransformationContext
     {
@@ -26,19 +26,8 @@ namespace Hast.Transformer
         IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; }
 
         /// <summary>
-        /// Retrieves the type declaration, given an AST type.
+        /// Table to look up type declarations in the syntax tree.
         /// </summary>
-        /// <param name="type">The AST type to look up the type declaration for.</param>
-        /// <returns>The retrieved <see cref="TypeDeclaration"/> if found or <c>null</c> otherwise.</returns>
-        TypeDeclaration LookupDeclaration(AstType type);
-    }
-
-
-    public static class TransformationContextExtensions
-    {
-        public static TypeDeclaration LookupDeclaration(this ITransformationContext transformationContext, TypeReferenceExpression expression)
-        {
-            return transformationContext.LookupDeclaration(expression.Type);
-        }
+        ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
     }
 }

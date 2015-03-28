@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Hast.Common;
 using Hast.Common.Configuration;
+using Hast.Common.Models;
+using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 

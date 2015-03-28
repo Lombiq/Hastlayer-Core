@@ -3,33 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Transformer;
+using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
 
-namespace Hast.Transformer.Helpers
+namespace Hast.Communication
 {
-    public static class InterfaceMethodHelper
+    public class MemberSuitabilityChecker : IMemberSuitabilityChecker
     {
-        /// <summary>
-        /// Checks whether a method is suitable to be part of the hardware implementation's interface.
-        /// </summary>
-        public static bool IsSuitableInterfaceMethod(MethodDeclaration method, ITransformationContext context)
+        public bool IsSuitableInterfaceMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            if (method.Parent is TypeDeclaration &&
-                (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) || // If it's a public virtual method,
-                    IsInterfaceDeclaredMethod(method, context) && // or a public method that implements an interface,
-                (!context.HardwareGenerationConfiguration.IncludedMethods.Any() ||
-                    context.HardwareGenerationConfiguration.IncludedMethods.Contains(method.GetFullName()))) // and it's among the selected method. 
-               )
+            if (member is MethodDeclaration)
             {
-                var parent = (TypeDeclaration)method.Parent;
-                return parent.ClassType == ClassType.Class && parent.Modifiers == Modifiers.Public;
+                var method = (MethodDeclaration)member;
+
+                if (method.Parent is TypeDeclaration &&
+                    (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) || // If it's a public virtual method,
+                        IsInterfaceDeclaredMethod(method, typeDeclarationLookupTable))) // or a public method that implements an interface,
+                {
+                    var parent = (TypeDeclaration)method.Parent;
+                    return parent.ClassType == ClassType.Class && parent.Modifiers == Modifiers.Public;
+                } 
             }
 
             return false;
         }
 
 
-        private static bool IsInterfaceDeclaredMethod(MethodDeclaration method, ITransformationContext context)
+        private static bool IsInterfaceDeclaredMethod(MethodDeclaration method, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             // Is this an explicitly implemented interface method?
             if (method.Modifiers == Modifiers.None &&
@@ -49,7 +50,7 @@ namespace Hast.Transformer.Helpers
                 if (baseType.NodeType == NodeType.TypeReference)
                 {
                     // baseType is a TypeReference but we need the corresponding TypeDeclaration to check for the methods.
-                    var baseTypeDeclaration = context.LookupDeclaration(baseType);
+                    var baseTypeDeclaration = typeDeclarationLookupTable.Lookup(baseType);
 
                     if (baseTypeDeclaration.ClassType == ClassType.Interface)
                     {
@@ -58,12 +59,12 @@ namespace Hast.Transformer.Helpers
                             if (member.Name == method.Name && member.EntityType == ICSharpCode.NRefactory.TypeSystem.EntityType.Method)
                             {
                                 var interfaceMethod = (MethodDeclaration)member;
-                                if (interfaceMethod.ReturnType.TypeEquals(method.ReturnType, context.LookupDeclaration) &&
+                                if (interfaceMethod.ReturnType.TypeEquals(method.ReturnType,typeDeclarationLookupTable.Lookup) &&
                                     interfaceMethod.Parameters.Count == method.Parameters.Count)
                                 {
                                     foreach (var interfaceMethodParameter in interfaceMethod.Parameters)
                                     {
-                                        if (!method.Parameters.Any(parameter => parameter.Type.TypeEquals(interfaceMethodParameter.Type, context.LookupDeclaration)))
+                                        if (!method.Parameters.Any(parameter => parameter.Type.TypeEquals(interfaceMethodParameter.Type, typeDeclarationLookupTable.Lookup)))
                                         {
                                             return false;
                                         }

@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\TopologicalSortHelper.cs" />
-    <Compile Include="IVhdlTransformationContext.cs" />
+    <Compile Include="Models\IVhdlTransformationContext.cs" />
     <Compile Include="MethodCallChainTable.cs" />
     <Compile Include="MethodIdTable.cs" />
     <Compile Include="InterfaceMethodDefinition.cs" />
@@ -60,9 +60,8 @@
     <Compile Include="SubTransformers\StatementTransformer.cs" />
     <Compile Include="SubTransformers\SubTransformerContext.cs" />
     <Compile Include="SubTransformers\TypeConverter.cs" />
-    <Compile Include="VhdlTransformationContext.cs" />
-    <Compile Include="TransformingWorkflow.cs" />
-    <Compile Include="VhdlHardwareDescription.cs" />
+    <Compile Include="Models\VhdlTransformationContext.cs" />
+    <Compile Include="Models\VhdlHardwareDescription.cs" />
     <Compile Include="VhdlTransformingEngine.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,10 +6,18 @@ using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class TypeConverter
+    public interface ITypeConverter : IDependency
+    {
+        DataType Convert(AstType type);
+        DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable);
+    }
+
+
+    public class TypeConverter : ITypeConverter
     {
         public DataType Convert(AstType type)
         {
@@ -30,6 +38,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             return vhdlType;
         }
+
 
         private DataType ConvertPrimitive(KnownTypeCode typeCode)
         {

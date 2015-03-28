@@ -11,16 +11,25 @@ using Hast.Common.Configuration;
 using Hast.Common;
 using System.Collections.Generic;
 using Orchard.Validation;
+using Hast.Transformer.Models;
+using Hast.Common.Models;
 
 namespace Hast.Transformer
 {
     public class DefaultTransformer : ITransformer
     {
+        private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
+        private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly ITransformingEngine _engine;
 
 
-        public DefaultTransformer(ITransformingEngine engine)
+        public DefaultTransformer(
+            ISyntaxTreeCleaner syntaxTreeCleaner,
+            ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
+            ITransformingEngine engine)
         {
+            _syntaxTreeCleaner = syntaxTreeCleaner;
+            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _engine = engine;
         }
 
@@ -39,25 +48,22 @@ namespace Hast.Transformer
                 astBuilder.AddAssembly(assembly);
             }
 
+            transformationId +=
+                configuration.MaxDegreeOfParallelism +
+                string.Join("-", configuration.IncludedMembers);
 
-            //astBuilder.SyntaxTree.AcceptVisitor(new UnusedTypeDefinitionCleanerAstVisitor());
+            var syntaxTree = astBuilder.SyntaxTree;
 
-            var typeDeclarationLookup = astBuilder.SyntaxTree
-                .GetTypes(true)
-                .ToDictionary(d => d.Annotation<TypeDefinition>().FullName);
+            _syntaxTreeCleaner.Clean(syntaxTree, configuration);
 
             var context = new TransformationContext
             {
                 Id = transformationId,
                 HardwareGenerationConfiguration = configuration,
-                SyntaxTree = astBuilder.SyntaxTree,
-                LookupDeclarationDelegate = type =>
-                    {
-                        TypeDeclaration declaration;
-                        typeDeclarationLookup.TryGetValue(type.Annotation<TypeReference>().FullName, out declaration);
-                        return declaration;
-                    }
+                SyntaxTree = syntaxTree,
+                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree)
             };
+
 
             return _engine.Transform(context);
         }

@@ -8,19 +8,23 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Representation;
+using Hast.Transformer.Models;
+using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class ExpressionTransformer
+    public interface IExpressionTransformer : IDependency
     {
-        private readonly TypeConverter _typeConverter;
+        IVhdlElement Transform(Expression expression, ISubTransformerContext context, IBlockElement block);
+    }
 
-        public ExpressionTransformer()
-            : this(new TypeConverter())
-        {
-        }
 
-        public ExpressionTransformer(TypeConverter typeConverter)
+    public class ExpressionTransformer : IExpressionTransformer
+    {
+        private readonly ITypeConverter _typeConverter;
+
+
+        public ExpressionTransformer(ITypeConverter typeConverter)
         {
             _typeConverter = typeConverter;
         }
@@ -28,13 +32,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         //  Would need to decide between + and & or sll/srl and sra/sla
         // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
-        public IVhdlElement Transform(Expression expression, SubTransformerContext context, IBlockElement block)
+        public IVhdlElement Transform(Expression expression, ISubTransformerContext context, IBlockElement block)
         {
             return new Raw(TransformInner(expression, context, block));
         }
 
 
-        private string TransformInner(Expression expression, SubTransformerContext context, IBlockElement block)
+        private string TransformInner(Expression expression, ISubTransformerContext context, IBlockElement block)
         {
             if (expression is AssignmentExpression)
             {
@@ -72,7 +76,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is TypeReferenceExpression)
             {
                 var type = ((TypeReferenceExpression)expression).Type;
-                var declaration = context.TransformationContext.LookupDeclaration(type);
+                var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
 
                 if (declaration == null)
                 {
@@ -84,7 +88,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
 
-        private string TransformBinaryOperatorExpression(BinaryOperatorExpression expression, SubTransformerContext context, IBlockElement block)
+        private string TransformBinaryOperatorExpression(BinaryOperatorExpression expression, ISubTransformerContext context, IBlockElement block)
         {
             var source = TransformInner(expression.Left, context, block) + " ";
 
@@ -149,7 +153,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return source + " " + TransformInner(expression.Right, context, block);
         }
 
-        private string TransformInvocationExpression(InvocationExpression expression, SubTransformerContext context, IBlockElement block)
+        private string TransformInvocationExpression(InvocationExpression expression, ISubTransformerContext context, IBlockElement block)
         {
             var procedure = context.Scope.SubProgram;
             var targetName = expression.GetFullName();
@@ -184,31 +188,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 AstType returnType;
                 if (expression.Target is MemberReferenceExpression)
                 {
-                    var target = (MemberReferenceExpression)expression.Target;
-                    TypeDeclaration type;
-
-                    if (target.Target is TypeReferenceExpression)
-                    {
-                        // The method is in a different class.
-                        type = context.TransformationContext.LookupDeclaration((TypeReferenceExpression)target.Target);
-                    }
-                    else
-                    {
-                        // The method is within this class.
-                        AstNode current = expression;
-                        while (!(current is TypeDeclaration))
-                        {
-                            current = current.Parent;
-                        }
-
-                        type = expression.GetParentType();
-                    }
-
-                    var targetMemberName = target.MemberName;
+                    var memberReferenceExpression = (MemberReferenceExpression)expression.Target;
 
                     // Using First() because there can be multiple methods with the same name (overload) but these should have the same
                     // return type.
-                    returnType = type.Members.First(member => member is MethodDeclaration && member.Name == targetMemberName).ReturnType;
+                    returnType = memberReferenceExpression
+                        .GetTargetType(context.TransformationContext.TypeDeclarationLookupTable)
+                        .Members
+                        .First(member => member is MethodDeclaration && member.Name == memberReferenceExpression.MemberName)
+                        .ReturnType;
                 }
                 else
                 {
