@@ -16,9 +16,9 @@ namespace ICSharpCode.NRefactory.CSharp
             return metadata != null && metadata.IsReferenced;
         }
 
-        public static void IncrementReferenceCounter(this AstNode node)
+        public static void AddReference(this AstNode node, AstNode from)
         {
-            node.GetOrAddReferenceMetadata().ReferenceCount++;
+            node.GetOrAddReferenceMetadata().ReferencedFrom.Add(from);
         }
 
         public static bool HasReferenceMetadata(this AstNode node)

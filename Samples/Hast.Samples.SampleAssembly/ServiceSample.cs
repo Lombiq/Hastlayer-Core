@@ -30,10 +30,6 @@ namespace Hast.Samples.SampleAssembly
         // Implicit interface implementation.
         public int Method2()
         {
-            if (Base())
-            {
-                return 4;
-            }
             return PrivateMethod() + PrivateMethod() - 3;
         }
 

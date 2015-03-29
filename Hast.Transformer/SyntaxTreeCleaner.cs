@@ -42,12 +42,20 @@ namespace Hast.Transformer
             // methods are called at least once).
             foreach (var type in syntaxTree.GetTypes(true))
             {
+                var implementedInterfaces = type.BaseTypes
+                    .Select(baseType => typeDeclarationLookupTable.Lookup(baseType))
+                    .Where(baseTypeDeclaration => baseTypeDeclaration.ClassType == ClassType.Interface);
+                foreach (var implementedInterface in implementedInterfaces)
+                {
+                    implementedInterface.AddReference(type);
+                }
+
                 foreach (var member in type.Members)
                 {
                     if ((noIncludedMembers || configuration.IncludedMembers.Contains(member.GetFullName())) &&
                         _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
                     {
-                        member.IncrementReferenceCounter();
+                        member.AddReference(syntaxTree);
                         member.AcceptVisitor(referencedNodesFlaggingVisitor);
                     }
                 }
@@ -56,6 +64,16 @@ namespace Hast.Transformer
             // Then removing all unused declarations.
             syntaxTree.AcceptVisitor(new UnreferencedNodesRemovingVisitor());
 
+            // Removing orphaned base types references.
+            foreach (var type in syntaxTree.GetTypes(true))
+            {
+                foreach (var baseType in type.BaseTypes.Where(baseType => !typeDeclarationLookupTable.Lookup(baseType).IsReferenced()))
+                {
+                    type.BaseTypes.Remove(baseType);
+                }
+            }
+
+            // Cleaning up empty namespaces.
             foreach (var namespaceDeclaration in syntaxTree.Members.Where(member => member is NamespaceDeclaration))
             {
                 if (!((NamespaceDeclaration)namespaceDeclaration).Members.Any())

@@ -40,7 +40,10 @@ namespace Hast.Transformer.Visitors
 
             if (member == null) return;
 
-            member.IncrementReferenceCounter();
+            // Using the reference expression as the "from", since e.g. two calls to the same method should be counted twice, even if from the
+            // same method.
+            member.AddReference(memberReferenceExpression);
+
             // Since when e.g. another method is referenced that is above the level of this expression in the syntaxt tree,
             // thus it won't be visited unless we start a visitor there too.
             member.AcceptVisitor(this);
