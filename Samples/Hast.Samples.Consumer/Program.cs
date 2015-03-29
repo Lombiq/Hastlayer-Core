@@ -37,6 +37,11 @@ namespace Hast.Samples.Consumer
                             //    "System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(System.Int32)",
                             //    "System.Int32 Hast.Samples.SampleAssembly.ServiceSample::Hast.Samples.SampleAssembly.IService.Method1()"
                             //}
+                            IncludeMembersPrefixed = new[]
+                            {
+                                "Hast.Samples.SampleAssembly.PrimeCalculator",
+                                "Hast.Samples.SampleAssembly.ServiceSample.Method1"
+                            }
                         };
 
                         var hardwareAssembly = await hastlayer.GenerateHardware(

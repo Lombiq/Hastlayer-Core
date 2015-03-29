@@ -32,6 +32,18 @@ namespace Hast.Common.Configuration
         /// "System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])
         /// </example>
         IEnumerable<string> IncludedMembers { get; }
+
+        /// <summary>
+        /// Gets the collection of the name prefix of those public members that will be accessible as hardware 
+        /// implementation. By default all members implemented from interfaces and all public virtual members will 
+        /// be included.
+        /// </summary>
+        /// <example>
+        /// Specify members with the leading part of their name as you would access them in C#, e.g.:
+        /// "Contoso.ImageProcessing" will include all members under this namespace.
+        /// "Contoso.ImageProcessing.FaceRecognition.FaceDetectors" will include all members in this class.
+        /// </example>
+        IEnumerable<string> IncludeMembersPrefixed { get; }
     }
 
 

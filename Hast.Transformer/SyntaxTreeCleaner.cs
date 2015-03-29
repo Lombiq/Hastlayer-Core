@@ -35,7 +35,7 @@ namespace Hast.Transformer
         public void Clean(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
-            var noIncludedMembers = !configuration.IncludedMembers.Any();
+            var noIncludedMembers = !configuration.IncludedMembers.Any() && !configuration.IncludeMembersPrefixed.Any();
             var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable);
 
             // Starting with interface members we walk through the references to see which declarations are used (e.g. which
@@ -52,7 +52,7 @@ namespace Hast.Transformer
 
                 foreach (var member in type.Members)
                 {
-                    if ((noIncludedMembers || configuration.IncludedMembers.Contains(member.GetFullName())) &&
+                    if ((noIncludedMembers || configuration.IncludedMembers.Contains(member.GetFullName()) || configuration.IncludeMembersPrefixed.Any(prefix => member.GetSimpleName().StartsWith(prefix))) &&
                         _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
                     {
                         member.AddReference(syntaxTree);
