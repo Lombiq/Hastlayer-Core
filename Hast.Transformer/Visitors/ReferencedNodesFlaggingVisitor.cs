@@ -44,6 +44,8 @@ namespace Hast.Transformer.Visitors
             // same method.
             member.AddReference(memberReferenceExpression);
 
+            member.GetParentType().AddReference(memberReferenceExpression);
+
             // Since when e.g. another method is referenced that is above the level of this expression in the syntaxt tree,
             // thus it won't be visited unless we start a visitor there too.
             member.AcceptVisitor(this);
