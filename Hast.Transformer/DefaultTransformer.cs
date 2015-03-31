@@ -13,21 +13,25 @@ using System.Collections.Generic;
 using Orchard.Validation;
 using Hast.Transformer.Models;
 using Hast.Common.Models;
+using Hast.Transformer.Events;
 
 namespace Hast.Transformer
 {
     public class DefaultTransformer : ITransformer
     {
+        private readonly ITransformerEventHandler _eventHandler;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly ITransformingEngine _engine;
 
 
         public DefaultTransformer(
+            ITransformerEventHandler eventHandler,
             ISyntaxTreeCleaner syntaxTreeCleaner,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             ITransformingEngine engine)
         {
+            _eventHandler = eventHandler;
             _syntaxTreeCleaner = syntaxTreeCleaner;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _engine = engine;
@@ -55,7 +59,9 @@ namespace Hast.Transformer
 
             var syntaxTree = astBuilder.SyntaxTree;
 
+
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
+
 
             var context = new TransformationContext
             {
@@ -64,6 +70,8 @@ namespace Hast.Transformer
                 SyntaxTree = syntaxTree,
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree)
             };
+
+            _eventHandler.SyntaxTreeBuilt(context);
 
 
             return _engine.Transform(context);

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
+    <Compile Include="Events\ITransformerEventHandler.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />
