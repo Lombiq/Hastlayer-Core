@@ -28,7 +28,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
                 Condition +
                 ") then " +
                 TrueElements.ToVhdl() +
-                (ElseElements != null ? "else " + ElseElements.ToVhdl() : string.Empty) +
+                (ElseElements != null && ElseElements.Any() ? "else " + ElseElements.ToVhdl() : string.Empty) +
                 "end if;";
         }
     }

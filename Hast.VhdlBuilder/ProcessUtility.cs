@@ -25,8 +25,13 @@ namespace Hast.VhdlBuilder
             foreach (var process in module.Architecture.Body.Where(element => element is Process).Select(element => element as Process))
             {
                 process.SesitivityList.Add(clockPort);
-                process.Body.Insert(0, new Raw("if rising_edge(" + clockSignalName.ToVhdlId() + ") then "));
-                process.Body.Add(new Raw("end if;"));
+                var wrappingIf = new IfElse
+                {
+                    Condition = "rising_edge(" + clockSignalName.ToVhdlId() + ")",
+                    TrueElements = new List<IVhdlElement>(process.Body)
+                };
+                process.Body.Clear();
+                process.Body.Add(wrappingIf);
             }
         }
 
