@@ -39,7 +39,6 @@ namespace Hast.Transformer.Vhdl.Tests
             builder.RegisterType<SyntaxTreeCleaner>().As<ISyntaxTreeCleaner>();
             builder.RegisterType<TypeDeclarationLookupTableFactory>().As<ITypeDeclarationLookupTableFactory>();
             builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
-            builder.RegisterType<SyntaxTreeCleaner>().As<ISyntaxTreeCleaner>();
 
             _transformingEngineMock = new Mock<ITransformingEngine>();
 
@@ -112,8 +111,9 @@ namespace Hast.Transformer.Vhdl.Tests
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, HardwareGenerationConfiguration.Default);
             var typeLookup = BuildTypeLookup();
 
+            Assert.AreEqual(typeLookup.Count, 8, "Not the number of types remained in the syntax tree than there are used.");
             Assert.IsFalse(typeLookup.ContainsKey(typeof(UnusedDeclarations).Name), "Classes with unreferenced members weren't removed from the syntax tree.");
-            Assert.IsFalse(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Any(member => member.Name == "UnusedMethod"), "Unreferenced members of classes weren't removed from the syntax tree.");
+            Assert.IsFalse(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Any(member => member.Name == "UnusedMethod" || member.Name == "NonVirtualNonInterfaceMehod"), "Unreferenced members of classes weren't removed from the syntax tree.");
         }
 
         [Test]
