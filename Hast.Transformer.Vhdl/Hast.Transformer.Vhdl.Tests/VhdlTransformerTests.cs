@@ -7,7 +7,7 @@ using Autofac;
 using Hast.Common.Configuration;
 using Moq;
 using NUnit.Framework;
-//using Orchard.Tests.Utility; // For some reason the compiler can't find this.
+using Orchard.Tests.Utility;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -25,7 +25,7 @@ namespace Hast.Transformer.Vhdl.Tests
             var builder = new ContainerBuilder();
 
 
-            //builder.RegisterAutoMocking(MockBehavior.Loose);
+            builder.RegisterAutoMocking(MockBehavior.Loose);
 
             builder.RegisterType<VhdlTransformingEngine>().As<ITransformingEngine>();
 

@@ -50,11 +50,12 @@ namespace Hast.Transformer
 
             transformationId +=
                 configuration.MaxDegreeOfParallelism +
-                string.Join("-", configuration.IncludedMembers);
+                string.Join("-", configuration.IncludedMembers) +
+                string.Join("-", configuration.IncludeMembersPrefixed);
 
             var syntaxTree = astBuilder.SyntaxTree;
 
-            _syntaxTreeCleaner.Clean(syntaxTree, configuration);
+            _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             var context = new TransformationContext
             {

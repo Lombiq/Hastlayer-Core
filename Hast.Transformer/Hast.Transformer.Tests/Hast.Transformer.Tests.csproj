@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B56676E-75E4-4D10-9DB4-AC446BD597CE}</ProjectGuid>
+    <ProjectGuid>{DA432B51-28D1-4D5E-9A3A-59127C809C5D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Transformer.Vhdl.Tests</RootNamespace>
-    <AssemblyName>Hast.Transformer.Vhdl.Tests</AssemblyName>
+    <RootNamespace>Hast.Transformer.Tests</RootNamespace>
+    <AssemblyName>Hast.Transformer.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <OldToolsVersion>4.0</OldToolsVersion>
     <TargetFrameworkProfile />
@@ -38,6 +38,14 @@
     <Reference Include="Autofac">
       <HintPath>..\..\Orchard\lib\autofac\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\ILSpy\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\ILSpy\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\Orchard\lib\moq\Moq.dll</HintPath>
     </Reference>
@@ -55,33 +63,41 @@
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Orchard\src\Orchard.Tests\Orchard.Framework.Tests.csproj">
-      <Project>{abc826d4-2fa1-4f2f-87de-e6095f653810}</Project>
-      <Name>Orchard.Framework.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
-      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
-      <Name>Hast.Transformer</Name>
+    <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj">
+      <Project>{71b55241-a31c-43f5-9b46-40b53099df56}</Project>
+      <Name>Hast.Communication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Orchard\src\Orchard.Web\Core\Orchard.Core.csproj">
-      <Project>{9916839c-39fc-4ceb-a5af-89ca7e87119f}</Project>
-      <Name>Orchard.Core</Name>
+    <ProjectReference Include="..\..\Hast.Tests.TestAssembly1\Hast.Tests.TestAssembly1.csproj">
+      <Project>{39ab568d-b7fd-40c3-a8dd-003e0be92982}</Project>
+      <Name>Hast.Tests.TestAssembly1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Tests.TestAssembly2\Hast.Tests.TestAssembly2.csproj">
+      <Project>{9a026174-8d66-4e74-8689-9f2eef2b8cf1}</Project>
+      <Name>Hast.Tests.TestAssembly2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Orchard\src\Orchard.Tests\Orchard.Framework.Tests.csproj">
+      <Project>{abc826d4-2fa1-4f2f-87de-e6095f653810}</Project>
+      <Name>Orchard.Framework.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
       <Name>Orchard.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hast.Transformer.Vhdl.csproj">
-      <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
-      <Name>Hast.Transformer.Vhdl</Name>
+    <ProjectReference Include="..\..\Orchard\src\Orchard.Web\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.Transformer.csproj">
+      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
+      <Name>Hast.Transformer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="VhdlTransformerTests.cs" />
+    <Compile Include="TransformerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

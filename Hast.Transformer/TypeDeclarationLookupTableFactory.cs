@@ -20,6 +20,10 @@ namespace Hast.Transformer
     {
         public ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree)
         {
+           var z = syntaxTree
+                .GetTypes(true)
+                .GroupBy(d => d.Annotation<TypeDefinition>().FullName);
+
             var typeDeclarations = syntaxTree
                 .GetTypes(true)
                 .ToDictionary(d => d.Annotation<TypeDefinition>().FullName);

@@ -11,9 +11,12 @@ using Orchard;
 
 namespace Hast.Transformer
 {
+    /// <summary>
+    /// Removes nodes from the syntax tree that aren't needed.
+    /// </summary>
     public interface ISyntaxTreeCleaner : IDependency
     {
-        void Clean(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
+        void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
     }
 
 
@@ -32,7 +35,7 @@ namespace Hast.Transformer
         }
 
 
-        public void Clean(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
+        public void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
             var noIncludedMembers = !configuration.IncludedMembers.Any() && !configuration.IncludeMembersPrefixed.Any();
