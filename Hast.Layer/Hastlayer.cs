@@ -56,6 +56,11 @@ namespace Hast.Layer
                 throw new ArgumentException("No assemblies were specified.");
             }
 
+            if (assemblies.Count() != assemblies.Distinct().Count())
+            {
+                throw new ArgumentException("The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
+            }
+
             /*
              * Steps to be implemented:
              * - Transform into hardware description through ITransformer.
