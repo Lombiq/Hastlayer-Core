@@ -8,6 +8,9 @@ using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Models
 {
+    /// <summary>
+    /// The full context of a hardware transformation, including the syntax tree to transform.
+    /// </summary>
     public interface ITransformationContext
     {
         /// <summary>
