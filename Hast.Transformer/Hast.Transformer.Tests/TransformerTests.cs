@@ -135,7 +135,7 @@ namespace Hast.Transformer.Vhdl.Tests
             Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Count, 1);
             Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Single().Name, "IsPrimeNumber");
             Assert.AreEqual(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count, 3);
-            Assert.IsTrue(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
+            Assert.That(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
                 .SequenceEqual(new[]{ "Interface1Method1", "PrivateMethod", "StaticMethod" }));
         }
 
@@ -158,7 +158,7 @@ namespace Hast.Transformer.Vhdl.Tests
             Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Count, 1);
             Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Single().Name, "IsPrimeNumber");
             Assert.AreEqual(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count, 7);
-            Assert.IsTrue(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
+            Assert.That(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
                 .SequenceEqual(new[] { "Interface1Method1", "Interface1Method2", "Interface2Method1", "BaseInterfaceMethod1", "BaseInterfaceMethod2", "PrivateMethod", "StaticMethod" }));
         }
 

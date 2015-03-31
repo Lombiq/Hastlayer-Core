@@ -84,6 +84,8 @@ namespace Hast.Transformer
                     namespaceDeclaration.Remove();
                 }
             }
+
+            // Note that at this point the reference counters are out of date and would need to be refreshed to be used.
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Hast.Layer
     public interface IHastlayer : IDisposable
     {
         /// <summary>
-        /// Occurs when the .NET assembly was transformed to hardware description.
+        /// Occurs when the .NET assembly was transformed into hardware description.
         /// </summary>
         event TransformedEventHandler Transformed;
 
@@ -24,9 +24,6 @@ namespace Hast.Layer
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
         /// <returns>The representation of the assemblies implemented as hardware.</returns>
         Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration);
-
-        // Maybe this as well?
-        //Task<IHardwareAssembly> GenerateHardware(Type type); // Would only transform this type and its dependencies.
 
         /// <summary>
         /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation.

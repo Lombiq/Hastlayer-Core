@@ -88,9 +88,6 @@ namespace Hast.Layer
             };
         }
 
-
-        // Maybe this should return an IDisposable? E.g. close communication to FPGA, or clean up its configuration here if no other calls for
-        // this type of object is alive.
         public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
         {
             Argument.ThrowIfNull(hardwareRepresentation, "hardwareAssembly");
@@ -120,7 +117,6 @@ namespace Hast.Layer
 
             var settings = new AppHostSettings
             {
-                // Everything loaded from here currently, but this needs an extension point for dynamic loading.
                 ImportedExtensions = new[]
                 {
                     typeof(Hastlayer).Assembly,
