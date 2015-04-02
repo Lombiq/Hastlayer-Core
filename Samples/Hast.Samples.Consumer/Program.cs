@@ -44,7 +44,7 @@ namespace Hast.Samples.Consumer
                             }
                         };
 
-                        var hardwareAssembly = await hastlayer.GenerateHardware(
+                        var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
                             {
                                 typeof(PrimeCalculator).Assembly
@@ -53,10 +53,10 @@ namespace Hast.Samples.Consumer
                             configuration);
 
                         IService serviceParameter = new ServiceSample();
-                        var service = await hastlayer.GenerateProxy(hardwareAssembly, serviceParameter);
+                        var service = await hastlayer.GenerateProxy(hardwareRepresentation, serviceParameter);
                         service.Method1();
 
-                        var primeCalculator = await hastlayer.GenerateProxy(hardwareAssembly, new PrimeCalculator());
+                        var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);
                     }
 
