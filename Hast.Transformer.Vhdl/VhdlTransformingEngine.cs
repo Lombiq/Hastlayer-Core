@@ -53,11 +53,11 @@ namespace Hast.Transformer.Vhdl
                     module.Architecture.Entity = module.Entity;
 
                     ReorderProcedures(vhdlTransformationContext);
-                    var callIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
+                    var methodIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
 
                     ProcessUtility.AddClockToProcesses(module, "clk");
 
-                    return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, callIdTable);
+                    return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, methodIdTable);
                 });
         }
 
@@ -125,18 +125,18 @@ namespace Hast.Transformer.Vhdl
 
             var proxyProcess = new Process { Name = "CallProxy" };
             var ports = transformationContext.Module.Entity.Ports;
-            var callIdTable = new MethodIdTable();
+            var methodIdTable = new MethodIdTable();
 
-            var callIdPort = new Port
+            var methodIdPort = new Port
             {
-                Name = "CallId",
+                Name = "MethodId",
                 Mode = PortMode.In,
                 DataType = new RangedDataType { Name = "integer", RangeMin = 0, RangeMax = 999999 },
             };
 
-            ports.Add(callIdPort);
+            ports.Add(methodIdPort);
 
-            var caseExpression = new Case { Expression = "CallId".ToVhdlId() };
+            var caseExpression = new Case { Expression = "MethodId".ToVhdlId() };
 
             var id = 1;
             foreach (var method in transformationContext.InterfaceMethods)
@@ -179,7 +179,7 @@ namespace Hast.Transformer.Vhdl
                 caseExpression.Whens.Add(when);
 
 
-                callIdTable.SetMapping(method.Name, id);
+                methodIdTable.SetMapping(method.Name, id);
                 id++;
             }
 
@@ -189,7 +189,7 @@ namespace Hast.Transformer.Vhdl
 
             transformationContext.Module.Architecture.Body.Add(proxyProcess);
 
-            return callIdTable;
+            return methodIdTable;
         }
 
         /// <summary>

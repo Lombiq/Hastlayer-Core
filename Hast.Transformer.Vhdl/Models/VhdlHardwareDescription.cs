@@ -14,21 +14,21 @@ namespace Hast.Transformer.Vhdl.Models
     public class VhdlHardwareDescription : IHardwareDescription
     {
         private VhdlManifest _manifest;
-        private MethodIdTable _callIdTable;
+        private MethodIdTable _methodIdTable;
 
         public string Language { get { return "VHDL"; } }
         public VhdlManifest Manifest { get { return _manifest; } }
-        public MethodIdTable CallIdTable { get { return _callIdTable; } }
+        public MethodIdTable MethodIdTable { get { return _methodIdTable; } }
 
 
         public VhdlHardwareDescription()
         {
         }
 
-        public VhdlHardwareDescription(VhdlManifest manifest, MethodIdTable callIdTable)
+        public VhdlHardwareDescription(VhdlManifest manifest, MethodIdTable methodIdTable)
         {
             _manifest = manifest;
-            _callIdTable = callIdTable;
+            _methodIdTable = methodIdTable;
         }
 
 
@@ -41,7 +41,7 @@ namespace Hast.Transformer.Vhdl.Models
                 var storage = new Storage
                 {
                     Manifest = _manifest,
-                    CallIdTable = _callIdTable,
+                    MethodIdTable = _methodIdTable,
                 };
 
                 await writer.WriteAsync(JsonConvert.SerializeObject(storage, Formatting.None, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
@@ -55,7 +55,7 @@ namespace Hast.Transformer.Vhdl.Models
                 var storage = JsonConvert.DeserializeObject<Storage>(await reader.ReadToEndAsync(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
                 
                 _manifest = storage.Manifest;
-                _callIdTable = storage.CallIdTable;
+                _methodIdTable = storage.MethodIdTable;
             }
         }
 
@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.Models
         public class Storage
         {
             public VhdlManifest Manifest { get; set; }
-            public MethodIdTable CallIdTable { get; set; }
+            public MethodIdTable MethodIdTable { get; set; }
         }
     }
 }
