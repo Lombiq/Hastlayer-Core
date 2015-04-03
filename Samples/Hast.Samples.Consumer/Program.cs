@@ -15,13 +15,7 @@ namespace Hast.Samples.Consumer
         {
             Task.Run(async () =>
                 {
-                    var extensions = new[]
-                        {
-                            typeof(Hast.Transformer.Vhdl.VhdlTransformingEngine).Assembly,
-                            typeof(Hast.Xilinx.XilinxHardwareRepresentationComposer).Assembly
-                        };
-
-                    using (var hastlayer = Hastlayer.Create(extensions))
+                    using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
                     {
                         hastlayer.Transformed += (sender, e) =>
                             {

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HastlayerFactory.cs" />
     <Compile Include="XilinxHardwareRepresentationComposer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,9 +52,17 @@
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
+      <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
+      <Name>Hast.Layer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
       <Name>Hast.Synthesis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj">
+      <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
+      <Name>Hast.Transformer.Vhdl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
