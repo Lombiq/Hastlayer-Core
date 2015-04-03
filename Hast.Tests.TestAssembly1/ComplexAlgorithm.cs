@@ -22,26 +22,5 @@ namespace Hast.Tests.TestAssembly1
 
             return true;
         }
-
-        // Arrays not yet supported
-        /*public virtual int[] PrimeFactors(int num)
-        {
-            var i = 0;
-            var result = new int[50];
-
-            int divisor = 2;
-
-            while (divisor <= num)
-            {
-                if (num % divisor == 0)
-                {
-                    result[i++] = divisor;
-                    num /= divisor;
-                }
-                else divisor++;
-            }
-
-            return result;
-        }*/
     }
 }

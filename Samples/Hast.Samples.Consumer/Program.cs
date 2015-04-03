@@ -27,34 +27,16 @@ namespace Hast.Samples.Consumer
                             {
                                 var vhdlHardwareDescription = (Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)e.HardwareDescription;
                                 var vhdl = vhdlHardwareDescription.Manifest.TopModule.ToVhdl();
-                                System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
+                                //System.IO.File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", vhdl);
                             };
-
-                        var configuration = new HardwareGenerationConfiguration
-                        {
-                            //IncludedMembers = new[]
-                            //{
-                            //    "System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(System.Int32)",
-                            //    "System.Int32 Hast.Samples.SampleAssembly.ServiceSample::Hast.Samples.SampleAssembly.IService.Method1()"
-                            //}
-                            IncludeMembersPrefixed = new[]
-                            {
-                                "Hast.Samples.SampleAssembly.PrimeCalculator",
-                                "Hast.Samples.SampleAssembly.ServiceSample.Method1"
-                            }
-                        };
 
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
                             {
-                                typeof(PrimeCalculator).Assembly
-                                //typeof(Math).Assembly
-                            }, 
-                            configuration);
-
-                        IService serviceParameter = new ServiceSample();
-                        var service = await hastlayer.GenerateProxy(hardwareRepresentation, serviceParameter);
-                        service.Method1();
+                                typeof(PrimeCalculator).Assembly,
+                                typeof(Math).Assembly
+                            },
+                            HardwareGenerationConfiguration.Default);
 
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);

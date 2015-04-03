@@ -11,9 +11,7 @@ namespace Hast.Samples.SampleAssembly
         public virtual bool IsPrimeNumber(int num)
         {
             int factor = num / 2;
-            //var z = Math.Max(10, 4);
-            //var y = z;
-            //var factor = Math.Sqrt(num); // Math.Sqrt() can't be processed yet
+            //var factor = Math.Sqrt(num); // Math.Sqrt() can't be processed yet because it needs object support.
 
             for (int i = 2; i <= factor; i++)
             {
