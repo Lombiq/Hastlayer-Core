@@ -38,13 +38,15 @@ namespace Hast.Transformer.Visitors
 
             var member = memberReferenceExpression.GetMemberDeclaration(_typeDeclarationLookupTable);
 
-            if (member == null) return;
+            if (member == null || member.WasVisited()) return;
 
             // Using the reference expression as the "from", since e.g. two calls to the same method should be counted twice, even if from the
             // same method.
             member.AddReference(memberReferenceExpression);
 
             member.GetParentType().AddReference(memberReferenceExpression);
+
+            member.SetVisited();
 
             // Since when e.g. another method is referenced that is above the level of this expression in the syntaxt tree,
             // thus it won't be visited unless we start a visitor there too.

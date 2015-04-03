@@ -21,6 +21,16 @@ namespace ICSharpCode.NRefactory.CSharp
             node.GetOrAddReferenceMetadata().ReferencedFrom.Add(from);
         }
 
+        public static void SetVisited(this AstNode node)
+        {
+            node.GetOrAddReferenceMetadata().WasVisited = true;
+        }
+
+        public static bool WasVisited(this AstNode node)
+        {
+            return node.GetOrAddReferenceMetadata().WasVisited;
+        }
+
         public static bool HasReferenceMetadata(this AstNode node)
         {
             return node.GetReferenceMetadata() != null;

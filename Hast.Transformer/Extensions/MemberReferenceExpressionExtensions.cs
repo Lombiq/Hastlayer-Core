@@ -14,6 +14,8 @@ namespace ICSharpCode.NRefactory.CSharp
         {
             var type = memberReferenceExpression.GetTargetType(typeDeclarationLookupTable);
 
+            if (type == null) return null;
+
             var parent = memberReferenceExpression.Parent;
             MemberReference memberReference = null;
             while (memberReference == null && parent != null)
@@ -37,7 +39,7 @@ namespace ICSharpCode.NRefactory.CSharp
                 // The member is in the base class (because of single class inheritance in C#, there can be only one base class).
                 return memberReferenceExpression.GetParentType().BaseTypes
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
-                    .Single(typeDeclaration => typeDeclaration.ClassType == ClassType.Class);
+                    .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
             else
             {

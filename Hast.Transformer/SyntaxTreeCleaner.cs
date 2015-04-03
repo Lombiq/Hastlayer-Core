@@ -47,7 +47,7 @@ namespace Hast.Transformer
             {
                 var implementedInterfaces = type.BaseTypes
                     .Select(baseType => typeDeclarationLookupTable.Lookup(baseType))
-                    .Where(baseTypeDeclaration => baseTypeDeclaration.ClassType == ClassType.Interface);
+                    .Where(baseTypeDeclaration => baseTypeDeclaration != null && baseTypeDeclaration.ClassType == ClassType.Interface);
                 foreach (var implementedInterface in implementedInterfaces)
                 {
                     implementedInterface.AddReference(type);

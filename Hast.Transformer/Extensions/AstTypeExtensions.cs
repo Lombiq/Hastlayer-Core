@@ -15,6 +15,10 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 return ((PrimitiveType)astType).Keyword == ((PrimitiveType)other).Keyword;
             }
+            else if (astType is ComposedType && other is ComposedType)
+            {
+                return ((ComposedType)astType).BaseType.TypeEquals(((ComposedType)other).BaseType, lookupDeclaration);
+            }
             else
             {
                 return lookupDeclaration(astType) == lookupDeclaration(other);

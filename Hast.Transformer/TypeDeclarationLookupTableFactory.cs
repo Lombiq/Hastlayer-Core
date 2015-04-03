@@ -45,8 +45,10 @@ namespace Hast.Transformer
         
             public TypeDeclaration Lookup(AstType type)
             {
+                var typeReference = type.Annotation<TypeReference>();
+                if (typeReference == null) return null;
                 TypeDeclaration declaration;
-                _typeDeclarations.TryGetValue(type.Annotation<TypeReference>().FullName, out declaration);
+                _typeDeclarations.TryGetValue(typeReference.FullName, out declaration);
                 return declaration;
             }
         }

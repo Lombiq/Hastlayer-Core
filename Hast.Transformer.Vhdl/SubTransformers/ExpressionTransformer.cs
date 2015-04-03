@@ -57,7 +57,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
             else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
-            // These are not needed at the moment.
+            // These are not needed at the moment. A ThisReferenceExpression can only happen if "this" is passed to a method, which is not supported.
             //else if (expression is MemberReferenceExpression)
             //{
             //    var memberReference = (MemberReferenceExpression)expression;
@@ -84,6 +84,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 return declaration.GetFullName();
+            }
+            else if (expression is CastExpression)
+            {
+                // Since the cast is valid (since the code was compiled) it should be safe to just use the expression without the cast, as it
+                // should use the correct data type.
+                return TransformInner(((CastExpression)expression).Expression, context, block);
             }
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
