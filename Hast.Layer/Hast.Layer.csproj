@@ -45,7 +45,6 @@
     <Compile Include="HardwareRepresentation.cs" />
     <Compile Include="Hastlayer.cs" />
     <Compile Include="IHastlayer.cs" />
-    <Compile Include="IHardwareRepresentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

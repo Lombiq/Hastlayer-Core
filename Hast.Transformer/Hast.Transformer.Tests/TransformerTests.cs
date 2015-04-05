@@ -94,14 +94,14 @@ namespace Hast.Transformer.Vhdl.Tests
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { MaxDegreeOfParallelism = 15 });
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { IncludedMembers = new[] { "aaa" } });
+            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { PublicHardwareMembers = new[] { "aaa" } });
             firstId = _producedContext.Id;
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { IncludedMembers = new[] { "bbb" } });
+            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { PublicHardwareMembers = new[] { "bbb" } });
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
 
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { IncludeMembersPrefixed = new[] { "aaa" } });
+            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { PublicHardwareMemberPrefixes = new[] { "aaa" } });
             firstId = _producedContext.Id;
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { IncludeMembersPrefixed = new[] { "bbb" } });
+            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, new HardwareGenerationConfiguration { PublicHardwareMemberPrefixes = new[] { "bbb" } });
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
 
@@ -121,7 +121,7 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             var configuration = new HardwareGenerationConfiguration
             {
-                IncludedMembers = new[]
+                PublicHardwareMembers = new[]
                 {
                     "System.Boolean Hast.Tests.TestAssembly1.ComplexAlgorithm::IsPrimeNumber(System.Int32)",
                     "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Hast.Tests.TestAssembly1.ComplexTypes.IInterface1.Interface1Method1()"
@@ -144,7 +144,7 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             var configuration = new HardwareGenerationConfiguration
             {
-                IncludeMembersPrefixed = new[]
+                PublicHardwareMemberPrefixes = new[]
                 {
                     "Hast.Tests.TestAssembly1.ComplexAlgorithm.IsPrimeNumber",
                     "Hast.Tests.TestAssembly1.ComplexTypes"

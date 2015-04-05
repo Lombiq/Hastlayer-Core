@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
+using Hast.Common.Models;
 using Orchard;
 
 namespace Hast.Communication
@@ -23,6 +24,6 @@ namespace Hast.Communication
     /// </summary>
     public interface IMethodInvocationHandlerFactory : ISingletonDependency
     {
-        MethodInvocationHandler CreateMethodInvocationHandler(object target);
+        MethodInvocationHandler CreateMethodInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target);
     }
 }

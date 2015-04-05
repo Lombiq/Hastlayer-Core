@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Models;
 using Orchard;
 
 namespace Hast.Communication
@@ -12,6 +13,6 @@ namespace Hast.Communication
     /// </summary>
     public interface IProxyGenerator : ISingletonDependency
     {
-        T CreateCommunicationProxy<T>(T target) where T : class;
+        T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target) where T : class;
     }
 }

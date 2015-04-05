@@ -23,6 +23,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
             else if (type is ComposedType) return ConvertComposed((ComposedType)type);
+            //else if (type is SimpleType) return ConvertSimple((SimpleType)type);
 
             throw new NotSupportedException("This type is not supported for transforming.");
         }
@@ -143,6 +144,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             return null;
+        }
+
+        private DataType ConvertSimple(SimpleType type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

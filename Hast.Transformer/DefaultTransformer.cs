@@ -54,8 +54,8 @@ namespace Hast.Transformer
 
             transformationId +=
                 configuration.MaxDegreeOfParallelism +
-                string.Join("-", configuration.IncludedMembers) +
-                string.Join("-", configuration.IncludeMembersPrefixed);
+                string.Join("-", configuration.PublicHardwareMembers) +
+                string.Join("-", configuration.PublicHardwareMemberPrefixes);
 
             var syntaxTree = astBuilder.SyntaxTree;
 

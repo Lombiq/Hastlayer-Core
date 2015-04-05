@@ -61,6 +61,10 @@
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Tests.TestAssembly1\Hast.Tests.TestAssembly1.csproj">
+      <Project>{39ab568d-b7fd-40c3-a8dd-003e0be92982}</Project>
+      <Name>Hast.Tests.TestAssembly1</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj">
       <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
       <Name>Hast.Transformer.Vhdl</Name>

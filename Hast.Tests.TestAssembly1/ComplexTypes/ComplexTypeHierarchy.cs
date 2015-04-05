@@ -52,6 +52,13 @@ namespace Hast.Tests.TestAssembly1.ComplexTypes
             return PrivateMethod();
         }
 
+        // A generic method. Not yet supported.
+        //public virtual void GenericMethod<T>(T input)
+        //{
+        //    var z = input;
+        //    var y = z;
+        //}
+
 
         private int PrivateMethod()
         {

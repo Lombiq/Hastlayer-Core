@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common;
 using Hast.Common.Configuration;
+using Hast.Common.Models;
 using Hast.Communication;
 using Hast.Synthesis;
 using Hast.Transformer;
@@ -70,6 +71,8 @@ namespace Hast.Layer
              * - Cache hardware implementation to be able to re-configure the FPGA with it later.
              */
 
+            HardwareRepresentation hardwareRepresentation = null;
+
             await (await GetHost())
                 .Run<ITransformer, IHardwareRepresentationComposer>(
                     async (transformer, hardwareRepresentationComposer) =>
@@ -80,12 +83,14 @@ namespace Hast.Layer
 
                         await hardwareRepresentationComposer.Compose(hardwareDescription);
 
+                        hardwareRepresentation = new HardwareRepresentation
+                        {
+                            SoftAssemblies = assemblies,
+                            HardwareDescription = hardwareDescription
+                        };
                     }, ShellName, false);
 
-            return new HardwareRepresentation
-            {
-                SoftAssemblies = assemblies
-            };
+            return hardwareRepresentation;
         }
 
         public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
@@ -99,7 +104,7 @@ namespace Hast.Layer
 
             return await
                 (await GetHost())
-                .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareObject)));
+                .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject)));
         }
 
         public void Dispose()
@@ -140,9 +145,7 @@ namespace Hast.Layer
                 }
             };
 
-            _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
-
-            return _host;
+            return _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
         }
     }
 }

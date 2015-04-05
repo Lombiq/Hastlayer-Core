@@ -19,6 +19,7 @@ namespace Hast.Transformer.Vhdl.Models
         public string Language { get { return "VHDL"; } }
         public VhdlManifest Manifest { get { return _manifest; } }
         public MethodIdTable MethodIdTable { get { return _methodIdTable; } }
+        public IEnumerable<string> HardwareMembers { get { return _methodIdTable.Values.Select(mapping => mapping.MethodName); } }
 
 
         public VhdlHardwareDescription()

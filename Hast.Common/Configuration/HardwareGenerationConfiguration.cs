@@ -10,8 +10,8 @@ namespace Hast.Common.Configuration
     {
         public int MaxDegreeOfParallelism { get; set; }
         public IDictionary<string, object> CustomConfiguration { get; set; }
-        public IEnumerable<string> IncludedMembers { get; set; }
-        public IEnumerable<string> IncludeMembersPrefixed { get; set; }
+        public IEnumerable<string> PublicHardwareMembers { get; set; }
+        public IEnumerable<string> PublicHardwareMemberPrefixes { get; set; }
 
         private static HardwareGenerationConfiguration _default;
         public static HardwareGenerationConfiguration Default
@@ -34,8 +34,8 @@ namespace Hast.Common.Configuration
         public HardwareGenerationConfiguration()
         {
             CustomConfiguration = new Dictionary<string, object>();
-            IncludedMembers = Enumerable.Empty<string>();
-            IncludeMembersPrefixed = Enumerable.Empty<string>();
+            PublicHardwareMembers = Enumerable.Empty<string>();
+            PublicHardwareMemberPrefixes = Enumerable.Empty<string>();
         }
     }
 }

@@ -41,7 +41,10 @@
   <ItemGroup>
     <Compile Include="Configuration\HardwareGenerationConfiguration.cs" />
     <Compile Include="Configuration\IHardwareGenerationConfiguration.cs" />
+    <Compile Include="Extensions\MethodInfoExtensions.cs" />
+    <Compile Include="Extensions\MethodNameExtensions.cs" />
     <Compile Include="Models\IHardwareDescription.cs" />
+    <Compile Include="Models\IHardwareRepresentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

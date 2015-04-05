@@ -8,6 +8,7 @@ using Hast.Transformer.Models;
 using Hast.Transformer.Visitors;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using Hast.Common.Extensions;
 
 namespace Hast.Transformer
 {
@@ -38,7 +39,7 @@ namespace Hast.Transformer
         public void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
-            var noIncludedMembers = !configuration.IncludedMembers.Any() && !configuration.IncludeMembersPrefixed.Any();
+            var noIncludedMembers = !configuration.PublicHardwareMembers.Any() && !configuration.PublicHardwareMemberPrefixes.Any();
             var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable);
 
             // Starting with interface members we walk through the references to see which declarations are used (e.g. which
@@ -55,7 +56,8 @@ namespace Hast.Transformer
 
                 foreach (var member in type.Members)
                 {
-                    if ((noIncludedMembers || configuration.IncludedMembers.Contains(member.GetFullName()) || configuration.IncludeMembersPrefixed.Any(prefix => member.GetSimpleName().StartsWith(prefix))) &&
+                    var fullName = member.GetFullName();
+                    if ((noIncludedMembers || configuration.PublicHardwareMembers.Contains(fullName) || fullName.GetMethodNameAlternates().Intersect(configuration.PublicHardwareMembers).Any() || configuration.PublicHardwareMemberPrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) &&
                         _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
                     {
                         member.AddReference(syntaxTree);

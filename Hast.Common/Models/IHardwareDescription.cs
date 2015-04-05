@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Hast.Common.Models
 {
     /// <summary>
-    /// Represents the hardware created from a transformed assembly.
+    /// Describes the hardware created from a transformed assembly.
     /// </summary>
     public interface IHardwareDescription
     {
@@ -16,6 +16,12 @@ namespace Hast.Common.Models
         /// The hardware description language used.
         /// </summary>
         string Language { get; }
+
+        /// <summary>
+        /// Gets a collection of the full name of those members (including the full namespace of the parent type(s) as well as their return 
+        /// type and the types of their - type - arguments) that are accessible as hardware implementation.
+        /// </summary>
+        IEnumerable<string> HardwareMembers { get; }
 
         /// <summary>
         /// Saves the full hardware description to a stream.

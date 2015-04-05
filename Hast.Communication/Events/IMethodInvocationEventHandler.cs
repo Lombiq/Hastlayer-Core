@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
+using Hast.Common.Models;
 using Orchard.Events;
 
 namespace Hast.Communication.Events
@@ -19,9 +20,20 @@ namespace Hast.Communication.Events
         bool CancelHardwareInvocation { get; set; }
 
         /// <summary>
-        /// Context of the method invocation.
+        /// Gets the context of the method invocation.
         /// </summary>
         IInvocation Invocation { get; }
+
+        /// <summary>
+        /// Gets the full name of the invoked method, including the full namespace of the parent type(s) as well as their return type 
+        /// and the types of their (type) arguments.
+        /// </summary>
+        string MethodFullName { get; }
+
+        /// <summary>
+        /// Gets the hardware representation behind the hardware-implemented members.
+        /// </summary>
+        IHardwareRepresentation HardwareRepresentation { get; }
     }
 
 
