@@ -29,8 +29,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " is array (" +
                 (MaxLength > 0 ? MaxLength + " downto 0" : "integer range <>") +
                 ") of " +
-                StoredType.Name +
-                ";";
+                StoredType.Name;
         }
     }
 }

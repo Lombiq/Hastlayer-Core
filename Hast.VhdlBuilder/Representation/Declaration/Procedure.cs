@@ -32,7 +32,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 Name.ToExtendedVhdlId() +
                 (Parameters.Count > 0 ? " (" : " ") +
                 // Out params at the end
-
                 string.Join("; ", Parameters.OrderBy(parameter => parameter.ParameterType).Select(parameter => parameter.ToVhdl())) +
                 (Parameters.Count > 0 ? ")" : string.Empty)  +
                 " is " +
