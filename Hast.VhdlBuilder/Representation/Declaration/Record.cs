@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder.Extensions;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {

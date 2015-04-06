@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ICSharpCode.NRefactory.CSharp;
-using Hast.VhdlBuilder.Representation.Declaration;
+﻿using System.Collections.Generic;
 using Hast.Transformer.Models;
+using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.Models
 {

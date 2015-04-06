@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder.Representation.Declaration;
+﻿using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
-using System.Diagnostics;
+using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {

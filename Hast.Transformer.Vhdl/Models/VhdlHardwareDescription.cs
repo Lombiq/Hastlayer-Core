@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.Common;
 using Hast.Common.Models;
+using Hast.VhdlBuilder.Representation.Declaration;
+using Newtonsoft.Json;
 
 namespace Hast.Transformer.Vhdl.Models
 {

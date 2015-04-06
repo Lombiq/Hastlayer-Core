@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Transformer.Models;
-using Mono.Cecil;
+﻿using Hast.Transformer.Models;
 
 namespace ICSharpCode.NRefactory.CSharp
 {

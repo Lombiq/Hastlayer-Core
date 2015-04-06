@@ -1,19 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using Hast.Common.Configuration;
+using Hast.Common.Models;
+using Hast.Transformer.Events;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
 using Mono.Cecil;
-using System.Linq;
-using ICSharpCode.NRefactory.CSharp;
-using System.Threading.Tasks;
-using Hast.Common.Configuration;
-using Hast.Common;
-using System.Collections.Generic;
-using Orchard.Validation;
-using Hast.Transformer.Models;
-using Hast.Common.Models;
-using Hast.Transformer.Events;
 
 namespace Hast.Transformer
 {
