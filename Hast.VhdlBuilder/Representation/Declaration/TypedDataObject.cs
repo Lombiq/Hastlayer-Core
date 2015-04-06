@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    /// <summary>
-    /// Declaration of a data object
-    /// </summary>
-    public class DataObject : DataObjectBase
+    [DebuggerDisplay("{ToVhdl()}")]
+    public class TypedDataObject : TypedDataObjectBase
     {
         /// <summary>
         /// If specified, this default value will be used to reset the object's value.
@@ -24,9 +24,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             var builder = new StringBuilder();
 
             builder
-                .Append(ObjectType)
+                .Append(DataObjectKind)
                 .Append(" ")
-                .Append(Name.ToVhdlId())
+                .Append(Name.ToExtendedVhdlId())
                 .Append(": ");
 
             if (DataType != null) builder.Append(DataType.ToVhdl());

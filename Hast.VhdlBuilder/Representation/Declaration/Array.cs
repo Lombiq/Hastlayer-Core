@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Array : DataType
     {
         public int MaxLength { get; set; }
@@ -22,7 +25,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "type " +
-                Name.ToVhdlId() +
+                Name.ToExtendedVhdlId() +
                 " is array (" +
                 (MaxLength > 0 ? MaxLength + " downto 0" : "integer range <>") +
                 ") of " +

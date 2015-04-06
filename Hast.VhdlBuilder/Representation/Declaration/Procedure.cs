@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Procedure : ISubProgram
     {
         public string Name { get; set; }
@@ -26,18 +29,18 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "procedure " +
-                Name.ToVhdlId() +
+                Name.ToExtendedVhdlId() +
                 (Parameters.Count > 0 ? " (" : " ") +
                 // Out params at the end
 
                 string.Join("; ", Parameters.OrderBy(parameter => parameter.ParameterType).Select(parameter => parameter.ToVhdl())) +
                 (Parameters.Count > 0 ? ")" : string.Empty)  +
                 " is " +
-                Declarations.ToVhdl() +
-                " begin " +
+                Declarations.ToVhdl() + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
+                "begin " +
                 Body.ToVhdl() +
                 " end procedure " +
-                Name.ToVhdlId() +
+                Name.ToExtendedVhdlId() +
                 ";";
         }
     }
@@ -51,15 +54,17 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     }
 
 
-    public class ProcedureParameter : DataObjectBase
+    [DebuggerDisplay("{ToVhdl()}")]
+    public class ProcedureParameter : TypedDataObjectBase
     {
         public ProcedureParameterType ParameterType { get; set; }
+
 
         public override string ToVhdl()
         {
             return
-                (ObjectType.ToString() ?? string.Empty) +
-                Name.ToVhdlId() +
+                (DataObjectKind.ToString() ?? string.Empty) +
+                Name.ToExtendedVhdlId() +
                 ": " +
                 ParameterType +
                 " " +

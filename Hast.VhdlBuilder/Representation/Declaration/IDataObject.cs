@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    public enum ObjectType
+    public enum DataObjectKind
     {
         Constant,
         Variable,
@@ -17,7 +17,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
     public interface IDataObject : INamedElement
     {
-        ObjectType ObjectType { get; set; }
-        DataType DataType { get; set; }
+        DataObjectKind DataObjectKind { get; set; }
     }
 }

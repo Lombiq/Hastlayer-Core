@@ -42,21 +42,23 @@
   <ItemGroup>
     <Compile Include="Representation\Declaration\Array.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
+    <Compile Include="Representation\Declaration\TypedDataObjectBase.cs" />
     <Compile Include="Representation\Declaration\IBlockElement.cs" />
     <Compile Include="Representation\Declaration\IDeclarableElement.cs" />
     <Compile Include="Representation\Declaration\INamedElement.cs" />
     <Compile Include="Representation\Declaration\InlineBlock.cs" />
     <Compile Include="Representation\Declaration\IStructuredElement.cs" />
+    <Compile Include="Representation\Declaration\ITypedDataObject.cs" />
     <Compile Include="Representation\Declaration\Signal.cs" />
     <Compile Include="Representation\Declaration\Variable.cs" />
     <Compile Include="Representation\Expression\Assignment.cs" />
-    <Compile Include="Representation\Expression\DataObject.cs" />
     <Compile Include="ProcessUtility.cs" />
     <Compile Include="Representation\Declaration\Architecture.cs" />
+    <Compile Include="Representation\Expression\Binary.cs" />
     <Compile Include="Representation\Expression\Case.cs" />
     <Compile Include="Representation\Declaration\Component.cs" />
     <Compile Include="Representation\Declaration\ComponentInstance.cs" />
-    <Compile Include="Representation\Declaration\DataTypes.cs" />
+    <Compile Include="Representation\Declaration\KnownDataTypes.cs" />
     <Compile Include="Representation\Declaration\ElementCollection.cs" />
     <Compile Include="Representation\Declaration\Function.cs" />
     <Compile Include="Representation\Declaration\IDataObject.cs" />
@@ -64,7 +66,10 @@
     <Compile Include="Representation\Declaration\ISubProgram.cs" />
     <Compile Include="Representation\Declaration\Module.cs" />
     <Compile Include="Representation\Declaration\Entity.cs" />
+    <Compile Include="Representation\Expression\DataObjectReference.cs" />
+    <Compile Include="Representation\Expression\Invokation.cs" />
     <Compile Include="Representation\Expression\IfElse.cs" />
+    <Compile Include="Representation\Expression\Return.cs" />
     <Compile Include="Representation\Expression\While.cs" />
     <Compile Include="Representation\IVhdlElement.cs" />
     <Compile Include="Representation\Declaration\Library.cs" />
@@ -79,15 +84,16 @@
     <Compile Include="Representation\Declaration\String.cs" />
     <Compile Include="Representation\Terminated.cs" />
     <Compile Include="Representation\Expression\Value.cs" />
-    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Representation\Declaration\Enum.cs" />
-    <Compile Include="Representation\Declaration\DataObject.cs" />
-    <Compile Include="VhdlElementEnumerableExtensions.cs" />
+    <Compile Include="Representation\Declaration\TypedDataObject.cs" />
+    <Compile Include="Extensions\VhdlElementEnumerableExtensions.cs" />
     <Compile Include="Representation\Declaration\VhdlManifest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

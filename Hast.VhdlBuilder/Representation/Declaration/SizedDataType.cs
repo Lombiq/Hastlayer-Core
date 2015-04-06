@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class SizedDataType : DataType
     {
         public int Size { get; set; }

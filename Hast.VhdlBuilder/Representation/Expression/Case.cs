@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Case : IVhdlElement
     {
-        public string Expression { get; set; }
+        public IVhdlElement Expression { get; set; }
         public List<When> Whens { get; set; }
 
 
@@ -25,7 +28,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             builder
                 .Append("case ")
-                .Append(Expression)
+                .Append(Expression.ToVhdl())
                 .Append(" is ");
 
             foreach (var when in Whens)
@@ -39,9 +42,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
     }
 
+
+    [DebuggerDisplay("{ToVhdl()}")]
     public class When : IVhdlElement
     {
-        public string Expression { get; set; }
+        public IVhdlElement Expression { get; set; }
         public List<IVhdlElement> Body { get; set; }
 
 
@@ -55,7 +60,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         {
             return 
                 "when " +
-                Expression +
+                Expression.ToVhdl() +
                 " => " +
                 (Body.Count != 0 ? Body.ToVhdl() : "null;");
         }

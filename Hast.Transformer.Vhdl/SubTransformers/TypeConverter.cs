@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
             else if (type is ComposedType) return ConvertComposed((ComposedType)type);
-            //else if (type is SimpleType) return ConvertSimple((SimpleType)type);
+            //else if (type is SimpleType) return ConvertSimple((SimpleType)type); // Would be a composite object.
 
             throw new NotSupportedException("This type is not supported for transforming.");
         }
@@ -50,11 +50,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Attribute:
                     break;
                 case KnownTypeCode.Boolean:
-                    return DataTypes.Boolean;
+                    return KnownDataTypes.Boolean;
                 case KnownTypeCode.Byte:
                     break;
                 case KnownTypeCode.Char:
-                    return DataTypes.Character;
+                    return KnownDataTypes.Character;
                 case KnownTypeCode.DBNull:
                     break;
                 case KnownTypeCode.DateTime:
@@ -64,9 +64,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Delegate:
                     break;
                 case KnownTypeCode.Double:
-                    return DataTypes.Real;
+                    return KnownDataTypes.Real;
                 case KnownTypeCode.Enum:
-                    return DataTypes.Enum;
+                    break;
                 case KnownTypeCode.Exception:
                     break;
                 case KnownTypeCode.ICollection:
@@ -90,10 +90,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.IReadOnlyListOfT:
                     break;
                 case KnownTypeCode.Int16:
-                    return DataTypes.Int16;
+                    return KnownDataTypes.Int16;
                 case KnownTypeCode.Int32:
                     // The lower barrier for VHDL integers is one shorter...
-                    return DataTypes.Int32;
+                    return KnownDataTypes.Int32;
                 case KnownTypeCode.Int64:
                     break;
                 case KnownTypeCode.IntPtr:
@@ -111,7 +111,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Single:
                     break;
                 case KnownTypeCode.String:
-                    return DataTypes.String;
+                    return KnownDataTypes.String;
                 case KnownTypeCode.Task:
                     break;
                 case KnownTypeCode.TaskOfT:
@@ -119,9 +119,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Type:
                     break;
                 case KnownTypeCode.UInt16:
-                    return DataTypes.Natural;
+                    return KnownDataTypes.Natural;
                 case KnownTypeCode.UInt32:
-                    return DataTypes.Natural;
+                    return KnownDataTypes.Natural;
                 case KnownTypeCode.UInt64:
                     break;
                 case KnownTypeCode.UIntPtr:
@@ -129,7 +129,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.ValueType:
                     break;
                 case KnownTypeCode.Void:
-                    return new DataType { Name = "void" };
+                    return KnownDataTypes.Void;
             }
 
             return null;

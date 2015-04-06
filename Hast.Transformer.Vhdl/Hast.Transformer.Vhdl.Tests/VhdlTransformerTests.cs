@@ -97,9 +97,9 @@ namespace Hast.Transformer.Vhdl.Tests
 
             var ifElseElement = (IfElse)((Process)topModule.Architecture.Body.Single()).Body.Single();
 
-            Assert.That(ifElseElement.TrueElements.Count == 1 && ifElseElement.TrueElements.Single() is Case, "The structure of the call proxy's inner branching is not correct.");
+            Assert.That(ifElseElement.True is ElementCollection && ((ElementCollection)ifElseElement.True).Elements.Count == 1 && ((ElementCollection)ifElseElement.True).Elements.Single() is Case, "The structure of the call proxy's inner branching is not correct.");
 
-            var caseElement = (Case)ifElseElement.TrueElements.Single();
+            var caseElement = (Case)((ElementCollection)ifElseElement.True).Elements.Single();
             var memberSuitabilityChecker = _container.Resolve<IMemberSuitabilityChecker>();
             var interfaceMethodCount = _eventHandler.TransformationContext.SyntaxTree
                 .GetTypes(true)

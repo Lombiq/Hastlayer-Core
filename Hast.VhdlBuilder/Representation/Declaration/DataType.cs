@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -21,6 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// <summary>
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
     /// </summary>
+    [DebuggerDisplay("{ToVhdl()}")]
     public class DataType : INamedElement
     {
         public DataTypeCategory TypeCategory { get; set; }

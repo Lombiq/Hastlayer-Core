@@ -5,9 +5,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Entity : INamedElement
     {
         private string _name;
@@ -77,19 +80,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     }
 
 
-    public class Port : DataObjectBase
+    public class Port : TypedDataObjectBase
     {
         public PortMode Mode { get; set; }
 
         public Port()
         {
-            this.ObjectType = ObjectType.Signal;
+            this.DataObjectKind = DataObjectKind.Signal;
         }
 
         public override string ToVhdl()
         {
             return
-                Name.ToVhdlId() +
+                Name.ToExtendedVhdlId() +
                 ": " +
                 Mode +
                 " " +

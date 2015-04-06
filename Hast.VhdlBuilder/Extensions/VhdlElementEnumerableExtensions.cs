@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 
-namespace Hast.VhdlBuilder
+namespace Hast.VhdlBuilder.Extensions
 {
     public static class VhdlElementEnumerableExtensions
     {

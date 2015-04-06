@@ -10,6 +10,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Representation;
 using Hast.Transformer.Vhdl.Models;
 using Orchard;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -61,7 +62,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (!isVoid)
             {
                 // Since this way there's a dot in the output var's name, it can't clash with normal variables.
-                outputParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.var" };
+                outputParam = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.var" };
 
                 if (interfaceMethod != null)
                 {
@@ -80,11 +81,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 foreach (var parameter in method.Parameters)
                 {
                     var type = _typeConverter.Convert(parameter.Type);
-                    var procedureParam = new ProcedureParameter { ObjectType = ObjectType.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = parameter.Name + ".param" };
+                    var procedureParam = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = parameter.Name + ".param" };
 
-                    // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables
-                    procedure.Declarations.Add(new Variable { DataType = type, Name = parameter.Name });
-                    procedure.Body.Add(new Raw(parameter.Name.ToVhdlId() + " := " + procedureParam.Name.ToVhdlId() + ";"));
+                    // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables.
+                    var variable = new Variable { DataType = type, Name = parameter.Name };
+                    procedure.Declarations.Add(variable);
+                    procedure.Body.Add(new Terminated(new Assignment { AssignTo = variable.ToReference(), Expression = procedureParam.ToReference() }));
 
                     if (interfaceMethod != null)
                     {

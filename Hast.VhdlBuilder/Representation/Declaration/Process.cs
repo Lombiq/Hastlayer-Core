@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Process : ISubProgram
     {
         public string Name { get; set; }
@@ -27,11 +30,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             var vhdl = "";
 
-            if (!string.IsNullOrEmpty(Name)) vhdl += Name.ToVhdlId() + ": ";
+            if (!string.IsNullOrEmpty(Name)) vhdl += Name.ToExtendedVhdlId() + ": ";
 
             return
                 "process (" +
-                string.Join("; ", SesitivityList.Select(signal => signal.Name.ToVhdlId())) +
+                string.Join("; ", SesitivityList.Select(signal => signal.Name.ToExtendedVhdlId())) +
                 ") " +
                 Declarations.ToVhdl() +
                 " begin " +

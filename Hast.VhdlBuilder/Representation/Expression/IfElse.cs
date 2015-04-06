@@ -4,31 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class IfElse : IVhdlElement
     {
-        public string Condition { get; set; }
-        public List<IVhdlElement> TrueElements { get; set; }
-        public List<IVhdlElement> ElseElements { get; set; }
-
-
-        public IfElse()
-        {
-            TrueElements = new List<IVhdlElement>();
-            ElseElements = new List<IVhdlElement>();
-        }
+        public IVhdlElement Condition { get; set; }
+        public IVhdlElement True { get; set; }
+        public IVhdlElement Else { get; set; }
 
 
         public string ToVhdl()
         {
             return
                 "if (" +
-                Condition +
+                Condition.ToVhdl() +
                 ") then " +
-                TrueElements.ToVhdl() +
-                (ElseElements != null && ElseElements.Any() ? "else " + ElseElements.ToVhdl() : string.Empty) +
+                True.ToVhdl() +
+                (Else != null ? "else " + Else.ToVhdl() : string.Empty) +
                 "end if;";
         }
     }

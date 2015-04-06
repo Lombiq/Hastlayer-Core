@@ -14,6 +14,7 @@ using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -136,54 +137,61 @@ namespace Hast.Transformer.Vhdl
 
             ports.Add(methodIdPort);
 
-            var caseExpression = new Case { Expression = "MethodId".ToVhdlId() };
+            var caseExpression = new Case { Expression = "MethodId".ToExtendedVhdlIdValue() };
 
             var id = 1;
             foreach (var method in transformationContext.InterfaceMethods)
             {
                 ports.AddRange(method.Ports);
 
-                string source = string.Empty;
+                var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = id.ToString() } };
 
-                // Copying signals to variables and vice versa
+                // Copying input signals to variables.
+                var portVariables = new Dictionary<Port, Variable>();
                 foreach (var port in method.Ports)
                 {
-                    var variableName = port.Name + ".var";
-                    proxyProcess.Declarations.Add(new Variable
+                    var variable = new Variable
                     {
-                        Name = variableName,
+                        Name = port.Name + ".var",
                         DataType = port.DataType
-                    });
+                    };
 
-                    if (port.Mode == PortMode.In) source += variableName.ToVhdlId() + " := " + port.Name.ToVhdlId() + ";";
+                    proxyProcess.Declarations.Add(variable);
+
+                    if (port.Mode == PortMode.In)
+                    {
+                        when.Body.Add(new Terminated(new Assignment { AssignTo = variable, Expression = port.Name.ToExtendedVhdlIdValue() }));
+                    }
+
+                    portVariables[port] = variable;
                 }
 
-                var when = new When { Expression = id.ToString() };
-                source += method.Name.ToVhdlId() + "(";
-                source += string.Join(
-                    ", ",
-                    method.ParameterMappings.Select(mapping =>
-                        {
-                            // Using named parameters as the order of ports is not necessarily right
-                            return mapping.Parameter.Name.ToVhdlId() + " => " + (mapping.Port.Name + ".var").ToVhdlId();
-                        }));
-                source += ");";
+                // Calling corresponding procedure and taking care of its input/output parameters.
+                var invokation = new Invokation
+                {
+                    Target = method.Procedure.Name.ToExtendedVhdlIdValue(),
+                    // Using named parameters as the order of ports is not necessarily right
+                    Parameters = method.ParameterMappings
+                        .Select(mapping => new NamedInvokationParameter { FormalParameter = mapping.Parameter, ActualParameter = portVariables[mapping.Port] })
+                        .Cast<IVhdlElement>()
+                        .ToList()
+                };
 
+                when.Body.Add(new Terminated(invokation));
+
+                // Copying output variables to output ports.
                 foreach (var port in method.Ports.Where(p => p.Mode == PortMode.Out))
                 {
-                    var variableName = port.Name + ".var";
-                    source += port.Name.ToVhdlId() + " <=" + variableName.ToVhdlId() + ";";
+                    when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToExtendedVhdlIdValue() }));
                 }
 
-                when.Body.Add(new Raw(source));
+                
                 caseExpression.Whens.Add(when);
-
-
                 methodIdTable.SetMapping(method.Name, id);
                 id++;
             }
 
-            caseExpression.Whens.Add(new When { Expression = "others" });
+            caseExpression.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
 
             proxyProcess.Body.Add(caseExpression);
 

@@ -39,11 +39,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var variableStatement = statement as VariableDeclarationStatement;
 
-                subProgram.Declarations.Add(new Variable
+                var type = _typeConverter.Convert(variableStatement.Type);
+
+                foreach (var variableInitializer in variableStatement.Variables)
                 {
-                    Name = string.Join(", ", variableStatement.Variables.Select(v => v.Name)),
-                    DataType = _typeConverter.Convert(variableStatement.Type)
-                });
+                    subProgram.Declarations.Add(new Variable
+                    {
+                        Name = variableInitializer.Name,
+                        DataType = type
+                    });
+                }
             }
             else if (statement is ExpressionStatement)
             {
@@ -55,36 +60,36 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var returnStatement = statement as ReturnStatement;
 
-                if (_typeConverter.Convert((context.Scope.Method).ReturnType).Name == "void") block.Body.Add(new Raw("return;"));
+                if (_typeConverter.Convert((context.Scope.Method).ReturnType) == KnownDataTypes.Void) block.Body.Add(new Return());
                 else if (subProgram is Procedure)
                 {
                     var procedure = subProgram as Procedure;
 
                     var outputParam = procedure.Parameters.Where(param => param.ParameterType == ProcedureParameterType.Out).Single();
 
-                    var source = outputParam.Name.ToVhdlId() +
-                                 (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
-                                 _expressionTransformer.Transform(returnStatement.Expression, context, block).ToVhdl() +
-                                 "; return;";
-
-                    procedure.Body.Add(new Raw(source));
+                    procedure.Body.Add(new Terminated(new Assignment
+                    {
+                        AssignTo = outputParam,
+                        Expression = _expressionTransformer.Transform(returnStatement.Expression, context, block)
+                    }));
+                    procedure.Body.Add(new Return());
                 }
             }
             else if (statement is IfElseStatement)
             {
                 var ifElse = statement as IfElseStatement;
 
-                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context, block).ToVhdl() };
+                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context, block) };
 
                 var trueBlock = new InlineBlock();
                 Transform(ifElse.TrueStatement, context, trueBlock);
-                ifElseElement.TrueElements.Add(trueBlock);
+                ifElseElement.True = trueBlock;
 
                 if (ifElse.FalseStatement != Statement.Null)
                 {
                     var falseBlock = new InlineBlock();
-                    Transform(ifElse.TrueStatement, context, falseBlock);
-                    ifElseElement.ElseElements.Add(falseBlock);
+                    Transform(ifElse.FalseStatement, context, falseBlock);
+                    ifElseElement.Else = falseBlock;
                 }
 
                 block.Body.Add(ifElseElement);
@@ -106,7 +111,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var whileStatement = statement as WhileStatement;
 
-                var whileElement = new While { Condition = _expressionTransformer.Transform(whileStatement.Condition, context, block).ToVhdl() };
+                var whileElement = new While { Condition = _expressionTransformer.Transform(whileStatement.Condition, context, block) };
 
                 var bodyBlock = new InlineBlock();
                 Transform(whileStatement.EmbeddedStatement, context, bodyBlock);

@@ -24,7 +24,8 @@ namespace Hast.VhdlBuilder.Representation
 
         public string ToVhdl()
         {
-            return Element.ToVhdl() + ";";
+            var vhdl = Element.ToVhdl();
+            return vhdl.EndsWith(";") ? vhdl : vhdl + ";";
         }
     }
 }

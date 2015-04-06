@@ -10,6 +10,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Representation;
 using Hast.Transformer.Models;
 using Orchard;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -30,38 +31,37 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        //  Would need to decide between + and & or sll/srl and sra/sla
-        // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
         public IVhdlElement Transform(Expression expression, ISubTransformerContext context, IBlockElement block)
-        {
-            return new Raw(TransformInner(expression, context, block));
-        }
-
-
-        private string TransformInner(Expression expression, ISubTransformerContext context, IBlockElement block)
         {
             if (expression is AssignmentExpression)
             {
                 var assignment = (AssignmentExpression)expression;
-                return TransformInner(assignment.Left, context, block) + " := " + TransformInner(assignment.Right, context, block);
+                return new Assignment
+                {
+                    AssignTo = (IDataObject)Transform(assignment.Left, context, block),
+                    Expression = Transform(assignment.Right, context, block)
+                };
             }
             else if (expression is IdentifierExpression)
             {
                 var identifier = (IdentifierExpression)expression;
-                return identifier.Identifier.ToVhdlId();
+                return new DataObjectReference { DataObjectKind = DataObjectKind.Variable, Name = identifier.Identifier.ToExtendedVhdlId() };
             }
             else if (expression is PrimitiveExpression)
             {
                 var primitive = (PrimitiveExpression)expression;
-                return primitive.Value.ToString();
+                // This works correctly but since not every primitive is an int the data type won't be correct. However since Content will be correct
+                // this will work fine.
+                return new Value { DataType = KnownDataTypes.Int32, Content = primitive.Value.ToString() };
             }
             else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
             else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
-            // These are not needed at the moment. A ThisReferenceExpression can only happen if "this" is passed to a method, which is not supported.
+            // These are not needed at the moment. MemberReferenceExpression is handled in TransformInvocationExpression and a
+            // ThisReferenceExpression can only happen if "this" is passed to a method, which is not supported.
             //else if (expression is MemberReferenceExpression)
             //{
             //    var memberReference = (MemberReferenceExpression)expression;
-            //    return TransformInner(memberReference.Target, context, block) + "." + memberReference.MemberName;
+            //    return Transform(memberReference.Target, context, block) + "." + memberReference.MemberName;
             //}
             //else if (expression is ThisReferenceExpression)
             //{
@@ -71,7 +71,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is UnaryOperatorExpression)
             {
                 var unary = expression as UnaryOperatorExpression;
-                return "not (" + TransformInner(unary.Expression, context, block) + ")";
+                return new Invokation
+                {
+                    Target = new Value { DataType = KnownDataTypes.Identifier, Content = "not" },
+                    Parameters = new List<IVhdlElement> { Transform(unary.Expression, context, block) }
+                };
             }
             else if (expression is TypeReferenceExpression)
             {
@@ -83,25 +87,32 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     throw new InvalidOperationException("No matching type for \"" + ((SimpleType)type).Identifier + "\" found in the syntax tree. This can mean that the type's assembly was not added to the syntax tree.");
                 }
 
-                return declaration.GetFullName();
+                return new Value { DataType = KnownDataTypes.Identifier, Content = declaration.GetFullName() };
             }
             else if (expression is CastExpression)
             {
-                // Since the cast is valid (since the code was compiled) it should be safe to just use the expression without the cast, as it
+                // Since the cast is valid (the code was compiled correctly) it should be safe to just use the expression without the cast, as it
                 // should use the correct data type.
-                return TransformInner(((CastExpression)expression).Expression, context, block);
+                return Transform(((CastExpression)expression).Expression, context, block);
             }
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
 
-        private string TransformBinaryOperatorExpression(BinaryOperatorExpression expression, ISubTransformerContext context, IBlockElement block)
-        {
-            var source = TransformInner(expression.Left, context, block) + " ";
 
+        private IVhdlElement TransformBinaryOperatorExpression(BinaryOperatorExpression expression, ISubTransformerContext context, IBlockElement block)
+        {
+            var binary = new Binary
+            {
+                Left = Transform(expression.Left, context, block),
+                Right = Transform(expression.Right, context, block)
+            };
+
+            //  Would need to decide between + and & or sll/srl and sra/sla
+            // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
             switch (expression.Operator)
             {
                 case BinaryOperatorType.Add:
-                    source += "+";
+                    binary.Operator = "+";
                     break;
                 case BinaryOperatorType.Any:
                     break;
@@ -114,74 +125,71 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case BinaryOperatorType.ConditionalOr:
                     break;
                 case BinaryOperatorType.Divide:
-                    source += "/";
+                    binary.Operator = "/";
                     break;
                 case BinaryOperatorType.Equality:
-                    source += "=";
+                    binary.Operator = "=";
                     break;
                 case BinaryOperatorType.ExclusiveOr:
-                    source += "XOR";
+                    binary.Operator = "XOR";
                     break;
                 case BinaryOperatorType.GreaterThan:
-                    source += ">";
+                    binary.Operator = ">";
                     break;
                 case BinaryOperatorType.GreaterThanOrEqual:
-                    source += ">=";
+                    binary.Operator = ">=";
                     break;
                 case BinaryOperatorType.InEquality:
-                    source += "/=";
+                    binary.Operator = "/=";
                     break;
                 case BinaryOperatorType.LessThan:
-                    source += "<";
+                    binary.Operator = "<";
                     break;
                 case BinaryOperatorType.LessThanOrEqual:
-                    source += "<=";
+                    binary.Operator = "<=";
                     break;
                 case BinaryOperatorType.Modulus:
-                    source += "mod";
+                    binary.Operator = "mod";
                     break;
                 case BinaryOperatorType.Multiply:
-                    source += "*";
+                    binary.Operator = "*";
                     break;
                 case BinaryOperatorType.NullCoalescing:
                     break;
                 case BinaryOperatorType.ShiftLeft:
-                    source += "sll";
+                    binary.Operator = "sll";
                     break;
                 case BinaryOperatorType.ShiftRight:
-                    source += "srl";
+                    binary.Operator = "srl";
                     break;
                 case BinaryOperatorType.Subtract:
-                    source += "-";
+                    binary.Operator = "-";
                     break;
             }
 
-            return source + " " + TransformInner(expression.Right, context, block);
+            return binary;
         }
 
-        private string TransformInvocationExpression(InvocationExpression expression, ISubTransformerContext context, IBlockElement block)
+        private IVhdlElement TransformInvocationExpression(InvocationExpression expression, ISubTransformerContext context, IBlockElement block)
         {
-            var procedure = context.Scope.SubProgram;
             var targetName = expression.GetFullName();
-            var hasArguments = expression.Arguments.Count > 0;
-            var hasReturnValue = !(expression.Parent is ExpressionStatement); // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method)
-            var needsParenthesis = hasArguments || hasReturnValue;
 
             context.TransformationContext.MethodCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
 
-            var source = targetName.ToVhdlId();
-
-            if (needsParenthesis) source += "(";
-
-            if (hasArguments)
+            var invokation = new Invokation
             {
-                source += string.Join(", ", expression.Arguments.Select(argument => TransformInner(argument, context, block)));
-            }
+                Target = targetName.ToExtendedVhdlIdValue(),
+                Parameters = new List<IVhdlElement>(expression.Arguments.Select(argument => Transform(argument, context, block)))
+            };
+
 
             var returnVariableName = string.Empty;
 
-            if (hasReturnValue)
+            // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method).
+            if (!(expression.Parent is ExpressionStatement))
             {
+                var procedure = context.Scope.SubProgram;
+
                 // Making sure that the return variable names are unique per method call.
                 returnVariableName = targetName + ".ret0";
                 var returnVariableNameIndex = 0;
@@ -209,26 +217,29 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     throw new NotSupportedException("Expressions having other than a MemberReferenceExpression as a target are not supported.");
                 }
 
-                procedure.Declarations.Add(new Variable
+
+                // Procedures can't just be assigned to variables like methods as they don't have a return value, just out parameters.
+                // Thus here we create a variable for the out parameter (the return variable), run the procedure with it and then use it later too.
+                var returnVariable = new Variable
                 {
                     Name = returnVariableName,
                     DataType = _typeConverter.Convert(returnType)
-                });
+                };
 
-                if (hasArguments) source += ",";
-                source += returnVariableName.ToVhdlId();
+                procedure.Declarations.Add(returnVariable);
+                invokation.Parameters.Add(returnVariable.ToReference());
+
+                // Adding the procedure invokation directly to the body so it's before the current expression...
+                block.Body.Add(new Terminated(invokation));
+
+                // ...and using the return variable in place of the original call.
+                return returnVariable.ToReference();
             }
-
-            if (needsParenthesis) source += ")";
-
-            if (hasReturnValue)
+            else
             {
-                source += ";";
-                block.Body.Add(new Raw(source));
-                source = returnVariableName.ToVhdlId();
+                // Simply return the procedure invokation if there is no return value.
+                return invokation;
             }
-
-            return source;
         }
     }
 }

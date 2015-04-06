@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class ComponentInstance : IVhdlElement
     {
         public Component Component { get; set; }
@@ -25,7 +28,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 Label +
                 " : " +
-                Component.Name.ToVhdlId() +
+                Component.Name.ToExtendedVhdlId() +
                 " port map (" +
                 string.Join(", ", PortMappings.Select(mapping => mapping.ToVhdl())) +
                 ");";
@@ -41,7 +44,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl()
         {
-            return From.ToVhdlId() + " => " + To.ToVhdlId();
+            return From.ToExtendedVhdlId() + " => " + To.ToExtendedVhdlId();
         }
     }
 }

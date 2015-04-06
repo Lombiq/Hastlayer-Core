@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Record : DataType
     {
-        public List<DataObject> Members { get; set; }
+        public List<TypedDataObjectBase> Members { get; set; }
 
 
         public Record()
         {
-            Members = new List<DataObject>();
+            Members = new List<TypedDataObjectBase>();
         }
 
 
@@ -21,7 +24,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "type " +
-                Name.ToVhdlId() +
+                Name.ToExtendedVhdlId() +
                 " is record " +
                 Members.ToVhdl() +
                 " end record;";
