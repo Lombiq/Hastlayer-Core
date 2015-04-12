@@ -6,9 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
 using Hast.Common.Models;
-using Hast.Communication.Events;
 using Orchard;
 using Hast.Common.Extensions;
+using Hast.Communication.Extensibility.Events;
+using Hast.Communication.Extensibility;
+using Hast.Communication.Extensibility.Pipeline;
+using System.Collections.Generic;
+using Hast.Common.Extensibility.Pipeline;
 
 namespace Hast.Communication
 {
@@ -29,27 +33,37 @@ namespace Hast.Communication
                 {
                     using (var workContext = _wca.CreateWorkContextScope())
                     {
-                        var context = new MethodInvocationContext
+                        var context = new MethodInvocationPipelineStepContext
                         {
                             Invocation = invocation,
                             MethodFullName = invocation.Method.GetFullName(),
                             HardwareRepresentation = hardwareRepresentation
                         };
 
+                        var eventHandler = workContext.Resolve<IMethodInvocationEventHandler>();
+                        eventHandler.MethodInvoking(context);
 
-                        var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
-                        var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMethodNameAlternates()));
-                        if (!hardwareMembers.Contains(context.MethodFullName) && !memberNameAlternates.Contains(context.MethodFullName))
+                        workContext.Resolve<IEnumerable<IMethodInvocationPipelineStep>>().InvokePipelineSteps(step =>
+                            {
+                                context.HardwareInvocationIsCancelled = step.CanContinueHardwareInvokation(context);
+                            });
+
+                        if (!context.HardwareInvocationIsCancelled)
                         {
-                            context.CancelHardwareInvocation = true;
+                            var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
+                            var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMethodNameAlternates()));
+                            if (!hardwareMembers.Contains(context.MethodFullName) && !memberNameAlternates.Contains(context.MethodFullName))
+                            {
+                                context.HardwareInvocationIsCancelled = true;
+                            } 
                         }
 
-                        workContext.Resolve<IMethodInvocationEventHandler>().MethodInvoked(context);
-
-                        if (context.CancelHardwareInvocation) return false;
+                        if (context.HardwareInvocationIsCancelled) return false;
 
                         // Implement FPGA communication, data transformation here.
                         // Set the return value as invocation.ReturnValue = ...
+
+                        eventHandler.MethodInvokedOnHardware(context);
 
                         return true;
                     }
@@ -57,9 +71,9 @@ namespace Hast.Communication
         }
 
 
-        private class MethodInvocationContext : IMethodInvocationContext
+        private class MethodInvocationPipelineStepContext : IMethodInvocationPipelineStepContext
         {
-            public bool CancelHardwareInvocation { get; set; }
+            public bool HardwareInvocationIsCancelled { get; set; }
             public IInvocation Invocation { get; set; }
             public string MethodFullName { get; set; }
             public IHardwareRepresentation HardwareRepresentation { get; set; }

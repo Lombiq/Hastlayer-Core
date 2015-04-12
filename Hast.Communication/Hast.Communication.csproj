@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\IMethodInvocationEventHandler.cs" />
+    <Compile Include="Extensibility\Events\IMethodInvocationEventHandler.cs" />
+    <Compile Include="Extensibility\IMethodInvocationContext.cs" />
+    <Compile Include="Extensibility\Pipeline\IMethodInvocationPipelineStep.cs" />
+    <Compile Include="Extensibility\Pipeline\IMethodInvocationPipelineStepContext.cs" />
     <Compile Include="IMethodInvocationHandlerFactory.cs" />
     <Compile Include="IProxyGenerator.cs" />
     <Compile Include="MemberSuitabilityChecker.cs" />

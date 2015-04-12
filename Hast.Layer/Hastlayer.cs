@@ -8,6 +8,7 @@ using Hast.Common;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Communication;
+using Hast.Layer.Extensibility.Events;
 using Hast.Synthesis;
 using Hast.Transformer;
 using Lombiq.OrchardAppHost;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Hast.Common;
 using Hast.Common.Models;
 
-namespace Hast.Layer
+namespace Hast.Layer.Extensibility.Events
 {
     public class TransformedEventArgs : EventArgs
     {

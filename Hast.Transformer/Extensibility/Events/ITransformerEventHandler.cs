@@ -1,7 +1,7 @@
 ﻿using Hast.Transformer.Models;
 using Orchard.Events;
 
-namespace Hast.Transformer.Events
+namespace Hast.Transformer.Extensibility.Events
 {
     public interface ITransformerEventHandler : IEventHandler
     {

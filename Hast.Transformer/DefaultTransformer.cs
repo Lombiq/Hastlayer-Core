@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
-using Hast.Transformer.Events;
+using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;

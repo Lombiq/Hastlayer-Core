@@ -8,7 +8,7 @@ using Hast.Common.Configuration;
 using Hast.Communication;
 using Hast.Tests.TestAssembly1;
 using Hast.Tests.TestAssembly2;
-using Hast.Transformer.Events;
+using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers;
