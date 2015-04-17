@@ -46,8 +46,8 @@ namespace Hast.Common.Configuration
         /// </example>
         public IList<string> PublicHardwareMemberPrefixes { get; set; }
 
-        private static HardwareGenerationConfiguration _default;
-        public static HardwareGenerationConfiguration Default
+        private static IHardwareGenerationConfiguration _default;
+        public static IHardwareGenerationConfiguration Default
         {
             get
             {
