@@ -48,7 +48,7 @@ namespace Hast.Samples.Consumer
 
                         var configuration = new HardwareGenerationConfiguration
                         {
-                            // Another was would be to add such prefixes (potentially for whole namespaces like here), instead we add a single
+                            // Another way would be to add such prefixes (potentially for whole namespaces like here), instead we add a single
                             // method below.
                             //PublicHardwareMemberPrefixes = new[] { "Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy" }
                         };
