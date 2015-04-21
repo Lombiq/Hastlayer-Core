@@ -17,6 +17,8 @@ namespace Hast.Transformer.Vhdl
 {
     public class VhdlTransformingEngine : ITransformingEngine
     {
+        private const string PortNamePrefix = "Hast_IP_";
+
         private readonly IMethodTransformer _methodTransformer;
 
 
@@ -53,7 +55,7 @@ namespace Hast.Transformer.Vhdl
                     ReorderProcedures(vhdlTransformationContext);
                     var methodIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
 
-                    ProcessUtility.AddClockToProcesses(module, "clk");
+                    ProcessUtility.AddClockToProcesses(module, PortNamePrefix + "clk");
 
                     return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, methodIdTable);
                 });
@@ -127,18 +129,23 @@ namespace Hast.Transformer.Vhdl
 
             var methodIdPort = new Port
             {
-                Name = "MethodId",
+                Name = PortNamePrefix + "MethodId",
                 Mode = PortMode.In,
                 DataType = new RangedDataType { Name = "integer", RangeMin = 0, RangeMax = 999999 },
             };
 
             ports.Add(methodIdPort);
 
-            var caseExpression = new Case { Expression = "MethodId".ToExtendedVhdlIdValue() };
+            var caseExpression = new Case { Expression = methodIdPort.Name.ToExtendedVhdlIdValue() };
 
             var id = 1;
             foreach (var method in transformationContext.InterfaceMethods)
             {
+                foreach (var port in method.Ports)
+                {
+                    port.Name = PortNamePrefix + port.Name;
+                }
+
                 ports.AddRange(method.Ports);
 
                 var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = id.ToString() } };
