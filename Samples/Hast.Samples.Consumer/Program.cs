@@ -9,6 +9,7 @@ using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Tests.TestAssembly1.ComplexTypes;
+using Hast.Tests.TestAssembly2;
 
 namespace Hast.Samples.Consumer
 {
@@ -57,7 +58,8 @@ namespace Hast.Samples.Consumer
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
                             {
-                                typeof(ComplexTypeHierarchy).Assembly
+                                typeof(ComplexTypeHierarchy).Assembly,
+                                typeof(StaticReference).Assembly
                             }, configuration);
 
                         // With this interface-typed variable we simulate that the object comes from dependency injection.

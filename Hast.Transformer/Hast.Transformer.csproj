@@ -63,6 +63,7 @@
     <Compile Include="Models\ITransformationContext.cs" />
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
+    <Compile Include="SimpleMemory\SimpleMemory.cs" />
     <Compile Include="SyntaxTreeCleaner.cs" />
     <Compile Include="TypeDeclarationLookupTableFactory.cs" />
     <Compile Include="ITransformer.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="DefaultTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TransformerExtensions.cs" />
+    <Compile Include="TransformerConfiguration.cs" />
     <Compile Include="Visitors\ReferencedNodesFlaggingVisitor.cs" />
     <Compile Include="Visitors\UnreferencedNodesRemovingVisitor.cs" />
   </ItemGroup>

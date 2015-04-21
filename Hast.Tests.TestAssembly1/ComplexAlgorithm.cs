@@ -11,13 +11,13 @@ namespace Hast.Tests.TestAssembly1
     /// </summary>
     public class ComplexAlgorithm
     {
-        public virtual bool IsPrimeNumber(int num)
+        public virtual bool IsPrimeNumber(uint number)
         {
-            int factor = num / 2;
+            uint factor = number / 2;
 
-            for (int i = 2; i <= factor; i++)
+            for (uint i = 2; i <= factor; i++)
             {
-                if ((num % i) == 0) return false;
+                if ((number % i) == 0) return false;
             }
 
             return true;
