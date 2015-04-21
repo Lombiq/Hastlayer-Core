@@ -44,8 +44,8 @@ namespace Hast.Transformer.Vhdl
 
                     module.Libraries.Add(new Library
                     {
-                        Name = "IEEE",
-                        Uses = new List<string> { "IEEE.STD_LOGIC_1164.ALL", "IEEE.NUMERIC_STD.ALL" }
+                        Name = "ieee",
+                        Uses = new List<string> { "ieee.std_logic_1164.all", "ieee.numeric_std.all" }
                     });
 
                     module.Architecture.Entity = module.Entity;
