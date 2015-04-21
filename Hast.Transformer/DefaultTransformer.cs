@@ -10,6 +10,7 @@ using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
+using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
 namespace Hast.Transformer
@@ -60,6 +61,12 @@ namespace Hast.Transformer
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
 
+            if (configuration.GetTransformerConfiguration().UseSimpleMemory)
+            {
+                CheckSimpleMemoryUsage(syntaxTree);
+            }
+
+
             var context = new TransformationContext
             {
                 Id = transformationId,
@@ -85,6 +92,21 @@ namespace Hast.Transformer
             }
 
             return Transform(assemblies.Select(assembly => assembly.Location), configuration);
+        }
+
+
+        private static void CheckSimpleMemoryUsage(SyntaxTree syntaxTree)
+        {
+            foreach (var type in syntaxTree.GetTypes(true))
+            {
+                foreach (var member in type.Members.Where(m => m.IsInterfaceMember()))
+                {
+                    if (member is MethodDeclaration && string.IsNullOrEmpty(((MethodDeclaration)member).GetSimpleMemoryParameterName()))
+                    {
+                        throw new InvalidOperationException("The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter.");
+                    }
+                }
+            }
         }
     }
 }

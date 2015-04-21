@@ -55,6 +55,7 @@ namespace Hast.Transformer
                     if ((noIncludedMembers || configuration.PublicHardwareMembers.Contains(fullName) || fullName.GetMethodNameAlternates().Intersect(configuration.PublicHardwareMembers).Any() || configuration.PublicHardwareMemberPrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) &&
                         _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
                     {
+                        member.SetInterfaceMember();
                         member.AddReference(syntaxTree);
                         member.AcceptVisitor(referencedNodesFlaggingVisitor);
                     }

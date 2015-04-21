@@ -21,13 +21,13 @@ namespace Hast.Transformer.SimpleMemory
         /// The number of memory "cells". The memory is divided into independently accessible "cells"; the size of the allocated memory space is
         /// calculated from the cell count and the cell size indicated in <see cref="MemoryCellSizeBytes"/>.
         /// </param>
-        public SimpleMemory(ulong cellCount)
+        public SimpleMemory(int cellCount)
         {
             _memory = new byte[cellCount * MemoryCellSizeBytes];
         }
 
 
-        public void Write4Bytes(ulong cellIndex, byte[] input)
+        public void Write4Bytes(int cellIndex, byte[] input)
         {
             if (input.Length > MemoryCellSizeBytes)
             {
@@ -45,7 +45,7 @@ namespace Hast.Transformer.SimpleMemory
             }
         }
 
-        public byte[] Read4Bytes(ulong cellIndex)
+        public byte[] Read4Bytes(int cellIndex)
         {
             var output = new byte[MemoryCellSizeBytes];
 
@@ -57,42 +57,42 @@ namespace Hast.Transformer.SimpleMemory
             return output;
         }
 
-        public void WriteUInt32(ulong cellIndex, UInt32 number)
+        public void WriteUInt32(int cellIndex, UInt32 number)
         {
             Write4Bytes(cellIndex, BitConverter.GetBytes(number));
         }
 
-        public UInt32 ReadUInt32(ulong cellIndex)
+        public UInt32 ReadUInt32(int cellIndex)
         {
             return BitConverter.ToUInt32(Read4Bytes(cellIndex), 0);
         }
 
-        public void WriteInt32(ulong cellIndex, int number)
+        public void WriteInt32(int cellIndex, int number)
         {
             Write4Bytes(cellIndex, BitConverter.GetBytes(number));
         }
 
-        public int ReadInt32(ulong cellIndex)
+        public int ReadInt32(int cellIndex)
         {
             return BitConverter.ToInt32(Read4Bytes(cellIndex), 0);
         }
 
-        public void WriteBoolean(ulong cellIndex, bool boolean)
+        public void WriteBoolean(int cellIndex, bool boolean)
         {
             Write4Bytes(cellIndex, BitConverter.GetBytes(boolean));
         }
 
-        public bool ReadBoolean(ulong cellIndex)
+        public bool ReadBoolean(int cellIndex)
         {
             return BitConverter.ToBoolean(Read4Bytes(cellIndex), 0);
         }
 
-        public void WriteChar(ulong cellIndex, char character)
+        public void WriteChar(int cellIndex, char character)
         {
             Write4Bytes(cellIndex, BitConverter.GetBytes(character));
         }
 
-        public char ReadChar(ulong cellIndex)
+        public char ReadChar(int cellIndex)
         {
             return BitConverter.ToChar(Read4Bytes(cellIndex), 0);
         }

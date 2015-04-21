@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
     <Compile Include="Helpers\TopologicalSortHelper.cs" />
     <Compile Include="Models\IVhdlTransformationContext.cs" />
     <Compile Include="MethodCallChainTable.cs" />

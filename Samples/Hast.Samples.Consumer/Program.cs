@@ -54,6 +54,7 @@ namespace Hast.Samples.Consumer
                             //PublicHardwareMemberPrefixes = new[] { "Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy" }
                         };
                         configuration.AddPublicHardwareMethod<IInterface1>(complex => complex.Interface1Method1());
+                        configuration.GetTransformerConfiguration().UseSimpleMemory = false;
 
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]

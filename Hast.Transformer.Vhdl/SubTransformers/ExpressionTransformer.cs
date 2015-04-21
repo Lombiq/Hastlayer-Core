@@ -7,6 +7,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using Hast.Transformer.Vhdl.Models;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -168,6 +169,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private IVhdlElement TransformInvocationExpression(InvocationExpression expression, ISubTransformerContext context, IBlockElement block)
         {
+            var targetMemberReference = expression.Target as MemberReferenceExpression;
+            var transformedParameters = new List<IVhdlElement>(expression.Arguments.Select(argument => Transform(argument, context, block)));
+
+            if (context.TransformationContext.UseSimpleMemory() &&
+                targetMemberReference != null &&
+                targetMemberReference.Target is IdentifierExpression &&
+                ((IdentifierExpression)targetMemberReference.Target).Identifier == context.Scope.Method.GetSimpleMemoryParameterName())
+            {
+                // This is a SimpleMemory access.
+
+                return new Invokation
+                {
+                    Target = new Value { Content = "SimpleMemory" + targetMemberReference.MemberName },
+                    Parameters = transformedParameters
+                };
+            }
+
             var targetName = expression.GetFullName();
 
             context.TransformationContext.MethodCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
@@ -175,7 +193,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var invokation = new Invokation
             {
                 Target = targetName.ToExtendedVhdlIdValue(),
-                Parameters = new List<IVhdlElement>(expression.Arguments.Select(argument => Transform(argument, context, block)))
+                Parameters = transformedParameters
             };
 
 
@@ -196,16 +214,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                 AstType returnType;
-                if (expression.Target is MemberReferenceExpression)
+                if (targetMemberReference != null)
                 {
-                    var memberReferenceExpression = (MemberReferenceExpression)expression.Target;
-
                     // Using First() because there can be multiple methods with the same name (overload) but these should have the same
                     // return type.
-                    returnType = memberReferenceExpression
+                    returnType = targetMemberReference
                         .GetTargetType(context.TransformationContext.TypeDeclarationLookupTable)
                         .Members
-                        .First(member => member is MethodDeclaration && member.Name == memberReferenceExpression.MemberName)
+                        .First(member => member is MethodDeclaration && member.Name == targetMemberReference.MemberName)
                         .ReturnType;
                 }
                 else

@@ -16,17 +16,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
     public class MethodTransformer : IMethodTransformer
     {
-        private readonly IMemberSuitabilityChecker _memberSuitabilityChecker;
         private readonly ITypeConverter _typeConverter;
         private readonly IStatementTransformer _statementTransformer;
 
 
         public MethodTransformer(
-            IMemberSuitabilityChecker memberSuitabilityChecker,
             ITypeConverter typeConverter,
             IStatementTransformer statementTransformer)
         {
-            _memberSuitabilityChecker = memberSuitabilityChecker;
             _typeConverter = typeConverter;
             _statementTransformer = statementTransformer;
         }
@@ -40,7 +37,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // Handling when the method is an interface method, i.e. should be present in the interface of the VHDL module.
             InterfaceMethodDefinition interfaceMethod = null;
-            if (_memberSuitabilityChecker.IsSuitableInterfaceMember(method, context.TypeDeclarationLookupTable))
+            if (method.IsInterfaceMember())
             {
                 interfaceMethod = new InterfaceMethodDefinition { Name = procedure.Name, Procedure = procedure };
                 context.InterfaceMethods.Add(interfaceMethod);
@@ -74,22 +71,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 foreach (var parameter in method.Parameters)
                 {
+                    // SimpleMemory parameters shouldn't be tranformed.
+                    if (context.UseSimpleMemory() && parameter.IsSimpleMemoryParameter()) continue;
+
                     var type = _typeConverter.Convert(parameter.Type);
-                    var procedureParam = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = parameter.Name + ".param" };
+
+                    var procedureParameter = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = parameter.Name + ".param" };
 
                     // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables.
                     var variable = new Variable { DataType = type, Name = parameter.Name };
                     procedure.Declarations.Add(variable);
-                    procedure.Body.Add(new Terminated(new Assignment { AssignTo = variable.ToReference(), Expression = procedureParam.ToReference() }));
+                    procedure.Body.Add(new Terminated(new Assignment { AssignTo = variable.ToReference(), Expression = procedureParameter.ToReference() }));
 
                     if (interfaceMethod != null)
                     {
                         var inputPort = new Port { DataType = type, Mode = PortMode.In, Name = fullName + "." + parameter.Name };
-                        interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = inputPort, Parameter = procedureParam });
+                        interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = inputPort, Parameter = procedureParameter });
                         interfaceMethod.Ports.Add(inputPort);
                     }
 
-                    parameters.Add(procedureParam);
+                    parameters.Add(procedureParameter);
                 }
             }
 
