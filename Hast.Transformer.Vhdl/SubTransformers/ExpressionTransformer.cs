@@ -216,12 +216,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 AstType returnType;
                 if (targetMemberReference != null)
                 {
-                    // Using First() because there can be multiple methods with the same name (overload) but these should have the same
-                    // return type.
+                    var targetFullName = expression.GetFullName();
+
                     returnType = targetMemberReference
                         .GetTargetType(context.TransformationContext.TypeDeclarationLookupTable)
                         .Members
-                        .First(member => member is MethodDeclaration && member.Name == targetMemberReference.MemberName)
+                        .Single(member => member.GetFullName() == targetFullName)
                         .ReturnType;
                 }
                 else
