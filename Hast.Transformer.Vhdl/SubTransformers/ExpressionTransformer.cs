@@ -201,6 +201,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return Transform(argument, context, block);
                 }));
 
+
             if (context.TransformationContext.UseSimpleMemory() &&
                 targetMemberReference != null &&
                 targetMemberReference.Target is IdentifierExpression &&
@@ -214,6 +215,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Parameters = transformedParameters
                 };
             }
+
 
             var targetName = expression.GetFullName();
 

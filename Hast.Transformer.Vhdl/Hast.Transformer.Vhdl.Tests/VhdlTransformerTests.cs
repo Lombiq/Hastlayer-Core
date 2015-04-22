@@ -116,7 +116,9 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private async Task<VhdlHardwareDescription> TransformReferenceAssembliesToVhdl()
         {
-            return (VhdlHardwareDescription)await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, HardwareGenerationConfiguration.Default);
+            var configuration = new HardwareGenerationConfiguration();
+            configuration.GetTransformerConfiguration().UseSimpleMemory = false;
+            return (VhdlHardwareDescription)await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, configuration);
         }
 
 
