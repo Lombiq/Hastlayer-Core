@@ -24,7 +24,7 @@ namespace Hast.Samples.Consumer
                     {
                         hastlayer.Transformed += (sender, e) =>
                             {
-                                //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
+                                File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
                             };
 
                         var hardwareRepresentation = await hastlayer.GenerateHardware(

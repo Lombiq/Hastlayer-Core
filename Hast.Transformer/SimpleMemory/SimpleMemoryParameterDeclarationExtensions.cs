@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
-    public static class ParameterDeclarationExtensions
+    public static class SimpleMemoryParameterDeclarationExtensions
     {
         public static bool IsSimpleMemoryParameter(this ParameterDeclaration parameterDeclaration)
         {

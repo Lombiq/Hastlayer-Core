@@ -33,14 +33,14 @@ namespace ICSharpCode.NRefactory.CSharp
             else if (memberReferenceExpression.Target is BaseReferenceExpression)
             {
                 // The member is in the base class (because of single class inheritance in C#, there can be only one base class).
-                return memberReferenceExpression.GetParentType().BaseTypes
+                return memberReferenceExpression.FindParentType().BaseTypes
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
             else
             {
                 // The member is within this class.
-                return memberReferenceExpression.GetParentType();
+                return memberReferenceExpression.FindParentType();
             }
         }
     }

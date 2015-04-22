@@ -41,20 +41,22 @@ namespace Hast.Transformer
             // methods are called at least once).
             foreach (var type in syntaxTree.GetTypes(true))
             {
-                var implementedInterfaces = type.BaseTypes
-                    .Select(baseType => typeDeclarationLookupTable.Lookup(baseType))
-                    .Where(baseTypeDeclaration => baseTypeDeclaration != null && baseTypeDeclaration.ClassType == ClassType.Interface);
-                foreach (var implementedInterface in implementedInterfaces)
-                {
-                    implementedInterface.AddReference(type);
-                }
-
                 foreach (var member in type.Members)
                 {
                     var fullName = member.GetFullName();
                     if ((noIncludedMembers || configuration.PublicHardwareMembers.Contains(fullName) || fullName.GetMethodNameAlternates().Intersect(configuration.PublicHardwareMembers).Any() || configuration.PublicHardwareMemberPrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) &&
                         _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
                     {
+                        if (member is MethodDeclaration)
+                        {
+                            var implementedInterfaceMethod = ((MethodDeclaration)member).FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup);
+                            if (implementedInterfaceMethod != null)
+                            {
+                                implementedInterfaceMethod.AddReference(member);
+                                implementedInterfaceMethod.FindParentType().AddReference(member);
+                            }
+                        }
+
                         member.SetInterfaceMember();
                         member.AddReference(syntaxTree);
                         member.AcceptVisitor(referencedNodesFlaggingVisitor);
@@ -65,7 +67,7 @@ namespace Hast.Transformer
             // Then removing all unused declarations.
             syntaxTree.AcceptVisitor(new UnreferencedNodesRemovingVisitor());
 
-            // Removing orphaned base types references.
+            // Removing orphaned base types.
             foreach (var type in syntaxTree.GetTypes(true))
             {
                 foreach (var baseType in type.BaseTypes.Where(baseType => !typeDeclarationLookupTable.Lookup(baseType).IsReferenced()))

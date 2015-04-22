@@ -136,12 +136,15 @@ namespace Hast.Transformer.Vhdl.Tests
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
-            Assert.AreEqual(typeLookup.Count, 5, "Not the number of types remained in the syntax tree than there are used.");
+            Assert.AreEqual(typeLookup.Count, 3, "Not the number of types remained in the syntax tree than there are used.");
             Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Count, 1);
             Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Single().Name, "IsPrimeNumber");
             Assert.AreEqual(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count, 3);
             Assert.That(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
                 .SequenceEqual(new[] { "Interface1Method1", "PrivateMethod", "StaticMethod" }));
+            Assert.AreEqual(typeLookup[typeof(IInterface1).Name].Members.Count, 1);
+            Assert.That(typeLookup[typeof(IInterface1).Name].Members.Select(member => member.Name)
+                .SequenceEqual(new[] { "Interface1Method1" }));
         }
 
         [Test]

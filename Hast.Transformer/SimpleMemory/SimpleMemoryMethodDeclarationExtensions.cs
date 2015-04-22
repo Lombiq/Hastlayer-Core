@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
-    public static class MethodDeclarationExtensions
+    public static class SimpleMemoryMethodDeclarationExtensions
     {
         public static string GetSimpleMemoryParameterName(this MethodDeclaration methodDeclaration)
         {
