@@ -1,6 +1,8 @@
 ﻿using Hast.Transformer.SimpleMemory;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +55,59 @@ namespace Hast.Samples.SampleAssembly
             if (correctedPixel > 255) correctedPixel = 255;
 
             return (int)correctedPixel;
+        }
+    }
+
+    public class ImageContrastExtensions
+    {
+        public SimpleMemory Memory { get; set; }
+        public Bitmap Image { get; set; }
+
+
+        public void CreateSimpleMemory(Bitmap image)
+        {
+            Image = image;
+            Memory = new SimpleMemory((ulong)(image.Width * image.Height * 3));
+
+            for (int x = 0; x < Image.Height; x++)
+            {
+                for (int y = 0; y < Image.Width; y++)
+                {
+                    var pixel = image.GetPixel(y, x);
+
+                    Memory.WriteInt32((ulong)((x * Image.Width + y) * 3), pixel.R);
+                    Memory.WriteInt32((ulong)((x * Image.Width + y) * 3 + 1), pixel.G);
+                    Memory.WriteInt32((ulong)((x * Image.Width + y) * 3 + 2), pixel.B);
+                }
+            }
+        }
+
+        public Bitmap CreateImage()
+        {
+            Bitmap image = new Bitmap(Image);
+
+            int r, g, b;
+
+            for (int x = 0; x < Image.Height; x++)
+            {
+                for (int y = 0; y < Image.Width; y++)
+                {
+                    r = Memory.ReadInt32((ulong)((x * Image.Width + y) * 3));
+                    g = Memory.ReadInt32((ulong)((x * Image.Width + y) * 3 + 1));
+                    b = Memory.ReadInt32((ulong)((x * Image.Width + y) * 3 + 2));
+
+                    image.SetPixel(y, x, Color.FromArgb(r, g, b));
+                }
+            }
+
+            return image;
+        }
+
+        public void GetContrastImage(double contrast)
+        {
+            ImageContrast imgProcess = new ImageContrast(Image.Height, Image.Width, contrast);
+
+            imgProcess.ProcessImage(Memory);
         }
     }
 }
