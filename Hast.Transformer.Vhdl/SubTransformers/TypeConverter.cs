@@ -2,12 +2,14 @@
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
+using Mono.Cecil;
 using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface ITypeConverter : IDependency
     {
+        DataType ConvertTypeReference(TypeReference typeReference);
         DataType Convert(AstType type);
         DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable);
     }
@@ -15,13 +17,49 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
     public class TypeConverter : ITypeConverter
     {
+        public DataType ConvertTypeReference(TypeReference typeReference)
+        {
+            if (!typeReference.IsPrimitive)
+            {
+                throw new ArgumentException("Only primitive types are supported.");
+            }
+
+            switch (typeReference.FullName)
+            {
+                case "System.Boolean":
+                    return ConvertPrimitive(KnownTypeCode.Boolean);
+                case "System.Char":
+                    return ConvertPrimitive(KnownTypeCode.Char);
+                case "System.Decimal":
+                    return ConvertPrimitive(KnownTypeCode.Decimal);
+                case "System.Double":
+                    return ConvertPrimitive(KnownTypeCode.Double);
+                case "System.Int16":
+                    return ConvertPrimitive(KnownTypeCode.Int16);
+                case "System.Int32":
+                    return ConvertPrimitive(KnownTypeCode.Int32);
+                case "System.Int64":
+                    return ConvertPrimitive(KnownTypeCode.Int64);
+                case "System.String":
+                    return ConvertPrimitive(KnownTypeCode.String);
+                case "System.UInt16":
+                    return ConvertPrimitive(KnownTypeCode.UInt16);
+                case "System.UInt32":
+                    return ConvertPrimitive(KnownTypeCode.UInt32);
+                case "System.UInt64":
+                    return ConvertPrimitive(KnownTypeCode.UInt64);
+            }
+
+            throw new NotSupportedException("The type " + typeReference.FullName + " is not supported for transforming.");
+        }
+
         public DataType Convert(AstType type)
         {
             if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
             else if (type is ComposedType) return ConvertComposed((ComposedType)type);
             //else if (type is SimpleType) return ConvertSimple((SimpleType)type); // Would be a composite object.
 
-            throw new NotSupportedException("This type is not supported for transforming.");
+            throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
 
         public DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable)
@@ -128,7 +166,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.Void;
             }
 
-            return null;
+            throw new NotSupportedException("The type " + typeCode.ToString() + " is not supported for transforming.");
         }
 
         private DataType ConvertComposed(ComposedType type)
@@ -139,7 +177,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return new Hast.VhdlBuilder.Representation.Declaration.Array { StoredType = storedType, Name = storedType.Name + "_array" };
             }
 
-            return null;
+            throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
 
         private DataType ConvertSimple(SimpleType type)
