@@ -59,7 +59,7 @@ namespace Hast.Samples.SampleAssembly
 
     public static class ImageContrastExtensions
     {
-        public Bitmap GetContrastImage(this ImageContrast imageContrast, Bitmap image, double contrast)
+        public static Bitmap GetContrastImage(this ImageContrast imageContrast, Bitmap image, double contrast)
         {
             var memory = CreateSimpleMemory(image);
             imageContrast = new ImageContrast(image.Height, image.Width, contrast);
