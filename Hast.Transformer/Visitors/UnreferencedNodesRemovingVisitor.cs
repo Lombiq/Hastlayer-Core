@@ -33,13 +33,6 @@ namespace Hast.Transformer.Visitors
         {
             base.VisitTypeDeclaration(typeDeclaration);
 
-
-            if (typeDeclaration.ClassType == ClassType.Interface && typeDeclaration.IsReferenced())
-            {
-                return;
-            }
-
-
             var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
 
             if (typeDeclaration.Members.Count == unreferencedMembers.Count())

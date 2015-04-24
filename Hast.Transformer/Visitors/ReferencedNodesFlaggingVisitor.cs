@@ -39,7 +39,19 @@ namespace Hast.Transformer.Visitors
             // same method.
             member.AddReference(memberReferenceExpression);
 
-            member.GetParentType().AddReference(memberReferenceExpression);
+            // Referencing the member's parent as well.
+            member.FindParentType().AddReference(memberReferenceExpression);
+
+            // And also the interfaces implemented by it.
+            if (member is MethodDeclaration)
+            {
+                var implementedInterfaceMethod = ((MethodDeclaration)member).FindImplementedInterfaceMethod(_typeDeclarationLookupTable.Lookup);
+                if (implementedInterfaceMethod != null)
+                {
+                    implementedInterfaceMethod.AddReference(member);
+                    implementedInterfaceMethod.FindParentType().AddReference(member);
+                }
+            }
 
             member.SetVisited();
 

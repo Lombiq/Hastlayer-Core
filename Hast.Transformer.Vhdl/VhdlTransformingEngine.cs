@@ -17,8 +17,6 @@ namespace Hast.Transformer.Vhdl
 {
     public class VhdlTransformingEngine : ITransformingEngine
     {
-        private const string PortNamePrefix = "Hast_IP_";
-
         private readonly IMethodTransformer _methodTransformer;
 
 
@@ -46,8 +44,8 @@ namespace Hast.Transformer.Vhdl
 
                     module.Libraries.Add(new Library
                     {
-                        Name = "IEEE",
-                        Uses = new List<string> { "IEEE.STD_LOGIC_1164.ALL", "IEEE.NUMERIC_STD.ALL" }
+                        Name = "ieee",
+                        Uses = new List<string> { "ieee.std_logic_1164.all", "ieee.numeric_std.all" }
                     });
 
                     module.Architecture.Entity = module.Entity;
@@ -55,7 +53,12 @@ namespace Hast.Transformer.Vhdl
                     ReorderProcedures(vhdlTransformationContext);
                     var methodIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
 
-                    ProcessUtility.AddClockToProcesses(module, PortNamePrefix + "clk");
+                    ProcessUtility.AddClockToProcesses(module, "Clock");
+
+                    if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
+                    {
+                        AddSimpleMemoryPorts(module);
+                    }
 
                     return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, methodIdTable);
                 });
@@ -129,9 +132,9 @@ namespace Hast.Transformer.Vhdl
 
             var methodIdPort = new Port
             {
-                Name = PortNamePrefix + "MethodId",
+                Name = "MethodId",
                 Mode = PortMode.In,
-                DataType = new RangedDataType { Name = "integer", RangeMin = 0, RangeMax = 999999 },
+                DataType = KnownDataTypes.UnrangedInt,
             };
 
             ports.Add(methodIdPort);
@@ -141,55 +144,63 @@ namespace Hast.Transformer.Vhdl
             var id = 1;
             foreach (var method in transformationContext.InterfaceMethods)
             {
-                foreach (var port in method.Ports)
-                {
-                    port.Name = PortNamePrefix + port.Name;
-                }
-
                 ports.AddRange(method.Ports);
 
                 var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = id.ToString() } };
 
-                // Copying input signals to variables.
-                var portVariables = new Dictionary<Port, Variable>();
-                foreach (var port in method.Ports)
+                if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
                 {
-                    var variable = new Variable
+                    // Calling corresponding procedure.
+                    var invokation = new Invokation
                     {
-                        Name = port.Name + ".var",
-                        DataType = port.DataType
+                        Target = method.Procedure.Name.ToExtendedVhdlIdValue()
                     };
 
-                    proxyProcess.Declarations.Add(variable);
-
-                    if (port.Mode == PortMode.In)
+                    when.Body.Add(new Terminated(invokation));
+                }
+                else
+                {
+                    // Copying input signals to variables.
+                    var portVariables = new Dictionary<Port, Variable>();
+                    foreach (var port in method.Ports)
                     {
-                        when.Body.Add(new Terminated(new Assignment { AssignTo = variable, Expression = port.Name.ToExtendedVhdlIdValue() }));
+                        var variable = new Variable
+                        {
+                            Name = port.Name + ".var",
+                            DataType = port.DataType
+                        };
+
+                        proxyProcess.Declarations.Add(variable);
+
+                        if (port.Mode == PortMode.In)
+                        {
+                            when.Body.Add(new Terminated(new Assignment { AssignTo = variable, Expression = port.Name.ToExtendedVhdlIdValue() }));
+                        }
+
+                        portVariables[port] = variable;
                     }
 
-                    portVariables[port] = variable;
+                    // Calling corresponding procedure and taking care of its input/output parameters.
+                    var invokation = new Invokation
+                    {
+                        Target = method.Procedure.Name.ToExtendedVhdlIdValue(),
+                        // Using named parameters as the order of ports is not necessarily right
+                        Parameters = method.ParameterMappings
+                            .Select(mapping => new NamedInvokationParameter { FormalParameter = mapping.Parameter, ActualParameter = portVariables[mapping.Port] })
+                            .Cast<IVhdlElement>()
+                            .ToList()
+                    };
+
+                    when.Body.Add(new Terminated(invokation));
+
+                    // Copying output variables to output ports.
+                    foreach (var port in method.Ports.Where(p => p.Mode == PortMode.Out))
+                    {
+                        when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToExtendedVhdlIdValue() }));
+                    }
                 }
 
-                // Calling corresponding procedure and taking care of its input/output parameters.
-                var invokation = new Invokation
-                {
-                    Target = method.Procedure.Name.ToExtendedVhdlIdValue(),
-                    // Using named parameters as the order of ports is not necessarily right
-                    Parameters = method.ParameterMappings
-                        .Select(mapping => new NamedInvokationParameter { FormalParameter = mapping.Parameter, ActualParameter = portVariables[mapping.Port] })
-                        .Cast<IVhdlElement>()
-                        .ToList()
-                };
 
-                when.Body.Add(new Terminated(invokation));
-
-                // Copying output variables to output ports.
-                foreach (var port in method.Ports.Where(p => p.Mode == PortMode.Out))
-                {
-                    when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToExtendedVhdlIdValue() }));
-                }
-
-                
                 caseExpression.Whens.Add(when);
                 methodIdTable.SetMapping(method.Name, id);
                 id++;
@@ -226,6 +237,37 @@ namespace Hast.Transformer.Vhdl
                     return transformationContext.Module.Architecture.Declarations
                         .Where(element => element is Procedure && targetNames.Contains(((Procedure)element).Name));
                 });
+        }
+
+        private static void AddSimpleMemoryPorts(Module module)
+        {
+            module.Entity.Ports.Add(new Port
+            {
+                Name = "DataIn",
+                Mode = PortMode.In,
+                DataType = KnownDataTypes.UnrangedInt
+            });
+
+            module.Entity.Ports.Add(new Port
+            {
+                Name = "DataOut",
+                Mode = PortMode.Out,
+                DataType = KnownDataTypes.UnrangedInt
+            });
+
+            module.Entity.Ports.Add(new Port
+            {
+                Name = "ReadAddress",
+                Mode = PortMode.Out,
+                DataType = KnownDataTypes.UnrangedInt
+            });
+
+            module.Entity.Ports.Add(new Port
+            {
+                Name = "WriteAddress",
+                Mode = PortMode.Out,
+                DataType = KnownDataTypes.UnrangedInt
+            });
         }
     }
 }

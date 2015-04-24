@@ -13,12 +13,13 @@ namespace Hast.Samples.SampleAssembly
     public class PrimeCalculator
     {
         // It's good to have externally interesting cell indices in constants like this, so they can be used from wrappers like below.
-        public const ulong IsPrimeNumber_InputNumberIndex = 0;
-        public const ulong IsPrimeNumber_OutputBooleanIndex = 0;
-        public const ulong ArePrimeNumbers_InputNumberCountIndex = 0;
-        public const ulong ArePrimeNumbers_InputNumbersStartIndex = 1;
-        public const ulong ArePrimeNumbers_OutputNumbersStartIndex = 0;
+        public const int IsPrimeNumber_InputNumberIndex = 0;
+        public const int IsPrimeNumber_OutputBooleanIndex = 0;
+        public const int ArePrimeNumbers_InputNumberCountIndex = 0;
+        public const int ArePrimeNumbers_InputNumbersStartIndex = 1;
+        public const int ArePrimeNumbers_OutputNumbersStartIndex = 0;
 
+    
         /// <summary>
         /// Calculates whether a number is prime.
         /// </summary>
@@ -39,7 +40,7 @@ namespace Hast.Samples.SampleAssembly
             // We need this information explicitly as we can't use arrays.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputNumberCountIndex);
 
-            for (uint i = 0; i < numberCount; i++)
+            for (int i = 0; i < numberCount; i++)
             {
                 uint number = memory.ReadUInt32(ArePrimeNumbers_InputNumbersStartIndex + i);
                 memory.WriteBoolean(ArePrimeNumbers_OutputNumbersStartIndex + i, IsPrimeNumber(number));
@@ -104,11 +105,11 @@ namespace Hast.Samples.SampleAssembly
         public static bool[] ArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
-            var memory = new SimpleMemory((ulong)(numbers.Length + 1));
+            var memory = new SimpleMemory(numbers.Length + 1);
 
             memory.WriteUInt32(PrimeCalculator.ArePrimeNumbers_InputNumberCountIndex, (uint)numbers.Length);
 
-            for (uint i = 0; i < numbers.Length; i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
                 memory.WriteUInt32(PrimeCalculator.ArePrimeNumbers_InputNumbersStartIndex + i, numbers[i]);
             }
@@ -117,7 +118,7 @@ namespace Hast.Samples.SampleAssembly
 
 
             var output = new bool[numbers.Length];
-            for (uint i = 0; i < numbers.Length; i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
                 output[i] = memory.ReadBoolean(PrimeCalculator.ArePrimeNumbers_OutputNumbersStartIndex + i);
             }

@@ -23,7 +23,7 @@ namespace Hast.Common.Configuration
         private const string ConfigKey = "Hast.Transformer.Configuration";
 
 
-        public static TransformerConfiguration GetVhdlConfiguration(this IHardwareGenerationConfiguration hardwareConfiguration)
+        public static TransformerConfiguration GetTransformerConfiguration(this IHardwareGenerationConfiguration hardwareConfiguration)
         {
             object config;
 
@@ -32,7 +32,7 @@ namespace Hast.Common.Configuration
                 return (TransformerConfiguration)config;
             }
 
-            return new TransformerConfiguration();
+            return (TransformerConfiguration)(hardwareConfiguration.CustomConfiguration[ConfigKey] = new TransformerConfiguration());
         }
     }
 }

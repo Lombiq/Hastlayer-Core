@@ -69,7 +69,7 @@ namespace ICSharpCode.NRefactory.CSharp
             return name;
         }
 
-        public static TypeDeclaration GetParentType(this AstNode node)
+        public static TypeDeclaration FindParentType(this AstNode node)
         {
             while (!(node is TypeDeclaration))
             {
