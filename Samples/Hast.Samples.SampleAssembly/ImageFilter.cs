@@ -109,17 +109,17 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 3; y < imageWidthHelper - 3; y++)
                 {
-                    topLeft = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper - 3));
-                    topMiddle = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper));
-                    topRight = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + 3));
-                    middleLeft = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper - 3));
-                    pixel = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper));
-                    middleRight = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper + 3));
-                    bottomLeft = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper - 3));
-                    bottomMiddle = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper));
-                    bottomRight = memory.ReadInt32((ulong)(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3));
+                    topLeft = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper - 3);
+                    topMiddle = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper);
+                    topRight = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + 3);
+                    middleLeft = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper - 3);
+                    pixel = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper);
+                    middleRight = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + 3);
+                    bottomLeft = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper - 3);
+                    bottomMiddle = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper);
+                    bottomRight = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3);
 
-                    memory.WriteInt32((ulong)(x * imageWidthHelper + y), WorkUpMatrix(
+                    memory.WriteInt32(x * imageWidthHelper + y, WorkUpMatrix(
                         topLeft, topMiddle, topRight, 
                         middleLeft, pixel, middleRight, 
                         bottomLeft, bottomMiddle, bottomRight));

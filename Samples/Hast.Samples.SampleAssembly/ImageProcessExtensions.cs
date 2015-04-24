@@ -12,6 +12,8 @@ namespace Hast.Samples.SampleAssembly
     {
         public static Bitmap GetContrastImage(this ImageContrast imageContrast, Bitmap image, double contrast)
         {
+            //Change image contrast
+
             var memory = CreateSimpleMemory(image);
             imageContrast = new ImageContrast(image.Height, image.Width, contrast);
             imageContrast.ChangeContrast(memory);
@@ -88,9 +90,9 @@ namespace Hast.Samples.SampleAssembly
             SimpleMemory memory = null;
 
             if (cloneImage)
-                memory = new SimpleMemory((ulong)(image.Width * image.Height * 6));
+                memory = new SimpleMemory(image.Width * image.Height * 6);
             else
-                memory = new SimpleMemory((ulong)(image.Width * image.Height * 3));
+                memory = new SimpleMemory(image.Width * image.Height * 3);
 
             for (int x = 0; x < image.Height; x++)
             {
@@ -98,17 +100,17 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var pixel = image.GetPixel(y, x);
 
-                    memory.WriteInt32((ulong)((x * image.Width + y) * 3), pixel.R);
-                    memory.WriteInt32((ulong)((x * image.Width + y) * 3 + 1), pixel.G);
-                    memory.WriteInt32((ulong)((x * image.Width + y) * 3 + 2), pixel.B);
+                    memory.WriteInt32((x * image.Width + y) * 3, pixel.R);
+                    memory.WriteInt32((x * image.Width + y) * 3 + 1, pixel.G);
+                    memory.WriteInt32((x * image.Width + y) * 3 + 2, pixel.B);
 
                     if (cloneImage)
                     {
                         int size = image.Width * image.Height;
 
-                        memory.WriteInt32((ulong)((x * image.Width + y) * 3 + (size * 3)), pixel.R);
-                        memory.WriteInt32((ulong)((x * image.Width + y) * 3 + 1 + (size * 3)), pixel.G);
-                        memory.WriteInt32((ulong)((x * image.Width + y) * 3 + 2 + (size * 3)), pixel.B);
+                        memory.WriteInt32((x * image.Width + y) * 3 + (size * 3), pixel.R);
+                        memory.WriteInt32((x * image.Width + y) * 3 + 1 + (size * 3), pixel.G);
+                        memory.WriteInt32((x * image.Width + y) * 3 + 2 + (size * 3), pixel.B);
                     }
                 }
             }
@@ -130,9 +132,9 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 0; y < image.Width; y++)
                 {
-                    r = memory.ReadInt32((ulong)((x * image.Width + y) * 3));
-                    g = memory.ReadInt32((ulong)((x * image.Width + y) * 3 + 1));
-                    b = memory.ReadInt32((ulong)((x * image.Width + y) * 3 + 2));
+                    r = memory.ReadInt32((x * image.Width + y) * 3);
+                    g = memory.ReadInt32((x * image.Width + y) * 3 + 1);
+                    b = memory.ReadInt32((x * image.Width + y) * 3 + 2);
 
                     image.SetPixel(y, x, Color.FromArgb(r, g, b));
                 }

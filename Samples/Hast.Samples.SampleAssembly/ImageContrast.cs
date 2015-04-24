@@ -49,8 +49,8 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 0; i < _imageHeight * _imageWidth * 3; i++)
             {
-                pixel = memory.ReadInt32((ulong)i);
-                memory.WriteInt32((ulong)i, WorkUpPixel(pixel));
+                pixel = memory.ReadInt32(i);
+                memory.WriteInt32(i, WorkUpPixel(pixel));
             }
         }
 
