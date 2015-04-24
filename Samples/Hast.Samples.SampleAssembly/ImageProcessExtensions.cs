@@ -14,12 +14,14 @@ namespace Hast.Samples.SampleAssembly
         {
             var memory = CreateSimpleMemory(image);
             imageContrast = new ImageContrast(image.Height, image.Width, contrast);
-            imageContrast.ProcessImage(memory);
+            imageContrast.ChangeContrast(memory);
             return CreateImage(memory, image);
         }
 
         public static Bitmap GetGaussImage(this ImageFilter imageFilter, Bitmap image)
         {
+            //Gauss smoothing
+
             var memory = CreateSimpleMemory(image, true);
             imageFilter = new ImageFilter(image.Height, image.Width);
             imageFilter.SetMatrixValues(
@@ -27,12 +29,14 @@ namespace Hast.Samples.SampleAssembly
                 2, 4, 2,
                 1, 2, 1,
                 16);
-            imageFilter.ProcessImage(memory);
+            imageFilter.FilterImage(memory);
             return CreateImage(memory, image);
         }
 
         public static Bitmap GetSobelImage(this ImageFilter imageFilter, Bitmap image)
         {
+            //Sobel edge detection
+
             var memory = CreateSimpleMemory(image, true);
             imageFilter = new ImageFilter(image.Height, image.Width);
             imageFilter.SetMatrixValues(
@@ -40,23 +44,45 @@ namespace Hast.Samples.SampleAssembly
                 0, 0, 0,
                 -1, -2, -1,
                 16);
-            imageFilter.ProcessImage(memory);
+            imageFilter.FilterImage(memory);
             return CreateImage(memory, image);
         }
 
-        public static Bitmap GetEdgeMap(this ImageFilter imageFilter, Bitmap image)
+        public static Bitmap GetHorizontalEdges(this ImageFilter imageFilter, Bitmap image)
         {
+            //Horizontal edge detection
+
             var memory = CreateSimpleMemory(image, true);
             imageFilter = new ImageFilter(image.Height, image.Width);
             imageFilter.SetMatrixValues(
                 1, 1, 1,
                 0, 0, 0,
                 -1, -1, -1);
-            imageFilter.ProcessImage(memory);
+            imageFilter.FilterImage(memory);
+            return CreateImage(memory, image);
+        }
+
+        public static Bitmap GetVerticalEdges(this ImageFilter imageFilter, Bitmap image)
+        {
+            //Vertical edge detection
+
+            var memory = CreateSimpleMemory(image, true);
+            imageFilter = new ImageFilter(image.Height, image.Width);
+            imageFilter.SetMatrixValues(
+                1, 0, -1,
+                1, 0, -1,
+                1, 0, -1);
+            imageFilter.FilterImage(memory);
             return CreateImage(memory, image);
         }
 
 
+        /// <summary>
+        /// Creates a <see cref="SimpleMemory"/> instance that stores the image.
+        /// </summary>
+        /// <param name="image">The image to process.</param>
+        /// <param name="cloneImage">Is image cloning required?</param>
+        /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
         private static SimpleMemory CreateSimpleMemory(Bitmap image, bool cloneImage = false)
         {
             SimpleMemory memory = null;
@@ -90,6 +116,12 @@ namespace Hast.Samples.SampleAssembly
             return memory;
         }
 
+        /// <summary>
+        /// Creates an image from a <see cref="SimpleMemory"/> instance.
+        /// </summary>
+        /// <param name="memory">The <see cref="SimpleMemory"/> instance.</param>
+        /// <param name="image">The original image.</param>
+        /// <returns>Returns the processed image.</returns>
         private static Bitmap CreateImage(SimpleMemory memory, Bitmap image)
         {
             int r, g, b;

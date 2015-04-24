@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
 {
+    /// <summary>
+    /// Algorithm for changing the contrast of an image.
+    /// </summary>
     public class ImageContrast
     {
         private int _imageHeight;
@@ -16,6 +19,12 @@ namespace Hast.Samples.SampleAssembly
         private double _contrastValue;
 
 
+        /// <summary>
+        /// Creates an instance of <see cref="ImageContrast"/> class.
+        /// </summary>
+        /// <param name="imageHeight">The height of the image in pixels.</param>
+        /// <param name="imageWidth">The width of the image in pixels.</param>
+        /// <param name="contrastValue">The difference in contrast.</param>
         public ImageContrast(int imageHeight, int imageWidth, double contrastValue = 50)
         {
             _imageHeight = imageHeight;
@@ -30,7 +39,11 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        public virtual void ProcessImage(SimpleMemory memory)
+        /// <summary>
+        /// Changes the contrast of an image.
+        /// </summary>
+        /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
+        public virtual void ChangeContrast(SimpleMemory memory)
         {
             int pixel = 0;
 
@@ -42,6 +55,11 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
+        /// <summary>
+        /// Makes the required changes on the selected pixel.
+        /// </summary>
+        /// <param name="pixel">The current pixel value.</param>
+        /// <returns>The pixel value after changing the contrast.</returns>
         private int WorkUpPixel(int pixel)
         {
             double correctedPixel = pixel / 255.0;

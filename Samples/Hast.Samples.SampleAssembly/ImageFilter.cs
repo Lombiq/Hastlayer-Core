@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
 {
+    /// <summary>
+    /// Algorithm for running convolution image processing on images.
+    /// </summary>
     public class ImageFilter
     {
         private int _imageHeight;
@@ -28,6 +31,12 @@ namespace Hast.Samples.SampleAssembly
         private int _currentIndex;
 
 
+        /// <summary>
+        /// Creates an instance of <see cref="ImageFilter"/> class.
+        /// </summary>
+        /// <param name="imageHeight">The height of the image in pixels.</param>
+        /// <param name="imageWidth">The width of the image in pixels.</param>
+        /// <param name="baseValue">All matrix values will be set to this value.</param>
         public ImageFilter(int imageHeight, int imageWidth, int baseValue = 1)
         {
             _imageHeight = imageHeight;
@@ -42,6 +51,20 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
+        /// <summary>
+        /// Sets the values of a 3x3 matrix.
+        /// </summary>
+        /// <param name="topLeft">Top left value.</param>
+        /// <param name="topMiddle">Top middle value.</param>
+        /// <param name="topRight">Top right value.</param>
+        /// <param name="middleLeft">Middle left value.</param>
+        /// <param name="pixel">The current pixel value.</param>
+        /// <param name="middleRight">Middle right value.</param>
+        /// <param name="bottomLeft">Bottom left value.</param>
+        /// <param name="bottomMiddle">Bottom middle value.</param>
+        /// <param name="bottomRight">Bottom right value.</param>
+        /// <param name="factor">The factor to divide the result with.</param>
+        /// <param name="offset">A final offset value.</param>
         public void SetMatrixValues(
             int topLeft, int topMiddle, int topRight,
             int middleLeft, int pixel, int middleRight,
@@ -61,7 +84,11 @@ namespace Hast.Samples.SampleAssembly
             _offset = offset;
         }
 
-        public virtual void ProcessImage(SimpleMemory memory)
+        /// <summary>
+        /// Makes the changes according to the matrix on the image.
+        /// </summary>
+        /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
+        public virtual void FilterImage(SimpleMemory memory)
         {
             _currentIndex = _imageWidth + 1;
 
@@ -101,6 +128,19 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
+        /// <summary>
+        /// Makes the required changes on the selected pixel.
+        /// </summary>
+        /// <param name="topLeft">Top left value.</param>
+        /// <param name="topMiddle">Top middle value.</param>
+        /// <param name="topRight">Top right value.</param>
+        /// <param name="middleLeft">Middle left value.</param>
+        /// <param name="pixel">The current pixel value.</param>
+        /// <param name="middleRight">Middle right value.</param>
+        /// <param name="bottomLeft">Bottom left value.</param>
+        /// <param name="bottomMiddle">Bottom middle value.</param>
+        /// <param name="bottomRight">Bottom right value.</param>
+        /// <returns>Returns the value of the filtered pixel.</returns>
         private int WorkUpMatrix(
             int topLeft, int topMiddle, int topRight,
             int middleLeft, int pixel, int middleRight,
