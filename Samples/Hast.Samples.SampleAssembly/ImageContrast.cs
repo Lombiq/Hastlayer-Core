@@ -11,23 +11,22 @@ namespace Hast.Samples.SampleAssembly
 {
     public class ImageContrast
     {
-        private int ImageHeight { get; set; }
-        private int ImageWidth { get; set; }
-        private int PixelsCount { get { return ImageHeight * ImageWidth; } }
-        private double ContrastValue { get; set; }
+        private int _imageHeight;
+        private int _imageWidth;
+        private double _contrastValue;
 
 
         public ImageContrast(int imageHeight, int imageWidth, double contrastValue = 50)
         {
-            ImageHeight = imageHeight;
-            ImageWidth = imageWidth;
+            _imageHeight = imageHeight;
+            _imageWidth = imageWidth;
 
             if (contrastValue > 100)
                 contrastValue = 100;
             else if (contrastValue < -100)
                 contrastValue = -100;
 
-            ContrastValue = (100.0 + contrastValue) / 100.0;
+            _contrastValue = (100.0 + contrastValue) / 100.0;
         }
 
 
@@ -35,7 +34,7 @@ namespace Hast.Samples.SampleAssembly
         {
             int pixel = 0;
 
-            for (int i = 0; i < PixelsCount * 3; i++)
+            for (int i = 0; i < _imageHeight * _imageWidth * 3; i++)
             {
                 pixel = memory.ReadInt32((ulong)i);
                 memory.WriteInt32((ulong)i, WorkUpPixel(pixel));
@@ -47,7 +46,7 @@ namespace Hast.Samples.SampleAssembly
         {
             double correctedPixel = pixel / 255.0;
             correctedPixel -= 0.5;
-            correctedPixel *= ContrastValue;
+            correctedPixel *= _contrastValue;
             correctedPixel += 0.5;
             correctedPixel *= 255;
 
@@ -58,56 +57,53 @@ namespace Hast.Samples.SampleAssembly
         }
     }
 
-    public class ImageContrastExtensions
+    public static class ImageContrastExtensions
     {
-        public SimpleMemory Memory { get; set; }
-        public Bitmap Image { get; set; }
-
-
-        public void CreateSimpleMemory(Bitmap image)
+        public Bitmap GetContrastImage(this ImageContrast imageContrast, Bitmap image, double contrast)
         {
-            Image = image;
-            Memory = new SimpleMemory((ulong)(image.Width * image.Height * 3));
+            var memory = CreateSimpleMemory(image);
+            imageContrast = new ImageContrast(image.Height, image.Width, contrast);
+            imageContrast.ProcessImage(memory);
+            return CreateImage(memory, image);
+        }
 
-            for (int x = 0; x < Image.Height; x++)
+
+        private static SimpleMemory CreateSimpleMemory(Bitmap image)
+        {
+            var memory = new SimpleMemory((ulong)(image.Width * image.Height * 3));
+
+            for (int x = 0; x < image.Height; x++)
             {
-                for (int y = 0; y < Image.Width; y++)
+                for (int y = 0; y < image.Width; y++)
                 {
                     var pixel = image.GetPixel(y, x);
 
-                    Memory.WriteInt32((ulong)((x * Image.Width + y) * 3), pixel.R);
-                    Memory.WriteInt32((ulong)((x * Image.Width + y) * 3 + 1), pixel.G);
-                    Memory.WriteInt32((ulong)((x * Image.Width + y) * 3 + 2), pixel.B);
+                    memory.WriteInt32((ulong)((x * image.Width + y) * 3), pixel.R);
+                    memory.WriteInt32((ulong)((x * image.Width + y) * 3 + 1), pixel.G);
+                    memory.WriteInt32((ulong)((x * image.Width + y) * 3 + 2), pixel.B);
                 }
             }
+
+            return memory;
         }
 
-        public Bitmap CreateImage()
+        private static Bitmap CreateImage(SimpleMemory memory, Bitmap image)
         {
-            Bitmap image = new Bitmap(Image);
-
             int r, g, b;
 
-            for (int x = 0; x < Image.Height; x++)
+            for (int x = 0; x < image.Height; x++)
             {
-                for (int y = 0; y < Image.Width; y++)
+                for (int y = 0; y < image.Width; y++)
                 {
-                    r = Memory.ReadInt32((ulong)((x * Image.Width + y) * 3));
-                    g = Memory.ReadInt32((ulong)((x * Image.Width + y) * 3 + 1));
-                    b = Memory.ReadInt32((ulong)((x * Image.Width + y) * 3 + 2));
+                    r = memory.ReadInt32((ulong)((x * image.Width + y) * 3));
+                    g = memory.ReadInt32((ulong)((x * image.Width + y) * 3 + 1));
+                    b = memory.ReadInt32((ulong)((x * image.Width + y) * 3 + 2));
 
                     image.SetPixel(y, x, Color.FromArgb(r, g, b));
                 }
             }
 
             return image;
-        }
-
-        public void GetContrastImage(double contrast)
-        {
-            ImageContrast imgProcess = new ImageContrast(Image.Height, Image.Width, contrast);
-
-            imgProcess.ProcessImage(Memory);
         }
     }
 }
