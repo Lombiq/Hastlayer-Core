@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
 {
-    public class ImageProcessorFilter
+    public class ImageFilter
     {
         private int _imageHeight;
         private int _imageWidth;
@@ -28,7 +28,7 @@ namespace Hast.Samples.SampleAssembly
         private int _currentIndex;
 
 
-        public ImageProcessorFilter(int imageHeight, int imageWidth, int baseValue = 1)
+        public ImageFilter(int imageHeight, int imageWidth, int baseValue = 1)
         {
             _imageHeight = imageHeight;
             _imageWidth = imageWidth;
