@@ -10,16 +10,6 @@ namespace Hast.Samples.SampleAssembly
 {
     public static class ImageProcessExtensions
     {
-        public static Bitmap GetContrastImage(this ImageContrast imageContrast, Bitmap image, double contrast)
-        {
-            //Change image contrast
-
-            var memory = CreateSimpleMemory(image);
-            imageContrast = new ImageContrast(image.Height, image.Width, contrast);
-            imageContrast.ChangeContrast(memory);
-            return CreateImage(memory, image);
-        }
-
         public static Bitmap GetGaussImage(this ImageFilter imageFilter, Bitmap image)
         {
             //Gauss smoothing
