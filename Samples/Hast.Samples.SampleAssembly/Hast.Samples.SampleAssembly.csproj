@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="ImageContrast.cs" />
     <Compile Include="ImageFilter.cs" />
-    <Compile Include="ImageProcessExtensions.cs" />
     <Compile Include="PrimeCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

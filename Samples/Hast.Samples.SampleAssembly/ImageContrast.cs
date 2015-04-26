@@ -76,13 +76,9 @@ namespace Hast.Samples.SampleAssembly
 
             var memory = CreateSimpleMemory(
                 image,
-                contrast,
-                ImageContrast.ImageStart_Index,
-                ImageContrast.ImageWidth_Index,
-                ImageContrast.ImageHeight_Index,
-                ImageContrast.ContrastValue_Index);
+                contrast);
             imageContrast.ChangeContrast(memory);
-            return CreateImage(memory, image, ImageContrast.ImageStart_Index);
+            return CreateImage(memory, image);
         }
 
 
@@ -90,15 +86,15 @@ namespace Hast.Samples.SampleAssembly
         /// Creates a <see cref="SimpleMemory"/> instance that stores the image.
         /// </summary>
         /// <param name="image">The image to process.</param>
-        /// <param name="cloneImage">Is image cloning required?</param>
+        /// <param name="contrastValue">The contast difference value.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
-        private static SimpleMemory CreateSimpleMemory(Bitmap image, int contrastValue, int startIndex, int widthIndex, int heightIndex, int contrastIndex)
+        private static SimpleMemory CreateSimpleMemory(Bitmap image, int contrastValue)
         {
             SimpleMemory memory = new SimpleMemory(image.Width * image.Height * 3 + 3);
 
-            memory.WriteInt32(widthIndex, image.Width);
-            memory.WriteInt32(heightIndex, image.Height);
-            memory.WriteInt32(contrastIndex, contrastValue);
+            memory.WriteInt32(ImageContrast.ImageWidth_Index, image.Width);
+            memory.WriteInt32(ImageContrast.ImageHeight_Index, image.Height);
+            memory.WriteInt32(ImageContrast.ContrastValue_Index, contrastValue);
 
             for (int x = 0; x < image.Height; x++)
             {
@@ -106,9 +102,9 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var pixel = image.GetPixel(y, x);
 
-                    memory.WriteInt32((x * image.Width + y) * 3 + startIndex, pixel.R);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 1 + startIndex, pixel.G);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 2 + startIndex, pixel.B);
+                    memory.WriteInt32((x * image.Width + y) * 3 + ImageContrast.ImageStart_Index, pixel.R);
+                    memory.WriteInt32((x * image.Width + y) * 3 + 1 + ImageContrast.ImageStart_Index, pixel.G);
+                    memory.WriteInt32((x * image.Width + y) * 3 + 2 + ImageContrast.ImageStart_Index, pixel.B);
                 }
             }
 
@@ -121,7 +117,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> instance.</param>
         /// <param name="image">The original image.</param>
         /// <returns>Returns the processed image.</returns>
-        private static Bitmap CreateImage(SimpleMemory memory, Bitmap image, int startIndex)
+        private static Bitmap CreateImage(SimpleMemory memory, Bitmap image)
         {
             Bitmap newImage = new Bitmap(image);
 
@@ -131,9 +127,9 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 0; y < newImage.Width; y++)
                 {
-                    r = memory.ReadInt32((x * newImage.Width + y) * 3 + startIndex);
-                    g = memory.ReadInt32((x * newImage.Width + y) * 3 + 1 + startIndex);
-                    b = memory.ReadInt32((x * newImage.Width + y) * 3 + 2 + startIndex);
+                    r = memory.ReadInt32((x * newImage.Width + y) * 3 + ImageContrast.ImageStart_Index);
+                    g = memory.ReadInt32((x * newImage.Width + y) * 3 + 1 + ImageContrast.ImageStart_Index);
+                    b = memory.ReadInt32((x * newImage.Width + y) * 3 + 2 + ImageContrast.ImageStart_Index);
 
                     newImage.SetPixel(y, x, Color.FromArgb(r, g, b));
                 }
