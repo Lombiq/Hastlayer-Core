@@ -185,7 +185,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         var variable = new Variable
                         {
-                            Name = expression.ToString() + ".arg",
+                            Name = GetNextUnusedTemporalVariableName(expression.ToString(), "argument", context),
                             DataType = type
                         };
 
@@ -276,23 +276,32 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        private static DataObjectReference BuildReturnReference(string targetName, DataType returnType, Invokation invokation, ISubTransformerContext context, IBlockElement block)
+        /// <summary>
+        /// Making sure that the e.g. return variable names are unique per method call (to transfer procedure outputs).
+        /// </summary>
+        private static string GetNextUnusedTemporalVariableName(string targetName, string suffix, ISubTransformerContext context)
         {
             var procedure = context.Scope.SubProgram;
 
-            // Making sure that the return variable names are unique per method call.
-            var returnVariableName = targetName + ".ret0";
+            var variableName = targetName + "." + suffix + "0";
             var returnVariableNameIndex = 0;
-            while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == returnVariableName))
+            while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == variableName))
             {
-                returnVariableName = targetName + ".ret" + ++returnVariableNameIndex;
+                variableName = targetName + "." + suffix + ++returnVariableNameIndex;
             }
+
+            return variableName;
+        }
+
+        private static DataObjectReference BuildReturnReference(string targetName, DataType returnType, Invokation invokation, ISubTransformerContext context, IBlockElement block)
+        {
+            var procedure = context.Scope.SubProgram;
 
             // Procedures can't just be assigned to variables like methods as they don't have a return value, just out parameters.
             // Thus here we create a variable for the out parameter (the return variable), run the procedure with it and then use it later too.
             var returnVariable = new Variable
             {
-                Name = returnVariableName,
+                Name = GetNextUnusedTemporalVariableName(targetName, "return", context),
                 DataType = returnType
             };
 
