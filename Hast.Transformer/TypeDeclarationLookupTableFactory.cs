@@ -17,10 +17,6 @@ namespace Hast.Transformer
     {
         public ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree)
         {
-           var z = syntaxTree
-                .GetTypes(true)
-                .GroupBy(d => d.Annotation<TypeDefinition>().FullName);
-
             var typeDeclarations = syntaxTree
                 .GetTypes(true)
                 .ToDictionary(d => d.Annotation<TypeDefinition>().FullName);
@@ -40,12 +36,10 @@ namespace Hast.Transformer
             }
         
         
-            public TypeDeclaration Lookup(AstType type)
+            public TypeDeclaration Lookup(string fullName)
             {
-                var typeReference = type.Annotation<TypeReference>();
-                if (typeReference == null) return null;
                 TypeDeclaration declaration;
-                _typeDeclarations.TryGetValue(typeReference.FullName, out declaration);
+                _typeDeclarations.TryGetValue(fullName, out declaration);
                 return declaration;
             }
         }
