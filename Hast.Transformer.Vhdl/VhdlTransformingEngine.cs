@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hast.Common.Models;
 using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers;
@@ -241,32 +242,35 @@ namespace Hast.Transformer.Vhdl
 
         private static void AddSimpleMemoryPorts(Module module)
         {
+            var dataWidthVector = new StdLogicVector { Size = 32 };
+            var addressWidthVector = dataWidthVector;
+
             module.Entity.Ports.Add(new Port
             {
-                Name = "DataIn",
+                Name = SimpleMemoryPortNames.DataIn,
                 Mode = PortMode.In,
-                DataType = KnownDataTypes.UnrangedInt
+                DataType = dataWidthVector
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = "DataOut",
+                Name = SimpleMemoryPortNames.DataOut,
                 Mode = PortMode.Out,
-                DataType = KnownDataTypes.UnrangedInt
+                DataType = dataWidthVector
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = "ReadAddress",
+                Name = SimpleMemoryPortNames.ReadAddress,
                 Mode = PortMode.Out,
-                DataType = KnownDataTypes.UnrangedInt
+                DataType = addressWidthVector
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = "WriteAddress",
+                Name = SimpleMemoryPortNames.WriteAddress,
                 Mode = PortMode.Out,
-                DataType = KnownDataTypes.UnrangedInt
+                DataType = addressWidthVector
             });
         }
     }

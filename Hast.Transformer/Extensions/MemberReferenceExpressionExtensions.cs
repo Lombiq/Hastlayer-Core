@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.Ast;
 using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp
@@ -36,6 +37,10 @@ namespace ICSharpCode.NRefactory.CSharp
                 return memberReferenceExpression.FindParentType().BaseTypes
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
+            }
+            else if (memberReferenceExpression.Target is IdentifierExpression)
+            {
+                return typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.Annotation<TypeInformation>().GetActualType().FullName);
             }
             else
             {

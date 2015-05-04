@@ -10,6 +10,8 @@ using Orchard;
 using Hast.Transformer.Vhdl.Models;
 using Mono.Cecil;
 using ICSharpCode.Decompiler.Ast;
+using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Models;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -179,7 +181,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (argument is PrimitiveExpression)
                     {
                         var primitiveArgument = ((PrimitiveExpression)argument);
-                        var type = _typeConverter.ConvertTypeReference(primitiveArgument.Annotation<TypeInformation>().ExpectedType);
+                        var type = _typeConverter.ConvertTypeReference(primitiveArgument.Annotation<TypeInformation>().GetActualType());
 
                         var variable = new Variable
                         {
@@ -209,11 +211,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 // This is a SimpleMemory access.
 
-                return new Invokation
+                var memberName = targetMemberReference.MemberName;
+
+                var isWrite = memberName.StartsWith("Write");
+                var invokationParameters = transformedParameters;
+                invokationParameters.AddRange(new[]
                 {
-                    Target = new Value { Content = "SimpleMemory" + targetMemberReference.MemberName },
-                    Parameters = transformedParameters
+                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = isWrite ? SimpleMemoryPortNames.DataOut : SimpleMemoryPortNames.DataIn },
+                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = isWrite ? SimpleMemoryPortNames.WriteAddress : SimpleMemoryPortNames.ReadAddress }
+                });
+
+                var target = "SimpleMemory" + targetMemberReference.MemberName;
+                var memoryOperationInvokation = new Invokation
+                {
+                    Target = new Value { Content = target },
+                    Parameters = invokationParameters
                 };
+
+                if (isWrite) return memoryOperationInvokation;
+
+                // If this is a memory read then comes the juggling with funneling the out parameter of the memory write
+                // procedure to the original location.
+                return BuildReturnReference(target, _typeConverter.ConvertTypeReference(expression.Annotation<TypeInformation>().GetActualType()), memoryOperationInvokation, context, block);
             }
 
 
@@ -228,22 +247,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
 
 
-            var returnVariableName = string.Empty;
-
             // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method).
             if (!(expression.Parent is ExpressionStatement))
             {
-                var procedure = context.Scope.SubProgram;
-
-                // Making sure that the return variable names are unique per method call.
-                returnVariableName = targetName + ".ret0";
-                var returnVariableNameIndex = 0;
-                while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == returnVariableName))
-                {
-                    returnVariableName = targetName + ".ret" + ++returnVariableNameIndex;
-                }
-
-
                 AstType returnType;
                 if (targetMemberReference != null)
                 {
@@ -260,29 +266,44 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     throw new NotSupportedException("Expressions having other than a MemberReferenceExpression as a target are not supported.");
                 }
 
-
-                // Procedures can't just be assigned to variables like methods as they don't have a return value, just out parameters.
-                // Thus here we create a variable for the out parameter (the return variable), run the procedure with it and then use it later too.
-                var returnVariable = new Variable
-                {
-                    Name = returnVariableName,
-                    DataType = _typeConverter.Convert(returnType)
-                };
-
-                procedure.Declarations.Add(returnVariable);
-                invokation.Parameters.Add(returnVariable.ToReference());
-
-                // Adding the procedure invokation directly to the body so it's before the current expression...
-                block.Body.Add(new Terminated(invokation));
-
-                // ...and using the return variable in place of the original call.
-                return returnVariable.ToReference();
+                return BuildReturnReference(targetName, _typeConverter.Convert(returnType), invokation, context, block);
             }
             else
             {
                 // Simply return the procedure invokation if there is no return value.
                 return invokation;
             }
+        }
+
+
+        private static DataObjectReference BuildReturnReference(string targetName, DataType returnType, Invokation invokation, ISubTransformerContext context, IBlockElement block)
+        {
+            var procedure = context.Scope.SubProgram;
+
+            // Making sure that the return variable names are unique per method call.
+            var returnVariableName = targetName + ".ret0";
+            var returnVariableNameIndex = 0;
+            while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == returnVariableName))
+            {
+                returnVariableName = targetName + ".ret" + ++returnVariableNameIndex;
+            }
+
+            // Procedures can't just be assigned to variables like methods as they don't have a return value, just out parameters.
+            // Thus here we create a variable for the out parameter (the return variable), run the procedure with it and then use it later too.
+            var returnVariable = new Variable
+            {
+                Name = returnVariableName,
+                DataType = returnType
+            };
+
+            procedure.Declarations.Add(returnVariable);
+            invokation.Parameters.Add(returnVariable.ToReference());
+
+            // Adding the procedure invokation directly to the body so it's before the current expression...
+            block.Body.Add(new Terminated(invokation));
+
+            // ...and using the return variable in place of the original call.
+            return returnVariable.ToReference();
         }
     }
 }

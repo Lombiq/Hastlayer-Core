@@ -4,6 +4,7 @@ using Hast.Common.Extensions;
 using Hast.Transformer.Visitors;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using Hast.Transformer.Models;
 
 namespace Hast.Transformer
 {
