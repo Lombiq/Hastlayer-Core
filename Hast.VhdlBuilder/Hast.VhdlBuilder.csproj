@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Representation\Declaration\Array.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
+    <Compile Include="Representation\Declaration\Generic.cs" />
+    <Compile Include="Representation\Declaration\StdLogicVector.cs" />
     <Compile Include="Representation\Declaration\TypedDataObjectBase.cs" />
     <Compile Include="Representation\Declaration\IBlockElement.cs" />
     <Compile Include="Representation\Declaration\IDeclarableElement.cs" />

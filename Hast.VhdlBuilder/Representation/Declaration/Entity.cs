@@ -8,7 +8,7 @@ using Hast.VhdlBuilder.Extensions;
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
     [DebuggerDisplay("{ToVhdl()}")]
-    public class Entity : INamedElement
+    public class Entity : INamedElement, IDeclarableElement
     {
         private string _name;
 
@@ -30,14 +30,16 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
         }
 
-        public List<IVhdlElement> Declarations { get; set; }
+        public List<Generic> Generics { get; set; }
         public List<Port> Ports { get; set; }
+        public List<IVhdlElement> Declarations { get; set; }
 
 
         public Entity()
         {
-            Ports = new List<Port>();
+            Generics = new List<Generic>();
             Declarations = new List<IVhdlElement>();
+            Ports = new List<Port>();
         }
 
 
@@ -46,7 +48,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 "entity " +
                 Name +
-                " is port(" +
+                " is " +
+                (Generics != null && Generics.Any() ? Generics.ToVhdl() : string.Empty) +
+                "port(" +
                 string.Join("; ", Ports.Select(parameter => parameter.ToVhdl())) +
                 ");" +
                 Declarations.ToVhdl() +
@@ -83,7 +87,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public Port()
         {
-            this.DataObjectKind = DataObjectKind.Signal;
+            DataObjectKind = DataObjectKind.Signal;
         }
 
         public override string ToVhdl()
