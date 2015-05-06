@@ -77,7 +77,7 @@ namespace Hast.Samples.SampleAssembly
                     bottomMiddle = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + FilterImage_ImageStartIndex);
                     bottomRight = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3 + FilterImage_ImageStartIndex);
 
-                    memory.WriteInt32(x * imageWidthHelper + y + FilterImage_ImageStartIndex, CalculatePixelValue(
+                    memory.WriteInt32(x * imageWidthHelper + y + FilterImage_ImageStartIndex, WorkUpMatrix(
                         topLeft, topMiddle, topRight,
                         middleLeft, pixel, middleRight,
                         bottomLeft, bottomMiddle, bottomRight,
@@ -114,7 +114,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="factor">The value to devide the summed matrix values with.</param>
         /// <param name="offset">Offset value added to the result.</param>
         /// <returns>Returns the value of the filtered pixel in matrix.</returns>
-        private int CalculatePixelValue(
+        private int WorkUpMatrix(
             int topLeft, int topMiddle, int topRight,
             int middleLeft, int pixel, int middleRight,
             int bottomLeft, int bottomMiddle, int bottomRight,
@@ -147,13 +147,10 @@ namespace Hast.Samples.SampleAssembly
 
     public static class ImageFilterExtensions
     {
-        /// <summary>
-        /// Applies Gauss filter to an image.
-        /// </summary>
-        /// <param name="image">The image to modify.</param>
-        /// <returns>Returns the smoothed image.</returns>
-        public static Bitmap ApplyGaussFilter(this ImageFilter imageFilter, Bitmap image)
+        public static Bitmap GetGaussImage(this ImageFilter imageFilter, Bitmap image)
         {
+            //Gauss smoothing
+
             var memory = CreateSimpleMemory(
                 image,
                 1, 2, 1,
@@ -164,13 +161,10 @@ namespace Hast.Samples.SampleAssembly
             return CreateImage(memory, image);
         }
 
-        /// <summary>
-        /// Applies Sobel filter to the image.
-        /// </summary>
-        /// <param name="image">The image to modify.</param>
-        /// <returns>Returns the edge map of the image.</returns>
-        public static Bitmap ApplySobelFilter(this ImageFilter imageFilter, Bitmap image)
+        public static Bitmap GetSobelImage(this ImageFilter imageFilter, Bitmap image)
         {
+            //Sobel edge detection
+
             var memory = CreateSimpleMemory(
                 image,
                 1, 2, 1,
@@ -180,13 +174,10 @@ namespace Hast.Samples.SampleAssembly
             return CreateImage(memory, image);
         }
 
-        /// <summary>
-        /// Applies a horizontal edge detection filter to the image.
-        /// </summary>
-        /// <param name="image">The image to modify.</param>
-        /// <returns>Returns the edge map of the image containing only horizontal edges.</returns>
-        public static Bitmap DetectHorizontalEdges(this ImageFilter imageFilter, Bitmap image)
+        public static Bitmap GetHorizontalEdges(this ImageFilter imageFilter, Bitmap image)
         {
+            //Horizontal edge detection
+
             var memory = CreateSimpleMemory(
                 image,
                 1, 1, 1,
@@ -196,13 +187,10 @@ namespace Hast.Samples.SampleAssembly
             return CreateImage(memory, image);
         }
 
-        /// <summary>
-        /// Applies a vertical edge detection filter to the image.
-        /// </summary>
-        /// <param name="image">The image to modify.</param>
-        /// <returns>Returns the edge map of the image containing only vertical edges.</returns>
-        public static Bitmap DetectVerticalEdges(this ImageFilter imageFilter, Bitmap image)
+        public static Bitmap GetVerticalEdges(this ImageFilter imageFilter, Bitmap image)
         {
+            //Vertical edge detection
+
             var memory = CreateSimpleMemory(
                 image,
                 1, 0, -1,

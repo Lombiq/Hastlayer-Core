@@ -14,10 +14,10 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ImageContrast
     {
-        public const int ImageHeight_Index = 0;
-        public const int ImageWidth_Index = 1;
-        public const int ContrastValue_Index = 2;
-        public const int ImageStart_Index = 3;
+        public const int ChangeContrast_ImageHeightIndex = 0;
+        public const int ChangeContrast_ImageWidthIndex = 1;
+        public const int ChangeContrast_ContrastValueIndex = 2;
+        public const int ChangeContrast_ImageStartIndex = 3;
 
 
         /// <summary>
@@ -26,9 +26,9 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void ChangeContrast(SimpleMemory memory)
         {
-            int imageWidth = memory.ReadInt32(ImageWidth_Index);
-            int imageHeight = memory.ReadInt32(ImageHeight_Index);
-            double contrastValue = memory.ReadInt32(ContrastValue_Index);
+            int imageWidth = memory.ReadInt32(ChangeContrast_ImageWidthIndex);
+            int imageHeight = memory.ReadInt32(ChangeContrast_ImageHeightIndex);
+            double contrastValue = memory.ReadInt32(ChangeContrast_ContrastValueIndex);
             int pixel = 0;
 
             if (contrastValue > 100)
@@ -40,8 +40,8 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 0; i < imageHeight * imageWidth * 3; i++)
             {
-                pixel = memory.ReadInt32(i + ImageStart_Index);
-                memory.WriteInt32(i + ImageStart_Index, WorkUpPixel(pixel, contrastValue));
+                pixel = memory.ReadInt32(i + ChangeContrast_ImageStartIndex);
+                memory.WriteInt32(i + ChangeContrast_ImageStartIndex, WorkUpPixel(pixel, contrastValue));
             }
         }
 
@@ -92,9 +92,9 @@ namespace Hast.Samples.SampleAssembly
         {
             SimpleMemory memory = new SimpleMemory(image.Width * image.Height * 3 + 3);
 
-            memory.WriteInt32(ImageContrast.ImageWidth_Index, image.Width);
-            memory.WriteInt32(ImageContrast.ImageHeight_Index, image.Height);
-            memory.WriteInt32(ImageContrast.ContrastValue_Index, contrastValue);
+            memory.WriteInt32(ImageContrast.ChangeContrast_ImageWidthIndex, image.Width);
+            memory.WriteInt32(ImageContrast.ChangeContrast_ImageHeightIndex, image.Height);
+            memory.WriteInt32(ImageContrast.ChangeContrast_ContrastValueIndex, contrastValue);
 
             for (int x = 0; x < image.Height; x++)
             {
@@ -102,9 +102,9 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var pixel = image.GetPixel(y, x);
 
-                    memory.WriteInt32((x * image.Width + y) * 3 + ImageContrast.ImageStart_Index, pixel.R);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 1 + ImageContrast.ImageStart_Index, pixel.G);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 2 + ImageContrast.ImageStart_Index, pixel.B);
+                    memory.WriteInt32((x * image.Width + y) * 3 + ImageContrast.ChangeContrast_ImageStartIndex, pixel.R);
+                    memory.WriteInt32((x * image.Width + y) * 3 + 1 + ImageContrast.ChangeContrast_ImageStartIndex, pixel.G);
+                    memory.WriteInt32((x * image.Width + y) * 3 + 2 + ImageContrast.ChangeContrast_ImageStartIndex, pixel.B);
                 }
             }
 
@@ -127,9 +127,9 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 0; y < newImage.Width; y++)
                 {
-                    r = memory.ReadInt32((x * newImage.Width + y) * 3 + ImageContrast.ImageStart_Index);
-                    g = memory.ReadInt32((x * newImage.Width + y) * 3 + 1 + ImageContrast.ImageStart_Index);
-                    b = memory.ReadInt32((x * newImage.Width + y) * 3 + 2 + ImageContrast.ImageStart_Index);
+                    r = memory.ReadInt32((x * newImage.Width + y) * 3 + ImageContrast.ChangeContrast_ImageStartIndex);
+                    g = memory.ReadInt32((x * newImage.Width + y) * 3 + 1 + ImageContrast.ChangeContrast_ImageStartIndex);
+                    b = memory.ReadInt32((x * newImage.Width + y) * 3 + 2 + ImageContrast.ChangeContrast_ImageStartIndex);
 
                     newImage.SetPixel(y, x, Color.FromArgb(r, g, b));
                 }
