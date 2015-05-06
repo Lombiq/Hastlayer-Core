@@ -67,7 +67,7 @@ namespace Hast.Samples.SampleAssembly
         /// <summary>
         /// Changes the contrast of an image.
         /// </summary>
-        /// <param name="image">The image to modify.</param>
+        /// <param name="image">The image that we modify.</param>
         /// <param name="contrast">The value of the intensity to calculate the new pixel values.</param>
         /// <returns></returns>
         public static Bitmap ChangeImageContrast(this ImageContrastModifier imageContrast, Bitmap image, int contrast)
