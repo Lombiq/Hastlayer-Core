@@ -77,7 +77,7 @@ namespace Hast.Samples.SampleAssembly
                     bottomMiddle = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + FilterImage_ImageStartIndex);
                     bottomRight = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3 + FilterImage_ImageStartIndex);
 
-                    memory.WriteInt32(x * imageWidthHelper + y + FilterImage_ImageStartIndex, CalculatePixelValue(
+                    memory.WriteUInt32(x * imageWidthHelper + y + FilterImage_ImageStartIndex, CalculatePixelValue(
                         topLeft, topMiddle, topRight,
                         middleLeft, pixel, middleRight,
                         bottomLeft, bottomMiddle, bottomRight,
