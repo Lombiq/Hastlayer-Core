@@ -20,10 +20,10 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void ChangeContrast(SimpleMemory memory)
         {
-            int imageWidth = memory.ReadInt32(ChangeContrast_ImageWidthIndex);
-            int imageHeight = memory.ReadInt32(ChangeContrast_ImageHeightIndex);
+            uint imageWidth = memory.ReadUInt32(ChangeContrast_ImageWidthIndex);
+            uint imageHeight = memory.ReadUInt32(ChangeContrast_ImageHeightIndex);
             double contrastValue = memory.ReadInt32(ChangeContrast_ContrastValueIndex);
-            int pixel = 0;
+            uint pixel = 0;
 
             if (contrastValue > 100)
                 contrastValue = 100;
@@ -34,8 +34,8 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 0; i < imageHeight * imageWidth * 3; i++)
             {
-                pixel = memory.ReadInt32(i + ChangeContrast_ImageStartIndex);
-                memory.WriteInt32(i + ChangeContrast_ImageStartIndex, ChangePixelValue(pixel, contrastValue));
+                pixel = memory.ReadUInt32(i + ChangeContrast_ImageStartIndex);
+                memory.WriteUInt32(i + ChangeContrast_ImageStartIndex, ChangePixelValue(pixel, contrastValue));
             }
         }
 
@@ -46,7 +46,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="pixel">The current pixel value.</param>
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The pixel value after changing the contrast.</returns>
-        private int ChangePixelValue(int pixel, double contrastValue)
+        private uint ChangePixelValue(uint pixel, double contrastValue)
         {
             double correctedPixel = pixel / 255.0;
             correctedPixel -= 0.5;
@@ -57,7 +57,7 @@ namespace Hast.Samples.SampleAssembly
             if (correctedPixel < 0) correctedPixel = 0;
             if (correctedPixel > 255) correctedPixel = 255;
 
-            return (int)correctedPixel;
+            return (uint)correctedPixel;
         }
     }
 
@@ -69,7 +69,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image that we modify.</param>
         /// <param name="contrast">The value of the intensity to calculate the new pixel values.</param>
-        /// <returns></returns>
+        /// <returns>Returns an image with changed contast values.</returns>
         public static Bitmap ChangeImageContrast(this ImageContrastModifier imageContrast, Bitmap image, int contrast)
         {
             var memory = CreateSimpleMemory(
@@ -90,9 +90,9 @@ namespace Hast.Samples.SampleAssembly
         {
             SimpleMemory memory = new SimpleMemory(image.Width * image.Height * 3 + 3);
 
-            memory.WriteInt32(ImageContrastModifier.ChangeContrast_ImageWidthIndex, image.Width);
-            memory.WriteInt32(ImageContrastModifier.ChangeContrast_ImageHeightIndex, image.Height);
-            memory.WriteInt32(ImageContrastModifier.ChangeContrast_ContrastValueIndex, contrastValue);
+            memory.WriteUInt32(ImageContrastModifier.ChangeContrast_ImageWidthIndex, (uint)image.Width);
+            memory.WriteUInt32(ImageContrastModifier.ChangeContrast_ImageHeightIndex, (uint)image.Height);
+            memory.WriteUInt32(ImageContrastModifier.ChangeContrast_ContrastValueIndex, (uint)contrastValue);
 
             for (int x = 0; x < image.Height; x++)
             {
@@ -100,9 +100,9 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var pixel = image.GetPixel(y, x);
 
-                    memory.WriteInt32((x * image.Width + y) * 3 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.R);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 1 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.G);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 2 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.B);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.R);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.G);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.B);
                 }
             }
 

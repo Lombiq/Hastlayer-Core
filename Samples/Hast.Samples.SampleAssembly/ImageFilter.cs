@@ -35,8 +35,8 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void FilterImage(SimpleMemory memory)
         {
-            int imageWidth = memory.ReadInt32(FilterImage_ImageWidthIndex);
-            int imageHeight = memory.ReadInt32(FilterImage_ImageHeightIndex);
+            uint imageWidth = memory.ReadUInt32(FilterImage_ImageWidthIndex);
+            uint imageHeight = memory.ReadUInt32(FilterImage_ImageHeightIndex);
 
             int factor = memory.ReadInt32(FilterImage_FactorIndex);
             int offset = memory.ReadInt32(FilterImage_OffsetIndex);
@@ -50,34 +50,34 @@ namespace Hast.Samples.SampleAssembly
             int bottomMiddleValue = memory.ReadInt32(FilterImage_BottomMiddleIndex);
             int bottomRightValue = memory.ReadInt32(FilterImage_BottomRightIndex);
 
-            int topLeft = 0;
-            int topMiddle = 0;
-            int topRight = 0;
-            int middleLeft = 0;
-            int pixel = 0;
-            int middleRight = 0;
-            int bottomLeft = 0;
-            int bottomMiddle = 0;
-            int bottomRight = 0;
+            uint topLeft = 0;
+            uint topMiddle = 0;
+            uint topRight = 0;
+            uint middleLeft = 0;
+            uint pixel = 0;
+            uint middleRight = 0;
+            uint bottomLeft = 0;
+            uint bottomMiddle = 0;
+            uint bottomRight = 0;
 
-            int pixelCountHelper = imageHeight * imageWidth * 3;
-            int imageWidthHelper = imageWidth * 3;
+            int pixelCountHelper = (int)(imageHeight * imageWidth * 3);
+            int imageWidthHelper = (int)(imageWidth * 3);
 
             for (int x = 1; x < imageHeight - 1; x++)
             {
                 for (int y = 3; y < imageWidthHelper - 3; y++)
                 {
-                    topLeft = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper - 3 + FilterImage_ImageStartIndex);
-                    topMiddle = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + FilterImage_ImageStartIndex);
-                    topRight = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + 3 + FilterImage_ImageStartIndex);
-                    middleLeft = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper - 3 + FilterImage_ImageStartIndex);
-                    pixel = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + FilterImage_ImageStartIndex);
-                    middleRight = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + 3 + FilterImage_ImageStartIndex);
-                    bottomLeft = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper - 3 + FilterImage_ImageStartIndex);
-                    bottomMiddle = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + FilterImage_ImageStartIndex);
-                    bottomRight = memory.ReadInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3 + FilterImage_ImageStartIndex);
+                    topLeft = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper - 3 + FilterImage_ImageStartIndex);
+                    topMiddle = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + FilterImage_ImageStartIndex);
+                    topRight = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + 3 + FilterImage_ImageStartIndex);
+                    middleLeft = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - 3 + FilterImage_ImageStartIndex);
+                    pixel = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + FilterImage_ImageStartIndex);
+                    middleRight = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + 3 + FilterImage_ImageStartIndex);
+                    bottomLeft = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper - 3 + FilterImage_ImageStartIndex);
+                    bottomMiddle = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + FilterImage_ImageStartIndex);
+                    bottomRight = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3 + FilterImage_ImageStartIndex);
 
-                    memory.WriteInt32(x * imageWidthHelper + y + FilterImage_ImageStartIndex, WorkUpMatrix(
+                    memory.WriteInt32(x * imageWidthHelper + y + FilterImage_ImageStartIndex, CalculatePixelValue(
                         topLeft, topMiddle, topRight,
                         middleLeft, pixel, middleRight,
                         bottomLeft, bottomMiddle, bottomRight,
@@ -114,10 +114,10 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="factor">The value to devide the summed matrix values with.</param>
         /// <param name="offset">Offset value added to the result.</param>
         /// <returns>Returns the value of the filtered pixel in matrix.</returns>
-        private int WorkUpMatrix(
-            int topLeft, int topMiddle, int topRight,
-            int middleLeft, int pixel, int middleRight,
-            int bottomLeft, int bottomMiddle, int bottomRight,
+        private uint CalculatePixelValue(
+            uint topLeft, uint topMiddle, uint topRight,
+            uint middleLeft, uint pixel, uint middleRight,
+            uint bottomLeft, uint bottomMiddle, uint bottomRight,
             int topLeftValue, int topMiddleValue, int topRightValue,
             int middleLeftValue, int pixelValue, int middleRightValue,
             int bottomLeftValue, int bottomMiddleValue, int bottomRightValue,
@@ -140,17 +140,20 @@ namespace Hast.Samples.SampleAssembly
             if (newPixel < 0) newPixel = 0;
             if (newPixel > 255) newPixel = 255;
 
-            return (int)newPixel;
+            return (uint)newPixel;
         }
     }
 
 
     public static class ImageFilterExtensions
     {
-        public static Bitmap GetGaussImage(this ImageFilter imageFilter, Bitmap image)
+        /// <summary>
+        /// Applies Gauss filter to an image.
+        /// </summary>
+        /// <param name="image">The image to modify.</param>
+        /// <returns>Returns the smoothed image.</returns>
+        public static Bitmap ApplyGaussFilter(this ImageFilter imageFilter, Bitmap image)
         {
-            //Gauss smoothing
-
             var memory = CreateSimpleMemory(
                 image,
                 1, 2, 1,
@@ -161,10 +164,13 @@ namespace Hast.Samples.SampleAssembly
             return CreateImage(memory, image);
         }
 
-        public static Bitmap GetSobelImage(this ImageFilter imageFilter, Bitmap image)
+        /// <summary>
+        /// Applies Sobel filter to the image.
+        /// </summary>
+        /// <param name="image">The image to modify.</param>
+        /// <returns>Returns the edge map of the image.</returns>
+        public static Bitmap ApplySobelFilter(this ImageFilter imageFilter, Bitmap image)
         {
-            //Sobel edge detection
-
             var memory = CreateSimpleMemory(
                 image,
                 1, 2, 1,
@@ -174,10 +180,13 @@ namespace Hast.Samples.SampleAssembly
             return CreateImage(memory, image);
         }
 
-        public static Bitmap GetHorizontalEdges(this ImageFilter imageFilter, Bitmap image)
+        /// <summary>
+        /// Applies a horizontal edge detection filter to the image.
+        /// </summary>
+        /// <param name="image">The image to modify.</param>
+        /// <returns>Returns the edge map of the image containing only horizontal edges.</returns>
+        public static Bitmap DetectHorizontalEdges(this ImageFilter imageFilter, Bitmap image)
         {
-            //Horizontal edge detection
-
             var memory = CreateSimpleMemory(
                 image,
                 1, 1, 1,
@@ -187,10 +196,13 @@ namespace Hast.Samples.SampleAssembly
             return CreateImage(memory, image);
         }
 
-        public static Bitmap GetVerticalEdges(this ImageFilter imageFilter, Bitmap image)
+        /// <summary>
+        /// Applies a vertical edge detection filter to the image.
+        /// </summary>
+        /// <param name="image">The image to modify.</param>
+        /// <returns>Returns the edge map of the image containing only vertical edges.</returns>
+        public static Bitmap DetectVerticalEdges(this ImageFilter imageFilter, Bitmap image)
         {
-            //Vertical edge detection
-
             var memory = CreateSimpleMemory(
                 image,
                 1, 0, -1,
@@ -226,8 +238,8 @@ namespace Hast.Samples.SampleAssembly
         {
             var memory = new SimpleMemory(image.Width * image.Height * 6 + 13);
 
-            memory.WriteInt32(ImageFilter.FilterImage_ImageWidthIndex, image.Width);
-            memory.WriteInt32(ImageFilter.FilterImage_ImageHeightIndex, image.Height);
+            memory.WriteUInt32(ImageFilter.FilterImage_ImageWidthIndex, (uint)image.Width);
+            memory.WriteUInt32(ImageFilter.FilterImage_ImageHeightIndex, (uint)image.Height);
             memory.WriteInt32(ImageFilter.FilterImage_TopLeftIndex, topLeft);
             memory.WriteInt32(ImageFilter.FilterImage_TopMiddleIndex, topMiddle);
             memory.WriteInt32(ImageFilter.FilterImage_TopRightIndex, topRight);
@@ -248,13 +260,13 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var pixelValue = image.GetPixel(y, x);
 
-                    memory.WriteInt32((x * image.Width + y) * 3 + ImageFilter.FilterImage_ImageStartIndex, pixelValue.R);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 1 + ImageFilter.FilterImage_ImageStartIndex, pixelValue.G);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 2 + ImageFilter.FilterImage_ImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + ImageFilter.FilterImage_ImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + ImageFilter.FilterImage_ImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + ImageFilter.FilterImage_ImageStartIndex, pixelValue.B);
 
-                    memory.WriteInt32((x * image.Width + y) * 3 + (size * 3) + ImageFilter.FilterImage_ImageStartIndex, pixelValue.R);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 1 + (size * 3) + ImageFilter.FilterImage_ImageStartIndex, pixelValue.G);
-                    memory.WriteInt32((x * image.Width + y) * 3 + 2 + (size * 3) + ImageFilter.FilterImage_ImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + (size * 3) + ImageFilter.FilterImage_ImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + (size * 3) + ImageFilter.FilterImage_ImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + (size * 3) + ImageFilter.FilterImage_ImageStartIndex, pixelValue.B);
                 }
             }
 
