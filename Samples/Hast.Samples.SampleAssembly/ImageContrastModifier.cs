@@ -92,7 +92,7 @@ namespace Hast.Samples.SampleAssembly
 
             memory.WriteUInt32(ImageContrastModifier.ChangeContrast_ImageWidthIndex, (uint)image.Width);
             memory.WriteUInt32(ImageContrastModifier.ChangeContrast_ImageHeightIndex, (uint)image.Height);
-            memory.WriteUInt32(ImageContrastModifier.ChangeContrast_ContrastValueIndex, (uint)contrastValue);
+            memory.WriteInt32(ImageContrastModifier.ChangeContrast_ContrastValueIndex, contrastValue);
 
             for (int x = 0; x < image.Height; x++)
             {
