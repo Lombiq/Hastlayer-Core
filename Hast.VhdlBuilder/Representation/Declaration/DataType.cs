@@ -27,5 +27,29 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return Name;
         }
+
+
+        public static bool operator ==(DataType a, DataType b)
+        {
+            // If both are null, or both are same instance, return true.
+            if (System.Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
+
+            // Else return true if names match:
+            return a.Name == b.Name;
+        }
+
+        public static bool operator !=(DataType a, DataType b)
+        {
+            return !(a == b);
+        }
     }
 }

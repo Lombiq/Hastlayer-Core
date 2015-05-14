@@ -40,7 +40,7 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else if (memberReferenceExpression.Target is IdentifierExpression)
             {
-                return typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.Annotation<TypeInformation>().GetActualType().FullName);
+                return typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualType().FullName);
             }
             else
             {
