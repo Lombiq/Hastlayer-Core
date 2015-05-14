@@ -52,7 +52,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var primitive = (PrimitiveExpression)expression;
 
-                var type = _typeConverter.ConvertTypeReference(expression.Annotation<TypeInformation>().GetActualType());
+                var type = _typeConverter.ConvertTypeReference(expression.GetActualType());
                 var value = primitive.Value.ToString();
                 if (type.TypeCategory == DataTypeCategory.Numeric) value = value.Replace(',', '.'); // Replacing decimal comma to decimal dot.
 
@@ -182,7 +182,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (argument is PrimitiveExpression)
                     {
                         var primitiveArgument = ((PrimitiveExpression)argument);
-                        var type = _typeConverter.ConvertTypeReference(primitiveArgument.Annotation<TypeInformation>().GetActualType());
+                        var type = _typeConverter.ConvertTypeReference(primitiveArgument.GetActualType());
 
                         var variable = new Variable
                         {
@@ -241,7 +241,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // If this is a memory read then comes the juggling with funneling the out parameter of the memory write
                 // procedure to the original location.
-                return BuildReturnReference(target, _typeConverter.ConvertTypeReference(currentNode.Annotation<TypeInformation>().GetActualType()), memoryOperationInvokation, context, block);
+                return BuildReturnReference(target, _typeConverter.ConvertTypeReference(currentNode.GetActualType()), memoryOperationInvokation, context, block);
             }
 
 
@@ -289,13 +289,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // This is a temporal workaround to get around cases where operations (e.g. multiplication) with 32b numbers resulting in a 64b number
             // would cause a cast to a 64b number type (what we don't support yet). See: https://lombiq.atlassian.net/browse/HAST-20
             var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
-            var fromTypeKeyword = expression.Annotation<TypeInformation>().GetActualType().FullName;
+            var fromTypeKeyword = expression.GetActualType().FullName;
             if (toTypeKeyword == "long" || toTypeKeyword == "ulong" || fromTypeKeyword == "System.Int64" || fromTypeKeyword == "System.UInt64")
             {
                 return Transform(expression.Expression, context, block);
             }
 
-            var fromType = _typeConverter.ConvertTypeReference(expression.Annotation<TypeInformation>().GetActualType());
+            var fromType = _typeConverter.ConvertTypeReference(expression.GetActualType());
             var toType = _typeConverter.Convert(expression.Type);
 
             var castInvokation = new Invokation();
