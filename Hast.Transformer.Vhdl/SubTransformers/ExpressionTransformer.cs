@@ -92,9 +92,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is CastExpression)
             {
-                // Since the cast is valid (the code was compiled correctly) it should be safe to just use the expression without the cast, as it
-                // should use the correct data type.
-                return Transform(((CastExpression)expression).Expression, context, block);
+                return TransformCastExpression((CastExpression)expression, context, block);
             }
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
@@ -230,9 +228,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (isWrite) return memoryOperationInvokation;
 
+                // Looking up the type information that will tell us what the return type of the memory read is. This might
+                // be some nodes up if e.g. there is an immediate cast expression.
+                AstNode currentNode = expression;
+                while (currentNode.Annotation<TypeInformation>() == null)
+                {
+                    currentNode = currentNode.Parent;
+                }
+
                 // If this is a memory read then comes the juggling with funneling the out parameter of the memory write
                 // procedure to the original location.
-                return BuildReturnReference(target, _typeConverter.ConvertTypeReference(expression.Annotation<TypeInformation>().GetActualType()), memoryOperationInvokation, context, block);
+                return BuildReturnReference(target, _typeConverter.ConvertTypeReference(currentNode.Annotation<TypeInformation>().GetActualType()), memoryOperationInvokation, context, block);
             }
 
 
@@ -273,6 +279,41 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Simply return the procedure invokation if there is no return value.
                 return invokation;
             }
+        }
+
+        private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context, IBlockElement block)
+        {
+            // This is a temporal workaround to get around cases where operations (e.g. multiplication) with 32b numbers resulting in a 64b number
+            // would cause a cast to a 64b number type (what we don't support yet). See: https://lombiq.atlassian.net/browse/HAST-20
+            var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
+            var fromTypeKeyword = expression.Annotation<TypeInformation>().GetActualType().FullName;
+            if (toTypeKeyword == "long" || toTypeKeyword == "ulong" || fromTypeKeyword == "System.Int64" || fromTypeKeyword == "System.UInt64")
+            {
+                return Transform(expression.Expression, context, block);
+            }
+
+            var fromType = _typeConverter.ConvertTypeReference(expression.Annotation<TypeInformation>().GetActualType());
+            var toType = _typeConverter.Convert(expression.Type);
+
+            var castInvokation = new Invokation();
+
+            // Trying supported cast scenarios:
+            if (fromType == KnownDataTypes.UnrangedInt && toType == KnownDataTypes.Real)
+            {
+                castInvokation.Target = new Raw("real");
+            }
+            else if ((fromType == KnownDataTypes.Real || fromType == KnownDataTypes.Natural) && (toType == KnownDataTypes.UnrangedInt || toType == KnownDataTypes.Natural))
+            {
+                castInvokation.Target = new Raw("integer");
+            }
+            else
+            {
+                throw new NotSupportedException("Casting from " + fromType.Name + " to " + toType.Name + " is not supported.");
+            }
+
+            castInvokation.Parameters.Add(Transform(expression.Expression, context, block));
+
+            return castInvokation;
         }
 
 
