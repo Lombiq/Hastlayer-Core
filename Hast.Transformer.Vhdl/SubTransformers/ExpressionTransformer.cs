@@ -217,8 +217,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var invokationParameters = transformedParameters;
                 invokationParameters.AddRange(new[]
                 {
-                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = isWrite ? SimpleMemoryPortNames.DataOut : SimpleMemoryPortNames.DataIn },
-                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = isWrite ? SimpleMemoryPortNames.WriteAddress : SimpleMemoryPortNames.ReadAddress }
+                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = (isWrite ? SimpleMemoryPortNames.DataOut : SimpleMemoryPortNames.DataIn).ToExtendedVhdlId() },
+                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = (isWrite ? SimpleMemoryPortNames.WriteAddress : SimpleMemoryPortNames.ReadAddress).ToExtendedVhdlId() }
                 });
 
                 var target = "SimpleMemory" + targetMemberReference.MemberName;
