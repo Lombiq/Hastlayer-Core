@@ -51,9 +51,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is PrimitiveExpression)
             {
                 var primitive = (PrimitiveExpression)expression;
-                // This works correctly but since not every primitive is an int the data type won't be correct. However since Content will be correct
-                // this will work fine.
-                return new Value { DataType = KnownDataTypes.Int32, Content = primitive.Value.ToString() };
+
+                var type = _typeConverter.ConvertTypeReference(expression.Annotation<TypeInformation>().GetActualType());
+                var value = primitive.Value.ToString();
+                if (type.TypeCategory == DataTypeCategory.Numeric) value = value.Replace(',', '.'); // Replacing decimal comma to decimal dot.
+
+                return new Value { DataType = type, Content = value };
             }
             else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
             else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
