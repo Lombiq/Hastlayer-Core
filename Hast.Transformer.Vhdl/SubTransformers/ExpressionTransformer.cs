@@ -46,17 +46,49 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is IdentifierExpression)
             {
                 var identifier = (IdentifierExpression)expression;
-                return new DataObjectReference { DataObjectKind = DataObjectKind.Variable, Name = identifier.Identifier.ToExtendedVhdlId() };
+                var reference = new DataObjectReference { DataObjectKind = DataObjectKind.Variable, Name = identifier.Identifier.ToExtendedVhdlId() };
+
+                if (!(identifier.Parent is BinaryOperatorExpression)) return reference;
+
+                // In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if necessary.
+
+                var binaryOperatorExpression = (BinaryOperatorExpression)identifier.Parent;
+                var leftType = _typeConverter.ConvertTypeReference(binaryOperatorExpression.Left.GetActualType());
+                var rightType = _typeConverter.ConvertTypeReference(binaryOperatorExpression.Right.GetActualType());
+
+                if (leftType == rightType) return reference;
+
+                var isLeft = binaryOperatorExpression.Left == expression;
+                var thisType = isLeft ? leftType : rightType;
+                var otherType = isLeft ? rightType : leftType;
+
+                // We need to convert types in a way to keep precision. E.g. conerting an int to real is fine, but vica versa would cause
+                // information loss.
+                if ((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real)
+                {
+                    return ImplementTypeConversion(thisType, otherType, reference);
+                }
+                else
+                {
+                    throw new NotImplementedException("Converting from " + thisType.Name + " to " + otherType.Name + " to fix a binary expression is not supported as it could cause information loss due to rounding.");
+                }
             }
             else if (expression is PrimitiveExpression)
             {
                 var primitive = (PrimitiveExpression)expression;
 
                 var type = _typeConverter.ConvertTypeReference(expression.GetActualType());
-                var value = primitive.Value.ToString();
-                if (type.TypeCategory == DataTypeCategory.Numeric) value = value.Replace(',', '.'); // Replacing decimal comma to decimal dot.
+                var valueString = primitive.Value.ToString();
+                if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.'); // Replacing decimal comma to decimal dot.
 
-                return new Value { DataType = type, Content = value };
+                // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer and a type conversion would
+                // be needed. Thus we add a .0 to the end to indicate it's a real.
+                if (type == KnownDataTypes.Real && !valueString.Contains('.'))
+                {
+                    valueString += ".0";
+                }
+
+                return new Value { DataType = type, Content = valueString };
             }
             else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
             else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
@@ -298,10 +330,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var fromType = _typeConverter.ConvertTypeReference(expression.GetActualType());
             var toType = _typeConverter.Convert(expression.Type);
 
+            return ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context, block));
+        }
+
+        private IVhdlElement ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression)
+        {
             var castInvokation = new Invokation();
 
             // Trying supported cast scenarios:
-            if (fromType == KnownDataTypes.UnrangedInt && toType == KnownDataTypes.Real)
+            if ((fromType == KnownDataTypes.UnrangedInt || fromType == KnownDataTypes.Natural) && toType == KnownDataTypes.Real)
             {
                 castInvokation.Target = new Raw("real");
             }
@@ -314,7 +351,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 throw new NotSupportedException("Casting from " + fromType.Name + " to " + toType.Name + " is not supported.");
             }
 
-            castInvokation.Parameters.Add(Transform(expression.Expression, context, block));
+            castInvokation.Parameters.Add(expression);
 
             return castInvokation;
         }
