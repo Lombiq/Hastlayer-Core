@@ -16,19 +16,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override string ToVhdl()
         {
-            var builder = new StringBuilder();
-
-            builder
-                .Append(DataObjectKind)
-                .Append(" ")
-                .Append(Name.ToExtendedVhdlId())
-                .Append(": ");
-
-            if (DataType != null) builder.Append(DataType.ToVhdl());
-
-            builder.Append(";");
-
-            return builder.ToString();
+            return
+                DataObjectKind.ToString() +
+                " " +
+                Name.ToExtendedVhdlId() +
+                (DataType != null ? ": " + DataType.ToVhdl() : string.Empty) +
+                ";";
         }
     }
 }
