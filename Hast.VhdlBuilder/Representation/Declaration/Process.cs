@@ -8,7 +8,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl()}")]
     public class Process : ISubProgram
     {
-        public string Name { get; set; }
+        public string Label { get; set; }
+        public string Name { get { return Label; } set { Label = value; } }
         public List<IDataObject> SesitivityList { get; set; }
         public List<IVhdlElement> Declarations { get; set; }
         public List<IVhdlElement> Body { get; set; }
@@ -29,6 +30,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             if (!string.IsNullOrEmpty(Name)) vhdl += Name.ToExtendedVhdlId() + ": ";
 
             return
+                (!string.IsNullOrEmpty(Label) ? Label.ToExtendedVhdlId() + ":" : string.Empty) +
                 "process (" +
                 string.Join("; ", SesitivityList.Select(signal => signal.Name.ToExtendedVhdlId())) +
                 ") " +

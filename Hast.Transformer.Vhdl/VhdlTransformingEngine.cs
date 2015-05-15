@@ -59,12 +59,12 @@ namespace Hast.Transformer.Vhdl
                     ReorderProcedures(vhdlTransformationContext);
                     var methodIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
 
-                    ProcessUtility.AddClockToProcesses(module, "Clock");
-
                     if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
                     {
                         AddSimpleMemoryPorts(module);
                     }
+
+                    ProcessUtility.AddClockToProcesses(module, "Clock");
 
                     return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, methodIdTable);
                 });
@@ -132,7 +132,7 @@ namespace Hast.Transformer.Vhdl
         {
             if (!transformationContext.InterfaceMethods.Any()) return MethodIdTable.Empty;
 
-            var proxyProcess = new Process { Name = "CallProxy" };
+            var proxyProcess = new Process { Label = "CallProxy" };
             var ports = transformationContext.Module.Entity.Ports;
             var methodIdTable = new MethodIdTable();
 
