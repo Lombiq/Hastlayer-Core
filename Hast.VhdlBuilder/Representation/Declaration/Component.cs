@@ -22,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "component " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 " port(" +
                 string.Join(", ", Ports.Select(parameter => parameter.ToVhdl())) +
                 ");" +

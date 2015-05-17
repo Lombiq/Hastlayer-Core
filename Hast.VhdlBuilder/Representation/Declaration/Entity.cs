@@ -93,7 +93,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public override string ToVhdl()
         {
             return
-                Name.ToExtendedVhdlId() +
+                Name +
                 ": " +
                 Mode +
                 " " +

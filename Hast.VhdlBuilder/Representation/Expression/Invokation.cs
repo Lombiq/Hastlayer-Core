@@ -37,7 +37,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl()
         {
-            return FormalParameter.Name.ToExtendedVhdlId() + " => " + ActualParameter.Name.ToExtendedVhdlId();
+            return FormalParameter.Name + " => " + ActualParameter.Name;
         }
     }
 }

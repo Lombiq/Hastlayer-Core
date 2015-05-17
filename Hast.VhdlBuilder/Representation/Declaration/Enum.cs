@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "type " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 " is (" +
                 string.Join(", ", Values.Select(value => value.ToVhdl())) +
                 ");";

@@ -25,14 +25,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl()
         {
-            var vhdl = "";
-
-            if (!string.IsNullOrEmpty(Name)) vhdl += Name.ToExtendedVhdlId() + ": ";
-
             return
-                (!string.IsNullOrEmpty(Label) ? Label.ToExtendedVhdlId() + ":" : string.Empty) +
+                (!string.IsNullOrEmpty(Label) ? Label + ":" : string.Empty) +
                 "process (" +
-                string.Join("; ", SesitivityList.Select(signal => signal.Name.ToExtendedVhdlId())) +
+                string.Join("; ", SesitivityList.Select(signal => signal.Name)) +
                 ") " +
                 Declarations.ToVhdl() +
                 " begin " +

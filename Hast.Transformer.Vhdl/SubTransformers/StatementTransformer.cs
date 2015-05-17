@@ -5,6 +5,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -41,7 +42,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     subProgram.Declarations.Add(new Variable
                     {
-                        Name = variableInitializer.Name,
+                        Name = variableInitializer.Name.ToExtendedVhdlId(),
                         DataType = type
                     });
                 }

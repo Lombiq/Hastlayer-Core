@@ -64,7 +64,7 @@ namespace Hast.Transformer.Vhdl
                         AddSimpleMemoryPorts(module);
                     }
 
-                    ProcessUtility.AddClockToProcesses(module, "Clock");
+                    ProcessUtility.AddClockToProcesses(module, "Clock".ToExtendedVhdlId());
 
                     return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, methodIdTable);
                 });
@@ -132,20 +132,20 @@ namespace Hast.Transformer.Vhdl
         {
             if (!transformationContext.InterfaceMethods.Any()) return MethodIdTable.Empty;
 
-            var proxyProcess = new Process { Label = "CallProxy" };
+            var proxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
             var ports = transformationContext.Module.Entity.Ports;
             var methodIdTable = new MethodIdTable();
 
             var methodIdPort = new Port
             {
-                Name = "MethodId",
+                Name = "MethodId".ToExtendedVhdlId(),
                 Mode = PortMode.In,
                 DataType = KnownDataTypes.UnrangedInt,
             };
 
             ports.Add(methodIdPort);
 
-            var caseExpression = new Case { Expression = methodIdPort.Name.ToExtendedVhdlIdValue() };
+            var caseExpression = new Case { Expression = methodIdPort.Name.ToVhdlIdValue() };
 
             var id = 1;
             foreach (var method in transformationContext.InterfaceMethods)
@@ -159,7 +159,7 @@ namespace Hast.Transformer.Vhdl
                     // Calling corresponding procedure.
                     var invokation = new Invokation
                     {
-                        Target = method.Procedure.Name.ToExtendedVhdlIdValue()
+                        Target = method.Procedure.Name.ToVhdlIdValue()
                     };
 
                     when.Body.Add(new Terminated(invokation));
@@ -172,7 +172,7 @@ namespace Hast.Transformer.Vhdl
                     {
                         var variable = new Variable
                         {
-                            Name = port.Name + ".var",
+                            Name = (port.Name.TrimExtendedVhdlIdDelimiters() + ".var").ToExtendedVhdlId(),
                             DataType = port.DataType
                         };
 
@@ -180,7 +180,7 @@ namespace Hast.Transformer.Vhdl
 
                         if (port.Mode == PortMode.In)
                         {
-                            when.Body.Add(new Terminated(new Assignment { AssignTo = variable, Expression = port.Name.ToExtendedVhdlIdValue() }));
+                            when.Body.Add(new Terminated(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() }));
                         }
 
                         portVariables[port] = variable;
@@ -189,7 +189,7 @@ namespace Hast.Transformer.Vhdl
                     // Calling corresponding procedure and taking care of its input/output parameters.
                     var invokation = new Invokation
                     {
-                        Target = method.Procedure.Name.ToExtendedVhdlIdValue(),
+                        Target = method.Procedure.Name.ToVhdlIdValue(),
                         // Using named parameters as the order of ports is not necessarily right
                         Parameters = method.ParameterMappings
                             .Select(mapping => new NamedInvokationParameter { FormalParameter = mapping.Parameter, ActualParameter = portVariables[mapping.Port] })
@@ -202,7 +202,7 @@ namespace Hast.Transformer.Vhdl
                     // Copying output variables to output ports.
                     foreach (var port in method.Ports.Where(p => p.Mode == PortMode.Out))
                     {
-                        when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToExtendedVhdlIdValue() }));
+                        when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }));
                     }
                 }
 
@@ -252,28 +252,28 @@ namespace Hast.Transformer.Vhdl
 
             module.Entity.Ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.DataIn,
+                Name = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId(),
                 Mode = PortMode.In,
                 DataType = dataWidthVector
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.DataOut,
+                Name = SimpleMemoryPortNames.DataOut.ToExtendedVhdlId(),
                 Mode = PortMode.Out,
                 DataType = dataWidthVector
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.ReadAddress,
+                Name = SimpleMemoryPortNames.ReadAddress.ToExtendedVhdlId(),
                 Mode = PortMode.Out,
                 DataType = addressWidthVector
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.WriteAddress,
+                Name = SimpleMemoryPortNames.WriteAddress.ToExtendedVhdlId(),
                 Mode = PortMode.Out,
                 DataType = addressWidthVector
             });

@@ -26,7 +26,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "procedure " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 (Parameters.Count > 0 ? " (" : " ") +
                 // Out params at the end
                 string.Join("; ", Parameters.OrderBy(parameter => parameter.ParameterType).Select(parameter => parameter.ToVhdl())) +
@@ -36,7 +36,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 "begin " +
                 Body.ToVhdl() +
                 " end procedure " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 ";";
         }
     }
@@ -60,7 +60,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 (DataObjectKind.ToString() ?? string.Empty) +
-                Name.ToExtendedVhdlId() +
+                Name +
                 ": " +
                 ParameterType +
                 " " +

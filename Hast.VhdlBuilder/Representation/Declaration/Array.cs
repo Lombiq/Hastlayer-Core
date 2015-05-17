@@ -20,7 +20,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "type " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 " is array (" +
                 (MaxLength > 0 ? MaxLength + " downto 0" : "integer range <>") +
                 ") of " +

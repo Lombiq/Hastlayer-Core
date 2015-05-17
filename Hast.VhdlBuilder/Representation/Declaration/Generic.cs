@@ -39,7 +39,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         override public string ToVhdl()
         {
             return
-                Name.ToExtendedVhdlId() +
+                Name +
                 ": " +
                 Value.DataType.ToVhdl() +
                 ":=" +

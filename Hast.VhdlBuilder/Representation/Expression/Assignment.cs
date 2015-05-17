@@ -14,7 +14,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ToVhdl()
         {
             return
-                AssignTo.Name.ToExtendedVhdlId() +
+                AssignTo.Name +
                 (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
                 Expression.ToVhdl();
         }

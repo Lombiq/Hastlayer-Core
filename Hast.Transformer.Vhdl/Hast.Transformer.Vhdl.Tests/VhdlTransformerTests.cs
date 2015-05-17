@@ -18,6 +18,7 @@ using ICSharpCode.NRefactory.CSharp;
 using Moq;
 using NUnit.Framework;
 using Orchard.Tests.Utility;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -82,7 +83,7 @@ namespace Hast.Transformer.Vhdl.Tests
             Assert.AreEqual(topModule.Entity, topModule.Architecture.Entity, "The top module's entity is not references by the architecture.");
             Assert.AreEqual(topModule.Architecture.Body.Count, 1, "There is not just one element, the call proxy, in the top module's architecture's body.");
             var callProxyProcess = topModule.Architecture.Body.Single();
-            Assert.That(callProxyProcess is Process && ((Process)callProxyProcess).Name == "CallProxy", "There is no call proxy process.");
+            Assert.That(callProxyProcess is Process && ((Process)callProxyProcess).Name == "CallProxy".ToExtendedVhdlId(), "There is no call proxy process.");
         }
 
         [Test]

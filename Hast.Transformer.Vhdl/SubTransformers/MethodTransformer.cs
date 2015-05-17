@@ -5,6 +5,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -32,7 +33,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public void Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
             var fullName = method.GetFullName();
-            var procedure = new Procedure { Name = fullName };
+            var procedure = new Procedure { Name = fullName.ToExtendedVhdlId() };
 
 
             // Handling when the method is an interface method, i.e. should be present in the interface of the VHDL module.
@@ -53,11 +54,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (!isVoid)
             {
                 // Since this way there's a dot in the output var's name, it can't clash with normal variables.
-                outputParam = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.var" };
+                outputParam = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.var".ToExtendedVhdlId() };
 
                 if (interfaceMethod != null)
                 {
-                    var outputPort = new Port { DataType = returnType, Mode = PortMode.Out, Name = fullName + ".output" };
+                    var outputPort = new Port { DataType = returnType, Mode = PortMode.Out, Name = (fullName + ".output").ToExtendedVhdlId() };
                     interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = outputPort, Parameter = outputParam });
                     interfaceMethod.Ports.Add(outputPort);
                 }
@@ -76,16 +77,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     var type = _typeConverter.Convert(parameter.Type);
 
-                    var procedureParameter = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = parameter.Name + ".param" };
+                    var procedureParameter = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = (parameter.Name + ".param").ToExtendedVhdlId() };
 
                     // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables.
-                    var variable = new Variable { DataType = type, Name = parameter.Name };
+                    var variable = new Variable { DataType = type, Name = parameter.Name.ToExtendedVhdlId() };
                     procedure.Declarations.Add(variable);
                     procedure.Body.Add(new Terminated(new Assignment { AssignTo = variable.ToReference(), Expression = procedureParameter.ToReference() }));
 
                     if (interfaceMethod != null)
                     {
-                        var inputPort = new Port { DataType = type, Mode = PortMode.In, Name = fullName + "." + parameter.Name };
+                        var inputPort = new Port { DataType = type, Mode = PortMode.In, Name = (fullName + "." + parameter.Name).ToExtendedVhdlId() };
                         interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = inputPort, Parameter = procedureParameter });
                         interfaceMethod.Ports.Add(inputPort);
                     }

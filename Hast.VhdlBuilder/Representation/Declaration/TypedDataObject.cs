@@ -19,7 +19,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 DataObjectKind.ToString() +
                 " " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 (DataType != null ? ": " + DataType.ToVhdl() : string.Empty) +
                 ";";
         }

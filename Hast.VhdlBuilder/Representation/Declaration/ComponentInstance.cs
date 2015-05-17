@@ -24,7 +24,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 Label +
                 " : " +
-                Component.Name.ToExtendedVhdlId() +
+                Component.Name +
                 " port map (" +
                 string.Join(", ", PortMappings.Select(mapping => mapping.ToVhdl())) +
                 ");";
@@ -40,7 +40,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl()
         {
-            return From.ToExtendedVhdlId() + " => " + To.ToExtendedVhdlId();
+            return From + " => " + To;
         }
     }
 }

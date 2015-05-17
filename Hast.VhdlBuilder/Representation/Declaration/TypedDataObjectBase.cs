@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public DataObjectReference ToReference()
         {
-            return new DataObjectReference { DataObjectKind = DataObjectKind, Name = Name.ToExtendedVhdlId() };
+            return new DataObjectReference { DataObjectKind = DataObjectKind, Name = Name };
         }
     }
 }

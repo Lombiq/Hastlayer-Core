@@ -277,13 +277,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
 
-            var targetName = expression.GetFullName();
+            var targetName = expression.GetFullName().ToExtendedVhdlId();
 
             context.TransformationContext.MethodCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
 
             var invokation = new Invokation
             {
-                Target = targetName.ToExtendedVhdlIdValue(),
+                Target = targetName.ToVhdlIdValue(),
                 Parameters = transformedParameters
             };
 
@@ -362,13 +362,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// </summary>
         private static string GetNextUnusedTemporalVariableName(string targetName, string suffix, ISubTransformerContext context)
         {
+            targetName = targetName.TrimExtendedVhdlIdDelimiters();
+
             var procedure = context.Scope.SubProgram;
 
-            var variableName = targetName + "." + suffix + "0";
+            var variableName = (targetName + "." + suffix + "0").ToExtendedVhdlId();
             var returnVariableNameIndex = 0;
             while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == variableName))
             {
-                variableName = targetName + "." + suffix + ++returnVariableNameIndex;
+                variableName = (targetName + "." + suffix + ++returnVariableNameIndex).ToExtendedVhdlId();
             }
 
             return variableName;
