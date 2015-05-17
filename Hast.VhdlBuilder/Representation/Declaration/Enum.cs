@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -23,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "type " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 " is (" +
                 string.Join(", ", Values.Select(value => value.ToVhdl())) +
                 ");";

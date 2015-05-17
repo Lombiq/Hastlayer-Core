@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -41,7 +42,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     subProgram.Declarations.Add(new Variable
                     {
-                        Name = variableInitializer.Name,
+                        Name = variableInitializer.Name.ToExtendedVhdlId(),
                         DataType = type
                     });
                 }

@@ -20,7 +20,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "type " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 " is record " +
                 Members.ToVhdl() +
                 " end record;";

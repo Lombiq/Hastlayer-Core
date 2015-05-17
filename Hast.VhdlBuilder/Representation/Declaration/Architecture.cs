@@ -26,7 +26,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "architecture " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 " of " +
                 Entity.Name + // Entity names can't be extended identifiers.
                 " is " +
@@ -34,7 +34,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " begin " +
                 Body.ToVhdl() +
                 " end " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 ";";
         }
     }

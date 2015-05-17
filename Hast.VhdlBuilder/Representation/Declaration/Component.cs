@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -22,7 +21,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "component " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 " port(" +
                 string.Join(", ", Ports.Select(parameter => parameter.ToVhdl())) +
                 ");" +

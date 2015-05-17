@@ -15,6 +15,14 @@ namespace Hast.VhdlBuilder.Extensions
         }
 
         /// <summary>
+        /// Trims the VHDL extended identifier delimiters (backslash characters) from the given string.
+        /// </summary>
+        public static string TrimExtendedVhdlIdDelimiters(this string id)
+        {
+            return id.Trim('\\');
+        }
+
+        /// <summary>
         /// Converts a string identifier to a VHDL identifier value object as an extended VHDL identifier.
         /// </summary>
         public static Value ToExtendedVhdlIdValue(this string id)

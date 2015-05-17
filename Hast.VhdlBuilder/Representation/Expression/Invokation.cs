@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
@@ -37,7 +36,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl()
         {
-            return FormalParameter.Name.ToExtendedVhdlId() + " => " + ActualParameter.Name.ToExtendedVhdlId();
+            return FormalParameter.Name + " => " + ActualParameter.Name;
         }
     }
 }

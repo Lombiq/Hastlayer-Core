@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.Ast;
 using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp

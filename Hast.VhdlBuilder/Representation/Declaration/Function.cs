@@ -27,7 +27,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "function " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 " (" +
                 string.Join("; ", Arguments.Select(parameter => parameter.ToVhdl())) +
                 ") return " +
@@ -37,7 +37,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 "begin " +
                 Body.ToVhdl() +
                 " end " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 ";";
         }
     }
@@ -49,7 +49,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 (DataObjectKind.ToString() ?? string.Empty) +
-                Name.ToExtendedVhdlId() +
+                Name +
                 ": " +
                 DataType.ToVhdl();
         }

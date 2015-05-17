@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using Hast.Common.Configuration;
 using Hast.Common.Extensions;
+using Hast.Transformer.Models;
 using Hast.Transformer.Visitors;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
-using Hast.Transformer.Models;
 
 namespace Hast.Transformer
 {

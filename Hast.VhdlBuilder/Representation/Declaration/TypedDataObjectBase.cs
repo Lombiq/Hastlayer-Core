@@ -1,5 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
-using Hast.VhdlBuilder.Representation.Expression;
+﻿using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -10,7 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public DataObjectReference ToReference()
         {
-            return new DataObjectReference { DataObjectKind = DataObjectKind, Name = Name.ToExtendedVhdlId() };
+            return new DataObjectReference { DataObjectKind = DataObjectKind, Name = Name };
         }
     }
 }

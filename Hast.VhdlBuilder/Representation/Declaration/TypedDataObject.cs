@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Text;
-using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -19,7 +17,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 DataObjectKind.ToString() +
                 " " +
-                Name.ToExtendedVhdlId() +
+                Name +
                 (DataType != null ? ": " + DataType.ToVhdl() : string.Empty) +
                 ";";
         }

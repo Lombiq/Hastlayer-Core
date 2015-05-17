@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
-using Hast.Transformer.Vhdl.Models;
-using Mono.Cecil;
-using ICSharpCode.Decompiler.Ast;
-using Hast.Transformer.Vhdl.Constants;
-using Hast.Transformer.Models;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -277,13 +276,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
 
-            var targetName = expression.GetFullName();
+            var targetName = expression.GetFullName().ToExtendedVhdlId();
 
             context.TransformationContext.MethodCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
 
             var invokation = new Invokation
             {
-                Target = targetName.ToExtendedVhdlIdValue(),
+                Target = targetName.ToVhdlIdValue(),
                 Parameters = transformedParameters
             };
 
@@ -362,13 +361,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// </summary>
         private static string GetNextUnusedTemporalVariableName(string targetName, string suffix, ISubTransformerContext context)
         {
+            targetName = targetName.TrimExtendedVhdlIdDelimiters();
+
             var procedure = context.Scope.SubProgram;
 
-            var variableName = targetName + "." + suffix + "0";
+            var variableName = (targetName + "." + suffix + "0").ToExtendedVhdlId();
             var returnVariableNameIndex = 0;
             while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == variableName))
             {
-                variableName = targetName + "." + suffix + ++returnVariableNameIndex;
+                variableName = (targetName + "." + suffix + ++returnVariableNameIndex).ToExtendedVhdlId();
             }
 
             return variableName;
