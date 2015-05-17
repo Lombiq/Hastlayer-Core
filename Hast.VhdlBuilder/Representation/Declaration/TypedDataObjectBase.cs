@@ -1,5 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
-using Hast.VhdlBuilder.Representation.Expression;
+﻿using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {

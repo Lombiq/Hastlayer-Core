@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {

@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
-using Hast.Transformer.Vhdl.Models;
-using Mono.Cecil;
-using ICSharpCode.Decompiler.Ast;
-using Hast.Transformer.Vhdl.Constants;
-using Hast.Transformer.Models;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
