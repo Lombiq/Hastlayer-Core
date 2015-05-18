@@ -39,11 +39,14 @@ namespace Hast.Samples.Consumer
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);
 
-                        var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
-                        var modifiedImage = imageContrastModifier.ChangeImageContrast(new Bitmap("fpga.jpg"), -50);
+                        using (var bitmap = new Bitmap("fpga.jpg"))
+                        {
+                            var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
+                            var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
 
-                        var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
-                        var filteredImage = imageFilter.DetectHorizontalEdges(new Bitmap("fpga.jpg"));
+                            var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
+                            var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
+                        }
                     }
 
                     // Generating hardware from test assemblies:
