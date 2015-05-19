@@ -35,8 +35,8 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void FilterImage(SimpleMemory memory)
         {
-            uint imageWidth = memory.ReadUInt32(FilterImage_ImageWidthIndex);
-            uint imageHeight = memory.ReadUInt32(FilterImage_ImageHeightIndex);
+            UInt16 imageWidth = (UInt16)memory.ReadUInt32(FilterImage_ImageWidthIndex);
+            UInt16 imageHeight = (UInt16)memory.ReadUInt32(FilterImage_ImageHeightIndex);
 
             int factor = memory.ReadInt32(FilterImage_FactorIndex);
             int offset = memory.ReadInt32(FilterImage_OffsetIndex);
@@ -50,32 +50,32 @@ namespace Hast.Samples.SampleAssembly
             int bottomMiddleValue = memory.ReadInt32(FilterImage_BottomMiddleIndex);
             int bottomRightValue = memory.ReadInt32(FilterImage_BottomRightIndex);
 
-            uint topLeft = 0;
-            uint topMiddle = 0;
-            uint topRight = 0;
-            uint middleLeft = 0;
-            uint pixel = 0;
-            uint middleRight = 0;
-            uint bottomLeft = 0;
-            uint bottomMiddle = 0;
-            uint bottomRight = 0;
+            UInt16 topLeft = 0;
+            UInt16 topMiddle = 0;
+            UInt16 topRight = 0;
+            UInt16 middleLeft = 0;
+            UInt16 pixel = 0;
+            UInt16 middleRight = 0;
+            UInt16 bottomLeft = 0;
+            UInt16 bottomMiddle = 0;
+            UInt16 bottomRight = 0;
 
             int pixelCountHelper = (int)(imageHeight * imageWidth * 3);
-            int imageWidthHelper = (int)(imageWidth * 3);
+            UInt16 imageWidthHelper = (UInt16)(imageWidth * 3);
 
             for (int x = 1; x < imageHeight - 1; x++)
             {
                 for (int y = 3; y < imageWidthHelper - 3; y++)
                 {
-                    topLeft = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper - 3 + FilterImage_ImageStartIndex);
-                    topMiddle = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + FilterImage_ImageStartIndex);
-                    topRight = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + 3 + FilterImage_ImageStartIndex);
-                    middleLeft = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - 3 + FilterImage_ImageStartIndex);
-                    pixel = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + FilterImage_ImageStartIndex);
-                    middleRight = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + 3 + FilterImage_ImageStartIndex);
-                    bottomLeft = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper - 3 + FilterImage_ImageStartIndex);
-                    bottomMiddle = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + FilterImage_ImageStartIndex);
-                    bottomRight = memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3 + FilterImage_ImageStartIndex);
+                    topLeft = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper - 3 + FilterImage_ImageStartIndex);
+                    topMiddle = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + FilterImage_ImageStartIndex);
+                    topRight = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + 3 + FilterImage_ImageStartIndex);
+                    middleLeft = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - 3 + FilterImage_ImageStartIndex);
+                    pixel = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + FilterImage_ImageStartIndex);
+                    middleRight = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + 3 + FilterImage_ImageStartIndex);
+                    bottomLeft = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper - 3 + FilterImage_ImageStartIndex);
+                    bottomMiddle = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + FilterImage_ImageStartIndex);
+                    bottomRight = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3 + FilterImage_ImageStartIndex);
 
                     memory.WriteUInt32(x * imageWidthHelper + y + FilterImage_ImageStartIndex, CalculatePixelValue(
                         topLeft, topMiddle, topRight,
@@ -114,10 +114,10 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="factor">The value to devide the summed matrix values with.</param>
         /// <param name="offset">Offset value added to the result.</param>
         /// <returns>Returns the value of the filtered pixel in matrix.</returns>
-        private uint CalculatePixelValue(
-            uint topLeft, uint topMiddle, uint topRight,
-            uint middleLeft, uint pixel, uint middleRight,
-            uint bottomLeft, uint bottomMiddle, uint bottomRight,
+        private UInt16 CalculatePixelValue(
+            UInt16 topLeft, UInt16 topMiddle, UInt16 topRight,
+            UInt16 middleLeft, UInt16 pixel, UInt16 middleRight,
+            UInt16 bottomLeft, UInt16 bottomMiddle, UInt16 bottomRight,
             int topLeftValue, int topMiddleValue, int topRightValue,
             int middleLeftValue, int pixelValue, int middleRightValue,
             int bottomLeftValue, int bottomMiddleValue, int bottomRightValue,
@@ -140,7 +140,7 @@ namespace Hast.Samples.SampleAssembly
             if (newPixel < 0) newPixel = 0;
             if (newPixel > 255) newPixel = 255;
 
-            return (uint)newPixel;
+            return (UInt16)newPixel;
         }
     }
 

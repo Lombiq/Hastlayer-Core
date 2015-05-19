@@ -47,7 +47,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="pixel">The current pixel value.</param>
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The pixel value after changing the contrast.</returns>
-        private UInt16 ChangePixelValue(uint pixel, double contrastValue)
+        private UInt16 ChangePixelValue(UInt16 pixel, double contrastValue)
         {
             double correctedPixel = pixel / 255.0;
             correctedPixel -= 0.5;
