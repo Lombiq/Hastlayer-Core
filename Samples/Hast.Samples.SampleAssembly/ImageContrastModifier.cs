@@ -33,7 +33,7 @@ namespace Hast.Samples.SampleAssembly
 
             contrastValue = (100.0 + contrastValue) / 100.0;
 
-            for (int i = 0; i < imageHeight * imageWidth * 3; i++)
+            for (UInt16 i = 0; i < imageHeight * imageWidth * 3; i++)
             {
                 pixel = (UInt16)memory.ReadUInt32(i + ChangeContrast_ImageStartIndex);
                 memory.WriteUInt32(i + ChangeContrast_ImageStartIndex, ChangePixelValue(pixel, contrastValue));

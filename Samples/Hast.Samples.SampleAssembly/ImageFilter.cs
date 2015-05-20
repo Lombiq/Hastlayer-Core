@@ -63,9 +63,9 @@ namespace Hast.Samples.SampleAssembly
             int pixelCountHelper = (int)(imageHeight * imageWidth * 3);
             UInt16 imageWidthHelper = (UInt16)(imageWidth * 3);
 
-            for (int x = 1; x < imageHeight - 1; x++)
+            for (UInt16 x = 1; x < imageHeight - 1; x++)
             {
-                for (int y = 3; y < imageWidthHelper - 3; y++)
+                for (UInt16 y = 3; y < imageWidthHelper - 3; y++)
                 {
                     topLeft = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper - 3 + FilterImage_ImageStartIndex);
                     topMiddle = (UInt16)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + FilterImage_ImageStartIndex);
