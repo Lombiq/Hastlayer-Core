@@ -156,10 +156,38 @@ namespace Hast.Transformer.Vhdl
 
                 if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
                 {
-                    // Calling corresponding procedure.
+                    // Calling corresponding procedure with SimpleMemory signals passed in.
+                    var simpleMemoryParameterNames = new [] { SimpleMemoryNames.DataInLocal, SimpleMemoryNames.DataOutLocal, SimpleMemoryNames.ReadAddressLocal, SimpleMemoryNames.WriteAddressLocal };
+                    var simpleMemoryParameters = method.Procedure.Parameters
+                        .Where(parameter => simpleMemoryParameterNames.Contains(parameter.Name))
+                        .Select(parameter =>
+                        {
+                            var reference = new DataObjectReference { DataObjectKind = DataObjectKind.Signal };
+
+                            if (parameter.Name == SimpleMemoryNames.DataInLocal)
+                            {
+                                reference.Name = SimpleMemoryNames.DataInPort;
+                            }
+                            else if (parameter.Name == SimpleMemoryNames.DataOutLocal)
+                            {
+                                reference.Name = SimpleMemoryNames.DataOutPort;
+                            }
+                            else if (parameter.Name == SimpleMemoryNames.ReadAddressLocal)
+                            {
+                                reference.Name = SimpleMemoryNames.ReadAddressPort;
+                            }
+                            else
+                            {
+                                reference.Name = SimpleMemoryNames.WriteAddressPort;
+                            }
+
+                            return reference;
+                        });
+
                     var invokation = new Invokation
                     {
-                        Target = method.Procedure.Name.ToVhdlIdValue()
+                        Target = method.Procedure.Name.ToVhdlIdValue(),
+                        Parameters = new List<IVhdlElement>(simpleMemoryParameters)
                     };
 
                     when.Body.Add(new Terminated(invokation));
@@ -247,35 +275,32 @@ namespace Hast.Transformer.Vhdl
 
         private static void AddSimpleMemoryPorts(Module module)
         {
-            var dataWidthVector = new StdLogicVector { Size = 32 };
-            var addressWidthVector = dataWidthVector;
-
             module.Entity.Ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId(),
+                Name = SimpleMemoryNames.DataInPort,
                 Mode = PortMode.In,
-                DataType = dataWidthVector
+                DataType = SimpleMemoryTypes.DataPortsDataType
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.DataOut.ToExtendedVhdlId(),
+                Name = SimpleMemoryNames.DataOutPort,
                 Mode = PortMode.Out,
-                DataType = dataWidthVector
+                DataType = SimpleMemoryTypes.DataPortsDataType
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.ReadAddress.ToExtendedVhdlId(),
+                Name = SimpleMemoryNames.ReadAddressPort,
                 Mode = PortMode.Out,
-                DataType = addressWidthVector
+                DataType = SimpleMemoryTypes.AddressPortsDataType
             });
 
             module.Entity.Ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.WriteAddress.ToExtendedVhdlId(),
+                Name = SimpleMemoryNames.WriteAddressPort,
                 Mode = PortMode.Out,
-                DataType = addressWidthVector
+                DataType = SimpleMemoryTypes.AddressPortsDataType
             });
         }
     }

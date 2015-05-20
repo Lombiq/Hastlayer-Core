@@ -8,7 +8,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         public override string ToVhdl()
         {
-            // Shouldn't use extended identifier as the reference can be a normal one too.
             return Name;
         }
     }

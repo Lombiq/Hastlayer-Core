@@ -2,6 +2,12 @@
 
 namespace Hast.Transformer.SimpleMemory
 {
+    /// <summary>
+    /// Represents a simplified memory model available on the FPGA for transformed algorithms.
+    /// </summary>
+    /// <remarks>
+    /// All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
+    /// </remarks>
     public class SimpleMemory
     {
         public const uint MemoryCellSizeBytes = 4;
