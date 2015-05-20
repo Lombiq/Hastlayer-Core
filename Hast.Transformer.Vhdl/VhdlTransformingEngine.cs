@@ -170,7 +170,7 @@ namespace Hast.Transformer.Vhdl
                             }
                             else if (parameter.Name == SimpleMemoryNames.DataOutLocal)
                             {
-                                reference.Name = SimpleMemoryNames.DataInPort;
+                                reference.Name = SimpleMemoryNames.DataOutPort;
                             }
                             else if (parameter.Name == SimpleMemoryNames.ReadAddressLocal)
                             {

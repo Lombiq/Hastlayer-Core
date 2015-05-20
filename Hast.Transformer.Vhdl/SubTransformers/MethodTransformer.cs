@@ -78,7 +78,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.DataPortsDataType, Name = SimpleMemoryNames.DataInLocal, ParameterType = ProcedureParameterType.In });
                         parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.DataPortsDataType, Name = SimpleMemoryNames.DataOutLocal, ParameterType = ProcedureParameterType.Out });
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.ReadAddressLocal, ParameterType = ProcedureParameterType.Out });
+                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.ReadAddressLocal, ParameterType = ProcedureParameterType.InOut });
                         parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.WriteAddressLocal, ParameterType = ProcedureParameterType.Out });
                     }
                     else
