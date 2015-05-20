@@ -15,6 +15,8 @@ using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
 using Orchard.Environment.Configuration;
 using Orchard.Validation;
+using Orchard.Exceptions;
+using Orchard.Logging;
 
 namespace Hast.Layer
 {
@@ -72,26 +74,38 @@ namespace Hast.Layer
              * - Cache hardware implementation to be able to re-configure the FPGA with it later.
              */
 
-            HardwareRepresentation hardwareRepresentation = null;
+            try
+            {
+                HardwareRepresentation hardwareRepresentation = null;
 
-            await (await GetHost())
-                .Run<ITransformer, IHardwareRepresentationComposer>(
-                    async (transformer, hardwareRepresentationComposer) =>
-                    {
-                        var hardwareDescription = await transformer.Transform(assemblies, configuration);
-
-                        if (Transformed != null) Transformed(this, new TransformedEventArgs(hardwareDescription));
-
-                        await hardwareRepresentationComposer.Compose(hardwareDescription);
-
-                        hardwareRepresentation = new HardwareRepresentation
+                await (await GetHost())
+                    .Run<ITransformer, IHardwareRepresentationComposer>(
+                        async (transformer, hardwareRepresentationComposer) =>
                         {
-                            SoftAssemblies = assemblies,
-                            HardwareDescription = hardwareDescription
-                        };
-                    }, ShellName, false);
+                            var hardwareDescription = await transformer.Transform(assemblies, configuration);
 
-            return hardwareRepresentation;
+                            if (Transformed != null) Transformed(this, new TransformedEventArgs(hardwareDescription));
+
+                            await hardwareRepresentationComposer.Compose(hardwareDescription);
+
+                            hardwareRepresentation = new HardwareRepresentation
+                            {
+                                SoftAssemblies = assemblies,
+                                HardwareDescription = hardwareDescription
+                            };
+                        }, ShellName, false);
+
+                return hardwareRepresentation;
+            }
+            catch (Exception ex)
+            {
+                if (ex.IsFatal()) throw;
+
+                var message = "An error happened during generating the Hastlayer hardware representation for the following assemblies: " + string.Join(", ", assemblies.Select(assembly => assembly.FullName));
+                // This should be async-await once we have C# 6.
+                GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message))).Wait();
+                throw new HastlayerException(message, ex);
+            }
         }
 
         public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
@@ -103,9 +117,21 @@ namespace Hast.Layer
                 throw new InvalidOperationException("The supplied type is not part of any assembly that this hardware representation was generated from.");
             }
 
-            return await
-                (await GetHost())
-                .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject)));
+            try
+            {
+                return await
+                    (await GetHost())
+                    .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject)));
+            }
+            catch (Exception ex)
+            {
+                if (ex.IsFatal()) throw;
+
+                var message = "An error happened during generating the Hastlayer proxy for an object of the following type: " + hardwareObject.GetType().FullName;
+                // This should be async-await once we have C# 6.
+                GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message))).Wait();
+                throw new HastlayerException(message, ex);
+            }
         }
 
         public void Dispose()
