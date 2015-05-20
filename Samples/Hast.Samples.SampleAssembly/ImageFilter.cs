@@ -60,7 +60,7 @@ namespace Hast.Samples.SampleAssembly
             UInt16 bottomMiddle = 0;
             UInt16 bottomRight = 0;
 
-            int pixelCountHelper = (int)(imageHeight * imageWidth * 3);
+            int pixelCountHelper = imageHeight * imageWidth * 3;
             UInt16 imageWidthHelper = (UInt16)(imageWidth * 3);
 
             for (UInt16 x = 1; x < imageHeight - 1; x++)
