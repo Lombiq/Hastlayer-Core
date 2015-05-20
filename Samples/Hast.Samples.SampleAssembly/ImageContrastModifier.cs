@@ -21,10 +21,10 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void ChangeContrast(SimpleMemory memory)
         {
-            UInt16 imageWidth = (UInt16)memory.ReadUInt32(ChangeContrast_ImageWidthIndex);
-            UInt16 imageHeight = (UInt16)memory.ReadUInt32(ChangeContrast_ImageHeightIndex);
+            ushort imageWidth = (ushort)memory.ReadUInt32(ChangeContrast_ImageWidthIndex);
+            ushort imageHeight = (ushort)memory.ReadUInt32(ChangeContrast_ImageHeightIndex);
             double contrastValue = memory.ReadInt32(ChangeContrast_ContrastValueIndex);
-            UInt16 pixel = 0;
+            ushort pixel = 0;
 
             if (contrastValue > 100)
                 contrastValue = 100;
@@ -33,9 +33,9 @@ namespace Hast.Samples.SampleAssembly
 
             contrastValue = (100.0 + contrastValue) / 100.0;
 
-            for (UInt16 i = 0; i < imageHeight * imageWidth * 3; i++)
+            for (ushort i = 0; i < imageHeight * imageWidth * 3; i++)
             {
-                pixel = (UInt16)memory.ReadUInt32(i + ChangeContrast_ImageStartIndex);
+                pixel = (ushort)memory.ReadUInt32(i + ChangeContrast_ImageStartIndex);
                 memory.WriteUInt32(i + ChangeContrast_ImageStartIndex, ChangePixelValue(pixel, contrastValue));
             }
         }
@@ -47,7 +47,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="pixel">The current pixel value.</param>
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The pixel value after changing the contrast.</returns>
-        private UInt16 ChangePixelValue(UInt16 pixel, double contrastValue)
+        private ushort ChangePixelValue(ushort pixel, double contrastValue)
         {
             double correctedPixel = pixel / 255.0;
             correctedPixel -= 0.5;
@@ -58,7 +58,7 @@ namespace Hast.Samples.SampleAssembly
             if (correctedPixel < 0) correctedPixel = 0;
             if (correctedPixel > 255) correctedPixel = 255;
 
-            return (UInt16)correctedPixel;
+            return (ushort)correctedPixel;
         }
     }
 
