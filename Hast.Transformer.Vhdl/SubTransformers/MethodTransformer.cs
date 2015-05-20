@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -72,26 +73,34 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 foreach (var parameter in method.Parameters)
                 {
-                    // SimpleMemory parameters shouldn't be tranformed.
-                    if (context.UseSimpleMemory() && parameter.IsSimpleMemoryParameter()) continue;
-
-                    var type = _typeConverter.Convert(parameter.Type);
-
-                    var procedureParameter = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = (parameter.Name + ".param").ToExtendedVhdlId() };
-
-                    // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables.
-                    var variable = new Variable { DataType = type, Name = parameter.Name.ToExtendedVhdlId() };
-                    procedure.Declarations.Add(variable);
-                    procedure.Body.Add(new Terminated(new Assignment { AssignTo = variable.ToReference(), Expression = procedureParameter.ToReference() }));
-
-                    if (interfaceMethod != null)
+                    // SimpleMemory parameters should be transformed into parameters that pass on SimpleMemory port references.
+                    if (context.UseSimpleMemory() && parameter.IsSimpleMemoryParameter())
                     {
-                        var inputPort = new Port { DataType = type, Mode = PortMode.In, Name = (fullName + "." + parameter.Name).ToExtendedVhdlId() };
-                        interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = inputPort, Parameter = procedureParameter });
-                        interfaceMethod.Ports.Add(inputPort);
+                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.DataPortsDataType, Name = SimpleMemoryNames.DataInLocal, ParameterType = ProcedureParameterType.In });
+                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.DataPortsDataType, Name = SimpleMemoryNames.DataOutLocal, ParameterType = ProcedureParameterType.Out });
+                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.ReadAddressLocal, ParameterType = ProcedureParameterType.Out });
+                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.WriteAddressLocal, ParameterType = ProcedureParameterType.Out });
                     }
+                    else
+                    {
+                        var type = _typeConverter.Convert(parameter.Type);
 
-                    parameters.Add(procedureParameter);
+                        var procedureParameter = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = (parameter.Name + ".param").ToExtendedVhdlId() };
+
+                        // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables.
+                        var variable = new Variable { DataType = type, Name = parameter.Name.ToExtendedVhdlId() };
+                        procedure.Declarations.Add(variable);
+                        procedure.Body.Add(new Terminated(new Assignment { AssignTo = variable.ToReference(), Expression = procedureParameter.ToReference() }));
+
+                        if (interfaceMethod != null)
+                        {
+                            var inputPort = new Port { DataType = type, Mode = PortMode.In, Name = (fullName + "." + parameter.Name).ToExtendedVhdlId() };
+                            interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = inputPort, Parameter = procedureParameter });
+                            interfaceMethod.Ports.Add(inputPort);
+                        }
+
+                        parameters.Add(procedureParameter); 
+                    }
                 }
             }
 

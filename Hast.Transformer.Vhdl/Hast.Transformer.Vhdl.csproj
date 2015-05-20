@@ -57,7 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\SimpleMemoryPortNames.cs" />
+    <Compile Include="Constants\SimpleMemoryNames.cs" />
+    <Compile Include="Constants\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
     <Compile Include="Helpers\TopologicalSortHelper.cs" />
     <Compile Include="Models\IVhdlTransformationContext.cs" />
