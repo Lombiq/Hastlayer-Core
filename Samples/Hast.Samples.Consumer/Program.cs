@@ -10,6 +10,7 @@ using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Tests.TestAssembly1.ComplexTypes;
 using Hast.Tests.TestAssembly2;
+using System.Drawing;
 
 namespace Hast.Samples.Consumer
 {
@@ -37,6 +38,15 @@ namespace Hast.Samples.Consumer
 
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);
+
+                        using (var bitmap = new Bitmap("fpga.jpg"))
+                        {
+                            var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
+                            var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
+
+                            var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
+                            var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
+                        }
                     }
 
                     // Generating hardware from test assemblies:
