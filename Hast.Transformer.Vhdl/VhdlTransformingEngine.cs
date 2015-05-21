@@ -285,7 +285,7 @@ namespace Hast.Transformer.Vhdl
             module.Entity.Ports.Add(new Port
             {
                 Name = SimpleMemoryNames.DataOutPort,
-                Mode = PortMode.Out,
+                Mode = PortMode.InOut,
                 DataType = SimpleMemoryTypes.DataPortsDataType
             });
 
