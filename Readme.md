@@ -6,9 +6,16 @@
 
 [Hastlayer](http://www.hastlayer.com/) - Be the hardware. Transforming .NET assemblies into FPGA hardware for faster execution.
 
+On how to use Hastlayer in your own application see the sample projects.
+
 Created by [Lombiq Technologies](http://lombiq.com/). 
 
 Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard Application Host](http://orchardapphost.codeplex.com/) to utilize [Orchard](http://orchard.codeplex.com/) as the application framework.
+
+
+## Troubleshooting
+
+If any error happens during runtime Hastlayer will throw an exception (mostly but not exclusively a `HastlayerException`) and the error will be also logged. Log files are located in the `App_Data\Logs` folder under your app's execution folder.
 
 
 ## Extensibility
