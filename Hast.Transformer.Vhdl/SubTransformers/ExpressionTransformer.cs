@@ -11,6 +11,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using Orchard.Logging;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -24,10 +25,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
+        public ILogger Logger { get; set; }
+
 
         public ExpressionTransformer(ITypeConverter typeConverter)
         {
             _typeConverter = typeConverter;
+
+            Logger = NullLogger.Instance;
         }
 
 
@@ -62,15 +67,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var otherType = isLeft ? rightType : leftType;
 
                 // We need to convert types in a way to keep precision. E.g. conerting an int to real is fine, but vica versa would cause
-                // information loss.
-                if ((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real)
+                // information loss. However excplicit casting in this direction is allowed in CIL so we need to allow it here as well.
+                if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real))
                 {
-                    return ImplementTypeConversion(thisType, otherType, reference);
+                    Logger.Warning("Converting from " + thisType.Name + " to " + otherType.Name + " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding.  The affected expression: " + binaryOperatorExpression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
                 }
-                else
-                {
-                    throw new NotImplementedException("Converting from " + thisType.Name + " to " + otherType.Name + " to fix a binary expression is not supported as it could cause information loss due to rounding.");
-                }
+
+                return ImplementTypeConversion(thisType, otherType, reference);
             }
             else if (expression is PrimitiveExpression)
             {
@@ -323,6 +326,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var fromTypeKeyword = expression.GetActualType().FullName;
             if (toTypeKeyword == "long" || toTypeKeyword == "ulong" || fromTypeKeyword == "System.Int64" || fromTypeKeyword == "System.UInt64")
             {
+                Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was omitted because non-32b numbers are not yet supported. If the result can indeed reach values above the 32b limit then overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
                 return Transform(expression.Expression, context, block);
             }
 
@@ -344,6 +348,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if ((fromType == KnownDataTypes.Real || fromType == KnownDataTypes.Natural) && (toType == KnownDataTypes.UnrangedInt || toType == KnownDataTypes.Natural))
             {
                 castInvokation.Target = new Raw("integer");
+            }
+            else if (fromType == KnownDataTypes.UnrangedInt && toType == KnownDataTypes.Natural)
+            {
+                castInvokation.Target = new Raw("natural");
             }
             else
             {
