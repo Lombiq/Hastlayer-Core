@@ -19,6 +19,6 @@ namespace Hast.Common.Extensibility.Pipeline
         /// Gets the priority value of the pipeline step. The priority affects the order in which pipeline steps are executed after each other:
         /// a bigger number means higher priority and pipeline steps with a higher priority are executed before the ones with a lower priority.
         /// </summary>
-        int Priority { get; }
+        double Priority { get; }
     }
 }
