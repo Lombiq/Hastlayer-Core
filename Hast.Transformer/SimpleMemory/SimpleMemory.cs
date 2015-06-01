@@ -12,7 +12,10 @@ namespace Hast.Transformer.SimpleMemory
     {
         public const uint MemoryCellSizeBytes = 4;
 
-        private readonly byte[] _memory;
+        /// <summary>
+        /// The contents of the memory representation.
+        /// </summary>
+        public byte[] Memory { get; private set; }
 
 
         /// <summary>
@@ -25,7 +28,7 @@ namespace Hast.Transformer.SimpleMemory
         /// </param>
         public SimpleMemory(int cellCount)
         {
-            _memory = new byte[cellCount * MemoryCellSizeBytes];
+            Memory = new byte[cellCount * MemoryCellSizeBytes];
         }
 
 
@@ -38,12 +41,12 @@ namespace Hast.Transformer.SimpleMemory
 
             for (uint i = 0; i < input.Length; i++)
             {
-                _memory[i + cellIndex * MemoryCellSizeBytes] = input[i];
+                Memory[i + cellIndex * MemoryCellSizeBytes] = input[i];
             }
 
             for (uint i = (uint)input.Length; i < MemoryCellSizeBytes; i++)
             {
-                _memory[i + cellIndex * MemoryCellSizeBytes] = 0;
+                Memory[i + cellIndex * MemoryCellSizeBytes] = 0;
             }
         }
 
@@ -53,7 +56,7 @@ namespace Hast.Transformer.SimpleMemory
 
             for (uint i = 0; i < MemoryCellSizeBytes; i++)
             {
-                output[i] = _memory[i + cellIndex * MemoryCellSizeBytes];
+                output[i] = Memory[i + cellIndex * MemoryCellSizeBytes];
             }
 
             return output;
