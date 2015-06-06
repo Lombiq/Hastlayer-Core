@@ -126,7 +126,7 @@ namespace Hast.Samples.SampleAssembly
             if (factor == 0)
                 return pixel;
 
-            var newPixel = (double)((((topLeft * topLeftValue) +
+            var newPixel = (((topLeft * topLeftValue) +
                             (topMiddle * topMiddleValue) +
                             (topRight * topRightValue) +
                             (middleLeft * middleLeftValue) +
@@ -135,7 +135,7 @@ namespace Hast.Samples.SampleAssembly
                             (bottomRight * bottomLeftValue) +
                             (bottomMiddle * bottomMiddleValue) +
                             (bottomRight * bottomRightValue))
-                            / factor) + offset);
+                            / factor) + offset;
 
             if (newPixel < 0) newPixel = 0;
             if (newPixel > 255) newPixel = 255;
