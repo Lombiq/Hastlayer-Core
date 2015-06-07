@@ -33,7 +33,7 @@ namespace Hast.Samples.SampleAssembly
             else if (contrastValue < -100)
                 contrastValue = -100;
 
-            contrastValue = (int)((100.0 + contrastValue * _multiplier) / 100.0);
+            contrastValue = (100 + contrastValue * _multiplier) / 100;
 
             for (int i = 0; i < imageHeight * imageWidth * 3; i++)
             {
@@ -51,7 +51,7 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>The pixel value after changing the contrast.</returns>
         private ushort ChangePixelValue(ushort pixel, int contrastValue)
         {
-            int correctedPixel = (int)(pixel * _multiplier / 255.0);
+            int correctedPixel = pixel * _multiplier / 255;
             correctedPixel -= (int)(0.5 * _multiplier); 
             correctedPixel *= contrastValue;
             correctedPixel /= _multiplier;
