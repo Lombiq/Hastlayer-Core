@@ -9,6 +9,8 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ImageContrastModifier
     {
+        private const int Multiplier = 1000;
+
         public const int ChangeContrast_ImageHeightIndex = 0;
         public const int ChangeContrast_ImageWidthIndex = 1;
         public const int ChangeContrast_ContrastValueIndex = 2;
@@ -23,7 +25,7 @@ namespace Hast.Samples.SampleAssembly
         {
             ushort imageWidth = (ushort)memory.ReadUInt32(ChangeContrast_ImageWidthIndex);
             ushort imageHeight = (ushort)memory.ReadUInt32(ChangeContrast_ImageHeightIndex);
-            double contrastValue = memory.ReadInt32(ChangeContrast_ContrastValueIndex);
+            int contrastValue = memory.ReadInt32(ChangeContrast_ContrastValueIndex);
             ushort pixel = 0;
 
             if (contrastValue > 100)
@@ -31,7 +33,7 @@ namespace Hast.Samples.SampleAssembly
             else if (contrastValue < -100)
                 contrastValue = -100;
 
-            contrastValue = (100.0 + contrastValue) / 100.0;
+            contrastValue = (100 + contrastValue * Multiplier) / 100;
 
             for (int i = 0; i < imageHeight * imageWidth * 3; i++)
             {
@@ -47,13 +49,15 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="pixel">The current pixel value.</param>
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The pixel value after changing the contrast.</returns>
-        private ushort ChangePixelValue(ushort pixel, double contrastValue)
+        private ushort ChangePixelValue(ushort pixel, int contrastValue)
         {
-            double correctedPixel = pixel / 255.0;
-            correctedPixel -= 0.5;
+            int correctedPixel = pixel * Multiplier / 255;
+            correctedPixel -= (int)(0.5 * Multiplier); 
             correctedPixel *= contrastValue;
-            correctedPixel += 0.5;
-            correctedPixel *= 255;
+            correctedPixel /= Multiplier;
+            correctedPixel += (int)(0.5 * Multiplier);
+            correctedPixel *= 255; 
+            correctedPixel /= Multiplier;
 
             if (correctedPixel < 0) correctedPixel = 0;
             if (correctedPixel > 255) correctedPixel = 255;
