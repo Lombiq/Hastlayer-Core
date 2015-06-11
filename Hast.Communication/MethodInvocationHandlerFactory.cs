@@ -61,6 +61,9 @@ namespace Hast.Communication
                         if (context.HardwareInvocationIsCancelled) return false;
 
                         // Implement FPGA communication, data transformation here.
+                        Communication com = new Communication();
+                        com.Start(); // Initialize the communication
+
                         // Set the return value as invocation.ReturnValue = ...
 
                         eventHandler.MethodInvokedOnHardware(context);
