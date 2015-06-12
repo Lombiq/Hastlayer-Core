@@ -12,6 +12,7 @@ using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Common.Extensibility.Pipeline;
+using Hast.Transformer.SimpleMemory;
 
 namespace Hast.Communication
 {
@@ -60,8 +61,20 @@ namespace Hast.Communication
                         if (context.HardwareInvocationIsCancelled) return false;
 
                         // Implement FPGA communication, data transformation here.
+
                         Communication com = new Communication();
                         com.Start(); // Initialize the communication
+                        var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
+                        if (memory != null)
+                        {
+                            memory = com.Execute(memory);
+                        }
+                        
+                        
+                        
+                       
+
+                        
 
                         // Set the return value as invocation.ReturnValue = ...
 
