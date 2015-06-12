@@ -11,7 +11,6 @@ using Hast.Common.Extensions;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Pipeline;
-using System.Collections.Generic;
 using Hast.Common.Extensibility.Pipeline;
 
 namespace Hast.Communication
