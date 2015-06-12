@@ -99,14 +99,15 @@ namespace Hast.Transformer.SimpleMemory
             return BitConverter.ToBoolean(Read4Bytes(cellIndex), 0);
         }
 
-        public void WriteChar(int cellIndex, char character)
-        {
-            Write4Bytes(cellIndex, BitConverter.GetBytes(character));
-        }
+        // Characters are not perfectly handled on the FPGA-side and are not really crucial, so de-activating these for now.
+        //public void WriteChar(int cellIndex, char character)
+        //{
+        //    Write4Bytes(cellIndex, BitConverter.GetBytes(character));
+        //}
 
-        public char ReadChar(int cellIndex)
-        {
-            return BitConverter.ToChar(Read4Bytes(cellIndex), 0);
-        }
+        //public char ReadChar(int cellIndex)
+        //{
+        //    return BitConverter.ToChar(Read4Bytes(cellIndex), 0);
+        //}
     }
 }
