@@ -148,9 +148,9 @@ namespace Hast.Transformer.Vhdl
             var caseExpression = new Case { Expression = methodIdPort.Name.ToVhdlIdValue() };
 
             var id = 1;
-            foreach (var method in transformationContext.InterfaceMethods)
+            foreach (var interfaceMethod in transformationContext.InterfaceMethods)
             {
-                ports.AddRange(method.Ports);
+                ports.AddRange(interfaceMethod.Ports);
 
                 var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = id.ToString() } };
 
@@ -158,7 +158,7 @@ namespace Hast.Transformer.Vhdl
                 {
                     // Calling corresponding procedure with SimpleMemory signals passed in.
                     var simpleMemoryParameterNames = new [] { SimpleMemoryNames.DataInLocal, SimpleMemoryNames.DataOutLocal, SimpleMemoryNames.ReadAddressLocal, SimpleMemoryNames.WriteAddressLocal };
-                    var simpleMemoryParameters = method.Procedure.Parameters
+                    var simpleMemoryParameters = interfaceMethod.Procedure.Parameters
                         .Where(parameter => simpleMemoryParameterNames.Contains(parameter.Name))
                         .Select(parameter =>
                         {
@@ -186,7 +186,7 @@ namespace Hast.Transformer.Vhdl
 
                     var invokation = new Invokation
                     {
-                        Target = method.Procedure.Name.ToVhdlIdValue(),
+                        Target = interfaceMethod.Procedure.Name.ToVhdlIdValue(),
                         Parameters = new List<IVhdlElement>(simpleMemoryParameters)
                     };
 
@@ -196,7 +196,7 @@ namespace Hast.Transformer.Vhdl
                 {
                     // Copying input signals to variables.
                     var portVariables = new Dictionary<Port, Variable>();
-                    foreach (var port in method.Ports)
+                    foreach (var port in interfaceMethod.Ports)
                     {
                         var variable = new Variable
                         {
@@ -217,9 +217,9 @@ namespace Hast.Transformer.Vhdl
                     // Calling corresponding procedure and taking care of its input/output parameters.
                     var invokation = new Invokation
                     {
-                        Target = method.Procedure.Name.ToVhdlIdValue(),
+                        Target = interfaceMethod.Procedure.Name.ToVhdlIdValue(),
                         // Using named parameters as the order of ports is not necessarily right
-                        Parameters = method.ParameterMappings
+                        Parameters = interfaceMethod.ParameterMappings
                             .Select(mapping => new NamedInvokationParameter { FormalParameter = mapping.Parameter, ActualParameter = portVariables[mapping.Port] })
                             .Cast<IVhdlElement>()
                             .ToList()
@@ -228,7 +228,7 @@ namespace Hast.Transformer.Vhdl
                     when.Body.Add(new Terminated(invokation));
 
                     // Copying output variables to output ports.
-                    foreach (var port in method.Ports.Where(p => p.Mode == PortMode.Out))
+                    foreach (var port in interfaceMethod.Ports.Where(p => p.Mode == PortMode.Out))
                     {
                         when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }));
                     }
@@ -236,7 +236,7 @@ namespace Hast.Transformer.Vhdl
 
 
                 caseExpression.Whens.Add(when);
-                methodIdTable.SetMapping(method.Name, id);
+                methodIdTable.SetMapping(interfaceMethod.Method.GetFullName(), id);
                 id++;
             }
 

@@ -41,7 +41,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             InterfaceMethodDefinition interfaceMethod = null;
             if (method.IsInterfaceMember())
             {
-                interfaceMethod = new InterfaceMethodDefinition { Name = procedure.Name, Procedure = procedure };
+                interfaceMethod = new InterfaceMethodDefinition { Name = procedure.Name, Procedure = procedure, Method = method };
                 context.InterfaceMethods.Add(interfaceMethod);
             }
 
