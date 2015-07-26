@@ -15,7 +15,7 @@ namespace Hast.Communication.Services
     /// </summary>
     public interface IHastlayerCommunicationService : IDependency
     {
-        async Task<SimpleMemory> Execute(SimpleMemory input);
+        Task<SimpleMemory> Execute(SimpleMemory input);
     }
 
     public class HastlayerCommunicationService : IHastlayerCommunicationService
