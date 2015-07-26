@@ -1,19 +1,15 @@
-﻿using System;
+﻿using Castle.DynamicProxy;
+using Hast.Common.Extensibility.Pipeline;
+using Hast.Common.Extensions;
+using Hast.Common.Models;
+using Hast.Communication.Extensibility.Events;
+using Hast.Communication.Extensibility.Pipeline;
+using Hast.Communication.Services;
+using Hast.Transformer.SimpleMemory;
+using Orchard;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.DynamicProxy;
-using Hast.Common.Models;
-using Orchard;
-using Hast.Common.Extensions;
-using Hast.Communication.Extensibility.Events;
-using Hast.Communication.Extensibility;
-using Hast.Communication.Extensibility.Pipeline;
-using Hast.Common.Extensibility.Pipeline;
-using Hast.Transformer.SimpleMemory;
-using Hast.Communication.Services;
 
 namespace Hast.Communication
 {
