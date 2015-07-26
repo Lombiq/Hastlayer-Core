@@ -43,6 +43,7 @@ namespace Hast.Communication
             if (sp.IsOpen)
             {
                 Debug.WriteLine("The port " + portName + " is ours.");
+                // We are listening, to incoming data
                 sp.DataReceived += sp_DataReceived;
             }
             else
@@ -59,6 +60,7 @@ namespace Hast.Communication
         bool ready = true;
         byte[] returnValue = new byte[13];
         int count = 0;
+
         private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             byte receivedByte = (byte)sp.ReadByte();
@@ -87,7 +89,7 @@ namespace Hast.Communication
 
 
 
-        public SimpleMemory Execute(object input)
+        public SimpleMemory Execute(SimpleMemory input)
         {
             // TODO: Ellenőrizni, hogy a beérkező adat SimpleMemory típus -e
             while (start) { }
@@ -98,6 +100,7 @@ namespace Hast.Communication
             output.Write4Bytes(0, returnValue);
             return output;
         }
+
         private byte[] ConvertIntToByteArray(int from)
         {
             MemoryStream stream = new MemoryStream();

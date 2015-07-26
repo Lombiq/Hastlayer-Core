@@ -13,17 +13,20 @@ using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Transformer.SimpleMemory;
+using Hast.Communication.Services;
 
 namespace Hast.Communication
 {
     public class MethodInvocationHandlerFactory : IMethodInvocationHandlerFactory
     {
         private readonly IWorkContextAccessor _wca;
+        private readonly IHastlayerCommunicationService _hastlayerCommunicationService;
 
 
-        public MethodInvocationHandlerFactory(IWorkContextAccessor wca)
+        public MethodInvocationHandlerFactory(IWorkContextAccessor wca, IHastlayerCommunicationService hastlayerCommunicationService)
         {
             _wca = wca;
+            _hastlayerCommunicationService = hastlayerCommunicationService;
         }
 
 
@@ -69,6 +72,8 @@ namespace Hast.Communication
                         {
                             memory = com.Execute(memory);
                         }
+
+
                         
                         
                         
