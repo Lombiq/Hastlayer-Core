@@ -6,8 +6,8 @@ namespace Hast.Communication.Helpers
     {
         public static byte[] ConvertIntToByteArray(int from)
         {
-            MemoryStream stream = new MemoryStream();
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            var stream = new MemoryStream();
+            using (var writer = new BinaryWriter(stream))
             {
                 writer.Write(from);
             }

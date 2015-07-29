@@ -7,7 +7,9 @@ using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Services;
 using Hast.Transformer.SimpleMemory;
 using Orchard;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -16,13 +18,11 @@ namespace Hast.Communication
     public class MethodInvocationHandlerFactory : IMethodInvocationHandlerFactory
     {
         private readonly IWorkContextAccessor _wca;
-        private readonly IHastlayerCommunicationService _hastlayerCommunicationService;
 
 
-        public MethodInvocationHandlerFactory(IWorkContextAccessor wca, IHastlayerCommunicationService hastlayerCommunicationService)
+        public MethodInvocationHandlerFactory(IWorkContextAccessor wca)
         {
             _wca = wca;
-            _hastlayerCommunicationService = hastlayerCommunicationService;
         }
 
 
@@ -61,16 +61,24 @@ namespace Hast.Communication
 
                         // Implement FPGA communication, data transformation here.
 
-                        Communication com = new Communication();
-                        com.Start(); // Initialize the communication
+                        
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            memory = com.Execute(memory);
+                            try
+                            {
+                                var task = workContext.Resolve<ICommunicationService>().Execute(memory, 0);
+                                memory = task.Result;
+                            }
+                            catch (Exception e)
+                            {
+                                //TODO: What to do, if something went wrong with the serial port communication.
+                                Debug.WriteLine(e.Message);
+                            }
+                            
                         }
-
-
                         
+
                         
                         
                        
