@@ -1,4 +1,6 @@
-﻿using ICSharpCode.Decompiler.Ast;
+﻿using System;
+using ICSharpCode.Decompiler.Ast;
+using ICSharpCode.Decompiler.ILAst;
 using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp
@@ -7,7 +9,13 @@ namespace ICSharpCode.NRefactory.CSharp
     {
         public static TypeReference GetActualType(this IAnnotatable annotable)
         {
-            return annotable.Annotation<TypeInformation>().GetActualType();
+            var typeInformation = annotable.Annotation<TypeInformation>();
+            if (typeInformation != null) return typeInformation.GetActualType();
+
+            var ilVariable = annotable.Annotation<ILVariable>();
+            if (ilVariable != null) return ilVariable.Type;
+
+            return null;
         }
     }
 }
