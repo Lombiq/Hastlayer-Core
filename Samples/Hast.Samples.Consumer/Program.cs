@@ -47,6 +47,25 @@ namespace Hast.Samples.Consumer
                             var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
                             var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
                         }
+
+                        var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher());
+
+                        // Sample from IBM.
+                        var inputOne = "GCCCTAGCG";
+                        var inputTwo = "GCGCAATG";
+
+                        var result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+
+                        // Sample from Wikipedia.
+                        inputOne = "ACACACTA";
+                        inputTwo = "AGCACACA";
+
+                        result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+
+                        inputOne = "lombiqtech";
+                        inputTwo = "coulombtech";
+
+                        result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
                     }
 
                     // Generating hardware from test assemblies:
