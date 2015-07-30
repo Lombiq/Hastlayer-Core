@@ -50,22 +50,22 @@ namespace Hast.Samples.Consumer
 
                         var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher());
 
-                        //Sample from IBM.
+                        // Sample from IBM.
                         var inputOne = "GCCCTAGCG";
                         var inputTwo = "GCGCAATG";
 
-                        var result = genomeMatcher.GetLCS(inputOne, inputTwo);
+                        var result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
 
-                        //Sample from Wikipedia.
+                        // Sample from Wikipedia.
                         inputOne = "ACACACTA";
                         inputTwo = "AGCACACA";
 
-                        result = genomeMatcher.GetLCS(inputOne, inputTwo);
+                        result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
 
                         inputOne = "lombiqtech";
                         inputTwo = "coulombtech";
 
-                        result = genomeMatcher.GetLCS(inputOne, inputTwo);
+                        result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
                     }
 
                     // Generating hardware from test assemblies:

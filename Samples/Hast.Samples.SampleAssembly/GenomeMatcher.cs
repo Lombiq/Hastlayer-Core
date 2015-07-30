@@ -22,10 +22,10 @@ namespace Hast.Samples.SampleAssembly
 
 
         /// <summary>
-        /// Gets the longest common subsequence of two byte arrays with the Smith-Waterman algorithm.
+        /// Calculates the longest common subsequence of two byte arrays with the Smith-Waterman algorithm.
         /// </summary>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
-        public virtual void GetLCS(SimpleMemory memory)
+        public virtual void CalculateLongestCommonSubsequence(SimpleMemory memory)
         {
             FillTable(memory);
             Traceback(memory);
@@ -34,8 +34,8 @@ namespace Hast.Samples.SampleAssembly
 
         private void FillTable(SimpleMemory memory)
         {
-            ushort inputOneLength = (ushort)memory.ReadUInt32(GetLCS_InputOneLengthIndex); //This will be the width of the matrix.
-            ushort inputTwoLength = (ushort)memory.ReadUInt32(GetLCS_InputTwoLengthIndex); //This will be the height of the matrix.
+            ushort inputOneLength = (ushort)memory.ReadUInt32(GetLCS_InputOneLengthIndex); // This will be the width of the matrix.
+            ushort inputTwoLength = (ushort)memory.ReadUInt32(GetLCS_InputTwoLengthIndex); // This will be the height of the matrix.
 
             ushort inputTwoStartIndex = (ushort)(GetLCS_InputOneStartIndex + inputOneLength);
             ushort resultStartIndex = (ushort)(inputTwoStartIndex + inputTwoLength);
@@ -62,11 +62,11 @@ namespace Hast.Samples.SampleAssembly
                     if (column != 0 && row != 0)
                         diagonalCell = (ushort)memory.ReadUInt32(position - inputOneLength - 1);
 
-                    //Increase the value of the diagonal cell if the current elements are the same, and the diagonal cell exists.
-                    if (memory.Read4Bytes(GetLCS_InputOneStartIndex + column)[0] == memory.Read4Bytes(inputTwoStartIndex + row)[0])
+                    // Increase the value of the diagonal cell if the current elements are the same, and the diagonal cell exists.
+                    if (memory.ReadUInt32(GetLCS_InputOneStartIndex + column) == memory.ReadUInt32(inputTwoStartIndex + row))
                         diagonalCell++;
 
-                    //Select the maximum of the three cells and set the value of the current cell and pointer.
+                    // Select the maximum of the three cells and set the value of the current cell and pointer.
                     if (diagonalCell > leftCell)
                     {
                         if (diagonalCell > topCell)
@@ -124,13 +124,13 @@ namespace Hast.Samples.SampleAssembly
 
             while (column >= 0 && row >= 0 && currentCell > 0)
             {
-                //These are necessary to avoid infinite while loops.
+                // These are necessary to avoid infinite while loops.
                 if (column == 0)
                     column--;
                 if (row == 0)
                     row--;
 
-                //Get the pointer and the cell value from the pointers position.
+                // Get the pointer and the cell value from the pointers position.
                 pointer = (ushort)memory.ReadUInt32(currentPosition + resultLength);
 
                 if (pointer == GetLCS_DiagonalCellPointerValue)
@@ -158,16 +158,16 @@ namespace Hast.Samples.SampleAssembly
                 if (previousPosition >= resultStartIndex)
                     previousCell = (ushort)memory.ReadUInt32(previousPosition);
 
-                //Add the current character to the result if the pointer is diagonal and the cell value decreased.
+                // Add the current character to the result if the pointer is diagonal and the cell value decreased.
                 if (pointer == GetLCS_DiagonalCellPointerValue && (currentCell == previousCell + 1 || previousPosition < resultStartIndex))
                 {
-                    var originalValue = memory.Read4Bytes(GetLCS_InputOneStartIndex + column);
-                    memory.Write4Bytes(resultStartIndex + 2 * resultLength + column, originalValue);
+                    var originalValue = memory.ReadUInt32(GetLCS_InputOneStartIndex + column);
+                    memory.WriteUInt32(resultStartIndex + 2 * resultLength + column, originalValue);
                 }
                 else if (pointer == GetLCS_OutOfBorderDiagonalCellPointerValue)
                 {
-                    var originalValue = memory.Read4Bytes(GetLCS_InputOneStartIndex + column);
-                    memory.Write4Bytes(resultStartIndex + 2 * resultLength + column, originalValue);
+                    var originalValue = memory.ReadUInt32(GetLCS_InputOneStartIndex + column);
+                    memory.WriteUInt32(resultStartIndex + 2 * resultLength + column, originalValue);
                 }
 
                 currentCell = previousCell;
@@ -180,16 +180,16 @@ namespace Hast.Samples.SampleAssembly
     public static class GenomeMatcherExtensions
     {
         /// <summary>
-        /// Gets the longest common subsequence of two strings.
+        /// Calculates the longest common subsequence of two strings.
         /// </summary>
         /// <param name="inputOne">The first string to compare.</param>
         /// <param name="inputTwo">The second string to compare.</param>
         /// <returns>Returns the longest common subsequence of the two strings.</returns>
-        public static string GetLCS(this GenomeMatcher genomeMatcher, string inputOne, string inputTwo)
+        public static string CalculateLongestCommonSubsequence(this GenomeMatcher genomeMatcher, string inputOne, string inputTwo)
         {
             var simpleMemory = CreateSimpleMemory(inputOne, inputTwo);
 
-            genomeMatcher.GetLCS(simpleMemory);
+            genomeMatcher.CalculateLongestCommonSubsequence(simpleMemory);
 
             return GetResult(simpleMemory, inputOne, inputTwo);
         }
@@ -212,12 +212,12 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 0; i < inputOne.Length; i++)
             {
-                simpleMemory.Write4Bytes(GenomeMatcher.GetLCS_InputOneStartIndex + i, Encoding.UTF8.GetBytes(inputOne[i].ToString()));
+                simpleMemory.WriteUInt32(GenomeMatcher.GetLCS_InputOneStartIndex + i, Encoding.UTF8.GetBytes(inputOne[i].ToString())[0]);
             }
 
             for (int i = 0; i < inputTwo.Length; i++)
             {
-                simpleMemory.Write4Bytes(GenomeMatcher.GetLCS_InputOneStartIndex + i + inputOne.Length, Encoding.UTF8.GetBytes(inputTwo[i].ToString()));
+                simpleMemory.WriteUInt32(GenomeMatcher.GetLCS_InputOneStartIndex + i + inputOne.Length, Encoding.UTF8.GetBytes(inputTwo[i].ToString())[0]);
             }
 
             return simpleMemory;
@@ -239,8 +239,9 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 0; i < maxInputLength; i++)
             {
-                var currentChar = simpleMemory.Read4Bytes(startIndex + i);
-                var chars = Encoding.UTF8.GetChars(currentChar);
+                var currentChar = simpleMemory.ReadUInt32(startIndex + i);
+                var currentCharBytes = BitConverter.GetBytes(currentChar);
+                var chars = Encoding.UTF8.GetChars(currentCharBytes);
 
                 result += chars[0];
             }
