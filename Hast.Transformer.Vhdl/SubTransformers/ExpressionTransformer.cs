@@ -387,6 +387,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private IVhdlElement ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression)
         {
+            if (fromType == toType)
+            {
+                return expression;
+            }
+
             var castInvokation = new Invokation();
 
             // Trying supported cast scenarios:
