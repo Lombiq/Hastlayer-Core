@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Communication
 {
@@ -68,7 +69,7 @@ namespace Hast.Communication
                             try
                             {
                                 var task = workContext.Resolve<ICommunicationService>().Execute(memory, 0);
-                                memory = task.Result;
+                                task.Wait();
                             }
                             catch (Exception e)
                             {
@@ -77,14 +78,7 @@ namespace Hast.Communication
                             }
                             
                         }
-                        
-
-                        
-                        
-                       
-
-                        
-
+                        invocation.ReturnValue = memory.Memory;
                         // Set the return value as invocation.ReturnValue = ...
 
                         eventHandler.MethodInvokedOnHardware(context);

@@ -10,7 +10,7 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        public Task<SimpleMemory> Execute(SimpleMemory input, int methodId)
+        public Task Execute(SimpleMemory input, int methodId)
         {
             var sp = new SerialPort();
             var receiveByteSize = 0; // The incoming byte buffer size.
@@ -82,7 +82,7 @@ namespace Hast.Communication.Services
                 j++;
             }
 
-            var taskCompletionSource = new TaskCompletionSource<SimpleMemory>();
+            var taskCompletionSource = new TaskCompletionSource<bool>();
             sp.DataReceived += (s, e) =>
             {
                 // TODO: Here i need to write a code that receives the data.
@@ -109,11 +109,11 @@ namespace Hast.Communication.Services
                 {
                     var output = new SimpleMemory(receiveByteSize);
                     output.Memory = returnValue.ToArray();
-                    taskCompletionSource.SetResult(output);
+                    taskCompletionSource.SetResult(true);
                 }
 
             };
-            
+
             // Send back the result.
             return taskCompletionSource.Task;
         }

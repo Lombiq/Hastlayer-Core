@@ -15,6 +15,6 @@ namespace Hast.Communication.Services
         /// <param name="input">The SimpleMemory object (array of bytes)</param>
         /// <param name="methodId">The method id is needed when we want to run multiple methods on fpga board.</param>
         /// <returns>A SimpleMemory object.</returns>
-        Task<SimpleMemory> Execute(SimpleMemory input, int methodId);
+        Task Execute(SimpleMemory input, int methodId);
     }
 }
