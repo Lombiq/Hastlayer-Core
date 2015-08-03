@@ -68,7 +68,7 @@ namespace Hast.Communication
                         {
                             try
                             {
-                                var task = workContext.Resolve<ICommunicationService>().Execute(memory, 0);
+                                var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, 0); });
                                 task.Wait();
                             }
                             catch (Exception e)
@@ -78,6 +78,7 @@ namespace Hast.Communication
                             }
                             
                         }
+                        // Debug.WriteLine("Execution completed...");
                         invocation.ReturnValue = memory.Memory;
                         // Set the return value as invocation.ReturnValue = ...
 

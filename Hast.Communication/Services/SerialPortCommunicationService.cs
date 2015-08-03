@@ -23,6 +23,8 @@ namespace Hast.Communication.Services
             sp.Parity = Parity.None;
             sp.StopBits = StopBits.One;
             sp.WriteTimeout = 10000;
+            
+            
 
             try
             {
@@ -45,7 +47,7 @@ namespace Hast.Communication.Services
 
             //TODO: Here i need to write a code that sends the data to the FPGA.
             var length = input.Memory.Length;
-            Debug.WriteLine("Data lengtg in bytes: " + length.ToString());
+            Debug.WriteLine("Data length in bytes: " + length.ToString());
             var buffer = new byte[length + 9]; // Data message command + messageLength
             var lengthInBytes = Helpers.CommunicationHelpers.ConvertIntToByteArray(length);
             var methodIdInBytes = Helpers.CommunicationHelpers.ConvertIntToByteArray(methodId); // TODO: In future version store the methodID-s in database (automatically)
@@ -94,7 +96,8 @@ namespace Hast.Communication.Services
                     receiveByteSize = (byte)sp.ReadByte();
                     // The code below is just used for debud purposes.
                     var RXString = Convert.ToChar(receiveByteSize);
-                    Debug.WriteLine("Incoming data size: " + RXString);
+                    Debug.WriteLine("Incoming data size: " + RXString.ToString());
+                    sp.Write("s"); // Signal that we are ready to receive the data.
                 }
                 else
                 {
@@ -102,18 +105,19 @@ namespace Hast.Communication.Services
                     var receivedByte = (byte)sp.ReadByte();
                     returnValue.Add(receivedByte);
                     count++;
+                    sp.Write("r"); // Signal that we received all bytes.
                 }
-
+                
                 // Set the incoming data if all bytes are received. (Waiting for incoming data stream to complete.)
                 if (receiveByteSize == count)
                 {
-                    var output = new SimpleMemory(receiveByteSize);
-                    output.Memory = returnValue.ToArray();
+                    //var output = new SimpleMemory(receiveByteSize);
+                    input.Memory = returnValue.ToArray();
                     taskCompletionSource.SetResult(true);
                 }
 
             };
-
+            
             // Send back the result.
             return taskCompletionSource.Task;
         }
