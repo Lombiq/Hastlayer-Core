@@ -1,0 +1,226 @@
+﻿using Hast.Transformer.SimpleMemory;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hast.Samples.SampleAssembly
+{
+    /// <summary>
+    ///  Algorithm to find the weight and centre of mass of a section of torus with varying density.
+    /// </summary>
+    public class MonteCarloAlgorithm
+    {
+        private static Random r = new Random();
+
+        private const int Multiplier = 100;
+
+        public const int MonteCarloAlgorithm_IterationsCountIndex = 0;
+        public const int MonteCarloAlgorithm_WIndex = 1;
+        public const int MonteCarloAlgorithm_XIndex = 2;
+        public const int MonteCarloAlgorithm_YIndex = 3;
+        public const int MonteCarloAlgorithm_ZIndex = 4;
+        public const int MonteCarloAlgorithm_DWIndex = 5;
+        public const int MonteCarloAlgorithm_DXIndex = 6;
+        public const int MonteCarloAlgorithm_DYIndex = 7;
+        public const int MonteCarloAlgorithm_DZIndex = 8;
+
+
+        public virtual void Calculate(SimpleMemory memory)
+        {
+            int w, x, y, s, z, dw, dx, dy, dz, sw, swx, swy, swz, varw, varx, vary, varz, ss, vol;
+            w = x = y = s = z = dw = dx = dy = dz = sw = swx = swy = swz = varw = varx = vary = varz = 0;
+
+            ss = 29; // Rounded constant value instead of "0.2 * (Math.Exp(5.0) - Math.Exp(-5.0))". This is the interval of s to be random sampled. 
+            vol = 3 * 7 * ss; // Volume of the sampled region in x,y,s space.
+
+            int iterationsCount = memory.ReadInt32(MonteCarloAlgorithm_IterationsCountIndex);
+
+            int sumsw = 0;
+            int sumswx = 0;
+            int sumswy = 0;
+            int sumswz = 0;
+            int sumvarw = 0;
+            int sumvarwx = 0;
+            int sumvarwy = 0;
+            int sumvarwz = 0;
+
+            for (int i = 1; i <= iterationsCount; i++)
+            {
+                // Pick points randomly from the sampled region.
+                x = checked((int)(1 * Multiplier + r.Next(101) * 3 * Multiplier / 100)); 
+                y = checked((int)(-3 * Multiplier + r.Next(101) * 7 * Multiplier / 100)); 
+                s = checked((int)(13 + ss * r.Next(101) * Multiplier / 100)); 
+                z = checked((int)(2 * Multiplier * Log(5 * s / Multiplier) / 10)); 
+
+                int b = checked((int)(Sqrt((x * x) + (y * y)) - 3 * Multiplier)); 
+                int a = checked((int)(((z * z) + (b * b)) / Multiplier)); 
+
+                // Check if the selected points are inside the torus. 
+                // If they are inside, add to the various cumulants.
+                if (a < Multiplier)
+                {
+                    sw = checked(sw + Multiplier);
+                    swx = checked(swx + x);
+                    swy = checked(swy + y);
+                    swz = checked(swz + z);
+                    varw = Multiplier;
+                    varx += (x * x) / Multiplier;
+                    vary += (y * y) / Multiplier;
+                    varz += (z * z) / Multiplier;
+                }
+
+                // Devide the values with the multiplier to return to the original numbers in every 1000th iteration. 
+                // This way we can avoid owerflows at the final computations, but we still get more precise values.
+                if (i % 1000 == 0 || i == iterationsCount)
+                {
+                    sumsw = checked(sumsw + sw / Multiplier);
+                    sumswx = checked(sumswx + swx / Multiplier);
+                    sumswy = checked(sumswy + swy / Multiplier);
+                    sumswz = checked(sumswz + swz / Multiplier);
+                    sumvarw = Multiplier;
+                    sumvarwx += varx / Multiplier;
+                    sumvarwy += vary / Multiplier;
+                    sumvarwz += varz / Multiplier;
+
+                    sw = 0;
+                    swx = 0;
+                    swy = 0;
+                    swz = 0;
+                    varw = 0;
+                    varx = 0;
+                    vary = 0;
+                    varz = 0;
+                }
+            }
+
+            // Values of the integrals.
+            memory.WriteInt32(MonteCarloAlgorithm_WIndex, checked((int)(vol * sumsw / iterationsCount)));
+            memory.WriteInt32(MonteCarloAlgorithm_XIndex, checked((int)(vol * sumswx / iterationsCount)));
+            memory.WriteInt32(MonteCarloAlgorithm_YIndex, checked((int)(vol * sumswy / iterationsCount)));
+            memory.WriteInt32(MonteCarloAlgorithm_ZIndex, checked((int)(vol * sumswz / iterationsCount)));
+
+            // Values of the error estimates.
+            memory.WriteInt32(MonteCarloAlgorithm_DWIndex, checked((int)(vol * Sqrt((int)((sumvarw / iterationsCount - Pow((sumsw / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteInt32(MonteCarloAlgorithm_DXIndex, checked((int)(vol * Sqrt((int)((sumvarwx / iterationsCount - Pow((sumswx / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteInt32(MonteCarloAlgorithm_DYIndex, checked((int)(vol * Sqrt((int)((sumvarwy / iterationsCount - Pow((sumswy / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteInt32(MonteCarloAlgorithm_DZIndex, checked((int)(vol * Sqrt((int)((sumvarwz / iterationsCount - Pow((sumswz / iterationsCount), 2)) / iterationsCount)))));
+        }
+
+
+        /// <summary>
+        /// Estimates the square root of a number using the Babylonian method.
+        /// </summary>
+        /// <param name="value">The number we search the square root of.</param>
+        /// <returns>Returns the square root of the number.</returns>
+        private int Sqrt(int value)
+        {
+            if (value == 0)
+                return 0;
+
+            var current = 100;  // This is an initial value, where the algorithm starts the estimations.
+            var previous = 0;
+
+            // The algorithm is running until an acceptable punctuality is reached.
+            while (current < previous - 10 || current > previous + 10)
+            {
+                previous = current;
+                current = (previous + value / previous) / 2;
+            }
+
+            return current;
+        }
+
+        /// <summary>
+        /// Calculates the natural based logarithm of a number.
+        /// </summary>
+        /// <param name="value">The number we search the natural based logarithm of.</param>
+        /// <returns>Returns the natural based logarithm of the number.</returns>
+        private int Log(int value)
+        {
+            var logarithm = Log10(value);
+            return logarithm * 10000 / 4342; // 4342 is the value of Log(e) multiplied by 10000;
+        }
+
+        /// <summary>
+        /// Calculates the logarithm of a number.
+        /// </summary>
+        /// <param name="value">The number we search the logarithm of.</param>
+        /// <returns>Returns the logarithm of the number.</returns>
+        private int Log10(int value)
+        {
+            return (value >= 10000000) ? 7 : (value >= 1000000) ? 6 : (value >= 100000) ? 5 : (value >= 10000) ? 4 :
+                (value >= 1000) ? 3 : (value >= 100) ? 2 : (value >= 10) ? 1 : 0;
+        }
+
+        /// <summary>
+        /// Calculates the power of a number.
+        /// </summary>
+        /// <param name="value">The base value.</param>
+        /// <param name="power">The power of the calculation.</param>
+        /// <returns>Returns the number raised to the power.</returns>
+        private int Pow(int value, int power)
+        {
+            var baseValue = value;
+
+            for (int i = 0; i < power - 1; i++)
+                baseValue *= value;
+
+            return baseValue;
+        }
+    }
+
+
+    public static class MonteCarloAlgorithmExtensions
+    {
+        /// <summary>
+        /// Algorithm to find the weight and centre of mass of a section of torus with varying density.
+        /// </summary>
+        /// <param name="iterationsCount">The number of iterations the algorithm uses for calculations.</param>
+        /// <returns>Returns the weight and centre of mass of a section of torus with varying density in the form of a <see cref="MonteCarloResult"/> object.</returns>
+        public static MonteCarloResult Calculate(this MonteCarloAlgorithm monteCarloAlgorithm, int iterationsCount)
+        {
+            var simpleMemory = CreateSimpleMemory(iterationsCount);
+
+            monteCarloAlgorithm.Calculate(simpleMemory);
+
+            return GetResult(simpleMemory);
+        }
+
+
+        /// <summary>
+        /// Creates a <see cref="SimpleMemory"/> object filled with the input values.
+        /// </summary>
+        /// <param name="iterationsCount">The number of iterations the algorithm uses for calculations.</param>
+        /// <returns>Returns a <see cref="SimpleMemory"/> object containing the input values.</returns>
+        private static SimpleMemory CreateSimpleMemory(int iterationsCount)
+        {
+            var simpleMemory = new SimpleMemory(10);
+
+            simpleMemory.WriteInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_IterationsCountIndex, iterationsCount);
+
+            return simpleMemory;
+        }
+
+        /// <summary>
+        /// Calculates the weight and centre of mass of a section of torus with varying density from a <see cref="SimpleMemory"/> object.
+        /// </summary>
+        /// <param name="simpleMemory">The <see cref="SimpleMemory"/> object that contains the result.</param>
+        /// <returns>Returns the weight and centre of mass of a section of torus with varying density in the form of a <see cref="MonteCarloResult"/> object.</returns>
+        private static MonteCarloResult GetResult(SimpleMemory simpleMemory)
+        {
+            return new MonteCarloResult
+            {
+                W = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_WIndex),
+                X = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_XIndex),
+                Y = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_YIndex),
+                Z = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_ZIndex),
+                DW = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DWIndex),
+                DX = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DXIndex),
+                DY = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DYIndex),
+                DZ = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DZIndex)
+            };
+        }
+    }
+}
