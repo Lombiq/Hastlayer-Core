@@ -12,8 +12,6 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MonteCarloAlgorithm
     {
-        private static Random r = new Random();
-
         private const int Multiplier = 100;
 
         public const int MonteCarloAlgorithm_IterationsCountIndex = 0;
@@ -25,6 +23,7 @@ namespace Hast.Samples.SampleAssembly
         public const int MonteCarloAlgorithm_DXIndex = 6;
         public const int MonteCarloAlgorithm_DYIndex = 7;
         public const int MonteCarloAlgorithm_DZIndex = 8;
+        public const int MonteCarloAlgorithm_RandomNumbersStartIndex = 9;
 
 
         public virtual void Calculate(SimpleMemory memory)
@@ -48,14 +47,18 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 1; i <= iterationsCount; i++)
             {
-                // Pick points randomly from the sampled region.
-                x = checked((int)(1 * Multiplier + r.Next(101) * 3 * Multiplier / 100)); 
-                y = checked((int)(-3 * Multiplier + r.Next(101) * 7 * Multiplier / 100)); 
-                s = checked((int)(13 + ss * r.Next(101) * Multiplier / 100)); 
-                z = checked((int)(2 * Multiplier * Log(5 * s / Multiplier) / 10)); 
+                var randomX = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i);
+                var randomY = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 1);
+                var randomZ = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 2);
 
-                int b = checked((int)(Sqrt((x * x) + (y * y)) - 3 * Multiplier)); 
-                int a = checked((int)(((z * z) + (b * b)) / Multiplier)); 
+                // Pick points randomly from the sampled region.
+                x = checked((int)(1 * Multiplier + randomX * 3 * Multiplier / 100));
+                y = checked((int)(-3 * Multiplier + randomY * 7 * Multiplier / 100));
+                s = checked((int)(13 + ss * randomZ * Multiplier / 100));
+                z = checked((int)(2 * Multiplier * Log(5 * s / Multiplier) / 10));
+
+                int b = checked((int)(Sqrt((x * x) + (y * y)) - 3 * Multiplier));
+                int a = checked((int)(((z * z) + (b * b)) / Multiplier));
 
                 // Check if the selected points are inside the torus. 
                 // If they are inside, add to the various cumulants.
@@ -174,6 +177,9 @@ namespace Hast.Samples.SampleAssembly
 
     public static class MonteCarloAlgorithmExtensions
     {
+        private static Random _random = new Random();
+
+
         /// <summary>
         /// Algorithm to find the weight and centre of mass of a section of torus with varying density.
         /// </summary>
@@ -196,9 +202,14 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns a <see cref="SimpleMemory"/> object containing the input values.</returns>
         private static SimpleMemory CreateSimpleMemory(int iterationsCount)
         {
-            var simpleMemory = new SimpleMemory(10);
+            var simpleMemory = new SimpleMemory(10 + iterationsCount * 3);
 
             simpleMemory.WriteInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_IterationsCountIndex, iterationsCount);
+
+            for (int i = 0; i < iterationsCount * 3; i++)
+            {
+                simpleMemory.WriteUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_RandomNumbersStartIndex + i, (uint)(_random.Next(101)));
+            }
 
             return simpleMemory;
         }
