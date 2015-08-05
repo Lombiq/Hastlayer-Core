@@ -28,11 +28,11 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void Calculate(SimpleMemory memory)
         {
-            int w, x, y, s, z, dw, dx, dy, dz, sw, swx, swy, swz, varw, varx, vary, varz, ss, vol;
+            int w, x, y, s, z, dw, dx, dy, dz, sw, swx, swy, swz, varw, varx, vary, varz, ss, volume;
             w = x = y = s = z = dw = dx = dy = dz = sw = swx = swy = swz = varw = varx = vary = varz = 0;
 
             ss = 29; // Rounded constant value instead of "0.2 * (Math.Exp(5.0) - Math.Exp(-5.0))". This is the interval of s to be random sampled. 
-            vol = 3 * 7 * ss; // Volume of the sampled region in x,y,s space.
+            volume = 3 * 7 * ss; // Volume of the sampled region in x,y,s space.
 
             int iterationsCount = memory.ReadInt32(MonteCarloAlgorithm_IterationsCountIndex);
 
@@ -45,14 +45,18 @@ namespace Hast.Samples.SampleAssembly
             int sumvarwy = 0;
             int sumvarwz = 0;
 
+            uint randomX = 0;
+            uint randomY = 0;
+            uint randomZ = 0;
+
             for (int i = 1; i <= iterationsCount; i++)
             {
-                var randomX = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i);
-                var randomY = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 1);
-                var randomZ = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 2);
+                randomX = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i);
+                randomY = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 1);
+                randomZ = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 2);
 
                 // Pick points randomly from the sampled region.
-                x = checked((int)(1 * Multiplier + randomX * 3 * Multiplier / 100));
+                x = checked((int)(Multiplier + randomX * 3 * Multiplier / 100));
                 y = checked((int)(-3 * Multiplier + randomY * 7 * Multiplier / 100));
                 s = checked((int)(13 + ss * randomZ * Multiplier / 100));
                 z = checked((int)(2 * Multiplier * Log(5 * s / Multiplier) / 10));
@@ -87,28 +91,21 @@ namespace Hast.Samples.SampleAssembly
                     sumvarwy += vary / Multiplier;
                     sumvarwz += varz / Multiplier;
 
-                    sw = 0;
-                    swx = 0;
-                    swy = 0;
-                    swz = 0;
-                    varw = 0;
-                    varx = 0;
-                    vary = 0;
-                    varz = 0;
+                    sw = swx = swy = swz = varw = varx = vary = varz = 0;
                 }
             }
 
             // Values of the integrals.
-            memory.WriteInt32(MonteCarloAlgorithm_WIndex, checked((int)(vol * sumsw / iterationsCount)));
-            memory.WriteInt32(MonteCarloAlgorithm_XIndex, checked((int)(vol * sumswx / iterationsCount)));
-            memory.WriteInt32(MonteCarloAlgorithm_YIndex, checked((int)(vol * sumswy / iterationsCount)));
-            memory.WriteInt32(MonteCarloAlgorithm_ZIndex, checked((int)(vol * sumswz / iterationsCount)));
+            memory.WriteUInt32(MonteCarloAlgorithm_WIndex, checked((uint)((uint)volume * (uint)sumsw / iterationsCount)));
+            memory.WriteUInt32(MonteCarloAlgorithm_XIndex, checked((uint)((uint)volume * (uint)sumswx / iterationsCount)));
+            memory.WriteUInt32(MonteCarloAlgorithm_YIndex, checked((uint)((uint)volume * (uint)sumswy / iterationsCount)));
+            memory.WriteUInt32(MonteCarloAlgorithm_ZIndex, checked((uint)((uint)volume * (uint)sumswz / iterationsCount)));
 
             // Values of the error estimates.
-            memory.WriteInt32(MonteCarloAlgorithm_DWIndex, checked((int)(vol * Sqrt((int)((sumvarw / iterationsCount - Pow((sumsw / iterationsCount), 2)) / iterationsCount)))));
-            memory.WriteInt32(MonteCarloAlgorithm_DXIndex, checked((int)(vol * Sqrt((int)((sumvarwx / iterationsCount - Pow((sumswx / iterationsCount), 2)) / iterationsCount)))));
-            memory.WriteInt32(MonteCarloAlgorithm_DYIndex, checked((int)(vol * Sqrt((int)((sumvarwy / iterationsCount - Pow((sumswy / iterationsCount), 2)) / iterationsCount)))));
-            memory.WriteInt32(MonteCarloAlgorithm_DZIndex, checked((int)(vol * Sqrt((int)((sumvarwz / iterationsCount - Pow((sumswz / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteUInt32(MonteCarloAlgorithm_DWIndex, checked((uint)(volume * Sqrt((int)((sumvarw / iterationsCount - Pow((sumsw / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteUInt32(MonteCarloAlgorithm_DXIndex, checked((uint)(volume * Sqrt((int)((sumvarwx / iterationsCount - Pow((sumswx / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteUInt32(MonteCarloAlgorithm_DYIndex, checked((uint)(volume * Sqrt((int)((sumvarwy / iterationsCount - Pow((sumswy / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteUInt32(MonteCarloAlgorithm_DZIndex, checked((uint)(volume * Sqrt((int)((sumvarwz / iterationsCount - Pow((sumswz / iterationsCount), 2)) / iterationsCount)))));
         }
 
 
@@ -223,14 +220,14 @@ namespace Hast.Samples.SampleAssembly
         {
             return new MonteCarloResult
             {
-                W = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_WIndex),
-                X = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_XIndex),
-                Y = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_YIndex),
-                Z = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_ZIndex),
-                DW = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DWIndex),
-                DX = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DXIndex),
-                DY = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DYIndex),
-                DZ = simpleMemory.ReadInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DZIndex)
+                W = simpleMemory.ReadUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_WIndex),
+                X = simpleMemory.ReadUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_XIndex),
+                Y = simpleMemory.ReadUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_YIndex),
+                Z = simpleMemory.ReadUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_ZIndex),
+                DW = simpleMemory.ReadUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DWIndex),
+                DX = simpleMemory.ReadUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DXIndex),
+                DY = simpleMemory.ReadUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DYIndex),
+                DZ = simpleMemory.ReadUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_DZIndex)
             };
         }
     }
