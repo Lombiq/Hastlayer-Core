@@ -26,7 +26,7 @@ namespace Hast.Samples.SampleAssembly
         public const int MonteCarloAlgorithm_RandomNumbersStartIndex = 9;
 
 
-        public virtual void Calculate(SimpleMemory memory)
+        public virtual void CalculateTorusSectionValues(SimpleMemory memory)
         {
             int w, x, y, s, z, dw, dx, dy, dz, sw, swx, swy, swz, varw, varx, vary, varz, ss, volume;
             w = x = y = s = z = dw = dx = dy = dz = sw = swx = swy = swz = varw = varx = vary = varz = 0;
@@ -182,11 +182,11 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="iterationsCount">The number of iterations the algorithm uses for calculations.</param>
         /// <returns>Returns the weight and centre of mass of a section of torus with varying density in the form of a <see cref="MonteCarloResult"/> object.</returns>
-        public static MonteCarloResult Calculate(this MonteCarloAlgorithm monteCarloAlgorithm, int iterationsCount)
+        public static MonteCarloResult CalculateTorusSectionValues(this MonteCarloAlgorithm monteCarloAlgorithm, int iterationsCount)
         {
             var simpleMemory = CreateSimpleMemory(iterationsCount);
 
-            monteCarloAlgorithm.Calculate(simpleMemory);
+            monteCarloAlgorithm.CalculateTorusSectionValues(simpleMemory);
 
             return GetResult(simpleMemory);
         }

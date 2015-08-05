@@ -66,6 +66,9 @@ namespace Hast.Samples.Consumer
                         inputTwo = "coulombtech";
 
                         result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+
+                        var monteCarloAlgorithm = new MonteCarloAlgorithm();
+                        var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
                     }
 
                     // Generating hardware from test assemblies:
