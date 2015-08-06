@@ -48,7 +48,7 @@ namespace Hast.Communication.Services
             var methodIdInBytes = Helpers.CommunicationHelpers.ConvertIntToByteArray(methodId);
 
             // Here we put together the data stream.
-            // Data message: |commanyType:1byte|messageLength:4byte|methodId:4byte|data
+            // Data message: |commandType:1byte|messageLength:4byte|methodId:4byte|data
             buffer[0] = 0; //commandType - not stored on FPGA - deprecated
             buffer[1] = lengthInBytes[0]; // messageLength
             buffer[2] = lengthInBytes[1]; // messageLength
