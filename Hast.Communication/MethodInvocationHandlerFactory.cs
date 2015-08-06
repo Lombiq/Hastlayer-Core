@@ -7,9 +7,7 @@ using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Services;
 using Hast.Transformer.SimpleMemory;
 using Orchard;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -59,28 +57,14 @@ namespace Hast.Communication
                         }
 
                         if (context.HardwareInvocationIsCancelled) return false;
-
-                        // Implement FPGA communication, data transformation here.
-
-                        
+                  
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            try
-                            {
-                                var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, 0); });
-                                task.Wait();
-                            }
-                            catch (Exception e)
-                            {
-                                //TODO: What to do, if something went wrong with the serial port communication.
-                                Debug.WriteLine(e.Message);
-                            }
-                            
+                            // The task here is needed because the code executed on the FPGA board doesn't returns immediately, therefore we have to wait it.
+                            var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, 0); });
+                            task.Wait();                   
                         }
-                        // Debug.WriteLine("Execution completed...");
-                        invocation.ReturnValue = memory.Memory;
-                        // Set the return value as invocation.ReturnValue = ...
 
                         eventHandler.MethodInvokedOnHardware(context);
 

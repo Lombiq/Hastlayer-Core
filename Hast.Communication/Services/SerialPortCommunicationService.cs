@@ -1,8 +1,8 @@
 ﻿using Hast.Communication.Exceptions;
 using Hast.Transformer.SimpleMemory;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Ports;
 using System.Threading.Tasks;
 
@@ -10,47 +10,42 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        public Task Execute(SimpleMemory input, int methodId)
+        public Task Execute(SimpleMemory simpleMemory, int methodId)
         {
-            var sp = new SerialPort();
-            var receiveByteSize = 0; // The incoming byte buffer size.
-            var count = 0; // Just used to know when is the data ready.
-            var returnValue = new List<byte>(); // The incoming buffer.
-
+            var serialPort = new SerialPort();
+            
             // Initializing some serial port connection settings (Maybe different whith some fpga boards)
-            sp.PortName = Constants.FpgaConstants.PortName;
-            sp.BaudRate = 9600;
-            sp.Parity = Parity.None;
-            sp.StopBits = StopBits.One;
-            sp.WriteTimeout = 10000;
+            serialPort.PortName = Constants.FpgaConstants.PortName;
+            serialPort.BaudRate = 9600;
+            serialPort.Parity = Parity.None;
+            serialPort.StopBits = StopBits.One;
+            serialPort.WriteTimeout = 10000;
             
-            
-
             try
             {
                 // We try to open the serial port.
-                sp.Open();
+                serialPort.Open();
             }
-            catch (Exception ex)
+            catch (IOException ex)
             {
-                throw new SerialPortCommunicationException("Probably the FPGA board is not connected.", ex);
+                throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. Probably ", ex);
             }
 
-            if (sp.IsOpen)
+            if (serialPort.IsOpen)
             {
-                Debug.WriteLine("The port " + sp.PortName + " is ours.");
+                Debug.WriteLine("The port " + serialPort.PortName + " is ours.");
             }
             else
             {
-                throw new SerialPortCommunicationException("The port " + sp.PortName + " is used by another app.");
+                throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. The " + serialPort.PortName + " exists but it's used by another process.");
             }
 
             //TODO: Here i need to write a code that sends the data to the FPGA.
-            var length = input.Memory.Length;
+            var length = simpleMemory.Memory.Length;
             Debug.WriteLine("Data length in bytes: " + length.ToString());
             var buffer = new byte[length + 9]; // Data message command + messageLength
             var lengthInBytes = Helpers.CommunicationHelpers.ConvertIntToByteArray(length);
-            var methodIdInBytes = Helpers.CommunicationHelpers.ConvertIntToByteArray(methodId); // TODO: In future version store the methodID-s in database (automatically)
+            var methodIdInBytes = Helpers.CommunicationHelpers.ConvertIntToByteArray(methodId);
 
             // Here we put together the data stream.
             // Data message: |commanyType:1byte|messageLength:4byte|methodId:4byte|data
@@ -67,52 +62,60 @@ namespace Hast.Communication.Services
             var index = 0;
             for (int i = 9; i < length + 9; i++)
             {
-                buffer[i] = input.Memory[index];
+                buffer[i] = simpleMemory.Memory[index];
                 index++;
             }
 
             // Here the out buffer is ready
             //sp.Write(buffer, 0, length + 9);
             var j = 0;
-            var byteBuf = new byte[1];
+            var byteBuffer = new byte[1];
 
             while (j < length + 9)
             {
-                byteBuf[0] = buffer[j];
+                byteBuffer[0] = buffer[j];
                 // Sending the data.
-                sp.Write(byteBuf, 0, 1);
+                serialPort.Write(byteBuffer, 0, 1);
                 j++;
             }
 
             var taskCompletionSource = new TaskCompletionSource<bool>();
-            sp.DataReceived += (s, e) =>
+            var messageSizeBytes = 0; // The incoming byte buffer size.
+            var count = 0; // Just used to know when is the data ready.
+            var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer
+            var returnValueIndex = 0;
+
+            serialPort.DataReceived += (s, e) =>
             {
                 // TODO: Here i need to write a code that receives the data.
 
                 // When there are some incoming data then we read it from the serial port (this will be a byte that we receive)
                 // The first byte will the size of the byte array that we must receive
-                if (receiveByteSize == 0)// To setup the right receiving buffer size
+                
+                if (messageSizeBytes == 0)// To setup the right receiving buffer size
                 {
-                    receiveByteSize = (byte)sp.ReadByte();
+                    // The first byte is the data size what we must receive.
+                    messageSizeBytes = (byte)serialPort.ReadByte();
                     // The code below is just used for debud purposes.
-                    var RXString = Convert.ToChar(receiveByteSize);
+                    var RXString = Convert.ToChar(messageSizeBytes);
                     Debug.WriteLine("Incoming data size: " + RXString.ToString());
-                    sp.Write("s"); // Signal that we are ready to receive the data.
+                    serialPort.Write("s"); // Signal that we are ready to receive the data.
                 }
                 else
                 {
                     // We put together the received data stream.
-                    var receivedByte = (byte)sp.ReadByte();
-                    returnValue.Add(receivedByte);
+                    var receivedByte = (byte)serialPort.ReadByte();
+                    returnValue[returnValueIndex] = receivedByte;
+                    returnValueIndex++;
                     count++;
-                    sp.Write("r"); // Signal that we received all bytes.
+                    serialPort.Write("r"); // Signal that we received all bytes.
                 }
                 
                 // Set the incoming data if all bytes are received. (Waiting for incoming data stream to complete.)
-                if (receiveByteSize == count)
+                if (messageSizeBytes == count)
                 {
                     //var output = new SimpleMemory(receiveByteSize);
-                    input.Memory = returnValue.ToArray();
+                    simpleMemory.Memory = returnValue;
                     taskCompletionSource.SetResult(true);
                 }
 
