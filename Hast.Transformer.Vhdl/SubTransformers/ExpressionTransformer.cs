@@ -50,47 +50,50 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is IdentifierExpression)
             {
                 var identifier = (IdentifierExpression)expression;
-                var reference = new DataObjectReference { DataObjectKind = DataObjectKind.Variable, Name = identifier.Identifier.ToExtendedVhdlId() };
+                var reference = new DataObjectReference
+                {
+                    DataObjectKind = DataObjectKind.Variable,
+                    Name = identifier.Identifier.ToExtendedVhdlId()
+                };
 
                 if (!(identifier.Parent is BinaryOperatorExpression)) return reference;
 
-                // In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if necessary.
+                return ImplementTypeConversionForBinaryExpression((BinaryOperatorExpression)identifier.Parent, reference, context);
 
-                var binaryOperatorExpression = (BinaryOperatorExpression)identifier.Parent;
-                var leftType = _typeConverter.ConvertTypeReference(binaryOperatorExpression.Left.GetActualType());
-                var rightType = _typeConverter.ConvertTypeReference(binaryOperatorExpression.Right.GetActualType());
-
-                if (leftType == rightType) return reference;
-
-                var isLeft = binaryOperatorExpression.Left == expression;
-                var thisType = isLeft ? leftType : rightType;
-                var otherType = isLeft ? rightType : leftType;
-
-                // We need to convert types in a way to keep precision. E.g. conerting an int to real is fine, but vica versa would cause
-                // information loss. However excplicit casting in this direction is allowed in CIL so we need to allow it here as well.
-                if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real))
-                {
-                    Logger.Warning("Converting from " + thisType.Name + " to " + otherType.Name + " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding.  The affected expression: " + binaryOperatorExpression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
-                }
-
-                return ImplementTypeConversion(thisType, otherType, reference);
             }
             else if (expression is PrimitiveExpression)
             {
                 var primitive = (PrimitiveExpression)expression;
 
-                var type = _typeConverter.ConvertTypeReference(expression.GetActualType());
-                var valueString = primitive.Value.ToString();
-                if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.'); // Replacing decimal comma to decimal dot.
-
-                // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer and a type conversion would
-                // be needed. Thus we add a .0 to the end to indicate it's a real.
-                if (type == KnownDataTypes.Real && !valueString.Contains('.'))
+                var typeReference = expression.GetActualType();
+                if (typeReference != null)
                 {
-                    valueString += ".0";
+                    var type = _typeConverter.ConvertTypeReference(typeReference);
+                    var valueString = primitive.Value.ToString();
+                    if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.'); // Replacing decimal comma to decimal dot.
+
+                    // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer and a type conversion would
+                    // be needed. Thus we add a .0 to the end to indicate it's a real.
+                    if (type == KnownDataTypes.Real && !valueString.Contains('.'))
+                    {
+                        valueString += ".0";
+                    }
+
+                    return new Value { DataType = type, Content = valueString }; 
+                }
+                else if (primitive.Parent is BinaryOperatorExpression)
+                {
+                    var reference = new DataObjectReference
+                    {
+                        DataObjectKind = DataObjectKind.Constant,
+                        Name = primitive.ToString()
+                    };
+                    return ImplementTypeConversionForBinaryExpression((BinaryOperatorExpression)primitive.Parent, reference, context);
                 }
 
-                return new Value { DataType = type, Content = valueString };
+                throw new InvalidOperationException(
+                    "The type of the following primitive expression couldn't be determined: " +
+                    expression.ToString());
             }
             else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
             else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
@@ -336,8 +339,59 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context, block));
         }
 
+        /// <summary>
+        /// In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if necessary.
+        /// </summary>
+        private IVhdlElement ImplementTypeConversionForBinaryExpression(
+            BinaryOperatorExpression binaryOperatorExpression, 
+            IVhdlElement expression,
+            ISubTransformerContext context)
+        {
+            // If the type of an operand can't be determined the best guess is the expression's type.
+            var expressionTypeReference = binaryOperatorExpression.GetActualType();
+            var expressionType = expressionTypeReference != null ? _typeConverter.ConvertTypeReference(expressionTypeReference) : null;
+
+            var leftTypeReference = binaryOperatorExpression.Left.GetActualType();
+            var leftType = leftTypeReference != null ? _typeConverter.ConvertTypeReference(leftTypeReference) : expressionType;
+
+            var rightTypeReference = binaryOperatorExpression.Right.GetActualType();
+            var rightType = rightTypeReference != null ? _typeConverter.ConvertTypeReference(rightTypeReference) : expressionType;
+
+            if (leftType == null || rightType == null)
+            {
+                throw new InvalidOperationException(
+                    "The type of the operands of the following expression could't be determined: " +
+                    binaryOperatorExpression.ToString());
+            }
+
+            if (leftType == rightType) return expression;
+
+            var isLeft = binaryOperatorExpression.Left == expression;
+            var thisType = isLeft ? leftType : rightType;
+            var otherType = isLeft ? rightType : leftType;
+
+            // We need to convert types in a way to keep precision. E.g. conerting an int to real is fine, but vica versa would cause
+            // information loss. However excplicit casting in this direction is allowed in CIL so we need to allow it here as well.
+            if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real))
+            {
+                Logger.Warning(
+                    "Converting from " + thisType.Name + 
+                    " to " + otherType.Name + 
+                    " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding. " +
+                    "The affected expression: " + binaryOperatorExpression.ToString() + 
+                    " in method " + context.Scope.Method.GetFullName() + ".");
+            }
+
+            return ImplementTypeConversion(thisType, otherType, expression);
+        }
+
         private IVhdlElement ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression)
         {
+            if (fromType == toType)
+            {
+                return expression;
+            }
+
             var castInvokation = new Invokation();
 
             // Trying supported cast scenarios:

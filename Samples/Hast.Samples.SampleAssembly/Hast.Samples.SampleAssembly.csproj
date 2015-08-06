@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenomeMatcher.cs" />
     <Compile Include="ImageContrastModifier.cs" />
     <Compile Include="ImageFilter.cs" />
     <Compile Include="PrimeCalculator.cs" />

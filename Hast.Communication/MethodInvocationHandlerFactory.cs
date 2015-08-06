@@ -4,7 +4,6 @@ using Hast.Common.Extensions;
 using Hast.Common.Models;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
-using Hast.Communication.Services;
 using Hast.Transformer.SimpleMemory;
 using Orchard;
 using System.Collections.Generic;
@@ -31,10 +30,12 @@ namespace Hast.Communication
                 {
                     using (var workContext = _wca.CreateWorkContextScope())
                     {
+                        var methodFullName = invocation.Method.GetFullName();
+
                         var context = new MethodInvocationPipelineStepContext
                         {
                             Invocation = invocation,
-                            MethodFullName = invocation.Method.GetFullName(),
+                            MethodFullName = methodFullName,
                             HardwareRepresentation = hardwareRepresentation
                         };
 
@@ -50,7 +51,7 @@ namespace Hast.Communication
                         {
                             var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
                             var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMethodNameAlternates()));
-                            if (!hardwareMembers.Contains(context.MethodFullName) && !memberNameAlternates.Contains(context.MethodFullName))
+                            if (!hardwareMembers.Contains(methodFullName) && !memberNameAlternates.Contains(methodFullName))
                             {
                                 context.HardwareInvocationIsCancelled = true;
                             } 
