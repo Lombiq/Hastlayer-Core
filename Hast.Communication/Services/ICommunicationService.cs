@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Hast.Communication.Services
 {
     /// <summary>
-    /// Interface for implement the basic communication with the FPGA board.
+    /// Interface for implementing the basic communication with the FPGA board.
     /// </summary>
     public interface ICommunicationService : IDependency
     {

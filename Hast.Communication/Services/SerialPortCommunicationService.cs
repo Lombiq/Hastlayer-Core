@@ -28,7 +28,7 @@ namespace Hast.Communication.Services
             }
             catch (IOException ex)
             {
-                throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. Probably ", ex);
+                throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed.", ex);
             }
 
             if (serialPort.IsOpen)
