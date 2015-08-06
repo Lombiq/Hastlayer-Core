@@ -1,6 +1,6 @@
 ﻿namespace Hast.Communication.Constants
 {
-    public class FpgaConstantsTemp
+    public class FpgaConstants
     {
         public const string PortName = "COM4";
     }
