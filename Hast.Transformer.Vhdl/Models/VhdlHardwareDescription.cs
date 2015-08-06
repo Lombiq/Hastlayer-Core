@@ -30,6 +30,11 @@ namespace Hast.Transformer.Vhdl.Models
         }
 
 
+        public int LookupMethodId(string methodFullName)
+        {
+            return _methodIdTable.LookupMethodId(methodFullName);
+        }
+
         public async void Save(Stream stream)
         {
             if (_manifest == null) throw new InvalidOperationException("There is no manifest to save");

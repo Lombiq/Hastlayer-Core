@@ -29,10 +29,12 @@ namespace Hast.Communication
                 {
                     using (var workContext = _wca.CreateWorkContextScope())
                     {
+                        var methodFullName = invocation.Method.GetFullName();
+
                         var context = new MethodInvocationPipelineStepContext
                         {
                             Invocation = invocation,
-                            MethodFullName = invocation.Method.GetFullName(),
+                            MethodFullName = methodFullName,
                             HardwareRepresentation = hardwareRepresentation
                         };
 
@@ -48,7 +50,7 @@ namespace Hast.Communication
                         {
                             var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
                             var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMethodNameAlternates()));
-                            if (!hardwareMembers.Contains(context.MethodFullName) && !memberNameAlternates.Contains(context.MethodFullName))
+                            if (!hardwareMembers.Contains(methodFullName) && !memberNameAlternates.Contains(methodFullName))
                             {
                                 context.HardwareInvocationIsCancelled = true;
                             } 

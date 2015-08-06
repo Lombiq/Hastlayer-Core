@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -32,11 +33,18 @@ namespace Hast.Transformer.Vhdl
         public IEnumerable<MethodMapping> Values { get { return _mappings.Values; } }
 
 
-        public void SetMapping(string methodName, int id)
+        public void SetMapping(string methodFullName, int id)
         {
             if (id > MaxId) MaxId = id;
-            if (!_mappings.ContainsKey(methodName)) _mappings[methodName] = new MethodMapping { MethodName = methodName, Id = id };
-            else _mappings[methodName].Id = id;
+            if (!_mappings.ContainsKey(methodFullName)) _mappings[methodFullName] = new MethodMapping { MethodName = methodFullName, Id = id };
+            else _mappings[methodFullName].Id = id;
+        }
+
+        public int LookupMethodId(string methodFullName)
+        {
+            MethodMapping mapping;
+            if (_mappings.TryGetValue(methodFullName, out mapping)) return mapping.Id;
+            throw new InvalidOperationException("No method ID mapping found for the given method name: " + methodFullName);
         }
     }
 }

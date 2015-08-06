@@ -13,6 +13,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
+using Hast.Common.Extensions;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -236,7 +237,10 @@ namespace Hast.Transformer.Vhdl
 
 
                 caseExpression.Whens.Add(when);
-                methodIdTable.SetMapping(interfaceMethod.Method.GetFullName(), id);
+                foreach (var methodNameAlternate in interfaceMethod.Method.GetFullName().GetMethodNameAlternates())
+                {
+                    methodIdTable.SetMapping(methodNameAlternate, id); 
+                }
                 id++;
             }
 
