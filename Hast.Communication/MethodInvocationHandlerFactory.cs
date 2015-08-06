@@ -4,7 +4,6 @@ using Hast.Common.Extensions;
 using Hast.Common.Models;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
-using Hast.Communication.Services;
 using Hast.Transformer.SimpleMemory;
 using Orchard;
 using System.Collections.Generic;
@@ -16,13 +15,11 @@ namespace Hast.Communication
     public class MethodInvocationHandlerFactory : IMethodInvocationHandlerFactory
     {
         private readonly IWorkContextAccessor _wca;
-        private readonly IHastlayerCommunicationService _hastlayerCommunicationService;
 
 
-        public MethodInvocationHandlerFactory(IWorkContextAccessor wca, IHastlayerCommunicationService hastlayerCommunicationService)
+        public MethodInvocationHandlerFactory(IWorkContextAccessor wca)
         {
             _wca = wca;
-            _hastlayerCommunicationService = hastlayerCommunicationService;
         }
 
 
