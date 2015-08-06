@@ -4,6 +4,7 @@ using Hast.Common.Extensions;
 using Hast.Common.Models;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
+using Hast.Communication.Services;
 using Hast.Transformer.SimpleMemory;
 using Orchard;
 using System.Collections.Generic;
@@ -62,8 +63,10 @@ namespace Hast.Communication
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            // The task here is needed because the code executed on the FPGA board doesn't returns immediately, therefore we have to wait it.
-                            var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, 0); });
+                            var methodId = hardwareRepresentation.HardwareDescription.LookupMethodId(methodFullName);
+                            // The task here is needed because the code executed on the FPGA board doesn't return, we have to wait for it.
+                            // The Execute method is executed in separate thread.
+                            var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, methodId); });
                             task.Wait();                   
                         }
 
