@@ -14,13 +14,15 @@ namespace Hast.Communication.Services
         public Task Execute(SimpleMemory simpleMemory, int memberId)
         {
             var serialPort = new SerialPort();
-            
+
             // Initializing some serial port connection settings (Maybe different whith some fpga boards)
-            serialPort.PortName = Constants.FpgaConstants.PortName;
-            serialPort.BaudRate = 9600;
-            serialPort.Parity = Parity.None;
-            serialPort.StopBits = StopBits.One;
-            serialPort.WriteTimeout = 10000;
+            var portName = Helpers.CommunicationHelpers.DetectSerialConnectionsPortName();
+            
+            serialPort.PortName = portName == null ? Constants.FpgaConstants.PortName : portName;
+            serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
+            serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
+            serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
+            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
             
             try
             {
