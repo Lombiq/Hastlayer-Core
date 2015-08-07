@@ -31,7 +31,7 @@ namespace Hast.Common.Models
         /// The full name (including the full namespace of the parent type(s) as well as their return type and the types 
         /// of their - type - arguments) of the method to look up the ID for.</param>
         /// <returns>The numerical ID of the method that identifies the call target in the hardware implementation.</returns>
-        int LookupMethodId(string methodFullName);
+        int LookupMemberId(string methodFullName);
 
         /// <summary>
         /// Saves the full hardware description to a stream.

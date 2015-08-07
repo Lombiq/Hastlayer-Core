@@ -8,6 +8,6 @@ namespace Hast.Transformer.Vhdl.Models
     {
         Module Module { get; }
         IList<InterfaceMethodDefinition> InterfaceMethods { get; }
-        MethodCallChainTable MethodCallChainTable { get; }
+        MemberCallChainTable MemberCallChainTable { get; }
     }
 }

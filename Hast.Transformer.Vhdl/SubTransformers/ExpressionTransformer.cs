@@ -284,7 +284,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var targetName = expression.GetFullName().ToExtendedVhdlId();
 
-            context.TransformationContext.MethodCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
+            context.TransformationContext.MemberCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
 
             var invokation = new Invokation
             {

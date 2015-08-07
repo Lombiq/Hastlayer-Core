@@ -5,12 +5,13 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Threading.Tasks;
+using Hast.Communication.Helpers;
 
 namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        public Task Execute(SimpleMemory simpleMemory, int methodId)
+        public Task Execute(SimpleMemory simpleMemory, int memberId)
         {
             var serialPort = new SerialPort();
             
@@ -44,20 +45,24 @@ namespace Hast.Communication.Services
             var length = simpleMemory.Memory.Length;
             Debug.WriteLine("Data length in bytes: " + length.ToString());
             var buffer = new byte[length + 9]; // Data message command + messageLength
-            var lengthInBytes = Helpers.CommunicationHelpers.ConvertIntToByteArray(length);
-            var methodIdInBytes = Helpers.CommunicationHelpers.ConvertIntToByteArray(methodId);
+            var lengthInBytes = CommunicationHelpers.ConvertIntToByteArray(length);
+            var memberIdInBytes = CommunicationHelpers.ConvertIntToByteArray(memberId);
 
             // Here we put together the data stream.
-            // Data message: |commandType:1byte|messageLength:4byte|methodId:4byte|data
+            // Data message: |commandType:1byte|messageLength:4byte|memberId:4byte|data
             buffer[0] = 0; //commandType - not stored on FPGA - deprecated
-            buffer[1] = lengthInBytes[0]; // messageLength
-            buffer[2] = lengthInBytes[1]; // messageLength
-            buffer[3] = lengthInBytes[2]; // messageLength
-            buffer[4] = lengthInBytes[3]; // messageLength
-            buffer[5] = methodIdInBytes[0];// MethodSelect
-            buffer[6] = methodIdInBytes[1];// MethodSelect
-            buffer[7] = methodIdInBytes[1];// MethodSelect
-            buffer[8] = methodIdInBytes[3];// MethodSelect
+
+            // Message length
+            buffer[1] = lengthInBytes[0];
+            buffer[2] = lengthInBytes[1];
+            buffer[3] = lengthInBytes[2];
+            buffer[4] = lengthInBytes[3];
+
+            // Memember ID
+            buffer[5] = memberIdInBytes[0];
+            buffer[6] = memberIdInBytes[1];
+            buffer[7] = memberIdInBytes[1];
+            buffer[8] = memberIdInBytes[3];
 
             var index = 0;
             for (int i = 9; i < length + 9; i++)

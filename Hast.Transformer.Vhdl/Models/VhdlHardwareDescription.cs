@@ -11,28 +11,28 @@ namespace Hast.Transformer.Vhdl.Models
     public class VhdlHardwareDescription : IHardwareDescription
     {
         private VhdlManifest _manifest;
-        private MethodIdTable _methodIdTable;
+        private MemberIdTable _memberIdTable;
 
         public string Language { get { return "VHDL"; } }
         public VhdlManifest Manifest { get { return _manifest; } }
-        public MethodIdTable MethodIdTable { get { return _methodIdTable; } }
-        public IEnumerable<string> HardwareMembers { get { return _methodIdTable.Values.Select(mapping => mapping.MethodName); } }
+        public MemberIdTable MemberIdTable { get { return _memberIdTable; } }
+        public IEnumerable<string> HardwareMembers { get { return _memberIdTable.Values.Select(mapping => mapping.MemberName); } }
 
 
         public VhdlHardwareDescription()
         {
         }
 
-        public VhdlHardwareDescription(VhdlManifest manifest, MethodIdTable methodIdTable)
+        public VhdlHardwareDescription(VhdlManifest manifest, MemberIdTable memberIdTable)
         {
             _manifest = manifest;
-            _methodIdTable = methodIdTable;
+            _memberIdTable = memberIdTable;
         }
 
 
-        public int LookupMethodId(string methodFullName)
+        public int LookupMemberId(string memberFullName)
         {
-            return _methodIdTable.LookupMethodId(methodFullName);
+            return _memberIdTable.LookupMemberId(memberFullName);
         }
 
         public async void Save(Stream stream)
@@ -44,7 +44,7 @@ namespace Hast.Transformer.Vhdl.Models
                 var storage = new Storage
                 {
                     Manifest = _manifest,
-                    MethodIdTable = _methodIdTable,
+                    MemberIdTable = _memberIdTable,
                 };
 
                 await writer.WriteAsync(JsonConvert.SerializeObject(storage, Formatting.None, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
@@ -58,7 +58,7 @@ namespace Hast.Transformer.Vhdl.Models
                 var storage = JsonConvert.DeserializeObject<Storage>(await reader.ReadToEndAsync(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
                 
                 _manifest = storage.Manifest;
-                _methodIdTable = storage.MethodIdTable;
+                _memberIdTable = storage.MemberIdTable;
             }
         }
 
@@ -66,7 +66,7 @@ namespace Hast.Transformer.Vhdl.Models
         public class Storage
         {
             public VhdlManifest Manifest { get; set; }
-            public MethodIdTable MethodIdTable { get; set; }
+            public MemberIdTable MemberIdTable { get; set; }
         }
     }
 }

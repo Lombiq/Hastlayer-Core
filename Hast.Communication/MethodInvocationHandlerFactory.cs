@@ -51,7 +51,7 @@ namespace Hast.Communication
                         if (!context.HardwareInvocationIsCancelled)
                         {
                             var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
-                            var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMethodNameAlternates()));
+                            var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
                             if (!hardwareMembers.Contains(methodFullName) && !memberNameAlternates.Contains(methodFullName))
                             {
                                 context.HardwareInvocationIsCancelled = true;
@@ -63,7 +63,7 @@ namespace Hast.Communication
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            var methodId = hardwareRepresentation.HardwareDescription.LookupMethodId(methodFullName);
+                            var methodId = hardwareRepresentation.HardwareDescription.LookupMemberId(methodFullName);
                             // The task here is needed because the code executed on the FPGA board doesn't return, we have to wait for it.
                             // The Execute method is executed in separate thread.
                             var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, methodId); });
