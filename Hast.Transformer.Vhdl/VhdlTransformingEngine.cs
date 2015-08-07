@@ -237,10 +237,14 @@ namespace Hast.Transformer.Vhdl
 
 
                 caseExpression.Whens.Add(when);
-                foreach (var methodNameAlternate in interfaceMethod.Method.GetFullName().GetMethodNameAlternates())
+
+                var methodFullName = interfaceMethod.Method.GetFullName();
+                methodIdTable.SetMapping(methodFullName, id);
+                foreach (var methodNameAlternate in methodFullName.GetMethodNameAlternates())
                 {
                     methodIdTable.SetMapping(methodNameAlternate, id); 
                 }
+
                 id++;
             }
 
