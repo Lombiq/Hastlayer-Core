@@ -45,7 +45,7 @@ namespace Hast.Transformer
                 foreach (var member in type.Members)
                 {
                     var fullName = member.GetFullName();
-                    if ((noIncludedMembers || configuration.PublicHardwareMembers.Contains(fullName) || fullName.GetMethodNameAlternates().Intersect(configuration.PublicHardwareMembers).Any() || configuration.PublicHardwareMemberPrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) &&
+                    if ((noIncludedMembers || configuration.PublicHardwareMembers.Contains(fullName) || fullName.GetMemberNameAlternates().Intersect(configuration.PublicHardwareMembers).Any() || configuration.PublicHardwareMemberPrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) &&
                         _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
                     {
                         if (member is MethodDeclaration)

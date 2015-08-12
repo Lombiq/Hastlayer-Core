@@ -8,7 +8,7 @@ namespace Hast.Transformer.Vhdl.Models
     {
         public Module Module { get; set; }
         public IList<InterfaceMethodDefinition> InterfaceMethods { get; set; }
-        public MethodCallChainTable MethodCallChainTable { get; set; }
+        public MemberCallChainTable MemberCallChainTable { get; set; }
 
 
         public VhdlTransformationContext(ITransformationContext previousContext) : base(previousContext)

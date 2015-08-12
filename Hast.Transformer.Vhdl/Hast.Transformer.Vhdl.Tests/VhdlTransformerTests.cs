@@ -71,7 +71,7 @@ namespace Hast.Transformer.Vhdl.Tests
             var hardwareDescription = await TransformReferenceAssembliesToVhdl();
 
             Assert.AreEqual(hardwareDescription.Language, "VHDL", "The language of the hardware description wasn't properly set to VHDL");
-            Assert.AreEqual(hardwareDescription.MethodIdTable.Values.Count(), 7, "Not the proper amount of interface members were produced.");
+            Assert.AreEqual(hardwareDescription.MemberIdTable.Values.Count(), 7, "Not the proper amount of interface members were produced.");
         }
 
         [Test]
