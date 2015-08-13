@@ -26,32 +26,28 @@ namespace Hast.Communication.Helpers
         {
             // Get all available serial ports on system.
             var ports = SerialPort.GetPortNames();
-            SerialPort serialPort = new SerialPort();
-
-            //Initialize the communication
-            serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
-            serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
-            serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
-            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
-
-            // Checking the port which the FPGA board is connected.  
-            foreach (var port in ports)
+            using (var serialPort = new SerialPort())
             {
-                serialPort.PortName = port;
+                // Initialize the communication
+                serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
+                serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
+                serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
+                serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
 
-                try
+                // Checking the port which the FPGA board is connected.  
+                foreach (var port in ports)
                 {
-                    serialPort.Open();
-                    serialPort.Close();
-                    return port;
-                }
-                catch (IOException e) { }
-                finally
-                {
-                    serialPort.Close();
+                    serialPort.PortName = port;
+
+                    try
+                    {
+                        serialPort.Open();
+                        return port;
+                    }
+                    catch (IOException e) { }
                 }
             }
-
+            
             return null;
         }
     }
