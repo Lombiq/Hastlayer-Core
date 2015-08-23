@@ -91,43 +91,63 @@ namespace Hast.Communication.Services
             var count = 0; // Just used to know when is the data ready.
             var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer
             var returnValueIndex = 0;
+            var communicationType = '0';
 
+            // In this event we are receiving the userful data comfing from the FPGA board.
             serialPort.DataReceived += (s, e) =>
             {
-                // TODO: Here i need to write a code that receives the data.
-
                 // When there are some incoming data then we read it from the serial port (this will be a byte that we receive)
                 // The first byte will the size of the byte array that we must receive
-                
-                if (messageSizeBytes == 0)// To setup the right receiving buffer size
-                {
-                    // The first byte is the data size what we must receive.
-                    messageSizeBytes = (byte)serialPort.ReadByte();
-                    // The code below is just used for debud purposes.
-                    var RXString = Convert.ToChar(messageSizeBytes);
-                    Debug.WriteLine("Incoming data size: " + RXString.ToString());
-                    serialPort.Write("s"); // Signal that we are ready to receive the data.
-                }
-                else
-                {
-                    // We put together the received data stream.
-                    var receivedByte = (byte)serialPort.ReadByte();
-                    returnValue[returnValueIndex] = receivedByte;
-                    returnValueIndex++;
-                    count++;
-                    serialPort.Write("r"); // Signal that we received all bytes.
-                }
-                
-                // Set the incoming data if all bytes are received. (Waiting for incoming data stream to complete.)
-                if (messageSizeBytes == count)
-                {
-                    //var output = new SimpleMemory(receiveByteSize);
-                    simpleMemory.Memory = returnValue;
-                    taskCompletionSource.SetResult(true);
-                }
 
+                if (communicationType == '0')
+                {
+                    var temp = (byte)serialPort.ReadByte();
+                    var RXString = Convert.ToChar(temp);
+                    if (RXString == 'i') // i as information
+                    {
+                        communicationType = 'i';
+                    }
+                    else
+                    {
+                        communicationType = 'd'; // as data
+                    }
+                }
+                else if(communicationType == 'i')
+                {
+                    // TODO: Same az in the data process, and in the end do not forget to set the communicationType to 'd'.
+                }
+                else // If useful data is receiving. If the communicationType variable is equal with 'd' then this code will run.
+                {
+
+                    if (messageSizeBytes == 0)// To setup the right receiving buffer size
+                    {
+                        // The first byte is the data size what we must receive.
+                        messageSizeBytes = (byte)serialPort.ReadByte();
+                        // The code below is just used for debug purposes.
+                        var RXString = Convert.ToChar(messageSizeBytes);
+                        Debug.WriteLine("Incoming data size: " + RXString.ToString());
+                        serialPort.Write("s"); // Signal that we are ready to receive the data.
+                    }
+                    else
+                    {
+                        // We put together the received data stream.
+                        var receivedByte = (byte)serialPort.ReadByte();
+                        returnValue[returnValueIndex] = receivedByte;
+                        returnValueIndex++;
+                        count++;
+                        serialPort.Write("r"); // Signal that we received all bytes.
+                    }
+
+                    // Set the incoming data if all bytes are received. (Waiting for incoming data stream to complete.)
+                    if (messageSizeBytes == count)
+                    {
+                        //var output = new SimpleMemory(receiveByteSize);
+                        simpleMemory.Memory = returnValue;
+                        taskCompletionSource.SetResult(true);
+                    }
+                }
             };
-            
+
             // Send back the result.
             return taskCompletionSource.Task;
         }
