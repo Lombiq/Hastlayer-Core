@@ -12,7 +12,7 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MonteCarloAlgorithm
     {
-        private const int Multiplier = 100;
+        private const ushort Multiplier = 100;
 
         public const int MonteCarloAlgorithm_IterationsCountIndex = 0;
         public const int MonteCarloAlgorithm_WIndex = 1;
@@ -57,9 +57,15 @@ namespace Hast.Samples.SampleAssembly
 
                 // Pick points randomly from the sampled region.
                 x = checked((int)(Multiplier + randomX * 3 * Multiplier / 100));
-                y = checked((int)(-3 * Multiplier + randomY * 7 * Multiplier / 100));
-                s = checked((int)(13 + ss * randomZ * Multiplier / 100));
-                z = checked((int)(2 * Multiplier * Log(5 * s / Multiplier) / 10));
+                // The constant can't be specified properly inline as (since it can't be specied as a short, see:
+                // http://stackoverflow.com/questions/8670511/how-to-specify-a-short-int-constant-without-casting)
+                // it would cause an underflow and be caster to an ulong.
+                short minusThree = -3;
+                y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / 100));
+                short thirteen = 13;
+                s = checked((int)(thirteen + ss * randomZ * Multiplier / 100));
+                short two = 2;
+                z = checked((int)(two * Multiplier * Log(5 * s / Multiplier) / 10));
 
                 int b = checked((int)(Sqrt((x * x) + (y * y)) - 3 * Multiplier));
                 int a = checked((int)(((z * z) + (b * b)) / Multiplier));
