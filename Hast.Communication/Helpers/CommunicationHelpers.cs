@@ -14,12 +14,12 @@ namespace Hast.Communication.Helpers
         /// <returns></returns>
         public static byte[] ConvertIntToByteArray(int from)
         {
-            var stream = new MemoryStream();
+            using (var stream = new MemoryStream())
             using (var writer = new BinaryWriter(stream))
             {
                 writer.Write(from);
+                return stream.ToArray();
             }
-            return stream.ToArray();
         }
 
         public static string DetectSerialConnectionsPortName()
