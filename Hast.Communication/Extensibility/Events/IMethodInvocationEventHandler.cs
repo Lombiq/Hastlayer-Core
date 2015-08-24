@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.DynamicProxy;
-using Hast.Common.Models;
-using Orchard.Events;
+﻿using Orchard.Events;
 
 namespace Hast.Communication.Extensibility.Events
 {

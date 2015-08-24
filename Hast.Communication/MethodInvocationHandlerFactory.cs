@@ -10,19 +10,18 @@ using Orchard;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Communication
 {
     public class MethodInvocationHandlerFactory : IMethodInvocationHandlerFactory
     {
         private readonly IWorkContextAccessor _wca;
-        private readonly IHastlayerCommunicationService _hastlayerCommunicationService;
 
 
-        public MethodInvocationHandlerFactory(IWorkContextAccessor wca, IHastlayerCommunicationService hastlayerCommunicationService)
+        public MethodInvocationHandlerFactory(IWorkContextAccessor wca)
         {
             _wca = wca;
-            _hastlayerCommunicationService = hastlayerCommunicationService;
         }
 
 
@@ -32,10 +31,12 @@ namespace Hast.Communication
                 {
                     using (var workContext = _wca.CreateWorkContextScope())
                     {
+                        var methodFullName = invocation.Method.GetFullName();
+
                         var context = new MethodInvocationPipelineStepContext
                         {
                             Invocation = invocation,
-                            MethodFullName = invocation.Method.GetFullName(),
+                            MethodFullName = methodFullName,
                             HardwareRepresentation = hardwareRepresentation
                         };
 
@@ -50,34 +51,24 @@ namespace Hast.Communication
                         if (!context.HardwareInvocationIsCancelled)
                         {
                             var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
-                            var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMethodNameAlternates()));
-                            if (!hardwareMembers.Contains(context.MethodFullName) && !memberNameAlternates.Contains(context.MethodFullName))
+                            var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
+                            if (!hardwareMembers.Contains(methodFullName) && !memberNameAlternates.Contains(methodFullName))
                             {
                                 context.HardwareInvocationIsCancelled = true;
                             } 
                         }
 
                         if (context.HardwareInvocationIsCancelled) return false;
-
-                        // Implement FPGA communication, data transformation here.
-
-                        Communication com = new Communication();
-                        com.Start(); // Initialize the communication
+                  
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            memory = com.Execute(memory);
+                            var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(methodFullName);
+                            // The task here is needed because the code executed on the FPGA board doesn't return, we have to wait for it.
+                            // The Execute method is executed in separate thread.
+                            var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, memberId); });
+                            task.Wait();                   
                         }
-
-
-                        
-                        
-                        
-                       
-
-                        
-
-                        // Set the return value as invocation.ReturnValue = ...
 
                         eventHandler.MethodInvokedOnHardware(context);
 

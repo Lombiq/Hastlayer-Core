@@ -13,6 +13,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
+using Hast.Common.Extensions;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -34,7 +35,7 @@ namespace Hast.Transformer.Vhdl
                     var vhdlTransformationContext = new VhdlTransformationContext(transformationContext)
                     {
                         Module = new Module { Architecture = new Architecture { Name = "Imp" } },
-                        MethodCallChainTable = new MethodCallChainTable()
+                        MemberCallChainTable = new MemberCallChainTable()
                     };
 
                     // The top module should have as few and as small inputs as possible. Its name can't be an extended identifier.
@@ -57,7 +58,7 @@ namespace Hast.Transformer.Vhdl
                     module.Architecture.Entity = module.Entity;
 
                     ReorderProcedures(vhdlTransformationContext);
-                    var methodIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
+                    var memberIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
 
                     if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
                     {
@@ -66,7 +67,7 @@ namespace Hast.Transformer.Vhdl
 
                     ProcessUtility.AddClockToProcesses(module, "Clock".ToExtendedVhdlId());
 
-                    return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, methodIdTable);
+                    return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable);
                 });
         }
 
@@ -128,13 +129,13 @@ namespace Hast.Transformer.Vhdl
         }
 
 
-        private static MethodIdTable ProcessInterfaceMethods(VhdlTransformationContext transformationContext)
+        private static MemberIdTable ProcessInterfaceMethods(VhdlTransformationContext transformationContext)
         {
-            if (!transformationContext.InterfaceMethods.Any()) return MethodIdTable.Empty;
+            if (!transformationContext.InterfaceMethods.Any()) return MemberIdTable.Empty;
 
             var proxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
             var ports = transformationContext.Module.Entity.Ports;
-            var methodIdTable = new MethodIdTable();
+            var memberIdTable = new MemberIdTable();
 
             var methodIdPort = new Port
             {
@@ -236,7 +237,14 @@ namespace Hast.Transformer.Vhdl
 
 
                 caseExpression.Whens.Add(when);
-                methodIdTable.SetMapping(interfaceMethod.Method.GetFullName(), id);
+
+                var methodFullName = interfaceMethod.Method.GetFullName();
+                memberIdTable.SetMapping(methodFullName, id);
+                foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
+                {
+                    memberIdTable.SetMapping(methodNameAlternate, id); 
+                }
+
                 id++;
             }
 
@@ -246,7 +254,7 @@ namespace Hast.Transformer.Vhdl
 
             transformationContext.Module.Architecture.Body.Add(proxyProcess);
 
-            return methodIdTable;
+            return memberIdTable;
         }
 
         /// <summary>
@@ -254,7 +262,7 @@ namespace Hast.Transformer.Vhdl
         /// </summary>
         private static void ReorderProcedures(VhdlTransformationContext transformationContext)
         {
-            var chains = transformationContext.MethodCallChainTable.Chains;
+            var chains = transformationContext.MemberCallChainTable.Chains;
 
             transformationContext.Module.Architecture.Declarations =
                 TopologicalSortHelper.Sort(

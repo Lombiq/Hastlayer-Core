@@ -70,7 +70,7 @@ namespace Hast.Layer
              * - Transform into hardware description through ITransformer.
              * - Save hardware description for re-use (cache file, stream supplied from the outside).
              * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary communication 
-             *   implementation (currently partially implemented with a method table).
+             *   implementation (currently partially implemented with a member table).
              * - Cache hardware implementation to be able to re-configure the FPGA with it later.
              */
 
