@@ -67,7 +67,7 @@ namespace Hast.Samples.Consumer
 
                         result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
 
-                        var monteCarloAlgorithm = new MonteCarloAlgorithm();
+                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm()); 
                         var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
                     }
 

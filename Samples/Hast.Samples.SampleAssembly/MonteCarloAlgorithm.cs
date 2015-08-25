@@ -31,7 +31,9 @@ namespace Hast.Samples.SampleAssembly
             int w, x, y, s, z, dw, dx, dy, dz, sw, swx, swy, swz, varw, varx, vary, varz, ss, volume;
             w = x = y = s = z = dw = dx = dy = dz = sw = swx = swy = swz = varw = varx = vary = varz = 0;
 
-            ss = 29; // Rounded constant value instead of "0.2 * (Math.Exp(5.0) - Math.Exp(-5.0))". This is the interval of s to be random sampled. 
+            // Rounded constant value instead of "0.2 * (Math.Exp(5.0) - Math.Exp(-5.0))". 
+            // This is the interval of s to be random sampled. 
+            ss = 29; 
             volume = 3 * 7 * ss; // Volume of the sampled region in x,y,s space.
 
             int iterationsCount = memory.ReadInt32(MonteCarloAlgorithm_IterationsCountIndex);
@@ -55,15 +57,17 @@ namespace Hast.Samples.SampleAssembly
                 randomY = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 1);
                 randomZ = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 2);
 
+                short hundred = 100; 
+
                 // Pick points randomly from the sampled region.
-                x = checked((int)(Multiplier + randomX * 3 * Multiplier / 100));
+                x = checked((int)(Multiplier + randomX * 3 * Multiplier / hundred));
                 // The constant can't be specified properly inline as (since it can't be specied as a short, see:
                 // http://stackoverflow.com/questions/8670511/how-to-specify-a-short-int-constant-without-casting)
                 // it would cause an underflow and be caster to an ulong.
                 short minusThree = -3;
-                y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / 100));
+                y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / hundred));
                 short thirteen = 13;
-                s = checked((int)(thirteen + ss * randomZ * Multiplier / 100));
+                s = checked((int)(thirteen + ss * randomZ * Multiplier / hundred));
                 short two = 2;
                 z = checked((int)(two * Multiplier * Log(5 * s / Multiplier) / 10));
 
@@ -108,10 +112,14 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteUInt32(MonteCarloAlgorithm_ZIndex, checked((uint)((uint)volume * (uint)sumswz / iterationsCount)));
 
             // Values of the error estimates.
-            memory.WriteUInt32(MonteCarloAlgorithm_DWIndex, checked((uint)(volume * Sqrt((int)((sumvarw / iterationsCount - Pow((sumsw / iterationsCount), 2)) / iterationsCount)))));
-            memory.WriteUInt32(MonteCarloAlgorithm_DXIndex, checked((uint)(volume * Sqrt((int)((sumvarwx / iterationsCount - Pow((sumswx / iterationsCount), 2)) / iterationsCount)))));
-            memory.WriteUInt32(MonteCarloAlgorithm_DYIndex, checked((uint)(volume * Sqrt((int)((sumvarwy / iterationsCount - Pow((sumswy / iterationsCount), 2)) / iterationsCount)))));
-            memory.WriteUInt32(MonteCarloAlgorithm_DZIndex, checked((uint)(volume * Sqrt((int)((sumvarwz / iterationsCount - Pow((sumswz / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteUInt32(MonteCarloAlgorithm_DWIndex, 
+                checked((uint)(volume * Sqrt((int)((sumvarw / iterationsCount - Pow((sumsw / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteUInt32(MonteCarloAlgorithm_DXIndex, 
+                checked((uint)(volume * Sqrt((int)((sumvarwx / iterationsCount - Pow((sumswx / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteUInt32(MonteCarloAlgorithm_DYIndex, 
+                checked((uint)(volume * Sqrt((int)((sumvarwy / iterationsCount - Pow((sumswy / iterationsCount), 2)) / iterationsCount)))));
+            memory.WriteUInt32(MonteCarloAlgorithm_DZIndex, 
+                checked((uint)(volume * Sqrt((int)((sumvarwz / iterationsCount - Pow((sumswz / iterationsCount), 2)) / iterationsCount)))));
         }
 
 
