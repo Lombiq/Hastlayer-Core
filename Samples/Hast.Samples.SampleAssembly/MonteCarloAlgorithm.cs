@@ -57,17 +57,16 @@ namespace Hast.Samples.SampleAssembly
                 randomY = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 1);
                 randomZ = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 2);
 
-                short hundred = 100; 
-
                 // Pick points randomly from the sampled region.
-                x = checked((int)(Multiplier + randomX * 3 * Multiplier / hundred));
+                x = checked((int)(Multiplier + randomX * 3 * Multiplier / 100));
+              
                 // The constant can't be specified properly inline as (since it can't be specied as a short, see:
                 // http://stackoverflow.com/questions/8670511/how-to-specify-a-short-int-constant-without-casting)
                 // it would cause an underflow and be caster to an ulong.
                 short minusThree = -3;
-                y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / hundred));
+                y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / 100));
                 short thirteen = 13;
-                s = checked((int)(thirteen + ss * randomZ * Multiplier / hundred));
+                s = checked((int)(thirteen + ss * (short)randomZ * Multiplier / 100));
                 short two = 2;
                 z = checked((int)(two * Multiplier * Log(5 * s / Multiplier) / 10));
 
@@ -164,8 +163,26 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns the logarithm of the number.</returns>
         private int Log10(int value)
         {
-            return (value >= 10000000) ? 7 : (value >= 1000000) ? 6 : (value >= 100000) ? 5 : (value >= 10000) ? 4 :
-                (value >= 1000) ? 3 : (value >= 100) ? 2 : (value >= 10) ? 1 : 0;
+            int returnValue = 0;
+
+            if (value >= 10000000)
+                returnValue = 7;
+            else if (value >= 1000000)
+                returnValue = 6;
+            else if (value >= 100000)
+                returnValue = 5;
+            else if (value >= 10000)
+                returnValue = 4;
+            else if (value >= 1000)
+                returnValue = 3;
+            else if (value >= 100)
+                returnValue = 2;
+            else if (value >= 10)
+                returnValue = 1;
+            else
+                returnValue = 0;
+
+            return returnValue;
         }
 
         /// <summary>
