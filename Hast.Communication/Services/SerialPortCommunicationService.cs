@@ -6,11 +6,19 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading.Tasks;
 using Hast.Communication.Helpers;
+using Orchard.Logging;
 
 namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
+        public ILogger Logger { get; set; }
+
+        public SerialPortCommunicationService()
+        {
+            Logger = NullLogger.Instance;
+        }
+
         public Task Execute(SimpleMemory simpleMemory, int memberId)
         {
             var serialPort = new SerialPort();
@@ -91,14 +99,13 @@ namespace Hast.Communication.Services
             var count = 0; // Just used to know when is the data ready.
             var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer
             var returnValueIndex = 0;
-            var communicationType = '0';
+            var communicationType = '0'; // The 0 is the default value, the i is when we want to read something from the fpga, and the d if we want to read the processed data.
+            var executionTime = 0; // In this variable is stored the execution time. (1Byte)
 
             // In this event we are receiving the userful data comfing from the FPGA board.
             serialPort.DataReceived += (s, e) =>
             {
                 // When there are some incoming data then we read it from the serial port (this will be a byte that we receive)
-                // The first byte will the size of the byte array that we must receive
-
                 if (communicationType == '0')
                 {
                     var temp = (byte)serialPort.ReadByte();
@@ -114,11 +121,15 @@ namespace Hast.Communication.Services
                 }
                 else if(communicationType == 'i')
                 {
-                    // TODO: Same az in the data process, and in the end do not forget to set the communicationType to 'd'.
+                    // We know that the incoming data's size will be 1 Byte.
+                    executionTime = (byte)serialPort.ReadByte();
+                    Logger.Information(string.Format("Execution time: {0}", executionTime));
+                    serialPort.Write("s"); // Signal that we received the data.
+                    communicationType = 'd';
                 }
                 else // If useful data is receiving. If the communicationType variable is equal with 'd' then this code will run.
                 {
-
+                    // The first byte will the size of the byte array that we must receive
                     if (messageSizeBytes == 0)// To setup the right receiving buffer size
                     {
                         // The first byte is the data size what we must receive.
