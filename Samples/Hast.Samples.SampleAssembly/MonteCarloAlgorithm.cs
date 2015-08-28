@@ -163,26 +163,22 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns the logarithm of the number.</returns>
         private int Log10(int value)
         {
-            int returnValue = 0;
-
             if (value >= 10000000)
-                returnValue = 7;
+                return 7;
             else if (value >= 1000000)
-                returnValue = 6;
+                return 6;
             else if (value >= 100000)
-                returnValue = 5;
+                return 5;
             else if (value >= 10000)
-                returnValue = 4;
+                return 4;
             else if (value >= 1000)
-                returnValue = 3;
+                return 3;
             else if (value >= 100)
-                returnValue = 2;
+                return 2;
             else if (value >= 10)
-                returnValue = 1;
+                return 1;
             else
-                returnValue = 0;
-
-            return returnValue;
+                return 0;
         }
 
         /// <summary>
