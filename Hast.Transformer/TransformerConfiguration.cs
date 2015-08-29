@@ -3,6 +3,16 @@ namespace Hast.Common.Configuration
 {
     public class TransformerConfiguration
     {
+        /// <summary>
+        /// Gets or sets the maximal degree of parallelism that will be attempted to build into the generated hardware
+        /// when constructs suitable for hardware-level parallelisation are found.
+        /// </summary>
+        public int MaxDegreeOfParallelism { get; set; }
+
+        /// <summary>
+        /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
+        /// array.
+        /// </summary>
         public bool UseSimpleMemory { get; set; }
 
 
@@ -18,7 +28,7 @@ namespace Hast.Common.Configuration
         private const string ConfigKey = "Hast.Transformer.Configuration";
 
 
-        public static TransformerConfiguration GetTransformerConfiguration(this IHardwareGenerationConfiguration hardwareConfiguration)
+        public static TransformerConfiguration TransformerConfiguration(this IHardwareGenerationConfiguration hardwareConfiguration)
         {
             object config;
 

@@ -6,7 +6,7 @@ namespace Hast.Transformer.Models
     {
         public static TransformerConfiguration GetTransformerConfiguration(this ITransformationContext transformationContext)
         {
-            return transformationContext.HardwareGenerationConfiguration.GetTransformerConfiguration();
+            return transformationContext.HardwareGenerationConfiguration.TransformerConfiguration();
         }
     }
 }
