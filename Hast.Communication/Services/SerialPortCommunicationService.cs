@@ -113,6 +113,7 @@ namespace Hast.Communication.Services
                     if (RXString == 'i') // i as information
                     {
                         communicationType = 'i';
+                        serialPort.Write("s");
                     }
                     else
                     {
