@@ -4,8 +4,8 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    // Although by implementing INamedElement and IStructuredElement Architecture is in the end implementing ISubProgram. However the
-    // architecture is not a subprogram, so implementing ISubProgram directly would be semantically incorrect.
+    // Although by implementing INamedElement and IStructuredElement Architecture is in the end implementing ISubProgram. 
+    // However the architecture is not a subprogram, so implementing ISubProgram directly would be semantically incorrect.
     [DebuggerDisplay("{ToVhdl()}")]
     public class Architecture : INamedElement, IStructuredElement
     {

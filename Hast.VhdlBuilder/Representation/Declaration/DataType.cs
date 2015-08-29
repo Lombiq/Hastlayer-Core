@@ -31,7 +31,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public static bool operator ==(DataType a, DataType b)
         {
-            // If both are null, or both are same instance, return true.
+            // If both are null, or both are the same instance, return true.
             if (System.Object.ReferenceEquals(a, b))
             {
                 return true;
