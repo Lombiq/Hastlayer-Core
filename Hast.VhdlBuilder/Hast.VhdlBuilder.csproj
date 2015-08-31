@@ -68,7 +68,9 @@
     <Compile Include="Representation\Declaration\ISubProgram.cs" />
     <Compile Include="Representation\Declaration\Module.cs" />
     <Compile Include="Representation\Declaration\Entity.cs" />
+    <Compile Include="Representation\Expression\Character.cs" />
     <Compile Include="Representation\Expression\DataObjectReference.cs" />
+    <Compile Include="Representation\Expression\IdentifierValue.cs" />
     <Compile Include="Representation\Expression\Invokation.cs" />
     <Compile Include="Representation\Expression\IfElse.cs" />
     <Compile Include="Representation\Expression\Return.cs" />

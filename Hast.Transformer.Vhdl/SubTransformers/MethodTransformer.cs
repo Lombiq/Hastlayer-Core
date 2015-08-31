@@ -7,6 +7,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -34,96 +35,84 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public void Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
             var fullName = method.GetFullName();
-            var procedure = new Procedure { Name = fullName.ToExtendedVhdlId() };
+            var stateMachine = new MethodStateMachine(fullName);
 
 
-            // Handling when the method is an interface method, i.e. should be present in the interface of the VHDL module.
+            // Handling when the method is an interface method, i.e. should be executable from the host computer.
             InterfaceMethodDefinition interfaceMethod = null;
             if (method.IsInterfaceMember())
             {
-                interfaceMethod = new InterfaceMethodDefinition { Name = procedure.Name, Procedure = procedure, Method = method };
+                interfaceMethod = new InterfaceMethodDefinition
+                {
+                    Name = stateMachine.Name,
+                    StateMachine = stateMachine,
+                    Method = method
+                };
                 context.InterfaceMethods.Add(interfaceMethod);
             }
 
 
-            var parameters = new List<ProcedureParameter>();
+            var parameters = new List<Variable>();
 
-            // Handling return type
+            // Handling return type.
             var returnType = _typeConverter.Convert(method.ReturnType);
             var isVoid = returnType.Name == "void";
-            ProcedureParameter outputParam = null;
             if (!isVoid)
             {
-                // Since this way there's a dot in the output var's name, it can't clash with normal variables.
-                outputParam = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.var".ToExtendedVhdlId() };
-
-                if (interfaceMethod != null)
+                var returnVariable = new Variable
                 {
-                    var outputPort = new Port { DataType = returnType, Mode = PortMode.Out, Name = (fullName + ".output").ToExtendedVhdlId() };
-                    interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = outputPort, Parameter = outputParam });
-                    interfaceMethod.Ports.Add(outputPort);
-                }
+                    Name = CreateReturnVariableName(stateMachine),
+                    DataType = returnType
+                };
 
-                parameters.Add(outputParam);
+                parameters.Add(returnVariable);
             }
 
 
-            // Handling input parameters
-            if (method.Parameters.Count != 0)
+            // Handling in/out method parameters.
+            foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
             {
-                foreach (var parameter in method.Parameters)
+                var variable = new Variable
                 {
-                    // SimpleMemory parameters should be transformed into parameters that pass on SimpleMemory port references.
-                    if (context.UseSimpleMemory() && parameter.IsSimpleMemoryParameter())
-                    {
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.DataPortsDataType, Name = SimpleMemoryNames.DataInLocal, ParameterType = ProcedureParameterType.In });
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.DataPortsDataType, Name = SimpleMemoryNames.DataOutLocal, ParameterType = ProcedureParameterType.Out });
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.ReadAddressLocal, ParameterType = ProcedureParameterType.InOut });
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.WriteAddressLocal, ParameterType = ProcedureParameterType.Out });
-                    }
-                    else
-                    {
-                        var type = _typeConverter.Convert(parameter.Type);
+                    DataType = _typeConverter.Convert(parameter.Type),
+                    Name = parameter.Name.ToExtendedVhdlId()
+                };
 
-                        var procedureParameter = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = (parameter.Name + ".param").ToExtendedVhdlId() };
-
-                        // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables.
-                        var variable = new Variable { DataType = type, Name = parameter.Name.ToExtendedVhdlId() };
-                        procedure.Declarations.Add(variable);
-                        procedure.Body.Add(new Terminated(new Assignment { AssignTo = variable.ToReference(), Expression = procedureParameter.ToReference() }));
-
-                        if (interfaceMethod != null)
-                        {
-                            var inputPort = new Port { DataType = type, Mode = PortMode.In, Name = (fullName + "." + parameter.Name).ToExtendedVhdlId() };
-                            interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = inputPort, Parameter = procedureParameter });
-                            interfaceMethod.Ports.Add(inputPort);
-                        }
-
-                        parameters.Add(procedureParameter); 
-                    }
-                }
+                parameters.Add(variable);
             }
 
-            procedure.Parameters = parameters;
+            stateMachine.Parameters = parameters;
 
+            // Adding opening state.
+            stateMachine.AddState(new InlineBlock());
 
-            // Processing method body
+            // Processing method body.
             var bodyContext = new SubTransformerContext
             {
                 TransformationContext = context,
                 Scope = new SubTransformerScope
                 {
                     Method = method,
-                    SubProgram = procedure
+                    StateMachine = stateMachine
                 }
             };
+
             foreach (var statement in method.Body.Statements)
             {
-                _statementTransformer.Transform(statement, bodyContext, procedure);
+                _statementTransformer.Transform(statement, bodyContext);
             }
 
+            stateMachine.States.Last().Body.Add(stateMachine.ChangeToFinalState());
 
-            context.Module.Architecture.Declarations.Add(procedure);
+
+            context.Module.Architecture.Declarations.Add(stateMachine.BuildDeclarations());
+            context.Module.Architecture.Body.Add(stateMachine.BuildBody());
+        }
+
+
+        public static string CreateReturnVariableName(MethodStateMachine stateMachine)
+        {
+            return (stateMachine.Name + ".return").ToExtendedVhdlId();
         }
     }
 }

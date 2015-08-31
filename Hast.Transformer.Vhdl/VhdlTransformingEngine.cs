@@ -65,7 +65,7 @@ namespace Hast.Transformer.Vhdl
                         AddSimpleMemoryPorts(module);
                     }
 
-                    ProcessUtility.AddClockToProcesses(module, "Clock".ToExtendedVhdlId());
+                    ProcessUtility.AddClockToProcesses(module, CommonPortNames.Clock);
 
                     return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable);
                 });
@@ -131,130 +131,131 @@ namespace Hast.Transformer.Vhdl
 
         private static MemberIdTable ProcessInterfaceMethods(VhdlTransformationContext transformationContext)
         {
-            if (!transformationContext.InterfaceMethods.Any()) return MemberIdTable.Empty;
+            return new MemberIdTable();
+            //if (!transformationContext.InterfaceMethods.Any()) return MemberIdTable.Empty;
 
-            var proxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
-            var ports = transformationContext.Module.Entity.Ports;
-            var memberIdTable = new MemberIdTable();
+            //var proxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
+            //var ports = transformationContext.Module.Entity.Ports;
+            //var memberIdTable = new MemberIdTable();
 
-            var methodIdPort = new Port
-            {
-                Name = "MethodId".ToExtendedVhdlId(),
-                Mode = PortMode.In,
-                DataType = KnownDataTypes.UnrangedInt,
-            };
+            //var methodIdPort = new Port
+            //{
+            //    Name = "MethodId".ToExtendedVhdlId(),
+            //    Mode = PortMode.In,
+            //    DataType = KnownDataTypes.UnrangedInt,
+            //};
 
-            ports.Add(methodIdPort);
+            //ports.Add(methodIdPort);
 
-            var caseExpression = new Case { Expression = methodIdPort.Name.ToVhdlIdValue() };
+            //var caseExpression = new Case { Expression = methodIdPort.Name.ToVhdlIdValue() };
 
-            var id = 1;
-            foreach (var interfaceMethod in transformationContext.InterfaceMethods)
-            {
-                ports.AddRange(interfaceMethod.Ports);
+            //var id = 1;
+            //foreach (var interfaceMethod in transformationContext.InterfaceMethods)
+            //{
+            //    ports.AddRange(interfaceMethod.Ports);
 
-                var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = id.ToString() } };
+            //    var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = id.ToString() } };
 
-                if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
-                {
-                    // Calling corresponding procedure with SimpleMemory signals passed in.
-                    var simpleMemoryParameterNames = new [] { SimpleMemoryNames.DataInLocal, SimpleMemoryNames.DataOutLocal, SimpleMemoryNames.ReadAddressLocal, SimpleMemoryNames.WriteAddressLocal };
-                    var simpleMemoryParameters = interfaceMethod.Procedure.Parameters
-                        .Where(parameter => simpleMemoryParameterNames.Contains(parameter.Name))
-                        .Select(parameter =>
-                        {
-                            var reference = new DataObjectReference { DataObjectKind = DataObjectKind.Signal };
+            //    if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
+            //    {
+            //        // Calling corresponding procedure with SimpleMemory signals passed in.
+            //        var simpleMemoryParameterNames = new [] { SimpleMemoryNames.DataInLocal, SimpleMemoryNames.DataOutLocal, SimpleMemoryNames.ReadAddressLocal, SimpleMemoryNames.WriteAddressLocal };
+            //        var simpleMemoryParameters = interfaceMethod.Procedure.Parameters
+            //            .Where(parameter => simpleMemoryParameterNames.Contains(parameter.Name))
+            //            .Select(parameter =>
+            //            {
+            //                var reference = new DataObjectReference { DataObjectKind = DataObjectKind.Signal };
 
-                            if (parameter.Name == SimpleMemoryNames.DataInLocal)
-                            {
-                                reference.Name = SimpleMemoryNames.DataInPort;
-                            }
-                            else if (parameter.Name == SimpleMemoryNames.DataOutLocal)
-                            {
-                                reference.Name = SimpleMemoryNames.DataOutPort;
-                            }
-                            else if (parameter.Name == SimpleMemoryNames.ReadAddressLocal)
-                            {
-                                reference.Name = SimpleMemoryNames.ReadAddressPort;
-                            }
-                            else
-                            {
-                                reference.Name = SimpleMemoryNames.WriteAddressPort;
-                            }
+            //                if (parameter.Name == SimpleMemoryNames.DataInLocal)
+            //                {
+            //                    reference.Name = SimpleMemoryNames.DataInPort;
+            //                }
+            //                else if (parameter.Name == SimpleMemoryNames.DataOutLocal)
+            //                {
+            //                    reference.Name = SimpleMemoryNames.DataOutPort;
+            //                }
+            //                else if (parameter.Name == SimpleMemoryNames.ReadAddressLocal)
+            //                {
+            //                    reference.Name = SimpleMemoryNames.ReadAddressPort;
+            //                }
+            //                else
+            //                {
+            //                    reference.Name = SimpleMemoryNames.WriteAddressPort;
+            //                }
 
-                            return reference;
-                        });
+            //                return reference;
+            //            });
 
-                    var invokation = new Invokation
-                    {
-                        Target = interfaceMethod.Procedure.Name.ToVhdlIdValue(),
-                        Parameters = new List<IVhdlElement>(simpleMemoryParameters)
-                    };
+            //        var invokation = new Invokation
+            //        {
+            //            Target = interfaceMethod.Procedure.Name.ToVhdlIdValue(),
+            //            Parameters = new List<IVhdlElement>(simpleMemoryParameters)
+            //        };
 
-                    when.Body.Add(new Terminated(invokation));
-                }
-                else
-                {
-                    // Copying input signals to variables.
-                    var portVariables = new Dictionary<Port, Variable>();
-                    foreach (var port in interfaceMethod.Ports)
-                    {
-                        var variable = new Variable
-                        {
-                            Name = (port.Name.TrimExtendedVhdlIdDelimiters() + ".var").ToExtendedVhdlId(),
-                            DataType = port.DataType
-                        };
+            //        when.Body.Add(new Terminated(invokation));
+            //    }
+            //    else
+            //    {
+            //        // Copying input signals to variables.
+            //        var portVariables = new Dictionary<Port, Variable>();
+            //        foreach (var port in interfaceMethod.Ports)
+            //        {
+            //            var variable = new Variable
+            //            {
+            //                Name = (port.Name.TrimExtendedVhdlIdDelimiters() + ".var").ToExtendedVhdlId(),
+            //                DataType = port.DataType
+            //            };
 
-                        proxyProcess.Declarations.Add(variable);
+            //            proxyProcess.Declarations.Add(variable);
 
-                        if (port.Mode == PortMode.In)
-                        {
-                            when.Body.Add(new Terminated(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() }));
-                        }
+            //            if (port.Mode == PortMode.In)
+            //            {
+            //                when.Body.Add(new Terminated(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() }));
+            //            }
 
-                        portVariables[port] = variable;
-                    }
+            //            portVariables[port] = variable;
+            //        }
 
-                    // Calling corresponding procedure and taking care of its input/output parameters.
-                    var invokation = new Invokation
-                    {
-                        Target = interfaceMethod.Procedure.Name.ToVhdlIdValue(),
-                        // Using named parameters as the order of ports is not necessarily right
-                        Parameters = interfaceMethod.ParameterMappings
-                            .Select(mapping => new NamedInvokationParameter { FormalParameter = mapping.Parameter, ActualParameter = portVariables[mapping.Port] })
-                            .Cast<IVhdlElement>()
-                            .ToList()
-                    };
+            //        // Calling corresponding procedure and taking care of its input/output parameters.
+            //        var invokation = new Invokation
+            //        {
+            //            Target = interfaceMethod.Procedure.Name.ToVhdlIdValue(),
+            //            // Using named parameters as the order of ports is not necessarily right
+            //            Parameters = interfaceMethod.ParameterMappings
+            //                .Select(mapping => new NamedInvokationParameter { FormalParameter = mapping.Parameter, ActualParameter = portVariables[mapping.Port] })
+            //                .Cast<IVhdlElement>()
+            //                .ToList()
+            //        };
 
-                    when.Body.Add(new Terminated(invokation));
+            //        when.Body.Add(new Terminated(invokation));
 
-                    // Copying output variables to output ports.
-                    foreach (var port in interfaceMethod.Ports.Where(p => p.Mode == PortMode.Out))
-                    {
-                        when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }));
-                    }
-                }
+            //        // Copying output variables to output ports.
+            //        foreach (var port in interfaceMethod.Ports.Where(p => p.Mode == PortMode.Out))
+            //        {
+            //            when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }));
+            //        }
+            //    }
 
 
-                caseExpression.Whens.Add(when);
+            //    caseExpression.Whens.Add(when);
 
-                var methodFullName = interfaceMethod.Method.GetFullName();
-                memberIdTable.SetMapping(methodFullName, id);
-                foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
-                {
-                    memberIdTable.SetMapping(methodNameAlternate, id); 
-                }
+            //    var methodFullName = interfaceMethod.Method.GetFullName();
+            //    memberIdTable.SetMapping(methodFullName, id);
+            //    foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
+            //    {
+            //        memberIdTable.SetMapping(methodNameAlternate, id); 
+            //    }
 
-                id++;
-            }
+            //    id++;
+            //}
 
-            caseExpression.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
+            //caseExpression.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
 
-            proxyProcess.Body.Add(caseExpression);
+            //proxyProcess.Body.Add(caseExpression);
 
-            transformationContext.Module.Architecture.Body.Add(proxyProcess);
+            //transformationContext.Module.Architecture.Body.Add(proxyProcess);
 
-            return memberIdTable;
+            //return memberIdTable;
         }
 
         /// <summary>

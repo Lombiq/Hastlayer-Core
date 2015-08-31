@@ -14,7 +14,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public interface ISubTransformerScope
     {
         MethodDeclaration Method { get; }
-        ISubProgram SubProgram { get; }
+        MethodStateMachine StateMachine { get; }
     }
 
 
@@ -28,6 +28,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public class SubTransformerScope : ISubTransformerScope
     {
         public MethodDeclaration Method { get; set; }
-        public ISubProgram SubProgram { get; set; }
+        public MethodStateMachine StateMachine { get; set; }
     }
 }

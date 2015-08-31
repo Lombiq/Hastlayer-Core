@@ -10,6 +10,11 @@ namespace Hast.Common.Configuration
         public int MaxDegreeOfParallelism { get; set; }
 
         /// <summary>
+        /// The maximal depth of any call stack that can happen in the program.
+        /// </summary>
+        public int MaxCallStackDepth { get; set; }
+
+        /// <summary>
         /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
         /// array.
         /// </summary>

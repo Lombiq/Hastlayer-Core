@@ -1,9 +1,14 @@
 ﻿using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
     public class Value : IVhdlElement
     {
+        public static readonly Value True = "true".ToVhdlIdValue();
+        public static readonly Value False = "false".ToVhdlIdValue();
+            
+
         public DataType DataType { get; set; }
         public string Content { get; set; }
 

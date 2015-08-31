@@ -25,16 +25,18 @@ namespace Hast.Samples.Consumer
                     {
                         hastlayer.Transformed += (sender, e) =>
                             {
-                                //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
+                                File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
                             };
 
+                        var configuration = new HardwareGenerationConfiguration();
+                        configuration.PublicHardwareMemberPrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumber");
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
                             {
                                 typeof(PrimeCalculator).Assembly
                                 //typeof(Math).Assembly // Would be needed for Math.Sqrt() but transforming that is not yet supported.
                             },
-                            HardwareGenerationConfiguration.Default);
+                            configuration);
 
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);
@@ -86,7 +88,7 @@ namespace Hast.Samples.Consumer
                             //PublicHardwareMemberPrefixes = new[] { "Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy" }
                         };
                         configuration.AddPublicHardwareMethod<IInterface1>(complex => complex.Interface1Method1());
-                        configuration.GetTransformerConfiguration().UseSimpleMemory = false;
+                        configuration.TransformerConfiguration().UseSimpleMemory = false;
 
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]

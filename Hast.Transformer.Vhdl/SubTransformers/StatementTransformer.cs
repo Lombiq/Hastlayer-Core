@@ -11,7 +11,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface IStatementTransformer : IDependency
     {
-        void Transform(Statement statement, ISubTransformerContext context, IBlockElement block);   
+        void Transform(Statement statement, ISubTransformerContext context);
     }
 
 
@@ -28,9 +28,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public void Transform(Statement statement, ISubTransformerContext context, IBlockElement block)
+        public void Transform(Statement statement, ISubTransformerContext context)
         {
-            var subProgram = context.Scope.SubProgram;
+            TransformInner(statement, context, context.Scope.StateMachine.States.Last());
+        }
+
+        
+        private void TransformInner(Statement statement, ISubTransformerContext context, IBlockElement currentState)
+        {
+            var stateMachine = context.Scope.StateMachine;
 
             if (statement is VariableDeclarationStatement)
             {
@@ -40,7 +46,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 foreach (var variableInitializer in variableStatement.Variables)
                 {
-                    subProgram.Declarations.Add(new Variable
+                    stateMachine.LocalVariables.Add(new Variable
                     {
                         Name = variableInitializer.Name.ToExtendedVhdlId(),
                         DataType = type
@@ -51,48 +57,41 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var expressionStatement = statement as ExpressionStatement;
 
-                block.Body.Add(new Terminated(_expressionTransformer.Transform(expressionStatement.Expression, context, block)));
+                currentState.Body.Add(new Terminated(_expressionTransformer.Transform(expressionStatement.Expression, context)));
             }
             else if (statement is ReturnStatement)
             {
                 var returnStatement = statement as ReturnStatement;
 
-                if (_typeConverter.Convert((context.Scope.Method).ReturnType) == KnownDataTypes.Void)
+                if (_typeConverter.Convert((context.Scope.Method).ReturnType) != KnownDataTypes.Void)
                 {
-                    block.Body.Add(new Return());
-                }
-                else if (subProgram is Procedure)
-                {
-                    var procedure = (Procedure)subProgram;
-
-                    var outputParam = procedure.Parameters.Where(param => param.ParameterType == ProcedureParameterType.Out).Single();
-
-                    block.Body.Add(new Terminated(new Assignment
+                    currentState.Body.Add(new Terminated(new Assignment
                     {
-                        AssignTo = outputParam,
-                        Expression = _expressionTransformer.Transform(returnStatement.Expression, context, block)
+                        AssignTo = MethodTransformer.CreateReturnVariableName(stateMachine).ToVhdlVaribleReference(),
+                        Expression = _expressionTransformer.Transform(returnStatement.Expression, context)
                     }));
-                    block.Body.Add(new Return());
                 }
+
+                currentState.Body.Add(stateMachine.ChangeToFinalState());
             }
             else if (statement is IfElseStatement)
             {
                 var ifElse = statement as IfElseStatement;
 
-                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context, block) };
+                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
 
                 var trueBlock = new InlineBlock();
-                Transform(ifElse.TrueStatement, context, trueBlock);
+                TransformInner(ifElse.TrueStatement, context, trueBlock);
                 ifElseElement.True = trueBlock;
 
                 if (ifElse.FalseStatement != Statement.Null)
                 {
                     var falseBlock = new InlineBlock();
-                    Transform(ifElse.FalseStatement, context, falseBlock);
+                    TransformInner(ifElse.FalseStatement, context, falseBlock);
                     ifElseElement.Else = falseBlock;
                 }
 
-                block.Body.Add(ifElseElement);
+                currentState.Body.Add(ifElseElement);
             }
             else if (statement is BlockStatement)
             {
@@ -102,22 +101,43 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 foreach (var stmt in blockStatement.Statements)
                 {
-                    Transform(stmt, context, statementBlock);
+                    TransformInner(stmt, context, statementBlock);
                 }
 
-                block.Body.Add(statementBlock);
+                currentState.Body.Add(statementBlock);
             }
             else if (statement is WhileStatement)
             {
                 var whileStatement = statement as WhileStatement;
 
-                var whileElement = new While { Condition = _expressionTransformer.Transform(whileStatement.Condition, context, block) };
+                stateMachine.AddState(currentState);
 
-                var bodyBlock = new InlineBlock();
-                Transform(whileStatement.EmbeddedStatement, context, bodyBlock);
-                whileElement.Body.Add(bodyBlock);
+                var whileState = new InlineBlock();
+                var whileStateIndex = stateMachine.AddState(whileState);
+                var afterWhileState = new InlineBlock();
+                var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
 
-                block.Body.Add(whileElement);
+                var condition = _expressionTransformer.Transform(whileStatement.Condition, context);
+
+                // Having a condition even in the current state's body: if the loop doesn't need to run at all we'll
+                // spare one cycle by directly jumping to the state after the loop.
+                currentState.Body.Add(new IfElse
+                    {
+                        Condition = condition,
+                        True = stateMachine.CreateStateChange(whileStateIndex),
+                        Else = stateMachine.CreateStateChange(afterWhileStateIndex)
+                    });
+
+                var whileStateInnerBody = new InlineBlock();
+                TransformInner(whileStatement.EmbeddedStatement, context, whileStateInnerBody);
+                whileStateInnerBody.Body.Add(stateMachine.CreateStateChange(whileStateIndex));
+
+                whileState.Body.Add(new IfElse
+                    {
+                        Condition = condition,
+                        True = whileStateInnerBody,
+                        Else = stateMachine.CreateStateChange(afterWhileStateIndex)
+                    });
             }
             else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
         }
