@@ -15,7 +15,7 @@ namespace Hast.VhdlBuilder
             {
                 Mode = PortMode.In,
                 Name = clockSignalName,
-                DataType = new DataType { Name = "std_logic" }
+                DataType = KnownDataTypes.StdLogic
             };
 
             module.Entity.Ports.Add(clockPort);
@@ -41,7 +41,7 @@ namespace Hast.VhdlBuilder
         //    {
         //        Mode = PortMode.In,
         //        Name = resetSignalName,
-        //        DataType = new DataType { Name = "std_logic" }
+        //        DataType = KnownDataTypes.StdLogic
         //    };
 
         //    module.Entity.Ports.Add(resetPort);

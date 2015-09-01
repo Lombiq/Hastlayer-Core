@@ -11,6 +11,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public static RangedDataType Int32 = new RangedDataType { TypeCategory = DataTypeCategory.Numeric, Name = "integer", RangeMin = -2147483647, RangeMax = 2147483647 };
         public static RangedDataType UnrangedInt = new RangedDataType { TypeCategory = DataTypeCategory.Numeric, Name = "integer" };
         public static DataType Natural = new DataType { TypeCategory = DataTypeCategory.Numeric, Name = "natural" };
+        public static DataType StdLogic = new DataType { TypeCategory = DataTypeCategory.Character, Name = "std_logic" };
         public static String String = new String { Length = 256 };
         public static DataType Real = new DataType { TypeCategory = DataTypeCategory.Numeric, Name = "real" };
         public static DataType Void = new DataType { TypeCategory = DataTypeCategory.Identifier, Name = "void" };
