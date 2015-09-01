@@ -59,26 +59,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var isVoid = returnType.Name == "void";
             if (!isVoid)
             {
-                var returnVariable = new Variable
-                {
-                    Name = CreateReturnVariableName(stateMachine),
-                    DataType = returnType
-                };
-
-                parameters.Add(returnVariable);
+                parameters.Add(new Variable
+                    {
+                        Name = stateMachine.CreateSharedReturnVariableName(),
+                        DataType = returnType
+                    });
             }
 
 
             // Handling in/out method parameters.
             foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
             {
-                var variable = new Variable
-                {
-                    DataType = _typeConverter.Convert(parameter.Type),
-                    Name = parameter.Name.ToExtendedVhdlId()
-                };
-
-                parameters.Add(variable);
+                parameters.Add(new Variable
+                    {
+                        DataType = _typeConverter.Convert(parameter.Type),
+                        Name = stateMachine.CreateSharedVariableName(parameter.Name)
+                    });
             }
 
             stateMachine.Parameters = parameters;
@@ -107,12 +103,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             context.Module.Architecture.Declarations.Add(stateMachine.BuildDeclarations());
             context.Module.Architecture.Body.Add(stateMachine.BuildBody());
-        }
-
-
-        public static string CreateReturnVariableName(MethodStateMachine stateMachine)
-        {
-            return (stateMachine.Name + ".return").ToExtendedVhdlId();
         }
     }
 }

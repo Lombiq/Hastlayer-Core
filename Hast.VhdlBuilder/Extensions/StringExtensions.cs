@@ -41,7 +41,7 @@ namespace Hast.VhdlBuilder.Extensions
         /// <summary>
         /// Converts a variable name to a VHDL variable reference.
         /// </summary>
-        public static DataObjectReference ToVhdlVaribleReference(this string variableName)
+        public static DataObjectReference ToVhdlVariableReference(this string variableName)
         {
             return new DataObjectReference
             {

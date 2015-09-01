@@ -47,19 +47,19 @@ namespace Hast.Transformer.Vhdl.Models
             Name = name;
 
 
-            _statesEnum = new Enum { Name = (Name + "_States").ToExtendedVhdlId() };
+            _statesEnum = new Enum { Name = CreateNamePrefixedExtendedVhdlId("_States") };
 
             _stateVariable = new Variable
             {
                 DataType = _statesEnum,
-                Name = (Name + "_State").ToExtendedVhdlId(),
+                Name = CreateNamePrefixedExtendedVhdlId("_State"),
                 Shared = true
             };
 
             _startVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = (Name + "_Start").ToExtendedVhdlId(),
+                Name = CreateNamePrefixedExtendedVhdlId("_Start"),
                 Shared = true,
                 DefaultValue = Value.False
             };
@@ -67,7 +67,7 @@ namespace Hast.Transformer.Vhdl.Models
             _finishedVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = (Name + "_Finished").ToExtendedVhdlId(),
+                Name = CreateNamePrefixedExtendedVhdlId("_Finished"),
                 Shared = true,
                 DefaultValue = Value.True
             };
@@ -129,6 +129,21 @@ namespace Hast.Transformer.Vhdl.Models
             return CreateStateChange(1);
         }
 
+        public string CreateSharedReturnVariableName()
+        {
+            return CreateSharedReturnVariableName(Name);
+        }
+
+        public string CreateSharedVariableName(string name)
+        {
+            return CreateSharedVariableName(this, name);
+        }
+
+        public string CreateNamePrefixedExtendedVhdlId(string id)
+        {
+            return CreateNamePrefixedExtendedVhdlId(Name, id);
+        }
+
         /// <summary>
         /// Produces the declarations corresponding to the state machine that should be inserted into the head of the
         /// architecture element.
@@ -158,7 +173,7 @@ namespace Hast.Transformer.Vhdl.Models
         /// </summary>
         public IVhdlElement BuildBody()
         {
-            var process = new Process { Name = (Name + "_StateMachine").ToExtendedVhdlId() };
+            var process = new Process { Name = CreateNamePrefixedExtendedVhdlId("_StateMachine") };
 
             process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
 
@@ -185,73 +200,27 @@ namespace Hast.Transformer.Vhdl.Models
             process.Body.Add(resetIf);
 
             return process;
-            /*
-                STM_Primecalculator_0: process (\Clock\)
-    begin
-        if (rising_edge(\Clock\)) then
-            if \Reset\ = '1' then
-                state_SM_Primecalculator_0 <= ST000_Primecalculator_0;
-            else
-                case (state_SM_Primecalculator_0) is
-                    
-                    when ST000_Primecalculator_0 =>
-                        Primecalc_Finished_0 <= '0';
-                        if StartPrimeCalculator_0 = '1' then
-                            state_SM_Primecalculator_0 <= ST001_Primecalculator_0;
-                        end if; 
-                        
-                    when ST001_Primecalculator_0 =>
-                        \PrimeCalcDataIn_0\ := \number.param\;
-                        state_SM_Primecalculator_0 <= ST002_Primecalculator_0;
-                        
-                    when ST002_Primecalculator_0 =>
-                        \number_0\ := \PrimeCalcDataIn_0\;
-                        \num2\   := 2;  
-                        \PrimeCalcDataOut_0\ <= \Primecalc_result_0\;
-                        state_SM_Primecalculator_0 <= ST003_Primecalculator_0;
-                        
-                    when ST003_Primecalculator_0 =>
-                        \num_0\    := \number_0\ /2;
-                        if (not (\number_0\ mod \num2\ /= 0)) then
-                            state_SM_Primecalculator_0 <= ST004_Primecalculator_0;
-                        else
-                            state_SM_Primecalculator_0 <= ST006_Primecalculator_0;
-                        end if;
-                        
-                    when ST004_Primecalculator_0 =>
-                        \Primecalc_result_0\ <= '0';
-                        state_SM_Primecalculator_0 <= ST005_Primecalculator_0;
-                        
-                    when ST005_Primecalculator_0 =>
-                        \PrimeCalcDataOut_0\ <= \Primecalc_result_0\;
-                        state_SM_Primecalculator_0 <= ST008_Primecalculator_0;
-                        
-                    when ST006_Primecalculator_0 =>
-                        \num2\ := \num2\ + 1;
-                        if \num2\ <= \num_0\ then
-                            state_SM_Primecalculator_0 <= ST003_Primecalculator_0;
-                        else 
-                            state_SM_Primecalculator_0 <= ST007_Primecalculator_0;
-                        end if;
-                        
-                    when ST007_Primecalculator_0 =>
-                        \Primecalc_result_0\ <= '1';
-                        state_SM_Primecalculator_0 <= ST005_Primecalculator_0;
-                        
-                    when ST008_Primecalculator_0 =>
-                        \result_0\ <= \PrimeCalcDataOut_0\;
-                        state_SM_Primecalculator_0 <= ST009_Primecalculator_0;  
-                        
-                    when ST009_Primecalculator_0 =>  
-                        Primecalc_Finished_0 <= '1';                              
-                        state_SM_Primecalculator_0 <= ST000_Primecalculator_0;  
-                             
-                    when others => null;  
-                                                         
-                end case;
-            end if;
-        end if;                                                      
-    end process;  */
+        }
+
+
+        public static string CreateSharedReturnVariableName(string stateMachineName)
+        {
+            return CreateSharedVariableName(stateMachineName, "return");
+        }
+
+        public static string CreateSharedVariableName(MethodStateMachine stateMachine, string name)
+        {
+            return CreateSharedVariableName(stateMachine.Name, name);
+        }
+
+        public static string CreateSharedVariableName(string stateMachineName, string name)
+        {
+            return CreateNamePrefixedExtendedVhdlId(stateMachineName, "." + name);
+        }
+
+        public static string CreateNamePrefixedExtendedVhdlId(string stateMachineName, string id)
+        {
+            return (stateMachineName + id).ToExtendedVhdlId();
         }
 
 

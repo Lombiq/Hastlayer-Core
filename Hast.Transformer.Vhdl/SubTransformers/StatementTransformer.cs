@@ -67,7 +67,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     currentState.Body.Add(new Terminated(new Assignment
                     {
-                        AssignTo = MethodTransformer.CreateReturnVariableName(stateMachine).ToVhdlVaribleReference(),
+                        AssignTo = stateMachine.CreateSharedReturnVariableName().ToVhdlVariableReference(),
                         Expression = _expressionTransformer.Transform(returnStatement.Expression, context)
                     }));
                 }
