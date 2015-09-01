@@ -28,6 +28,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return Name;
         }
 
+        public virtual string ToReferenceVhdl()
+        {
+            return Name;
+        }
+
 
         public static bool operator ==(DataType a, DataType b)
         {

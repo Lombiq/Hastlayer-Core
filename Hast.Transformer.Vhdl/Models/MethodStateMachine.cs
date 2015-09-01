@@ -51,7 +51,7 @@ namespace Hast.Transformer.Vhdl.Models
 
             _stateVariable = new Variable
             {
-                DataType = new DataType { TypeCategory = DataTypeCategory.Composite, Name = _statesEnum.Name },
+                DataType = _statesEnum,
                 Name = (Name + "_State").ToExtendedVhdlId(),
                 Shared = true
             };
