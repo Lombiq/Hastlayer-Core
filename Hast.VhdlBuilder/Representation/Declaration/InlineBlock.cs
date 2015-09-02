@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Hast.VhdlBuilder.Extensions;
+using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -14,6 +15,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public InlineBlock()
         {
             Body = new List<IVhdlElement>();
+        }
+
+        public InlineBlock(IVhdlElement[] vhdlElement)
+        {
+            Body = vhdlElement.ToList();
         }
 
 

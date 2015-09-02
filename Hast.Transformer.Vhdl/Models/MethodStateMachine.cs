@@ -59,7 +59,7 @@ namespace Hast.Transformer.Vhdl.Models
             _startVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = CreateNamePrefixedExtendedVhdlId("_Start"),
+                Name = CreateStartVariableName(Name),
                 Shared = true,
                 DefaultValue = Value.False
             };
@@ -67,7 +67,7 @@ namespace Hast.Transformer.Vhdl.Models
             _finishedVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = CreateNamePrefixedExtendedVhdlId("_Finished"),
+                Name = CreateFinishedVariableName(Name),
                 Shared = true,
                 DefaultValue = Value.True
             };
@@ -129,19 +129,19 @@ namespace Hast.Transformer.Vhdl.Models
             return CreateStateChange(1);
         }
 
-        public string CreateSharedReturnVariableName()
+        public string CreateReturnVariableName()
         {
-            return CreateSharedReturnVariableName(Name);
+            return CreateReturnVariableName(Name);
         }
 
-        public string CreateSharedVariableName(string name)
+        public string CreatePrefixedVariableName(string name)
         {
-            return CreateSharedVariableName(this, name);
+            return CreatePrefixedVariableName(this, name);
         }
 
         public string CreateNamePrefixedExtendedVhdlId(string id)
         {
-            return CreateNamePrefixedExtendedVhdlId(Name, id);
+            return CreatePrefixedExtendedVhdlId(Name, id);
         }
 
         /// <summary>
@@ -203,22 +203,32 @@ namespace Hast.Transformer.Vhdl.Models
         }
 
 
-        public static string CreateSharedReturnVariableName(string stateMachineName)
+        public static string CreateReturnVariableName(string stateMachineName)
         {
-            return CreateSharedVariableName(stateMachineName, "return");
+            return CreatePrefixedVariableName(stateMachineName, "return");
         }
 
-        public static string CreateSharedVariableName(MethodStateMachine stateMachine, string name)
+        public static string CreateStartVariableName(string stateMachineName)
         {
-            return CreateSharedVariableName(stateMachine.Name, name);
+            return CreatePrefixedVariableName(stateMachineName, "_Start");
         }
 
-        public static string CreateSharedVariableName(string stateMachineName, string name)
+        public static string CreateFinishedVariableName(string stateMachineName)
         {
-            return CreateNamePrefixedExtendedVhdlId(stateMachineName, "." + name);
+            return CreatePrefixedVariableName(stateMachineName, "_Finished");
         }
 
-        public static string CreateNamePrefixedExtendedVhdlId(string stateMachineName, string id)
+        public static string CreatePrefixedVariableName(MethodStateMachine stateMachine, string name)
+        {
+            return CreatePrefixedVariableName(stateMachine.Name, name);
+        }
+
+        public static string CreatePrefixedVariableName(string stateMachineName, string name)
+        {
+            return CreatePrefixedExtendedVhdlId(stateMachineName, "." + name);
+        }
+
+        public static string CreatePrefixedExtendedVhdlId(string stateMachineName, string id)
         {
             return (stateMachineName + id).ToExtendedVhdlId();
         }

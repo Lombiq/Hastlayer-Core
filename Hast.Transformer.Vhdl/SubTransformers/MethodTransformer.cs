@@ -61,7 +61,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 parameters.Add(new Variable
                     {
-                        Name = stateMachine.CreateSharedReturnVariableName(),
+                        Name = stateMachine.CreateReturnVariableName(),
                         DataType = returnType
                     });
             }
@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 parameters.Add(new Variable
                     {
                         DataType = _typeConverter.Convert(parameter.Type),
-                        Name = stateMachine.CreateSharedVariableName(parameter.Name)
+                        Name = stateMachine.CreatePrefixedVariableName(parameter.Name)
                     });
             }
 
