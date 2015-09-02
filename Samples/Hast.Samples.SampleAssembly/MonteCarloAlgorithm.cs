@@ -10,6 +10,9 @@ namespace Hast.Samples.SampleAssembly
     /// <summary>
     ///  Algorithm to find the weight and centre of mass of a section of torus with varying density.
     /// </summary>
+    /// <remarks>
+    /// Implementation taken from here: http://www.codeproject.com/Articles/767997/Parallelised-Monte-Carlo-Algorithms-sharp
+    /// </remarks>
     public class MonteCarloAlgorithm
     {
         private const ushort Multiplier = 100;
