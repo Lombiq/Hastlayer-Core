@@ -13,7 +13,8 @@ namespace Hast.Communication.Extensibility.Pipeline
     public interface IMethodInvocationPipelineStep : IPipelineStep
     {
         /// <summary>
-        /// Determines whether the invokation of the hardware-implemented method can continue as hardware-implemented logic.
+        /// Determines whether the invokation of the hardware-implemented method can continue as hardware-implemented 
+        /// logic. You can use this to decide in runtime whether a method invokation should continue on hardware.
         /// </summary>
         /// <param name="invocationContext">The context of the method invocation.</param>
         /// <returns><c>true</c> if the invocation can continue on hardware, <c>false</c> otherwise.</returns>
