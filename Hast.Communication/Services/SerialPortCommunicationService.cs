@@ -68,7 +68,7 @@ namespace Hast.Communication.Services
             buffer[3] = lengthInBytes[2];
             buffer[4] = lengthInBytes[3];
 
-            // Memember ID
+            // Member ID
             buffer[5] = memberIdInBytes[0];
             buffer[6] = memberIdInBytes[1];
             buffer[7] = memberIdInBytes[1];
