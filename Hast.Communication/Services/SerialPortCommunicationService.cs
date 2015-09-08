@@ -16,8 +16,10 @@ namespace Hast.Communication.Services
             var serialPort = new SerialPort();
 
             // Initializing some serial port connection settings (Maybe different whith some fpga boards)
-            var portName = Helpers.CommunicationHelpers.DetectSerialConnectionsPortName();
-            
+            var portName = "";
+            var task = Task.Run(async () => { portName = await Helpers.CommunicationHelpers.GetFPGAPortName(); });
+            task.Wait();
+
             serialPort.PortName = portName == null ? Constants.FpgaConstants.PortName : portName;
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
@@ -103,7 +105,7 @@ namespace Hast.Communication.Services
                 {
                     // The first byte is the data size what we must receive.
                     messageSizeBytes = (byte)serialPort.ReadByte();
-                    // The code below is just used for debud purposes.
+                    // The code below is just used for debug purposes.
                     var RXString = Convert.ToChar(messageSizeBytes);
                     Debug.WriteLine("Incoming data size: " + RXString.ToString());
                     serialPort.Write("s"); // Signal that we are ready to receive the data.

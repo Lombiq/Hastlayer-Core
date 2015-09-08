@@ -22,6 +22,44 @@ namespace Hast.Communication.Helpers
             }
         }
 
+        public static Task<string> GetFPGAPortName()
+        {
+            // Get all available serial ports on system.
+            var ports = SerialPort.GetPortNames();
+            SerialPort serialPort = new SerialPort();
+
+            serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
+            serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
+            serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
+            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
+
+            var taskCompletionSource = new TaskCompletionSource<string>();
+            serialPort.DataReceived += (s, e) => {
+                var dataIn = (byte)serialPort.ReadByte();
+                
+                var RXString = Convert.ToChar(dataIn);
+                if (RXString == 'y')
+                {
+                    serialPort.Close();
+                    taskCompletionSource.SetResult(serialPort.PortName);
+                }
+            };
+
+            foreach (var port in ports)
+            {
+                serialPort.PortName = port;
+                
+                try
+                {
+                    serialPort.Open();
+                    serialPort.Write("p");
+                }
+                catch (IOException e) { }
+            }
+
+            return taskCompletionSource.Task;
+        }
+
         public static string DetectSerialConnectionsPortName()
         {
             // Get all available serial ports on system.
