@@ -62,7 +62,7 @@ namespace Hast.Communication.Services
             buffer[3] = lengthInBytes[2];
             buffer[4] = lengthInBytes[3];
 
-            // Memember ID
+            // Member ID
             buffer[5] = memberIdInBytes[0];
             buffer[6] = memberIdInBytes[1];
             buffer[7] = memberIdInBytes[1];
@@ -75,7 +75,7 @@ namespace Hast.Communication.Services
                 index++;
             }
 
-            // Here the out buffer is ready
+            // Here the out buffer is ready.
             //sp.Write(buffer, 0, length + 9);
             var j = 0;
             var byteBuffer = new byte[1];
@@ -91,7 +91,7 @@ namespace Hast.Communication.Services
             var taskCompletionSource = new TaskCompletionSource<bool>();
             var messageSizeBytes = 0; // The incoming byte buffer size.
             var count = 0; // Just used to know when is the data ready.
-            var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer
+            var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer.
             var returnValueIndex = 0;
 
             serialPort.DataReceived += (s, e) =>

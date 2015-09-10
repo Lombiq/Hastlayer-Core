@@ -22,11 +22,15 @@ namespace Hast.Communication.Helpers
             }
         }
 
+        /// <summary>
+        /// Helper Method used for detection of the connected FPGA board.
+        /// </summary>
+        /// <returns>The COM port name whereeat the FPGA board is connected.</returns>
         public static Task<string> GetFPGAPortName()
         {
             // Get all available serial ports on system.
             var ports = SerialPort.GetPortNames();
-            SerialPort serialPort = new SerialPort();
+            var serialPort = new SerialPort();
 
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
@@ -58,39 +62,6 @@ namespace Hast.Communication.Helpers
             }
 
             return taskCompletionSource.Task;
-        }
-
-        public static string DetectSerialConnectionsPortName()
-        {
-            // Get all available serial ports on system.
-            var ports = SerialPort.GetPortNames();
-            SerialPort serialPort = new SerialPort();
-
-            //Initialize the communication
-            serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
-            serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
-            serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
-            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
-
-            // Checking the port which the FPGA board is connected.  
-            foreach (var port in ports)
-            {
-                serialPort.PortName = port;
-
-                try
-                {
-                    serialPort.Open();
-                    serialPort.Close();
-                    return port;
-                }
-                catch (IOException e) { }
-                finally
-                {
-                    serialPort.Close();
-                }
-            }
-
-            return null;
         }
     }
 }
