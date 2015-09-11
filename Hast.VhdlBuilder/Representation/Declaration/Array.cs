@@ -15,7 +15,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl()
+        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return
                 "type " +

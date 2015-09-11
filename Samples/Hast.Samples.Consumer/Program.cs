@@ -11,6 +11,7 @@ using Hast.Samples.SampleAssembly;
 using Hast.Tests.TestAssembly1.ComplexTypes;
 using Hast.Tests.TestAssembly2;
 using System.Drawing;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Samples.Consumer
 {
@@ -110,7 +111,8 @@ namespace Hast.Samples.Consumer
 
         private static string ToVhdl(IHardwareDescription hardwareDescription)
         {
-            return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription).Manifest.TopModule.ToVhdl();
+            return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription)
+                .Manifest.TopModule.ToVhdl(new VhdlGenerationOptions { FormatCode = true });
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Name { get; set; }
 
 
-        public virtual string ToVhdl()
+        public virtual string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return Name;
         }

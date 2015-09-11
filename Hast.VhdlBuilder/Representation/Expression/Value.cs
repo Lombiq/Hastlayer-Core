@@ -13,7 +13,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string Content { get; set; }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             if (DataType == null) return Content;
 

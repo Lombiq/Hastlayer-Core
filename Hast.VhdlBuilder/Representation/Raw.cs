@@ -19,7 +19,7 @@ namespace Hast.VhdlBuilder.Representation
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return Source;
         }

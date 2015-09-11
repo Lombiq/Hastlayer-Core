@@ -6,7 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     [DebuggerDisplay("{ToVhdl()}")]
     public class DataObjectReference : DataObjectBase
     {
-        public override string ToVhdl()
+        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return Name;
         }

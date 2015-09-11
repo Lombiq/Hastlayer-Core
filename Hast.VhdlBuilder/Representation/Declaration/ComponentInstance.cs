@@ -18,15 +18,25 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
-                Label +
-                " : " +
-                Component.Name +
-                " port map (" +
-                string.Join(", ", PortMappings.Select(mapping => mapping.ToVhdl())) +
-                ");";
+            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
+
+            var vhdl =
+                Label + " : " + Component.Name;
+
+
+            vhdl += subContext.IndentIfShouldFormat() + "port map (" + subContext.NewLineIfShouldFormat();
+
+            var portMapContext = subContext.CreateContextForSubLevel();
+            foreach (var portMapping in PortMappings)
+            {
+                vhdl += portMapContext.IndentIfShouldFormat() + Terminated.Terminate(portMapping.ToVhdl(portMapContext), portMapContext);
+            }
+
+            vhdl += ")";
+
+            return Terminated.Terminate(vhdl, vhdlGenerationContext);
         }
     }
 
@@ -37,7 +47,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string To { get; set; }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return From + " => " + To;
         }

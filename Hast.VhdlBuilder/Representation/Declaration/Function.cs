@@ -23,35 +23,31 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
-                "function " +
-                Name +
-                " (" +
-                string.Join("; ", Arguments.Select(parameter => parameter.ToVhdl())) +
-                ") return " +
-                ReturnType.Name +
-                " is " +
-                Declarations.ToVhdl() + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
-                "begin " +
-                Body.ToVhdl() +
-                " end " +
-                Name +
-                ";";
+            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
+
+            return Terminated.Terminate(
+                "function " + Name + 
+                " (" + string.Join("; ", Arguments.Select(parameter => parameter.ToVhdl(vhdlGenerationContext))) + ")" + 
+                " return " + ReturnType.Name + " is " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(subContext) + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
+                "begin " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    Body.ToVhdl(subContext) +
+                " end " + Name, vhdlGenerationContext);
         }
     }
 
 
     public class FunctionArgument : TypedDataObjectBase
     {
-        public override string ToVhdl()
+        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return
                 (DataObjectKind.ToString() ?? string.Empty) +
                 Name +
                 ": " +
-                DataType.ToVhdl();
+                DataType.ToVhdl(vhdlGenerationContext);
         }
     }
 }

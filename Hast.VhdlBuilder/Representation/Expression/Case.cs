@@ -18,7 +18,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             var builder = new StringBuilder();
 
@@ -52,7 +52,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return 
                 "when " +

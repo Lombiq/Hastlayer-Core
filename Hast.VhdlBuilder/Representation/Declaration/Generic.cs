@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -11,12 +12,18 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public List<GenericItem> Items { get; set; }
 
 
-        public string ToVhdl()
+        public Generic()
         {
-            return
-                "generic (" +
-                (Items != null ? string.Join(";", Items.Select(item => item.ToVhdl())) : string.Empty) +
-                ");";
+            Items = new List<GenericItem>();
+        }
+
+
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        {
+            return Terminated.Terminate(
+                "generic (" + vhdlGenerationContext.NewLineIfShouldFormat() +
+                (Items != null ? Items.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel(), ";") : string.Empty) +
+                ")", vhdlGenerationContext);
         }
     }
 
@@ -32,14 +39,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        override public string ToVhdl()
+        override public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return
                 Name +
                 ": " +
-                Value.DataType.ToVhdl() +
-                ":=" +
-                Value.ToVhdl();
+                Value.DataType.ToVhdl(vhdlGenerationContext) +
+                " := " +
+                Value.ToVhdl(vhdlGenerationContext);
         }
     }
 }

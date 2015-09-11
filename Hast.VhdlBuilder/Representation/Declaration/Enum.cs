@@ -18,14 +18,20 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl()
+        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
-                "type " +
-                Name +
-                " is (" +
-                string.Join(", ", Values.Select(value => value.ToVhdl())) +
-                ");";
+            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
+
+            var vhdl =
+                "type " + Name + " is (";
+
+            foreach (var value in Values)
+            {
+                vhdl += subContext.IndentIfShouldFormat() + value.ToVhdl(subContext) + subContext.NewLineIfShouldFormat();
+            }
+            vhdl += ")";
+
+            return Terminated.Terminate(vhdl, vhdlGenerationContext);
         }
     }
 }

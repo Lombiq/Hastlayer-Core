@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return
                 (!string.IsNullOrEmpty(Label) ? Label + ":" : string.Empty) +

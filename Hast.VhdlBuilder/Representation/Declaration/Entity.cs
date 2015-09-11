@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Hast.VhdlBuilder.Extensions;
 
@@ -43,20 +44,21 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
-                "entity " +
-                Name +
-                " is " +
-                (Generics != null && Generics.Any() ? Generics.ToVhdl() : string.Empty) +
-                "port(" +
-                string.Join("; ", Ports.Select(parameter => parameter.ToVhdl())) +
-                ");" +
-                Declarations.ToVhdl() +
-                "end " +
-                Name +
-                ";";
+            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
+            var portContext = subContext.CreateContextForSubLevel();
+
+            var vhdl =
+                "entity " + Name + " is " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    (Generics != null && Generics.Any() ? Generics.ToVhdl(subContext) : string.Empty) +
+                    subContext.IndentIfShouldFormat() + "port(" + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    Ports.ToVhdl(portContext, ";") +
+                    Terminated.Terminate(subContext.IndentIfShouldFormat() + ")", vhdlGenerationContext) +
+                    Declarations.ToVhdl(subContext) +
+                "end " + Name;
+
+            return Terminated.Terminate(vhdl, vhdlGenerationContext);
         }
 
 
@@ -68,36 +70,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public static string ToSafeEntityName(string name)
         {
             return Regex.Replace(name, "[^a-z0-9]", "I", RegexOptions.IgnoreCase);
-        }
-    }
-
-
-    public enum PortMode
-    {
-        In,
-        Out,
-        Buffer,
-        InOut
-    }
-
-
-    public class Port : TypedDataObjectBase
-    {
-        public PortMode Mode { get; set; }
-
-        public Port()
-        {
-            DataObjectKind = DataObjectKind.Signal;
-        }
-
-        public override string ToVhdl()
-        {
-            return
-                Name +
-                ": " +
-                Mode +
-                " " +
-                DataType.ToVhdl();
         }
     }
 }

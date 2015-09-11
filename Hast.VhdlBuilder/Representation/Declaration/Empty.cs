@@ -14,12 +14,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private static readonly Empty _instance = new Empty();
         public static Empty Instance { get { return _instance; } }
 
+
         private Empty()
         {
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return string.Empty;
         }

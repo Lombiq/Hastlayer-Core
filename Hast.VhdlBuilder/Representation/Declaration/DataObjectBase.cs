@@ -7,6 +7,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Name { get; set; }
 
 
-        public abstract string ToVhdl();
+        public abstract string ToVhdl(IVhdlGenerationContext vhdlGenerationContext);
     }
 }

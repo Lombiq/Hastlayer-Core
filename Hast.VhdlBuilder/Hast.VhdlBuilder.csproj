@@ -45,6 +45,7 @@
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
     <Compile Include="Representation\Declaration\Empty.cs" />
     <Compile Include="Representation\Declaration\Generic.cs" />
+    <Compile Include="Representation\Declaration\Port.cs" />
     <Compile Include="Representation\Declaration\StdLogicVector.cs" />
     <Compile Include="Representation\Declaration\TypedDataObjectBase.cs" />
     <Compile Include="Representation\Declaration\IBlockElement.cs" />
@@ -95,6 +96,8 @@
     <Compile Include="Representation\Declaration\TypedDataObject.cs" />
     <Compile Include="Extensions\VhdlElementEnumerableExtensions.cs" />
     <Compile Include="Representation\Declaration\VhdlManifest.cs" />
+    <Compile Include="Representation\VhdlGenerationContext.cs" />
+    <Compile Include="Representation\VhdlGenerationOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />

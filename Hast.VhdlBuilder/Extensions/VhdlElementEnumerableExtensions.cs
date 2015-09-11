@@ -7,12 +7,26 @@ namespace Hast.VhdlBuilder.Extensions
 {
     public static class VhdlElementEnumerableExtensions
     {
-        public static string ToVhdl(this IEnumerable<IVhdlElement> elements)
+        public static string ToVhdl(this IEnumerable<IVhdlElement> elements, IVhdlGenerationContext vhdlGenerationContext)
         {
-            if (elements == null || elements.Count() == 0) return string.Empty;
+            return elements.ToVhdl(vhdlGenerationContext, string.Empty);
+        }
+
+        public static string ToVhdl(this IEnumerable<IVhdlElement> elements, IVhdlGenerationContext vhdlGenerationContext, string lineTerminator)
+        {
+            if (elements == null || !elements.Any()) return string.Empty;
 
             var builder = new StringBuilder();
-            foreach (var element in elements) builder.Append(element.ToVhdl());
+
+            foreach (var element in elements)
+            {
+                builder.Append(
+                    vhdlGenerationContext.IndentIfShouldFormat() + 
+                    element.ToVhdl(vhdlGenerationContext) + 
+                    lineTerminator +
+                    vhdlGenerationContext.NewLineIfShouldFormat());
+            }
+
             return builder.ToString();
         }
     }

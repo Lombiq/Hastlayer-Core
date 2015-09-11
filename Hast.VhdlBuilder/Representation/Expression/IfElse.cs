@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Else { get; set; }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return
                 "if (" +

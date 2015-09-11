@@ -18,7 +18,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return 
                 Target.ToVhdl() +
@@ -34,7 +34,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public INamedElement ActualParameter { get; set; }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return FormalParameter.Name + " => " + ActualParameter.Name;
         }
