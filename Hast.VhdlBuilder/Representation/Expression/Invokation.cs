@@ -21,8 +21,8 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return 
-                Target.ToVhdl() +
-                (Parameters != null && Parameters.Any() ? "(" + string.Join(", ", Parameters.Select(parameter => parameter.ToVhdl())) + ")" : string.Empty);
+                Target.ToVhdl(vhdlGenerationContext) +
+                (Parameters != null && Parameters.Any() ? "(" + string.Join(", ", Parameters.Select(parameter => parameter.ToVhdl(vhdlGenerationContext))) + ")" : string.Empty);
         }
     }
 

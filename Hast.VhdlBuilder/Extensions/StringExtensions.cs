@@ -1,5 +1,8 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
+﻿using System;
+using Hast.VhdlBuilder.Representation;
+using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Linq;
 
 namespace Hast.VhdlBuilder.Extensions
 {
@@ -48,6 +51,13 @@ namespace Hast.VhdlBuilder.Extensions
                 DataObjectKind = DataObjectKind.Variable,
                 Name = variableName
             };
+        }
+
+        public static string IndentLinesIfShouldFormat(this string vhdl, IVhdlGenerationContext vhdlGenerationContext)
+        {
+            return string.Join(string.Empty, vhdl
+                .Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+                .Select(line => vhdlGenerationContext.IndentIfShouldFormat() + line));
         }
     }
 }

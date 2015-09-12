@@ -25,15 +25,17 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
-                (!string.IsNullOrEmpty(Label) ? Label + ":" : string.Empty) +
-                "process (" +
+            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
+
+            return Terminated.Terminate(
+                (!string.IsNullOrEmpty(Label) ? Label + ": " : string.Empty) +
+                "process (" + 
                 string.Join("; ", SesitivityList.Select(signal => signal.Name)) +
-                ") " +
-                Declarations.ToVhdl() +
-                " begin " +
-                Body.ToVhdl() +
-                " end process;";
+                ") " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(subContext) +
+                " begin " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    Body.ToVhdl(subContext) +
+                " end process", vhdlGenerationContext);
         }
     }
 }

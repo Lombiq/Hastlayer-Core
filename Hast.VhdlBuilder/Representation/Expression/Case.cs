@@ -24,17 +24,19 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             builder
                 .Append("case ")
-                .Append(Expression.ToVhdl())
-                .Append(" is ");
+                .Append(Expression.ToVhdl(vhdlGenerationContext))
+                .Append(" is ")
+                .Append(vhdlGenerationContext.NewLineIfShouldFormat());
 
+            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
             foreach (var when in Whens)
             {
-                builder.Append(when.ToVhdl());
+                builder.Append(when.ToVhdl(subContext));
             }
 
-            builder.Append("end case;");
+            builder.Append("end case");
 
-            return builder.ToString();
+            return Terminated.Terminate(builder.ToString(), vhdlGenerationContext);
         }
     }
 
@@ -55,10 +57,10 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return 
-                "when " +
-                Expression.ToVhdl() +
-                " => " +
-                (Body.Count != 0 ? Body.ToVhdl() : "null;");
+                "when " + Expression.ToVhdl(vhdlGenerationContext) + " => " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                (Body.Count != 0 ? 
+                    Body.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel()) : 
+                    Terminated.Terminate(vhdlGenerationContext.IndentIfShouldFormat () + "null", vhdlGenerationContext));
         }
     }
 }

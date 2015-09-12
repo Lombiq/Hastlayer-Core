@@ -15,7 +15,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             return
                 AssignTo.Name +
                 (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
-                Expression.ToVhdl();
+                Expression.ToVhdl(vhdlGenerationContext);
         }
     }
 }

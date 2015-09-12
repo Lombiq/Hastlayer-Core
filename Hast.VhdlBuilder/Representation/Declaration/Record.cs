@@ -18,12 +18,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
-                "type " +
-                Name +
-                " is record " +
-                Members.ToVhdl() +
-                " end record;";
+            return Terminated.Terminate(
+                "type " + Name + " is record " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    Members.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel()) +
+                " end record", vhdlGenerationContext);
         }
     }
 }

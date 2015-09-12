@@ -12,7 +12,10 @@ namespace Hast.VhdlBuilder.Extensions
             return elements.ToVhdl(vhdlGenerationContext, string.Empty);
         }
 
-        public static string ToVhdl(this IEnumerable<IVhdlElement> elements, IVhdlGenerationContext vhdlGenerationContext, string lineTerminator)
+        public static string ToVhdl(
+            this IEnumerable<IVhdlElement> elements,
+            IVhdlGenerationContext vhdlGenerationContext,
+            string elementTerminator)
         {
             if (elements == null || !elements.Any()) return string.Empty;
 
@@ -23,7 +26,7 @@ namespace Hast.VhdlBuilder.Extensions
                 builder.Append(
                     vhdlGenerationContext.IndentIfShouldFormat() + 
                     element.ToVhdl(vhdlGenerationContext) + 
-                    lineTerminator +
+                    elementTerminator +
                     vhdlGenerationContext.NewLineIfShouldFormat());
             }
 

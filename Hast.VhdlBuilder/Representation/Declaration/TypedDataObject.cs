@@ -14,13 +14,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
+            return Terminated.Terminate(
                 DataObjectKind.ToString() +
                 " " +
                 Name +
                 (DataType != null ? ": " + DataType.ToReferenceVhdl() : string.Empty) +
-                (DefaultValue != null ? ((DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") + DefaultValue.ToVhdl()) : string.Empty) +
-                ";";
+                (DefaultValue != null ? ((DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") + DefaultValue.ToVhdl(vhdlGenerationContext)) : string.Empty),
+                vhdlGenerationContext);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return Terminated.Terminate(
                 "generic (" + vhdlGenerationContext.NewLineIfShouldFormat() +
-                (Items != null ? Items.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel(), ";") : string.Empty) +
+                    (Items != null ? Items.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel(), ";") : string.Empty) +
                 ")", vhdlGenerationContext);
         }
     }

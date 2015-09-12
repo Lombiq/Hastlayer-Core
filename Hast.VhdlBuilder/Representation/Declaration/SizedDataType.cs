@@ -22,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 Name +
                 "(" +
-                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl()) +
+                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl(vhdlGenerationContext)) +
                 " downto 0)";
         }
     }

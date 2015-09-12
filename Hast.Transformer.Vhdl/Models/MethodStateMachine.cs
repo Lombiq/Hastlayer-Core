@@ -160,10 +160,10 @@ namespace Hast.Transformer.Vhdl.Models
                 parameter.Shared = true;
             }
 
-            var declarationsBlock = new InlineBlock();
+            var declarationsBlock = new ElementCollection();
 
-            declarationsBlock.Body.AddRange(new IVhdlElement[] { _statesEnum, _stateVariable });
-            declarationsBlock.Body.AddRange(Parameters);
+            declarationsBlock.Elements.AddRange(new IVhdlElement[] { _statesEnum, _stateVariable });
+            declarationsBlock.Elements.AddRange(Parameters);
 
             return declarationsBlock;
         }

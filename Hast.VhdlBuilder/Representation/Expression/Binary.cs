@@ -13,9 +13,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
             return
-                Left.ToVhdl() +
+                Left.ToVhdl(vhdlGenerationContext) +
                 " " + Operator + " " +
-                Right.ToVhdl();
+                Right.ToVhdl(vhdlGenerationContext);
         }
     }
 }

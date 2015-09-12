@@ -10,10 +10,10 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
+            return Terminated.Terminate(
                 "return" +
-                (Expression != null ? Expression.ToVhdl() : string.Empty) +
-                ";";
+                (Expression != null ? Expression.ToVhdl(vhdlGenerationContext) : string.Empty),
+                vhdlGenerationContext);
         }
     }
 }

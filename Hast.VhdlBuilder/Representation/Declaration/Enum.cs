@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -20,18 +21,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
-
-            var vhdl =
-                "type " + Name + " is (";
-
-            foreach (var value in Values)
-            {
-                vhdl += subContext.IndentIfShouldFormat() + value.ToVhdl(subContext) + subContext.NewLineIfShouldFormat();
-            }
-            vhdl += ")";
-
-            return Terminated.Terminate(vhdl, vhdlGenerationContext);
+            return Terminated.Terminate(
+                "type " + Name + " is (" + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    Values.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel(), ",") +
+                ")", vhdlGenerationContext);
         }
     }
 }

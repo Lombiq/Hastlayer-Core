@@ -12,13 +12,13 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
-                "if (" +
-                Condition.ToVhdl() +
-                ") then " +
-                True.ToVhdl() +
-                (Else != null ? "else " + Else.ToVhdl() : string.Empty) +
-                "end if;";
+            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
+
+            return Terminated.Terminate(
+                "if (" + Condition.ToVhdl(vhdlGenerationContext) + ") then " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    True.ToVhdl(subContext) +
+                    (Else != null ? "else " + Else.ToVhdl(subContext) : string.Empty) +
+                "end if", vhdlGenerationContext);
         }
     }
 }

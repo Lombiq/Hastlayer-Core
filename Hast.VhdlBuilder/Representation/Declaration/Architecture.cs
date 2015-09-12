@@ -29,7 +29,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return Terminated.Terminate(
                 "architecture " + Name + " of " + Entity.Name + " is " + vhdlGenerationContext.NewLineIfShouldFormat() +
                 Declarations.ToVhdl(subContext) +
-                " begin " +
+                " begin " + vhdlGenerationContext.NewLineIfShouldFormat() +
                 Body.ToVhdl(subContext) +
                 " end " + Name, vhdlGenerationContext);
         }

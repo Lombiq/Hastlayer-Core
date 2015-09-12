@@ -20,12 +20,10 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
         {
-            return
-                "while " +
-                Condition.ToVhdl() +
-                " loop " +
-                Body.ToVhdl() +
-                "end loop;";
+            return Terminated.Terminate(
+                "while " + Condition.ToVhdl(vhdlGenerationContext) + " loop " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel()) +
+                "end loop", vhdlGenerationContext);
         }
     }
 }
