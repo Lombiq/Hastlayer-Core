@@ -64,7 +64,6 @@
     <Compile Include="Representation\Declaration\Component.cs" />
     <Compile Include="Representation\Declaration\ComponentInstance.cs" />
     <Compile Include="Representation\Declaration\KnownDataTypes.cs" />
-    <Compile Include="Representation\Declaration\ElementCollection.cs" />
     <Compile Include="Representation\Declaration\Function.cs" />
     <Compile Include="Representation\Declaration\IDataObject.cs" />
     <Compile Include="Representation\Declaration\Identifier.cs" />

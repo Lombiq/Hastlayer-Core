@@ -28,7 +28,7 @@ namespace Hast.VhdlBuilder
                 var wrappingIf = new IfElse
                 {
                     Condition = invokation,
-                    True = new ElementCollection { Elements = new List<IVhdlElement>(process.Body) } // Needs to copy the list.
+                    True = new InlineBlock { Body = new List<IVhdlElement>(process.Body) } // Needs to copy the list.
                 };
                 process.Body.Clear();
                 process.Body.Add(wrappingIf);
