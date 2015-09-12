@@ -42,7 +42,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         override public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
-                Name +
+                vhdlGenerationOptions.ShortenName(Name) +
                 ": " +
                 Value.DataType.ToVhdl(vhdlGenerationOptions) +
                 " := " +

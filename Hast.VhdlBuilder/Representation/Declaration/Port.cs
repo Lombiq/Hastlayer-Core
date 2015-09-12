@@ -29,7 +29,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
-                Name +
+                vhdlGenerationOptions.ShortenName(Name) +
                 ": " +
                 Mode +
                 " " +

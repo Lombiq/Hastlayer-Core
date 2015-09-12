@@ -24,12 +24,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
+            var name = vhdlGenerationOptions.ShortenName(Name);
             return Terminated.Terminate(
-                "architecture " + Name + " of " + Entity.Name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                "architecture " + name + " of " + vhdlGenerationOptions.ShortenName(Entity.Name) + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + " " +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + " " +
-                "end " + Name, vhdlGenerationOptions);
+                "end " + name, vhdlGenerationOptions);
         }
     }
 }

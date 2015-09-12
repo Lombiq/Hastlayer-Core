@@ -26,11 +26,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return Terminated.Terminate(
                 "alias " +
-                Name +
+                vhdlGenerationOptions.ShortenName(Name) +
                 " : " +
-                 DataType.ToReferenceVhdl() +
+                DataType.ToReferenceVhdl() +
                 " is " +
-                ObjectName,
+                vhdlGenerationOptions.ShortenName(ObjectName),
                 vhdlGenerationOptions);
         }
     }

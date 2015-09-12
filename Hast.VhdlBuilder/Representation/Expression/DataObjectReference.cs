@@ -8,7 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Name;
+            return vhdlGenerationOptions.ShortenName(Name);
         }
     }
 }

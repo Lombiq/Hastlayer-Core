@@ -21,7 +21,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
-                Label + " : " + Component.Name + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                Label + " : " + vhdlGenerationOptions.ShortenName(Component.Name) + vhdlGenerationOptions.NewLineIfShouldFormat() +
 
                     "port map (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
                         PortMappings
@@ -42,7 +42,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return From + " => " + To;
+            return vhdlGenerationOptions.ShortenName(From) + " => " + vhdlGenerationOptions.ShortenName(To);
         }
     }
 }

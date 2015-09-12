@@ -18,8 +18,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
             if (DataType == null) return Content;
 
             if (DataType.TypeCategory == DataTypeCategory.Numeric || 
-                DataType.TypeCategory == DataTypeCategory.Unit ||
-                DataType.TypeCategory == DataTypeCategory.Identifier) return Content;
+                DataType.TypeCategory == DataTypeCategory.Unit) return Content;
+
+            if (DataType.TypeCategory == DataTypeCategory.Identifier) return vhdlGenerationOptions.ShortenName(Content);
 
             if (DataType.TypeCategory == DataTypeCategory.Array) return "\"" + Content + "\"";
 

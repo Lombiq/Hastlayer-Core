@@ -24,8 +24,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
+            var name = vhdlGenerationOptions.ShortenName(Name);
             return Terminated.Terminate(
-                "procedure " + Name +
+                "procedure " + name +
                 (Parameters.Count > 0 ? " (" : " ") + vhdlGenerationOptions.NewLineIfShouldFormat() +
                 // Out params at the end.
                 Parameters.OrderBy(parameter => parameter.ParameterType).ToVhdl(vhdlGenerationOptions, "; ", string.Empty) +
@@ -34,7 +35,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end procedure " + Name, vhdlGenerationOptions);
+                "end procedure " + name, vhdlGenerationOptions);
         }
     }
 
@@ -57,7 +58,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 (DataObjectKind.ToString() ?? string.Empty) +
-                Name +
+                vhdlGenerationOptions.ShortenName(Name) +
                 ": " +
                 ParameterType +
                 " " +

@@ -37,7 +37,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return FormalParameter.Name + " => " + ActualParameter.Name;
+            return vhdlGenerationOptions.ShortenName(FormalParameter.Name) + " => " + vhdlGenerationOptions.ShortenName(ActualParameter.Name);
         }
     }
 }

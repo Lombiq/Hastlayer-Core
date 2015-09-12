@@ -20,8 +20,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
+            var name = vhdlGenerationOptions.ShortenName(Name);
             return Terminated.Terminate(
-                "component " + Name  + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                "component " + name + vhdlGenerationOptions.NewLineIfShouldFormat() +
 
                     "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
                         Ports
@@ -29,7 +30,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                             .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                     Terminated.Terminate(")", vhdlGenerationOptions) +
 
-                "end " + Name, vhdlGenerationOptions);
+                "end " + name, vhdlGenerationOptions);
         }
     }
 }

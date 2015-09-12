@@ -22,7 +22,7 @@ namespace Hast.VhdlBuilder
 
             foreach (var process in module.Architecture.Body.Where(element => element is Process).Select(element => element as Process))
             {
-                process.SesitivityList.Add(clockPort);
+                process.SensitivityList.Add(clockPort);
                 var invokation = new Invokation { Target = "rising_edge".ToVhdlIdValue() };
                 invokation.Parameters.Add(clockSignalName.ToVhdlIdValue());
                 var wrappingIf = new IfElse

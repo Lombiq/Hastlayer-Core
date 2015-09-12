@@ -10,14 +10,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public string Label { get; set; }
         public string Name { get { return Label; } set { Label = value; } }
-        public List<IDataObject> SesitivityList { get; set; }
+        public List<IDataObject> SensitivityList { get; set; }
         public List<IVhdlElement> Declarations { get; set; }
         public List<IVhdlElement> Body { get; set; }
 
 
         public Process()
         {
-            SesitivityList = new List<IDataObject>();
+            SensitivityList = new List<IDataObject>();
             Declarations = new List<IVhdlElement>();
             Body = new List<IVhdlElement>();
         }
@@ -26,9 +26,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
-                (!string.IsNullOrEmpty(Label) ? Label + ": " : string.Empty) +
-                "process (" + 
-                    string.Join("; ", SesitivityList.Select(signal => signal.Name)) +
+                (!string.IsNullOrEmpty(Label) ? vhdlGenerationOptions.ShortenName(Label) + ": " : string.Empty) +
+                "process (" +
+                    string.Join("; ", SensitivityList.Select(signal => vhdlGenerationOptions.ShortenName(signal.Name))) +
                 ") " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +

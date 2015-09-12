@@ -112,7 +112,7 @@ namespace Hast.Samples.Consumer
         private static string ToVhdl(IHardwareDescription hardwareDescription)
         {
             return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription)
-                .Manifest.TopModule.ToVhdl(new VhdlGenerationOptions { FormatCode = true });
+                .Manifest.TopModule.ToVhdl(new VhdlGenerationOptions { FormatCode = true, NameShortener = VhdlGenerationOptions.DefaultNameShortener });
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
-                "type " + Name + " is (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                "type " + vhdlGenerationOptions.ShortenName(Name) + " is (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Values.ToVhdl(vhdlGenerationOptions, ", " + Environment.NewLine, string.Empty).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 ")", vhdlGenerationOptions);
         }
