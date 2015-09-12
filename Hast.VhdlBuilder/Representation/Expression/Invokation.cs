@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -18,11 +19,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return 
-                Target.ToVhdl(vhdlGenerationContext) +
-                (Parameters != null && Parameters.Any() ? "(" + string.Join(", ", Parameters.Select(parameter => parameter.ToVhdl(vhdlGenerationContext))) + ")" : string.Empty);
+                Target.ToVhdl(vhdlGenerationOptions) +
+                (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ") + ")" : string.Empty);
         }
     }
 
@@ -34,7 +35,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public INamedElement ActualParameter { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return FormalParameter.Name + " => " + ActualParameter.Name;
         }

@@ -53,11 +53,12 @@ namespace Hast.VhdlBuilder.Extensions
             };
         }
 
-        public static string IndentLinesIfShouldFormat(this string vhdl, IVhdlGenerationContext vhdlGenerationContext)
+        public static string IndentLinesIfShouldFormat(this string vhdl, IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return string.Join(string.Empty, vhdl
+            // Empty new lines won't be indented as it can contain a different block.
+            return string.Join(vhdlGenerationOptions.NewLineIfShouldFormat(), vhdl
                 .Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
-                .Select(line => vhdlGenerationContext.IndentIfShouldFormat() + line));
+                .Select(line => (!string.IsNullOrEmpty(line) ? vhdlGenerationOptions.IndentIfShouldFormat() : string.Empty) + line));
         }
     }
 }

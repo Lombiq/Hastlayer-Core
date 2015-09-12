@@ -17,17 +17,17 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (string.IsNullOrEmpty(Name)) return string.Empty;
 
             var builder = new StringBuilder();
 
-            builder.Append(Terminated.Terminate("library " + Name, vhdlGenerationContext));
+            builder.Append(Terminated.Terminate("library " + Name, vhdlGenerationOptions));
 
             foreach (var use in Uses)
             {
-                builder.Append(Terminated.Terminate("use " + use, vhdlGenerationContext));
+                builder.Append(Terminated.Terminate("use " + use, vhdlGenerationOptions));
             }
 
             return builder.ToString();

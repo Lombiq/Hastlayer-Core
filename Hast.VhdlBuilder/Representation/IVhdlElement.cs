@@ -9,20 +9,15 @@ namespace Hast.VhdlBuilder.Representation
     /// </remarks>
     public interface IVhdlElement
     {
-        string ToVhdl(IVhdlGenerationContext vhdlGenerationContext);
+        string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions);
     }
 
 
     public static class VhdlElementExtensions
     {
-        //public static string ToVhdl(this IVhdlElement vhdlElement)
-        //{
-        //    return vhdlElement.ToVhdl(new VhdlGenerationContext());
-        //}
-
-        public static string ToVhdl(this IVhdlElement vhdlElement, IVhdlGenerationOptions vhdlGenerationOptions)
+        public static string ToVhdl(this IVhdlElement vhdlElement)
         {
-            return vhdlElement.ToVhdl(new VhdlGenerationContext(vhdlGenerationOptions));
+            return vhdlElement.ToVhdl(new VhdlGenerationOptions());
         }
     }
 }

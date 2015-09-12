@@ -12,15 +12,15 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public Value DefaultValue { get; set; }
 
 
-        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
                 DataObjectKind.ToString() +
                 " " +
                 Name +
                 (DataType != null ? ": " + DataType.ToReferenceVhdl() : string.Empty) +
-                (DefaultValue != null ? ((DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") + DefaultValue.ToVhdl(vhdlGenerationContext)) : string.Empty),
-                vhdlGenerationContext);
+                (DefaultValue != null ? ((DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") + DefaultValue.ToVhdl(vhdlGenerationOptions)) : string.Empty),
+                vhdlGenerationOptions);
         }
     }
 }

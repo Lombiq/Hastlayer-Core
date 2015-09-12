@@ -44,21 +44,21 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
-            var portContext = subContext.CreateContextForSubLevel();
+            return Terminated.Terminate(
+                "entity " + Name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    ((Generics != null && Generics.Any() ? Generics.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : string.Empty) +
+                    
+                    "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                        Ports
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions))
+                            .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    Terminated.Terminate(")", vhdlGenerationOptions) +
 
-            var vhdl =
-                "entity " + Name + " is " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    (Generics != null && Generics.Any() ? Generics.ToVhdl(subContext) : string.Empty) +
-                    subContext.IndentIfShouldFormat() + "port(" + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    Ports.ToVhdl(portContext, ";") +
-                    Terminated.Terminate(subContext.IndentIfShouldFormat() + ")", vhdlGenerationContext) +
-                    Declarations.ToVhdl(subContext) +
-                "end " + Name;
-
-            return Terminated.Terminate(vhdl, vhdlGenerationContext);
+                    Declarations.ToVhdl(vhdlGenerationOptions))
+                    .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end " + Name, vhdlGenerationOptions);
         }
 
 

@@ -23,31 +23,30 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
-
             return Terminated.Terminate(
                 "function " + Name + 
-                " (" + string.Join("; ", Arguments.Select(parameter => parameter.ToVhdl(vhdlGenerationContext))) + ")" + 
-                " return " + ReturnType.Name + " is " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    Declarations.ToVhdl(subContext) + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
-                "begin " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    Body.ToVhdl(subContext) +
-                " end " + Name, vhdlGenerationContext);
+                " (" + Arguments.ToVhdl(vhdlGenerationOptions, "; ") + ") " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                "return " + ReturnType.Name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    (Declarations != null && Declarations.Any() ? " " : string.Empty) +
+                "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end " + Name, vhdlGenerationOptions);
         }
     }
 
 
     public class FunctionArgument : TypedDataObjectBase
     {
-        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
                 (DataObjectKind.ToString() ?? string.Empty) +
                 Name +
                 ": " +
-                DataType.ToVhdl(vhdlGenerationContext);
+                DataType.ToVhdl(vhdlGenerationOptions);
         }
     }
 }

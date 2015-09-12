@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -18,25 +18,18 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
+            return Terminated.Terminate(
+                Label + " : " + Component.Name + vhdlGenerationOptions.NewLineIfShouldFormat() +
 
-            var vhdl =
-                Label + " : " + Component.Name;
+                    "port map (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                        PortMappings
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions))
+                            .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    Terminated.Terminate(")", vhdlGenerationOptions) +
 
-
-            vhdl += subContext.IndentIfShouldFormat() + "port map (" + subContext.NewLineIfShouldFormat();
-
-            var portMapContext = subContext.CreateContextForSubLevel();
-            foreach (var portMapping in PortMappings)
-            {
-                vhdl += portMapContext.IndentIfShouldFormat() + Terminated.Terminate(portMapping.ToVhdl(portMapContext), portMapContext);
-            }
-
-            vhdl += ")";
-
-            return Terminated.Terminate(vhdl, vhdlGenerationContext);
+                ")", vhdlGenerationOptions);
         }
     }
 
@@ -47,7 +40,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string To { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return From + " => " + To;
         }

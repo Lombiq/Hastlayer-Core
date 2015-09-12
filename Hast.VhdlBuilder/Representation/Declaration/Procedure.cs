@@ -22,21 +22,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
-
             return Terminated.Terminate(
                 "procedure " + Name +
-                (Parameters.Count > 0 ? " (" : " ") + vhdlGenerationContext.NewLineIfShouldFormat() +
+                (Parameters.Count > 0 ? " (" : " ") + vhdlGenerationOptions.NewLineIfShouldFormat() +
                 // Out params at the end.
-                Parameters.OrderBy(parameter => parameter.ParameterType).ToVhdl(subContext, ";") +
+                Parameters.OrderBy(parameter => parameter.ParameterType).ToVhdl(vhdlGenerationOptions, ";") +
                 (Parameters.Count > 0 ? ")" : string.Empty)  +
-                " is " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                Declarations.ToVhdl(subContext) + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
-                "begin " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                Body.ToVhdl(subContext) +
-                " end procedure " + Name, vhdlGenerationContext);
+                " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
+                "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end procedure " + Name, vhdlGenerationOptions);
         }
     }
 
@@ -55,7 +53,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public ProcedureParameterType ParameterType { get; set; }
 
 
-        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
                 (DataObjectKind.ToString() ?? string.Empty) +
@@ -63,7 +61,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 ": " +
                 ParameterType +
                 " " +
-                DataType.ToVhdl(vhdlGenerationContext);
+                DataType.ToVhdl(vhdlGenerationOptions);
         }
     }
 }

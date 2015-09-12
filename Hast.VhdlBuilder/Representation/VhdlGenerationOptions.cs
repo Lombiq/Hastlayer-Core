@@ -29,4 +29,21 @@ namespace Hast.VhdlBuilder.Representation
         public bool FormatCode { get; set; }
         public bool UseShortNames { get; set; }
     }
+
+
+    public static class VhdlGenerationOptionsExtensions
+    {
+        public static string NewLineIfShouldFormat(this IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            return vhdlGenerationOptions.FormatCode ? Environment.NewLine : string.Empty;
+        }
+
+        public static string IndentIfShouldFormat(this IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            // Using spaces instead of tabs.
+            return vhdlGenerationOptions.FormatCode ?
+                string.Empty.PadLeft(4, ' ') :
+                string.Empty;
+        }
+    }
 }

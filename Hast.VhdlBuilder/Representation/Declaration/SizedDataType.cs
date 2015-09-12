@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public IVhdlElement SizeExpression { get; set; }
 
 
-        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (Size == 0 && SizeExpression == null) return Name;
 
@@ -22,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 Name +
                 "(" +
-                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl(vhdlGenerationContext)) +
+                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl(vhdlGenerationOptions)) +
                 " downto 0)";
         }
     }

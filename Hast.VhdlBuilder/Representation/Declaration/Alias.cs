@@ -22,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
                 "alias " +
@@ -31,7 +31,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                  DataType.ToReferenceVhdl() +
                 " is " +
                 ObjectName,
-                vhdlGenerationContext);
+                vhdlGenerationOptions);
         }
     }
 }

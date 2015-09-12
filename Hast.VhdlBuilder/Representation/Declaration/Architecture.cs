@@ -22,16 +22,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
-
             return Terminated.Terminate(
-                "architecture " + Name + " of " + Entity.Name + " is " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                Declarations.ToVhdl(subContext) +
-                " begin " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                Body.ToVhdl(subContext) +
-                " end " + Name, vhdlGenerationContext);
+                "architecture " + Name + " of " + Entity.Name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + " " +
+                "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + " " +
+                "end " + Name, vhdlGenerationOptions);
         }
     }
 }

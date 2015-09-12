@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
+using System;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -19,12 +20,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
-                "type " + Name + " is (" + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    Values.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel(), ",") +
-                ")", vhdlGenerationContext);
+                "type " + Name + " is (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Values.ToVhdl(vhdlGenerationOptions, ", " + Environment.NewLine, string.Empty).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                ")", vhdlGenerationOptions);
         }
     }
 }

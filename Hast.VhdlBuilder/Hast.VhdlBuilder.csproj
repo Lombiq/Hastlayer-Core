@@ -96,7 +96,6 @@
     <Compile Include="Representation\Declaration\TypedDataObject.cs" />
     <Compile Include="Extensions\VhdlElementEnumerableExtensions.cs" />
     <Compile Include="Representation\Declaration\VhdlManifest.cs" />
-    <Compile Include="Representation\VhdlGenerationContext.cs" />
     <Compile Include="Representation\VhdlGenerationOptions.cs" />
   </ItemGroup>
   <ItemGroup>

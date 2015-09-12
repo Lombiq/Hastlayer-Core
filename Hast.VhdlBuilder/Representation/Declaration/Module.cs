@@ -18,9 +18,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Libraries.ToVhdl(vhdlGenerationContext) + Entity.ToVhdl(vhdlGenerationContext) + Architecture.ToVhdl(vhdlGenerationContext);
+            return
+                Libraries.ToVhdl(vhdlGenerationOptions) + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                Entity.ToVhdl(vhdlGenerationOptions) + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                Architecture.ToVhdl(vhdlGenerationOptions);
         }
     }
 }

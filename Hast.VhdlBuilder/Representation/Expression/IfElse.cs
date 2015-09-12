@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -10,15 +11,15 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Else { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
-
             return Terminated.Terminate(
-                "if (" + Condition.ToVhdl(vhdlGenerationContext) + ") then " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    True.ToVhdl(subContext) +
-                    (Else != null ? "else " + Else.ToVhdl(subContext) : string.Empty) +
-                "end if", vhdlGenerationContext);
+                "if (" + Condition.ToVhdl(vhdlGenerationOptions) + ") then " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    True.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    (Else != null ? 
+                    "else " + vhdlGenerationOptions.NewLineIfShouldFormat() + Else.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : 
+                    string.Empty) +
+                "end if", vhdlGenerationOptions);
         }
     }
 }

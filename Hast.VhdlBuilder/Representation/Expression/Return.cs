@@ -8,12 +8,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Expression { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
                 "return" +
-                (Expression != null ? Expression.ToVhdl(vhdlGenerationContext) : string.Empty),
-                vhdlGenerationContext);
+                (Expression != null ? Expression.ToVhdl(vhdlGenerationOptions) : string.Empty),
+                vhdlGenerationOptions);
         }
     }
 }

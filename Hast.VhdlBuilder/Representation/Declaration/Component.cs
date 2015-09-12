@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -17,25 +18,18 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
+            return Terminated.Terminate(
+                "component " + Name  + vhdlGenerationOptions.NewLineIfShouldFormat() +
 
-            var vhdl =
-                "component " + Name  + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    subContext.IndentIfShouldFormat() + "port(" + vhdlGenerationContext.NewLineIfShouldFormat();
+                    "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                        Ports
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions))
+                            .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    Terminated.Terminate(")", vhdlGenerationOptions) +
 
-            var portContext = subContext.CreateContextForSubLevel();
-            foreach (var port in Ports)
-            {
-                vhdl += portContext.IndentIfShouldFormat() + Terminated.Terminate(port.ToVhdl(portContext), portContext);
-            }
-
-            vhdl +=
-                    Terminated.Terminate(subContext.IndentIfShouldFormat() + ")", vhdlGenerationContext) +
-                "end " + Name;
-
-            return Terminated.Terminate(vhdl, vhdlGenerationContext);
+                "end " + Name, vhdlGenerationOptions);
         }
     }
 }

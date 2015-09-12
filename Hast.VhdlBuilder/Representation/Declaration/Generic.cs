@@ -18,12 +18,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
-                "generic (" + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    (Items != null ? Items.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel(), ";") : string.Empty) +
-                ")", vhdlGenerationContext);
+                "generic (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    (Items != null ? Items.ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions)).IndentLinesIfShouldFormat(vhdlGenerationOptions) : string.Empty) +
+                ")", vhdlGenerationOptions);
         }
     }
 
@@ -39,14 +39,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        override public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        override public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
                 Name +
                 ": " +
-                Value.DataType.ToVhdl(vhdlGenerationContext) +
+                Value.DataType.ToVhdl(vhdlGenerationOptions) +
                 " := " +
-                Value.ToVhdl(vhdlGenerationContext);
+                Value.ToVhdl(vhdlGenerationOptions);
         }
     }
 }

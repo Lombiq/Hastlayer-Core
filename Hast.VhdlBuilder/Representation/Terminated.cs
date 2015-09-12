@@ -17,17 +17,22 @@ namespace Hast.VhdlBuilder.Representation
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Terminate(Element.ToVhdl(vhdlGenerationContext), vhdlGenerationContext);
+            return Terminate(Element.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
         }
 
 
-        public static string Terminate(string vhdl, IVhdlGenerationContext vhdlGenerationContext)
+        public static string Terminator(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            return ";" + vhdlGenerationOptions.NewLineIfShouldFormat();
+        }
+
+        public static string Terminate(string vhdl, IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return vhdl.TrimEnd(Environment.NewLine.ToCharArray()).EndsWith(";") ?
                 vhdl :
-                vhdl + ";" + vhdlGenerationContext.NewLineIfShouldFormat();
+                vhdl + Terminator(vhdlGenerationOptions);
         }
     }
 }

@@ -10,12 +10,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Expression { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
                 AssignTo.Name +
                 (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
-                Expression.ToVhdl(vhdlGenerationContext);
+                Expression.ToVhdl(vhdlGenerationOptions);
         }
     }
 }

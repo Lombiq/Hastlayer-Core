@@ -18,12 +18,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
-                "while " + Condition.ToVhdl(vhdlGenerationContext) + " loop " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    Body.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel()) +
-                "end loop", vhdlGenerationContext);
+                "while " + Condition.ToVhdl(vhdlGenerationOptions) + " loop " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end loop", vhdlGenerationOptions);
         }
     }
 }

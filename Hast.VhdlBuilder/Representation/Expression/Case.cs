@@ -18,25 +18,24 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var builder = new StringBuilder();
 
             builder
                 .Append("case ")
-                .Append(Expression.ToVhdl(vhdlGenerationContext))
+                .Append(Expression.ToVhdl(vhdlGenerationOptions))
                 .Append(" is ")
-                .Append(vhdlGenerationContext.NewLineIfShouldFormat());
+                .Append(vhdlGenerationOptions.NewLineIfShouldFormat());
 
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
             foreach (var when in Whens)
             {
-                builder.Append(when.ToVhdl(subContext));
+                builder.Append(when.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions));
             }
 
             builder.Append("end case");
 
-            return Terminated.Terminate(builder.ToString(), vhdlGenerationContext);
+            return Terminated.Terminate(builder.ToString(), vhdlGenerationOptions);
         }
     }
 
@@ -54,13 +53,13 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return 
-                "when " + Expression.ToVhdl(vhdlGenerationContext) + " => " + vhdlGenerationContext.NewLineIfShouldFormat() +
+                "when " + Expression.ToVhdl(vhdlGenerationOptions) + " => " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                 (Body.Count != 0 ? 
-                    Body.ToVhdl(vhdlGenerationContext.CreateContextForSubLevel()) : 
-                    Terminated.Terminate(vhdlGenerationContext.IndentIfShouldFormat () + "null", vhdlGenerationContext));
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : 
+                    Terminated.Terminate(vhdlGenerationOptions.IndentIfShouldFormat () + "null", vhdlGenerationOptions));
         }
     }
 }

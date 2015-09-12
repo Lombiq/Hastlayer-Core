@@ -23,19 +23,17 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationContext vhdlGenerationContext)
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            var subContext = vhdlGenerationContext.CreateContextForSubLevel();
-
             return Terminated.Terminate(
                 (!string.IsNullOrEmpty(Label) ? Label + ": " : string.Empty) +
                 "process (" + 
-                string.Join("; ", SesitivityList.Select(signal => signal.Name)) +
-                ") " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    Declarations.ToVhdl(subContext) +
-                " begin " + vhdlGenerationContext.NewLineIfShouldFormat() +
-                    Body.ToVhdl(subContext) +
-                " end process", vhdlGenerationContext);
+                    string.Join("; ", SesitivityList.Select(signal => signal.Name)) +
+                ") " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end process", vhdlGenerationOptions);
         }
     }
 }
