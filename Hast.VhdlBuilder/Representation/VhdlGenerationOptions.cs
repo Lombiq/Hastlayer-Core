@@ -42,7 +42,7 @@ namespace Hast.VhdlBuilder.Representation
         {
             // Using spaces instead of tabs.
             return vhdlGenerationOptions.FormatCode ?
-                string.Empty.PadLeft(4, ' ') :
+                "    " :
                 string.Empty;
         }
     }
