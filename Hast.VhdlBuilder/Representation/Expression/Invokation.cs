@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         {
             return 
                 Target.ToVhdl(vhdlGenerationOptions) +
-                (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ") + ")" : string.Empty);
+                (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
         }
     }
 

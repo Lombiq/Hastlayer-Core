@@ -28,7 +28,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 "procedure " + Name +
                 (Parameters.Count > 0 ? " (" : " ") + vhdlGenerationOptions.NewLineIfShouldFormat() +
                 // Out params at the end.
-                Parameters.OrderBy(parameter => parameter.ParameterType).ToVhdl(vhdlGenerationOptions, ";") +
+                Parameters.OrderBy(parameter => parameter.ParameterType).ToVhdl(vhdlGenerationOptions, "; ", string.Empty) +
                 (Parameters.Count > 0 ? ")" : string.Empty)  +
                 " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + (Declarations != null && Declarations.Any() ? " " : string.Empty) +

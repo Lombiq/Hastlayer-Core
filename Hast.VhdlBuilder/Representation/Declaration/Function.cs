@@ -26,8 +26,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
-                "function " + Name + 
-                " (" + Arguments.ToVhdl(vhdlGenerationOptions, "; ") + ") " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                "function " + Name +
+                " (" + Arguments.ToVhdl(vhdlGenerationOptions, "; ", string.Empty) + ") " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                 "return " + ReturnType.Name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                     (Declarations != null && Declarations.Any() ? " " : string.Empty) +
