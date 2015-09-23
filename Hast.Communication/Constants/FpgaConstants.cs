@@ -9,5 +9,9 @@ namespace Hast.Communication.Constants
         public const Parity SerialPortParity = Parity.None;
         public const StopBits SerialPortStopBits = StopBits.One;
         public const int WriteTimeout = 10000;
+        public const string signalReady = "s"; 
+        public const string signalAllBytesReceived = "r";
+        public const char signalYes = 'y'; // This constatnt is used for ACK or positive answer from the FPGA. (yes)
+        public const string signalFpgaDetect = "p";
     }
 }

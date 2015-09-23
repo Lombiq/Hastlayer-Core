@@ -108,7 +108,7 @@ namespace Hast.Communication.Services
                     // The code below is just used for debug purposes.
                     var RXString = Convert.ToChar(messageSizeBytes);
                     Debug.WriteLine("Incoming data size: " + RXString.ToString());
-                    serialPort.Write("s"); // Signal that we are ready to receive the data.
+                    serialPort.Write(Constants.FpgaConstants.signalReady); // Signal that we are ready to receive the data.
                 }
                 else
                 {
@@ -117,7 +117,7 @@ namespace Hast.Communication.Services
                     returnValue[returnValueIndex] = receivedByte;
                     returnValueIndex++;
                     count++;
-                    serialPort.Write("r"); // Signal that we received all bytes.
+                    serialPort.Write(Constants.FpgaConstants.signalAllBytesReceived); // Signal that we received all bytes.
                 }
                 
                 // Set the incoming data if all bytes are received. (Waiting for incoming data stream to complete.)
