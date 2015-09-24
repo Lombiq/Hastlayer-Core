@@ -25,7 +25,7 @@ namespace Hast.Communication.Helpers
         /// <summary>
         /// Helper Method used for detection of the connected FPGA board.
         /// </summary>
-        /// <returns>The COM port name whereeat the FPGA board is connected.</returns>
+        /// <returns>The COM port name where the FPGA board is connected.</returns>
         public static Task<string> GetFPGAPortName()
         {
             // Get all available serial ports on system.
