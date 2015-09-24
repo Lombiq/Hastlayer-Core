@@ -42,7 +42,7 @@ namespace Hast.Communication.Helpers
                 var dataIn = (byte)serialPort.ReadByte();
                 
                 var RXString = Convert.ToChar(dataIn);
-                if (RXString == Constants.FpgaConstants.signalYes)
+                if (RXString == Constants.FpgaConstants.SignalYes)
                 {
                     serialPort.Close();
                     taskCompletionSource.SetResult(serialPort.PortName);
@@ -56,7 +56,7 @@ namespace Hast.Communication.Helpers
                 try
                 {
                     serialPort.Open();
-                    serialPort.Write(Constants.FpgaConstants.signalFpgaDetect);
+                    serialPort.Write(Constants.FpgaConstants.SignalFpgaDetect);
                 }
                 catch (IOException e) { }
             }
