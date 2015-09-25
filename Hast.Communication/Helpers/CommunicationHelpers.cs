@@ -35,7 +35,7 @@ namespace Hast.Communication.Helpers
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
             serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
-            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
+            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeoutInMilliseconds;
 
             var taskCompletionSource = new TaskCompletionSource<string>();
             serialPort.DataReceived += (s, e) => {

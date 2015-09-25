@@ -24,7 +24,7 @@ namespace Hast.Communication.Services
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
             serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
-            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
+            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeoutInMilliseconds;
             
             try
             {
