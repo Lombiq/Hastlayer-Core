@@ -14,10 +14,12 @@ namespace Hast.Communication.Services
     {
         public ILogger Logger { get; set; }
 
+
         public SerialPortCommunicationService()
         {
             Logger = NullLogger.Instance;
         }
+
 
         public Task Execute(SimpleMemory simpleMemory, int memberId)
         {
