@@ -25,13 +25,13 @@ namespace Hast.Communication.Services
 
             // Initializing some serial port connection settings (Maybe different whith some fpga boards)
             var portName = Helpers.CommunicationHelpers.DetectSerialConnectionsPortName();
-            
+
             serialPort.PortName = portName == null ? Constants.FpgaConstants.PortName : portName;
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
             serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
             serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
-            
+
             try
             {
                 // We try to open the serial port.
@@ -100,7 +100,8 @@ namespace Hast.Communication.Services
             var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer
             var returnValueIndex = 0;
             var communicationType = '0'; // The 0 is the default value, the i is when we want to read something from the fpga, and the d if we want to read the processed data.
-            var executionTime = 0; // In this variable is stored the execution time. (1Byte)
+            var executionTime = new byte[4]; // In this variable is stored the execution time. (4Bytes)
+            var executionTimeByteCounter = 0;
 
             // In this event we are receiving the userful data comfing from the FPGA board.
             serialPort.DataReceived += (s, e) =>
@@ -120,13 +121,24 @@ namespace Hast.Communication.Services
                         communicationType = 'd'; // as data
                     }
                 }
-                else if(communicationType == 'i')
+                else if (communicationType == 'i')
                 {
                     // We know that the incoming data's size will be 1 Byte.
-                    executionTime = (byte)serialPort.ReadByte();
-                    Logger.Information(string.Format("Execution time: {0}", executionTime));
-                    serialPort.Write("s"); // Signal that we received the data.
-                    communicationType = 'd';
+                    executionTime[executionTimeByteCounter] = (byte)serialPort.ReadByte();
+                    executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
+                    if (executionTimeByteCounter == 3) // If we receive the 4 bytes.
+                    {
+                        communicationType = 'd'; // We switch the communication type back to 'data'.
+                        executionTimeByteCounter = 0;
+                        // If the system architecture is little-endian (that is, little end first),
+                        // reverse the byte array.
+                        if (BitConverter.IsLittleEndian) Array.Reverse(executionTime); // Maybe this will be better in HelperMethods.. ByteArryToIntConversion()
+                        // Log the information.
+                        Logger.Information(BitConverter.ToInt32(executionTime, 0).ToString());
+                    }
+                    //Logger.Information(string.Format("Execution time: {0}", executionTime));
+                    //serialPort.Write("s"); // Signal that we received the data. 'r'
+                    //
                 }
                 else // If useful data is receiving. If the communicationType variable is equal with 'd' then this code will run.
                 {
