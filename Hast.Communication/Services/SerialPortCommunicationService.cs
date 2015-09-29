@@ -11,15 +11,13 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        public Task Execute(SimpleMemory simpleMemory, int memberId)
+        public async Task Execute(SimpleMemory simpleMemory, int memberId)
         {
             var serialPort = new SerialPort();
 
             // Initializing some serial port connection settings (Maybe different whith some fpga boards).
-            var task = Helpers.CommunicationHelpers.GetFpgaPortName();
-            task.Wait();
-            var portName = task.Result;
-
+            var portName = await CommunicationHelpers.GetFpgaPortName();
+            
             serialPort.PortName = portName == null ? Constants.FpgaConstants.PortName : portName;
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
@@ -123,7 +121,7 @@ namespace Hast.Communication.Services
             };
             
             // Send back the result.
-            return taskCompletionSource.Task;
+            //return taskCompletionSource.Task;
         }
     }
 }
