@@ -45,7 +45,7 @@ namespace Hast.Communication.Helpers
 
                 if (receivedCharacter == Constants.FpgaConstants.SignalYes)
                 {
-                    serialPort.Close();
+                    serialPort.Dispose();
                     taskCompletionSource.SetResult(serialPort.PortName);
                 }
             };

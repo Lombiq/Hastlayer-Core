@@ -52,7 +52,7 @@ namespace Hast.Communication.Services
             var memberIdInBytes = CommunicationHelpers.ConvertIntToByteArray(memberId);
 
             // Here we put together the data stream.
-            buffer[0] = 0; // commandType - not stored on FPGA - deprecated.
+            buffer[0] = 0; // commandType - not stored on FPGA - future use.
 
             // Message length
             buffer[1] = lengthInBytes[0];
