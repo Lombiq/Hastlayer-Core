@@ -67,7 +67,7 @@ namespace Hast.Communication
                             // The task here is needed because the code executed on the FPGA board doesn't return, we have to wait for it.
                             // The Execute method is executed in separate thread.
                             var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, memberId); });
-                            task.Wait();                   
+                            task.Wait();
                         }
 
                         eventHandler.MethodInvokedOnHardware(context);

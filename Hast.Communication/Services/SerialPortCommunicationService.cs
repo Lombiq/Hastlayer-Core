@@ -120,8 +120,8 @@ namespace Hast.Communication.Services
                 }
             };
             
-            // Send back the result.
-            //return taskCompletionSource.Task;
+            // Await the tcs to complete.
+            await taskCompletionSource.Task;
         }
     }
 }
