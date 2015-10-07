@@ -110,8 +110,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var whileStatement = statement as WhileStatement;
 
-                stateMachine.AddState(currentBlock);
-
                 var whileState = new InlineBlock();
                 var whileStateIndex = stateMachine.AddState(whileState);
                 var afterWhileState = new InlineBlock();
