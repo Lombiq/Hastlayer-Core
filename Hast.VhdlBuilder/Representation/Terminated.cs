@@ -37,4 +37,13 @@ namespace Hast.VhdlBuilder.Representation
                 vhdl + Terminator(vhdlGenerationOptions);
         }
     }
+
+
+    public static class TerminatedExtensions
+    {
+        public static IVhdlElement Terminate(this IVhdlElement element)
+        {
+            return new Terminated(element);
+        }
+    }
 }

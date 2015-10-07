@@ -159,7 +159,7 @@ namespace Hast.Transformer.Vhdl
             //    if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
             //    {
             //        // Calling corresponding procedure with SimpleMemory signals passed in.
-            //        var simpleMemoryParameterNames = new [] { SimpleMemoryNames.DataInLocal, SimpleMemoryNames.DataOutLocal, SimpleMemoryNames.ReadAddressLocal, SimpleMemoryNames.WriteAddressLocal };
+            //        var simpleMemoryParameterNames = new[] { SimpleMemoryNames.DataInLocal, SimpleMemoryNames.DataOutLocal, SimpleMemoryNames.ReadAddressLocal, SimpleMemoryNames.WriteAddressLocal };
             //        var simpleMemoryParameters = interfaceMethod.Procedure.Parameters
             //            .Where(parameter => simpleMemoryParameterNames.Contains(parameter.Name))
             //            .Select(parameter =>
@@ -192,7 +192,7 @@ namespace Hast.Transformer.Vhdl
             //            Parameters = new List<IVhdlElement>(simpleMemoryParameters)
             //        };
 
-            //        when.Body.Add(new Terminated(invokation));
+            //        when.Body.Add(invokation.Terminate());
             //    }
             //    else
             //    {
@@ -210,7 +210,7 @@ namespace Hast.Transformer.Vhdl
 
             //            if (port.Mode == PortMode.In)
             //            {
-            //                when.Body.Add(new Terminated(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() }));
+            //                when.Body.Add(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() }.Terminate());
             //            }
 
             //            portVariables[port] = variable;
@@ -227,12 +227,12 @@ namespace Hast.Transformer.Vhdl
             //                .ToList()
             //        };
 
-            //        when.Body.Add(new Terminated(invokation));
+            //        when.Body.Add(invokation.Terminate());
 
             //        // Copying output variables to output ports.
             //        foreach (var port in interfaceMethod.Ports.Where(p => p.Mode == PortMode.Out))
             //        {
-            //            when.Body.Add(new Terminated(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }));
+            //            when.Body.Add(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }.Terminate());
             //        }
             //    }
 
@@ -243,7 +243,7 @@ namespace Hast.Transformer.Vhdl
             //    memberIdTable.SetMapping(methodFullName, id);
             //    foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
             //    {
-            //        memberIdTable.SetMapping(methodNameAlternate, id); 
+            //        memberIdTable.SetMapping(methodNameAlternate, id);
             //    }
 
             //    id++;

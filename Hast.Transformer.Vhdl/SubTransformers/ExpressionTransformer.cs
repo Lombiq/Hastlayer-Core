@@ -312,11 +312,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method).
             if (!(expression.Parent is ExpressionStatement))
             {
-                currentBlock.Body.Add(new Terminated(new Assignment
+                currentBlock.Body.Add(new Assignment
                     {
                         AssignTo = MethodStateMachine.CreateStartVariableName(targetStateMachineName).ToVhdlVariableReference(),
                         Expression = Value.True
-                    }));
+                    }.Terminate());
 
                 var targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
 
@@ -331,13 +331,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 methodParametersEnumerator.MoveNext();
                 foreach (var parameter in transformedParameters)
                 {
-                    currentBlock.Body.Add(new Terminated(new Assignment
+                    currentBlock.Body.Add(new Assignment
                         {
                             AssignTo =
                                 MethodStateMachine.CreatePrefixedVariableName(targetStateMachineName, methodParametersEnumerator.Current.Name)
                                 .ToVhdlVariableReference(),
                             Expression = parameter
-                        }));
+                        }.Terminate());
                     methodParametersEnumerator.MoveNext();
                 }
 
@@ -484,7 +484,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             invokation.Parameters.Add(returnVariable.ToReference());
 
             // Adding the procedure invokation directly to the body so it's before the current expression...
-            currentBlock.Body.Add(new Terminated(invokation));
+            currentBlock.Body.Add(invokation.Terminate());
 
             // ...and using the return variable in place of the original call.
             return returnVariable.ToReference();

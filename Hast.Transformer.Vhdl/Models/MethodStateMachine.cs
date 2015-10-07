@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl.Models
 
 
             var startStateBlock = new InlineBlock();
-            startStateBlock.Body.Add(new Terminated(new Assignment { AssignTo = _finishedVariable, Expression = Value.False }));
+            startStateBlock.Body.Add(new Assignment { AssignTo = _finishedVariable, Expression = Value.False }.Terminate());
             var startStateIfElse = new IfElse
             {
                 Condition = new Binary { Left = _startVariable.Name.ToVhdlIdValue(), Operator = "=", Right = Value.True },
@@ -83,7 +83,7 @@ namespace Hast.Transformer.Vhdl.Models
             startStateBlock.Body.Add(startStateIfElse);
 
             var finalStateBlock = new InlineBlock();
-            finalStateBlock.Body.Add(new Terminated(new Assignment { AssignTo = _finishedVariable, Expression = Value.True }));
+            finalStateBlock.Body.Add(new Assignment { AssignTo = _finishedVariable, Expression = Value.True }.Terminate());
             finalStateBlock.Body.Add(ChangeToStartState());
 
             _states = new List<IBlockElement>
@@ -116,7 +116,7 @@ namespace Hast.Transformer.Vhdl.Models
 
         public IVhdlElement CreateStateChange(int nextStateIndex)
         {
-            return new Terminated(new Assignment { AssignTo = _stateVariable, Expression = CreateStateValue(nextStateIndex) });
+            return new Assignment { AssignTo = _stateVariable, Expression = CreateStateValue(nextStateIndex) }.Terminate();
         }
 
         public IVhdlElement ChangeToStartState()
