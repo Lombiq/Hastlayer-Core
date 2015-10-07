@@ -5,7 +5,7 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Function : ISubProgram
     {
         public string Name { get; set; }

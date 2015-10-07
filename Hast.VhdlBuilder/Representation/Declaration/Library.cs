@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Library : INamedElement
     {
         public string Name { get; set; }

@@ -5,7 +5,7 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Case : IVhdlElement
     {
         public IVhdlElement Expression { get; set; }
@@ -40,7 +40,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     }
 
 
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class When : IVhdlElement
     {
         public IVhdlElement Expression { get; set; }

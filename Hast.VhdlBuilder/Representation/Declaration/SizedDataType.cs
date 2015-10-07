@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class SizedDataType : DataType
     {
         public int Size { get; set; }

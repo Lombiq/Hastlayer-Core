@@ -2,7 +2,7 @@
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Binary : IVhdlElement
     {
         public IVhdlElement Left { get; set; }

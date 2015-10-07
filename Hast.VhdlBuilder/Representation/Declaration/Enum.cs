@@ -7,7 +7,7 @@ using System;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Enum : DataType
     {
         public List<Value> Values { get; set; }

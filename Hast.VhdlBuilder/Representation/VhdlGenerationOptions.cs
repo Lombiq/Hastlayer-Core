@@ -85,6 +85,13 @@ namespace Hast.VhdlBuilder.Representation
                 return shortName;
             };
 
+        private static VhdlGenerationOptions _debugOptions = new VhdlGenerationOptions
+        {
+            FormatCode = true,
+            NameShortener = SimpleNameShortener
+        };
+        public static VhdlGenerationOptions Debug { get { return _debugOptions; } }
+
         public bool FormatCode { get; set; }
         public NameShortener NameShortener { get; set; }
 

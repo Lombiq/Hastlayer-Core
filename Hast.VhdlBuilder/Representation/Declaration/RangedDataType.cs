@@ -2,7 +2,7 @@
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class RangedDataType : DataType
     {
         public int RangeMin { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Alias : TypedDataObjectBase
     {
         /// <summary>

@@ -5,7 +5,7 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Procedure : ISubProgram
     {
         public string Name { get; set; }
@@ -48,7 +48,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     }
 
 
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class ProcedureParameter : TypedDataObjectBase
     {
         public ProcedureParameterType ParameterType { get; set; }

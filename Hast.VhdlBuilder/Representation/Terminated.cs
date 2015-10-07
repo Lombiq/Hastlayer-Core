@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation
 {
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Terminated : IVhdlElement
     {
         public IVhdlElement Element { get; set; }

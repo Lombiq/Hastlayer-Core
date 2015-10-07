@@ -2,7 +2,7 @@
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class StdLogicVector : SizedDataType
     {
         public StdLogicVector()

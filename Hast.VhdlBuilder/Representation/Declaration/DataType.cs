@@ -16,7 +16,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// <summary>
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
     /// </summary>
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class DataType : INamedElement
     {
         public DataTypeCategory TypeCategory { get; set; }
