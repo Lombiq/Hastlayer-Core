@@ -93,12 +93,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
             };
 
+            var lastStatementIsReturn = false;
             foreach (var statement in method.Body.Statements)
             {
                 _statementTransformer.Transform(statement, bodyContext);
+                lastStatementIsReturn = statement is ReturnStatement;
             }
 
-            stateMachine.States.Last().Body.Add(stateMachine.ChangeToFinalState());
+            // If the last statement was a return statement then there is already a state change to the final state
+            // added.
+            if (!lastStatementIsReturn)
+            {
+                stateMachine.States.Last().Body.Add(stateMachine.ChangeToFinalState()); 
+            }
 
 
             context.Module.Architecture.Declarations.Add(stateMachine.BuildDeclarations());
