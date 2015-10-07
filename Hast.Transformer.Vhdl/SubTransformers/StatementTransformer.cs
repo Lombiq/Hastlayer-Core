@@ -57,7 +57,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var expressionStatement = statement as ExpressionStatement;
 
-                currentBlock.Body.Add(new Terminated(_expressionTransformer.Transform(expressionStatement.Expression, context, ref currentBlock)));
+                var expressionElement = new Terminated(_expressionTransformer.Transform(expressionStatement.Expression, context, ref currentBlock));
+                currentBlock.Body.Add(expressionElement);
             }
             else if (statement is ReturnStatement)
             {
@@ -65,11 +66,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (_typeConverter.Convert((context.Scope.Method).ReturnType) != KnownDataTypes.Void)
                 {
-                    currentBlock.Body.Add(new Terminated(new Assignment
+                    var assigmentElement = new Terminated(new Assignment
                     {
                         AssignTo = stateMachine.CreateReturnVariableName().ToVhdlVariableReference(),
                         Expression = _expressionTransformer.Transform(returnStatement.Expression, context, ref currentBlock)
-                    }));
+                    });
+                    currentBlock.Body.Add(assigmentElement);
                 }
 
                 currentBlock.Body.Add(stateMachine.ChangeToFinalState());
