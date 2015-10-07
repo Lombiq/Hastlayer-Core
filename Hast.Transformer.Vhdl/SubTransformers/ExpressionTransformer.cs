@@ -251,7 +251,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (isWrite)
                 {
-                    currentBlock.Body.Add(memoryOperationInvokation);
+                    currentBlock.Body.Add(memoryOperationInvokation.Terminate());
                     currentBlock = afterMemoryBlock;
                     return Empty.Instance;
                 }
@@ -472,7 +472,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// Procedures can't just be assigned to variables like methods as they don't have a return value, just out parameters.
         /// Thus here we create a variable for the out parameter (the return variable), run the procedure with it and then use it later too.
         /// </summary>
-        private static DataObjectReference BuildProcedureReturnReference(string targetName, DataType returnType, Invokation invokation, ISubTransformerContext context, IBlockElement currentBlock)
+        private static DataObjectReference BuildProcedureReturnReference(
+            string targetName,
+            DataType returnType,
+            Invokation invokation,
+            ISubTransformerContext context,
+            IBlockElement currentBlock)
         {
             var returnVariable = new Variable
             {
