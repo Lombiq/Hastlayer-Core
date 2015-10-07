@@ -38,7 +38,7 @@ namespace Hast.VhdlBuilder.Representation
         /// A simple name shortener function. Keep in mind that shortening names with this, while produces more readable
         /// code for debugging, does not guarantee unique names.
         /// </summary>
-        public static NameShortener DefaultNameShortener = originalName =>
+        public static NameShortener SimpleNameShortener = originalName =>
             {
                 var shortName = originalName;
 
