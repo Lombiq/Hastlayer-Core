@@ -15,7 +15,7 @@ namespace Hast.Communication.Services
         {
             var serialPort = new SerialPort();
 
-            // Initializing some serial port connection settings (Maybe different whith some fpga boards).
+            // Initializing some serial port connection settings (maybe different whith some Fpga boards).
             var portName = await CommunicationHelpers.GetFpgaPortName();
             
             serialPort.PortName = portName == null ? Constants.FpgaConstants.PortName : portName;
@@ -50,7 +50,7 @@ namespace Hast.Communication.Services
             var memberIdInBytes = CommunicationHelpers.ConvertIntToByteArray(memberId);
 
             // Here we put together the data stream.
-            buffer[0] = 0; // commandType - not stored on FPGA - future use.
+            buffer[0] = 0; // commandType - not stored on Fpga - for future use.
 
             // Message length
             buffer[1] = lengthInBytes[0];
