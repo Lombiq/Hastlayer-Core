@@ -192,6 +192,12 @@ namespace Hast.Transformer.Vhdl.Models
                 stateCase.Whens.Add(stateWhen);
             }
 
+            var ifInResetBlock = new InlineBlock(new[]
+                {
+                    new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate(),
+                    CreateStateChange(0)
+                });
+
             var resetIf = new IfElse
             {
                 Condition = new Binary
@@ -200,7 +206,7 @@ namespace Hast.Transformer.Vhdl.Models
                     Operator = "=",
                     Right = new Character('1')
                 },
-                True = CreateStateChange(0),
+                True = ifInResetBlock,
                 Else = stateCase
             };
             process.Body.Add(resetIf);
