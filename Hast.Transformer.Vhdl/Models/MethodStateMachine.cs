@@ -162,7 +162,13 @@ namespace Hast.Transformer.Vhdl.Models
 
             var declarationsBlock = new InlineBlock();
 
-            declarationsBlock.Body.AddRange(new IVhdlElement[] { _statesEnum, _stateVariable });
+            declarationsBlock.Body.AddRange(new IVhdlElement[]
+            {
+                _statesEnum,
+                _stateVariable,
+                _startVariable,
+                _finishedVariable
+            });
             declarationsBlock.Body.AddRange(Parameters);
 
             return declarationsBlock;
