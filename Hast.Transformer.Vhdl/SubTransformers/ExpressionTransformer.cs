@@ -306,10 +306,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             var waitForInvokedStateMachineToFinishState = new InlineBlock();
-            var isInvokedStateMachineFinishedIfElseTrue = new InlineBlock(new[]
-            {
-                stateMachine.CreateStateChange(stateMachine.AddState(new InlineBlock()))
-            });
+            var isInvokedStateMachineFinishedIfElseTrue = new InlineBlock();
             var isInvokedStateMachineFinishedIfElse = new IfElse
             {
                 Condition = new Binary
@@ -360,12 +357,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
 
-                //isInvokedStateMachineFinishedIfElseTrue.Body.Add()
+                currentBlock = isInvokedStateMachineFinishedIfElseTrue;
 
                 return Empty.Instance;
             }
             else
             {
+                currentBlock = isInvokedStateMachineFinishedIfElseTrue;
+
                 return Empty.Instance;
             }
         }
