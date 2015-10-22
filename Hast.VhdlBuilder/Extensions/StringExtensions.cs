@@ -55,10 +55,13 @@ namespace Hast.VhdlBuilder.Extensions
 
         public static string IndentLinesIfShouldFormat(this string vhdl, IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            // Empty new lines won't be indented as it can contain a different block.
+            // Empty new lines won't be indented as they can contain different blocks.
+            // A space will be added if no formatting is uses so the code remains syntactically correct even if being
+            // just one line.
             return string.Join(vhdlGenerationOptions.NewLineIfShouldFormat(), vhdl
                 .Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
-                .Select(line => (!string.IsNullOrEmpty(line) ? vhdlGenerationOptions.IndentIfShouldFormat() : string.Empty) + line));
+                .Select(line => (!string.IsNullOrEmpty(line) ? vhdlGenerationOptions.IndentIfShouldFormat() : string.Empty) + line)) +
+                (vhdlGenerationOptions.FormatCode ? string.Empty : " ");
         }
     }
 }
