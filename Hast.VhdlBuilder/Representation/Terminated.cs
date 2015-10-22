@@ -32,6 +32,8 @@ namespace Hast.VhdlBuilder.Representation
 
         public static string Terminate(string vhdl, IVhdlGenerationOptions vhdlGenerationOptions)
         {
+            if (string.IsNullOrEmpty(vhdl)) return string.Empty;
+
             return vhdl.TrimEnd(Environment.NewLine.ToCharArray()).EndsWith(";") ?
                 vhdl :
                 vhdl + Terminator(vhdlGenerationOptions);
