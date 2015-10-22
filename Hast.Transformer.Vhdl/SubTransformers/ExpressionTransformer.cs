@@ -234,8 +234,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var invokationParameters = transformedParameters;
                 invokationParameters.AddRange(new[]
                 {
-                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = isWrite ? SimpleMemoryNames.DataOutLocal : SimpleMemoryNames.DataInLocal },
-                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = isWrite ? SimpleMemoryNames.WriteAddressLocal : SimpleMemoryNames.ReadAddressLocal }
+                    new DataObjectReference
+                    {
+                        DataObjectKind = DataObjectKind.Signal, 
+                        Name = isWrite ? SimpleMemoryNames.DataOutLocal : SimpleMemoryNames.DataInLocal
+                    },
+                    new DataObjectReference
+                    {
+                        DataObjectKind = DataObjectKind.Signal, 
+                        Name = isWrite ? SimpleMemoryNames.WriteAddressLocal : SimpleMemoryNames.ReadAddressLocal
+                    }
                 });
 
                 var target = "SimpleMemory" + targetMemberReference.MemberName;
@@ -257,8 +265,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    // Looking up the type information that will tell us what the return type of the memory read is. This might
-                    // be some nodes up if e.g. there is an immediate cast expression.
+                    // Looking up the type information that will tell us what the return type of the memory read is. 
+                    // This might be some nodes up if e.g. there is an immediate cast expression.
                     AstNode currentNode = expression;
                     while (currentNode.Annotation<TypeInformation>() == null)
                     {
@@ -266,8 +274,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
 
 
-                    // If this is a memory read then comes the juggling with funneling the out parameter of the memory write
-                    // procedure to the original location.
+                    // If this is a memory read then comes the juggling with funneling the out parameter of the memory 
+                    // write procedure to the original location.
                     var returnReference = BuildProcedureReturnReference(
                         target,
                         _typeConverter.ConvertTypeReference(currentNode.GetActualType()),
@@ -309,7 +317,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachineToFinishState);
             currentBlock.Body.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
 
-            // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method).
+            // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to 
+            // a non-void method).
             if (!(expression.Parent is ExpressionStatement))
             {
                 currentBlock.Body.Add(new Assignment
@@ -354,8 +363,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context, IBlockElement currentBlock)
         {
-            // This is a temporal workaround to get around cases where operations (e.g. multiplication) with 32b numbers resulting in a 64b number
-            // would cause a cast to a 64b number type (what we don't support yet). See: https://lombiq.atlassian.net/browse/HAST-20
+            // This is a temporal workaround to get around cases where operations (e.g. multiplication) with 32b numbers
+            // resulting in a 64b number would cause a cast to a 64b number type (what we don't support yet). 
+            // See: https://lombiq.atlassian.net/browse/HAST-20
             var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
             var fromTypeKeyword = expression.GetActualType().FullName;
             if (toTypeKeyword == "long" || toTypeKeyword == "ulong" || fromTypeKeyword == "System.Int64" || fromTypeKeyword == "System.UInt64")
@@ -371,7 +381,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
         /// <summary>
-        /// In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if necessary.
+        /// In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if 
+        /// necessary.
         /// </summary>
         private IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
@@ -401,8 +412,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var thisType = isLeft ? leftType : rightType;
             var otherType = isLeft ? rightType : leftType;
 
-            // We need to convert types in a way to keep precision. E.g. conerting an int to real is fine, but vica versa would cause
-            // information loss. However excplicit casting in this direction is allowed in CIL so we need to allow it here as well.
+            // We need to convert types in a way to keep precision. E.g. conerting an int to real is fine, but vica 
+            // versa would cause information loss. However excplicit casting in this direction is allowed in CIL so we 
+            // need to allow it here as well.
             if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real))
             {
                 Logger.Warning(
@@ -469,8 +481,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
         /// <summary>
-        /// Procedures can't just be assigned to variables like methods as they don't have a return value, just out parameters.
-        /// Thus here we create a variable for the out parameter (the return variable), run the procedure with it and then use it later too.
+        /// Procedures can't just be assigned to variables like methods as they don't have a return value, just out 
+        /// parameters. Thus here we create a variable for the out parameter (the return variable), run the procedure
+        /// with it and then use it later too.
         /// </summary>
         private static DataObjectReference BuildProcedureReturnReference(
             string targetName,
