@@ -253,18 +253,27 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Parameters = invokationParameters
                 };
 
-                var afterMemoryBlock = new InlineBlock();
+                // The memory operation should be initialized in this state, then finished in another one.
+                var memoryOperationFinishedBlock = new InlineBlock();
 
-                currentBlock.Body.Add(stateMachine.CreateStateChange(stateMachine.AddState(afterMemoryBlock)));
+                currentBlock.Body.Add(stateMachine.CreateStateChange(stateMachine.AddState(memoryOperationFinishedBlock)));
 
                 if (isWrite)
                 {
+                    // TODO: WriteEnable and CellIndex should be set in currentBlock and be re-set in
+                    // memoryOperationFinishedBlock.
+                    memoryOperationFinishedBlock.Body.Add(new VhdlBuilder.Representation.Declaration.Comment("Write finish"));
+
                     currentBlock.Body.Add(memoryOperationInvokation.Terminate());
-                    currentBlock = afterMemoryBlock;
+                    currentBlock = memoryOperationFinishedBlock;
+
                     return Empty.Instance;
                 }
                 else
                 {
+                    // TODO: ReadEnable should be set in currentBlock and re-set in memoryOperationFinishedBlock.
+                    currentBlock.Body.Add(new VhdlBuilder.Representation.Declaration.Comment("ReadEnable"));
+
                     // Looking up the type information that will tell us what the return type of the memory read is. 
                     // This might be some nodes up if e.g. there is an immediate cast expression.
                     AstNode currentNode = expression;
@@ -281,9 +290,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         _typeConverter.ConvertTypeReference(currentNode.GetActualType()),
                         memoryOperationInvokation,
                         context,
-                        currentBlock);
+                        memoryOperationFinishedBlock);
 
-                    currentBlock = afterMemoryBlock;
+                    currentBlock = memoryOperationFinishedBlock;
 
                     return returnReference;
                 }
