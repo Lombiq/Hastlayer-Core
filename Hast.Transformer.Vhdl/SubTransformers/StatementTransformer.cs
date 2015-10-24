@@ -101,14 +101,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var blockStatement = statement as BlockStatement;
 
-                var statementBlock = new InlineBlock();
-
                 foreach (var blockStatementStatement in blockStatement.Statements)
                 {
-                    TransformInner(blockStatementStatement, context, statementBlock);
+                    TransformInner(blockStatementStatement, context, currentBlock);
                 }
-
-                currentBlock.Body.Add(statementBlock);
             }
             else if (statement is WhileStatement)
             {
