@@ -135,6 +135,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         True = whileStateInnerBody,
                         Else = stateMachine.CreateStateChange(afterWhileStateIndex)
                     });
+
+                // Returning to the of the while condition so the cycle can re-start.
+                stateMachine.States.Last().Body.Add(stateMachine.CreateStateChange(whileStateIndex));
             }
             else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
         }
