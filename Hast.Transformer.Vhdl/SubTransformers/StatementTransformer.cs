@@ -30,13 +30,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public void Transform(Statement statement, ISubTransformerContext context)
         {
-            TransformInner(statement, context, context.Scope.StateMachine.States.Last());
+            TransformInner(statement, context);
         }
 
         
-        private void TransformInner(Statement statement, ISubTransformerContext context, IBlockElement currentBlock)
+        private void TransformInner(Statement statement, ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
+            var currentBlock = context.Scope.CurrentBlock;
 
             if (statement is VariableDeclarationStatement)
             {
@@ -58,9 +59,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var expressionStatement = statement as ExpressionStatement;
 
                 var expressionElement = 
-                    _expressionTransformer.Transform(expressionStatement.Expression, context, ref currentBlock)
+                    _expressionTransformer.Transform(expressionStatement.Expression, context)
                     .Terminate();
-                currentBlock.Body.Add(expressionElement);
+                currentBlock.Add(expressionElement);
             }
             else if (statement is ReturnStatement)
             {
@@ -71,31 +72,32 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var assigmentElement = new Assignment
                     {
                         AssignTo = stateMachine.CreateReturnVariableName().ToVhdlVariableReference(),
-                        Expression = _expressionTransformer.Transform(returnStatement.Expression, context, ref currentBlock)
+                        Expression = _expressionTransformer.Transform(returnStatement.Expression, context)
                     }.Terminate();
-                    currentBlock.Body.Add(assigmentElement);
+                    currentBlock.Add(assigmentElement);
                 }
 
-                currentBlock.Body.Add(stateMachine.ChangeToFinalState());
+                currentBlock.Add(stateMachine.ChangeToFinalState());
             }
             else if (statement is IfElseStatement)
             {
                 var ifElse = statement as IfElseStatement;
 
-                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context, ref currentBlock) };
+                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
+                currentBlock.Add(ifElseElement);
 
                 var trueBlock = new InlineBlock();
-                TransformInner(ifElse.TrueStatement, context, trueBlock);
                 ifElseElement.True = trueBlock;
+                currentBlock.ChangeBlock(trueBlock);
+                TransformInner(ifElse.TrueStatement, context);
 
                 if (ifElse.FalseStatement != Statement.Null)
                 {
                     var falseBlock = new InlineBlock();
-                    TransformInner(ifElse.FalseStatement, context, falseBlock);
                     ifElseElement.Else = falseBlock;
+                    currentBlock.ChangeBlock(falseBlock);
+                    TransformInner(ifElse.FalseStatement, context);
                 }
-
-                currentBlock.Body.Add(ifElseElement);
             }
             else if (statement is BlockStatement)
             {
@@ -103,7 +105,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 foreach (var blockStatementStatement in blockStatement.Statements)
                 {
-                    TransformInner(blockStatementStatement, context, currentBlock);
+                    TransformInner(blockStatementStatement, context);
                 }
             }
             else if (statement is WhileStatement)
@@ -115,11 +117,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var afterWhileState = new InlineBlock();
                 var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
 
-                var condition = _expressionTransformer.Transform(whileStatement.Condition, context, ref currentBlock);
+                var condition = _expressionTransformer.Transform(whileStatement.Condition, context);
 
                 // Having a condition even in the current state's body: if the loop doesn't need to run at all we'll
                 // spare one cycle by directly jumping to the state after the loop.
-                currentBlock.Body.Add(new IfElse
+                currentBlock.Add(new IfElse
                     {
                         Condition = condition,
                         True = stateMachine.CreateStateChange(whileStateIndex),
@@ -127,7 +129,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     });
 
                 var whileStateInnerBody = new InlineBlock();
-                TransformInner(whileStatement.EmbeddedStatement, context, whileStateInnerBody);
+                currentBlock.ChangeBlock(whileStateInnerBody);
+                TransformInner(whileStatement.EmbeddedStatement, context);
 
                 whileState.Body.Add(new IfElse
                     {

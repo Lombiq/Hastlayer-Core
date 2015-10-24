@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// Transforms an expression into a VHDL element that can be used in place of the original expression. Be aware
         /// that <code>currentBlock</code>, being a reference, can change.
         /// </summary>
-        IVhdlElement Transform(Expression expression, ISubTransformerContext context, ref IBlockElement currentBlock);
+        IVhdlElement Transform(Expression expression, ISubTransformerContext context);
     }
 
 
@@ -40,7 +40,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public IVhdlElement Transform(Expression expression, ISubTransformerContext context, ref IBlockElement currentBlock)
+        public IVhdlElement Transform(Expression expression, ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
 
@@ -49,8 +49,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var assignment = (AssignmentExpression)expression;
                 return new Assignment
                 {
-                    AssignTo = (IDataObject)Transform(assignment.Left, context, ref currentBlock),
-                    Expression = Transform(assignment.Right, context, ref currentBlock)
+                    AssignTo = (IDataObject)Transform(assignment.Left, context),
+                    Expression = Transform(assignment.Right, context)
                 };
             }
             else if (expression is IdentifierExpression)
@@ -97,8 +97,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     "The type of the following primitive expression couldn't be determined: " +
                     expression.ToString());
             }
-            else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, currentBlock);
-            else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, ref currentBlock);
+            else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context);
+            else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context);
             // These are not needed at the moment. MemberReferenceExpression is handled in TransformInvocationExpression and a
             // ThisReferenceExpression can only happen if "this" is passed to a method, which is not supported.
             //else if (expression is MemberReferenceExpression)
@@ -117,7 +117,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return new Invokation
                 {
                     Target = new Value { DataType = KnownDataTypes.Identifier, Content = "not" },
-                    Parameters = new List<IVhdlElement> { Transform(unary.Expression, context, ref currentBlock) }
+                    Parameters = new List<IVhdlElement> { Transform(unary.Expression, context) }
                 };
             }
             else if (expression is TypeReferenceExpression)
@@ -134,18 +134,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is CastExpression)
             {
-                return TransformCastExpression((CastExpression)expression, context, currentBlock);
+                return TransformCastExpression((CastExpression)expression, context);
             }
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
 
 
-        private IVhdlElement TransformBinaryOperatorExpression(BinaryOperatorExpression expression, ISubTransformerContext context, IBlockElement currentBlock)
+        private IVhdlElement TransformBinaryOperatorExpression(BinaryOperatorExpression expression, ISubTransformerContext context)
         {
             var binary = new Binary
             {
-                Left = Transform(expression.Left, context, ref currentBlock),
-                Right = Transform(expression.Right, context, ref currentBlock)
+                Left = Transform(expression.Left, context),
+                Right = Transform(expression.Right, context)
             };
 
             //  Would need to decide between + and & or sll/srl and sra/sla
@@ -211,15 +211,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return binary;
         }
 
-        private IVhdlElement TransformInvocationExpression(InvocationExpression expression, ISubTransformerContext context, ref IBlockElement currentBlock)
+        private IVhdlElement TransformInvocationExpression(InvocationExpression expression, ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
+            var currentBlock = context.Scope.CurrentBlock;
 
             var targetMemberReference = expression.Target as MemberReferenceExpression;
             var transformedParameters = new List<IVhdlElement>();
             foreach (var argument in expression.Arguments)
             {
-                transformedParameters.Add(Transform(argument, context, ref currentBlock));
+                transformedParameters.Add(Transform(argument, context));
             }
 
             // This is a SimpleMemory access.
@@ -256,7 +257,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // The memory operation should be initialized in this state, then finished in another one.
                 var memoryOperationFinishedBlock = new InlineBlock();
 
-                currentBlock.Body.Add(stateMachine.CreateStateChange(stateMachine.AddState(memoryOperationFinishedBlock)));
+                currentBlock.Add(stateMachine.CreateStateChange(stateMachine.AddState(memoryOperationFinishedBlock)));
 
                 if (isWrite)
                 {
@@ -264,15 +265,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // memoryOperationFinishedBlock.
                     memoryOperationFinishedBlock.Body.Add(new VhdlBuilder.Representation.Declaration.Comment("Write finish"));
 
-                    currentBlock.Body.Add(memoryOperationInvokation.Terminate());
-                    currentBlock = memoryOperationFinishedBlock;
+                    currentBlock.Add(memoryOperationInvokation.Terminate());
+                    currentBlock.ChangeBlock(memoryOperationFinishedBlock);
 
                     return Empty.Instance;
                 }
                 else
                 {
                     // TODO: ReadEnable should be set in currentBlock and re-set in memoryOperationFinishedBlock.
-                    currentBlock.Body.Add(new VhdlBuilder.Representation.Declaration.Comment("ReadEnable"));
+                    currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("ReadEnable"));
 
                     // Looking up the type information that will tell us what the return type of the memory read is. 
                     // This might be some nodes up if e.g. there is an immediate cast expression.
@@ -283,16 +284,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
 
 
+                    currentBlock.ChangeBlock(memoryOperationFinishedBlock);
+
                     // If this is a memory read then comes the juggling with funneling the out parameter of the memory 
                     // write procedure to the original location.
                     var returnReference = BuildProcedureReturnReference(
                         target,
                         _typeConverter.ConvertTypeReference(currentNode.GetActualType()),
                         memoryOperationInvokation,
-                        context,
-                        memoryOperationFinishedBlock);
-
-                    currentBlock = memoryOperationFinishedBlock;
+                        context);
 
                     return returnReference;
                 }
@@ -321,13 +321,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             waitForInvokedStateMachineToFinishState.Body.Add(isInvokedStateMachineFinishedIfElse);
 
             var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachineToFinishState);
-            currentBlock.Body.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
+            currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
 
             // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to 
             // a non-void method).
             if (!(expression.Parent is ExpressionStatement))
             {
-                currentBlock.Body.Add(new Assignment
+                currentBlock.Add(new Assignment
                     {
                         AssignTo = MethodStateMachine.CreateStartVariableName(targetStateMachineName).ToVhdlVariableReference(),
                         Expression = Value.True
@@ -346,7 +346,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 methodParametersEnumerator.MoveNext();
                 foreach (var parameter in transformedParameters)
                 {
-                    currentBlock.Body.Add(new Assignment
+                    currentBlock.Add(new Assignment
                         {
                             AssignTo =
                                 MethodStateMachine.CreatePrefixedVariableName(targetStateMachineName, methodParametersEnumerator.Current.Name)
@@ -357,19 +357,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
 
-                currentBlock = isInvokedStateMachineFinishedIfElseTrue;
+                currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);
 
                 return Empty.Instance;
             }
             else
             {
-                currentBlock = isInvokedStateMachineFinishedIfElseTrue;
+                currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);
 
                 return Empty.Instance;
             }
         }
 
-        private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context, IBlockElement currentBlock)
+        private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context)
         {
             // This is a temporal workaround to get around cases where operations (e.g. multiplication) with 32b numbers
             // resulting in a 64b number would cause a cast to a 64b number type (what we don't support yet). 
@@ -379,13 +379,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (toTypeKeyword == "long" || toTypeKeyword == "ulong" || fromTypeKeyword == "System.Int64" || fromTypeKeyword == "System.UInt64")
             {
                 Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was omitted because non-32b numbers are not yet supported. If the result can indeed reach values above the 32b limit then overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
-                return Transform(expression.Expression, context, ref currentBlock);
+                return Transform(expression.Expression, context);
             }
 
             var fromType = _typeConverter.ConvertTypeReference(expression.GetActualType());
             var toType = _typeConverter.Convert(expression.Type);
 
-            return ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context, ref currentBlock));
+            return ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context));
         }
 
         /// <summary>
@@ -497,8 +497,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             string targetName,
             DataType returnType,
             Invokation invokation,
-            ISubTransformerContext context,
-            IBlockElement currentBlock)
+            ISubTransformerContext context)
         {
             var returnVariable = new Variable
             {
@@ -510,7 +509,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             invokation.Parameters.Add(returnVariable.ToReference());
 
             // Adding the procedure invokation directly to the body so it's before the current expression...
-            currentBlock.Body.Add(invokation.Terminate());
+            context.Scope.CurrentBlock.Add(invokation.Terminate());
 
             // ...and using the return variable in place of the original call.
             return returnVariable.ToReference();

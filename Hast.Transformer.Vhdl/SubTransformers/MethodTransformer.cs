@@ -79,8 +79,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             stateMachine.Parameters = parameters;
 
-            // Adding opening state.
-            stateMachine.AddState(new InlineBlock());
+            // Adding opening state and its block.
+            var openingBlock = new InlineBlock();
+            stateMachine.AddState(openingBlock);
 
             // Processing method body.
             var bodyContext = new SubTransformerContext
@@ -89,7 +90,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 Scope = new SubTransformerScope
                 {
                     Method = method,
-                    StateMachine = stateMachine
+                    StateMachine = stateMachine,
+                    CurrentBlock = new CurrentBlock(openingBlock)
                 }
             };
 
