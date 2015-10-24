@@ -17,27 +17,27 @@ namespace Hast.Xilinx
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create()
         {
-            return Create(Enumerable.Empty<Assembly>());
+            return Create(HastlayerConfiguration.Default);
         }
 
         /// <summary>
         /// Instantiates a new <see cref="IHastlayer"/> implementation, configured for Xilinx FPGAs and the Xilinx FPGA
         /// development toolchain.
         /// </summary>
-        /// <param name="extensions">
-        /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
-        /// pipeline.
-        /// </param>
+        /// <param name="configuration">Configuration for Hastalyer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
-        public static IHastlayer Create(IEnumerable<Assembly> extensions)
+        public static IHastlayer Create(IHastlayerConfiguration configuration)
         {
-            extensions = new[]
+            configuration = new HastlayerConfiguration(configuration)
+            {
+                Extensions = new[]
                 {
                     typeof(Hast.Transformer.Vhdl.InterfaceMethodDefinition).Assembly,
                     typeof(Hast.Xilinx.XilinxHardwareRepresentationComposer).Assembly
-                }.Union(extensions);
+                }.Union(configuration.Extensions)
+            };
 
-            return Hastlayer.Create(extensions);
+            return Hastlayer.Create(configuration);
         }
     }
 }
