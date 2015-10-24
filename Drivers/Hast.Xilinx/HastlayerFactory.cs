@@ -11,7 +11,8 @@ namespace Hast.Xilinx
     public static class HastlayerFactory
     {
         /// <summary>
-        /// Instantiates a new <see cref="IHastlayer"/> implementation, configured for Xilinx FPGAs and the Xilinx FPGA development toolchain.
+        /// Instantiates a new <see cref="IHastlayer"/> implementation, configured for Xilinx FPGAs and the Xilinx FPGA
+        /// development toolchain.
         /// </summary>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create()
@@ -20,10 +21,12 @@ namespace Hast.Xilinx
         }
 
         /// <summary>
-        /// Instantiates a new <see cref="IHastlayer"/> implementation, configured for Xilinx FPGAs and the Xilinx FPGA development toolchain.
+        /// Instantiates a new <see cref="IHastlayer"/> implementation, configured for Xilinx FPGAs and the Xilinx FPGA
+        /// development toolchain.
         /// </summary>
         /// <param name="extensions">
-        /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation pipeline.
+        /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
+        /// pipeline.
         /// </param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create(IEnumerable<Assembly> extensions)

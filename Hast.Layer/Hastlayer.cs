@@ -41,7 +41,8 @@ namespace Hast.Layer
         /// </summary>
         /// <remarks>Point of this factory is that it returns an interface type instead of the implementation.</remarks>
         /// <param name="extensions">
-        /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation pipeline.
+        /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
+        /// pipeline.
         /// </param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create(IEnumerable<Assembly> extensions)
@@ -69,7 +70,8 @@ namespace Hast.Layer
              * Steps to be implemented:
              * - Transform into hardware description through ITransformer.
              * - Save hardware description for re-use (cache file, stream supplied from the outside).
-             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary communication 
+             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the 
+             *   necessary communication 
              *   implementation (currently partially implemented with a member table).
              * - Cache hardware implementation to be able to re-configure the FPGA with it later.
              */
