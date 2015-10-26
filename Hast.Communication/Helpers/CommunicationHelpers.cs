@@ -25,9 +25,9 @@ namespace Hast.Communication.Helpers
         }
 
         /// <summary>
-        /// Helper Method used for detection of the connected Fpga board.
+        /// Helper Method used for detection of the connected FPGA board.
         /// </summary>
-        /// <returns>The COM port name where the Fpga board is connected to.</returns>
+        /// <returns>The serial port name where the FPGA board is connected to.</returns>
         public static async Task<string> GetFpgaPortName()
         {
             // Get all available serial ports on system.
@@ -67,14 +67,14 @@ namespace Hast.Communication.Helpers
 
                 if (i == ports.Length - 1)
                 {
-                    if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the Fpga board is already detected.
+                    if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
                     {
                         await Task.Delay(5000); // Wait 5 seconds.
                     }
                       
                     if(!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't responded, then throw an Exception.
                     {
-                        throw new SerialPortCommunicationException("Fpga board not detected.");
+                        throw new SerialPortCommunicationException("FPGA board not detected.");
                     }
                 }
             }
