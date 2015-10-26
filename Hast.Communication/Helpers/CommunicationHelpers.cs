@@ -28,12 +28,12 @@ namespace Hast.Communication.Helpers
         /// Helper Method used for detection of the connected FPGA board.
         /// </summary>
         /// <returns>The serial port name where the FPGA board is connected to.</returns>
-        public static async Task<Task<string>> GetFpgaPortName()
+        public static async Task<string> GetFpgaPortName()
         {
             // Get all available serial ports on system.
             var ports = SerialPort.GetPortNames();
             // If no serial ports detected, then throw an SerialPortCommunicationException.
-            if (ports == null) throw new SerialPortCommunicationException("No serial port detected.");
+            if (ports.Length == 0) throw new SerialPortCommunicationException("No serial port detected.");
 
             var serialPort = new SerialPort();
 
@@ -64,7 +64,7 @@ namespace Hast.Communication.Helpers
                     serialPort.Open();
                     serialPort.Write(Constants.FpgaConstants.SignalFpgaDetect);
                 }
-                catch (IOException e) { } 
+                catch { } 
             }
 
             if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
@@ -78,7 +78,7 @@ namespace Hast.Communication.Helpers
             }
             
             await taskCompletionSource.Task;
-            return taskCompletionSource.Task;
+            return taskCompletionSource.Task.Result;
         }
     }
 }
