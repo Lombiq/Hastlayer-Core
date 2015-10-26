@@ -32,7 +32,7 @@ namespace Hast.Communication.Helpers
         {
             // Get all available serial ports on system.
             var ports = SerialPort.GetPortNames();
-            // If no serial ports detected, then throw an Exception.
+            // If no serial ports detected, then throw an SerialPortCommunicationException.
             if (ports == null) throw new SerialPortCommunicationException("No serial port detected.");
 
             var serialPort = new SerialPort();
@@ -70,8 +70,9 @@ namespace Hast.Communication.Helpers
             if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
             {
                 await Task.Delay(5000); // Wait 5 seconds.
-                if (!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't responded, then throw an Exception.
+                if (!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't respond, then throw a SerialPortCommunicationException.
                 {
+                    serialPort.Dispose();
                     throw new SerialPortCommunicationException("FPGA board not detected.");
                 }
             }
