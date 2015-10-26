@@ -18,7 +18,7 @@ namespace Hast.Communication.Services
             // Initializing some serial port connection settings (maybe different whith some FPGA boards).
             var portName = await CommunicationHelpers.GetFpgaPortName();
             
-            serialPort.PortName = portName == null ? Constants.FpgaConstants.PortName : portName;
+            serialPort.PortName = portName.Result == null ? Constants.FpgaConstants.PortName : portName.Result;
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
             serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;

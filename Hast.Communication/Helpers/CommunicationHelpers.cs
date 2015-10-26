@@ -28,12 +28,14 @@ namespace Hast.Communication.Helpers
         /// Helper Method used for detection of the connected FPGA board.
         /// </summary>
         /// <returns>The serial port name where the FPGA board is connected to.</returns>
-        public static async Task<string> GetFpgaPortName()
+        public static async Task<Task<string>> GetFpgaPortName()
         {
             // Get all available serial ports on system.
             var ports = SerialPort.GetPortNames();
+            // If no serial ports detected, then throw an Exception.
+            if (ports == null) throw new SerialPortCommunicationException("No serial port detected.");
+
             var serialPort = new SerialPort();
-            var serialPortName = "";
 
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
@@ -49,38 +51,33 @@ namespace Hast.Communication.Helpers
                 if (receivedCharacter == Constants.FpgaConstants.SignalYes)
                 {
                     serialPort.Dispose();
-                    taskCompletionSource.SetResult(serialPortName);
+                    taskCompletionSource.SetResult(serialPort.PortName);
                 }
             };
 
             for (int i = 0; i < ports.Length; i++)
             {
-                serialPortName = ports[i];
-                serialPort.PortName = serialPortName;
+                serialPort.PortName = ports[i];
 
                 try
                 {
                     serialPort.Open();
                     serialPort.Write(Constants.FpgaConstants.SignalFpgaDetect);
                 }
-                catch (IOException e) { }
+                catch (IOException e) { } 
+            }
 
-                if (i == ports.Length - 1)
+            if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
+            {
+                await Task.Delay(5000); // Wait 5 seconds.
+                if (!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't responded, then throw an Exception.
                 {
-                    if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
-                    {
-                        await Task.Delay(5000); // Wait 5 seconds.
-                    }
-                      
-                    if(!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't responded, then throw an Exception.
-                    {
-                        throw new SerialPortCommunicationException("FPGA board not detected.");
-                    }
+                    throw new SerialPortCommunicationException("FPGA board not detected.");
                 }
             }
-           
+            
             await taskCompletionSource.Task;
-            return serialPortName;
+            return taskCompletionSource.Task;
         }
     }
 }
