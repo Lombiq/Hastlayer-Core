@@ -91,9 +91,9 @@ namespace Hast.Communication.Services
 
             serialPort.DataReceived += (s, e) =>
             {
-                // When there are some incoming data then we read it from the serial port (this will be a byte that we receive)
-                // The first byte will the size of the byte array that we must receive
-                if (messageSizeBytes == 0)// To setup the right receiving buffer size
+                // When there are some incoming data then we read it from the serial port (this will be a byte that we receive).
+                // The first byte will the size of the byte array that we must receive.
+                if (messageSizeBytes == 0)// To setup the right receiving buffer size.
                 {
                     // The first byte is the data size what we must receive.
                     messageSizeBytes = (byte)serialPort.ReadByte();
