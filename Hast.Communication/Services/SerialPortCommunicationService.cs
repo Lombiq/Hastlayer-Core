@@ -11,18 +11,18 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        public Task Execute(SimpleMemory simpleMemory, int memberId)
+        public async Task Execute(SimpleMemory simpleMemory, int memberId)
         {
             var serialPort = new SerialPort();
 
-            // Initializing some serial port connection settings (Maybe different whith some fpga boards)
-            var portName = Helpers.CommunicationHelpers.DetectSerialConnectionsPortName();
+            // Initializing some serial port connection settings (maybe different whith some FPGA boards).
+            var portName = await CommunicationHelpers.GetFpgaPortName();
             
             serialPort.PortName = portName == null ? Constants.FpgaConstants.PortName : portName;
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
             serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
-            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeout;
+            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeoutInMilliseconds;
             
             try
             {
@@ -43,7 +43,6 @@ namespace Hast.Communication.Services
                 throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. The " + serialPort.PortName + " exists but it's used by another process.");
             }
 
-            //TODO: Here i need to write a code that sends the data to the FPGA.
             var length = simpleMemory.Memory.Length;
             Debug.WriteLine("Data length in bytes: " + length.ToString());
             var buffer = new byte[length + 9]; // Data message command + messageLength
@@ -51,8 +50,7 @@ namespace Hast.Communication.Services
             var memberIdInBytes = CommunicationHelpers.ConvertIntToByteArray(memberId);
 
             // Here we put together the data stream.
-            // Data message: |commandType:1byte|messageLength:4byte|memberId:4byte|data
-            buffer[0] = 0; //commandType - not stored on FPGA - deprecated
+            buffer[0] = 0; // commandType - not stored on FPGA - for future use.
 
             // Message length
             buffer[1] = lengthInBytes[0];
@@ -60,7 +58,7 @@ namespace Hast.Communication.Services
             buffer[3] = lengthInBytes[2];
             buffer[4] = lengthInBytes[3];
 
-            // Memember ID
+            // Member ID
             buffer[5] = memberIdInBytes[0];
             buffer[6] = memberIdInBytes[1];
             buffer[7] = memberIdInBytes[1];
@@ -73,8 +71,7 @@ namespace Hast.Communication.Services
                 index++;
             }
 
-            // Here the out buffer is ready
-            //sp.Write(buffer, 0, length + 9);
+            // Here the out buffer is ready.
             var j = 0;
             var byteBuffer = new byte[1];
 
@@ -89,24 +86,21 @@ namespace Hast.Communication.Services
             var taskCompletionSource = new TaskCompletionSource<bool>();
             var messageSizeBytes = 0; // The incoming byte buffer size.
             var count = 0; // Just used to know when is the data ready.
-            var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer
+            var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer.
             var returnValueIndex = 0;
 
             serialPort.DataReceived += (s, e) =>
             {
-                // TODO: Here i need to write a code that receives the data.
-
-                // When there are some incoming data then we read it from the serial port (this will be a byte that we receive)
-                // The first byte will the size of the byte array that we must receive
-                
-                if (messageSizeBytes == 0)// To setup the right receiving buffer size
+                // When there are some incoming data then we read it from the serial port (this will be a byte that we receive).
+                // The first byte will the size of the byte array that we must receive.
+                if (messageSizeBytes == 0)// To setup the right receiving buffer size.
                 {
                     // The first byte is the data size what we must receive.
                     messageSizeBytes = (byte)serialPort.ReadByte();
-                    // The code below is just used for debud purposes.
-                    var RXString = Convert.ToChar(messageSizeBytes);
-                    Debug.WriteLine("Incoming data size: " + RXString.ToString());
-                    serialPort.Write("s"); // Signal that we are ready to receive the data.
+                    // The code below is just used for debug purposes.
+                    var receivedCharacter = Convert.ToChar(messageSizeBytes);
+                    Debug.WriteLine("Incoming data size: " + receivedCharacter.ToString());
+                    serialPort.Write(Constants.FpgaConstants.SignalReady); // Signal that we are ready to receive the data.
                 }
                 else
                 {
@@ -115,21 +109,19 @@ namespace Hast.Communication.Services
                     returnValue[returnValueIndex] = receivedByte;
                     returnValueIndex++;
                     count++;
-                    serialPort.Write("r"); // Signal that we received all bytes.
+                    serialPort.Write(Constants.FpgaConstants.SignalAllBytesReceived); // Signal that we received all bytes.
                 }
                 
                 // Set the incoming data if all bytes are received. (Waiting for incoming data stream to complete.)
                 if (messageSizeBytes == count)
                 {
-                    //var output = new SimpleMemory(receiveByteSize);
                     simpleMemory.Memory = returnValue;
                     taskCompletionSource.SetResult(true);
                 }
-
             };
             
-            // Send back the result.
-            return taskCompletionSource.Task;
+            // Await the tcs to complete.
+            await taskCompletionSource.Task;
         }
     }
 }
