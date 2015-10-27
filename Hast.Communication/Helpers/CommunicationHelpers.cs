@@ -36,14 +36,13 @@ namespace Hast.Communication.Helpers
             if (ports.Length == 0) throw new SerialPortCommunicationException("No serial port detected.");
 
             var serialPort = new SerialPort();
-
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
             serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
             serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
             serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeoutInMilliseconds;
 
             var taskCompletionSource = new TaskCompletionSource<string>();
-            serialPort.DataReceived += (s, e) => 
+            serialPort.DataReceived += (s, e) =>
             {
                 var dataIn = (byte)serialPort.ReadByte();
                 var receivedCharacter = Convert.ToChar(dataIn);
@@ -64,7 +63,7 @@ namespace Hast.Communication.Helpers
                     serialPort.Open();
                     serialPort.Write(Constants.FpgaConstants.SignalFpgaDetect);
                 }
-                catch { } 
+                catch (IOException) { }
             }
 
             if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
@@ -76,7 +75,7 @@ namespace Hast.Communication.Helpers
                     throw new SerialPortCommunicationException("FPGA board not detected.");
                 }
             }
-            
+
             await taskCompletionSource.Task;
             return taskCompletionSource.Task.Result;
         }
