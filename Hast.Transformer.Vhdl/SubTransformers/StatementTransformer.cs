@@ -85,6 +85,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
                 currentBlock.Add(ifElseElement);
+                var afterIfElseBlock = new InlineBlock();
+                currentBlock.Add(afterIfElseBlock);
 
                 var trueBlock = new InlineBlock();
                 ifElseElement.True = trueBlock;
@@ -98,6 +100,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.ChangeBlock(falseBlock);
                     TransformInner(ifElse.FalseStatement, context);
                 }
+
+                currentBlock.ChangeBlock(afterIfElseBlock);
             }
             else if (statement is BlockStatement)
             {
