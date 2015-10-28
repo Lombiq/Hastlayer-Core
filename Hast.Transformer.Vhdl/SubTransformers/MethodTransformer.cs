@@ -106,7 +106,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // added.
             if (!lastStatementIsReturn)
             {
-                stateMachine.States.Last().Body.Add(stateMachine.ChangeToFinalState()); 
+                bodyContext.Scope.CurrentBlock.Add(stateMachine.ChangeToFinalState());
             }
 
 

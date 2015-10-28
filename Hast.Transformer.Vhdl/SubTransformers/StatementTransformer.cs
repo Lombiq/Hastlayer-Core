@@ -33,7 +33,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             TransformInner(statement, context);
         }
 
-        
+
         private void TransformInner(Statement statement, ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
@@ -58,7 +58,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var expressionStatement = statement as ExpressionStatement;
 
-                var expressionElement = 
+                var expressionElement =
                     _expressionTransformer.Transform(expressionStatement.Expression, context)
                     .Terminate();
                 currentBlock.Add(expressionElement);
@@ -140,7 +140,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     });
 
                 // Returning to the of the while condition so the cycle can re-start.
-                stateMachine.States.Last().Body.Add(stateMachine.CreateStateChange(whileStateIndex));
+                var lastState = stateMachine.States.Last();
+                if (lastState != afterWhileState)
+                {
+                    lastState.Body.Add(stateMachine.CreateStateChange(whileStateIndex));
+                }
+                currentBlock.ChangeBlock(afterWhileState);
             }
             else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
         }
