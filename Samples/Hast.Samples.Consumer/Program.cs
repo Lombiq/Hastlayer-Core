@@ -66,6 +66,9 @@ namespace Hast.Samples.Consumer
                         inputTwo = "coulombtech";
 
                         result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+
+                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm()); 
+                        var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
                     }
 
                     // Generating hardware from test assemblies:
@@ -83,7 +86,7 @@ namespace Hast.Samples.Consumer
                             //PublicHardwareMemberPrefixes = new[] { "Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy" }
                         };
                         configuration.AddPublicHardwareMethod<IInterface1>(complex => complex.Interface1Method1());
-                        configuration.GetTransformerConfiguration().UseSimpleMemory = false;
+                        configuration.TransformerConfiguration().UseSimpleMemory = false;
 
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]

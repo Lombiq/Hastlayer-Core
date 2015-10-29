@@ -14,6 +14,7 @@ using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
 using Moq;
 using NUnit.Framework;
+using Orchard.Services;
 using Orchard.Tests.Utility;
 
 namespace Hast.Transformer.Vhdl.Tests
@@ -36,6 +37,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
             builder.RegisterAutoMocking(MockBehavior.Loose);
 
+            builder.RegisterType<DefaultJsonConverter>().As<IJsonConverter>();
             builder.RegisterType<SyntaxTreeCleaner>().As<ISyntaxTreeCleaner>();
             builder.RegisterType<TypeDeclarationLookupTableFactory>().As<ITypeDeclarationLookupTableFactory>();
             builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
@@ -90,10 +92,11 @@ namespace Hast.Transformer.Vhdl.Tests
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, config);
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
-            config.MaxDegreeOfParallelism = 5;
+
+            config.TransformerConfiguration().MaxDegreeOfParallelism = 5;
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             firstId = _producedContext.Id;
-            config.MaxDegreeOfParallelism = 15;
+            config.TransformerConfiguration().MaxDegreeOfParallelism = 15;
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
@@ -178,7 +181,7 @@ namespace Hast.Transformer.Vhdl.Tests
         private static HardwareGenerationConfiguration CreateConfig()
         {
             var configuration = new HardwareGenerationConfiguration();
-            configuration.GetTransformerConfiguration().UseSimpleMemory = false;
+            configuration.TransformerConfiguration().UseSimpleMemory = false;
             return configuration;
         }
     }

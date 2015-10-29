@@ -12,12 +12,14 @@ using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
+using Orchard.Services;
 
 namespace Hast.Transformer
 {
     public class DefaultTransformer : ITransformer
     {
         private readonly ITransformerEventHandler _eventHandler;
+        private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly ITransformingEngine _engine;
@@ -25,11 +27,13 @@ namespace Hast.Transformer
 
         public DefaultTransformer(
             ITransformerEventHandler eventHandler,
+            IJsonConverter jsonConverter,
             ISyntaxTreeCleaner syntaxTreeCleaner,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             ITransformingEngine engine)
         {
             _eventHandler = eventHandler;
+            _jsonConverter = jsonConverter;
             _syntaxTreeCleaner = syntaxTreeCleaner;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _engine = engine;
@@ -51,9 +55,9 @@ namespace Hast.Transformer
             }
 
             transformationId +=
-                configuration.MaxDegreeOfParallelism +
                 string.Join("-", configuration.PublicHardwareMembers) +
-                string.Join("-", configuration.PublicHardwareMemberPrefixes);
+                string.Join("-", configuration.PublicHardwareMemberPrefixes) +
+                _jsonConverter.Serialize(configuration.CustomConfiguration);
 
             var syntaxTree = astBuilder.SyntaxTree;
 
@@ -61,7 +65,7 @@ namespace Hast.Transformer
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
 
-            if (configuration.GetTransformerConfiguration().UseSimpleMemory)
+            if (configuration.TransformerConfiguration().UseSimpleMemory)
             {
                 CheckSimpleMemoryUsage(syntaxTree);
             }

@@ -11,12 +11,6 @@ namespace Hast.Common.Configuration
     public interface IHardwareGenerationConfiguration
     {
         /// <summary>
-        /// Gets or sets the maximal degree of parallelism that will be attempted to build into the generated hardware
-        /// when constructs suitable for hardware-level parallelisation are found.
-        /// </summary>
-        int MaxDegreeOfParallelism { get; }
-
-        /// <summary>
         /// Gets a dictionary that can contain settings for non-default configuration options (like ones required by 
         /// specific transformer implementations).
         /// </summary>
