@@ -12,6 +12,9 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
+        private Information information;
+
+
         public ILogger Logger { get; set; }
 
 
@@ -21,7 +24,7 @@ namespace Hast.Communication.Services
         }
 
 
-        public Task Execute(SimpleMemory simpleMemory, int memberId)
+        public async Task<Information> Execute(SimpleMemory simpleMemory, int memberId)
         {
             var serialPort = new SerialPort();
 
@@ -46,7 +49,7 @@ namespace Hast.Communication.Services
 
             if (serialPort.IsOpen)
             {
-                Debug.WriteLine("The port " + serialPort.PortName + " is ours.");
+                Logger.Information("The port " + serialPort.PortName + " is ours.");
             }
             else
             {
@@ -54,7 +57,6 @@ namespace Hast.Communication.Services
             }
 
             var length = simpleMemory.Memory.Length;
-            Debug.WriteLine("Data length in bytes: " + length.ToString());
             var buffer = new byte[length + 9]; // Data message command + messageLength
             var lengthInBytes = CommunicationHelpers.ConvertIntToByteArray(length);
             var memberIdInBytes = CommunicationHelpers.ConvertIntToByteArray(memberId);
@@ -98,7 +100,7 @@ namespace Hast.Communication.Services
             var count = 0; // Just used to know when is the data ready.
             var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer.
             var returnValueIndex = 0;
-            var communicationType = '0'; // The 0 is the default value, the i is when we want to read something from the fpga, and the d if we want to read the processed data.
+            var communicationType = Constants.FpgaConstants.SignalDefault; // The 0 is the default value, the i is when we want to read something from the FPGA, and the d if we want to read the processed data.
             var executionTime = new byte[4]; // In this variable is stored the execution time. (4Bytes)
             var executionTimeByteCounter = 0;
 
@@ -106,53 +108,47 @@ namespace Hast.Communication.Services
             serialPort.DataReceived += (s, e) =>
             {
                 // When there are some incoming data then we read it from the serial port (this will be a byte that we receive).
-                // The first byte will the size of the byte array that we must receive.
-                if (messageSizeBytes == 0)// To setup the right receiving buffer size.
-                if (communicationType == '0')
+                if (communicationType == Constants.FpgaConstants.SignalDefault)
                 {
-                    var temp = (byte)serialPort.ReadByte();
-                    var RXString = Convert.ToChar(temp);
-                    if (RXString == 'i') // i as information
+                    var receivedCharacter = Convert.ToChar((byte)serialPort.ReadByte());
+                    if (receivedCharacter == Constants.FpgaConstants.SignalInformation)
                     {
-                        communicationType = 'i';
-                        serialPort.Write("s");
+                        communicationType = Constants.FpgaConstants.SignalInformation;
+                        serialPort.Write(Constants.FpgaConstants.SignalReady);
                     }
                     else
                     {
-                        communicationType = 'd'; // as data
+                        communicationType = Constants.FpgaConstants.SignalData;
                     }
                 }
-                else if (communicationType == 'i')
+                else if (communicationType == Constants.FpgaConstants.SignalInformation)
                 {
-                    // We know that the incoming data's size will be 1 Byte.
+                    // We know that the incoming data's size will be 4 Bytes.
                     executionTime[executionTimeByteCounter] = (byte)serialPort.ReadByte();
                     executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
                     if (executionTimeByteCounter == 3) // If we receive the 4 bytes.
                     {
-                        communicationType = 'd'; // We switch the communication type back to 'data'.
+                        communicationType = Constants.FpgaConstants.SignalData; // We switch the communication type back to 'data'.
                         executionTimeByteCounter = 0;
-                        // If the system architecture is little-endian (that is, little end first),
-                        // reverse the byte array.
-                        if (BitConverter.IsLittleEndian) Array.Reverse(executionTime); // Maybe this will be better in HelperMethods.. ByteArryToIntConversion()
+                        // If the system architecture is little-endian (that is, little end first), reverse the byte array.
+                        if (BitConverter.IsLittleEndian) Array.Reverse(executionTime);
                         // Log the information.
-                        Logger.Information(BitConverter.ToInt32(executionTime, 0).ToString());
+                        string executionTimeMessage = BitConverter.ToInt32(executionTime, 0).ToString();
+                        Logger.Information(executionTimeMessage);
+                        information = new Information(executionTimeMessage);
                     }
-                    //Logger.Information(string.Format("Execution time: {0}", executionTime));
-                    //serialPort.Write("s"); // Signal that we received the data. 'r'
-                    //
                 }
-                else // If useful data is receiving. If the communicationType variable is equal with 'd' then this code will run.
+                else // If the communicationType variable is equal with 'd' then this code will run.
                 {
                     // The first byte will the size of the byte array that we must receive
-                
                     if (messageSizeBytes == 0)// To setup the right receiving buffer size
                     {
                         // The first byte is the data size what we must receive.
                         messageSizeBytes = (byte)serialPort.ReadByte();
                         // The code below is just used for debug purposes.
-                    var receivedCharacter = Convert.ToChar(messageSizeBytes);
-                    Debug.WriteLine("Incoming data size: " + receivedCharacter.ToString());
-                    serialPort.Write(Constants.FpgaConstants.SignalReady); // Signal that we are ready to receive the data.
+                        var receivedCharacter = Convert.ToChar(messageSizeBytes);
+                        Logger.Information("Incoming data size: " + receivedCharacter.ToString());
+                        serialPort.Write(Constants.FpgaConstants.SignalReady); // Signal that we are ready to receive the data.
                     }
                     else
                     {
@@ -161,7 +157,7 @@ namespace Hast.Communication.Services
                         returnValue[returnValueIndex] = receivedByte;
                         returnValueIndex++;
                         count++;
-                    serialPort.Write(Constants.FpgaConstants.SignalAllBytesReceived); // Signal that we received all bytes.
+                        serialPort.Write(Constants.FpgaConstants.SignalAllBytesReceived); // Signal that we received all bytes.
                     }
 
                     // Set the incoming data if all bytes are received. (Waiting for incoming data stream to complete.)
@@ -175,6 +171,7 @@ namespace Hast.Communication.Services
 
             // Await the tcs to complete.
             await taskCompletionSource.Task;
+            return information;
         }
     }
 }
