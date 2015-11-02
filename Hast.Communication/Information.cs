@@ -2,23 +2,30 @@
 
 namespace Hast.Communication
 {
+    /// <summary>
+    /// For measuring the exection times.
+    /// </summary>
     public class Information
     {
-        // The useful information received.
-        public string Message { get; set; }
-        public DateTime ReceivedDate { get; set; }
+        /// <summary>
+        /// The exection time received from the FPGA board.
+        /// </summary>
+        public long FpgaExecutionTime { get; set; }
+        /// <summary>
+        /// The full exection time.
+        /// </summary>
+        public long FullExecutionTime { get; set; }
+        /// <summary>
+        /// The date when the exection started.
+        /// </summary>
+        public DateTime Started { get; set; }
 
 
-        public Information(string message)
+        public Information()
         {
-            this.ReceivedDate = DateTime.Now;
-            this.Message = message;
-        }
-
-
-        public override string ToString()
-        {
-            return string.Format("Information received at {0}: {1}", ReceivedDate, Message);
+            this.Started = DateTime.Now;
+            this.FpgaExecutionTime = 0;
+            this.FullExecutionTime = 0;
         }
     }
 }

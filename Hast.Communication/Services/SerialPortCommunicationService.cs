@@ -12,9 +12,6 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        private Information information;
-
-
         public ILogger Logger { get; set; }
 
 
@@ -26,6 +23,9 @@ namespace Hast.Communication.Services
 
         public async Task<Information> Execute(SimpleMemory simpleMemory, int memberId)
         {
+            var stopWatch = new Stopwatch(); // Measuring the exection time.
+            stopWatch.Start(); // Start the measure.
+            var information = new Information();
             var serialPort = new SerialPort();
 
             // Initializing some serial port connection settings (maybe different whith some FPGA boards).
@@ -133,9 +133,9 @@ namespace Hast.Communication.Services
                         // If the system architecture is little-endian (that is, little end first), reverse the byte array.
                         if (BitConverter.IsLittleEndian) Array.Reverse(executionTime);
                         // Log the information.
-                        string executionTimeMessage = BitConverter.ToInt32(executionTime, 0).ToString();
-                        Logger.Information(executionTimeMessage);
-                        information = new Information(executionTimeMessage);
+                        var executionTimeValue = BitConverter.ToInt32(executionTime, 0);
+                        Logger.Information(executionTimeValue.ToString());
+                        information.FpgaExecutionTime = executionTimeValue;
                     }
                 }
                 else // If the communicationType variable is equal with 'd' then this code will run.
@@ -171,6 +171,8 @@ namespace Hast.Communication.Services
 
             // Await the tcs to complete.
             await taskCompletionSource.Task;
+            stopWatch.Stop(); // Stop the exection time measurement.
+            information.FullExecutionTime = stopWatch.ElapsedMilliseconds;
             return information;
         }
     }
