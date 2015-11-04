@@ -1,12 +1,12 @@
 ﻿using Hast.Communication.Exceptions;
+using Hast.Communication.Helpers;
 using Hast.Transformer.SimpleMemory;
+using Orchard.Logging;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Threading.Tasks;
-using Hast.Communication.Helpers;
-using Orchard.Logging;
 
 namespace Hast.Communication.Services
 {
@@ -126,7 +126,7 @@ namespace Hast.Communication.Services
                     // We know that the incoming data's size will be 4 Bytes.
                     executionTime[executionTimeByteCounter] = (byte)serialPort.ReadByte();
                     executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
-                    if (executionTimeByteCounter == 3) // If we receive the 4 bytes.
+                    if (executionTimeByteCounter == 3) // If we received the 4 bytes.
                     {
                         communicationType = Constants.FpgaConstants.SignalData; // We switch the communication type back to 'data'.
                         executionTimeByteCounter = 0;
