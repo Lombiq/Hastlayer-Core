@@ -14,7 +14,7 @@ namespace Hast.Communication.Constants
         public const char SignalYes = 'y'; // This constant is used for recognizing the positive answer coming from the FPGA. (yes)
         public const string SignalFpgaDetect = "p";
         public const char SignalInformation = 'i';
-        public const char SignalData = 'd';
+        public const char SignalResult = 'd';
         public const char SignalDefault = '0';
     }
 }

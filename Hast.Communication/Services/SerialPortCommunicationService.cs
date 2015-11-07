@@ -49,15 +49,15 @@ namespace Hast.Communication.Services
 
             if (serialPort.IsOpen)
             {
-                Logger.Information("The port " + serialPort.PortName + " is ours.");
+                Logger.Information("The port {0} is ours.", serialPort.PortName);
             }
             else
             {
-                throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. The " + serialPort.PortName + " exists but it's used by another process.");
+                throw new SerialPortCommunicationException(string.Format("Communication with the FPGA board through the serial port failed. The {0} exists but it's used by another process.", serialPort.PortName));
             }
 
             var length = simpleMemory.Memory.Length;
-            var buffer = new byte[length + 9]; // Data message command + messageLength
+            var buffer = new byte[length + 9]; // Data message command + messageLength.
             var lengthInBytes = CommunicationHelpers.ConvertIntToByteArray(length);
             var memberIdInBytes = CommunicationHelpers.ConvertIntToByteArray(memberId);
 
@@ -100,11 +100,11 @@ namespace Hast.Communication.Services
             var count = 0; // Just used to know when is the data ready.
             var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer.
             var returnValueIndex = 0;
-            var communicationType = Constants.FpgaConstants.SignalDefault; // The 0 is the default value, the i is when we want to read something from the FPGA, and the d if we want to read the processed data.
-            var executionTime = new byte[4]; // In this variable is stored the execution time. (4Bytes)
+            var communicationType = Constants.FpgaConstants.SignalDefault; // The 0 is the default value, the i is when we want to read something from the FPGA, and the d if we want to read the results.
+            var executionTime = new byte[4]; // The execution time is stored in this variable.
             var executionTimeByteCounter = 0;
 
-            // In this event we are receiving the userful data comfing from the FPGA board.
+            // In this event we are receiving the useful data coming from the FPGA board.
             serialPort.DataReceived += (s, e) =>
             {
                 // When there are some incoming data then we read it from the serial port (this will be a byte that we receive).
@@ -118,7 +118,7 @@ namespace Hast.Communication.Services
                     }
                     else
                     {
-                        communicationType = Constants.FpgaConstants.SignalData;
+                        communicationType = Constants.FpgaConstants.SignalResult;
                     }
                 }
                 else if (communicationType == Constants.FpgaConstants.SignalInformation)
@@ -128,7 +128,7 @@ namespace Hast.Communication.Services
                     executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
                     if (executionTimeByteCounter == 3) // If we received the 4 bytes.
                     {
-                        communicationType = Constants.FpgaConstants.SignalData; // We switch the communication type back to 'data'.
+                        communicationType = Constants.FpgaConstants.SignalResult; // We switch the communication type back to 'result'.
                         executionTimeByteCounter = 0;
                         // If the system architecture is little-endian (that is, little end first), reverse the byte array.
                         if (BitConverter.IsLittleEndian) Array.Reverse(executionTime);
@@ -138,16 +138,16 @@ namespace Hast.Communication.Services
                         information.FpgaExecutionTime = executionTimeValue;
                     }
                 }
-                else // If the communicationType variable is equal with 'd' then this code will run.
+                else // If the communicationType variable is equal with Constants.FpgaConstants.SignalData (d) then this code will run.
                 {
-                    // The first byte will the size of the byte array that we must receive
-                    if (messageSizeBytes == 0)// To setup the right receiving buffer size
+                    // The first byte will the size of the byte array that we must receive.
+                    if (messageSizeBytes == 0)// To setup the right receiving buffer size.
                     {
                         // The first byte is the data size what we must receive.
                         messageSizeBytes = (byte)serialPort.ReadByte();
                         // The code below is just used for debug purposes.
                         var receivedCharacter = Convert.ToChar(messageSizeBytes);
-                        Logger.Information("Incoming data size: " + receivedCharacter.ToString());
+                        Logger.Information("Incoming data size: {0}", receivedCharacter.ToString());
                         serialPort.Write(Constants.FpgaConstants.SignalReady); // Signal that we are ready to receive the data.
                     }
                     else
@@ -160,7 +160,7 @@ namespace Hast.Communication.Services
                         serialPort.Write(Constants.FpgaConstants.SignalAllBytesReceived); // Signal that we received all bytes.
                     }
 
-                    // Set the incoming data if all bytes are received. (Waiting for incoming data stream to complete.)
+                    // Set the incoming data if all bytes are received (Waiting for incoming data stream to complete).
                     if (messageSizeBytes == count)
                     {
                         simpleMemory.Memory = returnValue;
@@ -169,10 +169,12 @@ namespace Hast.Communication.Services
                 }
             };
 
-            // Await the tcs to complete.
+            // Await the taskCompletionSource to complete.
             await taskCompletionSource.Task;
             stopWatch.Stop(); // Stop the exection time measurement.
-            information.FullExecutionTime = stopWatch.ElapsedMilliseconds;
+            var fullExecutionTime = stopWatch.ElapsedMilliseconds;
+            Logger.Information("Full execution time: {0}", fullExecutionTime.ToString());
+            information.FullExecutionTime = fullExecutionTime;
             return information;
         }
     }
