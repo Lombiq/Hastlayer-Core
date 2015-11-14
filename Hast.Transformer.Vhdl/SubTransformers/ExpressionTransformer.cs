@@ -298,7 +298,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
             }
 
-            
+
             var targetMethodName = expression.GetFullName();
             var targetStateMachineName = targetMethodName;
             var targetStateMachineVhdlId = targetStateMachineName.ToExtendedVhdlId();
@@ -356,18 +356,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         }.Terminate());
                     methodParametersEnumerator.MoveNext();
                 }
-
-
-                currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);
-
-                return Empty.Instance;
             }
-            else
-            {
-                currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);
 
-                return Empty.Instance;
-            }
+            currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);
+            return Empty.Instance;
         }
 
         private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context)
