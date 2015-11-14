@@ -84,6 +84,7 @@ namespace Hast.Transformer.Vhdl.Models
 
             var finalStateBlock = new InlineBlock();
             finalStateBlock.Body.Add(new Assignment { AssignTo = _finishedVariable, Expression = Value.True }.Terminate());
+            finalStateBlock.Body.Add(new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate());
             finalStateBlock.Body.Add(ChangeToStartState());
 
             _states = new List<IBlockElement>
@@ -243,6 +244,11 @@ namespace Hast.Transformer.Vhdl.Models
         public static string CreatePrefixedExtendedVhdlId(string stateMachineName, string id)
         {
             return (stateMachineName + id).ToExtendedVhdlId();
+        }
+
+        public static string CreateStateMachineName(string stateMachineName, int index)
+        {
+            return stateMachineName + "." + index;
         }
 
 

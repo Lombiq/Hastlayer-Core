@@ -303,59 +303,106 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var targetStateMachineName = targetMethodName;
             var targetStateMachineVhdlId = targetStateMachineName.ToExtendedVhdlId();
 
+            var targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+
+            if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))
+            {
+                throw new InvalidOperationException("The invoked method " + targetMethodName + " can't be found.");
+            }
+
             context.TransformationContext.MemberCallChainTable.AddTarget(context.Scope.StateMachine.Name, targetStateMachineVhdlId);
 
 
             var waitForInvokedStateMachineToFinishState = new InlineBlock();
-            var isInvokedStateMachineFinishedIfElseTrue = new InlineBlock();
-            var isInvokedStateMachineFinishedIfElse = new IfElse
+
+            // Since .NET methods can be recursive but a hardware state machine can only have one "instance" we need to
+            // have multiple state machines with the same logic. This way even with recursive calls there will always be
+            // an idle, usable state machine (these state machines are distinguished by an index).
+
+            // Logic for determining which state machine is idle and thus can be invoked. We probe every state machine.
+            // If we can't find any idle one that is an issue, we should probably have a fail safe for that somehow.
+            var stateMachineSelectingConditionsBlock = new InlineBlock();
+            currentBlock.Add(stateMachineSelectingConditionsBlock);
+            for (int i = 0; i < context.TransformationContext.GetTransformerConfiguration().MaxCallStackDepth; i++)
+            {
+                var indexedStateMachineName = MethodStateMachine.CreateStateMachineName(targetStateMachineName, i);
+                var startVariableReference = MethodStateMachine
+                    .CreateStartVariableName(indexedStateMachineName)
+                    .ToVhdlVariableReference();
+
+                var trueBlock = new InlineBlock();
+
+                trueBlock.Body.Add(new Assignment
+                    {
+                        AssignTo = startVariableReference,
+                        Expression = Value.True
+                    }.Terminate());
+
+                var methodParametersEnumerator = ((MethodDeclaration)targetDeclaration).Parameters.GetEnumerator();
+                methodParametersEnumerator.MoveNext();
+                foreach (var parameter in transformedParameters)
+                {
+                    trueBlock.Body.Add(new Assignment
+                    {
+                        AssignTo =
+                            MethodStateMachine.CreatePrefixedVariableName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
+                            .ToVhdlVariableReference(),
+                        Expression = parameter
+                    }.Terminate());
+                    methodParametersEnumerator.MoveNext();
+                }
+
+                var elseBlock = new InlineBlock();
+
+                stateMachineSelectingConditionsBlock.Body.Add(new IfElse
+                {
+                    Condition = new Binary
+                    {
+                        Left = startVariableReference,
+                        Operator = "=",
+                        Right = Value.False
+                    },
+                    True = trueBlock,
+                    Else = elseBlock
+                });
+
+                stateMachineSelectingConditionsBlock = elseBlock;
+            }
+
+            // Common variable to signal that the invoked state machine finished.
+            var stateMachineFinishedVariableName = GetNextUnusedTemporaryVariableName(targetStateMachineName, "finished", context);
+            var stateMachineFinishedVariableReference = stateMachineFinishedVariableName.ToVhdlVariableReference();
+            stateMachine.LocalVariables.Add(new Variable
+            {
+                Name = stateMachineFinishedVariableName,
+                DataType = KnownDataTypes.Boolean
+            });
+
+            var isInvokedStateMachineFinishedIfElseTrue = new InlineBlock(new[]
+            {
+                new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.False }.Terminate()
+            });
+
+            waitForInvokedStateMachineToFinishState.Body.Add(new IfElse
             {
                 Condition = new Binary
                 {
-                    Left = MethodStateMachine.CreateFinishedVariableName(targetStateMachineName).ToVhdlVariableReference(),
+                    Left = stateMachineFinishedVariableReference,
                     Operator = "=",
                     Right = Value.True
                 },
                 True = isInvokedStateMachineFinishedIfElseTrue
-            };
-
-            waitForInvokedStateMachineToFinishState.Body.Add(isInvokedStateMachineFinishedIfElse);
+            });
 
             var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachineToFinishState);
             currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
+
 
             // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to 
             // a non-void method).
             if (!(expression.Parent is ExpressionStatement))
             {
-                currentBlock.Add(new Assignment
-                    {
-                        AssignTo = MethodStateMachine.CreateStartVariableName(targetStateMachineName).ToVhdlVariableReference(),
-                        Expression = Value.True
-                    }.Terminate());
-
-                var targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
-
-                if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))
-                {
-                    throw new InvalidOperationException("The invoked method " + targetMethodName + " can't be found.");
-                }
-
-                var targetMethod = (MethodDeclaration)targetDeclaration;
-
-                var methodParametersEnumerator = targetMethod.Parameters.GetEnumerator();
-                methodParametersEnumerator.MoveNext();
-                foreach (var parameter in transformedParameters)
-                {
-                    currentBlock.Add(new Assignment
-                        {
-                            AssignTo =
-                                MethodStateMachine.CreatePrefixedVariableName(targetStateMachineName, methodParametersEnumerator.Current.Name)
-                                .ToVhdlVariableReference(),
-                            Expression = parameter
-                        }.Terminate());
-                    methodParametersEnumerator.MoveNext();
-                }
+                // TODO: read out the return variable here.
             }
 
             currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);

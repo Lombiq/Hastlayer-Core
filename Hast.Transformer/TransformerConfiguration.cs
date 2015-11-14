@@ -1,4 +1,5 @@
 ﻿
+using System;
 namespace Hast.Common.Configuration
 {
     public class TransformerConfiguration
@@ -12,7 +13,19 @@ namespace Hast.Common.Configuration
         /// <summary>
         /// The maximal depth of any call stack that can happen in the program.
         /// </summary>
-        public int MaxCallStackDepth { get; set; }
+        private int _maxCallStackDepth;
+        public int MaxCallStackDepth
+        {
+            get { return _maxCallStackDepth; }
+            set
+            {
+                if (value < 1)
+                {
+                    throw new ArgumentOutOfRangeException("The max call depth should be at least 1 otherwise methods can't invoke each other.");
+                }
+                _maxCallStackDepth = value;
+            }
+        }
 
         /// <summary>
         /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
@@ -24,6 +37,7 @@ namespace Hast.Common.Configuration
         public TransformerConfiguration()
         {
             UseSimpleMemory = true;
+            MaxCallStackDepth = 1;
         }
     }
 
