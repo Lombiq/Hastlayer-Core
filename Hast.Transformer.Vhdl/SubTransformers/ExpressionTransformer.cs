@@ -371,7 +371,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context)
         {
-            // This is a temporal workaround to get around cases where operations (e.g. multiplication) with 32b numbers
+            // This is a temporary workaround to get around cases where operations (e.g. multiplication) with 32b numbers
             // resulting in a 64b number would cause a cast to a 64b number type (what we don't support yet). 
             // See: https://lombiq.atlassian.net/browse/HAST-20
             var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
