@@ -465,7 +465,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// <summary>
         /// Making sure that the e.g. return variable names are unique per method call (to transfer procedure outputs).
         /// </summary>
-        private static string GetNextUnusedTemporalVariableName(string targetName, string suffix, ISubTransformerContext context)
+        private static string GetNextUnusedTemporaryVariableName(string targetName, string suffix, ISubTransformerContext context)
         {
             targetName = targetName.TrimExtendedVhdlIdDelimiters();
 
@@ -494,7 +494,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             var returnVariable = new Variable
             {
-                Name = GetNextUnusedTemporalVariableName(targetName, "return", context),
+                Name = GetNextUnusedTemporaryVariableName(targetName, "return", context),
                 DataType = returnType
             };
 
