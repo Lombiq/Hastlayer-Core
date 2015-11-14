@@ -298,11 +298,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
             }
 
+            
+            var targetMethodName = expression.GetFullName();
+            var targetStateMachineName = targetMethodName;
+            var targetStateMachineVhdlId = targetStateMachineName.ToExtendedVhdlId();
 
-            var targetStateMachineName = expression.GetFullName();
-            var targetVhdlId = targetStateMachineName.ToExtendedVhdlId();
-
-            context.TransformationContext.MemberCallChainTable.AddTarget(context.Scope.StateMachine.Name, targetVhdlId);
+            context.TransformationContext.MemberCallChainTable.AddTarget(context.Scope.StateMachine.Name, targetStateMachineVhdlId);
 
 
             var waitForInvokedStateMachineToFinishState = new InlineBlock();
@@ -337,7 +338,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))
                 {
-                    throw new InvalidOperationException("The invoked method " + targetStateMachineName + " can't be found.");
+                    throw new InvalidOperationException("The invoked method " + targetMethodName + " can't be found.");
                 }
 
                 var targetMethod = (MethodDeclaration)targetDeclaration;
