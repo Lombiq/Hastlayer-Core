@@ -313,17 +313,30 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             context.TransformationContext.MemberCallChainTable.AddTarget(context.Scope.StateMachine.Name, targetStateMachineVhdlId);
 
 
-            var waitForInvokedStateMachineToFinishState = new InlineBlock();
-
             // Since .NET methods can be recursive but a hardware state machine can only have one "instance" we need to
             // have multiple state machines with the same logic. This way even with recursive calls there will always be
             // an idle, usable state machine (these state machines are distinguished by an index).
 
+            var stateMachineRunningIndexVariableName = GetNextUnusedTemporaryVariableName(targetStateMachineName, "runningIndex", context);
+            var stateMachineRunningIndexVariable = new Variable
+            {
+                Name = stateMachineRunningIndexVariableName,
+                DataType = new RangedDataType
+                {
+                    TypeCategory = DataTypeCategory.Numeric,
+                    Name = "integer",
+                    RangeMin = 0,
+                    RangeMax = 32767
+                }
+            };
+            stateMachine.LocalVariables.Add(stateMachineRunningIndexVariable);
+
             // Logic for determining which state machine is idle and thus can be invoked. We probe every state machine.
             // If we can't find any idle one that is an issue, we should probably have a fail safe for that somehow.
+            var maxCallStackDepth = context.TransformationContext.GetTransformerConfiguration().MaxCallStackDepth;
             var stateMachineSelectingConditionsBlock = new InlineBlock();
             currentBlock.Add(stateMachineSelectingConditionsBlock);
-            for (int i = 0; i < context.TransformationContext.GetTransformerConfiguration().MaxCallStackDepth; i++)
+            for (int i = 0; i < maxCallStackDepth; i++)
             {
                 var indexedStateMachineName = MethodStateMachine.CreateStateMachineName(targetStateMachineName, i);
                 var startVariableReference = MethodStateMachine
@@ -333,10 +346,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var trueBlock = new InlineBlock();
 
                 trueBlock.Body.Add(new Assignment
-                    {
-                        AssignTo = startVariableReference,
-                        Expression = Value.True
-                    }.Terminate());
+                {
+                    AssignTo = startVariableReference,
+                    Expression = Value.True
+                }.Terminate());
+
+                trueBlock.Body.Add(new Assignment
+                {
+                    AssignTo = stateMachineRunningIndexVariable.ToReference(),
+                    Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() }
+                }.Terminate());
 
                 var methodParametersEnumerator = ((MethodDeclaration)targetDeclaration).Parameters.GetEnumerator();
                 methodParametersEnumerator.MoveNext();
@@ -382,6 +401,35 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.False }.Terminate()
             });
+
+            var waitForInvokedStateMachineToFinishState = new InlineBlock();
+
+            // Check if the running state machine finished.
+            var stateMachineFinishedCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
+            waitForInvokedStateMachineToFinishState.Body.Add(stateMachineFinishedCheckCase);
+            for (int i = 0; i < maxCallStackDepth; i++)
+            {
+                var finishedVariableName = MethodStateMachine
+                    .CreateFinishedVariableName(MethodStateMachine.CreateStateMachineName(targetStateMachineName, i));
+
+                stateMachineFinishedCheckCase.Whens.Add(new When
+                {
+                    Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() },
+                    Body = new List<IVhdlElement>
+                    {
+                        new IfElse
+                        {
+                            Condition = new Binary
+                            {
+                                Left = finishedVariableName.ToVhdlVariableReference(),
+                                Operator = "=",
+                                Right = Value.True
+                            },
+                            True = new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.True }.Terminate()
+                        }
+                    }
+                });
+            }
 
             waitForInvokedStateMachineToFinishState.Body.Add(new IfElse
             {
