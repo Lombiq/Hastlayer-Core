@@ -275,22 +275,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // TODO: ReadEnable should be set in currentBlock and re-set in memoryOperationFinishedBlock.
                     currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("ReadEnable"));
 
-                    // Looking up the type information that will tell us what the return type of the memory read is. 
-                    // This might be some nodes up if e.g. there is an immediate cast expression.
-                    AstNode currentNode = expression;
-                    while (currentNode.Annotation<TypeInformation>() == null)
-                    {
-                        currentNode = currentNode.Parent;
-                    }
-
-
                     currentBlock.ChangeBlock(memoryOperationFinishedBlock);
 
                     // If this is a memory read then comes the juggling with funneling the out parameter of the memory 
                     // write procedure to the original location.
-                    var returnReference = BuildProcedureReturnReference(
+                    var returnReference = CreateProcedureReturnReference(
                         target,
-                        _typeConverter.ConvertTypeReference(currentNode.GetActualType()),
+                        _typeConverter.ConvertTypeReference(expression.GetReturnType()),
                         memoryOperationInvokation,
                         context);
 
@@ -388,6 +379,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 stateMachineSelectingConditionsBlock = elseBlock;
             }
 
+            stateMachineSelectingConditionsBlock.Body.Add(new VhdlBuilder.Representation.Declaration.Comment(
+                "No idle state machine could be found. This is an error."));
+
             // Common variable to signal that the invoked state machine finished.
             var stateMachineFinishedVariableName = GetNextUnusedTemporaryVariableName(targetStateMachineName, "finished", context);
             var stateMachineFinishedVariableReference = stateMachineFinishedVariableName.ToVhdlVariableReference();
@@ -445,16 +439,48 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachineToFinishState);
             currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
 
+            currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);
 
             // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to 
             // a non-void method).
             if (!(expression.Parent is ExpressionStatement))
             {
-                // TODO: read out the return variable here.
-            }
+                // We copy the used state machine's return value to a local variable and then use the local variable in
+                // place of the original method call.
 
-            currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);
-            return Empty.Instance;
+                var localReturnVariableReference = CreateTemporaryVariableReference(
+                    targetStateMachineName,
+                    "return",
+                    _typeConverter.ConvertTypeReference(expression.GetReturnType()),
+                    context);
+
+                var stateMachineReadReturnValueCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
+                isInvokedStateMachineFinishedIfElseTrue.Body.Add(stateMachineReadReturnValueCheckCase);
+                for (int i = 0; i < maxCallStackDepth; i++)
+                {
+                    var returnVariableName = MethodStateMachine
+                        .CreateReturnVariableName(MethodStateMachine.CreateStateMachineName(targetStateMachineName, i));
+
+                    stateMachineReadReturnValueCheckCase.Whens.Add(new When
+                    {
+                        Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() },
+                        Body = new List<IVhdlElement>
+                        {
+                            new Assignment
+                            {
+                                AssignTo = localReturnVariableReference,
+                                Expression = returnVariableName.ToVhdlVariableReference()
+                            }.Terminate()
+                        }
+                    });
+                }
+
+                return localReturnVariableReference;
+            }
+            else
+            {
+                return Empty.Instance;
+            }
         }
 
         private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context)
@@ -576,31 +602,43 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return variableName;
         }
 
-        /// <summary>
-        /// Procedures can't just be assigned to variables like methods as they don't have a return value, just out 
-        /// parameters. Thus here we create a variable for the out parameter (the return variable), run the procedure
-        /// with it and then use it later too.
-        /// </summary>
-        private static DataObjectReference BuildProcedureReturnReference(
+        private static DataObjectReference CreateTemporaryVariableReference(
             string targetName,
-            DataType returnType,
-            Invokation invokation,
+            string suffix,
+            DataType dataType,
             ISubTransformerContext context)
         {
             var returnVariable = new Variable
             {
                 Name = GetNextUnusedTemporaryVariableName(targetName, "return", context),
-                DataType = returnType
+                DataType = dataType
             };
 
             context.Scope.StateMachine.LocalVariables.Add(returnVariable);
-            invokation.Parameters.Add(returnVariable.ToReference());
+
+            return returnVariable.ToReference();
+        }
+
+        /// <summary>
+        /// Procedures can't just be assigned to variables like methods as they don't have a return value, just out 
+        /// parameters. Thus here we create a variable for the out parameter (the return variable), run the procedure
+        /// with it and then use it later too.
+        /// </summary>
+        private static DataObjectReference CreateProcedureReturnReference(
+            string targetName,
+            DataType returnType,
+            Invokation invokation,
+            ISubTransformerContext context)
+        {
+            var returnVariableReference = CreateTemporaryVariableReference(targetName, "return", returnType, context);
+
+            invokation.Parameters.Add(returnVariableReference);
 
             // Adding the procedure invokation directly to the body so it's before the current expression...
             context.Scope.CurrentBlock.Add(invokation.Terminate());
 
             // ...and using the return variable in place of the original call.
-            return returnVariable.ToReference();
+            return returnVariableReference;
         }
     }
 }
