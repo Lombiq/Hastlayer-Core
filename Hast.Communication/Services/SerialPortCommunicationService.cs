@@ -53,7 +53,7 @@ namespace Hast.Communication.Services
             }
             else
             {
-                throw new SerialPortCommunicationException(string.Format("Communication with the FPGA board through the serial port failed. The {0} exists but it's used by another process.", serialPort.PortName));
+                throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. The " + serialPort.PortName + " exists but it's used by another process.");
             }
 
             var length = simpleMemory.Memory.Length;
