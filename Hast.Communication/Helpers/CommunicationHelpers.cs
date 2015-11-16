@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Communication.Helpers
 {
-    public static class CommunicationHelpers
+    internal static class CommunicationHelpers
     {
         /// <summary>
         /// Simple helper method that converts int to byte array.
@@ -25,7 +25,7 @@ namespace Hast.Communication.Helpers
         }
 
         /// <summary>
-        /// Helper Method used for detection of the connected FPGA board.
+        /// Helper method used for detection of the connected FPGA board.
         /// </summary>
         /// <returns>The serial port name where the FPGA board is connected to.</returns>
         public static async Task<string> GetFpgaPortName()
@@ -33,7 +33,7 @@ namespace Hast.Communication.Helpers
             // Get all available serial ports on system.
             var ports = SerialPort.GetPortNames();
             // If no serial ports detected, then throw an SerialPortCommunicationException.
-            if (ports.Length == 0) throw new SerialPortCommunicationException("No serial port detected.");
+            if (ports.Length == 0) throw new SerialPortCommunicationException("No serial port detected (no serial ports are open).");
 
             var serialPort = new SerialPort();
             serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
@@ -72,7 +72,7 @@ namespace Hast.Communication.Helpers
                 if (!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't respond, then throw a SerialPortCommunicationException.
                 {
                     serialPort.Dispose();
-                    throw new SerialPortCommunicationException("FPGA board not detected.");
+                    throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
                 }
             }
 
