@@ -57,6 +57,7 @@
     <Compile Include="Extensibility\Pipeline\IMethodInvocationPipelineStepContext.cs" />
     <Compile Include="Helpers\CommunicationHelpers.cs" />
     <Compile Include="IMethodInvocationHandlerFactory.cs" />
+    <Compile Include="Information.cs" />
     <Compile Include="IProxyGenerator.cs" />
     <Compile Include="MemberSuitabilityChecker.cs" />
     <Compile Include="MethodInvocationHandlerFactory.cs" />

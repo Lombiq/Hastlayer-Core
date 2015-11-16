@@ -15,6 +15,6 @@ namespace Hast.Communication.Services
         /// <param name="simpleMemory">The SimpleMemory object (array of bytes).</param>
         /// <param name="memberId">The member ID identifies the code what we want to run on the FPGA board.</param>
         /// <returns>A SimpleMemory object.</returns>
-        Task Execute(SimpleMemory simpleMemory, int memberId);
+        Task<Information> Execute(SimpleMemory simpleMemory, int memberId);
     }
 }
