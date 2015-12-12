@@ -30,45 +30,43 @@ namespace Hast.Transformer.Vhdl
 
         public Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
-            return Task.Run<IHardwareDescription>(() =>
-                {
-                    var vhdlTransformationContext = new VhdlTransformationContext(transformationContext)
-                    {
-                        Module = new Module { Architecture = new Architecture { Name = "Imp" } },
-                        MemberCallChainTable = new MemberCallChainTable()
-                    };
+            var vhdlTransformationContext = new VhdlTransformationContext(transformationContext)
+            {
+                Module = new Module { Architecture = new Architecture { Name = "Imp" } },
+                MemberCallChainTable = new MemberCallChainTable()
+            };
 
-                    // The top module should have as few and as small inputs as possible. Its name can't be an extended identifier.
-                    var module = vhdlTransformationContext.Module;
-                    module.Entity = new Entity { Name = Entity.ToSafeEntityName("Hastlayer" + vhdlTransformationContext.Id.GetHashCode().ToString()) };
+            // The top module should have as few and as small inputs as possible. Its name can't be an extended identifier.
+            var module = vhdlTransformationContext.Module;
+            module.Entity = new Entity { Name = Entity.ToSafeEntityName("Hastlayer" + vhdlTransformationContext.Id.GetHashCode().ToString()) };
 
-                    Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext);
+            Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext);
 
-                    module.Libraries.Add(new Library
-                    {
-                        Name = "ieee",
-                        Uses = new List<string> { "ieee.std_logic_1164.all", "ieee.numeric_std.all" }
-                    });
-                    module.Libraries.Add(new Library
-                    {
-                        Name = "Hast",
-                        Uses = new List<string> { "Hast.SimpleMemory.all" }
-                    });
+            module.Libraries.Add(new Library
+            {
+                Name = "ieee",
+                Uses = new List<string> { "ieee.std_logic_1164.all", "ieee.numeric_std.all" }
+            });
+            module.Libraries.Add(new Library
+            {
+                Name = "Hast",
+                Uses = new List<string> { "Hast.SimpleMemory.all" }
+            });
 
-                    module.Architecture.Entity = module.Entity;
+            module.Architecture.Entity = module.Entity;
 
-                    ReorderProcedures(vhdlTransformationContext);
-                    var memberIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
+            ReorderProcedures(vhdlTransformationContext);
+            var memberIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
 
-                    if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
-                    {
-                        AddSimpleMemoryPorts(module);
-                    }
+            if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
+            {
+                AddSimpleMemoryPorts(module);
+            }
 
-                    ProcessUtility.AddClockToProcesses(module, CommonPortNames.Clock);
+            ProcessUtility.AddClockToProcesses(module, CommonPortNames.Clock);
 
-                    return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable);
-                });
+            return Task.FromResult<IHardwareDescription>(
+                new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable));
         }
 
 
