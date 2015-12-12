@@ -37,7 +37,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public async Task Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
-            var sw = System.Diagnostics.Stopwatch.StartNew();
             var stateMachineComputingTasks = new List<Task<StateMachineResult>>();
 
             for (int i = 0; i < context.GetTransformerConfiguration().MaxCallStackDepth; i++)
@@ -65,8 +64,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 context.Module.Architecture.Declarations.Add(result.Declarations);
                 context.Module.Architecture.Add(result.Body);
             }
-            sw.Stop();
-            var z = sw.ElapsedMilliseconds;
         }
 
 
