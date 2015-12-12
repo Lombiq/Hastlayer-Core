@@ -195,6 +195,7 @@ namespace Hast.Transformer.Vhdl.Models
 
             var ifInResetBlock = new InlineBlock(
                 new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate(),
+                new Assignment { AssignTo = _finishedVariable, Expression = Value.False }.Terminate(),
                 CreateStateChange(0));
 
             var resetIf = new IfElse
