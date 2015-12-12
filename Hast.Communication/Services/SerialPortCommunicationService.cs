@@ -24,11 +24,11 @@ namespace Hast.Communication.Services
         public async Task<Information> Execute(SimpleMemory simpleMemory, int memberId)
         {
             var stopWatch = new Stopwatch(); // Measuring the exection time.
-            stopWatch.Start(); // Start the measure.
+            stopWatch.Start(); // Start the measurement.
             var information = new Information();
             var serialPort = new SerialPort();
 
-            // Initializing some serial port connection settings (maybe different whith some FPGA boards).
+            // Initializing some serial port connection settings (may be different whith some FPGA boards).
             var portName = await CommunicationHelpers.GetFpgaPortName();
 
             serialPort.PortName = portName == null ? Constants.FpgaConstants.PortName : portName;
@@ -97,17 +97,17 @@ namespace Hast.Communication.Services
 
             var taskCompletionSource = new TaskCompletionSource<bool>();
             var messageSizeBytes = 0; // The incoming byte buffer size.
-            var count = 0; // Just used to know when is the data ready.
+            var count = 0; // Just used to know when the data is ready.
             var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer.
             var returnValueIndex = 0;
-            var communicationType = Constants.FpgaConstants.SignalDefault; // The 0 is the default value, the i is when we want to read something from the FPGA, and the d if we want to read the results.
-            var executionTime = new byte[4]; // The execution time is stored in this variable.
+            var communicationType = Constants.FpgaConstants.SignalDefault;
+            var executionTime = new byte[4];
             var executionTimeByteCounter = 0;
 
             // In this event we are receiving the useful data coming from the FPGA board.
             serialPort.DataReceived += (s, e) =>
             {
-                // When there are some incoming data then we read it from the serial port (this will be a byte that we receive).
+                // When there i ssome incoming data then we read it from the serial port (this will be a byte that we receive).
                 if (communicationType == Constants.FpgaConstants.SignalDefault)
                 {
                     var receivedCharacter = Convert.ToChar((byte)serialPort.ReadByte());
@@ -123,7 +123,7 @@ namespace Hast.Communication.Services
                 }
                 else if (communicationType == Constants.FpgaConstants.SignalInformation)
                 {
-                    // We know that the incoming data's size will be 4 Bytes.
+                    // We know that the incoming data's size will be 4 bytes.
                     executionTime[executionTimeByteCounter] = (byte)serialPort.ReadByte();
                     executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
                     if (executionTimeByteCounter == 3) // If we received the 4 bytes.
@@ -140,10 +140,10 @@ namespace Hast.Communication.Services
                 }
                 else // If the communicationType variable is equal with Constants.FpgaConstants.SignalData (d) then this code will run.
                 {
-                    // The first byte will the size of the byte array that we must receive.
-                    if (messageSizeBytes == 0)// To setup the right receiving buffer size.
+                    // The first byte will be the size of the byte array that we must receive.
+                    if (messageSizeBytes == 0) // To setup the right receiving buffer size.
                     {
-                        // The first byte is the data size what we must receive.
+                        // The first byte is the data size that we must receive.
                         messageSizeBytes = (byte)serialPort.ReadByte();
                         // The code below is just used for debug purposes.
                         var receivedCharacter = Convert.ToChar(messageSizeBytes);
@@ -160,7 +160,7 @@ namespace Hast.Communication.Services
                         serialPort.Write(Constants.FpgaConstants.SignalAllBytesReceived); // Signal that we received all bytes.
                     }
 
-                    // Set the incoming data if all bytes are received (Waiting for incoming data stream to complete).
+                    // Set the incoming data if all bytes are received (waiting for incoming data stream to complete).
                     if (messageSizeBytes == count)
                     {
                         simpleMemory.Memory = returnValue;
