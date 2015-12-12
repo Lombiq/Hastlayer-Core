@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -19,7 +20,7 @@ namespace Hast.Transformer.Vhdl
     /// </summary>
     public class MemberCallChainTable
     {
-        private readonly Dictionary<string, MemberCallChain> _chains = new Dictionary<string, MemberCallChain>();
+        private readonly ConcurrentDictionary<string, MemberCallChain> _chains = new ConcurrentDictionary<string, MemberCallChain>();
 
         public IDictionary<string, MemberCallChain> Chains { get { return _chains; } }
 

@@ -28,7 +28,7 @@ namespace Hast.Transformer.Vhdl
         }
 
 
-        public Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
+        public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext)
             {
@@ -40,7 +40,7 @@ namespace Hast.Transformer.Vhdl
             var module = vhdlTransformationContext.Module;
             module.Entity = new Entity { Name = Entity.ToSafeEntityName("Hastlayer" + vhdlTransformationContext.Id.GetHashCode().ToString()) };
 
-            Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext);
+            await Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext);
 
             module.Libraries.Add(new Library
             {
@@ -65,12 +65,11 @@ namespace Hast.Transformer.Vhdl
 
             ProcessUtility.AddClockToProcesses(module, CommonPortNames.Clock);
 
-            return Task.FromResult<IHardwareDescription>(
-                new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable));
+            return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable);
         }
 
 
-        private void Traverse(AstNode node, VhdlTransformationContext transformationContext)
+        private async Task Traverse(AstNode node, VhdlTransformationContext transformationContext)
         {
             var traverseTo = node.Children;
 
@@ -82,7 +81,7 @@ namespace Hast.Transformer.Vhdl
                     if (node is MethodDeclaration)
                     {
                         var method = node as MethodDeclaration;
-                        _methodTransformer.Transform(method, transformationContext);
+                        await _methodTransformer.Transform(method, transformationContext);
                     }
                     break;
                 case NodeType.Pattern:
@@ -122,7 +121,7 @@ namespace Hast.Transformer.Vhdl
 
             foreach (var target in traverseTo)
             {
-                Traverse(target, transformationContext);
+                await Traverse(target, transformationContext);
             }
         }
 

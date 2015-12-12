@@ -10,12 +10,13 @@ using Orchard;
 using System.Linq;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Helpers;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface IMethodTransformer : IDependency
     {
-        void Transform(MethodDeclaration method, IVhdlTransformationContext context);
+        Task Transform(MethodDeclaration method, IVhdlTransformationContext context);
     }
 
 
@@ -34,12 +35,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        // Should we want parellisation to speed transformation up, this method should be possible to be run in
-        // parallel for each method. It seems that only the types in IVhdlTransformationContext should be made
-        // thread-safe.
-        public void Transform(MethodDeclaration method, IVhdlTransformationContext context)
+        public async Task Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
-            var firstStateMachine = BuildStateMachineFromMethod(method, context, 0);
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var stateMachineComputingTasks = new List<Task<StateMachineResult>>();
+
+            for (int i = 0; i < context.GetTransformerConfiguration().MaxCallStackDepth; i++)
+            {
+                stateMachineComputingTasks.Add(BuildStateMachineFromMethod(method, context, i));
+            }
+
+            var stateMachineResults = await Task.WhenAll(stateMachineComputingTasks);
 
             // Handling when the method is an interface method, i.e. should be executable from the host computer.
             InterfaceMethodDefinition interfaceMethod = null;
@@ -47,86 +53,105 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 interfaceMethod = new InterfaceMethodDefinition
                 {
-                    Name = firstStateMachine.Name,
-                    StateMachine = firstStateMachine,
+                    Name = stateMachineResults[0].StateMachine.Name,
+                    StateMachine = stateMachineResults[0].StateMachine,
                     Method = method
                 };
                 context.InterfaceMethods.Add(interfaceMethod);
             }
 
-            for (int i = 1; i < context.GetTransformerConfiguration().MaxCallStackDepth; i++)
+            foreach (var result in stateMachineResults)
             {
-                BuildStateMachineFromMethod(method, context, i);
+                context.Module.Architecture.Declarations.Add(result.Declarations);
+                context.Module.Architecture.Add(result.Body);
             }
+            sw.Stop();
+            var z = sw.ElapsedMilliseconds;
         }
 
 
-        private IMethodStateMachine BuildStateMachineFromMethod(
+        private Task<StateMachineResult> BuildStateMachineFromMethod(
             MethodDeclaration method, 
             IVhdlTransformationContext context,
             int stateMachineIndex)
         {
-            var stateMachine = new MethodStateMachine(MethodStateMachineNameFactory.CreateStateMachineName(method.GetFullName(), stateMachineIndex));
-
-
-            // Handling return type.
-            var returnType = _typeConverter.Convert(method.ReturnType);
-            var isVoid = returnType.Name == "void";
-            if (!isVoid)
-            {
-                stateMachine.Parameters.Add(new Variable
+            return Task.Run(() =>
                 {
-                    Name = stateMachine.CreateReturnVariableName(),
-                    DataType = returnType
+                    var stateMachine = new MethodStateMachine(MethodStateMachineNameFactory.CreateStateMachineName(method.GetFullName(), stateMachineIndex));
+
+
+                    // Handling return type.
+                    var returnType = _typeConverter.Convert(method.ReturnType);
+                    var isVoid = returnType.Name == "void";
+                    if (!isVoid)
+                    {
+                        stateMachine.Parameters.Add(new Variable
+                        {
+                            Name = stateMachine.CreateReturnVariableName(),
+                            DataType = returnType
+                        });
+                    }
+
+                    // Handling in/out method parameters.
+                    foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
+                    {
+                        stateMachine.Parameters.Add(new Variable
+                        {
+                            DataType = _typeConverter.Convert(parameter.Type),
+                            Name = stateMachine.CreatePrefixedVariableName(parameter.Name)
+                        });
+                    }
+
+
+                    // Adding opening state and its block.
+                    var openingBlock = new InlineBlock();
+                    stateMachine.AddState(openingBlock);
+
+                    // Processing method body.
+                    var bodyContext = new SubTransformerContext
+                    {
+                        TransformationContext = context,
+                        Scope = new SubTransformerScope
+                        {
+                            Method = method,
+                            StateMachine = stateMachine,
+                            CurrentBlock = new CurrentBlock(openingBlock)
+                        }
+                    };
+
+                    var lastStatementIsReturn = false;
+                    foreach (var statement in method.Body.Statements)
+                    {
+                        _statementTransformer.Transform(statement, bodyContext);
+                        lastStatementIsReturn = statement is ReturnStatement;
+                    }
+
+                    // If the last statement was a return statement then there is already a state change to the final state
+                    // added.
+                    if (!lastStatementIsReturn)
+                    {
+                        bodyContext.Scope.CurrentBlock.Add(stateMachine.ChangeToFinalState());
+                    }
+
+
+                    // We need to return the declarations and body here too so their computation can be parallelised too.
+                    // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to
+                    // be thread-safe.
+                    return new StateMachineResult
+                    {
+                        StateMachine = stateMachine,
+                        Declarations = stateMachine.BuildDeclarations(),
+                        Body = stateMachine.BuildBody()
+                    };
                 });
-            }
-
-            // Handling in/out method parameters.
-            foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
-            {
-                stateMachine.Parameters.Add(new Variable
-                {
-                    DataType = _typeConverter.Convert(parameter.Type),
-                    Name = stateMachine.CreatePrefixedVariableName(parameter.Name)
-                });
-            }
+        }
 
 
-            // Adding opening state and its block.
-            var openingBlock = new InlineBlock();
-            stateMachine.AddState(openingBlock);
-
-            // Processing method body.
-            var bodyContext = new SubTransformerContext
-            {
-                TransformationContext = context,
-                Scope = new SubTransformerScope
-                {
-                    Method = method,
-                    StateMachine = stateMachine,
-                    CurrentBlock = new CurrentBlock(openingBlock)
-                }
-            };
-
-            var lastStatementIsReturn = false;
-            foreach (var statement in method.Body.Statements)
-            {
-                _statementTransformer.Transform(statement, bodyContext);
-                lastStatementIsReturn = statement is ReturnStatement;
-            }
-
-            // If the last statement was a return statement then there is already a state change to the final state
-            // added.
-            if (!lastStatementIsReturn)
-            {
-                bodyContext.Scope.CurrentBlock.Add(stateMachine.ChangeToFinalState());
-            }
-
-
-            context.Module.Architecture.Declarations.Add(stateMachine.BuildDeclarations());
-            context.Module.Architecture.Add(stateMachine.BuildBody());
-
-            return stateMachine;
+        private class StateMachineResult
+        {
+            public IMethodStateMachine StateMachine { get; set; }
+            public IVhdlElement Declarations { get; set; }
+            public IVhdlElement Body { get; set; }
         }
     }
 }
