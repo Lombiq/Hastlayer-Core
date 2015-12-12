@@ -276,7 +276,7 @@ namespace Hast.Transformer.Vhdl
 
                     if (!chains.ContainsKey(procedure.Name)) return Enumerable.Empty<IVhdlElement>();
 
-                    var targetNames = chains[procedure.Name].Targets.Select(chain => chain.ProcedureName);
+                    var targetNames = chains[procedure.Name].Targets.Select(chain => chain.MemberName);
                     return transformationContext.Module.Architecture.Declarations
                         .Where(element => element is Procedure && targetNames.Contains(((Procedure)element).Name));
                 });

@@ -4,7 +4,7 @@ namespace Hast.Transformer.Vhdl
 {
     public class MemberCallChain
     {
-        public string ProcedureName { get; set; }
+        public string MemberName { get; set; }
         public List<MemberCallChain> Targets { get; set; }
 
         public MemberCallChain()
@@ -15,8 +15,7 @@ namespace Hast.Transformer.Vhdl
 
 
     /// <summary>
-    /// Contains information on which member calls which other members(s). This is needed to then re-order VHDL procedures
-    /// if necessary.
+    /// Contains information on which member calls which other members(s).
     /// </summary>
     public class MemberCallChainTable
     {
@@ -25,13 +24,13 @@ namespace Hast.Transformer.Vhdl
         public IDictionary<string, MemberCallChain> Chains { get { return _chains; } }
 
 
-        public void AddTarget(string procedureName, string targetProcedureName)
+        public void AddTarget(string memberName, string targetMemberName)
         {
-            if (!_chains.ContainsKey(procedureName)) _chains[procedureName] = new MemberCallChain { ProcedureName = procedureName };
-            if (!_chains.ContainsKey(targetProcedureName)) _chains[targetProcedureName] = new MemberCallChain { ProcedureName = targetProcedureName };
+            if (!_chains.ContainsKey(memberName)) _chains[memberName] = new MemberCallChain { MemberName = memberName };
+            if (!_chains.ContainsKey(targetMemberName)) _chains[targetMemberName] = new MemberCallChain { MemberName = targetMemberName };
             
-            var member = _chains[procedureName];
-            var target = _chains[targetProcedureName];
+            var member = _chains[memberName];
+            var target = _chains[targetMemberName];
             if (!member.Targets.Contains(target)) member.Targets.Add(target);
         }
     }
