@@ -36,10 +36,10 @@ namespace Hast.Communication.Helpers
             if (ports.Length == 0) throw new SerialPortCommunicationException("No serial port detected (no serial ports are open).");
 
             var serialPort = new SerialPort();
-            serialPort.BaudRate = Constants.FpgaConstants.BaudRate;
-            serialPort.Parity = Constants.FpgaConstants.SerialPortParity;
-            serialPort.StopBits = Constants.FpgaConstants.SerialPortStopBits;
-            serialPort.WriteTimeout = Constants.FpgaConstants.WriteTimeoutInMilliseconds;
+            serialPort.BaudRate = Constants.SerialCommunicationConstants.BaudRate;
+            serialPort.Parity = Constants.SerialCommunicationConstants.SerialPortParity;
+            serialPort.StopBits = Constants.SerialCommunicationConstants.SerialPortStopBits;
+            serialPort.WriteTimeout = Constants.SerialCommunicationConstants.WriteTimeoutInMilliseconds;
 
             var taskCompletionSource = new TaskCompletionSource<string>();
             serialPort.DataReceived += (s, e) =>
@@ -47,7 +47,7 @@ namespace Hast.Communication.Helpers
                 var dataIn = (byte)serialPort.ReadByte();
                 var receivedCharacter = Convert.ToChar(dataIn);
 
-                if (receivedCharacter == Constants.FpgaConstants.SignalYes)
+                if (receivedCharacter == Constants.SerialCommunicationConstants.Signals.Yes)
                 {
                     serialPort.Dispose();
                     taskCompletionSource.SetResult(serialPort.PortName);
@@ -61,7 +61,7 @@ namespace Hast.Communication.Helpers
                 try
                 {
                     serialPort.Open();
-                    serialPort.Write(Constants.FpgaConstants.SignalFpgaDetect);
+                    serialPort.Write(Constants.SerialCommunicationConstants.Signals.FpgaDetect);
                 }
                 catch (IOException) { }
             }
