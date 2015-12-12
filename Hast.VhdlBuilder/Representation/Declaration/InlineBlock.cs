@@ -25,7 +25,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Body.ToVhdl(vhdlGenerationOptions);
         }

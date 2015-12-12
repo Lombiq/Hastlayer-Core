@@ -46,6 +46,7 @@
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
     <Compile Include="Representation\Declaration\Empty.cs" />
     <Compile Include="Representation\Declaration\Generic.cs" />
+    <Compile Include="Representation\Declaration\LogicalBlock.cs" />
     <Compile Include="Representation\Declaration\Port.cs" />
     <Compile Include="Representation\Declaration\StdLogicVector.cs" />
     <Compile Include="Representation\Declaration\TypedDataObjectBase.cs" />
