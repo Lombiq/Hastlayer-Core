@@ -391,10 +391,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 DataType = KnownDataTypes.Boolean
             });
 
-            var isInvokedStateMachineFinishedIfElseTrue = new InlineBlock(new[]
-            {
-                new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.False }.Terminate()
-            });
+            var isInvokedStateMachineFinishedIfElseTrue = new InlineBlock(
+                new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.False }.Terminate());
 
             var waitForInvokedStateMachineToFinishState = new InlineBlock();
 

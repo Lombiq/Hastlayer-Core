@@ -14,14 +14,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public List<IVhdlElement> Body { get; set; }
 
 
+        public InlineBlock(params IVhdlElement[] vhdlElements)
+        {
+            Body = vhdlElements.ToList();
+        }
+
         public InlineBlock()
         {
             Body = new List<IVhdlElement>();
-        }
-
-        public InlineBlock(IVhdlElement[] vhdlElement)
-        {
-            Body = vhdlElement.ToList();
         }
 
 
