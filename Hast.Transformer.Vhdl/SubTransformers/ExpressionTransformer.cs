@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -329,8 +330,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.Add(stateMachineSelectingConditionsBlock);
             for (int i = 0; i < maxCallStackDepth; i++)
             {
-                var indexedStateMachineName = MethodStateMachine.CreateStateMachineName(targetStateMachineName, i);
-                var startVariableReference = MethodStateMachine
+                var indexedStateMachineName = MethodStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
+                var startVariableReference = MethodStateMachineNameFactory
                     .CreateStartVariableName(indexedStateMachineName)
                     .ToVhdlVariableReference();
 
@@ -355,7 +356,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     trueBlock.Add(new Assignment
                     {
                         AssignTo =
-                            MethodStateMachine.CreatePrefixedVariableName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
+                            MethodStateMachineNameFactory.CreatePrefixedVariableName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
                             .ToVhdlVariableReference(),
                         Expression = parameter
                     }.Terminate());
@@ -401,8 +402,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             waitForInvokedStateMachineToFinishState.Add(stateMachineFinishedCheckCase);
             for (int i = 0; i < maxCallStackDepth; i++)
             {
-                var finishedVariableName = MethodStateMachine
-                    .CreateFinishedVariableName(MethodStateMachine.CreateStateMachineName(targetStateMachineName, i));
+                var finishedVariableName = MethodStateMachineNameFactory
+                    .CreateFinishedVariableName(MethodStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
 
                 stateMachineFinishedCheckCase.Whens.Add(new When
                 {
@@ -456,8 +457,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 isInvokedStateMachineFinishedIfElseTrue.Add(stateMachineReadReturnValueCheckCase);
                 for (int i = 0; i < maxCallStackDepth; i++)
                 {
-                    var returnVariableName = MethodStateMachine
-                        .CreateReturnVariableName(MethodStateMachine.CreateStateMachineName(targetStateMachineName, i));
+                    var returnVariableName = MethodStateMachineNameFactory
+                        .CreateReturnVariableName(MethodStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
 
                     stateMachineReadReturnValueCheckCase.Whens.Add(new When
                     {

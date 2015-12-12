@@ -61,7 +61,9 @@
     <Compile Include="Constants\SimpleMemoryNames.cs" />
     <Compile Include="Constants\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
+    <Compile Include="Helpers\MethodStateMachineNameFactory.cs" />
     <Compile Include="Helpers\TopologicalSortHelper.cs" />
+    <Compile Include="Models\IMethodStateMachine.cs" />
     <Compile Include="Models\IVhdlTransformationContext.cs" />
     <Compile Include="MemberCallChainTable.cs" />
     <Compile Include="MemberIdTable.cs" />
@@ -71,7 +73,7 @@
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
     <Compile Include="SubTransformers\MethodTransformer.cs" />
     <Compile Include="SubTransformers\StatementTransformer.cs" />
-    <Compile Include="SubTransformers\SubTransformerContext.cs" />
+    <Compile Include="Models\SubTransformerContext.cs" />
     <Compile Include="SubTransformers\TypeConverter.cs" />
     <Compile Include="Models\VhdlTransformationContext.cs" />
     <Compile Include="Models\VhdlHardwareDescription.cs" />

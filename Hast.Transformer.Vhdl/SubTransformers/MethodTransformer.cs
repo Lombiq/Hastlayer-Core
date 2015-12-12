@@ -52,32 +52,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
 
-            var parameters = new List<Variable>();
-
             // Handling return type.
             var returnType = _typeConverter.Convert(method.ReturnType);
             var isVoid = returnType.Name == "void";
             if (!isVoid)
             {
-                parameters.Add(new Variable
+                stateMachine.Parameters.Add(new Variable
                     {
                         Name = stateMachine.CreateReturnVariableName(),
                         DataType = returnType
                     });
             }
 
-
             // Handling in/out method parameters.
             foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
             {
-                parameters.Add(new Variable
+                stateMachine.Parameters.Add(new Variable
                     {
                         DataType = _typeConverter.Convert(parameter.Type),
                         Name = stateMachine.CreatePrefixedVariableName(parameter.Name)
                     });
             }
 
-            stateMachine.Parameters = parameters;
 
             // Adding opening state and its block.
             var openingBlock = new InlineBlock();

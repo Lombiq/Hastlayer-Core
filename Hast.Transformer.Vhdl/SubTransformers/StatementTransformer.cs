@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -143,7 +144,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         Else = stateMachine.CreateStateChange(afterWhileStateIndex)
                     });
 
-                // Returning to the of the while condition so the cycle can re-start.
+                // Returning to the state of the while condition so the cycle can re-start.
                 var lastState = stateMachine.States.Last();
                 if (lastState != afterWhileState)
                 {

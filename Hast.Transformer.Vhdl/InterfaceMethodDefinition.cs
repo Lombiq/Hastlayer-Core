@@ -8,7 +8,7 @@ namespace Hast.Transformer.Vhdl
     public class InterfaceMethodDefinition
     {
         public string Name { get; set; }
-        public MethodStateMachine StateMachine { get; set; }
+        public IMethodStateMachine StateMachine { get; set; }
         public MethodDeclaration Method { get; set; }
     }
 }

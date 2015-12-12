@@ -7,13 +7,11 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.Helpers;
 
 namespace Hast.Transformer.Vhdl.Models
 {
-    /// <summary>
-    /// A state machine generated from a .NET method.
-    /// </summary>
-    public class MethodStateMachine
+    internal class MethodStateMachine : IMethodStateMachine
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;
@@ -32,8 +30,8 @@ namespace Hast.Transformer.Vhdl.Models
             get { return _states; }
         }
 
-        public IList<Variable> Parameters { get; set; }
-        public IList<Variable> LocalVariables { get; set; }
+        public IList<Variable> Parameters { get; private set; }
+        public IList<Variable> LocalVariables { get; private set; }
 
 
         /// <summary>
@@ -47,19 +45,19 @@ namespace Hast.Transformer.Vhdl.Models
             Name = name;
 
 
-            _statesEnum = new Enum { Name = CreateNamePrefixedExtendedVhdlId("_States") };
+            _statesEnum = new Enum { Name = this.CreateNamePrefixedExtendedVhdlId("_States") };
 
             _stateVariable = new Variable
             {
                 DataType = _statesEnum,
-                Name = CreateNamePrefixedExtendedVhdlId("_State"),
+                Name = this.CreateNamePrefixedExtendedVhdlId("_State"),
                 Shared = true
             };
 
             _startVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = CreateStartVariableName(Name),
+                Name = MethodStateMachineNameFactory.CreateStartVariableName(Name),
                 Shared = true,
                 DefaultValue = Value.False
             };
@@ -67,7 +65,7 @@ namespace Hast.Transformer.Vhdl.Models
             _finishedVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = CreateFinishedVariableName(Name),
+                Name = MethodStateMachineNameFactory.CreateFinishedVariableName(Name),
                 Shared = true,
                 DefaultValue = Value.True
             };
@@ -86,7 +84,7 @@ namespace Hast.Transformer.Vhdl.Models
                 new Comment("Final state"),
                 new Assignment { AssignTo = _finishedVariable, Expression = Value.True }.Terminate(),
                 new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate(),
-                ChangeToStartState());
+                this.ChangeToStartState());
 
             _states = new List<IBlockElement>
             {
@@ -100,11 +98,6 @@ namespace Hast.Transformer.Vhdl.Models
         }
 
 
-        /// <summary>
-        /// Adds a new state to the state machine.
-        /// </summary>
-        /// <param name="state">The state's VHDL element.</param>
-        /// <returns>The index of the state.</returns>
         public int AddState(IBlockElement state)
         {
             _states.Add(state);
@@ -121,35 +114,6 @@ namespace Hast.Transformer.Vhdl.Models
             return new Assignment { AssignTo = _stateVariable, Expression = CreateStateValue(nextStateIndex) }.Terminate();
         }
 
-        public IVhdlElement ChangeToStartState()
-        {
-            return CreateStateChange(0);
-        }
-
-        public IVhdlElement ChangeToFinalState()
-        {
-            return CreateStateChange(1);
-        }
-
-        public string CreateReturnVariableName()
-        {
-            return CreateReturnVariableName(Name);
-        }
-
-        public string CreatePrefixedVariableName(string name)
-        {
-            return CreatePrefixedVariableName(this, name);
-        }
-
-        public string CreateNamePrefixedExtendedVhdlId(string id)
-        {
-            return CreatePrefixedExtendedVhdlId(Name, id);
-        }
-
-        /// <summary>
-        /// Produces the declarations corresponding to the state machine that should be inserted into the head of the
-        /// architecture element.
-        /// </summary>
         public IVhdlElement BuildDeclarations()
         {
             for (int i = 0; i < _states.Count; i++)
@@ -182,12 +146,9 @@ namespace Hast.Transformer.Vhdl.Models
             return declarationsBlock;
         }
 
-        /// <summary>
-        /// Produces the body of the state machine that should be inserted into the body of the architecture element.
-        /// </summary>
         public IVhdlElement BuildBody()
         {
-            var process = new Process { Name = CreateNamePrefixedExtendedVhdlId("_StateMachine") };
+            var process = new Process { Name = this.CreateNamePrefixedExtendedVhdlId("_StateMachine") };
 
             process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
 
@@ -223,42 +184,6 @@ namespace Hast.Transformer.Vhdl.Models
                 new Comment(Name + " state machine start"), 
                 process,
                 new Comment(Name + " state machine end"));
-        }
-
-
-        public static string CreateReturnVariableName(string stateMachineName)
-        {
-            return CreatePrefixedVariableName(stateMachineName, "return");
-        }
-
-        public static string CreateStartVariableName(string stateMachineName)
-        {
-            return CreatePrefixedVariableName(stateMachineName, "_Start");
-        }
-
-        public static string CreateFinishedVariableName(string stateMachineName)
-        {
-            return CreatePrefixedVariableName(stateMachineName, "_Finished");
-        }
-
-        public static string CreatePrefixedVariableName(MethodStateMachine stateMachine, string name)
-        {
-            return CreatePrefixedVariableName(stateMachine.Name, name);
-        }
-
-        public static string CreatePrefixedVariableName(string stateMachineName, string name)
-        {
-            return CreatePrefixedExtendedVhdlId(stateMachineName, "." + name);
-        }
-
-        public static string CreatePrefixedExtendedVhdlId(string stateMachineName, string id)
-        {
-            return (stateMachineName + id).ToExtendedVhdlId();
-        }
-
-        public static string CreateStateMachineName(string stateMachineName, int stateMachineIndex)
-        {
-            return stateMachineName + "." + stateMachineIndex;
         }
 
 
