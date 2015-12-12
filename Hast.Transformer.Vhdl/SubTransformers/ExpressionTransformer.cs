@@ -589,7 +589,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             targetName = targetName.TrimExtendedVhdlIdDelimiters();
 
-            var procedure = context.Scope.StateMachine;
+            var stateMachine = context.Scope.StateMachine;
 
             var variableName = (targetName + "." + suffix + "0").ToExtendedVhdlId();
             var returnVariableNameIndex = 0;
