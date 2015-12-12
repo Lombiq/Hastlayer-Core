@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Function : ISubProgram
     {
         public string Name { get; set; }
@@ -27,29 +27,29 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "function " +
-                Name.ToVhdlId() +
+                Name +
                 " (" +
                 string.Join("; ", Arguments.Select(parameter => parameter.ToVhdl())) +
                 ") return " +
                 ReturnType.Name +
                 " is " +
-                Declarations.ToVhdl() +
-                " begin " +
+                Declarations.ToVhdl() + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
+                "begin " +
                 Body.ToVhdl() +
                 " end " +
-                Name.ToVhdlId() +
+                Name +
                 ";";
         }
     }
 
 
-    public class FunctionArgument : DataObjectBase
+    public class FunctionArgument : TypedDataObjectBase
     {
         public override string ToVhdl()
         {
             return
-                (ObjectType.ToString() ?? string.Empty) +
-                Name.ToVhdlId() +
+                (DataObjectKind.ToString() ?? string.Empty) +
+                Name +
                 ": " +
                 DataType.ToVhdl();
         }

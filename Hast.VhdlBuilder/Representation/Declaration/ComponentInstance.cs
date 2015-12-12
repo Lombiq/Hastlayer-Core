@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class ComponentInstance : IVhdlElement
     {
         public Component Component { get; set; }
@@ -25,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 Label +
                 " : " +
-                Component.Name.ToVhdlId() +
+                Component.Name +
                 " port map (" +
                 string.Join(", ", PortMappings.Select(mapping => mapping.ToVhdl())) +
                 ");";
@@ -41,7 +39,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl()
         {
-            return From.ToVhdlId() + " => " + To.ToVhdlId();
+            return From + " => " + To;
         }
     }
 }

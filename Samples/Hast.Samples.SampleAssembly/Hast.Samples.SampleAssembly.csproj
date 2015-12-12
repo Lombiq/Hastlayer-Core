@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,9 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenomeMatcher.cs" />
+    <Compile Include="ImageContrastModifier.cs" />
+    <Compile Include="ImageFilter.cs" />
+    <Compile Include="MonteCarloAlgorithm.cs" />
+    <Compile Include="MonteCarloResult.cs" />
     <Compile Include="PrimeCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceSample.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
+      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
+      <Name>Hast.Transformer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

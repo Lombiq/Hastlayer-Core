@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Models;
 
 namespace Hast.Communication
 {
@@ -19,14 +20,15 @@ namespace Hast.Communication
         }
 
 
-        public T CreateCommunicationProxy<T>(T target) where T : class
+        public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target) where T : class
         {
+            var methodInvokationHandler = _methodInvocationHandlerFactory.CreateMethodInvocationHandler(hardwareRepresentation, target);
             if (typeof(T).IsInterface)
             {
-                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MethodInvocationInterceptor(_methodInvocationHandlerFactory.CreateMethodInvocationHandler(target)));
+                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MethodInvocationInterceptor(methodInvokationHandler));
             }
 
-            return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MethodInvocationInterceptor(_methodInvocationHandlerFactory.CreateMethodInvocationHandler(target)));
+            return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MethodInvocationInterceptor(methodInvokationHandler));
         }
 
 

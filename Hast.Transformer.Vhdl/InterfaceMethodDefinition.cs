@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Hast.VhdlBuilder.Representation.Declaration;
+using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -12,6 +9,7 @@ namespace Hast.Transformer.Vhdl
         public string Name { get; set; }
         public List<Port> Ports { get; set; }
         public Procedure Procedure { get; set; }
+        public MethodDeclaration Method { get; set; }
         public List<ParameterMapping> ParameterMappings { get; set; }
 
 

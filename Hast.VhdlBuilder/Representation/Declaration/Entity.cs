@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    public class Entity : INamedElement
+    [DebuggerDisplay("{ToVhdl()}")]
+    public class Entity : INamedElement, IDeclarableElement
     {
         private string _name;
 
@@ -30,14 +30,16 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
         }
 
-        public List<IVhdlElement> Declarations { get; set; }
+        public List<Generic> Generics { get; set; }
         public List<Port> Ports { get; set; }
+        public List<IVhdlElement> Declarations { get; set; }
 
 
         public Entity()
         {
-            Ports = new List<Port>();
+            Generics = new List<Generic>();
             Declarations = new List<IVhdlElement>();
+            Ports = new List<Port>();
         }
 
 
@@ -46,7 +48,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 "entity " +
                 Name +
-                " is port(" +
+                " is " +
+                (Generics != null && Generics.Any() ? Generics.ToVhdl() : string.Empty) +
+                "port(" +
                 string.Join("; ", Ports.Select(parameter => parameter.ToVhdl())) +
                 ");" +
                 Declarations.ToVhdl() +
@@ -77,19 +81,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     }
 
 
-    public class Port : DataObjectBase
+    public class Port : TypedDataObjectBase
     {
         public PortMode Mode { get; set; }
 
         public Port()
         {
-            this.ObjectType = ObjectType.Signal;
+            DataObjectKind = DataObjectKind.Signal;
         }
 
         public override string ToVhdl()
         {
             return
-                Name.ToVhdlId() +
+                Name +
                 ": " +
                 Mode +
                 " " +

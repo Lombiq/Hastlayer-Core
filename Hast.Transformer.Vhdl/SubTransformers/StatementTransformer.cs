@@ -1,34 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ICSharpCode.NRefactory.CSharp;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
+using ICSharpCode.NRefactory.CSharp;
+using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class StatementTransformer
+    public interface IStatementTransformer : IDependency
     {
-        private readonly TypeConverter _typeConverter;
-        private readonly ExpressionTransformer _expressionTransformer;
+        void Transform(Statement statement, ISubTransformerContext context, IBlockElement block);   
+    }
 
 
-        public StatementTransformer()
-            : this(new TypeConverter(), new ExpressionTransformer())
-        {
-        }
+    public class StatementTransformer : IStatementTransformer
+    {
+        private readonly ITypeConverter _typeConverter;
+        private readonly IExpressionTransformer _expressionTransformer;
 
-        public StatementTransformer(TypeConverter typeConverter, ExpressionTransformer expressionTransformer)
+
+        public StatementTransformer(ITypeConverter typeConverter, IExpressionTransformer expressionTransformer)
         {
             _typeConverter = typeConverter;
             _expressionTransformer = expressionTransformer;
         }
 
-        public void Transform(Statement statement, SubTransformerContext context, IBlockElement block)
+
+        public void Transform(Statement statement, ISubTransformerContext context, IBlockElement block)
         {
             var subProgram = context.Scope.SubProgram;
 
@@ -36,11 +36,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var variableStatement = statement as VariableDeclarationStatement;
 
-                subProgram.Declarations.Add(new Variable
+                var type = _typeConverter.Convert(variableStatement.Type);
+
+                foreach (var variableInitializer in variableStatement.Variables)
                 {
-                    Name = string.Join(", ", variableStatement.Variables.Select(v => v.Name)),
-                    DataType = _typeConverter.Convert(variableStatement.Type)
-                });
+                    subProgram.Declarations.Add(new Variable
+                    {
+                        Name = variableInitializer.Name.ToExtendedVhdlId(),
+                        DataType = type
+                    });
+                }
             }
             else if (statement is ExpressionStatement)
             {
@@ -52,39 +57,39 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var returnStatement = statement as ReturnStatement;
 
-                if (context.Scope.Node is MethodDeclaration)
+                if (_typeConverter.Convert((context.Scope.Method).ReturnType) == KnownDataTypes.Void)
                 {
-                    if (_typeConverter.Convert(((MethodDeclaration)context.Scope.Node).ReturnType).Name == "void") block.Body.Add(new Raw("return;"));
-                    else if (subProgram is Procedure)
+                    block.Body.Add(new Return());
+                }
+                else if (subProgram is Procedure)
+                {
+                    var procedure = (Procedure)subProgram;
+
+                    var outputParam = procedure.Parameters.Where(param => param.ParameterType == ProcedureParameterType.Out).Single();
+
+                    block.Body.Add(new Terminated(new Assignment
                     {
-                        var procedure = subProgram as Procedure;
-
-                        var outputParam = procedure.Parameters.Where(param => param.ParameterType == ProcedureParameterType.Out).Single();
-
-                        var source = outputParam.Name.ToVhdlId() +
-                                     (outputParam.ObjectType == ObjectType.Variable ? " := " : " <= ") +
-                                     _expressionTransformer.Transform(returnStatement.Expression, context, block).ToVhdl() +
-                                     "; return;";
-
-                        procedure.Body.Add(new Raw(source));
-                    }
+                        AssignTo = outputParam,
+                        Expression = _expressionTransformer.Transform(returnStatement.Expression, context, block)
+                    }));
+                    block.Body.Add(new Return());
                 }
             }
             else if (statement is IfElseStatement)
             {
                 var ifElse = statement as IfElseStatement;
 
-                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context, block).ToVhdl() };
+                var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context, block) };
 
                 var trueBlock = new InlineBlock();
                 Transform(ifElse.TrueStatement, context, trueBlock);
-                ifElseElement.TrueElements.Add(trueBlock);
+                ifElseElement.True = trueBlock;
 
                 if (ifElse.FalseStatement != Statement.Null)
                 {
                     var falseBlock = new InlineBlock();
-                    Transform(ifElse.TrueStatement, context, falseBlock);
-                    ifElseElement.ElseElements.Add(falseBlock);
+                    Transform(ifElse.FalseStatement, context, falseBlock);
+                    ifElseElement.Else = falseBlock;
                 }
 
                 block.Body.Add(ifElseElement);
@@ -106,7 +111,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var whileStatement = statement as WhileStatement;
 
-                var whileElement = new While { Condition = _expressionTransformer.Transform(whileStatement.Condition, context, block).ToVhdl() };
+                var whileElement = new While { Condition = _expressionTransformer.Transform(whileStatement.Condition, context, block) };
 
                 var bodyBlock = new InlineBlock();
                 Transform(whileStatement.EmbeddedStatement, context, bodyBlock);

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    public class Signal : DataObject
+    [DebuggerDisplay("{ToVhdl()}")]
+    public class Signal : TypedDataObject
     {
         public Signal()
         {
-            ObjectType = ObjectType.Signal;
+            DataObjectKind = DataObjectKind.Signal;
         }
     }
 }

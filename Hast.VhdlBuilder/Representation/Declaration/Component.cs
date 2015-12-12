@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Component : INamedElement
     {
         public string Name { get; set; }
@@ -23,7 +21,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "component " +
-                Name.ToVhdlId() +
+                Name +
                 " port(" +
                 string.Join(", ", Ports.Select(parameter => parameter.ToVhdl())) +
                 ");" +

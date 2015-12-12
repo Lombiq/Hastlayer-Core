@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Common;
 using Hast.Common.Configuration;
+using Hast.Common.Models;
 using Orchard;
 
 namespace Hast.Transformer

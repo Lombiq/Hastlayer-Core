@@ -31,11 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.Decompiler, Version=2.3.0.1827, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Hast.Transformer\Libs\ILSpy\ICSharpCode.Decompiler.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>..\Hast.Transformer\Libs\ILSpy\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory.CSharp">
       <HintPath>..\Hast.Transformer\Libs\ILSpy\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Hast.Transformer\Libs\ILSpy\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Orchard\lib\newtonsoft.json\Newtonsoft.Json.dll</HintPath>
@@ -49,20 +57,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\AstNodeExtensions.cs" />
-    <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
-    <Compile Include="MethodCallChainTable.cs" />
-    <Compile Include="MethodIdTable.cs" />
+    <Compile Include="Constants\SimpleMemoryNames.cs" />
+    <Compile Include="Constants\SimpleMemoryTypes.cs" />
+    <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
+    <Compile Include="Helpers\TopologicalSortHelper.cs" />
+    <Compile Include="Models\IVhdlTransformationContext.cs" />
+    <Compile Include="MemberCallChainTable.cs" />
+    <Compile Include="MemberIdTable.cs" />
     <Compile Include="InterfaceMethodDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
     <Compile Include="SubTransformers\MethodTransformer.cs" />
     <Compile Include="SubTransformers\StatementTransformer.cs" />
-    <Compile Include="SubTransformers\SubTransformerContexts.cs" />
+    <Compile Include="SubTransformers\SubTransformerContext.cs" />
     <Compile Include="SubTransformers\TypeConverter.cs" />
-    <Compile Include="TransformingContext.cs" />
-    <Compile Include="TransformingWorkflow.cs" />
-    <Compile Include="VhdlHardwareDescription.cs" />
+    <Compile Include="Models\VhdlTransformationContext.cs" />
+    <Compile Include="Models\VhdlHardwareDescription.cs" />
     <Compile Include="VhdlTransformingEngine.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +96,7 @@
       <Name>Orchard.Framework</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

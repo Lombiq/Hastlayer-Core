@@ -38,6 +38,14 @@
     <Reference Include="Autofac">
       <HintPath>..\..\Orchard\lib\autofac\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Hast.Transformer\Libs\ILSpy\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Hast.Transformer\Libs\ILSpy\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\Orchard\lib\moq\Moq.dll</HintPath>
     </Reference>
@@ -50,17 +58,27 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Orchard\lib\sqlce\System.Data.SqlServerCe.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj">
+      <Project>{71b55241-a31c-43f5-9b46-40b53099df56}</Project>
+      <Name>Hast.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Tests.TestAssembly1\Hast.Tests.TestAssembly1.csproj">
+      <Project>{39ab568d-b7fd-40c3-a8dd-003e0be92982}</Project>
+      <Name>Hast.Tests.TestAssembly1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Tests.TestAssembly2\Hast.Tests.TestAssembly2.csproj">
+      <Project>{9a026174-8d66-4e74-8689-9f2eef2b8cf1}</Project>
+      <Name>Hast.Tests.TestAssembly2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
+      <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
+      <Name>Hast.VhdlBuilder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Orchard\src\Orchard.Tests\Orchard.Framework.Tests.csproj">
       <Project>{abc826d4-2fa1-4f2f-87de-e6095f653810}</Project>
       <Name>Orchard.Framework.Tests</Name>
@@ -88,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="VhdlTransformerTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

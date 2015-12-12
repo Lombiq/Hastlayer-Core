@@ -6,17 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common;
 using Hast.Common.Configuration;
+using Hast.Common.Models;
+using Hast.Layer.Extensibility.Events;
 using Orchard;
 
 namespace Hast.Layer
 {
-    public delegate void TransformedEventHandler(IHardwareDescription hardwareDescription);
-
-
     public interface IHastlayer : IDisposable
     {
         /// <summary>
-        /// Occurs when the .NET assembly was transformed to hardware description.
+        /// Occurs when the .NET assembly was transformed into hardware description.
         /// </summary>
         event TransformedEventHandler Transformed;
 
@@ -26,10 +25,8 @@ namespace Hast.Layer
         /// <param name="assemblies">The assemblies that should be implemented as hardware.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
         /// <returns>The representation of the assemblies implemented as hardware.</returns>
+        /// <exception cref="HastlayerException">Thrown if any lower-level exception or other error happens during hardware generation.</exception>
         Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration);
-
-        // Maybe this as well?
-        //Task<IHardwareAssembly> GenerateHardware(Type type); // Would only transform this type and its dependencies.
 
         /// <summary>
         /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation.
@@ -38,6 +35,7 @@ namespace Hast.Layer
         /// <param name="hardwareRepresentation">The representation of the assemblies implemented as hardware.</param>
         /// <param name="hardwareObject">The object to generate the proxy for.</param>
         /// <returns>The generated proxy object.</returns>
+        /// <exception cref="HastlayerException">Thrown if any lower-level exception or other error happens during proxy generation.</exception>
         Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class;
     }
 }

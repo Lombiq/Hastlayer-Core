@@ -1,26 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using ICSharpCode.Decompiler;
-using ICSharpCode.Decompiler.Ast;
-using Mono.Cecil;
 using System.Linq;
-using ICSharpCode.NRefactory.CSharp;
+using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
-using Hast.Common;
-using System.Collections.Generic;
-using Orchard.Validation;
+using Hast.Common.Models;
+using Hast.Transformer.Extensibility.Events;
+using Hast.Transformer.Models;
+using ICSharpCode.Decompiler;
+using ICSharpCode.Decompiler.Ast;
+using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
+using Orchard.Services;
 
 namespace Hast.Transformer
 {
     public class DefaultTransformer : ITransformer
     {
+        private readonly ITransformerEventHandler _eventHandler;
+        private readonly IJsonConverter _jsonConverter;
+        private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
+        private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly ITransformingEngine _engine;
 
 
-        public DefaultTransformer(ITransformingEngine engine)
+        public DefaultTransformer(
+            ITransformerEventHandler eventHandler,
+            IJsonConverter jsonConverter,
+            ISyntaxTreeCleaner syntaxTreeCleaner,
+            ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
+            ITransformingEngine engine)
         {
+            _eventHandler = eventHandler;
+            _jsonConverter = jsonConverter;
+            _syntaxTreeCleaner = syntaxTreeCleaner;
+            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _engine = engine;
         }
 
@@ -39,22 +54,35 @@ namespace Hast.Transformer
                 astBuilder.AddAssembly(assembly);
             }
 
-            //((TypeReferenceExpression)new object()).Type.ToTypeReference().Resolve(null).GetDefinition()
+            transformationId +=
+                string.Join("-", configuration.PublicHardwareMembers) +
+                string.Join("-", configuration.PublicHardwareMemberPrefixes) +
+                _jsonConverter.Serialize(configuration.CustomConfiguration);
 
-            //astBuilder.AddAssembly(AssemblyDefinition.ReadAssembly(typeof(Math).Assembly.Location));
-            //astBuilder.AddType(new TypeDefinition("System", "Math", Mono.Cecil.TypeAttributes.Class | Mono.Cecil.TypeAttributes.Public));
+            var syntaxTree = astBuilder.SyntaxTree;
 
-            //This would be the decompiled output
-            //using (var output = new StringWriter())
-            //{
-            //    astBuilder.GenerateCode(new PlainTextOutput(output));
-            //    var z = output.ToString();
-            //    var y = z;
-            //}
 
-            //astBuilder.SyntaxTree.AcceptVisitor(new UnusedTypeDefinitionCleanerAstVisitor());
+            _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            return _engine.Transform(transformationId, astBuilder.SyntaxTree, configuration);
+
+            if (configuration.TransformerConfiguration().UseSimpleMemory)
+            {
+                CheckSimpleMemoryUsage(syntaxTree);
+            }
+
+
+            var context = new TransformationContext
+            {
+                Id = transformationId,
+                HardwareGenerationConfiguration = configuration,
+                SyntaxTree = syntaxTree,
+                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree)
+            };
+
+            _eventHandler.SyntaxTreeBuilt(context);
+
+
+            return _engine.Transform(context);
         }
 
         public Task<IHardwareDescription> Transform(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
@@ -68,6 +96,21 @@ namespace Hast.Transformer
             }
 
             return Transform(assemblies.Select(assembly => assembly.Location), configuration);
+        }
+
+
+        private static void CheckSimpleMemoryUsage(SyntaxTree syntaxTree)
+        {
+            foreach (var type in syntaxTree.GetTypes(true))
+            {
+                foreach (var member in type.Members.Where(m => m.IsInterfaceMember()))
+                {
+                    if (member is MethodDeclaration && string.IsNullOrEmpty(((MethodDeclaration)member).GetSimpleMemoryParameterName()))
+                    {
+                        throw new InvalidOperationException("The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter.");
+                    }
+                }
+            }
         }
     }
 }

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
     // Although by implementing INamedElement and IStructuredElement Architecture is in the end implementing ISubProgram. However the
     // architecture is not a subprogram, so implementing ISubProgram directly would be semantically incorrect.
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Architecture : INamedElement, IStructuredElement
     {
         public string Name { get; set; }
@@ -28,7 +26,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "architecture " +
-                Name.ToVhdlId() +
+                Name +
                 " of " +
                 Entity.Name + // Entity names can't be extended identifiers.
                 " is " +
@@ -36,7 +34,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " begin " +
                 Body.ToVhdl() +
                 " end " +
-                Name.ToVhdlId() +
+                Name +
                 ";";
         }
     }

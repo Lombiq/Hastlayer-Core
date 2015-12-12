@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Process : ISubProgram
     {
-        public string Name { get; set; }
+        public string Label { get; set; }
+        public string Name { get { return Label; } set { Label = value; } }
         public List<IDataObject> SesitivityList { get; set; }
         public List<IVhdlElement> Declarations { get; set; }
         public List<IVhdlElement> Body { get; set; }
@@ -25,13 +25,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl()
         {
-            var vhdl = "";
-
-            if (!string.IsNullOrEmpty(Name)) vhdl += Name.ToVhdlId() + ": ";
-
             return
+                (!string.IsNullOrEmpty(Label) ? Label + ":" : string.Empty) +
                 "process (" +
-                string.Join("; ", SesitivityList.Select(signal => signal.Name.ToVhdlId())) +
+                string.Join("; ", SesitivityList.Select(signal => signal.Name)) +
                 ") " +
                 Declarations.ToVhdl() +
                 " begin " +

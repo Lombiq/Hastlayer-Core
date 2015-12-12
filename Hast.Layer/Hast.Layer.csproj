@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensibility\Events\EventHandlers.cs" />
+    <Compile Include="Extensibility\Events\TransformedEventArgs.cs" />
     <Compile Include="HardwareRepresentation.cs" />
     <Compile Include="Hastlayer.cs" />
+    <Compile Include="HastlayerException.cs" />
     <Compile Include="IHastlayer.cs" />
-    <Compile Include="IHardwareRepresentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

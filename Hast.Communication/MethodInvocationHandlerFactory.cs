@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Castle.DynamicProxy;
+using Hast.Common.Extensibility.Pipeline;
+using Hast.Common.Extensions;
+using Hast.Common.Models;
+using Hast.Communication.Extensibility.Events;
+using Hast.Communication.Extensibility.Pipeline;
+using Hast.Communication.Services;
+using Hast.Transformer.SimpleMemory;
+using Orchard;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
-using Castle.DynamicProxy;
-using Hast.Communication.Events;
-using Orchard;
 
 namespace Hast.Communication
 {
@@ -20,19 +25,52 @@ namespace Hast.Communication
         }
 
 
-        public MethodInvocationHandler CreateMethodInvocationHandler(object target)
+        public MethodInvocationHandler CreateMethodInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target)
         {
             return invocation =>
                 {
                     using (var workContext = _wca.CreateWorkContextScope())
                     {
-                        var context = new MethodInvocationContext { Invocation = invocation };
+                        var methodFullName = invocation.Method.GetFullName();
 
-                        workContext.Resolve<IMethodInvocationEventHandler>().MethodInvoked(context);
+                        var context = new MethodInvocationPipelineStepContext
+                        {
+                            Invocation = invocation,
+                            MethodFullName = methodFullName,
+                            HardwareRepresentation = hardwareRepresentation
+                        };
 
-                        if (context.CancelHardwareInvocation) return false;
+                        var eventHandler = workContext.Resolve<IMethodInvocationEventHandler>();
+                        eventHandler.MethodInvoking(context);
 
-                        // Implement FPGA communication, data transformation here.
+                        workContext.Resolve<IEnumerable<IMethodInvocationPipelineStep>>().InvokePipelineSteps(step =>
+                            {
+                                context.HardwareInvocationIsCancelled = step.CanContinueHardwareInvokation(context);
+                            });
+
+                        if (!context.HardwareInvocationIsCancelled)
+                        {
+                            var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
+                            var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
+                            if (!hardwareMembers.Contains(methodFullName) && !memberNameAlternates.Contains(methodFullName))
+                            {
+                                context.HardwareInvocationIsCancelled = true;
+                            } 
+                        }
+
+                        if (context.HardwareInvocationIsCancelled) return false;
+                  
+                        var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
+                        if (memory != null)
+                        {
+                            var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(methodFullName);
+                            // The task here is needed because the code executed on the FPGA board doesn't return, we have to wait for it.
+                            // The Execute method is executed in separate thread.
+                            var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, memberId); });
+                            task.Wait();
+                        }
+
+                        eventHandler.MethodInvokedOnHardware(context);
 
                         return true;
                     }
@@ -40,10 +78,12 @@ namespace Hast.Communication
         }
 
 
-        private class MethodInvocationContext : IMethodInvocationContext
+        private class MethodInvocationPipelineStepContext : IMethodInvocationPipelineStepContext
         {
-            public bool CancelHardwareInvocation { get; set; }
+            public bool HardwareInvocationIsCancelled { get; set; }
             public IInvocation Invocation { get; set; }
+            public string MethodFullName { get; set; }
+            public IHardwareRepresentation HardwareRepresentation { get; set; }
         }
     }
 }

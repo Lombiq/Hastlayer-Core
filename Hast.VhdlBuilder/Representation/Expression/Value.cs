@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder.Representation.Declaration;
+﻿using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -11,6 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         public DataType DataType { get; set; }
         public string Content { get; set; }
+
 
         public string ToVhdl()
         {

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class Enum : DataType
     {
         public List<Value> Values { get; set; }
@@ -24,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return
                 "type " +
-                Name.ToVhdlId() +
+                Name +
                 " is (" +
                 string.Join(", ", Values.Select(value => value.ToVhdl())) +
                 ");";

@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,9 +62,21 @@
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Tests.TestAssembly1\Hast.Tests.TestAssembly1.csproj">
+      <Project>{39ab568d-b7fd-40c3-a8dd-003e0be92982}</Project>
+      <Name>Hast.Tests.TestAssembly1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Tests.TestAssembly2\Hast.Tests.TestAssembly2.csproj">
+      <Project>{9a026174-8d66-4e74-8689-9f2eef2b8cf1}</Project>
+      <Name>Hast.Tests.TestAssembly2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj">
       <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
       <Name>Hast.Transformer.Vhdl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
+      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
+      <Name>Hast.Transformer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
       <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
@@ -73,6 +86,11 @@
       <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
       <Name>Hast.Samples.SampleAssembly</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fpga.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

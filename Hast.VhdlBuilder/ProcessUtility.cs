@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -25,8 +23,15 @@ namespace Hast.VhdlBuilder
             foreach (var process in module.Architecture.Body.Where(element => element is Process).Select(element => element as Process))
             {
                 process.SesitivityList.Add(clockPort);
-                process.Body.Insert(0, new Raw("if rising_edge(" + clockSignalName.ToVhdlId() + ") then "));
-                process.Body.Add(new Raw("end if;"));
+                var invokation = new Invokation { Target = "rising_edge".ToVhdlIdValue() };
+                invokation.Parameters.Add(clockSignalName.ToVhdlIdValue());
+                var wrappingIf = new IfElse
+                {
+                    Condition = invokation,
+                    True = new ElementCollection { Elements = new List<IVhdlElement>(process.Body) } // Needs to copy the list.
+                };
+                process.Body.Clear();
+                process.Body.Add(wrappingIf);
             }
         }
 

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
+    [DebuggerDisplay("{ToVhdl()}")]
     public class While : IBlockElement
     {
-        public string Condition { get; set; }
+        public IVhdlElement Condition { get; set; }
         public List<IVhdlElement> Body { get; set; }
 
 
@@ -23,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         {
             return
                 "while " +
-                Condition +
+                Condition.ToVhdl() +
                 " loop " +
                 Body.ToVhdl() +
                 "end loop;";
