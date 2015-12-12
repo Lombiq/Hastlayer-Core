@@ -256,9 +256,9 @@ namespace Hast.Transformer.Vhdl.Models
             return (stateMachineName + id).ToExtendedVhdlId();
         }
 
-        public static string CreateStateMachineName(string stateMachineName, int index)
+        public static string CreateStateMachineName(string stateMachineName, int stateMachineIndex)
         {
-            return stateMachineName + "." + index;
+            return stateMachineName + "." + stateMachineIndex;
         }
 
 
