@@ -136,7 +136,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 currentBlock.ChangeBlock(whileStateInnerBody);
                 TransformInner(whileStatement.EmbeddedStatement, context);
 
-                whileState.Body.Add(new IfElse
+                whileState.Add(new IfElse
                     {
                         Condition = condition,
                         True = whileStateInnerBody,
@@ -147,7 +147,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var lastState = stateMachine.States.Last();
                 if (lastState != afterWhileState)
                 {
-                    lastState.Body.Add(stateMachine.CreateStateChange(whileStateIndex));
+                    lastState.Add(stateMachine.CreateStateChange(whileStateIndex));
                 }
                 currentBlock.ChangeBlock(afterWhileState);
             }

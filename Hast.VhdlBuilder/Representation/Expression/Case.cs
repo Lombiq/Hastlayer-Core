@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -41,7 +42,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class When : IVhdlElement
+    public class When : IBlockElement
     {
         public IVhdlElement Expression { get; set; }
         public List<IVhdlElement> Body { get; set; }

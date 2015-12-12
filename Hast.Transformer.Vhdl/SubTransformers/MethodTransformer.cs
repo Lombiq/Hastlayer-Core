@@ -111,7 +111,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             context.Module.Architecture.Declarations.Add(stateMachine.BuildDeclarations());
-            context.Module.Architecture.Body.Add(stateMachine.BuildBody());
+            context.Module.Architecture.Add(stateMachine.BuildBody());
         }
     }
 }

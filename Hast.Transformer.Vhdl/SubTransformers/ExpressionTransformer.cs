@@ -263,7 +263,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     // TODO: WriteEnable and CellIndex should be set in currentBlock and be re-set in
                     // memoryOperationFinishedBlock.
-                    memoryOperationFinishedBlock.Body.Add(new VhdlBuilder.Representation.Declaration.Comment("Write finish"));
+                    memoryOperationFinishedBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Write finish"));
 
                     currentBlock.Add(memoryOperationInvokation.Terminate());
                     currentBlock.ChangeBlock(memoryOperationFinishedBlock);
@@ -336,13 +336,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var trueBlock = new InlineBlock();
 
-                trueBlock.Body.Add(new Assignment
+                trueBlock.Add(new Assignment
                 {
                     AssignTo = startVariableReference,
                     Expression = Value.True
                 }.Terminate());
 
-                trueBlock.Body.Add(new Assignment
+                trueBlock.Add(new Assignment
                 {
                     AssignTo = stateMachineRunningIndexVariable.ToReference(),
                     Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() }
@@ -352,7 +352,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 methodParametersEnumerator.MoveNext();
                 foreach (var parameter in transformedParameters)
                 {
-                    trueBlock.Body.Add(new Assignment
+                    trueBlock.Add(new Assignment
                     {
                         AssignTo =
                             MethodStateMachine.CreatePrefixedVariableName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
@@ -364,7 +364,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var elseBlock = new InlineBlock();
 
-                stateMachineSelectingConditionsBlock.Body.Add(new IfElse
+                stateMachineSelectingConditionsBlock.Add(new IfElse
                 {
                     Condition = new Binary
                     {
@@ -379,7 +379,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 stateMachineSelectingConditionsBlock = elseBlock;
             }
 
-            stateMachineSelectingConditionsBlock.Body.Add(new VhdlBuilder.Representation.Declaration.Comment(
+            stateMachineSelectingConditionsBlock.Add(new VhdlBuilder.Representation.Declaration.Comment(
                 "No idle state machine could be found. This is an error."));
 
             // Common variable to signal that the invoked state machine finished.
@@ -398,7 +398,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // Check if the running state machine finished.
             var stateMachineFinishedCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
-            waitForInvokedStateMachineToFinishState.Body.Add(stateMachineFinishedCheckCase);
+            waitForInvokedStateMachineToFinishState.Add(stateMachineFinishedCheckCase);
             for (int i = 0; i < maxCallStackDepth; i++)
             {
                 var finishedVariableName = MethodStateMachine
@@ -423,7 +423,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 });
             }
 
-            waitForInvokedStateMachineToFinishState.Body.Add(new IfElse
+            waitForInvokedStateMachineToFinishState.Add(new IfElse
             {
                 Condition = new Binary
                 {
@@ -453,7 +453,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     context);
 
                 var stateMachineReadReturnValueCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
-                isInvokedStateMachineFinishedIfElseTrue.Body.Add(stateMachineReadReturnValueCheckCase);
+                isInvokedStateMachineFinishedIfElseTrue.Add(stateMachineReadReturnValueCheckCase);
                 for (int i = 0; i < maxCallStackDepth; i++)
                 {
                     var returnVariableName = MethodStateMachine

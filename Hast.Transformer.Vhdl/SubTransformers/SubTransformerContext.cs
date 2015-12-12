@@ -59,7 +59,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public void Add(IVhdlElement element)
         {
-            _currentBlock.Body.Add(element);
+            _currentBlock.Add(element);
         }
 
         public void ChangeBlock(IBlockElement newBlock)

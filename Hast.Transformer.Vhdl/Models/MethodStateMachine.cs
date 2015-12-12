@@ -74,18 +74,18 @@ namespace Hast.Transformer.Vhdl.Models
 
 
             var startStateBlock = new InlineBlock();
-            startStateBlock.Body.Add(new Assignment { AssignTo = _finishedVariable, Expression = Value.False }.Terminate());
+            startStateBlock.Add(new Assignment { AssignTo = _finishedVariable, Expression = Value.False }.Terminate());
             var startStateIfElse = new IfElse
             {
                 Condition = new Binary { Left = _startVariable.Name.ToVhdlIdValue(), Operator = "=", Right = Value.True },
                 True = CreateStateChange(2)
             };
-            startStateBlock.Body.Add(startStateIfElse);
+            startStateBlock.Add(startStateIfElse);
 
             var finalStateBlock = new InlineBlock();
-            finalStateBlock.Body.Add(new Assignment { AssignTo = _finishedVariable, Expression = Value.True }.Terminate());
-            finalStateBlock.Body.Add(new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate());
-            finalStateBlock.Body.Add(ChangeToStartState());
+            finalStateBlock.Add(new Assignment { AssignTo = _finishedVariable, Expression = Value.True }.Terminate());
+            finalStateBlock.Add(new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate());
+            finalStateBlock.Add(ChangeToStartState());
 
             _states = new List<IBlockElement>
             {
@@ -189,7 +189,7 @@ namespace Hast.Transformer.Vhdl.Models
             for (int i = 0; i < _states.Count; i++)
             {
                 var stateWhen = new When { Expression = CreateStateName(i).ToVhdlIdValue() };
-                stateWhen.Body.Add(_states[i]);
+                stateWhen.Add(_states[i]);
                 stateCase.Whens.Add(stateWhen);
             }
 
@@ -209,7 +209,7 @@ namespace Hast.Transformer.Vhdl.Models
                 True = ifInResetBlock,
                 Else = stateCase
             };
-            process.Body.Add(resetIf);
+            process.Add(resetIf);
 
             return process;
         }

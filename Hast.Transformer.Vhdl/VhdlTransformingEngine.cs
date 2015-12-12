@@ -192,7 +192,7 @@ namespace Hast.Transformer.Vhdl
             //            Parameters = new List<IVhdlElement>(simpleMemoryParameters)
             //        };
 
-            //        when.Body.Add(invokation.Terminate());
+            //        when.Add(invokation.Terminate());
             //    }
             //    else
             //    {
@@ -210,7 +210,7 @@ namespace Hast.Transformer.Vhdl
 
             //            if (port.Mode == PortMode.In)
             //            {
-            //                when.Body.Add(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() }.Terminate());
+            //                when.Add(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() }.Terminate());
             //            }
 
             //            portVariables[port] = variable;
@@ -227,12 +227,12 @@ namespace Hast.Transformer.Vhdl
             //                .ToList()
             //        };
 
-            //        when.Body.Add(invokation.Terminate());
+            //        when.Add(invokation.Terminate());
 
             //        // Copying output variables to output ports.
             //        foreach (var port in interfaceMethod.Ports.Where(p => p.Mode == PortMode.Out))
             //        {
-            //            when.Body.Add(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }.Terminate());
+            //            when.Add(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }.Terminate());
             //        }
             //    }
 
@@ -251,9 +251,9 @@ namespace Hast.Transformer.Vhdl
 
             //caseExpression.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
 
-            //proxyProcess.Body.Add(caseExpression);
+            //proxyProcess.Add(caseExpression);
 
-            //transformationContext.Module.Architecture.Body.Add(proxyProcess);
+            //transformationContext.Module.Architecture.Add(proxyProcess);
 
             //return memberIdTable;
         }
