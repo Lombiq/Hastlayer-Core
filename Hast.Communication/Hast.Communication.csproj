@@ -63,6 +63,7 @@
     <Compile Include="MethodInvocationHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyGenerator.cs" />
+    <Compile Include="Services\EthernetCommunicationService.cs" />
     <Compile Include="Services\SerialPortCommunicationService.cs" />
     <Compile Include="Services\ICommunicationService.cs" />
   </ItemGroup>

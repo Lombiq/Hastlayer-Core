@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.IO.Ports;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -78,6 +79,18 @@ namespace Hast.Communication.Helpers
 
             await taskCompletionSource.Task;
             return taskCompletionSource.Task.Result;
+        }
+
+        /// <summary>
+        /// Helper method used for detection of the connected FPGA board on the network.
+        /// </summary>
+        /// <returns>The IP address of the FPGA board.</returns>
+        public static async Task<string> GetFpgaIPAddress()
+        {
+            // Get the IP address of the .NET side.
+            var ipAddresses = await Dns.GetHostAddressesAsync(Dns.GetHostName());
+            // Not yet implemented. Please change this to the address of the FPGA board.
+            return "192.168.0.107"; 
         }
     }
 }
