@@ -65,7 +65,7 @@ namespace Hast.Communication
                         {
                             var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(methodFullName);
                             // The task here is needed because the code executed on the FPGA board doesn't return, we have to wait for it.
-                            // The Execute method is executed in separate thread.
+                            // The Execute method is executed on separate thread.
                             var task = Task.Run(async () => { await workContext.Resolve<ICommunicationService>().Execute(memory, memberId); });
                             task.Wait();
                         }
