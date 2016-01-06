@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Threading.Tasks;
+using Hast.Communication.Models;
 
 namespace Hast.Communication.Services
 {
@@ -21,11 +22,11 @@ namespace Hast.Communication.Services
         }
 
 
-        public async Task<Information> Execute(SimpleMemory simpleMemory, int memberId)
+        public async Task<IExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
             var stopWatch = new Stopwatch(); // Measuring the exection time.
             stopWatch.Start(); // Start the measurement.
-            var information = new Information();
+            var information = new ExecutionInformation();
             var serialPort = new SerialPort();
 
             // Initializing some serial port connection settings (may be different whith some FPGA boards).
@@ -191,7 +192,7 @@ namespace Hast.Communication.Services
             stopWatch.Stop(); // Stop the exection time measurement.
             var fullExecutionTime = stopWatch.ElapsedMilliseconds;
             Logger.Information("Full execution time: {0}", fullExecutionTime.ToString());
-            information.FullExecutionTime = fullExecutionTime;
+            information.FullExecutionTimeMilliseconds = fullExecutionTime;
             return information;
         }
     }

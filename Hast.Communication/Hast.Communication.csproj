@@ -57,10 +57,11 @@
     <Compile Include="Extensibility\Pipeline\IMethodInvocationPipelineStepContext.cs" />
     <Compile Include="Helpers\CommunicationHelpers.cs" />
     <Compile Include="IMethodInvocationHandlerFactory.cs" />
-    <Compile Include="Information.cs" />
+    <Compile Include="Models\ExecutionInformation.cs" />
     <Compile Include="IProxyGenerator.cs" />
     <Compile Include="MemberSuitabilityChecker.cs" />
     <Compile Include="MethodInvocationHandlerFactory.cs" />
+    <Compile Include="Models\IExecutionInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyGenerator.cs" />
     <Compile Include="Services\SerialPortCommunicationService.cs" />

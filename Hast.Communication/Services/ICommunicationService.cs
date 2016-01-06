@@ -1,6 +1,7 @@
 ﻿using Hast.Transformer.SimpleMemory;
 using Orchard;
 using System.Threading.Tasks;
+using Hast.Communication.Models;
 
 namespace Hast.Communication.Services
 {
@@ -10,11 +11,13 @@ namespace Hast.Communication.Services
     public interface ICommunicationService : IDependency
     {
         /// <summary>
-        /// The method to run the code on FPGA board.
+        /// Executes the given member on hardware.
         /// </summary>
-        /// <param name="simpleMemory">The SimpleMemory object (array of bytes).</param>
-        /// <param name="memberId">The member ID identifies the code what we want to run on the FPGA board.</param>
-        /// <returns>A SimpleMemory object.</returns>
-        Task<Information> Execute(SimpleMemory simpleMemory, int memberId);
+        /// <param name="simpleMemory">The <see cref="SimpleMemory"/> object representing the memory space the logic works in.</param>
+        /// <param name="memberId">The member ID identifies the class member that we want to run on the FPGA board.</param>
+        /// <returns>
+        /// An <see cref="IExecutionInformation"/> object containing debug and runtime information about the hardware execution.
+        /// </returns>
+        Task<IExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId);
     }
 }
