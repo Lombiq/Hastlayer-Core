@@ -106,7 +106,7 @@ namespace Hast.Communication.Services
             // In this event we are receiving the useful data coming from the FPGA board.
             serialPort.DataReceived += (s, e) =>
             {
-                // When there i ssome incoming data then we read it from the serial port (this will be a byte that we receive).
+                // When there is some incoming data then we read it from the serial port (this will be a byte that we receive).
                 if (communicationType == Constants.SerialCommunicationConstants.Signals.Default)
                 {
                     var receivedCharacter = Convert.ToChar((byte)serialPort.ReadByte());
@@ -135,6 +135,7 @@ namespace Hast.Communication.Services
                         var executionTimeValue = BitConverter.ToInt32(executionTime, 0);
                         Logger.Information(executionTimeValue.ToString());
                         information.FpgaExecutionTime = executionTimeValue;
+                        serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived);
                     }
                 }
                 else // If the communicationType variable is equal with Constants.FpgaConstants.Signals.Data (d) then this code will run.
