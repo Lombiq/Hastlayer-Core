@@ -29,6 +29,7 @@ namespace Hast.Communication.Services
             var serialPort = new SerialPort();
 
             // Initializing some serial port connection settings (may be different whith some FPGA boards).
+            // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
 
             serialPort.PortName = await CommunicationHelpers.GetFpgaPortName();
             serialPort.BaudRate = Constants.SerialCommunicationConstants.BaudRate;
@@ -103,68 +104,82 @@ namespace Hast.Communication.Services
             var executionTime = new byte[4];
             var executionTimeByteCounter = 0;
 
+            Action<byte> processReceivedByte = receivedByte =>
+                {
+                    // When there is some incoming data then we read it from the serial port (this will be a byte that we receive).
+                    if (communicationType == Constants.SerialCommunicationConstants.Signals.Default)
+                    {
+                        var receivedCharacter = Convert.ToChar(receivedByte);
+                        if (receivedCharacter == Constants.SerialCommunicationConstants.Signals.Information)
+                        {
+                            communicationType = Constants.SerialCommunicationConstants.Signals.Information;
+                            serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready);
+                        }
+                        else
+                        {
+                            communicationType = Constants.SerialCommunicationConstants.Signals.Result;
+                        }
+                    }
+                    else if (communicationType == Constants.SerialCommunicationConstants.Signals.Information)
+                    {
+                        // We know that the incoming data's size will be 4 bytes.
+                        executionTime[executionTimeByteCounter] = receivedByte;
+                        executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
+                        if (executionTimeByteCounter == 3) // If we received the 4 bytes.
+                        {
+                            communicationType = Constants.SerialCommunicationConstants.Signals.Result; // We switch the communication type back to 'result'.
+                            executionTimeByteCounter = 0;
+                            // If the system architecture is little-endian (that is, little end first), reverse the byte array.
+                            if (BitConverter.IsLittleEndian) Array.Reverse(executionTime);
+                            // Log the information.
+                            var executionTimeValue = BitConverter.ToInt32(executionTime, 0);
+                            Logger.Information(executionTimeValue.ToString());
+                            information.FpgaExecutionTime = executionTimeValue;
+                            serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived);
+                        }
+                    }
+                    else // If the communicationType variable is equal with Constants.FpgaConstants.Signals.Data (d) then this code will run.
+                    {
+                        // The first byte will be the size of the byte array that we must receive.
+                        if (messageSizeBytes == 0) // To setup the right receiving buffer size.
+                        {
+                            // The first byte is the data size that we must receive.
+                            messageSizeBytes = receivedByte;
+                            // The code below is just used for debug purposes.
+                            var receivedCharacter = Convert.ToChar(messageSizeBytes);
+                            Logger.Information("Incoming data size: {0}", receivedCharacter.ToString());
+                            serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready); // Signal that we are ready to receive the data.
+                        }
+                        else
+                        {
+                            // We put together the received data stream.
+
+                            returnValue[returnValueIndex] = receivedByte;
+                            returnValueIndex++;
+                            count++;
+                            serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived); // Signal that we received all bytes.
+                        }
+
+                        // Set the incoming data if all bytes are received (waiting for incoming data stream to complete).
+                        if (messageSizeBytes == count)
+                        {
+                            simpleMemory.Memory = returnValue;
+                            taskCompletionSource.SetResult(true);
+                        }
+                    }
+                };
+
             // In this event we are receiving the useful data coming from the FPGA board.
             serialPort.DataReceived += (s, e) =>
             {
-                // When there is some incoming data then we read it from the serial port (this will be a byte that we receive).
-                if (communicationType == Constants.SerialCommunicationConstants.Signals.Default)
+                if (e.EventType == SerialData.Chars)
                 {
-                    var receivedCharacter = Convert.ToChar((byte)serialPort.ReadByte());
-                    if (receivedCharacter == Constants.SerialCommunicationConstants.Signals.Information)
-                    {
-                        communicationType = Constants.SerialCommunicationConstants.Signals.Information;
-                        serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready);
-                    }
-                    else
-                    {
-                        communicationType = Constants.SerialCommunicationConstants.Signals.Result;
-                    }
-                }
-                else if (communicationType == Constants.SerialCommunicationConstants.Signals.Information)
-                {
-                    // We know that the incoming data's size will be 4 bytes.
-                    executionTime[executionTimeByteCounter] = (byte)serialPort.ReadByte();
-                    executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
-                    if (executionTimeByteCounter == 3) // If we received the 4 bytes.
-                    {
-                        communicationType = Constants.SerialCommunicationConstants.Signals.Result; // We switch the communication type back to 'result'.
-                        executionTimeByteCounter = 0;
-                        // If the system architecture is little-endian (that is, little end first), reverse the byte array.
-                        if (BitConverter.IsLittleEndian) Array.Reverse(executionTime);
-                        // Log the information.
-                        var executionTimeValue = BitConverter.ToInt32(executionTime, 0);
-                        Logger.Information(executionTimeValue.ToString());
-                        information.FpgaExecutionTime = executionTimeValue;
-                        serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived);
-                    }
-                }
-                else // If the communicationType variable is equal with Constants.FpgaConstants.Signals.Data (d) then this code will run.
-                {
-                    // The first byte will be the size of the byte array that we must receive.
-                    if (messageSizeBytes == 0) // To setup the right receiving buffer size.
-                    {
-                        // The first byte is the data size that we must receive.
-                        messageSizeBytes = (byte)serialPort.ReadByte();
-                        // The code below is just used for debug purposes.
-                        var receivedCharacter = Convert.ToChar(messageSizeBytes);
-                        Logger.Information("Incoming data size: {0}", receivedCharacter.ToString());
-                        serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready); // Signal that we are ready to receive the data.
-                    }
-                    else
-                    {
-                        // We put together the received data stream.
-                        var receivedByte = (byte)serialPort.ReadByte();
-                        returnValue[returnValueIndex] = receivedByte;
-                        returnValueIndex++;
-                        count++;
-                        serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived); // Signal that we received all bytes.
-                    }
+                    var inputBuffer = new byte[serialPort.BytesToRead];
+                    serialPort.Read(inputBuffer, 0, inputBuffer.Length);
 
-                    // Set the incoming data if all bytes are received (waiting for incoming data stream to complete).
-                    if (messageSizeBytes == count)
+                    for (int i = 0; i < inputBuffer.Length; i++)
                     {
-                        simpleMemory.Memory = returnValue;
-                        taskCompletionSource.SetResult(true);
+                        processReceivedByte(inputBuffer[i]);
                     }
                 }
             };
