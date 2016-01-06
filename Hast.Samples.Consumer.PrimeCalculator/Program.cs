@@ -32,7 +32,7 @@ namespace Hast.Samples.Consumer.PrimeCalculator
 
                     var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator());
                     var isPrime = primeCalculator.IsPrimeNumber(15);
-                    var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 99237 });
+                    var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
                 }
             }).Wait(); // This is a workaround for async just to be able to run all this from inside a console app.
         }

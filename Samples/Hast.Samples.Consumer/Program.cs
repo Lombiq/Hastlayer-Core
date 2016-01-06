@@ -38,6 +38,7 @@ namespace Hast.Samples.Consumer
 
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);
+                        var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
 
                         using (var bitmap = new Bitmap("fpga.jpg"))
                         {
