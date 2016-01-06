@@ -125,7 +125,7 @@ namespace Hast.Communication.Services
                         // We know that the incoming data's size will be 4 bytes.
                         executionTime[executionTimeByteCounter] = receivedByte;
                         executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
-                        if (executionTimeByteCounter == 3) // If we received the 4 bytes.
+                        if (executionTimeByteCounter == 4) // If we received the 4 bytes.
                         {
                             communicationType = Constants.SerialCommunicationConstants.Signals.Result; // We switch the communication type back to 'result'.
                             executionTimeByteCounter = 0;
