@@ -31,6 +31,7 @@ namespace Hast.Samples.Consumer
 
                         var configuration = new HardwareGenerationConfiguration();
                         configuration.PublicHardwareMemberPrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumber");
+                        configuration.TransformerConfiguration().MaxCallStackDepth = 3;
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
                             {
@@ -38,6 +39,9 @@ namespace Hast.Samples.Consumer
                                 //typeof(Math).Assembly // Would be needed for Math.Sqrt() but transforming that is not yet supported.
                             },
                             configuration);
+
+                        // For testing transformation, we don't need anything else.
+                        return;
 
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);
