@@ -97,7 +97,7 @@ namespace Hast.Communication.Services
 
             var taskCompletionSource = new TaskCompletionSource<bool>();
             var messageSizeBytes = 0; // The incoming byte buffer size.
-            var count = 0; // Just used to know when the data is ready.
+            var messageSizeCount = 0; // Just used to know when the data is ready.
             var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer.
             var returnValueIndex = 0;
             var communicationType = Constants.SerialCommunicationConstants.Signals.Default;
@@ -156,13 +156,15 @@ namespace Hast.Communication.Services
 
                             returnValue[returnValueIndex] = receivedByte;
                             returnValueIndex++;
-                            count++;
-                            serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived); // Signal that we received all bytes.
+                            messageSizeCount++;
+                            serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready);
                         }
 
                         // Set the incoming data if all bytes are received (waiting for incoming data stream to complete).
-                        if (messageSizeBytes == count)
+                        if (messageSizeBytes == messageSizeCount)
                         {
+                            serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived); // Signal that we received all bytes.
+
                             simpleMemory.Memory = returnValue;
                             taskCompletionSource.SetResult(true);
                         }
