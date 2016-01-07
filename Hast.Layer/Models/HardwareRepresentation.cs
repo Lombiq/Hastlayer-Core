@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Models;
 
-namespace Hast.Layer
+namespace Hast.Layer.Models
 {
     internal class HardwareRepresentation : IHardwareRepresentation
     {

@@ -30,7 +30,9 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                             },
                         hardwareConfiguration);
 
-                    var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator());
+                    var materializedHardware = await hastlayer.MaterializeHardware(hardwareRepresentation);
+
+                    var primeCalculator = await hastlayer.GenerateProxy(materializedHardware, new Hast.Samples.SampleAssembly.PrimeCalculator());
                     var isPrime = primeCalculator.IsPrimeNumber(15);
                     var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
                 }
