@@ -13,11 +13,15 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
+        private readonly ISerialPortNameCache _serialPortNameCache;
+
         public ILogger Logger { get; set; }
 
 
-        public SerialPortCommunicationService()
+        public SerialPortCommunicationService(ISerialPortNameCache serialPortNameCache)
         {
+            _serialPortNameCache = serialPortNameCache;
+
             Logger = NullLogger.Instance;
         }
 
@@ -33,7 +37,11 @@ namespace Hast.Communication.Services
                 // Initializing some serial port connection settings (may be different whith some FPGA boards).
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
 
-                serialPort.PortName = await CommunicationHelpers.GetFpgaPortName();
+                if (string.IsNullOrEmpty(_serialPortNameCache.PortName))
+                {
+                    _serialPortNameCache.PortName = await CommunicationHelpers.GetFpgaPortName();
+                }
+                serialPort.PortName = _serialPortNameCache.PortName;
                 serialPort.BaudRate = Constants.SerialCommunicationConstants.BaudRate;
                 serialPort.Parity = Constants.SerialCommunicationConstants.SerialPortParity;
                 serialPort.StopBits = Constants.SerialCommunicationConstants.SerialPortStopBits;
@@ -98,9 +106,9 @@ namespace Hast.Communication.Services
                 }
 
                 var taskCompletionSource = new TaskCompletionSource<bool>();
-                var messageSizeBytes = 0; // The incoming byte buffer size.
-                var messageSizeCount = 0; // Just used to know when the data is ready.
-                var returnValue = new byte[simpleMemory.Memory.Length]; // The incoming buffer.
+                var messageBytesCount = 0; // The incoming byte buffer size.
+                var messageBytesReceived = 0; // Just used to know when the data is ready.
+                var returnValueBytes = new byte[0]; // The incoming buffer.
                 var returnValueIndex = 0;
                 var communicationType = Constants.SerialCommunicationConstants.Signals.Default;
                 var executionTime = new byte[4];
@@ -143,31 +151,37 @@ namespace Hast.Communication.Services
                         else // If the communicationType variable is equal with Constants.FpgaConstants.Signals.Data (d) then this code will run.
                         {
                             // The first byte will be the size of the byte array that we must receive.
-                            if (messageSizeBytes == 0) // To setup the right receiving buffer size.
+                            if (messageBytesCount == 0) // To setup the right receiving buffer size.
                             {
                                 // The first byte is the data size that we must receive.
-                                messageSizeBytes = receivedByte;
-                                // The code below is just used for debug purposes.
-                                var receivedCharacter = Convert.ToChar(messageSizeBytes);
-                                Logger.Information("Incoming data size: {0}", receivedCharacter.ToString());
-                                serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready); // Signal that we are ready to receive the data.
+                                messageBytesCount = receivedByte;
+
+                                // Since the return value's size can differ from the input size for optimization reasons,
+                                // we take the explicit size into account.
+                                returnValueBytes = new byte[messageBytesCount];
+
+                                Logger.Information("Incoming data size: {0}", Convert.ToChar(messageBytesCount).ToString());
+
+                                // Signal that we are ready to receive the data.
+                                serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready);
                             }
                             else
                             {
                                 // We put together the received data stream.
 
-                                returnValue[returnValueIndex] = receivedByte;
+                                returnValueBytes[returnValueIndex] = receivedByte;
                                 returnValueIndex++;
-                                messageSizeCount++;
+                                messageBytesReceived++;
                                 serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready);
                             }
 
                             // Set the incoming data if all bytes are received (waiting for incoming data stream to complete).
-                            if (messageSizeBytes == messageSizeCount)
+                            if (messageBytesCount == messageBytesReceived)
                             {
-                                serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived); // Signal that we received all bytes.
+                                // Signal that we received all bytes.
+                                serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived);
 
-                                simpleMemory.Memory = returnValue;
+                                simpleMemory.Memory = returnValueBytes;
                                 taskCompletionSource.SetResult(true);
                             }
                         }

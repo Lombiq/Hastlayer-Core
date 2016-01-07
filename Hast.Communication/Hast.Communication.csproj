@@ -66,6 +66,7 @@
     <Compile Include="ProxyGenerator.cs" />
     <Compile Include="Services\SerialPortCommunicationService.cs" />
     <Compile Include="Services\ICommunicationService.cs" />
+    <Compile Include="Services\SerialPortNameCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj">
