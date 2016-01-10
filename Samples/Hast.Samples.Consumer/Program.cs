@@ -23,9 +23,14 @@ namespace Hast.Samples.Consumer
                     // Generating hardware from samples:
                     using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
                     {
-                        hastlayer.Transformed += (sender, e) =>
+                        hastlayer.ExecutedOnHardware += (sender, e) =>
                             {
-                                //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
+                                Console.WriteLine(
+                                    "Executing " + 
+                                    e.MemberFullName + 
+                                    " on hardware took " +
+                                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                                    " milliseconds (all together)");
                             };
 
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
@@ -35,6 +40,8 @@ namespace Hast.Samples.Consumer
                                 //typeof(Math).Assembly // Would be needed for Math.Sqrt() but transforming that is not yet supported.
                             },
                             HardwareGenerationConfiguration.Default);
+
+                        //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
                         var materializedHardware = await hastlayer.MaterializeHardware(hardwareRepresentation);
 
@@ -77,11 +84,6 @@ namespace Hast.Samples.Consumer
                     // Generating hardware from test assemblies:
                     using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
                     {
-                        hastlayer.Transformed += (sender, e) =>
-                        {
-                            //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
-                        };
-
                         var configuration = new HardwareGenerationConfiguration
                         {
                             // Another way would be to add such prefixes (potentially for whole namespaces like here), instead we add a single
@@ -97,6 +99,8 @@ namespace Hast.Samples.Consumer
                                 typeof(ComplexTypeHierarchy).Assembly,
                                 typeof(StaticReference).Assembly
                             }, configuration);
+
+                        //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
                         var materializedHardware = await hastlayer.MaterializeHardware(hardwareRepresentation);
 

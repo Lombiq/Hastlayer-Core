@@ -51,17 +51,17 @@
   <ItemGroup>
     <Compile Include="Constants\SerialCommunicationConstants.cs" />
     <Compile Include="Exceptions\SerialPortCommunicationException.cs" />
+    <Compile Include="Extensibility\Events\IMemberHardwareExecutionContext.cs" />
     <Compile Include="Extensibility\Events\IMemberInvocationEventHandler.cs" />
     <Compile Include="Extensibility\IMemberInvocationContext.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStep.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStepContext.cs" />
     <Compile Include="Helpers\CommunicationHelpers.cs" />
     <Compile Include="IMemberInvocationHandlerFactory.cs" />
-    <Compile Include="Models\ExecutionInformation.cs" />
+    <Compile Include="Models\HardwareExecutionInformation.cs" />
     <Compile Include="IProxyGenerator.cs" />
     <Compile Include="MemberSuitabilityChecker.cs" />
     <Compile Include="MemberInvocationHandlerFactory.cs" />
-    <Compile Include="Models\IExecutionInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyGenerator.cs" />
     <Compile Include="Services\SerialPortCommunicationService.cs" />

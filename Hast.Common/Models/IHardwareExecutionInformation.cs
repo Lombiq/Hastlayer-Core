@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Communication.Models
+namespace Hast.Common.Models
 {
     /// <summary>
     /// Carries debug and runtime information about a hardware execution.
     /// </summary>
-    public interface IExecutionInformation
+    public interface IHardwareExecutionInformation
     {
         /// <summary>
         /// The execution time received from the FPGA board.

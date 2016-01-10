@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System;
+using Hast.Communication.Extensibility;
 
 namespace Hast.Communication
 {
@@ -25,7 +27,7 @@ namespace Hast.Communication
         }
 
 
-        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target)
+        public MemberInvocationHandler CreateMemberInvocationHandler(IMaterializedHardware materializedHardware, object target)
         {
             return invocation =>
                 {
@@ -34,48 +36,54 @@ namespace Hast.Communication
                         // Although it says Method it can also be a property.
                         var memberFullName = invocation.Method.GetFullName();
 
-                        var context = new MemberInvocationPipelineStepContext
+                        var invokationContext = new MemberInvocationContext
                         {
                             Invocation = invocation,
                             MemberFullName = memberFullName,
-                            HardwareRepresentation = hardwareRepresentation
+                            MaterializedHardware = materializedHardware
                         };
 
                         var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
-                        eventHandler.MemberInvoking(context);
+                        eventHandler.MemberInvoking(invokationContext);
 
                         workContext.Resolve<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
                             {
-                                context.HardwareInvocationIsCancelled = step.CanContinueHardwareInvokation(context);
+                                invokationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invokationContext);
                             });
 
-                        if (!context.HardwareInvocationIsCancelled)
+                        if (!invokationContext.HardwareExecutionIsCancelled)
                         {
-                            var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
+                            var hardwareMembers = materializedHardware.HardwareRepresentation.HardwareDescription.HardwareMembers;
                             var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
                             if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                             {
-                                context.HardwareInvocationIsCancelled = true;
+                                invokationContext.HardwareExecutionIsCancelled = true;
                             } 
                         }
 
-                        if (context.HardwareInvocationIsCancelled) return false;
+                        if (invokationContext.HardwareExecutionIsCancelled) return false;
                   
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
+                            var memberId = materializedHardware.HardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
                             // The task here is needed because the code executed on the FPGA board doesn't return, we have 
                             // to wait for it.
                             // The Execute method is executed on separate thread.
                             var task = Task.Run(async () =>
                                 {
-                                    await workContext.Resolve<ICommunicationService>().Execute(memory, memberId);
+                                    invokationContext.ExecutionInformation = await workContext
+                                        .Resolve<ICommunicationService>()
+                                        .Execute(memory, memberId);
                                 });
                             task.Wait();
                         }
+                        else
+                        {
+                            throw new InvalidOperationException("Only SimpleMemory-using implementations are supported for hardware execution.");
+                        }
 
-                        eventHandler.MemberInvokedOnHardware(context);
+                        eventHandler.MemberExecutedOnHardware(invokationContext);
 
                         return true;
                     }
@@ -83,12 +91,13 @@ namespace Hast.Communication
         }
 
 
-        private class MemberInvocationPipelineStepContext : IMemberInvocationPipelineStepContext
+        private class MemberInvocationContext : IMemberInvocationPipelineStepContext, IMemberHardwareExecutionContext
         {
-            public bool HardwareInvocationIsCancelled { get; set; }
+            public bool HardwareExecutionIsCancelled { get; set; }
             public IInvocation Invocation { get; set; }
             public string MemberFullName { get; set; }
-            public IHardwareRepresentation HardwareRepresentation { get; set; }
+            public IMaterializedHardware MaterializedHardware { get; set; }
+            public IHardwareExecutionInformation ExecutionInformation { get; set; }
         }
     }
 }

@@ -41,7 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensibility\Events\EventHandlers.cs" />
-    <Compile Include="Extensibility\Events\TransformedEventArgs.cs" />
+    <Compile Include="Extensibility\Events\ExecutedOnHardwareEventArgs.cs" />
+    <Compile Include="Extensibility\Events\HardwareExecutionEventProxy.cs" />
     <Compile Include="Models\HardwareRepresentation.cs" />
     <Compile Include="Hastlayer.cs" />
     <Compile Include="HastlayerException.cs" />

@@ -14,9 +14,9 @@ namespace Hast.Communication.Extensibility.Events
         void MemberInvoking(IMemberInvocationContext invocationContext);
 
         /// <summary>
-        /// Fired when a hardware-implemented member finished being invoked as hardware-implemented logic.
+        /// Fired when a hardware-implemented member finished being executed as hardware-implemented logic.
         /// </summary>
-        /// <param name="invocationContext">The context of the member invocation.</param>
-        void MemberInvokedOnHardware(IMemberInvocationContext invocationContext);
+        /// <param name="hardwareExecutionContext">The context of the hardware execution.</param>
+        void MemberExecutedOnHardware(IMemberHardwareExecutionContext hardwareExecutionContext);
     }
 }

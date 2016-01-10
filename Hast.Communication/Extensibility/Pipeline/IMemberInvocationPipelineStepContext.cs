@@ -11,6 +11,6 @@ namespace Hast.Communication.Extensibility.Pipeline
         /// <summary>
         /// Indicates whether running the logic on hardware was cancelled to resume member invokation in software.
         /// </summary>
-        bool HardwareInvocationIsCancelled { get; }
+        bool HardwareExecutionIsCancelled { get; }
     }
 }

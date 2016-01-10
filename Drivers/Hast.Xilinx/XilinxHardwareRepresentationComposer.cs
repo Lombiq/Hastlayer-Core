@@ -9,9 +9,9 @@ using Hast.Synthesis;
 
 namespace Hast.Xilinx
 {
-    public class XilinxHardwareRepresentationComposer : IHardwareRepresentationComposer
+    public class XilinxHardwareRepresentationComposer : IHardwareImplementationComposer
     {
-        public Task Compose(IHardwareDescription hardwareDescription)
+        public Task Compose(IHardwareRepresentation hardwareRepresentation)
         {
             // Not yet implemented.
             return Task.Delay(1);

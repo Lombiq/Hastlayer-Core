@@ -15,9 +15,9 @@ namespace Hast.Layer
     public interface IHastlayer : IDisposable
     {
         /// <summary>
-        /// Occurs when the .NET assembly was transformed into hardware description.
+        /// Occurs when the member invokation (e.g. a method call) was transferred to hardware and finished there.
         /// </summary>
-        event TransformedEventHandler Transformed;
+        event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 
         /// <summary>
         /// Generates a hardware representation of the given assemblies.

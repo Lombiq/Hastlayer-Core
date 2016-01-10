@@ -24,6 +24,6 @@ namespace Hast.Communication
     /// </summary>
     public interface IMemberInvocationHandlerFactory : ISingletonDependency
     {
-        MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target);
+        MemberInvocationHandler CreateMemberInvocationHandler(IMaterializedHardware materializedHardware, object target);
     }
 }

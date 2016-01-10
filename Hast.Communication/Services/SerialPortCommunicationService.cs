@@ -8,6 +8,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading.Tasks;
 using Hast.Communication.Models;
+using Hast.Common.Models;
 
 namespace Hast.Communication.Services
 {
@@ -26,11 +27,11 @@ namespace Hast.Communication.Services
         }
 
 
-        public async Task<IExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
+        public async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
             var stopWatch = new Stopwatch(); // Measuring the exection time.
             stopWatch.Start(); // Start the measurement.
-            var information = new ExecutionInformation();
+            var information = new HardwareExecutionInformation();
 
             using (var serialPort = new SerialPort())
             {
