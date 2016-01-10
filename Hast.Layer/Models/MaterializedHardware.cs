@@ -7,7 +7,7 @@ using Hast.Common.Models;
 
 namespace Hast.Layer.Models
 {
-    internal class MaterializedHardware
+    internal class MaterializedHardware : IMaterializedHardware
     {
         public IHardwareRepresentation HardwareRepresentation { get; set; }
     }
