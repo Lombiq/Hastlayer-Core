@@ -9,7 +9,7 @@ using Orchard;
 namespace Hast.Communication
 {
     /// <summary>
-    /// Generates proxies for objects whose logic is implemented as hardware to redirect method calls to the hardware implementation.
+    /// Generates proxies for objects whose logic is implemented as hardware to redirect member calls to the hardware implementation.
     /// </summary>
     public interface IProxyGenerator : ISingletonDependency
     {

@@ -9,20 +9,20 @@ using Hast.Common.Models;
 namespace Hast.Communication.Extensibility
 {
     /// <summary>
-    /// The context of the invocation of a hardware-implemented method.
+    /// The context of the invocation of a hardware-implemented member.
     /// </summary>
-    public interface IMethodInvocationContext
+    public interface IMemberInvocationContext
     {
         /// <summary>
-        /// Gets the context of the method invocation.
+        /// Gets the context of the member invocation.
         /// </summary>
         IInvocation Invocation { get; }
 
         /// <summary>
-        /// Gets the full name of the invoked method, including the full namespace of the parent type(s) as well as their return type 
-        /// and the types of their (type) arguments.
+        /// Gets the full name of the invoked member, including the full namespace of the parent type(s) as well as their
+        /// return type and the types of their (type) arguments.
         /// </summary>
-        string MethodFullName { get; }
+        string MemberFullName { get; }
 
         /// <summary>
         /// Gets the hardware representation behind the hardware-implemented members.

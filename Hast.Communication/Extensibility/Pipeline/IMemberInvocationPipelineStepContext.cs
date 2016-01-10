@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Hast.Communication.Extensibility.Pipeline
 {
-    public interface IMethodInvocationPipelineStepContext : IMethodInvocationContext
+    public interface IMemberInvocationPipelineStepContext : IMemberInvocationContext
     {
         /// <summary>
-        /// Indicates whether running the logic on hardware was cancelled to resume method invokation in software.
+        /// Indicates whether running the logic on hardware was cancelled to resume member invokation in software.
         /// </summary>
         bool HardwareInvocationIsCancelled { get; }
     }
