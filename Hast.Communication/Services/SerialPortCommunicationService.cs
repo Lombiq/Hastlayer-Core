@@ -204,10 +204,12 @@ namespace Hast.Communication.Services
 
                 // Await the taskCompletionSource to complete.
                 await taskCompletionSource.Task;
+
                 stopWatch.Stop(); // Stop the exection time measurement.
                 var fullExecutionTime = stopWatch.ElapsedMilliseconds;
                 Logger.Information("Full execution time (in milliseconds): {0}", fullExecutionTime.ToString());
                 information.FullExecutionTimeMilliseconds = fullExecutionTime;
+
                 return information; 
             }
         }
