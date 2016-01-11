@@ -112,7 +112,7 @@ namespace Hast.Communication.Services
                 var returnValueBytes = new byte[0]; // The incoming buffer.
                 var returnValueIndex = 0;
                 var communicationType = Constants.SerialCommunicationConstants.Signals.Default;
-                var executionTime = new byte[4];
+                var executionTimeClockCycles = new byte[4];
                 var executionTimeByteCounter = 0;
 
                 Action<byte> processReceivedByte = receivedByte =>
@@ -134,18 +134,21 @@ namespace Hast.Communication.Services
                         else if (communicationType == Constants.SerialCommunicationConstants.Signals.Information)
                         {
                             // We know that the incoming data's size will be 4 bytes.
-                            executionTime[executionTimeByteCounter] = receivedByte;
+                            executionTimeClockCycles[executionTimeByteCounter] = receivedByte;
                             executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
                             if (executionTimeByteCounter == 4) // If we received the 4 bytes.
                             {
                                 communicationType = Constants.SerialCommunicationConstants.Signals.Result; // We switch the communication type back to 'result'.
                                 executionTimeByteCounter = 0;
                                 // If the system architecture is little-endian (that is, little end first), reverse the byte array.
-                                if (BitConverter.IsLittleEndian) Array.Reverse(executionTime);
+                                if (BitConverter.IsLittleEndian) Array.Reverse(executionTimeClockCycles);
                                 // Log the information.
-                                var executionTimeValue = BitConverter.ToInt32(executionTime, 0);
-                                Logger.Information(executionTimeValue.ToString());
-                                information.FpgaExecutionTime = executionTimeValue;
+                                var executionTimeValue = BitConverter.ToUInt32(executionTimeClockCycles, 0);
+
+                                // Hard-coding the divisor for now: the FPGA runs at 100Mhz so one clock cycle is 10ns.
+                                information.HardwareExecutionTimeMilliseconds = executionTimeValue / 100000;
+                                Logger.Information("Hardware execution took " + information.HardwareExecutionTimeMilliseconds + "ms.");
+                                
                                 serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived);
                             }
                         }

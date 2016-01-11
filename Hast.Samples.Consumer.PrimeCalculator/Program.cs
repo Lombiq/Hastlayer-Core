@@ -16,6 +16,18 @@ namespace Hast.Samples.Consumer.PrimeCalculator
             {
                 using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
                 {
+                    hastlayer.ExecutedOnHardware += (sender, e) =>
+                    {
+                        Console.WriteLine(
+                            "Executing " +
+                            e.MemberFullName +
+                            " on hardware took " +
+                            e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + 
+                            "ms (net)" +
+                            e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                            " milliseconds (all together)");
+                    };
+
                     var hardwareConfiguration = new HardwareGenerationConfiguration();
                     hardwareConfiguration.PublicHardwareMemberPrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
                     var hardwareRepresentation = await hastlayer.GenerateHardware(

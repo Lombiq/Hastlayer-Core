@@ -12,9 +12,9 @@ namespace Hast.Common.Models
     public interface IHardwareExecutionInformation
     {
         /// <summary>
-        /// The execution time received from the FPGA board.
+        /// The net execution time (without the communication roundtrip) on the hardware.
         /// </summary>
-        long FpgaExecutionTime { get; }
+        ulong HardwareExecutionTimeMilliseconds { get; }
 
         /// <summary>
         /// The full execution time of the hardware execution, including the communication roundtrip.

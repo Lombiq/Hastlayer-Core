@@ -26,9 +26,11 @@ namespace Hast.Samples.Consumer
                         hastlayer.ExecutedOnHardware += (sender, e) =>
                             {
                                 Console.WriteLine(
-                                    "Executing " + 
-                                    e.MemberFullName + 
+                                    "Executing " +
+                                    e.MemberFullName +
                                     " on hardware took " +
+                                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                                    "ms (net)" +
                                     e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                                     " milliseconds (all together)");
                             };

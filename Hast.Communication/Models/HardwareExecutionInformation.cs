@@ -5,7 +5,7 @@ namespace Hast.Communication.Models
 {
     public class HardwareExecutionInformation : IHardwareExecutionInformation
     {
-        public long FpgaExecutionTime { get; set; }
+        public ulong HardwareExecutionTimeMilliseconds { get; set; }
         public long FullExecutionTimeMilliseconds { get; set; }
         public DateTime StartedUtc { get; set; }
 
@@ -13,7 +13,7 @@ namespace Hast.Communication.Models
         public HardwareExecutionInformation()
         {
             StartedUtc = DateTime.UtcNow;
-            FpgaExecutionTime = 0;
+            HardwareExecutionTimeMilliseconds = 0;
             FullExecutionTimeMilliseconds = 0;
         }
     }
