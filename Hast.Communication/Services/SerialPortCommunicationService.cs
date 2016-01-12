@@ -117,6 +117,9 @@ namespace Hast.Communication.Services
 
                 Action<byte> processReceivedByte = receivedByte =>
                     {
+                        // Serial communication can give more data than we actually await, so need to check this.
+                        if (taskCompletionSource.Task.IsCompleted) return;
+
                         // When there is some incoming data then we read it from the serial port (this will be a byte that we receive).
                         if (communicationType == Constants.SerialCommunicationConstants.Signals.Default)
                         {
@@ -138,7 +141,8 @@ namespace Hast.Communication.Services
                             executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
                             if (executionTimeByteCounter == 4) // If we received the 4 bytes.
                             {
-                                communicationType = Constants.SerialCommunicationConstants.Signals.Result; // We switch the communication type back to 'result'.
+                                // We switch the communication type back to 'result'.
+                                communicationType = Constants.SerialCommunicationConstants.Signals.Result;
                                 executionTimeByteCounter = 0;
                                 // If the system architecture is little-endian (that is, little end first), reverse the byte array.
                                 if (BitConverter.IsLittleEndian) Array.Reverse(executionTimeClockCycles);
@@ -187,6 +191,7 @@ namespace Hast.Communication.Services
 
                                 simpleMemory.Memory = returnValueBytes;
                                 taskCompletionSource.SetResult(true);
+
                             }
                         }
                     };
@@ -202,6 +207,8 @@ namespace Hast.Communication.Services
                         for (int i = 0; i < inputBuffer.Length; i++)
                         {
                             processReceivedByte(inputBuffer[i]);
+
+                            if (taskCompletionSource.Task.IsCompleted) return;
                         }
                     }
                 };
