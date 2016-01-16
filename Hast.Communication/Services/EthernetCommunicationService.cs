@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hast.Communication.Helpers;
 using Hast.Transformer.SimpleMemory;
 using Orchard.Logging;
-using Hast.Communication.Helpers;
+using System;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
