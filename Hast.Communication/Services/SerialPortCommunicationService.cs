@@ -115,7 +115,7 @@ namespace Hast.Communication.Services
                 var executionTimeClockCycles = new byte[4];
                 var executionTimeByteCounter = 0;
 
-                Action<byte> processReceivedByte = receivedByte =>
+                Action<byte, bool> processReceivedByte = (receivedByte, isLastOfBatch) =>
                     {
                         // Serial communication can give more data than we actually await, so need to check this.
                         if (taskCompletionSource.Task.IsCompleted) return;
@@ -180,7 +180,10 @@ namespace Hast.Communication.Services
                                 returnValueBytes[returnValueIndex] = receivedByte;
                                 returnValueIndex++;
                                 messageBytesReceived++;
-                                serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready);
+                                if (isLastOfBatch)
+                                {
+                                    serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready); 
+                                }
                             }
 
                             // Set the incoming data if all bytes are received (waiting for incoming data stream to complete).
@@ -206,7 +209,7 @@ namespace Hast.Communication.Services
 
                         for (int i = 0; i < inputBuffer.Length; i++)
                         {
-                            processReceivedByte(inputBuffer[i]);
+                            processReceivedByte(inputBuffer[i], i == inputBuffer.Length - 1);
 
                             if (taskCompletionSource.Task.IsCompleted) return;
                         }
