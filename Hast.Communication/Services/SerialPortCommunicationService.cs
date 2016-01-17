@@ -29,7 +29,7 @@ namespace Hast.Communication.Services
 
         public async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
-            // Stopwatch for measuring the exection time.
+            // Stopwatch for measuring the total exection time.
             var stopWatch = Stopwatch.StartNew();
             var executionInformation = new HardwareExecutionInformation();
 
@@ -69,7 +69,7 @@ namespace Hast.Communication.Services
                 // Here we put together the data stream.
 
                 // Execute Order 66.
-                outputBuffer[0] = Convert.ToByte(SerialCommunicationConstants.CommandTypes.Execution);
+                outputBuffer[0] = Convert.ToByte(CommandTypes.Execution);
 
                 // Copying the input length, represented as bytes, to the output buffer.
                 Array.Copy(BitConverter.GetBytes(length), 0, outputBuffer, 1, 4);

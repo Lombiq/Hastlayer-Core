@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\CommandTypes.cs" />
     <Compile Include="Constants\SerialCommunicationConstants.cs" />
     <Compile Include="Exceptions\SerialPortCommunicationException.cs" />
     <Compile Include="Extensibility\Events\IMemberHardwareExecutionContext.cs" />

@@ -10,11 +10,6 @@ namespace Hast.Communication.Constants
         public const int WriteTimeoutInMilliseconds = 10000;
 
 
-        public static class CommandTypes
-        {
-            public const char Execution = 'e';
-        }
-
         public static class Signals
         {
             public const char Ping = 'p';

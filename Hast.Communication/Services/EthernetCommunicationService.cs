@@ -1,9 +1,13 @@
-﻿using Hast.Communication.Helpers;
-using Hast.Transformer.SimpleMemory;
+﻿using Hast.Transformer.SimpleMemory;
 using Orchard.Logging;
 using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Hast.Common.Models;
+using Hast.Communication.Models;
+using System.Diagnostics;
+using System.Net;
+using Hast.Communication.Constants;
 
 namespace Hast.Communication.Services
 {
@@ -16,55 +20,50 @@ namespace Hast.Communication.Services
         {
             Logger = NullLogger.Instance;
         }
-        public async Task<Information> Execute(SimpleMemory simpleMemory, int memberId)
+
+
+        public async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
-            // The returned information object.
-            var information = new Information();
+            // Stopwatch for measuring the total exection time.
+            var stopWatch = Stopwatch.StartNew();
+            var executionInformation = new HardwareExecutionInformation();
 
             // Get the IP address of the FPGA board.
-            var serverIPAddress = await CommunicationHelpers.GetFpgaIPAddress();
+            var fpgaIPAddress = await GetFpgaIPAddress();
             // This is the port that the FPGA board is using.
             var serverPort = 7;
-            Logger.Information("Socket: {0}:{1}", serverIPAddress, serverPort);
+
+            Logger.Information("Socket: {0}:{1}", fpgaIPAddress, serverPort);
 
             var length = simpleMemory.Memory.Length;
-            var outgoingDataBuffer = new byte[length + 9]; // The number 9 meaning is below (addig the message length and memberID to the output stream).
+            var outputBuffer = new byte[length + 9];
 
-            var lengthInBytes = CommunicationHelpers.ConvertIntToByteArray(length); // Converting the length to byte array.
-            var memberIdInBytes = CommunicationHelpers.ConvertIntToByteArray(memberId); // Converting the memberID to byte array.
+            // Here we put together the data stream.
 
-            // Here we put together the outgoing data stream.
-            outgoingDataBuffer[0] = 0; // commandType - not stored on FPGA - for future use.
+            // Execute Order 66.
+            outputBuffer[0] = Convert.ToByte(CommandTypes.Execution);
 
-            // Message length
-            outgoingDataBuffer[1] = lengthInBytes[0];
-            outgoingDataBuffer[2] = lengthInBytes[1];
-            outgoingDataBuffer[3] = lengthInBytes[2];
-            outgoingDataBuffer[4] = lengthInBytes[3];
+            // Copying the input length, represented as bytes, to the output buffer.
+            Array.Copy(BitConverter.GetBytes(length), 0, outputBuffer, 1, 4);
 
-            // Member ID
-            outgoingDataBuffer[5] = memberIdInBytes[0];
-            outgoingDataBuffer[6] = memberIdInBytes[1];
-            outgoingDataBuffer[7] = memberIdInBytes[1];
-            outgoingDataBuffer[8] = memberIdInBytes[3];
+            // Copying the member ID, represented as bytes, to the output buffer.
+            Array.Copy(BitConverter.GetBytes(memberId), 0, outputBuffer, 5, 4);
 
-            var index = 0;
-            for (int i = 9; i < length + 9; i++)
+            for (int i = 0; i < length; i++)
             {
-                outgoingDataBuffer[i] = simpleMemory.Memory[index];
-                index++;
+                outputBuffer[i + 9] = simpleMemory.Memory[i];
             }
 
             try
             {
                 // Initialize the connection.
-                using (var client = new TcpClient(serverIPAddress, serverPort))
+                using (var client = new TcpClient(fpgaIPAddress, serverPort))
                 {
                     // Get a client stream for reading and writing.
                     var stream = client.GetStream();
 
                     // Sending data to the FPGA board.
-                    stream.Write(outgoingDataBuffer, 0, outgoingDataBuffer.Length);
+                    stream.Write(outputBuffer, 0, outputBuffer.Length);
 
                     // Buffer to store the response bytes.
                     var responseBuffer = new byte[length];
@@ -73,6 +72,8 @@ namespace Hast.Communication.Services
                     int bytes = await stream.ReadAsync(responseBuffer, 0, responseBuffer.Length);
                     // Copy the results back to simpleMemory.Memory.
                     Buffer.BlockCopy(responseBuffer, 0, simpleMemory.Memory, 0, bytes);
+                    // Why copy, why not just assign responseBuffer to simpleMemory.Memory?
+
                 } // The client connection closes automatically.
             }
             catch (SocketException e) // Only catch socket exceptions.
@@ -80,7 +81,20 @@ namespace Hast.Communication.Services
                 Logger.Information("Socket exception: {0}", e);
             }
 
-            return information;
+            stopWatch.Stop();
+            Logger.Information("Full execution time: {0}ms", stopWatch.ElapsedMilliseconds);
+            executionInformation.FullExecutionTimeMilliseconds = stopWatch.ElapsedMilliseconds;
+
+            return executionInformation;
+        }
+
+
+        public static async Task<string> GetFpgaIPAddress()
+        {
+            // Get the IP address of the .NET side.
+            var ipAddresses = await Dns.GetHostAddressesAsync(Dns.GetHostName());
+            // Not yet implemented. Please change this to the address of the FPGA board.
+            return "192.168.0.107";
         }
     }
 }
