@@ -43,6 +43,18 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                     var isPrime = primeCalculator.IsPrimeNumber(15);
                     var isPrime2 = primeCalculator.IsPrimeNumber(13);
                     var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
+                    var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
+
+                    // With 210 numbers this takes about 1,9s all together (with UART) with an FPGA and 166s on a 3,2GHz i7.
+                    var numberCount = 4000;
+                    var numbers = new uint[numberCount];
+                    for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
+                    {
+                        numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
+                    }
+                    var sw = System.Diagnostics.Stopwatch.StartNew();
+                    var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
+                    sw.Stop();
                 }
             }).Wait(); // This is a workaround for async just to be able to run all this from inside a console app.
         }
