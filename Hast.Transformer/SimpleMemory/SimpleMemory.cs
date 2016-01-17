@@ -91,12 +91,15 @@ namespace Hast.Transformer.SimpleMemory
 
         public void WriteBoolean(int cellIndex, bool boolean)
         {
-            Write4Bytes(cellIndex, BitConverter.GetBytes(boolean));
+            // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
+            // so on the FPGA-side we can depend on it.
+            Write4Bytes(cellIndex, boolean ? new byte[] { 255, 255, 255, 255 } : new byte[] { 0, 0, 0, 0 });
         }
 
         public bool ReadBoolean(int cellIndex)
         {
-            return BitConverter.ToBoolean(Read4Bytes(cellIndex), 0);
+            var bytes = Read4Bytes(cellIndex);
+            return bytes[0] != 0 || bytes[1] != 0 || bytes[2] != 0 || bytes[3] != 0;
         }
 
         // Characters are not perfectly handled on the FPGA-side and are not really crucial, so de-activating these for now.

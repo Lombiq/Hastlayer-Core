@@ -9,44 +9,44 @@ namespace Hast.Communication
 {
     public class ProxyGenerator : IProxyGenerator
     {
-        private readonly IMethodInvocationHandlerFactory _methodInvocationHandlerFactory;
+        private readonly IMemberInvocationHandlerFactory _memberInvocationHandlerFactory;
         private readonly Castle.DynamicProxy.ProxyGenerator _proxyGenerator;
 
 
-        public ProxyGenerator(IMethodInvocationHandlerFactory methodInvocationHandlerFactory)
+        public ProxyGenerator(IMemberInvocationHandlerFactory memberInvocationHandlerFactory)
         {
-            _methodInvocationHandlerFactory = methodInvocationHandlerFactory;
+            _memberInvocationHandlerFactory = memberInvocationHandlerFactory;
             _proxyGenerator = new Castle.DynamicProxy.ProxyGenerator();
         }
 
 
-        public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target) where T : class
+        public T CreateCommunicationProxy<T>(IMaterializedHardware materializedHardware, T target) where T : class
         {
-            var methodInvokationHandler = _methodInvocationHandlerFactory.CreateMethodInvocationHandler(hardwareRepresentation, target);
+            var memberInvokationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(materializedHardware, target);
             if (typeof(T).IsInterface)
             {
-                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MethodInvocationInterceptor(methodInvokationHandler));
+                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvokationHandler));
             }
 
-            return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MethodInvocationInterceptor(methodInvokationHandler));
+            return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvokationHandler));
         }
 
 
         [Serializable]
-        public class MethodInvocationInterceptor : Castle.DynamicProxy.IInterceptor
+        public class MemberInvocationInterceptor : Castle.DynamicProxy.IInterceptor
         {
-            private readonly MethodInvocationHandler _methodInvocationHandler;
+            private readonly MemberInvocationHandler _memberInvocationHandler;
 
 
-            public MethodInvocationInterceptor(MethodInvocationHandler methodInvocationHandler)
+            public MemberInvocationInterceptor(MemberInvocationHandler memberInvocationHandler)
             {
-                _methodInvocationHandler = methodInvocationHandler;
+                _memberInvocationHandler = memberInvocationHandler;
             }
         
         
             public void Intercept(Castle.DynamicProxy.IInvocation invocation)
             {
-                if (!_methodInvocationHandler(invocation))
+                if (!_memberInvocationHandler(invocation))
                 {
                     invocation.Proceed();
                 }

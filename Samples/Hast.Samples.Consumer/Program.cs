@@ -23,9 +23,16 @@ namespace Hast.Samples.Consumer
                     // Generating hardware from samples:
                     using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
                     {
-                        hastlayer.Transformed += (sender, e) =>
+                        hastlayer.ExecutedOnHardware += (sender, e) =>
                             {
-                                //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
+                                Console.WriteLine(
+                                    "Executing " +
+                                    e.MemberFullName +
+                                    " on hardware took " +
+                                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                                    "ms (net) " +
+                                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                                    " milliseconds (all together)");
                             };
 
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
@@ -36,19 +43,24 @@ namespace Hast.Samples.Consumer
                             },
                             HardwareGenerationConfiguration.Default);
 
-                        var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
+                        //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+
+                        var materializedHardware = await hastlayer.MaterializeHardware(hardwareRepresentation);
+
+                        var primeCalculator = await hastlayer.GenerateProxy(materializedHardware, new PrimeCalculator());
                         var isPrime = primeCalculator.IsPrimeNumber(15);
+                        var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
 
                         using (var bitmap = new Bitmap("fpga.jpg"))
                         {
-                            var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
+                            var imageContrastModifier = await hastlayer.GenerateProxy(materializedHardware, new ImageContrastModifier());
                             var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
 
-                            var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
+                            var imageFilter = await hastlayer.GenerateProxy(materializedHardware, new ImageFilter());
                             var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
                         }
 
-                        var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher());
+                        var genomeMatcher = await hastlayer.GenerateProxy(materializedHardware, new GenomeMatcher());
 
                         // Sample from IBM.
                         var inputOne = "GCCCTAGCG";
@@ -67,18 +79,13 @@ namespace Hast.Samples.Consumer
 
                         result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
 
-                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm()); 
+                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(materializedHardware, new MonteCarloAlgorithm()); 
                         var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
                     }
 
                     // Generating hardware from test assemblies:
                     using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
                     {
-                        hastlayer.Transformed += (sender, e) =>
-                        {
-                            //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
-                        };
-
                         var configuration = new HardwareGenerationConfiguration
                         {
                             // Another way would be to add such prefixes (potentially for whole namespaces like here), instead we add a single
@@ -95,9 +102,13 @@ namespace Hast.Samples.Consumer
                                 typeof(StaticReference).Assembly
                             }, configuration);
 
+                        //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+
+                        var materializedHardware = await hastlayer.MaterializeHardware(hardwareRepresentation);
+
                         // With this interface-typed variable we simulate that the object comes from dependency injection.
                         IInterface1 complexType = new ComplexTypeHierarchy();
-                        complexType = await hastlayer.GenerateProxy(hardwareRepresentation, complexType);
+                        complexType = await hastlayer.GenerateProxy(materializedHardware, complexType);
                         var output = complexType.Interface1Method1();
                         output = complexType.Interface1Method2();
                     }

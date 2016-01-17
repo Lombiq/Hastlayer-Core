@@ -17,6 +17,7 @@ using Orchard.Environment.Configuration;
 using Orchard.Validation;
 using Orchard.Exceptions;
 using Orchard.Logging;
+using Hast.Layer.Models;
 
 namespace Hast.Layer
 {
@@ -27,7 +28,7 @@ namespace Hast.Layer
         private readonly IEnumerable<Assembly> _extensions;
         private IOrchardAppHost _host;
 
-        public event TransformedEventHandler Transformed;
+        public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 
 
         // Private so the static factory should be used.
@@ -69,9 +70,6 @@ namespace Hast.Layer
              * Steps to be implemented:
              * - Transform into hardware description through ITransformer.
              * - Save hardware description for re-use (cache file, stream supplied from the outside).
-             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary communication 
-             *   implementation (currently partially implemented with a member table).
-             * - Cache hardware implementation to be able to re-configure the FPGA with it later.
              */
 
             try
@@ -79,14 +77,10 @@ namespace Hast.Layer
                 HardwareRepresentation hardwareRepresentation = null;
 
                 await (await GetHost())
-                    .Run<ITransformer, IHardwareRepresentationComposer>(
+                    .Run<ITransformer, IHardwareImplementationComposer>(
                         async (transformer, hardwareRepresentationComposer) =>
                         {
                             var hardwareDescription = await transformer.Transform(assemblies, configuration);
-
-                            if (Transformed != null) Transformed(this, new TransformedEventArgs(hardwareDescription));
-
-                            await hardwareRepresentationComposer.Compose(hardwareDescription);
 
                             hardwareRepresentation = new HardwareRepresentation
                             {
@@ -108,11 +102,35 @@ namespace Hast.Layer
             }
         }
 
-        public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
+        public async Task<IMaterializedHardware> MaterializeHardware(IHardwareRepresentation hardwareRepresentation)
         {
-            Argument.ThrowIfNull(hardwareRepresentation, "hardwareAssembly");
+            /*
+             * Steps to be implemented:
+             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary
+             *   communication implementation (currently partially implemented with a member table).
+             * - Cache hardware implementation to be able to re-configure the FPGA with it later.
+             */
 
-            if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
+            var materializedHardware = new MaterializedHardware
+            {
+                HardwareRepresentation = hardwareRepresentation
+            };
+
+            await(await GetHost())
+                .Run<ITransformer, IHardwareImplementationComposer>(
+                    async (transformer, hardwareImplementationComposer) =>
+                    {
+                        await hardwareImplementationComposer.Compose(hardwareRepresentation);
+                    }, ShellName, false);
+
+            return (IMaterializedHardware)materializedHardware;
+        }
+
+        public async Task<T> GenerateProxy<T>(IMaterializedHardware materializedHardware, T hardwareObject) where T : class
+        {
+            Argument.ThrowIfNull(materializedHardware, "materializedHardware");
+
+            if (!materializedHardware.HardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
             {
                 throw new InvalidOperationException("The supplied type is not part of any assembly that this hardware representation was generated from.");
             }
@@ -121,7 +139,7 @@ namespace Hast.Layer
             {
                 return await
                     (await GetHost())
-                    .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject)));
+                    .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(materializedHardware, hardwareObject)));
             }
             catch (Exception ex)
             {
@@ -153,7 +171,7 @@ namespace Hast.Layer
                 {
                     typeof(Hastlayer).Assembly,
                     typeof(Hast.Communication.IProxyGenerator).Assembly,
-                    typeof(Hast.Synthesis.IHardwareRepresentationComposer).Assembly,
+                    typeof(Hast.Synthesis.IHardwareImplementationComposer).Assembly,
                     typeof(Hast.Transformer.ITransformer).Assembly
                 }.Union(_extensions),
                 DefaultShellFeatureStates = new[]
@@ -172,7 +190,17 @@ namespace Hast.Layer
                 }
             };
 
-            return _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
+            _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
+
+            await _host.Run<IHardwareExecutionEventProxy>(proxy => Task.Run(() => proxy.RegisterExecutedOnHardwareEventHandler(eventArgs =>
+                {
+                    if (ExecutedOnHardware != null)
+                    {
+                        ExecutedOnHardware(this, eventArgs);
+                    }
+                })));
+
+            return _host;
         }
     }
 }
