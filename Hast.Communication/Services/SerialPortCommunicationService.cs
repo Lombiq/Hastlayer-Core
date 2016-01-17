@@ -8,6 +8,7 @@ using System.IO.Ports;
 using System.Threading.Tasks;
 using Hast.Communication.Models;
 using Hast.Common.Models;
+using Hast.Communication.Constants;
 
 namespace Hast.Communication.Services
 {
@@ -32,7 +33,7 @@ namespace Hast.Communication.Services
             var stopWatch = Stopwatch.StartNew();
             var executionInformation = new HardwareExecutionInformation();
 
-            using (var serialPort = new SerialPort())
+            using (var serialPort = CreateSerialPort())
             {
                 // Initializing some serial port connection settings (may be different whith some FPGA boards).
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
@@ -42,10 +43,6 @@ namespace Hast.Communication.Services
                     _serialPortNameCache.PortName = await GetFpgaPortName();
                 }
                 serialPort.PortName = _serialPortNameCache.PortName;
-                serialPort.BaudRate = Constants.SerialCommunicationConstants.BaudRate;
-                serialPort.Parity = Constants.SerialCommunicationConstants.SerialPortParity;
-                serialPort.StopBits = Constants.SerialCommunicationConstants.SerialPortStopBits;
-                serialPort.WriteTimeout = Constants.SerialCommunicationConstants.WriteTimeoutInMilliseconds;
 
                 try
                 {
@@ -70,9 +67,11 @@ namespace Hast.Communication.Services
                 var outputBuffer = new byte[length + 9];
 
                 // Here we put together the data stream.
-                outputBuffer[0] = 0; // commandType - not used on the FPGA - for future use.
 
-                // Copying the message length, represented as bytes, to the output buffer.
+                // Execute Order 66.
+                outputBuffer[0] = Convert.ToByte(SerialCommunicationConstants.CommandTypes.Execution);
+
+                // Copying the input length, represented as bytes, to the output buffer.
                 Array.Copy(BitConverter.GetBytes(length), 0, outputBuffer, 1, 4);
 
                 // Copying the member ID, represented as bytes, to the output buffer.
@@ -86,99 +85,84 @@ namespace Hast.Communication.Services
                 // Sending the data.
                 serialPort.Write(outputBuffer, 0, outputBuffer.Length);
 
+
+                // Processing the response.
                 var taskCompletionSource = new TaskCompletionSource<bool>();
-                var communicationType = Constants.SerialCommunicationConstants.Signals.Default;
-                var messageBytesCountBytes = new byte[4];
-                var messageBytesCountByteCounter = 0;
-                var messageBytesCount = 0; // The incoming byte buffer size.
-                var messageBytesReceivedCount = 0; // Just used to know when the data is ready.
-                var receivedValueBytes = new byte[0]; // The incoming buffer.
-                var executionTimeClockCyclesBytes = new byte[4];
+                var communicationState = SerialCommunicationConstants.CommunicationState.WaitForFirstResponse;
+                var outputByteCountBytes = new byte[4];
+                var outputByteCountByteCounter = 0;
+                var outputByteCount = 0; // The incoming byte buffer size.
+                var outputBytesReceivedCount = 0; // Just used to know when the data is ready.
+                var outputBytes = new byte[0]; // The incoming buffer.
+                var executionTimeBytes = new byte[4];
                 var executionTimeByteCounter = 0;
 
                 Action<byte, bool> processReceivedByte = (receivedByte, isLastOfBatch) =>
                     {
-                        // Serial communication can give more data than we actually await, so need to check this.
-                        if (taskCompletionSource.Task.IsCompleted) return;
-
-                        // When there is some incoming data then we read it from the serial port (this will be a byte that we receive).
-                        if (communicationType == Constants.SerialCommunicationConstants.Signals.Default)
+                        switch (communicationState)
                         {
-                            var receivedCharacter = Convert.ToChar(receivedByte);
-                            if (receivedCharacter == Constants.SerialCommunicationConstants.Signals.Information)
-                            {
-                                communicationType = Constants.SerialCommunicationConstants.Signals.Information;
-                                serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready);
-                            }
-                            else
-                            {
-                                communicationType = Constants.SerialCommunicationConstants.Signals.Result;
-                            }
-                        }
-                        else if (communicationType == Constants.SerialCommunicationConstants.Signals.Information)
-                        {
-                            // We know that the incoming data's size will be 4 bytes.
-                            executionTimeClockCyclesBytes[executionTimeByteCounter] = receivedByte;
-                            executionTimeByteCounter++; // We increment the byte counter to index the next incoming byte.
-                            if (executionTimeByteCounter == 4) // If we received the 4 bytes.
-                            {
-                                // We switch the communication type back to 'result'.
-                                communicationType = Constants.SerialCommunicationConstants.Signals.Result;
-                                executionTimeByteCounter = 0;
-
-                                var executionTimeClockCycles = BitConverter.ToUInt32(executionTimeClockCyclesBytes, 0);
-
-                                // Hard-coding the divisor for now: the FPGA runs at 100Mhz so one clock cycle is 10ns.
-                                executionInformation.HardwareExecutionTimeMilliseconds = executionTimeClockCycles / 100000;
-                                Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
-                                
-                                serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived);
-                            }
-                        }
-                        else // If the communicationType variable is equal to Constants.FpgaConstants.Signals.Data (d) then this code will run.
-                        {
-                            // The first bytes will be the size of the byte array that we must receive.
-                            if (messageBytesCount == 0)
-                            {
-                                messageBytesCountBytes[messageBytesCountByteCounter] = receivedByte;
-                                messageBytesCountByteCounter++;
-
-                                if (messageBytesCountByteCounter == 4)
+                            case SerialCommunicationConstants.CommunicationState.WaitForFirstResponse:
+                                if (receivedByte == SerialCommunicationConstants.Signals.Ping)
                                 {
-                                    messageBytesCount = BitConverter.ToInt32(messageBytesCountBytes, 0);
+                                    communicationState = SerialCommunicationConstants.CommunicationState.ReceivingExecutionInformation;
+                                    serialPort.Write(SerialCommunicationConstants.Signals.Ready);
+                                }
+                                else
+                                {
+                                    throw new SerialPortCommunicationException("Awaited a ping signal from the FPGA after it finished but received the following byte instead: " + receivedByte);
+                                }
+                                break;
+                            case SerialCommunicationConstants.CommunicationState.ReceivingExecutionInformation:
+                                // We know that the incoming data's size will be 4 bytes.
+                                executionTimeBytes[executionTimeByteCounter] = receivedByte;
+                                executionTimeByteCounter++;
+                                if (executionTimeByteCounter == 4)
+                                {
+                                    var executionTimeClockCycles = BitConverter.ToUInt32(executionTimeBytes, 0);
 
-                                    // Since the return value's size can differ from the input size for optimization reasons,
+                                    // Hard-coding the divisor for now: the FPGA runs at 100Mhz so one clock cycle is 10ns.
+                                    executionInformation.HardwareExecutionTimeMilliseconds = executionTimeClockCycles / 100000;
+                                    Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+
+                                    communicationState = SerialCommunicationConstants.CommunicationState.ReceivingOutputByteCount;
+                                    serialPort.Write(SerialCommunicationConstants.Signals.Ready);
+                                }
+                                break;
+                            case SerialCommunicationConstants.CommunicationState.ReceivingOutputByteCount:
+                                outputByteCountBytes[outputByteCountByteCounter] = receivedByte;
+                                outputByteCountByteCounter++;
+
+                                if (outputByteCountByteCounter == 4)
+                                {
+                                    outputByteCount = BitConverter.ToInt32(outputByteCountBytes, 0);
+
+                                    // Since the output's size can differ from the input size for optimization reasons,
                                     // we take the explicit size into account.
-                                    receivedValueBytes = new byte[messageBytesCount];
+                                    outputBytes = new byte[outputByteCount];
 
-                                    Logger.Information("Incoming data size: {0}", Convert.ToChar(messageBytesCount).ToString());
+                                    Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
-                                    // Signal that we are ready to receive the data.
-                                    serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready); 
+                                    communicationState = SerialCommunicationConstants.CommunicationState.ReceivingOuput;
+                                    serialPort.Write(SerialCommunicationConstants.Signals.Ready);
                                 }
-                            }
-                            else
-                            {
-                                // We put together the received data stream.
+                                break;
+                            case SerialCommunicationConstants.CommunicationState.ReceivingOuput:
+                                outputBytes[outputBytesReceivedCount] = receivedByte;
+                                outputBytesReceivedCount++;
 
-                                receivedValueBytes[messageBytesReceivedCount] = receivedByte;
-                                messageBytesReceivedCount++;
-                                if (isLastOfBatch)
+                                if (outputByteCount == outputBytesReceivedCount)
                                 {
-                                    serialPort.Write(Constants.SerialCommunicationConstants.Signals.Ready); 
+                                    simpleMemory.Memory = outputBytes;
+
+                                    // Serial communication can give more data than we actually await, so need to set this.
+                                    communicationState = SerialCommunicationConstants.CommunicationState.Finished;
+                                    serialPort.Write(SerialCommunicationConstants.Signals.Ready);
+
+                                    taskCompletionSource.SetResult(true);
                                 }
-                            }
-
-                            // Set the incoming data if all bytes are received (waiting for incoming data stream to complete).
-                            if (messageBytesCount > 0 && messageBytesCount == messageBytesReceivedCount)
-                            {
-                                // Signal that we received all bytes.
-                                serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived);
-
-                                simpleMemory.Memory = receivedValueBytes;
-                                taskCompletionSource.SetResult(true);
-
-                            }
+                                break;
+                            default:
+                                break;
                         }
                     };
 
@@ -194,20 +178,21 @@ namespace Hast.Communication.Services
                         {
                             processReceivedByte(inputBuffer[i], i == inputBuffer.Length - 1);
 
-                            if (taskCompletionSource.Task.IsCompleted) return;
+                            if (communicationState == SerialCommunicationConstants.CommunicationState.Finished)
+                            {
+                                return;
+                            }
                         }
                     }
                 };
 
-                // Await the taskCompletionSource to complete.
                 await taskCompletionSource.Task;
 
-                stopWatch.Stop(); // Stop the exection time measurement.
-                var fullExecutionTime = stopWatch.ElapsedMilliseconds;
-                Logger.Information("Full execution time (in milliseconds): {0}", fullExecutionTime.ToString());
-                executionInformation.FullExecutionTimeMilliseconds = fullExecutionTime;
+                stopWatch.Stop();
+                Logger.Information("Full execution time: {0}ms", stopWatch.ElapsedMilliseconds);
+                executionInformation.FullExecutionTimeMilliseconds = stopWatch.ElapsedMilliseconds;
 
-                return executionInformation; 
+                return executionInformation;
             }
         }
 
@@ -220,52 +205,59 @@ namespace Hast.Communication.Services
         {
             // Get all available serial ports on system.
             var ports = SerialPort.GetPortNames();
-            // If no serial ports detected, then throw an SerialPortCommunicationException.
+
+            // If no serial ports detected, then throw a SerialPortCommunicationException.
             if (ports.Length == 0) throw new SerialPortCommunicationException("No serial port detected (no serial ports are open).");
 
+            using (var serialPort = CreateSerialPort())
+            {
+                var taskCompletionSource = new TaskCompletionSource<string>();
+
+                serialPort.DataReceived += (sender, e) =>
+                {
+                    if (serialPort.ReadByte() == SerialCommunicationConstants.Signals.Ready)
+                    {
+                        taskCompletionSource.SetResult(serialPort.PortName);
+                    }
+                };
+
+                for (int i = 0; i < ports.Length; i++)
+                {
+                    serialPort.PortName = ports[i];
+
+                    try
+                    {
+                        serialPort.Open();
+                        serialPort.Write(SerialCommunicationConstants.Signals.Ping);
+                    }
+                    catch (IOException) { }
+                }
+
+                if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
+                {
+                    await Task.Delay(5000); // Wait 5 seconds.
+                    if (!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't respond, then throw a SerialPortCommunicationException.
+                    {
+                        throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
+                    }
+                }
+
+                await taskCompletionSource.Task;
+
+                return taskCompletionSource.Task.Result; 
+            }
+        }
+
+        private static SerialPort CreateSerialPort()
+        {
             var serialPort = new SerialPort();
-            serialPort.BaudRate = Constants.SerialCommunicationConstants.BaudRate;
-            serialPort.Parity = Constants.SerialCommunicationConstants.SerialPortParity;
-            serialPort.StopBits = Constants.SerialCommunicationConstants.SerialPortStopBits;
-            serialPort.WriteTimeout = Constants.SerialCommunicationConstants.WriteTimeoutInMilliseconds;
 
-            var taskCompletionSource = new TaskCompletionSource<string>();
-            serialPort.DataReceived += (s, e) =>
-            {
-                var dataIn = (byte)serialPort.ReadByte();
-                var receivedCharacter = Convert.ToChar(dataIn);
+            serialPort.BaudRate = SerialCommunicationConstants.BaudRate;
+            serialPort.Parity = SerialCommunicationConstants.SerialPortParity;
+            serialPort.StopBits = SerialCommunicationConstants.SerialPortStopBits;
+            serialPort.WriteTimeout = SerialCommunicationConstants.WriteTimeoutInMilliseconds;
 
-                if (receivedCharacter == Constants.SerialCommunicationConstants.Signals.Yes)
-                {
-                    serialPort.Dispose();
-                    taskCompletionSource.SetResult(serialPort.PortName);
-                }
-            };
-
-            for (int i = 0; i < ports.Length; i++)
-            {
-                serialPort.PortName = ports[i];
-
-                try
-                {
-                    serialPort.Open();
-                    serialPort.Write(Constants.SerialCommunicationConstants.Signals.FpgaDetect);
-                }
-                catch (IOException) { }
-            }
-
-            if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
-            {
-                await Task.Delay(5000); // Wait 5 seconds.
-                if (!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't respond, then throw a SerialPortCommunicationException.
-                {
-                    serialPort.Dispose();
-                    throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
-                }
-            }
-
-            await taskCompletionSource.Task;
-            return taskCompletionSource.Task.Result;
+            return serialPort;
         }
     }
 }

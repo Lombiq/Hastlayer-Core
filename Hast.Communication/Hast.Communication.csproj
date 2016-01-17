@@ -56,6 +56,7 @@
     <Compile Include="Extensibility\IMemberInvocationContext.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStep.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStepContext.cs" />
+    <Compile Include="Extensions\SerialPortExtensions.cs" />
     <Compile Include="IMemberInvocationHandlerFactory.cs" />
     <Compile Include="Models\HardwareExecutionInformation.cs" />
     <Compile Include="IProxyGenerator.cs" />

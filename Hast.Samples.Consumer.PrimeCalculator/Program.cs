@@ -47,7 +47,7 @@ namespace Hast.Samples.Consumer.PrimeCalculator
 
                     // With 210 numbers this takes about 1,9s all together (with UART) on an FPGA and 166s on a 3,2GHz i7.
                     // With 4000 numbers it takes 38s on an FPGA and 3550s (about an hour) on the same PC.
-                    var numberCount = 4000;
+                    var numberCount = 210;
                     var numbers = new uint[numberCount];
                     for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
                     {
