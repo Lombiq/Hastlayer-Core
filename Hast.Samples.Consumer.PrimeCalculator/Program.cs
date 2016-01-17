@@ -22,8 +22,8 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                             "Executing " +
                             e.MemberFullName +
                             " on hardware took " +
-                            e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + 
-                            "ms (net)" +
+                            e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                            "ms (net) " +
                             e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                             " milliseconds (all together)");
                     };
