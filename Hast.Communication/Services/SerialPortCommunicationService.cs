@@ -83,17 +83,8 @@ namespace Hast.Communication.Services
                     outputBuffer[i + 9] = simpleMemory.Memory[i];
                 }
 
-                // Here the out buffer is ready.
-                var j = 0;
-                var byteBuffer = new byte[1];
-
-                while (j < length + 9)
-                {
-                    byteBuffer[0] = buffer[j];
-                    // Sending the data.
-                    serialPort.Write(byteBuffer, 0, 1);
-                    j++;
-                }
+                // Sending the data.
+                serialPort.Write(outputBuffer, 0, outputBuffer.Length);
 
                 var taskCompletionSource = new TaskCompletionSource<bool>();
                 var messageBytesCount = 0; // The incoming byte buffer size.
