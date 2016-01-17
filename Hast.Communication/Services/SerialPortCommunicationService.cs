@@ -1,5 +1,4 @@
 ﻿using Hast.Communication.Exceptions;
-using Hast.Communication.Helpers;
 using Hast.Transformer.SimpleMemory;
 using Orchard.Logging;
 using System;
@@ -29,9 +28,9 @@ namespace Hast.Communication.Services
 
         public async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
-            var stopWatch = new Stopwatch(); // Measuring the exection time.
-            stopWatch.Start(); // Start the measurement.
-            var information = new HardwareExecutionInformation();
+            // Stopwatch for measuring the exection time.
+            var stopWatch = Stopwatch.StartNew();
+            var executionInformation = new HardwareExecutionInformation();
 
             using (var serialPort = new SerialPort())
             {
@@ -40,7 +39,7 @@ namespace Hast.Communication.Services
 
                 if (string.IsNullOrEmpty(_serialPortNameCache.PortName))
                 {
-                    _serialPortNameCache.PortName = await CommunicationHelpers.GetFpgaPortName();
+                    _serialPortNameCache.PortName = await GetFpgaPortName();
                 }
                 serialPort.PortName = _serialPortNameCache.PortName;
                 serialPort.BaudRate = Constants.SerialCommunicationConstants.BaudRate;
@@ -68,30 +67,20 @@ namespace Hast.Communication.Services
                 }
 
                 var length = simpleMemory.Memory.Length;
-                var buffer = new byte[length + 9]; // Data message command + messageLength.
-                var lengthInBytes = CommunicationHelpers.ConvertIntToByteArray(length);
-                var memberIdInBytes = CommunicationHelpers.ConvertIntToByteArray(memberId);
+                var outputBuffer = new byte[length + 9];
 
                 // Here we put together the data stream.
-                buffer[0] = 0; // commandType - not stored on FPGA - for future use.
+                outputBuffer[0] = 0; // commandType - not used on the FPGA - for future use.
 
-                // Message length
-                buffer[1] = lengthInBytes[0];
-                buffer[2] = lengthInBytes[1];
-                buffer[3] = lengthInBytes[2];
-                buffer[4] = lengthInBytes[3];
+                // Copying the message length, represented as bytes, to the output buffer.
+                Array.Copy(BitConverter.GetBytes(length), 0, outputBuffer, 1, 4);
 
-                // Member ID
-                buffer[5] = memberIdInBytes[0];
-                buffer[6] = memberIdInBytes[1];
-                buffer[7] = memberIdInBytes[1];
-                buffer[8] = memberIdInBytes[3];
+                // Copying the member ID, represented as bytes, to the output buffer.
+                Array.Copy(BitConverter.GetBytes(memberId), 0, outputBuffer, 5, 4);
 
-                var index = 0;
-                for (int i = 9; i < length + 9; i++)
+                for (int i = 0; i < length; i++)
                 {
-                    buffer[i] = simpleMemory.Memory[index];
-                    index++;
+                    outputBuffer[i + 9] = simpleMemory.Memory[i];
                 }
 
                 // Here the out buffer is ready.
@@ -144,14 +133,12 @@ namespace Hast.Communication.Services
                                 // We switch the communication type back to 'result'.
                                 communicationType = Constants.SerialCommunicationConstants.Signals.Result;
                                 executionTimeByteCounter = 0;
-                                // If the system architecture is little-endian (that is, little end first), reverse the byte array.
-                                if (BitConverter.IsLittleEndian) Array.Reverse(executionTimeClockCycles);
                                 // Log the information.
                                 var executionTimeValue = BitConverter.ToUInt32(executionTimeClockCycles, 0);
 
                                 // Hard-coding the divisor for now: the FPGA runs at 100Mhz so one clock cycle is 10ns.
-                                information.HardwareExecutionTimeMilliseconds = executionTimeValue / 100000;
-                                Logger.Information("Hardware execution took " + information.HardwareExecutionTimeMilliseconds + "ms.");
+                                executionInformation.HardwareExecutionTimeMilliseconds = executionTimeValue / 100000;
+                                Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
                                 
                                 serialPort.Write(Constants.SerialCommunicationConstants.Signals.AllBytesReceived);
                             }
@@ -222,10 +209,67 @@ namespace Hast.Communication.Services
                 stopWatch.Stop(); // Stop the exection time measurement.
                 var fullExecutionTime = stopWatch.ElapsedMilliseconds;
                 Logger.Information("Full execution time (in milliseconds): {0}", fullExecutionTime.ToString());
-                information.FullExecutionTimeMilliseconds = fullExecutionTime;
+                executionInformation.FullExecutionTimeMilliseconds = fullExecutionTime;
 
-                return information; 
+                return executionInformation; 
             }
+        }
+
+
+        /// <summary>
+        /// Helper method used for the detection of the connected FPGA board.
+        /// </summary>
+        /// <returns>The serial port name where the FPGA board is connected to.</returns>
+        private static async Task<string> GetFpgaPortName()
+        {
+            // Get all available serial ports on system.
+            var ports = SerialPort.GetPortNames();
+            // If no serial ports detected, then throw an SerialPortCommunicationException.
+            if (ports.Length == 0) throw new SerialPortCommunicationException("No serial port detected (no serial ports are open).");
+
+            var serialPort = new SerialPort();
+            serialPort.BaudRate = Constants.SerialCommunicationConstants.BaudRate;
+            serialPort.Parity = Constants.SerialCommunicationConstants.SerialPortParity;
+            serialPort.StopBits = Constants.SerialCommunicationConstants.SerialPortStopBits;
+            serialPort.WriteTimeout = Constants.SerialCommunicationConstants.WriteTimeoutInMilliseconds;
+
+            var taskCompletionSource = new TaskCompletionSource<string>();
+            serialPort.DataReceived += (s, e) =>
+            {
+                var dataIn = (byte)serialPort.ReadByte();
+                var receivedCharacter = Convert.ToChar(dataIn);
+
+                if (receivedCharacter == Constants.SerialCommunicationConstants.Signals.Yes)
+                {
+                    serialPort.Dispose();
+                    taskCompletionSource.SetResult(serialPort.PortName);
+                }
+            };
+
+            for (int i = 0; i < ports.Length; i++)
+            {
+                serialPort.PortName = ports[i];
+
+                try
+                {
+                    serialPort.Open();
+                    serialPort.Write(Constants.SerialCommunicationConstants.Signals.FpgaDetect);
+                }
+                catch (IOException) { }
+            }
+
+            if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
+            {
+                await Task.Delay(5000); // Wait 5 seconds.
+                if (!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't respond, then throw a SerialPortCommunicationException.
+                {
+                    serialPort.Dispose();
+                    throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
+                }
+            }
+
+            await taskCompletionSource.Task;
+            return taskCompletionSource.Task.Result;
         }
     }
 }
