@@ -26,7 +26,7 @@ namespace Hast.Samples.Consumer
                     {
                         hastlayer.ExecutedOnHardware += (sender, e) =>
                             {
-                                File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.HardwareDescription));
+                                File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(e.MaterializedHardware.HardwareRepresentation.HardwareDescription));
                                 
                                 Console.WriteLine(
                                     "Executing " +
