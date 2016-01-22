@@ -8,6 +8,6 @@ namespace Hast.Communication.Constants
 {
     public static class CommandTypes
     {
-        public const char Execution = 'e';
+        public const char Execution = 'x';
     }
 }
