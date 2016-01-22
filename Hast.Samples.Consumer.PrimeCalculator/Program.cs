@@ -45,7 +45,7 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                     var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
                     var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
 
-                    // With 210 numbers this takes about 1,9s all together (with UART) on an FPGA and 166s on a 3,2GHz i7.
+                    // With 210 numbers this takes about 2,1s all together (with UART) on an FPGA and 166s on a 3,2GHz i7.
                     // With 4000 numbers it takes 38s on an FPGA and 3550s (about an hour) on the same PC.
                     var numberCount = 210;
                     var numbers = new uint[numberCount];

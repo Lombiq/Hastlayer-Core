@@ -14,15 +14,11 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        private readonly ISerialPortNameCache _serialPortNameCache;
-
         public ILogger Logger { get; set; }
 
 
-        public SerialPortCommunicationService(ISerialPortNameCache serialPortNameCache)
+        public SerialPortCommunicationService()
         {
-            _serialPortNameCache = serialPortNameCache;
-
             Logger = NullLogger.Instance;
         }
 
@@ -38,11 +34,7 @@ namespace Hast.Communication.Services
                 // Initializing some serial port connection settings (may be different whith some FPGA boards).
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
 
-                if (string.IsNullOrEmpty(_serialPortNameCache.PortName))
-                {
-                    _serialPortNameCache.PortName = await GetFpgaPortName();
-                }
-                serialPort.PortName = _serialPortNameCache.PortName;
+                serialPort.PortName = await GetFpgaPortName();
 
                 try
                 {
@@ -223,26 +215,23 @@ namespace Hast.Communication.Services
 
                 for (int i = 0; i < ports.Length; i++)
                 {
+                    if (taskCompletionSource.Task.IsCompleted) break;
+
                     serialPort.PortName = ports[i];
 
                     try
                     {
                         serialPort.Open();
-                        serialPort.Write(SerialCommunicationConstants.Signals.Ping);
+                        serialPort.Write(SerialCommunicationConstants.Signals.Echo);
                     }
                     catch (IOException) { }
                 }
 
-                if (!taskCompletionSource.Task.IsCompleted) // Do not wait unnecessarily if the FPGA board is already detected.
+                // Waiting a maximum of 3s for a response from a port.
+                if (!taskCompletionSource.Task.Wait(3000))
                 {
-                    await Task.Delay(5000); // Wait 5 seconds.
-                    if (!taskCompletionSource.Task.IsCompleted) // If the last serial port didn't respond, then throw a SerialPortCommunicationException.
-                    {
-                        throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
-                    }
+                    throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
                 }
-
-                await taskCompletionSource.Task;
 
                 return taskCompletionSource.Task.Result; 
             }
