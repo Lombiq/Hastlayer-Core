@@ -40,7 +40,7 @@ namespace Hast.Communication
                         {
                             Invocation = invocation,
                             MemberFullName = memberFullName,
-                            MaterializedHardware = hardwareRepresentation
+                            HardwareRepresentation = hardwareRepresentation
                         };
 
                         var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
@@ -96,7 +96,7 @@ namespace Hast.Communication
             public bool HardwareExecutionIsCancelled { get; set; }
             public IInvocation Invocation { get; set; }
             public string MemberFullName { get; set; }
-            public IHardwareRepresentation MaterializedHardware { get; set; }
+            public IHardwareRepresentation HardwareRepresentation { get; set; }
             public IHardwareExecutionInformation ExecutionInformation { get; set; }
         }
     }

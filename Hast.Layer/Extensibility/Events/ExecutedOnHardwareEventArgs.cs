@@ -12,7 +12,7 @@ namespace Hast.Layer.Extensibility.Events
     public class ExecutedOnHardwareEventArgs : EventArgs
     {
         private IHardwareRepresentation _hardwareRepresentation;
-        public IHardwareRepresentation MaterializedHardware
+        public IHardwareRepresentation HardwareRepresentation
         {
             get { return _hardwareRepresentation; }
         }
