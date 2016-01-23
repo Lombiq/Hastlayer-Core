@@ -10,12 +10,6 @@ using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public interface IStatementTransformer : IDependency
-    {
-        void Transform(Statement statement, ISubTransformerContext context);
-    }
-
-
     public class StatementTransformer : IStatementTransformer
     {
         private readonly ITypeConverter _typeConverter;

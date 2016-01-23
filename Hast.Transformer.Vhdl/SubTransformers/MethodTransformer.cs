@@ -14,12 +14,6 @@ using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public interface IMethodTransformer : IDependency
-    {
-        Task Transform(MethodDeclaration method, IVhdlTransformationContext context);
-    }
-
-
     public class MethodTransformer : IMethodTransformer
     {
         private readonly ITypeConverter _typeConverter;

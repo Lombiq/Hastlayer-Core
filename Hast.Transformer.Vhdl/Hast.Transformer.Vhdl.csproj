@@ -71,6 +71,9 @@
     <Compile Include="Models\MethodStateMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\IExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\IMethodTransformer.cs" />
+    <Compile Include="SubTransformers\IStatementTransformer.cs" />
     <Compile Include="SubTransformers\MethodTransformer.cs" />
     <Compile Include="SubTransformers\StatementTransformer.cs" />
     <Compile Include="Models\SubTransformerContext.cs" />
