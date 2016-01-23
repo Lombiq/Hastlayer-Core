@@ -25,7 +25,9 @@ namespace Hast.Layer
         /// <param name="assemblies">The assemblies that should be implemented as hardware.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
         /// <returns>The representation of the assemblies implemented as hardware.</returns>
-        /// <exception cref="HastlayerException">Thrown if any lower-level exception or other error happens during hardware generation.</exception>
+        /// <exception cref="HastlayerException">
+        /// Thrown if any lower-level exception or other error happens during hardware generation.
+        /// </exception>
         Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration);
 
         /// <summary>
@@ -35,7 +37,9 @@ namespace Hast.Layer
         /// <param name="hardwareRepresentation">The representation of the assemblies implemented as hardware.</param>
         /// <param name="hardwareObject">The object to generate the proxy for.</param>
         /// <returns>The generated proxy object.</returns>
-        /// <exception cref="HastlayerException">Thrown if any lower-level exception or other error happens during proxy generation.</exception>
+        /// <exception cref="HastlayerException">
+        /// Thrown if any lower-level exception or other error happens during proxy generation.
+        /// </exception>
         Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class;
     }
 }

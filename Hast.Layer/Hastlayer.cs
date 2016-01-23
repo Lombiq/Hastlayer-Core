@@ -43,6 +43,7 @@ namespace Hast.Layer
         /// <remarks>Point of this factory is that it returns an interface type instead of the implementation.</remarks>
         /// <param name="extensions">
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation pipeline.
+        /// These should be Orchard extensions.
         /// </param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create(IEnumerable<Assembly> extensions)
