@@ -49,7 +49,6 @@
     <Compile Include="HastlayerException.cs" />
     <Compile Include="IHastlayer.cs" />
     <Compile Include="IHastlayerConfiguration.cs" />
-    <Compile Include="Models\MaterializedHardware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

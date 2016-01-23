@@ -12,11 +12,12 @@ namespace Hast.Communication.Constants
 
         public static class CommandTypes
         {
-            public const char Execution = 'e';
+            public const char Execution = 'x';
         }
 
         public static class Signals
         {
+            public const char Echo = 'e';
             public const char Ping = 'p';
             public const char Ready = 'r';
         }
