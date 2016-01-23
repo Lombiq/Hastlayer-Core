@@ -20,15 +20,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public class ExpressionTransformer : IExpressionTransformer
     {
         private readonly ITypeConverter _typeConverter;
-        private readonly IHardwareDriver _hardwareDriver;
+        private readonly IDeviceDriver _deviceDriver;
 
         public ILogger Logger { get; set; }
 
 
-        public ExpressionTransformer(ITypeConverter typeConverter, IHardwareDriver hardwareDriver)
+        public ExpressionTransformer(ITypeConverter typeConverter, IDeviceDriver deviceDriver)
         {
             _typeConverter = typeConverter;
-            _hardwareDriver = hardwareDriver;
+            _deviceDriver = deviceDriver;
 
             Logger = NullLogger.Instance;
         }
