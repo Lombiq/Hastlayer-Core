@@ -66,10 +66,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     var type = _typeConverter.ConvertTypeReference(typeReference);
                     var valueString = primitive.Value.ToString();
-                    if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.'); // Replacing decimal comma to decimal dot.
+                    // Replacing decimal comma to decimal dot.
+                    if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.');
 
-                    // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer and a type conversion would
-                    // be needed. Thus we add a .0 to the end to indicate it's a real.
+                    // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
+                    // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
                     if (type == KnownDataTypes.Real && !valueString.Contains('.'))
                     {
                         valueString += ".0";
@@ -93,8 +94,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context);
             else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context);
-            // These are not needed at the moment. MemberReferenceExpression is handled in TransformInvocationExpression and a
-            // ThisReferenceExpression can only happen if "this" is passed to a method, which is not supported.
+            // These are not needed at the moment. MemberReferenceExpression is handled in TransformInvocationExpression 
+            // and a ThisReferenceExpression can only happen if "this" is passed to a method, which is not supported.
             //else if (expression is MemberReferenceExpression)
             //{
             //    var memberReference = (MemberReferenceExpression)expression;
