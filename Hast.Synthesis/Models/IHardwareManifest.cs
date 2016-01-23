@@ -12,6 +12,11 @@ namespace Hast.Synthesis.Models
     public interface IHardwareManifest
     {
         /// <summary>
+        /// Technical name that identifies the hardware.
+        /// </summary>
+        string TechnicalName { get; }
+
+        /// <summary>
         /// The clock frequency of the board in Hz.
         /// </summary>
         uint ClockFrequencyHz { get; }

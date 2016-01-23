@@ -17,6 +17,7 @@ namespace Hast.Xilinx
         {
             HardwareManifest = new HardwareManifest
             {
+                TechnicalName = "Nexys4 DDR",
                 ClockFrequencyHz = 100000000
             };
         }
