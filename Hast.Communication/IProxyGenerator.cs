@@ -14,6 +14,6 @@ namespace Hast.Communication
     /// </summary>
     public interface IProxyGenerator : ISingletonDependency
     {
-        T CreateCommunicationProxy<T>(IMaterializedHardware materializedHardware, T target) where T : class;
+        T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target) where T : class;
     }
 }

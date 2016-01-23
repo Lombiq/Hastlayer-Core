@@ -20,9 +20,9 @@ namespace Hast.Communication
         }
 
 
-        public T CreateCommunicationProxy<T>(IMaterializedHardware materializedHardware, T target) where T : class
+        public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target) where T : class
         {
-            var memberInvokationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(materializedHardware, target);
+            var memberInvokationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(hardwareRepresentation, target);
             if (typeof(T).IsInterface)
             {
                 return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvokationHandler));

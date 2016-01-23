@@ -17,6 +17,7 @@ using Orchard.Environment.Configuration;
 using Orchard.Validation;
 using Orchard.Exceptions;
 using Orchard.Logging;
+using Hast.Layer.Models;
 
 namespace Hast.Layer
 {
@@ -69,9 +70,9 @@ namespace Hast.Layer
              * Steps to be implemented:
              * - Transform into hardware description through ITransformer.
              * - Save hardware description for re-use (cache file, stream supplied from the outside).
-             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary communication 
-             *   implementation (currently partially implemented with a member table).
-             * - Cache hardware implementation to be able to re-configure the FPGA with it later.
+             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary 
+             *   communication implementation (currently partially implemented with a member table). The implementation
+             *   should be cached by the vendor tools.
              */
 
             try
@@ -106,15 +107,6 @@ namespace Hast.Layer
 
         public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
         {
-            Argument.ThrowIfNull(hardwareRepresentation, "hardwareAssembly");
-                .Run<ITransformer, IHardwareImplementationComposer>(
-                    async (transformer, hardwareImplementationComposer) =>
-                    {
-                        await hardwareImplementationComposer.Compose(hardwareRepresentation);
-                    }, ShellName, false);
-
-            return (IMaterializedHardware)materializedHardware;
-
             if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
             {
                 throw new InvalidOperationException("The supplied type is not part of any assembly that this hardware representation was generated from.");
