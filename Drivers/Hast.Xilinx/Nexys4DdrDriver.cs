@@ -24,14 +24,18 @@ namespace Hast.Xilinx
         }
 
 
-        public uint GetClockCyclesNeededForOperation(BinaryOperatorType operation)
+        public decimal GetClockCyclesNeededForOperation(BinaryOperatorType operation)
         {
             if (operation == BinaryOperatorType.Modulus)
+            {
+                return 5;
+            }
+            else if (operation == BinaryOperatorType.Multiply || operation == BinaryOperatorType.Divide)
             {
                 return 3;
             }
 
-            return 1;
+            return 0.1M;
         }
     }
 }
