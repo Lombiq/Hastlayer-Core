@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Synthesis;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Helpers;
@@ -29,13 +30,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public class ExpressionTransformer : IExpressionTransformer
     {
         private readonly ITypeConverter _typeConverter;
+        private readonly IHardwareDriver _hardwareDriver;
 
         public ILogger Logger { get; set; }
 
 
-        public ExpressionTransformer(ITypeConverter typeConverter)
+        public ExpressionTransformer(ITypeConverter typeConverter, IHardwareDriver hardwareDriver)
         {
             _typeConverter = typeConverter;
+            _hardwareDriver = hardwareDriver;
 
             Logger = NullLogger.Instance;
         }
