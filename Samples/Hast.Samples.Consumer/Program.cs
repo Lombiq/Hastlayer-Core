@@ -52,7 +52,6 @@ namespace Hast.Samples.Consumer
                         // For testing transformation, we don't need anything else.
                         return;
 
-                        //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
                         var materializedHardware = await hastlayer.MaterializeHardware(hardwareRepresentation);
 
