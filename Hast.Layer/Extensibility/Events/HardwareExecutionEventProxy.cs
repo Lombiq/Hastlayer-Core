@@ -32,7 +32,7 @@ namespace Hast.Layer.Extensibility.Events
         public void MemberExecutedOnHardware(IMemberHardwareExecutionContext hardwareExecutionContext)
         {
             _eventHandler(new ExecutedOnHardwareEventArgs(
-                hardwareExecutionContext.MaterializedHardware,
+                hardwareExecutionContext.HardwareRepresentation,
                 hardwareExecutionContext.MemberFullName,
                 hardwareExecutionContext.ExecutionInformation));
         }
