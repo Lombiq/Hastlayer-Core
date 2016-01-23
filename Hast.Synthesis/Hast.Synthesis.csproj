@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IHardwareDriver.cs" />
     <Compile Include="IHardwareImplementationComposer.cs" />
+    <Compile Include="Models\HardwareManifest.cs" />
+    <Compile Include="Models\HardwareImplementation.cs" />
+    <Compile Include="Models\IHardwareManifest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

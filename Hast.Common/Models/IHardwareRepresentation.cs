@@ -22,5 +22,10 @@ namespace Hast.Common.Models
         /// Describes the hardware created from a transformed assembly.
         /// </summary>
         IHardwareDescription HardwareDescription { get; }
+
+        /// <summary>
+        /// Represents a handle to the hardware implementation synthesized through the FPGA vendor toolchain.
+        /// </summary>
+        IHardwareImplementation HardwareImplementation { get; }
     }
 }
