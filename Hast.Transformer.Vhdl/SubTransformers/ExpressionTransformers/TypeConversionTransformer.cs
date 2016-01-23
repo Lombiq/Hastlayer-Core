@@ -10,7 +10,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard.Logging;
 
-namespace Hast.Transformer.Vhdl.SubTransformers
+namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
     public class TypeConversionTransformer : ITypeConversionTransformer
     {
