@@ -20,14 +20,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public class ExpressionTransformer : IExpressionTransformer
     {
         private readonly ITypeConverter _typeConverter;
+        private readonly ITypeConversionTransformer _typeConversionTransformer;
         private readonly IDeviceDriver _deviceDriver;
 
         public ILogger Logger { get; set; }
 
 
-        public ExpressionTransformer(ITypeConverter typeConverter, IDeviceDriver deviceDriver)
+        public ExpressionTransformer(
+            ITypeConverter typeConverter,
+            ITypeConversionTransformer typeConversionTransformer,
+            IDeviceDriver deviceDriver)
         {
             _typeConverter = typeConverter;
+            _typeConversionTransformer = typeConversionTransformer;
             _deviceDriver = deviceDriver;
 
             Logger = NullLogger.Instance;
@@ -54,7 +59,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (!(identifier.Parent is BinaryOperatorExpression)) return reference;
 
-                return ImplementTypeConversionForBinaryExpression((BinaryOperatorExpression)identifier.Parent, reference, context);
+                return _typeConversionTransformer
+                    .ImplementTypeConversionForBinaryExpression((BinaryOperatorExpression)identifier.Parent, reference, context);
 
             }
             else if (expression is PrimitiveExpression)
@@ -85,7 +91,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         DataObjectKind = DataObjectKind.Constant,
                         Name = primitive.ToString()
                     };
-                    return ImplementTypeConversionForBinaryExpression((BinaryOperatorExpression)primitive.Parent, reference, context);
+
+                    return _typeConversionTransformer.
+                        ImplementTypeConversionForBinaryExpression((BinaryOperatorExpression)primitive.Parent, reference, context);
                 }
 
                 throw new InvalidOperationException(
@@ -492,87 +500,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var fromType = _typeConverter.ConvertTypeReference(expression.GetActualType());
             var toType = _typeConverter.Convert(expression.Type);
 
-            return ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context));
-        }
-
-        /// <summary>
-        /// In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if 
-        /// necessary.
-        /// </summary>
-        private IVhdlElement ImplementTypeConversionForBinaryExpression(
-            BinaryOperatorExpression binaryOperatorExpression,
-            IVhdlElement expression,
-            ISubTransformerContext context)
-        {
-            // If the type of an operand can't be determined the best guess is the expression's type.
-            var expressionTypeReference = binaryOperatorExpression.GetActualType();
-            var expressionType = expressionTypeReference != null ? _typeConverter.ConvertTypeReference(expressionTypeReference) : null;
-
-            var leftTypeReference = binaryOperatorExpression.Left.GetActualType();
-            var leftType = leftTypeReference != null ? _typeConverter.ConvertTypeReference(leftTypeReference) : expressionType;
-
-            var rightTypeReference = binaryOperatorExpression.Right.GetActualType();
-            var rightType = rightTypeReference != null ? _typeConverter.ConvertTypeReference(rightTypeReference) : expressionType;
-
-            if (leftType == null || rightType == null)
-            {
-                throw new InvalidOperationException(
-                    "The type of the operands of the following expression could't be determined: " +
-                    binaryOperatorExpression.ToString());
-            }
-
-            if (leftType == rightType) return expression;
-
-            var isLeft = binaryOperatorExpression.Left == expression;
-            var thisType = isLeft ? leftType : rightType;
-            var otherType = isLeft ? rightType : leftType;
-
-            // We need to convert types in a way to keep precision. E.g. conerting an int to real is fine, but vica 
-            // versa would cause information loss. However excplicit casting in this direction is allowed in CIL so we 
-            // need to allow it here as well.
-            if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real))
-            {
-                Logger.Warning(
-                    "Converting from " + thisType.Name +
-                    " to " + otherType.Name +
-                    " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding. " +
-                    "The affected expression: " + binaryOperatorExpression.ToString() +
-                    " in method " + context.Scope.Method.GetFullName() + ".");
-            }
-
-            return ImplementTypeConversion(thisType, otherType, expression);
-        }
-
-        private IVhdlElement ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression)
-        {
-            if (fromType == toType)
-            {
-                return expression;
-            }
-
-            var castInvokation = new Invokation();
-
-            // Trying supported cast scenarios:
-            if ((fromType == KnownDataTypes.UnrangedInt || fromType == KnownDataTypes.Natural) && toType == KnownDataTypes.Real)
-            {
-                castInvokation.Target = new Raw("real");
-            }
-            else if ((fromType == KnownDataTypes.Real || fromType == KnownDataTypes.Natural) && (toType == KnownDataTypes.UnrangedInt || toType == KnownDataTypes.Natural))
-            {
-                castInvokation.Target = new Raw("integer");
-            }
-            else if (fromType == KnownDataTypes.UnrangedInt && toType == KnownDataTypes.Natural)
-            {
-                castInvokation.Target = new Raw("natural");
-            }
-            else
-            {
-                throw new NotSupportedException("Casting from " + fromType.Name + " to " + toType.Name + " is not supported.");
-            }
-
-            castInvokation.Parameters.Add(expression);
-
-            return castInvokation;
+            return _typeConversionTransformer.ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context));
         }
 
 
