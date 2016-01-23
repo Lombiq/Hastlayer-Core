@@ -9,16 +9,21 @@ using System.Threading.Tasks;
 using Hast.Communication.Models;
 using Hast.Common.Models;
 using Hast.Communication.Constants;
+using Hast.Synthesis;
 
 namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
+        private readonly IHardwareDriver _hardwareDriver;
+
         public ILogger Logger { get; set; }
 
 
-        public SerialPortCommunicationService()
+        public SerialPortCommunicationService(IHardwareDriver hardwareDriver)
         {
+            _hardwareDriver = hardwareDriver;
+
             Logger = NullLogger.Instance;
         }
 
@@ -112,8 +117,8 @@ namespace Hast.Communication.Services
                                 {
                                     var executionTimeClockCycles = BitConverter.ToUInt32(executionTimeBytes, 0);
 
-                                    // Hard-coding the divisor for now: the FPGA runs at 100Mhz so one clock cycle is 10ns.
-                                    executionInformation.HardwareExecutionTimeMilliseconds = executionTimeClockCycles / 100000;
+                                    executionInformation.HardwareExecutionTimeMilliseconds = 
+                                        executionTimeClockCycles / (_hardwareDriver.HardwareManifest.ClockFrequencyHz / 1000);
                                     Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
 
                                     communicationState = SerialCommunicationConstants.CommunicationState.ReceivingOutputByteCount;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common;
 using Hast.Common.Models;
+using Hast.Synthesis.Models;
 using Orchard;
 
 namespace Hast.Synthesis
@@ -14,8 +15,8 @@ namespace Hast.Synthesis
         /// <summary>
         /// Composes the hardware implemenation for the give hardware representation.
         /// </summary>
-        /// <param name="hardwareRepresentation">Represents the hardware that was generated from .NET assemblies.</param>
-        /// <returns></returns>
-        Task Compose(IHardwareRepresentation hardwareRepresentation);
+        /// <param name="hardwareDescription">Represents the hardware that was generated from .NET assemblies.</param>
+        /// <returns>The handle to the synthesized hardware implementation.</returns>
+        Task<IHardwareImplementation> Compose(IHardwareDescription hardwareDescription);
     }
 }
