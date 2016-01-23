@@ -72,6 +72,10 @@
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
+      <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
+      <Name>Hast.Synthesis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj">
       <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
       <Name>Hast.Transformer</Name>
