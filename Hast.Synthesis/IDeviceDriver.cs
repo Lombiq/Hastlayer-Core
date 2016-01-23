@@ -12,9 +12,9 @@ namespace Hast.Synthesis
     /// <summary>
     /// Provides FPGA-specific implementations.
     /// </summary>
-    public interface IHardwareDriver : IDependency
+    public interface IDeviceDriver : IDependency
     {
-        IHardwareManifest HardwareManifest { get; }
+        IDeviceManifest DeviceManifest { get; }
 
         uint GetClockCyclesNeededForOperation(BinaryOperatorType operation);
     }

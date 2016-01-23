@@ -15,14 +15,14 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        private readonly IHardwareDriver _hardwareDriver;
+        private readonly IDeviceDriver _deviceDriver;
 
         public ILogger Logger { get; set; }
 
 
-        public SerialPortCommunicationService(IHardwareDriver hardwareDriver)
+        public SerialPortCommunicationService(IDeviceDriver deviceDriver)
         {
-            _hardwareDriver = hardwareDriver;
+            _deviceDriver = deviceDriver;
 
             Logger = NullLogger.Instance;
         }
@@ -118,7 +118,7 @@ namespace Hast.Communication.Services
                                     var executionTimeClockCycles = BitConverter.ToUInt32(executionTimeBytes, 0);
 
                                     executionInformation.HardwareExecutionTimeMilliseconds = 
-                                        executionTimeClockCycles / (_hardwareDriver.HardwareManifest.ClockFrequencyHz / 1000);
+                                        executionTimeClockCycles / (_deviceDriver.DeviceManifest.ClockFrequencyHz / 1000);
                                     Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
 
                                     communicationState = SerialCommunicationConstants.CommunicationState.ReceivingOutputByteCount;
