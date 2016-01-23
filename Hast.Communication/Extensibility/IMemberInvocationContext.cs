@@ -27,6 +27,6 @@ namespace Hast.Communication.Extensibility
         /// <summary>
         /// Gets the materialized hardware behind the hardware-implemented members.
         /// </summary>
-        IMaterializedHardware MaterializedHardware { get; }
+        IHardwareRepresentation HardwareRepresentation { get; }
     }
 }

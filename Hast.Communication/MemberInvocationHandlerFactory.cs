@@ -27,7 +27,7 @@ namespace Hast.Communication
         }
 
 
-        public MemberInvocationHandler CreateMemberInvocationHandler(IMaterializedHardware materializedHardware, object target)
+        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target)
         {
             return invocation =>
                 {
@@ -40,7 +40,7 @@ namespace Hast.Communication
                         {
                             Invocation = invocation,
                             MemberFullName = memberFullName,
-                            MaterializedHardware = materializedHardware
+                            HardwareRepresentation = hardwareRepresentation
                         };
 
                         var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
@@ -53,7 +53,7 @@ namespace Hast.Communication
 
                         if (!invokationContext.HardwareExecutionIsCancelled)
                         {
-                            var hardwareMembers = materializedHardware.HardwareRepresentation.HardwareDescription.HardwareMembers;
+                            var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
                             var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
                             if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                             {
@@ -66,7 +66,7 @@ namespace Hast.Communication
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            var memberId = materializedHardware.HardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
+                            var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
                             // The task here is needed because the code executed on the FPGA board doesn't return, we have 
                             // to wait for it.
                             // The Execute method is executed on separate thread.
@@ -96,7 +96,7 @@ namespace Hast.Communication
             public bool HardwareExecutionIsCancelled { get; set; }
             public IInvocation Invocation { get; set; }
             public string MemberFullName { get; set; }
-            public IMaterializedHardware MaterializedHardware { get; set; }
+            public IHardwareRepresentation HardwareRepresentation { get; set; }
             public IHardwareExecutionInformation ExecutionInformation { get; set; }
         }
     }

@@ -43,6 +43,7 @@ namespace Hast.Layer
         /// <remarks>Point of this factory is that it returns an interface type instead of the implementation.</remarks>
         /// <param name="extensions">
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation pipeline.
+        /// These should be Orchard extensions.
         /// </param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create(IEnumerable<Assembly> extensions)
@@ -70,6 +71,9 @@ namespace Hast.Layer
              * Steps to be implemented:
              * - Transform into hardware description through ITransformer.
              * - Save hardware description for re-use (cache file, stream supplied from the outside).
+             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary 
+             *   communication implementation (currently partially implemented with a member table). The implementation
+             *   should be cached by the vendor tools.
              */
 
             try
@@ -102,35 +106,9 @@ namespace Hast.Layer
             }
         }
 
-        public async Task<IMaterializedHardware> MaterializeHardware(IHardwareRepresentation hardwareRepresentation)
+        public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
         {
-            /*
-             * Steps to be implemented:
-             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary
-             *   communication implementation (currently partially implemented with a member table).
-             * - Cache hardware implementation to be able to re-configure the FPGA with it later.
-             */
-
-            var materializedHardware = new MaterializedHardware
-            {
-                HardwareRepresentation = hardwareRepresentation
-            };
-
-            await(await GetHost())
-                .Run<ITransformer, IHardwareImplementationComposer>(
-                    async (transformer, hardwareImplementationComposer) =>
-                    {
-                        await hardwareImplementationComposer.Compose(hardwareRepresentation);
-                    }, ShellName, false);
-
-            return (IMaterializedHardware)materializedHardware;
-        }
-
-        public async Task<T> GenerateProxy<T>(IMaterializedHardware materializedHardware, T hardwareObject) where T : class
-        {
-            Argument.ThrowIfNull(materializedHardware, "materializedHardware");
-
-            if (!materializedHardware.HardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
+            if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
             {
                 throw new InvalidOperationException("The supplied type is not part of any assembly that this hardware representation was generated from.");
             }
@@ -139,7 +117,7 @@ namespace Hast.Layer
             {
                 return await
                     (await GetHost())
-                    .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(materializedHardware, hardwareObject)));
+                    .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject)));
             }
             catch (Exception ex)
             {

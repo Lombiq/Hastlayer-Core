@@ -11,10 +11,10 @@ namespace Hast.Layer.Extensibility.Events
 {
     public class ExecutedOnHardwareEventArgs : EventArgs
     {
-        private IMaterializedHardware _materializedHardware;
-        public IMaterializedHardware MaterializedHardware
+        private IHardwareRepresentation _hardwareRepresentation;
+        public IHardwareRepresentation HardwareRepresentation
         {
-            get { return _materializedHardware; }
+            get { return _hardwareRepresentation; }
         }
 
         private string _memberFullName;
@@ -31,11 +31,11 @@ namespace Hast.Layer.Extensibility.Events
 
 
         public ExecutedOnHardwareEventArgs(
-            IMaterializedHardware materializedHardware,
+            IHardwareRepresentation hardwareRepresentation,
             string memberFullName,
             IHardwareExecutionInformation hardwareExecutionInformation)
         {
-            _materializedHardware = materializedHardware;
+            _hardwareRepresentation = hardwareRepresentation;
             _memberFullName = memberFullName;
             _hardwareExecutionInformation = hardwareExecutionInformation;
         }
