@@ -8,14 +8,14 @@ using Hast.Synthesis.Models;
 
 namespace Hast.Xilinx
 {
-    public class Nexys4DdrDriver : IHardwareDriver
+    public class Nexys4DdrDriver : IDeviceDriver
     {
-        public IHardwareManifest HardwareManifest { get; private set; }
+        public IDeviceManifest DeviceManifest { get; private set; }
 
 
         public Nexys4DdrDriver()
         {
-            HardwareManifest = new HardwareManifest
+            DeviceManifest = new DeviceManifest
             {
                 TechnicalName = "Nexys4 DDR",
                 ClockFrequencyHz = 100000000
