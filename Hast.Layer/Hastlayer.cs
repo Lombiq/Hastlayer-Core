@@ -82,14 +82,17 @@ namespace Hast.Layer
 
                 await (await GetHost())
                     .Run<ITransformer, IHardwareImplementationComposer>(
-                        async (transformer, hardwareRepresentationComposer) =>
+                        async (transformer, hardwareImplementationComposer) =>
                         {
                             var hardwareDescription = await transformer.Transform(assemblies, configuration);
+
+                            var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
 
                             hardwareRepresentation = new HardwareRepresentation
                             {
                                 SoftAssemblies = assemblies,
-                                HardwareDescription = hardwareDescription
+                                HardwareDescription = hardwareDescription,
+                                HardwareImplementation = hardwareImplementation
                             };
                         }, ShellName, false);
 

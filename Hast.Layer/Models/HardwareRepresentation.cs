@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Models;
+using Hast.Synthesis.Models;
 
 namespace Hast.Layer.Models
 {
@@ -12,5 +13,6 @@ namespace Hast.Layer.Models
     {
         public IEnumerable<Assembly> SoftAssemblies { get; set; }
         public IHardwareDescription HardwareDescription { get; set; }
+        public IHardwareImplementation HardwareImplementation { get; set; }
     }
 }

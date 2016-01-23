@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HastlayerFactory.cs" />
-    <Compile Include="XilinxHardwareRepresentationComposer.cs" />
+    <Compile Include="VivadoHardwareImplementationComposer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

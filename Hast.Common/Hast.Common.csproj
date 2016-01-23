@@ -48,6 +48,7 @@
     <Compile Include="Extensions\MemberNameExtensions.cs" />
     <Compile Include="Models\IHardwareExecutionInformation.cs" />
     <Compile Include="Models\IHardwareDescription.cs" />
+    <Compile Include="Models\IHardwareImplementation.cs" />
     <Compile Include="Models\IHardwareRepresentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
