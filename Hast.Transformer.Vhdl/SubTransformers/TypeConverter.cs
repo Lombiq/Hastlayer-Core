@@ -7,14 +7,6 @@ using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public interface ITypeConverter : IDependency
-    {
-        DataType ConvertTypeReference(TypeReference typeReference);
-        DataType Convert(AstType type);
-        DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable);
-    }
-
-
     public class TypeConverter : ITypeConverter
     {
         public DataType ConvertTypeReference(TypeReference typeReference)
