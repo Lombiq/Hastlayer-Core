@@ -53,6 +53,18 @@ namespace Hast.VhdlBuilder.Extensions
             };
         }
 
+        /// <summary>
+        /// Converts a signal name to a VHDL signal reference.
+        /// </summary>
+        public static DataObjectReference ToVhdlSignalReference(this string signalName)
+        {
+            return new DataObjectReference
+            {
+                DataObjectKind = DataObjectKind.Signal,
+                Name = signalName
+            };
+        }
+
         public static string IndentLinesIfShouldFormat(this string vhdl, IVhdlGenerationOptions vhdlGenerationOptions)
         {
             // Empty new lines won't be indented as they can contain different blocks.
