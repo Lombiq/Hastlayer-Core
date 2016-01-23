@@ -584,14 +584,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var stateMachine = context.Scope.StateMachine;
 
-            var variableName = (targetName + "." + suffix + "0").ToExtendedVhdlId();
+            var variableName = (targetName + "." + suffix + "0");
             var returnVariableNameIndex = 0;
-            while (context.Scope.StateMachine.LocalVariables.Any(variable => variable.Name == variableName))
+            while (context.Scope.StateMachine.LocalVariables.Any(variable => variable.Name == variableName.ToExtendedVhdlId()))
             {
-                variableName = (targetName + "." + suffix + ++returnVariableNameIndex).ToExtendedVhdlId();
+                variableName = (targetName + "." + suffix + ++returnVariableNameIndex);
             }
 
-            return variableName;
+            return MethodStateMachineNameFactory.CreatePrefixedVariableName(context.Scope.StateMachine, variableName);
         }
 
         private static DataObjectReference CreateTemporaryVariableReference(
@@ -602,7 +602,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             var returnVariable = new Variable
             {
-                Name = GetNextUnusedTemporaryVariableName(targetName, "return", context),
+                Name = GetNextUnusedTemporaryVariableName(targetName, suffix, context),
                 DataType = dataType
             };
 
