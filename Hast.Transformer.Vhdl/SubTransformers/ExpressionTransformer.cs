@@ -138,6 +138,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var unary = expression as UnaryOperatorExpression;
                 return new Invokation
                 {
+                    // Currently only handling negation among the unary operators but it seems that only this is
+                    // preserved in CIL, other such operators are compiled into binary operators (e.g. i++ will be
+                    // i = i + 1.
                     Target = new Value { DataType = KnownDataTypes.Identifier, Content = "not" },
                     Parameters = new List<IVhdlElement> { Transform(unary.Expression, context) }
                 };

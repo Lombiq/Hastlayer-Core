@@ -16,6 +16,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// Transforms an expression into a VHDL element that can be used in place of the original expression. Be aware
         /// that <code>currentBlock</code>, being a reference, can change.
         /// </summary>
+        /// <returns>
+        /// A reference that can be used in place of the original expression.
+        /// </returns>
         IVhdlElement Transform(Expression expression, ISubTransformerContext context);
     }
 }
