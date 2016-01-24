@@ -63,7 +63,6 @@
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachineExtenions.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachineNameFactory.cs" />
-    <Compile Include="Helpers\TopologicalSortHelper.cs" />
     <Compile Include="StateMachineGeneration\IMemberStateMachine.cs" />
     <Compile Include="Models\IVhdlTransformationContext.cs" />
     <Compile Include="MemberCallChainTable.cs" />

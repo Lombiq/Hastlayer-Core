@@ -4,7 +4,6 @@ using System.Linq;
 using Hast.Synthesis;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Constants;
-using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Extensions;

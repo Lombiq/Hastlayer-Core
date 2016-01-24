@@ -9,7 +9,6 @@ using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 using System.Linq;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Helpers;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.StateMachineGeneration;
 

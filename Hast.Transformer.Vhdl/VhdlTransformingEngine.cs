@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Hast.Common.Models;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Constants;
-using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers;
 using Hast.VhdlBuilder;
@@ -56,7 +55,6 @@ namespace Hast.Transformer.Vhdl
 
             module.Architecture.Entity = module.Entity;
 
-            ReorderProcedures(vhdlTransformationContext);
             var memberIdTable = ProcessInterfaceMethods(vhdlTransformationContext);
 
             if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
@@ -281,30 +279,6 @@ namespace Hast.Transformer.Vhdl
             //transformationContext.Module.Architecture.Add(proxyProcess);
 
             //return memberIdTable;
-        }
-
-        /// <summary>
-        /// In VHDL procedures should be declared before they're used. Because of this we re-order them if necessary.
-        /// </summary>
-        private static void ReorderProcedures(VhdlTransformationContext transformationContext)
-        {
-            var chains = transformationContext.MemberCallChainTable.Chains;
-
-            transformationContext.Module.Architecture.Declarations =
-                TopologicalSortHelper.Sort(
-                transformationContext.Module.Architecture.Declarations,
-                declaration =>
-                {
-                    if (!(declaration is Procedure)) return Enumerable.Empty<IVhdlElement>();
-
-                    var procedure = (Procedure)declaration;
-
-                    if (!chains.ContainsKey(procedure.Name)) return Enumerable.Empty<IVhdlElement>();
-
-                    var targetNames = chains[procedure.Name].Targets.Select(chain => chain.MemberName);
-                    return transformationContext.Module.Architecture.Declarations
-                        .Where(element => element is Procedure && targetNames.Contains(((Procedure)element).Name));
-                });
         }
 
         private static void AddSimpleMemoryPorts(Module module)
