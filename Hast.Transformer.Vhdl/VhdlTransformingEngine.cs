@@ -42,6 +42,7 @@ namespace Hast.Transformer.Vhdl
 
             await Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext);
 
+            // Adding libraries
             module.Libraries.Add(new Library
             {
                 Name = "ieee",
@@ -62,6 +63,33 @@ namespace Hast.Transformer.Vhdl
             {
                 AddSimpleMemoryPorts(module);
             }
+
+            // Adding common ports
+            var ports = module.Entity.Ports;
+            ports.Add(new Port
+            {
+                Name = CommonPortNames.Reset,
+                Mode = PortMode.In,
+                DataType = KnownDataTypes.StdLogic
+            });
+            ports.Add(new Port
+            {
+                Name = CommonPortNames.MemberId,
+                Mode = PortMode.In,
+                DataType = KnownDataTypes.UnrangedInt
+            });
+            ports.Add(new Port
+            {
+                Name = CommonPortNames.Started,
+                Mode = PortMode.In,
+                DataType = KnownDataTypes.StdLogic
+            });
+            ports.Add(new Port
+            {
+                Name = CommonPortNames.Finished,
+                Mode = PortMode.Out,
+                DataType = KnownDataTypes.StdLogic
+            });
 
             ProcessUtility.AddClockToProcesses(module, CommonPortNames.Clock);
 
@@ -281,32 +309,55 @@ namespace Hast.Transformer.Vhdl
 
         private static void AddSimpleMemoryPorts(Module module)
         {
-            module.Entity.Ports.Add(new Port
+            var ports = module.Entity.Ports;
+
+            ports.Add(new Port
             {
                 Name = SimpleMemoryNames.DataInPort,
                 Mode = PortMode.In,
                 DataType = SimpleMemoryTypes.DataPortsDataType
             });
 
-            module.Entity.Ports.Add(new Port
+            ports.Add(new Port
             {
                 Name = SimpleMemoryNames.DataOutPort,
-                Mode = PortMode.InOut,
+                Mode = PortMode.Out,
                 DataType = SimpleMemoryTypes.DataPortsDataType
             });
 
-            module.Entity.Ports.Add(new Port
+            ports.Add(new Port
             {
-                Name = SimpleMemoryNames.ReadAddressPort,
+                Name = SimpleMemoryNames.CellIndexOutPort,
                 Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.AddressPortsDataType
+                DataType = SimpleMemoryTypes.CellIndexOutPortDataType
             });
 
-            module.Entity.Ports.Add(new Port
+            ports.Add(new Port
             {
-                Name = SimpleMemoryNames.WriteAddressPort,
+                Name = SimpleMemoryNames.ReadEnablePort,
                 Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.AddressPortsDataType
+                DataType = SimpleMemoryTypes.EnablePortsDataType
+            });
+
+            ports.Add(new Port
+            {
+                Name = SimpleMemoryNames.WriteEnablePort,
+                Mode = PortMode.Out,
+                DataType = SimpleMemoryTypes.EnablePortsDataType
+            });
+
+            ports.Add(new Port
+            {
+                Name = SimpleMemoryNames.ReadsDonePort,
+                Mode = PortMode.In,
+                DataType = SimpleMemoryTypes.DonePortsDataType
+            });
+
+            ports.Add(new Port
+            {
+                Name = SimpleMemoryNames.WritesDonePort,
+                Mode = PortMode.In,
+                DataType = SimpleMemoryTypes.DonePortsDataType
             });
         }
     }

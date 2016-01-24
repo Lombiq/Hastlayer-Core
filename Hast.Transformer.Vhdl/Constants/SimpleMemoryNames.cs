@@ -6,13 +6,10 @@ namespace Hast.Transformer.Vhdl.Constants
     {
         public const string DataInPort = @"\DataIn\";
         public const string DataOutPort = @"\DataOut\";
-        public const string ReadAddressPort = @"\ReadAddress\";
-        public const string WriteAddressPort = @"\WriteAddress\";
-
-        // Aliases for the port signals to be used in local scopes (e.g. inside procedures).
-        public const string DataInLocal = @"\DataInLocal\";
-        public const string DataOutLocal = @"\DataOutLocal\";
-        public const string ReadAddressLocal = @"\ReadAddressLocal\";
-        public const string WriteAddressLocal = @"\WriteAddressLocal\";
+        public const string CellIndexOutPort = @"\CellIndexOut\";
+        public const string ReadEnablePort = @"\ReadEnable\";
+        public const string WriteEnablePort = @"\WriteEnable\";
+        public const string ReadsDonePort = @"\ReadsDone\";
+        public const string WritesDonePort = @"\WritesDone\";
     }
 }

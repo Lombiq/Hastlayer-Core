@@ -11,5 +11,8 @@ namespace Hast.Transformer.Vhdl.Constants
     {
         public static readonly string Clock = "Clock".ToExtendedVhdlId();
         public static readonly string Reset = "Reset".ToExtendedVhdlId();
+        public static readonly string MemberId = "MemberID".ToExtendedVhdlId();
+        public static readonly string Started = "Started".ToExtendedVhdlId();
+        public static readonly string Finished = "Finished".ToExtendedVhdlId();
     }
 }

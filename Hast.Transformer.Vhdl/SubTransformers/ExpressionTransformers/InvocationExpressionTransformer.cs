@@ -53,12 +53,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     new DataObjectReference
                     {
                         DataObjectKind = DataObjectKind.Signal, 
-                        Name = isWrite ? SimpleMemoryNames.DataOutLocal : SimpleMemoryNames.DataInLocal
+                        Name = isWrite ? SimpleMemoryNames.DataOutPort : SimpleMemoryNames.DataInPort
                     },
                     new DataObjectReference
                     {
                         DataObjectKind = DataObjectKind.Signal, 
-                        Name = isWrite ? SimpleMemoryNames.WriteAddressLocal : SimpleMemoryNames.ReadAddressLocal
+                        Name = SimpleMemoryNames.CellIndexOutPort
                     }
                 });
 
