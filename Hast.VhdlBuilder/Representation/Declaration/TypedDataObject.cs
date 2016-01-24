@@ -18,7 +18,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 DataObjectKind.ToString() +
                 " " +
                 vhdlGenerationOptions.ShortenName(Name) +
-                (DataType != null ? ": " + DataType.ToReferenceVhdl() : string.Empty) +
+                (DataType != null ? ": " + DataType.ToReferenceVhdl(vhdlGenerationOptions) : string.Empty) +
                 (DefaultValue != null ? ((DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") + DefaultValue.ToVhdl(vhdlGenerationOptions)) : string.Empty),
                 vhdlGenerationOptions);
         }

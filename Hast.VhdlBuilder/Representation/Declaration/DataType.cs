@@ -25,12 +25,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Name;
+            return ToReferenceVhdl(vhdlGenerationOptions);
         }
 
-        public virtual string ToReferenceVhdl()
+        // We need this separate method since ToVhdl() will be overridden by specific data type implementation.
+        public virtual string ToReferenceVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Name;
+            return vhdlGenerationOptions.NameShortener(Name);
         }
 
 
