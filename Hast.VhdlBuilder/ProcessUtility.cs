@@ -33,7 +33,7 @@ namespace Hast.VhdlBuilder
             {
                 process.SensitivityList.Add(clockPort);
                 var invokation = new Invokation { Target = "rising_edge".ToVhdlIdValue() };
-                invokation.Parameters.Add(clockSignalName.ToVhdlIdValue());
+                invokation.Parameters.Add(clockSignalName.ToVhdlSignalReference());
                 var wrappingIf = new IfElse
                 {
                     Condition = invokation,

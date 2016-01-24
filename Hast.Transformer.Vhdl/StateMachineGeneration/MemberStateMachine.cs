@@ -168,9 +168,9 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             {
                 Condition = new Binary
                 {
-                    Left = CommonPortNames.Reset.ToVhdlIdValue(),
+                    Left = CommonPortNames.Reset.ToVhdlSignalReference(),
                     Operator = Operator.Equality,
-                    Right = new Character('1')
+                    Right = Value.OneCharacter
                 },
                 True = ifInResetBlock,
                 Else = stateCase

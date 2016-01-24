@@ -313,49 +313,49 @@ namespace Hast.Transformer.Vhdl
 
             ports.Add(new Port
             {
-                Name = SimpleMemoryNames.DataInPort,
+                Name = SimpleMemoryPortNames.DataIn,
                 Mode = PortMode.In,
                 DataType = SimpleMemoryTypes.DataPortsDataType
             });
 
             ports.Add(new Port
             {
-                Name = SimpleMemoryNames.DataOutPort,
+                Name = SimpleMemoryPortNames.DataOut,
                 Mode = PortMode.Out,
                 DataType = SimpleMemoryTypes.DataPortsDataType
             });
 
             ports.Add(new Port
             {
-                Name = SimpleMemoryNames.CellIndexOutPort,
+                Name = SimpleMemoryPortNames.CellIndexOut,
                 Mode = PortMode.Out,
                 DataType = SimpleMemoryTypes.CellIndexOutPortDataType
             });
 
             ports.Add(new Port
             {
-                Name = SimpleMemoryNames.ReadEnablePort,
+                Name = SimpleMemoryPortNames.ReadEnable,
                 Mode = PortMode.Out,
                 DataType = SimpleMemoryTypes.EnablePortsDataType
             });
 
             ports.Add(new Port
             {
-                Name = SimpleMemoryNames.WriteEnablePort,
+                Name = SimpleMemoryPortNames.WriteEnable,
                 Mode = PortMode.Out,
                 DataType = SimpleMemoryTypes.EnablePortsDataType
             });
 
             ports.Add(new Port
             {
-                Name = SimpleMemoryNames.ReadsDonePort,
+                Name = SimpleMemoryPortNames.ReadsDone,
                 Mode = PortMode.In,
                 DataType = SimpleMemoryTypes.DonePortsDataType
             });
 
             ports.Add(new Port
             {
-                Name = SimpleMemoryNames.WritesDonePort,
+                Name = SimpleMemoryPortNames.WritesDone,
                 Mode = PortMode.In,
                 DataType = SimpleMemoryTypes.DonePortsDataType
             });

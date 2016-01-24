@@ -7,6 +7,8 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         public static readonly Value True = "true".ToVhdlIdValue();
         public static readonly Value False = "false".ToVhdlIdValue();
+        public static readonly Value ZeroCharacter = new Character('0');
+        public static readonly Value OneCharacter = new Character('1');
             
 
         public DataType DataType { get; set; }

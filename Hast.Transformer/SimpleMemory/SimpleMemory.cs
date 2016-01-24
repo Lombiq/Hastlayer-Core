@@ -11,6 +11,10 @@ namespace Hast.Transformer.SimpleMemory
     /// </summary>
     /// <remarks>
     /// All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
+    /// 
+    /// WARNING: changes here should be in sync with the VHDL library. The signatures of the methods of this class 
+    /// mustn't be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL
+    /// library too.
     /// </remarks>
     public class SimpleMemory
     {

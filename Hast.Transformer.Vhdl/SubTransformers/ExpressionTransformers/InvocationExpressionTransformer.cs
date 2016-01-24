@@ -48,18 +48,37 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 var isWrite = memberName.StartsWith("Write");
                 var invokationParameters = transformedParameters.ToList();
+
+                if (isWrite)
+                {
+                    currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Begin SimpleMemory write."));
+                }
+                else
+                {
+                    currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Begin SimpleMemory read."));
+                }
+
+                // Directly setting SimpleMemory ports since the SimpleMemory library doesn't handle these yet.
+                // See: https://lombiq.atlassian.net/browse/HAST-44
+                currentBlock.Add(new Assignment
+                {
+                    AssignTo = SimpleMemoryPortNames.CellIndexOut.ToVhdlSignalReference(),
+                    Expression = invokationParameters[0] // CellIndex is conventionally the first invokation parameter.
+                });
+                invokationParameters.RemoveAt(0);
+                var enablePortReference = (isWrite ? SimpleMemoryPortNames.WriteEnable : SimpleMemoryPortNames.ReadEnable)
+                    .ToVhdlSignalReference();
+                currentBlock.Add(new Assignment
+                {
+                    AssignTo = enablePortReference,
+                    Expression = Value.OneCharacter
+                });
+
                 invokationParameters.AddRange(new[]
                 {
-                    new DataObjectReference
-                    {
-                        DataObjectKind = DataObjectKind.Signal, 
-                        Name = isWrite ? SimpleMemoryNames.DataOutPort : SimpleMemoryNames.DataInPort
-                    },
-                    new DataObjectReference
-                    {
-                        DataObjectKind = DataObjectKind.Signal, 
-                        Name = SimpleMemoryNames.CellIndexOutPort
-                    }
+                    (isWrite ? SimpleMemoryPortNames.DataOut : SimpleMemoryPortNames.DataIn).ToVhdlSignalReference()
+                    // The SimpleMemory library doesn't handle the CellIndex yet, we need to set that directly.
+                    //SimpleMemoryNames.CellIndexOutPort.ToVhdlSignalReference()
                 });
 
                 var target = "SimpleMemory" + targetMemberReference.MemberName;
@@ -71,15 +90,32 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 // The memory operation should be initialized in this state, then finished in another one.
                 var memoryOperationFinishedBlock = new InlineBlock();
-                var memoryOperationFinishedStateIndex = stateMachine.AddState(memoryOperationFinishedBlock);
+                var endMemoryOperationBlock = new InlineBlock(
+                    new IfElse
+                    {
+                        Condition = new Binary
+                            {
+                                Left = (isWrite ? SimpleMemoryPortNames.WritesDone : SimpleMemoryPortNames.ReadsDone).ToVhdlSignalReference(),
+                                Operator = Operator.Equality,
+                                Right = Value.OneCharacter
+                            },
+                        True = memoryOperationFinishedBlock
+                    });
+                var memoryOperationFinishedStateIndex = stateMachine.AddState(endMemoryOperationBlock);
+
+                // Directly resetting SimpleMemory *Enable port since the SimpleMemory library doesn't handle these yet.
+                memoryOperationFinishedBlock.Add(new Assignment
+                {
+                    AssignTo = enablePortReference,
+                    Expression = Value.ZeroCharacter
+                });
 
                 currentBlock.Add(stateMachine.CreateStateChange(memoryOperationFinishedStateIndex));
 
                 if (isWrite)
                 {
-                    // TODO: WriteEnable and CellIndex should be set in currentBlock and be re-set in
-                    // memoryOperationFinishedBlock.
-                    memoryOperationFinishedBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Write finish"));
+                    memoryOperationFinishedBlock.Body.Insert(0, 
+                        new VhdlBuilder.Representation.Declaration.Comment("SimpleMemory write finished."));
 
                     currentBlock.Add(memoryOperationInvokation.Terminate());
                     currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
@@ -88,8 +124,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
                 else
                 {
-                    // TODO: ReadEnable should be set in currentBlock and re-set in memoryOperationFinishedBlock.
-                    currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("ReadEnable"));
+                    memoryOperationFinishedBlock.Body.Insert(0, 
+                        new VhdlBuilder.Representation.Declaration.Comment("SimpleMemory read finished."));
 
                     currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
 
