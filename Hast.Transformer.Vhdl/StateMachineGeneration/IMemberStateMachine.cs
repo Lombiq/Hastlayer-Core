@@ -10,10 +10,13 @@ using Hast.VhdlBuilder.Representation.Declaration;
 namespace Hast.Transformer.Vhdl.StateMachineGeneration
 {
     /// <summary>
-    /// A state machine generated from a .NET method.
+    /// A state machine generated from a .NET member.
     /// </summary>
     public interface IMemberStateMachine
     {
+        /// <summary>
+        /// Name of the state machine.
+        /// </summary>
         string Name { get; }
 
         /// <summary>
@@ -22,8 +25,14 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         /// </summary>
         IReadOnlyList<IBlockElement> States { get; }
 
+        /// <summary>
+        /// Input/output parameters of the state machine which can be used to communicate with other state machines.
+        /// </summary>
         IList<Variable> Parameters { get; }
 
+        /// <summary>
+        /// Variables local to the state machine.
+        /// </summary>
         IList<Variable> LocalVariables { get; }
 
 
@@ -34,7 +43,18 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         /// <returns>The index of the state.</returns>
         int AddState(IBlockElement state);
 
+        /// <summary>
+        /// Generates the name for the state with the given index.
+        /// </summary>
+        /// <param name="index">The index of the state.</param>
+        /// <returns>The name of the state.</returns>
         string CreateStateName(int index);
+
+        /// <summary>
+        /// Implements a change from the current state to the state with the given index in VHDL.
+        /// </summary>
+        /// <param name="nextStateIndex">The index of the state to change to.</param>
+        /// <returns>The state change implemented in VHDL.</returns>
         IVhdlElement CreateStateChange(int nextStateIndex);
 
         /// <summary>
