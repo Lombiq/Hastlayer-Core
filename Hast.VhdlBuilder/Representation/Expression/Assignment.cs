@@ -13,9 +13,10 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
-                vhdlGenerationOptions.ShortenName(AssignTo.Name) +
-                (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
-                Expression.ToVhdl(vhdlGenerationOptions);
+                Terminated.Terminate(
+                    vhdlGenerationOptions.ShortenName(AssignTo.Name) +
+                    (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
+                    Expression.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
         }
     }
 }

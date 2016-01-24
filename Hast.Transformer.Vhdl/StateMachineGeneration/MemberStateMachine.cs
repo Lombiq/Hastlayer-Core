@@ -69,7 +69,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             var startStateBlock = new InlineBlock(
                 new Comment("Start state"),
-                new Assignment { AssignTo = _finishedVariable, Expression = Value.False }.Terminate(),
+                new Assignment { AssignTo = _finishedVariable, Expression = Value.False },
                 new IfElse
                 {
                     Condition = new Binary { Left = _startVariable.Name.ToVhdlIdValue(), Operator = Operator.Equality, Right = Value.True },
@@ -78,8 +78,8 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             var finalStateBlock = new InlineBlock(
                 new Comment("Final state"),
-                new Assignment { AssignTo = _finishedVariable, Expression = Value.True }.Terminate(),
-                new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate(),
+                new Assignment { AssignTo = _finishedVariable, Expression = Value.True },
+                new Assignment { AssignTo = _startVariable, Expression = Value.False },
                 this.ChangeToStartState());
 
             _states = new List<IMemberStateMachineState>
@@ -107,7 +107,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
         public IVhdlElement CreateStateChange(int nextStateIndex)
         {
-            return new Assignment { AssignTo = _stateVariable, Expression = CreateStateValue(nextStateIndex) }.Terminate();
+            return new Assignment { AssignTo = _stateVariable, Expression = CreateStateValue(nextStateIndex) };
         }
 
         public IVhdlElement BuildDeclarations()
@@ -160,8 +160,8 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             var ifInResetBlock = new InlineBlock(
                 new Comment("Synchronous reset"),
-                new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate(),
-                new Assignment { AssignTo = _finishedVariable, Expression = Value.False }.Terminate(),
+                new Assignment { AssignTo = _startVariable, Expression = Value.False },
+                new Assignment { AssignTo = _finishedVariable, Expression = Value.False },
                 CreateStateChange(0));
 
             var resetIf = new IfElse

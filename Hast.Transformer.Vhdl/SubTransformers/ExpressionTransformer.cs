@@ -246,7 +246,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     stateMachine)
                 .ToReference();
 
-            currentBlock.Add(new Assignment { AssignTo = operationResultVariableReference, Expression = binary }.Terminate());
+            currentBlock.Add(new Assignment { AssignTo = operationResultVariableReference, Expression = binary });
 
             // Since the operations takes more than one clock cycle we need to add a new state just to wait. Then we
             // transition from that state forward to a state where the actual algorithm continues.
@@ -288,7 +288,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                     Operator = Operator.Add,
                                     Right = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType }
                                 }
-                        }.Terminate());
+                        });
 
                 var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
                 currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));

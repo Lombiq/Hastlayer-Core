@@ -157,13 +157,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     AssignTo = startVariableReference,
                     Expression = Value.True
-                }.Terminate());
+                });
 
                 trueBlock.Add(new Assignment
                 {
                     AssignTo = stateMachineRunningIndexVariable.ToReference(),
                     Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() }
-                }.Terminate());
+                });
 
                 var methodParametersEnumerator = ((MethodDeclaration)targetDeclaration).Parameters.GetEnumerator();
                 methodParametersEnumerator.MoveNext();
@@ -175,7 +175,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             MemberStateMachineNameFactory.CreatePrefixedVariableName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
                             .ToVhdlVariableReference(),
                         Expression = parameter
-                    }.Terminate());
+                    });
                     methodParametersEnumerator.MoveNext();
                 }
 
@@ -210,7 +210,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             });
 
             var isInvokedStateMachineFinishedIfElseTrue = new InlineBlock(
-                new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.False }.Terminate());
+                new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.False });
 
             var waitForInvokedStateMachineToFinishState = new InlineBlock();
 
@@ -235,7 +235,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 Operator = Operator.Equality,
                                 Right = Value.True
                             },
-                            True = new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.True }.Terminate()
+                            True = new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.True }
                         }
                     }
                 });
@@ -287,7 +287,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             {
                                 AssignTo = localReturnVariableReference,
                                 Expression = returnVariableName.ToVhdlVariableReference()
-                            }.Terminate()
+                            }
                         }
                     });
                 }

@@ -47,7 +47,7 @@ namespace Hast.Samples.Consumer
                             },
                             configuration);
 
-                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.srcs\sources_1\ipshared\xilinx.com\hast_ip_v1_0\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
 
                         // For testing transformation, we don't need anything else.

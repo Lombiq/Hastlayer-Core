@@ -207,7 +207,7 @@ namespace Hast.Transformer.Vhdl
 
             //            if (port.Mode == PortMode.In)
             //            {
-            //                when.Add(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() }.Terminate());
+            //                when.Add(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() });
             //            }
 
             //            portVariables[port] = variable;
@@ -229,7 +229,7 @@ namespace Hast.Transformer.Vhdl
             //        // Copying output variables to output ports.
             //        foreach (var port in interfaceMethod.Ports.Where(p => p.Mode == PortMode.Out))
             //        {
-            //            when.Add(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() }.Terminate());
+            //            when.Add(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() });
             //        }
             //    }
 
