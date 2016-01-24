@@ -11,6 +11,7 @@ using System.Linq;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Helpers;
 using System.Threading.Tasks;
+using Hast.Transformer.Vhdl.StateMachineGeneration;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -85,7 +86,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IVhdlTransformationContext context,
             int stateMachineIndex)
         {
-            var stateMachine = new MethodStateMachine(MethodStateMachineNameFactory.CreateStateMachineName(method.GetFullName(), stateMachineIndex));
+            var stateMachine = new MemberStateMachine(MemberStateMachineNameFactory.CreateStateMachineName(method.GetFullName(), stateMachineIndex));
 
 
             // Handling return type.
@@ -156,7 +157,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private class StateMachineResult
         {
-            public IMethodStateMachine StateMachine { get; set; }
+            public IMemberStateMachine StateMachine { get; set; }
             public IVhdlElement Declarations { get; set; }
             public IVhdlElement Body { get; set; }
         }

@@ -9,9 +9,9 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Helpers;
 
-namespace Hast.Transformer.Vhdl.Models
+namespace Hast.Transformer.Vhdl.StateMachineGeneration
 {
-    internal class MethodStateMachine : IMethodStateMachine
+    public class MemberStateMachine : IMemberStateMachine
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;
@@ -21,11 +21,7 @@ namespace Hast.Transformer.Vhdl.Models
         public string Name { get; private set; }
 
         private List<IBlockElement> _states;
-        /// <summary>
-        /// States of the state machine. The state with the index 0 is the start state, the one with the index 1 is the
-        /// final state.
-        /// </summary>
-        public IEnumerable<IBlockElement> States
+        public IReadOnlyList<IBlockElement> States
         {
             get { return _states; }
         }
@@ -35,12 +31,12 @@ namespace Hast.Transformer.Vhdl.Models
 
 
         /// <summary>
-        /// Constructs a new <see cref="MethodStateMachine"/> object.
+        /// Constructs a new <see cref="MemberStateMachine"/> object.
         /// </summary>
         /// <param name="name">
-        /// The name of the state machine, i.e. the name of the method. Use the real name, not the extended VHDL ID.
+        /// The name of the state machine, i.e. the name of the member. Use the real name, not the extended VHDL ID.
         /// </param>
-        public MethodStateMachine(string name)
+        public MemberStateMachine(string name)
         {
             Name = name;
 
@@ -57,7 +53,7 @@ namespace Hast.Transformer.Vhdl.Models
             _startVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = MethodStateMachineNameFactory.CreateStartVariableName(Name),
+                Name = MemberStateMachineNameFactory.CreateStartVariableName(Name),
                 Shared = true,
                 DefaultValue = Value.False
             };
@@ -65,7 +61,7 @@ namespace Hast.Transformer.Vhdl.Models
             _finishedVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = MethodStateMachineNameFactory.CreateFinishedVariableName(Name),
+                Name = MemberStateMachineNameFactory.CreateFinishedVariableName(Name),
                 Shared = true,
                 DefaultValue = Value.True
             };

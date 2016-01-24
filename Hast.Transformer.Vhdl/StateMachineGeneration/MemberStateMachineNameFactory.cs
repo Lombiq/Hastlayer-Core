@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 
-namespace Hast.Transformer.Vhdl.Helpers
+namespace Hast.Transformer.Vhdl.StateMachineGeneration
 {
-    public static class MethodStateMachineNameFactory
+    public static class MemberStateMachineNameFactory
     {
         public static string CreateReturnVariableName(string stateMachineName)
         {
@@ -25,7 +25,7 @@ namespace Hast.Transformer.Vhdl.Helpers
             return CreatePrefixedVariableName(stateMachineName, "_Finished");
         }
 
-        public static string CreatePrefixedVariableName(IMethodStateMachine stateMachine, string name)
+        public static string CreatePrefixedVariableName(IMemberStateMachine stateMachine, string name)
         {
             return CreatePrefixedVariableName(stateMachine.Name, name);
         }

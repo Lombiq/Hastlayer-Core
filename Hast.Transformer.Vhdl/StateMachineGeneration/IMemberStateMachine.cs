@@ -7,16 +7,23 @@ using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 
-namespace Hast.Transformer.Vhdl.Models
+namespace Hast.Transformer.Vhdl.StateMachineGeneration
 {
     /// <summary>
     /// A state machine generated from a .NET method.
     /// </summary>
-    public interface IMethodStateMachine
+    public interface IMemberStateMachine
     {
         string Name { get; }
-        IEnumerable<IBlockElement> States { get; }
+
+        /// <summary>
+        /// States of the state machine. The state with the index 0 is the start state, the one with the index 1 is the
+        /// final state.
+        /// </summary>
+        IReadOnlyList<IBlockElement> States { get; }
+
         IList<Variable> Parameters { get; }
+
         IList<Variable> LocalVariables { get; }
 
 
@@ -43,31 +50,31 @@ namespace Hast.Transformer.Vhdl.Models
     }
 
 
-    public static class MethodStateMachineExtenions
+    public static class MemberStateMachineExtenions
     {
-        public static IVhdlElement ChangeToStartState(this IMethodStateMachine stateMachine)
+        public static IVhdlElement ChangeToStartState(this IMemberStateMachine stateMachine)
         {
             return stateMachine.CreateStateChange(0);
         }
 
-        public static IVhdlElement ChangeToFinalState(this IMethodStateMachine stateMachine)
+        public static IVhdlElement ChangeToFinalState(this IMemberStateMachine stateMachine)
         {
             return stateMachine.CreateStateChange(1);
         }
 
-        public static string CreateReturnVariableName(this IMethodStateMachine stateMachine)
+        public static string CreateReturnVariableName(this IMemberStateMachine stateMachine)
         {
-            return MethodStateMachineNameFactory.CreateReturnVariableName(stateMachine.Name);
+            return MemberStateMachineNameFactory.CreateReturnVariableName(stateMachine.Name);
         }
 
-        public static string CreatePrefixedVariableName(this IMethodStateMachine stateMachine, string name)
+        public static string CreatePrefixedVariableName(this IMemberStateMachine stateMachine, string name)
         {
-            return MethodStateMachineNameFactory.CreatePrefixedVariableName(stateMachine, name);
+            return MemberStateMachineNameFactory.CreatePrefixedVariableName(stateMachine, name);
         }
 
-        public static string CreateNamePrefixedExtendedVhdlId(this IMethodStateMachine stateMachine, string id)
+        public static string CreateNamePrefixedExtendedVhdlId(this IMemberStateMachine stateMachine, string id)
         {
-            return MethodStateMachineNameFactory.CreatePrefixedExtendedVhdlId(stateMachine.Name, id);
+            return MemberStateMachineNameFactory.CreatePrefixedExtendedVhdlId(stateMachine.Name, id);
         }
     }
 }

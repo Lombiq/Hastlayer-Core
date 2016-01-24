@@ -12,6 +12,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder.Extensions;
 using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.StateMachineGeneration;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -143,8 +144,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             currentBlock.Add(stateMachineSelectingConditionsBlock);
             for (int i = 0; i < maxCallStackDepth; i++)
             {
-                var indexedStateMachineName = MethodStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
-                var startVariableReference = MethodStateMachineNameFactory
+                var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
+                var startVariableReference = MemberStateMachineNameFactory
                     .CreateStartVariableName(indexedStateMachineName)
                     .ToVhdlVariableReference();
 
@@ -169,7 +170,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     trueBlock.Add(new Assignment
                     {
                         AssignTo =
-                            MethodStateMachineNameFactory.CreatePrefixedVariableName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
+                            MemberStateMachineNameFactory.CreatePrefixedVariableName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
                             .ToVhdlVariableReference(),
                         Expression = parameter
                     }.Terminate());
@@ -215,8 +216,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             waitForInvokedStateMachineToFinishState.Add(stateMachineFinishedCheckCase);
             for (int i = 0; i < maxCallStackDepth; i++)
             {
-                var finishedVariableName = MethodStateMachineNameFactory
-                    .CreateFinishedVariableName(MethodStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
+                var finishedVariableName = MemberStateMachineNameFactory
+                    .CreateFinishedVariableName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
 
                 stateMachineFinishedCheckCase.Whens.Add(new When
                 {
@@ -270,8 +271,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 isInvokedStateMachineFinishedIfElseTrue.Add(stateMachineReadReturnValueCheckCase);
                 for (int i = 0; i < maxCallStackDepth; i++)
                 {
-                    var returnVariableName = MethodStateMachineNameFactory
-                        .CreateReturnVariableName(MethodStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
+                    var returnVariableName = MemberStateMachineNameFactory
+                        .CreateReturnVariableName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
 
                     stateMachineReadReturnValueCheckCase.Whens.Add(new When
                     {
@@ -312,7 +313,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 variableName = (targetName + "." + suffix + ++returnVariableNameIndex);
             }
 
-            return MethodStateMachineNameFactory.CreatePrefixedVariableName(context.Scope.StateMachine, variableName);
+            return MemberStateMachineNameFactory.CreatePrefixedVariableName(context.Scope.StateMachine, variableName);
         }
 
         private static DataObjectReference CreateTemporaryVariableReference(

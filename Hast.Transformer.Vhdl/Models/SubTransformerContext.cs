@@ -1,4 +1,5 @@
 ﻿using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.StateMachineGeneration;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -15,7 +16,7 @@ namespace Hast.Transformer.Vhdl.Models
     public interface ISubTransformerScope
     {
         MethodDeclaration Method { get; }
-        IMethodStateMachine StateMachine { get; }
+        IMemberStateMachine StateMachine { get; }
         ICurrentBlock CurrentBlock { get; }
     }
 
@@ -37,7 +38,7 @@ namespace Hast.Transformer.Vhdl.Models
     public class SubTransformerScope : ISubTransformerScope
     {
         public MethodDeclaration Method { get; set; }
-        public IMethodStateMachine StateMachine { get; set; }
+        public IMemberStateMachine StateMachine { get; set; }
         public ICurrentBlock CurrentBlock { get; set; }
     }
 

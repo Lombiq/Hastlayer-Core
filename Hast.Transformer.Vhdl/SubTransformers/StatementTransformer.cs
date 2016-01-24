@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.StateMachineGeneration;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
