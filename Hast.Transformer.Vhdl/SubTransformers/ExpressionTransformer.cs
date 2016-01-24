@@ -173,12 +173,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 Right = Transform(expression.Right, context)
             };
 
-            //  Would need to decide between + and & or sll/srl and sra/sla
+            // Would need to decide between + and & or sll/srl and sra/sla
             // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
             switch (expression.Operator)
             {
                 case BinaryOperatorType.Add:
-                    binary.Operator = "+";
+                    binary.Operator = Operator.Add;
                     break;
                 case BinaryOperatorType.Any:
                     break;
@@ -191,45 +191,45 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case BinaryOperatorType.ConditionalOr:
                     break;
                 case BinaryOperatorType.Divide:
-                    binary.Operator = "/";
+                    binary.Operator = Operator.Divide;
                     break;
                 case BinaryOperatorType.Equality:
-                    binary.Operator = "=";
+                    binary.Operator = Operator.Equality;
                     break;
                 case BinaryOperatorType.ExclusiveOr:
-                    binary.Operator = "XOR";
+                    binary.Operator = Operator.ExclusiveOr;
                     break;
                 case BinaryOperatorType.GreaterThan:
-                    binary.Operator = ">";
+                    binary.Operator = Operator.GreaterThan;
                     break;
                 case BinaryOperatorType.GreaterThanOrEqual:
-                    binary.Operator = ">=";
+                    binary.Operator = Operator.GreaterThanOrEqual;
                     break;
                 case BinaryOperatorType.InEquality:
-                    binary.Operator = "/=";
+                    binary.Operator = Operator.InEquality;
                     break;
                 case BinaryOperatorType.LessThan:
-                    binary.Operator = "<";
+                    binary.Operator = Operator.LessThan;
                     break;
                 case BinaryOperatorType.LessThanOrEqual:
-                    binary.Operator = "<=";
+                    binary.Operator = Operator.LessThanOrEqual;
                     break;
                 case BinaryOperatorType.Modulus:
-                    binary.Operator = "mod";
+                    binary.Operator = Operator.Modulus;
                     break;
                 case BinaryOperatorType.Multiply:
-                    binary.Operator = "*";
+                    binary.Operator = Operator.Multiply;
                     break;
                 case BinaryOperatorType.NullCoalescing:
                     break;
                 case BinaryOperatorType.ShiftLeft:
-                    binary.Operator = "sll";
+                    binary.Operator = Operator.ShiftLeft;
                     break;
                 case BinaryOperatorType.ShiftRight:
-                    binary.Operator = "srl";
+                    binary.Operator = Operator.ShiftRight;
                     break;
                 case BinaryOperatorType.Subtract:
-                    binary.Operator = "-";
+                    binary.Operator = Operator.Subtract;
                     break;
             }
 

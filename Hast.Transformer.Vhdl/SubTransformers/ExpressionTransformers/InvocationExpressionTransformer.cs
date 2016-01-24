@@ -184,7 +184,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Condition = new Binary
                     {
                         Left = startVariableReference,
-                        Operator = "=",
+                        Operator = Operator.Equality,
                         Right = Value.False
                     },
                     True = trueBlock,
@@ -229,7 +229,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             Condition = new Binary
                             {
                                 Left = finishedVariableName.ToVhdlVariableReference(),
-                                Operator = "=",
+                                Operator = Operator.Equality,
                                 Right = Value.True
                             },
                             True = new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.True }.Terminate()
@@ -243,7 +243,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Condition = new Binary
                 {
                     Left = stateMachineFinishedVariableReference,
-                    Operator = "=",
+                    Operator = Operator.Equality,
                     Right = Value.True
                 },
                 True = isInvokedStateMachineFinishedIfElseTrue

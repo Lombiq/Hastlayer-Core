@@ -77,6 +77,7 @@
     <Compile Include="Representation\Expression\IdentifierValue.cs" />
     <Compile Include="Representation\Expression\Invokation.cs" />
     <Compile Include="Representation\Expression\IfElse.cs" />
+    <Compile Include="Representation\Expression\Operator.cs" />
     <Compile Include="Representation\Expression\Return.cs" />
     <Compile Include="Representation\Expression\While.cs" />
     <Compile Include="Representation\IVhdlElement.cs" />

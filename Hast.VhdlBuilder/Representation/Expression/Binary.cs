@@ -6,7 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class Binary : IVhdlElement
     {
         public IVhdlElement Left { get; set; }
-        public string Operator { get; set; }
+        public Operator Operator { get; set; }
         public IVhdlElement Right { get; set; }
 
 
@@ -14,7 +14,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         {
             return
                 Left.ToVhdl(vhdlGenerationOptions) +
-                " " + Operator + " " +
+                " " + Operator.ToVhdl(vhdlGenerationOptions) + " " +
                 Right.ToVhdl(vhdlGenerationOptions);
         }
     }

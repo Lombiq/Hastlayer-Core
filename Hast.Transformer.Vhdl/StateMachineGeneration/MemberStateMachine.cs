@@ -72,7 +72,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 new Assignment { AssignTo = _finishedVariable, Expression = Value.False }.Terminate(),
                 new IfElse
                 {
-                    Condition = new Binary { Left = _startVariable.Name.ToVhdlIdValue(), Operator = "=", Right = Value.True },
+                    Condition = new Binary { Left = _startVariable.Name.ToVhdlIdValue(), Operator = Operator.Equality, Right = Value.True },
                     True = CreateStateChange(2)
                 });
 
@@ -168,7 +168,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 Condition = new Binary
                 {
                     Left = CommonPortNames.Reset.ToVhdlIdValue(),
-                    Operator = "=",
+                    Operator = Operator.Equality,
                     Right = new Character('1')
                 },
                 True = ifInResetBlock,
