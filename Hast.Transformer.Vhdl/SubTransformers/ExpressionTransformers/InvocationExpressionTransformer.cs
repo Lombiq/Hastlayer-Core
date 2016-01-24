@@ -71,8 +71,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 // The memory operation should be initialized in this state, then finished in another one.
                 var memoryOperationFinishedBlock = new InlineBlock();
+                var memoryOperationFinishedStateIndex = stateMachine.AddState(memoryOperationFinishedBlock);
 
-                currentBlock.Add(stateMachine.CreateStateChange(stateMachine.AddState(memoryOperationFinishedBlock)));
+                currentBlock.Add(stateMachine.CreateStateChange(memoryOperationFinishedStateIndex));
 
                 if (isWrite)
                 {
@@ -81,7 +82,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     memoryOperationFinishedBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Write finish"));
 
                     currentBlock.Add(memoryOperationInvokation.Terminate());
-                    currentBlock.ChangeBlock(memoryOperationFinishedBlock);
+                    currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
 
                     return Empty.Instance;
                 }
@@ -90,7 +91,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     // TODO: ReadEnable should be set in currentBlock and re-set in memoryOperationFinishedBlock.
                     currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("ReadEnable"));
 
-                    currentBlock.ChangeBlock(memoryOperationFinishedBlock);
+                    currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
 
                     // If this is a memory read then comes the juggling with funneling the out parameter of the memory 
                     // write procedure to the original location.
@@ -123,7 +124,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // have multiple state machines with the same logic. This way even with recursive calls there will always be
             // an idle, usable state machine (these state machines are distinguished by an index).
 
-            var stateMachineRunningIndexVariableName = GetNextUnusedTemporaryVariableName(targetStateMachineName, "runningIndex", context);
+            var stateMachineRunningIndexVariableName = MemberStateMachineVariableHelper
+                .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "runningIndex", context.Scope.StateMachine);
             var stateMachineRunningIndexVariable = new Variable
             {
                 Name = stateMachineRunningIndexVariableName,
@@ -198,7 +200,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 "No idle state machine could be found. This is an error."));
 
             // Common variable to signal that the invoked state machine finished.
-            var stateMachineFinishedVariableName = GetNextUnusedTemporaryVariableName(targetStateMachineName, "finished", context);
+            var stateMachineFinishedVariableName = MemberStateMachineVariableHelper
+                .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "finished", context.Scope.StateMachine);
             var stateMachineFinishedVariableReference = stateMachineFinishedVariableName.ToVhdlVariableReference();
             stateMachine.LocalVariables.Add(new Variable
             {
@@ -252,7 +255,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachineToFinishState);
             currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
 
-            currentBlock.ChangeBlock(isInvokedStateMachineFinishedIfElseTrue);
+            currentBlock.ChangeBlockToDifferentState(isInvokedStateMachineFinishedIfElseTrue, waitForInvokedStateMachineToFinishStateIndex);
 
             // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to 
             // a non-void method).
@@ -261,11 +264,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // We copy the used state machine's return value to a local variable and then use the local variable in
                 // place of the original method call.
 
-                var localReturnVariableReference = CreateTemporaryVariableReference(
-                    targetStateMachineName,
-                    "return",
-                    _typeConverter.ConvertTypeReference(expression.GetReturnType()),
-                    context);
+                var localReturnVariableReference = MemberStateMachineVariableHelper
+                    .CreateTemporaryVariable(
+                        targetStateMachineName + "." + "return",
+                        _typeConverter.ConvertTypeReference(expression.GetReturnType()),
+                        context.Scope.StateMachine)
+                    .ToReference();
 
                 var stateMachineReadReturnValueCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
                 isInvokedStateMachineFinishedIfElseTrue.Add(stateMachineReadReturnValueCheckCase);
@@ -298,42 +302,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
         /// <summary>
-        /// Making sure that the e.g. return variable names are unique per method call (to transfer procedure outputs).
-        /// </summary>
-        private static string GetNextUnusedTemporaryVariableName(string targetName, string suffix, ISubTransformerContext context)
-        {
-            targetName = targetName.TrimExtendedVhdlIdDelimiters();
-
-            var stateMachine = context.Scope.StateMachine;
-
-            var variableName = (targetName + "." + suffix + "0");
-            var returnVariableNameIndex = 0;
-            while (context.Scope.StateMachine.LocalVariables.Any(variable => variable.Name == variableName.ToExtendedVhdlId()))
-            {
-                variableName = (targetName + "." + suffix + ++returnVariableNameIndex);
-            }
-
-            return MemberStateMachineNameFactory.CreatePrefixedVariableName(context.Scope.StateMachine, variableName);
-        }
-
-        private static DataObjectReference CreateTemporaryVariableReference(
-            string targetName,
-            string suffix,
-            DataType dataType,
-            ISubTransformerContext context)
-        {
-            var returnVariable = new Variable
-            {
-                Name = GetNextUnusedTemporaryVariableName(targetName, suffix, context),
-                DataType = dataType
-            };
-
-            context.Scope.StateMachine.LocalVariables.Add(returnVariable);
-
-            return returnVariable.ToReference();
-        }
-
-        /// <summary>
         /// Procedures can't just be assigned to variables like methods as they don't have a return value, just out 
         /// parameters. Thus here we create a variable for the out parameter (the return variable), run the procedure
         /// with it and then use it later too.
@@ -344,7 +312,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             Invokation invokation,
             ISubTransformerContext context)
         {
-            var returnVariableReference = CreateTemporaryVariableReference(targetName, "return", returnType, context);
+            var returnVariableReference = MemberStateMachineVariableHelper
+                .CreateTemporaryVariable(targetName + "." + "return", returnType, context.Scope.StateMachine)
+                .ToReference();
 
             invokation.Parameters.Add(returnVariableReference);
 

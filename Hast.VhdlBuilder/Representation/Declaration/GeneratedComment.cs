@@ -8,26 +8,23 @@ using System.Threading.Tasks;
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
     /// <summary>
-    /// A VHDL comment.
+    /// A VHDL comment that produces its value when VHDL code is generated.
     /// </summary>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class Comment : IVhdlElement
+    public class GeneratedComment : IVhdlElement
     {
-        public string Text { get; set; }
+        private readonly Func<IVhdlGenerationOptions, string> _generator;
 
 
-        public Comment(string text)
+        public GeneratedComment(Func<IVhdlGenerationOptions, string> generator)
         {
-            Text = text;
+            _generator = generator;
         }
         
-        
+
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            // There are no block comments in VHDL so if the code is not formatted there can't be any comments.
-            if (!vhdlGenerationOptions.FormatCode) return string.Empty;
-
-            return "-- " + Text + vhdlGenerationOptions.NewLineIfShouldFormat();
+            return new Comment(_generator(vhdlGenerationOptions)).ToVhdl(vhdlGenerationOptions);
         }
     }
 }

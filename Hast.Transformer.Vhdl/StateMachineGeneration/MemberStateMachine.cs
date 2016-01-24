@@ -20,8 +20,8 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
         public string Name { get; private set; }
 
-        private List<IBlockElement> _states;
-        public IReadOnlyList<IBlockElement> States
+        private List<IMemberStateMachineState> _states;
+        public IReadOnlyList<IMemberStateMachineState> States
         {
             get { return _states; }
         }
@@ -82,10 +82,10 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 new Assignment { AssignTo = _startVariable, Expression = Value.False }.Terminate(),
                 this.ChangeToStartState());
 
-            _states = new List<IBlockElement>
+            _states = new List<IMemberStateMachineState>
             {
-                startStateBlock,
-                finalStateBlock
+                new MemberStateMachineState { Body = startStateBlock },
+                new MemberStateMachineState { Body = finalStateBlock }
             };
 
 
@@ -96,7 +96,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
         public int AddState(IBlockElement state)
         {
-            _states.Add(state);
+            _states.Add(new MemberStateMachineState { Body = state });
             return _states.Count - 1;
         }
 
@@ -153,7 +153,8 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             for (int i = 0; i < _states.Count; i++)
             {
                 var stateWhen = new When { Expression = CreateStateName(i).ToVhdlIdValue() };
-                stateWhen.Add(_states[i]);
+                stateWhen.Add(_states[i].Body);
+                stateWhen.Add(new Comment("Clock cycles needed to complete this state: " + _states[i].RequiredClockCycles));
                 stateCase.Whens.Add(stateWhen);
             }
 
@@ -186,6 +187,13 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         private Value CreateStateValue(int index)
         {
             return CreateStateName(index).ToVhdlIdValue();
+        }
+
+
+        public class MemberStateMachineState : IMemberStateMachineState
+        {
+            public IBlockElement Body { get; set; }
+            public decimal RequiredClockCycles { get; set; }
         }
     }
 }

@@ -233,7 +233,73 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     break;
             }
 
-            return binary;
+
+            var stateMachine = context.Scope.StateMachine;
+            var currentBlock = context.Scope.CurrentBlock;
+
+            currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForOperation(expression.Operator);
+
+            var operationResultVariableReference = MemberStateMachineVariableHelper
+                .CreateTemporaryVariable(
+                    "binaryOperationResult", 
+                    _typeConverter.ConvertTypeReference(expression.GetActualType()), 
+                    stateMachine)
+                .ToReference();
+
+            currentBlock.Add(new Assignment { AssignTo = operationResultVariableReference, Expression = binary }.Terminate());
+
+            // Since the operations takes more than one clock cycle we need to add a new state just to wait. Then we
+            // transition from that state forward to a state where the actual algorithm continues.
+            if (currentBlock.RequiredClockCycles > 1)
+            {
+                var waitedCyclesCountVariable = MemberStateMachineVariableHelper.CreateTemporaryVariable(
+                    "clockCyclesWaitedForBinaryOperationResult", 
+                    KnownDataTypes.Natural, 
+                    stateMachine);
+                // Default value is 1 because due to the state change we already waited 1 cycle.
+                waitedCyclesCountVariable.DefaultValue = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType };
+                var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
+
+
+                var waitForResultIf = new IfElse
+                {
+                    Condition = new Binary
+                        {
+                            Left = waitedCyclesCountVariableReference,
+                            Operator = Operator.GreaterThanOrEqual,
+                            Right = new Value
+                                {
+                                    // Subtracting 1 because due to the wait state added we already wait at least 2 cycles.
+                                    Content = ((int)Math.Ceiling(currentBlock.RequiredClockCycles - 1)).ToString(), 
+                                    DataType = waitedCyclesCountVariable.DataType
+                                }
+                        }
+                };
+
+                var waitForResultBlock = new InlineBlock(
+                    new GeneratedComment(vhdlGenerationOptions => "Waiting for the result to appear in " + operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + "."), 
+                    waitForResultIf,
+                    new Assignment
+                        {
+                            AssignTo = waitedCyclesCountVariableReference,
+                            Expression = new Binary
+                                {
+                                    Left = waitedCyclesCountVariableReference,
+                                    Operator = Operator.Add,
+                                    Right = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType }
+                                }
+                        }.Terminate());
+
+                var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
+                currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));
+
+                var afterResultReceivedBlock = new InlineBlock();
+                var afterResultReceivedStateIndex = stateMachine.AddState(afterResultReceivedBlock);
+                waitForResultIf.True = stateMachine.CreateStateChange(afterResultReceivedStateIndex);
+                currentBlock.ChangeBlockToDifferentState(afterResultReceivedBlock, afterResultReceivedStateIndex);
+            }
+
+            return operationResultVariableReference;
         }
 
         private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context)

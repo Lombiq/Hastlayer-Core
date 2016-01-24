@@ -9,6 +9,13 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.StateMachineGeneration
 {
+    public interface IMemberStateMachineState
+    {
+        IBlockElement Body { get; }
+        decimal RequiredClockCycles { get; set; }
+    }
+
+
     /// <summary>
     /// A state machine generated from a .NET member.
     /// </summary>
@@ -23,7 +30,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         /// States of the state machine. The state with the index 0 is the start state, the one with the index 1 is the
         /// final state.
         /// </summary>
-        IReadOnlyList<IBlockElement> States { get; }
+        IReadOnlyList<IMemberStateMachineState> States { get; }
 
         /// <summary>
         /// Input/output parameters of the state machine which can be used to communicate with other state machines.
@@ -67,34 +74,5 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         /// Produces the body of the state machine that should be inserted into the body of the architecture element.
         /// </summary>
         IVhdlElement BuildBody();
-    }
-
-
-    public static class MemberStateMachineExtenions
-    {
-        public static IVhdlElement ChangeToStartState(this IMemberStateMachine stateMachine)
-        {
-            return stateMachine.CreateStateChange(0);
-        }
-
-        public static IVhdlElement ChangeToFinalState(this IMemberStateMachine stateMachine)
-        {
-            return stateMachine.CreateStateChange(1);
-        }
-
-        public static string CreateReturnVariableName(this IMemberStateMachine stateMachine)
-        {
-            return MemberStateMachineNameFactory.CreateReturnVariableName(stateMachine.Name);
-        }
-
-        public static string CreatePrefixedVariableName(this IMemberStateMachine stateMachine, string name)
-        {
-            return MemberStateMachineNameFactory.CreatePrefixedVariableName(stateMachine, name);
-        }
-
-        public static string CreateNamePrefixedExtendedVhdlId(this IMemberStateMachine stateMachine, string id)
-        {
-            return MemberStateMachineNameFactory.CreatePrefixedExtendedVhdlId(stateMachine.Name, id);
-        }
     }
 }

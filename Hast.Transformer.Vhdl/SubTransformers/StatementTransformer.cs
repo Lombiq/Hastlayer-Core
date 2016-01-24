@@ -129,7 +129,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     });
 
                 var whileStateInnerBody = new InlineBlock();
-                currentBlock.ChangeBlock(whileStateInnerBody);
+                currentBlock.ChangeBlockToDifferentState(whileStateInnerBody, whileStateIndex);
                 TransformInner(whileStatement.EmbeddedStatement, context);
 
                 whileState.Add(new IfElse
@@ -140,12 +140,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     });
 
                 // Returning to the state of the while condition so the cycle can re-start.
-                var lastState = stateMachine.States.Last();
+                var lastState = stateMachine.States.Last().Body;
                 if (lastState != afterWhileState)
                 {
                     lastState.Add(stateMachine.CreateStateChange(whileStateIndex));
                 }
-                currentBlock.ChangeBlock(afterWhileState);
+                currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
             }
             else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
         }

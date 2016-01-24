@@ -114,7 +114,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // Adding opening state and its block.
             var openingBlock = new InlineBlock();
-            stateMachine.AddState(openingBlock);
+            var openingStateIndex = stateMachine.AddState(openingBlock);
 
             // Processing method body.
             var bodyContext = new SubTransformerContext
@@ -124,7 +124,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     Method = method,
                     StateMachine = stateMachine,
-                    CurrentBlock = new CurrentBlock(openingBlock)
+                    CurrentBlock = new CurrentBlock(stateMachine, openingBlock, openingStateIndex)
                 }
             };
 
