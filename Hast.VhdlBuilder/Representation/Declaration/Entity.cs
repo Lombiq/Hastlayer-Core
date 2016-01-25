@@ -53,7 +53,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     
                     "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
                         Ports
-                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions))
+                            // The last port shouldn't be terminated by a semicolon...
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions), string.Empty)
                             .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                     Terminated.Terminate(")", vhdlGenerationOptions) +
 
