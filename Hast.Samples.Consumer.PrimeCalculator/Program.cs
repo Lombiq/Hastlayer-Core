@@ -45,7 +45,9 @@ namespace Hast.Samples.Consumer.PrimeCalculator
 
                     // With 210 numbers this takes about 2,1s all together (with UART) on an FPGA and 166s on a 3,2GHz i7.
                     // With 4000 numbers it takes 38s on an FPGA and 3550s (about an hour) on the same PC.
-                    var numberCount = 210;
+                    // About 90000000 numbers are the maximum before an OutOfMemoryException down the line. But that would
+                    // take 93 hours to send via 9600 baud serial (and then above this to receive the results).
+                    var numberCount = 90000000;
                     var numbers = new uint[numberCount];
                     for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
                     {
