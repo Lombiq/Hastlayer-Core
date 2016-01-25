@@ -19,7 +19,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " " +
                 vhdlGenerationOptions.ShortenName(Name) +
                 (DataType != null ? ": " + DataType.ToReferenceVhdl(vhdlGenerationOptions) : string.Empty) +
-                (DefaultValue != null ? ((DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") + DefaultValue.ToVhdl(vhdlGenerationOptions)) : string.Empty),
+                // The default value should be specified with ":=", even for signals.
+                (DefaultValue != null ? ( " := " + DefaultValue.ToVhdl(vhdlGenerationOptions)) : string.Empty),
                 vhdlGenerationOptions);
         }
     }

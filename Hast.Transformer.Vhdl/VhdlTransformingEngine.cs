@@ -164,8 +164,23 @@ namespace Hast.Transformer.Vhdl
 
             ports.Add(memberIdPort);
 
+            // Since the Finished port is an out port, it can't be read. Adding an internal proxy signal so we can also 
+            // read it.
+            var finishedSignal = new Signal
+            {
+                Name = "FinishedInternal".ToExtendedVhdlId(),
+                DataType = KnownDataTypes.StdLogic,
+                DefaultValue = Value.ZeroCharacter
+            };
+            transformationContext.Module.Architecture.Declarations.Add(finishedSignal);
+            var finishedSignalReference = finishedSignal.ToReference();
+            transformationContext.Module.Architecture.Body.Add(new Assignment
+                {
+                    AssignTo = CommonPortNames.Finished.ToVhdlSignalReference(),
+                    Expression = finishedSignalReference
+                });
+
             var caseExpression = new Case { Expression = memberIdPort.Name.ToVhdlIdValue() };
-            var finishedPortReference = CommonPortNames.Finished.ToVhdlSignalReference();
 
             var memberId = 0;
             foreach (var interfaceMethod in transformationContext.InterfaceMethods)
@@ -188,7 +203,7 @@ namespace Hast.Transformer.Vhdl
                     },
                     True = new Assignment
                     {
-                        AssignTo = finishedPortReference,
+                        AssignTo = finishedSignalReference,
                         Expression = Value.OneCharacter
                     },
                     Else = new IfElse
@@ -238,7 +253,7 @@ namespace Hast.Transformer.Vhdl
                     Operator = Operator.ConditionalAnd,
                     Right = new Binary
                     {
-                        Left = finishedPortReference,
+                        Left = finishedSignalReference,
                         Operator = Operator.Equality,
                         Right = Value.ZeroCharacter
                     }
@@ -258,7 +273,7 @@ namespace Hast.Transformer.Vhdl
                         Operator = Operator.ConditionalAnd,
                         Right = new Binary
                         {
-                            Left = finishedPortReference,
+                            Left = finishedSignalReference,
                             Operator = Operator.Equality,
                             Right = Value.OneCharacter
                         }
@@ -266,7 +281,7 @@ namespace Hast.Transformer.Vhdl
                     },
                     True = new Assignment
                     {
-                        AssignTo = finishedPortReference,
+                        AssignTo = finishedSignalReference,
                         Expression = Value.ZeroCharacter
                     }
                 }
