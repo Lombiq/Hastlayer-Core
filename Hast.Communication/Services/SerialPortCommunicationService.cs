@@ -91,7 +91,7 @@ namespace Hast.Communication.Services
                 var outputByteCount = 0; // The incoming byte buffer size.
                 var outputBytesReceivedCount = 0; // Just used to know when the data is ready.
                 var outputBytes = new byte[0]; // The incoming buffer.
-                var executionTimeBytes = new byte[4];
+                var executionTimeBytes = new byte[8];
                 var executionTimeByteCounter = 0;
 
                 Action<byte, bool> processReceivedByte = (receivedByte, isLastOfBatch) =>
@@ -110,12 +110,11 @@ namespace Hast.Communication.Services
                                 }
                                 break;
                             case SerialCommunicationConstants.CommunicationState.ReceivingExecutionInformation:
-                                // We know that the incoming data's size will be 4 bytes.
                                 executionTimeBytes[executionTimeByteCounter] = receivedByte;
                                 executionTimeByteCounter++;
-                                if (executionTimeByteCounter == 4)
+                                if (executionTimeByteCounter == 8)
                                 {
-                                    var executionTimeClockCycles = BitConverter.ToUInt32(executionTimeBytes, 0);
+                                    var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
                                     executionInformation.HardwareExecutionTimeMilliseconds = 
                                         executionTimeClockCycles / (_deviceDriver.DeviceManifest.ClockFrequencyHz / 1000);
