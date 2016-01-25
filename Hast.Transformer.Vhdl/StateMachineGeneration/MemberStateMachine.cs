@@ -52,7 +52,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             _startVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = MemberStateMachineNameFactory.CreateStartVariableName(Name),
+                Name = this.CreateStartVariableName(),
                 Shared = true,
                 DefaultValue = Value.False
             };
@@ -60,7 +60,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             _finishedVariable = new Variable
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = MemberStateMachineNameFactory.CreateFinishedVariableName(Name),
+                Name = this.CreateFinishedVariableName(),
                 Shared = true,
                 DefaultValue = Value.True
             };

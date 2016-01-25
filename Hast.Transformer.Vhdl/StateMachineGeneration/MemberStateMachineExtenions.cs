@@ -19,6 +19,17 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             return stateMachine.CreateStateChange(1);
         }
 
+
+        public static string CreateStartVariableName(this IMemberStateMachine stateMachine)
+        {
+            return MemberStateMachineNameFactory.CreateStartVariableName(stateMachine.Name);
+        }
+
+        public static string CreateFinishedVariableName(this IMemberStateMachine stateMachine)
+        {
+            return MemberStateMachineNameFactory.CreateFinishedVariableName(stateMachine.Name);
+        }
+
         public static string CreateReturnVariableName(this IMemberStateMachine stateMachine)
         {
             return MemberStateMachineNameFactory.CreateReturnVariableName(stateMachine.Name);
@@ -31,7 +42,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
         public static string CreatePrefixedVariableName(this IMemberStateMachine stateMachine, string name)
         {
-            return MemberStateMachineNameFactory.CreatePrefixedVariableName(stateMachine, name);
+            return MemberStateMachineNameFactory.CreatePrefixedVariableName(stateMachine.Name, name);
         }
 
         public static string CreateNamePrefixedExtendedVhdlId(this IMemberStateMachine stateMachine, string id)

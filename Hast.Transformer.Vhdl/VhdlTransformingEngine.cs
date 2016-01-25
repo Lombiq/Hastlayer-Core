@@ -188,16 +188,14 @@ namespace Hast.Transformer.Vhdl
                 var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = memberId.ToString() } };
 
 
-                var stateMachineName = interfaceMethod.StateMachine.Name;
-                var startVariableReference = MemberStateMachineNameFactory
-                    .CreateStartVariableName(stateMachineName)
-                    .ToVhdlVariableReference();
+                var stateMachine = interfaceMethod.StateMachine;
+                var startVariableReference = stateMachine.CreateStartVariableName().ToVhdlVariableReference();
 
                 var stateMachineIsFinishedIfElse = new IfElse
                 {
                     Condition = new Binary
                     {
-                        Left = MemberStateMachineNameFactory.CreateFinishedVariableName(stateMachineName).ToVhdlVariableReference(),
+                        Left = stateMachine.CreateFinishedVariableName().ToVhdlVariableReference(),
                         Operator = Operator.Equality,
                         Right = Value.True
                     },
@@ -210,7 +208,7 @@ namespace Hast.Transformer.Vhdl
                     {
                         Condition = new Binary
                         {
-                            Left = MemberStateMachineNameFactory.CreateStartVariableName(stateMachineName).ToVhdlVariableReference(),
+                            Left = stateMachine.CreateStartVariableName().ToVhdlVariableReference(),
                             Operator = Operator.Equality,
                             Right = Value.False
                         },

@@ -30,11 +30,6 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             return CreatePrefixedVariableName(stateMachineName, "_State");
         }
 
-        public static string CreatePrefixedVariableName(IMemberStateMachine stateMachine, string name)
-        {
-            return CreatePrefixedVariableName(stateMachine.Name, name);
-        }
-
         public static string CreatePrefixedVariableName(string stateMachineName, string name)
         {
             return CreatePrefixedExtendedVhdlId(stateMachineName, "." + name);
