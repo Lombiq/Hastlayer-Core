@@ -17,7 +17,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// that <code>currentBlock</code>, being a reference, can change.
         /// </summary>
         /// <returns>
-        /// A reference that can be used in place of the original expression.
+        /// A reference that can be used in place of the original expression. WARNING: don't re-use this handle in
+        /// multiple state machine states! Even if it's the same expression it should be transformed for each state
+        /// separately.
         /// </returns>
         IVhdlElement Transform(Expression expression, ISubTransformerContext context);
     }

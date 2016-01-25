@@ -112,38 +112,51 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var whileStatement = statement as WhileStatement;
 
-                var whileState = new InlineBlock();
-                var whileStateIndex = stateMachine.AddState(whileState);
+                var repeatedState = new InlineBlock();
+                repeatedState.Add(new VhdlBuilder.Representation.Declaration.Comment("Repeated state of a while loop."));
+                var repeatedStateIndex = stateMachine.AddState(repeatedState);
                 var afterWhileState = new InlineBlock();
                 var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
 
-                var condition = _expressionTransformer.Transform(whileStatement.Condition, context);
-
                 // Having a condition even in the current state's body: if the loop doesn't need to run at all we'll
                 // spare one cycle by directly jumping to the state after the loop.
+                currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Starting a while loop."));
                 currentBlock.Add(new IfElse
                     {
-                        Condition = condition,
-                        True = stateMachine.CreateStateChange(whileStateIndex),
+                        Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
+                        True = stateMachine.CreateStateChange(repeatedStateIndex),
                         Else = stateMachine.CreateStateChange(afterWhileStateIndex)
                     });
 
                 var whileStateInnerBody = new InlineBlock();
-                currentBlock.ChangeBlockToDifferentState(whileStateInnerBody, whileStateIndex);
-                TransformInner(whileStatement.EmbeddedStatement, context);
 
-                whileState.Add(new IfElse
+                currentBlock.ChangeBlockToDifferentState(repeatedState, repeatedStateIndex);
+                repeatedState.Add(new IfElse
                     {
-                        Condition = condition,
+                        Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
                         True = whileStateInnerBody,
                         Else = stateMachine.CreateStateChange(afterWhileStateIndex)
                     });
+
+                currentBlock.ChangeBlock(whileStateInnerBody);
+                TransformInner(whileStatement.EmbeddedStatement, context);
 
                 // Returning to the state of the while condition so the cycle can re-start.
                 var lastState = stateMachine.States.Last().Body;
                 if (lastState != afterWhileState)
                 {
-                    lastState.Add(stateMachine.CreateStateChange(whileStateIndex));
+                    // We need an if to check whether the state was changed in the logic. If it was then that means
+                    // that the loop was exited so we mustn't overwrite the new state.
+                    lastState.Add(new IfElse
+                        {
+                            Condition = new Binary
+                            {
+                                Left = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
+                                Operator = Operator.Equality,
+                                Right = stateMachine.CreateStateName(stateMachine.States.Count - 1).ToVhdlIdValue()
+                            },
+                            True = stateMachine.CreateStateChange(repeatedStateIndex)
+                        });
                 }
                 currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
             }

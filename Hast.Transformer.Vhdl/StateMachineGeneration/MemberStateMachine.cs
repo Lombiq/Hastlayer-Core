@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             _stateVariable = new Variable
             {
                 DataType = _statesEnum,
-                Name = this.CreateNamePrefixedExtendedVhdlId("_State"),
+                Name = this.CreateStateVariableName(),
                 Shared = true
             };
 
@@ -153,7 +153,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             {
                 var stateWhen = new When { Expression = CreateStateName(i).ToVhdlIdValue() };
                 stateWhen.Add(_states[i].Body);
-                stateWhen.Add(new Comment("Clock cycles needed to complete this state: " + _states[i].RequiredClockCycles));
+                stateWhen.Add(new Comment("Clock cycles needed to complete this state (approximation): " + _states[i].RequiredClockCycles));
                 stateCase.Whens.Add(stateWhen);
             }
 

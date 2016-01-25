@@ -264,6 +264,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 waitedCyclesCountVariable.DefaultValue = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType };
                 var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
 
+                var requiredClockCyclesRoundedUp = (int)Math.Ceiling(currentBlock.RequiredClockCycles);
 
                 var waitForResultIf = new IfElse
                 {
@@ -274,14 +275,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Right = new Value
                                 {
                                     // Subtracting 1 because due to the wait state added we already wait at least 2 cycles.
-                                    Content = ((int)Math.Ceiling(currentBlock.RequiredClockCycles - 1)).ToString(), 
+                                    Content = (requiredClockCyclesRoundedUp - 1).ToString(), 
                                     DataType = waitedCyclesCountVariable.DataType
                                 }
                         }
                 };
 
                 var waitForResultBlock = new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions => "Waiting for the result to appear in " + operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + "."), 
+                    new GeneratedComment(vhdlGenerationOptions => 
+                        "Waiting for the result to appear in " + operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."), 
                     waitForResultIf,
                     new Assignment
                         {
