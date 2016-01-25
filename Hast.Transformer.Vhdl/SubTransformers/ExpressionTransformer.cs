@@ -287,11 +287,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         {
                             AssignTo = waitedCyclesCountVariableReference,
                             Expression = new Binary
-                                {
-                                    Left = waitedCyclesCountVariableReference,
-                                    Operator = Operator.Add,
-                                    Right = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType }
-                                }
+                            {
+                                Left = waitedCyclesCountVariableReference,
+                                Operator = Operator.Add,
+                                Right = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType }
+                            }
                         });
 
                 var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);

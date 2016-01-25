@@ -93,11 +93,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     new IfElse
                     {
                         Condition = new Binary
-                            {
-                                Left = (isWrite ? SimpleMemoryPortNames.WritesDone : SimpleMemoryPortNames.ReadsDone).ToVhdlSignalReference(),
-                                Operator = Operator.Equality,
-                                Right = Value.OneCharacter
-                            },
+                        {
+                            Left = (isWrite ? SimpleMemoryPortNames.WritesDone : SimpleMemoryPortNames.ReadsDone).ToVhdlSignalReference(),
+                            Operator = Operator.Equality,
+                            Right = Value.OneCharacter
+                        },
                         True = memoryOperationFinishedBlock
                     });
                 var memoryOperationFinishedStateIndex = stateMachine.AddState(endMemoryOperationBlock);

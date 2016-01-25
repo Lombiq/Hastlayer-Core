@@ -181,30 +181,30 @@ namespace Hast.Transformer.Vhdl
                 var stateMachineIsFinishedIfElse = new IfElse
                 {
                     Condition = new Binary
-                        {
-                            Left = MemberStateMachineNameFactory.CreateFinishedVariableName(stateMachineName).ToVhdlVariableReference(),
-                            Operator = Operator.Equality,
-                            Right = Value.True
-                        },
+                    {
+                        Left = MemberStateMachineNameFactory.CreateFinishedVariableName(stateMachineName).ToVhdlVariableReference(),
+                        Operator = Operator.Equality,
+                        Right = Value.True
+                    },
                     True = new Assignment
-                        {
-                            AssignTo = finishedPortReference,
-                            Expression = Value.OneCharacter
-                        },
+                    {
+                        AssignTo = finishedPortReference,
+                        Expression = Value.OneCharacter
+                    },
                     Else = new IfElse
+                    {
+                        Condition = new Binary
                         {
-                            Condition = new Binary
-                                {
-                                    Left = MemberStateMachineNameFactory.CreateStartVariableName(stateMachineName).ToVhdlVariableReference(),
-                                    Operator = Operator.Equality,
-                                    Right = Value.False
-                                },
-                            True = new Assignment
-                                {
-                                    AssignTo = startVariableReference,
-                                    Expression = Value.True
-                                }
+                            Left = MemberStateMachineNameFactory.CreateStartVariableName(stateMachineName).ToVhdlVariableReference(),
+                            Operator = Operator.Equality,
+                            Right = Value.False
+                        },
+                        True = new Assignment
+                        {
+                            AssignTo = startVariableReference,
+                            Expression = Value.True
                         }
+                    }
                 };
 
                 when.Add(stateMachineIsFinishedIfElse);
@@ -242,7 +242,7 @@ namespace Hast.Transformer.Vhdl
                         Operator = Operator.Equality,
                         Right = Value.ZeroCharacter
                     }
-                            
+
                 },
                 True = caseExpression,
                 Else = new IfElse
