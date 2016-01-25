@@ -11,6 +11,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Entity : INamedElement, IDeclarableElement
     {
+        private const string SafeNameCharacterSet = "a-z0-9_";
+
         private string _name;
 
         /// <summary>
@@ -22,7 +24,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             get { return _name; }
             set
             {
-                if (!Regex.IsMatch(value, "^[a-z0-9]*$", RegexOptions.IgnoreCase))
+                if (!Regex.IsMatch(value, "^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase))
                 {
                     throw new ArgumentException("VHDL Entity names can only contain alphanumerical characters.");
                 }
@@ -72,7 +74,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// <returns>The cleaned name.</returns>
         public static string ToSafeEntityName(string name)
         {
-            return Regex.Replace(name, "[^a-z0-9]", "I", RegexOptions.IgnoreCase);
+            return Regex.Replace(name, "[^" + SafeNameCharacterSet + "]", "_", RegexOptions.IgnoreCase);
         }
     }
 }

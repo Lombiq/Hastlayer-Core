@@ -38,7 +38,9 @@ namespace Hast.Transformer.Vhdl
 
             // The top module should have as few and as small inputs as possible. Its name can't be an extended identifier.
             var module = vhdlTransformationContext.Module;
-            module.Entity = new Entity { Name = Entity.ToSafeEntityName("Hastlayer" + vhdlTransformationContext.Id.GetHashCode().ToString()) };
+            module.Entity = new Entity { Name = Entity.ToSafeEntityName("Hast_IP") };
+            module.Entity.Declarations.Add(new Hast.VhdlBuilder.Representation.Declaration.Comment(
+                "IP ID: " + vhdlTransformationContext.Id.GetHashCode().ToString()));
 
             await Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext);
 
