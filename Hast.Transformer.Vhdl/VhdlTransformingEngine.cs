@@ -167,7 +167,7 @@ namespace Hast.Transformer.Vhdl
             var caseExpression = new Case { Expression = memberIdPort.Name.ToVhdlIdValue() };
             var finishedPortReference = CommonPortNames.Finished.ToVhdlSignalReference();
 
-            var memberId = 1;
+            var memberId = 0;
             foreach (var interfaceMethod in transformationContext.InterfaceMethods)
             {
                 var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = memberId.ToString() } };
