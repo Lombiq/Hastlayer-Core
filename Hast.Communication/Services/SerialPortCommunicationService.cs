@@ -15,14 +15,14 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : ICommunicationService
     {
-        private readonly IHardwareDriver _hardwareDriver;
+        private readonly IDeviceDriver _deviceDriver;
 
         public ILogger Logger { get; set; }
 
 
-        public SerialPortCommunicationService(IHardwareDriver hardwareDriver)
+        public SerialPortCommunicationService(IDeviceDriver deviceDriver)
         {
-            _hardwareDriver = hardwareDriver;
+            _deviceDriver = deviceDriver;
 
             Logger = NullLogger.Instance;
         }
@@ -38,6 +38,7 @@ namespace Hast.Communication.Services
             {
                 // Initializing some serial port connection settings (may be different whith some FPGA boards).
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
+                // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 
                 serialPort.PortName = await GetFpgaPortName();
 
@@ -80,7 +81,17 @@ namespace Hast.Communication.Services
                 }
 
                 // Sending the data.
-                serialPort.Write(outputBuffer, 0, outputBuffer.Length);
+                // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
+                // we need to create batches. Since the FPGA receives data in the multiples of 4 bytes we use a batch
+                // of 4 bytes. This seems to have no negative impact on performance compared to using
+                // serialPort.Write() once.
+                var maxBytesToSendAtOnce = 4;
+                for (int i = 0; i < (int)Math.Ceiling(outputBuffer.Length / (decimal)maxBytesToSendAtOnce); i++)
+                {
+                    var remainingBytes = outputBuffer.Length - i * maxBytesToSendAtOnce;
+                    var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
+                    serialPort.Write(outputBuffer, i * maxBytesToSendAtOnce, bytesToSend); 
+                }
 
 
                 // Processing the response.
@@ -91,7 +102,7 @@ namespace Hast.Communication.Services
                 var outputByteCount = 0; // The incoming byte buffer size.
                 var outputBytesReceivedCount = 0; // Just used to know when the data is ready.
                 var outputBytes = new byte[0]; // The incoming buffer.
-                var executionTimeBytes = new byte[4];
+                var executionTimeBytes = new byte[8];
                 var executionTimeByteCounter = 0;
 
                 Action<byte, bool> processReceivedByte = (receivedByte, isLastOfBatch) =>
@@ -110,15 +121,14 @@ namespace Hast.Communication.Services
                                 }
                                 break;
                             case SerialCommunicationConstants.CommunicationState.ReceivingExecutionInformation:
-                                // We know that the incoming data's size will be 4 bytes.
                                 executionTimeBytes[executionTimeByteCounter] = receivedByte;
                                 executionTimeByteCounter++;
-                                if (executionTimeByteCounter == 4)
+                                if (executionTimeByteCounter == 8)
                                 {
-                                    var executionTimeClockCycles = BitConverter.ToUInt32(executionTimeBytes, 0);
+                                    var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                                    executionInformation.HardwareExecutionTimeMilliseconds = 
-                                        executionTimeClockCycles / (_hardwareDriver.HardwareManifest.ClockFrequencyHz / 1000);
+                                    executionInformation.HardwareExecutionTimeMilliseconds = (ulong)Math.Round(
+                                        executionTimeClockCycles / (decimal)(_deviceDriver.DeviceManifest.ClockFrequencyHz / 1000));
                                     Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
 
                                     communicationState = SerialCommunicationConstants.CommunicationState.ReceivingOutputByteCount;

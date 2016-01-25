@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Hast.Synthesis.Models
 {
-    public class HardwareManifest : IHardwareManifest
+    public class DeviceManifest : IDeviceManifest
     {
+        public string TechnicalName { get; set; }
         public uint ClockFrequencyHz { get; set; }
     }
 }
