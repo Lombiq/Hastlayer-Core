@@ -52,10 +52,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     ((Generics != null && Generics.Any() ? Generics.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : string.Empty) +
                     
                     "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                        Ports
+                        (Ports
                             // The last port shouldn't be terminated by a semicolon...
-                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions), string.Empty)
-                            .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions), string.Empty) +
+                            vhdlGenerationOptions.NewLineIfShouldFormat())
+                        .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                     Terminated.Terminate(")", vhdlGenerationOptions) +
 
                     Declarations.ToVhdl(vhdlGenerationOptions))
