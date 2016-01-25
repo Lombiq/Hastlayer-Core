@@ -275,6 +275,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     }
                 });
             }
+            stateMachineFinishedCheckCase.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
+
 
             waitForInvokedStateMachineToFinishState.Add(new IfElse
             {
@@ -326,6 +328,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         }
                     });
                 }
+                stateMachineReadReturnValueCheckCase.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
 
                 return localReturnVariableReference;
             }
