@@ -8,8 +8,8 @@ namespace ICSharpCode.NRefactory.CSharp
         /// Finds the method in an interface that the declaration implements a method of, if any.
         /// </summary>
         /// <returns>
-        /// The <see cref="TypeDeclaration"/> of the interface's method that the declaration implements a method of, or <c>null</c> if the
-        /// declaration is not an implementation of any method of any interface.
+        /// The <see cref="TypeDeclaration"/> of the interface's method that the declaration implements a method of, 
+        /// or <c>null</c> if the declaration is not an implementation of any method of any interface.
         /// </returns>
         public static MethodDeclaration FindImplementedInterfaceMethod(this MethodDeclaration declaration, Func<AstType, TypeDeclaration> lookupDeclaration)
         {

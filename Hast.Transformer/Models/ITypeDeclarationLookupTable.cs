@@ -28,7 +28,9 @@ namespace Hast.Transformer.Models
             return typeDeclarationLookupTable.Lookup(typeReference.FullName);
         }
 
-        public static TypeDeclaration Lookup(this ITypeDeclarationLookupTable typeDeclarationLookupTable, TypeReferenceExpression typeReferenceExpression)
+        public static TypeDeclaration Lookup(
+            this ITypeDeclarationLookupTable typeDeclarationLookupTable, 
+            TypeReferenceExpression typeReferenceExpression)
         {
             return typeDeclarationLookupTable.Lookup(typeReferenceExpression.Type);
         }

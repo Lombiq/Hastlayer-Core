@@ -6,7 +6,9 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     public static class MemberReferenceExpressionExtensions
     {
-        public static EntityDeclaration GetMemberDeclaration(this MemberReferenceExpression memberReferenceExpression, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+        public static EntityDeclaration GetMemberDeclaration(
+            this MemberReferenceExpression memberReferenceExpression, 
+            ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             var type = memberReferenceExpression.GetTargetType(typeDeclarationLookupTable);
 
@@ -23,7 +25,9 @@ namespace ICSharpCode.NRefactory.CSharp
             return type.Members.Where(member => member.Annotation<MemberReference>().FullName == memberReference.FullName).SingleOrDefault();
         }
 
-        public static TypeDeclaration GetTargetType(this MemberReferenceExpression memberReferenceExpression, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+        public static TypeDeclaration GetTargetType(
+            this MemberReferenceExpression memberReferenceExpression, 
+            ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             if (memberReferenceExpression.Target is TypeReferenceExpression)
             {

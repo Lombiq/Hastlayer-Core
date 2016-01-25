@@ -19,7 +19,10 @@ namespace Hast.Transformer
 
     public static class TransformerExtensions
     {
-        public static Task<IHardwareDescription> Transform(this ITransformer transformer, string sourceCode, Language language, IHardwareGenerationConfiguration configuration)
+        public static Task<IHardwareDescription> Transform(
+            this ITransformer transformer, 
+            string sourceCode, Language language, 
+            IHardwareGenerationConfiguration configuration)
         {
             CompilerResults result;
             var providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };

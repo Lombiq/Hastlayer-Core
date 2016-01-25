@@ -30,12 +30,13 @@ namespace Hast.Transformer.SimpleMemory
 
 
         /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on the FPGA for transformed
-        /// algorithms.
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// the FPGA for transformed algorithms.
         /// </summary>
         /// <param name="cellCount">
-        /// The number of memory "cells". The memory is divided into independently accessible "cells"; the size of the allocated memory space is
-        /// calculated from the cell count and the cell size indicated in <see cref="MemoryCellSizeBytes"/>.
+        /// The number of memory "cells". The memory is divided into independently accessible "cells"; the size of the
+        /// allocated memory space is calculated from the cell count and the cell size indicated in 
+        /// <see cref="MemoryCellSizeBytes"/>.
         /// </param>
         public SimpleMemory(int cellCount)
         {

@@ -7,7 +7,8 @@ namespace ICSharpCode.NRefactory.CSharp
     public static class AstNodeExtensions
     {
         /// <summary>
-        /// Retrieves the node's full name, including (if applicable) information about return type, type parameters, arguments...
+        /// Retrieves the node's full name, including (if applicable) information about return type, type parameters, 
+        /// arguments...
         /// </summary>
         public static string GetFullName(this AstNode node)
         {
@@ -21,7 +22,8 @@ namespace ICSharpCode.NRefactory.CSharp
         }
 
         /// <summary>
-        /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's name.
+        /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's 
+        /// name.
         /// </summary>
         public static string GetSimpleName(this AstNode node)
         {
@@ -46,7 +48,8 @@ namespace ICSharpCode.NRefactory.CSharp
                 }
             }
 
-            // The name is already a full name, but for a different declaring type. This is the case for explicitly implemented interface methods.
+            // The name is already a full name, but for a different declaring type. This is the case for explicitly 
+            // implemented interface methods.
             if (name.Contains('.'))
             {
                 name = name.Substring(name.LastIndexOf('.') + 1);
