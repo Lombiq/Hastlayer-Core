@@ -13,6 +13,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.Common.Extensions;
+using Hast.Transformer.Vhdl.StateMachineGeneration;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -69,12 +70,6 @@ namespace Hast.Transformer.Vhdl
                 Name = CommonPortNames.Reset,
                 Mode = PortMode.In,
                 DataType = KnownDataTypes.StdLogic
-            });
-            ports.Add(new Port
-            {
-                Name = CommonPortNames.MemberId,
-                Mode = PortMode.In,
-                DataType = KnownDataTypes.UnrangedInt
             });
             ports.Add(new Port
             {
@@ -154,131 +149,134 @@ namespace Hast.Transformer.Vhdl
 
         private static MemberIdTable ProcessInterfaceMethods(VhdlTransformationContext transformationContext)
         {
-            return new MemberIdTable();
-            //if (!transformationContext.InterfaceMethods.Any()) return MemberIdTable.Empty;
+            if (!transformationContext.InterfaceMethods.Any()) return MemberIdTable.Empty;
 
-            //var proxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
-            //var ports = transformationContext.Module.Entity.Ports;
-            //var memberIdTable = new MemberIdTable();
+            var callProxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
+            var ports = transformationContext.Module.Entity.Ports;
+            var memberIdTable = new MemberIdTable();
 
-            //var methodIdPort = new Port
-            //{
-            //    Name = "MethodId".ToExtendedVhdlId(),
-            //    Mode = PortMode.In,
-            //    DataType = KnownDataTypes.UnrangedInt,
-            //};
+            var memberIdPort = new Port
+            {
+                Name = CommonPortNames.MemberId,
+                Mode = PortMode.In,
+                DataType = KnownDataTypes.UnrangedInt
+            };
 
-            //ports.Add(methodIdPort);
+            ports.Add(memberIdPort);
 
-            //var caseExpression = new Case { Expression = methodIdPort.Name.ToVhdlIdValue() };
+            var caseExpression = new Case { Expression = memberIdPort.Name.ToVhdlIdValue() };
+            var finishedPortReference = CommonPortNames.Finished.ToVhdlSignalReference();
 
-            //var id = 1;
-            //foreach (var interfaceMethod in transformationContext.InterfaceMethods)
-            //{
-            //    ports.AddRange(interfaceMethod.Ports);
-
-            //    var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = id.ToString() } };
-
-            //    if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
-            //    {
-            //        // Calling corresponding procedure with SimpleMemory signals passed in.
-            //        var simpleMemoryParameterNames = new[] { SimpleMemoryNames.DataInLocal, SimpleMemoryNames.DataOutLocal, SimpleMemoryNames.ReadAddressLocal, SimpleMemoryNames.WriteAddressLocal };
-            //        var simpleMemoryParameters = interfaceMethod.Procedure.Parameters
-            //            .Where(parameter => simpleMemoryParameterNames.Contains(parameter.Name))
-            //            .Select(parameter =>
-            //            {
-            //                var reference = new DataObjectReference { DataObjectKind = DataObjectKind.Signal };
-
-            //                if (parameter.Name == SimpleMemoryNames.DataInLocal)
-            //                {
-            //                    reference.Name = SimpleMemoryNames.DataInPort;
-            //                }
-            //                else if (parameter.Name == SimpleMemoryNames.DataOutLocal)
-            //                {
-            //                    reference.Name = SimpleMemoryNames.DataOutPort;
-            //                }
-            //                else if (parameter.Name == SimpleMemoryNames.ReadAddressLocal)
-            //                {
-            //                    reference.Name = SimpleMemoryNames.ReadAddressPort;
-            //                }
-            //                else
-            //                {
-            //                    reference.Name = SimpleMemoryNames.WriteAddressPort;
-            //                }
-
-            //                return reference;
-            //            });
-
-            //        var invokation = new Invokation
-            //        {
-            //            Target = interfaceMethod.Procedure.Name.ToVhdlIdValue(),
-            //            Parameters = new List<IVhdlElement>(simpleMemoryParameters)
-            //        };
-
-            //        when.Add(invokation.Terminate());
-            //    }
-            //    else
-            //    {
-            //        // Copying input signals to variables.
-            //        var portVariables = new Dictionary<Port, Variable>();
-            //        foreach (var port in interfaceMethod.Ports)
-            //        {
-            //            var variable = new Variable
-            //            {
-            //                Name = (port.Name.TrimExtendedVhdlIdDelimiters() + ".var").ToExtendedVhdlId(),
-            //                DataType = port.DataType
-            //            };
-
-            //            proxyProcess.Declarations.Add(variable);
-
-            //            if (port.Mode == PortMode.In)
-            //            {
-            //                when.Add(new Assignment { AssignTo = variable, Expression = port.Name.ToVhdlIdValue() });
-            //            }
-
-            //            portVariables[port] = variable;
-            //        }
-
-            //        // Calling corresponding procedure and taking care of its input/output parameters.
-            //        var invokation = new Invokation
-            //        {
-            //            Target = interfaceMethod.Procedure.Name.ToVhdlIdValue(),
-            //            // Using named parameters as the order of ports is not necessarily right
-            //            Parameters = interfaceMethod.ParameterMappings
-            //                .Select(mapping => new NamedInvokationParameter { FormalParameter = mapping.Parameter, ActualParameter = portVariables[mapping.Port] })
-            //                .Cast<IVhdlElement>()
-            //                .ToList()
-            //        };
-
-            //        when.Add(invokation.Terminate());
-
-            //        // Copying output variables to output ports.
-            //        foreach (var port in interfaceMethod.Ports.Where(p => p.Mode == PortMode.Out))
-            //        {
-            //            when.Add(new Assignment { AssignTo = port, Expression = portVariables[port].Name.ToVhdlIdValue() });
-            //        }
-            //    }
+            var memberId = 1;
+            foreach (var interfaceMethod in transformationContext.InterfaceMethods)
+            {
+                var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = memberId.ToString() } };
 
 
-            //    caseExpression.Whens.Add(when);
+                var stateMachineName = interfaceMethod.StateMachine.Name;
+                var startVariableReference = MemberStateMachineNameFactory
+                    .CreateStartVariableName(stateMachineName)
+                    .ToVhdlVariableReference();
 
-            //    var methodFullName = interfaceMethod.Method.GetFullName();
-            //    memberIdTable.SetMapping(methodFullName, id);
-            //    foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
-            //    {
-            //        memberIdTable.SetMapping(methodNameAlternate, id);
-            //    }
+                var stateMachineIsFinishedIfElse = new IfElse
+                {
+                    Condition = new Binary
+                        {
+                            Left = MemberStateMachineNameFactory.CreateFinishedVariableName(stateMachineName).ToVhdlVariableReference(),
+                            Operator = Operator.Equality,
+                            Right = Value.True
+                        },
+                    True = new Assignment
+                        {
+                            AssignTo = finishedPortReference,
+                            Expression = Value.OneCharacter
+                        },
+                    Else = new IfElse
+                        {
+                            Condition = new Binary
+                                {
+                                    Left = MemberStateMachineNameFactory.CreateStartVariableName(stateMachineName).ToVhdlVariableReference(),
+                                    Operator = Operator.Equality,
+                                    Right = Value.False
+                                },
+                            True = new Assignment
+                                {
+                                    AssignTo = startVariableReference,
+                                    Expression = Value.True
+                                }
+                        }
+                };
 
-            //    id++;
-            //}
+                when.Add(stateMachineIsFinishedIfElse);
 
-            //caseExpression.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
 
-            //proxyProcess.Add(caseExpression);
+                caseExpression.Whens.Add(when);
 
-            //transformationContext.Module.Architecture.Add(proxyProcess);
+                var methodFullName = interfaceMethod.Method.GetFullName();
+                memberIdTable.SetMapping(methodFullName, memberId);
+                foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
+                {
+                    memberIdTable.SetMapping(methodNameAlternate, memberId);
+                }
 
-            //return memberIdTable;
+                memberId++;
+            }
+
+            caseExpression.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
+
+            var startedPortReference = CommonPortNames.Started.ToVhdlSignalReference();
+            var startedIfElse = new IfElse
+            {
+                Condition = new Binary
+                {
+                    Left = new Binary
+                    {
+                        Left = startedPortReference,
+                        Operator = Operator.Equality,
+                        Right = Value.OneCharacter
+                    },
+                    Operator = Operator.ConditionalAnd,
+                    Right = new Binary
+                    {
+                        Left = finishedPortReference,
+                        Operator = Operator.Equality,
+                        Right = Value.ZeroCharacter
+                    }
+                            
+                },
+                True = caseExpression,
+                Else = new IfElse
+                {
+                    Condition = new Binary
+                    {
+                        Left = new Binary
+                        {
+                            Left = startedPortReference,
+                            Operator = Operator.Equality,
+                            Right = Value.ZeroCharacter
+                        },
+                        Operator = Operator.ConditionalAnd,
+                        Right = new Binary
+                        {
+                            Left = finishedPortReference,
+                            Operator = Operator.Equality,
+                            Right = Value.OneCharacter
+                        }
+
+                    },
+                    True = new Assignment
+                    {
+                        AssignTo = finishedPortReference,
+                        Expression = Value.ZeroCharacter
+                    }
+                }
+            };
+
+            callProxyProcess.Add(startedIfElse);
+
+            transformationContext.Module.Architecture.Add(callProxyProcess);
+
+            return memberIdTable;
         }
 
         private static void AddSimpleMemoryPorts(Module module)

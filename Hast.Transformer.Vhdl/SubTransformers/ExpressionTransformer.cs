@@ -174,20 +174,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // Would need to decide between + and & or sll/srl and sra/sla
             // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
+            // The commented out cases with unsupported operators are here so adding them later is easier.
             switch (expression.Operator)
             {
                 case BinaryOperatorType.Add:
                     binary.Operator = Operator.Add;
                     break;
-                case BinaryOperatorType.Any:
-                    break;
-                case BinaryOperatorType.BitwiseAnd:
-                    break;
-                case BinaryOperatorType.BitwiseOr:
-                    break;
+                //case BinaryOperatorType.Any:
+                //    break;
+                //case BinaryOperatorType.BitwiseAnd:
+                //    break;
+                //case BinaryOperatorType.BitwiseOr:
+                //    break;
                 case BinaryOperatorType.ConditionalAnd:
+                    binary.Operator = Operator.ConditionalAnd;
                     break;
                 case BinaryOperatorType.ConditionalOr:
+                    binary.Operator = Operator.ConditionalOr;
                     break;
                 case BinaryOperatorType.Divide:
                     binary.Operator = Operator.Divide;
@@ -219,8 +222,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case BinaryOperatorType.Multiply:
                     binary.Operator = Operator.Multiply;
                     break;
-                case BinaryOperatorType.NullCoalescing:
-                    break;
+                //case BinaryOperatorType.NullCoalescing:
+                //    break;
                 case BinaryOperatorType.ShiftLeft:
                     binary.Operator = Operator.ShiftLeft;
                     break;
@@ -230,6 +233,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case BinaryOperatorType.Subtract:
                     binary.Operator = Operator.Subtract;
                     break;
+                default:
+                    throw new NotImplementedException("Support for the binary operator " + expression.Operator + " is not implemented.");
             }
 
 

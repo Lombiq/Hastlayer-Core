@@ -24,7 +24,7 @@ namespace Hast.VhdlBuilder
             var processes = 
                 module.Architecture.Body.Where(element => element is Process)
                 .Union(module.Architecture.Body
-                    .Where(element => element is IBlockElement)
+                    .Where(element => !(element is Process) && element is IBlockElement)
                     .Cast<InlineBlock>()
                     .SelectMany(block => block.Body.Where(element => element is Process)))
                 .Cast<Process>();

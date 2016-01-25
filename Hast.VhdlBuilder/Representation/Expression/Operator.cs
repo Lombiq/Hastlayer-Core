@@ -11,9 +11,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
         private readonly string _source;
 
         public static readonly Operator Add = new Operator("+");
+        public static readonly Operator ConditionalAnd = new Operator("and");
+        public static readonly Operator ConditionalOr = new Operator("or");
         public static readonly Operator Divide = new Operator("/");
         public static readonly Operator Equality = new Operator("=");
-        public static readonly Operator ExclusiveOr = new Operator("XOR");
+        public static readonly Operator ExclusiveOr = new Operator("xor");
         public static readonly Operator GreaterThan = new Operator(">");
         public static readonly Operator GreaterThanOrEqual = new Operator(">=");
         public static readonly Operator InEquality = new Operator("/=");
