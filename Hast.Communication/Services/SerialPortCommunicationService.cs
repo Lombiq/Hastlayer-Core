@@ -38,6 +38,7 @@ namespace Hast.Communication.Services
             {
                 // Initializing some serial port connection settings (may be different whith some FPGA boards).
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
+                // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 
                 serialPort.PortName = await GetFpgaPortName();
 
@@ -80,7 +81,17 @@ namespace Hast.Communication.Services
                 }
 
                 // Sending the data.
-                serialPort.Write(outputBuffer, 0, outputBuffer.Length);
+                // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
+                // we need to create batches. Since the FPGA receives data in the multiples of 4 bytes we use a batch
+                // of 4 bytes. This seems to have no negative impact on performance compared to using
+                // serialPort.Write() once.
+                var maxBytesToSendAtOnce = 4;
+                for (int i = 0; i < (int)Math.Ceiling(outputBuffer.Length / (decimal)maxBytesToSendAtOnce); i++)
+                {
+                    var remainingBytes = outputBuffer.Length - i * maxBytesToSendAtOnce;
+                    var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
+                    serialPort.Write(outputBuffer, i * maxBytesToSendAtOnce, bytesToSend); 
+                }
 
 
                 // Processing the response.
