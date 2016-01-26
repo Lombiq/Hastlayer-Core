@@ -53,11 +53,23 @@ namespace Hast.Samples.Consumer
                         // For testing transformation, we don't need anything else.
                         return;
 
+                        #region PrimeCalculator
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
 
                         var isPrime = primeCalculator.IsPrimeNumber(15);
-                        var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
+                        var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime 
+                        #endregion
 
+
+                        #region RecursiveAlgorithms
+                        var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms());
+
+                        var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries((short)13); // 233
+                        var factorial = recursiveAlgorithms.CalculateFactorial((short)6); // 720 
+                        #endregion
+
+
+                        #region ImageAlgorithms
                         using (var bitmap = new Bitmap("fpga.jpg"))
                         {
                             var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
@@ -65,8 +77,11 @@ namespace Hast.Samples.Consumer
 
                             var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
                             var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
-                        }
+                        } 
+                        #endregion
 
+
+                        #region GenomeMatcher
                         var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher());
 
                         // Sample from IBM.
@@ -84,11 +99,16 @@ namespace Hast.Samples.Consumer
                         inputOne = "lombiqtech";
                         inputTwo = "coulombtech";
 
-                        result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+                        result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo); 
+                        #endregion
 
-                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm()); 
-                        var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
+
+                        #region MonteCarlo
+                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm());
+                        var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000); 
+                        #endregion
                     }
+
 
                     // Generating hardware from test assemblies:
                     using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
