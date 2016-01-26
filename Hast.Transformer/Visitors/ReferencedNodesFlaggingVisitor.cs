@@ -56,8 +56,8 @@ namespace Hast.Transformer.Visitors
 
             member.SetVisited();
 
-            // Since when e.g. another method is referenced that is above the level of this expression in the syntaxt tree,
-            // thus it won't be visited unless we start a visitor there too.
+            // Since when e.g. another method is referenced that is above the level of this expression in the syntax
+            // tree, thus it won't be visited unless we start a visitor there too.
             member.AcceptVisitor(this);
         }
     }
