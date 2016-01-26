@@ -5,7 +5,7 @@ using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 using Orchard;
 
-namespace Hast.Transformer
+namespace Hast.Transformer.Services
 {
     public interface ITypeDeclarationLookupTableFactory : IDependency
     {

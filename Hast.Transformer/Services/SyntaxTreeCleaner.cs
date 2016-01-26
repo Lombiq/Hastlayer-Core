@@ -6,7 +6,7 @@ using Hast.Transformer.Visitors;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
-namespace Hast.Transformer
+namespace Hast.Transformer.Services
 {
     /// <summary>
     /// Removes nodes from the syntax tree that aren't needed.

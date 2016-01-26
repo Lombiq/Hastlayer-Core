@@ -8,6 +8,7 @@ using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
+using Hast.Transformer.Services;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;

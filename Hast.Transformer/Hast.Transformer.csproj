@@ -74,8 +74,8 @@
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemory.cs" />
-    <Compile Include="SyntaxTreeCleaner.cs" />
-    <Compile Include="TypeDeclarationLookupTableFactory.cs" />
+    <Compile Include="Services\SyntaxTreeCleaner.cs" />
+    <Compile Include="Services\TypeDeclarationLookupTableFactory.cs" />
     <Compile Include="ITransformer.cs" />
     <Compile Include="ITransformingEngine.cs" />
     <Compile Include="DefaultTransformer.cs" />

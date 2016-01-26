@@ -19,6 +19,7 @@ using Moq;
 using NUnit.Framework;
 using Orchard.Tests.Utility;
 using Hast.VhdlBuilder.Extensions;
+using Hast.Transformer.Services;
 
 namespace Hast.Transformer.Vhdl.Tests
 {

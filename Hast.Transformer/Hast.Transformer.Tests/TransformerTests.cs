@@ -11,6 +11,7 @@ using Hast.Tests.TestAssembly1;
 using Hast.Tests.TestAssembly1.ComplexTypes;
 using Hast.Tests.TestAssembly2;
 using Hast.Transformer.Models;
+using Hast.Transformer.Services;
 using ICSharpCode.NRefactory.CSharp;
 using Moq;
 using NUnit.Framework;
