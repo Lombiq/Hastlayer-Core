@@ -32,8 +32,7 @@ namespace Hast.Transformer.Vhdl
         {
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext)
             {
-                Module = new Module { Architecture = new Architecture { Name = "Imp" } },
-                MemberCallChainTable = new MemberCallChainTable()
+                Module = new Module { Architecture = new Architecture { Name = "Imp" } }
             };
 
             // The top module should have as few and as small inputs as possible. Its name can't be an extended identifier.

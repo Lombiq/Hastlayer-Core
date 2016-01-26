@@ -65,7 +65,6 @@
     <Compile Include="StateMachineGeneration\MemberStateMachineNameFactory.cs" />
     <Compile Include="StateMachineGeneration\IMemberStateMachine.cs" />
     <Compile Include="Models\IVhdlTransformationContext.cs" />
-    <Compile Include="MemberCallChainTable.cs" />
     <Compile Include="MemberIdTable.cs" />
     <Compile Include="InterfaceMethodDefinition.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachine.cs" />

@@ -152,8 +152,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 throw new InvalidOperationException("The invoked method " + targetMethodName + " can't be found.");
             }
 
-            context.TransformationContext.MemberCallChainTable.AddTarget(context.Scope.StateMachine.Name, targetStateMachineVhdlId);
-
 
             // Since .NET methods can be recursive but a hardware state machine can only have one "instance" we need to
             // have multiple state machines with the same logic. This way even with recursive calls there will always be
