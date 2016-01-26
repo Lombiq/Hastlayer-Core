@@ -65,7 +65,7 @@ namespace Hast.Samples.SampleAssembly
               
                 // The constant can't be specified properly inline as (since it can't be specied as a short, see:
                 // http://stackoverflow.com/questions/8670511/how-to-specify-a-short-int-constant-without-casting)
-                // it would cause an underflow and be caster to an ulong.
+                // it would cause an underflow and be casted to an ulong.
                 short minusThree = -3;
                 y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / 100));
                 short thirteen = 13;
