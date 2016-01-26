@@ -243,10 +243,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForOperation(expression.Operator);
 
+            var resultType = expression.GetActualType();
+            if (resultType == null) resultType = expression.Parent.GetActualType();
             var operationResultVariableReference = MemberStateMachineVariableHelper
                 .CreateTemporaryVariable(
-                    "binaryOperationResult", 
-                    _typeConverter.ConvertTypeReference(expression.GetActualType()), 
+                    "binaryOperationResult",
+                    _typeConverter.ConvertTypeReference(resultType), 
                     stateMachine)
                 .ToReference();
 
@@ -315,7 +317,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // See: https://lombiq.atlassian.net/browse/HAST-20
             var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
             var fromTypeKeyword = expression.GetActualType().FullName;
-            if (toTypeKeyword == "long" || toTypeKeyword == "ulong" || fromTypeKeyword == "System.Int64" || fromTypeKeyword == "System.UInt64")
+            if (toTypeKeyword == "long" ||
+                toTypeKeyword == "ulong" || 
+                fromTypeKeyword == "System.Int64" || 
+                fromTypeKeyword == "System.UInt64")
             {
                 Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was omitted because non-32b numbers are not yet supported. If the result can indeed reach values above the 32b limit then overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
                 return Transform(expression.Expression, context);

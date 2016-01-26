@@ -18,13 +18,13 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculateFactorial_OutputUInt32Index = 0;
 
 
-        public void CalculateFibonacchiSeries(SimpleMemory memory)
+        public virtual void CalculateFibonacchiSeries(SimpleMemory memory)
         {
             var number = (short)memory.ReadInt32(CalculateFibonacchiSeries_InputShortIndex);
             memory.WriteUInt32(CalculateFibonacchiSeries_OutputUInt32Index, CalculateFibonacchiSeries(number));
         }
 
-        public void CalculateFactorial(SimpleMemory memory)
+        public virtual void CalculateFactorial(SimpleMemory memory)
         {
             var number = (short)memory.ReadInt32(CalculateFactorial_InputShortIndex);
             memory.WriteUInt32(CalculateFactorial_OutputUInt32Index, CalculateFactorial(number));
