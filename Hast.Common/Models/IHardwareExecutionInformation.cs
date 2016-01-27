@@ -12,17 +12,18 @@ namespace Hast.Common.Models
     public interface IHardwareExecutionInformation
     {
         /// <summary>
-        /// The net execution time (without the communication roundtrip) on the hardware.
+        /// Gets the net (without the communication roundtrip) execution time on the hardware, in milliseconds.
         /// </summary>
-        ulong HardwareExecutionTimeMilliseconds { get; }
+        decimal HardwareExecutionTimeMilliseconds { get; }
 
         /// <summary>
-        /// The full execution time of the hardware execution, including the communication roundtrip.
+        /// Gets the full (including the communication roundtrip) execution time of the hardware execution, in
+        /// milliseconds.
         /// </summary>
         long FullExecutionTimeMilliseconds { get; }
 
         /// <summary>
-        /// The date when the execution started.
+        /// Gets the date and time when the execution started.
         /// </summary>
         DateTime StartedUtc { get; }
     }

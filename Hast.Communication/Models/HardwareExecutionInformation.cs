@@ -5,7 +5,7 @@ namespace Hast.Communication.Models
 {
     public class HardwareExecutionInformation : IHardwareExecutionInformation
     {
-        public ulong HardwareExecutionTimeMilliseconds { get; set; }
+        public decimal HardwareExecutionTimeMilliseconds { get; set; }
         public long FullExecutionTimeMilliseconds { get; set; }
         public DateTime StartedUtc { get; set; }
 

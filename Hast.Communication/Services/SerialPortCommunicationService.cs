@@ -127,8 +127,8 @@ namespace Hast.Communication.Services
                                 {
                                     var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                                    executionInformation.HardwareExecutionTimeMilliseconds = (ulong)Math.Round(
-                                        executionTimeClockCycles / (decimal)(_deviceDriver.DeviceManifest.ClockFrequencyHz / 1000));
+                                    executionInformation.HardwareExecutionTimeMilliseconds =
+                                        1M / _deviceDriver.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
                                     Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
 
                                     communicationState = SerialCommunicationConstants.CommunicationState.ReceivingOutputByteCount;
