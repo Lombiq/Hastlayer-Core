@@ -157,6 +157,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // have multiple state machines with the same logic. This way even with recursive calls there will always be
             // an idle, usable state machine (these state machines are distinguished by an index).
 
+            var maxRecursionDepth = context.TransformationContext.GetTransformerConfiguration().MaxCallStackDepth;
+
             var stateMachineRunningIndexVariableName = MemberStateMachineVariableHelper
                 .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "runningIndex", context.Scope.StateMachine);
             var stateMachineRunningIndexVariable = new Variable
@@ -167,17 +169,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     TypeCategory = DataTypeCategory.Numeric,
                     Name = "integer",
                     RangeMin = 0,
-                    RangeMax = 32767
+                    RangeMax = maxRecursionDepth - 1
                 }
             };
             stateMachine.LocalVariables.Add(stateMachineRunningIndexVariable);
 
             // Logic for determining which state machine is idle and thus can be invoked. We probe every state machine.
             // If we can't find any idle one that is an issue, we should probably have a fail safe for that somehow.
-            var maxCallStackDepth = context.TransformationContext.GetTransformerConfiguration().MaxCallStackDepth;
             var stateMachineSelectingConditionsBlock = new InlineBlock();
             currentBlock.Add(stateMachineSelectingConditionsBlock);
-            for (int i = 0; i < maxCallStackDepth; i++)
+            for (int i = 0; i < maxRecursionDepth; i++)
             {
                 var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
                 var startVariableReference = MemberStateMachineNameFactory
@@ -250,7 +251,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Check if the running state machine finished.
             var stateMachineFinishedCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
             waitForInvokedStateMachineToFinishState.Add(stateMachineFinishedCheckCase);
-            for (int i = 0; i < maxCallStackDepth; i++)
+            for (int i = 0; i < maxRecursionDepth; i++)
             {
                 var finishedVariableName = MemberStateMachineNameFactory
                     .CreateFinishedVariableName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
@@ -273,8 +274,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     }
                 });
             }
-            stateMachineFinishedCheckCase.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
-
 
             waitForInvokedStateMachineToFinishState.Add(new IfElse
             {
@@ -308,7 +307,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 var stateMachineReadReturnValueCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
                 isInvokedStateMachineFinishedIfElseTrue.Add(stateMachineReadReturnValueCheckCase);
-                for (int i = 0; i < maxCallStackDepth; i++)
+                for (int i = 0; i < maxRecursionDepth; i++)
                 {
                     var returnVariableName = MemberStateMachineNameFactory
                         .CreateReturnVariableName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
@@ -326,7 +325,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         }
                     });
                 }
-                stateMachineReadReturnValueCheckCase.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
 
                 return localReturnVariableReference;
             }
