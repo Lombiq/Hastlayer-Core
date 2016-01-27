@@ -16,7 +16,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            if (RangeMin == 0 && RangeMax == 0) return Name;
             return Name + " range " + RangeMin + " to " + RangeMax;
         }
     }
