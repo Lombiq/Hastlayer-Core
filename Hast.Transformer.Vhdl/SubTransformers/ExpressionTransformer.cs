@@ -263,7 +263,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     KnownDataTypes.Natural, 
                     stateMachine);
                 // Default value is 1 because due to the state change we already waited 1 cycle.
-                waitedCyclesCountVariable.DefaultValue = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType };
+                waitedCyclesCountVariable.InitialValue = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType };
                 var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
 
                 var requiredClockCyclesRoundedUp = (int)Math.Ceiling(currentBlock.RequiredClockCycles);

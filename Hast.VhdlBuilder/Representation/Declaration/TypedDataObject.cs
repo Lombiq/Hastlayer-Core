@@ -7,9 +7,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class TypedDataObject : TypedDataObjectBase
     {
         /// <summary>
-        /// If specified, this default value will be used to reset the object's value.
+        /// If specified, this value will be set for the object when the hardware is initialized.
         /// </summary>
-        public Value DefaultValue { get; set; }
+        public Value InitialValue { get; set; }
 
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
@@ -20,7 +20,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 vhdlGenerationOptions.ShortenName(Name) +
                 (DataType != null ? ": " + DataType.ToReferenceVhdl(vhdlGenerationOptions) : string.Empty) +
                 // The default value should be specified with ":=", even for signals.
-                (DefaultValue != null ? ( " := " + DefaultValue.ToVhdl(vhdlGenerationOptions)) : string.Empty),
+                (InitialValue != null ? ( " := " + InitialValue.ToVhdl(vhdlGenerationOptions)) : string.Empty),
                 vhdlGenerationOptions);
         }
     }

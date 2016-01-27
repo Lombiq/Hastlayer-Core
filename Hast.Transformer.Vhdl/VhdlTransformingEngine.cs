@@ -171,7 +171,7 @@ namespace Hast.Transformer.Vhdl
             {
                 Name = "FinishedInternal".ToExtendedVhdlId(),
                 DataType = KnownDataTypes.StdLogic,
-                DefaultValue = Value.ZeroCharacter
+                InitialValue = Value.ZeroCharacter
             };
             transformationContext.Module.Architecture.Declarations.Add(finishedSignal);
             var finishedSignalReference = finishedSignal.ToReference();
