@@ -39,7 +39,14 @@ namespace Hast.Samples.Consumer
                         var configuration = new HardwareGenerationConfiguration();
                         configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumber");
                         configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
-                        configuration.TransformerConfiguration().MaxCallStackDepth = 3;
+                        configuration.TransformerConfiguration().MemberMaxRecursionDepthConfigurations.Add(
+                            new TransformerConfiguration.MemberMaxRecursionDepthConfiguration
+                            {
+                                MemberNamePrefix = "Hast.Samples.SampleAssembly.RecursiveAlgorithms.CalculateFibonacchiSeries",
+                                // If we give these algorithms inputs causing a larger recursion depth then that will
+                                // cause runtime problems.
+                                MaxRecursionDepth = 20
+                            });
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
                             {

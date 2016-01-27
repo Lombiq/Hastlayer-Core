@@ -12,6 +12,7 @@ using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder.Extensions;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.StateMachineGeneration;
+using Hast.Common.Configuration;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -157,7 +158,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // have multiple state machines with the same logic. This way even with recursive calls there will always be
             // an idle, usable state machine (these state machines are distinguished by an index).
 
-            var maxRecursionDepth = context.TransformationContext.GetTransformerConfiguration().MaxCallStackDepth;
+            var maxRecursionDepth = context.TransformationContext.GetTransformerConfiguration()
+                .GetMaxRecursionDepthForMember(targetDeclaration.GetSimpleName());
+
 
             var stateMachineRunningIndexVariableName = MemberStateMachineVariableHelper
                 .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "runningIndex", context.Scope.StateMachine);

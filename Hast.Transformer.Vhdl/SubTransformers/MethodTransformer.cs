@@ -11,6 +11,7 @@ using System.Linq;
 using Hast.Transformer.Models;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.StateMachineGeneration;
+using Hast.Common.Configuration;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -31,7 +32,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public async Task Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
-            var stateMachineCount = context.GetTransformerConfiguration().MaxCallStackDepth;
+            var stateMachineCount = context
+                .GetTransformerConfiguration()
+                .GetMaxRecursionDepthForMember(method.GetSimpleName());
             var stateMachineResults = new StateMachineResult[stateMachineCount];
 
             // Not much use to parallelize computation unless there are a lot of state machines to create or the method

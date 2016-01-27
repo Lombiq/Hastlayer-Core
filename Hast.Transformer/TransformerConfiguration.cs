@@ -1,5 +1,7 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Hast.Common.Configuration
 {
     public class TransformerConfiguration
@@ -11,21 +13,10 @@ namespace Hast.Common.Configuration
         public int MaxDegreeOfParallelism { get; set; }
 
         /// <summary>
-        /// The maximal depth of any call stack that can happen in the program.
+        /// Gets or sets the list of maximal recursion depth configurations for members. When using (even indirectly) 
+        /// recursive calls between members set the maximal depth here.
         /// </summary>
-        private int _maxCallStackDepth;
-        public int MaxCallStackDepth
-        {
-            get { return _maxCallStackDepth; }
-            set
-            {
-                if (value < 1)
-                {
-                    throw new ArgumentOutOfRangeException("The max call depth should be at least 1 otherwise methods can't invoke each other.");
-                }
-                _maxCallStackDepth = value;
-            }
-        }
+        public IList<MemberMaxRecursionDepthConfiguration> MemberMaxRecursionDepthConfigurations { get; set; }
 
         /// <summary>
         /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
@@ -37,7 +28,47 @@ namespace Hast.Common.Configuration
         public TransformerConfiguration()
         {
             UseSimpleMemory = true;
-            MaxCallStackDepth = 1;
+            MemberMaxRecursionDepthConfigurations = new List<MemberMaxRecursionDepthConfiguration>();
+        }
+
+
+        public class MemberMaxRecursionDepthConfiguration
+        {
+            /// <summary>
+            /// Gets or sets the prefix of the member's name. Use the same convention as with 
+            /// <see cref="HardwareGenerationConfiguration.PublicHardwareMemberNamePrefixes"/>
+            /// </summary>
+            public string MemberNamePrefix { get; set; }
+
+            private int _maxRecursionDepth;
+            /// <summary>
+            /// Gets or sets the maximal recursion depth of the member.
+            /// </summary>
+            public int MaxRecursionDepth
+            {
+                get { return _maxRecursionDepth; }
+                set
+                {
+                    if (value < 1)
+                    {
+                        throw new ArgumentOutOfRangeException("The max recursion depth should be at least 1, otherwise the member wouldn't be transformed at all.");
+                    }
+
+                    _maxRecursionDepth = value;
+                }
+            }
+
+        }
+    }
+
+
+    public static class TransformerConfigurationExtensions
+    {
+        public static int GetMaxRecursionDepthForMember(this TransformerConfiguration configuration, string memberName)
+        {
+            var maxRecursionDepthConfig = configuration.MemberMaxRecursionDepthConfigurations
+                .FirstOrDefault(config => memberName.StartsWith(config.MemberNamePrefix));
+            return maxRecursionDepthConfig != null ? maxRecursionDepthConfig.MaxRecursionDepth : 1;
         }
     }
 
