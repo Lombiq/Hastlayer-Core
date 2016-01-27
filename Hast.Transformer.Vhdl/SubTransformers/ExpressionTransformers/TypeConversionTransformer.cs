@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
-            IVhdlElement variableReference,
+            DataObjectReference variableReference,
             ISubTransformerContext context)
         {
             // If the type of an operand can't be determined the best guess is the expression's type.
@@ -51,8 +51,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (leftType == rightType) return variableReference;
 
-            // We compare an Expression to an IVhdlElement, doesn't seem right...
-            var isLeft = binaryOperatorExpression.Left == variableReference;
+            var isLeft = false;
             var thisType = isLeft ? leftType : rightType;
             var otherType = isLeft ? rightType : leftType;
 

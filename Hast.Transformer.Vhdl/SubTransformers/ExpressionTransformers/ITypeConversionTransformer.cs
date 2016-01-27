@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
@@ -19,7 +20,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         /// </summary>
         IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
-            IVhdlElement variableReference,
+            DataObjectReference variableReference,
             ISubTransformerContext context);
 
         IVhdlElement ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement variableReference);
