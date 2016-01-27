@@ -23,7 +23,7 @@ namespace ICSharpCode.NRefactory.CSharp
                 currentNode = currentNode.Parent;
             }
 
-            return currentNode.GetActualType();
+            return currentNode.GetActualTypeReference();
         }
     }
 }

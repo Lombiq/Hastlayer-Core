@@ -7,7 +7,7 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     public static class AnnotatableExtensions
     {
-        public static TypeReference GetActualType(this IAnnotatable annotable)
+        public static TypeReference GetActualTypeReference(this IAnnotatable annotable)
         {
             var typeInformation = annotable.Annotation<TypeInformation>();
             if (typeInformation != null) return typeInformation.GetActualType();

@@ -71,7 +71,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var primitive = (PrimitiveExpression)expression;
 
-                var typeReference = expression.GetActualType();
+                var typeReference = expression.GetActualTypeReference();
                 if (typeReference != null)
                 {
                     var type = _typeConverter.ConvertTypeReference(typeReference);
@@ -243,8 +243,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForOperation(expression.Operator);
 
-            var resultType = expression.GetActualType();
-            if (resultType == null) resultType = expression.Parent.GetActualType();
+            var resultType = expression.GetActualTypeReference();
+            if (resultType == null) resultType = expression.Parent.GetActualTypeReference();
             var operationResultVariableReference = MemberStateMachineVariableHelper
                 .CreateTemporaryVariable(
                     "binaryOperationResult",
@@ -316,7 +316,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // resulting in a 64b number would cause a cast to a 64b number type (what we don't support yet). 
             // See: https://lombiq.atlassian.net/browse/HAST-20
             var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
-            var fromTypeKeyword = expression.GetActualType().FullName;
+            var fromTypeKeyword = expression.GetActualTypeReference().FullName;
             if (toTypeKeyword == "long" ||
                 toTypeKeyword == "ulong" || 
                 fromTypeKeyword == "System.Int64" || 
@@ -326,7 +326,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return Transform(expression.Expression, context);
             }
 
-            var fromType = _typeConverter.ConvertTypeReference(expression.GetActualType());
+            var fromType = _typeConverter.ConvertTypeReference(expression.GetActualTypeReference());
             var toType = _typeConverter.Convert(expression.Type);
 
             return _typeConversionTransformer.ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context));
