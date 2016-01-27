@@ -56,8 +56,8 @@ namespace Hast.Transformer
             }
 
             transformationId +=
-                string.Join("-", configuration.PublicHardwareMembers) +
-                string.Join("-", configuration.PublicHardwareMemberPrefixes) +
+                string.Join("-", configuration.PublicHardwareMemberFullNames) +
+                string.Join("-", configuration.PublicHardwareMemberNamePrefixes) +
                 _jsonConverter.Serialize(configuration.CustomConfiguration);
 
             var syntaxTree = astBuilder.SyntaxTree;

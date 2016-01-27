@@ -101,17 +101,17 @@ namespace Hast.Transformer.Vhdl.Tests
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
-            config.PublicHardwareMembers = new[] { "aaa" };
+            config.PublicHardwareMemberFullNames = new[] { "aaa" };
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             firstId = _producedContext.Id;
-            config.PublicHardwareMembers = new[] { "bbb" };
+            config.PublicHardwareMemberFullNames = new[] { "bbb" };
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
 
-            config.PublicHardwareMemberPrefixes = new[] { "aaa" };
+            config.PublicHardwareMemberNamePrefixes = new[] { "aaa" };
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             firstId = _producedContext.Id;
-            config.PublicHardwareMemberPrefixes = new[] { "bbb" };
+            config.PublicHardwareMemberNamePrefixes = new[] { "bbb" };
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
@@ -131,7 +131,7 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task IncludedMembersAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
-            configuration.PublicHardwareMembers = new[]
+            configuration.PublicHardwareMemberFullNames = new[]
             {
                 "System.Boolean Hast.Tests.TestAssembly1.ComplexAlgorithm::IsPrimeNumber(System.UInt32)",
                 "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Hast.Tests.TestAssembly1.ComplexTypes.IInterface1.Interface1Method1()"
@@ -155,7 +155,7 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task IncludedMembersPrefixedAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
-            configuration.PublicHardwareMemberPrefixes = new[]
+            configuration.PublicHardwareMemberNamePrefixes = new[]
             {
                 "Hast.Tests.TestAssembly1.ComplexAlgorithm.IsPrimeNumber",
                 "Hast.Tests.TestAssembly1.ComplexTypes"

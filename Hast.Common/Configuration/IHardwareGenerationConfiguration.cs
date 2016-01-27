@@ -27,7 +27,7 @@ namespace Hast.Common.Configuration
         /// return type and the types of their (type) arguments, e.g.:
         /// "System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])
         /// </example>
-        IList<string> PublicHardwareMembers { get; }
+        IList<string> PublicHardwareMemberFullNames { get; }
 
         /// <summary>
         /// Gets the collection of the name prefixes of those public members that will be accessible as hardware 
@@ -40,7 +40,7 @@ namespace Hast.Common.Configuration
         /// "Contoso.ImageProcessing" will include all members under this namespace.
         /// "Contoso.ImageProcessing.FaceRecognition.FaceDetectors" will include all members in this class.
         /// </example>
-        IList<string> PublicHardwareMemberPrefixes { get; }
+        IList<string> PublicHardwareMemberNamePrefixes { get; }
     }
 
 
@@ -58,7 +58,7 @@ namespace Hast.Common.Configuration
             {
                 throw new InvalidOperationException("The supplied expression is not a method call.");
             }
-            configuration.PublicHardwareMembers.Add(methodCallExpression.Method.GetFullName());
+            configuration.PublicHardwareMemberFullNames.Add(methodCallExpression.Method.GetFullName());
         }
 
         // Properties could be added similarly once properties are supported.

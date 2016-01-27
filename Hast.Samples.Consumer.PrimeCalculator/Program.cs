@@ -29,7 +29,7 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                     };
 
                     var hardwareConfiguration = new HardwareGenerationConfiguration();
-                    hardwareConfiguration.PublicHardwareMemberPrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                    hardwareConfiguration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
                     var hardwareRepresentation = await hastlayer.GenerateHardware(
                         new[]
                             {

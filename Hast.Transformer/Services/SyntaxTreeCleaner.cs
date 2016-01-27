@@ -35,7 +35,7 @@ namespace Hast.Transformer.Services
         public void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
-            var noIncludedMembers = !configuration.PublicHardwareMembers.Any() && !configuration.PublicHardwareMemberPrefixes.Any();
+            var noIncludedMembers = !configuration.PublicHardwareMemberFullNames.Any() && !configuration.PublicHardwareMemberNamePrefixes.Any();
             var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable);
 
             // Starting with interface members we walk through the references to see which declarations are used (e.g. which
@@ -47,9 +47,9 @@ namespace Hast.Transformer.Services
                     var fullName = member.GetFullName();
                     if (
                             (noIncludedMembers || 
-                            configuration.PublicHardwareMembers.Contains(fullName) || 
-                            fullName.GetMemberNameAlternates().Intersect(configuration.PublicHardwareMembers).Any() || 
-                            configuration.PublicHardwareMemberPrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) 
+                            configuration.PublicHardwareMemberFullNames.Contains(fullName) || 
+                            fullName.GetMemberNameAlternates().Intersect(configuration.PublicHardwareMemberFullNames).Any() || 
+                            configuration.PublicHardwareMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) 
                         &&
                             _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
                     {

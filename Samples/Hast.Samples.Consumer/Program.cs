@@ -37,7 +37,8 @@ namespace Hast.Samples.Consumer
                             };
 
                         var configuration = new HardwareGenerationConfiguration();
-                        configuration.PublicHardwareMemberPrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumber");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumber");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
                         configuration.TransformerConfiguration().MaxCallStackDepth = 3;
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
@@ -47,7 +48,8 @@ namespace Hast.Samples.Consumer
                             },
                             configuration);
 
-                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.srcs\sources_1\ipshared\xilinx.com\hast_ip_v1_0\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                        //File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                        File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
 
                         // For testing transformation, we don't need anything else.
