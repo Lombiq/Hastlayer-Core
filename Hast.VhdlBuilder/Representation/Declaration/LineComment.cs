@@ -10,6 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// <summary>
     /// A VHDL comment line.
     /// </summary>
+    /// <seealso cref="BlockComment"/>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class LineComment : IVhdlElement
     {

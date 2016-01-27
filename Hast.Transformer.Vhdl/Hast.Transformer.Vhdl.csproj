@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\CommonPortNames.cs" />
+    <Compile Include="Constants\GeneratedCodeOverviewComment.cs" />
     <Compile Include="Constants\SimpleMemoryPortNames.cs" />
     <Compile Include="Constants\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
