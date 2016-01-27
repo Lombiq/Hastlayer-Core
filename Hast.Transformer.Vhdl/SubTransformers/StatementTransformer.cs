@@ -113,14 +113,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var whileStatement = statement as WhileStatement;
 
                 var repeatedState = new InlineBlock();
-                repeatedState.Add(new VhdlBuilder.Representation.Declaration.Comment("Repeated state of a while loop."));
+                repeatedState.Add(new LineComment("Repeated state of a while loop."));
                 var repeatedStateIndex = stateMachine.AddState(repeatedState);
                 var afterWhileState = new InlineBlock();
                 var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
 
                 // Having a condition even in the current state's body: if the loop doesn't need to run at all we'll
                 // spare one cycle by directly jumping to the state after the loop.
-                currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Starting a while loop."));
+                currentBlock.Add(new LineComment("Starting a while loop."));
                 currentBlock.Add(new IfElse
                     {
                         Condition = _expressionTransformer.Transform(whileStatement.Condition, context),

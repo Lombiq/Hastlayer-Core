@@ -67,7 +67,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
 
             var startStateBlock = new InlineBlock(
-                new Comment("Start state"),
+                new LineComment("Start state"),
                 new Assignment { AssignTo = _finishedVariable, Expression = Value.False },
                 new IfElse
                 {
@@ -76,7 +76,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 });
 
             var finalStateBlock = new InlineBlock(
-                new Comment("Final state"),
+                new LineComment("Final state"),
                 new Assignment { AssignTo = _finishedVariable, Expression = Value.True },
                 new Assignment { AssignTo = _startVariable, Expression = Value.False },
                 this.ChangeToStartState());
@@ -122,21 +122,21 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             }
 
             var declarationsBlock = new LogicalBlock(
-                new Comment(Name + " declarations start"),
-                new Comment("State machine states"),
+                new LineComment(Name + " declarations start"),
+                new LineComment("State machine states"),
                 _statesEnum,
-                new Comment("State machine control variables"),
+                new LineComment("State machine control variables"),
                 _stateVariable,
                 _startVariable,
                 _finishedVariable);
 
             if (Parameters.Any())
             {
-                declarationsBlock.Add(new Comment("Shared variables for the state machine's inputs and outputs")); 
+                declarationsBlock.Add(new LineComment("Shared variables for the state machine's inputs and outputs")); 
             }
             declarationsBlock.Body.AddRange(Parameters);
 
-            declarationsBlock.Add(new Comment(Name + " declarations end"));
+            declarationsBlock.Add(new LineComment(Name + " declarations end"));
 
             return declarationsBlock;
         }
@@ -153,12 +153,12 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             {
                 var stateWhen = new When { Expression = CreateStateName(i).ToVhdlIdValue() };
                 stateWhen.Add(_states[i].Body);
-                stateWhen.Add(new Comment("Clock cycles needed to complete this state (approximation): " + _states[i].RequiredClockCycles));
+                stateWhen.Add(new LineComment("Clock cycles needed to complete this state (approximation): " + _states[i].RequiredClockCycles));
                 stateCase.Whens.Add(stateWhen);
             }
 
             var ifInResetBlock = new InlineBlock(
-                new Comment("Synchronous reset"),
+                new LineComment("Synchronous reset"),
                 new Assignment { AssignTo = _startVariable, Expression = Value.False },
                 new Assignment { AssignTo = _finishedVariable, Expression = Value.False },
                 CreateStateChange(0));
@@ -177,9 +177,9 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             process.Add(resetIf);
 
             return new LogicalBlock(
-                new Comment(Name + " state machine start"), 
+                new LineComment(Name + " state machine start"), 
                 process,
-                new Comment(Name + " state machine end"));
+                new LineComment(Name + " state machine end"));
         }
 
 

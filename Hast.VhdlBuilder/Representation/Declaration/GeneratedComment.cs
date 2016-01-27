@@ -24,7 +24,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return new Comment(_generator(vhdlGenerationOptions)).ToVhdl(vhdlGenerationOptions);
+            return new LineComment(_generator(vhdlGenerationOptions)).ToVhdl(vhdlGenerationOptions);
         }
     }
 }

@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
     /// <summary>
-    /// A VHDL comment.
+    /// A VHDL comment line.
     /// </summary>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class Comment : IVhdlElement
+    public class LineComment : IVhdlElement
     {
         public string Text { get; set; }
 
 
-        public Comment(string text)
+        public LineComment(string text)
         {
             Text = text;
         }

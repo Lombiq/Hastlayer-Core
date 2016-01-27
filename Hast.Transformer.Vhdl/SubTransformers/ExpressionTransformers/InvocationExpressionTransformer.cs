@@ -51,11 +51,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 if (isWrite)
                 {
-                    currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Begin SimpleMemory write."));
+                    currentBlock.Add(new LineComment("Begin SimpleMemory write."));
                 }
                 else
                 {
-                    currentBlock.Add(new VhdlBuilder.Representation.Declaration.Comment("Begin SimpleMemory read."));
+                    currentBlock.Add(new LineComment("Begin SimpleMemory read."));
                 }
 
                 // Directly setting SimpleMemory ports since the SimpleMemory library doesn't handle these yet.
@@ -114,8 +114,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 if (isWrite)
                 {
-                    memoryOperationFinishedBlock.Body.Insert(0, 
-                        new VhdlBuilder.Representation.Declaration.Comment("SimpleMemory write finished."));
+                    memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory write finished."));
 
                     currentBlock.Add(memoryOperationInvokation.Terminate());
                     currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
@@ -124,8 +123,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
                 else
                 {
-                    memoryOperationFinishedBlock.Body.Insert(0, 
-                        new VhdlBuilder.Representation.Declaration.Comment("SimpleMemory read finished."));
+                    memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory read finished."));
 
                     currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
 
@@ -233,8 +231,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 stateMachineSelectingConditionsBlock = elseBlock;
             }
 
-            stateMachineSelectingConditionsBlock.Add(new VhdlBuilder.Representation.Declaration.Comment(
-                "No idle state machine could be found. This is an error."));
+            stateMachineSelectingConditionsBlock.Add(new LineComment("No idle state machine could be found. This is an error."));
 
             // Common variable to signal that the invoked state machine finished.
             var stateMachineFinishedVariableName = MemberStateMachineVariableHelper

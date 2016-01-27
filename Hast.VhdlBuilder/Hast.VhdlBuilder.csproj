@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Representation\Declaration\Alias.cs" />
     <Compile Include="Representation\Declaration\Array.cs" />
-    <Compile Include="Representation\Declaration\Comment.cs" />
+    <Compile Include="Representation\Declaration\LineComment.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
     <Compile Include="Representation\Declaration\Empty.cs" />
     <Compile Include="Representation\Declaration\Generic.cs" />
