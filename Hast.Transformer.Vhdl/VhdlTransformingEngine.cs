@@ -181,7 +181,26 @@ namespace Hast.Transformer.Vhdl
                     Expression = finishedSignalReference
                 });
 
-            var caseExpression = new Case { Expression = memberIdPort.Name.ToVhdlIdValue() };
+
+            var ifInResetBlock = new InlineBlock(
+                new Hast.VhdlBuilder.Representation.Declaration.Comment("Synchronous reset"),
+                new Assignment { AssignTo = finishedSignalReference, Expression = Value.ZeroCharacter });
+
+            var resetIf = new IfElse
+            {
+                Condition = new Binary
+                {
+                    Left = CommonPortNames.Reset.ToVhdlSignalReference(),
+                    Operator = Operator.Equality,
+                    Right = Value.OneCharacter
+                },
+                True = ifInResetBlock
+            };
+
+            callProxyProcess.Add(resetIf);
+
+
+            var memberSelectingCase = new Case { Expression = memberIdPort.Name.ToVhdlIdValue() };
 
             var memberId = 0;
             foreach (var interfaceMethod in transformationContext.InterfaceMethods)
@@ -224,7 +243,7 @@ namespace Hast.Transformer.Vhdl
                 when.Add(stateMachineIsFinishedIfElse);
 
 
-                caseExpression.Whens.Add(when);
+                memberSelectingCase.Whens.Add(when);
 
                 var methodFullName = interfaceMethod.Method.GetFullName();
                 memberIdTable.SetMapping(methodFullName, memberId);
@@ -236,7 +255,7 @@ namespace Hast.Transformer.Vhdl
                 memberId++;
             }
 
-            caseExpression.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
+            memberSelectingCase.Whens.Add(new When { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
 
             var startedPortReference = CommonPortNames.Started.ToVhdlSignalReference();
             var startedIfElse = new IfElse
@@ -258,7 +277,7 @@ namespace Hast.Transformer.Vhdl
                     }
 
                 },
-                True = caseExpression,
+                True = memberSelectingCase,
                 Else = new IfElse
                 {
                     Condition = new Binary
@@ -286,7 +305,7 @@ namespace Hast.Transformer.Vhdl
                 }
             };
 
-            callProxyProcess.Add(startedIfElse);
+            resetIf.Else = startedIfElse;
 
             transformationContext.Module.Architecture.Add(callProxyProcess);
 
