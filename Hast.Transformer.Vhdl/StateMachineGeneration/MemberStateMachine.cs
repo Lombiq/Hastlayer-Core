@@ -14,8 +14,8 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;
-        private readonly Variable _startVariable;
-        private readonly Variable _finishedVariable;
+        private readonly Signal _startSignal;
+        private readonly Signal _finishedSignal;
 
         public string Name { get; private set; }
 
@@ -39,46 +39,47 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         {
             Name = name;
 
+            Parameters = new List<Variable>();
+            LocalVariables = new List<Variable>();
+
 
             _statesEnum = new Enum { Name = this.CreateNamePrefixedExtendedVhdlId("_States") };
 
             _stateVariable = new Variable
             {
                 DataType = _statesEnum,
-                Name = this.CreateStateVariableName(),
-                Shared = true
+                Name = this.CreateStateVariableName()
             };
+            LocalVariables.Add(_stateVariable);
 
-            _startVariable = new Variable
+            _startSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = this.CreateStartVariableName(),
-                Shared = true,
+                Name = this.CreateStartSignalName(),
                 InitialValue = Value.False
             };
 
-            _finishedVariable = new Variable
+            _finishedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = this.CreateFinishedVariableName(),
-                Shared = true,
+                Name = this.CreateFinishedSignalName(),
                 InitialValue = Value.True
             };
 
 
             var startStateBlock = new InlineBlock(
                 new LineComment("Start state"),
-                new Assignment { AssignTo = _finishedVariable, Expression = Value.False },
+                new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
                 new IfElse
                 {
-                    Condition = new Binary { Left = _startVariable.Name.ToVhdlIdValue(), Operator = Operator.Equality, Right = Value.True },
+                    Condition = new Binary { Left = _startSignal.Name.ToVhdlIdValue(), Operator = Operator.Equality, Right = Value.True },
                     True = CreateStateChange(2)
                 });
 
             var finalStateBlock = new InlineBlock(
                 new LineComment("Final state"),
-                new Assignment { AssignTo = _finishedVariable, Expression = Value.True },
-                new Assignment { AssignTo = _startVariable, Expression = Value.False },
+                new Assignment { AssignTo = _finishedSignal, Expression = Value.True },
+                new Assignment { AssignTo = _startSignal, Expression = Value.False },
                 this.ChangeToStartState());
 
             _states = new List<IMemberStateMachineState>
@@ -86,10 +87,6 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 new MemberStateMachineState { Body = startStateBlock },
                 new MemberStateMachineState { Body = finalStateBlock }
             };
-
-
-            Parameters = new List<Variable>();
-            LocalVariables = new List<Variable>();
         }
 
 
@@ -126,9 +123,8 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 new LineComment("State machine states"),
                 _statesEnum,
                 new LineComment("State machine control variables"),
-                _stateVariable,
-                _startVariable,
-                _finishedVariable);
+                _startSignal,
+                _finishedSignal);
 
             if (Parameters.Any())
             {
@@ -159,8 +155,8 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             var ifInResetBlock = new InlineBlock(
                 new LineComment("Synchronous reset"),
-                new Assignment { AssignTo = _startVariable, Expression = Value.False },
-                new Assignment { AssignTo = _finishedVariable, Expression = Value.False },
+                new Assignment { AssignTo = _startSignal, Expression = Value.False },
+                new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
                 CreateStateChange(0));
 
             var resetIf = new IfElse

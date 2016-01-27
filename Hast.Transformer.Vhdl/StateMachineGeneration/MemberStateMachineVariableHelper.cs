@@ -20,12 +20,12 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             var returnVariableNameIndex = 0;
 
             while (stateMachine.LocalVariables.Any(variable => 
-                variable.Name == stateMachine.CreatePrefixedVariableName(variableName)))
+                variable.Name == stateMachine.CreatePrefixedObjectName(variableName)))
             {
                 variableName = name + ++returnVariableNameIndex;
             }
 
-            return stateMachine.CreatePrefixedVariableName(variableName);
+            return stateMachine.CreatePrefixedObjectName(variableName);
         }
 
         public static Variable CreateTemporaryVariable(

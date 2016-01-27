@@ -109,7 +109,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 stateMachine.Parameters.Add(new Variable
                 {
                     DataType = _typeConverter.Convert(parameter.Type),
-                    Name = stateMachine.CreatePrefixedVariableName(parameter.Name)
+                    Name = stateMachine.CreatePrefixedObjectName(parameter.Name)
                 });
             }
 

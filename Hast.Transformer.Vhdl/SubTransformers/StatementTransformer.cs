@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     stateMachine.LocalVariables.Add(new Variable
                     {
-                        Name = stateMachine.CreatePrefixedVariableName(variableInitializer.Name),
+                        Name = stateMachine.CreatePrefixedObjectName(variableInitializer.Name),
                         DataType = type
                     });
                 }

@@ -208,13 +208,13 @@ namespace Hast.Transformer.Vhdl
 
 
                 var stateMachine = interfaceMethod.StateMachine;
-                var startVariableReference = stateMachine.CreateStartVariableName().ToVhdlVariableReference();
+                var startSignalReference = stateMachine.CreateStartSignalName().ToVhdlSignalReference();
 
                 var stateMachineIsFinishedIfElse = new IfElse
                 {
                     Condition = new Binary
                     {
-                        Left = stateMachine.CreateFinishedVariableName().ToVhdlVariableReference(),
+                        Left = stateMachine.CreateFinishedSignalName().ToVhdlSignalReference(),
                         Operator = Operator.Equality,
                         Right = Value.True
                     },
@@ -227,13 +227,13 @@ namespace Hast.Transformer.Vhdl
                     {
                         Condition = new Binary
                         {
-                            Left = stateMachine.CreateStartVariableName().ToVhdlVariableReference(),
+                            Left = startSignalReference,
                             Operator = Operator.Equality,
                             Right = Value.False
                         },
                         True = new Assignment
                         {
-                            AssignTo = startVariableReference,
+                            AssignTo = startSignalReference,
                             Expression = Value.True
                         }
                     }

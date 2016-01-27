@@ -59,7 +59,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is IdentifierExpression)
             {
                 var identifier = (IdentifierExpression)expression;
-                var reference = stateMachine.CreatePrefixedVariableName(identifier.Identifier).ToVhdlVariableReference();
+                var reference = stateMachine.CreatePrefixedObjectName(identifier.Identifier).ToVhdlVariableReference();
 
                 if (!(identifier.Parent is BinaryOperatorExpression)) return reference;
 

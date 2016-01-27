@@ -182,15 +182,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             for (int i = 0; i < maxRecursionDepth; i++)
             {
                 var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
-                var startVariableReference = MemberStateMachineNameFactory
-                    .CreateStartVariableName(indexedStateMachineName)
-                    .ToVhdlVariableReference();
+                var startSignalReference = MemberStateMachineNameFactory
+                    .CreateStartSignalName(indexedStateMachineName)
+                    .ToVhdlSignalReference();
 
                 var trueBlock = new InlineBlock();
 
                 trueBlock.Add(new Assignment
                 {
-                    AssignTo = startVariableReference,
+                    AssignTo = startSignalReference,
                     Expression = Value.True
                 });
 
@@ -207,7 +207,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     trueBlock.Add(new Assignment
                     {
                         AssignTo =
-                            MemberStateMachineNameFactory.CreatePrefixedVariableName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
+                            MemberStateMachineNameFactory.CreatePrefixedObjectName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
                             .ToVhdlVariableReference(),
                         Expression = parameter
                     });
@@ -220,7 +220,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     Condition = new Binary
                     {
-                        Left = startVariableReference,
+                        Left = startSignalReference,
                         Operator = Operator.Equality,
                         Right = Value.False
                     },
@@ -253,8 +253,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             waitForInvokedStateMachineToFinishState.Add(stateMachineFinishedCheckCase);
             for (int i = 0; i < maxRecursionDepth; i++)
             {
-                var finishedVariableName = MemberStateMachineNameFactory
-                    .CreateFinishedVariableName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
+                var finishedSignalName = MemberStateMachineNameFactory
+                    .CreateFinishedSignalName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
 
                 stateMachineFinishedCheckCase.Whens.Add(new When
                 {
@@ -265,7 +265,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         {
                             Condition = new Binary
                             {
-                                Left = finishedVariableName.ToVhdlVariableReference(),
+                                Left = finishedSignalName.ToVhdlSignalReference(),
                                 Operator = Operator.Equality,
                                 Right = Value.True
                             },
