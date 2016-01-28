@@ -159,8 +159,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 .GetMaxRecursionDepthForMember(targetDeclaration.GetSimpleName());
 
 
-            var stateMachineRunningIndexVariableName = MemberStateMachineVariableHelper
-                .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "runningIndex", context.Scope.StateMachine);
+            var stateMachineRunningIndexVariableName = context.Scope.StateMachine
+                .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "runningIndex");
             var stateMachineRunningIndexVariable = new Variable
             {
                 Name = stateMachineRunningIndexVariableName,
@@ -243,8 +243,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             stateMachineSelectingConditionsBlock.Add(new LineComment("No idle state machine could be found. This is an error."));
 
             // Common variable to signal that the invoked state machine finished.
-            var stateMachineFinishedVariableName = MemberStateMachineVariableHelper
-                .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "finished", context.Scope.StateMachine);
+            var stateMachineFinishedVariableName = context.Scope.StateMachine
+                .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "finished");
             var stateMachineFinishedVariableReference = stateMachineFinishedVariableName.ToVhdlVariableReference();
             stateMachine.LocalVariables.Add(new Variable
             {
@@ -312,11 +312,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // We copy the used state machine's return value to a local variable and then use the local variable in
                 // place of the original method call.
 
-                var localReturnVariableReference = MemberStateMachineVariableHelper
+                var localReturnVariableReference = context.Scope.StateMachine
                     .CreateTemporaryVariable(
                         targetStateMachineName + "." + "return",
-                        _typeConverter.ConvertTypeReference(expression.GetReturnType()),
-                        context.Scope.StateMachine)
+                        _typeConverter.ConvertTypeReference(expression.GetReturnType()))
                     .ToReference();
 
                 var stateMachineReadReturnValueCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
@@ -360,8 +359,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             Invokation invokation,
             ISubTransformerContext context)
         {
-            var returnVariableReference = MemberStateMachineVariableHelper
-                .CreateTemporaryVariable(targetName + "." + "return", returnType, context.Scope.StateMachine)
+            var returnVariableReference = context.Scope.StateMachine
+                .CreateTemporaryVariable(targetName + "." + "return", returnType)
                 .ToReference();
 
             invokation.Parameters.Add(returnVariableReference);

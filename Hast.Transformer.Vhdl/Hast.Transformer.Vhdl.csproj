@@ -72,7 +72,6 @@
     <Compile Include="InterfaceMethodDefinition.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateMachineGeneration\MemberStateMachineVariableHelper.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />
