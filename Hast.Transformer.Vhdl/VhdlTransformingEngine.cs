@@ -159,6 +159,7 @@ namespace Hast.Transformer.Vhdl
 
             var callProxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
             var ports = transformationContext.Module.Entity.Ports;
+            var architecture = transformationContext.Module.Architecture;
             var memberIdTable = new MemberIdTable();
 
             var memberIdPort = new Port
@@ -170,6 +171,9 @@ namespace Hast.Transformer.Vhdl
 
             ports.Add(memberIdPort);
 
+            var callProxySignalDeclarationsBlock = new LogicalBlock(new LineComment("CallProxy signal declarations start"));
+            architecture.Declarations.Add(callProxySignalDeclarationsBlock);
+
             // Since the Finished port is an out port, it can't be read. Adding an internal proxy signal so we can also 
             // read it.
             var finishedSignal = new Signal
@@ -178,9 +182,9 @@ namespace Hast.Transformer.Vhdl
                 DataType = KnownDataTypes.StdLogic,
                 InitialValue = Value.ZeroCharacter
             };
-            transformationContext.Module.Architecture.Declarations.Add(finishedSignal);
+            callProxySignalDeclarationsBlock.Add(finishedSignal);
             var finishedSignalReference = finishedSignal.ToReference();
-            transformationContext.Module.Architecture.Body.Add(new Assignment
+            architecture.Body.Add(new Assignment
                 {
                     AssignTo = CommonPortNames.Finished.ToVhdlSignalReference(),
                     Expression = finishedSignalReference
@@ -219,7 +223,14 @@ namespace Hast.Transformer.Vhdl
                 // state machine.
                 var startSignalName = ("System.Void Hast::CallProxy " + stateMachine.CreateStartSignalName().TrimExtendedVhdlIdDelimiters())
                     .ToExtendedVhdlId();
-                var startSignalReference = startSignalName.ToVhdlSignalReference();
+                var startSignal = new Signal
+                {
+                    DataType = KnownDataTypes.Boolean,
+                    Name = startSignalName,
+                    InitialValue = Value.False
+                };
+                callProxySignalDeclarationsBlock.Add(startSignal);
+                var startSignalReference = startSignal.ToReference();
 
                 transformationContext.MemberStateMachineStartSignalFunnel
                     .AddDrivingStartSignalForStateMachine(startSignalName, stateMachine.Name);
@@ -330,7 +341,9 @@ namespace Hast.Transformer.Vhdl
 
             resetIf.Else = startedIfElse;
 
-            transformationContext.Module.Architecture.Add(callProxyProcess);
+            architecture.Add(callProxyProcess);
+
+            callProxySignalDeclarationsBlock.Add(new LineComment("CallProxy signal declarations end"));
 
             return memberIdTable;
         }
