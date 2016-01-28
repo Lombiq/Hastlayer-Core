@@ -8,5 +8,6 @@ namespace Hast.Transformer.Vhdl.Models
     {
         Module Module { get; }
         IList<InterfaceMethodDefinition> InterfaceMethods { get; }
+        IMemberStateMachineStartSignalFunnel MemberStateMachineStartSignalFunnel { get; }
     }
 }

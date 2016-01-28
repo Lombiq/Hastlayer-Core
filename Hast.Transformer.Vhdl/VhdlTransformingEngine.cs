@@ -14,6 +14,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.Common.Extensions;
 using Hast.Transformer.Vhdl.StateMachineGeneration;
+using System;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -65,6 +66,8 @@ namespace Hast.Transformer.Vhdl
             {
                 AddSimpleMemoryPorts(module);
             }
+
+            ProcessStateMachineStartSignalFunnel(vhdlTransformationContext);
 
             // Adding common ports
             var ports = module.Entity.Ports;
@@ -211,7 +214,15 @@ namespace Hast.Transformer.Vhdl
 
 
                 var stateMachine = interfaceMethod.StateMachine;
-                var startSignalReference = stateMachine.CreateStartSignalName().ToVhdlSignalReference();
+
+                // So it's not cut off wrongly we need to use a name for this signal as it would look from a generated
+                // state machine.
+                var startSignalName = ("System.Void Hast::CallProxy " + stateMachine.CreateStartSignalName().TrimExtendedVhdlIdDelimiters())
+                    .ToExtendedVhdlId();
+                var startSignalReference = startSignalName.ToVhdlSignalReference();
+
+                transformationContext.MemberStateMachineStartSignalFunnel
+                    .AddDrivingStartSignalForStateMachine(startSignalName, stateMachine.Name);
 
                 var stateMachineIsFinishedIfElse = new IfElse
                 {
@@ -221,16 +232,22 @@ namespace Hast.Transformer.Vhdl
                         Operator = Operator.Equality,
                         Right = Value.True
                     },
-                    True = new Assignment
-                    {
-                        AssignTo = finishedSignalReference,
-                        Expression = Value.OneCharacter
-                    },
+                    True = new InlineBlock(
+                        new Assignment
+                        {
+                            AssignTo = startSignalReference,
+                            Expression = Value.False
+                        },
+                        new Assignment
+                        {
+                            AssignTo = finishedSignalReference,
+                            Expression = Value.OneCharacter
+                        }),
                     Else = new IfElse
                     {
                         Condition = new Binary
                         {
-                            Left = startSignalReference,
+                            Left = stateMachine.CreateStartSignalName().ToVhdlSignalReference(),
                             Operator = Operator.Equality,
                             Right = Value.False
                         },
@@ -279,32 +296,36 @@ namespace Hast.Transformer.Vhdl
                     }
 
                 },
-                True = memberSelectingCase,
-                Else = new IfElse
-                {
-                    Condition = new Binary
+                True = new InlineBlock(
+                    new LineComment("Starting the state machine corresponding to the given member ID."),
+                    memberSelectingCase),
+                Else = new InlineBlock(
+                    new LineComment("Waiting for Started to be pulled back to zero that signals the framework noting the finish."),
+                    new IfElse
                     {
-                        Left = new Binary
+                        Condition = new Binary
                         {
-                            Left = startedPortReference,
-                            Operator = Operator.Equality,
-                            Right = Value.ZeroCharacter
-                        },
-                        Operator = Operator.ConditionalAnd,
-                        Right = new Binary
-                        {
-                            Left = finishedSignalReference,
-                            Operator = Operator.Equality,
-                            Right = Value.OneCharacter
-                        }
+                            Left = new Binary
+                            {
+                                Left = startedPortReference,
+                                Operator = Operator.Equality,
+                                Right = Value.ZeroCharacter
+                            },
+                            Operator = Operator.ConditionalAnd,
+                            Right = new Binary
+                            {
+                                Left = finishedSignalReference,
+                                Operator = Operator.Equality,
+                                Right = Value.OneCharacter
+                            }
 
-                    },
-                    True = new Assignment
-                    {
-                        AssignTo = finishedSignalReference,
-                        Expression = Value.ZeroCharacter
-                    }
-                }
+                        },
+                        True = new Assignment
+                        {
+                            AssignTo = finishedSignalReference,
+                            Expression = Value.ZeroCharacter
+                        }
+                    })
             };
 
             resetIf.Else = startedIfElse;
@@ -366,6 +387,62 @@ namespace Hast.Transformer.Vhdl
                 Mode = PortMode.In,
                 DataType = SimpleMemoryTypes.DonePortsDataType
             });
+        }
+
+        private static void ProcessStateMachineStartSignalFunnel(VhdlTransformationContext transformationContext)
+        {
+            var drivingStartSignalsForStateMachines = transformationContext.MemberStateMachineStartSignalFunnel
+                .GetDrivingStartSignalsForStateMachines();
+
+            var signalsAssignmentBlock = new LogicalBlock();
+
+            foreach (var stateMachineToSignalsMapping in drivingStartSignalsForStateMachines)
+            {
+                IVhdlElement assignmentExpression;
+
+                if (!stateMachineToSignalsMapping.Value.Any())
+                {
+                    throw new InvalidOperationException("There weren't any driving start signals specified for the state machine " + stateMachineToSignalsMapping.Key + ".");
+                }
+
+                assignmentExpression = stateMachineToSignalsMapping.Value.First().ToVhdlSignalReference();
+
+                // Iteratively build a binary expression chain to OR together all the driving signals.
+                if (stateMachineToSignalsMapping.Value.Count() > 1)
+                {
+                    var currentBinary = new Binary
+                    {
+                        Left = stateMachineToSignalsMapping.Value.Skip(1).First().ToVhdlSignalReference(),
+                        Operator = Operator.ConditionalOr
+                    };
+
+                    foreach (var drivingStartSignal in stateMachineToSignalsMapping.Value.Skip(1))
+                    {
+                        var newBinary = new Binary
+                        {
+                            Left = drivingStartSignal.ToVhdlSignalReference(),
+                            Operator = Operator.ConditionalOr
+                        };
+
+                        currentBinary.Right = newBinary;
+                        currentBinary = newBinary;
+                    }
+
+                    currentBinary.Right = assignmentExpression;
+                    assignmentExpression = currentBinary;
+                }
+
+                signalsAssignmentBlock.Add(
+                    new Assignment
+                    {
+                        AssignTo = MemberStateMachineNameFactory
+                            .CreateStartSignalName(stateMachineToSignalsMapping.Key)
+                            .ToVhdlSignalReference(),
+                        Expression = assignmentExpression
+                    });
+            }
+
+            transformationContext.Module.Architecture.Add(signalsAssignmentBlock);
         }
     }
 }

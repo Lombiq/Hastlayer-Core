@@ -41,6 +41,11 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         /// </summary>
         IList<Variable> LocalVariables { get; }
 
+        /// <summary>
+        /// Global signals declared for this state machine.
+        /// </summary>
+        IList<Signal> Signals { get; }
+
 
         /// <summary>
         /// Adds a new state to the state machine.

@@ -8,11 +8,13 @@ namespace Hast.Transformer.Vhdl.Models
     {
         public Module Module { get; set; }
         public IList<InterfaceMethodDefinition> InterfaceMethods { get; set; }
+        public IMemberStateMachineStartSignalFunnel MemberStateMachineStartSignalFunnel { get; set; }
 
 
         public VhdlTransformationContext(ITransformationContext previousContext) : base(previousContext)
         {
             InterfaceMethods = new List<InterfaceMethodDefinition>();
+            MemberStateMachineStartSignalFunnel = new MemberStateMachineStartSignalFunnel();
         }
     }
 }

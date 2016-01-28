@@ -42,14 +42,14 @@ namespace Hast.VhdlBuilder.Representation
             {
                 var shortName = originalName;
 
-                // Cutting of return type name.
+                // Cutting off return type name.
                 var firstSpaceIndex = shortName.IndexOf(' ');
                 if (firstSpaceIndex != -1)
                 {
                     shortName = shortName.Substring(firstSpaceIndex + 1);
                 }
 
-                // Cutting of namespace name, type name can be enough.
+                // Cutting off namespace name, type name can be enough.
                 var doubleColonIndex = shortName.IndexOf("::");
                 if (doubleColonIndex != -1)
                 {

@@ -62,6 +62,8 @@
     <Compile Include="Constants\SimpleMemoryPortNames.cs" />
     <Compile Include="Constants\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
+    <Compile Include="Models\IMemberStateMachineStartSignalFunnel.cs" />
+    <Compile Include="Models\MemberStateMachineStartSignalFunnel.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachineExtenions.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachineNameFactory.cs" />
     <Compile Include="StateMachineGeneration\IMemberStateMachine.cs" />

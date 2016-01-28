@@ -142,7 +142,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var targetMethodName = expression.GetFullName();
             var targetStateMachineName = targetMethodName;
-            var targetStateMachineVhdlId = targetStateMachineName.ToExtendedVhdlId();
 
             var targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
 
@@ -182,15 +181,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             for (int i = 0; i < maxRecursionDepth; i++)
             {
                 var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
-                var startSignalReference = MemberStateMachineNameFactory
-                    .CreateStartSignalName(indexedStateMachineName)
-                    .ToVhdlSignalReference();
+                var startSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
+                    .CreateStartSignalName(indexedStateMachineName).TrimExtendedVhdlIdDelimiters());
+
+                context.TransformationContext.MemberStateMachineStartSignalFunnel
+                    .AddDrivingStartSignalForStateMachine(startSignalName, indexedStateMachineName);
+
+                stateMachine.Signals.Add(new Signal
+                    {
+                        DataType = KnownDataTypes.Boolean,
+                        Name = startSignalName,
+                        InitialValue = Value.False
+                    });
 
                 var trueBlock = new InlineBlock();
 
                 trueBlock.Add(new Assignment
                 {
-                    AssignTo = startSignalReference,
+                    AssignTo = startSignalName.ToVhdlSignalReference(),
                     Expression = Value.True
                 });
 
@@ -220,7 +228,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     Condition = new Binary
                     {
-                        Left = startSignalReference,
+                        // We need to check for the main start signal here, not this state machine's driving signal.
+                        Left = MemberStateMachineNameFactory.CreateStartSignalName(indexedStateMachineName).ToVhdlSignalReference(),
                         Operator = Operator.Equality,
                         Right = Value.False
                     },
@@ -253,8 +262,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             waitForInvokedStateMachineToFinishState.Add(stateMachineFinishedCheckCase);
             for (int i = 0; i < maxRecursionDepth; i++)
             {
+                var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
+                var startSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
+                    .CreateStartSignalName(indexedStateMachineName).TrimExtendedVhdlIdDelimiters());
                 var finishedSignalName = MemberStateMachineNameFactory
-                    .CreateFinishedSignalName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
+                    .CreateFinishedSignalName(indexedStateMachineName);
 
                 stateMachineFinishedCheckCase.Whens.Add(new When
                 {
@@ -269,7 +281,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 Operator = Operator.Equality,
                                 Right = Value.True
                             },
-                            True = new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.True }
+                            True = new InlineBlock(
+                                new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.True },
+                                new Assignment { AssignTo = startSignalName.ToVhdlSignalReference(), Expression = Value.False })
                         }
                     }
                 });
