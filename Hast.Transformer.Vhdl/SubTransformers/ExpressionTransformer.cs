@@ -50,11 +50,45 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (expression is AssignmentExpression)
             {
                 var assignment = (AssignmentExpression)expression;
-                return new Assignment
+
+                Func<Expression, Expression, Assignment> transformSimpleAssignmentExpression = (left, right) =>
+                    new Assignment
+                    {
+                        AssignTo = (IDataObject)Transform(left, context),
+                        Expression = Transform(right, context)
+                    };
+
+                // If the right side of an assignment is also an assignment that means that it's a single-line assignment
+                // to multiple variables, so e.g. int a, b, c = 2; We flatten out such expression to individual simple
+                // assignments.
+                if (assignment.Right is AssignmentExpression)
                 {
-                    AssignTo = (IDataObject)Transform(assignment.Left, context),
-                    Expression = Transform(assignment.Right, context)
-                };
+                    // Finding the rightmost expression that is the actual value assignment.
+                    var currentRight = assignment.Right;
+                    while (currentRight is AssignmentExpression)
+                    {
+                        currentRight = ((AssignmentExpression)currentRight).Right;
+                    }
+
+                    var actualAssignment = currentRight;
+
+                    var assignmentsBlock = new InlineBlock();
+
+                    assignmentsBlock.Add(transformSimpleAssignmentExpression(assignment.Left, actualAssignment));
+
+                    currentRight = assignment.Right;
+                    while (currentRight is AssignmentExpression)
+                    {
+                        var currentAssignment = ((AssignmentExpression)currentRight);
+
+                        assignmentsBlock.Add(transformSimpleAssignmentExpression(currentAssignment.Left, actualAssignment));
+                        currentRight = currentAssignment.Right;
+                    }
+
+                    return assignmentsBlock;
+                }
+
+                return transformSimpleAssignmentExpression(assignment.Left, assignment.Right);
             }
             else if (expression is IdentifierExpression)
             {
