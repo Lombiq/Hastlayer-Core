@@ -19,6 +19,7 @@ Take a look at the sample projects in the Sample solution folder. Those are ther
 
 Some general constraints you have to keep in mind:
 
+- Only public virtual methods, or methods that implement a method defined in an interface will be accessible from the outside.
 - Always use the smallest data type necessary, e.g. `short` instead of `int` if 16b is enough, and unsigned types like `uint` if you don't need negative numbers.
 - Floating-point numbers like `float` and `double` and numbers bigger than 32b are not supported.
 - Algorithms can use a fixed-size (determined at runtime) memory space modelled as a `byte` array in the class `SimpleMemory`. For inputs that should be passed to hardware implementations and outputs that should be sent back this memory space is to be used. Internal method arguments (i.e. for data that isn't coming from the host computer or should be sent back) normal method arguments can be used.
