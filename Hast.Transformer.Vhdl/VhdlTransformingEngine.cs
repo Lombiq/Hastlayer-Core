@@ -407,7 +407,7 @@ namespace Hast.Transformer.Vhdl
             var drivingStartSignalsForStateMachines = transformationContext.MemberStateMachineStartSignalFunnel
                 .GetDrivingStartSignalsForStateMachines();
 
-            var signalsAssignmentBlock = new LogicalBlock();
+            var signalsAssignmentBlock = new LogicalBlock(new LineComment("Driving state machine start signals start"));
 
             foreach (var stateMachineToSignalsMapping in drivingStartSignalsForStateMachines)
             {
@@ -455,6 +455,7 @@ namespace Hast.Transformer.Vhdl
                     });
             }
 
+            signalsAssignmentBlock.Add(new LineComment("Driving state machine start signals end"));
             transformationContext.Module.Architecture.Add(signalsAssignmentBlock);
         }
     }
