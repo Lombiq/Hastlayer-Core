@@ -113,7 +113,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var invocationExpression = (InvocationExpression)expression;
                 var transformedParameters = new List<IVhdlElement>();
 
-                foreach (var argument in invocationExpression.Arguments)
+                IEnumerable<Expression> arguments = invocationExpression.Arguments;
+
+                // When the SimpleMemory object is passed around it can be omitted since state machines access the memory
+                // directly.
+                if (context.TransformationContext.UseSimpleMemory())
+                {
+                    arguments = arguments.Where(argument =>
+                        {
+                            var actualTypeReference = argument.GetActualTypeReference();
+                            return actualTypeReference == null || !actualTypeReference.FullName.EndsWith("SimpleMemory");
+                        });
+                }
+
+                foreach (var argument in arguments)
                 {
                     transformedParameters.Add(Transform(argument, context));
                 }
@@ -258,7 +271,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (currentBlock.RequiredClockCycles > 1)
             {
                 var waitedCyclesCountVariable = stateMachine.CreateTemporaryVariable(
-                    "clockCyclesWaitedForBinaryOperationResult", 
+                    "clockCyclesWaitedForBinaryOperationResult",
                     KnownDataTypes.Natural);
                 // Default value is 1 because due to the state change we already waited 1 cycle.
                 waitedCyclesCountVariable.InitialValue = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType };
@@ -275,15 +288,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Right = new Value
                                 {
                                     // Subtracting 1 because due to the wait state added we already wait at least 2 cycles.
-                                    Content = (requiredClockCyclesRoundedUp - 1).ToString(), 
+                                    Content = (requiredClockCyclesRoundedUp - 1).ToString(),
                                     DataType = waitedCyclesCountVariable.DataType
                                 }
                         }
                 };
 
                 var waitForResultBlock = new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions => 
-                        "Waiting for the result to appear in " + operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."), 
+                    new GeneratedComment(vhdlGenerationOptions =>
+                        "Waiting for the result to appear in " + operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."),
                     waitForResultIf,
                     new Assignment
                         {
@@ -316,8 +329,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
             var fromTypeKeyword = expression.GetActualTypeReference().FullName;
             if (toTypeKeyword == "long" ||
-                toTypeKeyword == "ulong" || 
-                fromTypeKeyword == "System.Int64" || 
+                toTypeKeyword == "ulong" ||
+                fromTypeKeyword == "System.Int64" ||
                 fromTypeKeyword == "System.UInt64")
             {
                 Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was omitted because non-32b numbers are not yet supported. If the result can indeed reach values above the 32b limit then overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
