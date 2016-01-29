@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Representation\Declaration\Alias.cs" />
     <Compile Include="Representation\Declaration\Array.cs" />
     <Compile Include="Representation\Declaration\BlockComment.cs" />

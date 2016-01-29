@@ -187,7 +187,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 context.TransformationContext.MemberStateMachineStartSignalFunnel
                     .AddDrivingStartSignalForStateMachine(startSignalName, indexedStateMachineName);
 
-                stateMachine.Signals.Add(new Signal
+                stateMachine.Signals.AddIfNew(new Signal
                     {
                         DataType = KnownDataTypes.Boolean,
                         Name = startSignalName,
@@ -202,7 +202,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Expression = Value.True
                 });
 
-                trueBlock.Add(new Assignment
+                trueBlock.Body.Add(new Assignment
                 {
                     AssignTo = stateMachineRunningIndexVariable.ToReference(),
                     Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() }

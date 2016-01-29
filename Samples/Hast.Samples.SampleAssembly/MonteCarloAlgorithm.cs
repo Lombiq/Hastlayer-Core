@@ -128,6 +128,7 @@ namespace Hast.Samples.SampleAssembly
         /// <summary>
         /// Estimates the square root of a number using the Babylonian method.
         /// </summary>
+        /// <remarks>This is only needed because we don't support Math.Sqrt() yet.</remarks>
         /// <param name="value">The number we search the square root of.</param>
         /// <returns>Returns the square root of the number.</returns>
         private int Sqrt(int value)
