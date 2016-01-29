@@ -6,7 +6,7 @@ namespace ICSharpCode.Decompiler.Ast
     {
         public static TypeReference GetActualType(this TypeInformation typeInformation)
         {
-            return typeInformation.InferredType ?? typeInformation.ExpectedType;
+            return typeInformation.ExpectedType ?? typeInformation.InferredType;
         }
     }
 }

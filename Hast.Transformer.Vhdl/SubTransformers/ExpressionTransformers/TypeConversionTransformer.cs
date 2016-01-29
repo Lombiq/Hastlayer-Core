@@ -37,9 +37,30 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var expressionType = expressionTypeReference != null ? _typeConverter.ConvertTypeReference(expressionTypeReference) : null;
 
             var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
+            var rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference();
+
+            // We won't get a type reference is the expression is a PrimitiveExpression (a constant). In this case we'll
+            // assume that the type of the two sides is the same.
+            if (!(binaryOperatorExpression.Left is PrimitiveExpression) || !(binaryOperatorExpression.Right is PrimitiveExpression))
+            {
+                if (leftTypeReference == null && binaryOperatorExpression.Left is PrimitiveExpression)
+                {
+                    leftTypeReference = rightTypeReference;
+                }
+                else
+                {
+                    rightTypeReference = leftTypeReference;
+                } 
+            }
+            else
+            {
+                // If both of them are PrimitiveExpressions that's something strange (like writing e.g. "if (1 == 3) { ....").
+                // Let's assume that then the correc type is that of the expression's.
+                leftTypeReference = expressionTypeReference;
+            }
+
             var leftType = leftTypeReference != null ? _typeConverter.ConvertTypeReference(leftTypeReference) : expressionType;
 
-            var rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference();
             var rightType = rightTypeReference != null ? _typeConverter.ConvertTypeReference(rightTypeReference) : expressionType;
 
             if (leftType == null || rightType == null)
