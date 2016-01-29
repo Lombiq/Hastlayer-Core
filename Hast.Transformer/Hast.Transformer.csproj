@@ -64,7 +64,6 @@
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
     <Compile Include="Extensions\TransformationContextExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
-    <Compile Include="Extensions\TypeInformationExtensions.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />
     <Compile Include="Models\DeclarationReferenceMetadata.cs" />
     <Compile Include="Models\InterfaceMemberMetadata.cs" />

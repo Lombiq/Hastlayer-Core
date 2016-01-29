@@ -290,7 +290,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForOperation(expression.Operator);
 
-            var resultType = expression.GetActualTypeReference();
+            var resultType = expression.GetActualTypeReference(true);
             if (resultType == null) resultType = expression.Parent.GetActualTypeReference();
             var operationResultVariableReference = stateMachine
                 .CreateTemporaryVariable(
