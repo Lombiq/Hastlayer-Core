@@ -150,7 +150,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.UInt32:
                     return KnownDataTypes.Natural;
                 case KnownTypeCode.UInt64:
-                    break;
+                    // Silently casting until we have a proper solution: https://lombiq.atlassian.net/browse/HAST-20
+                    return KnownDataTypes.Natural;
                 case KnownTypeCode.UIntPtr:
                     break;
                 case KnownTypeCode.ValueType:
