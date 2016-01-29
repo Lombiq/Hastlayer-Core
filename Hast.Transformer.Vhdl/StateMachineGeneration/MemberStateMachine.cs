@@ -129,7 +129,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 new LineComment(Name + " declarations start"),
                 new LineComment("State machine states:"),
                 _statesEnum,
-                new LineComment("State machine control variables:"),
+                new LineComment("State machine control signals:"),
                 _startSignal,
                 _finishedSignal);
 
