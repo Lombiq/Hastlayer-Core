@@ -436,14 +436,13 @@ namespace Hast.Transformer.Vhdl
 
             foreach (var stateMachineToSignalsMapping in drivingStartSignalsForStateMachines)
             {
-                IVhdlElement assignmentExpression;
 
                 if (!stateMachineToSignalsMapping.Value.Any())
                 {
                     throw new InvalidOperationException("There weren't any driving start signals specified for the state machine " + stateMachineToSignalsMapping.Key + ".");
                 }
 
-                assignmentExpression = stateMachineToSignalsMapping.Value.First().ToVhdlSignalReference();
+                IVhdlElement assignmentExpression = stateMachineToSignalsMapping.Value.First().ToVhdlSignalReference();
 
                 // Iteratively build a binary expression chain to OR together all the driving signals.
                 if (stateMachineToSignalsMapping.Value.Count() > 1)
@@ -453,8 +452,9 @@ namespace Hast.Transformer.Vhdl
                         Left = stateMachineToSignalsMapping.Value.Skip(1).First().ToVhdlSignalReference(),
                         Operator = Operator.ConditionalOr
                     };
+                    var firstBinary = currentBinary;
 
-                    foreach (var drivingStartSignal in stateMachineToSignalsMapping.Value.Skip(1))
+                    foreach (var drivingStartSignal in stateMachineToSignalsMapping.Value.Skip(2))
                     {
                         var newBinary = new Binary
                         {
@@ -467,7 +467,7 @@ namespace Hast.Transformer.Vhdl
                     }
 
                     currentBinary.Right = assignmentExpression;
-                    assignmentExpression = currentBinary;
+                    assignmentExpression = firstBinary;
                 }
 
                 signalsAssignmentBlock.Add(
