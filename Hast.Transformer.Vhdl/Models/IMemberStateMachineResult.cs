@@ -11,7 +11,7 @@ namespace Hast.Transformer.Vhdl.Models
     public interface IMemberStateMachineResult
     {
         IMemberStateMachine StateMachine { get; }
-        public IVhdlElement Declarations { get; }
-        public IVhdlElement Body { get; }
+        IVhdlElement Declarations { get; }
+        IVhdlElement Body { get; }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.StateMachineGeneration;
 using Hast.VhdlBuilder.Representation;
+using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -17,6 +18,8 @@ namespace Hast.Transformer.Vhdl.Models
     /// </remarks>
     public interface IMemberTransformerResult
     {
-        IEnumerable<IMemberStateMachineResult> StateMachines { get; }
+        EntityDeclaration Member { get; }
+        bool IsInterfaceMember { get; }
+        IEnumerable<IMemberStateMachineResult> StateMachineResults { get; }
     }
 }

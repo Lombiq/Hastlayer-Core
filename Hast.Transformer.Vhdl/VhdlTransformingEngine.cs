@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl
             var transformerResults = await Task.WhenAll(Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext));
             foreach (var transformerResult in transformerResults)
             {
-                foreach (var stateMachineResult in transformerResult.StateMachines)
+                foreach (var stateMachineResult in transformerResult.StateMachineResults)
                 {
                     module.Architecture.Declarations.Add(stateMachineResult.Declarations);
                     module.Architecture.Add(stateMachineResult.Body); 
@@ -66,7 +66,7 @@ namespace Hast.Transformer.Vhdl
 
             module.Architecture.Entity = module.Entity;
 
-            var memberIdTable = ProcessInterfaceMethods(module, vhdlTransformationContext);
+            var memberIdTable = ProcessInterfaceMembers(module, vhdlTransformationContext, transformerResults);
 
             if (transformationContext.GetTransformerConfiguration().UseSimpleMemory)
             {
@@ -169,10 +169,11 @@ namespace Hast.Transformer.Vhdl
         }
 
 
-        private static MemberIdTable ProcessInterfaceMethods(Module module, VhdlTransformationContext transformationContext)
+        private static MemberIdTable ProcessInterfaceMembers(
+            Module module, 
+            VhdlTransformationContext transformationContext,
+            IMemberTransformerResult[] memberTransformerResults)
         {
-            if (!transformationContext.InterfaceMethods.Any()) return MemberIdTable.Empty;
-
             var callProxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
             var ports = module.Entity.Ports;
             var architecture = module.Architecture;
@@ -227,13 +228,21 @@ namespace Hast.Transformer.Vhdl
 
             var memberSelectingCase = new Case { Expression = memberIdPort.Name.ToVhdlIdValue() };
 
+            var interfaceMemberResults = memberTransformerResults.Where(result => result.IsInterfaceMember);
+
+            if (!interfaceMemberResults.Any())
+            {
+                throw new InvalidOperationException("There aren't any interface members, however at least one interface member is needed to execute anything on hardware.");
+            }
+
             var memberId = 0;
-            foreach (var interfaceMethod in transformationContext.InterfaceMethods)
+
+            foreach (var interfaceMemberResult in interfaceMemberResults)
             {
                 var when = new When { Expression = new Value { DataType = KnownDataTypes.Int32, Content = memberId.ToString() } };
 
 
-                var stateMachine = interfaceMethod.StateMachine;
+                var stateMachine = interfaceMemberResult.StateMachineResults.First().StateMachine;
 
                 // So it's not cut off wrongly we need to use a name for this signal as it would look from a generated
                 // state machine.
@@ -291,7 +300,7 @@ namespace Hast.Transformer.Vhdl
 
                 memberSelectingCase.Whens.Add(when);
 
-                var methodFullName = interfaceMethod.Method.GetFullName();
+                var methodFullName = interfaceMemberResult.Member.GetFullName();
                 memberIdTable.SetMapping(methodFullName, memberId);
                 foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
                 {

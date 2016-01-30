@@ -30,24 +30,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public async Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context)
+        public Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
-            await Task.Run(async () =>
+            return Task.Run(async () =>
                 {
                     var stateMachineCount = context
                         .GetTransformerConfiguration()
                         .GetMaxRecursionDepthForMember(method.GetSimpleName());
                     var stateMachineResults = new IMemberStateMachineResult[stateMachineCount];
 
-                    // Not much use to parallelize computation unless there are a lot of state machines to create or the method
-                    // is very complex. We'll need to examine when to parallelize here and determine it in runtime.
+                    // Not much use to parallelize computation unless there are a lot of state machines to create or the 
+                    // method is very complex. We'll need to examine when to parallelize here and determine it in runtime.
                     if (stateMachineCount > 50)
                     {
                         var stateMachineComputingTasks = new List<Task<IMemberStateMachineResult>>();
 
                         for (int i = 0; i < stateMachineCount; i++)
                         {
-                            stateMachineComputingTasks.Add(Task.Run(() => BuildStateMachineFromMethod(method, context, i)));
+                            var task = new Task<IMemberStateMachineResult>(
+                                index => BuildStateMachineFromMethod(method, context, (int)index),
+                                i);
+                            task.Start();
+                            stateMachineComputingTasks.Add(task);
                         }
 
                         stateMachineResults = await Task.WhenAll(stateMachineComputingTasks);
@@ -60,20 +64,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         }
                     }
 
-                    return new MemberTransformerResult { StateMachines = stateMachineResults };
-
-                    // Handling when the method is an interface method, i.e. should be executable from the host computer.
-                    InterfaceMethodDefinition interfaceMethod = null;
-                    if (method.IsInterfaceMember())
+                    return (IMemberTransformerResult)new MemberTransformerResult
                     {
-                        interfaceMethod = new InterfaceMethodDefinition
-                        {
-                            Name = stateMachineResults[0].StateMachine.Name,
-                            StateMachine = stateMachineResults[0].StateMachine,
-                            Method = method
-                        };
-                        context.InterfaceMethods.Add(interfaceMethod);
-                    }
+                        Member = method,
+                        IsInterfaceMember = method.IsInterfaceMember(),
+                        StateMachineResults = stateMachineResults
+                    };
                 });
         }
 
