@@ -44,7 +44,7 @@ namespace Hast.Transformer.Vhdl
 
             module.Architecture.Declarations.Add(new BlockComment(GeneratedCodeOverviewComment.Comment));
 
-            await Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext);
+            await Task.WhenAll(Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext));
 
             // Adding libraries
             module.Libraries.Add(new Library
@@ -96,8 +96,13 @@ namespace Hast.Transformer.Vhdl
         }
 
 
-        private async Task Traverse(AstNode node, VhdlTransformationContext transformationContext)
+        private IEnumerable<Task> Traverse(AstNode node, VhdlTransformationContext transformationContext, List<Task> methodTransformerTasks = null)
         {
+            if (methodTransformerTasks == null)
+            {
+                methodTransformerTasks = new List<Task>();
+            }
+
             var traverseTo = node.Children;
 
             switch (node.NodeType)
@@ -108,7 +113,7 @@ namespace Hast.Transformer.Vhdl
                     if (node is MethodDeclaration)
                     {
                         var method = node as MethodDeclaration;
-                        await _methodTransformer.Transform(method, transformationContext);
+                        methodTransformerTasks.Add(_methodTransformer.Transform(method, transformationContext));
                     }
                     break;
                 case NodeType.Pattern:
@@ -133,7 +138,7 @@ namespace Hast.Transformer.Vhdl
                         case ClassType.Enum:
                             break;
                         case ClassType.Interface:
-                            return; // Interfaces are irrelevant here.
+                            return methodTransformerTasks; // Interfaces are irrelevant here.
                         case ClassType.Struct:
                             break;
                     }
@@ -148,8 +153,10 @@ namespace Hast.Transformer.Vhdl
 
             foreach (var target in traverseTo)
             {
-                await Traverse(target, transformationContext);
+                Traverse(target, transformationContext, methodTransformerTasks);
             }
+
+            return methodTransformerTasks;
         }
 
 
