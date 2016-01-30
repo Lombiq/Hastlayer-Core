@@ -11,6 +11,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface IMethodTransformer : IDependency
     {
-        Task Transform(MethodDeclaration method, IVhdlTransformationContext context);
+        Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context);
     }
 }

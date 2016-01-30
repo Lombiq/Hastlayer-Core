@@ -30,20 +30,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public async Task Transform(MethodDeclaration method, IVhdlTransformationContext context)
+        public async Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
             await Task.Run(async () =>
                 {
                     var stateMachineCount = context
                         .GetTransformerConfiguration()
                         .GetMaxRecursionDepthForMember(method.GetSimpleName());
-                    var stateMachineResults = new StateMachineResult[stateMachineCount];
+                    var stateMachineResults = new IMemberStateMachineResult[stateMachineCount];
 
                     // Not much use to parallelize computation unless there are a lot of state machines to create or the method
                     // is very complex. We'll need to examine when to parallelize here and determine it in runtime.
                     if (stateMachineCount > 50)
                     {
-                        var stateMachineComputingTasks = new List<Task<StateMachineResult>>();
+                        var stateMachineComputingTasks = new List<Task<IMemberStateMachineResult>>();
 
                         for (int i = 0; i < stateMachineCount; i++)
                         {
@@ -60,6 +60,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         }
                     }
 
+                    return new MemberTransformerResult { StateMachines = stateMachineResults };
+
                     // Handling when the method is an interface method, i.e. should be executable from the host computer.
                     InterfaceMethodDefinition interfaceMethod = null;
                     if (method.IsInterfaceMember())
@@ -72,21 +74,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         };
                         context.InterfaceMethods.Add(interfaceMethod);
                     }
-
-                    // If we wanted to parallelize individual method transforms then these calls should be made thread-safe.
-                    // One option would be to externalize adding the declarations and body just as it's not part of 
-                    // BuildStateMachineFromMethod. A better would be to use locking somehow to synchronize access to the two
-                    // collections (locking shouldn't hurt performance too much in this case).
-                    foreach (var result in stateMachineResults)
-                    {
-                        context.Module.Architecture.Declarations.Add(result.Declarations);
-                        context.Module.Architecture.Add(result.Body);
-                    }
                 });
         }
 
 
-        private StateMachineResult BuildStateMachineFromMethod(
+        private IMemberStateMachineResult BuildStateMachineFromMethod(
             MethodDeclaration method,
             IVhdlTransformationContext context,
             int stateMachineIndex)
@@ -151,20 +143,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // We need to return the declarations and body here too so their computation can be parallelized too.
             // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to
             // be thread-safe.
-            return new StateMachineResult
+            return new MemberStateMachineResult
             {
                 StateMachine = stateMachine,
                 Declarations = stateMachine.BuildDeclarations(),
                 Body = stateMachine.BuildBody()
             };
-        }
-
-
-        private class StateMachineResult
-        {
-            public IMemberStateMachine StateMachine { get; set; }
-            public IVhdlElement Declarations { get; set; }
-            public IVhdlElement Body { get; set; }
         }
     }
 }
