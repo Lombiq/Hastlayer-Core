@@ -81,7 +81,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                         Operator = Operator.Equality, 
                         Right = Value.True
                     },
-                    True = CreateStateChange(2)
+                    True = this.CreateStateChange(2)
                 });
 
             var finalStateBlock = new InlineBlock(
@@ -103,21 +103,11 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             return _states.Count - 1;
         }
 
-        public string CreateStateName(int index)
-        {
-            return (Name + "_State_" + index).ToExtendedVhdlId();
-        }
-
-        public IVhdlElement CreateStateChange(int nextStateIndex)
-        {
-            return new Assignment { AssignTo = _stateVariable, Expression = CreateStateValue(nextStateIndex) };
-        }
-
         public IVhdlElement BuildDeclarations()
         {
             for (int i = 0; i < _states.Count; i++)
             {
-                _statesEnum.Values.Add(CreateStateValue(i));
+                _statesEnum.Values.Add(this.CreateStateName(i).ToVhdlIdValue());
             }
 
             foreach (var parameter in Parameters)
@@ -160,7 +150,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             for (int i = 0; i < _states.Count; i++)
             {
-                var stateWhen = new When { Expression = CreateStateName(i).ToVhdlIdValue() };
+                var stateWhen = new When { Expression = this.CreateStateName(i).ToVhdlIdValue() };
                 stateWhen.Add(_states[i].Body);
                 stateWhen.Add(new LineComment("Clock cycles needed to complete this state (approximation): " + _states[i].RequiredClockCycles));
                 stateCase.Whens.Add(stateWhen);
@@ -169,7 +159,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             var ifInResetBlock = new InlineBlock(
                 new LineComment("Synchronous reset"),
                 new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
-                CreateStateChange(0));
+                this.CreateStateChange(0));
             ifInResetBlock.Body.AddRange(Signals.Select( signal =>
                 new Assignment { AssignTo = signal.ToReference(), Expression = signal.InitialValue }));
 
@@ -190,12 +180,6 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 new LineComment(Name + " state machine start"), 
                 process,
                 new LineComment(Name + " state machine end"));
-        }
-
-
-        private Value CreateStateValue(int index)
-        {
-            return CreateStateName(index).ToVhdlIdValue();
         }
 
 

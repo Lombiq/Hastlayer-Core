@@ -25,11 +25,6 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             return CreatePrefixedObjectName(stateMachineName, "_Finished");
         }
 
-        public static string CreateStateVariableName(string stateMachineName)
-        {
-            return CreatePrefixedObjectName(stateMachineName, "_State");
-        }
-
         public static string CreatePrefixedObjectName(string stateMachineName, string name)
         {
             return CreatePrefixedExtendedVhdlId(stateMachineName, "." + name);

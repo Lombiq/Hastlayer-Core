@@ -55,20 +55,6 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         int AddState(IBlockElement state);
 
         /// <summary>
-        /// Generates the name for the state with the given index.
-        /// </summary>
-        /// <param name="index">The index of the state.</param>
-        /// <returns>The name of the state.</returns>
-        string CreateStateName(int index);
-
-        /// <summary>
-        /// Implements a change from the current state to the state with the given index in VHDL.
-        /// </summary>
-        /// <param name="nextStateIndex">The index of the state to change to.</param>
-        /// <returns>The state change implemented in VHDL.</returns>
-        IVhdlElement CreateStateChange(int nextStateIndex);
-
-        /// <summary>
         /// Produces the declarations corresponding to the state machine that should be inserted into the head of the
         /// architecture element.
         /// </summary>
