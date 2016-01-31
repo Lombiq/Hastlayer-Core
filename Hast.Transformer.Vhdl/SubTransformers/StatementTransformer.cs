@@ -89,8 +89,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var ifElseStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
 
                 var afterIfElseStateBlock = new InlineBlock(
-                    new LineComment("State after the if-else started in state " + ifElseStartStateIndex + "."));
+                    new LineComment("State after the if-else which was started in state " + ifElseStartStateIndex + "."));
                 var afterIfElseStateIndex = stateMachine.AddState(afterIfElseStateBlock);
+
+                Func<IVhdlElement> createConditionalStateChangeToAfterIfElseState = () =>
+                    new InlineBlock(
+                        new LineComment(
+                            "Going to the state after the if-else which was started in state " + ifElseStartStateIndex + "."),
+                        CreateConditionalStateChange(afterIfElseStateIndex, context));
+
 
                 var trueStateBlock = new InlineBlock(
                     new LineComment("True branch of the if-else started in state " + ifElseStartStateIndex + "."));
@@ -98,7 +105,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 ifElseElement.True = stateMachine.CreateStateChange(trueStateIndex);
                 currentBlock.ChangeBlockToDifferentState(trueStateBlock, trueStateIndex);
                 TransformInner(ifElse.TrueStatement, context);
-                currentBlock.Add(stateMachine.CreateStateChange(afterIfElseStateIndex));
+                currentBlock.Add(createConditionalStateChangeToAfterIfElseState());
                 var trueEndStateIndex = currentBlock.CurrentStateMachineStateIndex;
 
                 var falseStateIndex = 0;
@@ -111,9 +118,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     ifElseElement.Else = stateMachine.CreateStateChange(falseStateIndex);
                     currentBlock.ChangeBlockToDifferentState(falseStateBlock, falseStateIndex);
                     TransformInner(ifElse.FalseStatement, context);
-                    currentBlock.Add(stateMachine.CreateStateChange(afterIfElseStateIndex));
+                    currentBlock.Add(createConditionalStateChangeToAfterIfElseState());
                     falseEndStateIndex = currentBlock.CurrentStateMachineStateIndex;
                 }
+                else
+                {
+                    ifElseElement.Else = new InlineBlock(
+                        new LineComment("There was no false branch, so going directly to the state after the if-else."),
+                        stateMachine.CreateStateChange(afterIfElseStateIndex));
+                }
+
 
                 ifElseCommentsBlock.Add(
                     new LineComment("This if-else was transformed from a .NET if-else. It spans across multiple states:"));
@@ -129,6 +143,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 ifElseCommentsBlock.Add(new LineComment(
                     "    * Execution after either branch will continue in the state with the following index: " +
                     afterIfElseStateIndex + "."));
+
 
                 currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
             }
@@ -148,10 +163,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var whileStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
 
                 var repeatedState = new InlineBlock(
-                    new LineComment("Repeated state of a while loop started in state " + whileStartStateIndex + "."));
+                    new LineComment("Repeated state of the while loop which was started in state " + whileStartStateIndex + "."));
                 var repeatedStateIndex = stateMachine.AddState(repeatedState);
                 var afterWhileState = new InlineBlock(
-                    new LineComment("State after a while loop started in state " + whileStartStateIndex + "."));
+                    new LineComment("State after the while loop which was started in state " + whileStartStateIndex + "."));
                 var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
 
                 // Having a condition even in the current state's body: if the loop doesn't need to run at all we'll
@@ -186,23 +201,38 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     // We need an if to check whether the state was changed in the logic. If it was then that means
                     // that the loop was exited so we mustn't overwrite the new state.
-                    lastState.Add(
-                        new LineComment("Returning to the repeated state of the while loop started in state " + 
+                    currentBlock.Add(
+                        new LineComment("Returning to the repeated state of the while loop which was started in state " +
                             whileStartStateIndex + " if the loop wasn't exited with a state change."));
-                    lastState.Add(new IfElse
-                        {
-                            Condition = new Binary
-                            {
-                                Left = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
-                                Operator = Operator.Equality,
-                                Right = stateMachine.CreateStateName(stateMachine.States.Count - 1).ToVhdlIdValue()
-                            },
-                            True = stateMachine.CreateStateChange(repeatedStateIndex)
-                        });
+
+                    currentBlock.Add(CreateConditionalStateChange(repeatedStateIndex, context));
                 }
                 currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
             }
             else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
+        }
+
+        /// <summary>
+        /// Creates a conditional state change to the destination state that will only take place if the state wasn't
+        /// already changed in the current state.
+        /// </summary>
+        private IVhdlElement CreateConditionalStateChange(int destinationStateIndex, ISubTransformerContext context)
+        {
+            // We need an if to check whether the state was changed in the logic. If it was then that means
+            // that the subroutine was exited so we mustn't overwrite the new state.
+
+            var stateMachine = context.Scope.StateMachine;
+
+            return new IfElse
+                {
+                    Condition = new Binary
+                    {
+                        Left = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
+                        Operator = Operator.Equality,
+                        Right = stateMachine.CreateStateName(context.Scope.CurrentBlock.CurrentStateMachineStateIndex).ToVhdlIdValue()
+                    },
+                    True = stateMachine.CreateStateChange(destinationStateIndex)
+                };
         }
     }
 }
