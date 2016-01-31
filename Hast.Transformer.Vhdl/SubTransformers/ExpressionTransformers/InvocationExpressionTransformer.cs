@@ -91,6 +91,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // The memory operation should be initialized in this state, then finished in another one.
                 var memoryOperationFinishedBlock = new InlineBlock();
                 var endMemoryOperationBlock = new InlineBlock(
+                    new LineComment("Waiting for the SimpleMemory operation to finish."),
                     new IfElse
                     {
                         Condition = new Binary
