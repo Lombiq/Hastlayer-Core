@@ -37,8 +37,8 @@ namespace Hast.Samples.Consumer
                             };
 
                         var configuration = new HardwareGenerationConfiguration();
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.MonteCarloAlgorithm");
-                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.MonteCarloAlgorithm");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
                         configuration.TransformerConfiguration().MemberMaxRecursionDepthConfigurations.Add(
                             new TransformerConfiguration.MemberMaxRecursionDepthConfiguration
@@ -55,6 +55,7 @@ namespace Hast.Samples.Consumer
                                 //typeof(Math).Assembly // Would be needed for Math.Sqrt() but transforming that is not yet supported.
                             },
                             configuration);
+
 
                         //File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
                         File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
