@@ -37,7 +37,7 @@ namespace Hast.Samples.Consumer
                             };
 
                         var configuration = new HardwareGenerationConfiguration();
-                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.GenomeMatcher");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.MonteCarloAlgorithm");
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
                         configuration.TransformerConfiguration().MemberMaxRecursionDepthConfigurations.Add(

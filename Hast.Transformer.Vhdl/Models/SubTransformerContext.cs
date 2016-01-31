@@ -23,6 +23,7 @@ namespace Hast.Transformer.Vhdl.Models
 
     public interface ICurrentBlock
     {
+        int CurrentStateMachineStateIndex { get; }
         decimal RequiredClockCycles { get; set; }
 
         void Add(IVhdlElement element);
@@ -50,18 +51,19 @@ namespace Hast.Transformer.Vhdl.Models
     {
         private readonly IMemberStateMachine _stateMachine;
         private IBlockElement _currentBlock;
-        private int _currentStateMachineStateIndex;
+
+        public int CurrentStateMachineStateIndex { get; private set; }
 
         public decimal RequiredClockCycles
         {
             get
             {
-                return _stateMachine.States[_currentStateMachineStateIndex].RequiredClockCycles;
+                return _stateMachine.States[CurrentStateMachineStateIndex].RequiredClockCycles;
             }
 
             set
             {
-                _stateMachine.States[_currentStateMachineStateIndex].RequiredClockCycles = value;
+                _stateMachine.States[CurrentStateMachineStateIndex].RequiredClockCycles = value;
             }
         }
 
@@ -70,7 +72,7 @@ namespace Hast.Transformer.Vhdl.Models
             : this(stateMachine)
         {
             _currentBlock = currentBlock;
-            _currentStateMachineStateIndex = stateMachineStateIndex;
+            CurrentStateMachineStateIndex = stateMachineStateIndex;
         }
 
         public CurrentBlock(IMemberStateMachine stateMachine)
@@ -86,7 +88,7 @@ namespace Hast.Transformer.Vhdl.Models
 
         public void ChangeBlockToDifferentState(IBlockElement newBlock, int stateMachineStateIndex)
         {
-            _currentStateMachineStateIndex = stateMachineStateIndex;
+            CurrentStateMachineStateIndex = stateMachineStateIndex;
             ChangeBlock(newBlock);
         }
 

@@ -79,25 +79,58 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var ifElse = statement as IfElseStatement;
 
+                // If-elses are always split up into multiple states, i.e. the true and false statements branch off
+                // into separate states. This makes it simpler to track how many clock cycles something requires, since
+                // the latency of the two branches should be tracked separately.
+
                 var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
-                currentBlock.Add(ifElseElement);
-                var afterIfElseBlock = new InlineBlock();
-                currentBlock.Add(afterIfElseBlock);
+                var ifElseCommentsBlock = new LogicalBlock();
+                currentBlock.Add(new InlineBlock(ifElseCommentsBlock, ifElseElement));
+                var ifElseStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
 
-                var trueBlock = new InlineBlock();
-                ifElseElement.True = trueBlock;
-                currentBlock.ChangeBlock(trueBlock);
+                var afterIfElseStateBlock = new InlineBlock(
+                    new LineComment("State after the if-else started in state " + ifElseStartStateIndex + "."));
+                var afterIfElseStateIndex = stateMachine.AddState(afterIfElseStateBlock);
+
+                var trueStateBlock = new InlineBlock(
+                    new LineComment("True branch of the if-else started in state " + ifElseStartStateIndex + "."));
+                var trueStateIndex = stateMachine.AddState(trueStateBlock);
+                ifElseElement.True = stateMachine.CreateStateChange(trueStateIndex);
+                currentBlock.ChangeBlockToDifferentState(trueStateBlock, trueStateIndex);
                 TransformInner(ifElse.TrueStatement, context);
+                currentBlock.Add(stateMachine.CreateStateChange(afterIfElseStateIndex));
+                var trueEndStateIndex = currentBlock.CurrentStateMachineStateIndex;
 
+                var falseStateIndex = 0;
+                var falseEndStateIndex = 0;
                 if (ifElse.FalseStatement != Statement.Null)
                 {
-                    var falseBlock = new InlineBlock();
-                    ifElseElement.Else = falseBlock;
-                    currentBlock.ChangeBlock(falseBlock);
+                    var falseStateBlock = new InlineBlock(
+                        new LineComment("False branch of the if-else started in state " + ifElseStartStateIndex + "."));
+                    falseStateIndex = stateMachine.AddState(falseStateBlock);
+                    ifElseElement.Else = stateMachine.CreateStateChange(falseStateIndex);
+                    currentBlock.ChangeBlockToDifferentState(falseStateBlock, falseStateIndex);
                     TransformInner(ifElse.FalseStatement, context);
+                    currentBlock.Add(stateMachine.CreateStateChange(afterIfElseStateIndex));
+                    falseEndStateIndex = currentBlock.CurrentStateMachineStateIndex;
                 }
 
-                currentBlock.ChangeBlock(afterIfElseBlock);
+                ifElseCommentsBlock.Add(
+                    new LineComment("This if-else was transformed from a .NET if-else. It spans across multiple states:"));
+                ifElseCommentsBlock.Add(new LineComment(
+                    "    * The true branch starts in state " + trueStateIndex +
+                    " and ends in state " + trueEndStateIndex + "."));
+                if (falseStateIndex != 0)
+                {
+                    ifElseCommentsBlock.Add(new LineComment(
+                        "    * The false branch starts in state " + falseStateIndex +
+                        " and ends in state " + falseEndStateIndex + "."));
+                }
+                ifElseCommentsBlock.Add(new LineComment(
+                    "    * Execution after either branch will continue in the state with the following index: " +
+                    afterIfElseStateIndex + "."));
+
+                currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
             }
             else if (statement is BlockStatement)
             {
@@ -112,15 +145,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var whileStatement = statement as WhileStatement;
 
-                var repeatedState = new InlineBlock();
-                repeatedState.Add(new LineComment("Repeated state of a while loop."));
+                var whileStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
+
+                var repeatedState = new InlineBlock(
+                    new LineComment("Repeated state of a while loop started in state " + whileStartStateIndex + "."));
                 var repeatedStateIndex = stateMachine.AddState(repeatedState);
-                var afterWhileState = new InlineBlock();
+                var afterWhileState = new InlineBlock(
+                    new LineComment("State after a while loop started in state " + whileStartStateIndex + "."));
                 var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
 
                 // Having a condition even in the current state's body: if the loop doesn't need to run at all we'll
                 // spare one cycle by directly jumping to the state after the loop.
                 currentBlock.Add(new LineComment("Starting a while loop."));
+                currentBlock.Add(new LineComment(
+                    "The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):"));
                 currentBlock.Add(new IfElse
                     {
                         Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
@@ -131,6 +169,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var whileStateInnerBody = new InlineBlock();
 
                 currentBlock.ChangeBlockToDifferentState(repeatedState, repeatedStateIndex);
+                repeatedState.Add(new LineComment("The while loop's condition:"));
                 repeatedState.Add(new IfElse
                     {
                         Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
@@ -147,6 +186,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     // We need an if to check whether the state was changed in the logic. If it was then that means
                     // that the loop was exited so we mustn't overwrite the new state.
+                    lastState.Add(
+                        new LineComment("Returning to the repeated state of the while loop started in state " + 
+                            whileStartStateIndex + " if the loop wasn't exited with a state change."));
                     lastState.Add(new IfElse
                         {
                             Condition = new Binary
