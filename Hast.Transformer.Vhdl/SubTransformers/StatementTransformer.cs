@@ -88,29 +88,29 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 currentBlock.Add(new InlineBlock(ifElseCommentsBlock, ifElseElement));
 
                 var ifElseStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
-                Func<IVhdlGenerationOptions, string> ifElseStartStateIndexNameGenerator = vhdlGenerationOptions =>
-                    vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(ifElseStartStateIndex));
+                Func<int, IVhdlGenerationOptions, string> stateNameGenerator = (index, vhdlGenerationOptions) =>
+                    vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
 
                 var afterIfElseStateBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions => 
-                        "State after the if-else which was started in state " + 
-                        ifElseStartStateIndexNameGenerator(vhdlGenerationOptions) + 
+                        "State after the if-else which was started in state " +
+                        stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) + 
                         "."));
                 var afterIfElseStateIndex = stateMachine.AddState(afterIfElseStateBlock);
 
                 Func<IVhdlElement> createConditionalStateChangeToAfterIfElseState = () =>
                     new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions => 
-                            "Going to the state after the if-else which was started in state " + 
-                            ifElseStartStateIndexNameGenerator(vhdlGenerationOptions) +
+                            "Going to the state after the if-else which was started in state " +
+                            stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
                             "."),
                         CreateConditionalStateChange(afterIfElseStateIndex, context));
 
 
                 var trueStateBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions => 
-                        "True branch of the if-else started in state " + 
-                        ifElseStartStateIndexNameGenerator(vhdlGenerationOptions) + 
+                        "True branch of the if-else started in state " +
+                        stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) + 
                         "."));
                 var trueStateIndex = stateMachine.AddState(trueStateBlock);
                 ifElseElement.True = stateMachine.CreateStateChange(trueStateIndex);
@@ -125,8 +125,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     var falseStateBlock = new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions => 
-                            "False branch of the if-else started in state " + 
-                            ifElseStartStateIndexNameGenerator(vhdlGenerationOptions) + 
+                            "False branch of the if-else started in state " +
+                            stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) + 
                             "."));
                     falseStateIndex = stateMachine.AddState(falseStateBlock);
                     ifElseElement.Else = stateMachine.CreateStateChange(falseStateIndex);
@@ -145,18 +145,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 ifElseCommentsBlock.Add(
                     new LineComment("This if-else was transformed from a .NET if-else. It spans across multiple states:"));
-                ifElseCommentsBlock.Add(new LineComment(
-                    "    * The true branch starts in state " + trueStateIndex +
-                    " and ends in state " + trueEndStateIndex + "."));
+                ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
+                    "    * The true branch starts in state " + stateNameGenerator(trueStateIndex, vhdlGenerationOptions) +
+                    " and ends in state " + stateNameGenerator(trueEndStateIndex, vhdlGenerationOptions) + "."));
                 if (falseStateIndex != 0)
                 {
-                    ifElseCommentsBlock.Add(new LineComment(
-                        "    * The false branch starts in state " + falseStateIndex +
-                        " and ends in state " + falseEndStateIndex + "."));
+                    ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
+                        "    * The false branch starts in state " + stateNameGenerator(falseStateIndex, vhdlGenerationOptions) +
+                        " and ends in state " + stateNameGenerator(falseEndStateIndex, vhdlGenerationOptions) + "."));
                 }
-                ifElseCommentsBlock.Add(new LineComment(
-                    "    * Execution after either branch will continue in the state with the following index: " +
-                    afterIfElseStateIndex + "."));
+                ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
+                    "    * Execution after either branch will continue in the following state: " +
+                    stateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
 
 
                 currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
