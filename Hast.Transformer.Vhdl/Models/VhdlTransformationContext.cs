@@ -6,12 +6,12 @@ namespace Hast.Transformer.Vhdl.Models
 {
     public class VhdlTransformationContext : TransformationContext, IVhdlTransformationContext
     {
-        public IMemberStateMachineStartSignalFunnel MemberStateMachineStartSignalFunnel { get; set; }
+        public IMemberStateMachineStartedSignalFunnel MemberStateMachineStartSignalFunnel { get; set; }
 
 
         public VhdlTransformationContext(ITransformationContext previousContext) : base(previousContext)
         {
-            MemberStateMachineStartSignalFunnel = new MemberStateMachineStartSignalFunnel();
+            MemberStateMachineStartSignalFunnel = new MemberStateMachineStartedSignalFunnel();
         }
     }
 }

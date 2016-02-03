@@ -15,9 +15,9 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             return CreatePrefixedObjectName(stateMachineName, "return");
         }
 
-        public static string CreateStartSignalName(string stateMachineName)
+        public static string CreateStartedSignalName(string stateMachineName)
         {
-            return CreatePrefixedObjectName(stateMachineName, "_Start");
+            return CreatePrefixedObjectName(stateMachineName, "_Started");
         }
 
         public static string CreateFinishedSignalName(string stateMachineName)

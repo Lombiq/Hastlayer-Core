@@ -48,9 +48,9 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             return (stateMachine.Name + "_State_" + index).ToExtendedVhdlId();
         }
 
-        public static string CreateStartSignalName(this IMemberStateMachine stateMachine)
+        public static string CreateStartedSignalName(this IMemberStateMachine stateMachine)
         {
-            return MemberStateMachineNameFactory.CreateStartSignalName(stateMachine.Name);
+            return MemberStateMachineNameFactory.CreateStartedSignalName(stateMachine.Name);
         }
 
         public static string CreateFinishedSignalName(this IMemberStateMachine stateMachine)

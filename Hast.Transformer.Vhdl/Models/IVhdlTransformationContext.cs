@@ -6,6 +6,6 @@ namespace Hast.Transformer.Vhdl.Models
 {
     public interface IVhdlTransformationContext : ITransformationContext
     {
-        IMemberStateMachineStartSignalFunnel MemberStateMachineStartSignalFunnel { get; }
+        IMemberStateMachineStartedSignalFunnel MemberStateMachineStartSignalFunnel { get; }
     }
 }

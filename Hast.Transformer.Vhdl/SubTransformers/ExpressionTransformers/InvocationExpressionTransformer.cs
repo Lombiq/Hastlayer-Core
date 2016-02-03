@@ -182,16 +182,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             for (int i = 0; i < maxRecursionDepth; i++)
             {
                 var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
-                var startSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
-                    .CreateStartSignalName(indexedStateMachineName).TrimExtendedVhdlIdDelimiters());
+                var startedSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
+                    .CreateStartedSignalName(indexedStateMachineName).TrimExtendedVhdlIdDelimiters());
 
                 context.TransformationContext.MemberStateMachineStartSignalFunnel
-                    .AddDrivingStartSignalForStateMachine(startSignalName, indexedStateMachineName);
+                    .AddDrivingStartedSignalForStateMachine(startedSignalName, indexedStateMachineName);
 
                 stateMachine.Signals.AddIfNew(new Signal
                     {
                         DataType = KnownDataTypes.Boolean,
-                        Name = startSignalName,
+                        Name = startedSignalName,
                         InitialValue = Value.False
                     });
 
@@ -199,7 +199,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 trueBlock.Add(new Assignment
                 {
-                    AssignTo = startSignalName.ToVhdlSignalReference(),
+                    AssignTo = startedSignalName.ToVhdlSignalReference(),
                     Expression = Value.True
                 });
 
@@ -230,7 +230,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Condition = new Binary
                     {
                         // We need to check for the main start signal here, not this state machine's driving signal.
-                        Left = MemberStateMachineNameFactory.CreateStartSignalName(indexedStateMachineName).ToVhdlSignalReference(),
+                        Left = MemberStateMachineNameFactory.CreateStartedSignalName(indexedStateMachineName).ToVhdlSignalReference(),
                         Operator = Operator.Equality,
                         Right = Value.False
                     },
@@ -264,8 +264,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             for (int i = 0; i < maxRecursionDepth; i++)
             {
                 var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
-                var startSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
-                    .CreateStartSignalName(indexedStateMachineName).TrimExtendedVhdlIdDelimiters());
+                var startedSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
+                    .CreateStartedSignalName(indexedStateMachineName).TrimExtendedVhdlIdDelimiters());
                 var finishedSignalName = MemberStateMachineNameFactory
                     .CreateFinishedSignalName(indexedStateMachineName);
 
@@ -284,7 +284,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             },
                             True = new InlineBlock(
                                 new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.True },
-                                new Assignment { AssignTo = startSignalName.ToVhdlSignalReference(), Expression = Value.False })
+                                new Assignment { AssignTo = startedSignalName.ToVhdlSignalReference(), Expression = Value.False })
                         }
                     }
                 });

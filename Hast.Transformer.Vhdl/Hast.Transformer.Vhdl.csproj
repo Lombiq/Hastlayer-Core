@@ -62,10 +62,10 @@
     <Compile Include="Constants\SimpleMemoryPortNames.cs" />
     <Compile Include="Constants\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
-    <Compile Include="Models\IMemberStateMachineStartSignalFunnel.cs" />
+    <Compile Include="Models\IMemberStateMachineStartedSignalFunnel.cs" />
     <Compile Include="Models\IMemberTransformerResult.cs" />
     <Compile Include="Models\IMemberStateMachineResult.cs" />
-    <Compile Include="Models\MemberStateMachineStartSignalFunnel.cs" />
+    <Compile Include="Models\MemberStateMachineStartedSignalFunnel.cs" />
     <Compile Include="Models\MemberTransformerResult.cs" />
     <Compile Include="Models\MemberStateMachineResult.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachineExtenions.cs" />

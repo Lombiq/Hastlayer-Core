@@ -14,7 +14,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;
-        private readonly Signal _startSignal;
+        private readonly Signal _startedSignal;
         private readonly Signal _finishedSignal;
 
         public string Name { get; private set; }
@@ -54,10 +54,10 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             };
             LocalVariables.Add(_stateVariable);
 
-            _startSignal = new Signal
+            _startedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = this.CreateStartSignalName(),
+                Name = this.CreateStartedSignalName(),
                 InitialValue = Value.False
             };
             // The star signal is special since it's driven from the outside, so not adding it to Signals.
@@ -77,7 +77,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 {
                     Condition = new Binary
                     {
-                        Left = _startSignal.Name.ToVhdlSignalReference(), 
+                        Left = _startedSignal.Name.ToVhdlSignalReference(), 
                         Operator = Operator.Equality, 
                         Right = Value.True
                     },
@@ -120,7 +120,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 new LineComment("State machine states:"),
                 _statesEnum,
                 new LineComment("State machine control signals:"),
-                _startSignal,
+                _startedSignal,
                 _finishedSignal);
 
             if (Parameters.Any())
