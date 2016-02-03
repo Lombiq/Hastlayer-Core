@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         {
             // This doesn't need a static helper method because we deliberately don't want to generate state names for
             // other state machines, since we don't want to directly set other state machines' states.
-            return (stateMachine.Name + "_State_" + index).ToExtendedVhdlId();
+            return MemberStateMachineNameFactory.CreatePrefixedObjectName(stateMachine.Name, "_State_" + index);
         }
 
         public static string CreateStartedSignalName(this IMemberStateMachine stateMachine)
@@ -83,13 +83,13 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         /// </summary>
         public static string GetNextUnusedTemporaryVariableName(this IMemberStateMachine stateMachine, string name)
         {
-            var variableName = name + "0";
+            var variableName = name + ".0";
             var returnVariableNameIndex = 0;
 
             while (stateMachine.LocalVariables.Any(variable =>
                 variable.Name == stateMachine.CreatePrefixedObjectName(variableName)))
             {
-                variableName = name + ++returnVariableNameIndex;
+                variableName = name + "." + ++returnVariableNameIndex;
             }
 
             return stateMachine.CreatePrefixedObjectName(variableName);
