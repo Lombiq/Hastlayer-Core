@@ -20,7 +20,7 @@ namespace Hast.Common.Models
         /// Gets the full (including the communication roundtrip) execution time of the hardware execution, in
         /// milliseconds.
         /// </summary>
-        long FullExecutionTimeMilliseconds { get; }
+        decimal FullExecutionTimeMilliseconds { get; }
 
         /// <summary>
         /// Gets the date and time when the execution started.
