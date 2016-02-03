@@ -198,6 +198,10 @@ namespace Hast.Communication.Services
                 stopWatch.Stop();
                 Logger.Information("Full execution time: {0}ms", stopWatch.ElapsedMilliseconds);
                 executionInformation.FullExecutionTimeMilliseconds = stopWatch.ElapsedMilliseconds;
+                if (executionInformation.FullExecutionTimeMilliseconds == 0)
+                {
+                    executionInformation.FullExecutionTimeMilliseconds = executionInformation.HardwareExecutionTimeMilliseconds;
+                }
 
                 return executionInformation;
             }
