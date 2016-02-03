@@ -84,7 +84,7 @@ namespace Hast.Transformer.Vhdl.Tests
             Assert.IsNotNullOrEmpty(topModule.Entity.Name, "The top module's entity doesn't have a name.");
             Assert.AreEqual(topModule.Entity, topModule.Architecture.Entity, "The top module's entity is not references by the architecture.");
             var callProxyProcess = topModule.Architecture.Body
-                .SingleOrDefault(element => element is Process && ((Process)element).Name == "CallProxy".ToExtendedVhdlId());
+                .SingleOrDefault(element => element is Process && ((Process)element).Name == "ExternalCallProxy".ToExtendedVhdlId());
             Assert.That(callProxyProcess != null, "There is no call proxy process.");
         }
 

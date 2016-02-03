@@ -178,7 +178,7 @@ namespace Hast.Transformer.Vhdl
             VhdlTransformationContext transformationContext,
             IMemberTransformerResult[] memberTransformerResults)
         {
-            var callProxyProcess = new Process { Label = "CallProxy".ToExtendedVhdlId() };
+            var callProxyProcess = new Process { Label = "ExternalCallProxy".ToExtendedVhdlId() };
             var ports = module.Entity.Ports;
             var architecture = module.Architecture;
             var memberIdTable = new MemberIdTable();
@@ -192,7 +192,7 @@ namespace Hast.Transformer.Vhdl
 
             ports.Add(memberIdPort);
 
-            var callProxySignalDeclarationsBlock = new LogicalBlock(new LineComment("CallProxy signal declarations start"));
+            var callProxySignalDeclarationsBlock = new LogicalBlock(new LineComment("ExternalCallProxy signal declarations start"));
             architecture.Declarations.Add(callProxySignalDeclarationsBlock);
 
             // Since the Finished port is an out port, it can't be read. Adding an internal proxy signal so we can also 
@@ -250,19 +250,19 @@ namespace Hast.Transformer.Vhdl
 
                 // So it's not cut off wrongly we need to use a name for this signal as it would look from a generated
                 // state machine.
-                var startSignalName = ("System.Void Hast::CallProxy " + stateMachine.CreateStartSignalName().TrimExtendedVhdlIdDelimiters())
+                var startedSignalName = ("System.Void Hast::ExternalCallProxy " + stateMachine.CreateStartedSignalName().TrimExtendedVhdlIdDelimiters())
                     .ToExtendedVhdlId();
-                var startSignal = new Signal
+                var startedSignal = new Signal
                 {
                     DataType = KnownDataTypes.Boolean,
-                    Name = startSignalName,
+                    Name = startedSignalName,
                     InitialValue = Value.False
                 };
-                callProxySignalDeclarationsBlock.Add(startSignal);
-                var startSignalReference = startSignal.ToReference();
+                callProxySignalDeclarationsBlock.Add(startedSignal);
+                var startedSignalReference = startedSignal.ToReference();
 
                 transformationContext.MemberStateMachineStartSignalFunnel
-                    .AddDrivingStartSignalForStateMachine(startSignalName, stateMachine.Name);
+                    .AddDrivingStartedSignalForStateMachine(startedSignalName, stateMachine.Name);
 
                 var stateMachineIsFinishedIfElse = new IfElse
                 {
@@ -275,7 +275,7 @@ namespace Hast.Transformer.Vhdl
                     True = new InlineBlock(
                         new Assignment
                         {
-                            AssignTo = startSignalReference,
+                            AssignTo = startedSignalReference,
                             Expression = Value.False
                         },
                         new Assignment
@@ -287,13 +287,13 @@ namespace Hast.Transformer.Vhdl
                     {
                         Condition = new Binary
                         {
-                            Left = stateMachine.CreateStartSignalName().ToVhdlSignalReference(),
+                            Left = stateMachine.CreateStartedSignalName().ToVhdlSignalReference(),
                             Operator = Operator.Equality,
                             Right = Value.False
                         },
                         True = new Assignment
                         {
-                            AssignTo = startSignalReference,
+                            AssignTo = startedSignalReference,
                             Expression = Value.True
                         }
                     }
@@ -372,7 +372,7 @@ namespace Hast.Transformer.Vhdl
 
             architecture.Add(callProxyProcess);
 
-            callProxySignalDeclarationsBlock.Add(new LineComment("CallProxy signal declarations end"));
+            callProxySignalDeclarationsBlock.Add(new LineComment("ExternalCallProxy signal declarations end"));
 
             return memberIdTable;
         }
@@ -433,17 +433,17 @@ namespace Hast.Transformer.Vhdl
 
         private static void ProcessStateMachineStartSignalFunnel(Module module, VhdlTransformationContext transformationContext)
         {
-            var drivingStartSignalsForStateMachines = transformationContext.MemberStateMachineStartSignalFunnel
-                .GetDrivingStartSignalsForStateMachines();
+            var drivingStartedSignalsForStateMachines = transformationContext.MemberStateMachineStartSignalFunnel
+                .GetDrivingStartedSignalsForStateMachines();
 
-            var signalsAssignmentBlock = new LogicalBlock(new LineComment("Driving state machine start signals start"));
+            var signalsAssignmentBlock = new LogicalBlock(new LineComment("Driving state machine started signals start"));
 
-            foreach (var stateMachineToSignalsMapping in drivingStartSignalsForStateMachines)
+            foreach (var stateMachineToSignalsMapping in drivingStartedSignalsForStateMachines)
             {
 
                 if (!stateMachineToSignalsMapping.Value.Any())
                 {
-                    throw new InvalidOperationException("There weren't any driving start signals specified for the state machine " + stateMachineToSignalsMapping.Key + ".");
+                    throw new InvalidOperationException("There weren't any driving started signals specified for the state machine " + stateMachineToSignalsMapping.Key + ".");
                 }
 
                 IVhdlElement assignmentExpression = stateMachineToSignalsMapping.Value.First().ToVhdlSignalReference();
@@ -458,11 +458,11 @@ namespace Hast.Transformer.Vhdl
                     };
                     var firstBinary = currentBinary;
 
-                    foreach (var drivingStartSignal in stateMachineToSignalsMapping.Value.Skip(2))
+                    foreach (var drivingStartedSignal in stateMachineToSignalsMapping.Value.Skip(2))
                     {
                         var newBinary = new Binary
                         {
-                            Left = drivingStartSignal.ToVhdlSignalReference(),
+                            Left = drivingStartedSignal.ToVhdlSignalReference(),
                             Operator = Operator.ConditionalOr
                         };
 
@@ -478,13 +478,13 @@ namespace Hast.Transformer.Vhdl
                     new Assignment
                     {
                         AssignTo = MemberStateMachineNameFactory
-                            .CreateStartSignalName(stateMachineToSignalsMapping.Key)
+                            .CreateStartedSignalName(stateMachineToSignalsMapping.Key)
                             .ToVhdlSignalReference(),
                         Expression = assignmentExpression
                     });
             }
 
-            signalsAssignmentBlock.Add(new LineComment("Driving state machine start signals end"));
+            signalsAssignmentBlock.Add(new LineComment("Driving state machine started signals end"));
             module.Architecture.Add(signalsAssignmentBlock);
         }
     }

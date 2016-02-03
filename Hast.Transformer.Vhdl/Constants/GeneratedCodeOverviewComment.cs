@@ -20,6 +20,6 @@ namespace Hast.Transformer.Vhdl.Constants
 * There are operations that take multiple clock cycles like interacting with the memory and long-running arithmetic operations 
   (modulo, division, multiplication). These are awaited in subsequent states but be aware that some states can take more 
   than one clock cycle to produce their output.
-* The CallProxy process at the bottom dispatches executions to the state machine that was started from the outside.";
+* The ExternalCallProxy process at the bottom dispatches executions that were started from the outside to the state machines.";
     }
 }
