@@ -60,7 +60,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 Name = this.CreateStartedSignalName(),
                 InitialValue = Value.False
             };
-            // The star signal is special since it's driven from the outside, so not adding it to Signals.
+            // The start signal is special since it's driven from the outside, so not adding it to Signals.
 
             _finishedSignal = new Signal
             {
@@ -72,13 +72,13 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             var startStateBlock = new InlineBlock(
                 new LineComment("Start state"),
-                new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
+                new LineComment("Waiting for the start signal."),
                 new IfElse
                 {
                     Condition = new Binary
                     {
-                        Left = _startedSignal.Name.ToVhdlSignalReference(), 
-                        Operator = Operator.Equality, 
+                        Left = _startedSignal.Name.ToVhdlSignalReference(),
+                        Operator = Operator.Equality,
                         Right = Value.True
                     },
                     True = this.CreateStateChange(2)
@@ -86,8 +86,20 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             var finalStateBlock = new InlineBlock(
                 new LineComment("Final state"),
-                new Assignment { AssignTo = _finishedSignal, Expression = Value.True },
-                this.ChangeToStartState());
+                new LineComment("Signaling finished until Started is pulled back to false, then returning to the start state."),
+                new IfElse
+                {
+                    Condition = new Binary
+                    {
+                        Left = _startedSignal.Name.ToVhdlSignalReference(),
+                        Operator = Operator.Equality,
+                        Right = Value.True
+                    },
+                    True = new Assignment { AssignTo = _finishedSignal, Expression = Value.True },
+                    Else = new InlineBlock(
+                        new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
+                        this.ChangeToStartState())
+                });
 
             _states = new List<IMemberStateMachineState>
             {
@@ -125,7 +137,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             if (Parameters.Any())
             {
-                declarationsBlock.Add(new LineComment("Shared variables for the state machine's inputs and outputs:")); 
+                declarationsBlock.Add(new LineComment("Shared variables for the state machine's inputs and outputs:"));
             }
             declarationsBlock.Body.AddRange(Parameters);
 
@@ -160,7 +172,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 new LineComment("Synchronous reset"),
                 new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
                 this.CreateStateChange(0));
-            ifInResetBlock.Body.AddRange(Signals.Select( signal =>
+            ifInResetBlock.Body.AddRange(Signals.Select(signal =>
                 new Assignment { AssignTo = signal.ToReference(), Expression = signal.InitialValue }));
 
             var resetIf = new IfElse
@@ -177,7 +189,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             process.Add(resetIf);
 
             return new LogicalBlock(
-                new LineComment(Name + " state machine start"), 
+                new LineComment(Name + " state machine start"),
                 process,
                 new LineComment(Name + " state machine end"));
         }
