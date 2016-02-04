@@ -73,11 +73,6 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             return MemberStateMachineNameFactory.CreatePrefixedObjectName(stateMachine.Name, name);
         }
 
-        public static string CreateNamePrefixedExtendedVhdlId(this IMemberStateMachine stateMachine, string id)
-        {
-            return MemberStateMachineNameFactory.CreatePrefixedExtendedVhdlId(stateMachine.Name, id);
-        }
-
         /// <summary>
         /// Making sure that the e.g. return variable names are unique per method call (to transfer procedure outputs).
         /// </summary>

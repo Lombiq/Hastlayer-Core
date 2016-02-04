@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             Signals = new List<Signal>();
 
 
-            _statesEnum = new Enum { Name = this.CreateNamePrefixedExtendedVhdlId("_States") };
+            _statesEnum = new Enum { Name = this.CreatePrefixedObjectName("_States") };
 
             _stateVariable = new Variable
             {
@@ -154,7 +154,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
         public IVhdlElement BuildBody()
         {
-            var process = new Process { Name = this.CreateNamePrefixedExtendedVhdlId("_StateMachine") };
+            var process = new Process { Name = this.CreatePrefixedObjectName("_StateMachine") };
 
             process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
 
