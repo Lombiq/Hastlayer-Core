@@ -152,12 +152,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
 
-            // Since .NET methods can be recursive but a hardware state machine can only have one "instance" we need to
-            // have multiple state machines with the same logic. This way even with recursive calls there will always be
-            // an idle, usable state machine (these state machines are distinguished by an index).
-
-            var maxRecursionDepth = context.TransformationContext.GetTransformerConfiguration()
-                .GetMaxRecursionDepthForMember(targetDeclaration.GetSimpleName());
+            var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
+                .GetMaxCallInstanceCountConfigurationForMember(targetDeclaration.GetSimpleName()).MaxDegreeOfParallelism;
 
 
             var stateMachineRunningIndexVariableName = context.Scope.StateMachine
@@ -170,7 +166,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     TypeCategory = DataTypeCategory.Numeric,
                     Name = "integer",
                     RangeMin = 0,
-                    RangeMax = maxRecursionDepth - 1
+                    RangeMax = maxDegreeOfParallelism - 1
                 }
             };
             stateMachine.LocalVariables.Add(stateMachineRunningIndexVariable);
@@ -179,7 +175,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // If we can't find any idle one that is an issue, we should probably have a fail safe for that somehow.
             var stateMachineSelectingConditionsBlock = new InlineBlock();
             currentBlock.Add(stateMachineSelectingConditionsBlock);
-            for (int i = 0; i < maxRecursionDepth; i++)
+            for (int i = 0; i < maxDegreeOfParallelism; i++)
             {
                 var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
                 var startedSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
@@ -261,7 +257,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Check if the running state machine finished.
             var stateMachineFinishedCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
             waitForInvokedStateMachineToFinishState.Add(stateMachineFinishedCheckCase);
-            for (int i = 0; i < maxRecursionDepth; i++)
+            for (int i = 0; i < maxDegreeOfParallelism; i++)
             {
                 var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
                 var startedSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
@@ -321,7 +317,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 var stateMachineReadReturnValueCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
                 isInvokedStateMachineFinishedIfElseTrue.Add(stateMachineReadReturnValueCheckCase);
-                for (int i = 0; i < maxRecursionDepth; i++)
+                for (int i = 0; i < maxDegreeOfParallelism; i++)
                 {
                     var returnVariableName = MemberStateMachineNameFactory
                         .CreateReturnVariableName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));

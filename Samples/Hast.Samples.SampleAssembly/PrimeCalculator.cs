@@ -34,7 +34,7 @@ namespace Hast.Samples.SampleAssembly
             // Reading out the input parameter.
             var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
             // Writing back the output.
-            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumber(number));
+            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(number));
         }
 
         public virtual void ArePrimeNumbers(SimpleMemory memory)
@@ -45,7 +45,7 @@ namespace Hast.Samples.SampleAssembly
             for (int i = 0; i < numberCount; i++)
             {
                 uint number = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i);
-                memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i, IsPrimeNumber(number));
+                memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i, IsPrimeNumberInternal(number));
             }
         }
 
@@ -76,7 +76,7 @@ namespace Hast.Samples.SampleAssembly
         /// Because when you want to pass data between methods you can freely use supported types as arguments, you 
         /// don't need to pass data through SimpleMemory.
         /// </summary>
-        private bool IsPrimeNumber(uint number)
+        private bool IsPrimeNumberInternal(uint number)
         {
             uint factor = number / 2;
             //var factor = Math.Sqrt(number); // Math.Sqrt() can't be processed yet because it needs object support.

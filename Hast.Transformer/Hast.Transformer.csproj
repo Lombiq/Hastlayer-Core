@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\MemberCallInstanceCountConfiguration.cs" />
     <Compile Include="Extensions\AnnotatableExtensions.cs" />
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="DefaultTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TransformerExtensions.cs" />
-    <Compile Include="TransformerConfiguration.cs" />
+    <Compile Include="Configuration\TransformerConfiguration.cs" />
     <Compile Include="Visitors\ReferencedNodesFlaggingVisitor.cs" />
     <Compile Include="Visitors\UnreferencedNodesRemovingVisitor.cs" />
   </ItemGroup>
