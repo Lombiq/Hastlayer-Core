@@ -13,7 +13,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public interface ITypeConverter : IDependency
     {
         DataType ConvertTypeReference(TypeReference typeReference);
-        DataType Convert(AstType type);
-        DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable);
+        DataType ConvertAstType(AstType type);
+        DataType ConvertAndDeclareAstType(AstType type, IDeclarableElement declarable);
     }
 }

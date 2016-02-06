@@ -13,7 +13,7 @@ namespace ICSharpCode.NRefactory.CSharp
         /// <summary>
         /// Retrieves the return type of the method that was invoked in an invokation expression.
         /// </summary>
-        public static TypeReference GetReturnType(this InvocationExpression expression)
+        public static TypeReference GetReturnTypeReference(this InvocationExpression expression)
         {
             // Looking up the type information that will tell us what the return type of the invokation is. 
             // This might be some nodes up if e.g. there is an immediate cast expression.

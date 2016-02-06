@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             throw new NotSupportedException("The type " + typeReference.FullName + " is not supported for transforming.");
         }
 
-        public DataType Convert(AstType type)
+        public DataType ConvertAstType(AstType type)
         {
             if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
             else if (type is ComposedType) return ConvertComposed((ComposedType)type);
@@ -54,9 +54,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
 
-        public DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable)
+        public DataType ConvertAndDeclareAstType(AstType type, IDeclarableElement declarable)
         {
-            var vhdlType = Convert(type);
+            var vhdlType = ConvertAstType(type);
 
             if (vhdlType.TypeCategory == DataTypeCategory.Array || vhdlType.TypeCategory == DataTypeCategory.Composite)
             {
@@ -167,7 +167,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             if (type.ArraySpecifiers.Count != 0)
             {
-                var storedType = Convert(type.BaseType);
+                var storedType = ConvertAstType(type.BaseType);
                 return new Hast.VhdlBuilder.Representation.Declaration.Array { StoredType = storedType, Name = storedType.Name + "_array" };
             }
 

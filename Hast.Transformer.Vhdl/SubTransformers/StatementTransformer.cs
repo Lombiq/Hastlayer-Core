@@ -39,7 +39,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var variableStatement = statement as VariableDeclarationStatement;
 
-                var type = _typeConverter.Convert(variableStatement.Type);
+                var type = _typeConverter.ConvertAstType(variableStatement.Type);
 
                 foreach (var variableInitializer in variableStatement.Variables)
                 {
@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var returnStatement = statement as ReturnStatement;
 
-                if (_typeConverter.Convert((context.Scope.Method).ReturnType) != KnownDataTypes.Void)
+                if (_typeConverter.ConvertAstType((context.Scope.Method).ReturnType) != KnownDataTypes.Void)
                 {
                     var assigmentElement = new Assignment
                     {

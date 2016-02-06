@@ -40,7 +40,7 @@ namespace Hast.Transformer.Visitors
             member.AddReference(memberReferenceExpression);
 
             // Referencing the member's parent as well.
-            member.FindParentType().AddReference(memberReferenceExpression);
+            member.FindParentTypeDeclaration().AddReference(memberReferenceExpression);
 
             // And also the interfaces implemented by it.
             if (member is MethodDeclaration)
@@ -50,7 +50,7 @@ namespace Hast.Transformer.Visitors
                 if (implementedInterfaceMethod != null)
                 {
                     implementedInterfaceMethod.AddReference(member);
-                    implementedInterfaceMethod.FindParentType().AddReference(member);
+                    implementedInterfaceMethod.FindParentTypeDeclaration().AddReference(member);
                 }
             }
 

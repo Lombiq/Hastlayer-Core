@@ -21,12 +21,12 @@ namespace ICSharpCode.NRefactory.CSharp
                 {
                     var method = (MethodDeclaration)member;
                     if ((typeDeclaration.ClassType == ClassType.Interface || method.Modifiers == methodDeclaration.Modifiers) && // Only checking for modifiers is the type is not an interface.
-                        method.ReturnType.TypeEquals(methodDeclaration.ReturnType, lookupDeclaration) &&
+                        method.ReturnType.AstTypeEquals(methodDeclaration.ReturnType, lookupDeclaration) &&
                         method.Parameters.Count == methodDeclaration.Parameters.Count)
                     {
                         foreach (var interfaceMethodParameter in method.Parameters)
                         {
-                            if (!methodDeclaration.Parameters.Any(parameter => parameter.Type.TypeEquals(interfaceMethodParameter.Type, lookupDeclaration)))
+                            if (!methodDeclaration.Parameters.Any(parameter => parameter.Type.AstTypeEquals(interfaceMethodParameter.Type, lookupDeclaration)))
                             {
                                 return false;
                             }

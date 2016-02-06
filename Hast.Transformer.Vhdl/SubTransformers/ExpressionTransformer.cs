@@ -372,7 +372,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             var fromType = _typeConverter.ConvertTypeReference(expression.GetActualTypeReference());
-            var toType = _typeConverter.Convert(expression.Type);
+            var toType = _typeConverter.ConvertAstType(expression.Type);
 
             return _typeConversionTransformer.ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context));
         }

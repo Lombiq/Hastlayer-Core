@@ -68,33 +68,48 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             return MemberStateMachineNameFactory.CreatePrefixedObjectName(stateMachine.Name, "_State");
         }
 
+        public static string CreatePrefixedSegmentedObjectName(this IMemberStateMachine stateMachine, params string[] segments)
+        {
+            return stateMachine.CreatePrefixedObjectName(string.Join(".", segments));
+        }
+
+        /// <summary>
+        /// Creates a VHDL object (i.e. signal or variable) name prefixes with the state machine's name.
+        /// </summary>
         public static string CreatePrefixedObjectName(this IMemberStateMachine stateMachine, string name)
         {
             return MemberStateMachineNameFactory.CreatePrefixedObjectName(stateMachine.Name, name);
         }
 
         /// <summary>
-        /// Making sure that the e.g. return variable names are unique per method call (to transfer procedure outputs).
+        /// Determines the name of the next available name for a VHDL object (i.e. signal or variable) whose name is
+        /// suffixed with a numerical index.
         /// </summary>
-        public static string GetNextUnusedTemporaryVariableName(this IMemberStateMachine stateMachine, string name)
+        /// <example>
+        /// If we need a variable with the name "number" then this method will create a name like "StateMachineName.number.0",
+        /// or if that exists, then the next available variation like "StateMachineName.number.5".
+        /// </example>
+        /// <returns>An object name prefixed with the state machine's name and suffixed with a numerical index.</returns>
+        public static string GetNextUnusedIndexedObjectName(this IMemberStateMachine stateMachine, string name)
         {
-            var variableName = name + ".0";
-            var returnVariableNameIndex = 0;
+            var objectName = name + ".0";
+            var objectNameIndex = 0;
 
-            while (stateMachine.LocalVariables.Any(variable =>
-                variable.Name == stateMachine.CreatePrefixedObjectName(variableName)))
+            while (
+                stateMachine.LocalVariables.Any(variable => variable.Name == stateMachine.CreatePrefixedObjectName(objectName)) ||
+                stateMachine.Signals.Any(signal => signal.Name == stateMachine.CreatePrefixedObjectName(objectName)))
             {
-                variableName = name + "." + ++returnVariableNameIndex;
+                objectName = name + "." + ++objectNameIndex;
             }
 
-            return stateMachine.CreatePrefixedObjectName(variableName);
+            return stateMachine.CreatePrefixedObjectName(objectName);
         }
 
-        public static Variable CreateTemporaryVariable(this IMemberStateMachine stateMachine, string name, DataType dataType)
+        public static Variable CreateVariableWithNextUnusedIndexedName(this IMemberStateMachine stateMachine, string name, DataType dataType)
         {
             var returnVariable = new Variable
             {
-                Name = stateMachine.GetNextUnusedTemporaryVariableName(name),
+                Name = stateMachine.GetNextUnusedIndexedObjectName(name),
                 DataType = dataType
             };
 

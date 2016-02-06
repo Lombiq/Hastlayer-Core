@@ -83,7 +83,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             // Handling return type.
-            var returnType = _typeConverter.Convert(method.ReturnType);
+            var returnType = _typeConverter.ConvertAstType(method.ReturnType);
             var isVoid = returnType.Name == "void";
             if (!isVoid)
             {
@@ -99,7 +99,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 stateMachine.Parameters.Add(new Variable
                 {
-                    DataType = _typeConverter.Convert(parameter.Type),
+                    DataType = _typeConverter.ConvertAstType(parameter.Type),
                     Name = stateMachine.CreatePrefixedObjectName(parameter.Name)
                 });
             }

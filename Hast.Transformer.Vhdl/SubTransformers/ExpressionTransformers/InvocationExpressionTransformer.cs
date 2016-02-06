@@ -132,7 +132,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     // write procedure to the original location.
                     var returnReference = CreateProcedureReturnReference(
                         target,
-                        _typeConverter.ConvertTypeReference(expression.GetReturnType()),
+                        _typeConverter.ConvertTypeReference(expression.GetReturnTypeReference()),
                         memoryOperationInvokation,
                         context);
 

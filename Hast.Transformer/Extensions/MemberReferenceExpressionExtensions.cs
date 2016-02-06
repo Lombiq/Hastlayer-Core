@@ -10,7 +10,7 @@ namespace ICSharpCode.NRefactory.CSharp
             this MemberReferenceExpression memberReferenceExpression, 
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            var type = memberReferenceExpression.GetTargetType(typeDeclarationLookupTable);
+            var type = memberReferenceExpression.GetTargetTypeDeclaration(typeDeclarationLookupTable);
 
             if (type == null) return null;
 
@@ -25,7 +25,7 @@ namespace ICSharpCode.NRefactory.CSharp
             return type.Members.Where(member => member.Annotation<MemberReference>().FullName == memberReference.FullName).SingleOrDefault();
         }
 
-        public static TypeDeclaration GetTargetType(
+        public static TypeDeclaration GetTargetTypeDeclaration(
             this MemberReferenceExpression memberReferenceExpression, 
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
@@ -37,7 +37,7 @@ namespace ICSharpCode.NRefactory.CSharp
             else if (memberReferenceExpression.Target is BaseReferenceExpression)
             {
                 // The member is in the base class (because of single class inheritance in C#, there can be only one base class).
-                return memberReferenceExpression.FindParentType().BaseTypes
+                return memberReferenceExpression.FindParentTypeDeclaration().BaseTypes
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
@@ -48,7 +48,7 @@ namespace ICSharpCode.NRefactory.CSharp
             else
             {
                 // The member is within this class.
-                return memberReferenceExpression.FindParentType();
+                return memberReferenceExpression.FindParentTypeDeclaration();
             }
         }
     }
