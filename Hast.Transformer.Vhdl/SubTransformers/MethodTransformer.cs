@@ -10,7 +10,7 @@ using Orchard;
 using System.Linq;
 using Hast.Transformer.Models;
 using System.Threading.Tasks;
-using Hast.Transformer.Vhdl.StateMachineGeneration;
+using Hast.Transformer.Vhdl.ArchitectureComponentBuilding;
 using Hast.Common.Configuration;
 
 namespace Hast.Transformer.Vhdl.SubTransformers

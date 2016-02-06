@@ -32,7 +32,7 @@ namespace Hast.Xilinx
             {
                 Extensions = new[]
                 {
-                    typeof(Hast.Transformer.Vhdl.MemberIdTable).Assembly,
+                    typeof(Hast.Transformer.Vhdl.Models.MemberIdTable).Assembly,
                     typeof(Hast.Xilinx.VivadoHardwareImplementationComposer).Assembly
                 }.Union(configuration.Extensions)
             };

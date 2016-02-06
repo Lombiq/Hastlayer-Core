@@ -7,17 +7,16 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.Models;
 
-namespace Hast.Transformer.Vhdl.StateMachineGeneration
+namespace Hast.Transformer.Vhdl.ArchitectureComponentBuilding
 {
-    internal class MemberStateMachine : IMemberStateMachine
+    internal class MemberStateMachine : ArchitectureComponent, IMemberStateMachine
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;
         private readonly Signal _startedSignal;
         private readonly Signal _finishedSignal;
-
-        public string Name { get; private set; }
 
         private List<IMemberStateMachineState> _states;
         public IReadOnlyList<IMemberStateMachineState> States
@@ -25,28 +24,9 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             get { return _states; }
         }
 
-        public IList<Variable> LocalVariables { get; private set; }
-        public IList<Variable> GlobalVariables { get; private set; }
-        public IList<Signal> Signals { get; private set; }
-        public IDictionary<string, int> OtherMemberMaxCallInstanceCounts { get; set; }
 
-
-        /// <summary>
-        /// Constructs a new <see cref="MemberStateMachine"/> object.
-        /// </summary>
-        /// <param name="name">
-        /// The name of the state machine, i.e. the name of the member. Use the real name, not the extended VHDL ID.
-        /// </param>
-        public MemberStateMachine(string name)
+        public MemberStateMachine(string name) : base(name)
         {
-            Name = name;
-
-            LocalVariables = new List<Variable>();
-            GlobalVariables = new List<Variable>();
-            Signals = new List<Signal>();
-            OtherMemberMaxCallInstanceCounts = new Dictionary<string, int>();
-
-
             _statesEnum = new Enum { Name = this.CreatePrefixedObjectName("_States") };
 
             _stateVariable = new Variable
@@ -125,39 +105,13 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 _statesEnum.Values.Add(this.CreateStateName(i).ToVhdlIdValue());
             }
 
-            foreach (var variable in GlobalVariables)
-            {
-                variable.Shared = true;
-            }
-
-            var declarationsBlock = new LogicalBlock(
-                new LineComment(Name + " declarations start"),
+            return BuildDeclarationsBlock(new InlineBlock(
                 new LineComment("State machine states:"),
-                _statesEnum);
-
-            if (Signals.Any())
-            {
-                declarationsBlock.Add(new LineComment("Signals of the state machine, starting with control signals:"));
-            }
-            declarationsBlock.Body.AddRange(Signals);
-
-            if (GlobalVariables.Any())
-            {
-                declarationsBlock.Add(new LineComment("Shared variables of the state machine (mainly for inputs and outputs):"));
-            }
-            declarationsBlock.Body.AddRange(GlobalVariables);
-
-            declarationsBlock.Add(new LineComment(Name + " declarations end"));
-
-            return declarationsBlock;
+                _statesEnum));
         }
 
         public IVhdlElement BuildBody()
         {
-            var process = new Process { Name = this.CreatePrefixedObjectName("_StateMachine") };
-
-            process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
-
             var stateCase = new Case { Expression = _stateVariable.Name.ToVhdlIdValue() };
 
             for (int i = 0; i < _states.Count; i++)
@@ -168,33 +122,9 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 stateCase.Whens.Add(stateWhen);
             }
 
-            var ifInResetBlock = new InlineBlock(
-                new LineComment("Synchronous reset"),
-                this.CreateStateChange(0));
+            var process = BuildProcess(stateCase, this.CreateStateChange(0));
 
-            // Re-setting all signals and variables to their initial value.
-            ifInResetBlock.Body.AddRange(Signals
-                .Where(signal => signal.InitialValue != null)
-                .Select(signal =>
-                    new Assignment { AssignTo = signal.ToReference(), Expression = signal.InitialValue }));
-            ifInResetBlock.Body.AddRange(LocalVariables
-                .Union(GlobalVariables)
-                .Where(variable => variable.InitialValue != null)
-                .Select(variable =>
-                    new Assignment { AssignTo = variable.ToReference(), Expression = variable.InitialValue }));
-
-            var resetIf = new IfElse
-            {
-                Condition = new Binary
-                {
-                    Left = CommonPortNames.Reset.ToVhdlSignalReference(),
-                    Operator = Operator.Equality,
-                    Right = Value.OneCharacter
-                },
-                True = ifInResetBlock,
-                Else = stateCase
-            };
-            process.Add(resetIf);
+            process.Name = this.CreatePrefixedObjectName("_StateMachine");
 
             return new LogicalBlock(
                 new LineComment(Name + " state machine start"),

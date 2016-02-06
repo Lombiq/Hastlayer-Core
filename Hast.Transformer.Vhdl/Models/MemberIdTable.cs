@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Hast.Transformer.Vhdl
+namespace Hast.Transformer.Vhdl.Models
 {
     public class MemberMapping
     {

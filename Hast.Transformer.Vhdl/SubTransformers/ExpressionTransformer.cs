@@ -14,7 +14,7 @@ using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 using Orchard.Logging;
-using Hast.Transformer.Vhdl.StateMachineGeneration;
+using Hast.Transformer.Vhdl.ArchitectureComponentBuilding;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {

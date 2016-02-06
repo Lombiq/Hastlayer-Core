@@ -1,5 +1,5 @@
 ﻿using Hast.Transformer.Vhdl.Models;
-using Hast.Transformer.Vhdl.StateMachineGeneration;
+using Hast.Transformer.Vhdl.ArchitectureComponentBuilding;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
