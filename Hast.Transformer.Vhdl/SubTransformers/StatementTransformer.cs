@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Hast.Transformer.Vhdl.Models;
-using Hast.Transformer.Vhdl.ArchitectureComponentBuilding;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;

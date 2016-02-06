@@ -13,7 +13,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.Common.Extensions;
-using Hast.Transformer.Vhdl.ArchitectureComponentBuilding;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using System;
 using Orchard.Services;
 

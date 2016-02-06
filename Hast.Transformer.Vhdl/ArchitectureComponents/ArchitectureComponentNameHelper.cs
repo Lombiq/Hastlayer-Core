@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 
-namespace Hast.Transformer.Vhdl.ArchitectureComponentBuilding
+namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public static class ArchitectureComponentNameHelper
     {

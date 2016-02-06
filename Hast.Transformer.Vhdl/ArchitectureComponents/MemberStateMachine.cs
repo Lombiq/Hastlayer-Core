@@ -9,7 +9,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Models;
 
-namespace Hast.Transformer.Vhdl.ArchitectureComponentBuilding
+namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     internal class MemberStateMachine : ArchitectureComponent, IMemberStateMachine
     {

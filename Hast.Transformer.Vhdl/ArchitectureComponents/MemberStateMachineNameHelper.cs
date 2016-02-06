@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Vhdl.ArchitectureComponentBuilding
+namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public static class MemberStateMachineNameHelper
     {

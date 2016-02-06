@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Orchard;
 
-namespace Hast.Transformer.Vhdl.ArchitectureComponentBuilding
+namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public interface IMemberStateMachineFactory : IDependency
     {

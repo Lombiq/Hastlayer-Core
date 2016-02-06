@@ -11,7 +11,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder.Extensions;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.ArchitectureComponentBuilding;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Common.Configuration;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers

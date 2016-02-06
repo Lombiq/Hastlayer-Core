@@ -8,7 +8,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
 
-namespace Hast.Transformer.Vhdl.ArchitectureComponentBuilding
+namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public static class MemberStateMachineExtenions
     {
