@@ -179,7 +179,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             for (int i = 0; i < currentCallDegreeOfParallelism; i++)
             {
-                var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetMethodName, i);
+                var indexedStateMachineName = MemberStateMachineNameHelper.CreateStateMachineName(targetMethodName, i);
 
                 var methodParametersEnumerator = ((MethodDeclaration)targetDeclaration).Parameters
                     .Where(parameter => !parameter.IsSimpleMemoryParameter())

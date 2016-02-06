@@ -10,7 +10,7 @@ using Hast.Transformer.Vhdl.Constants;
 
 namespace Hast.Transformer.Vhdl.StateMachineGeneration
 {
-    public class MemberStateMachine : IMemberStateMachine
+    internal class MemberStateMachine : IMemberStateMachine
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;

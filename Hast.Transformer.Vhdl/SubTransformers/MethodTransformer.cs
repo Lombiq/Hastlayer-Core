@@ -17,14 +17,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class MethodTransformer : IMethodTransformer
     {
+        private readonly IMemberStateMachineFactory _memberStateMachineFactory;
         private readonly ITypeConverter _typeConverter;
         private readonly IStatementTransformer _statementTransformer;
 
 
         public MethodTransformer(
+            IMemberStateMachineFactory memberStateMachineFactory,
             ITypeConverter typeConverter,
             IStatementTransformer statementTransformer)
         {
+            _memberStateMachineFactory = memberStateMachineFactory;
             _typeConverter = typeConverter;
             _statementTransformer = statementTransformer;
         }
@@ -79,7 +82,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IVhdlTransformationContext context,
             int stateMachineIndex)
         {
-            var stateMachine = new MemberStateMachine(MemberStateMachineNameFactory.CreateStateMachineName(method.GetFullName(), stateMachineIndex));
+            var stateMachine = _memberStateMachineFactory
+                .CreateStateMachine(MemberStateMachineNameHelper.CreateStateMachineName(method.GetFullName(), stateMachineIndex));
 
 
             // Handling return type.

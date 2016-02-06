@@ -66,8 +66,9 @@
     <Compile Include="Models\IMemberStateMachineResult.cs" />
     <Compile Include="Models\MemberTransformerResult.cs" />
     <Compile Include="Models\MemberStateMachineResult.cs" />
+    <Compile Include="StateMachineGeneration\MemberStateMachineFactory.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachineExtenions.cs" />
-    <Compile Include="StateMachineGeneration\MemberStateMachineNameFactory.cs" />
+    <Compile Include="StateMachineGeneration\MemberStateMachineNameHelper.cs" />
     <Compile Include="StateMachineGeneration\IMemberStateMachine.cs" />
     <Compile Include="Models\IVhdlTransformationContext.cs" />
     <Compile Include="MemberIdTable.cs" />

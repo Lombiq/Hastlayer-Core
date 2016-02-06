@@ -8,7 +8,7 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.StateMachineGeneration
 {
-    public static class MemberStateMachineNameFactory
+    public static class MemberStateMachineNameHelper
     {
         public static string CreateReturnVariableName(string stateMachineName)
         {

@@ -45,27 +45,27 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         {
             // This doesn't need a static helper method because we deliberately don't want to generate state names for
             // other state machines, since we don't want to directly set other state machines' states.
-            return MemberStateMachineNameFactory.CreatePrefixedObjectName(stateMachine.Name, "_State_" + index);
+            return MemberStateMachineNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State_" + index);
         }
 
         public static string CreateStartedSignalName(this IMemberStateMachine stateMachine)
         {
-            return MemberStateMachineNameFactory.CreateStartedSignalName(stateMachine.Name);
+            return MemberStateMachineNameHelper.CreateStartedSignalName(stateMachine.Name);
         }
 
         public static string CreateFinishedSignalName(this IMemberStateMachine stateMachine)
         {
-            return MemberStateMachineNameFactory.CreateFinishedSignalName(stateMachine.Name);
+            return MemberStateMachineNameHelper.CreateFinishedSignalName(stateMachine.Name);
         }
 
         public static string CreateReturnVariableName(this IMemberStateMachine stateMachine)
         {
-            return MemberStateMachineNameFactory.CreateReturnVariableName(stateMachine.Name);
+            return MemberStateMachineNameHelper.CreateReturnVariableName(stateMachine.Name);
         }
 
         public static string CreateStateVariableName(this IMemberStateMachine stateMachine)
         {
-            return MemberStateMachineNameFactory.CreatePrefixedObjectName(stateMachine.Name, "_State");
+            return MemberStateMachineNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State");
         }
 
         public static string CreatePrefixedSegmentedObjectName(this IMemberStateMachine stateMachine, params string[] segments)
@@ -78,7 +78,7 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         /// </summary>
         public static string CreatePrefixedObjectName(this IMemberStateMachine stateMachine, string name)
         {
-            return MemberStateMachineNameFactory.CreatePrefixedObjectName(stateMachine.Name, name);
+            return MemberStateMachineNameHelper.CreatePrefixedObjectName(stateMachine.Name, name);
         }
 
         /// <summary>
