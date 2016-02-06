@@ -293,7 +293,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var resultType = expression.GetActualTypeReference(true);
             if (resultType == null) resultType = expression.Parent.GetActualTypeReference();
             var operationResultVariableReference = stateMachine
-                .CreateTemporaryVariable(
+                .CreateVariableWithNextUnusedIndexedName(
                     "binaryOperationResult",
                     _typeConverter.ConvertTypeReference(resultType))
                 .ToReference();
@@ -304,7 +304,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // transition from that state forward to a state where the actual algorithm continues.
             if (currentBlock.RequiredClockCycles > 1)
             {
-                var waitedCyclesCountVariable = stateMachine.CreateTemporaryVariable(
+                var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
                     "clockCyclesWaitedForBinaryOperationResult",
                     KnownDataTypes.Natural);
                 // Default value is 1 because due to the state change we already waited 1 cycle.

@@ -25,8 +25,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         {
             _typeConverter = typeConverter;
         }
-        
-        
+
+
         public IVhdlElement TransformInvocationExpression(
             InvocationExpression expression,
             ISubTransformerContext context,
@@ -142,7 +142,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
             var targetMethodName = expression.GetFullName();
-            var targetStateMachineName = targetMethodName;
 
             var targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
 
@@ -154,189 +153,170 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
                 .GetMaxCallInstanceCountConfigurationForMember(targetDeclaration.GetSimpleName()).MaxDegreeOfParallelism;
+            // Eventually this should be determined, dummy value for now.
+            var currentCallDegreeOfParallelism = 1;
 
-
-            var stateMachineRunningIndexVariableName = context.Scope.StateMachine
-                .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "runningIndex");
-            var stateMachineRunningIndexVariable = new Variable
+            if (currentCallDegreeOfParallelism > maxDegreeOfParallelism)
             {
-                Name = stateMachineRunningIndexVariableName,
-                DataType = new RangedDataType
+                throw new InvalidOperationException(
+                    "This parallelized call from " + context.Scope.Method + " to " + targetMethodName + " would do " +
+                    currentCallDegreeOfParallelism +
+                    " calls in parallel but the maximal degree of parallelism for this member was set up as " +
+                    maxDegreeOfParallelism + ".");
+            }
+
+            int previousMaxCallInstanceCount;
+            if (!stateMachine.OtherMemberMaxCallInstanceCounts.TryGetValue(targetMethodName, out previousMaxCallInstanceCount) ||
+                previousMaxCallInstanceCount < currentCallDegreeOfParallelism)
+            {
+                stateMachine.OtherMemberMaxCallInstanceCounts[targetMethodName] = currentCallDegreeOfParallelism;
+            }
+
+
+            currentBlock.Add(new LineComment("Starting state machine invokation (transformed from a method call)."));
+
+            var allInvokedStateMachinesFinishedIfElseTrue = new InlineBlock();
+
+            for (int i = 0; i < currentCallDegreeOfParallelism; i++)
+            {
+                var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetMethodName, i);
+
+                var methodParametersEnumerator = ((MethodDeclaration)targetDeclaration).Parameters
+                    .Where(parameter => !parameter.IsSimpleMemoryParameter())
+                    .GetEnumerator();
+                methodParametersEnumerator.MoveNext();
+
+                foreach (var parameter in transformedParameters)
                 {
-                    TypeCategory = DataTypeCategory.Numeric,
-                    Name = "integer",
-                    RangeMin = 0,
-                    RangeMax = maxDegreeOfParallelism - 1
+                    // Adding signal for parameter passing if it doesn't exist.
+                    var currentParameter = methodParametersEnumerator.Current;
+
+                    var parameterVariableName = stateMachine
+                        .CreatePrefixedSegmentedObjectName(targetMethodName, currentParameter.Name, i.ToString());
+
+                    stateMachine.GlobalVariables.AddIfNew(new Variable
+                        {
+                            DataType = _typeConverter.ConvertAstType(currentParameter.Type),
+                            Name = parameterVariableName
+                        });
+
+
+                    // Assign local values to be passed to the intermediary signal.
+                    currentBlock.Add(new Assignment
+                        {
+                            AssignTo = parameterVariableName.ToVhdlSignalReference(),
+                            Expression = parameter
+                        });
+
+                    methodParametersEnumerator.MoveNext();
                 }
-            };
-            stateMachine.LocalVariables.Add(stateMachineRunningIndexVariable);
 
-            // Logic for determining which state machine is idle and thus can be invoked. We probe every state machine.
-            // If we can't find any idle one that is an issue, we should probably have a fail safe for that somehow.
-            var stateMachineSelectingConditionsBlock = new InlineBlock();
-            currentBlock.Add(stateMachineSelectingConditionsBlock);
-            for (int i = 0; i < maxDegreeOfParallelism; i++)
-            {
-                var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
-                var startedSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
-                    .CreateStartedSignalName(indexedStateMachineName).TrimExtendedVhdlIdDelimiters());
 
-                context.TransformationContext.MemberStateMachineStartSignalFunnel
-                    .AddDrivingStartedSignalForStateMachine(startedSignalName, indexedStateMachineName);
+                // If Started/Finished signals don't exist create them here.
+                var startedSignalName = stateMachine
+                    .CreatePrefixedSegmentedObjectName(targetMethodName, NameSuffixes.Started, i.ToString());
+                var startedSignalReference = startedSignalName.ToVhdlSignalReference();
 
                 stateMachine.Signals.AddIfNew(new Signal
                     {
                         DataType = KnownDataTypes.Boolean,
-                        Name = startedSignalName,
-                        InitialValue = Value.False
+                        Name = startedSignalName
                     });
-
-                var trueBlock = new InlineBlock();
-
-                trueBlock.Add(new Assignment
-                {
-                    AssignTo = startedSignalName.ToVhdlSignalReference(),
-                    Expression = Value.True
-                });
-
-                trueBlock.Body.Add(new Assignment
-                {
-                    AssignTo = stateMachineRunningIndexVariable.ToReference(),
-                    Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() }
-                });
-
-                var methodParametersEnumerator = ((MethodDeclaration)targetDeclaration).Parameters.GetEnumerator();
-                methodParametersEnumerator.MoveNext();
-                foreach (var parameter in transformedParameters)
-                {
-                    trueBlock.Add(new Assignment
+                stateMachine.Signals.AddIfNew(new Signal
                     {
-                        AssignTo =
-                            MemberStateMachineNameFactory.CreatePrefixedObjectName(indexedStateMachineName, methodParametersEnumerator.Current.Name)
-                            .ToVhdlVariableReference(),
-                        Expression = parameter
+                        DataType = KnownDataTypes.Boolean,
+                        Name = CreateFinishedSignalReference(stateMachine, targetMethodName, i).Name
                     });
-                    methodParametersEnumerator.MoveNext();
+
+                // Set the start signal for the state machine.
+                currentBlock.Add(new Assignment
+                    {
+                        AssignTo = startedSignalReference,
+                        Expression = Value.True
+                    });
+
+                // Reset the start signal in the finished block.
+                allInvokedStateMachinesFinishedIfElseTrue.Add(new Assignment
+                    {
+                        AssignTo = startedSignalReference,
+                        Expression = Value.False
+                    });
+            }
+
+
+            // Iteratively building a binary expression chain to OR together all Finished signals.
+            IVhdlElement allInvokedStateMachinesFinishedExpression;
+
+            allInvokedStateMachinesFinishedExpression = CreateFinishedSignalReference(stateMachine, targetMethodName, 0);
+
+            if (currentCallDegreeOfParallelism > 1)
+            {
+                var currentBinary = new Binary
+                {
+                    Left = CreateFinishedSignalReference(stateMachine, targetMethodName, 1),
+                    Operator = Operator.ConditionalOr
+                };
+                var firstBinary = currentBinary;
+
+                for (int i = 2; i < currentCallDegreeOfParallelism; i++)
+                {
+                    var newBinary = new Binary
+                    {
+                        Left = CreateFinishedSignalReference(stateMachine, targetMethodName, i),
+                        Operator = Operator.ConditionalOr
+                    };
+
+                    currentBinary.Right = newBinary;
+                    currentBinary = newBinary;
                 }
 
-                var elseBlock = new InlineBlock();
-
-                stateMachineSelectingConditionsBlock.Add(new IfElse
-                {
-                    Condition = new Binary
-                    {
-                        // We need to check for the main start signal here, not this state machine's driving signal.
-                        Left = MemberStateMachineNameFactory.CreateStartedSignalName(indexedStateMachineName).ToVhdlSignalReference(),
-                        Operator = Operator.Equality,
-                        Right = Value.False
-                    },
-                    True = trueBlock,
-                    Else = elseBlock
-                });
-
-                stateMachineSelectingConditionsBlock = elseBlock;
+                currentBinary.Right = allInvokedStateMachinesFinishedExpression;
+                allInvokedStateMachinesFinishedExpression = firstBinary;
             }
 
-            stateMachineSelectingConditionsBlock.Add(new LineComment("No idle state machine could be found. This is an error."));
 
-            // Common variable to signal that the invoked state machine finished.
-            var stateMachineFinishedVariableName = context.Scope.StateMachine
-                .GetNextUnusedTemporaryVariableName(targetStateMachineName + "." + "finished");
-            var stateMachineFinishedVariableReference = stateMachineFinishedVariableName.ToVhdlVariableReference();
-            stateMachine.LocalVariables.Add(new Variable
-            {
-                Name = stateMachineFinishedVariableName,
-                DataType = KnownDataTypes.Boolean
-            });
-
-            var isInvokedStateMachineFinishedIfElseTrue = new InlineBlock(
-                new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.False });
-
-            var waitForInvokedStateMachineToFinishState = new InlineBlock();
-
-            // Check if the running state machine finished.
-            var stateMachineFinishedCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
-            waitForInvokedStateMachineToFinishState.Add(stateMachineFinishedCheckCase);
-            for (int i = 0; i < maxDegreeOfParallelism; i++)
-            {
-                var indexedStateMachineName = MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i);
-                var startedSignalName = stateMachine.CreatePrefixedObjectName(MemberStateMachineNameFactory
-                    .CreateStartedSignalName(indexedStateMachineName).TrimExtendedVhdlIdDelimiters());
-                var finishedSignalName = MemberStateMachineNameFactory
-                    .CreateFinishedSignalName(indexedStateMachineName);
-
-                stateMachineFinishedCheckCase.Whens.Add(new When
+            var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
+            var waitForInvokedStateMachinesToFinishState = new InlineBlock(
+                new GeneratedComment(vhdlGenerationOptions =>
+                    "Waiting for the state machine invokation to finish, which was started in state " +
+                    vhdlGenerationOptions.NameShortener(currentStateName) +
+                    "."),
+                new IfElse
                 {
-                    Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() },
-                    Body = new List<IVhdlElement>
-                    {
-                        new IfElse
-                        {
-                            Condition = new Binary
-                            {
-                                Left = finishedSignalName.ToVhdlSignalReference(),
-                                Operator = Operator.Equality,
-                                Right = Value.True
-                            },
-                            True = new InlineBlock(
-                                new Assignment { AssignTo = stateMachineFinishedVariableReference, Expression = Value.True },
-                                new Assignment { AssignTo = startedSignalName.ToVhdlSignalReference(), Expression = Value.False })
-                        }
-                    }
+                    Condition = allInvokedStateMachinesFinishedExpression,
+                    True = allInvokedStateMachinesFinishedIfElseTrue
                 });
-            }
 
-            waitForInvokedStateMachineToFinishState.Add(new IfElse
-            {
-                Condition = new Binary
-                {
-                    Left = stateMachineFinishedVariableReference,
-                    Operator = Operator.Equality,
-                    Right = Value.True
-                },
-                True = isInvokedStateMachineFinishedIfElseTrue
-            });
-
-            var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachineToFinishState);
+            var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachinesToFinishState);
             currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
 
-            currentBlock.ChangeBlockToDifferentState(isInvokedStateMachineFinishedIfElseTrue, waitForInvokedStateMachineToFinishStateIndex);
+            currentBlock.ChangeBlockToDifferentState(allInvokedStateMachinesFinishedIfElseTrue, waitForInvokedStateMachineToFinishStateIndex);
 
             // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to 
             // a non-void method).
             if (!(expression.Parent is ExpressionStatement))
             {
-                // We copy the used state machine's return value to a local variable and then use the local variable in
-                // place of the original method call.
+                // Using the references of the state machines' return values in place of the original method calls.
+                var returnVariableReferences = new List<DataObjectReference>();
 
-                var localReturnVariableReference = context.Scope.StateMachine
-                    .CreateTemporaryVariable(
-                        targetStateMachineName + "." + "return",
-                        _typeConverter.ConvertTypeReference(expression.GetReturnType()))
-                    .ToReference();
-
-                var stateMachineReadReturnValueCheckCase = new Case { Expression = stateMachineRunningIndexVariable.ToReference() };
-                isInvokedStateMachineFinishedIfElseTrue.Add(stateMachineReadReturnValueCheckCase);
-                for (int i = 0; i < maxDegreeOfParallelism; i++)
+                for (int i = 0; i < currentCallDegreeOfParallelism; i++)
                 {
-                    var returnVariableName = MemberStateMachineNameFactory
-                        .CreateReturnVariableName(MemberStateMachineNameFactory.CreateStateMachineName(targetStateMachineName, i));
+                    // Creating return variable if it doesn't exist.
+                    var returnVariableName = stateMachine
+                        .CreatePrefixedSegmentedObjectName(targetMethodName, NameSuffixes.Return, i.ToString());
 
-                    stateMachineReadReturnValueCheckCase.Whens.Add(new When
+                    stateMachine.GlobalVariables.AddIfNew(new Variable
                     {
-                        Expression = new Value { DataType = stateMachineRunningIndexVariable.DataType, Content = i.ToString() },
-                        Body = new List<IVhdlElement>
-                        {
-                            new Assignment
-                            {
-                                AssignTo = localReturnVariableReference,
-                                Expression = returnVariableName.ToVhdlVariableReference()
-                            }
-                        }
+                        DataType = _typeConverter.ConvertTypeReference(expression.GetReturnTypeReference()),
+                        Name = returnVariableName
                     });
+
+
+                    returnVariableReferences.Add(returnVariableName.ToVhdlVariableReference());
                 }
 
-                return localReturnVariableReference;
+                // Just handling a single method call now, parallelization will come later.
+                return returnVariableReferences[0];
             }
             else
             {
@@ -357,7 +337,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             ISubTransformerContext context)
         {
             var returnVariableReference = context.Scope.StateMachine
-                .CreateTemporaryVariable(targetName + "." + "return", returnType)
+                .CreateVariableWithNextUnusedIndexedName(targetName + "." + NameSuffixes.Return, returnType)
                 .ToReference();
 
             invokation.Parameters.Add(returnVariableReference);
@@ -367,6 +347,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             // ...and using the return variable in place of the original call.
             return returnVariableReference;
+        }
+
+        private static DataObjectReference CreateFinishedSignalReference(
+            IMemberStateMachine stateMachine,
+            string targetMethodName,
+            int index)
+        {
+            return stateMachine
+                    .CreatePrefixedSegmentedObjectName(targetMethodName, NameSuffixes.Finished, index.ToString())
+                    .ToVhdlSignalReference();
         }
     }
 }

@@ -87,7 +87,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var isVoid = returnType.Name == "void";
             if (!isVoid)
             {
-                stateMachine.Parameters.Add(new Variable
+                stateMachine.GlobalVariables.Add(new Variable
                 {
                     Name = stateMachine.CreateReturnVariableName(),
                     DataType = returnType
@@ -97,7 +97,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Handling in/out method parameters.
             foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
             {
-                stateMachine.Parameters.Add(new Variable
+                stateMachine.GlobalVariables.Add(new Variable
                 {
                     DataType = _typeConverter.ConvertAstType(parameter.Type),
                     Name = stateMachine.CreatePrefixedObjectName(parameter.Name)

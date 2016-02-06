@@ -77,8 +77,6 @@ namespace Hast.Transformer.Vhdl
                 AddSimpleMemoryPorts(module);
             }
 
-            ProcessStateMachineStartSignalFunnel(module, vhdlTransformationContext);
-
             // Adding common ports
             var ports = module.Entity.Ports;
             ports.Add(new Port
@@ -261,9 +259,6 @@ namespace Hast.Transformer.Vhdl
                 callProxySignalDeclarationsBlock.Add(startedSignal);
                 var startedSignalReference = startedSignal.ToReference();
 
-                transformationContext.MemberStateMachineStartSignalFunnel
-                    .AddDrivingStartedSignalForStateMachine(startedSignalName, stateMachine.Name);
-
                 var stateMachineIsFinishedIfElse = new IfElse
                 {
                     Condition = new Binary
@@ -429,63 +424,6 @@ namespace Hast.Transformer.Vhdl
                 Mode = PortMode.In,
                 DataType = SimpleMemoryTypes.DonePortsDataType
             });
-        }
-
-        private static void ProcessStateMachineStartSignalFunnel(Module module, VhdlTransformationContext transformationContext)
-        {
-            var drivingStartedSignalsForStateMachines = transformationContext.MemberStateMachineStartSignalFunnel
-                .GetDrivingStartedSignalsForStateMachines();
-
-            var signalsAssignmentBlock = new LogicalBlock(new LineComment("Driving state machine started signals start"));
-
-            foreach (var stateMachineToSignalsMapping in drivingStartedSignalsForStateMachines)
-            {
-
-                if (!stateMachineToSignalsMapping.Value.Any())
-                {
-                    throw new InvalidOperationException("There weren't any driving started signals specified for the state machine " + stateMachineToSignalsMapping.Key + ".");
-                }
-
-                IVhdlElement assignmentExpression = stateMachineToSignalsMapping.Value.First().ToVhdlSignalReference();
-
-                // Iteratively build a binary expression chain to OR together all the driving signals.
-                if (stateMachineToSignalsMapping.Value.Count() > 1)
-                {
-                    var currentBinary = new Binary
-                    {
-                        Left = stateMachineToSignalsMapping.Value.Skip(1).First().ToVhdlSignalReference(),
-                        Operator = Operator.ConditionalOr
-                    };
-                    var firstBinary = currentBinary;
-
-                    foreach (var drivingStartedSignal in stateMachineToSignalsMapping.Value.Skip(2))
-                    {
-                        var newBinary = new Binary
-                        {
-                            Left = drivingStartedSignal.ToVhdlSignalReference(),
-                            Operator = Operator.ConditionalOr
-                        };
-
-                        currentBinary.Right = newBinary;
-                        currentBinary = newBinary;
-                    }
-
-                    currentBinary.Right = assignmentExpression;
-                    assignmentExpression = firstBinary;
-                }
-
-                signalsAssignmentBlock.Add(
-                    new Assignment
-                    {
-                        AssignTo = MemberStateMachineNameFactory
-                            .CreateStartedSignalName(stateMachineToSignalsMapping.Key)
-                            .ToVhdlSignalReference(),
-                        Expression = assignmentExpression
-                    });
-            }
-
-            signalsAssignmentBlock.Add(new LineComment("Driving state machine started signals end"));
-            module.Architecture.Add(signalsAssignmentBlock);
         }
     }
 }

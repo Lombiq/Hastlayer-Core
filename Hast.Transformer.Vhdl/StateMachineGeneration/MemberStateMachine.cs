@@ -25,9 +25,10 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
             get { return _states; }
         }
 
-        public IList<Variable> Parameters { get; private set; }
         public IList<Variable> LocalVariables { get; private set; }
+        public IList<Variable> GlobalVariables { get; private set; }
         public IList<Signal> Signals { get; private set; }
+        public IDictionary<string, int> OtherMemberMaxCallInstanceCounts { get; set; }
 
 
         /// <summary>
@@ -40,9 +41,10 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
         {
             Name = name;
 
-            Parameters = new List<Variable>();
             LocalVariables = new List<Variable>();
+            GlobalVariables = new List<Variable>();
             Signals = new List<Signal>();
+            OtherMemberMaxCallInstanceCounts = new Dictionary<string, int>();
 
 
             _statesEnum = new Enum { Name = this.CreatePrefixedObjectName("_States") };
@@ -60,14 +62,15 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 Name = this.CreateStartedSignalName(),
                 InitialValue = Value.False
             };
-            // The start signal is special since it's driven from the outside, so not adding it to Signals.
+            Signals.Add(_startedSignal);
 
             _finishedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateFinishedSignalName(),
-                InitialValue = Value.True
+                InitialValue = Value.False
             };
+            Signals.Add(_finishedSignal);
 
 
             var startStateBlock = new InlineBlock(
@@ -122,30 +125,27 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
                 _statesEnum.Values.Add(this.CreateStateName(i).ToVhdlIdValue());
             }
 
-            foreach (var parameter in Parameters)
+            foreach (var variable in GlobalVariables)
             {
-                parameter.Shared = true;
+                variable.Shared = true;
             }
 
             var declarationsBlock = new LogicalBlock(
                 new LineComment(Name + " declarations start"),
                 new LineComment("State machine states:"),
-                _statesEnum,
-                new LineComment("State machine control signals:"),
-                _startedSignal,
-                _finishedSignal);
-
-            if (Parameters.Any())
-            {
-                declarationsBlock.Add(new LineComment("Shared variables for the state machine's inputs and outputs:"));
-            }
-            declarationsBlock.Body.AddRange(Parameters);
+                _statesEnum);
 
             if (Signals.Any())
             {
-                declarationsBlock.Add(new LineComment("Global signals corresponding to the state machine:"));
+                declarationsBlock.Add(new LineComment("Signals of the state machine, starting with control signals:"));
             }
             declarationsBlock.Body.AddRange(Signals);
+
+            if (GlobalVariables.Any())
+            {
+                declarationsBlock.Add(new LineComment("Shared variables of the state machine (mainly for inputs and outputs):"));
+            }
+            declarationsBlock.Body.AddRange(GlobalVariables);
 
             declarationsBlock.Add(new LineComment(Name + " declarations end"));
 
@@ -170,10 +170,18 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
 
             var ifInResetBlock = new InlineBlock(
                 new LineComment("Synchronous reset"),
-                new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
                 this.CreateStateChange(0));
-            ifInResetBlock.Body.AddRange(Signals.Select(signal =>
-                new Assignment { AssignTo = signal.ToReference(), Expression = signal.InitialValue }));
+
+            // Re-setting all signals and variables to their initial value.
+            ifInResetBlock.Body.AddRange(Signals
+                .Where(signal => signal.InitialValue != null)
+                .Select(signal =>
+                    new Assignment { AssignTo = signal.ToReference(), Expression = signal.InitialValue }));
+            ifInResetBlock.Body.AddRange(LocalVariables
+                .Union(GlobalVariables)
+                .Where(variable => variable.InitialValue != null)
+                .Select(variable =>
+                    new Assignment { AssignTo = variable.ToReference(), Expression = variable.InitialValue }));
 
             var resetIf = new IfElse
             {

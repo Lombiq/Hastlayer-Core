@@ -62,10 +62,8 @@
     <Compile Include="Constants\SimpleMemoryPortNames.cs" />
     <Compile Include="Constants\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
-    <Compile Include="Models\IMemberStateMachineStartedSignalFunnel.cs" />
     <Compile Include="Models\IMemberTransformerResult.cs" />
     <Compile Include="Models\IMemberStateMachineResult.cs" />
-    <Compile Include="Models\MemberStateMachineStartedSignalFunnel.cs" />
     <Compile Include="Models\MemberTransformerResult.cs" />
     <Compile Include="Models\MemberStateMachineResult.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachineExtenions.cs" />
@@ -75,6 +73,7 @@
     <Compile Include="MemberIdTable.cs" />
     <Compile Include="StateMachineGeneration\MemberStateMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StateMachineGeneration\NameSuffixes.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />

@@ -12,17 +12,17 @@ namespace Hast.Transformer.Vhdl.StateMachineGeneration
     {
         public static string CreateReturnVariableName(string stateMachineName)
         {
-            return CreatePrefixedObjectName(stateMachineName, "return");
+            return CreatePrefixedObjectName(stateMachineName, NameSuffixes.Return);
         }
 
         public static string CreateStartedSignalName(string stateMachineName)
         {
-            return CreatePrefixedObjectName(stateMachineName, "_Started");
+            return CreatePrefixedObjectName(stateMachineName, NameSuffixes.Started);
         }
 
         public static string CreateFinishedSignalName(string stateMachineName)
         {
-            return CreatePrefixedObjectName(stateMachineName, "_Finished");
+            return CreatePrefixedObjectName(stateMachineName, NameSuffixes.Finished);
         }
 
         public static string CreatePrefixedObjectName(string stateMachineName, string name)
