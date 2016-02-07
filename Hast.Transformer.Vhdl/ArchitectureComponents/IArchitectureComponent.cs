@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
@@ -36,5 +37,16 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// in more than one instance at a given time).
         /// </summary>
         IDictionary<string, int> OtherMemberMaxCallInstanceCounts { get; }
+
+        /// <summary>
+        /// Produces the declarations corresponding to the component that should be inserted into the head of the
+        /// architecture element.
+        /// </summary>
+        IVhdlElement BuildDeclarations();
+
+        /// <summary>
+        /// Produces the body of the componentthat should be inserted into the body of the architecture element.
+        /// </summary>
+        IVhdlElement BuildBody();
     }
 }

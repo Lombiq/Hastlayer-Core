@@ -11,7 +11,7 @@ using Hast.Transformer.Vhdl.Models;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
-    internal class MemberStateMachine : ArchitectureComponent, IMemberStateMachine
+    internal class MemberStateMachine : ArchitectureComponentBase, IMemberStateMachine
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;
@@ -98,7 +98,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return _states.Count - 1;
         }
 
-        public IVhdlElement BuildDeclarations()
+        public override IVhdlElement BuildDeclarations()
         {
             for (int i = 0; i < _states.Count; i++)
             {
@@ -110,7 +110,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 _statesEnum));
         }
 
-        public IVhdlElement BuildBody()
+        public override IVhdlElement BuildBody()
         {
             var stateCase = new Case { Expression = _stateVariable.Name.ToVhdlIdValue() };
 

@@ -152,32 +152,31 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
             var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
-                .GetMaxCallInstanceCountConfigurationForMember(targetDeclaration.GetSimpleName()).MaxDegreeOfParallelism;
+                .GetMaxInvokationInstanceCountConfigurationForMember(targetDeclaration.GetSimpleName()).MaxDegreeOfParallelism;
             // Eventually this should be determined, dummy value for now.
-            var currentCallDegreeOfParallelism = 1;
+            var currentInvokationDegreeOfParallelism = 1;
 
-            if (currentCallDegreeOfParallelism > maxDegreeOfParallelism)
+            if (currentInvokationDegreeOfParallelism > maxDegreeOfParallelism)
             {
                 throw new InvalidOperationException(
                     "This parallelized call from " + context.Scope.Method + " to " + targetMethodName + " would do " +
-                    currentCallDegreeOfParallelism +
+                    currentInvokationDegreeOfParallelism +
                     " calls in parallel but the maximal degree of parallelism for this member was set up as " +
                     maxDegreeOfParallelism + ".");
             }
 
             int previousMaxCallInstanceCount;
             if (!stateMachine.OtherMemberMaxCallInstanceCounts.TryGetValue(targetMethodName, out previousMaxCallInstanceCount) ||
-                previousMaxCallInstanceCount < currentCallDegreeOfParallelism)
+                previousMaxCallInstanceCount < currentInvokationDegreeOfParallelism)
             {
-                stateMachine.OtherMemberMaxCallInstanceCounts[targetMethodName] = currentCallDegreeOfParallelism;
+                stateMachine.OtherMemberMaxCallInstanceCounts[targetMethodName] = currentInvokationDegreeOfParallelism;
             }
 
 
             currentBlock.Add(new LineComment("Starting state machine invokation (transformed from a method call)."));
 
-            var allInvokedStateMachinesFinishedIfElseTrue = new InlineBlock();
 
-            for (int i = 0; i < currentCallDegreeOfParallelism; i++)
+            for (int i = 0; i < currentInvokationDegreeOfParallelism; i++)
             {
                 var indexedStateMachineName = MemberStateMachineNameHelper.CreateStateMachineName(targetMethodName, i);
 
@@ -212,68 +211,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
 
 
-                // If Started/Finished signals don't exist create them here.
-                var startedSignalName = stateMachine
-                    .CreatePrefixedSegmentedObjectName(targetMethodName, NameSuffixes.Started, i.ToString());
-                var startedSignalReference = startedSignalName.ToVhdlSignalReference();
-
-                stateMachine.Signals.AddIfNew(new Signal
-                    {
-                        DataType = KnownDataTypes.Boolean,
-                        Name = startedSignalName
-                    });
-                stateMachine.Signals.AddIfNew(new Signal
-                    {
-                        DataType = KnownDataTypes.Boolean,
-                        Name = CreateFinishedSignalReference(stateMachine, targetMethodName, i).Name
-                    });
-
-                // Set the start signal for the state machine.
-                currentBlock.Add(new Assignment
-                    {
-                        AssignTo = startedSignalReference,
-                        Expression = Value.True
-                    });
-
-                // Reset the start signal in the finished block.
-                allInvokedStateMachinesFinishedIfElseTrue.Add(new Assignment
-                    {
-                        AssignTo = startedSignalReference,
-                        Expression = Value.False
-                    });
+                currentBlock.Add(InvokationHelper.CreateInvokationStart(stateMachine, targetMethodName, i));
             }
 
 
-            // Iteratively building a binary expression chain to OR together all Finished signals.
-            IVhdlElement allInvokedStateMachinesFinishedExpression;
-
-            allInvokedStateMachinesFinishedExpression = CreateFinishedSignalReference(stateMachine, targetMethodName, 0);
-
-            if (currentCallDegreeOfParallelism > 1)
-            {
-                var currentBinary = new Binary
-                {
-                    Left = CreateFinishedSignalReference(stateMachine, targetMethodName, 1),
-                    Operator = Operator.ConditionalOr
-                };
-                var firstBinary = currentBinary;
-
-                for (int i = 2; i < currentCallDegreeOfParallelism; i++)
-                {
-                    var newBinary = new Binary
-                    {
-                        Left = CreateFinishedSignalReference(stateMachine, targetMethodName, i),
-                        Operator = Operator.ConditionalOr
-                    };
-
-                    currentBinary.Right = newBinary;
-                    currentBinary = newBinary;
-                }
-
-                currentBinary.Right = allInvokedStateMachinesFinishedExpression;
-                allInvokedStateMachinesFinishedExpression = firstBinary;
-            }
-
+            var waitForInvokationFinishedIfElse = InvokationHelper
+                .CreateWaitForInvokationFinished(stateMachine, targetMethodName, currentInvokationDegreeOfParallelism);
 
             var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
             var waitForInvokedStateMachinesToFinishState = new InlineBlock(
@@ -281,16 +224,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     "Waiting for the state machine invokation to finish, which was started in state " +
                     vhdlGenerationOptions.NameShortener(currentStateName) +
                     "."),
-                new IfElse
-                {
-                    Condition = allInvokedStateMachinesFinishedExpression,
-                    True = allInvokedStateMachinesFinishedIfElseTrue
-                });
+                waitForInvokationFinishedIfElse);
 
             var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachinesToFinishState);
             currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
 
-            currentBlock.ChangeBlockToDifferentState(allInvokedStateMachinesFinishedIfElseTrue, waitForInvokedStateMachineToFinishStateIndex);
+            currentBlock.ChangeBlockToDifferentState(waitForInvokationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
 
             // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to 
             // a non-void method).
@@ -299,7 +238,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // Using the references of the state machines' return values in place of the original method calls.
                 var returnVariableReferences = new List<DataObjectReference>();
 
-                for (int i = 0; i < currentCallDegreeOfParallelism; i++)
+                for (int i = 0; i < currentInvokationDegreeOfParallelism; i++)
                 {
                     // Creating return variable if it doesn't exist.
                     var returnVariableName = stateMachine

@@ -32,16 +32,5 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// <param name="state">The state's VHDL element.</param>
         /// <returns>The index of the state.</returns>
         int AddState(IBlockElement state);
-
-        /// <summary>
-        /// Produces the declarations corresponding to the state machine that should be inserted into the head of the
-        /// architecture element.
-        /// </summary>
-        IVhdlElement BuildDeclarations();
-
-        /// <summary>
-        /// Produces the body of the state machine that should be inserted into the body of the architecture element.
-        /// </summary>
-        IVhdlElement BuildBody();
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Common.Configuration
 {
-    public class MemberCallInstanceCountConfiguration
+    public class MemberInvokationInstanceCountConfiguration
     {
         /// <summary>
         /// Gets the prefix of the member's name. Use the same convention as with 
@@ -15,11 +15,11 @@ namespace Hast.Common.Configuration
         public string MemberNamePrefix { get; private set; }
 
         /// <summary>
-        /// Gets or sets the maximal recursion depth of the member. When using (even indirectly) recursive calls
+        /// Gets or sets the maximal recursion depth of the member. When using (even indirectly) recursive invokations
         /// between members set the maximal depth here.
         /// </summary>
         /// <example>
-        /// A value of 3 would mean that the member can call itself three times recursively, i.e. there is the
+        /// A value of 3 would mean that the member can invoke itself three times recursively, i.e. there is the
         /// member, then it calls itself (depth 1), then it calls itself (depth 2), then it calls itself (depth 3)
         /// before returning.
         /// </example>
@@ -51,7 +51,7 @@ namespace Hast.Common.Configuration
         public uint MaxCallInstanceCount { get { return (uint)(MaxRecursionDepth + MaxDegreeOfParallelism); } }
 
 
-        public MemberCallInstanceCountConfiguration(string memberNamePrefix)
+        public MemberInvokationInstanceCountConfiguration(string memberNamePrefix)
         {
             MemberNamePrefix = memberNamePrefix;
             MaxDegreeOfParallelism = 1;

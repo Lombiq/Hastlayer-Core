@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\MemberCallInstanceCountConfiguration.cs" />
+    <Compile Include="Configuration\MemberInvokationInstanceCountConfiguration.cs" />
     <Compile Include="Extensions\AnnotatableExtensions.cs" />
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />

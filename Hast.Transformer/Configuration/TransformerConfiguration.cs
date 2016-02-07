@@ -7,10 +7,10 @@ namespace Hast.Common.Configuration
     public class TransformerConfiguration
     {
         /// <summary>
-        /// Gets or sets the list of the member call instance counts, i.e. how many times a member can be called at a
-        /// given time.
+        /// Gets or sets the list of the member invokation instance counts, i.e. how many times a member can be invoked
+        /// at a given time.
         /// </summary>
-        public IList<MemberCallInstanceCountConfiguration> MemberCallInstanceCountConfigurations { get; set; }
+        public IList<MemberInvokationInstanceCountConfiguration> MemberInvokationInstanceCountConfigurations { get; set; }
 
         /// <summary>
         /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
@@ -22,23 +22,23 @@ namespace Hast.Common.Configuration
         public TransformerConfiguration()
         {
             UseSimpleMemory = true;
-            MemberCallInstanceCountConfigurations = new List<MemberCallInstanceCountConfiguration>();
+            MemberInvokationInstanceCountConfigurations = new List<MemberInvokationInstanceCountConfiguration>();
         }
     }
 
 
     public static class TransformerConfigurationExtensions
     {
-        public static MemberCallInstanceCountConfiguration GetMaxCallInstanceCountConfigurationForMember(
+        public static MemberInvokationInstanceCountConfiguration GetMaxInvokationInstanceCountConfigurationForMember(
             this TransformerConfiguration configuration, 
             string memberName)
         {
-            var maxRecursionDepthConfig = configuration.MemberCallInstanceCountConfigurations
+            var maxRecursionDepthConfig = configuration.MemberInvokationInstanceCountConfigurations
                 .FirstOrDefault(config => memberName.StartsWith(config.MemberNamePrefix));
 
             if (maxRecursionDepthConfig != null) return maxRecursionDepthConfig;
 
-            return new MemberCallInstanceCountConfiguration(memberName);
+            return new MemberInvokationInstanceCountConfiguration(memberName);
         }
     }
 

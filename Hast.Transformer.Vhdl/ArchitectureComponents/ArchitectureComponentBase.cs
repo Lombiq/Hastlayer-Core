@@ -8,19 +8,20 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
+using Orchard.Validation;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
-    public class ArchitectureComponent : IArchitectureComponent
+    public abstract class ArchitectureComponentBase : IArchitectureComponent
     {
         public string Name { get; private set; }
         public IList<Variable> LocalVariables { get; private set; }
         public IList<Variable> GlobalVariables { get; private set; }
         public IList<Signal> Signals { get; private set; }
-        public IDictionary<string, int> OtherMemberMaxCallInstanceCounts { get; set; }
+        public IDictionary<string, int> OtherMemberMaxCallInstanceCounts { get; private set; }
 
 
-        public ArchitectureComponent(string name)
+        protected ArchitectureComponentBase(string name)
         {
             Name = name;
 
@@ -31,7 +32,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         }
 
 
-        public IBlockElement BuildDeclarationsBlock(IVhdlElement beginWith = null, IVhdlElement endWith = null)
+        public abstract IVhdlElement BuildDeclarations();
+
+        public abstract IVhdlElement BuildBody();
+
+
+        protected IBlockElement BuildDeclarationsBlock(IVhdlElement beginWith = null, IVhdlElement endWith = null)
         {
             var declarationsBlock = new LogicalBlock(new LineComment(Name + " declarations start"));
 
@@ -66,9 +72,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return declarationsBlock;
         }
 
-        public Process BuildProcess(IVhdlElement notInReset, IVhdlElement inReset = null)
+        protected Process BuildProcess(IVhdlElement notInReset, IVhdlElement inReset = null)
         {
-            var process = new Process { Name = Name };
+            Argument.ThrowIfNull(notInReset, "notInReset");
+
+
+            var process = new Process { Name = Name.ToExtendedVhdlId() };
 
             process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
 
