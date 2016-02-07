@@ -43,13 +43,13 @@ namespace Hast.Samples.Consumer
                         configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
 
-                        configuration.TransformerConfiguration().MemberCallInstanceCountConfigurations.Add(
-                            new MemberCallInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumberInternal")
+                        configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
+                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumberInternal")
                             {
                                 MaxDegreeOfParallelism = 3
                             });
-                        configuration.TransformerConfiguration().MemberCallInstanceCountConfigurations.Add(
-                            new MemberCallInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.CalculateFibonacchiSeries")
+                        configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
+                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.CalculateFibonacchiSeries")
                             {
                                 // If we give these algorithms inputs causing a larger recursion depth then that will
                                 // cause runtime problems.
