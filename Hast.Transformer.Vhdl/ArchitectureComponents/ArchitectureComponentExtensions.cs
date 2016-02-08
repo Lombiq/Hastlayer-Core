@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
         public static string CreatePrefixedSegmentedObjectName(this IArchitectureComponent component, params string[] segments)
         {
-            return component.CreatePrefixedObjectName(string.Join(".", segments));
+            return ArchitectureComponentNameHelper.CreatePrefixedSegmentedObjectName(component.Name, segments);
         }
 
         /// <summary>

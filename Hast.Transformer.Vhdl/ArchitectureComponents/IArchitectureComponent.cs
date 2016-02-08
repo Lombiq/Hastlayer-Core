@@ -36,7 +36,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// parallelization happens then the call instance count will be greater than 1 (i.e. the other member is called
         /// in more than one instance at a given time).
         /// </summary>
-        IDictionary<string, int> OtherMemberMaxCallInstanceCounts { get; }
+        IDictionary<string, int> OtherMemberMaxInvokationInstanceCounts { get; }
 
         /// <summary>
         /// Produces the declarations corresponding to the component that should be inserted into the head of the

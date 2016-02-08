@@ -39,7 +39,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     var stateMachineCount = context
                         .GetTransformerConfiguration()
-                        .GetMaxInvokationInstanceCountConfigurationForMember(method.GetSimpleName()).MaxCallInstanceCount;
+                        .GetMaxInvokationInstanceCountConfigurationForMember(method.GetSimpleName()).MaxInvokationInstanceCount;
                     var stateMachineResults = new IMemberStateMachineResult[stateMachineCount];
 
                     // Not much use to parallelize computation unless there are a lot of state machines to create or the 
@@ -83,7 +83,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             int stateMachineIndex)
         {
             var stateMachine = _memberStateMachineFactory
-                .CreateStateMachine(MemberStateMachineNameHelper.CreateStateMachineName(method.GetFullName(), stateMachineIndex));
+                .CreateStateMachine(ArchitectureComponentNameHelper.CreateIndexedComponentName(method.GetFullName(), stateMachineIndex));
 
 
             // Handling return type.

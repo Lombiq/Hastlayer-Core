@@ -10,12 +10,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public class BasicComponent : ArchitectureComponentBase
     {
-        public IVhdlElement BeginDeclarationsWith { get; set; }
-        public IVhdlElement EndDeclarationsWith { get; set; }
-        public IVhdlElement ProcessInReset { get; set; }
-        public IVhdlElement ProcessNotInReset { get; set; }
-        public IVhdlElement BeginBodyWith { get; set; }
-        public IVhdlElement EndBodyWith { get; set; }
+        public IVhdlElement Declarations { get; set; }
+        public IVhdlElement Body { get; set; }
 
 
         public BasicComponent(string name) : base(name)
@@ -25,17 +21,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
         public override IVhdlElement BuildDeclarations()
         {
-            return BuildDeclarationsBlock(BeginDeclarationsWith, EndDeclarationsWith);
+            return BuildDeclarationsBlock(Declarations);
         }
 
         public override IVhdlElement BuildBody()
         {
-            return new LogicalBlock(
-                new LineComment(Name + " start"),
-                BeginBodyWith ?? Empty.Instance,
-                BuildProcess(ProcessNotInReset, ProcessInReset),
-                EndBodyWith ?? Empty.Instance,
-                new LineComment(Name + " end"));
+            return Body ?? Empty.Instance;
         }
     }
 }

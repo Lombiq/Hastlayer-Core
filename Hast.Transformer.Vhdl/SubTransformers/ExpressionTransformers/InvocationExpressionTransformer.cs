@@ -166,10 +166,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             int previousMaxCallInstanceCount;
-            if (!stateMachine.OtherMemberMaxCallInstanceCounts.TryGetValue(targetMethodName, out previousMaxCallInstanceCount) ||
+            if (!stateMachine.OtherMemberMaxInvokationInstanceCounts.TryGetValue(targetMethodName, out previousMaxCallInstanceCount) ||
                 previousMaxCallInstanceCount < currentInvokationDegreeOfParallelism)
             {
-                stateMachine.OtherMemberMaxCallInstanceCounts[targetMethodName] = currentInvokationDegreeOfParallelism;
+                stateMachine.OtherMemberMaxInvokationInstanceCounts[targetMethodName] = currentInvokationDegreeOfParallelism;
             }
 
 
@@ -178,7 +178,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             for (int i = 0; i < currentInvokationDegreeOfParallelism; i++)
             {
-                var indexedStateMachineName = MemberStateMachineNameHelper.CreateStateMachineName(targetMethodName, i);
+                var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, i);
 
                 var methodParametersEnumerator = ((MethodDeclaration)targetDeclaration).Parameters
                     .Where(parameter => !parameter.IsSimpleMemoryParameter())

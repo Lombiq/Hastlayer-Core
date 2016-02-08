@@ -25,6 +25,16 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return CreatePrefixedObjectName(componentName, NameSuffixes.Finished);
         }
 
+        public static string CreateIndexedComponentName(string componentName, int index)
+        {
+            return componentName + "." + index;
+        }
+
+        public static string CreatePrefixedSegmentedObjectName(string componentName, params string[] segments)
+        {
+            return CreatePrefixedObjectName(componentName, string.Join(".", segments));
+        }
+
         public static string CreatePrefixedObjectName(string componentName, string name)
         {
             return CreatePrefixedExtendedVhdlId(componentName, "." + name);

@@ -9,6 +9,17 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public int RangeMax { get; set; }
 
 
+        public RangedDataType(DataType baseType)
+        {
+            TypeCategory = baseType.TypeCategory;
+            Name = base.Name;
+        }
+
+        public RangedDataType()
+        {
+        }
+
+
         public override string ToReferenceVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return ToVhdl(vhdlGenerationOptions);

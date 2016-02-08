@@ -25,16 +25,19 @@ namespace Hast.Transformer.Vhdl
         private readonly IClock _clock;
         private readonly IMethodTransformer _methodTransformer;
         private readonly IExternalInvokationProxyBuilder _externalInvokationProxyBuilder;
+        private readonly IInternalInvokationProxyBuilder _internalInvokationProxyBuilder;
 
 
         public VhdlTransformingEngine(
             IClock clock,
             IMethodTransformer methodTransformer,
-            IExternalInvokationProxyBuilder externalInvokationProxyBuilder)
+            IExternalInvokationProxyBuilder externalInvokationProxyBuilder,
+            IInternalInvokationProxyBuilder internalInvokationProxyBuilder)
         {
             _clock = clock;
             _methodTransformer = methodTransformer;
             _externalInvokationProxyBuilder = externalInvokationProxyBuilder;
+            _internalInvokationProxyBuilder = internalInvokationProxyBuilder;
         }
 
 
@@ -71,7 +74,7 @@ namespace Hast.Transformer.Vhdl
 
             // Doing transformations
             var transformerResults = await Task.WhenAll(Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext));
-            var invokingArchitectureComponents = transformerResults
+            var potentiallyInvokingArchitectureComponents = transformerResults
                 .SelectMany(result => result.StateMachineResults.Select(smResult => smResult.StateMachine).Cast<IArchitectureComponent>())
                 .ToList();
             foreach (var transformerResult in transformerResults)
@@ -92,15 +95,21 @@ namespace Hast.Transformer.Vhdl
             }
             var memberIdTable = BuildMemberIdTable(interfaceMemberResults);
             var externalInvocationProxy = _externalInvokationProxyBuilder.BuildProxy(interfaceMemberResults, memberIdTable);
-            invokingArchitectureComponents.Add(externalInvocationProxy);
+            potentiallyInvokingArchitectureComponents.Add(externalInvocationProxy);
             architecture.Declarations.Add(externalInvocationProxy.BuildDeclarations());
             architecture.Add(externalInvocationProxy.BuildBody());
 
 
             // Proxying internal invokations
-            foreach (var component in invokingArchitectureComponents)
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var internaInvokationProxies = _internalInvokationProxyBuilder.BuildProxy(
+                potentiallyInvokingArchitectureComponents,
+                vhdlTransformationContext);
+            sw.Stop();
+            foreach (var proxy in internaInvokationProxies)
             {
-
+                architecture.Declarations.Add(proxy.BuildDeclarations());
+                architecture.Add(proxy.BuildBody());
             }
 
 

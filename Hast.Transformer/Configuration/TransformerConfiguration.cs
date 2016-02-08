@@ -31,14 +31,14 @@ namespace Hast.Common.Configuration
     {
         public static MemberInvokationInstanceCountConfiguration GetMaxInvokationInstanceCountConfigurationForMember(
             this TransformerConfiguration configuration, 
-            string memberName)
+            string simpleMemberName)
         {
             var maxRecursionDepthConfig = configuration.MemberInvokationInstanceCountConfigurations
-                .FirstOrDefault(config => memberName.StartsWith(config.MemberNamePrefix));
+                .FirstOrDefault(config => simpleMemberName.StartsWith(config.MemberNamePrefix));
 
             if (maxRecursionDepthConfig != null) return maxRecursionDepthConfig;
 
-            return new MemberInvokationInstanceCountConfiguration(memberName);
+            return new MemberInvokationInstanceCountConfiguration(simpleMemberName);
         }
     }
 

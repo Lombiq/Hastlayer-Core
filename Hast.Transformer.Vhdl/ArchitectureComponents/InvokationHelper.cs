@@ -102,19 +102,45 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             string targetStateMachineName,
             int index)
         {
-            return component
-                    .CreatePrefixedSegmentedObjectName(targetStateMachineName, NameSuffixes.Started, index.ToString())
-                    .ToVhdlSignalReference();
+            return CreateStartedSignalReference(component.Name, targetStateMachineName, index);
         }
+
+        public static DataObjectReference CreateStartedSignalReference(
+            string componentName,
+            string targetStateMachineName,
+            int index)
+        {
+            return CreateSignalReference(componentName, targetStateMachineName, NameSuffixes.Started, index);
+        }
+
 
         public static DataObjectReference CreateFinishedSignalReference(
             IArchitectureComponent component,
             string targetStateMachineName,
             int index)
         {
-            return component
-                    .CreatePrefixedSegmentedObjectName(targetStateMachineName, NameSuffixes.Finished, index.ToString())
-                    .ToVhdlSignalReference();
+            return CreateFinishedSignalReference(component.Name, targetStateMachineName, index);
+        }
+
+
+        public static DataObjectReference CreateFinishedSignalReference(
+            string componentName,
+            string targetStateMachineName,
+            int index)
+        {
+            return CreateSignalReference(componentName, targetStateMachineName, NameSuffixes.Finished, index);
+        }
+
+
+        private static DataObjectReference CreateSignalReference(
+            string componentName,
+            string targetStateMachineName,
+            string signalName,
+            int index)
+        {
+            return ArchitectureComponentNameHelper
+                .CreatePrefixedSegmentedObjectName(componentName, targetStateMachineName, signalName, index.ToString())
+                .ToVhdlSignalReference();
         }
     }
 }
