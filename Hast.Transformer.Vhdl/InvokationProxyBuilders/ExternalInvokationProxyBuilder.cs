@@ -66,7 +66,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                         Condition = new Binary
                         {
                             Left = InvokationHelper.CreateStartedSignalReference(proxyComponent, memberName, 0),
-                            Operator = Operator.Equality,
+                            Operator = BinaryOperator.Equality,
                             Right = Value.False
                         },
                         True = InvokationHelper.CreateInvokationStart(proxyComponent, memberName, 0),
@@ -88,14 +88,14 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                     Left = new Binary
                     {
                         Left = startedPortReference,
-                        Operator = Operator.Equality,
+                        Operator = BinaryOperator.Equality,
                         Right = Value.OneCharacter
                     },
-                    Operator = Operator.ConditionalAnd,
+                    Operator = BinaryOperator.ConditionalAnd,
                     Right = new Binary
                     {
                         Left = finishedSignalReference,
-                        Operator = Operator.Equality,
+                        Operator = BinaryOperator.Equality,
                         Right = Value.ZeroCharacter
                     }
 
@@ -112,14 +112,14 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                             Left = new Binary
                             {
                                 Left = startedPortReference,
-                                Operator = Operator.Equality,
+                                Operator = BinaryOperator.Equality,
                                 Right = Value.ZeroCharacter
                             },
-                            Operator = Operator.ConditionalAnd,
+                            Operator = BinaryOperator.ConditionalAnd,
                             Right = new Binary
                             {
                                 Left = finishedSignalReference,
-                                Operator = Operator.Equality,
+                                Operator = BinaryOperator.Equality,
                                 Right = Value.OneCharacter
                             }
 

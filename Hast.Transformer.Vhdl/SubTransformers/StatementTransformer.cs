@@ -252,7 +252,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Condition = new Binary
                     {
                         Left = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
-                        Operator = Operator.Equality,
+                        Operator = BinaryOperator.Equality,
                         Right = stateMachine.CreateStateName(context.Scope.CurrentBlock.CurrentStateMachineStateIndex).ToVhdlIdValue()
                     },
                     True = stateMachine.CreateStateChange(destinationStateIndex)

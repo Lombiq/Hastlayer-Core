@@ -49,7 +49,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 var currentBinary = new Binary
                 {
                     Left = CreateFinishedSignalReference(component, targetStateMachineName, 1),
-                    Operator = Operator.ConditionalOr
+                    Operator = BinaryOperator.ConditionalOr
                 };
                 var firstBinary = currentBinary;
 
@@ -58,7 +58,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                     var newBinary = new Binary
                     {
                         Left = CreateFinishedSignalReference(component, targetStateMachineName, i),
-                        Operator = Operator.ConditionalOr
+                        Operator = BinaryOperator.ConditionalOr
                     };
 
                     currentBinary.Right = newBinary;

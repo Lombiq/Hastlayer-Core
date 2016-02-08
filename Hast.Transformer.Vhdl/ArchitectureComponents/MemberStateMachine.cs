@@ -61,7 +61,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                     Condition = new Binary
                     {
                         Left = _startedSignal.Name.ToVhdlSignalReference(),
-                        Operator = Operator.Equality,
+                        Operator = BinaryOperator.Equality,
                         Right = Value.True
                     },
                     True = this.CreateStateChange(2)
@@ -75,7 +75,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                     Condition = new Binary
                     {
                         Left = _startedSignal.Name.ToVhdlSignalReference(),
-                        Operator = Operator.Equality,
+                        Operator = BinaryOperator.Equality,
                         Right = Value.True
                     },
                     True = new Assignment { AssignTo = _finishedSignal, Expression = Value.True },

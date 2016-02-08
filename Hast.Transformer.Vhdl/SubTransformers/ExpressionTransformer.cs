@@ -225,7 +225,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             switch (expression.Operator)
             {
                 case BinaryOperatorType.Add:
-                    binary.Operator = Operator.Add;
+                    binary.Operator = BinaryOperator.Add;
                     break;
                 //case BinaryOperatorType.Any:
                 //    break;
@@ -234,51 +234,51 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 //case BinaryOperatorType.BitwiseOr:
                 //    break;
                 case BinaryOperatorType.ConditionalAnd:
-                    binary.Operator = Operator.ConditionalAnd;
+                    binary.Operator = BinaryOperator.ConditionalAnd;
                     break;
                 case BinaryOperatorType.ConditionalOr:
-                    binary.Operator = Operator.ConditionalOr;
+                    binary.Operator = BinaryOperator.ConditionalOr;
                     break;
                 case BinaryOperatorType.Divide:
-                    binary.Operator = Operator.Divide;
+                    binary.Operator = BinaryOperator.Divide;
                     break;
                 case BinaryOperatorType.Equality:
-                    binary.Operator = Operator.Equality;
+                    binary.Operator = BinaryOperator.Equality;
                     break;
                 case BinaryOperatorType.ExclusiveOr:
-                    binary.Operator = Operator.ExclusiveOr;
+                    binary.Operator = BinaryOperator.ExclusiveOr;
                     break;
                 case BinaryOperatorType.GreaterThan:
-                    binary.Operator = Operator.GreaterThan;
+                    binary.Operator = BinaryOperator.GreaterThan;
                     break;
                 case BinaryOperatorType.GreaterThanOrEqual:
-                    binary.Operator = Operator.GreaterThanOrEqual;
+                    binary.Operator = BinaryOperator.GreaterThanOrEqual;
                     break;
                 case BinaryOperatorType.InEquality:
-                    binary.Operator = Operator.InEquality;
+                    binary.Operator = BinaryOperator.InEquality;
                     break;
                 case BinaryOperatorType.LessThan:
-                    binary.Operator = Operator.LessThan;
+                    binary.Operator = BinaryOperator.LessThan;
                     break;
                 case BinaryOperatorType.LessThanOrEqual:
-                    binary.Operator = Operator.LessThanOrEqual;
+                    binary.Operator = BinaryOperator.LessThanOrEqual;
                     break;
                 case BinaryOperatorType.Modulus:
-                    binary.Operator = Operator.Modulus;
+                    binary.Operator = BinaryOperator.Modulus;
                     break;
                 case BinaryOperatorType.Multiply:
-                    binary.Operator = Operator.Multiply;
+                    binary.Operator = BinaryOperator.Multiply;
                     break;
                 //case BinaryOperatorType.NullCoalescing:
                 //    break;
                 case BinaryOperatorType.ShiftLeft:
-                    binary.Operator = Operator.ShiftLeft;
+                    binary.Operator = BinaryOperator.ShiftLeft;
                     break;
                 case BinaryOperatorType.ShiftRight:
-                    binary.Operator = Operator.ShiftRight;
+                    binary.Operator = BinaryOperator.ShiftRight;
                     break;
                 case BinaryOperatorType.Subtract:
-                    binary.Operator = Operator.Subtract;
+                    binary.Operator = BinaryOperator.Subtract;
                     break;
                 default:
                     throw new NotImplementedException("Support for the binary operator " + expression.Operator + " is not implemented.");
@@ -318,7 +318,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Condition = new Binary
                         {
                             Left = waitedCyclesCountVariableReference,
-                            Operator = Operator.GreaterThanOrEqual,
+                            Operator = BinaryOperator.GreaterThanOrEqual,
                             Right = new Value
                                 {
                                     // Subtracting 1 because due to the wait state added we already wait at least 2 cycles.
@@ -338,7 +338,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Expression = new Binary
                             {
                                 Left = waitedCyclesCountVariableReference,
-                                Operator = Operator.Add,
+                                Operator = BinaryOperator.Add,
                                 Right = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType }
                             }
                         });

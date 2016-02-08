@@ -104,7 +104,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 Condition = new Binary
                 {
                     Left = CommonPortNames.Reset.ToVhdlSignalReference(),
-                    Operator = Operator.Equality,
+                    Operator = BinaryOperator.Equality,
                     Right = Value.OneCharacter
                 },
                 True = ifInResetBlock,

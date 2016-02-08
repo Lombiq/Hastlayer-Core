@@ -97,7 +97,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         Condition = new Binary
                         {
                             Left = (isWrite ? SimpleMemoryPortNames.WritesDone : SimpleMemoryPortNames.ReadsDone).ToVhdlSignalReference(),
-                            Operator = Operator.Equality,
+                            Operator = BinaryOperator.Equality,
                             Right = Value.OneCharacter
                         },
                         True = memoryOperationFinishedBlock
