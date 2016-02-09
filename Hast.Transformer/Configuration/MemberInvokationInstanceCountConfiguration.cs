@@ -48,7 +48,7 @@ namespace Hast.Common.Configuration
         }
 
         // But why do I need to cast to uint? http://stackoverflow.com/questions/10065287/why-is-ushort-ushort-equal-to-int#comment58098182_10157517
-        public uint MaxInvokationInstanceCount { get { return (uint)(MaxRecursionDepth * MaxDegreeOfParallelism); } }
+        public uint MaxInvokationInstanceCount { get { return (uint)((MaxRecursionDepth + 1) * MaxDegreeOfParallelism); } }
 
 
         public MemberInvokationInstanceCountConfiguration(string memberNamePrefix)
