@@ -155,7 +155,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                         proxyComponent.LocalVariables.Add(new Variable
                             {
                                 DataType = runningStates,
-                                Name = "runningState",
+                                Name = proxyComponent.CreatePrefixedSegmentedObjectName(invokerName, "runningState", i.ToString()),
                                 InitialValue = waitingForFinishedStateValue
                             });
 
