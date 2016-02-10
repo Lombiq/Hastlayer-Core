@@ -176,9 +176,9 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                         };
 
                         // WaitingForStarted state
-                        // Chaining together if-elses to check all the instances of the target component whether they
+                        // Chaining together ifs to check all the instances of the target component whether they
                         // are already started.
-                        IfElse notStartedComponentSelectingIfElse = null, previousIfComponentStartedIfElse = null;
+                        IfElse notStartedComponentSelectingIfElse = null;
                         for (int c = 0; c < componentCount; c++)
                         {
                             var ifComponentStartedIfElse = new IfElse
@@ -202,16 +202,14 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                 True = Empty.Instance
                             };
 
-                            if (notStartedComponentSelectingIfElse == null)
+                            if (notStartedComponentSelectingIfElse != null)
+                            {
+                                notStartedComponentSelectingIfElse.ElseIfs.Add(ifComponentStartedIfElse);
+                            }
+                            else
                             {
                                 notStartedComponentSelectingIfElse = ifComponentStartedIfElse;
                             }
-                            if (previousIfComponentStartedIfElse != null)
-                            {
-                                previousIfComponentStartedIfElse.Else = ifComponentStartedIfElse;
-                            }
-
-                            previousIfComponentStartedIfElse = ifComponentStartedIfElse;
                         }
                         runningStateCase.Whens.Add(new When
                             {
