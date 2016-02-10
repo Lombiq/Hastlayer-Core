@@ -46,7 +46,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
             var proxyComponents = new List<IArchitectureComponent>(invokedMembers.Count);
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would 
             // look from a generated state machine.
-            var namePrefix = "System.Void Hast::InternalInvokationProxy.";
+            var namePrefix = "System.Void Hast::InternalInvokationProxy().";
 
             var waitingForStartedStateValue = "WaitingForStarted".ToVhdlIdValue();
             var waitingForFinishedStateValue = "WaitingForFinished".ToVhdlIdValue();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hast.VhdlBuilder.Representation
@@ -40,49 +41,77 @@ namespace Hast.VhdlBuilder.Representation
         /// </summary>
         public static NameShortener SimpleNameShortener = originalName =>
             {
-                var shortName = originalName;
+                var newName = originalName;
+                var previousNewName = string.Empty;
+                // As long as we can find names inside names we'll replace the inner names first.
 
-                // Cutting off return type name.
-                var firstSpaceIndex = shortName.IndexOf(' ');
-                if (firstSpaceIndex != -1)
+                while (newName != previousNewName)
                 {
-                    shortName = shortName.Substring(firstSpaceIndex + 1);
+                    previousNewName = newName;
+
+                    newName = Regex.Replace(
+                        newName,
+                        // Detects names in the following patterns:
+                        // System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory)
+                        // \System.Void Hast::ExternalInvokationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory)._Finished.0\
+                        // Will also replace names in names.
+                        @"\\?\S+\.\S+ [^\s:]+::[^\s(]+\(\S*?\)(\.\d+)?\\?",
+                        match =>
+                        {
+                            var originalMatch = match.Groups[0].Value;
+                            var shortName = originalMatch;
+
+                            // Cutting off return type name.
+                            var firstSpaceIndex = shortName.IndexOf(' ');
+                            if (firstSpaceIndex != -1)
+                            {
+                                shortName = shortName.Substring(firstSpaceIndex + 1);
+                            }
+
+                            // Cutting off namespace name, type name can be enough.
+                            var doubleColonIndex = shortName.IndexOf("::");
+                            if (doubleColonIndex != -1)
+                            {
+                                var namespaceAndClassName = shortName.Substring(0, doubleColonIndex);
+                                shortName =
+                                    namespaceAndClassName.Substring(namespaceAndClassName.LastIndexOf('.') + 1) +
+                                    shortName.Substring(doubleColonIndex);
+                            }
+
+                            // Shortening parameter type names to just their type name.
+                            if (shortName.Contains('(') && shortName.Contains(')'))
+                            {
+                                var openingParenthesisIndex = shortName.IndexOf('(');
+                                var closingParenthesisIndex = shortName.IndexOf(')');
+
+                                var shortenedParameters = string.Join(",", shortName
+                                    .Substring(openingParenthesisIndex + 1, closingParenthesisIndex - openingParenthesisIndex)
+                                    .Split(',')
+                                    .Select(parameter => parameter.Split('.').Last()));
+
+                                shortName =
+                                    shortName.Substring(0, openingParenthesisIndex + 1) +
+                                    shortenedParameters +
+                                    shortName.Substring(closingParenthesisIndex + 1);
+                            }
+
+                            // Keep leading backslash for extended VHDL identifiers.
+                            if (originalMatch.StartsWith(@"\") && !shortName.StartsWith(@"\"))
+                            {
+                                shortName = @"\" + shortName;
+                            }
+
+                            // Keep leading dot for concatenated names.
+                            if (originalMatch.StartsWith(".") && !shortName.StartsWith("."))
+                            {
+                                shortName = "." + shortName;
+                            }
+
+                            return shortName;
+                    });
                 }
 
-                // Cutting off namespace name, type name can be enough.
-                var doubleColonIndex = shortName.IndexOf("::");
-                if (doubleColonIndex != -1)
-                {
-                    var namespaceAndClassName = shortName.Substring(0, doubleColonIndex);
-                    shortName = 
-                        namespaceAndClassName.Substring(namespaceAndClassName.LastIndexOf('.') + 1) +
-                        shortName.Substring(doubleColonIndex);
-                }
-
-                // Shortening parameter type names to just their type name.
-                if (shortName.Contains('(') && shortName.Contains(')'))
-                {
-                    var openingParenthesisIndex = shortName.IndexOf('(');
-                    var closingParenthesisIndex = shortName.IndexOf(')');
-
-                    var shortenedParameters = string.Join(",", shortName
-                        .Substring(openingParenthesisIndex + 1, closingParenthesisIndex - openingParenthesisIndex)
-                        .Split(',')
-                        .Select(parameter => parameter.Split('.').Last()));
-
-                    shortName =
-                        shortName.Substring(0, openingParenthesisIndex + 1) +
-                        shortenedParameters +
-                        shortName.Substring(closingParenthesisIndex + 1);
-                }
-
-                // Keep leading backslash for extended VHDL identifiers.
-                if (originalName.StartsWith(@"\") && !shortName.StartsWith(@"\"))
-                {
-                    shortName = @"\" + shortName;
-                }
-
-                return shortName;
+                return newName;
             };
 
         private static VhdlGenerationOptions _debugOptions = new VhdlGenerationOptions
