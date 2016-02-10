@@ -11,6 +11,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
 using Hast.Transformer.Vhdl.Extensions;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 {
@@ -138,39 +139,104 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 foreach (var invokation in invokedMember.Value)
                 {
                     var invokerName = invokation.Key;
-                    var instanceCount = invokation.Value;
+                    var invokationInstanceCount = invokation.Value;
 
-                    for (int i = 0; i < instanceCount; i++)
+                    for (int i = 0; i < invokationInstanceCount; i++)
                     {
+                        var runningIndexName = proxyComponent
+                            .CreatePrefixedSegmentedObjectName(invokerName, "runningIndex", i.ToString());
                         proxyComponent.LocalVariables.Add(new Variable
+                        {
+                            DataType = new RangedDataType(KnownDataTypes.UnrangedInt)
                             {
-                                DataType = new RangedDataType(KnownDataTypes.UnrangedInt)
-                                {
-                                    RangeMin = 0,
-                                    RangeMax = instanceCount
-                                },
-                                Name = proxyComponent.CreatePrefixedSegmentedObjectName(invokerName, "runningIndex", i.ToString())
-                            });
+                                RangeMin = 0,
+                                RangeMax = invokationInstanceCount
+                            },
+                            Name = runningIndexName
+                        });
 
+                        var runningStateVariableName = proxyComponent
+                            .CreatePrefixedSegmentedObjectName(invokerName, "runningState", i.ToString());
                         proxyComponent.LocalVariables.Add(new Variable
-                            {
-                                DataType = runningStates,
-                                Name = proxyComponent.CreatePrefixedSegmentedObjectName(invokerName, "runningState", i.ToString()),
-                                InitialValue = waitingForFinishedStateValue
-                            });
+                        {
+                            DataType = runningStates,
+                            Name = runningStateVariableName,
+                            InitialValue = waitingForFinishedStateValue
+                        });
 
 
                         var invokationHandlerBlock = new LogicalBlock(
                             new LineComment("Invokation handler corresponding to " + invokerName));
                         bodyBlock.Add(invokationHandlerBlock);
 
-                        var startedIf = new IfElse
+
+                        var runningStateCase = new Case
                         {
-                            Condition = InvokationHelper.CreateStartedSignalReference(invokerName, memberName, i),
-                            True = Empty.Instance
+                            Expression = runningStateVariableName.ToVhdlVariableReference()
                         };
 
-                        invokationHandlerBlock.Add(startedIf);
+                        // WaitingForStarted state
+                        // Chaining together if-elses to check all the instances of the target component whether they
+                        // are already started.
+                        IfElse notStartedComponentSelectingIfElse = null, previousIfComponentStartedIfElse = null;
+                        for (int c = 0; c < componentCount; c++)
+                        {
+                            var ifComponentStartedIfElse = new IfElse
+                            {
+                                Condition = new Binary
+                                {
+                                    Left = new Binary
+                                    {
+                                        Left = getStartVariableReference(c),
+                                        Operator = BinaryOperator.Equality,
+                                        Right = Value.False
+                                    },
+                                    Operator = BinaryOperator.ConditionalAnd,
+                                    Right = new Binary
+                                    {
+                                        Left = getJustFinishedVariableReference(c),
+                                        Operator = BinaryOperator.Equality,
+                                        Right = Value.False
+                                    }
+                                },
+                                True = Empty.Instance
+                            };
+
+                            if (notStartedComponentSelectingIfElse == null)
+                            {
+                                notStartedComponentSelectingIfElse = ifComponentStartedIfElse;
+                            }
+                            if (previousIfComponentStartedIfElse != null)
+                            {
+                                previousIfComponentStartedIfElse.Else = ifComponentStartedIfElse;
+                            }
+
+                            previousIfComponentStartedIfElse = ifComponentStartedIfElse;
+                        }
+                        runningStateCase.Whens.Add(new When
+                            {
+                                Expression = waitingForStartedStateValue,
+                                Body = new List<IVhdlElement> { { notStartedComponentSelectingIfElse } }
+                            });
+
+                        // WaitingForFinished state
+                        runningStateCase.Whens.Add(new When
+                            {
+                                Expression = waitingForFinishedStateValue
+                            });
+
+                        // AfterFinished state
+                        runningStateCase.Whens.Add(new When
+                            {
+                                Expression = afterFinishedStateValue
+                            });
+
+
+                        invokationHandlerBlock.Add(new IfElse
+                        {
+                            Condition = InvokationHelper.CreateStartedSignalReference(invokerName, memberName, i),
+                            True = runningStateCase
+                        });
                     }
                 }
 
