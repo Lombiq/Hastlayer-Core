@@ -191,7 +191,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     var currentParameter = methodParametersEnumerator.Current;
 
                     var parameterVariableName = stateMachine
-                        .CreatePrefixedSegmentedObjectName(targetMethodName, currentParameter.Name, i.ToString());
+                        .CreatePrefixedSegmentedObjectName(
+                            ArchitectureComponentNameHelper
+                                .CreateParameterVariableName(targetMethodName, currentParameter.Name).TrimExtendedVhdlIdDelimiters(),
+                            i.ToString());
 
                     stateMachine.GlobalVariables.AddIfNew(new Variable
                         {

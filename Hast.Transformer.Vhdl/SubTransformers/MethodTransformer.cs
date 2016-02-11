@@ -85,6 +85,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = _memberStateMachineFactory
                 .CreateStateMachine(ArchitectureComponentNameHelper.CreateIndexedComponentName(method.GetFullName(), stateMachineIndex));
 
+            // Adding the opening state's block.
+            var openingBlock = new InlineBlock();
+
 
             // Handling return type.
             var returnType = _typeConverter.ConvertAstType(method.ReturnType);
@@ -101,17 +104,33 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Handling in/out method parameters.
             foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
             {
+                // Since input parameters are assigned to from the outside but they could be attempted to be also assigned
+                // to from the inside (since in .NET a method argument can also be assigned to from inside the method)
+                // we need to have intermediary input variables, then copy their values to local variables.
+
+                var parameterDataType = _typeConverter.ConvertAstType(parameter.Type);
+                var parameterGlobalVariableName = stateMachine.CreateParameterVariableName(parameter.Name);
+                var parameterLocalVariableName = stateMachine.CreatePrefixedObjectName(parameter.Name);
+
                 stateMachine.GlobalVariables.Add(new Variable
                 {
-                    DataType = _typeConverter.ConvertAstType(parameter.Type),
-                    Name = stateMachine.CreatePrefixedObjectName(parameter.Name)
+                    DataType = parameterDataType,
+                    Name = parameterGlobalVariableName
+                });
+
+                stateMachine.LocalVariables.Add(new Variable
+                {
+                    DataType = parameterDataType,
+                    Name = parameterLocalVariableName
+                });
+
+                openingBlock.Add(new Assignment
+                {
+                    AssignTo = parameterLocalVariableName.ToVhdlVariableReference(),
+                    Expression = parameterGlobalVariableName.ToVhdlVariableReference()
                 });
             }
 
-
-            // Adding opening state and its block.
-            var openingBlock = new InlineBlock();
-            var openingStateIndex = stateMachine.AddState(openingBlock);
 
             // Processing method body.
             var bodyContext = new SubTransformerContext
@@ -121,7 +140,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     Method = method,
                     StateMachine = stateMachine,
-                    CurrentBlock = new CurrentBlock(stateMachine, openingBlock, openingStateIndex)
+                    CurrentBlock = new CurrentBlock(stateMachine, openingBlock, stateMachine.AddState(openingBlock))
                 }
             };
 

@@ -9,19 +9,24 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public static class ArchitectureComponentExtensions
     {
-        public static string CreateStartedSignalName(this IMemberStateMachine stateMachine)
+        public static string CreateStartedSignalName(this IArchitectureComponent component)
         {
-            return ArchitectureComponentNameHelper.CreateStartedSignalName(stateMachine.Name);
+            return ArchitectureComponentNameHelper.CreateStartedSignalName(component.Name);
         }
 
-        public static string CreateFinishedSignalName(this IMemberStateMachine stateMachine)
+        public static string CreateFinishedSignalName(this IArchitectureComponent component)
         {
-            return ArchitectureComponentNameHelper.CreateFinishedSignalName(stateMachine.Name);
+            return ArchitectureComponentNameHelper.CreateFinishedSignalName(component.Name);
         }
 
-        public static string CreateReturnVariableName(this IMemberStateMachine stateMachine)
+        public static string CreateParameterVariableName(this IArchitectureComponent component, string parameterName)
         {
-            return ArchitectureComponentNameHelper.CreateReturnVariableName(stateMachine.Name);
+            return ArchitectureComponentNameHelper.CreateParameterVariableName(component.Name, parameterName);
+        }
+
+        public static string CreateReturnVariableName(this IArchitectureComponent component)
+        {
+            return ArchitectureComponentNameHelper.CreateReturnVariableName(component.Name);
         }
 
         public static string CreatePrefixedSegmentedObjectName(this IArchitectureComponent component, params string[] segments)
