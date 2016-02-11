@@ -187,7 +187,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 foreach (var parameter in transformedParameters)
                 {
-                    // Adding signal for parameter passing if it doesn't exist.
+                    // Adding variable for parameter passing if it doesn't exist.
                     var currentParameter = methodParametersEnumerator.Current;
 
                     var parameterVariableName = stateMachine
@@ -203,10 +203,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         });
 
 
-                    // Assign local values to be passed to the intermediary signal.
+                    // Assign local values to be passed to the intermediary variable.
                     currentBlock.Add(new Assignment
                         {
-                            AssignTo = parameterVariableName.ToVhdlSignalReference(),
+                            AssignTo = parameterVariableName.ToVhdlVariableReference(),
                             Expression = parameter
                         });
 
