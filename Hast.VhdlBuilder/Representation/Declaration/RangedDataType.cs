@@ -12,7 +12,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public RangedDataType(DataType baseType)
         {
             TypeCategory = baseType.TypeCategory;
-            Name = base.Name;
+            Name = baseType.Name;
         }
 
         public RangedDataType()
