@@ -370,7 +370,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                                 new Assignment
                                                 {
                                                     AssignTo = InvokationHelper
-                                                        .CreateFinishedSignalReference(invokerName, targetMemberName, c),
+                                                        .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                                                     Expression = Value.False
                                                 }
                                             }
