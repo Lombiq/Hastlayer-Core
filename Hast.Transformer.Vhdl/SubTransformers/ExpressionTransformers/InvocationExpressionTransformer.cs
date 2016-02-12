@@ -196,10 +196,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 .CreateParameterVariableName(targetMethodName, currentParameter.Name).TrimExtendedVhdlIdDelimiters(),
                             i.ToString());
 
-                    stateMachine.GlobalVariables.AddIfNew(new Variable
+                    stateMachine.GlobalVariables.AddIfNew(new ParameterVariable(targetMethodName, currentParameter.Name)
                         {
                             DataType = _typeConverter.ConvertAstType(currentParameter.Type),
-                            Name = parameterVariableName
+                            Name = parameterVariableName,
+                            Index = i
                         });
 
 

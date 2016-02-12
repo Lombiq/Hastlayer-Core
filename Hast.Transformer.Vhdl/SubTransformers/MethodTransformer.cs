@@ -82,8 +82,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IVhdlTransformationContext context,
             int stateMachineIndex)
         {
+            var methodFullName = method.GetFullName();
             var stateMachine = _memberStateMachineFactory
-                .CreateStateMachine(ArchitectureComponentNameHelper.CreateIndexedComponentName(method.GetFullName(), stateMachineIndex));
+                .CreateStateMachine(ArchitectureComponentNameHelper.CreateIndexedComponentName(methodFullName, stateMachineIndex));
 
             // Adding the opening state's block.
             var openingBlock = new InlineBlock();
@@ -112,7 +113,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var parameterGlobalVariableName = stateMachine.CreateParameterVariableName(parameter.Name);
                 var parameterLocalVariableName = stateMachine.CreatePrefixedObjectName(parameter.Name);
 
-                stateMachine.GlobalVariables.Add(new Variable
+                stateMachine.GlobalVariables.Add(new ParameterVariable(methodFullName, parameter.Name)
                 {
                     DataType = parameterDataType,
                     Name = parameterGlobalVariableName

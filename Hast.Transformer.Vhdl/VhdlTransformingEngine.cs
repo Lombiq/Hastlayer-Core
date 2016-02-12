@@ -105,12 +105,12 @@ namespace Hast.Transformer.Vhdl
             var internaInvokationProxies = _internalInvokationProxyBuilder.BuildProxy(
                 potentiallyInvokingArchitectureComponents,
                 vhdlTransformationContext);
-            sw.Stop();
             foreach (var proxy in internaInvokationProxies)
             {
                 architecture.Declarations.Add(proxy.BuildDeclarations());
                 architecture.Add(proxy.BuildBody());
             }
+            sw.Stop();
 
 
             // Adding common ports

@@ -7,7 +7,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
-    public static class ArchitectureComponentExtensions
+    public static class ArchitectureComponentNameExtensions
     {
         public static string CreateStartedSignalName(this IArchitectureComponent component)
         {
@@ -64,22 +64,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             }
 
             return component.CreatePrefixedObjectName(objectName);
-        }
-
-        public static Variable CreateVariableWithNextUnusedIndexedName(
-            this IArchitectureComponent component, 
-            string name, 
-            DataType dataType)
-        {
-            var returnVariable = new Variable
-            {
-                Name = component.GetNextUnusedIndexedObjectName(name),
-                DataType = dataType
-            };
-
-            component.LocalVariables.Add(returnVariable);
-
-            return returnVariable;
         }
     }
 }

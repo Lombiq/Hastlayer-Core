@@ -21,6 +21,8 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
             IEnumerable<IArchitectureComponent> components,
             IVhdlTransformationContext transformationContext)
         {
+            var componentsByName = components.ToDictionary(component => component.Name);
+            
             // [invoked member name][from component name][invokation instance count]
             var invokedMembers = new Dictionary<string, List<KeyValuePair<string, int>>>();
 
@@ -66,15 +68,15 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
             foreach (var invokedMember in invokedMembers)
             {
-                var memberName = invokedMember.Key;
+                var targetMemberName = invokedMember.Key;
 
-                var proxyComponent = new ConfigurableComponent(namePrefix + memberName);
+                var proxyComponent = new ConfigurableComponent(namePrefix + targetMemberName);
                 proxyComponents.Add(proxyComponent);
                 var bodyBlock = new InlineBlock();
 
 
                 Func<int, string> getMemberComponentName = index =>
-                    ArchitectureComponentNameHelper.CreateIndexedComponentName(memberName, index);
+                    ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, index);
 
                 Func<int, DataObjectReference> getStartVariableReference = index => proxyComponent
                             .CreatePrefixedSegmentedObjectName(ArchitectureComponentNameHelper
@@ -89,9 +91,9 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
                 // How many instances does this member have in form of components, e.g. how many state machines are
                 // there for this member?
-                var componentCount = transformationContext
+                var targetComponentCount = transformationContext
                     .GetTransformerConfiguration()
-                    .GetMaxInvokationInstanceCountConfigurationForMember(memberName.ToSimpleName()).MaxInvokationInstanceCount;
+                    .GetMaxInvokationInstanceCountConfigurationForMember(targetMemberName.ToSimpleName()).MaxInvokationInstanceCount;
 
 
                 // Creating started variables for each indexed component of the member, e.g. all state machines of a 
@@ -105,7 +107,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                     new LineComment("JustFinished states should be only kept for one clock cycle, since they are used not to immediately restart a state machine once it finished."));
                 bodyBlock.Add(justFinishedWriteBlock);
 
-                for (int i = 0; i < componentCount; i++)
+                for (int i = 0; i < targetComponentCount; i++)
                 {
                     var startedVariableReference = getStartVariableReference(i);
                     proxyComponent.LocalVariables.Add(new Variable
@@ -176,18 +178,54 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                         };
 
                         // WaitingForStarted state
+                        var passedParameters = componentsByName[invokerName]
+                            .GetParameterVariables()
+                            .Where(parameter => parameter.TargetMemberFullName == targetMemberName && parameter.Index == i);
+
                         // Chaining together ifs to check all the instances of the target component whether they
                         // are already started.
                         IfElse notStartedComponentSelectingIfElse = null;
-                        for (int c = 0; c < componentCount; c++)
+                        for (int c = 0; c < targetComponentCount; c++)
                         {
+                            var componentStartVariableReference = getStartVariableReference(c);
+
+                            var ifComponentStartedTrue = new InlineBlock(
+                                new Assignment
+                                {
+                                    AssignTo = runningIndexName.ToVhdlVariableReference(),
+                                    Expression = new Value
+                                    {
+                                        DataType = KnownDataTypes.UnrangedInt,
+                                        Content = c.ToString()
+                                    }
+                                },
+                                new Assignment
+                                {
+                                    AssignTo = componentStartVariableReference,
+                                    Expression = Value.True
+                                });
+
+                            var targetParameters = 
+                                componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, c)]
+                                .GetParameterVariables()
+                                .Where(parameter => parameter.TargetMemberFullName == targetMemberName);
+                            foreach (var parameter in passedParameters)
+                            {
+                                ifComponentStartedTrue.Add(new Assignment
+                                    {
+                                        AssignTo = targetParameters
+                                            .Single(p => p.TargetParameterName == parameter.TargetParameterName),
+                                        Expression = parameter.ToReference()
+                                    });
+                            }
+
                             var ifComponentStartedIfElse = new IfElse
                             {
                                 Condition = new Binary
                                 {
                                     Left = new Binary
                                     {
-                                        Left = getStartVariableReference(c),
+                                        Left = componentStartVariableReference,
                                         Operator = BinaryOperator.Equality,
                                         Right = Value.False
                                     },
@@ -199,7 +237,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                         Right = Value.False
                                     }
                                 },
-                                True = Empty.Instance
+                                True = ifComponentStartedTrue
                             };
 
                             if (notStartedComponentSelectingIfElse != null)
@@ -214,7 +252,17 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                         runningStateCase.Whens.Add(new When
                             {
                                 Expression = waitingForStartedStateValue,
-                                Body = new List<IVhdlElement> { { notStartedComponentSelectingIfElse } }
+                                Body = new List<IVhdlElement>
+                                {
+                                    { 
+                                        new Assignment
+                                        {
+                                            AssignTo = InvokationHelper.CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                                            Expression = Value.False
+                                        }
+                                    },
+                                    { notStartedComponentSelectingIfElse }
+                                }
                             });
 
                         // WaitingForFinished state
@@ -231,10 +279,10 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
 
                         invokationHandlerBlock.Add(new IfElse
-                        {
-                            Condition = InvokationHelper.CreateStartedSignalReference(invokerName, memberName, i),
-                            True = runningStateCase
-                        });
+                            {
+                                Condition = InvokationHelper.CreateStartedSignalReference(invokerName, targetMemberName, i),
+                                True = runningStateCase
+                            });
                     }
                 }
 
@@ -242,7 +290,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 // Writing Started variables back to signals.
                 var startedWriteBackBlock = new LogicalBlock(
                     new LineComment("Writing Started variable values back to signals."));
-                for (int i = 0; i < componentCount; i++)
+                for (int i = 0; i < targetComponentCount; i++)
                 {
                     startedWriteBackBlock.Add(new Assignment
                         {
