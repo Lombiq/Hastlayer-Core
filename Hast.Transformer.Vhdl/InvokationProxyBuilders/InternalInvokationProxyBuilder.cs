@@ -160,11 +160,12 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
                         var runningStateVariableName = proxyComponent
                             .CreatePrefixedSegmentedObjectName(invokerName, "runningState", i.ToString());
+                        var runningStateVariableReference = runningStateVariableName.ToVhdlVariableReference();
                         proxyComponent.LocalVariables.Add(new Variable
                         {
                             DataType = runningStates,
                             Name = runningStateVariableName,
-                            InitialValue = waitingForFinishedStateValue
+                            InitialValue = waitingForStartedStateValue
                         });
 
 
@@ -175,7 +176,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
                         var runningStateCase = new Case
                         {
-                            Expression = runningStateVariableName.ToVhdlVariableReference()
+                            Expression = runningStateVariableReference
                         };
 
 
@@ -193,6 +194,11 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                 var componentStartVariableReference = getStartVariableReference(c);
 
                                 var ifComponentStartedTrue = new InlineBlock(
+                                    new Assignment
+                                    {
+                                        AssignTo = runningStateVariableReference,
+                                        Expression = waitingForFinishedStateValue
+                                    },
                                     new Assignment
                                     {
                                         AssignTo = runningIndexVariableReference,
@@ -288,6 +294,11 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                             for (int c = 0; c < targetComponentCount; c++)
                             {
                                 var isFinishedIfTrue = new InlineBlock(
+                                    new Assignment
+                                    {
+                                        AssignTo = runningStateVariableReference,
+                                        Expression = afterFinishedStateValue
+                                    },
                                     finishedSignalAssignment,
                                     new Assignment
                                     {
