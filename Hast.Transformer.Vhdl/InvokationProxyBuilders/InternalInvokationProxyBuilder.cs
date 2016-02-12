@@ -22,7 +22,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
             IVhdlTransformationContext transformationContext)
         {
             var componentsByName = components.ToDictionary(component => component.Name);
-            
+
             // [invoked member name][from component name][invokation instance count]
             var invokedMembers = new Dictionary<string, List<KeyValuePair<string, int>>>();
 
@@ -147,6 +147,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                     {
                         var runningIndexName = proxyComponent
                             .CreatePrefixedSegmentedObjectName(invokerName, "runningIndex", i.ToString());
+                        var runningIndexVariableReference = runningIndexName.ToVhdlVariableReference();
                         proxyComponent.LocalVariables.Add(new Variable
                         {
                             DataType = new RangedDataType(KnownDataTypes.UnrangedInt)
@@ -177,112 +178,185 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                             Expression = runningStateVariableName.ToVhdlVariableReference()
                         };
 
+
                         // WaitingForStarted state
-                        var passedParameters = componentsByName[invokerName]
+                        {
+                            var passedParameters = componentsByName[invokerName]
                             .GetParameterVariables()
                             .Where(parameter => parameter.TargetMemberFullName == targetMemberName && parameter.Index == i);
 
-                        // Chaining together ifs to check all the instances of the target component whether they
-                        // are already started.
-                        IfElse notStartedComponentSelectingIfElse = null;
-                        for (int c = 0; c < targetComponentCount; c++)
-                        {
-                            var componentStartVariableReference = getStartVariableReference(c);
-
-                            var ifComponentStartedTrue = new InlineBlock(
-                                new Assignment
-                                {
-                                    AssignTo = runningIndexName.ToVhdlVariableReference(),
-                                    Expression = new Value
-                                    {
-                                        DataType = KnownDataTypes.UnrangedInt,
-                                        Content = c.ToString()
-                                    }
-                                },
-                                new Assignment
-                                {
-                                    AssignTo = componentStartVariableReference,
-                                    Expression = Value.True
-                                });
-
-                            var targetParameters = 
-                                componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, c)]
-                                .GetParameterVariables()
-                                .Where(parameter => parameter.TargetMemberFullName == targetMemberName);
-                            foreach (var parameter in passedParameters)
+                            // Chaining together ifs to check all the instances of the target component whether they
+                            // are already started.
+                            IfElse notStartedComponentSelectingIfElse = null;
+                            for (int c = 0; c < targetComponentCount; c++)
                             {
-                                ifComponentStartedTrue.Add(new Assignment
+                                var componentStartVariableReference = getStartVariableReference(c);
+
+                                var ifComponentStartedTrue = new InlineBlock(
+                                    new Assignment
                                     {
-                                        AssignTo = targetParameters
-                                            .Single(p => p.TargetParameterName == parameter.TargetParameterName),
-                                        Expression = parameter.ToReference()
+                                        AssignTo = runningIndexVariableReference,
+                                        Expression = new Value
+                                        {
+                                            DataType = KnownDataTypes.UnrangedInt,
+                                            Content = c.ToString()
+                                        }
+                                    },
+                                    new Assignment
+                                    {
+                                        AssignTo = componentStartVariableReference,
+                                        Expression = Value.True
+                                    });
+
+                                var targetParameters =
+                                    componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, c)]
+                                    .GetParameterVariables()
+                                    .Where(parameter => parameter.TargetMemberFullName == targetMemberName);
+                                foreach (var parameter in passedParameters)
+                                {
+                                    ifComponentStartedTrue.Add(new Assignment
+                                        {
+                                            AssignTo = targetParameters
+                                                .Single(p => p.TargetParameterName == parameter.TargetParameterName),
+                                            Expression = parameter.ToReference()
+                                        });
+                                }
+
+                                var ifComponentStartedIfElse = new IfElse
+                                {
+                                    Condition = new Binary
+                                    {
+                                        Left = new Binary
+                                        {
+                                            Left = componentStartVariableReference,
+                                            Operator = BinaryOperator.Equality,
+                                            Right = Value.False
+                                        },
+                                        Operator = BinaryOperator.ConditionalAnd,
+                                        Right = new Binary
+                                        {
+                                            Left = getJustFinishedVariableReference(c),
+                                            Operator = BinaryOperator.Equality,
+                                            Right = Value.False
+                                        }
+                                    },
+                                    True = ifComponentStartedTrue
+                                };
+
+                                if (notStartedComponentSelectingIfElse != null)
+                                {
+                                    notStartedComponentSelectingIfElse.ElseIfs.Add(ifComponentStartedIfElse);
+                                }
+                                else
+                                {
+                                    notStartedComponentSelectingIfElse = ifComponentStartedIfElse;
+                                }
+                            }
+                            runningStateCase.Whens.Add(new When
+                                {
+                                    Expression = waitingForStartedStateValue,
+                                    Body = new List<IVhdlElement>
+                                    {
+                                        { 
+                                            new Assignment
+                                            {
+                                                AssignTo = InvokationHelper
+                                                    .CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                                                Expression = Value.False
+                                            }
+                                        },
+                                        { notStartedComponentSelectingIfElse }
+                                    }
+                                });
+                        }
+
+
+                        // WaitingForFinished state
+                        {
+                            var runningIndexCase = new Case
+                            {
+                                Expression = runningIndexVariableReference
+                            };
+
+                            var finishedSignalAssignment = new Assignment
+                            {
+                                AssignTo = InvokationHelper
+                                    .CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                                Expression = Value.True
+                            };
+
+                            for (int c = 0; c < targetComponentCount; c++)
+                            {
+                                var isFinishedIfTrue = new InlineBlock(
+                                    finishedSignalAssignment,
+                                    new Assignment
+                                    {
+                                        AssignTo = getStartVariableReference(c),
+                                        Expression = Value.False
+                                    },
+                                    new Assignment
+                                    {
+                                        AssignTo = getJustFinishedVariableReference(c),
+                                        Expression = Value.False
+                                    });
+
+                                // Does the target has a return value?
+                                var targetComponent = componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, c)];
+                                var returnVariable =
+                                    targetComponent
+                                    .GlobalVariables
+                                    .SingleOrDefault(variable => variable.Name == targetComponent.CreateReturnVariableName());
+                                if (returnVariable != null)
+                                {
+                                    isFinishedIfTrue.Add(new Assignment
+                                        {
+                                            AssignTo = componentsByName[invokerName]
+                                                .CreateReturnVariableNameForTargetComponent(targetMemberName, i)
+                                                .ToVhdlVariableReference(),
+                                            Expression = returnVariable.ToReference()
+                                        });
+                                }
+
+                                var isFinishedIf = new If
+                                {
+                                    Condition = ArchitectureComponentNameHelper
+                                        .CreateFinishedSignalName(getMemberComponentName(c))
+                                        .ToVhdlSignalReference(),
+                                    True = isFinishedIfTrue
+                                };
+
+                                runningIndexCase.Whens.Add(new When
+                                    {
+                                        Expression = new Value { DataType = KnownDataTypes.UnrangedInt, Content = c.ToString() },
+                                        Body = new List<IVhdlElement> { { isFinishedIf } }
                                     });
                             }
 
-                            var ifComponentStartedIfElse = new IfElse
-                            {
-                                Condition = new Binary
+                            runningStateCase.Whens.Add(new When
                                 {
-                                    Left = new Binary
+                                    Expression = waitingForFinishedStateValue,
+                                    Body = new List<IVhdlElement>
                                     {
-                                        Left = componentStartVariableReference,
-                                        Operator = BinaryOperator.Equality,
-                                        Right = Value.False
-                                    },
-                                    Operator = BinaryOperator.ConditionalAnd,
-                                    Right = new Binary
-                                    {
-                                        Left = getJustFinishedVariableReference(c),
-                                        Operator = BinaryOperator.Equality,
-                                        Right = Value.False
+                                        { runningIndexCase }
                                     }
-                                },
-                                True = ifComponentStartedTrue
-                            };
-
-                            if (notStartedComponentSelectingIfElse != null)
-                            {
-                                notStartedComponentSelectingIfElse.ElseIfs.Add(ifComponentStartedIfElse);
-                            }
-                            else
-                            {
-                                notStartedComponentSelectingIfElse = ifComponentStartedIfElse;
-                            }
+                                });
                         }
-                        runningStateCase.Whens.Add(new When
-                            {
-                                Expression = waitingForStartedStateValue,
-                                Body = new List<IVhdlElement>
-                                {
-                                    { 
-                                        new Assignment
-                                        {
-                                            AssignTo = InvokationHelper.CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                            Expression = Value.False
-                                        }
-                                    },
-                                    { notStartedComponentSelectingIfElse }
-                                }
-                            });
 
-                        // WaitingForFinished state
-                        runningStateCase.Whens.Add(new When
-                            {
-                                Expression = waitingForFinishedStateValue
-                            });
 
                         // AfterFinished state
-                        runningStateCase.Whens.Add(new When
-                            {
-                                Expression = afterFinishedStateValue
-                            });
+                        {
+                            runningStateCase.Whens.Add(new When
+                                {
+                                    Expression = afterFinishedStateValue
+                                });
 
 
-                        invokationHandlerBlock.Add(new IfElse
-                            {
-                                Condition = InvokationHelper.CreateStartedSignalReference(invokerName, targetMemberName, i),
-                                True = runningStateCase
-                            });
+                            invokationHandlerBlock.Add(new IfElse
+                                {
+                                    Condition = InvokationHelper.CreateStartedSignalReference(invokerName, targetMemberName, i),
+                                    True = runningStateCase
+                                });
+                        }
                     }
                 }
 

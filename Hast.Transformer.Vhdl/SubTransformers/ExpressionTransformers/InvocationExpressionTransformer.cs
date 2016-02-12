@@ -245,8 +245,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 for (int i = 0; i < currentInvokationDegreeOfParallelism; i++)
                 {
                     // Creating return variable if it doesn't exist.
-                    var returnVariableName = stateMachine
-                        .CreatePrefixedSegmentedObjectName(targetMethodName, NameSuffixes.Return, i.ToString());
+                    var returnVariableName = stateMachine.CreateReturnVariableNameForTargetComponent(targetMethodName, i);
 
                     stateMachine.GlobalVariables.AddIfNew(new Variable
                     {
