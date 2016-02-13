@@ -116,7 +116,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
             for (int i = 0; i < _states.Count; i++)
             {
-                var stateWhen = new When { Expression = this.CreateStateName(i).ToVhdlIdValue() };
+                var stateWhen = new CaseWhen { Expression = this.CreateStateName(i).ToVhdlIdValue() };
                 stateWhen.Add(_states[i].Body);
                 stateWhen.Add(new LineComment("Clock cycles needed to complete this state (approximation): " + _states[i].RequiredClockCycles));
                 stateCase.Whens.Add(stateWhen);

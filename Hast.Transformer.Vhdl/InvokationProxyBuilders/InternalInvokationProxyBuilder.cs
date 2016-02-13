@@ -258,7 +258,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     notStartedComponentSelectingIfElse = ifComponentStartedIfElse;
                                 }
                             }
-                            runningStateCase.Whens.Add(new When
+                            runningStateCase.Whens.Add(new CaseWhen
                                 {
                                     Expression = waitingForStartedStateValue,
                                     Body = new List<IVhdlElement>
@@ -334,14 +334,14 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     True = isFinishedIfTrue
                                 };
 
-                                runningIndexCase.Whens.Add(new When
+                                runningIndexCase.Whens.Add(new CaseWhen
                                     {
                                         Expression = new Value { DataType = KnownDataTypes.UnrangedInt, Content = c.ToString() },
                                         Body = new List<IVhdlElement> { { isFinishedIf } }
                                     });
                             }
 
-                            runningStateCase.Whens.Add(new When
+                            runningStateCase.Whens.Add(new CaseWhen
                                 {
                                     Expression = waitingForFinishedStateValue,
                                     Body = new List<IVhdlElement>
@@ -361,7 +361,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
                             for (int c = 0; c < targetComponentCount; c++)
                             {
-                                runningIndexCase.Whens.Add(new When
+                                runningIndexCase.Whens.Add(new CaseWhen
                                     {
                                         Expression = new Value { DataType = KnownDataTypes.UnrangedInt, Content = c.ToString() },
                                         Body = new List<IVhdlElement>
@@ -378,7 +378,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     });
                             }
 
-                            runningStateCase.Whens.Add(new When
+                            runningStateCase.Whens.Add(new CaseWhen
                                 {
                                     Expression = afterFinishedStateValue,
                                     Body = new List<IVhdlElement>

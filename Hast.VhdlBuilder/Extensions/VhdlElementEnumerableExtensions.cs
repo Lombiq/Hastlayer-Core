@@ -3,20 +3,22 @@ using System.Linq;
 using System.Text;
 using Hast.VhdlBuilder.Representation;
 
-namespace Hast.VhdlBuilder.Extensions
+namespace System.Collections.Generic
 {
     public static class VhdlElementEnumerableExtensions
     {
-        public static string ToVhdl(this IEnumerable<IVhdlElement> elements, IVhdlGenerationOptions vhdlGenerationOptions)
+        public static string ToVhdl<T>(this IEnumerable<T> elements, IVhdlGenerationOptions vhdlGenerationOptions)
+            where T : IVhdlElement
         {
             return elements.ToVhdl(vhdlGenerationOptions, string.Empty);
         }
 
-        public static string ToVhdl(
-            this IEnumerable<IVhdlElement> elements,
+        public static string ToVhdl<T>(
+            this IEnumerable<T> elements,
             IVhdlGenerationOptions vhdlGenerationOptions,
             string elementTerminator,
             string lastElementTerminator = null)
+            where T : IVhdlElement
         {
             if (elements == null || !elements.Any()) return string.Empty;
 

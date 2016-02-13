@@ -76,6 +76,7 @@
     <Compile Include="Representation\Declaration\Module.cs" />
     <Compile Include="Representation\Declaration\Entity.cs" />
     <Compile Include="Representation\Expression\Character.cs" />
+    <Compile Include="Representation\Expression\ConditionalSignalAssignment.cs" />
     <Compile Include="Representation\Expression\DataObjectReference.cs" />
     <Compile Include="Representation\Expression\If.cs" />
     <Compile Include="Representation\Expression\IdentifierValue.cs" />

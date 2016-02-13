@@ -10,12 +10,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class Case : IVhdlElement
     {
         public IVhdlElement Expression { get; set; }
-        public List<When> Whens { get; set; }
+        public List<CaseWhen> Whens { get; set; }
 
 
         public Case()
         {
-            Whens = new List<When>();
+            Whens = new List<CaseWhen>();
         }
 
 
@@ -42,13 +42,13 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class When : IBlockElement
+    public class CaseWhen : IBlockElement
     {
         public IVhdlElement Expression { get; set; }
         public List<IVhdlElement> Body { get; set; }
 
 
-        public When()
+        public CaseWhen()
         {
             Body = new List<IVhdlElement>();
         }
