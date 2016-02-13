@@ -101,7 +101,6 @@ namespace Hast.Transformer.Vhdl
 
 
             // Proxying internal invokations
-            var sw = System.Diagnostics.Stopwatch.StartNew();
             var internaInvokationProxies = _internalInvokationProxyBuilder.BuildProxy(
                 potentiallyInvokingArchitectureComponents,
                 vhdlTransformationContext);
@@ -110,7 +109,6 @@ namespace Hast.Transformer.Vhdl
                 architecture.Declarations.Add(proxy.BuildDeclarations());
                 architecture.Add(proxy.BuildBody());
             }
-            sw.Stop();
 
 
             // Adding common ports
