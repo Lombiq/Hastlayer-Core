@@ -108,7 +108,8 @@ namespace Hast.VhdlBuilder.Representation
                             }
 
                             return shortName;
-                    });
+                    },
+                    RegexOptions.Compiled);
                 }
 
                 return newName;
