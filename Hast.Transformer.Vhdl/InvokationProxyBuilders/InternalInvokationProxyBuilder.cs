@@ -223,7 +223,8 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     ifComponentStartedTrue.Add(new Assignment
                                         {
                                             AssignTo = targetParameters
-                                                .Single(p => p.TargetParameterName == parameter.TargetParameterName),
+                                                .Single(p => 
+                                                    p.TargetParameterName == parameter.TargetParameterName && p.IsOwn),
                                             Expression = parameter.ToReference()
                                         });
                                 }

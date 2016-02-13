@@ -116,7 +116,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 stateMachine.GlobalVariables.Add(new ParameterVariable(methodFullName, parameter.Name)
                 {
                     DataType = parameterDataType,
-                    Name = parameterGlobalVariableName
+                    Name = parameterGlobalVariableName,
+                    IsOwn = true
                 });
 
                 stateMachine.LocalVariables.Add(new Variable
