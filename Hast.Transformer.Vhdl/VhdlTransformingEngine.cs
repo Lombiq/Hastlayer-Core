@@ -256,9 +256,9 @@ namespace Hast.Transformer.Vhdl
 
             ports.Add(new Port
             {
-                Name = SimpleMemoryPortNames.CellIndexOut,
+                Name = SimpleMemoryPortNames.CellIndex,
                 Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.CellIndexOutPortDataType
+                DataType = SimpleMemoryTypes.CellIndexPortDataType
             });
 
             ports.Add(new Port

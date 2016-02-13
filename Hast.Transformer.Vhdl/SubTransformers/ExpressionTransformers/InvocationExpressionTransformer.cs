@@ -62,7 +62,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // See: https://lombiq.atlassian.net/browse/HAST-44
                 currentBlock.Add(new Assignment
                 {
-                    AssignTo = SimpleMemoryPortNames.CellIndexOut.ToVhdlSignalReference(),
+                    AssignTo = SimpleMemoryPortNames.CellIndex.ToVhdlSignalReference(),
                     Expression = invokationParameters[0] // CellIndex is conventionally the first invokation parameter.
                 });
                 invokationParameters.RemoveAt(0);

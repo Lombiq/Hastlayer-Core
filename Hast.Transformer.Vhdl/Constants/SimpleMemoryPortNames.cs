@@ -6,7 +6,7 @@ namespace Hast.Transformer.Vhdl.Constants
     {
         public const string DataIn = @"\DataIn\";
         public const string DataOut = @"\DataOut\";
-        public const string CellIndexOut = @"\CellIndexOut\";
+        public const string CellIndex = @"\CellIndexOut\";
         public const string ReadEnable = @"\ReadEnable\";
         public const string WriteEnable = @"\WriteEnable\";
         public const string ReadsDone = @"\ReadsDone\";
