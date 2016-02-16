@@ -223,7 +223,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     ifComponentStartedTrue.Add(new Assignment
                                         {
                                             AssignTo = targetParameters
-                                                .Single(p => 
+                                                .Single(p =>
                                                     p.TargetParameterName == parameter.TargetParameterName && p.IsOwn),
                                             Expression = parameter.ToReference()
                                         });
@@ -393,21 +393,25 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                         },
                                         {
                                             runningIndexCase
-}
+                                        }
                                     }
                                 });
 
+
+                            // Adding resets for the finished signal.
+                            var finishedResetAssignment = new Assignment
+                            {
+                                AssignTo = InvokationHelper
+                                    .CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                                Expression = Value.False
+                            };
+                            proxyComponent.ProcessInReset = finishedResetAssignment;
 
                             invokationHandlerBlock.Add(new IfElse
                                 {
                                     Condition = InvokationHelper.CreateStartedSignalReference(invokerName, targetMemberName, i),
                                     True = runningStateCase,
-                                    Else = new Assignment
-                                    {
-                                        AssignTo = InvokationHelper
-                                            .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                        Expression = Value.False
-                                    } 
+                                    Else = finishedResetAssignment
                                 });
                         }
                     }
