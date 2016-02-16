@@ -9,9 +9,9 @@ namespace Hast.Transformer.Vhdl.Constants
 {
     internal static class SimpleMemoryTypes
     {
-        public static readonly DataType DataPortsDataType = new StdLogicVector { Size = 32 };
-        public static readonly DataType CellIndexPortDataType = KnownDataTypes.UnrangedInt;
-        public static readonly DataType EnablePortsDataType = KnownDataTypes.StdLogic;
-        public static readonly DataType DonePortsDataType = KnownDataTypes.StdLogic;
+        public static readonly DataType DataSignalsDataType = new StdLogicVector { Size = 32 };
+        public static readonly DataType CellIndexSignalDataType = KnownDataTypes.UnrangedInt;
+        public static readonly DataType EnableSignalsDataType = KnownDataTypes.StdLogic;
+        public static readonly DataType DoneSignalsDataType = KnownDataTypes.StdLogic;
     }
 }

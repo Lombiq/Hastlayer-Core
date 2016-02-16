@@ -44,6 +44,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 targetMemberReference.Target is IdentifierExpression &&
                 ((IdentifierExpression)targetMemberReference.Target).Identifier == context.Scope.Method.GetSimpleMemoryParameterName())
             {
+                stateMachine.AddSimpleMemorySignalsIfNew();
+
                 var memberName = targetMemberReference.MemberName;
 
                 var isWrite = memberName.StartsWith("Write");
@@ -58,35 +60,67 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     currentBlock.Add(new LineComment("Begin SimpleMemory read."));
                 }
 
-                // Directly setting SimpleMemory ports since the SimpleMemory library doesn't handle these yet.
-                // See: https://lombiq.atlassian.net/browse/HAST-44
+                // Setting SimpleMemory control signals:
                 currentBlock.Add(new Assignment
                 {
-                    AssignTo = SimpleMemoryPortNames.CellIndex.ToVhdlSignalReference(),
+                    AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
                     Expression = invokationParameters[0] // CellIndex is conventionally the first invokation parameter.
                 });
-                invokationParameters.RemoveAt(0);
-                var enablePortReference = (isWrite ? SimpleMemoryPortNames.WriteEnable : SimpleMemoryPortNames.ReadEnable)
-                    .ToVhdlSignalReference();
+
+                var enablePortReference = isWrite ?
+                    stateMachine.CreateSimpleMemoryWriteEnableSignalReference() :
+                    stateMachine.CreateSimpleMemoryReadEnableSignalReference();
                 currentBlock.Add(new Assignment
                 {
                     AssignTo = enablePortReference,
                     Expression = Value.OneCharacter
                 });
 
-                invokationParameters.AddRange(new[]
-                {
-                    (isWrite ? SimpleMemoryPortNames.DataOut : SimpleMemoryPortNames.DataIn).ToVhdlSignalReference()
-                    // The SimpleMemory library doesn't handle the CellIndex yet, we need to set that directly.
-                    //SimpleMemoryNames.CellIndexOutPort.ToVhdlSignalReference()
-                });
 
-                var target = "SimpleMemory" + targetMemberReference.MemberName;
-                var memoryOperationInvokation = new Invokation
+                Func<IVhdlElement, bool, IVhdlElement> implementSimpleMemoryTypeConversion = 
+                    (variableToConvert, directionIsLogicVectorToType) =>
+                    {
+                        // If the memory operations was Read/Write4Bytes then no need to do any conversions.
+                        if (targetMemberReference.MemberName.EndsWith("4Bytes"))
+                        {
+                            return variableToConvert;
+                        }
+
+                        string dataConversionInvokationTarget = null;
+                        var memoryType = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
+
+                        // Using the built-in conversion functions to handle known data types.
+                        if (memoryType == "UInt32" ||
+                            memoryType == "Int32" ||
+                            memoryType == "Boolean" ||
+                            memoryType == "Char")
+                        {
+                            if (directionIsLogicVectorToType)
+                            {
+                                dataConversionInvokationTarget = "ConvertStdLogicVectorTo" + memoryType;
+                            }
+                            else
+                            {
+                                dataConversionInvokationTarget = "Convert" + memoryType + "ToStdLogicVector";
+                            }
+                        }
+
+                        return new Invokation
+                        {
+                            Target = dataConversionInvokationTarget.ToVhdlIdValue(),
+                            Parameters = new List<IVhdlElement> { { variableToConvert } }
+                        };
+                    };
+
+                if (isWrite)
                 {
-                    Target = new Value { Content = target },
-                    Parameters = invokationParameters
-                };
+                    currentBlock.Add(new Assignment
+                    {
+                        AssignTo = stateMachine.CreateSimpleMemoryDataOutSignalReference(),
+                        // The data to write is conventionally the second parameter.
+                        Expression = implementSimpleMemoryTypeConversion(invokationParameters[1], false)
+                    });
+                }
 
                 // The memory operation should be initialized in this state, then finished in another one.
                 var memoryOperationFinishedBlock = new InlineBlock();
@@ -96,7 +130,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         Condition = new Binary
                         {
-                            Left = (isWrite ? SimpleMemoryPortNames.WritesDone : SimpleMemoryPortNames.ReadsDone).ToVhdlSignalReference(),
+                            Left = (isWrite ? SimpleMemoryPortNames.WritesDone : SimpleMemoryPortNames.ReadsDone)
+                                .ToExtendedVhdlId()
+                                .ToVhdlSignalReference(),
                             Operator = BinaryOperator.Equality,
                             Right = Value.OneCharacter
                         },
@@ -104,7 +140,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     });
                 var memoryOperationFinishedStateIndex = stateMachine.AddState(endMemoryOperationBlock);
 
-                // Directly resetting SimpleMemory *Enable port since the SimpleMemory library doesn't handle these yet.
                 memoryOperationFinishedBlock.Add(new Assignment
                 {
                     AssignTo = enablePortReference,
@@ -117,7 +152,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory write finished."));
 
-                    currentBlock.Add(memoryOperationInvokation.Terminate());
                     currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
 
                     return Empty.Instance;
@@ -126,17 +160,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory read finished."));
 
+
                     currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
 
-                    // If this is a memory read then comes the juggling with funneling the out parameter of the memory 
-                    // write procedure to the original location.
-                    var returnReference = CreateProcedureReturnReference(
-                        target,
-                        _typeConverter.ConvertTypeReference(expression.GetReturnTypeReference()),
-                        memoryOperationInvokation,
-                        context);
-
-                    return returnReference;
+                    return implementSimpleMemoryTypeConversion(
+                        SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
+                        true);
                 }
             }
 
@@ -264,41 +293,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 return Empty.Instance;
             }
-        }
-
-
-        /// <summary>
-        /// Procedures can't just be assigned to variables like methods as they don't have a return value, just out 
-        /// parameters. Thus here we create a variable for the out parameter (the return variable), run the procedure
-        /// with it and then use it later too.
-        /// </summary>
-        private static DataObjectReference CreateProcedureReturnReference(
-            string targetName,
-            DataType returnType,
-            Invokation invokation,
-            ISubTransformerContext context)
-        {
-            var returnVariableReference = context.Scope.StateMachine
-                .CreateVariableWithNextUnusedIndexedName(targetName + "." + NameSuffixes.Return, returnType)
-                .ToReference();
-
-            invokation.Parameters.Add(returnVariableReference);
-
-            // Adding the procedure invokation directly to the body so it's before the current expression...
-            context.Scope.CurrentBlock.Add(invokation.Terminate());
-
-            // ...and using the return variable in place of the original call.
-            return returnVariableReference;
-        }
-
-        private static DataObjectReference CreateFinishedSignalReference(
-            IMemberStateMachine stateMachine,
-            string targetMethodName,
-            int index)
-        {
-            return stateMachine
-                    .CreatePrefixedSegmentedObjectName(targetMethodName, NameSuffixes.Finished, index.ToString())
-                    .ToVhdlSignalReference();
         }
     }
 }
