@@ -31,8 +31,8 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
             var finishedSignal = new Signal
             {
                 Name = "FinishedInternal".ToExtendedVhdlId(),
-                DataType = KnownDataTypes.StdLogic,
-                InitialValue = Value.ZeroCharacter
+                DataType = KnownDataTypes.Boolean,
+                InitialValue = Value.False
             };
             proxyComponent.Signals.Add(finishedSignal);
             var finishedSignalReference = finishedSignal.ToReference();
@@ -58,7 +58,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 waitForInvokationFinishedIfElse.True.Add(new Assignment
                     {
                         AssignTo = finishedSignalReference,
-                        Expression = Value.OneCharacter
+                        Expression = Value.True
                     });
 
                 when.Add(new IfElse
@@ -89,14 +89,14 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                     {
                         Left = startedPortReference,
                         Operator = BinaryOperator.Equality,
-                        Right = Value.OneCharacter
+                        Right = Value.True
                     },
                     Operator = BinaryOperator.ConditionalAnd,
                     Right = new Binary
                     {
                         Left = finishedSignalReference,
                         Operator = BinaryOperator.Equality,
-                        Right = Value.ZeroCharacter
+                        Right = Value.False
                     }
 
                 },
@@ -113,21 +113,21 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                             {
                                 Left = startedPortReference,
                                 Operator = BinaryOperator.Equality,
-                                Right = Value.ZeroCharacter
+                                Right = Value.False
                             },
                             Operator = BinaryOperator.ConditionalAnd,
                             Right = new Binary
                             {
                                 Left = finishedSignalReference,
                                 Operator = BinaryOperator.Equality,
-                                Right = Value.OneCharacter
+                                Right = Value.True
                             }
 
                         },
                         True = new Assignment
                         {
                             AssignTo = finishedSignalReference,
-                            Expression = Value.ZeroCharacter
+                            Expression = Value.False
                         }
                     })
             };

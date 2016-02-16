@@ -147,13 +147,13 @@ namespace Hast.Transformer.Vhdl
             {
                 Name = CommonPortNames.Started,
                 Mode = PortMode.In,
-                DataType = KnownDataTypes.StdLogic
+                DataType = KnownDataTypes.Boolean
             });
             ports.Add(new Port
             {
                 Name = CommonPortNames.Finished,
                 Mode = PortMode.Out,
-                DataType = KnownDataTypes.StdLogic
+                DataType = KnownDataTypes.Boolean
             });
 
 

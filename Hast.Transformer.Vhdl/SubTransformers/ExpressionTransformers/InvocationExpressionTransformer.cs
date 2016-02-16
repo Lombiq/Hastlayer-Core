@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 currentBlock.Add(new Assignment
                 {
                     AssignTo = enablePortReference,
-                    Expression = Value.OneCharacter
+                    Expression = Value.True
                 });
 
 
@@ -134,7 +134,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 .ToExtendedVhdlId()
                                 .ToVhdlSignalReference(),
                             Operator = BinaryOperator.Equality,
-                            Right = Value.OneCharacter
+                            Right = Value.True
                         },
                         True = memoryOperationFinishedBlock
                     });
@@ -143,7 +143,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 memoryOperationFinishedBlock.Add(new Assignment
                 {
                     AssignTo = enablePortReference,
-                    Expression = Value.ZeroCharacter
+                    Expression = Value.False
                 });
 
                 currentBlock.Add(stateMachine.CreateStateChange(memoryOperationFinishedStateIndex));

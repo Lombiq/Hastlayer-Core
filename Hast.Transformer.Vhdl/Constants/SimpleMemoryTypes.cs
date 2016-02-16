@@ -11,7 +11,7 @@ namespace Hast.Transformer.Vhdl.Constants
     {
         public static readonly DataType DataSignalsDataType = new StdLogicVector { Size = 32 };
         public static readonly DataType CellIndexSignalDataType = KnownDataTypes.UnrangedInt;
-        public static readonly DataType EnableSignalsDataType = KnownDataTypes.StdLogic;
-        public static readonly DataType DoneSignalsDataType = KnownDataTypes.StdLogic;
+        public static readonly DataType EnableSignalsDataType = KnownDataTypes.Boolean;
+        public static readonly DataType DoneSignalsDataType = KnownDataTypes.Boolean;
     }
 }
