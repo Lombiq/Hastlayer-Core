@@ -10,6 +10,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public IVhdlElement SizeExpression { get; set; }
 
 
+        public override string ToReferenceVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            return ToVhdl(vhdlGenerationOptions);
+        }
+
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (Size == 0 && SizeExpression == null) return Name;
