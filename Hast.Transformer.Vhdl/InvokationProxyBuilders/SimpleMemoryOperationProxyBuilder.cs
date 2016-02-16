@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.Constants;
+using Hast.VhdlBuilder.Representation;
+using Hast.VhdlBuilder.Representation.Expression;
 using Orchard;
+using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 {
@@ -12,12 +17,108 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
     {
         public IArchitectureComponent BuildProxy(IEnumerable<IArchitectureComponent> components)
         {
-            foreach (var component in components.Where(c => c.AreSimpleMemorySignalsAdded()))
-            {
+            var simpleMemoryUsingComponents = components.Where(c => c.AreSimpleMemorySignalsAdded());
+            
 
+            var proxyComponentName = "System.Void Hast::SimpleMemoryOperationProxy()";
+            var signalsAssignmentBlock = new InlineBlock(new LineComment(proxyComponentName + " start"));
+
+
+            signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
+                SimpleMemoryPortNames.CellIndex,
+                simpleMemoryUsingComponents));
+
+            signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
+                SimpleMemoryPortNames.DataOut,
+                simpleMemoryUsingComponents));
+
+            signalsAssignmentBlock.Add(BuildConditionalOrPortAssignment(
+                SimpleMemoryPortNames.ReadEnable,
+                simpleMemoryUsingComponents));
+
+            signalsAssignmentBlock.Add(BuildConditionalOrPortAssignment(
+                SimpleMemoryPortNames.WriteEnable,
+                simpleMemoryUsingComponents));
+
+
+            signalsAssignmentBlock.Add(new LineComment(proxyComponentName + " start"));
+
+
+            // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look 
+            // from a generated state machine.
+            return new BasicComponent(proxyComponentName)
+            {
+                Body = signalsAssignmentBlock
+            };
+        }
+
+
+        private static ConditionalSignalAssignment BuildConditionalPortAssignment(
+            string portName,
+            IEnumerable<IArchitectureComponent> components)
+        {
+            var assignment = new ConditionalSignalAssignment
+            {
+                AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference()
+            };
+
+
+            foreach (var component in components)
+            {
+                assignment.Whens.Add(new SignalAssignmentWhen
+                    {
+                        Expression = new Binary
+                        {
+                            Left = component.CreateSimpleMemoryReadEnableSignalReference(),
+                            Operator = BinaryOperator.ConditionalOr,
+                            Right = component.CreateSimpleMemoryWriteEnableSignalReference()
+                        },
+                        Value = component.CreateSimpleMemorySignalName(portName).ToVhdlIdValue()
+                    });
             }
 
-            throw new NotImplementedException();
+
+            return assignment;
+        }
+
+        private static Assignment BuildConditionalOrPortAssignment(
+            string portName,
+            IEnumerable<IArchitectureComponent> components)
+        {
+            IVhdlElement assignmentExpression = components.First().CreateSimpleMemorySignalReference(portName);
+
+            // Iteratively build a binary expression chain to OR together all the driving signals.
+            if (components.Count() > 1)
+            {
+                var currentBinary = new Binary
+                {
+                    Left = components.Skip(1).First().CreateSimpleMemorySignalReference(portName),
+                    Operator = BinaryOperator.ConditionalOr
+                };
+                var firstBinary = currentBinary;
+
+                foreach (var drivingSignal in components.Skip(2).Select(c => c.CreateSimpleMemorySignalReference(portName)))
+                {
+                    var newBinary = new Binary
+                    {
+                        Left = drivingSignal,
+                        Operator = BinaryOperator.ConditionalOr
+                    };
+
+                    currentBinary.Right = newBinary;
+                    currentBinary = newBinary;
+                }
+
+                currentBinary.Right = assignmentExpression;
+                assignmentExpression = firstBinary;
+            }
+
+            
+            return new Assignment
+            {
+                AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
+                Expression = assignmentExpression
+            };
         }
     }
 }

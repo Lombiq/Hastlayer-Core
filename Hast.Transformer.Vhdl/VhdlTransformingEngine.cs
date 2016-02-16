@@ -118,10 +118,10 @@ namespace Hast.Transformer.Vhdl
             // Proxying SimpleMemory operations
             if (useSimpleMemory)
             {
-                //var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilderLazy.Value
-                //    .BuildProxy(potentiallyInvokingArchitectureComponents);
-                //architecture.Declarations.Add(simpleMemoryProxyComponent.BuildDeclarations());
-                //architecture.Add(simpleMemoryProxyComponent.BuildBody());
+                var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilderLazy.Value
+                    .BuildProxy(potentiallyInvokingArchitectureComponents);
+                architecture.Declarations.Add(simpleMemoryProxyComponent.BuildDeclarations());
+                architecture.Add(simpleMemoryProxyComponent.BuildBody());
             }
 
 

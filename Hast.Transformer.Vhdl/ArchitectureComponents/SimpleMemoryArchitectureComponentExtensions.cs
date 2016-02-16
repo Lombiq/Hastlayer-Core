@@ -71,15 +71,14 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return component.CreateSimpleMemorySignalReference(SimpleMemoryPortNames.WriteEnable);
         }
 
-
-        private static DataObjectReference CreateSimpleMemorySignalReference(
+        public static DataObjectReference CreateSimpleMemorySignalReference(
             this IArchitectureComponent component, 
             string simpleMemoryPortName)
         {
             return component.CreateSimpleMemorySignalName(simpleMemoryPortName).ToVhdlSignalReference();
         }
 
-        private static string CreateSimpleMemorySignalName(
+        public static string CreateSimpleMemorySignalName(
             this IArchitectureComponent component, 
             string simpleMemoryPortName)
         {
