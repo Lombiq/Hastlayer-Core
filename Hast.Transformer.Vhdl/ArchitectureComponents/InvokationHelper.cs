@@ -77,8 +77,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 component.Signals.AddIfNew(new Signal
                 {
                     DataType = KnownDataTypes.Boolean,
-                    Name = CreateFinishedSignalReference(component, targetStateMachineName, i).Name,
-                    InitialValue = Value.False
+                    Name = CreateFinishedSignalReference(component, targetStateMachineName, i).Name
                 });
 
                 // Reset the start signal in the finished block.

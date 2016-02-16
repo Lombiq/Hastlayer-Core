@@ -123,15 +123,15 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                 .CreateStartedSignalName(getMemberComponentName(i)).ToVhdlSignalReference()
                         });
 
-                    var finishedVariableReference = getJustFinishedVariableReference(i);
+                    var justFinishedVariableReference = getJustFinishedVariableReference(i);
                     proxyComponent.LocalVariables.Add(new Variable
                         {
                             DataType = KnownDataTypes.Boolean,
-                            Name = finishedVariableReference.Name
+                            Name = justFinishedVariableReference.Name
                         });
                     justFinishedWriteBlock.Add(new Assignment
                         {
-                            AssignTo = finishedVariableReference,
+                            AssignTo = justFinishedVariableReference,
                             Expression = Value.False
                         });
                 }
@@ -398,10 +398,16 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                 });
 
 
-                            invokationHandlerBlock.Add(new If
+                            invokationHandlerBlock.Add(new IfElse
                                 {
                                     Condition = InvokationHelper.CreateStartedSignalReference(invokerName, targetMemberName, i),
-                                    True = runningStateCase
+                                    True = runningStateCase,
+                                    Else = new Assignment
+                                    {
+                                        AssignTo = InvokationHelper
+                                            .CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                                        Expression = Value.False
+                                    } 
                                 });
                         }
                     }
