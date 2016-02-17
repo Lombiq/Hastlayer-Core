@@ -12,6 +12,7 @@ using Orchard;
 using Hast.VhdlBuilder.Extensions;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.Common.Extensions;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 {
@@ -70,7 +71,14 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                             Right = Value.False
                         },
                         True = InvokationHelper.CreateInvokationStart(proxyComponent, memberName, 0),
-                        Else = waitForInvokationFinishedIfElse
+                        ElseIfs = new List<If<IVhdlElement>>
+                        {
+                            new If
+                            {
+                                Condition = waitForInvokationFinishedIfElse.Condition,
+                                True = waitForInvokationFinishedIfElse.True
+                            }
+                        }
                     });
                 ;
 
