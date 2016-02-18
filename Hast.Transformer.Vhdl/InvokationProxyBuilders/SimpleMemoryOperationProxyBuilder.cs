@@ -26,11 +26,18 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
                 SimpleMemoryPortNames.CellIndex,
-                simpleMemoryUsingComponents));
+                simpleMemoryUsingComponents,
+                component => new Binary
+                {
+                    Left = component.CreateSimpleMemoryReadEnableSignalReference(),
+                    Operator = BinaryOperator.ConditionalOr,
+                    Right = component.CreateSimpleMemoryWriteEnableSignalReference()
+                }));
 
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
                 SimpleMemoryPortNames.DataOut,
-                simpleMemoryUsingComponents));
+                simpleMemoryUsingComponents,
+                component => component.CreateSimpleMemoryWriteEnableSignalReference()));
 
             signalsAssignmentBlock.Add(BuildConditionalOrPortAssignment(
                 SimpleMemoryPortNames.ReadEnable,
@@ -55,7 +62,8 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
         private static ConditionalSignalAssignment BuildConditionalPortAssignment(
             string portName,
-            IEnumerable<IArchitectureComponent> components)
+            IEnumerable<IArchitectureComponent> components,
+            Func<IArchitectureComponent, IVhdlElement> expressionBuilderForComponentsAssignment)
         {
             var assignment = new ConditionalSignalAssignment
             {
@@ -67,12 +75,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
             {
                 assignment.Whens.Add(new SignalAssignmentWhen
                     {
-                        Expression = new Binary
-                        {
-                            Left = component.CreateSimpleMemoryReadEnableSignalReference(),
-                            Operator = BinaryOperator.ConditionalOr,
-                            Right = component.CreateSimpleMemoryWriteEnableSignalReference()
-                        },
+                        Expression = expressionBuilderForComponentsAssignment(component),
                         Value = component.CreateSimpleMemorySignalName(portName).ToVhdlIdValue()
                     });
             }
