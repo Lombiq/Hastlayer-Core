@@ -74,10 +74,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
             for (int i = 0; i < degreeOfParallelism; i++)
             {
-                component.InternallyDrivenSignals.AddIfNew(new Signal
+                component.ExternallyDrivenSignals.AddIfNew(new Signal
                 {
                     DataType = KnownDataTypes.Boolean,
-                    Name = CreateFinishedSignalReference(component, targetStateMachineName, i).Name
+                    Name = CreateFinishedSignalReference(component, targetStateMachineName, i).Name,
+                    InitialValue = Value.False
                 });
 
                 // Reset the start signal in the finished block.

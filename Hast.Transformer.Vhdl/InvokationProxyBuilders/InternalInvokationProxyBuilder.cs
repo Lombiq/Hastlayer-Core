@@ -407,12 +407,11 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                             };
                             proxyComponent.ProcessInReset = finishedResetAssignment;
 
-                            invokationHandlerBlock.Add(new IfElse
-                                {
-                                    Condition = InvokationHelper.CreateStartedSignalReference(invokerName, targetMemberName, i),
-                                    True = runningStateCase,
-                                    Else = finishedResetAssignment
-                                });
+                            invokationHandlerBlock.Add(new If
+                            {
+                                Condition = InvokationHelper.CreateStartedSignalReference(invokerName, targetMemberName, i),
+                                True = runningStateCase
+                            });
                         }
                     }
                 }
