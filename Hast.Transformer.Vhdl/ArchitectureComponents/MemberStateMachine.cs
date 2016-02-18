@@ -32,7 +32,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             _stateVariable = new Variable
             {
                 DataType = _statesEnum,
-                Name = this.CreateStateVariableName()
+                Name = this.CreateStateVariableName(),
+                InitialValue = this.CreateStateName(0).ToVhdlIdValue()
             };
             LocalVariables.Add(_stateVariable);
 
@@ -122,7 +123,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 stateCase.Whens.Add(stateWhen);
             }
 
-            var process = BuildProcess(stateCase, this.CreateStateChange(0));
+            var process = BuildProcess(stateCase);
 
             process.Name = this.CreatePrefixedObjectName("_StateMachine");
 

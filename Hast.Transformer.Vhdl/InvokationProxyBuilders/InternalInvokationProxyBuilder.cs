@@ -72,6 +72,8 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
                 var proxyComponent = new ConfigurableComponent(namePrefix + targetMemberName);
                 proxyComponents.Add(proxyComponent);
+                var proxyInResetBlock = new InlineBlock();
+                proxyComponent.ProcessInReset = proxyInResetBlock;
                 var bodyBlock = new InlineBlock();
 
 
@@ -398,14 +400,13 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                 });
 
 
-                            // Adding resets for the finished signal.
-                            var finishedResetAssignment = new Assignment
+                            // Adding reset for the finished signal.
+                            proxyInResetBlock.Add(new Assignment
                             {
                                 AssignTo = InvokationHelper
                                     .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                                 Expression = Value.False
-                            };
-                            proxyComponent.ProcessInReset = finishedResetAssignment;
+                            });
 
                             invokationHandlerBlock.Add(new If
                             {

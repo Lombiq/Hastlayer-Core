@@ -42,12 +42,14 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             component.InternallyDrivenSignals.Add(new Signal
                 {
                     DataType = SimpleMemoryTypes.EnableSignalsDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.ReadEnable)
+                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.ReadEnable),
+                    InitialValue = Value.False
                 });
             component.InternallyDrivenSignals.Add(new Signal
                 {
                     DataType = SimpleMemoryTypes.EnableSignalsDataType,
-                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.WriteEnable)
+                    Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.WriteEnable),
+                    InitialValue = Value.False
                 });
         }
 
