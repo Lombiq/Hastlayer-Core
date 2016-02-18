@@ -36,13 +36,13 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             };
             LocalVariables.Add(_stateVariable);
 
-            // Since the Started signal shouldn't be re-set in the reset block we don't add it to the Signals.
             _startedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateStartedSignalName(),
                 InitialValue = Value.False
             };
+            Signals.Add(_startedSignal);
 
             _finishedSignal = new Signal
             {
@@ -107,7 +107,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
             return BuildDeclarationsBlock(new InlineBlock(
                 new LineComment("State machine states:"),
-                _startedSignal,
                 _statesEnum));
         }
 
