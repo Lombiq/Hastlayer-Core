@@ -309,7 +309,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     new Assignment
                                     {
                                         AssignTo = getJustFinishedVariableReference(c),
-                                        Expression = Value.False
+                                        Expression = Value.True
                                     });
 
                                 // Does the target has a return value?
