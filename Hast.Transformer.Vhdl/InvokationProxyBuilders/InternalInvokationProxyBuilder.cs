@@ -266,15 +266,21 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     Expression = waitingForStartedStateValue,
                                     Body = new List<IVhdlElement>
                                     {
-                                        { 
-                                            new Assignment
+                                        {
+                                            new If
                                             {
-                                                AssignTo = InvokationHelper
-                                                    .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                                Expression = Value.False
+                                                Condition = InvokationHelper
+                                                    .CreateStartedSignalReference(invokerName, targetMemberName, i),
+                                                True = new InlineBlock(
+                                                new Assignment
+                                                {
+                                                    AssignTo = InvokationHelper
+                                                        .CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                                                    Expression = Value.False
+                                                },
+                                                notStartedComponentSelectingIfElse)
                                             }
-                                        },
-                                        { notStartedComponentSelectingIfElse }
+                                        }
                                     }
                                 });
                         }
@@ -312,7 +318,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                         Expression = Value.True
                                     });
 
-                                // Does the target has a return value?
+                                // Does the target have a return value?
                                 var targetComponent = componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, c)];
                                 var returnVariable =
                                     targetComponent
@@ -387,6 +393,9 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     Body = new List<IVhdlElement>
                                     {
                                         {
+                                            new LineComment("Invoking components have one clock cycle to notice that the invoked state machine finished. This is so they can immediately invoke it again.")
+                                        },
+                                        {
                                             new Assignment
                                             {
                                                 AssignTo = runningStateVariableReference,
@@ -398,22 +407,18 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                         }
                                     }
                                 });
-
-
-                            // Adding reset for the finished signal.
-                            proxyInResetBlock.Add(new Assignment
-                            {
-                                AssignTo = InvokationHelper
-                                    .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                Expression = Value.False
-                            });
-
-                            invokationHandlerBlock.Add(new If
-                            {
-                                Condition = InvokationHelper.CreateStartedSignalReference(invokerName, targetMemberName, i),
-                                True = runningStateCase
-                            });
                         }
+
+
+                        // Adding reset for the finished signal.
+                        proxyInResetBlock.Add(new Assignment
+                        {
+                            AssignTo = InvokationHelper
+                                .CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                            Expression = Value.False
+                        });
+
+                        invokationHandlerBlock.Add(runningStateCase);
                     }
                 }
 
