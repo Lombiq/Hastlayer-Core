@@ -35,7 +35,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 DataType = KnownDataTypes.Boolean,
                 InitialValue = Value.False
             };
-            proxyComponent.Signals.Add(finishedSignal);
+            proxyComponent.InternallyDrivenSignals.Add(finishedSignal);
             var finishedSignalReference = finishedSignal.ToReference();
             proxyComponent.BeginBodyWith = new Assignment
             {

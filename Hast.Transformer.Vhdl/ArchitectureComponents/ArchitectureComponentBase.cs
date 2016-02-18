@@ -17,7 +17,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public string Name { get; private set; }
         public IList<Variable> LocalVariables { get; private set; }
         public IList<Variable> GlobalVariables { get; private set; }
-        public IList<Signal> Signals { get; private set; }
+        public IList<Signal> InternallyDrivenSignals { get; private set; }
+        public IList<Signal> ExternallyDrivenSignals { get; private set; }
         public IDictionary<string, int> OtherMemberMaxInvokationInstanceCounts { get; private set; }
 
 
@@ -27,7 +28,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
             LocalVariables = new List<Variable>();
             GlobalVariables = new List<Variable>();
-            Signals = new List<Signal>();
+            InternallyDrivenSignals = new List<Signal>();
+            ExternallyDrivenSignals = new List<Signal>();
             OtherMemberMaxInvokationInstanceCounts = new Dictionary<string, int>();
         }
 
@@ -46,11 +48,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 declarationsBlock.Add(beginWith);
             }
 
-            if (Signals.Any())
+            if (InternallyDrivenSignals.Any() || ExternallyDrivenSignals.Any())
             {
                 declarationsBlock.Add(new LineComment("Signals:"));
             }
-            declarationsBlock.Body.AddRange(Signals);
+            declarationsBlock.Body.AddRange(InternallyDrivenSignals.Union(ExternallyDrivenSignals));
 
             foreach (var variable in GlobalVariables)
             {
@@ -83,8 +85,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
             var ifInResetBlock = new InlineBlock(new LineComment("Synchronous reset"));
 
-            // Re-setting all signals and variables to their initial value.
-            ifInResetBlock.Body.AddRange(Signals
+            // Re-setting all internally driven signals and variables to their initial value.
+            ifInResetBlock.Body.AddRange(InternallyDrivenSignals
                 .Where(signal => signal.InitialValue != null)
                 .Select(signal =>
                     new Assignment { AssignTo = signal.ToReference(), Expression = signal.InitialValue }));

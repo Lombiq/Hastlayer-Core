@@ -42,7 +42,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 Name = this.CreateStartedSignalName(),
                 InitialValue = Value.False
             };
-            Signals.Add(_startedSignal);
+            ExternallyDrivenSignals.Add(_startedSignal);
 
             _finishedSignal = new Signal
             {
@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 Name = this.CreateFinishedSignalName(),
                 InitialValue = Value.False
             };
-            Signals.Add(_finishedSignal);
+            InternallyDrivenSignals.Add(_finishedSignal);
 
 
             var startStateBlock = new InlineBlock(

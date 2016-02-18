@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         {
             // If there is a signal for CellIndex then all the others should be added too.
             var signalName = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex);
-            return component.Signals.Any(signal => signal.Name == signalName);
+            return component.InternallyDrivenSignals.Any(signal => signal.Name == signalName);
         }
 
         public static void AddSimpleMemorySignalsIfNew(this IArchitectureComponent component)
@@ -29,22 +29,22 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             if (component.AreSimpleMemorySignalsAdded()) return;
 
 
-            component.Signals.Add(new Signal
+            component.InternallyDrivenSignals.Add(new Signal
                 {
                     DataType = SimpleMemoryTypes.CellIndexSignalDataType,
                     Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex)
                 });
-            component.Signals.Add(new Signal
+            component.InternallyDrivenSignals.Add(new Signal
                 {
                     DataType = SimpleMemoryTypes.DataSignalsDataType,
                     Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.DataOut)
                 });
-            component.Signals.Add(new Signal
+            component.InternallyDrivenSignals.Add(new Signal
                 {
                     DataType = SimpleMemoryTypes.EnableSignalsDataType,
                     Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.ReadEnable)
                 });
-            component.Signals.Add(new Signal
+            component.InternallyDrivenSignals.Add(new Signal
                 {
                     DataType = SimpleMemoryTypes.EnableSignalsDataType,
                     Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.WriteEnable)

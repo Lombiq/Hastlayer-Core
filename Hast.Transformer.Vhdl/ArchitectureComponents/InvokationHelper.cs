@@ -19,7 +19,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         {
             var startedSignalReference = CreateStartedSignalReference(component, targetStateMachineName, targetIndex);
 
-            component.Signals.AddIfNew(new Signal
+            component.InternallyDrivenSignals.AddIfNew(new Signal
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = startedSignalReference.Name,
@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
             for (int i = 0; i < degreeOfParallelism; i++)
             {
-                component.Signals.AddIfNew(new Signal
+                component.InternallyDrivenSignals.AddIfNew(new Signal
                 {
                     DataType = KnownDataTypes.Boolean,
                     Name = CreateFinishedSignalReference(component, targetStateMachineName, i).Name

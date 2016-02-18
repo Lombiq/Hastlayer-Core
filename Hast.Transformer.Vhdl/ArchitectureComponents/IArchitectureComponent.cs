@@ -26,9 +26,14 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         IList<Variable> GlobalVariables { get; }
 
         /// <summary>
-        /// Global signals declared for the component.
+        /// Global signals declared for the component that are driven from inside the component.
         /// </summary>
-        IList<Signal> Signals { get; }
+        IList<Signal> InternallyDrivenSignals { get; }
+
+        /// <summary>
+        /// Global signals declared for the component that are driven from outside the component.
+        /// </summary>
+        IList<Signal> ExternallyDrivenSignals { get; }
 
         /// <summary>
         /// Track which other members are called from this component and in how many instances at a given time. I.e.
