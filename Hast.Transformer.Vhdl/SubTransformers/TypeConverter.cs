@@ -11,11 +11,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         public DataType ConvertTypeReference(TypeReference typeReference)
         {
-            if (!typeReference.IsPrimitive)
-            {
-                throw new ArgumentException("Only primitive types are supported.");
-            }
-
             switch (typeReference.FullName)
             {
                 case "System.Boolean":
