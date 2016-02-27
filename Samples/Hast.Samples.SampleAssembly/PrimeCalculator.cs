@@ -79,7 +79,7 @@ namespace Hast.Samples.SampleAssembly
         private bool IsPrimeNumberInternal(uint number)
         {
             uint factor = number / 2;
-            //var factor = Math.Sqrt(number); // Math.Sqrt() can't be processed yet because it needs object support.
+            //uint factor = Math.Sqrt(number); // Math.Sqrt() can't be processed because it's not a managed method.
 
             for (uint i = 2; i <= factor; i++)
             {
