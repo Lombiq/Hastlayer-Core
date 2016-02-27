@@ -182,14 +182,36 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is UnaryOperatorExpression)
             {
                 var unary = expression as UnaryOperatorExpression;
-                return new Invokation
+
+                // The increment/decrement unary operators are compiled into binary operators (e.g. i++ will be
+                // i = i + 1) so we don't have to care about those.
+
+                var transformedExpression = Transform(unary.Expression, context);
+
+                switch (unary.Operator)
                 {
-                    // Currently only handling negation among the unary operators but it seems that only this is
-                    // preserved in CIL, other such operators are compiled into binary operators (e.g. i++ will be
-                    // i = i + 1.
-                    Target = new Value { DataType = KnownDataTypes.Identifier, Content = "not" },
-                    Parameters = new List<IVhdlElement> { Transform(unary.Expression, context) }
-                };
+                    case UnaryOperatorType.Minus:
+                        return new Unary
+                        {
+                            Operator = UnaryOperator.Negation,
+                            Expression = transformedExpression
+                        };
+                    case UnaryOperatorType.Not:
+                        // In VHDL there is no boolean negation operator, just the not() function.
+                        return new Invokation
+                        {
+                            Target = new Value { DataType = KnownDataTypes.Identifier, Content = "not" },
+                            Parameters = new List<IVhdlElement> { transformedExpression }
+                        };
+                    case UnaryOperatorType.Plus:
+                        return new Unary
+                        {
+                            Operator = UnaryOperator.Identity,
+                            Expression = transformedExpression
+                        };
+                    default:
+                        throw new NotImplementedException("Transformation of the unary operation " + unary.Operator + " is not supported.");
+                }
             }
             else if (expression is TypeReferenceExpression)
             {
