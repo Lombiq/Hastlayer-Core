@@ -8,6 +8,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using Orchard.Logging;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -16,11 +17,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConverter _typeConverter;
         private readonly IExpressionTransformer _expressionTransformer;
 
+        public ILogger Logger { get; set; }
+
 
         public StatementTransformer(ITypeConverter typeConverter, IExpressionTransformer expressionTransformer)
         {
             _typeConverter = typeConverter;
             _expressionTransformer = expressionTransformer;
+
+            Logger = NullLogger.Instance;
         }
 
 
@@ -232,6 +237,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.Add(CreateConditionalStateChange(repeatedStateIndex, context));
                 }
                 currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
+            }
+            else if (statement is ThrowStatement)
+            {
+                Logger.Warning("The exception throw statement \"{0}\" was omitted during transformation to be able to transform the code. However this can cause issues for certain algorithms; if it is an issue for this one then this code can't be transformed.", statement.ToString());
+                currentBlock.Add(new LineComment("A throw statement was here, which was omitted during transformation."));
             }
             else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
         }

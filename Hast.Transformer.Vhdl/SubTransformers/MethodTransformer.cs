@@ -12,6 +12,7 @@ using Hast.Transformer.Models;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Common.Configuration;
+using System;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -37,6 +38,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             return Task.Run(async () =>
                 {
+                    if (method.Modifiers.HasFlag(Modifiers.Extern))
+                    {
+                        throw new InvalidOperationException(
+                            "The method " + method.GetFullName() + 
+                            " can't be transformed because it's extern. Only managed code can be transformed.");
+                    }
+
                     var stateMachineCount = context
                         .GetTransformerConfiguration()
                         .GetMaxInvokationInstanceCountConfigurationForMember(method.GetSimpleName()).MaxInvokationInstanceCount;

@@ -61,7 +61,6 @@ namespace Hast.Samples.Consumer
                             new[]
                             {
                                 typeof(PrimeCalculator).Assembly
-                                //typeof(Math).Assembly // Would be needed for Math.Sqrt() but transforming that is not yet supported.
                             },
                             configuration);
 

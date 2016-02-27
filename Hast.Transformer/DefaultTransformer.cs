@@ -22,6 +22,7 @@ namespace Hast.Transformer
         private readonly ITransformerEventHandler _eventHandler;
         private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
+        private readonly IInvokationInstanceCountAdjuster _invokationInstanceCountAdjuster;
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly ITransformingEngine _engine;
 
@@ -30,12 +31,14 @@ namespace Hast.Transformer
             ITransformerEventHandler eventHandler,
             IJsonConverter jsonConverter,
             ISyntaxTreeCleaner syntaxTreeCleaner,
+            IInvokationInstanceCountAdjuster invokationInstanceCountAdjuster,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             ITransformingEngine engine)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
             _syntaxTreeCleaner = syntaxTreeCleaner;
+            _invokationInstanceCountAdjuster = invokationInstanceCountAdjuster;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _engine = engine;
         }
@@ -60,10 +63,13 @@ namespace Hast.Transformer
                 string.Join("-", configuration.PublicHardwareMemberNamePrefixes) +
                 _jsonConverter.Serialize(configuration.CustomConfiguration);
 
+
             var syntaxTree = astBuilder.SyntaxTree;
 
 
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
+
+            _invokationInstanceCountAdjuster.AdjustInvokationInstanceCounts(syntaxTree, configuration);
 
 
             if (configuration.TransformerConfiguration().UseSimpleMemory)

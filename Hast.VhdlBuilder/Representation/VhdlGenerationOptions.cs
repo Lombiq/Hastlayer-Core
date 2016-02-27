@@ -42,6 +42,11 @@ namespace Hast.VhdlBuilder.Representation
         /// </summary>
         public static NameShortener SimpleNameShortener = originalName =>
             {
+                if (string.IsNullOrEmpty(originalName))
+                {
+                    return string.Empty;
+                }
+
                 var newName = originalName;
                 var previousNewName = string.Empty;
                 // As long as we can find names inside names we'll replace the inner names first.

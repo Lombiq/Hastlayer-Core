@@ -38,7 +38,10 @@ namespace Hast.Common.Configuration
 
             if (maxRecursionDepthConfig != null) return maxRecursionDepthConfig;
 
-            return new MemberInvokationInstanceCountConfiguration(simpleMemberName);
+            // Adding the configuration so if the object is modified it's saved in the TransformerConfiguration.
+            var newConfiguration = new MemberInvokationInstanceCountConfiguration(simpleMemberName);
+            configuration.MemberInvokationInstanceCountConfigurations.Add(newConfiguration);
+            return newConfiguration;
         }
     }
 
