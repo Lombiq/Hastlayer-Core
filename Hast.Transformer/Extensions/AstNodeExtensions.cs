@@ -72,6 +72,16 @@ namespace ICSharpCode.NRefactory.CSharp
             return name;
         }
 
+        public static EntityDeclaration FindClosestParentEntityDeclaration(this AstNode node)
+        {
+            while (!(node is EntityDeclaration))
+            {
+                node = node.Parent;
+            }
+
+            return (EntityDeclaration)node;
+        }
+
         public static TypeDeclaration FindParentTypeDeclaration(this AstNode node)
         {
             while (!(node is TypeDeclaration))
