@@ -6,7 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Array : DataType
     {
         public int MaxLength { get; set; }
-        public DataType StoredType { get; set; }
+        public DataType ElementType { get; set; }
 
 
         public Array()
@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " is array (" +
                 (MaxLength > 0 ? MaxLength + " downto 0" : "integer range <>") +
                 ") of " +
-                StoredType.Name;
+                ElementType.ToReferenceVhdl(vhdlGenerationOptions);
         }
     }
 }

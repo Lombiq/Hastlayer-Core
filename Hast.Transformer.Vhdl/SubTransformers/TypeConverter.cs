@@ -163,7 +163,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (type.ArraySpecifiers.Count != 0)
             {
                 var storedType = ConvertAstType(type.BaseType);
-                return new Hast.VhdlBuilder.Representation.Declaration.Array { StoredType = storedType, Name = storedType.Name + "_array" };
+                return new Hast.VhdlBuilder.Representation.Declaration.Array { ElementType = storedType, Name = storedType.Name + "_array" };
             }
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
