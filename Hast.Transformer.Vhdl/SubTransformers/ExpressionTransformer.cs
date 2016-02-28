@@ -210,7 +210,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Expression = transformedExpression
                         };
                     default:
-                        throw new NotImplementedException("Transformation of the unary operation " + unary.Operator + " is not supported.");
+                        throw new NotSupportedException("Transformation of the unary operation " + unary.Operator + " is not supported.");
                 }
             }
             else if (expression is TypeReferenceExpression)
