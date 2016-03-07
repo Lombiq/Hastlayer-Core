@@ -10,9 +10,11 @@ using Hast.Communication.Models;
 using Hast.Common.Models;
 using Hast.Communication.Constants;
 using Hast.Synthesis;
+using Orchard.Environment.Extensions;
 
 namespace Hast.Communication.Services
 {
+    [OrchardFeature("Hast.Communication.Serial")]
     public class SerialPortCommunicationService : ICommunicationService
     {
         private readonly IDeviceDriver _deviceDriver;
@@ -90,7 +92,7 @@ namespace Hast.Communication.Services
                 {
                     var remainingBytes = outputBuffer.Length - i * maxBytesToSendAtOnce;
                     var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
-                    serialPort.Write(outputBuffer, i * maxBytesToSendAtOnce, bytesToSend); 
+                    serialPort.Write(outputBuffer, i * maxBytesToSendAtOnce, bytesToSend);
                 }
 
 
@@ -252,7 +254,7 @@ namespace Hast.Communication.Services
                     throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
                 }
 
-                return taskCompletionSource.Task.Result; 
+                return taskCompletionSource.Task.Result;
             }
         }
 

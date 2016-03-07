@@ -50,13 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\CommandTypes.cs" />
+    <Compile Include="Constants\EthernetCommunicationConstants.cs" />
     <Compile Include="Constants\SerialCommunicationConstants.cs" />
+    <Compile Include="Exceptions\EthernetCommunicationException.cs" />
     <Compile Include="Exceptions\SerialPortCommunicationException.cs" />
     <Compile Include="Extensibility\Events\IMemberHardwareExecutionContext.cs" />
     <Compile Include="Extensibility\Events\IMemberInvocationEventHandler.cs" />
     <Compile Include="Extensibility\IMemberInvocationContext.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStep.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStepContext.cs" />
+    <Compile Include="Extensions\TcpClientExtensions.cs" />
     <Compile Include="Extensions\SerialPortExtensions.cs" />
     <Compile Include="IMemberInvocationHandlerFactory.cs" />
     <Compile Include="Models\HardwareExecutionInformation.cs" />

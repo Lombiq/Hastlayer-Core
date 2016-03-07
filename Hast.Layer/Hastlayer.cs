@@ -164,6 +164,7 @@ namespace Hast.Layer
                         {
                             "Hast.Layer",
                             "Hast.Communication",
+                            "Hast.Communication.Ethernet",
                             "Hast.Synthesis",
                             "Hast.Transformer"
                         }.Union(_extensions.Select(extension => extension.ShortName()))

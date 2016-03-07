@@ -1,7 +1,9 @@
-﻿using System.IO.Ports;
+﻿using Orchard.Environment.Extensions;
+using System.IO.Ports;
 
 namespace Hast.Communication.Constants
 {
+    [OrchardFeature("Hast.Communication.Serial")]
     internal static class SerialCommunicationConstants
     {
         public const int BaudRate = 9600;
