@@ -109,7 +109,7 @@ namespace Hast.Layer
             }
         }
 
-        public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
+        public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject, IProxyGenerationConfiguration configuration) where T : class
         {
             if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
             {
@@ -120,7 +120,7 @@ namespace Hast.Layer
             {
                 return await
                     (await GetHost())
-                    .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject)));
+                    .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject, configuration)));
             }
             catch (Exception ex)
             {
@@ -164,7 +164,6 @@ namespace Hast.Layer
                         {
                             "Hast.Layer",
                             "Hast.Communication",
-                            "Hast.Communication.Ethernet",
                             "Hast.Synthesis",
                             "Hast.Transformer"
                         }.Union(_extensions.Select(extension => extension.ShortName()))

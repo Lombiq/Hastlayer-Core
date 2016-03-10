@@ -10,6 +10,7 @@ namespace Hast.Communication.Constants
         public const Parity SerialPortParity = Parity.None;
         public const StopBits SerialPortStopBits = StopBits.One;
         public const int WriteTimeoutInMilliseconds = 10000;
+        public const string ChannelName = "SerialPort";
 
 
         public static class Signals

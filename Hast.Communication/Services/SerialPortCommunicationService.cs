@@ -10,16 +10,22 @@ using Hast.Communication.Models;
 using Hast.Common.Models;
 using Hast.Communication.Constants;
 using Hast.Synthesis;
-using Orchard.Environment.Extensions;
 
 namespace Hast.Communication.Services
 {
-    [OrchardFeature("Hast.Communication.Serial")]
     public class SerialPortCommunicationService : ICommunicationService
     {
         private readonly IDeviceDriver _deviceDriver;
 
         public ILogger Logger { get; set; }
+
+        public string ChannelName
+        {
+            get
+            {
+                return SerialCommunicationConstants.ChannelName;
+            }
+        }
 
 
         public SerialPortCommunicationService(IDeviceDriver deviceDriver)

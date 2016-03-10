@@ -43,21 +43,21 @@ namespace Hast.Samples.Consumer
                             },
                             HardwareGenerationConfiguration.Default);
 
-                        var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
+                        var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator(), new ProxyGenerationConfiguration());
 
                         var isPrime = primeCalculator.IsPrimeNumber(15);
                         var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
 
                         using (var bitmap = new Bitmap("fpga.jpg"))
                         {
-                            var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
+                            var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), new ProxyGenerationConfiguration());
                             var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
 
-                            var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
+                            var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter(), new ProxyGenerationConfiguration());
                             var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
                         }
 
-                        var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher());
+                        var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher(), new ProxyGenerationConfiguration());
 
                         // Sample from IBM.
                         var inputOne = "GCCCTAGCG";
@@ -76,7 +76,7 @@ namespace Hast.Samples.Consumer
 
                         result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
 
-                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm()); 
+                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm(), new ProxyGenerationConfiguration()); 
                         var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
                     }
 
@@ -103,7 +103,7 @@ namespace Hast.Samples.Consumer
 
                         // With this interface-typed variable we simulate that the object comes from dependency injection.
                         IInterface1 complexType = new ComplexTypeHierarchy();
-                        complexType = await hastlayer.GenerateProxy(hardwareRepresentation, complexType);
+                        complexType = await hastlayer.GenerateProxy(hardwareRepresentation, complexType, new ProxyGenerationConfiguration());
                         var output = complexType.Interface1Method1();
                         output = complexType.Interface1Method2();
                     }

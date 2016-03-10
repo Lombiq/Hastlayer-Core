@@ -10,17 +10,23 @@ using System.Net;
 using Hast.Communication.Constants;
 using Hast.Communication.Exceptions;
 using Hast.Synthesis;
-using Orchard.Environment.Extensions;
 
 namespace Hast.Communication.Services
 {
-    [OrchardFeature("Hast.Communication.Ethernet")]
     public class EthernetCommunicationService : ICommunicationService
     {
         private readonly IDeviceDriver _deviceDriver;
 
 
         public ILogger Logger { get; set; }
+
+        public string ChannelName
+        {
+            get
+            {
+                return EthernetCommunicationConstants.ChannelName; 
+            }
+        }
 
 
         public EthernetCommunicationService(IDeviceDriver deviceDriver)
@@ -47,7 +53,7 @@ namespace Hast.Communication.Services
                 // Initialize the connection.
                 using (var client = new TcpClient())
                 {
-                    var success = await client.ConnectAsync(fpgaIPEndpoint, 1000);
+                    var success = await client.ConnectAsync(fpgaIPEndpoint, 3000);
                     if (!success)
                         throw new EthernetCommunicationException("Couldn't connect to FPGA before the timeout exceeded.");
 
@@ -59,8 +65,8 @@ namespace Hast.Communication.Services
                     var executionCommandTypeResponseByte = new byte[1];
                     await stream.ReadAsync(executionCommandTypeResponseByte, 0, executionCommandTypeResponseByte.Length);
                     
-                    if (executionCommandTypeByte[0] != EthernetCommunicationConstants.Signals.Ready)
-                        throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeByte[0]);
+                    if (executionCommandTypeResponseByte[0] != EthernetCommunicationConstants.Signals.Ready)
+                        throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
 
                     
                     var outputBytes = new byte[simpleMemory.Memory.Length + 8];

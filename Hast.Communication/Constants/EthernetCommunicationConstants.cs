@@ -5,6 +5,8 @@ namespace Hast.Communication.Constants
     [OrchardFeature("Hast.Communication.Ethernet")]
     internal static class EthernetCommunicationConstants
     {
+        public const string ChannelName = "Ethernet";
+
         public static class Signals
         {
             public const char Busy = 'b';

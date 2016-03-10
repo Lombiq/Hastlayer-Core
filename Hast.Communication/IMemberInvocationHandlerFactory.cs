@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Castle.DynamicProxy;
 using Hast.Common.Models;
 using Orchard;
+using Hast.Common.Configuration;
 
 namespace Hast.Communication
 {
@@ -24,6 +25,6 @@ namespace Hast.Communication
     /// </summary>
     public interface IMemberInvocationHandlerFactory : ISingletonDependency
     {
-        MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target);
+        MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target, IProxyGenerationConfiguration configuration);
     }
 }

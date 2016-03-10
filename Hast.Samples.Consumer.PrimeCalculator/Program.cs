@@ -37,7 +37,12 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                             },
                         hardwareConfiguration);
 
-                    var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator());
+
+                    var proxyConfiguration = new ProxyGenerationConfiguration();
+                    //proxyConfiguration.CustomConfiguration.Add("Hast.Communication.ChannelName", "SerialPort");
+
+                    var primeCalculator = await hastlayer
+                        .GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator(), proxyConfiguration);
                     var isPrime = primeCalculator.IsPrimeNumber(15);
                     var isPrime2 = primeCalculator.IsPrimeNumber(13);
                     var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime

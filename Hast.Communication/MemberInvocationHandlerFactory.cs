@@ -12,7 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System;
-using Hast.Communication.Extensibility;
+using Hast.Common.Configuration;
 
 namespace Hast.Communication
 {
@@ -27,7 +27,7 @@ namespace Hast.Communication
         }
 
 
-        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target)
+        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target, IProxyGenerationConfiguration configuration)
         {
             return invocation =>
                 {
@@ -67,13 +67,16 @@ namespace Hast.Communication
                         if (memory != null)
                         {
                             var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
+                            object communicationChannelName;
+                            configuration.CustomConfiguration.TryGetValue("Hast.Communication.ChannelName", out communicationChannelName);
                             // The task here is needed because the code executed on the FPGA board doesn't return, we have 
                             // to wait for it.
                             // The Execute method is executed on separate thread.
                             var task = Task.Run(async () =>
                                 {
                                     invokationContext.ExecutionInformation = await workContext
-                                        .Resolve<ICommunicationService>()
+                                        .Resolve<ICommunicationServiceProvider>()
+                                        .GetCommunicationService(communicationChannelName != null ? (string)communicationChannelName : null)
                                         .Execute(memory, memberId);
                                 });
                             task.Wait();

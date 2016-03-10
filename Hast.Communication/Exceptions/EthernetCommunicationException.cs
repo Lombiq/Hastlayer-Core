@@ -1,12 +1,10 @@
-﻿using Orchard.Environment.Extensions;
-using System;
+﻿using System;
 
 namespace Hast.Communication.Exceptions
 {
     /// <summary>
     /// This exception is thrown when something is wrong with the FPGA board connected through ethernet connection.
     /// </summary>
-    [OrchardFeature("Hast.Communication.Ethernet")]
     public class EthernetCommunicationException : Exception
     {
         public EthernetCommunicationException(string message) : base(message) { }
