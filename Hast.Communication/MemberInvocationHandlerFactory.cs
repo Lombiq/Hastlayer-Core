@@ -75,7 +75,7 @@ namespace Hast.Communication
                             var task = Task.Run(async () =>
                                 {
                                     invokationContext.ExecutionInformation = await workContext
-                                        .Resolve<ICommunicationServiceProvider>()
+                                        .Resolve<ICommunicationServiceSelector>()
                                         .GetCommunicationService(communicationChannelName != null ? (string)communicationChannelName : null)
                                         .Execute(memory, memberId);
                                 });

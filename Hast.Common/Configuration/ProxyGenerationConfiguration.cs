@@ -8,7 +8,22 @@ namespace Hast.Common.Configuration
         /// Gets or sets a dictionary that can contain settings for non-default configuration options (like the name of the communication channel).
         /// </summary>
         public IDictionary<string, object> CustomConfiguration { get; set; }
-        
+
+
+        private static IProxyGenerationConfiguration _default;
+        public static IProxyGenerationConfiguration Default
+        {
+            get
+            {
+                if (_default == null)
+                {
+                    _default = new ProxyGenerationConfiguration();
+                }
+
+                return _default;
+            }
+        }
+
 
         public ProxyGenerationConfiguration()
         {

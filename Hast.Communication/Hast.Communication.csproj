@@ -61,6 +61,7 @@
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStepContext.cs" />
     <Compile Include="Extensions\TcpClientExtensions.cs" />
     <Compile Include="Extensions\SerialPortExtensions.cs" />
+    <Compile Include="Extensions\ByteArrayExtensions.cs" />
     <Compile Include="IMemberInvocationHandlerFactory.cs" />
     <Compile Include="Models\HardwareExecutionInformation.cs" />
     <Compile Include="IProxyGenerator.cs" />
@@ -68,8 +69,10 @@
     <Compile Include="MemberInvocationHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyGenerator.cs" />
+    <Compile Include="Services\ICommunicationServiceSelector.cs" />
     <Compile Include="Services\EthernetCommunicationService.cs" />
-    <Compile Include="Services\CommunicationServiceProvider.cs" />
+    <Compile Include="Services\CommunicationServiceSelector.cs" />
+    <Compile Include="Services\CommunicationServiceBase.cs" />
     <Compile Include="Services\SerialPortCommunicationService.cs" />
     <Compile Include="Services\ICommunicationService.cs" />
   </ItemGroup>

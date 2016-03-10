@@ -13,13 +13,11 @@ using Hast.Synthesis;
 
 namespace Hast.Communication.Services
 {
-    public class SerialPortCommunicationService : ICommunicationService
+    public class SerialPortCommunicationService : CommunicationServiceBase
     {
         private readonly IDeviceDriver _deviceDriver;
 
-        public ILogger Logger { get; set; }
-
-        public string ChannelName
+        public override string ChannelName
         {
             get
             {
@@ -36,11 +34,9 @@ namespace Hast.Communication.Services
         }
 
 
-        public async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
+        public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
-            // Stopwatch for measuring the total exection time.
-            var stopWatch = Stopwatch.StartNew();
-            var executionInformation = new HardwareExecutionInformation();
+            var executionInformation = BeginExecutionTimer();
 
             using (var serialPort = CreateSerialPort())
             {
@@ -69,24 +65,16 @@ namespace Hast.Communication.Services
                     throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. The " + serialPort.PortName + " exists but it's used by another process.");
                 }
 
-                var length = simpleMemory.Memory.Length;
-                var outputBuffer = new byte[length + 9];
-
                 // Here we put together the data stream.
 
                 // Execute Order 66.
-                outputBuffer[0] = Convert.ToByte(CommandTypes.Execution);
-
-                // Copying the input length, represented as bytes, to the output buffer.
-                Array.Copy(BitConverter.GetBytes(length), 0, outputBuffer, 1, 4);
-
-                // Copying the member ID, represented as bytes, to the output buffer.
-                Array.Copy(BitConverter.GetBytes(memberId), 0, outputBuffer, 5, 4);
-
-                for (int i = 0; i < length; i++)
-                {
-                    outputBuffer[i + 9] = simpleMemory.Memory[i];
-                }
+                var outputBuffer = BitConverter.GetBytes(CommandTypes.Execution)
+                    // Copying the input length, represented as bytes, to the output buffer.
+                    .Append(BitConverter.GetBytes(simpleMemory.Memory.Length))
+                    // Copying the member ID, represented as bytes, to the output buffer.
+                    .Append(BitConverter.GetBytes(memberId))
+                    // Copying the simple memory.
+                    .Append(simpleMemory.Memory);
 
                 // Sending the data.
                 // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
@@ -135,9 +123,7 @@ namespace Hast.Communication.Services
                                 {
                                     var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                                    executionInformation.HardwareExecutionTimeMilliseconds =
-                                        1M / _deviceDriver.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
-                                    Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+                                    SetHardwareExecutionTime(executionInformation, _deviceDriver.DeviceManifest.ClockFrequencyHz, executionTimeClockCycles);
 
                                     communicationState = SerialCommunicationConstants.CommunicationState.ReceivingOutputByteCount;
                                     serialPort.Write(SerialCommunicationConstants.Signals.Ready);
@@ -203,13 +189,7 @@ namespace Hast.Communication.Services
 
                 await taskCompletionSource.Task;
 
-                stopWatch.Stop();
-                Logger.Information("Full execution time: {0}ms", stopWatch.ElapsedMilliseconds);
-                executionInformation.FullExecutionTimeMilliseconds = stopWatch.ElapsedMilliseconds;
-                if (executionInformation.FullExecutionTimeMilliseconds == 0)
-                {
-                    executionInformation.FullExecutionTimeMilliseconds = executionInformation.HardwareExecutionTimeMilliseconds;
-                }
+                EndExecutionTimer(executionInformation);
 
                 return executionInformation;
             }

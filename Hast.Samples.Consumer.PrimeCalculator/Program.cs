@@ -39,7 +39,7 @@ namespace Hast.Samples.Consumer.PrimeCalculator
 
 
                     var proxyConfiguration = new ProxyGenerationConfiguration();
-                    //proxyConfiguration.CustomConfiguration.Add("Hast.Communication.ChannelName", "SerialPort");
+                    proxyConfiguration.CustomConfiguration.Add("Hast.Communication.ChannelName", "Ethernet");
 
                     var primeCalculator = await hastlayer
                         .GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator(), proxyConfiguration);
