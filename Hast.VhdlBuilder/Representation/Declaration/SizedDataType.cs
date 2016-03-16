@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -10,9 +11,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public IVhdlElement SizeExpression { get; set; }
 
 
-        public override string ToReferenceVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        public override DataType ToReference()
         {
-            return ToVhdl(vhdlGenerationOptions);
+            return this;
         }
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)

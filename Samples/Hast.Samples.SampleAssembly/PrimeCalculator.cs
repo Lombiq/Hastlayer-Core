@@ -19,6 +19,9 @@ namespace Hast.Samples.SampleAssembly
         public const int ArePrimeNumbers_InputUInt32CountIndex = 0;
         public const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
         public const int ArePrimeNumbers_OutputUInt32sStartIndex = 1;
+        public const int ParallelizedArePrimeNumbers_InputUInt32sStartIndex = 1;
+
+        public const int MaxDegreeOfParallelism = 10;
 
     
         /// <summary>
@@ -54,18 +57,22 @@ namespace Hast.Samples.SampleAssembly
             // We need this information explicitly as we can't use arrays.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
-            var numbers = new uint[10];
+            var numbers = new uint[MaxDegreeOfParallelism];
             int i = 0;
             while (i < numberCount)
             {
                 // Ternary operator is not supported yet, that's why the if statement.
-                var memoryReadIndexUpperBound = 10;
-                if (numberCount - i < 10) memoryReadIndexUpperBound = (int)(numberCount - i);
+                var memoryReadIndexUpperBound = MaxDegreeOfParallelism;
+                if (numberCount - i < MaxDegreeOfParallelism) memoryReadIndexUpperBound = (int)(numberCount - i);
 
                 for (int m = 0; m < memoryReadIndexUpperBound; m++)
                 {
-                    numbers[m] = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
-                }           
+                    numbers[m] = memory.ReadUInt32(ParallelizedArePrimeNumbers_InputUInt32sStartIndex + i + m);
+                }
+
+                // Run IsPrimeNumberInternal() in parallel memoryReadIndexUpperBound times. 
+
+                i += memoryReadIndexUpperBound;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -18,7 +19,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
     /// </summary>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class DataType : INamedElement
+    public class DataType : INamedElement, IReferenceableDeclaration<DataType>
     {
         public DataTypeCategory TypeCategory { get; set; }
         public string Name { get; set; }
@@ -45,14 +46,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// concept from <see cref="DataObjectReference"/> which is about referencing data objects (e.g. signals), not
         /// data types.
         /// </remarks>
-        public virtual string ToReferenceVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        public virtual DataType ToReference()
         {
-            return vhdlGenerationOptions.NameShortener(Name);
+            return new DataTypeReference(this, vhdlGenerationOptions => vhdlGenerationOptions.NameShortener(Name));
         }
 
         public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return ToReferenceVhdl(vhdlGenerationOptions);
+            return vhdlGenerationOptions.NameShortener(Name);
         }
 
         /// <summary>

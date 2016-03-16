@@ -44,6 +44,7 @@
     <Compile Include="Representation\Declaration\Alias.cs" />
     <Compile Include="Representation\Declaration\ArrayType.cs" />
     <Compile Include="Representation\Declaration\BlockComment.cs" />
+    <Compile Include="Representation\Declaration\IReferenceableDeclaration.cs" />
     <Compile Include="Representation\Declaration\LineComment.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
     <Compile Include="Representation\Declaration\Empty.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Representation\Expression\Character.cs" />
     <Compile Include="Representation\Expression\ConditionalSignalAssignment.cs" />
     <Compile Include="Representation\Expression\DataObjectReference.cs" />
+    <Compile Include="Representation\Expression\DataTypeReference.cs" />
     <Compile Include="Representation\Expression\If.cs" />
     <Compile Include="Representation\Expression\IdentifierValue.cs" />
     <Compile Include="Representation\Expression\Invokation.cs" />
