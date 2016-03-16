@@ -1,4 +1,5 @@
 ﻿using System;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -162,8 +163,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             if (type.ArraySpecifiers.Count != 0)
             {
-                var storedType = ConvertAstType(type.BaseType);
-                return new Hast.VhdlBuilder.Representation.Declaration.Array { ElementType = storedType, Name = storedType.Name + "_array" };
+                var elementType = ConvertAstType(type.BaseType);
+                return new Hast.VhdlBuilder.Representation.Declaration.ArrayType
+                {
+                    ElementType = elementType,
+                    Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name)
+                };
             }
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");

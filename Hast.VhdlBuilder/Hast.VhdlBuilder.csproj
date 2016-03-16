@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Representation\Declaration\Alias.cs" />
-    <Compile Include="Representation\Declaration\Array.cs" />
+    <Compile Include="Representation\Declaration\ArrayType.cs" />
     <Compile Include="Representation\Declaration\BlockComment.cs" />
     <Compile Include="Representation\Declaration\LineComment.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
@@ -61,6 +61,8 @@
     <Compile Include="Representation\Declaration\ITypedDataObject.cs" />
     <Compile Include="Representation\Declaration\Signal.cs" />
     <Compile Include="Representation\Declaration\Variable.cs" />
+    <Compile Include="Representation\Declaration\UnconstrainedArrayInstantiation.cs" />
+    <Compile Include="Representation\Expression\ArrayElementAccess.cs" />
     <Compile Include="Representation\Expression\Assignment.cs" />
     <Compile Include="ProcessUtility.cs" />
     <Compile Include="Representation\Declaration\Architecture.cs" />

@@ -9,10 +9,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public int RangeMax { get; set; }
 
 
-        public RangedDataType(DataType baseType)
+        public RangedDataType(DataType baseType) : base(baseType)
         {
-            TypeCategory = baseType.TypeCategory;
-            Name = baseType.Name;
+        }
+
+        public RangedDataType(RangedDataType previous) : base(previous)
+        {
+            RangeMin = previous.RangeMin;
+            RangeMax = previous.RangeMax;
         }
 
         public RangedDataType()

@@ -49,6 +49,26 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
+        public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
+        {
+            // We need this information explicitly as we can't use arrays.
+            uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
+
+            var numbers = new uint[10];
+            int i = 0;
+            while (i < numberCount)
+            {
+                // Ternary operator is not supported yet, that's why the if statement.
+                var memoryReadIndexUpperBound = 10;
+                if (numberCount - i < 10) memoryReadIndexUpperBound = (int)(numberCount - i);
+
+                for (int m = 0; m < memoryReadIndexUpperBound; m++)
+                {
+                    numbers[m] = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
+                }           
+            }
+        }
+
         // Arrays not yet supported
         /*public virtual int[] PrimeFactors(int number)
         {

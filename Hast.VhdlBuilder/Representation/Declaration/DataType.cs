@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -21,6 +22,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public DataTypeCategory TypeCategory { get; set; }
         public string Name { get; set; }
+        public Value DefaultValue { get; set; }
+
+
+        public DataType(DataType previous) : this()
+        {
+            TypeCategory = previous.TypeCategory;
+            Name = previous.Name;
+            DefaultValue = previous.DefaultValue;
+        }
+
+        public DataType()
+        {
+        }
 
 
         /// <summary>
@@ -39,6 +53,15 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return ToReferenceVhdl(vhdlGenerationOptions);
+        }
+
+        /// <summary>
+        /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside 
+        /// double quotes.
+        /// </summary>
+        public bool IsLiteralArrayType()
+        {
+            return this == KnownDataTypes.String || Name == "bit_vector" || Name == "std_logic_vector";
         }
 
 

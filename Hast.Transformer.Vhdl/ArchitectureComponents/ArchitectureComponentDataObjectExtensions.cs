@@ -8,8 +8,17 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
-    public static class ArchitectureComponentVariableExtensions
+    public static class ArchitectureComponentDataObjectExtensions
     {
+        public static IEnumerable<TypedDataObject> GetAllDataObjects(this IArchitectureComponent component)
+        {
+            return component.GlobalVariables
+                .Cast<TypedDataObject>()
+                .Union(component.LocalVariables)
+                .Union(component.InternallyDrivenSignals)
+                .Union(component.ExternallyDrivenSignals);
+        }
+
         public static IEnumerable<ParameterVariable> GetParameterVariables(this IArchitectureComponent component)
         {
             return component.GlobalVariables.Where(variable => variable is ParameterVariable).Cast<ParameterVariable>();
