@@ -8,14 +8,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             TypeCategory = DataTypeCategory.Character,
             Name = "bit",
-            DefaultValue = default(bool) ? Value.OneCharacter : Value.ZeroCharacter
+            DefaultValue = Value.ZeroCharacter
         };
 
         public static DataType Boolean = new DataType
         {
             TypeCategory = DataTypeCategory.Identifier,
             Name = "boolean",
-            DefaultValue = default(bool) ? Value.True : Value.False
+            DefaultValue = Value.False
         };
 
         private static DataType _character = new DataType { TypeCategory = DataTypeCategory.Character, Name = "character" };
@@ -53,7 +53,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private static DataType _stdLogic = new DataType { TypeCategory = DataTypeCategory.Character, Name = "std_logic" };
         public static DataType StdLogic = new DataType(_stdLogic)
         {
-            DefaultValue = new Value { DataType = _stdLogic, Content = default(bool) ? "1" : "0" }
+            DefaultValue = new Value { DataType = _stdLogic, Content = "0" }
         };
 
         private static DataType _string = new String { Length = 256 };
