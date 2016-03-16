@@ -9,7 +9,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 namespace Hast.VhdlBuilder.Representation.Expression
 {
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    internal class DataTypeReference : DataType
+    public class DataTypeReference : DataType
     {
         private readonly Func<IVhdlGenerationOptions, string> _vhdlGenerator;
 
