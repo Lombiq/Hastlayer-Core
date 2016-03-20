@@ -76,27 +76,6 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-        // Arrays not yet supported
-        /*public virtual int[] PrimeFactors(int number)
-        {
-            var i = 0;
-            var result = new int[50];
-
-            int divisor = 2;
-
-            while (divisor <= number)
-            {
-                if (number % divisor == 0)
-                {
-                    result[i++] = divisor;
-                    number /= divisor;
-                }
-                else divisor++;
-            }
-
-            return result;
-        }*/
-
 
         /// <summary>
         /// Internal implementation of prime number checking. This is here so we can use it simpler from two methods.
