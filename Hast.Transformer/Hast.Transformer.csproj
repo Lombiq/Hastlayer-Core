@@ -63,6 +63,7 @@
     <Compile Include="Extensions\InterfaceMemberEntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
+    <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
     <Compile Include="Extensions\TransformationContextExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />

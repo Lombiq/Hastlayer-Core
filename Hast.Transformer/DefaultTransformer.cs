@@ -108,7 +108,7 @@ namespace Hast.Transformer
 
         private static void CheckSimpleMemoryUsage(SyntaxTree syntaxTree)
         {
-            foreach (var type in syntaxTree.GetTypes(true))
+            foreach (var type in syntaxTree.GetAllTypeDeclarations())
             {
                 foreach (var member in type.Members.Where(m => m.IsInterfaceMember()))
                 {

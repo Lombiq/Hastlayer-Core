@@ -17,7 +17,7 @@ namespace ICSharpCode.NRefactory.CSharp
             // Searching for members that have the exact same signature.
             var matchedMember = typeDeclaration.Members.SingleOrDefault(member =>
             {
-                if (member.Name == methodDeclaration.Name && member.EntityType == ICSharpCode.NRefactory.TypeSystem.EntityType.Method)
+                if (member.Name == methodDeclaration.Name && member is MethodDeclaration)
                 {
                     var method = (MethodDeclaration)member;
                     if ((typeDeclaration.ClassType == ClassType.Interface || method.Modifiers == methodDeclaration.Modifiers) && // Only checking for modifiers is the type is not an interface.

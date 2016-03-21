@@ -87,6 +87,7 @@
     <Compile Include="Representation\Expression\Invokation.cs" />
     <Compile Include="Representation\Expression\IfElse.cs" />
     <Compile Include="Representation\Expression\BinaryOperator.cs" />
+    <Compile Include="Representation\Expression\Parenthesized.cs" />
     <Compile Include="Representation\Expression\Return.cs" />
     <Compile Include="Representation\Expression\Unary.cs" />
     <Compile Include="Representation\Expression\UnaryOperator.cs" />

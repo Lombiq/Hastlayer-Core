@@ -321,6 +321,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     IndexExpression = Transform(indexerExpression.Arguments.Single(), context)
                 };
             }
+            else if (expression is ParenthesizedExpression)
+            {
+                var parenthesizedExpression = (ParenthesizedExpression)expression;
+
+                return new Parenthesized
+                {
+                    Target = Transform(parenthesizedExpression.Expression, context)
+                };
+            }
             else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
         }
 
@@ -405,7 +414,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForOperation(expression.Operator);
 
             var resultType = expression.GetActualTypeReference(true);
-            if (resultType == null) resultType = expression.Parent.GetActualTypeReference();
+            // First parent: ParenthesizedExpression, second: BinaryOperatorExpression.
+            if (resultType == null) resultType = expression.Parent.Parent.GetActualTypeReference();
             var operationResultVariableReference = stateMachine
                 .CreateVariableWithNextUnusedIndexedName(
                     "binaryOperationResult",

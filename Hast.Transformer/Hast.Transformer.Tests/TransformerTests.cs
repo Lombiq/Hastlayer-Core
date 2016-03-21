@@ -179,7 +179,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private Dictionary<string, TypeDeclaration> BuildTypeLookup()
         {
-            return _producedContext.SyntaxTree.GetTypes(true).ToDictionary(type => type.Name);
+            return _producedContext.SyntaxTree.GetAllTypeDeclarations().ToDictionary(type => type.Name);
         }
 
 
