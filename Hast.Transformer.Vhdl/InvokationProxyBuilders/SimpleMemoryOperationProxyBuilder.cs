@@ -18,9 +18,11 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
         public IArchitectureComponent BuildProxy(IEnumerable<IArchitectureComponent> components)
         {
             var simpleMemoryUsingComponents = components.Where(c => c.AreSimpleMemorySignalsAdded());
-            
 
             var proxyComponentName = "System.Void Hast::SimpleMemoryOperationProxy()";
+
+            if (!simpleMemoryUsingComponents.Any()) return new BasicComponent(proxyComponentName);
+
             var signalsAssignmentBlock = new InlineBlock(new LineComment(proxyComponentName + " start"));
 
 
