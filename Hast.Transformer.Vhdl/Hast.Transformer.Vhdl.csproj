@@ -68,6 +68,7 @@
     <Compile Include="Constants\GeneratedCodeOverviewComment.cs" />
     <Compile Include="Constants\SimpleMemoryPortNames.cs" />
     <Compile Include="Constants\SimpleMemoryTypes.cs" />
+    <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
     <Compile Include="ArchitectureComponents\ArchitectureComponentBase.cs" />

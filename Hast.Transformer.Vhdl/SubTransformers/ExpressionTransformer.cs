@@ -414,8 +414,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForOperation(expression.Operator);
 
             var resultType = expression.GetActualTypeReference(true);
-            // First parent: ParenthesizedExpression, second: BinaryOperatorExpression.
-            if (resultType == null) resultType = expression.Parent.Parent.GetActualTypeReference();
+            if (resultType == null) resultType = expression.FindFirstNonParenthesizedExpressionParent().GetActualTypeReference();
             var operationResultVariableReference = stateMachine
                 .CreateVariableWithNextUnusedIndexedName(
                     "binaryOperationResult",
