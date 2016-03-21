@@ -46,7 +46,7 @@ namespace Hast.Samples.Consumer
                         configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
                             new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumberInternal")
                             {
-                                MaxDegreeOfParallelism = 3
+                                MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
                             });
                         configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
                             new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.CalculateFibonacchiSeries")
@@ -89,7 +89,16 @@ namespace Hast.Samples.Consumer
                             numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
                         }
                         var sw = System.Diagnostics.Stopwatch.StartNew();
-                        var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
+                        //var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
+                        sw.Stop();
+
+                        // With 210 numbers and 50 workers this takes about ...s all together (with UART) on an FPGA and 
+                        // 95s on a 3,2GHz i7.
+                        sw.Restart();
+                        var arePrimes4 = primeCalculator.ParallelizedArePrimeNumbers(numbers);
+                        sw.Stop();
+                        sw.Restart();
+                        var arePrimes5 = await primeCalculator.TaskParallelizedArePrimeNumbers(numbers);
                         sw.Stop();
                         #endregion
 
