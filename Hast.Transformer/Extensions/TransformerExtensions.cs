@@ -21,7 +21,8 @@ namespace Hast.Transformer
     {
         public static Task<IHardwareDescription> Transform(
             this ITransformer transformer, 
-            string sourceCode, Language language, 
+            string sourceCode,
+            Language language, 
             IHardwareGenerationConfiguration configuration)
         {
             CompilerResults result;
