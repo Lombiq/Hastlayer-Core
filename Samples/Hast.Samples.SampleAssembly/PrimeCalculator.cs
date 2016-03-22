@@ -41,7 +41,7 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void ArePrimeNumbers(SimpleMemory memory)
         {
-            // We need this information explicitly as we can't use arrays.
+            // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
             for (int i = 0; i < numberCount; i++)
@@ -53,7 +53,7 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
         {
-            // We need this information explicitly as we can't use arrays.
+            // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
             var numbers = new uint[MaxDegreeOfParallelism];
@@ -86,7 +86,7 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual async Task TaskParallelizedArePrimeNumbers(SimpleMemory memory)
         {
-            // We need this information explicitly as we can't use arrays.
+            // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
             var numbers = new uint[MaxDegreeOfParallelism];
