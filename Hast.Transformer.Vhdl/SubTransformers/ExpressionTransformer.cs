@@ -247,7 +247,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (!(sizeArgument is PrimitiveExpression))
                 {
-                    throw new NotSupportedException("Only arrays with statically defined dimensions are supported.");
+                    throw new NotSupportedException("Only arrays with statically defined dimension sizes are supported. Consider adding the dimension sizes directly into the array initialization or use a const field.");
                 }
 
                 var size = int.Parse(sizeArgument.ToString());
