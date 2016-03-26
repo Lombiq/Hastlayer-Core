@@ -20,8 +20,12 @@ namespace Hast.Communication
                 var method = (MethodDeclaration)member;
 
                 if (method.Parent is TypeDeclaration &&
-                    (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) || // If it's a public virtual method,
-                        method.FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup) != null)) // or a public method that implements an interface,
+                        // If it's a public virtual method,
+                        (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) ||
+                        // or a public virtual async method,
+                        method.Modifiers == (Modifiers.Public | Modifiers.Virtual | Modifiers.Async) ||
+                        // or a public method that implements an interface.
+                        method.FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup) != null))
                 {
                     var parent = (TypeDeclaration)method.Parent;
                     return parent.ClassType == ClassType.Class && parent.Modifiers == Modifiers.Public;
