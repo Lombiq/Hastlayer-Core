@@ -63,11 +63,11 @@
     <Compile Include="ArchitectureComponents\ConfigurableComponent.cs" />
     <Compile Include="ArchitectureComponents\InvokationHelper.cs" />
     <Compile Include="ArchitectureComponents\IArchitectureComponent.cs" />
-    <Compile Include="ArchitectureComponents\SimpleMemoryArchitectureComponentExtensions.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryArchitectureComponentExtensions.cs" />
     <Compile Include="Constants\CommonPortNames.cs" />
     <Compile Include="Constants\GeneratedCodeOverviewComment.cs" />
-    <Compile Include="Constants\SimpleMemoryPortNames.cs" />
-    <Compile Include="Constants\SimpleMemoryTypes.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryPortNames.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
@@ -76,9 +76,9 @@
     <Compile Include="InvokationProxyBuilders\ExternalInvokationProxyBuilder.cs" />
     <Compile Include="InvokationProxyBuilders\IExternalInvokationProxyBuilder.cs" />
     <Compile Include="InvokationProxyBuilders\IInternalInvokationProxyBuilder.cs" />
-    <Compile Include="InvokationProxyBuilders\ISimpleMemoryOperationProxyBuilder.cs" />
+    <Compile Include="SimpleMemory\ISimpleMemoryOperationProxyBuilder.cs" />
     <Compile Include="InvokationProxyBuilders\InternalInvokationProxyBuilder.cs" />
-    <Compile Include="InvokationProxyBuilders\SimpleMemoryOperationProxyBuilder.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryOperationProxyBuilder.cs" />
     <Compile Include="Models\IMemberTransformerResult.cs" />
     <Compile Include="Models\IMemberStateMachineResult.cs" />
     <Compile Include="Models\MemberTransformerResult.cs" />
@@ -93,6 +93,8 @@
     <Compile Include="Models\ParameterVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ArchitectureComponents\NameSuffixes.cs" />
+    <Compile Include="SimpleMemory\ISimpleMemoryComponentBuilder.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryComponentBuilder.cs" />
     <Compile Include="SubTransformers\ArrayTypesCreator.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />

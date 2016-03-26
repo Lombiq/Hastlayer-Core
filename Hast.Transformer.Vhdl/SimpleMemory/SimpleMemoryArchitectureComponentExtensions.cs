@@ -7,8 +7,9 @@ using Hast.Transformer.Vhdl.Constants;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 
-namespace Hast.Transformer.Vhdl.ArchitectureComponents
+namespace Hast.Transformer.Vhdl.SimpleMemory
 {
     /// <summary>
     /// Handles intermediay signals for using SimpleMemory ports. Such signals are only needed for Out or InOut ports,

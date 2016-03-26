@@ -11,7 +11,7 @@ using Orchard;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 
-namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
+namespace Hast.Transformer.Vhdl.SimpleMemory
 {
     public class SimpleMemoryOperationProxyBuilder : ISimpleMemoryOperationProxyBuilder
     {

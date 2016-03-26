@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Orchard;
 
-namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
+namespace Hast.Transformer.Vhdl.SimpleMemory
 {
     public interface ISimpleMemoryOperationProxyBuilder : IDependency
     {

@@ -17,6 +17,7 @@ using Hast.Transformer.Vhdl.ArchitectureComponents;
 using System;
 using Orchard.Services;
 using Hast.Transformer.Vhdl.InvokationProxyBuilders;
+using Hast.Transformer.Vhdl.SimpleMemory;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -27,7 +28,7 @@ namespace Hast.Transformer.Vhdl
         private readonly IMethodTransformer _methodTransformer;
         private readonly IExternalInvokationProxyBuilder _externalInvokationProxyBuilder;
         private readonly IInternalInvokationProxyBuilder _internalInvokationProxyBuilder;
-        private readonly Lazy<ISimpleMemoryOperationProxyBuilder> _simpleMemoryOperationProxyBuilderLazy;
+        private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
 
 
         public VhdlTransformingEngine(
@@ -36,14 +37,14 @@ namespace Hast.Transformer.Vhdl
             IMethodTransformer methodTransformer,
             IExternalInvokationProxyBuilder externalInvokationProxyBuilder,
             IInternalInvokationProxyBuilder internalInvokationProxyBuilder,
-            Lazy<ISimpleMemoryOperationProxyBuilder> simpleMemoryOperationProxyBuilderLazy)
+            Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy)
         {
             _clock = clock;
             _arrayTypesCreator = arrayTypesCreator;
             _methodTransformer = methodTransformer;
             _externalInvokationProxyBuilder = externalInvokationProxyBuilder;
             _internalInvokationProxyBuilder = internalInvokationProxyBuilder;
-            _simpleMemoryOperationProxyBuilderLazy = simpleMemoryOperationProxyBuilderLazy;
+            _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
         }
 
 
@@ -137,19 +138,14 @@ namespace Hast.Transformer.Vhdl
             // Proxying SimpleMemory operations
             if (useSimpleMemory)
             {
-                var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilderLazy.Value
-                    .BuildProxy(potentiallyInvokingArchitectureComponents);
-                architecture.Declarations.Add(simpleMemoryProxyComponent.BuildDeclarations());
-                architecture.Add(simpleMemoryProxyComponent.BuildBody());
+                _simpleMemoryComponentBuilderLazy.Value.AddSimpleMemoryComponentsToArchitecture(
+                    potentiallyInvokingArchitectureComponents,
+                    architecture);
             }
 
 
             // Adding common ports
             var ports = entity.Ports;
-            if (useSimpleMemory)
-            {
-                AddSimpleMemoryPorts(ports);
-            }
             ports.Add(new Port
             {
                 Name = CommonPortNames.MemberId,
@@ -269,58 +265,6 @@ namespace Hast.Transformer.Vhdl
 
 
             return memberIdTable;
-        }
-
-        private static void AddSimpleMemoryPorts(List<Port> ports)
-        {
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId(),
-                Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DataSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.DataOut.ToExtendedVhdlId(),
-                Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.DataSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.CellIndex.ToExtendedVhdlId(),
-                Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.CellIndexSignalDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.ReadEnable.ToExtendedVhdlId(),
-                Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.EnableSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.WriteEnable.ToExtendedVhdlId(),
-                Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.EnableSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.ReadsDone.ToExtendedVhdlId(),
-                Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DoneSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.WritesDone.ToExtendedVhdlId(),
-                Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DoneSignalsDataType
-            });
         }
     }
 }
