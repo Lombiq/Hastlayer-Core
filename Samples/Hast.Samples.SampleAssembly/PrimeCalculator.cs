@@ -51,47 +51,13 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-        public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
+        public virtual async Task ParallelizedArePrimeNumbersAsync(SimpleMemory memory)
         {
             // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
             var numbers = new uint[MaxDegreeOfParallelism];
-            var results = new bool[MaxDegreeOfParallelism];
-            int i = 0;
-            while (i < numberCount)
-            {
-                // Ternary operator is not supported yet, that's why the if statement.
-                var memoryReadIndexUpperBound = MaxDegreeOfParallelism;
-                if (numberCount - i < MaxDegreeOfParallelism) memoryReadIndexUpperBound = (int)(numberCount - i);
-
-                for (int m = 0; m < memoryReadIndexUpperBound; m++)
-                {
-                    numbers[m] = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
-                }
-
-                Parallel.For(0, memoryReadIndexUpperBound, m =>
-                {
-                    results[m] = IsPrimeNumberInternal(numbers[m]);
-                });
-
-                for (int m = 0; m < memoryReadIndexUpperBound; m++)
-                {
-                    memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i + m, results[m]);
-                }
-
-                i += memoryReadIndexUpperBound;
-            }
-        }
-
-        public virtual async Task TaskParallelizedArePrimeNumbers(SimpleMemory memory)
-        {
-            // We need this information explicitly as we can't store arrays directly in memory.
-            uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
-
-            var numbers = new uint[MaxDegreeOfParallelism];
-            var results = new bool[MaxDegreeOfParallelism];
-            var tasks = new Task[MaxDegreeOfParallelism];
+            var tasks = new Task<bool>[MaxDegreeOfParallelism];
             int i = 0;
             while (i < numberCount)
             {
@@ -106,18 +72,16 @@ namespace Hast.Samples.SampleAssembly
 
                 for (int m = 0; m < memoryReadIndexUpperBound; m++)
                 {
-                    tasks[m] = Task.Factory.StartNew(indexObject =>
-                        {
-                            var index = (int)indexObject;
-                            results[index] = IsPrimeNumberInternal(numbers[index]);
-                        }, m);
+                    tasks[m] = Task.Factory.StartNew<bool>(
+                        indexObject => IsPrimeNumberInternal(numbers[(int)indexObject]),
+                        m);
                 }
 
                 await Task.WhenAll(tasks);
 
                 for (int m = 0; m < memoryReadIndexUpperBound; m++)
                 {
-                    memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i + m, results[m]);
+                    memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i + m, tasks[m].Result);
                 }
 
                 i += memoryReadIndexUpperBound;
@@ -164,14 +128,9 @@ namespace Hast.Samples.SampleAssembly
             return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ArePrimeNumbers(memory));
         }
 
-        public static bool[] ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
+        public static Task<bool[]> ParallelizedArePrimeNumbersAsync(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ParallelizedArePrimeNumbers(memory));
-        }
-
-        public static Task<bool[]> TaskParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
-        {
-            return Task.FromResult(RunArePrimeNumbersMethod(numbers, memory => primeCalculator.TaskParallelizedArePrimeNumbers(memory).Wait()));
+            return Task.FromResult(RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ParallelizedArePrimeNumbersAsync(memory).Wait()));
         }
 
 

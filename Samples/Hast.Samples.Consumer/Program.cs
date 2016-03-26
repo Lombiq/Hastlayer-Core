@@ -95,10 +95,7 @@ namespace Hast.Samples.Consumer
                         // With 210 numbers and 50 workers this takes about ...s all together (with UART) on an FPGA and 
                         // 95s on a 3,2GHz i7.
                         sw.Restart();
-                        var arePrimes4 = primeCalculator.ParallelizedArePrimeNumbers(numbers);
-                        sw.Stop();
-                        sw.Restart();
-                        var arePrimes5 = await primeCalculator.TaskParallelizedArePrimeNumbers(numbers);
+                        var arePrimes4 = await primeCalculator.ParallelizedArePrimeNumbersAsync(numbers);
                         sw.Stop();
                         #endregion
 
