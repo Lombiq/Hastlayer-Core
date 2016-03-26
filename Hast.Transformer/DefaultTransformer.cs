@@ -50,6 +50,7 @@ namespace Hast.Transformer
             var firstAssembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPaths.First()));
             var transformationId = firstAssembly.FullName;
             var decompiledContext = new DecompilerContext(firstAssembly.MainModule);
+            decompiledContext.Settings.AnonymousMethods = false;
             var astBuilder = new AstBuilder(decompiledContext);
             astBuilder.AddAssembly(firstAssembly);
 

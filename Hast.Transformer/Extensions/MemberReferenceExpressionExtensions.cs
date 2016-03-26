@@ -14,15 +14,37 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (type == null) return null;
 
-            var parent = memberReferenceExpression.Parent;
-            MemberReference memberReference = null;
-            while (memberReference == null && parent != null)
+            // A MethodReference annotation is present if the expression is for creating a delegate for a lambda expression
+            // like this: new Func<object, bool> (<>c__DisplayClass.<ParallelizedArePrimeNumbersAsync>b__0)
+            var methodReference = memberReferenceExpression.Annotation<MethodReference>();
+            if (methodReference == null)
             {
-                memberReference = parent.Annotation<MemberReference>();
-                parent = parent.Parent;
-            }
+                // A FieldDefinition annotation is present if the expression is about accessing a field.
+                var fieldDefinition = memberReferenceExpression.Annotation<FieldDefinition>();
+                if (fieldDefinition == null)
+                {
+                    var parent = memberReferenceExpression.Parent;
+                    MemberReference memberReference = null;
+                    while (memberReference == null && parent != null)
+                    {
+                        memberReference = parent.Annotation<MemberReference>();
+                        parent = parent.Parent;
+                    }
 
-            return type.Members.Where(member => member.Annotation<MemberReference>().FullName == memberReference.FullName).SingleOrDefault();
+                    return type.Members
+                        .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);  
+                }
+                else
+                {
+                    return type.Members
+                        .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName); 
+                }
+            }
+            else
+            {
+                return type.Members
+                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == methodReference.FullName); 
+            }
         }
 
         public static TypeDeclaration GetTargetTypeDeclaration(
