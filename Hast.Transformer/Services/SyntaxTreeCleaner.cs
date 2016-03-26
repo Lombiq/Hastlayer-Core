@@ -59,7 +59,7 @@ namespace Hast.Transformer.Services
                             if (implementedInterfaceMethod != null)
                             {
                                 implementedInterfaceMethod.AddReference(member);
-                                implementedInterfaceMethod.FindParentTypeDeclaration().AddReference(member);
+                                implementedInterfaceMethod.FindFirstParentTypeDeclaration().AddReference(member);
                             }
                         }
 

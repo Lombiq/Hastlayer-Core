@@ -44,7 +44,7 @@ namespace ICSharpCode.NRefactory.CSharp
                 {
                     name = memberReference.Name;
                     declaringType = memberReference.DeclaringType;
-                    if (declaringType == null) name = memberDefinition.FullName;
+                    if (declaringType == null) name = memberReference.FullName;
                 }
             }
 
@@ -72,24 +72,19 @@ namespace ICSharpCode.NRefactory.CSharp
             return name;
         }
 
-        public static EntityDeclaration FindClosestParentEntityDeclaration(this AstNode node)
+        public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode
         {
-            while (!(node is EntityDeclaration))
+            while (!(node is T))
             {
                 node = node.Parent;
             }
 
-            return (EntityDeclaration)node;
+            return (T)node;
         }
 
-        public static TypeDeclaration FindParentTypeDeclaration(this AstNode node)
+        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node)
         {
-            while (!(node is TypeDeclaration))
-            {
-                node = node.Parent;
-            }
-
-            return (TypeDeclaration)node;
+            return node.FindFirstParentOfType<TypeDeclaration>();
         }
     }
 }

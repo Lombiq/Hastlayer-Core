@@ -96,10 +96,12 @@
     <Compile Include="SimpleMemory\ISimpleMemoryComponentBuilder.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryComponentBuilder.cs" />
     <Compile Include="SubTransformers\ArrayTypesCreator.cs" />
+    <Compile Include="SubTransformers\CompilerGeneratedClassesConverter.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\IArrayTypesCreator.cs" />
+    <Compile Include="SubTransformers\ICompilerGeneratedClassesConverter.cs" />
     <Compile Include="SubTransformers\IExpressionTransformer.cs" />
     <Compile Include="SubTransformers\IMethodTransformer.cs" />
     <Compile Include="SubTransformers\IStatementTransformer.cs" />

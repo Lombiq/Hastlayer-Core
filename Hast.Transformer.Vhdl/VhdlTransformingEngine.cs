@@ -23,6 +23,7 @@ namespace Hast.Transformer.Vhdl
 {
     public class VhdlTransformingEngine : ITransformingEngine
     {
+        private readonly ICompilerGeneratedClassesConverter _compilerGeneratedClassesConverter;
         private readonly IClock _clock;
         private readonly IArrayTypesCreator _arrayTypesCreator;
         private readonly IMethodTransformer _methodTransformer;
@@ -32,6 +33,7 @@ namespace Hast.Transformer.Vhdl
 
 
         public VhdlTransformingEngine(
+            ICompilerGeneratedClassesConverter compilerGeneratedClassesConverter,
             IClock clock,
             IArrayTypesCreator arrayTypesCreator,
             IMethodTransformer methodTransformer,
@@ -39,6 +41,7 @@ namespace Hast.Transformer.Vhdl
             IInternalInvokationProxyBuilder internalInvokationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy)
         {
+            _compilerGeneratedClassesConverter = compilerGeneratedClassesConverter;
             _clock = clock;
             _arrayTypesCreator = arrayTypesCreator;
             _methodTransformer = methodTransformer;
@@ -50,6 +53,8 @@ namespace Hast.Transformer.Vhdl
 
         public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
+            _compilerGeneratedClassesConverter.InlineCompilerGeneratedClasses(transformationContext.SyntaxTree);
+
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext);
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;
 

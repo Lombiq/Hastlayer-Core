@@ -20,7 +20,7 @@ namespace Hast.Transformer.Visitors
 
 
         public InvokationInstanceCountAdjustingVisitor(
-            ITypeDeclarationLookupTable typeDeclarationLookupTable, 
+            ITypeDeclarationLookupTable typeDeclarationLookupTable,
             IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
             _typeDeclarationLookupTable = typeDeclarationLookupTable;
@@ -39,7 +39,7 @@ namespace Hast.Transformer.Visitors
             var referencedMemberMaxInvokationConfiguration = _transformerConfiguration
                 .GetMaxInvokationInstanceCountConfigurationForMember(referencedMember.GetSimpleName());
 
-            var invokingMemberSimpleName = memberReferenceExpression.FindClosestParentEntityDeclaration().GetSimpleName();
+            var invokingMemberSimpleName = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>().GetSimpleName();
             var invokingMemberMaxInvokationConfiguration = _transformerConfiguration
                 .GetMaxInvokationInstanceCountConfigurationForMember(invokingMemberSimpleName);
 
