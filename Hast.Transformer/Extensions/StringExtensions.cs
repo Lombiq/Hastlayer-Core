@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Vhdl.Extensions
+namespace Hast.Transformer.Extensions
 {
-    internal static class StringExtensions
+    public static class StringExtensions
     {
         /// <summary>
-        /// Creates a simple dot-delimited name for a full member name, whcih will include the parent types' and the
-        /// wrapping namespace's name.
+        /// Creates a simple dot-delimited name for a full member name, which will include the parent types' and the
+        /// wrapping namespace's name. This can be used where name prefixes are required.
         /// </summary>
         public static string ToSimpleName(this string fullName)
         {

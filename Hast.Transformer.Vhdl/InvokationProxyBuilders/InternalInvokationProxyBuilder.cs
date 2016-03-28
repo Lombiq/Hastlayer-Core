@@ -10,7 +10,7 @@ using Hast.Common.Configuration;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
-using Hast.Transformer.Vhdl.Extensions;
+using Hast.Transformer.Extensions;
 using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.InvokationProxyBuilders

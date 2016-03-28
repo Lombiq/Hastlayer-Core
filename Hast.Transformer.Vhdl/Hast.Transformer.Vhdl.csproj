@@ -69,7 +69,6 @@
     <Compile Include="SimpleMemory\SimpleMemoryPortNames.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\AstNodeExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
     <Compile Include="ArchitectureComponents\ArchitectureComponentBase.cs" />
     <Compile Include="Helpers\ArrayTypeNameHelper.cs" />
