@@ -45,7 +45,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             foreach (var compilerGeneratedClass in compilerGeneratedClasses)
             {
                 var parentClass = compilerGeneratedClass.FindFirstParentTypeDeclaration();
-                var thisFieldNames = new HashSet<string>();
 
 
                 // Processing the DisplayClasses themselves.
@@ -59,7 +58,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         var fieldName = ((FieldDeclaration)thisField).Variables.First().Name;
 
-                        thisFieldNames.Add(fieldName);
                         thisField.Remove();
 
                         Action<MemberReferenceExpression> memberReferenceExpressionProcessor = memberReferenceExpression =>
@@ -133,10 +131,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                     new ParameterDeclaration(field.ReturnType.Clone(), parameterName));
 
                                 // Changing the field reference to a reference to the parameter.
-                                //var fieldTypeReference = field.ReturnType.GetActualTypeReference();
-                                var identifierExpression = new IdentifierExpression(parameterName);
-                                //identifierExpression.AddAnnotation(new TypeInformation(fieldTypeReference, fieldTypeReference));
-                                memberReferenceExpression.ReplaceWith(identifierExpression);
+                                memberReferenceExpression.ReplaceWith(new IdentifierExpression(parameterName));
                             };
                         method.AcceptVisitor(new MemberReferenceExpressionVisitingVisitor(memberReferenceExpressionProcessor));
 
@@ -150,14 +145,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Processing consumer code of DisplayClasses.
                 {
-                    // Removing __this field references.
+                    var compilerGeneratedClassTypeInfoName = compilerGeneratedClass.Annotation<TypeDefinition>().FullName;
                     Action<MemberReferenceExpression> memberReferenceExpressionProcessor = memberReferenceExpression =>
                     {
-                        if (thisFieldNames.Contains(memberReferenceExpression.MemberName))
+                        if (memberReferenceExpression.Target is IdentifierExpression &&
+                            memberReferenceExpression.Target.Annotation<TypeInformation>().ExpectedType.FullName == compilerGeneratedClassTypeInfoName)
                         {
-                            // Removing the whole statement which should be something like:
-                            // <>c__DisplayClass.<>4__this = this;
-                            memberReferenceExpression.FindFirstParentOfType<ExpressionStatement>().Remove();
+                            // Removing __this field references.
+                            if (memberReferenceExpression.MemberName.EndsWith("__this"))
+                            {
+                                // Removing the whole statement which should be something like:
+                                // <>c__DisplayClass.<>4__this = this;
+                                memberReferenceExpression.FindFirstParentOfType<ExpressionStatement>().Remove();
+                            }
+                            // Converting DisplayClass field references to local variable references.
+                            else
+                            {
+                                var variableIdentifierExpression = new IdentifierExpression(
+                                    CreateGeneratedClassVariableName(compilerGeneratedClass, memberReferenceExpression.MemberName));
+                                memberReferenceExpression.ReplaceWith(variableIdentifierExpression);
+                            }
                         }
                     };
                     parentClass.AcceptVisitor(new MemberReferenceExpressionVisitingVisitor(memberReferenceExpressionProcessor));
