@@ -44,6 +44,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         .Attributes.Any(attribute => attribute.Type.GetSimpleName() == "CompilerGeneratedAttribute")));
             foreach (var compilerGeneratedClass in compilerGeneratedClasses)
             {
+                var parentClass = compilerGeneratedClass.FindFirstParentTypeDeclaration();
                 var thisFieldNames = new HashSet<string>();
 
 
@@ -122,7 +123,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                                 // This generated name should be sufficiently unique so it doesn't clash with existing
                                 // parameters.
-                                var parameterName = compilerGeneratedClass.Name + "_" + field.Variables.Single().Name;
+                                var parameterName = CreateGeneratedClassVariableName(
+                                    compilerGeneratedClass, 
+                                    field.Variables.Single().Name);
 
                                 // Adding a method parameter for the field.
                                 parametersForFormerFields.Add(
@@ -138,13 +141,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         method.AcceptVisitor(new MemberReferenceExpressionVisitingVisitor(memberReferenceExpressionProcessor));
 
                         method.Parameters.AddRange(parametersForFormerFields.Values);
+
+                        method.Name = compilerGeneratedClass.Name + method.Name;
+                        parentClass.Members.Add((MethodDeclaration)method.Clone());
+                        compilerGeneratedClass.Remove();
                     }
                 }
 
                 // Processing consumer code of DisplayClasses.
                 {
-                    var parentClass = compilerGeneratedClass.Parent;
-
                     // Removing __this field references.
                     Action<MemberReferenceExpression> memberReferenceExpressionProcessor = memberReferenceExpression =>
                     {
@@ -158,6 +163,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     parentClass.AcceptVisitor(new MemberReferenceExpressionVisitingVisitor(memberReferenceExpressionProcessor));
                 }
             }
+        }
+
+
+        private static string CreateGeneratedClassVariableName(TypeDeclaration compilerGeneratedClass, string variableName)
+        {
+            return compilerGeneratedClass.Name + "_" + variableName;
         }
 
 

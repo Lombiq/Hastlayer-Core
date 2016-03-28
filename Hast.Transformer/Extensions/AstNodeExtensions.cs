@@ -74,6 +74,8 @@ namespace ICSharpCode.NRefactory.CSharp
 
         public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode
         {
+            node = node.Parent;
+
             while (node != null && !(node is T))
             {
                 node = node.Parent;
