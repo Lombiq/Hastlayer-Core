@@ -1,9 +1,16 @@
-﻿
-using Hast.VhdlBuilder.Representation.Expression;
+﻿using Hast.VhdlBuilder.Representation.Expression;
+
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public static class KnownDataTypes
     {
+        // Without this static ctor the fields, even when actually used, wouldn't be initialized.
+        // See: http://stackoverflow.com/questions/3580171/static-member-variable-not-being-initialized-in-release-compiler-clr-bug
+        static KnownDataTypes()
+        {
+        }
+
+
         public static DataType Bit = new DataType
         {
             TypeCategory = DataTypeCategory.Character,
