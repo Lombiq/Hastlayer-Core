@@ -17,7 +17,6 @@ namespace Hast.Communication.Services
     public class EthernetCommunicationService : CommunicationServiceBase
     {
         private readonly IDeviceDriver _deviceDriver;
-        private readonly IPingService _pingService;
         private readonly IAvailableFpgaIpEndpointFinder _availableFpgaFinder;
 
 
@@ -32,11 +31,9 @@ namespace Hast.Communication.Services
 
         public EthernetCommunicationService(
             IDeviceDriver deviceDriver, 
-            IPingService pingService,
             IAvailableFpgaIpEndpointFinder availableFpgaFinder)
         {
             _deviceDriver = deviceDriver;
-            _pingService = pingService;
             _availableFpgaFinder = availableFpgaFinder;
         }
 
