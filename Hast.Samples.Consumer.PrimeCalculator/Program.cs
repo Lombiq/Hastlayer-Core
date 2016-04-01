@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Samples.SampleAssembly;
+using Hast.Communication.Constants;
 
 namespace Hast.Samples.Consumer.PrimeCalculator
 {
@@ -39,7 +40,7 @@ namespace Hast.Samples.Consumer.PrimeCalculator
 
 
                     var proxyConfiguration = new ProxyGenerationConfiguration();
-                    proxyConfiguration.CustomConfiguration.Add("Hast.Communication.ChannelName", "Ethernet");
+                    proxyConfiguration.CustomConfiguration.Add(CommunicationConstants.ChannelNameKey, CommunicationConstants.Ethernet.ChannelName);
 
                     var primeCalculator = await hastlayer
                         .GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator(), proxyConfiguration);

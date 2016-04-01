@@ -150,6 +150,7 @@ namespace Hast.Layer
             {
                 ImportedExtensions = new[]
                 {
+                    typeof(Orchard.Caching.Services.ICacheService).Assembly,
                     typeof(Hastlayer).Assembly,
                     typeof(Hast.Communication.IProxyGenerator).Assembly,
                     typeof(Hast.Synthesis.IHardwareImplementationComposer).Assembly,
@@ -162,6 +163,7 @@ namespace Hast.Layer
                         ShellName = ShellName,
                         EnabledFeatures = new[]
                         {
+                            "Orchard.Caching",
                             "Hast.Layer",
                             "Hast.Communication",
                             "Hast.Synthesis",

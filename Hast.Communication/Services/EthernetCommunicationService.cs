@@ -8,26 +8,36 @@ using System.Net;
 using Hast.Communication.Constants;
 using Hast.Communication.Exceptions;
 using Hast.Synthesis;
+using Orchard.Caching;
+using System.Text;
+using System.Linq;
 
 namespace Hast.Communication.Services
 {
     public class EthernetCommunicationService : CommunicationServiceBase
     {
         private readonly IDeviceDriver _deviceDriver;
-        
+        private readonly IPingService _pingService;
+        private readonly IAvailableFpgaIpEndpointFinder _availableFpgaFinder;
+
 
         public override string ChannelName
         {
             get
             {
-                return EthernetCommunicationConstants.ChannelName; 
+                return CommunicationConstants.Ethernet.ChannelName; 
             }
         }
 
 
-        public EthernetCommunicationService(IDeviceDriver deviceDriver)
+        public EthernetCommunicationService(
+            IDeviceDriver deviceDriver, 
+            IPingService pingService,
+            IAvailableFpgaIpEndpointFinder availableFpgaFinder)
         {
             _deviceDriver = deviceDriver;
+            _pingService = pingService;
+            _availableFpgaFinder = availableFpgaFinder;
         }
 
 
@@ -36,7 +46,9 @@ namespace Hast.Communication.Services
             var executionInformation = BeginExecutionTimer();
 
             // Get the IP address of the FPGA board.
-            var fpgaIPEndpoint = await GetFpgaIPEndPoint();
+            var fpgaIPEndpoint = await _availableFpgaFinder.FindAnAvailableFpgaIpEndpoint();
+            if (fpgaIPEndpoint == null)
+                throw new EthernetCommunicationException("Couldn't find any available FPGA.");
             
             Logger.Information("IP endpoint to communicate with via ethernet: {0}:{1}", fpgaIPEndpoint.Address, fpgaIPEndpoint.Port);
 
@@ -57,7 +69,7 @@ namespace Hast.Communication.Services
 
                     var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
                     
-                    if (executionCommandTypeResponseByte[0] != EthernetCommunicationConstants.Signals.Ready)
+                    if (executionCommandTypeResponseByte[0] != CommunicationConstants.Ethernet.Signals.Ready)
                         throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
 
                     // Here we put together the data stream.
@@ -102,14 +114,7 @@ namespace Hast.Communication.Services
             
             return executionInformation;
         }
-        
 
-        public static async Task<IPEndPoint> GetFpgaIPEndPoint()
-        {
-            var endpoint = new IPEndPoint(IPAddress.Parse("192.168.1.10"), 7);
-
-            return endpoint;
-        }
 
         public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length)
         {

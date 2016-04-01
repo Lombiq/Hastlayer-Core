@@ -7,9 +7,6 @@ namespace Hast.Communication.Services
 {
     public class CommunicationServiceSelector : ICommunicationServiceSelector
     {
-        private const string DefaultChannelName = SerialCommunicationConstants.ChannelName;
-
-
         private readonly IEnumerable<ICommunicationService> _communicationServices;
 
 
@@ -22,7 +19,8 @@ namespace Hast.Communication.Services
         public ICommunicationService GetCommunicationService(string channelName = "")
         {
             var communicationService = _communicationServices
-                .FirstOrDefault(service => service.ChannelName == (string.IsNullOrEmpty(channelName) ? DefaultChannelName : channelName));
+                .FirstOrDefault(service => 
+                    service.ChannelName == (string.IsNullOrEmpty(channelName) ? CommunicationConstants.DefaultChannelName : channelName));
 
             if (communicationService == null)
                 throw new InvalidOperationException("Communication service was not found with the given channel name.");

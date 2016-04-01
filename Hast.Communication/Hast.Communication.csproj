@@ -50,8 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\CommandTypes.cs" />
-    <Compile Include="Constants\EthernetCommunicationConstants.cs" />
-    <Compile Include="Constants\SerialCommunicationConstants.cs" />
+    <Compile Include="Constants\CommunicationConstants.cs" />
     <Compile Include="Exceptions\EthernetCommunicationException.cs" />
     <Compile Include="Exceptions\SerialPortCommunicationException.cs" />
     <Compile Include="Extensibility\Events\IMemberHardwareExecutionContext.cs" />
@@ -59,9 +58,11 @@
     <Compile Include="Extensibility\IMemberInvocationContext.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStep.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStepContext.cs" />
+    <Compile Include="Extensions\UdpClientExtensions.cs" />
     <Compile Include="Extensions\TcpClientExtensions.cs" />
     <Compile Include="Extensions\SerialPortExtensions.cs" />
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
+    <Compile Include="Helpers\EthernetCommunicationHelpers.cs" />
     <Compile Include="IMemberInvocationHandlerFactory.cs" />
     <Compile Include="Models\HardwareExecutionInformation.cs" />
     <Compile Include="IProxyGenerator.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="MemberInvocationHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyGenerator.cs" />
+    <Compile Include="Services\AvailableFpgaIpEndpointFinder.cs" />
+    <Compile Include="Services\IAvailableFpgaIpEndpointFinder.cs" />
     <Compile Include="Services\ICommunicationServiceSelector.cs" />
     <Compile Include="Services\EthernetCommunicationService.cs" />
     <Compile Include="Services\CommunicationServiceSelector.cs" />
@@ -88,6 +91,10 @@
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj">
       <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
       <Name>Hast.Transformer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard\src\Orchard.Web\Modules\Orchard.Caching\Orchard.Caching.csproj">
+      <Project>{7528bf74-25c7-4abe-883a-443b4eec4776}</Project>
+      <Name>Orchard.Caching</Name>
     </ProjectReference>
     <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
