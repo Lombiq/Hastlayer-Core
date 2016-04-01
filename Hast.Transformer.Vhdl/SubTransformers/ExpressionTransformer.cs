@@ -430,8 +430,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
                     "clockCyclesWaitedForBinaryOperationResult",
                     KnownDataTypes.Natural);
+                var waitedCyclesCountOne = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType };
                 // Default value is 1 because due to the state change we already waited 1 cycle.
-                waitedCyclesCountVariable.InitialValue = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType };
+                waitedCyclesCountVariable.InitialValue = waitedCyclesCountOne;
                 var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
 
                 var requiredClockCyclesRoundedUp = (int)Math.Ceiling(currentBlock.RequiredClockCycles);
@@ -454,24 +455,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var waitForResultBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "Waiting for the result to appear in " + operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."),
-                    waitForResultIf,
-                    new Assignment
-                        {
-                            AssignTo = waitedCyclesCountVariableReference,
-                            Expression = new Binary
-                            {
-                                Left = waitedCyclesCountVariableReference,
-                                Operator = BinaryOperator.Add,
-                                Right = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType }
-                            }
-                        });
+                    waitForResultIf);
 
                 var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
                 currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));
 
                 var afterResultReceivedBlock = new InlineBlock();
                 var afterResultReceivedStateIndex = stateMachine.AddState(afterResultReceivedBlock);
-                waitForResultIf.True = stateMachine.CreateStateChange(afterResultReceivedStateIndex);
+                waitForResultIf.True = new InlineBlock(
+                    stateMachine.CreateStateChange(afterResultReceivedStateIndex),
+                    new Assignment { AssignTo = waitedCyclesCountVariableReference, Expression = waitedCyclesCountOne });
+                waitForResultIf.Else = new Assignment
+                {
+                    AssignTo = waitedCyclesCountVariableReference,
+                    Expression = new Binary
+                    {
+                        Left = waitedCyclesCountVariableReference,
+                        Operator = BinaryOperator.Add,
+                        Right = waitedCyclesCountOne
+                    }
+                };
                 currentBlock.ChangeBlockToDifferentState(afterResultReceivedBlock, afterResultReceivedStateIndex);
             }
 
