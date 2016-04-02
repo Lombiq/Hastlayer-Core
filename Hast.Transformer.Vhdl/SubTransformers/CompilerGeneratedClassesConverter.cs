@@ -46,6 +46,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var parentClass = compilerGeneratedClass.FindFirstParentTypeDeclaration();
 
+                var fields = compilerGeneratedClass.Members.OfType<FieldDeclaration>()
+                    .OrderBy(field => field.Variables.Single().Name)
+                    .ToDictionary(field => field.Variables.Single().Name);
 
                 // Processing the DisplayClasses themselves.
                 {
@@ -77,11 +80,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                     // Converting fields into method arguments.
-                    var fields = compilerGeneratedClass.Members.OfType<FieldDeclaration>()
-                        .OrderBy(field => field.Variables.Single().Name)
-                        .ToArray(); // Eagerly evaluating so the below removal doesn't affect this field collection.
 
-                    foreach (var field in fields)
+                    foreach (var field in fields.Values)
                     {
                         field.Remove();
                     }
@@ -99,7 +99,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                                 if (fieldDefinition == null) return;
 
-                                var field = fields.Single(f => f.Annotation<FieldDefinition>().FullName == fieldDefinition.FullName);
+                                var field = fields.Values
+                                    .Single(f => f.Annotation<FieldDefinition>().FullName == fieldDefinition.FullName);
 
                                 // Is the field assigned to? Because we don't support that currently, since with it being
                                 // converted to a parameter we'd need to return its value and assign it to the caller's
@@ -146,13 +147,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Processing consumer code of DisplayClasses.
                 {
                     var compilerGeneratedClassTypeInfoName = compilerGeneratedClass.Annotation<TypeDefinition>().FullName;
+                    var compilerGeneratClassFullName = compilerGeneratedClass.GetFullName();
+                    var variablesAlreadyDeclared = new HashSet<string>();
+
                     Action<MemberReferenceExpression> memberReferenceExpressionProcessor = memberReferenceExpression =>
                     {
                         if (memberReferenceExpression.Target is IdentifierExpression &&
                             memberReferenceExpression.Target.Annotation<TypeInformation>().ExpectedType.FullName == compilerGeneratedClassTypeInfoName)
                         {
+                            var memberName = memberReferenceExpression.MemberName;
+
                             // Removing __this field references.
-                            if (memberReferenceExpression.MemberName.EndsWith("__this"))
+                            if (memberName.EndsWith("__this"))
                             {
                                 // Removing the whole statement which should be something like:
                                 // <>c__DisplayClass.<>4__this = this;
@@ -161,12 +167,45 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             // Converting DisplayClass field references to local variable references.
                             else
                             {
-                                var variableIdentifierExpression = new IdentifierExpression(
-                                    CreateGeneratedClassVariableName(compilerGeneratedClass, memberReferenceExpression.MemberName));
+                                var variableName = CreateGeneratedClassVariableName(compilerGeneratedClass, memberName);
+
+                                // Adding a variable declaration for the variable.
+                                var variableIdentifier = memberReferenceExpression
+                                    .FindFirstParentOfType<MethodDeclaration>()
+                                    .GetFullName() + variableName;
+                                if (!variablesAlreadyDeclared.Contains(variableIdentifier))
+                                {
+                                    variablesAlreadyDeclared.Add(variableIdentifier);
+
+                                    var variableDeclaration = new VariableDeclarationStatement(
+                                        fields[memberName].ReturnType.Clone(), variableName);
+
+                                    // We need to find the variable declaration of the DisplayClass object and insert
+                                    // such declarations adjacent to it. This will ensure that the new variable
+                                    // declarations have the same scope.
+                                    var parentMethod = memberReferenceExpression.FindFirstParentOfType<MethodDeclaration>();
+                                    var displayClassVariableDeclaration = parentMethod.Descendants
+                                        .Single(node => 
+                                            {
+                                                if (!(node is VariableDeclarationStatement)) return false;
+
+                                                var variableType = ((VariableDeclarationStatement)node).Type;
+
+                                                if (!(variableType is MemberType)) return false;
+
+                                                return variableType.GetFullName() == compilerGeneratClassFullName;
+                                            });
+
+                                    displayClassVariableDeclaration.Parent.InsertChildAfter(
+                                        displayClassVariableDeclaration, variableDeclaration, BlockStatement.StatementRole);
+                                }
+
+                                var variableIdentifierExpression = new IdentifierExpression(variableName);
                                 memberReferenceExpression.ReplaceWith(variableIdentifierExpression);
                             }
                         }
                     };
+
                     parentClass.AcceptVisitor(new MemberReferenceExpressionVisitingVisitor(memberReferenceExpressionProcessor));
                 }
             }

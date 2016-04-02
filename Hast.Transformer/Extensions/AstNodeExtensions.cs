@@ -18,6 +18,8 @@ namespace ICSharpCode.NRefactory.CSharp
             var memberReference = node.Annotation<MemberReference>();
             if (memberReference != null) return memberReference.FullName;
 
+            if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 
