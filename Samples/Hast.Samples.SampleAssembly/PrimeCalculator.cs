@@ -39,6 +39,15 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(number));
         }
 
+        public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
+        {
+            IsPrimeNumber(memory);
+
+            // For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized
+            // interface method async with Task.FromResult(). In .NET 4.6+ Task.CompletedTask can be used too.
+            return Task.FromResult(true);
+        }
+
         public virtual void ArePrimeNumbers(SimpleMemory memory)
         {
             // We need this information explicitly as we can't store arrays directly in memory.
@@ -56,6 +65,7 @@ namespace Hast.Samples.SampleAssembly
             // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
+            var numbers3 = new uint[MaxDegreeOfParallelism];
             var numbers = new uint[MaxDegreeOfParallelism];
             var tasks = new Task<bool>[MaxDegreeOfParallelism];
             int i = 0;
@@ -116,38 +126,49 @@ namespace Hast.Samples.SampleAssembly
     {
         public static bool IsPrimeNumber(this PrimeCalculator primeCalculator, uint number)
         {
-            // One memory cell is enough for data exchange.
-            var memory = new SimpleMemory(1);
-            memory.WriteUInt32(PrimeCalculator.IsPrimeNumber_InputUInt32Index, number);
-            primeCalculator.IsPrimeNumber(memory);
-            return memory.ReadBoolean(PrimeCalculator.IsPrimeNumber_OutputBooleanIndex);
+            return RunIsPrimeNumber(number, memory => Task.Run(() => primeCalculator.IsPrimeNumber(memory))).Result;
+        }
+
+        public static Task<bool> IsPrimeNumberAsync(this PrimeCalculator primeCalculator, uint number)
+        {
+            return RunIsPrimeNumber(number, memory => primeCalculator.IsPrimeNumberAsync(memory));
         }
 
         public static bool[] ArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ArePrimeNumbers(memory));
+            return RunArePrimeNumbersMethod(numbers, memory => Task.Run(() => primeCalculator.ArePrimeNumbers(memory))).Result;
         }
 
         public static Task<bool[]> ParallelizedArePrimeNumbersAsync(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            return Task.FromResult(RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ParallelizedArePrimeNumbersAsync(memory).Wait()));
+            return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ParallelizedArePrimeNumbersAsync(memory));
         }
 
 
-        private static bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner)
+        private static async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner)
+        {
+            // One memory cell is enough for data exchange.
+            var memory = new SimpleMemory(1);
+            memory.WriteUInt32(PrimeCalculator.IsPrimeNumber_InputUInt32Index, number);
+
+            await methodRunner(memory);
+
+            return memory.ReadBoolean(PrimeCalculator.IsPrimeNumber_OutputBooleanIndex);
+        }
+
+        private static async Task<bool[]> RunArePrimeNumbersMethod(uint[] numbers, Func<SimpleMemory, Task> methodRunner)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
             var memory = new SimpleMemory(numbers.Length + 1);
 
             memory.WriteUInt32(PrimeCalculator.ArePrimeNumbers_InputUInt32CountIndex, (uint)numbers.Length);
-
             for (int i = 0; i < numbers.Length; i++)
             {
                 memory.WriteUInt32(PrimeCalculator.ArePrimeNumbers_InputUInt32sStartIndex + i, numbers[i]);
             }
 
 
-            methodRunner(memory);
+            await methodRunner(memory);
 
 
             var output = new bool[numbers.Length];

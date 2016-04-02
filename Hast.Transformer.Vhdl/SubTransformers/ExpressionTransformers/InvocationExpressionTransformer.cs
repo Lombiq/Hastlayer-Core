@@ -173,6 +173,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var targetMethodName = expression.GetFullName();
 
+            // This is a Task.FromResult() method call.
+            if (targetMethodName.IsTaskFromResultMethodName())
+            {
+                return transformedParameters.Single();
+            }
+
             var targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
 
             if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))

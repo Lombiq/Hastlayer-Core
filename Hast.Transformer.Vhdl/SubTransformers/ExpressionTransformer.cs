@@ -168,13 +168,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 return _invocationExpressionTransformer.TransformInvocationExpression(invocationExpression, context, transformedParameters);
             }
-            // These are not needed at the moment. MemberReferenceExpression is handled in TransformInvocationExpression 
-            // and a ThisReferenceExpression can only happen if "this" is passed to a method, which is not supported.
-            //else if (expression is MemberReferenceExpression)
-            //{
-            //    var memberReference = (MemberReferenceExpression)expression;
-            //    return Transform(memberReference.Target, context) + "." + memberReference.MemberName;
-            //}
+            else if (expression is MemberReferenceExpression)
+            {
+                var memberReference = (MemberReferenceExpression)expression;
+
+                // Only expressions like return Task.CompletedTask; are supported.
+                if (memberReference.GetFullName().IsTaskCompletedTaskPropertyName())
+                {
+                    return Empty.Instance;
+                }
+
+                throw new NotSupportedException("Transformation of the member reference expression " + memberReference + " is not supported.");
+            }
+            // Not needed at the moment since ThisReferenceExpression can only happen if "this" is passed to a method, 
+            // which is not supported
             //else if (expression is ThisReferenceExpression)
             //{
             //    var thisRef = expression as ThisReferenceExpression;
@@ -210,6 +217,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Operator = UnaryOperator.Identity,
                             Expression = transformedExpression
                         };
+                    case UnaryOperatorType.Await:
+                        if (unary.Expression is InvocationExpression && 
+                            unary.Expression.GetFullName().IsTaskFromResultMethodName())
+                        {
+                            return transformedExpression;
+                        }
+
+                        // Otherwise nothing to do.
+                        goto default;
                     default:
                         throw new NotSupportedException("Transformation of the unary operation " + unary.Operator + " is not supported.");
                 }

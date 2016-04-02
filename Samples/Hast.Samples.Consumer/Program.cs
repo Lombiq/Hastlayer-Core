@@ -77,6 +77,7 @@ namespace Hast.Samples.Consumer
 
                         var isPrime = primeCalculator.IsPrimeNumber(15);
                         var isPrime2 = primeCalculator.IsPrimeNumber(13);
+                        var isPrime3 = await primeCalculator.IsPrimeNumberAsync(21);
                         var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
                         var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
 
