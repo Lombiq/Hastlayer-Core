@@ -138,7 +138,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         method.Parameters.AddRange(parametersForFormerFields.Values);
 
-                        method.Name = compilerGeneratedClass.Name + method.Name;
+                        // Moving the method to the parent class.
+                        method.Name = compilerGeneratedClass.Name + "_" + method.Name;
                         parentClass.Members.Add((MethodDeclaration)method.Clone());
                         compilerGeneratedClass.Remove();
                     }
