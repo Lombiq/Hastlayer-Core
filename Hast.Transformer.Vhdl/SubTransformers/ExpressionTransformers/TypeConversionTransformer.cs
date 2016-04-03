@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 else
                 {
                     rightTypeReference = leftTypeReference;
-                } 
+                }
             }
             else
             {
@@ -114,12 +114,36 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 castInvokation.Target = new Raw("natural");
             }
-            else
+
+            castInvokation.Parameters.Add(variableReference);
+
+            if (fromType == KnownDataTypes.StdLogicVector32)
+            {
+                castInvokation.Target = new Raw("to_integer");
+                castInvokation.Parameters.Clear();
+                var signednessInvokation = new Invokation();
+                signednessInvokation.Parameters.Add(variableReference);
+                castInvokation.Parameters.Add(signednessInvokation);
+
+                if (toType == KnownDataTypes.UnrangedInt)
+                {
+                    signednessInvokation.Target = new Raw("signed");
+                }
+                if (toType == KnownDataTypes.Natural)
+                {
+                    signednessInvokation.Target = new Raw("unsigned");
+                }
+                else
+                {
+                    castInvokation.Target = null;
+                }
+            }
+
+            if (castInvokation.Target == null)
             {
                 throw new NotSupportedException("Casting from " + fromType.Name + " to " + toType.Name + " is not supported.");
             }
 
-            castInvokation.Parameters.Add(variableReference);
 
             return castInvokation;
         }

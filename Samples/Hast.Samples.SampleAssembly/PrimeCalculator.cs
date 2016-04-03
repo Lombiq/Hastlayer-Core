@@ -60,43 +60,43 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-        public virtual async Task ParallelizedArePrimeNumbersAsync(SimpleMemory memory)
-        {
-            // We need this information explicitly as we can't store arrays directly in memory.
-            uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
+        //public virtual async Task ParallelizedArePrimeNumbersAsync(SimpleMemory memory)
+        //{
+        //    // We need this information explicitly as we can't store arrays directly in memory.
+        //    uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
-            var numbers3 = new uint[MaxDegreeOfParallelism];
-            var numbers = new uint[MaxDegreeOfParallelism];
-            var tasks = new Task<bool>[MaxDegreeOfParallelism];
-            int i = 0;
-            while (i < numberCount)
-            {
-                // Ternary operator is not supported yet, that's why the if statement.
-                var memoryReadIndexUpperBound = MaxDegreeOfParallelism;
-                if (numberCount - i < MaxDegreeOfParallelism) memoryReadIndexUpperBound = (int)(numberCount - i);
+        //    var numbers3 = new uint[MaxDegreeOfParallelism];
+        //    var numbers = new uint[MaxDegreeOfParallelism];
+        //    var tasks = new Task<bool>[MaxDegreeOfParallelism];
+        //    int i = 0;
+        //    while (i < numberCount)
+        //    {
+        //        // Ternary operator is not supported yet, that's why the if statement.
+        //        var memoryReadIndexUpperBound = MaxDegreeOfParallelism;
+        //        if (numberCount - i < MaxDegreeOfParallelism) memoryReadIndexUpperBound = (int)(numberCount - i);
 
-                for (int m = 0; m < memoryReadIndexUpperBound; m++)
-                {
-                    numbers[m] = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
-                }
+        //        for (int m = 0; m < memoryReadIndexUpperBound; m++)
+        //        {
+        //            numbers[m] = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
+        //        }
 
-                for (int m = 0; m < memoryReadIndexUpperBound; m++)
-                {
-                    tasks[m] = Task.Factory.StartNew<bool>(
-                        indexObject => IsPrimeNumberInternal(numbers[(int)indexObject]),
-                        m);
-                }
+        //        for (int m = 0; m < memoryReadIndexUpperBound; m++)
+        //        {
+        //            tasks[m] = Task.Factory.StartNew<bool>(
+        //                indexObject => IsPrimeNumberInternal(numbers[(int)indexObject]),
+        //                m);
+        //        }
 
-                await Task.WhenAll(tasks);
+        //        await Task.WhenAll(tasks);
 
-                for (int m = 0; m < memoryReadIndexUpperBound; m++)
-                {
-                    memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i + m, tasks[m].Result);
-                }
+        //        for (int m = 0; m < memoryReadIndexUpperBound; m++)
+        //        {
+        //            memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i + m, tasks[m].Result);
+        //        }
 
-                i += memoryReadIndexUpperBound;
-            }
-        }
+        //        i += memoryReadIndexUpperBound;
+        //    }
+        //}
 
 
         /// <summary>
@@ -141,7 +141,8 @@ namespace Hast.Samples.SampleAssembly
 
         public static Task<bool[]> ParallelizedArePrimeNumbersAsync(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ParallelizedArePrimeNumbersAsync(memory));
+            return Task.FromResult(new bool[0]);
+            //return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ParallelizedArePrimeNumbersAsync(memory));
         }
 
 

@@ -63,6 +63,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             DefaultValue = new Value { DataType = _stdLogic, Content = "0" }
         };
 
+        private static DataType _stdLogicVector32 = new StdLogicVector { Size = 32 };
+        public static DataType StdLogicVector32 = new DataType(_stdLogicVector32)
+        {
+            DefaultValue = new Value { DataType = _stdLogicVector32, Content = "0" }
+        };
+
         private static DataType _string = new String { Length = 256 };
         public static DataType String = new DataType(_string)
         {

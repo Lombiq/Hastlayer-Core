@@ -28,6 +28,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return ConvertPrimitive(KnownTypeCode.Int32);
                 case "System.Int64":
                     return ConvertPrimitive(KnownTypeCode.Int64);
+                case "System.Object":
+                    return ConvertPrimitive(KnownTypeCode.Object);
                 case "System.String":
                     return ConvertPrimitive(KnownTypeCode.String);
                 case "System.UInt16":
@@ -128,7 +130,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.NullableOfT:
                     break;
                 case KnownTypeCode.Object:
-                    break;
+                    return KnownDataTypes.StdLogicVector32;
                 case KnownTypeCode.SByte:
                     break;
                 case KnownTypeCode.Single:
