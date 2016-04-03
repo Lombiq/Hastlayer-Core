@@ -224,7 +224,9 @@ namespace Hast.Transformer.Vhdl
                     switch (typeDeclaration.ClassType)
                     {
                         case ClassType.Class:
-                            traverseTo = traverseTo.Skip(traverseTo.Count(n => n.NodeType != NodeType.Member));
+                            traverseTo = traverseTo
+                                .Skip(traverseTo
+                                    .Count(n => n.NodeType != NodeType.Member && n.NodeType != NodeType.TypeDeclaration));
                             break;
                         case ClassType.Enum:
                             break;
