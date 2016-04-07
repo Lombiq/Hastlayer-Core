@@ -3,7 +3,7 @@
     internal static class ByteArrayExtensions
     {
         /// <summary>
-        /// Appends a byte array with another array.
+        /// Appends a byte array to another array.
         /// </summary>
         /// <param name="additionalBytes">Byte array to append the original array with.</param>
         /// <returns>A new byte array containing the original and the additional bytes.</returns>

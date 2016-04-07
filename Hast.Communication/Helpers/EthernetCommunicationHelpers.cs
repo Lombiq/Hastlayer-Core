@@ -14,7 +14,7 @@ namespace Hast.Communication.Helpers
         /// Sends an UDP datagram to an endpoint and receives answer if it arrives within a period of time.
         /// </summary>
         /// <param name="datagram">Datagram to send.</param>
-        /// <param name="bindingPort">Port where the UDP clients (sender and receiver) will be binded.</param>
+        /// <param name="bindingPort">Port where the UDP clients (sender and receiver) will be bound.</param>
         /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent.</param>
         /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
         /// <returns>Result object containing UDP datagram received from the remote host. It is null if nothing has arrived.</returns>

@@ -47,7 +47,7 @@ namespace Hast.Communication.Services
             if (fpgaIPEndpoint == null)
                 throw new EthernetCommunicationException("Couldn't find any available FPGA.");
             
-            Logger.Information("IP endpoint to communicate with via ethernet: {0}:{1}", fpgaIPEndpoint.Address, fpgaIPEndpoint.Port);
+            Logger.Information("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIPEndpoint.Address, fpgaIPEndpoint.Port);
 
             try
             {
@@ -104,7 +104,7 @@ namespace Hast.Communication.Services
             }
             catch (SocketException e)
             {
-                throw new EthernetCommunicationException("An unexpected error was occurred during the Ethernet communication.", e);
+                throw new EthernetCommunicationException("An unexpected error occurred during the Ethernet communication.", e);
             }
 
             EndExecutionTimer(executionInformation);

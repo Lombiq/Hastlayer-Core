@@ -3,7 +3,7 @@
 namespace Hast.Communication.Exceptions
 {
     /// <summary>
-    /// This exception is thrown when something is wrong with the FPGA board connected through ethernet connection.
+    /// This exception is thrown when something is wrong with the FPGA board connected through Ethernet connection.
     /// </summary>
     public class EthernetCommunicationException : Exception
     {
