@@ -58,10 +58,6 @@
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj">
-      <Project>{71b55241-a31c-43f5-9b46-40b53099df56}</Project>
-      <Name>Hast.Communication</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Hast.Layer\Hast.Layer.csproj">
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>

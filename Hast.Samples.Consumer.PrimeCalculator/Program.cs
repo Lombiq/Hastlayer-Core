@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Samples.SampleAssembly;
-using Hast.Communication.Constants;
+using Hast.Layer;
 
 namespace Hast.Samples.Consumer.PrimeCalculator
 {
@@ -38,12 +38,8 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                             },
                         hardwareConfiguration);
 
-
-                    var proxyConfiguration = new ProxyGenerationConfiguration();
-                    proxyConfiguration.CustomConfiguration.Add(CommunicationConstants.ChannelNameKey, CommunicationConstants.Ethernet.ChannelName);
-
                     var primeCalculator = await hastlayer
-                        .GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator(), proxyConfiguration);
+                        .GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator());
                     var isPrime = primeCalculator.IsPrimeNumber(15);
                     var isPrime2 = primeCalculator.IsPrimeNumber(13);
                     var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime

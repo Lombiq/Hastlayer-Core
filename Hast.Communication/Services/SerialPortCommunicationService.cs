@@ -36,7 +36,7 @@ namespace Hast.Communication.Services
 
         public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
-            var executionInformation = BeginExecutionTimer();
+            var context = BeginExecution();
 
             using (var serialPort = CreateSerialPort())
             {
@@ -123,7 +123,7 @@ namespace Hast.Communication.Services
                                 {
                                     var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                                    SetHardwareExecutionTime(executionInformation, _deviceDriver.DeviceManifest.ClockFrequencyHz, executionTimeClockCycles);
+                                    SetHardwareExecutionTime(context, _deviceDriver.DeviceManifest.ClockFrequencyHz, executionTimeClockCycles);
 
                                     communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount;
                                     serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
@@ -189,9 +189,9 @@ namespace Hast.Communication.Services
 
                 await taskCompletionSource.Task;
 
-                EndExecutionTimer(executionInformation);
+                EndExecution(context);
 
-                return executionInformation;
+                return context.HardwareExecutionInformation;
             }
         }
 

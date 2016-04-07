@@ -33,7 +33,7 @@ namespace Hast.Communication.Services
         public async Task<IPEndPoint> FindAnAvailableFpgaIpEndpoint()
         {
             var endpoints = _cacheService
-                .Get(FpgaEndpointsCacheKey, () => GetFpgaEndpoints().Result).ToList();
+                .Get(FpgaEndpointsCacheKey, () => GetFpgaEndpoints().Result);
 
             // Find an available endpoint that was lastly checked because it is probably still available.
             var availableEndpoint = endpoints
@@ -43,7 +43,8 @@ namespace Hast.Communication.Services
             if (availableEndpoint != null && await ExistsAndAvailable(availableEndpoint))
                 return UpdateCacheAndGetIpEndpoint(availableEndpoint, endpoints);
 
-            // If there was no potentially available endpoint in the list let's check the longest unavailable FGPA if it is available now.
+            // If there was no potentially available endpoint in the list 
+            // let's check the longest unavailable FGPA if it is available now.
             if (availableEndpoint == null)
             {
                 availableEndpoint = endpoints
@@ -51,7 +52,9 @@ namespace Hast.Communication.Services
                     .FirstOrDefault();
 
                 if (availableEndpoint != null && await ExistsAndAvailable(availableEndpoint))
+                {
                     return UpdateCacheAndGetIpEndpoint(availableEndpoint, endpoints);
+                }
             }
 
             // Otherwise the quickest way to find an available board is to broadcast a "Who is available" message again.
@@ -92,7 +95,8 @@ namespace Hast.Communication.Services
             while (currentRetries <= BroadcastRetryCount && !receiveResults.Any())
             {
                 receiveResults = await EthernetCommunicationHelpers
-                    .UdpSendAndReceiveAllAsync(inputBuffer, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse, broadcastEndpoint, AvailabilityCheckerTimeout);
+                    .UdpSendAndReceiveAllAsync(inputBuffer, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse, 
+                        broadcastEndpoint, AvailabilityCheckerTimeout);
 
                 currentRetries++;
             }
@@ -102,11 +106,13 @@ namespace Hast.Communication.Services
 
         private async Task<bool> ExistsAndAvailable(FpgaEndpoint fpgaEndpoint)
         {
-            var availabilityCheckerEndpoint = new IPEndPoint(fpgaEndpoint.Endpoint.Address, CommunicationConstants.Ethernet.Ports.WhoIsAvailableRequest);
+            var availabilityCheckerEndpoint = 
+                new IPEndPoint(fpgaEndpoint.Endpoint.Address, CommunicationConstants.Ethernet.Ports.WhoIsAvailableRequest);
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
 
             var receiveResult = await EthernetCommunicationHelpers
-                .UdpSendAndReceiveAsync(inputBuffer, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse, availabilityCheckerEndpoint, AvailabilityCheckerTimeout);
+                .UdpSendAndReceiveAsync(inputBuffer, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse, 
+                    availabilityCheckerEndpoint, AvailabilityCheckerTimeout);
 
             if (receiveResult != default(UdpReceiveResult))
             {

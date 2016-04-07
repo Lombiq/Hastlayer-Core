@@ -9,6 +9,11 @@ namespace Hast.Common.Configuration
         /// </summary>
         public IDictionary<string, object> CustomConfiguration { get; set; }
 
+        /// <summary>
+        /// Communication channel used for communicating with the FPGA (eg. Ethernet).
+        /// </summary>
+        public string CommunicationChannelName { get; set; }
+
 
         private static IProxyGenerationConfiguration _default;
         public static IProxyGenerationConfiguration Default
@@ -28,6 +33,7 @@ namespace Hast.Common.Configuration
         public ProxyGenerationConfiguration()
         {
             CustomConfiguration = new Dictionary<string, object>();
+            CommunicationChannelName = "Ethernet";
         }
     }
 }

@@ -15,9 +15,6 @@ namespace Hast.Communication.Services
 {
     public abstract class CommunicationServiceBase : ICommunicationService
     {
-        private Stopwatch _stopwatch;
-
-
         public ILogger Logger { get; set; }
 
         abstract public string ChannelName { get; }
@@ -32,28 +29,40 @@ namespace Hast.Communication.Services
         abstract public Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId);
 
 
-        protected HardwareExecutionInformation BeginExecutionTimer()
+        protected CommunicationStateContext BeginExecution()
         {
-            // Stopwatch for measuring the total exection time.
-            _stopwatch = Stopwatch.StartNew();
-
-            return new HardwareExecutionInformation();
+            return new CommunicationStateContext
+            {
+                Stopwatch = Stopwatch.StartNew(),
+                HardwareExecutionInformation = new HardwareExecutionInformation()
+            };
         }
 
-        protected void EndExecutionTimer(HardwareExecutionInformation executionInformation)
+        protected void EndExecution(CommunicationStateContext context)
         {
-            _stopwatch.Stop();
+            context.Stopwatch.Stop();
 
-            executionInformation.FullExecutionTimeMilliseconds = _stopwatch.ElapsedMilliseconds;
+            context.HardwareExecutionInformation.FullExecutionTimeMilliseconds = context.Stopwatch.ElapsedMilliseconds;
 
-            Logger.Information("Full execution time: {0}ms", _stopwatch.ElapsedMilliseconds);
+            Logger.Information("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
         }
 
-        protected void SetHardwareExecutionTime(HardwareExecutionInformation executionInformation, uint clockFrequencyHz, ulong executionTimeClockCycles)
+        protected void SetHardwareExecutionTime(CommunicationStateContext context, uint clockFrequencyHz, 
+            ulong executionTimeClockCycles)
         {
-            executionInformation.HardwareExecutionTimeMilliseconds = 1M / clockFrequencyHz * 1000 * executionTimeClockCycles;
+            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = 
+                1M / clockFrequencyHz * 1000 * executionTimeClockCycles;
 
-            Logger.Information("Hardware execution took " + executionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+            Logger.Information("Hardware execution took " + 
+                context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+        }
+
+
+        protected class CommunicationStateContext
+        {
+            public Stopwatch Stopwatch { get; set; }
+
+            public HardwareExecutionInformation HardwareExecutionInformation { get; set; }
         }
     }
 }

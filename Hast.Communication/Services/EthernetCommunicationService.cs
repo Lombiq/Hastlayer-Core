@@ -40,7 +40,7 @@ namespace Hast.Communication.Services
 
         public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
-            var executionInformation = BeginExecutionTimer();
+            var context = BeginExecution();
 
             // Get the IP address of the FPGA board.
             var fpgaIPEndpoint = await _availableFpgaFinder.FindAnAvailableFpgaIpEndpoint();
@@ -56,7 +56,9 @@ namespace Hast.Communication.Services
                     // Initialize the connection.
                     var success = await client.ConnectAsync(fpgaIPEndpoint, 3000);
                     if (!success)
+                    {
                         throw new EthernetCommunicationException("Couldn't connect to FPGA before the timeout exceeded.");
+                    }
 
                     var stream = client.GetStream();
 
@@ -87,7 +89,7 @@ namespace Hast.Communication.Services
 
                     var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                    SetHardwareExecutionTime(executionInformation, _deviceDriver.DeviceManifest.ClockFrequencyHz, executionTimeClockCycles);
+                    SetHardwareExecutionTime(context, _deviceDriver.DeviceManifest.ClockFrequencyHz, executionTimeClockCycles);
 
                     // Read the bytes representing the length of the simple memory.
                     var outputByteCountBytes = await GetBytesFromStream(stream, 4);
@@ -107,9 +109,9 @@ namespace Hast.Communication.Services
                 throw new EthernetCommunicationException("An unexpected error occurred during the Ethernet communication.", e);
             }
 
-            EndExecutionTimer(executionInformation);
+            EndExecution(context);
             
-            return executionInformation;
+            return context.HardwareExecutionInformation;
         }
 
 
