@@ -16,8 +16,11 @@ namespace Hast.Communication.Services
 {
     public class EthernetCommunicationService : CommunicationServiceBase
     {
+        private const int TcpConnectionTimeout = 3000;
+
+
         private readonly IDeviceDriver _deviceDriver;
-        private readonly IAvailableFpgaIpEndpointFinder _availableFpgaFinder;
+        private readonly IFpgaIpEndpointFinder _availableFpgaFinder;
 
 
         public override string ChannelName
@@ -31,7 +34,7 @@ namespace Hast.Communication.Services
 
         public EthernetCommunicationService(
             IDeviceDriver deviceDriver, 
-            IAvailableFpgaIpEndpointFinder availableFpgaFinder)
+            IFpgaIpEndpointFinder availableFpgaFinder)
         {
             _deviceDriver = deviceDriver;
             _availableFpgaFinder = availableFpgaFinder;
@@ -43,19 +46,21 @@ namespace Hast.Communication.Services
             var context = BeginExecution();
 
             // Get the IP address of the FPGA board.
-            var fpgaIPEndpoint = await _availableFpgaFinder.FindAnAvailableFpgaIpEndpoint();
-            if (fpgaIPEndpoint == null)
-                throw new EthernetCommunicationException("Couldn't find any available FPGA.");
+            var fpgaEndpoints = await _availableFpgaFinder.FindFpgaEndpoints();
+            if (!fpgaEndpoints.Any())
+                throw new EthernetCommunicationException("Couldn't find any FPGA on the network.");
+
+            // Temporary using the first FPGA found on the network.
+            var fpgaIpEndpoint = fpgaEndpoints.First().Endpoint;
             
-            Logger.Information("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIPEndpoint.Address, fpgaIPEndpoint.Port);
+            Logger.Information("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIpEndpoint.Address, fpgaIpEndpoint.Port);
 
             try
             {
                 using (var client = new TcpClient())
                 {
                     // Initialize the connection.
-                    var success = await client.ConnectAsync(fpgaIPEndpoint, 3000);
-                    if (!success)
+                    if (!await client.ConnectAsync(fpgaIpEndpoint, TcpConnectionTimeout))
                     {
                         throw new EthernetCommunicationException("Couldn't connect to FPGA before the timeout exceeded.");
                     }

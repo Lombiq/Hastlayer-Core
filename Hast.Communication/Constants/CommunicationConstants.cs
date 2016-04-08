@@ -4,7 +4,6 @@ namespace Hast.Communication.Constants
 {
     public static class CommunicationConstants
     {
-        public const string ChannelNameKey = "Hast.Communication.ChannelName";
         public const string DefaultChannelName = Ethernet.ChannelName;
 
 
