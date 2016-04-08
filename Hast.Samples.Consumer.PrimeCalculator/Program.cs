@@ -39,10 +39,7 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                         hardwareConfiguration);
 
                     var primeCalculator = await hastlayer
-                        .GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator(), new ProxyGenerationConfiguration
-                        {
-                            CommunicationChannelName = "Serial"
-                        });
+                        .GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator());
                     var isPrime = primeCalculator.IsPrimeNumber(15);
                     var isPrime2 = primeCalculator.IsPrimeNumber(13);
                     var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
@@ -53,7 +50,7 @@ namespace Hast.Samples.Consumer.PrimeCalculator
                     // take 84s on an FPGA.
                     // About 90000000 numbers are the maximum before an OutOfMemoryException down the line. But that would
                     // take 93 hours to send via 9600 baud serial (and then above this to receive the results).
-                    var numberCount = 210;
+                    var numberCount = 4000;
                     var numbers = new uint[numberCount];
                     for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
                     {
