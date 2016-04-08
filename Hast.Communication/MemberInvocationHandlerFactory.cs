@@ -67,8 +67,6 @@ namespace Hast.Communication
                         if (memory != null)
                         {
                             var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
-                            object communicationChannelName;
-                            configuration.CustomConfiguration.TryGetValue("Hast.Communication.ChannelName", out communicationChannelName);
                             // The task here is needed because the code executed on the FPGA board doesn't return, we have 
                             // to wait for it.
                             // The Execute method is executed on separate thread.
@@ -76,7 +74,7 @@ namespace Hast.Communication
                                 {
                                     invokationContext.ExecutionInformation = await workContext
                                         .Resolve<ICommunicationServiceSelector>()
-                                        .GetCommunicationService(communicationChannelName as string)
+                                        .GetCommunicationService(configuration.CommunicationChannelName)
                                         .Execute(memory, memberId);
                                 });
                             task.Wait();

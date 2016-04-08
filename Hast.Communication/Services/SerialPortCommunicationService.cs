@@ -68,7 +68,7 @@ namespace Hast.Communication.Services
                 // Here we put together the data stream.
 
                 // Execute Order 66.
-                var outputBuffer = BitConverter.GetBytes(CommandTypes.Execution)
+                var outputBuffer = new byte[] { (byte)CommandTypes.Execution }
                     // Copying the input length, represented as bytes, to the output buffer.
                     .Append(BitConverter.GetBytes(simpleMemory.Memory.Length))
                     // Copying the member ID, represented as bytes, to the output buffer.
