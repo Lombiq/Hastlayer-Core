@@ -252,6 +252,11 @@ namespace Hast.Communication.Services
 
             await Task.WhenAll(serialPortPingingTasks);
 
+            if (!fpgaPortNames.Any())
+            {
+                throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
+            }
+
             return fpgaPortNames;
         }
 
