@@ -10,6 +10,10 @@ using Hast.Communication.Models;
 using Hast.Common.Models;
 using Hast.Communication.Constants;
 using Hast.Synthesis;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Concurrent;
+using System.Linq;
 
 namespace Hast.Communication.Services
 {
@@ -44,7 +48,7 @@ namespace Hast.Communication.Services
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
                 // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 
-                serialPort.PortName = await GetFpgaPortName();
+                serialPort.PortName = (await GetFpgaPortNames()).First();
 
                 try
                 {
@@ -197,51 +201,58 @@ namespace Hast.Communication.Services
 
 
         /// <summary>
-        /// Helper method used for the detection of the connected FPGA board.
+        /// Detects serial-connected compatible FPGA boards.
         /// </summary>
         /// <returns>The serial port name where the FPGA board is connected to.</returns>
-        private static Task<string> GetFpgaPortName()
+        private static async Task<IEnumerable<string>> GetFpgaPortNames()
         {
-            // Get all available serial ports on system.
+            // Get all available serial ports in the system.
             var ports = SerialPort.GetPortNames();
 
-            // If no serial ports detected, then throw a SerialPortCommunicationException.
-            if (ports.Length == 0) throw new SerialPortCommunicationException("No serial port detected (no serial ports are open).");
-
-            using (var serialPort = CreateSerialPort())
+            // If no serial ports were detected, then we can't do anything else.
+            if (ports.Length == 0)
             {
-                var taskCompletionSource = new TaskCompletionSource<string>();
-
-                serialPort.DataReceived += (sender, e) =>
-                {
-                    if (serialPort.ReadByte() == CommunicationConstants.Serial.Signals.Ready)
-                    {
-                        taskCompletionSource.SetResult(serialPort.PortName);
-                    }
-                };
-
-                for (int i = 0; i < ports.Length; i++)
-                {
-                    if (taskCompletionSource.Task.IsCompleted) break;
-
-                    serialPort.PortName = ports[i];
-
-                    try
-                    {
-                        serialPort.Open();
-                        serialPort.Write(CommunicationConstants.Serial.Signals.Echo);
-                    }
-                    catch (IOException) { }
-                }
-
-                // Waiting a maximum of 3s for a response from a port.
-                if (!taskCompletionSource.Task.Wait(3000))
-                {
-                    throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
-                }
-
-                return taskCompletionSource.Task;
+                throw new SerialPortCommunicationException("No serial port detected (no serial ports are open).");
             }
+
+            var fpgaPortNames = new ConcurrentBag<string>();
+            var serialPortPingingTasks = new Task[ports.Length];
+
+            for (int i = 0; i < ports.Length; i++)
+            {
+                serialPortPingingTasks[i] = Task.Factory.StartNew(portNameObject =>
+                    {
+                        using (var serialPort = CreateSerialPort())
+                        {
+                            var taskCompletionSource = new TaskCompletionSource<bool>();
+
+                            serialPort.DataReceived += (sender, e) =>
+                            {
+                                if (serialPort.ReadByte() == CommunicationConstants.Serial.Signals.Ready)
+                                {
+                                    fpgaPortNames.Add(serialPort.PortName);
+                                    taskCompletionSource.SetResult(true);
+                                }
+                            };
+
+                            serialPort.PortName = (string)portNameObject;
+
+                            try
+                            {
+                                serialPort.Open();
+                                serialPort.Write(CommandTypes.WhoIsAvailable);
+                            }
+                            catch (IOException) { }
+
+                            // Waiting a maximum of 3s for a response from the port.
+                            taskCompletionSource.Task.Wait(3000);
+                        }
+                    }, ports[i]);
+            }
+
+            await Task.WhenAll(serialPortPingingTasks);
+
+            return fpgaPortNames;
         }
 
         private static SerialPort CreateSerialPort()
