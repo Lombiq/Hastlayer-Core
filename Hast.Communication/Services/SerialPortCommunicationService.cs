@@ -200,7 +200,7 @@ namespace Hast.Communication.Services
         /// Helper method used for the detection of the connected FPGA board.
         /// </summary>
         /// <returns>The serial port name where the FPGA board is connected to.</returns>
-        private static async Task<string> GetFpgaPortName()
+        private static Task<string> GetFpgaPortName()
         {
             // Get all available serial ports on system.
             var ports = SerialPort.GetPortNames();
@@ -240,7 +240,7 @@ namespace Hast.Communication.Services
                     throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
                 }
 
-                return taskCompletionSource.Task.Result;
+                return taskCompletionSource.Task;
             }
         }
 
