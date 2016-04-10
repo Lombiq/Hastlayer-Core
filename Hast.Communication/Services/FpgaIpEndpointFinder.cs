@@ -1,8 +1,6 @@
 ﻿using Hast.Communication.Constants;
 using Hast.Communication.Helpers;
 using Hast.Communication.Models;
-using Orchard.Caching;
-using Orchard.Caching.Services;
 using Orchard.Services;
 using System;
 using System.Collections.Generic;
@@ -20,25 +18,16 @@ namespace Hast.Communication.Services
         private const string FpgaEndpointsCacheKey = "Hast.Communication.FpgaEndpoints";
 
 
-        private readonly ICacheService _cacheService;
         private readonly IClock _clock;
 
 
-        public FpgaIpEndpointFinder(ICacheService cacheService, IClock clock)
+        public FpgaIpEndpointFinder(IClock clock)
         {
-            _cacheService = cacheService;
             _clock = clock;
         }
 
 
         public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpoints()
-        {
-            return _cacheService
-                .Get(FpgaEndpointsCacheKey, () => GetFpgaEndpoints().Result);
-        }
-        
-
-        private async Task<IEnumerable<FpgaEndpoint>> GetFpgaEndpoints()
         {
             var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, CommunicationConstants.Ethernet.Ports.WhoIsAvailableRequest);
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
@@ -57,6 +46,7 @@ namespace Hast.Communication.Services
 
             return receiveResults.Select(result => CreateFpgaEndpoint(result.Buffer));
         }
+
 
         private FpgaEndpoint CreateFpgaEndpoint(byte[] answerBytes)
         {
