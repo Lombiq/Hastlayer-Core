@@ -49,19 +49,19 @@ namespace Hast.Communication.Services
         {
             var context = BeginExecution();
 
-            // Initializing some serial port connection settings (may be different whith some FPGA boards).
-            // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
-            // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
+            _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
+                {
+                    var portNames = await GetFpgaPortNames();
+                    return portNames.Select(portName => new Device { Identifier = portName });
+                });
 
-            using (var serialPort = CreateSerialPort())
+            using (var device = await _devicePoolManager.ReserveDevice())
             {
-                _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
-                    {
-                        var portNames = await GetFpgaPortNames();
-                        return portNames.Select(portName => new Device { Identifier = portName });
-                    });
+                // Initializing some serial port connection settings (may be different whith some FPGA boards).
+                // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
+                // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 
-                using (var device = await _devicePoolManager.ReserveDevice())
+                using (var serialPort = CreateSerialPort())
                 {
                     serialPort.PortName = device.Identifier;
 
