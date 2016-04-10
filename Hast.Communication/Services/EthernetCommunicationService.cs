@@ -50,8 +50,6 @@ namespace Hast.Communication.Services
 
         public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
-            var context = BeginExecution();
-
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
                 {
                     // Get the IP addresses of the FPGA boards.
@@ -67,6 +65,8 @@ namespace Hast.Communication.Services
 
             using (var device = await _devicePoolManager.ReserveDevice())
             {
+                var context = BeginExecution();
+
                 IFpgaEndpoint fpgaEndpoint = device.Metadata;
                 var fpgaIpEndpoint = fpgaEndpoint.Endpoint;
 
@@ -130,11 +130,11 @@ namespace Hast.Communication.Services
                 {
                     throw new EthernetCommunicationException("An unexpected error occurred during the Ethernet communication.", e);
                 }
+
+                EndExecution(context);
+
+                return context.HardwareExecutionInformation;
             }
-
-            EndExecution(context);
-
-            return context.HardwareExecutionInformation;
         }
 
 

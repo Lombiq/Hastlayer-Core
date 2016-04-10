@@ -47,8 +47,6 @@ namespace Hast.Communication.Services
 
         public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
         {
-            var context = BeginExecution();
-
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
                 {
                     var portNames = await GetFpgaPortNames();
@@ -57,6 +55,8 @@ namespace Hast.Communication.Services
 
             using (var device = await _devicePoolManager.ReserveDevice())
             {
+                var context = BeginExecution();
+
                 // Initializing some serial port connection settings (may be different whith some FPGA boards).
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
                 // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
