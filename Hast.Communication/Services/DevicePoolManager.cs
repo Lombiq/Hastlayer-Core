@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,8 @@ namespace Hast.Communication.Services
 
                 if (firstAvailableDevice != null)
                 {
+                    Debug.WriteLine("Found an available device with the identifier {0}.", (object)firstAvailableDevice.Identifier);
+
                     firstAvailableDevice.IsBusy = true;
 
                     Action<ReservedDevice> disposer = thisReservedDevice =>
@@ -61,11 +64,20 @@ namespace Hast.Communication.Services
                             {
                                 if (_waitQueue.Any())
                                 {
+                                    Debug.WriteLine(
+                                        "Dequeuing a device reservation request. Will re-use the device with the ID {0}. {1} items are in the queue.", 
+                                        thisReservedDevice.Identifier,
+                                        _waitQueue.Count);
+
                                     // In this case we re-use the current ReservedDevice and the device remains IsBusy.
                                     _waitQueue.Dequeue()(thisReservedDevice);
                                 }
                                 else
                                 {
+                                    Debug.WriteLine(
+                                        "No device reservation requests are in the queue so freeing up the device with the ID {0}.",
+                                        (object)thisReservedDevice.Identifier);
+
                                     _devicePool[thisReservedDevice.Identifier].IsBusy = false;
                                 }
                             }
@@ -75,6 +87,8 @@ namespace Hast.Communication.Services
                 }
                 else
                 {
+                    Debug.WriteLine("Enqueuing a device reservation request.");
+
                     var reservationCompletionSource = new TaskCompletionSource<IReservedDevice>();
 
                     _waitQueue.Enqueue(freedUpDevice => reservationCompletionSource.SetResult(freedUpDevice));
