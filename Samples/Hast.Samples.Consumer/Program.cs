@@ -80,6 +80,17 @@ namespace Hast.Samples.Consumer
                         var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
                         var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
 
+                        // You can also launch hardware-executed method calls in parallel. If there are multiple boards
+                        // attached then all of them will be utilized. If the whole device pool is utilized calls will
+                        // wait for their turn.
+                        var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
+                        for (uint i = 100; i < 110; i++)
+                        {
+                            parallelLaunchedIsPrimeTasks
+                                .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
+                        }
+                        var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
+
                         // With 210 numbers this takes about 2,1s all together (with UART) on an FPGA and 166s on a 3,2GHz i7.
                         // With 4000 numbers it takes 38s on an FPGA and 3550s (about an hour) on the same PC. 10000 numbers
                         // take 84s on an FPGA.
