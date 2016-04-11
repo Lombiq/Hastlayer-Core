@@ -37,7 +37,6 @@ namespace Hast.Communication.Constants
 
             public static class Signals
             {
-                public const char Echo = 'e';
                 public const char Ping = 'p';
                 public const char Ready = 'r';
             }

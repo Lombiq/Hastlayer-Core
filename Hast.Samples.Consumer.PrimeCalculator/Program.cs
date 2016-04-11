@@ -40,6 +40,19 @@ namespace Hast.Samples.Consumer.PrimeCalculator
 
                     var primeCalculator = await hastlayer
                         .GenerateProxy(hardwareRepresentation, new Hast.Samples.SampleAssembly.PrimeCalculator());
+
+                    // You can also launch hardware-executed method calls in parallel. If there are multiple boards
+                    // attached then all of them will be utilized. If the whole device pool is utilized calls will wait
+                    // for their turn.
+                    var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
+                    for (uint i = 100; i < 110; i++)
+                    {
+                        parallelLaunchedIsPrimeTasks
+                            .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
+                    }
+
+                    var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
+
                     var isPrime = primeCalculator.IsPrimeNumber(15);
                     var isPrime2 = primeCalculator.IsPrimeNumber(13);
                     var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
