@@ -47,11 +47,10 @@ namespace Hast.Communication.Services
             Logger.Information("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
         }
 
-        protected void SetHardwareExecutionTime(CommunicationStateContext context, uint clockFrequencyHz, 
-            ulong executionTimeClockCycles)
+        protected void SetHardwareExecutionTime(CommunicationStateContext context, IDeviceDriver deviceDriver, ulong executionTimeClockCycles)
         {
             context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = 
-                1M / clockFrequencyHz * 1000 * executionTimeClockCycles;
+                1M / deviceDriver.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
 
             Logger.Information("Hardware execution took " + 
                 context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");

@@ -111,7 +111,7 @@ namespace Hast.Communication.Services
 
                         var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                        SetHardwareExecutionTime(context, _deviceDriver.DeviceManifest.ClockFrequencyHz, executionTimeClockCycles);
+                        SetHardwareExecutionTime(context, _deviceDriver, executionTimeClockCycles);
 
                         // Read the bytes representing the length of the simple memory.
                         var outputByteCountBytes = await GetBytesFromStream(stream, 4);

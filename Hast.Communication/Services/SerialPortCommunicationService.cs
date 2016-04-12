@@ -142,7 +142,7 @@ namespace Hast.Communication.Services
                                     {
                                         var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                                        SetHardwareExecutionTime(context, _deviceDriver.DeviceManifest.ClockFrequencyHz, executionTimeClockCycles);
+                                        SetHardwareExecutionTime(context, _deviceDriver, executionTimeClockCycles);
 
                                         communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount;
                                         serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
