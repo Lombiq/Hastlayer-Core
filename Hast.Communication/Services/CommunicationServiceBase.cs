@@ -52,8 +52,7 @@ namespace Hast.Communication.Services
             context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = 
                 1M / deviceDriver.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
 
-            Logger.Information("Hardware execution took " + 
-                context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+            Logger.Information("Hardware execution took " + context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
         }
 
 

@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 namespace Hast.Communication.Services
 {
     /// <summary>
-    /// Service for finding FPGA endpoint attached to the same LAN like the PC.
+    /// Service for finding FPGA endpoints connected to the available networks of this computer.
     /// </summary>
     public interface IFpgaIpEndpointFinder : IDependency
     {
         /// <summary>
-        /// Returns all FPGA endpoint that is currently attached to the network.
+        /// Returns all FPGA endpoints connected to the available networks of this computer.
         /// </summary>
-        /// <returns>FPGA endpoints attached to the network.</returns>
+        /// <returns>FPGA endpoints connected to the available networks of this computer.</returns>
         Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpoints();
     }
 }

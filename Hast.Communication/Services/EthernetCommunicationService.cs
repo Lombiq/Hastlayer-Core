@@ -23,7 +23,7 @@ namespace Hast.Communication.Services
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IDeviceDriver _deviceDriver;
-        private readonly IFpgaIpEndpointFinder _availableFpgaFinder;
+        private readonly IFpgaIpEndpointFinder _fpgaIpEndpointFinder;
 
 
         public override string ChannelName
@@ -39,12 +39,12 @@ namespace Hast.Communication.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IDeviceDriver deviceDriver,
-            IFpgaIpEndpointFinder availableFpgaFinder)
+            IFpgaIpEndpointFinder fpgaIpEndpointFinder)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
             _deviceDriver = deviceDriver;
-            _availableFpgaFinder = availableFpgaFinder;
+            _fpgaIpEndpointFinder = fpgaIpEndpointFinder;
         }
 
 
@@ -53,10 +53,12 @@ namespace Hast.Communication.Services
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
                 {
                     // Get the IP addresses of the FPGA boards.
-                    var fpgaEndpoints = await _availableFpgaFinder.FindFpgaEndpoints();
+                    var fpgaEndpoints = await _fpgaIpEndpointFinder.FindFpgaEndpoints();
 
                     if (!fpgaEndpoints.Any())
-                        throw new EthernetCommunicationException("Couldn't find any FPGA on the network.");
+                    {
+                        throw new EthernetCommunicationException("Couldn't find any FPGAs on the network.");
+                    }
 
                     return fpgaEndpoints.Select(endpoint =>
                         new Device { Identifier = endpoint.Endpoint.Address.ToString(), Metadata = endpoint });

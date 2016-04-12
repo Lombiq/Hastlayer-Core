@@ -19,8 +19,7 @@ namespace Hast.Communication.Helpers
         /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent.</param>
         /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
         /// <returns>Result object containing UDP datagram received from the remote host. It is null if nothing has arrived.</returns>
-        public static async Task<UdpReceiveResult> UdpSendAndReceiveAsync(byte[] datagram, int bindingPort, 
-            IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
+        public static async Task<UdpReceiveResult> UdpSendAndReceiveAsync(byte[] datagram, int bindingPort, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
         {
             return await UdpSendAndReceiveAnyAsync(client => client.ReceiveAsync(receiveTimeoutMilliseconds), 
                 datagram, bindingPort, targetEndpoint, receiveTimeoutMilliseconds);
@@ -34,16 +33,14 @@ namespace Hast.Communication.Helpers
         /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent. Possibly it is a broadcast address.</param>
         /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
         /// <returns>Result objects containing UDP datagram received from the remote host. It is empty if nothing has arrived.</returns>
-        public static async Task<IEnumerable<UdpReceiveResult>> UdpSendAndReceiveAllAsync(byte[] datagram, int bindingPort, 
-            IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
+        public static async Task<IEnumerable<UdpReceiveResult>> UdpSendAndReceiveAllAsync(byte[] datagram, int bindingPort, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
         {
             return await UdpSendAndReceiveAnyAsync(client => client.ReceiveAllAsync(receiveTimeoutMilliseconds), 
                 datagram, bindingPort, targetEndpoint, receiveTimeoutMilliseconds);
         }
 
 
-        private static async Task<T> UdpSendAndReceiveAnyAsync<T>(Func<UdpClient, Task<T>> receiverTaskFactory, byte[] datagram, 
-            int bindingPort, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
+        private static async Task<T> UdpSendAndReceiveAnyAsync<T>(Func<UdpClient, Task<T>> receiverTaskFactory, byte[] datagram, int bindingPort, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
         {
             var udpEndpoint = new IPEndPoint(IPAddress.Any, bindingPort);
 
