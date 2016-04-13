@@ -1,8 +1,10 @@
 ﻿using Hast.Communication.Constants;
 using Hast.Communication.Helpers;
 using Hast.Communication.Models;
+using Orchard.Logging;
 using Orchard.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -21,9 +23,14 @@ namespace Hast.Communication.Services
         private readonly IClock _clock;
 
 
+        public ILogger Logger { get; set; }
+
+
         public FpgaIpEndpointFinder(IClock clock)
         {
             _clock = clock;
+
+            Logger = NullLogger.Instance;
         }
 
 
@@ -33,13 +40,15 @@ namespace Hast.Communication.Services
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
 
             // We need retries because somehow the FPGA doesn't always catch our request.
+            Logger.Information("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
             var currentRetries = 0;
             var receiveResults = Enumerable.Empty<UdpReceiveResult>();
-            while (currentRetries <= BroadcastRetryCount && !receiveResults.Any())
+            while (currentRetries <= BroadcastRetryCount)
             {
-                receiveResults = await EthernetCommunicationHelpers
-                    .UdpSendAndReceiveAllAsync(inputBuffer, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse, 
-                        broadcastEndpoint, AvailabilityCheckerTimeout);
+                var currentReceiveResults = await EthernetCommunicationHelpers
+                    .UdpSendAndReceiveAllAsync(inputBuffer, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse, broadcastEndpoint, AvailabilityCheckerTimeout);
+
+                receiveResults = receiveResults.Union(currentReceiveResults, new UdpReceiveResultEqualityComparer());
 
                 currentRetries++;
             }
@@ -60,6 +69,20 @@ namespace Hast.Communication.Services
                 Endpoint = new IPEndPoint(ipAddress, port),
                 LastCheckedUtc = _clock.UtcNow
             };
+        }
+
+
+        private class UdpReceiveResultEqualityComparer : IEqualityComparer<UdpReceiveResult>
+        {
+            public bool Equals(UdpReceiveResult firstResult, UdpReceiveResult secondResult)
+            {
+                return firstResult.RemoteEndPoint.Equals(secondResult.RemoteEndPoint);
+            }
+
+            public int GetHashCode(UdpReceiveResult result)
+            {
+                return result.RemoteEndPoint.GetHashCode();
+            }
         }
     }
 }
