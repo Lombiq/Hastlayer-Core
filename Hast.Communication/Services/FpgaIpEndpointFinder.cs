@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
@@ -45,10 +46,25 @@ namespace Hast.Communication.Services
             var receiveResults = Enumerable.Empty<UdpReceiveResult>();
             while (currentRetries <= BroadcastRetryCount)
             {
-                var currentReceiveResults = await EthernetCommunicationHelpers
-                    .UdpSendAndReceiveAllAsync(inputBuffer, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse, broadcastEndpoint, AvailabilityCheckerTimeout);
+                var endpoints = new List<IPEndPoint>();
 
-                receiveResults = receiveResults.Union(currentReceiveResults, new UdpReceiveResultEqualityComparer());
+                // Send request to all broadcast addresses on all the supported network interfaces.
+                foreach (var suppertedNetworkInterface in NetworkInterface.GetAllNetworkInterfaces()
+                    .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up && networkInterface.SupportsMulticast == true))
+                {
+                    // Currently we are supporting only IPv4 addresses.
+                    var ipv4AddressInformations = suppertedNetworkInterface.GetIPProperties().UnicastAddresses
+                        .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork).ToList();
+
+                    endpoints.AddRange(ipv4AddressInformations.Select( addressInformation => new IPEndPoint(addressInformation.Address, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse)));
+                }
+
+                // Sending requests to all the found IP endpoints at the same time.
+                foreach (var currentReceiveResults in await Task.WhenAll(endpoints.Select(endpoint => EthernetCommunicationHelpers
+                    .UdpSendAndReceiveAllAsync(inputBuffer, endpoint, broadcastEndpoint, AvailabilityCheckerTimeout))))
+                {
+                    receiveResults = receiveResults.Union(currentReceiveResults, new UdpReceiveResultEqualityComparer());
+                }
 
                 currentRetries++;
             }
