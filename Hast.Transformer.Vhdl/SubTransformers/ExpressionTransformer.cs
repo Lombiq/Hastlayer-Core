@@ -171,11 +171,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is MemberReferenceExpression)
             {
                 var memberReference = (MemberReferenceExpression)expression;
+                var memberFullName = memberReference.GetFullName();
 
-                // Only expressions like return Task.CompletedTask; are supported.
-                if (memberReference.GetFullName().IsTaskCompletedTaskPropertyName())
+                // Expressions like return Task.CompletedTask;
+                if (memberFullName.IsTaskCompletedTaskPropertyName())
                 {
                     return Empty.Instance;
+                }
+
+                // Field reference expressions in DisplayClasses are supported.
+                if (memberReference.Target is ThisReferenceExpression && memberFullName.IsDisplayClassMemberName())
+                {
+                    return stateMachine.CreatePrefixedObjectName(memberFullName).ToVhdlVariableReference();
                 }
 
                 throw new NotSupportedException("Transformation of the member reference expression " + memberReference + " is not supported.");
