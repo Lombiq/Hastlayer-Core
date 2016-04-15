@@ -78,7 +78,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 });
 
 
-                Func<IVhdlElement, bool, IVhdlElement> implementSimpleMemoryTypeConversion = 
+                Func<IVhdlElement, bool, IVhdlElement> implementSimpleMemoryTypeConversion =
                     (variableToConvert, directionIsLogicVectorToType) =>
                     {
                         // If the memory operations was Read/Write4Bytes then no need to do any conversions.
@@ -179,7 +179,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 return transformedParameters.Single();
             }
 
-            var targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+            EntityDeclaration targetDeclaration = null;
+
+            // Is this a reference to a member of the parent class from a compiler-generated DisplayClass?
+            // These look like following: this.<>4__this.IsPrimeNumberInternal()
+            if (targetMemberReference.Target is MemberReferenceExpression)
+            {
+                var targetTargetFullName = ((MemberReferenceExpression)targetMemberReference.Target).GetFullName();
+                if (targetTargetFullName.IsDisplayClassMemberName())
+                {
+                    // We need to find the corresponding member in the parent class of this expression's class.
+                    targetDeclaration = expression
+                        .FindFirstParentTypeDeclaration() // This is the level of the DisplayClass.
+                        .FindFirstParentTypeDeclaration() // The parent class of the DisplayClass.
+                        .Members.Single(member => member.GetFullName() == targetMethodName);
+                }
+            }
+            else
+            {
+                targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+            }
 
             if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))
             {
