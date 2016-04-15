@@ -182,7 +182,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Field reference expressions in DisplayClasses are supported.
                 if (memberReference.Target is ThisReferenceExpression && memberFullName.IsDisplayClassMemberName())
                 {
-                    return stateMachine.CreatePrefixedObjectName(memberFullName).ToVhdlVariableReference();
+                    // These fields are global and correspond to the DisplayClass class so they shouldn't be prefixed
+                    // with the state machine's name.
+                    return memberFullName.ToExtendedVhdlId().ToVhdlVariableReference();
                 }
 
                 throw new NotSupportedException("Transformation of the member reference expression " + memberReference + " is not supported.");

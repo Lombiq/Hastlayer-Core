@@ -8,9 +8,9 @@ using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.Models
 {
-    public interface IMemberStateMachineResult
+    public interface IArchitectureComponentResult
     {
-        IMemberStateMachine StateMachine { get; }
+        IArchitectureComponent ArchitectureComponent { get; }
         IVhdlElement Declarations { get; }
         IVhdlElement Body { get; }
     }

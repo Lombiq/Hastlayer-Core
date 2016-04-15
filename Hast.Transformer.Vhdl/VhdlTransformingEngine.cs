@@ -27,6 +27,7 @@ namespace Hast.Transformer.Vhdl
         private readonly IClock _clock;
         private readonly IArrayTypesCreator _arrayTypesCreator;
         private readonly IMethodTransformer _methodTransformer;
+        private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
         private readonly IExternalInvokationProxyBuilder _externalInvokationProxyBuilder;
         private readonly IInternalInvokationProxyBuilder _internalInvokationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
@@ -37,6 +38,7 @@ namespace Hast.Transformer.Vhdl
             IClock clock,
             IArrayTypesCreator arrayTypesCreator,
             IMethodTransformer methodTransformer,
+            IDisplayClassFieldTransformer displayClassFieldTransformer,
             IExternalInvokationProxyBuilder externalInvokationProxyBuilder,
             IInternalInvokationProxyBuilder internalInvokationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy)
@@ -45,6 +47,7 @@ namespace Hast.Transformer.Vhdl
             _clock = clock;
             _arrayTypesCreator = arrayTypesCreator;
             _methodTransformer = methodTransformer;
+            _displayClassFieldTransformer = displayClassFieldTransformer;
             _externalInvokationProxyBuilder = externalInvokationProxyBuilder;
             _internalInvokationProxyBuilder = internalInvokationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
@@ -104,11 +107,11 @@ namespace Hast.Transformer.Vhdl
             // Doing transformations
             var transformerResults = await Task.WhenAll(Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext));
             var potentiallyInvokingArchitectureComponents = transformerResults
-                .SelectMany(result => result.StateMachineResults.Select(smResult => smResult.StateMachine).Cast<IArchitectureComponent>())
+                .SelectMany(result => result.ArchitectureComponentResults.Select(smResult => smResult.ArchitectureComponent).Cast<IArchitectureComponent>())
                 .ToList();
             foreach (var transformerResult in transformerResults)
             {
-                foreach (var stateMachineResult in transformerResult.StateMachineResults)
+                foreach (var stateMachineResult in transformerResult.ArchitectureComponentResults)
                 {
                     architecture.Declarations.Add(stateMachineResult.Declarations);
                     architecture.Add(stateMachineResult.Body);
@@ -187,11 +190,11 @@ namespace Hast.Transformer.Vhdl
         private IEnumerable<Task<IMemberTransformerResult>> Traverse(
             AstNode node, 
             VhdlTransformationContext transformationContext,
-            List<Task<IMemberTransformerResult>> methodTransformerTasks = null)
+            List<Task<IMemberTransformerResult>> memberTransformerTasks = null)
         {
-            if (methodTransformerTasks == null)
+            if (memberTransformerTasks == null)
             {
-                methodTransformerTasks = new List<Task<IMemberTransformerResult>>();
+                memberTransformerTasks = new List<Task<IMemberTransformerResult>>();
             }
 
             var traverseTo = node.Children;
@@ -203,8 +206,15 @@ namespace Hast.Transformer.Vhdl
                 case NodeType.Member:
                     if (node is MethodDeclaration)
                     {
-                        var method = node as MethodDeclaration;
-                        methodTransformerTasks.Add(_methodTransformer.Transform(method, transformationContext));
+                        memberTransformerTasks.Add(_methodTransformer.Transform((MethodDeclaration)node, transformationContext));
+                    }
+                    else if (node is FieldDeclaration && node.GetFullName().IsDisplayClassMemberName())
+                    {
+                        memberTransformerTasks.Add(_displayClassFieldTransformer.Transform((FieldDeclaration)node, transformationContext));
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("The member " + node.ToString() + " is not supported for transformation.");
                     }
                     break;
                 case NodeType.Pattern:
@@ -231,7 +241,7 @@ namespace Hast.Transformer.Vhdl
                         case ClassType.Enum:
                             break;
                         case ClassType.Interface:
-                            return methodTransformerTasks; // Interfaces are irrelevant here.
+                            return memberTransformerTasks; // Interfaces are irrelevant here.
                         case ClassType.Struct:
                             break;
                     }
@@ -246,10 +256,10 @@ namespace Hast.Transformer.Vhdl
 
             foreach (var target in traverseTo)
             {
-                Traverse(target, transformationContext, methodTransformerTasks);
+                Traverse(target, transformationContext, memberTransformerTasks);
             }
 
-            return methodTransformerTasks;
+            return memberTransformerTasks;
         }
 
 

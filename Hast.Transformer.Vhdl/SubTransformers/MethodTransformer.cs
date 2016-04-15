@@ -48,17 +48,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var stateMachineCount = context
                         .GetTransformerConfiguration()
                         .GetMaxInvokationInstanceCountConfigurationForMember(method.GetSimpleName()).MaxInvokationInstanceCount;
-                    var stateMachineResults = new IMemberStateMachineResult[stateMachineCount];
+                    var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
 
                     // Not much use to parallelize computation unless there are a lot of state machines to create or the 
                     // method is very complex. We'll need to examine when to parallelize here and determine it in runtime.
                     if (stateMachineCount > 50)
                     {
-                        var stateMachineComputingTasks = new List<Task<IMemberStateMachineResult>>();
+                        var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
 
                         for (int i = 0; i < stateMachineCount; i++)
                         {
-                            var task = new Task<IMemberStateMachineResult>(
+                            var task = new Task<IArchitectureComponentResult>(
                                 index => BuildStateMachineFromMethod(method, context, (int)index),
                                 i);
                             task.Start();
@@ -79,13 +79,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         Member = method,
                         IsInterfaceMember = method.IsInterfaceMember(),
-                        StateMachineResults = stateMachineResults
+                        ArchitectureComponentResults = stateMachineResults
                     };
                 });
         }
 
 
-        private IMemberStateMachineResult BuildStateMachineFromMethod(
+        private IArchitectureComponentResult BuildStateMachineFromMethod(
             MethodDeclaration method,
             IVhdlTransformationContext context,
             int stateMachineIndex)
@@ -94,6 +94,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = _memberStateMachineFactory
                 .CreateStateMachine(ArchitectureComponentNameHelper.CreateIndexedComponentName(methodFullName, stateMachineIndex));
 
+            if (methodFullName.Contains("System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbersAsync(Hast.Transformer.SimpleMemory.SimpleMemory)"))
+            {
+                return new ArchitectureComponentResult
+                {
+                    ArchitectureComponent = stateMachine,
+                    Declarations = stateMachine.BuildDeclarations(),
+                    Body = stateMachine.BuildBody()
+                };
+            }
             // Adding the opening state's block.
             var openingBlock = new InlineBlock();
 
@@ -172,9 +181,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // We need to return the declarations and body here too so their computation can be parallelized too.
             // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to
             // be thread-safe.
-            return new MemberStateMachineResult
+            return new ArchitectureComponentResult
             {
-                StateMachine = stateMachine,
+                ArchitectureComponent = stateMachine,
                 Declarations = stateMachine.BuildDeclarations(),
                 Body = stateMachine.BuildBody()
             };

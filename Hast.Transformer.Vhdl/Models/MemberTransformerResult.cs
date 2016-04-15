@@ -13,6 +13,6 @@ namespace Hast.Transformer.Vhdl.Models
     {
         public EntityDeclaration Member { get; set; }
         public bool IsInterfaceMember { get; set; }
-        public IEnumerable<IMemberStateMachineResult> StateMachineResults { get; set; }
+        public IEnumerable<IArchitectureComponentResult> ArchitectureComponentResults { get; set; }
     }
 }
