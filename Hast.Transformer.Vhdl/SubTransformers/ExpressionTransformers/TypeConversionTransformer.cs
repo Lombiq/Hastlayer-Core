@@ -129,7 +129,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     signednessInvokation.Target = new Raw("signed");
                 }
-                if (toType == KnownDataTypes.Natural)
+                else if (toType == KnownDataTypes.Natural)
                 {
                     signednessInvokation.Target = new Raw("unsigned");
                 }
