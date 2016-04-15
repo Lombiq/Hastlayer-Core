@@ -54,14 +54,15 @@ namespace Hast.Communication.Services
                 {
                     // Currently we are supporting only IPv4 addresses.
                     var ipv4AddressInformations = suppertedNetworkInterface.GetIPProperties().UnicastAddresses
-                        .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork).ToList();
+                        .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork);
 
-                    endpoints.AddRange(ipv4AddressInformations.Select( addressInformation => new IPEndPoint(addressInformation.Address, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse)));
+                    endpoints.AddRange(ipv4AddressInformations.Select(addressInformation => new IPEndPoint(addressInformation.Address, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse)));
                 }
 
                 // Sending requests to all the found IP endpoints at the same time.
-                foreach (var currentReceiveResults in await Task.WhenAll(endpoints.Select(endpoint => EthernetCommunicationHelpers
-                    .UdpSendAndReceiveAllAsync(inputBuffer, endpoint, broadcastEndpoint, AvailabilityCheckerTimeout))))
+                var currentReceiveResultLists = await Task.WhenAll(endpoints.Select(endpoint => EthernetCommunicationHelpers
+                    .UdpSendAndReceiveAllAsync(inputBuffer, endpoint, broadcastEndpoint, AvailabilityCheckerTimeout)));
+                foreach (var currentReceiveResults in currentReceiveResultLists)
                 {
                     receiveResults = receiveResults.Union(currentReceiveResults, new UdpReceiveResultEqualityComparer());
                 }
