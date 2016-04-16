@@ -18,6 +18,8 @@ namespace Hast.Communication.Services
     public class EthernetCommunicationService : CommunicationServiceBase
     {
         private const int TcpConnectionTimeout = 3000;
+        // This has to be maximum the number set for the TCP sender buffer space in the Hastlayer hardware project.
+        private const int ReceiveBufferSize = 8192; 
 
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
@@ -142,8 +144,29 @@ namespace Hast.Communication.Services
 
         public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length)
         {
-            var outputBytes = new byte[length];
-            await stream.ReadAsync(outputBytes, 0, outputBytes.Length);
+            var outputBytes = new byte[0];
+            var currentReadBytes = new byte[ReceiveBufferSize];
+
+            if (length <= ReceiveBufferSize)
+            {
+                currentReadBytes = new byte[length];
+                await stream.ReadAsync(currentReadBytes, 0, currentReadBytes.Length);
+
+                return currentReadBytes;
+            }
+
+            var remaining = length;
+            while (remaining > 0)
+            {
+                if (remaining < ReceiveBufferSize)
+                {
+                    currentReadBytes = new byte[remaining];
+                }
+
+                remaining -= await stream.ReadAsync(currentReadBytes, 0, currentReadBytes.Length);
+
+                outputBytes = outputBytes.Append(currentReadBytes);
+            }
 
             return outputBytes;
         }
