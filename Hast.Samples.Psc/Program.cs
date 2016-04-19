@@ -55,7 +55,7 @@ namespace Hast.Samples.Psc
                     #endregion
 
                     #region A lot of numbers
-                    //var numberCount = 400;
+                    //var numberCount = 4000;
                     //var numbers = new uint[numberCount];
                     //for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
                     //{
