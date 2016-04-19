@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
+using Hast.Common.Models;
 using Hast.Layer;
 
 namespace Hast.Samples.Psc
@@ -16,6 +18,7 @@ namespace Hast.Samples.Psc
             {
                 using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
                 {
+                    #region Configuration
                     hastlayer.ExecutedOnHardware += (sender, e) =>
                     {
                         Console.WriteLine(
@@ -36,37 +39,55 @@ namespace Hast.Samples.Psc
                             {
                                 typeof(Program).Assembly
                             },
-                        hardwareConfiguration);
+                        hardwareConfiguration); 
+                    #endregion
+
 
                     var primeCalculator = await hastlayer
                         .GenerateProxy(hardwareRepresentation, new PrimeCalculator());
 
 
-                    var isPrime = primeCalculator.IsPrimeNumber(15);
-                    var isPrime2 = primeCalculator.IsPrimeNumber(13);
-                    var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
-                    var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
+                    #region Basic samples
+                    //var isPrime = primeCalculator.IsPrimeNumber(15);
+                    //var isPrime2 = primeCalculator.IsPrimeNumber(13);
+                    //var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
+                    //var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 }); 
+                    #endregion
 
-                    var numberCount = 4000;
-                    var numbers = new uint[numberCount];
-                    for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
-                    {
-                        numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
-                    }
-                    var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
+                    #region A lot of numbers
+                    //var numberCount = 400;
+                    //var numbers = new uint[numberCount];
+                    //for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
+                    //{
+                    //    numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
+                    //}
+                    //var arePrimesOnCpu = new PrimeCalculator().ArePrimeNumbers(numbers);
+                    //var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers); 
+                    #endregion
 
+                    #region Parallel launch
+                    //var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
 
-                    var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
+                    //for (uint i = 1; i <= 10; i++)
+                    //{
+                    //    parallelLaunchedIsPrimeTasks
+                    //        .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
+                    //}
 
-                    for (uint i = 1; i <= 10; i++)
-                    {
-                        parallelLaunchedIsPrimeTasks
-                            .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
-                    }
+                    //var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks); 
+                    #endregion
 
-                    var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
+                    #region Looking at VHDL
+                    File.WriteAllText(@"C:\HastlayerSample.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                    #endregion
                 }
             }).Wait();
+        }
+
+
+        private static string ToVhdl(IHardwareDescription hardwareDescription)
+        {
+            return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription).Manifest.TopModule.ToVhdl();
         }
     }
 }
