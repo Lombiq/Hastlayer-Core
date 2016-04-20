@@ -54,7 +54,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Tests.TestAssembly1", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Tests.TestAssembly2", "Hast.Tests.TestAssembly2\Hast.Tests.TestAssembly2.csproj", "{9A026174-8D66-4E74-8689-9F2EEF2B8CF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Samples.Psc", "Hast.Samples.Psc\Hast.Samples.Psc.csproj", "{DD5FBA5F-B5CA-42C5-9BC3-90DAB723EB26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Samples.Psc", "Samples\Hast.Samples.Psc\Hast.Samples.Psc.csproj", "{DD5FBA5F-B5CA-42C5-9BC3-90DAB723EB26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
