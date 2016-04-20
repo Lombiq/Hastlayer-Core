@@ -67,7 +67,6 @@ namespace Hast.Samples.Psc
                     {
                         numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
                     }
-                    Debugger.Break();
                     #endregion
 
                     #region Crunching big numbers
