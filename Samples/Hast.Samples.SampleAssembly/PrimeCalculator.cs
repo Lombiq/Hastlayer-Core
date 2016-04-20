@@ -12,8 +12,8 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class PrimeCalculator
     {
-        // It's good to have externally interesting cell indices in constants like this, so they can be used from wrappers like below. Note the
-        // Hungarian notation-like prefixes. It's unfortunate but we need them here for clarity.
+        // It's good to have externally interesting cell indices in constants like this, so they can be used from wrappers 
+        // like below. Note the Hungarian notation-like prefixes. It's unfortunate but we need them here for clarity.
         public const int IsPrimeNumber_InputUInt32Index = 0;
         public const int IsPrimeNumber_OutputBooleanIndex = 0;
         public const int ArePrimeNumbers_InputUInt32CountIndex = 0;
@@ -25,7 +25,8 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates whether a number is prime.
         /// </summary>
         /// <remarks>
-        /// Note that the entry point of SimpleMemory-using algorithms should be void methods having a single <see cref="SimpleMemory"/> argument. 
+        /// Note that the entry point of SimpleMemory-using algorithms should be void methods having a single 
+        /// <see cref="SimpleMemory"/> argument. 
         /// </remarks>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void IsPrimeNumber(SimpleMemory memory)
@@ -33,7 +34,7 @@ namespace Hast.Samples.SampleAssembly
             // Reading out the input parameter.
             var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
             // Writing back the output.
-            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumber(number));
+            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(number));
         }
 
         public virtual void ArePrimeNumbers(SimpleMemory memory)
@@ -44,7 +45,7 @@ namespace Hast.Samples.SampleAssembly
             for (int i = 0; i < numberCount; i++)
             {
                 uint number = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i);
-                memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i, IsPrimeNumber(number));
+                memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i, IsPrimeNumberInternal(number));
             }
         }
 
@@ -71,13 +72,14 @@ namespace Hast.Samples.SampleAssembly
 
 
         /// <summary>
-        /// Internal implementation of prime number checking. This is here so we can use it simpler from two methods. Because when you want to
-        /// pass data between methods you can freely use supported types as arguments, you don't need to pass data through SimpleMemory.
+        /// Internal implementation of prime number checking. This is here so we can use it simpler from two methods.
+        /// Because when you want to pass data between methods you can freely use supported types as arguments, you 
+        /// don't need to pass data through SimpleMemory.
         /// </summary>
-        private bool IsPrimeNumber(uint number)
+        private bool IsPrimeNumberInternal(uint number)
         {
             uint factor = number / 2;
-            //var factor = Math.Sqrt(number); // Math.Sqrt() can't be processed yet because it needs object support.
+            //uint factor = Math.Sqrt(number); // Math.Sqrt() can't be processed because it's not a managed method.
 
             for (uint i = 2; i <= factor; i++)
             {

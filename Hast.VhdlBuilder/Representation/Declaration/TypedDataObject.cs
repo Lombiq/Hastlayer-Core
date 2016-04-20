@@ -3,23 +3,25 @@ using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class TypedDataObject : TypedDataObjectBase
     {
         /// <summary>
-        /// If specified, this default value will be used to reset the object's value.
+        /// If specified, this value will be set for the object when the hardware is initialized.
         /// </summary>
-        public Value DefaultValue { get; set; }
+        public Value InitialValue { get; set; }
 
 
-        public override string ToVhdl()
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return
+            return Terminated.Terminate(
                 DataObjectKind.ToString() +
                 " " +
-                Name +
-                (DataType != null ? ": " + DataType.ToVhdl() : string.Empty) +
-                ";";
+                vhdlGenerationOptions.ShortenName(Name) +
+                (DataType != null ? ": " + DataType.ToReferenceVhdl(vhdlGenerationOptions) : string.Empty) +
+                // The default value should be specified with ":=", even for signals.
+                (InitialValue != null ? ( " := " + InitialValue.ToVhdl(vhdlGenerationOptions)) : string.Empty),
+                vhdlGenerationOptions);
         }
     }
 }

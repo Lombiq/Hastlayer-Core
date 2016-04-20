@@ -58,7 +58,7 @@ namespace Hast.Communication
                             if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                             {
                                 invokationContext.HardwareExecutionIsCancelled = true;
-                            } 
+                            }
                         }
 
                         if (invokationContext.HardwareExecutionIsCancelled) return false;
@@ -66,7 +66,7 @@ namespace Hast.Communication
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
+                            var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName) + 1;
                             // The task here is needed because the code executed on the FPGA board doesn't return, we have 
                             // to wait for it.
                             // The Execute method is executed on separate thread.

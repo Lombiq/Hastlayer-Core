@@ -2,7 +2,7 @@
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Array : DataType
     {
         public int MaxLength { get; set; }
@@ -15,11 +15,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl()
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
                 "type " +
-                Name +
+                vhdlGenerationOptions.ShortenName(Name) +
                 " is array (" +
                 (MaxLength > 0 ? MaxLength + " downto 0" : "integer range <>") +
                 ") of " +

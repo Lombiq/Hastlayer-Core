@@ -3,19 +3,20 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Assignment : IVhdlElement
     {
         public IDataObject AssignTo { get; set; }
         public IVhdlElement Expression { get; set; }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
-                AssignTo.Name +
-                (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
-                Expression.ToVhdl();
+                Terminated.Terminate(
+                    vhdlGenerationOptions.ShortenName(AssignTo.Name) +
+                    (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
+                    Expression.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
         }
     }
 }

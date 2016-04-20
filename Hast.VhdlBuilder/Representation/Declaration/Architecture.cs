@@ -4,9 +4,9 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    // Although by implementing INamedElement and IStructuredElement Architecture is in the end implementing ISubProgram. However the
-    // architecture is not a subprogram, so implementing ISubProgram directly would be semantically incorrect.
-    [DebuggerDisplay("{ToVhdl()}")]
+    // Although by implementing INamedElement and IStructuredElement Architecture is in the end implementing ISubProgram. 
+    // However the architecture is not a subprogram, so implementing ISubProgram directly would be semantically incorrect.
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Architecture : INamedElement, IStructuredElement
     {
         public string Name { get; set; }
@@ -22,20 +22,15 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return
-                "architecture " +
-                Name +
-                " of " +
-                Entity.Name + // Entity names can't be extended identifiers.
-                " is " +
-                Declarations.ToVhdl() +
-                " begin " +
-                Body.ToVhdl() +
-                " end " +
-                Name +
-                ";";
+            var name = vhdlGenerationOptions.ShortenName(Name);
+            return Terminated.Terminate(
+                "architecture " + name + " of " + vhdlGenerationOptions.ShortenName(Entity.Name) + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end " + name, vhdlGenerationOptions);
         }
     }
 }

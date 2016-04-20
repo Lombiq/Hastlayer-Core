@@ -7,123 +7,177 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using System.Linq;
+using Hast.Transformer.Models;
+using System.Threading.Tasks;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Common.Configuration;
+using System;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public interface IMethodTransformer : IDependency
-    {
-        void Transform(MethodDeclaration method, IVhdlTransformationContext context);
-    }
-
-
     public class MethodTransformer : IMethodTransformer
     {
+        private readonly IMemberStateMachineFactory _memberStateMachineFactory;
         private readonly ITypeConverter _typeConverter;
         private readonly IStatementTransformer _statementTransformer;
 
 
         public MethodTransformer(
+            IMemberStateMachineFactory memberStateMachineFactory,
             ITypeConverter typeConverter,
             IStatementTransformer statementTransformer)
         {
+            _memberStateMachineFactory = memberStateMachineFactory;
             _typeConverter = typeConverter;
             _statementTransformer = statementTransformer;
         }
 
 
-        public void Transform(MethodDeclaration method, IVhdlTransformationContext context)
+        public Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
-            var fullName = method.GetFullName();
-            var procedure = new Procedure { Name = fullName.ToExtendedVhdlId() };
-
-
-            // Handling when the method is an interface method, i.e. should be present in the interface of the VHDL module.
-            InterfaceMethodDefinition interfaceMethod = null;
-            if (method.IsInterfaceMember())
-            {
-                interfaceMethod = new InterfaceMethodDefinition { Name = procedure.Name, Procedure = procedure, Method = method };
-                context.InterfaceMethods.Add(interfaceMethod);
-            }
-
-
-            var parameters = new List<ProcedureParameter>();
-
-            // Handling return type
-            var returnType = _typeConverter.Convert(method.ReturnType);
-            var isVoid = returnType.Name == "void";
-            ProcedureParameter outputParam = null;
-            if (!isVoid)
-            {
-                // Since this way there's a dot in the output var's name, it can't clash with normal variables.
-                outputParam = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = returnType, ParameterType = ProcedureParameterType.Out, Name = "output.var".ToExtendedVhdlId() };
-
-                if (interfaceMethod != null)
+            return Task.Run(async () =>
                 {
-                    var outputPort = new Port { DataType = returnType, Mode = PortMode.Out, Name = (fullName + ".output").ToExtendedVhdlId() };
-                    interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = outputPort, Parameter = outputParam });
-                    interfaceMethod.Ports.Add(outputPort);
-                }
-
-                parameters.Add(outputParam);
-            }
-
-
-            // Handling input parameters
-            if (method.Parameters.Count != 0)
-            {
-                foreach (var parameter in method.Parameters)
-                {
-                    // SimpleMemory parameters should be transformed into parameters that pass on SimpleMemory port references.
-                    if (context.UseSimpleMemory() && parameter.IsSimpleMemoryParameter())
+                    if (method.Modifiers.HasFlag(Modifiers.Extern))
                     {
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.DataPortsDataType, Name = SimpleMemoryNames.DataInLocal, ParameterType = ProcedureParameterType.In });
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.DataPortsDataType, Name = SimpleMemoryNames.DataOutLocal, ParameterType = ProcedureParameterType.Out });
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.ReadAddressLocal, ParameterType = ProcedureParameterType.InOut });
-                        parameters.Add(new ProcedureParameter { DataObjectKind = DataObjectKind.Signal, DataType = SimpleMemoryTypes.AddressPortsDataType, Name = SimpleMemoryNames.WriteAddressLocal, ParameterType = ProcedureParameterType.Out });
+                        throw new InvalidOperationException(
+                            "The method " + method.GetFullName() + 
+                            " can't be transformed because it's extern. Only managed code can be transformed.");
+                    }
+
+                    var stateMachineCount = context
+                        .GetTransformerConfiguration()
+                        .GetMaxInvokationInstanceCountConfigurationForMember(method.GetSimpleName()).MaxInvokationInstanceCount;
+                    var stateMachineResults = new IMemberStateMachineResult[stateMachineCount];
+
+                    // Not much use to parallelize computation unless there are a lot of state machines to create or the 
+                    // method is very complex. We'll need to examine when to parallelize here and determine it in runtime.
+                    if (stateMachineCount > 50)
+                    {
+                        var stateMachineComputingTasks = new List<Task<IMemberStateMachineResult>>();
+
+                        for (int i = 0; i < stateMachineCount; i++)
+                        {
+                            var task = new Task<IMemberStateMachineResult>(
+                                index => BuildStateMachineFromMethod(method, context, (int)index),
+                                i);
+                            task.Start();
+                            stateMachineComputingTasks.Add(task);
+                        }
+
+                        stateMachineResults = await Task.WhenAll(stateMachineComputingTasks);
                     }
                     else
                     {
-                        var type = _typeConverter.Convert(parameter.Type);
-
-                        var procedureParameter = new ProcedureParameter { DataObjectKind = DataObjectKind.Variable, DataType = type, ParameterType = ProcedureParameterType.In, Name = (parameter.Name + ".param").ToExtendedVhdlId() };
-
-                        // Since In params can't be assigned to but C# method arguments can we copy the In params to local variables.
-                        var variable = new Variable { DataType = type, Name = parameter.Name.ToExtendedVhdlId() };
-                        procedure.Declarations.Add(variable);
-                        procedure.Body.Add(new Terminated(new Assignment { AssignTo = variable.ToReference(), Expression = procedureParameter.ToReference() }));
-
-                        if (interfaceMethod != null)
+                        for (int i = 0; i < stateMachineCount; i++)
                         {
-                            var inputPort = new Port { DataType = type, Mode = PortMode.In, Name = (fullName + "." + parameter.Name).ToExtendedVhdlId() };
-                            interfaceMethod.ParameterMappings.Add(new ParameterMapping { Port = inputPort, Parameter = procedureParameter });
-                            interfaceMethod.Ports.Add(inputPort);
+                            stateMachineResults[i] = BuildStateMachineFromMethod(method, context, i);
                         }
-
-                        parameters.Add(procedureParameter); 
                     }
-                }
+
+                    return (IMemberTransformerResult)new MemberTransformerResult
+                    {
+                        Member = method,
+                        IsInterfaceMember = method.IsInterfaceMember(),
+                        StateMachineResults = stateMachineResults
+                    };
+                });
+        }
+
+
+        private IMemberStateMachineResult BuildStateMachineFromMethod(
+            MethodDeclaration method,
+            IVhdlTransformationContext context,
+            int stateMachineIndex)
+        {
+            var methodFullName = method.GetFullName();
+            var stateMachine = _memberStateMachineFactory
+                .CreateStateMachine(ArchitectureComponentNameHelper.CreateIndexedComponentName(methodFullName, stateMachineIndex));
+
+            // Adding the opening state's block.
+            var openingBlock = new InlineBlock();
+
+
+            // Handling return type.
+            var returnType = _typeConverter.ConvertAstType(method.ReturnType);
+            var isVoid = returnType.Name == "void";
+            if (!isVoid)
+            {
+                stateMachine.GlobalVariables.Add(new Variable
+                {
+                    Name = stateMachine.CreateReturnVariableName(),
+                    DataType = returnType
+                });
             }
 
-            procedure.Parameters = parameters;
+            // Handling in/out method parameters.
+            foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
+            {
+                // Since input parameters are assigned to from the outside but they could be attempted to be also assigned
+                // to from the inside (since in .NET a method argument can also be assigned to from inside the method)
+                // we need to have intermediary input variables, then copy their values to local variables.
+
+                var parameterDataType = _typeConverter.ConvertAstType(parameter.Type);
+                var parameterGlobalVariableName = stateMachine.CreateParameterVariableName(parameter.Name);
+                var parameterLocalVariableName = stateMachine.CreatePrefixedObjectName(parameter.Name);
+
+                stateMachine.GlobalVariables.Add(new ParameterVariable(methodFullName, parameter.Name)
+                {
+                    DataType = parameterDataType,
+                    Name = parameterGlobalVariableName,
+                    IsOwn = true
+                });
+
+                stateMachine.LocalVariables.Add(new Variable
+                {
+                    DataType = parameterDataType,
+                    Name = parameterLocalVariableName
+                });
+
+                openingBlock.Add(new Assignment
+                {
+                    AssignTo = parameterLocalVariableName.ToVhdlVariableReference(),
+                    Expression = parameterGlobalVariableName.ToVhdlVariableReference()
+                });
+            }
 
 
-            // Processing method body
+            // Processing method body.
             var bodyContext = new SubTransformerContext
             {
                 TransformationContext = context,
                 Scope = new SubTransformerScope
                 {
                     Method = method,
-                    SubProgram = procedure
+                    StateMachine = stateMachine,
+                    CurrentBlock = new CurrentBlock(stateMachine, openingBlock, stateMachine.AddState(openingBlock))
                 }
             };
+
+            var lastStatementIsReturn = false;
             foreach (var statement in method.Body.Statements)
             {
-                _statementTransformer.Transform(statement, bodyContext, procedure);
+                _statementTransformer.Transform(statement, bodyContext);
+                lastStatementIsReturn = statement is ReturnStatement;
+            }
+
+            // If the last statement was a return statement then there is already a state change to the final state
+            // added.
+            if (!lastStatementIsReturn)
+            {
+                bodyContext.Scope.CurrentBlock.Add(stateMachine.ChangeToFinalState());
             }
 
 
-            context.Module.Architecture.Declarations.Add(procedure);
+            // We need to return the declarations and body here too so their computation can be parallelized too.
+            // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to
+            // be thread-safe.
+            return new MemberStateMachineResult
+            {
+                StateMachine = stateMachine,
+                Declarations = stateMachine.BuildDeclarations(),
+                Body = stateMachine.BuildBody()
+            };
         }
     }
 }

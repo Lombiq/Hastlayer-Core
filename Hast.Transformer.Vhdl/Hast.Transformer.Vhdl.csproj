@@ -57,19 +57,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\SimpleMemoryNames.cs" />
+    <Compile Include="ArchitectureComponents\ArchitectureComponentNameExtensions.cs" />
+    <Compile Include="ArchitectureComponents\ArchitectureComponentVariableExtensions.cs" />
+    <Compile Include="ArchitectureComponents\BasicComponent.cs" />
+    <Compile Include="ArchitectureComponents\ConfigurableComponent.cs" />
+    <Compile Include="ArchitectureComponents\InvokationHelper.cs" />
+    <Compile Include="ArchitectureComponents\IArchitectureComponent.cs" />
+    <Compile Include="ArchitectureComponents\SimpleMemoryArchitectureComponentExtensions.cs" />
+    <Compile Include="Constants\CommonPortNames.cs" />
+    <Compile Include="Constants\GeneratedCodeOverviewComment.cs" />
+    <Compile Include="Constants\SimpleMemoryPortNames.cs" />
     <Compile Include="Constants\SimpleMemoryTypes.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
-    <Compile Include="Helpers\TopologicalSortHelper.cs" />
+    <Compile Include="ArchitectureComponents\ArchitectureComponentBase.cs" />
+    <Compile Include="InvokationProxyBuilders\ExternalInvokationProxyBuilder.cs" />
+    <Compile Include="InvokationProxyBuilders\IExternalInvokationProxyBuilder.cs" />
+    <Compile Include="InvokationProxyBuilders\IInternalInvokationProxyBuilder.cs" />
+    <Compile Include="InvokationProxyBuilders\ISimpleMemoryOperationProxyBuilder.cs" />
+    <Compile Include="InvokationProxyBuilders\InternalInvokationProxyBuilder.cs" />
+    <Compile Include="InvokationProxyBuilders\SimpleMemoryOperationProxyBuilder.cs" />
+    <Compile Include="Models\IMemberTransformerResult.cs" />
+    <Compile Include="Models\IMemberStateMachineResult.cs" />
+    <Compile Include="Models\MemberTransformerResult.cs" />
+    <Compile Include="Models\MemberStateMachineResult.cs" />
+    <Compile Include="ArchitectureComponents\MemberStateMachineFactory.cs" />
+    <Compile Include="ArchitectureComponents\MemberStateMachineExtenions.cs" />
+    <Compile Include="ArchitectureComponents\ArchitectureComponentNameHelper.cs" />
+    <Compile Include="ArchitectureComponents\IMemberStateMachine.cs" />
     <Compile Include="Models\IVhdlTransformationContext.cs" />
-    <Compile Include="MemberCallChainTable.cs" />
-    <Compile Include="MemberIdTable.cs" />
-    <Compile Include="InterfaceMethodDefinition.cs" />
+    <Compile Include="Models\MemberIdTable.cs" />
+    <Compile Include="ArchitectureComponents\MemberStateMachine.cs" />
+    <Compile Include="Models\ParameterVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ArchitectureComponents\NameSuffixes.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\IExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\IMethodTransformer.cs" />
+    <Compile Include="SubTransformers\IStatementTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\ITypeConversionTransformer.cs" />
+    <Compile Include="SubTransformers\ITypeConverter.cs" />
     <Compile Include="SubTransformers\MethodTransformer.cs" />
     <Compile Include="SubTransformers\StatementTransformer.cs" />
-    <Compile Include="SubTransformers\SubTransformerContext.cs" />
+    <Compile Include="Models\SubTransformerContext.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\TypeConversionTransformer.cs" />
     <Compile Include="SubTransformers\TypeConverter.cs" />
     <Compile Include="Models\VhdlTransformationContext.cs" />
     <Compile Include="Models\VhdlHardwareDescription.cs" />
@@ -82,6 +115,10 @@
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
+      <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
+      <Name>Hast.Synthesis</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj">
       <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>

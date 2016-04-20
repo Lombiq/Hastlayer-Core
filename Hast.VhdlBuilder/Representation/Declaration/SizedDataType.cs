@@ -3,14 +3,19 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class SizedDataType : DataType
     {
         public int Size { get; set; }
         public IVhdlElement SizeExpression { get; set; }
 
 
-        public override string ToVhdl()
+        public override string ToReferenceVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            return ToVhdl(vhdlGenerationOptions);
+        }
+
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (Size == 0 && SizeExpression == null) return Name;
 
@@ -22,7 +27,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 Name +
                 "(" +
-                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl()) +
+                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl(vhdlGenerationOptions)) +
                 " downto 0)";
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Component : INamedElement
     {
         public string Name { get; set; }
@@ -17,15 +18,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return
-                "component " +
-                Name +
-                " port(" +
-                string.Join(", ", Ports.Select(parameter => parameter.ToVhdl())) +
-                ");" +
-                "end component;";
+            var name = vhdlGenerationOptions.ShortenName(Name);
+            return Terminated.Terminate(
+                "component " + name + vhdlGenerationOptions.NewLineIfShouldFormat() +
+
+                    "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                        Ports
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions))
+                            .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    Terminated.Terminate(")", vhdlGenerationOptions) +
+
+                "end " + name, vhdlGenerationOptions);
         }
     }
 }

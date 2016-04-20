@@ -16,22 +16,35 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// <summary>
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
     /// </summary>
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class DataType : INamedElement
     {
         public DataTypeCategory TypeCategory { get; set; }
         public string Name { get; set; }
 
 
-        public virtual string ToVhdl()
+        /// <summary>
+        /// Generates VHDL code that can be used when the data type is referenced e.g. in a variable declaration.
+        /// </summary>
+        /// <remarks>
+        /// This is necessary because enums are declared and used in variables differently. Note that this is a different
+        /// concept from <see cref="DataObjectReference"/> which is about referencing data objects (e.g. signals), not
+        /// data types.
+        /// </remarks>
+        public virtual string ToReferenceVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Name;
+            return vhdlGenerationOptions.NameShortener(Name);
+        }
+
+        public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            return ToReferenceVhdl(vhdlGenerationOptions);
         }
 
 
         public static bool operator ==(DataType a, DataType b)
         {
-            // If both are null, or both are same instance, return true.
+            // If both are null, or both are the same instance, return true.
             if (System.Object.ReferenceEquals(a, b))
             {
                 return true;

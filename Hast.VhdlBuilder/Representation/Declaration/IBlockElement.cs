@@ -6,4 +6,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         List<IVhdlElement> Body { get; set; }
     }
+
+
+    public static class BlockElementExtensions
+    {
+        public static void Add(this IBlockElement blockElement, IVhdlElement element)
+        {
+            blockElement.Body.Add(element);
+        }
+    }
 }

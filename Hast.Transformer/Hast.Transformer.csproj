@@ -53,34 +53,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\MemberInvokationInstanceCountConfiguration.cs" />
     <Compile Include="Extensions\AnnotatableExtensions.cs" />
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
     <Compile Include="Extensibility\Events\ITransformerEventHandler.cs" />
+    <Compile Include="Extensions\InvocationExpressionExtensions.cs" />
     <Compile Include="Extensions\MethodDeclarationExtensions.cs" />
     <Compile Include="Extensions\InterfaceMemberEntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
     <Compile Include="Extensions\TransformationContextExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
-    <Compile Include="Extensions\TypeInformationExtensions.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />
     <Compile Include="Models\DeclarationReferenceMetadata.cs" />
     <Compile Include="Models\InterfaceMemberMetadata.cs" />
     <Compile Include="Models\ITransformationContext.cs" />
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
+    <Compile Include="Services\InvokationInstanceCountAdjuster.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemory.cs" />
-    <Compile Include="SyntaxTreeCleaner.cs" />
-    <Compile Include="TypeDeclarationLookupTableFactory.cs" />
+    <Compile Include="Services\SyntaxTreeCleaner.cs" />
+    <Compile Include="Services\TypeDeclarationLookupTableFactory.cs" />
     <Compile Include="ITransformer.cs" />
     <Compile Include="ITransformingEngine.cs" />
     <Compile Include="DefaultTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TransformerExtensions.cs" />
-    <Compile Include="TransformerConfiguration.cs" />
+    <Compile Include="Configuration\TransformerConfiguration.cs" />
+    <Compile Include="Visitors\InvokationInstanceCountAdjustingVisitor.cs" />
     <Compile Include="Visitors\ReferencedNodesFlaggingVisitor.cs" />
     <Compile Include="Visitors\UnreferencedNodesRemovingVisitor.cs" />
   </ItemGroup>

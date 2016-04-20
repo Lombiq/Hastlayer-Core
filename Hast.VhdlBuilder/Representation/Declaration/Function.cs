@@ -5,7 +5,7 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Function : ISubProgram
     {
         public string Name { get; set; }
@@ -23,35 +23,31 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return
-                "function " +
-                Name +
-                " (" +
-                string.Join("; ", Arguments.Select(parameter => parameter.ToVhdl())) +
-                ") return " +
-                ReturnType.Name +
-                " is " +
-                Declarations.ToVhdl() + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
-                "begin " +
-                Body.ToVhdl() +
-                " end " +
-                Name +
-                ";";
+            var name = vhdlGenerationOptions.ShortenName(Name);
+            return Terminated.Terminate(
+                "function " + name +
+                " (" + Arguments.ToVhdl(vhdlGenerationOptions, "; ", string.Empty) + ") " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                "return " + ReturnType.Name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    (Declarations != null && Declarations.Any() ? " " : string.Empty) +
+                "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end " + name, vhdlGenerationOptions);
         }
     }
 
 
     public class FunctionArgument : TypedDataObjectBase
     {
-        public override string ToVhdl()
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
                 (DataObjectKind.ToString() ?? string.Empty) +
-                Name +
+                vhdlGenerationOptions.ShortenName(Name) +
                 ": " +
-                DataType.ToVhdl();
+                DataType.ToVhdl(vhdlGenerationOptions);
         }
     }
 }

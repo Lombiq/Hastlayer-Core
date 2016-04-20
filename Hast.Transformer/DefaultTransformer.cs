@@ -8,6 +8,7 @@ using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
+using Hast.Transformer.Services;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
@@ -21,6 +22,7 @@ namespace Hast.Transformer
         private readonly ITransformerEventHandler _eventHandler;
         private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
+        private readonly IInvokationInstanceCountAdjuster _invokationInstanceCountAdjuster;
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly ITransformingEngine _engine;
 
@@ -29,12 +31,14 @@ namespace Hast.Transformer
             ITransformerEventHandler eventHandler,
             IJsonConverter jsonConverter,
             ISyntaxTreeCleaner syntaxTreeCleaner,
+            IInvokationInstanceCountAdjuster invokationInstanceCountAdjuster,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             ITransformingEngine engine)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
             _syntaxTreeCleaner = syntaxTreeCleaner;
+            _invokationInstanceCountAdjuster = invokationInstanceCountAdjuster;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _engine = engine;
         }
@@ -55,14 +59,17 @@ namespace Hast.Transformer
             }
 
             transformationId +=
-                string.Join("-", configuration.PublicHardwareMembers) +
-                string.Join("-", configuration.PublicHardwareMemberPrefixes) +
+                string.Join("-", configuration.PublicHardwareMemberFullNames) +
+                string.Join("-", configuration.PublicHardwareMemberNamePrefixes) +
                 _jsonConverter.Serialize(configuration.CustomConfiguration);
+
 
             var syntaxTree = astBuilder.SyntaxTree;
 
 
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
+
+            _invokationInstanceCountAdjuster.AdjustInvokationInstanceCounts(syntaxTree, configuration);
 
 
             if (configuration.TransformerConfiguration().UseSimpleMemory)

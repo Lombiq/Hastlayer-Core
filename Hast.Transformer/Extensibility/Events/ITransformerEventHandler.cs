@@ -8,7 +8,9 @@ namespace Hast.Transformer.Extensibility.Events
         /// <summary>
         /// Fired when the syntax tree is built from the assemblies to transform.
         /// </summary>
-        /// <param name="transformationContext">The full context of the transformation, including the syntax tree to transform.</param>
+        /// <param name="transformationContext">
+        /// The full context of the transformation, including the syntax tree to transform.
+        /// </param>
         void SyntaxTreeBuilt(ITransformationContext transformationContext);
     }
 }

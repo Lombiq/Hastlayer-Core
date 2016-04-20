@@ -10,6 +10,7 @@ using System.Threading.Tasks.Schedulers;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Layer;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Samples.Psc
 {
@@ -36,7 +37,7 @@ namespace Hast.Samples.Psc
 
 
                     var hardwareConfiguration = new HardwareGenerationConfiguration();
-                    hardwareConfiguration.PublicHardwareMemberPrefixes.Add("Hast.Samples.Psc.PrimeCalculator");
+                    hardwareConfiguration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.Psc.PrimeCalculator");
                     var hardwareRepresentation = await hastlayer.GenerateHardware(
                         new[]
                             {
@@ -123,7 +124,8 @@ namespace Hast.Samples.Psc
 
         private static string ToVhdl(IHardwareDescription hardwareDescription)
         {
-            return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription).Manifest.TopModule.ToVhdl();
+            return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription)
+                .Manifest.TopModule.ToVhdl(new VhdlGenerationOptions { FormatCode = true, NameShortener = VhdlGenerationOptions.SimpleNameShortener });
         }
 
         private static void StopAndWriteTime(Stopwatch stopwatch)

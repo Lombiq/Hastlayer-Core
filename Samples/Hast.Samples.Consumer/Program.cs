@@ -11,6 +11,7 @@ using Hast.Samples.SampleAssembly;
 using Hast.Tests.TestAssembly1.ComplexTypes;
 using Hast.Tests.TestAssembly2;
 using System.Drawing;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Samples.Consumer
 {
@@ -35,19 +36,78 @@ namespace Hast.Samples.Consumer
                                     " milliseconds (all together)");
                             };
 
+
+                        var configuration = new HardwareGenerationConfiguration();
+
+                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.MonteCarloAlgorithm");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
+
+                        configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
+                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumberInternal")
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
+                        configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
+                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.CalculateFibonacchiSeries")
+                            {
+                                // If we give these algorithms inputs causing a larger recursion depth then that will
+                                // cause runtime problems.
+                                MaxRecursionDepth = 20
+                            });
+
+
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
                             {
                                 typeof(PrimeCalculator).Assembly
-                                //typeof(Math).Assembly // Would be needed for Math.Sqrt() but transforming that is not yet supported.
                             },
-                            HardwareGenerationConfiguration.Default);
+                            configuration);
 
+
+                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                        //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+
+
+                        // For testing transformation, we don't need anything else.
+                        return;
+
+                        #region PrimeCalculator
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
 
                         var isPrime = primeCalculator.IsPrimeNumber(15);
+                        var isPrime2 = primeCalculator.IsPrimeNumber(13);
                         var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
+                        var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
 
+                        // With 210 numbers this takes about 2,1s all together (with UART) on an FPGA and 166s on a 3,2GHz i7.
+                        // With 4000 numbers it takes 38s on an FPGA and 3550s (about an hour) on the same PC. 10000 numbers
+                        // take 84s on an FPGA.
+                        // These take the following amount of time via Ethernet respectively: 330ms (200 numbers), 1,5s 
+                        // (4000 numbers), 6,8s (10000 numbers).
+                        // About 90000000 numbers are the maximum before an OutOfMemoryException down the line. But that would
+                        // take 93 hours to send via 9600 baud serial (and then above this to receive the results).
+                        var numberCount = 210;
+                        var numbers = new uint[numberCount];
+                        for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
+                        {
+                            numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
+                        }
+                        var sw = System.Diagnostics.Stopwatch.StartNew();
+                        var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
+                        sw.Stop();
+                        #endregion
+
+
+                        #region RecursiveAlgorithms
+                        var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms());
+
+                        var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries((short)13); // 233
+                        var factorial = recursiveAlgorithms.CalculateFactorial((short)6); // 720 
+                        #endregion
+
+
+                        #region ImageAlgorithms
                         using (var bitmap = new Bitmap("fpga.jpg"))
                         {
                             var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
@@ -56,7 +116,10 @@ namespace Hast.Samples.Consumer
                             var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
                             var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
                         }
+                        #endregion
 
+
+                        #region GenomeMatcher
                         var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher());
 
                         // Sample from IBM.
@@ -75,10 +138,15 @@ namespace Hast.Samples.Consumer
                         inputTwo = "coulombtech";
 
                         result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+                        #endregion
 
-                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm()); 
+
+                        #region MonteCarlo
+                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm());
                         var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
+                        #endregion
                     }
+
 
                     // Generating hardware from test assemblies:
                     using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
@@ -114,7 +182,8 @@ namespace Hast.Samples.Consumer
 
         private static string ToVhdl(IHardwareDescription hardwareDescription)
         {
-            return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription).Manifest.TopModule.ToVhdl();
+            return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription)
+                .Manifest.TopModule.ToVhdl(new VhdlGenerationOptions { FormatCode = true, NameShortener = VhdlGenerationOptions.SimpleNameShortener });
         }
     }
 }

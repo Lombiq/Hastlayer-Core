@@ -10,6 +10,9 @@ namespace Hast.Samples.SampleAssembly
     /// <summary>
     ///  Algorithm to find the weight and centre of mass of a section of torus with varying density.
     /// </summary>
+    /// <remarks>
+    /// Implementation taken from here: http://www.codeproject.com/Articles/767997/Parallelised-Monte-Carlo-Algorithms-sharp
+    /// </remarks>
     public class MonteCarloAlgorithm
     {
         private const ushort Multiplier = 100;
@@ -62,7 +65,7 @@ namespace Hast.Samples.SampleAssembly
               
                 // The constant can't be specified properly inline as (since it can't be specied as a short, see:
                 // http://stackoverflow.com/questions/8670511/how-to-specify-a-short-int-constant-without-casting)
-                // it would cause an underflow and be caster to an ulong.
+                // it would cause an underflow and be casted to an ulong.
                 short minusThree = -3;
                 y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / 100));
                 short thirteen = 13;
@@ -125,6 +128,7 @@ namespace Hast.Samples.SampleAssembly
         /// <summary>
         /// Estimates the square root of a number using the Babylonian method.
         /// </summary>
+        /// <remarks>This is only needed because we don't support Math.Sqrt() yet.</remarks>
         /// <param name="value">The number we search the square root of.</param>
         /// <returns>Returns the square root of the number.</returns>
         private int Sqrt(int value)

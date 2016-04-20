@@ -9,7 +9,10 @@ namespace ICSharpCode.NRefactory.CSharp
         /// Searches for a method on the type that has the same signature as the supplied method.
         /// </summary>
         /// <returns>The declaration of the matching method if found, <c>null</c> otherwise.</returns>
-        public static MethodDeclaration FindMatchingMethod(this TypeDeclaration typeDeclaration, MethodDeclaration methodDeclaration, Func<AstType, TypeDeclaration> lookupDeclaration)
+        public static MethodDeclaration FindMatchingMethod(
+            this TypeDeclaration typeDeclaration, 
+            MethodDeclaration methodDeclaration, 
+            Func<AstType, TypeDeclaration> lookupDeclaration)
         {
             // Searching for members that have the exact same signature.
             var matchedMember = typeDeclaration.Members.SingleOrDefault(member =>
@@ -18,12 +21,12 @@ namespace ICSharpCode.NRefactory.CSharp
                 {
                     var method = (MethodDeclaration)member;
                     if ((typeDeclaration.ClassType == ClassType.Interface || method.Modifiers == methodDeclaration.Modifiers) && // Only checking for modifiers is the type is not an interface.
-                        method.ReturnType.TypeEquals(methodDeclaration.ReturnType, lookupDeclaration) &&
+                        method.ReturnType.AstTypeEquals(methodDeclaration.ReturnType, lookupDeclaration) &&
                         method.Parameters.Count == methodDeclaration.Parameters.Count)
                     {
                         foreach (var interfaceMethodParameter in method.Parameters)
                         {
-                            if (!methodDeclaration.Parameters.Any(parameter => parameter.Type.TypeEquals(interfaceMethodParameter.Type, lookupDeclaration)))
+                            if (!methodDeclaration.Parameters.Any(parameter => parameter.Type.AstTypeEquals(interfaceMethodParameter.Type, lookupDeclaration)))
                             {
                                 return false;
                             }
