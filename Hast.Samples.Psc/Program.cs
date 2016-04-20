@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Schedulers;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Layer;
@@ -33,13 +36,15 @@ namespace Hast.Samples.Psc
 
 
                     var hardwareConfiguration = new HardwareGenerationConfiguration();
-                    //hardwareConfiguration.PublicHardwareMemberPrefixes.Add("Hast.Samples.Psc.PrimeCalculator");
+                    hardwareConfiguration.PublicHardwareMemberPrefixes.Add("Hast.Samples.Psc.PrimeCalculator");
                     var hardwareRepresentation = await hastlayer.GenerateHardware(
                         new[]
                             {
                                 typeof(Program).Assembly
                             },
-                        hardwareConfiguration); 
+                        hardwareConfiguration);
+
+                    var stopwatch = new Stopwatch();
                     #endregion
 
 
@@ -48,37 +53,69 @@ namespace Hast.Samples.Psc
 
 
                     #region Basic samples
-                    //var isPrime = primeCalculator.IsPrimeNumber(15);
-                    //var isPrime2 = primeCalculator.IsPrimeNumber(13);
-                    //var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
-                    //var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 }); 
+                    var isPrime = primeCalculator.IsPrimeNumber(15);
+                    var isPrime2 = primeCalculator.IsPrimeNumber(13);
+                    var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
+                    var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
+                    Debugger.Break();
                     #endregion
 
-                    #region A lot of numbers
-                    //var numberCount = 4000;
-                    //var numbers = new uint[numberCount];
-                    //for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
-                    //{
-                    //    numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
-                    //}
-                    //var arePrimesOnCpu = new PrimeCalculator().ArePrimeNumbers(numbers);
-                    //var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers); 
+                    #region Generating some big numbers
+                    var numberCount = 4000;
+                    var numbers = new uint[numberCount];
+                    for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
+                    {
+                        numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
+                    }
+                    Debugger.Break();
+                    #endregion
+
+                    #region Crunching big numbers
+                    stopwatch.Restart();
+                    var arePrimesOnCpu = new PrimeCalculator().ArePrimeNumbers(numbers.Take(20).ToArray());
+                    StopAndWriteTime(stopwatch);
+                    Debugger.Break();
+                    stopwatch.Restart();
+                    primeCalculator.ArePrimeNumbers(numbers.Take(20).ToArray());
+                    StopAndWriteTime(stopwatch);
+                    Debugger.Break();
+                    stopwatch.Restart();
+                    var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
+                    StopAndWriteTime(stopwatch);
+                    Debugger.Break();
+                    #endregion
+
+                    #region Sequential launch
+                    stopwatch.Restart();
+                    var sequentialLaunchArePrimes = new bool[10][];
+                    for (uint i = 0; i < 10; i++)
+                    {
+                        sequentialLaunchArePrimes[i] = primeCalculator.ArePrimeNumbers(numbers);
+                    }
+                    StopAndWriteTime(stopwatch);
+                    Debugger.Break();
                     #endregion
 
                     #region Parallel launch
-                    //var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
-
-                    //for (uint i = 1; i <= 10; i++)
-                    //{
-                    //    parallelLaunchedIsPrimeTasks
-                    //        .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
-                    //}
-
-                    //var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks); 
+                    var taskScheduler = new QueuedTaskScheduler(2);
+                    stopwatch.Restart();
+                    var parallelLaunchedIsPrimeTasks = new List<Task<bool[]>>();
+                    for (uint i = 0; i < 10; i++)
+                    {
+                        parallelLaunchedIsPrimeTasks.Add(Task.Factory.StartNew(() =>
+                            primeCalculator.ArePrimeNumbers(numbers),
+                            new CancellationToken(),
+                            TaskCreationOptions.None,
+                            taskScheduler));
+                    }
+                    var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
+                    StopAndWriteTime(stopwatch);
+                    Debugger.Break();
                     #endregion
 
                     #region Looking at VHDL
                     File.WriteAllText(@"C:\HastlayerSample.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                    Debugger.Break();
                     #endregion
                 }
             }).Wait();
@@ -88,6 +125,14 @@ namespace Hast.Samples.Psc
         private static string ToVhdl(IHardwareDescription hardwareDescription)
         {
             return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareDescription).Manifest.TopModule.ToVhdl();
+        }
+
+        private static void StopAndWriteTime(Stopwatch stopwatch)
+        {
+            stopwatch.Stop();
+            Console.WriteLine("===========");
+            Console.WriteLine("Ellapsed milliseconds: " + stopwatch.ElapsedMilliseconds);
+            Console.WriteLine();
         }
     }
 }
