@@ -38,7 +38,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             private readonly Dictionary<string, IVhdlElement> _arrayDeclarations;
 
 
-            public ArrayCreationCheckingVisitor(ITypeConverter typeConverter, Dictionary<string, IVhdlElement> arrayDeclarations)
+            public ArrayCreationCheckingVisitor(
+                ITypeConverter typeConverter,
+                Dictionary<string, IVhdlElement> arrayDeclarations)
             {
                 _typeConverter = typeConverter;
                 _arrayDeclarations = arrayDeclarations;
