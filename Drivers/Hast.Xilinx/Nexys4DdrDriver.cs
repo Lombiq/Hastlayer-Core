@@ -28,11 +28,12 @@ namespace Hast.Xilinx
         {
             if (operation == BinaryOperatorType.Modulus)
             {
-                return 5;
+                return 8;
             }
             else if (operation == BinaryOperatorType.Multiply || operation == BinaryOperatorType.Divide)
             {
-                return 3;
+                // 8 just for now to be safe, will find the actual threshold.
+                return 8;
             }
 
             return 0.1M;
