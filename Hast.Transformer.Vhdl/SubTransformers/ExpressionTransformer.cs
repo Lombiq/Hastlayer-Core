@@ -310,7 +310,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 
-            currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForBinaryOperation(expression);
+            var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForBinaryOperation(expression);;
+            currentBlock.RequiredClockCycles += clockCyclesNeededForOperation; 
 
             var resultType = expression.GetActualTypeReference(true);
             if (resultType == null) resultType = expression.Parent.GetActualTypeReference();
@@ -320,7 +321,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     _typeConverter.ConvertTypeReference(resultType))
                 .ToReference();
 
-            currentBlock.Add(new Assignment { AssignTo = operationResultVariableReference, Expression = binary });
+            var operationResultAssignment = new Assignment { AssignTo = operationResultVariableReference, Expression = binary };
+            currentBlock.Add(operationResultAssignment);
 
             // Since the operations takes more than one clock cycle we need to add a new state just to wait. Then we
             // transition from that state forward to a state where the actual algorithm continues.
@@ -357,6 +359,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     new LineComment(
                         "Note that transitioning from the inital state to this one was already one cycle, then transitioning from this to the result state will be another one, so actually need to stay in this state for " +
                         (requiredClockCyclesRoundedUp - 2) + " clock cycles."),
+                    new LineComment(
+                        "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."),
+                    operationResultAssignment,
                     waitForResultIf);
 
                 var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
