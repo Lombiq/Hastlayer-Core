@@ -310,7 +310,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 
-            currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForOperation(expression.Operator);
+            currentBlock.RequiredClockCycles += _deviceDriver.GetClockCyclesNeededForBinaryOperation(expression);
 
             var resultType = expression.GetActualTypeReference(true);
             if (resultType == null) resultType = expression.Parent.GetActualTypeReference();
