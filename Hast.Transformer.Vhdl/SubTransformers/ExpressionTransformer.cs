@@ -353,7 +353,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var waitForResultBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
-                        "Waiting for the result to appear in " + operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."),
+                        "Waiting for the result to appear in " + 
+                        operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + 
+                        " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."),
+                    new LineComment(
+                        "Note that transitioning from the inital state to this one was already one cycle, then transitioning from this to the result state will be another one, so actually need to stay in this state for " +
+                        (requiredClockCyclesRoundedUp - 2) + " clock cycles."),
                     waitForResultIf);
 
                 var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
