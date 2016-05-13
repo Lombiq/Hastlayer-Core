@@ -329,9 +329,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
                     "clockCyclesWaitedForBinaryOperationResult",
                     KnownDataTypes.Natural);
-                var waitedCyclesCountOne = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType };
-                // Default value is 1 because due to the state change we already waited 1 cycle.
-                waitedCyclesCountVariable.InitialValue = waitedCyclesCountOne;
+                var waitedCyclesCountInitialValue = new Value { Content = "0", DataType = waitedCyclesCountVariable.DataType };
+                waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
                 var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
 
                 var requiredClockCyclesRoundedUp = (int)Math.Ceiling(currentBlock.RequiredClockCycles);
@@ -344,8 +343,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Operator = BinaryOperator.GreaterThanOrEqual,
                             Right = new Value
                                 {
-                                    // Subtracting 1 because due to the wait state added we already wait at least 2 cycles.
-                                    Content = (requiredClockCyclesRoundedUp - 1).ToString(),
+                                    Content = (requiredClockCyclesRoundedUp - 2).ToString(),
                                     DataType = waitedCyclesCountVariable.DataType
                                 }
                         }
@@ -368,7 +366,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var afterResultReceivedStateIndex = stateMachine.AddState(afterResultReceivedBlock);
                 waitForResultIf.True = new InlineBlock(
                     stateMachine.CreateStateChange(afterResultReceivedStateIndex),
-                    new Assignment { AssignTo = waitedCyclesCountVariableReference, Expression = waitedCyclesCountOne });
+                    new Assignment { AssignTo = waitedCyclesCountVariableReference, Expression = waitedCyclesCountInitialValue });
                 waitForResultIf.Else = new Assignment
                 {
                     AssignTo = waitedCyclesCountVariableReference,
@@ -376,7 +374,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         Left = waitedCyclesCountVariableReference,
                         Operator = BinaryOperator.Add,
-                        Right = waitedCyclesCountOne
+                        Right = new Value { Content = "1", DataType = waitedCyclesCountVariable.DataType }
                     }
                 };
                 currentBlock.ChangeBlockToDifferentState(afterResultReceivedBlock, afterResultReceivedStateIndex);
