@@ -24,15 +24,38 @@ namespace Hast.Xilinx
         }
 
 
-        public decimal GetClockCyclesNeededForOperation(BinaryOperatorType operation)
+        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression)
         {
-            if (operation == BinaryOperatorType.Modulus)
+            var op = expression.Operator;
+
+            if (op == BinaryOperatorType.Modulus)
             {
-                return 5;
+                return 8;
             }
-            else if (operation == BinaryOperatorType.Multiply || operation == BinaryOperatorType.Divide)
+            else if (op == BinaryOperatorType.Multiply || op == BinaryOperatorType.Divide)
             {
-                return 3;
+                // If the Right expression results in 2^n then since the operations will be implemented with a very 
+                // compact circuit we can assume that it's "instant".
+                if (expression.Right is PrimitiveExpression)
+                {
+                    // LiteralValue somehow is an empty string for PrimitiveExpressions.
+                    var valueObject = ((PrimitiveExpression)expression.Right).Value;
+                    var literalValue = valueObject != null ? valueObject.ToString() : string.Empty;
+                    int intValue;
+
+                    if (int.TryParse(literalValue, out intValue))
+                    {
+                        var log = Math.Log(intValue, 2);
+                        // If the logarithm is a whole number that means that the value can be expressed as a power of 2.
+                        if (log == Math.Floor(log))
+                        {
+                            return 0.1M; 
+                        }
+                    }
+                }
+
+                // 8 just for now to be safe, will find the actual threshold.
+                return 8;
             }
 
             return 0.1M;
