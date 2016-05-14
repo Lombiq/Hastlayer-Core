@@ -337,20 +337,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var requiredClockCyclesRoundedUp = (int)Math.Ceiling(currentBlock.RequiredClockCycles);
 
-                var waitForResultIf = new IfElse
-                {
-                    Condition = new Binary
-                        {
-                            Left = waitedCyclesCountVariableReference,
-                            Operator = BinaryOperator.GreaterThanOrEqual,
-                            Right = new Value
-                                {
-                                    Content = (requiredClockCyclesRoundedUp - 2).ToString(),
-                                    DataType = waitedCyclesCountVariable.DataType
-                                }
-                        }
-                };
-
                 var waitForResultBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "Waiting for the result to appear in " + 
@@ -358,11 +344,31 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."),
                     new LineComment(
                         "Note that transitioning from the inital state to this one was already one cycle, then transitioning from this to the result state will be another one, so actually need to stay in this state for " +
-                        (requiredClockCyclesRoundedUp - 2) + " clock cycles."),
-                    new LineComment(
-                        "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."),
-                    operationResultAssignment,
-                    waitForResultIf);
+                        (requiredClockCyclesRoundedUp - 2) + " clock cycles."));
+
+                // It can be that the block ran out of one clock cycle but this last operation wasn't a multi-cycle one.
+                // In that case the operation doesn't need to be kept up, just if it in itself is longer than 1 cycle.
+                if (clockCyclesNeededForOperation > 1)
+                {
+                    waitForResultBlock.Add(new LineComment(
+                        "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."));
+                    waitForResultBlock.Add(operationResultAssignment);
+                }
+
+                var waitForResultIf = new IfElse
+                {
+                    Condition = new Binary
+                    {
+                        Left = waitedCyclesCountVariableReference,
+                        Operator = BinaryOperator.GreaterThanOrEqual,
+                        Right = new Value
+                        {
+                            Content = (requiredClockCyclesRoundedUp - 2).ToString(),
+                            DataType = waitedCyclesCountVariable.DataType
+                        }
+                    }
+                };
+                waitForResultBlock.Add(waitForResultIf);
 
                 var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
                 currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));
