@@ -310,8 +310,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 
-            var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForBinaryOperation(expression);;
-            currentBlock.RequiredClockCycles += clockCyclesNeededForOperation; 
+            var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForBinaryOperation(expression);
+            var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
             var resultType = expression.GetActualTypeReference(true);
             if (resultType == null) resultType = expression.Parent.GetActualTypeReference();
@@ -322,11 +322,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 .ToReference();
 
             var operationResultAssignment = new Assignment { AssignTo = operationResultVariableReference, Expression = binary };
-            currentBlock.Add(operationResultAssignment);
+
+            // If the operation itself wasn't too long but the state all together takes more than 1 clock cycle then all
+            // operations will remain in the current state. Otherwise the operation will just be added to the wait state,
+            // see below.
+            if (!operationIsMultiCycle)
+            {
+                currentBlock.Add(operationResultAssignment);
+                currentBlock.RequiredClockCycles += clockCyclesNeededForOperation; 
+            }
 
             // Since the operations takes more than one clock cycle we need to add a new state just to wait. Then we
             // transition from that state forward to a state where the actual algorithm continues.
-            if (currentBlock.RequiredClockCycles > 1)
+            if (currentBlock.RequiredClockCycles > 1 || operationIsMultiCycle)
             {
                 var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
                     "clockCyclesWaitedForBinaryOperationResult",
@@ -335,24 +343,30 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
                 var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
 
-                var requiredClockCyclesRoundedUp = (int)Math.Ceiling(currentBlock.RequiredClockCycles);
+                var clockCyclesToWait = (int)Math.Ceiling(
+                    operationIsMultiCycle ? 
+                    clockCyclesNeededForOperation : 
+                    currentBlock.RequiredClockCycles - 2);
 
                 var waitForResultBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "Waiting for the result to appear in " + 
                         operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + 
-                        " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."),
-                    new LineComment(
-                        "Note that transitioning from the inital state to this one was already one cycle, then transitioning from this to the result state will be another one, so actually need to stay in this state for " +
-                        (requiredClockCyclesRoundedUp - 2) + " clock cycles."));
+                        " (have to wait " + clockCyclesToWait + " clock cycles in this state)."));
 
-                // It can be that the block ran out of one clock cycle but this last operation wasn't a multi-cycle one.
-                // In that case the operation doesn't need to be kept up, just if it in itself is longer than 1 cycle.
-                if (clockCyclesNeededForOperation > 1)
+                // If the operation was a multi-cycle one it needs to be only added in the wait state. There the operation
+                // should be kept up for the whole durationn of the wait.
+                if (operationIsMultiCycle)
                 {
                     waitForResultBlock.Add(new LineComment(
                         "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."));
                     waitForResultBlock.Add(operationResultAssignment);
+                }
+                else
+                {
+                    waitForResultBlock.Add(new LineComment(
+                        "Note that transitioning from the inital state to this one was already one cycle, then transitioning from this to the result state will be another one, so the total wait time is actually " +
+                        (clockCyclesToWait + 2) + " clock cycles."));
                 }
 
                 var waitForResultIf = new IfElse
@@ -363,7 +377,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         Operator = BinaryOperator.GreaterThanOrEqual,
                         Right = new Value
                         {
-                            Content = (requiredClockCyclesRoundedUp - 2).ToString(),
+                            Content = clockCyclesToWait.ToString(),
                             DataType = waitedCyclesCountVariable.DataType
                         }
                     }
@@ -371,6 +385,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 waitForResultBlock.Add(waitForResultIf);
 
                 var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
+                stateMachine.States[waitForResultStateIndex].RequiredClockCycles = clockCyclesToWait;
                 currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));
 
                 var afterResultReceivedBlock = new InlineBlock();

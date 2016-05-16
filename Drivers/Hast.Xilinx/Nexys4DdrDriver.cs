@@ -30,7 +30,7 @@ namespace Hast.Xilinx
 
             if (op == BinaryOperatorType.Modulus)
             {
-                return 8;
+                return 7;
             }
             else if (op == BinaryOperatorType.Multiply || op == BinaryOperatorType.Divide)
             {
@@ -54,8 +54,8 @@ namespace Hast.Xilinx
                     }
                 }
 
-                // 8 just for now to be safe, will find the actual threshold.
-                return 8;
+                // 7 just for now to be safe, will find the actual threshold.
+                return 7;
             }
 
             return 0.1M;
