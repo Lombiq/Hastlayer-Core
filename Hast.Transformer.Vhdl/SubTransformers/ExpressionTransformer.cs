@@ -338,7 +338,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
                     "clockCyclesWaitedForBinaryOperationResult",
-                    KnownDataTypes.Natural);
+                    KnownDataTypes.Int32);
                 var waitedCyclesCountInitialValue = new Value { Content = "0", DataType = waitedCyclesCountVariable.DataType };
                 waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
                 var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();

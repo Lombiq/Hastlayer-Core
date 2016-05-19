@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 else
                 {
                     rightTypeReference = leftTypeReference;
-                } 
+                }
             }
             else
             {
@@ -79,7 +79,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // We need to convert types in a way to keep precision. E.g. converting an int to real is fine, but vica 
             // versa would cause information loss. However excplicit casting in this direction is allowed in CIL so we 
             // need to allow it here as well.
-            if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real))
+            if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.UInt16 || thisType == KnownDataTypes.UInt32) &&
+                otherType == KnownDataTypes.Real))
             {
                 Logger.Warning(
                     "Converting from " + thisType.Name +
@@ -102,15 +103,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var castInvokation = new Invokation();
 
             // Trying supported cast scenarios:
-            if ((fromType == KnownDataTypes.UnrangedInt || fromType == KnownDataTypes.Natural) && toType == KnownDataTypes.Real)
+            if ((fromType == KnownDataTypes.UnrangedInt || fromType == KnownDataTypes.UInt16 || fromType == KnownDataTypes.UInt32) &&
+                toType == KnownDataTypes.Real)
             {
                 castInvokation.Target = new Raw("real");
             }
-            else if ((fromType == KnownDataTypes.Real || fromType == KnownDataTypes.Natural) && (toType == KnownDataTypes.UnrangedInt || toType == KnownDataTypes.Natural))
+            else if ((fromType == KnownDataTypes.Real || fromType == KnownDataTypes.UInt16 || fromType == KnownDataTypes.UInt32) && 
+                toType == KnownDataTypes.UnrangedInt)
             {
                 castInvokation.Target = new Raw("integer");
             }
-            else if (fromType == KnownDataTypes.UnrangedInt && toType == KnownDataTypes.Natural)
+            else if (fromType == KnownDataTypes.UnrangedInt && toType == KnownDataTypes.UInt16)
             {
                 castInvokation.Target = new Raw("natural");
             }
