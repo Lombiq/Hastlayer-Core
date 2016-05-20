@@ -94,15 +94,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = _memberStateMachineFactory
                 .CreateStateMachine(ArchitectureComponentNameHelper.CreateIndexedComponentName(methodFullName, stateMachineIndex));
 
-            if (methodFullName.Contains("System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbersAsync(Hast.Transformer.SimpleMemory.SimpleMemory)"))
-            {
-                return new ArchitectureComponentResult
-                {
-                    ArchitectureComponent = stateMachine,
-                    Declarations = stateMachine.BuildDeclarations(),
-                    Body = stateMachine.BuildBody()
-                };
-            }
             // Adding the opening state's block.
             var openingBlock = new InlineBlock();
 
