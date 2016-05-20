@@ -47,8 +47,8 @@ namespace Hast.Layer
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create(IHastlayerConfiguration configuration)
         {
-            Argument.ThrowIfNull(configuration, "configuration");
-            Argument.ThrowIfNull(configuration.Extensions, "configuration.Extensions");
+            Argument.ThrowIfNull(configuration, nameof(configuration));
+            Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
             return new Hastlayer(configuration);
         }
@@ -56,7 +56,7 @@ namespace Hast.Layer
 
         public async Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
         {
-            Argument.ThrowIfNull(assemblies, "assemblies");
+            Argument.ThrowIfNull(assemblies, nameof(assemblies));
             if (!assemblies.Any())
             {
                 throw new ArgumentException("No assemblies were specified.");
@@ -98,13 +98,10 @@ namespace Hast.Layer
 
                 return hardwareRepresentation;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!ex.IsFatal())
             {
-                if (ex.IsFatal()) throw;
-
                 var message = "An error happened during generating the Hastlayer hardware representation for the following assemblies: " + string.Join(", ", assemblies.Select(assembly => assembly.FullName));
-                // This should be async-await once we have C# 6.
-                GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message))).Wait();
+                await GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
             }
         }
@@ -122,13 +119,10 @@ namespace Hast.Layer
                     (await GetHost())
                     .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject)));
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!ex.IsFatal())
             {
-                if (ex.IsFatal()) throw;
-
                 var message = "An error happened during generating the Hastlayer proxy for an object of the following type: " + hardwareObject.GetType().FullName;
-                // This should be async-await once we have C# 6.
-                GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message))).Wait();
+                await GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
             }
         }

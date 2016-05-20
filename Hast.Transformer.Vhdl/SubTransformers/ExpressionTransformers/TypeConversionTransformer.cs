@@ -39,9 +39,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
             var rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference();
 
-            // We won't get a type reference is the expression is a PrimitiveExpression (a constant). In this case we'll
+            // We won't get a type reference if the expression is a PrimitiveExpression (a constant). In this case we'll
             // assume that the type of the two sides is the same.
-            if (!(binaryOperatorExpression.Left is PrimitiveExpression) || !(binaryOperatorExpression.Right is PrimitiveExpression))
+            if (binaryOperatorExpression.Left is PrimitiveExpression || binaryOperatorExpression.Right is PrimitiveExpression)
             {
                 if (leftTypeReference == null && binaryOperatorExpression.Left is PrimitiveExpression)
                 {
@@ -52,10 +52,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     rightTypeReference = leftTypeReference;
                 }
             }
-            else
+            // If both of them are PrimitiveExpressions that's something strange (like writing e.g. "if (1 == 3) { ....").
+            // Let's assume that then the correct type is that of the expression's.
+            else if (binaryOperatorExpression.Left is PrimitiveExpression && binaryOperatorExpression.Right is PrimitiveExpression)
             {
-                // If both of them are PrimitiveExpressions that's something strange (like writing e.g. "if (1 == 3) { ....").
-                // Let's assume that then the correc type is that of the expression's.
                 leftTypeReference = expressionTypeReference;
             }
 
