@@ -48,7 +48,7 @@ namespace Hast.Layer
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create(IEnumerable<Assembly> extensions)
         {
-            Argument.ThrowIfNull(extensions, "extensions");
+            Argument.ThrowIfNull(extensions, nameof(extensions));
 
             return new Hastlayer(extensions);
         }
@@ -56,7 +56,7 @@ namespace Hast.Layer
 
         public async Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
         {
-            Argument.ThrowIfNull(assemblies, "assemblies");
+            Argument.ThrowIfNull(assemblies, nameof(assemblies));
             if (!assemblies.Any())
             {
                 throw new ArgumentException("No assemblies were specified.");
