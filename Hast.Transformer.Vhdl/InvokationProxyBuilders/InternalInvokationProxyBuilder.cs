@@ -155,7 +155,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                 DataType = new RangedDataType(KnownDataTypes.UnrangedInt)
                                 {
                                     RangeMin = 0,
-                                    RangeMax = (int)targetComponentCount - 1
+                                    RangeMax = targetComponentCount - 1
                                 },
                                 Name = runningIndexName
                             });

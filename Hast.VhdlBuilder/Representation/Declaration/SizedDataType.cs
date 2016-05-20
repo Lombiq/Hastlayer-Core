@@ -11,6 +11,23 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public IVhdlElement SizeExpression { get; set; }
 
 
+        public SizedDataType(DataType baseType)
+            : base(baseType)
+        {
+        }
+
+        public SizedDataType(SizedDataType previous)
+            : base(previous)
+        {
+            Size = previous.Size;
+            SizeExpression = previous.SizeExpression;
+        }
+
+        public SizedDataType()
+        {
+        }
+
+
         public override DataType ToReference()
         {
             return this;

@@ -436,8 +436,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 
-            var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForBinaryOperation(expression);;
-            currentBlock.RequiredClockCycles += clockCyclesNeededForOperation; 
+            var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForBinaryOperation(expression);
+            var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
             var resultType = expression.GetActualTypeReference(true);
             if (resultType == null) resultType = expression.FindFirstNonParenthesizedExpressionParent().GetActualTypeReference();
@@ -448,49 +448,63 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 .ToReference();
 
             var operationResultAssignment = new Assignment { AssignTo = operationResultVariableReference, Expression = binary };
-            currentBlock.Add(operationResultAssignment);
 
-            // Since the operations takes more than one clock cycle we need to add a new state just to wait. Then we
-            // transition from that state forward to a state where the actual algorithm continues.
-            if (currentBlock.RequiredClockCycles > 1)
+            // Since the current state takes more than one clock cycle we add a new state and follow up there.
+            if (!operationIsMultiCycle && currentBlock.RequiredClockCycles + clockCyclesNeededForOperation > 1)
+            {
+                var nextStateBlock = new InlineBlock(new LineComment(
+                    "This state was added because the previous state would go over one clock cycle with any more operations."));
+                var nextStateIndex = stateMachine.AddState(nextStateBlock);
+                currentBlock.Add(stateMachine.CreateStateChange(nextStateIndex));
+                currentBlock.ChangeBlockToDifferentState(nextStateBlock, nextStateIndex);
+            }
+
+            // If the operation in itself doesn't take more than one clock cycle then we simply add the operation to the
+            // current block, which can be in a new state added previously above.
+            if (!operationIsMultiCycle)
+            {
+                currentBlock.Add(operationResultAssignment);
+                currentBlock.RequiredClockCycles += clockCyclesNeededForOperation;
+            }
+            // Since the operation in itself takes more than one clock cycle we need to add a new state just to wait.
+            // Then we transition from that state forward to a state where the actual algorithm continues.
+            else
             {
                 var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
                     "clockCyclesWaitedForBinaryOperationResult",
-                    KnownDataTypes.Natural);
+                    KnownDataTypes.Int32);
                 var waitedCyclesCountInitialValue = new Value { Content = "0", DataType = waitedCyclesCountVariable.DataType };
                 waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
                 var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
 
-                var requiredClockCyclesRoundedUp = (int)Math.Ceiling(currentBlock.RequiredClockCycles);
+                var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
+
+                var waitForResultBlock = new InlineBlock(
+                    new GeneratedComment(vhdlGenerationOptions =>
+                        "Waiting for the result to appear in " +
+                        operationResultVariableReference.ToVhdl(vhdlGenerationOptions) +
+                        " (have to wait " + clockCyclesToWait + " clock cycles in this state)."),
+                    new LineComment(
+                    "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."),
+                    operationResultAssignment);
 
                 var waitForResultIf = new IfElse
                 {
                     Condition = new Binary
+                    {
+                        Left = waitedCyclesCountVariableReference,
+                        Operator = BinaryOperator.GreaterThanOrEqual,
+                        Right = new Value
                         {
-                            Left = waitedCyclesCountVariableReference,
-                            Operator = BinaryOperator.GreaterThanOrEqual,
-                            Right = new Value
-                                {
-                                    Content = (requiredClockCyclesRoundedUp - 2).ToString(),
-                                    DataType = waitedCyclesCountVariable.DataType
-                                }
+                            Content = clockCyclesToWait.ToString(),
+                            DataType = waitedCyclesCountVariable.DataType
                         }
+                    }
                 };
-
-                var waitForResultBlock = new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions =>
-                        "Waiting for the result to appear in " + 
-                        operationResultVariableReference.ToVhdl(vhdlGenerationOptions) + 
-                        " (have to wait " + requiredClockCyclesRoundedUp + " clock cycles)."),
-                    new LineComment(
-                        "Note that transitioning from the inital state to this one was already one cycle, then transitioning from this to the result state will be another one, so actually need to stay in this state for " +
-                        (requiredClockCyclesRoundedUp - 2) + " clock cycles."),
-                    new LineComment(
-                        "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."),
-                    operationResultAssignment,
-                    waitForResultIf);
+                waitForResultBlock.Add(waitForResultIf);
 
                 var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
+                stateMachine.States[waitForResultStateIndex].RequiredClockCycles = clockCyclesToWait;
                 currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));
 
                 var afterResultReceivedBlock = new InlineBlock();

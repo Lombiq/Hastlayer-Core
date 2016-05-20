@@ -1,4 +1,5 @@
-﻿using Hast.VhdlBuilder.Representation.Expression;
+﻿using System;
+using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -36,25 +37,49 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public static DataType _unrangedInt = new DataType { TypeCategory = DataTypeCategory.Numeric, Name = "integer" };
         public static DataType UnrangedInt = new DataType(_unrangedInt)
         {
-            DefaultValue = new Value {  DataType = _unrangedInt, Content = default(int).ToString() }
+            DefaultValue = new Value { DataType = _unrangedInt, Content = default(int).ToString() }
         };
 
-        private static RangedDataType _int16 = new RangedDataType(_unrangedInt) {  RangeMin = -32768, RangeMax = 32767 };
+        private static RangedDataType _int16 = new RangedDataType(_unrangedInt) { RangeMin = -32768, RangeMax = 32767 };
         public static RangedDataType Int16 = new RangedDataType(_int16)
         {
             DefaultValue = new Value { DataType = _int16, Content = default(short).ToString() }
         };
 
-        private static RangedDataType _int32 = new RangedDataType(_unrangedInt) { RangeMin = -2147483647, RangeMax = 2147483647 };
+        private static RangedDataType _int32 = new RangedDataType(_unrangedInt) { RangeMin = -2147483648, RangeMax = 2147483647 };
         public static RangedDataType Int32 = new RangedDataType(_int32)
         {
             DefaultValue = new Value { DataType = _int32, Content = default(int).ToString() }
         };
 
-        private static DataType _natural = new DataType { TypeCategory = DataTypeCategory.Numeric, Name = "natural" };
-        public static DataType Natural = new DataType(_natural)
+        private static SizedDataType _int64 = new SizedDataType { Name = "signed", Size = 64 };
+        public static SizedDataType Int64 = new SizedDataType(_int64)
         {
-            DefaultValue = new Value { DataType = _natural, Content = default(uint).ToString() }
+            DefaultValue = new Value { DataType = _int64, Content = default(Int64).ToString() }
+        };
+
+        private static RangedDataType _uint16 = new RangedDataType
+        {
+            TypeCategory = DataTypeCategory.Numeric,
+            Name = "natural",
+            RangeMin = 0,
+            RangeMax = 65535
+        };
+        public static RangedDataType UInt16 = new RangedDataType(_uint16)
+        {
+            DefaultValue = new Value { DataType = _uint16, Content = default(uint).ToString() }
+        };
+
+        private static SizedDataType _uint32 = new SizedDataType { Name = "unsigned", Size = 32 };
+        public static SizedDataType UInt32 = new SizedDataType(_uint32)
+        {
+            DefaultValue = new Value { DataType = _uint32, Content = default(Int64).ToString() }
+        };
+
+        private static SizedDataType _uint64 = new SizedDataType { Name = "unsigned", Size = 64 };
+        public static SizedDataType UInt64 = new SizedDataType(_uint64)
+        {
+            DefaultValue = new Value { DataType = _uint64, Content = default(Int64).ToString() }
         };
 
         private static DataType _stdLogic = new DataType { TypeCategory = DataTypeCategory.Character, Name = "std_logic" };
@@ -73,14 +98,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public static DataType String = new DataType(_string)
         {
             DefaultValue = new Value { DataType = _string, Content = default(string) }
-        }; 
-        
+        };
+
         private static DataType _real = new DataType { TypeCategory = DataTypeCategory.Numeric, Name = "real" };
         public static DataType Real = new DataType(_real)
         {
             DefaultValue = new Value { DataType = _real, Content = default(double).ToString() }
         };
-        
+
         public static DataType Void = new DataType { TypeCategory = DataTypeCategory.Identifier, Name = "void" };
     }
 }

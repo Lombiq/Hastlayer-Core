@@ -1,6 +1,7 @@
 ﻿using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Extensions;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -20,6 +21,23 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (DataType == null) return Content;
+
+            // Handling signed and unsigned types specially.
+            if (DataType.Name == KnownDataTypes.UInt32.Name || DataType.Name == KnownDataTypes.Int64.Name)
+            {
+                var conversionFunctionName = DataType.Name == KnownDataTypes.UInt32.Name ? "to_unsigned" : "to_signed";
+                var size = ((SizedDataType)DataType).Size;
+
+                return new Invokation
+                {
+                    Target = conversionFunctionName.ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement>
+                    {
+                        { new Raw(Content) },
+                        { new Value { DataType = KnownDataTypes.UnrangedInt, Content = size.ToString() } }
+                    }
+                }.ToVhdl(vhdlGenerationOptions);
+            }
 
             if (DataType.TypeCategory == DataTypeCategory.Numeric || 
                 DataType.TypeCategory == DataTypeCategory.Unit) return Content;

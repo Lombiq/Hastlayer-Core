@@ -119,8 +119,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // The lower barrier for VHDL integers is one shorter...
                     return KnownDataTypes.Int32;
                 case KnownTypeCode.Int64:
-                    // Silently casting until we have a proper solution: https://lombiq.atlassian.net/browse/HAST-20
-                    return KnownDataTypes.Int32;
+                    return KnownDataTypes.Int64;
                 case KnownTypeCode.IntPtr:
                     break;
                 case KnownTypeCode.MulticastDelegate:
@@ -144,12 +143,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Type:
                     break;
                 case KnownTypeCode.UInt16:
-                    return KnownDataTypes.Natural;
+                    return KnownDataTypes.UInt16;
                 case KnownTypeCode.UInt32:
-                    return KnownDataTypes.Natural;
+                    return KnownDataTypes.UInt32;
                 case KnownTypeCode.UInt64:
-                    // Silently casting until we have a proper solution: https://lombiq.atlassian.net/browse/HAST-20
-                    return KnownDataTypes.Natural;
+                    return KnownDataTypes.UInt64;
                 case KnownTypeCode.UIntPtr:
                     break;
                 case KnownTypeCode.ValueType:
