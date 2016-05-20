@@ -24,6 +24,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConverter _typeConverter;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
         private readonly IInvocationExpressionTransformer _invocationExpressionTransformer;
+        private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
         private readonly IDeviceDriver _deviceDriver;
 
         public ILogger Logger { get; set; }
@@ -33,11 +34,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             ITypeConverter typeConverter,
             ITypeConversionTransformer typeConversionTransformer,
             IInvocationExpressionTransformer invocationExpressionTransformer,
+            IArrayCreateExpressionTransformer arrayCreateExpressionTransformer,
             IDeviceDriver deviceDriver)
         {
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
             _invocationExpressionTransformer = invocationExpressionTransformer;
+            _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
             _deviceDriver = deviceDriver;
 
             Logger = NullLogger.Instance;
@@ -257,72 +260,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is ArrayCreateExpression)
             {
-                var arrayCreateExpression = expression as ArrayCreateExpression;
-
-                if (arrayCreateExpression.Arguments.Count != 1)
-                {
-                    // For the sake of maximal compatibility with synthesis tools we don't allow multi-dimensional
-                    // arrays, see: http://vhdl.renerta.com/mobile/source/vhd00006.htm "Synthesis tools do generally not 
-                    // support multidimensional arrays. The only exceptions to this are two-dimensional "vectors of 
-                    // vectors". Some synthesis tools allow two-dimensional arrays."
-                    throw new NotSupportedException("Only single-dimensional arrays are supported.");
-                }
-
-                var sizeArgument = arrayCreateExpression.Arguments.Single();
-
-                if (!(sizeArgument is PrimitiveExpression))
-                {
-                    throw new NotSupportedException("Only arrays with statically defined dimension sizes are supported. Consider adding the dimension sizes directly into the array initialization or use a const field.");
-                }
-
-                var size = int.Parse(sizeArgument.ToString());
-
-                if (size < 1)
-                {
-                    throw new InvalidOperationException("An array should have a size greater than 1.");
-                }
-
-
-                // Arrays are tricky: the variable declaration can happen earlier but without an array creation (i.e.
-                // at that point the size of the array won't be known) so we have to go back to the variable declaration
-                // and set its data type to the unconstrained array instantiation.
-
-                if (!(expression.Parent is AssignmentExpression) || !(((AssignmentExpression)expression.Parent).Left is IdentifierExpression))
-                {
-                    throw new NotSupportedException("Only array-using constructs where the newly created array is assigned to a variable is supported.");
-                }
-
-                // Finding the variable where the array is used and changing its type to the array instantiation.
-                var parentIdentifier = (IdentifierExpression)((AssignmentExpression)expression.Parent).Left;
-                var parentDataObjectName = stateMachine.CreatePrefixedObjectName(parentIdentifier.Identifier);
-                var parentDataObject = stateMachine
-                    .GetAllDataObjects()
-                    .Where(dataObject => dataObject.Name == parentDataObjectName)
-                    .Single();
-
-                var elementType = _typeConverter.ConvertAstType(arrayCreateExpression.Type);
-                var arrayInstantiationType = new UnconstrainedArrayInstantiation
-                {
-                    Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name),
-                    RangeFrom = 0,
-                    RangeTo = size - 1
-                };
-                parentDataObject.DataType = arrayInstantiationType;
-
-                // Initializing the array with the .NET default values so there are no surprises when reading values
-                // without setting them previously.
-                var arrayInitializationValue = new Value { DataType = arrayInstantiationType };
-                var arrayInitializationItems = Enumerable.Repeat(elementType.DefaultValue.ToVhdl(), size);
-                if (elementType.IsLiteralArrayType())
-                {
-                    arrayInitializationValue.Content = string.Concat(arrayInitializationItems);
-                }
-                else
-                {
-                    arrayInitializationValue.Content = string.Join(", ", arrayInitializationItems);
-                }
-
-                return arrayInitializationValue;
+                return _arrayCreateExpressionTransformer
+                    .Transform((ArrayCreateExpression)expression, context.Scope.StateMachine);
             }
             else if (expression is IndexerExpression)
             {

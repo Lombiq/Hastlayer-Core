@@ -56,7 +56,7 @@ namespace Hast.Transformer.Vhdl
 
         public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
-            _compilerGeneratedClassesConverter.InlineCompilerGeneratedClasses(transformationContext.SyntaxTree);
+            //_compilerGeneratedClassesConverter.InlineCompilerGeneratedClasses(transformationContext.SyntaxTree);
 
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext);
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;

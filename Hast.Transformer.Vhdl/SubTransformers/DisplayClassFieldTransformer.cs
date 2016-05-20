@@ -8,17 +8,23 @@ using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder.Extensions;
+using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class DisplayClassFieldTransformer : IDisplayClassFieldTransformer
     {
         private readonly ITypeConverter _typeConverter;
+        private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
 
 
-        public DisplayClassFieldTransformer(ITypeConverter typeConverter)
+        public DisplayClassFieldTransformer(
+            ITypeConverter typeConverter, 
+            IArrayCreateExpressionTransformer arrayCreateExpressionTransformer)
         {
             _typeConverter = typeConverter;
+            _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
         }
 
 
@@ -58,5 +64,35 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 };
             });
         }
+
+
+        //private class ArrayCreationCheckingVisitor : DepthFirstAstVisitor
+        //{
+        //    private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
+        //    private readonly Dictionary<string, IVhdlElement> _arrayDeclarations;
+
+
+        //    public ArrayCreationCheckingVisitor(ITypeConverter typeConverter, Dictionary<string, IVhdlElement> arrayDeclarations)
+        //    {
+        //        _typeConverter = typeConverter;
+        //        _arrayDeclarations = arrayDeclarations;
+        //    }
+
+
+        //    public override void VisitArrayCreateExpression(ArrayCreateExpression arrayCreateExpression)
+        //    {
+        //        base.VisitArrayCreateExpression(arrayCreateExpression);
+
+        //        var elementType = _typeConverter.ConvertAstType(arrayCreateExpression.Type);
+
+        //        if (_arrayDeclarations.ContainsKey(elementType.Name)) return;
+
+        //        _arrayDeclarations[elementType.Name] = new ArrayType
+        //        {
+        //            ElementType = elementType,
+        //            Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name)
+        //        };
+        //    }
+        //}
     }
 }

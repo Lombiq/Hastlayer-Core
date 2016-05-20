@@ -99,6 +99,8 @@
     <Compile Include="SubTransformers\CompilerGeneratedClassesConverter.cs" />
     <Compile Include="SubTransformers\DisplayClassFieldTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\ArrayCreateExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\IArrayCreateExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\IArrayTypesCreator.cs" />
