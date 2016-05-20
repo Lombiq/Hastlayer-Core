@@ -77,7 +77,8 @@ namespace Hast.Samples.Consumer
 
                         var isPrime = primeCalculator.IsPrimeNumber(15);
                         var isPrime2 = primeCalculator.IsPrimeNumber(13);
-                        var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }); // Only 2341 is prime
+                        // Only 2341 is prime.
+                        var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
                         var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
 
                         // You can also launch hardware-executed method calls in parallel. If there are multiple boards
@@ -91,13 +92,14 @@ namespace Hast.Samples.Consumer
                         }
                         var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
-                        // With 210 numbers this takes about 2,1s all together (with UART) on an FPGA and 166s on a 3,2GHz i7.
-                        // With 4000 numbers it takes 38s on an FPGA and 3550s (about an hour) on the same PC. 10000 numbers
-                        // take 84s on an FPGA.
+                        // With 210 numbers this takes about 2,1s all together (with UART) on an FPGA and 166s on a 
+                        // 3,2GHz i7.
+                        // With 4000 numbers it takes 38s on an FPGA and 3550s (about an hour) on the same PC. 10000 
+                        // numbers take 84s on an FPGA.
                         // These take the following amount of time via Ethernet respectively: 330ms (200 numbers), 1,5s 
                         // (4000 numbers), 6,8s (10000 numbers).
-                        // About 90000000 numbers are the maximum before an OutOfMemoryException down the line. But that would
-                        // take 93 hours to send via 9600 baud serial (and then above this to receive the results).
+                        // About 90000000 numbers are the maximum before an OutOfMemoryException down the line. But that 
+                        // would take 93 hours to send via 9600 baud serial (and then above this to receive the results).
                         var numberCount = 210;
                         var numbers = new uint[numberCount];
                         for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
@@ -121,7 +123,8 @@ namespace Hast.Samples.Consumer
                         #region ImageAlgorithms
                         using (var bitmap = new Bitmap("fpga.jpg"))
                         {
-                            var imageContrastModifier = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
+                            var imageContrastModifier = await hastlayer
+                                .GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
                             var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
 
                             var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
@@ -153,7 +156,8 @@ namespace Hast.Samples.Consumer
 
 
                         #region MonteCarlo
-                        var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm());
+                        var monteCarloAlgorithm = await hastlayer
+                            .GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm());
                         var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
                         #endregion
                     }
@@ -164,8 +168,8 @@ namespace Hast.Samples.Consumer
                     {
                         var configuration = new HardwareGenerationConfiguration
                         {
-                            // Another way would be to add such prefixes (potentially for whole namespaces like here), instead we add a single
-                            // method below.
+                            // Another way would be to add such prefixes (potentially for whole namespaces like here), 
+                            // instead we add a single method below.
                             //PublicHardwareMemberPrefixes = new[] { "Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy" }
                         };
                         configuration.AddPublicHardwareMethod<IInterface1>(complex => complex.Interface1Method1());
@@ -178,7 +182,6 @@ namespace Hast.Samples.Consumer
                                 typeof(StaticReference).Assembly
                             }, configuration);
 
-                        //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
                         // With this interface-typed variable we simulate that the object comes from dependency injection.
                         IInterface1 complexType = new ComplexTypeHierarchy();
