@@ -98,10 +98,8 @@ namespace Hast.Layer
 
                 return hardwareRepresentation;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!ex.IsFatal())
             {
-                if (ex.IsFatal()) throw;
-
                 var message = "An error happened during generating the Hastlayer hardware representation for the following assemblies: " + string.Join(", ", assemblies.Select(assembly => assembly.FullName));
                 await GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
@@ -121,10 +119,8 @@ namespace Hast.Layer
                     (await GetHost())
                     .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject)));
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!ex.IsFatal())
             {
-                if (ex.IsFatal()) throw;
-
                 var message = "An error happened during generating the Hastlayer proxy for an object of the following type: " + hardwareObject.GetType().FullName;
                 await GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
