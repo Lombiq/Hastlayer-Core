@@ -113,7 +113,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Int16:
                     return KnownDataTypes.Int16;
                 case KnownTypeCode.Int32:
-                    // The lower barrier for VHDL integers is one shorter...
                     return KnownDataTypes.Int32;
                 case KnownTypeCode.Int64:
                     return KnownDataTypes.Int64;
