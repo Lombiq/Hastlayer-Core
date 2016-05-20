@@ -48,7 +48,7 @@ namespace Hast.Layer
         public static IHastlayer Create(IHastlayerConfiguration configuration)
         {
             Argument.ThrowIfNull(configuration, nameof(configuration));
-            Argument.ThrowIfNull(configuration.Extensions, "configuration.Extensions");
+            Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
             return new Hastlayer(configuration);
         }

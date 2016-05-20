@@ -76,7 +76,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
         protected Process BuildProcess(IVhdlElement notInReset, IVhdlElement inReset = null)
         {
-            Argument.ThrowIfNull(notInReset, "notInReset");
+            Argument.ThrowIfNull(notInReset, nameof(notInReset));
 
 
             var process = new Process { Name = Name.ToExtendedVhdlId() };
