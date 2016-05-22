@@ -60,7 +60,7 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-        public virtual async Task ParallelizedArePrimeNumbersAsync(SimpleMemory memory)
+        public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
         {
             // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
@@ -87,7 +87,9 @@ namespace Hast.Samples.SampleAssembly
                         m);
                 }
 
-                await Task.WhenAll(tasks);
+                // Hastlayer doesn't support async code at the moment since ILSpy doesn't handle the new Roslyn-compiled
+                // code. See: https://github.com/icsharpcode/ILSpy/issues/502
+                Task.WhenAll(tasks).Wait();
 
                 for (int m = 0; m < memoryReadIndexUpperBound; m++)
                 {
@@ -139,9 +141,9 @@ namespace Hast.Samples.SampleAssembly
             return RunArePrimeNumbersMethod(numbers, memory => Task.Run(() => primeCalculator.ArePrimeNumbers(memory))).Result;
         }
 
-        public static Task<bool[]> ParallelizedArePrimeNumbersAsync(this PrimeCalculator primeCalculator, uint[] numbers)
+        public static Task<bool[]> ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ParallelizedArePrimeNumbersAsync(memory));
+            return RunArePrimeNumbersMethod(numbers, memory => Task.Run(() => primeCalculator.ParallelizedArePrimeNumbers(memory)));
         }
 
 
