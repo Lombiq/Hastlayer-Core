@@ -53,7 +53,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class SignalAssignmentWhen : IVhdlElement
     {
-        public Value Value { get; set; }
+        public IVhdlElement Value { get; set; }
         public IVhdlElement Expression { get; set; }
 
 

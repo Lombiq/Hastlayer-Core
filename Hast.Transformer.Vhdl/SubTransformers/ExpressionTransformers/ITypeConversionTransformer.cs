@@ -12,6 +12,13 @@ using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
+    public interface ITypeConversionResult
+    {
+        IVhdlElement Expression { get; }
+        bool IsLossy { get; }
+    }
+
+
     public interface ITypeConversionTransformer : IDependency
     {
         /// <summary>
@@ -21,8 +28,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
-            ISubTransformerContext context);
+            bool isLeft);
 
-        IVhdlElement ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement variableReference);
+        ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression);
     }
 }

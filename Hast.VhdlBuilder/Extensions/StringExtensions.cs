@@ -41,6 +41,11 @@ namespace Hast.VhdlBuilder.Extensions
             return new IdentifierValue(id);
         }
 
+        public static Value ToVhdlValue(this string valueString, DataType dataType)
+        {
+            return new Value { Content = valueString, DataType = dataType };
+        }
+
         /// <summary>
         /// Converts a variable name to a VHDL variable reference.
         /// </summary>

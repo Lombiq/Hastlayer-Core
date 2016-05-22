@@ -32,7 +32,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 
             component.InternallyDrivenSignals.Add(new Signal
                 {
-                    DataType = SimpleMemoryTypes.CellIndexSignalDataType,
+                    DataType = SimpleMemoryTypes.CellIndexInternalSignalDataType,
                     Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex)
                 });
             component.InternallyDrivenSignals.Add(new Signal

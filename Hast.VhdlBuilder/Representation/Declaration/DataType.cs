@@ -60,16 +60,25 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside 
         /// double quotes.
         /// </summary>
-        public bool IsLiteralArrayType()
+        public virtual bool IsLiteralArrayType()
         {
             return this == KnownDataTypes.String || Name == "bit_vector" || Name == "std_logic_vector";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+
+            var otherType = (DataType)obj;
+            return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
 
 
         public static bool operator ==(DataType a, DataType b)
         {
-            // If both are null, or both are the same instance, return true.
-            if (System.Object.ReferenceEquals(a, b))
+            // If both are null, or both are the same instance, return true (ReferenceEquals() returns true if both
+            // object are null).
+            if (ReferenceEquals(a, b))
             {
                 return true;
             }
@@ -80,8 +89,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 return false;
             }
 
-            // Else return true if names match:
-            return a.Name == b.Name;
+            // Else return true if the data types match:
+            return a.Equals(b);
         }
 
         public static bool operator !=(DataType a, DataType b)

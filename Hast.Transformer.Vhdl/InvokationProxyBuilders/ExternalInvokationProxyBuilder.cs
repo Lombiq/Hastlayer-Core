@@ -51,7 +51,10 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 var memberName = interfaceMemberResult.Member.GetFullName();
                 var memberId = memberIdTable.LookupMemberId(memberName);
                 proxyComponent.OtherMemberMaxInvokationInstanceCounts[memberName] = 1;
-                var when = new CaseWhen { Expression = new Value { DataType = KnownDataTypes.Int32, Content = memberId.ToString() } };
+                var when = new CaseWhen
+                {
+                    Expression = memberId.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                };
 
 
                 var waitForInvokationFinishedIfElse = InvokationHelper.CreateWaitForInvokationFinished(proxyComponent, memberName, 1);
@@ -86,7 +89,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 memberSelectingCase.Whens.Add(when);
             }
 
-            memberSelectingCase.Whens.Add(new CaseWhen { Expression = new Value { DataType = KnownDataTypes.Identifier, Content = "others" } });
+            memberSelectingCase.Whens.Add(new CaseWhen { Expression = "others".ToVhdlValue(KnownDataTypes.Identifier) });
 
             var startedPortReference = CommonPortNames.Started.ToVhdlSignalReference();
             proxyComponent.ProcessNotInReset = new IfElse

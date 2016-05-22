@@ -17,6 +17,7 @@ namespace Hast.VhdlBuilder.Representation
     {
         public static string ToVhdl(this IVhdlElement vhdlElement)
         {
+            if (vhdlElement == null) return null;
             return vhdlElement.ToVhdl(new VhdlGenerationOptions());
         }
     }

@@ -2,6 +2,7 @@
 using Hast.VhdlBuilder.Extensions;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -23,7 +24,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             if (DataType == null) return Content;
 
             // Handling signed and unsigned types specially.
-            if (DataType.Name == KnownDataTypes.UInt32.Name || DataType.Name == KnownDataTypes.Int64.Name)
+            if (KnownDataTypes.Integers.Contains(DataType))
             {
                 var conversionFunctionName = DataType.Name == KnownDataTypes.UInt32.Name ? "to_unsigned" : "to_signed";
                 var size = ((SizedDataType)DataType).Size;
@@ -34,7 +35,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
                     Parameters = new List<IVhdlElement>
                     {
                         { new Raw(Content) },
-                        { new Value { DataType = KnownDataTypes.UnrangedInt, Content = size.ToString() } }
+                        { size.ToVhdlValue(KnownDataTypes.UnrangedInt) }
                     }
                 }.ToVhdl(vhdlGenerationOptions);
             }

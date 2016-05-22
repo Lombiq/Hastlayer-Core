@@ -75,11 +75,24 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 
             foreach (var component in components)
             {
+                IVhdlElement value = component.CreateSimpleMemorySignalName(portName).ToVhdlIdValue();
+
+                // Since CellIndex is an integer but all ints are handled as unsigned types internally we need to do
+                // a type conversion.
+                if (portName == SimpleMemoryPortNames.CellIndex)
+                {
+                    value = new Invokation
+                    {
+                        Target = "to_integer".ToVhdlIdValue(),
+                        Parameters = new List<IVhdlElement> { { value } }
+                    };
+                }
+
                 assignment.Whens.Add(new SignalAssignmentWhen
                     {
                         Expression = expressionBuilderForComponentsAssignment(component),
-                        Value = component.CreateSimpleMemorySignalName(portName).ToVhdlIdValue()
-                    });
+                        Value = value
+                });
             }
 
 

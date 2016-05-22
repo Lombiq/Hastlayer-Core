@@ -48,5 +48,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl(vhdlGenerationOptions)) +
                 " downto 0)";
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SizedDataType)) return false;
+
+            var otherType = (SizedDataType)obj;
+            return base.Equals(obj) && 
+                (SizeExpression == null ? Size == otherType.Size : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
+        }
     }
 }

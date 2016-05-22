@@ -34,5 +34,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return Name + " range " + RangeMin + " to " + RangeMax;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RangedDataType)) return false;
+
+            var otherType = (RangedDataType)obj;
+            return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
+        }
     }
 }

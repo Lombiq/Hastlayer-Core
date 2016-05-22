@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Representation\Declaration\Alias.cs" />
     <Compile Include="Representation\Declaration\ArrayType.cs" />
     <Compile Include="Representation\Declaration\BlockComment.cs" />

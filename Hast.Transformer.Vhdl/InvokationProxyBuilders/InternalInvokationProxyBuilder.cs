@@ -204,11 +204,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     new Assignment
                                     {
                                         AssignTo = runningIndexVariableReference,
-                                        Expression = new Value
-                                        {
-                                            DataType = KnownDataTypes.UnrangedInt,
-                                            Content = c.ToString()
-                                        }
+                                        Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt)
                                     },
                                     new Assignment
                                     {
@@ -345,7 +341,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
                                 runningIndexCase.Whens.Add(new CaseWhen
                                     {
-                                        Expression = new Value { DataType = KnownDataTypes.UnrangedInt, Content = c.ToString() },
+                                        Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt),
                                         Body = new List<IVhdlElement> { { isFinishedIf } }
                                     });
                             }
@@ -372,7 +368,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                             {
                                 runningIndexCase.Whens.Add(new CaseWhen
                                     {
-                                        Expression = new Value { DataType = KnownDataTypes.UnrangedInt, Content = c.ToString() },
+                                        Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt),
                                         Body = new List<IVhdlElement>
                                         {
                                             {
