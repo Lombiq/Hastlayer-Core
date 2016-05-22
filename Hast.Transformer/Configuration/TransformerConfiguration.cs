@@ -33,7 +33,9 @@ namespace Hast.Common.Configuration
             this TransformerConfiguration configuration, 
             string simpleMemberName)
         {
-            var maxRecursionDepthConfig = configuration.MemberInvokationInstanceCountConfigurations
+            var maxRecursionDepthConfig = configuration
+                .MemberInvokationInstanceCountConfigurations
+                .ToArray() // To prevent "Collection was modified" exception.
                 .FirstOrDefault(config => simpleMemberName.StartsWith(config.MemberNamePrefix));
 
             if (maxRecursionDepthConfig != null) return maxRecursionDepthConfig;
