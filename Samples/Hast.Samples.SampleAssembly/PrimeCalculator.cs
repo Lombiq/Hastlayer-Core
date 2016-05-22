@@ -18,7 +18,7 @@ namespace Hast.Samples.SampleAssembly
         public const int IsPrimeNumber_OutputBooleanIndex = 0;
         public const int ArePrimeNumbers_InputUInt32CountIndex = 0;
         public const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
-        public const int ArePrimeNumbers_OutputUInt32sStartIndex = 1;
+        public const int ArePrimeNumbers_OutputBooleansStartIndex = 1;
 
         public const int MaxDegreeOfParallelism = 50;
 
@@ -56,7 +56,7 @@ namespace Hast.Samples.SampleAssembly
             for (int i = 0; i < numberCount; i++)
             {
                 uint number = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i);
-                memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i, IsPrimeNumberInternal(number));
+                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, IsPrimeNumberInternal(number));
             }
         }
 
@@ -93,7 +93,7 @@ namespace Hast.Samples.SampleAssembly
 
                 for (int m = 0; m < memoryReadIndexUpperBound; m++)
                 {
-                    memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i + m, tasks[m].Result);
+                    memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i + m, tasks[m].Result);
                 }
 
                 i += memoryReadIndexUpperBound;
@@ -176,7 +176,7 @@ namespace Hast.Samples.SampleAssembly
             var output = new bool[numbers.Length];
             for (int i = 0; i < numbers.Length; i++)
             {
-                output[i] = memory.ReadBoolean(PrimeCalculator.ArePrimeNumbers_OutputUInt32sStartIndex + i);
+                output[i] = memory.ReadBoolean(PrimeCalculator.ArePrimeNumbers_OutputBooleansStartIndex + i);
             }
             return output;
         }
