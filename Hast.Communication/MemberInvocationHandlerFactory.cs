@@ -74,9 +74,7 @@ namespace Hast.Communication
                         if (memory != null)
                         {
                             var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
-                            // The task here is needed because the code executed on the FPGA board doesn't return, we have 
-                            // to wait for it.
-                            // The Execute method is executed on separate thread.
+                            // Need the wrapping Task to handle the async code.
                             var task = Task.Run(async () =>
                                 {
                                     invocationContext.ExecutionInformation = await workContext
