@@ -65,7 +65,8 @@ namespace Hast.Samples.SampleAssembly
                 CalculateFactorial_InvokationCounterUInt32Index,
                 memory.ReadUInt32(CalculateFactorial_InvokationCounterUInt32Index) + 1);
 
-            if (number == 0)  return 1;
+            // Using inequality operator to make sure we don't miss anything.
+            if (number <= 0)  return 1;
             return (uint)(number * RecursivelyCalculateFactorial(memory, (short)(number - 1)));
         }
     }
