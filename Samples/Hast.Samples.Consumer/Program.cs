@@ -49,7 +49,7 @@ namespace Hast.Samples.Consumer
                                 MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
                             });
                         configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
-                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms")
+                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
                             {
                                 // If we give these algorithms inputs causing a larger recursion depth then that will
                                 // cause runtime problems.
@@ -122,7 +122,9 @@ namespace Hast.Samples.Consumer
                         #region RecursiveAlgorithms
                         var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms());
 
-                        var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries((short)13); // 233
+                        // Since CalculateFibonacchiSeries would need a large call stack this sample won't work yet as
+                        // it won't fit on a small FPGA.
+                        //var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries((short)13); // 233
                         var factorial = recursiveAlgorithms.CalculateFactorial((short)6); // 720 
                         #endregion
 
