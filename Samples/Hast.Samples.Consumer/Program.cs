@@ -49,7 +49,7 @@ namespace Hast.Samples.Consumer
                                 MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
                             });
                         configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
-                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.CalculateFibonacchiSeries")
+                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms")
                             {
                                 // If we give these algorithms inputs causing a larger recursion depth then that will
                                 // cause runtime problems.
@@ -65,7 +65,7 @@ namespace Hast.Samples.Consumer
                             configuration);
 
 
-                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest2\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
                         //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
 
