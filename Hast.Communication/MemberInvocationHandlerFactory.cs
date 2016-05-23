@@ -33,10 +33,17 @@ namespace Hast.Communication
                 {
                     using (var workContext = _wca.CreateWorkContextScope())
                     {
+                        var methodAsynchronicity = GetMethodAsynchronicity(invocation);
+
+                        if (methodAsynchronicity == MethodAsynchronicity.AsyncFunction)
+                        {
+                            throw new NotSupportedException("Only async methods that return a Task, not Task<T>, are supported.");
+                        }
+
                         // Although it says Method it can also be a property.
                         var memberFullName = invocation.Method.GetFullName();
 
-                        var invokationContext = new MemberInvocationContext
+                        var invocationContext = new MemberInvocationContext
                         {
                             Invocation = invocation,
                             MemberFullName = memberFullName,
@@ -44,24 +51,24 @@ namespace Hast.Communication
                         };
 
                         var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
-                        eventHandler.MemberInvoking(invokationContext);
+                        eventHandler.MemberInvoking(invocationContext);
 
                         workContext.Resolve<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
                             {
-                                invokationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invokationContext);
+                                invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
                             });
 
-                        if (!invokationContext.HardwareExecutionIsCancelled)
+                        if (!invocationContext.HardwareExecutionIsCancelled)
                         {
                             var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
                             var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
                             if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                             {
-                                invokationContext.HardwareExecutionIsCancelled = true;
+                                invocationContext.HardwareExecutionIsCancelled = true;
                             } 
                         }
 
-                        if (invokationContext.HardwareExecutionIsCancelled) return false;
+                        if (invocationContext.HardwareExecutionIsCancelled) return false;
                   
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
@@ -72,7 +79,7 @@ namespace Hast.Communication
                             // The Execute method is executed on separate thread.
                             var task = Task.Run(async () =>
                                 {
-                                    invokationContext.ExecutionInformation = await workContext
+                                    invocationContext.ExecutionInformation = await workContext
                                         .Resolve<ICommunicationService>()
                                         .Execute(memory, memberId);
                                 });
@@ -80,16 +87,42 @@ namespace Hast.Communication
                         }
                         else
                         {
-                            throw new InvalidOperationException("Only SimpleMemory-using implementations are supported for hardware execution.");
+                            throw new NotSupportedException("Only SimpleMemory-using implementations are supported for hardware execution.");
                         }
 
-                        eventHandler.MemberExecutedOnHardware(invokationContext);
+                        eventHandler.MemberExecutedOnHardware(invocationContext);
+
+                        if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
+                        {
+                            invocation.ReturnValue = Task.FromResult(true);
+                        }
 
                         return true;
                     }
                 };
         }
 
+
+        // Code taken from http://stackoverflow.com/a/28374134/220230
+        private static MethodAsynchronicity GetMethodAsynchronicity(IInvocation invocation)
+        {
+            var returnType = invocation.Method.ReturnType;
+
+            if (returnType == typeof(Task)) return MethodAsynchronicity.AsyncAction;
+
+            if (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Task<>))
+                return MethodAsynchronicity.AsyncFunction;
+
+            return MethodAsynchronicity.Synchronous;
+        }
+
+
+        private enum MethodAsynchronicity
+        {
+            Synchronous,
+            AsyncAction,
+            AsyncFunction
+        }
 
         private class MemberInvocationContext : IMemberInvocationPipelineStepContext, IMemberHardwareExecutionContext
         {
