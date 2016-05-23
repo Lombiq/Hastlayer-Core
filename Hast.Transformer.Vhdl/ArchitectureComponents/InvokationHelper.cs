@@ -37,7 +37,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public static IfElse<IBlockElement> CreateWaitForInvokationFinished(
             IArchitectureComponent component,
             string targetStateMachineName,
-            int degreeOfParallelism)
+            int degreeOfParallelism,
+            bool waitForAll = true)
         {
             // Iteratively building a binary expression chain to OR together all Finished signals.
             IVhdlElement allInvokedStateMachinesFinishedExpression;
@@ -46,10 +47,13 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
             if (degreeOfParallelism > 1)
             {
+                var binaryCondition = BinaryOperator.ConditionalAnd;
+                if (!waitForAll) binaryCondition = BinaryOperator.ConditionalOr;
+
                 var currentBinary = new Binary
                 {
                     Left = CreateFinishedSignalReference(component, targetStateMachineName, 1),
-                    Operator = BinaryOperator.ConditionalOr
+                    Operator = binaryCondition
                 };
                 var firstBinary = currentBinary;
 
@@ -58,7 +62,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                     var newBinary = new Binary
                     {
                         Left = CreateFinishedSignalReference(component, targetStateMachineName, i),
-                        Operator = BinaryOperator.ConditionalOr
+                        Operator = binaryCondition
                     };
 
                     currentBinary.Right = newBinary;

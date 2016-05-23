@@ -57,7 +57,8 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 };
 
 
-                var waitForInvokationFinishedIfElse = InvokationHelper.CreateWaitForInvokationFinished(proxyComponent, memberName, 1);
+                var waitForInvokationFinishedIfElse = InvokationHelper
+                    .CreateWaitForInvokationFinished(proxyComponent, memberName, 1);
 
                 waitForInvokationFinishedIfElse.True.Add(new Assignment
                     {
