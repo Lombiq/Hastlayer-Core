@@ -35,9 +35,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var fieldFullName = field.GetFullName();
                 var fieldComponent = new BasicComponent(fieldFullName);
 
-                // Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
-                // like: public PrimeCalculator <>4__this;
-                if (!field.Variables.Any(variable => variable.Name.EndsWith("__this")))
+
+                var shouldTransform =
+                    // Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
+                    // like: public PrimeCalculator <>4__this;
+                    !field.Variables.Any(variable => variable.Name.EndsWith("__this")) &&
+                    // Roslyn adds a field lik public Func<object, bool> <>9__0; with the same argument and return types 
+                    // as the original lambda. Nothing needs to be done with this.
+                    !(field.ReturnType is SimpleType && ((SimpleType)field.ReturnType).Identifier == "Func");
+                if (shouldTransform)
                 {
                     var type = _typeConverter.ConvertAstType(field.ReturnType);
 
