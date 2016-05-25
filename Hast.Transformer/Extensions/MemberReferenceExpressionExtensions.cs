@@ -31,7 +31,13 @@ namespace ICSharpCode.NRefactory.CSharp
                         parent = parent.Parent;
                     }
 
-                    return type.Members
+                    var declaringType = typeDeclarationLookupTable.Lookup(memberReference.DeclaringType.FullName);
+
+                    if (declaringType == null) return null;
+
+                    return
+                        declaringType
+                        .Members
                         .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);  
                 }
                 else
