@@ -122,9 +122,7 @@ namespace Hast.Samples.Consumer
                         #region RecursiveAlgorithms
                         var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms());
 
-                        // Since CalculateFibonacchiSeries would need a large call stack this sample won't work yet as
-                        // it won't fit on a small FPGA.
-                        //var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries((short)13); // 233
+                        var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries((short)13); // 233
                         var factorial = recursiveAlgorithms.CalculateFactorial((short)6); // 720 
                         #endregion
 
