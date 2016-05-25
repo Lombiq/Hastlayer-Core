@@ -65,22 +65,19 @@ namespace Hast.Samples.SampleAssembly
             // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
-            var numbers3 = new uint[MaxDegreeOfParallelism];
+            // At the moment Hastlayer only supports a fixed degree of parallelism so we need to pad the input array
+            // if necessary, see PrimeCalculatorExtensions.
             var numbers = new uint[MaxDegreeOfParallelism];
             var tasks = new Task<bool>[MaxDegreeOfParallelism];
             int i = 0;
             while (i < numberCount)
             {
-                // Ternary operator is not supported yet, that's why the if statement.
-                var memoryReadIndexUpperBound = MaxDegreeOfParallelism;
-                if (numberCount - i < MaxDegreeOfParallelism) memoryReadIndexUpperBound = (int)(numberCount - i);
-
-                for (int m = 0; m < memoryReadIndexUpperBound; m++)
+                for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
                     numbers[m] = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
                 }
 
-                for (int m = 0; m < memoryReadIndexUpperBound; m++)
+                for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
                     tasks[m] = Task.Factory.StartNew<bool>(
                         indexObject => IsPrimeNumberInternal(numbers[(int)indexObject]),
@@ -91,12 +88,12 @@ namespace Hast.Samples.SampleAssembly
                 // code. See: https://github.com/icsharpcode/ILSpy/issues/502
                 Task.WhenAll(tasks).Wait();
 
-                for (int m = 0; m < memoryReadIndexUpperBound; m++)
+                for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
                     memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i + m, tasks[m].Result);
                 }
 
-                i += memoryReadIndexUpperBound;
+                i += MaxDegreeOfParallelism;
             }
         }
 
@@ -141,11 +138,31 @@ namespace Hast.Samples.SampleAssembly
             return RunArePrimeNumbersMethod(numbers, memory => Task.Run(() => primeCalculator.ArePrimeNumbers(memory))).Result;
         }
 
-        public static Task<bool[]> ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
+        public static async Task<bool[]> ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => Task.Run(() => primeCalculator.ParallelizedArePrimeNumbers(memory)));
-        }
+            // Padding the input array as necessary to have a multiple of MaxDegreeOfParallelism. This is needed because
+            // at the moment Hastlayer only supports a fixed degree of parallelism. This is the simplest way to overcome 
+            // this.
+            var originalNumberCount = numbers.Length;
+            var remainderToMaxDegreeOfParallelism = numbers.Length % PrimeCalculator.MaxDegreeOfParallelism;
+            if (remainderToMaxDegreeOfParallelism != 0)
+            {
+                numbers = numbers
+                    .Concat(new uint[PrimeCalculator.MaxDegreeOfParallelism - remainderToMaxDegreeOfParallelism])
+                    .ToArray();
+            }
 
+            var results = await RunArePrimeNumbersMethod(
+                numbers,
+                memory => Task.Run(() => primeCalculator.ParallelizedArePrimeNumbers(memory)));
+
+            if (remainderToMaxDegreeOfParallelism != 0)
+            {
+                return results.Take(originalNumberCount).ToArray();
+            }
+
+            return results;
+        }
 
         private static async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner)
         {
