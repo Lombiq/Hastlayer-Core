@@ -47,8 +47,8 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        // The return value should be a type with a bigger range than the input. But we can't use larger than 32b numbers
-        // yet so the input needs to be a short.
+        // The return value should be a type with a bigger range than the input. Although we can use 64b numbers
+        // internally we can't write the to memory yet so the input needs to be a short.
         private uint RecursivelyCalculateFibonacchiSeries(SimpleMemory memory, short number)
         {
             memory.WriteUInt32(
