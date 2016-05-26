@@ -48,7 +48,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_;
                 if (!variableStatement.Type.GetFullName().IsDisplayClassName())
                 {
-
                     var type = _typeConverter.ConvertAstType(variableStatement.Type);
 
                     foreach (var variableInitializer in variableStatement.Variables)
@@ -74,7 +73,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var returnStatement = statement as ReturnStatement;
 
-                if (_typeConverter.ConvertAstType((context.Scope.Method).ReturnType) != KnownDataTypes.Void)
+                var returnType = context.Scope.Method.ReturnType;
+                if (!returnType.IsTask() && _typeConverter.ConvertAstType(returnType) != KnownDataTypes.Void)
                 {
                     var assigmentElement = new Assignment
                     {

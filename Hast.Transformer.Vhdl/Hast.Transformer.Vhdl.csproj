@@ -63,6 +63,7 @@
     <Compile Include="ArchitectureComponents\ConfigurableComponent.cs" />
     <Compile Include="ArchitectureComponents\InvokationHelper.cs" />
     <Compile Include="ArchitectureComponents\IArchitectureComponent.cs" />
+    <Compile Include="Extensions\AstTypeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryArchitectureComponentExtensions.cs" />
     <Compile Include="Constants\CommonPortNames.cs" />

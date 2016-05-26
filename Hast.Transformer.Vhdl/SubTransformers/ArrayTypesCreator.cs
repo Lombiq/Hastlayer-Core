@@ -51,7 +51,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 base.VisitArrayCreateExpression(arrayCreateExpression);
 
-                var elementType = _typeConverter.ConvertAstType(arrayCreateExpression.Type);
+                var elementAstType = arrayCreateExpression.Type;
+                if (elementAstType.IsTask())
+                {
+                    elementAstType = elementAstType.GetStoredTypeOfTaskResultArray();
+                }
+                var elementType = _typeConverter.ConvertAstType(elementAstType);
 
                 if (_arrayDeclarations.ContainsKey(elementType.Name)) return;
 

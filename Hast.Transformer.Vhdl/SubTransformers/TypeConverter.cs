@@ -175,8 +175,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertSimple(SimpleType type)
         {
-            if (type.Identifier == "Task") return KnownDataTypes.Void;
-
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
     }
