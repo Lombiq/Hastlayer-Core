@@ -5,6 +5,7 @@ using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using Mono.Cecil;
 using Orchard;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -175,6 +176,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertSimple(SimpleType type)
         {
+            if (type.Identifier == "Task")
+            {
+                // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
+                if (type.TypeArguments.Count == 1)
+                {
+                    return ConvertAstType(type.TypeArguments.Single());
+                }
+
+                return SpecialTypes.Task;
+            }
+
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
     }

@@ -73,8 +73,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var returnStatement = statement as ReturnStatement;
 
-                var returnType = context.Scope.Method.ReturnType;
-                if (!returnType.IsTask() && _typeConverter.ConvertAstType(returnType) != KnownDataTypes.Void)
+                var returnType = _typeConverter.ConvertAstType(context.Scope.Method.ReturnType);
+                if (returnType != KnownDataTypes.Void && returnType != SpecialTypes.Task)
                 {
                     var assigmentElement = new Assignment
                     {

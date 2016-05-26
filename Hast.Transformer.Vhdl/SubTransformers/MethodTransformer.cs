@@ -99,12 +99,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             // Handling the return type.
-            DataType returnType;
+            var returnType = _typeConverter.ConvertAstType(method.ReturnType);
             // If the return type is a Task then that means it's one of the supported simple TPL scenarios, corresponding
             // to void in VHDL.
-            if (method.ReturnType.IsTask()) returnType = KnownDataTypes.Void;
-            else returnType = _typeConverter.ConvertAstType(method.ReturnType);
-
+            if (returnType == SpecialTypes.Task) returnType = KnownDataTypes.Void;
             var isVoid = returnType.Name == "void";
             if (!isVoid)
             {
