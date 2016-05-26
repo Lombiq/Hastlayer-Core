@@ -20,6 +20,23 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
 
+            if (node is ComposedType)
+            {
+                var composedType = node as ComposedType;
+
+                var name = composedType.BaseType.GetFullName();
+
+                if (composedType.ArraySpecifiers.Any())
+                {
+                    foreach (var arraySpecifier in composedType.ArraySpecifiers)
+                    {
+                        name += arraySpecifier.ToString();
+                    }
+                }
+
+                return name;
+            }
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 

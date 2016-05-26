@@ -44,15 +44,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var variableStatement = statement as VariableDeclarationStatement;
 
-                var type = _typeConverter.ConvertAstType(variableStatement.Type);
-
-                foreach (var variableInitializer in variableStatement.Variables)
+                // Filtering out variable declarations for DisplayClasses generated for lambda expressions, e.g.:
+                // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_;
+                if (!variableStatement.Type.GetFullName().IsDisplayClassName())
                 {
-                    stateMachine.LocalVariables.Add(new Variable
+
+                    var type = _typeConverter.ConvertAstType(variableStatement.Type);
+
+                    foreach (var variableInitializer in variableStatement.Variables)
                     {
-                        Name = stateMachine.CreatePrefixedObjectName(variableInitializer.Name),
-                        DataType = type
-                    });
+                        stateMachine.LocalVariables.Add(new Variable
+                        {
+                            Name = stateMachine.CreatePrefixedObjectName(variableInitializer.Name),
+                            DataType = type
+                        });
+                    } 
                 }
             }
             else if (statement is ExpressionStatement)
