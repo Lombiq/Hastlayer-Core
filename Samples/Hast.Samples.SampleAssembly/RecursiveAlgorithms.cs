@@ -55,7 +55,9 @@ namespace Hast.Samples.SampleAssembly
                 CalculateFibonacchiSeries_InvokationCounterUInt32Index, 
                 memory.ReadUInt32(CalculateFibonacchiSeries_InvokationCounterUInt32Index) + 1);
 
-            if (number == 0 || number == 1) return (uint)number;
+            // Here the expression should really be number == 0 || number == 1 but somehow that won't evaluate to true
+            // on hardware despite the number actually reaching 0 and 1.
+            if (number <= 1) return (uint)number;
             return RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 2)) + RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 1));
         }
 
@@ -65,7 +67,8 @@ namespace Hast.Samples.SampleAssembly
                 CalculateFactorial_InvokationCounterUInt32Index,
                 memory.ReadUInt32(CalculateFactorial_InvokationCounterUInt32Index) + 1);
 
-            // Using inequality operator to make sure we don't miss anything.
+            // Here the expression should really be number == 0 but somehow that won't evaluate to true on hardware 
+            // despite the number actually reaching 0.
             if (number <= 0) return 1;
             return (uint)(number * RecursivelyCalculateFactorial(memory, (short)(number - 1)));
         }
