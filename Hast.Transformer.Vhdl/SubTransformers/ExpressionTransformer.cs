@@ -312,7 +312,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Target = Transform(parenthesizedExpression.Expression, context)
                 };
             }
-            else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
+            else
+            {
+                throw new NotSupportedException(
+                    "Expressions of type " + 
+                    expression.GetType() + " are not supported. The expression was: " +
+                    expression.ToString());
+            }
         }
 
 
