@@ -262,7 +262,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
 
-            currentBlock.Add(new LineComment("Starting state machine invokation (transformed from a method call)."));
+            currentBlock.Add(new LineComment("Starting state machine invocation (transformed from a method call)."));
 
 
             for (int i = 0; i < currentInvokationDegreeOfParallelism; i++)
@@ -314,7 +314,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
             var waitForInvokedStateMachinesToFinishState = new InlineBlock(
                 new GeneratedComment(vhdlGenerationOptions =>
-                    "Waiting for the state machine invokation to finish, which was started in state " +
+                    "Waiting for the state machine invocation to finish, which was started in state " +
                     vhdlGenerationOptions.NameShortener(currentStateName) +
                     "."),
                 waitForInvokationFinishedIfElse);
