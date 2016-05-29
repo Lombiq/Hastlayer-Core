@@ -107,5 +107,12 @@ namespace ICSharpCode.NRefactory.CSharp
         {
             return node.FindFirstParentOfType<TypeDeclaration>();
         }
+
+        public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
+        {
+            var castNode = node as T;
+            if (castNode == null) return false;
+            return predicate(castNode);
+        }
     }
 }

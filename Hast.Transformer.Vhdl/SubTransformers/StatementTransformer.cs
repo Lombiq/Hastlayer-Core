@@ -44,11 +44,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var variableStatement = statement as VariableDeclarationStatement;
 
-                // Filtering out variable declarations for DisplayClasses generated for lambda expressions, e.g.:
-                // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_;
-                if (!variableStatement.Type.GetFullName().IsDisplayClassName())
+                var variableType = variableStatement.Type;
+                var variableSimpleType = variableType as SimpleType;
+
+                // Filtering out variable declarations that were added by the compiler for multi-threaded code but
+                // which shouldn't be transformed.
+                var omitStatement =
+                    // DisplayClass objects that generated for lambda expressions are put into variables like:
+                    // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when
+                    // processing the corresponding ObjectCreateExpressions.
+                    variableType.GetFullName().IsDisplayClassName() ||
+                    variableSimpleType != null &&
+                    (
+                        // The TaskFactory object is saved to a variable like TaskFactory arg_97_0;
+                        variableSimpleType.Identifier == nameof(System.Threading.Tasks.TaskFactory) ||
+                        // Delegates used for the body of Tasks are functions like: Func<object, bool> arg_97_1;
+                        variableSimpleType.Identifier == "Func"
+                    );
+                if (!omitStatement)
                 {
-                    var type = _typeConverter.ConvertAstType(variableStatement.Type);
+                    var type = _typeConverter.ConvertAstType(variableType);
 
                     foreach (var variableInitializer in variableStatement.Variables)
                     {

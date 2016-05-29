@@ -70,12 +70,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var assignment = (AssignmentExpression)expression;
 
-                Func<Expression, Expression, Assignment> transformSimpleAssignmentExpression = (left, right) =>
-                    new Assignment
+                Func<Expression, Expression, IVhdlElement> transformSimpleAssignmentExpression = (left, right) =>
+                {
+                    var leftTransformed = Transform(left, context);
+                    if (leftTransformed == Empty.Instance) return Empty.Instance;
+                    var rightTransformed = Transform(right, context);
+                    if (rightTransformed == Empty.Instance) return Empty.Instance;
+
+                    return new Assignment
                     {
-                        AssignTo = (IDataObject)Transform(left, context),
-                        Expression = Transform(right, context)
+                        AssignTo = (IDataObject)leftTransformed,
+                        Expression = rightTransformed
                     };
+                };
 
                 // If the right side of an assignment is also an assignment that means that it's a single-line assignment
                 // to multiple variables, so e.g. int a, b, c = 2; We flatten out such expression to individual simple
@@ -105,6 +112,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
 
                     return assignmentsBlock;
+                }
+                // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will be
+                // like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0 ();
+                else
+                {
+                    var rightObjectCreateExpression = assignment.Right as ObjectCreateExpression;
+                    string rightObjectFullName;
+                    if (rightObjectCreateExpression != null &&
+                        (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayClassName())
+                    {
+                        var leftIdentifierExpression = assignment.Left as IdentifierExpression;
+
+                        if (leftIdentifierExpression != null)
+                        {
+                            context.Scope.VariableToDisplayClassMappings[leftIdentifierExpression.Identifier] =
+                                rightObjectFullName;
+                        }
+
+                        return Empty.Instance;
+                    }
                 }
 
                 return transformSimpleAssignmentExpression(assignment.Left, assignment.Right);
@@ -208,6 +235,31 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return memberFullName.ToExtendedVhdlId().ToVhdlVariableReference();
                 }
 
+                var targetIdentifier = (memberReference.Target as IdentifierExpression)?.Identifier;
+                string displayClassName;
+                if (context.Scope.VariableToDisplayClassMappings.TryGetValue(targetIdentifier, out displayClassName))
+                {
+                    // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
+                    if (memberReference.MemberName.EndsWith("__this"))
+                    {
+                        return Empty.Instance;
+                    }
+                    // Otherwise this is field access on the DisplayClass object (the field was created to pass variables
+                    // from the local scope to the method generated from the lambda expression). Can look something like:
+                    // <>c__DisplayClass9_.numbers = new uint[35];
+                    else
+                    {
+                        return context.TransformationContext.TypeDeclarationLookupTable
+                            .Lookup(displayClassName)
+                            .Members
+                            .Single(member => member is FieldDeclaration && 
+                                ((FieldDeclaration)member).Variables.Single().Name == memberReference.MemberName)
+                            .GetFullName()
+                            .ToExtendedVhdlId()
+                            .ToVhdlVariableReference();
+                    }
+                }
+
                 throw new NotSupportedException("Transformation of the member reference expression " + memberReference + " is not supported.");
             }
             // Not needed at the moment since ThisReferenceExpression can only happen if "this" is passed to a method, 
@@ -248,7 +300,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Expression = transformedExpression
                         };
                     case UnaryOperatorType.Await:
-                        if (unary.Expression is InvocationExpression && 
+                        if (unary.Expression is InvocationExpression &&
                             unary.Expression.GetFullName().IsTaskFromResultMethodName())
                         {
                             return transformedExpression;
@@ -315,7 +367,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else
             {
                 throw new NotSupportedException(
-                    "Expressions of type " + 
+                    "Expressions of type " +
                     expression.GetType() + " are not supported. The expression was: " +
                     expression.ToString());
             }
@@ -328,7 +380,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 expression.Expression.GetActualTypeReference() ?? expression.GetActualTypeReference());
             var toType = _typeConverter.ConvertAstType(expression.Type);
 
-            var typeConversionResult= _typeConversionTransformer
+            var typeConversionResult = _typeConversionTransformer
                 .ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context));
             if (typeConversionResult.IsLossy)
             {

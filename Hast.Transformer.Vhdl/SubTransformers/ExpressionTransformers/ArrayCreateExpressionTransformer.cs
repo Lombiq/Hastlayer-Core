@@ -24,7 +24,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         }
         
         
-        public IVhdlElement Transform(ArrayCreateExpression expression, IArchitectureComponent component)
+        public Value Transform(ArrayCreateExpression expression, IArchitectureComponent component)
         {
             if (expression.Arguments.Count != 1)
             {
@@ -54,18 +54,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // at that point the size of the array won't be known) so we have to go back to the variable declaration
             // and set its data type to the unconstrained array instantiation.
 
-            if (!(expression.Parent is AssignmentExpression) || !(((AssignmentExpression)expression.Parent).Left is IdentifierExpression))
+            var parentAssignmentExpression = expression.Parent as AssignmentExpression;
+            if (parentAssignmentExpression == null || 
+                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression))
             {
-                throw new NotSupportedException("Only array-using constructs where the newly created array is assigned to a variable is supported.");
+                throw new NotSupportedException("Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
             }
-
-            // Finding the variable where the array is used and changing its type to the array instantiation.
-            var parentIdentifier = (IdentifierExpression)((AssignmentExpression)expression.Parent).Left;
-            var parentDataObjectName = component.CreatePrefixedObjectName(parentIdentifier.Identifier);
-            var parentDataObject = component
-                .GetAllDataObjects()
-                .Where(dataObject => dataObject.Name == parentDataObjectName)
-                .Single();
 
             var elementType = _typeConverter.ConvertAstType(expression.Type);
             var arrayInstantiationType = new UnconstrainedArrayInstantiation
@@ -74,7 +68,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 RangeFrom = 0,
                 RangeTo = size - 1
             };
-            parentDataObject.DataType = arrayInstantiationType;
+
+            // Finding the variable or member where the array is used and changing its type to the array instantiation.
+            var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
+                ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
+                ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
+            var parentDataObjectName = component.CreatePrefixedObjectName(parentIdentifier);
+            var parentDataObject = component
+                .GetAllDataObjects()
+                .Where(dataObject => dataObject.Name == parentDataObjectName)
+                .SingleOrDefault();
+            // We'll only find the data object if it's in the same architecture component. So e.g. separately transformed
+            // fields (possibly in compiler-generated and inner DisplayClasses) won't be handled: those should be dealt
+            // with separately.
+            if (parentDataObject != null)
+            {
+                parentDataObject.DataType = arrayInstantiationType; 
+            }
 
             // Initializing the array with the .NET default values so there are no surprises when reading values
             // without setting them previously.

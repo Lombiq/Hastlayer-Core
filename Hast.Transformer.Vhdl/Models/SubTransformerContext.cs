@@ -3,6 +3,8 @@ using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -18,6 +20,24 @@ namespace Hast.Transformer.Vhdl.Models
         MethodDeclaration Method { get; }
         IMemberStateMachine StateMachine { get; }
         ICurrentBlock CurrentBlock { get; }
+
+        /// <summary>
+        /// Maps the names of variables that store object references to compiler-generated DisplayClasses (created for
+        /// lambda expressions) to full DisplayClass names.
+        /// </summary>
+        IDictionary<string, string> VariableToDisplayClassMappings { get; }
+
+        /// <summary>
+        /// Keeps track of the name of those variables that store arrays of <see cref="System.Threading.Tasks.Task"/>
+        /// objects (e.g. Task<bool>[] array).
+        /// </summary>
+        ISet<string> TaskArrayVariableNames { get; }
+
+        /// <summary>
+        /// Keeps track of the name of those variables that store references to 
+        /// <see cref="System.Threading.Tasks.TaskFactory"/> objects.
+        /// </summary>
+        ISet<string> TaskFactoryVariableNames { get; }
     }
 
 
@@ -44,6 +64,9 @@ namespace Hast.Transformer.Vhdl.Models
         public MethodDeclaration Method { get; set; }
         public IMemberStateMachine StateMachine { get; set; }
         public ICurrentBlock CurrentBlock { get; set; }
+        public IDictionary<string, string> VariableToDisplayClassMappings { get; } = new Dictionary<string, string>();
+        public ISet<string> TaskArrayVariableNames { get; } = new HashSet<string>();
+        public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
     }
 
 

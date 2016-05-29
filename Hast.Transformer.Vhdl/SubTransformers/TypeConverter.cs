@@ -164,7 +164,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (type.ArraySpecifiers.Count != 0)
             {
                 var elementType = ConvertAstType(type.BaseType);
-                return new Hast.VhdlBuilder.Representation.Declaration.ArrayType
+                return new VhdlBuilder.Representation.Declaration.ArrayType
                 {
                     ElementType = elementType,
                     Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name)
@@ -176,7 +176,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertSimple(SimpleType type)
         {
-            if (type.Identifier == "Task")
+            if (type.Identifier == nameof(System.Threading.Tasks.Task))
             {
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)

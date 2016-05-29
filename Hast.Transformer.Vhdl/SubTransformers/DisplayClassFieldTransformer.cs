@@ -10,6 +10,7 @@ using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder.Extensions;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Representation;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -20,7 +21,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
         public DisplayClassFieldTransformer(
-            ITypeConverter typeConverter, 
+            ITypeConverter typeConverter,
             IArrayCreateExpressionTransformer arrayCreateExpressionTransformer)
         {
             _typeConverter = typeConverter;
@@ -45,13 +46,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     !(field.ReturnType is SimpleType && ((SimpleType)field.ReturnType).Identifier == "Func");
                 if (shouldTransform)
                 {
-                    var type = _typeConverter.ConvertAstType(field.ReturnType);
+                    var dataType = _typeConverter.ConvertAstType(field.ReturnType);
+
+                    // The field is an array so need to instantiate it.
+                    if (field.ReturnType is ComposedType && ((ComposedType)field.ReturnType).ArraySpecifiers.Any())
+                    {
+                        var visitor = new ArrayCreationDataTypeRetrievingVisitor(
+                            fieldFullName,
+                            _arrayCreateExpressionTransformer);
+
+                        context.SyntaxTree.AcceptVisitor(visitor);
+
+                        dataType = visitor.ArrayDataType;
+                    }
 
                     fieldComponent.GlobalVariables.Add(new Variable
-                        {
-                            Name = fieldFullName.ToExtendedVhdlId(),
-                            DataType = type
-                        });
+                    {
+                        Name = fieldFullName.ToExtendedVhdlId(),
+                        DataType = dataType
+                    });
                 }
 
                 return (IMemberTransformerResult)new MemberTransformerResult
@@ -72,33 +85,39 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        //private class ArrayCreationCheckingVisitor : DepthFirstAstVisitor
-        //{
-        //    private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
-        //    private readonly Dictionary<string, IVhdlElement> _arrayDeclarations;
+        private class ArrayCreationDataTypeRetrievingVisitor : DepthFirstAstVisitor
+        {
+            private readonly string _fieldFullName;
+            private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
+
+            public DataType ArrayDataType { get; private set; }
 
 
-        //    public ArrayCreationCheckingVisitor(ITypeConverter typeConverter, Dictionary<string, IVhdlElement> arrayDeclarations)
-        //    {
-        //        _typeConverter = typeConverter;
-        //        _arrayDeclarations = arrayDeclarations;
-        //    }
+            public ArrayCreationDataTypeRetrievingVisitor(
+                string fieldDefinitionFullName,
+                IArrayCreateExpressionTransformer arrayCreateExpressionTransformer)
+            {
+                _fieldFullName = fieldDefinitionFullName;
+                _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
+            }
 
 
-        //    public override void VisitArrayCreateExpression(ArrayCreateExpression arrayCreateExpression)
-        //    {
-        //        base.VisitArrayCreateExpression(arrayCreateExpression);
+            public override void VisitArrayCreateExpression(ArrayCreateExpression arrayCreateExpression)
+            {
+                if (ArrayDataType != null) return;
 
-        //        var elementType = _typeConverter.ConvertAstType(arrayCreateExpression.Type);
+                base.VisitArrayCreateExpression(arrayCreateExpression);
 
-        //        if (_arrayDeclarations.ContainsKey(elementType.Name)) return;
-
-        //        _arrayDeclarations[elementType.Name] = new ArrayType
-        //        {
-        //            ElementType = elementType,
-        //            Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name)
-        //        };
-        //    }
-        //}
+                var isSearchFieldAccess = arrayCreateExpression.Parent
+                    .Is<AssignmentExpression>(assignment => assignment.Left
+                        .Is<MemberReferenceExpression>(memberReference => memberReference.GetFullName() == _fieldFullName));
+                if (isSearchFieldAccess)
+                {
+                    ArrayDataType = _arrayCreateExpressionTransformer
+                        .Transform(arrayCreateExpression, new BasicComponent("dummy"))
+                        .DataType; 
+                }
+            }
+        }
     }
 }
