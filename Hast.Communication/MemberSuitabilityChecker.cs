@@ -9,8 +9,8 @@ using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Communication
 {
-    // The implementation is here because it depends on the Communication component and its proxy generator what can be 
-    // used as interface members.
+    // The implementation is here because it depends on the Communication component and its proxy generator on what can 
+    // be used as interface members.
     public class MemberSuitabilityChecker : IMemberSuitabilityChecker
     {
         public bool IsSuitableInterfaceMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)

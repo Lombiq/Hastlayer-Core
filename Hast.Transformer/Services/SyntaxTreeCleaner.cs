@@ -38,8 +38,8 @@ namespace Hast.Transformer.Services
             var noIncludedMembers = !configuration.PublicHardwareMemberFullNames.Any() && !configuration.PublicHardwareMemberNamePrefixes.Any();
             var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable);
 
-            // Starting with interface members we walk through the references to see which declarations are used (e.g. which
-            // methods are called at least once).
+            // Starting with interface members we walk through the references to see which declarations are used (e.g. 
+            // which methods are called at least once).
             foreach (var type in syntaxTree.GetAllTypeDeclarations())
             {
                 foreach (var member in type.Members)
