@@ -17,6 +17,8 @@ using Hast.Transformer.Vhdl.SimpleMemory;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
+    // SimpleMemory and member invocation transformation are factored out into two methods so the class has some
+    // structure, not to have one giant TransformInvocationExpression method.
     public class InvocationExpressionTransformer : IInvocationExpressionTransformer
     {
         private readonly ITypeConverter _typeConverter;
@@ -33,154 +35,176 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             ISubTransformerContext context,
             IEnumerable<IVhdlElement> transformedParameters)
         {
-            var stateMachine = context.Scope.StateMachine;
-            var currentBlock = context.Scope.CurrentBlock;
-
             var targetMemberReference = expression.Target as MemberReferenceExpression;
-
 
             // This is a SimpleMemory access.
             if (context.TransformationContext.UseSimpleMemory() &&
                 targetMemberReference != null &&
-                targetMemberReference.Target is IdentifierExpression &&
-                ((IdentifierExpression)targetMemberReference.Target).Identifier == context.Scope.Method.GetSimpleMemoryParameterName())
+                targetMemberReference.Target.Is<IdentifierExpression>(identifier =>
+                    identifier.Identifier == context.Scope.Method.GetSimpleMemoryParameterName()))
             {
-                stateMachine.AddSimpleMemorySignalsIfNew();
+                return TransformSimpleMemoryInvocation(expression, context, transformedParameters, targetMemberReference);
+            }
+            // This is a standard member access.
+            else
+            {
+                return TransformMemberInvocation(expression, context, transformedParameters, targetMemberReference);
+            }
+        }
 
-                var memberName = targetMemberReference.MemberName;
 
-                var isWrite = memberName.StartsWith("Write");
-                var invokationParameters = transformedParameters.ToList();
+        private IVhdlElement TransformSimpleMemoryInvocation(
+            InvocationExpression expression,
+            ISubTransformerContext context,
+            IEnumerable<IVhdlElement> transformedParameters,
+            MemberReferenceExpression targetMemberReference)
+        {
+            var stateMachine = context.Scope.StateMachine;
+            var currentBlock = context.Scope.CurrentBlock;
 
-                if (isWrite)
+            stateMachine.AddSimpleMemorySignalsIfNew();
+
+            var memberName = targetMemberReference.MemberName;
+
+            var isWrite = memberName.StartsWith("Write");
+            var invokationParameters = transformedParameters.ToList();
+
+            if (isWrite)
+            {
+                currentBlock.Add(new LineComment("Begin SimpleMemory write."));
+            }
+            else
+            {
+                currentBlock.Add(new LineComment("Begin SimpleMemory read."));
+            }
+
+            // Setting SimpleMemory control signals:
+            currentBlock.Add(new Assignment
+            {
+                AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
+                Expression = new Invokation
                 {
-                    currentBlock.Add(new LineComment("Begin SimpleMemory write."));
-                }
-                else
-                {
-                    currentBlock.Add(new LineComment("Begin SimpleMemory read."));
-                }
-
-                // Setting SimpleMemory control signals:
-                currentBlock.Add(new Assignment
-                {
-                    AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
-                    Expression = new Invokation
-                    {
-                        // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
-                        Target = "resize".ToVhdlIdValue(),
-                        Parameters = new List<IVhdlElement>
+                    // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
+                    Target = "resize".ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement>
                         {
                             // CellIndex is conventionally the first invokation parameter. 
                             { invokationParameters[0] },
                             SimpleMemoryTypes.CellIndexInternalSignalDataType.Size.ToVhdlValue(KnownDataTypes.UnrangedInt)
                         }
-                    }
-                });
+                }
+            });
 
-                var enablePortReference = isWrite ?
-                    stateMachine.CreateSimpleMemoryWriteEnableSignalReference() :
-                    stateMachine.CreateSimpleMemoryReadEnableSignalReference();
+            var enablePortReference = isWrite ?
+                stateMachine.CreateSimpleMemoryWriteEnableSignalReference() :
+                stateMachine.CreateSimpleMemoryReadEnableSignalReference();
+            currentBlock.Add(new Assignment
+            {
+                AssignTo = enablePortReference,
+                Expression = Value.True
+            });
+
+
+            Func<IVhdlElement, bool, IVhdlElement> implementSimpleMemoryTypeConversion =
+                (variableToConvert, directionIsLogicVectorToType) =>
+                {
+                    // If the memory operations was Read/Write4Bytes then no need to do any conversions.
+                    if (targetMemberReference.MemberName.EndsWith("4Bytes"))
+                    {
+                        return variableToConvert;
+                    }
+
+                    string dataConversionInvokationTarget = null;
+                    var memoryType = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
+
+                    // Using the built-in conversion functions to handle known data types.
+                    if (memoryType == "UInt32" ||
+                    memoryType == "Int32" ||
+                    memoryType == "Boolean" ||
+                    memoryType == "Char")
+                    {
+                        if (directionIsLogicVectorToType)
+                        {
+                            dataConversionInvokationTarget = "ConvertStdLogicVectorTo" + memoryType;
+                        }
+                        else
+                        {
+                            dataConversionInvokationTarget = "Convert" + memoryType + "ToStdLogicVector";
+                        }
+                    }
+
+                    return new Invokation
+                    {
+                        Target = dataConversionInvokationTarget.ToVhdlIdValue(),
+                        Parameters = new List<IVhdlElement> { { variableToConvert } }
+                    };
+                };
+
+            if (isWrite)
+            {
                 currentBlock.Add(new Assignment
                 {
-                    AssignTo = enablePortReference,
-                    Expression = Value.True
+                    AssignTo = stateMachine.CreateSimpleMemoryDataOutSignalReference(),
+                    // The data to write is conventionally the second parameter.
+                    Expression = implementSimpleMemoryTypeConversion(invokationParameters[1], false)
                 });
-
-
-                Func<IVhdlElement, bool, IVhdlElement> implementSimpleMemoryTypeConversion =
-                    (variableToConvert, directionIsLogicVectorToType) =>
-                    {
-                        // If the memory operations was Read/Write4Bytes then no need to do any conversions.
-                        if (targetMemberReference.MemberName.EndsWith("4Bytes"))
-                        {
-                            return variableToConvert;
-                        }
-
-                        string dataConversionInvokationTarget = null;
-                        var memoryType = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
-
-                        // Using the built-in conversion functions to handle known data types.
-                        if (memoryType == "UInt32" ||
-                            memoryType == "Int32" ||
-                            memoryType == "Boolean" ||
-                            memoryType == "Char")
-                        {
-                            if (directionIsLogicVectorToType)
-                            {
-                                dataConversionInvokationTarget = "ConvertStdLogicVectorTo" + memoryType;
-                            }
-                            else
-                            {
-                                dataConversionInvokationTarget = "Convert" + memoryType + "ToStdLogicVector";
-                            }
-                        }
-
-                        return new Invokation
-                        {
-                            Target = dataConversionInvokationTarget.ToVhdlIdValue(),
-                            Parameters = new List<IVhdlElement> { { variableToConvert } }
-                        };
-                    };
-
-                if (isWrite)
-                {
-                    currentBlock.Add(new Assignment
-                    {
-                        AssignTo = stateMachine.CreateSimpleMemoryDataOutSignalReference(),
-                        // The data to write is conventionally the second parameter.
-                        Expression = implementSimpleMemoryTypeConversion(invokationParameters[1], false)
-                    });
-                }
-
-                // The memory operation should be initialized in this state, then finished in another one.
-                var memoryOperationFinishedBlock = new InlineBlock();
-                var endMemoryOperationBlock = new InlineBlock(
-                    new LineComment("Waiting for the SimpleMemory operation to finish."),
-                    new IfElse
-                    {
-                        Condition = new Binary
-                        {
-                            Left = (isWrite ? SimpleMemoryPortNames.WritesDone : SimpleMemoryPortNames.ReadsDone)
-                                .ToExtendedVhdlId()
-                                .ToVhdlSignalReference(),
-                            Operator = BinaryOperator.Equality,
-                            Right = Value.True
-                        },
-                        True = memoryOperationFinishedBlock
-                    });
-                var memoryOperationFinishedStateIndex = stateMachine.AddState(endMemoryOperationBlock);
-
-                memoryOperationFinishedBlock.Add(new Assignment
-                {
-                    AssignTo = enablePortReference,
-                    Expression = Value.False
-                });
-
-                currentBlock.Add(stateMachine.CreateStateChange(memoryOperationFinishedStateIndex));
-
-                if (isWrite)
-                {
-                    memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory write finished."));
-
-                    currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
-
-                    return Empty.Instance;
-                }
-                else
-                {
-                    memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory read finished."));
-
-
-                    currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
-
-                    return implementSimpleMemoryTypeConversion(
-                        SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
-                        true);
-                }
             }
 
+            // The memory operation should be initialized in this state, then finished in another one.
+            var memoryOperationFinishedBlock = new InlineBlock();
+            var endMemoryOperationBlock = new InlineBlock(
+                new LineComment("Waiting for the SimpleMemory operation to finish."),
+                new IfElse
+                {
+                    Condition = new Binary
+                    {
+                        Left = (isWrite ? SimpleMemoryPortNames.WritesDone : SimpleMemoryPortNames.ReadsDone)
+                            .ToExtendedVhdlId()
+                            .ToVhdlSignalReference(),
+                        Operator = BinaryOperator.Equality,
+                        Right = Value.True
+                    },
+                    True = memoryOperationFinishedBlock
+                });
+            var memoryOperationFinishedStateIndex = stateMachine.AddState(endMemoryOperationBlock);
 
+            memoryOperationFinishedBlock.Add(new Assignment
+            {
+                AssignTo = enablePortReference,
+                Expression = Value.False
+            });
+
+            currentBlock.Add(stateMachine.CreateStateChange(memoryOperationFinishedStateIndex));
+
+            if (isWrite)
+            {
+                memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory write finished."));
+
+                currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
+
+                return Empty.Instance;
+            }
+            else
+            {
+                memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory read finished."));
+
+
+                currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
+
+                return implementSimpleMemoryTypeConversion(
+                    SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
+                    true);
+            }
+        }
+
+        private IVhdlElement TransformMemberInvocation(
+            InvocationExpression expression,
+            ISubTransformerContext context,
+            IEnumerable<IVhdlElement> transformedParameters,
+            MemberReferenceExpression targetMemberReference)
+        {
+            var stateMachine = context.Scope.StateMachine;
+            var currentBlock = context.Scope.CurrentBlock;
             var targetMethodName = expression.GetFullName();
 
             // This is a Task.FromResult() method call.
@@ -262,19 +286,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             i.ToString());
 
                     stateMachine.GlobalVariables.AddIfNew(new ParameterVariable(targetMethodName, currentParameter.Name)
-                        {
-                            DataType = _typeConverter.ConvertAstType(currentParameter.Type),
-                            Name = parameterVariableName,
-                            Index = i
-                        });
+                    {
+                        DataType = _typeConverter.ConvertAstType(currentParameter.Type),
+                        Name = parameterVariableName,
+                        Index = i
+                    });
 
 
                     // Assign local values to be passed to the intermediary variable.
                     currentBlock.Add(new Assignment
-                        {
-                            AssignTo = parameterVariableName.ToVhdlVariableReference(),
-                            Expression = parameter
-                        });
+                    {
+                        AssignTo = parameterVariableName.ToVhdlVariableReference(),
+                        Expression = parameter
+                    });
 
                     methodParametersEnumerator.MoveNext();
                 }
