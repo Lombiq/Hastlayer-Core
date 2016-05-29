@@ -32,8 +32,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public IVhdlElement TransformInvocationExpression(
             InvocationExpression expression,
-            ISubTransformerContext context,
-            IEnumerable<IVhdlElement> transformedParameters)
+            IEnumerable<IVhdlElement> transformedParameters,
+            ISubTransformerContext context)
         {
             var targetMemberReference = expression.Target as MemberReferenceExpression;
 
@@ -43,21 +43,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 targetMemberReference.Target.Is<IdentifierExpression>(identifier =>
                     identifier.Identifier == context.Scope.Method.GetSimpleMemoryParameterName()))
             {
-                return TransformSimpleMemoryInvocation(expression, context, transformedParameters, targetMemberReference);
+                return TransformSimpleMemoryInvocation(expression, transformedParameters, targetMemberReference, context);
             }
             // This is a standard member access.
             else
             {
-                return TransformMemberInvocation(expression, context, transformedParameters, targetMemberReference);
+                return TransformMemberInvocation(expression, transformedParameters, targetMemberReference, context);
             }
         }
 
 
         private IVhdlElement TransformSimpleMemoryInvocation(
             InvocationExpression expression,
-            ISubTransformerContext context,
             IEnumerable<IVhdlElement> transformedParameters,
-            MemberReferenceExpression targetMemberReference)
+            MemberReferenceExpression targetMemberReference,
+            ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
@@ -199,9 +199,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         private IVhdlElement TransformMemberInvocation(
             InvocationExpression expression,
-            ISubTransformerContext context,
             IEnumerable<IVhdlElement> transformedParameters,
-            MemberReferenceExpression targetMemberReference)
+            MemberReferenceExpression targetMemberReference,
+            ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;

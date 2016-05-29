@@ -214,7 +214,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     transformedParameters.Add(Transform(argument, context));
                 }
 
-                return _invocationExpressionTransformer.TransformInvocationExpression(invocationExpression, context, transformedParameters);
+                return _invocationExpressionTransformer
+                    .TransformInvocationExpression(invocationExpression, transformedParameters, context);
             }
             else if (expression is MemberReferenceExpression)
             {
