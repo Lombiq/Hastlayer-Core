@@ -43,13 +43,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     !field.Variables.Any(variable => variable.Name.EndsWith("__this")) &&
                     // Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return types 
                     // as the original lambda. Nothing needs to be done with this.
-                    !(field.ReturnType is SimpleType && ((SimpleType)field.ReturnType).Identifier == "Func");
+                    !(field.ReturnType.Is<SimpleType>(simple => simple.Identifier == "Func"));
                 if (shouldTransform)
                 {
                     var dataType = _typeConverter.ConvertAstType(field.ReturnType);
 
                     // The field is an array so need to instantiate it.
-                    if (field.ReturnType is ComposedType && ((ComposedType)field.ReturnType).ArraySpecifiers.Any())
+                    if (field.ReturnType.Is<ComposedType>(composed => composed.ArraySpecifiers.Any()))
                     {
                         var visitor = new ArrayCreationDataTypeRetrievingVisitor(
                             fieldFullName,

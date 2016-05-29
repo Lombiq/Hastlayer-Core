@@ -161,7 +161,10 @@ namespace Hast.Transformer
             {
                 if (string.IsNullOrEmpty(assembly.Location))
                 {
-                    throw new ArgumentException("No assembly used for hardware generation can be an in-memory one, but the assembly named \"" + assembly.FullName + "\" is.");
+                    throw new ArgumentException(
+                        "No assembly used for hardware generation can be an in-memory one, but the assembly named \"" + 
+                        assembly.FullName + 
+                        "\" is.");
                 }
             }
 
@@ -175,9 +178,10 @@ namespace Hast.Transformer
             {
                 foreach (var member in type.Members.Where(m => m.IsInterfaceMember()))
                 {
-                    if (member is MethodDeclaration && string.IsNullOrEmpty(((MethodDeclaration)member).GetSimpleMemoryParameterName()))
+                    if (member.Is<MethodDeclaration>(method => string.IsNullOrEmpty(method.GetSimpleMemoryParameterName())))
                     {
-                        throw new InvalidOperationException("The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter.");
+                        throw new InvalidOperationException(
+                            "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter.");
                     }
                 }
             }

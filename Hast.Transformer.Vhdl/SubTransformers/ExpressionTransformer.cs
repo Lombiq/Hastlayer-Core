@@ -252,8 +252,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return context.TransformationContext.TypeDeclarationLookupTable
                             .Lookup(displayClassName)
                             .Members
-                            .Single(member => member is FieldDeclaration && 
-                                ((FieldDeclaration)member).Variables.Single().Name == memberReference.MemberName)
+                            .Single(member => member
+                                .Is<FieldDeclaration>(field => field.Variables.Single().Name == memberReference.MemberName))
                             .GetFullName()
                             .ToExtendedVhdlId()
                             .ToVhdlVariableReference();

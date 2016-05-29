@@ -22,7 +22,7 @@ namespace Hast.Transformer.Visitors
             if (memberReferenceExpression.Target is TypeReferenceExpression)
             {
                 var typeReferenceExpression = (TypeReferenceExpression)memberReferenceExpression.Target;
-                if (typeReferenceExpression.Type is SimpleType && ((SimpleType)typeReferenceExpression.Type).Identifier == "MethodImplOptions")
+                if (typeReferenceExpression.Type.Is<SimpleType>(simple => simple.Identifier == "MethodImplOptions"))
                 {
                     // This can happen when a method is extern (see: https://msdn.microsoft.com/en-us/library/e59b22c5.aspx),
                     // thus has no body but has the MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.

@@ -55,7 +55,8 @@ namespace Hast.Transformer.Services
                     {
                         if (member is MethodDeclaration)
                         {
-                            var implementedInterfaceMethod = ((MethodDeclaration)member).FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup);
+                            var implementedInterfaceMethod = ((MethodDeclaration)member)
+                                .FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup);
                             if (implementedInterfaceMethod != null)
                             {
                                 implementedInterfaceMethod.AddReference(member);
