@@ -311,6 +311,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                 }
 
+                // Is this a Task result access like array[k].Result? We know that we've already handled the target so
+                // it stores the result objects, so just need to use them directly.
+                if (memberReference.Target.GetActualTypeReference().FullName.StartsWith("System.Threading.Tasks.Task") &&
+                    memberReference.MemberName == "Result")
+                {
+                    return Transform(memberReference.Target, context);
+                }
+
 
                 throw new NotSupportedException("Transformation of the member reference expression " + memberReference + " is not supported.");
             }
