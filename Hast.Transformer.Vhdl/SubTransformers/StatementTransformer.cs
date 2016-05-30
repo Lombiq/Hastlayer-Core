@@ -120,7 +120,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         binary.Left.Is<AssignmentExpression>(assignment => 
                             assignment.Right.Is<MemberReferenceExpression>(member => 
                                 member.Target.Is<IdentifierExpression>(identifier =>
-                                    scope.VariableToDisplayClassMappings.ContainsKey(identifier.Identifier)))) &&
+                                    scope.VariableNameToDisplayClassNameMappings.ContainsKey(identifier.Identifier)))) &&
                         binary.Right is NullReferenceExpression);
                 if (isDisplayClassMethodReferenceCreatingIf)
                 {
@@ -133,7 +133,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var displayClassMemberReference = ((MemberReferenceExpression)funcCreateExpression.Arguments.Single());
                     var funcVariableName = ((IdentifierExpression)assignment.Left).Identifier;
 
-                    scope.VariableToDisplayClassMethodMappings[funcVariableName] = displayClassMemberReference.GetFullName();
+                    scope.FuncVariableNameToDisplayClassMethodMappings[funcVariableName] = 
+                        displayClassMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                 }
                 else
                 {

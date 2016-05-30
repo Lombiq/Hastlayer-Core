@@ -75,6 +75,7 @@
     <Compile Include="Models\ITransformationContext.cs" />
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
+    <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\InvokationInstanceCountAdjuster.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />
@@ -87,6 +88,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TransformerExtensions.cs" />
     <Compile Include="Configuration\TransformerConfiguration.cs" />
+    <Compile Include="Visitors\InlinableTaskArraysFindingVisitor.cs" />
+    <Compile Include="Visitors\InlinableTaskArraysInliningVisitor.cs" />
     <Compile Include="Visitors\InvokationInstanceCountAdjustingVisitor.cs" />
     <Compile Include="Visitors\ReferencedNodesFlaggingVisitor.cs" />
     <Compile Include="Visitors\UnreferencedNodesRemovingVisitor.cs" />

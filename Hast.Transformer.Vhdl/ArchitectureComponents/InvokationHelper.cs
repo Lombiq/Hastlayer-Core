@@ -40,10 +40,21 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             int degreeOfParallelism,
             bool waitForAll = true)
         {
-            // Iteratively building a binary expression chain to OR together all Finished signals.
+            // Iteratively building a binary expression chain to OR or AND together all (Started = Finished) expressions.
+            // Using (Started = Finished) so it will work even if not all state available state machines were started.
+
+            Func<int, Binary> createStartedEqualsFinishedBinary = index =>
+                new Binary
+                {
+                    Left = CreateStartedSignalReference(component, targetStateMachineName, index),
+                    Operator = BinaryOperator.Equality,
+                    Right = CreateFinishedSignalReference(component, targetStateMachineName, index)
+                };
+
+
             IVhdlElement allInvokedStateMachinesFinishedExpression;
 
-            allInvokedStateMachinesFinishedExpression = CreateFinishedSignalReference(component, targetStateMachineName, 0);
+            allInvokedStateMachinesFinishedExpression = createStartedEqualsFinishedBinary(0);
 
             if (degreeOfParallelism > 1)
             {
@@ -52,7 +63,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
                 var currentBinary = new Binary
                 {
-                    Left = CreateFinishedSignalReference(component, targetStateMachineName, 1),
+                    Left = createStartedEqualsFinishedBinary(1),
                     Operator = binaryCondition
                 };
                 var firstBinary = currentBinary;
@@ -61,7 +72,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 {
                     var newBinary = new Binary
                     {
-                        Left = CreateFinishedSignalReference(component, targetStateMachineName, i),
+                        Left = createStartedEqualsFinishedBinary(i),
                         Operator = binaryCondition
                     };
 

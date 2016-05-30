@@ -25,19 +25,19 @@ namespace Hast.Transformer.Vhdl.Models
         /// Maps the names of variables that store object references to compiler-generated DisplayClasses (created for
         /// lambda expressions) to full DisplayClass names.
         /// </summary>
-        IDictionary<string, string> VariableToDisplayClassMappings { get; }
+        IDictionary<string, string> VariableNameToDisplayClassNameMappings { get; }
 
         /// <summary>
         /// Maps the names of variables that store object references to compiler-generated Func<TIn, TOut> objects that
         /// are then populated with references to DisplayClasse methods.
         /// </summary>
-        IDictionary<string, string> VariableToDisplayClassMethodMappings { get; }
+        IDictionary<string, EntityDeclaration> FuncVariableNameToDisplayClassMethodMappings { get; }
 
         /// <summary>
         /// Keeps track of the name of those variables that store references to Tasks and then later the Task results
         /// fetched from them via Task.Result.
         /// </summary>
-        ISet<string> TaskReferencingVariableNames { get; }
+        IDictionary<string, EntityDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; }
 
         /// <summary>
         /// Keeps track of the name of those variables that store references to 
@@ -70,9 +70,9 @@ namespace Hast.Transformer.Vhdl.Models
         public MethodDeclaration Method { get; set; }
         public IMemberStateMachine StateMachine { get; set; }
         public ICurrentBlock CurrentBlock { get; set; }
-        public IDictionary<string, string> VariableToDisplayClassMappings { get; } = new Dictionary<string, string>();
-        public IDictionary<string, string> VariableToDisplayClassMethodMappings { get; } = new Dictionary<string, string>();
-        public ISet<string> TaskReferencingVariableNames { get; } = new HashSet<string>();
+        public IDictionary<string, string> VariableNameToDisplayClassNameMappings { get; } = new Dictionary<string, string>();
+        public IDictionary<string, EntityDeclaration> FuncVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, EntityDeclaration>();
+        public IDictionary<string, EntityDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, EntityDeclaration>();
         public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
     }
 

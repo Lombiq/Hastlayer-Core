@@ -127,11 +127,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (rightObjectCreateExpression != null &&
                         (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayClassName())
                     {
+                        context.TransformationContext.TypeDeclarationLookupTable.Lookup(rightObjectCreateExpression.Type);
                         var leftIdentifierExpression = assignment.Left as IdentifierExpression;
 
                         if (leftIdentifierExpression != null)
                         {
-                            scope.VariableToDisplayClassMappings[leftIdentifierExpression.Identifier] = rightObjectFullName;
+                            scope.VariableNameToDisplayClassNameMappings[leftIdentifierExpression.Identifier] = rightObjectFullName;
                         }
 
                         return Empty.Instance;
@@ -154,16 +155,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // The first argument is always for the Func that referes to the method on the DisplayClass
                         // generated for the lambda expression originally passed to the Task factory.
                         var funcVariablename = ((IdentifierExpression)taskStartArguments.First()).Identifier;
-                        var targetMethodName = scope.VariableToDisplayClassMethodMappings[funcVariablename];
-
-                        var targetNameParts = targetMethodName.Split(new[] { "::" }, StringSplitOptions.RemoveEmptyEntries);
-                        // Cutting off the return type name.
-                        var targetTypeName = targetNameParts[0].Substring(targetNameParts[0].IndexOf(' ') + 1);
-                        var targetMethod = context.TransformationContext.TypeDeclarationLookupTable
-                            .Lookup(targetTypeName)
-                            .Members
-                            // Since it's a DisplayClass there will be only one matching method for sure.
-                            .Single(member => member.GetFullName() == targetMethodName);
+                        var targetMethod = scope.FuncVariableNameToDisplayClassMethodMappings[funcVariablename];
 
                         // We only need to care about he invocation here. Since this is a Task start there will be
                         // some form of await later.
@@ -171,6 +163,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             targetMethod,
                             taskStartArguments.Skip(1).Select(argument => Transform(argument, context)),
                             context);
+
+                        // Retrieving the variable the Task is saved to. It's either an array or a standard variable.
+                        IdentifierExpression taskVariable;
+                        if (assignment.Left is IndexerExpression)
+                        {
+                            taskVariable = (IdentifierExpression)((IndexerExpression)assignment.Left).Target;
+                        }
+                        else
+                        {
+                            taskVariable = (IdentifierExpression)assignment.Left;
+                        }
+
+                        scope.TaskVariableNameToDisplayClassMethodMappings[taskVariable.Identifier] = targetMethod;
 
                         return Empty.Instance;
                     }
@@ -282,7 +287,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (targetIdentifier != null)
                 {
                     string displayClassName;
-                    if (context.Scope.VariableToDisplayClassMappings.TryGetValue(targetIdentifier, out displayClassName))
+                    if (context.Scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out displayClassName))
                     {
                         // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
                         if (memberReference.MemberName.EndsWith("__this"))

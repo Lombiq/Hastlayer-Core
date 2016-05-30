@@ -122,6 +122,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public IEnumerable<IVhdlElement> BuildInvocationWait(
             EntityDeclaration targetDeclaration,
             int instanceCount,
+            bool waitForAll,
             ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
@@ -130,7 +131,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             var waitForInvokationFinishedIfElse = InvokationHelper
-                .CreateWaitForInvokationFinished(stateMachine, targetDeclaration.GetFullName(), instanceCount);
+                .CreateWaitForInvokationFinished(stateMachine, targetDeclaration.GetFullName(), instanceCount, waitForAll);
 
             var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
             var waitForInvokedStateMachinesToFinishState = new InlineBlock(

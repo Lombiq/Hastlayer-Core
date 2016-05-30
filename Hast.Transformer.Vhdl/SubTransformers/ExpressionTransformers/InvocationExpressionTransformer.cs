@@ -22,11 +22,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     public class InvocationExpressionTransformer : IInvocationExpressionTransformer
     {
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
+        private readonly ITypeConverter _typeConverter;
 
 
-        public InvocationExpressionTransformer(IStateMachineInvocationBuilder stateMachineInvocationBuilder)
+        public InvocationExpressionTransformer(IStateMachineInvocationBuilder stateMachineInvocationBuilder, ITypeConverter typeConverter)
         {
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
+            _typeConverter = typeConverter;
         }
 
 
@@ -205,11 +207,70 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         {
             var targetMethodName = expression.GetFullName();
 
+
             // This is a Task.FromResult() method call.
             if (targetMethodName.IsTaskFromResultMethodName())
             {
                 return transformedParameters.Single();
             }
+
+            // This is a Task.Wait() call so needs special care.
+            if (targetMethodName == "System.Void System.Threading.Tasks.Task::Wait()")
+            {
+                // Tasks aren't awaited where they're started so we only need to await the already started state
+                // machines here.
+                var waitTarget = ((MemberReferenceExpression)expression.Target).Target;
+
+                // Is it a Task.Something().Wait() call?
+                var memberName = string.Empty;
+                if (waitTarget.Is<InvocationExpression>(invocation => 
+                    invocation.Target.Is<MemberReferenceExpression>(member =>
+                    {
+                        memberName = member.MemberName;
+                        return member.Target.Is<TypeReferenceExpression>(type =>
+                            _typeConverter.ConvertAstType(type.Type) == SpecialTypes.Task);
+                    })))
+                {
+                    if (memberName == "WhenAll" || memberName == "WhenAny")
+                    {
+                        // Since it's used in a WhenAll() or WhenAny() call the argument should be an array.
+                        var taskArrayIdentifier = 
+                            ((IdentifierExpression)((InvocationExpression)waitTarget).Arguments.Single()).Identifier;
+
+                        // This array originally stored the Task<T> objects but now is just for the results, so we have 
+                        // to move the results to its elements.
+                        var targetMethod = context.Scope.TaskVariableNameToDisplayClassMethodMappings[taskArrayIdentifier];
+                        var resultReferences = _stateMachineInvocationBuilder.BuildInvocationWait(
+                            targetMethod,
+                            context.TransformationContext.GetTransformerConfiguration()
+                                .GetMaxInvokationInstanceCountConfigurationForMember(targetMethod).MaxDegreeOfParallelism,
+                            memberName == "WhenAll",
+                            context);
+
+                        var index = 0;
+                        var stateMachine = context.Scope.StateMachine;
+                        var arrayReference = stateMachine.CreatePrefixedObjectName(taskArrayIdentifier).ToVhdlVariableReference();
+                        var resultBlock = new InlineBlock();
+                        foreach (var resultReference in resultReferences)
+                        {
+                            resultBlock.Add(
+                                new Assignment
+                                {
+                                    AssignTo = new ArrayElementAccess
+                                    {
+                                        Array = arrayReference,
+                                        IndexExpression = index.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                    },
+                                    Expression = resultReference
+                                });
+                            index++;
+                        }
+
+                        return resultBlock;
+                    }
+                }
+            }
+
 
             EntityDeclaration targetDeclaration = null;
 
@@ -241,7 +302,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             _stateMachineInvocationBuilder
                 .BuildInvocation(targetDeclaration, transformedParameters, context);
 
-            return _stateMachineInvocationBuilder.BuildInvocationWait(targetDeclaration, 1, context).Single();
+            return _stateMachineInvocationBuilder.BuildInvocationWait(targetDeclaration, 1, true, context).Single();
         }
     }
 }
