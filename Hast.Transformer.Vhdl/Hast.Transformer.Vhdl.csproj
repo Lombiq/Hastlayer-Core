@@ -98,7 +98,6 @@
     <Compile Include="SimpleMemory\ISimpleMemoryComponentBuilder.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryComponentBuilder.cs" />
     <Compile Include="SubTransformers\ArrayTypesCreator.cs" />
-    <Compile Include="SubTransformers\CompilerGeneratedClassesConverter.cs" />
     <Compile Include="SubTransformers\CompilerGeneratedClassesVerifier.cs" />
     <Compile Include="SubTransformers\DisplayClassFieldTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
@@ -111,7 +110,6 @@
     <Compile Include="SubTransformers\IStateMachineInvocationBuilder.cs" />
     <Compile Include="SubTransformers\StateMachineInvocationBuilder.cs" />
     <Compile Include="SubTransformers\IArrayTypesCreator.cs" />
-    <Compile Include="SubTransformers\ICompilerGeneratedClassesConverter.cs" />
     <Compile Include="SubTransformers\ICompilerGeneratedClassesVerifier.cs" />
     <Compile Include="SubTransformers\IDisplayClassFieldTransformer.cs" />
     <Compile Include="SubTransformers\IExpressionTransformer.cs" />
