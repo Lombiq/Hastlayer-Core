@@ -73,6 +73,10 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 return typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
             }
+            else if (memberReferenceExpression.Target is MemberReferenceExpression)
+            {
+                return ((MemberReferenceExpression)memberReferenceExpression.Target).GetTargetTypeDeclaration(typeDeclarationLookupTable);
+            }
             else
             {
                 // The member is within this class.
