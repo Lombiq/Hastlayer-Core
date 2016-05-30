@@ -68,7 +68,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else
             {
-                var invocationIndexVariableName = CreateInvocationIndexVariableName(stateMachine, targetMethodName);
+                var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
                 var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
                 {
                     RangeMax = maxDegreeOfParallelism
@@ -229,12 +229,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             block.Add(InvokationHelper.CreateInvokationStart(stateMachine, targetMethodName, index));
 
             return block;
-        }
-
-
-        private static string CreateInvocationIndexVariableName(IMemberStateMachine stateMachine, string targetMethodName)
-        {
-            return stateMachine.CreatePrefixedSegmentedObjectName(targetMethodName, "invocationIndex");
         }
     }
 }
