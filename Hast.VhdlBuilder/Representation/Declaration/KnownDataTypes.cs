@@ -90,8 +90,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             DefaultValue = "0".ToVhdlValue(_stdLogic)
         };
 
-        private static DataType _stdLogicVector32 = new StdLogicVector { Size = 32 };
-        public static DataType StdLogicVector32 = new DataType(_stdLogicVector32)
+        private static StdLogicVector _stdLogicVector32 = new StdLogicVector { Size = 32 };
+        public static StdLogicVector StdLogicVector32 = new StdLogicVector(_stdLogicVector32)
         {
             DefaultValue = "0".ToVhdlValue(_stdLogicVector32)
         };
