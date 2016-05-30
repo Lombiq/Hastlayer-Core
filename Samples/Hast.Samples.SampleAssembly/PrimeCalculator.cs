@@ -44,8 +44,8 @@ namespace Hast.Samples.SampleAssembly
             IsPrimeNumber(memory);
 
             // For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized
-            // interface method async with Task.FromResult(). In .NET 4.6+ Task.CompletedTask can be used too.
-            return Task.FromResult(true);
+            // interface method async with Task.FromResult(). In .NET <4.6 Task.FromResult(true) can be used too.
+            return Task.CompletedTask;
         }
 
         public virtual void ArePrimeNumbers(SimpleMemory memory)
