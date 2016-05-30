@@ -10,7 +10,6 @@ using Hast.Common.Configuration;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
-using Hast.Transformer.Extensions;
 using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
@@ -28,9 +27,9 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
 
             // Summarizing which member was invoked with how many instances from which component.
-            foreach (var component in components.Where(component => component.OtherMemberMaxInvokationInstanceCounts.Any()))
+            foreach (var component in components.Where(component => component.OtherMemberMaxInvocationInstanceCounts.Any()))
             {
-                foreach (var memberInvokationCount in component.OtherMemberMaxInvokationInstanceCounts)
+                foreach (var memberInvokationCount in component.OtherMemberMaxInvocationInstanceCounts)
                 {
                     var memberName = memberInvokationCount.Key;
 

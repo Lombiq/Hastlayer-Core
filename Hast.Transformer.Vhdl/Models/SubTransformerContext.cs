@@ -28,10 +28,16 @@ namespace Hast.Transformer.Vhdl.Models
         IDictionary<string, string> VariableToDisplayClassMappings { get; }
 
         /// <summary>
-        /// Keeps track of the name of those variables that store arrays of <see cref="System.Threading.Tasks.Task"/>
-        /// objects (e.g. Task<bool>[] array).
+        /// Maps the names of variables that store object references to compiler-generated Func<TIn, TOut> objects that
+        /// are then populated with references to DisplayClasse methods.
         /// </summary>
-        ISet<string> TaskArrayVariableNames { get; }
+        IDictionary<string, string> VariableToDisplayClassMethodMappings { get; }
+
+        /// <summary>
+        /// Keeps track of the name of those variables that store references to Tasks and then later the Task results
+        /// fetched from them via Task.Result.
+        /// </summary>
+        ISet<string> TaskReferencingVariableNames { get; }
 
         /// <summary>
         /// Keeps track of the name of those variables that store references to 
@@ -65,7 +71,8 @@ namespace Hast.Transformer.Vhdl.Models
         public IMemberStateMachine StateMachine { get; set; }
         public ICurrentBlock CurrentBlock { get; set; }
         public IDictionary<string, string> VariableToDisplayClassMappings { get; } = new Dictionary<string, string>();
-        public ISet<string> TaskArrayVariableNames { get; } = new HashSet<string>();
+        public IDictionary<string, string> VariableToDisplayClassMethodMappings { get; } = new Dictionary<string, string>();
+        public ISet<string> TaskReferencingVariableNames { get; } = new HashSet<string>();
         public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
     }
 

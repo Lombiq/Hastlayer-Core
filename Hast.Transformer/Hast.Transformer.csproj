@@ -67,6 +67,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
     <Compile Include="Extensions\TransformationContextExtensions.cs" />
+    <Compile Include="Extensions\InvokationInstanceCountTransformerConfigurationExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />
     <Compile Include="Models\DeclarationReferenceMetadata.cs" />

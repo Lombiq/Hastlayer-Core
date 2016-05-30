@@ -13,7 +13,7 @@ namespace Hast.Transformer.Visitors
     /// When a member's instance count is >1 the members invoked by it should have at least that instance count. This
     /// visitor adjusts these instance counts.
     /// </summary>
-    public class InvokationInstanceCountAdjustingVisitor : DepthFirstAstVisitor
+    internal class InvokationInstanceCountAdjustingVisitor : DepthFirstAstVisitor
     {
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly TransformerConfiguration _transformerConfiguration;
@@ -37,11 +37,10 @@ namespace Hast.Transformer.Visitors
             if (referencedMember == null) return;
 
             var referencedMemberMaxInvokationConfiguration = _transformerConfiguration
-                .GetMaxInvokationInstanceCountConfigurationForMember(referencedMember.GetSimpleName());
+                .GetMaxInvokationInstanceCountConfigurationForMember(referencedMember);
 
-            var invokingMemberSimpleName = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>().GetSimpleName();
             var invokingMemberMaxInvokationConfiguration = _transformerConfiguration
-                .GetMaxInvokationInstanceCountConfigurationForMember(invokingMemberSimpleName);
+                .GetMaxInvokationInstanceCountConfigurationForMember(memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>());
 
             if (invokingMemberMaxInvokationConfiguration.MaxInvokationInstanceCount > referencedMemberMaxInvokationConfiguration.MaxInvokationInstanceCount)
             {

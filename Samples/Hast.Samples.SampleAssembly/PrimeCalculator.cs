@@ -80,7 +80,20 @@ namespace Hast.Samples.SampleAssembly
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
                     tasks[m] = Task.Factory.StartNew<bool>(
-                        indexObject => IsPrimeNumberInternal(numbers[(int)indexObject]),
+                        indexObject =>
+                        {
+                            // This is a copy of the body of IsPrimeNumberInternal(). We could also call that method
+                            // from this lambda but it's more efficient to just do it directly, not adding indirection.
+                            var number = numbers[(int)indexObject];
+                            uint factor = number / 2;
+
+                            for (uint x = 2; x <= factor; x++)
+                            {
+                                if ((number % x) == 0) return false;
+                            }
+
+                            return true;
+                        },
                         m);
                 }
 

@@ -19,7 +19,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public IList<Variable> GlobalVariables { get; private set; }
         public IList<Signal> InternallyDrivenSignals { get; private set; }
         public IList<Signal> ExternallyDrivenSignals { get; private set; }
-        public IDictionary<string, int> OtherMemberMaxInvokationInstanceCounts { get; private set; }
+        public IDictionary<string, int> OtherMemberMaxInvocationInstanceCounts { get; private set; }
 
 
         protected ArchitectureComponentBase(string name)
@@ -30,7 +30,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             GlobalVariables = new List<Variable>();
             InternallyDrivenSignals = new List<Signal>();
             ExternallyDrivenSignals = new List<Signal>();
-            OtherMemberMaxInvokationInstanceCounts = new Dictionary<string, int>();
+            OtherMemberMaxInvocationInstanceCounts = new Dictionary<string, int>();
         }
 
 

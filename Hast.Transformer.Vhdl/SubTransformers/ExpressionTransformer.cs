@@ -27,6 +27,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
         private readonly IDeviceDriver _deviceDriver;
         private readonly IBinaryOperatorExpressionTransformer _binaryOperatorExpressionTransformer;
+        private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
 
         public ILogger Logger { get; set; }
 
@@ -37,7 +38,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IInvocationExpressionTransformer invocationExpressionTransformer,
             IArrayCreateExpressionTransformer arrayCreateExpressionTransformer,
             IDeviceDriver deviceDriver,
-            IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer)
+            IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
+            IStateMachineInvocationBuilder stateMachineInvocationBuilder)
         {
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
@@ -45,6 +47,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
             _deviceDriver = deviceDriver;
             _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
+            _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
 
             Logger = NullLogger.Instance;
         }
@@ -113,10 +116,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     return assignmentsBlock;
                 }
-                // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will be
-                // like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0 ();
                 else
                 {
+                    var scope = context.Scope;
+
+                    // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
+                    // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
                     var rightObjectCreateExpression = assignment.Right as ObjectCreateExpression;
                     string rightObjectFullName;
                     if (rightObjectCreateExpression != null &&
@@ -126,9 +131,46 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         if (leftIdentifierExpression != null)
                         {
-                            context.Scope.VariableToDisplayClassMappings[leftIdentifierExpression.Identifier] =
-                                rightObjectFullName;
+                            scope.VariableToDisplayClassMappings[leftIdentifierExpression.Identifier] = rightObjectFullName;
                         }
+
+                        return Empty.Instance;
+                    }
+                    // Omitting assignments like arg_97_0 = Task.Factory;
+                    else if (assignment.Left.Is<IdentifierExpression>(identifier =>
+                        scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))
+                    {
+                        return Empty.Instance;
+                    }
+                    // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
+                    else if (assignment.Right.Is<InvocationExpression>(invocation => 
+                        invocation.Target.Is<MemberReferenceExpression>(member => 
+                            member.MemberName == "StartNew" &&
+                            member.Target.Is<IdentifierExpression>(identifier => 
+                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))))
+                    {
+                        var taskStartArguments = ((InvocationExpression)assignment.Right).Arguments;
+
+                        // The first argument is always for the Func that referes to the method on the DisplayClass
+                        // generated for the lambda expression originally passed to the Task factory.
+                        var funcVariablename = ((IdentifierExpression)taskStartArguments.First()).Identifier;
+                        var targetMethodName = scope.VariableToDisplayClassMethodMappings[funcVariablename];
+
+                        var targetNameParts = targetMethodName.Split(new[] { "::" }, StringSplitOptions.RemoveEmptyEntries);
+                        // Cutting off the return type name.
+                        var targetTypeName = targetNameParts[0].Substring(targetNameParts[0].IndexOf(' ') + 1);
+                        var targetMethod = context.TransformationContext.TypeDeclarationLookupTable
+                            .Lookup(targetTypeName)
+                            .Members
+                            // Since it's a DisplayClass there will be only one matching method for sure.
+                            .Single(member => member.GetFullName() == targetMethodName);
+
+                        // We only need to care about he invocation here. Since this is a Task start there will be
+                        // some form of await later.
+                        _stateMachineInvocationBuilder.BuildInvocation(
+                            targetMethod,
+                            taskStartArguments.Skip(1).Select(argument => Transform(argument, context)),
+                            context);
 
                         return Empty.Instance;
                     }
@@ -237,29 +279,33 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 var targetIdentifier = (memberReference.Target as IdentifierExpression)?.Identifier;
-                string displayClassName;
-                if (context.Scope.VariableToDisplayClassMappings.TryGetValue(targetIdentifier, out displayClassName))
+                if (targetIdentifier != null)
                 {
-                    // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
-                    if (memberReference.MemberName.EndsWith("__this"))
+                    string displayClassName;
+                    if (context.Scope.VariableToDisplayClassMappings.TryGetValue(targetIdentifier, out displayClassName))
                     {
-                        return Empty.Instance;
-                    }
-                    // Otherwise this is field access on the DisplayClass object (the field was created to pass variables
-                    // from the local scope to the method generated from the lambda expression). Can look something like:
-                    // <>c__DisplayClass9_.numbers = new uint[35];
-                    else
-                    {
-                        return context.TransformationContext.TypeDeclarationLookupTable
-                            .Lookup(displayClassName)
-                            .Members
-                            .Single(member => member
-                                .Is<FieldDeclaration>(field => field.Variables.Single().Name == memberReference.MemberName))
-                            .GetFullName()
-                            .ToExtendedVhdlId()
-                            .ToVhdlVariableReference();
+                        // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
+                        if (memberReference.MemberName.EndsWith("__this"))
+                        {
+                            return Empty.Instance;
+                        }
+                        // Otherwise this is field access on the DisplayClass object (the field was created to pass variables
+                        // from the local scope to the method generated from the lambda expression). Can look something like:
+                        // <>c__DisplayClass9_.numbers = new uint[35];
+                        else
+                        {
+                            return context.TransformationContext.TypeDeclarationLookupTable
+                                .Lookup(displayClassName)
+                                .Members
+                                .Single(member => member
+                                    .Is<FieldDeclaration>(field => field.Variables.Single().Name == memberReference.MemberName))
+                                .GetFullName()
+                                .ToExtendedVhdlId()
+                                .ToVhdlVariableReference();
+                        }
                     }
                 }
+
 
                 throw new NotSupportedException("Transformation of the member reference expression " + memberReference + " is not supported.");
             }
@@ -327,7 +373,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is CastExpression)
             {
-                return TransformCastExpression((CastExpression)expression, context);
+                var castExpression = (CastExpression)expression;
+
+                var fromType = _typeConverter.ConvertTypeReference(
+                    castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference());
+                var toType = _typeConverter.ConvertAstType(castExpression.Type);
+
+                var typeConversionResult = _typeConversionTransformer
+                    .ImplementTypeConversion(fromType, toType, Transform(castExpression.Expression, context));
+                if (typeConversionResult.IsLossy)
+                {
+                    var toTypeKeyword = ((PrimitiveType)castExpression.Type).Keyword;
+                    var fromTypeKeyword = castExpression.GetActualTypeReference().FullName;
+                    Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
+                }
+
+                return typeConversionResult.Expression;
             }
             else if (expression is ArrayCreateExpression)
             {
@@ -372,24 +433,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     expression.GetType() + " are not supported. The expression was: " +
                     expression.ToString());
             }
-        }
-
-
-        private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context)
-        {
-            var fromType = _typeConverter.ConvertTypeReference(
-                expression.Expression.GetActualTypeReference() ?? expression.GetActualTypeReference());
-            var toType = _typeConverter.ConvertAstType(expression.Type);
-
-            var typeConversionResult = _typeConversionTransformer
-                .ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context));
-            if (typeConversionResult.IsLossy)
-            {
-                var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
-                var fromTypeKeyword = expression.GetActualTypeReference().FullName;
-                Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
-            }
-            return typeConversionResult.Expression;
         }
     }
 }

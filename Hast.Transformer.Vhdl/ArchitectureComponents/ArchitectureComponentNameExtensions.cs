@@ -44,7 +44,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         }
 
         /// <summary>
-        /// Creates a VHDL object (i.e. signal or variable) name prefixes with the component's name.
+        /// Creates a VHDL object (i.e. signal or variable) name prefixed with the component's name.
         /// </summary>
         public static string CreatePrefixedObjectName(this IArchitectureComponent component, string name)
         {

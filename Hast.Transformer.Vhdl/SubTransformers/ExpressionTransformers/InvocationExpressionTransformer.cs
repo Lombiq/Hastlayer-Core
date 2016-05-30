@@ -21,12 +21,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     // structure, not to have one giant TransformInvocationExpression method.
     public class InvocationExpressionTransformer : IInvocationExpressionTransformer
     {
-        private readonly ITypeConverter _typeConverter;
+        private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
 
 
-        public InvocationExpressionTransformer(ITypeConverter typeConverter)
+        public InvocationExpressionTransformer(IStateMachineInvocationBuilder stateMachineInvocationBuilder)
         {
-            _typeConverter = typeConverter;
+            _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
         }
 
 
@@ -203,8 +203,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             MemberReferenceExpression targetMemberReference,
             ISubTransformerContext context)
         {
-            var stateMachine = context.Scope.StateMachine;
-            var currentBlock = context.Scope.CurrentBlock;
             var targetMethodName = expression.GetFullName();
 
             // This is a Task.FromResult() method call.
@@ -240,119 +238,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
 
-            var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
-                .GetMaxInvokationInstanceCountConfigurationForMember(targetDeclaration.GetSimpleName()).MaxDegreeOfParallelism;
-            // Eventually this should be determined, dummy value for now.
-            var currentInvokationDegreeOfParallelism = 1;
+            _stateMachineInvocationBuilder
+                .BuildInvocation(targetDeclaration, transformedParameters, context);
 
-            if (currentInvokationDegreeOfParallelism > maxDegreeOfParallelism)
-            {
-                throw new InvalidOperationException(
-                    "This parallelized call from " + context.Scope.Method + " to " + targetMethodName + " would do " +
-                    currentInvokationDegreeOfParallelism +
-                    " calls in parallel but the maximal degree of parallelism for this member was set up as " +
-                    maxDegreeOfParallelism + ".");
-            }
-
-            int previousMaxCallInstanceCount;
-            if (!stateMachine.OtherMemberMaxInvokationInstanceCounts.TryGetValue(targetMethodName, out previousMaxCallInstanceCount) ||
-                previousMaxCallInstanceCount < currentInvokationDegreeOfParallelism)
-            {
-                stateMachine.OtherMemberMaxInvokationInstanceCounts[targetMethodName] = currentInvokationDegreeOfParallelism;
-            }
-
-
-            currentBlock.Add(new LineComment("Starting state machine invocation (transformed from a method call)."));
-
-
-            for (int i = 0; i < currentInvokationDegreeOfParallelism; i++)
-            {
-                var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, i);
-
-                var methodParametersEnumerator = ((MethodDeclaration)targetDeclaration).Parameters
-                    .Where(parameter => !parameter.IsSimpleMemoryParameter())
-                    .GetEnumerator();
-                methodParametersEnumerator.MoveNext();
-
-                foreach (var parameter in transformedParameters)
-                {
-                    // Adding variable for parameter passing if it doesn't exist.
-                    var currentParameter = methodParametersEnumerator.Current;
-
-                    var parameterVariableName = stateMachine
-                        .CreatePrefixedSegmentedObjectName(
-                            ArchitectureComponentNameHelper
-                                .CreateParameterVariableName(targetMethodName, currentParameter.Name).TrimExtendedVhdlIdDelimiters(),
-                            i.ToString());
-
-                    stateMachine.GlobalVariables.AddIfNew(new ParameterVariable(targetMethodName, currentParameter.Name)
-                    {
-                        DataType = _typeConverter.ConvertAstType(currentParameter.Type),
-                        Name = parameterVariableName,
-                        Index = i
-                    });
-
-
-                    // Assign local values to be passed to the intermediary variable.
-                    currentBlock.Add(new Assignment
-                    {
-                        AssignTo = parameterVariableName.ToVhdlVariableReference(),
-                        Expression = parameter
-                    });
-
-                    methodParametersEnumerator.MoveNext();
-                }
-
-
-                currentBlock.Add(InvokationHelper.CreateInvokationStart(stateMachine, targetMethodName, i));
-            }
-
-
-            var waitForInvokationFinishedIfElse = InvokationHelper
-                .CreateWaitForInvokationFinished(stateMachine, targetMethodName, currentInvokationDegreeOfParallelism);
-
-            var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
-            var waitForInvokedStateMachinesToFinishState = new InlineBlock(
-                new GeneratedComment(vhdlGenerationOptions =>
-                    "Waiting for the state machine invocation to finish, which was started in state " +
-                    vhdlGenerationOptions.NameShortener(currentStateName) +
-                    "."),
-                waitForInvokationFinishedIfElse);
-
-            var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachinesToFinishState);
-            currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
-
-            currentBlock.ChangeBlockToDifferentState(waitForInvokationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
-
-            // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to 
-            // a non-void method).
-            if (!(expression.Parent is ExpressionStatement))
-            {
-                // Using the references of the state machines' return values in place of the original method calls.
-                var returnVariableReferences = new List<DataObjectReference>();
-
-                for (int i = 0; i < currentInvokationDegreeOfParallelism; i++)
-                {
-                    // Creating return variable if it doesn't exist.
-                    var returnVariableName = stateMachine.CreateReturnVariableNameForTargetComponent(targetMethodName, i);
-
-                    stateMachine.GlobalVariables.AddIfNew(new Variable
-                    {
-                        DataType = _typeConverter.ConvertTypeReference(expression.GetReturnTypeReference()),
-                        Name = returnVariableName
-                    });
-
-
-                    returnVariableReferences.Add(returnVariableName.ToVhdlVariableReference());
-                }
-
-                // Just handling a single method call now, parallelization will come later.
-                return returnVariableReferences[0];
-            }
-            else
-            {
-                return Empty.Instance;
-            }
+            return _stateMachineInvocationBuilder.BuildInvocationWait(targetDeclaration, 1, context).Single();
         }
     }
 }
