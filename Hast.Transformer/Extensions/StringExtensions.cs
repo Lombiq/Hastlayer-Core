@@ -36,10 +36,12 @@ namespace System
         /// <example>
         /// Such a name is like following: 
         /// "Hast.Samples.SampleAssembly.PrimeCalculator/<>c__DisplayClass9_0"
+        /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c"
         /// </example>
         public static bool IsDisplayClassName(this string name)
         {
-            return name.Contains("/<>") && name.Contains("__DisplayClass");
+            // A class anme containing "<>" would be invalid, so this is a fairly safe bet.
+            return name.Contains("/<>c");
         }
 
         /// <summary>
