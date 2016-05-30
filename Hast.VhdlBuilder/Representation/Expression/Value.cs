@@ -3,6 +3,7 @@ using Hast.VhdlBuilder.Extensions;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -11,10 +12,14 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         public static readonly Value True = "true".ToVhdlIdValue();
         public static readonly Value False = "false".ToVhdlIdValue();
-        public static readonly Value ZeroCharacter = new Character('0');
-        public static readonly Value OneCharacter = new Character('1');
 
-        
+        // These below need to be Lazy, because otherwise there would be a circular dependency between the static
+        // ctors with KnownDataTypes (since it uses ToVhdlValue() and thus this class a lot for default values).
+        private static readonly Lazy<Value> _zeroCharacterLazy = new Lazy<Value>(() => new Character('0'));
+        public static Value ZeroCharacter { get { return _zeroCharacterLazy.Value; } }
+        private static readonly Lazy<Value> _oneCharacterLazy = new Lazy<Value>(() => new Character('1'));
+        public static Value OneCharacter { get { return _oneCharacterLazy.Value; } }
+
         public DataType DataType { get; set; }
         public string Content { get; set; }
 

@@ -7,25 +7,16 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public static class KnownDataTypes
     {
-        // Without this static ctor the fields, even when actually used, wouldn't be initialized.
-        // See: http://stackoverflow.com/questions/3580171/static-member-variable-not-being-initialized-in-release-compiler-clr-bug
-        static KnownDataTypes()
+        private static DataType _bit = new DataType { TypeCategory = DataTypeCategory.Character, Name = "bit" };
+        public static DataType Bit = new DataType(_bit)
         {
-        }
-
-
-        public static DataType Bit = new DataType
-        {
-            TypeCategory = DataTypeCategory.Character,
-            Name = "bit",
-            DefaultValue = Value.ZeroCharacter
+            DefaultValue = "0".ToVhdlValue(_bit)
         };
 
-        public static DataType Boolean = new DataType
+        private static DataType _boolean = new DataType { TypeCategory = DataTypeCategory.Identifier, Name = "boolean" };
+        public static DataType Boolean = new DataType(_boolean)
         {
-            TypeCategory = DataTypeCategory.Identifier,
-            Name = "boolean",
-            DefaultValue = Value.False
+            DefaultValue = "false".ToVhdlValue(_boolean)
         };
 
         private static DataType _character = new DataType { TypeCategory = DataTypeCategory.Character, Name = "character" };
