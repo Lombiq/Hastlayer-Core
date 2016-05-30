@@ -71,7 +71,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
                 var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
                 {
-                    RangeMax = maxDegreeOfParallelism
+                    RangeMax = (uint)maxDegreeOfParallelism - 1
                 };
                 var invocationIndexVariableReference = invocationIndexVariableName.ToVhdlVariableReference();
                 stateMachine.LocalVariables.AddIfNew(new Variable
