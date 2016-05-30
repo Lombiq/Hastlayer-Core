@@ -403,7 +403,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (targetVariableReference == null)
                 {
-                    throw new InvalidOperationException("The target of the indexer expression " + expression.ToString() + " wasn't transformed to a data object reference.");
+                    throw new InvalidOperationException("The target of the indexer expression " + expression.ToString() + " couldn't be transformed to a data object reference.");
                 }
 
                 if (indexerExpression.Arguments.Count != 1)
@@ -411,10 +411,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     throw new NotSupportedException("Accessing elements of only single-dimensional arrays are supported.");
                 }
 
+                var indexExpression = indexerExpression.Arguments.Single();
                 return new ArrayElementAccess
                 {
                     Array = targetVariableReference,
-                    IndexExpression = Transform(indexerExpression.Arguments.Single(), context)
+                    IndexExpression = _typeConversionTransformer
+                        .ImplementTypeConversion(
+                            _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference()),
+                            KnownDataTypes.UnrangedInt,
+                            Transform(indexExpression, context))
+                        .Expression
                 };
             }
             else if (expression is ParenthesizedExpression)

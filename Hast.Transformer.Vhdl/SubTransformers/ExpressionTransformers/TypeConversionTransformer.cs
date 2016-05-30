@@ -177,27 +177,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 castInvokation.Target = "unsigned".ToVhdlIdValue();
                 resizeToToSizeIfNeeded();
             }
+            else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.UnrangedInt)
+            {
+                result.IsLossy = true;
+                castInvokation.Target = "to_integer".ToVhdlIdValue();
+            }
 
 
             if (fromType == KnownDataTypes.StdLogicVector32)
             {
-                castInvokation.Target = "to_integer".ToVhdlIdValue();
-                castInvokation.Parameters.Clear();
-                var signednessInvokation = new Invokation();
-                signednessInvokation.Parameters.Add(expression);
-                castInvokation.Parameters.Add(signednessInvokation);
-
                 if (KnownDataTypes.SignedIntegers.Contains(toType))
                 {
-                    signednessInvokation.Target = "signed".ToVhdlIdValue();
+                    castInvokation.Target = "signed".ToVhdlIdValue();
                 }
-                else if (toType == KnownDataTypes.UInt16)
+                else if (KnownDataTypes.UnsignedIntegers.Contains(toType))
                 {
-                    signednessInvokation.Target = "unsigned".ToVhdlIdValue();
-                }
-                else
-                {
-                    castInvokation.Target = null;
+                    castInvokation.Target = "unsigned".ToVhdlIdValue();
                 }
             }
 
