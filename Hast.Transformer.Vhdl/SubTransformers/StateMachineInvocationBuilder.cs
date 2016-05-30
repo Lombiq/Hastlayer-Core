@@ -210,16 +210,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                 // Assign local values to be passed to the intermediary variable.
-                block.Add(new Assignment
+                var assignmentExpression = parameter;
+                // Only trying casting if the parameter is not a constant or something other than an IDataObject.
+                if (parameter is IDataObject)
                 {
-                    AssignTo = parameterVariableName.ToVhdlVariableReference(),
-                    Expression = _typeConversionTransformer
+                    assignmentExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
                             stateMachine.LocalVariables
                                 .Single(variable => variable.Name == ((IDataObject)parameter).Name).DataType,
                             parameterVariableType,
                             parameter)
-                        .Expression
+                        .Expression;
+                }
+                block.Add(new Assignment
+                {
+                    AssignTo = parameterVariableName.ToVhdlVariableReference(),
+                    Expression = assignmentExpression
                 });
 
                 methodParametersEnumerator.MoveNext();
