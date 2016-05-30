@@ -12,17 +12,22 @@ using ICSharpCode.NRefactory.CSharp;
 using Hast.VhdlBuilder.Extensions;
 using Hast.Transformer.Models;
 using Hast.Common.Configuration;
+using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class StateMachineInvocationBuilder : IStateMachineInvocationBuilder
     {
         private readonly ITypeConverter _typeConverter;
+        private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
-        public StateMachineInvocationBuilder(ITypeConverter typeConverter)
+        public StateMachineInvocationBuilder(
+            ITypeConverter typeConverter,
+            ITypeConversionTransformer typeConversionTransformer)
         {
             _typeConverter = typeConverter;
+            _typeConversionTransformer = typeConversionTransformer;
         }
 
 
@@ -194,9 +199,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             .CreateParameterVariableName(targetMethodName, currentParameter.Name).TrimExtendedVhdlIdDelimiters(),
                         index.ToString());
 
+                var parameterVariableType = _typeConverter.ConvertAstType(currentParameter.Type);
                 stateMachine.GlobalVariables.AddIfNew(new ParameterVariable(targetMethodName, currentParameter.Name)
                 {
-                    DataType = _typeConverter.ConvertAstType(currentParameter.Type),
+                    DataType = parameterVariableType,
                     Name = parameterVariableName,
                     Index = index
                 });
@@ -206,7 +212,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 block.Add(new Assignment
                 {
                     AssignTo = parameterVariableName.ToVhdlVariableReference(),
-                    Expression = parameter
+                    Expression = _typeConversionTransformer
+                        .ImplementTypeConversion(
+                            stateMachine.LocalVariables
+                                .Single(variable => variable.Name == ((IDataObject)parameter).Name).DataType,
+                            parameterVariableType,
+                            parameter)
+                        .Expression
                 });
 
                 methodParametersEnumerator.MoveNext();

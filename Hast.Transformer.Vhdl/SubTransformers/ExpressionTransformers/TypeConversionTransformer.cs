@@ -183,7 +183,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 castInvokation.Target = "to_integer".ToVhdlIdValue();
             }
 
-
             if (fromType == KnownDataTypes.StdLogicVector32)
             {
                 if (KnownDataTypes.SignedIntegers.Contains(toType))
@@ -194,6 +193,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     castInvokation.Target = "unsigned".ToVhdlIdValue();
                 }
+            }
+            if (toType == KnownDataTypes.StdLogicVector32)
+            {
+                castInvokation.Target = "std_logic_vector".ToVhdlIdValue();
             }
 
 
