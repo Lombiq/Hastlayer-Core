@@ -91,7 +91,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
 
                 // How many instances does this member have in form of components, e.g. how many state machines are
-                // there for this member? This is not necessaryil the same ans the invocation instance count.
+                // there for this member? This is not necessarily the same as the invocation instance count.
                 var targetComponentCount = transformationContext
                     .GetTransformerConfiguration()
                     .GetMaxInvocationInstanceCountConfigurationForMember(targetMemberName.ToSimpleName())
