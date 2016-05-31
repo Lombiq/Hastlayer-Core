@@ -40,13 +40,19 @@ namespace Hast.Samples.Consumer
                         var configuration = new HardwareGenerationConfiguration();
 
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.MonteCarloAlgorithm");
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm");
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
 
                         configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
                             new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumberInternal")
                             {
                                 MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
+                            });
+                        configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
+                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.LambdaExpression.0")
+                            {
+                                MaxDegreeOfParallelism = HastlayerOptimizedAlgorithm.MaxDegreeOfParallelism
                             });
                         configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
                             new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
@@ -71,6 +77,12 @@ namespace Hast.Samples.Consumer
 
                         // For testing transformation, we don't need anything else.
                         return;
+
+                        #region HastlayerOptimizedAlgorithm
+                        var hastlayerOptimizedAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new HastlayerOptimizedAlgorithm());
+
+                        var output = hastlayerOptimizedAlgorithm.Run(234234);
+                        #endregion
 
                         #region PrimeCalculator
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
