@@ -121,16 +121,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var fromSize = fromType is SizedDataType ? getSize(fromType) : 0;
             var toSize = toType is SizedDataType ? getSize(toType) : 0;
 
-            var castInvokation = new Invokation();
-            castInvokation.Parameters.Add(expression);
+            var castInvocation = new Invocation();
+            castInvocation.Parameters.Add(expression);
 
-            Action<int> convertInvokationToResizeAndAddSizeParameter = size =>
+            Action<int> convertInvocationToResizeAndAddSizeParameter = size =>
             {
                 // Resize is supposed to work with little endian numbers: "When truncating, the sign bit is retained
                 // along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
                 // dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
-                castInvokation.Target = "resize".ToVhdlIdValue();
-                castInvokation.Parameters
+                castInvocation.Target = "resize".ToVhdlIdValue();
+                castInvocation.Parameters
                     .Add(size.ToVhdlValue(KnownDataTypes.UnrangedInt));
             };
 
@@ -139,10 +139,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // The from type should be resized to fit into the to type.
                 if (fromSize != toSize)
                 {
-                    var resizeInvokation = new Invokation();
-                    resizeInvokation.Parameters.Add(castInvokation);
-                    castInvokation = resizeInvokation;
-                    convertInvokationToResizeAndAddSizeParameter(toSize);
+                    var resizeInvocation = new Invocation();
+                    resizeInvocation.Parameters.Add(castInvocation);
+                    castInvocation = resizeInvocation;
+                    convertInvocationToResizeAndAddSizeParameter(toSize);
                 }
             };
 
@@ -155,58 +155,58 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 if (getSize(fromType) > toSize)
                 {
                     result.IsLossy = true;
-                    convertInvokationToResizeAndAddSizeParameter(toSize);
+                    convertInvocationToResizeAndAddSizeParameter(toSize);
                 }
                 else return result;
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.Real)
             {
-                castInvokation.Target = "real".ToVhdlIdValue();
+                castInvocation.Target = "real".ToVhdlIdValue();
             }
             else if (KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType))
             {
                 // If the full scale of the uint wouldn't fit.
                 result.IsLossy = fromSize > toSize / 2;
 
-                castInvokation.Target = "signed".ToVhdlIdValue();
+                castInvocation.Target = "signed".ToVhdlIdValue();
                 resizeToToSizeIfNeeded();
             }
             else if (KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
             {
                 result.IsLossy = true;
-                castInvokation.Target = "unsigned".ToVhdlIdValue();
+                castInvocation.Target = "unsigned".ToVhdlIdValue();
                 resizeToToSizeIfNeeded();
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.UnrangedInt)
             {
                 result.IsLossy = true;
-                castInvokation.Target = "to_integer".ToVhdlIdValue();
+                castInvocation.Target = "to_integer".ToVhdlIdValue();
             }
 
             if (fromType == KnownDataTypes.StdLogicVector32)
             {
                 if (KnownDataTypes.SignedIntegers.Contains(toType))
                 {
-                    castInvokation.Target = "signed".ToVhdlIdValue();
+                    castInvocation.Target = "signed".ToVhdlIdValue();
                 }
                 else if (KnownDataTypes.UnsignedIntegers.Contains(toType))
                 {
-                    castInvokation.Target = "unsigned".ToVhdlIdValue();
+                    castInvocation.Target = "unsigned".ToVhdlIdValue();
                 }
             }
             if (toType == KnownDataTypes.StdLogicVector32)
             {
-                castInvokation.Target = "std_logic_vector".ToVhdlIdValue();
+                castInvocation.Target = "std_logic_vector".ToVhdlIdValue();
             }
 
 
-            if (castInvokation.Target == null)
+            if (castInvocation.Target == null)
             {
                 throw new NotSupportedException("Casting from " + fromType.Name + " to " + toType.Name + " is not supported.");
             }
 
 
-            result.Expression = castInvokation;
+            result.Expression = castInvocation;
             return result;
         }
 

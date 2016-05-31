@@ -85,7 +85,7 @@
     <Compile Include="Representation\Expression\DataTypeReference.cs" />
     <Compile Include="Representation\Expression\If.cs" />
     <Compile Include="Representation\Expression\IdentifierValue.cs" />
-    <Compile Include="Representation\Expression\Invokation.cs" />
+    <Compile Include="Representation\Expression\Invocation.cs" />
     <Compile Include="Representation\Expression\IfElse.cs" />
     <Compile Include="Representation\Expression\BinaryOperator.cs" />
     <Compile Include="Representation\Expression\Parenthesized.cs" />

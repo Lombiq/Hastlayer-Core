@@ -61,7 +61,7 @@
     <Compile Include="ArchitectureComponents\ArchitectureComponentDataObjectExtensions.cs" />
     <Compile Include="ArchitectureComponents\BasicComponent.cs" />
     <Compile Include="ArchitectureComponents\ConfigurableComponent.cs" />
-    <Compile Include="ArchitectureComponents\InvokationHelper.cs" />
+    <Compile Include="ArchitectureComponents\InvocationHelper.cs" />
     <Compile Include="ArchitectureComponents\IArchitectureComponent.cs" />
     <Compile Include="Constants\SpecialTypes.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
@@ -75,11 +75,11 @@
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
     <Compile Include="ArchitectureComponents\ArchitectureComponentBase.cs" />
     <Compile Include="Helpers\ArrayTypeNameHelper.cs" />
-    <Compile Include="InvokationProxyBuilders\ExternalInvokationProxyBuilder.cs" />
-    <Compile Include="InvokationProxyBuilders\IExternalInvokationProxyBuilder.cs" />
-    <Compile Include="InvokationProxyBuilders\IInternalInvokationProxyBuilder.cs" />
+    <Compile Include="InvocationProxyBuilders\ExternalInvocationProxyBuilder.cs" />
+    <Compile Include="InvocationProxyBuilders\IExternalInvocationProxyBuilder.cs" />
+    <Compile Include="InvocationProxyBuilders\IInternalInvocationProxyBuilder.cs" />
     <Compile Include="SimpleMemory\ISimpleMemoryOperationProxyBuilder.cs" />
-    <Compile Include="InvokationProxyBuilders\InternalInvokationProxyBuilder.cs" />
+    <Compile Include="InvocationProxyBuilders\InternalInvocationProxyBuilder.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryOperationProxyBuilder.cs" />
     <Compile Include="Models\IMemberTransformerResult.cs" />
     <Compile Include="Models\IArchitectureComponentResult.cs" />

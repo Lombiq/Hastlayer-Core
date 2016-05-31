@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
-                .GetMaxInvokationInstanceCountConfigurationForMember(targetDeclaration).MaxDegreeOfParallelism;
+                .GetMaxInvocationInstanceCountConfigurationForMember(targetDeclaration).MaxDegreeOfParallelism;
 
             int previousMaxInvocationInstanceCount;
             if (!stateMachine.OtherMemberMaxInvocationInstanceCounts.TryGetValue(targetMethodName, out previousMaxInvocationInstanceCount) ||
@@ -130,21 +130,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var targetMethodName = targetDeclaration.GetFullName();
 
 
-            var waitForInvokationFinishedIfElse = InvokationHelper
-                .CreateWaitForInvokationFinished(stateMachine, targetDeclaration.GetFullName(), instanceCount, waitForAll);
+            var waitForInvocationFinishedIfElse = InvocationHelper
+                .CreateWaitForInvocationFinished(stateMachine, targetDeclaration.GetFullName(), instanceCount, waitForAll);
 
             var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
             var waitForInvokedStateMachinesToFinishState = new InlineBlock(
                 new LineComment(
                     "Waiting for the state machine invocation of the following method to finish: " + targetMethodName),
-                waitForInvokationFinishedIfElse);
+                waitForInvocationFinishedIfElse);
 
             var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachinesToFinishState);
             currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
 
             if (instanceCount > 1)
             {
-                waitForInvokationFinishedIfElse.True.Add(new Assignment
+                waitForInvocationFinishedIfElse.True.Add(new Assignment
                 {
                     AssignTo = stateMachine
                         .CreateInvocationIndexVariableName(targetMethodName)
@@ -153,7 +153,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 });
             }
 
-            currentBlock.ChangeBlockToDifferentState(waitForInvokationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
+            currentBlock.ChangeBlockToDifferentState(waitForInvocationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
 
 
             var returnType = _typeConverter.ConvertAstType(targetDeclaration.ReturnType);
@@ -243,7 +243,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
 
-            block.Add(InvokationHelper.CreateInvokationStart(stateMachine, targetMethodName, index));
+            block.Add(InvocationHelper.CreateInvocationStart(stateMachine, targetMethodName, index));
 
             return block;
         }

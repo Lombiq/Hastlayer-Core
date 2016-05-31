@@ -40,22 +40,22 @@ namespace Hast.Samples.Consumer
                         var configuration = new HardwareGenerationConfiguration();
 
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.MonteCarloAlgorithm");
-                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm");
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
 
-                        configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
-                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0")
+                        configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0")
                             {
                                 MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
                             });
-                        configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
-                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.LambdaExpression.0")
+                        configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.LambdaExpression.0")
                             {
                                 MaxDegreeOfParallelism = HastlayerOptimizedAlgorithm.MaxDegreeOfParallelism
                             });
-                        configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
-                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
+                        configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
                             {
                                 // If we give these algorithms inputs causing a larger recursion depth then that will
                                 // cause runtime problems.
@@ -71,7 +71,7 @@ namespace Hast.Samples.Consumer
                             configuration);
 
 
-                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest2\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
                         //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
 

@@ -348,7 +348,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         };
                     case UnaryOperatorType.Not:
                         // In VHDL there is no boolean negation operator, just the not() function.
-                        return new Invokation
+                        return new Invocation
                         {
                             Target = "not".ToVhdlValue(KnownDataTypes.Identifier),
                             Parameters = new List<IVhdlElement> { transformedExpression }

@@ -7,13 +7,13 @@ using Hast.VhdlBuilder.Extensions;
 namespace Hast.VhdlBuilder.Representation.Expression
 {
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class Invokation : IVhdlElement
+    public class Invocation : IVhdlElement
     {
         public IVhdlElement Target { get; set; }
         public List<IVhdlElement> Parameters { get; set; }
 
 
-        public Invokation()
+        public Invocation()
         {
             Parameters = new List<IVhdlElement>();
         }
@@ -29,7 +29,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class NamedInvokationParameter : IVhdlElement
+    public class NamedInvocationParameter : IVhdlElement
     {
         public INamedElement FormalParameter { get; set; }
         public INamedElement ActualParameter { get; set; }

@@ -12,9 +12,9 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 
-namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
+namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
-    public class InternalInvokationProxyBuilder : IInternalInvokationProxyBuilder
+    public class InternalInvocationProxyBuilder : IInternalInvocationProxyBuilder
     {
         public IEnumerable<IArchitectureComponent> BuildProxy(
             IEnumerable<IArchitectureComponent> components,
@@ -22,25 +22,25 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
         {
             var componentsByName = components.ToDictionary(component => component.Name);
 
-            // [invoked member name][from component name][invokation instance count]
+            // [invoked member name][from component name][invocation instance count]
             var invokedMembers = new Dictionary<string, List<KeyValuePair<string, int>>>();
 
 
             // Summarizing which member was invoked with how many instances from which component.
             foreach (var component in components.Where(component => component.OtherMemberMaxInvocationInstanceCounts.Any()))
             {
-                foreach (var memberInvokationCount in component.OtherMemberMaxInvocationInstanceCounts)
+                foreach (var memberInvocationCount in component.OtherMemberMaxInvocationInstanceCounts)
                 {
-                    var memberName = memberInvokationCount.Key;
+                    var targetMemberName = memberInvocationCount.Key;
 
                     List<KeyValuePair<string, int>> invokedFromList;
 
-                    if (!invokedMembers.TryGetValue(memberName, out invokedFromList))
+                    if (!invokedMembers.TryGetValue(targetMemberName, out invokedFromList))
                     {
-                        invokedMembers[memberName] = invokedFromList = new List<KeyValuePair<string, int>>();
+                        invokedMembers[targetMemberName] = invokedFromList = new List<KeyValuePair<string, int>>();
                     }
 
-                    invokedFromList.Add(new KeyValuePair<string, int>(component.Name, memberInvokationCount.Value));
+                    invokedFromList.Add(new KeyValuePair<string, int>(component.Name, memberInvocationCount.Value));
                 }
             }
 
@@ -48,7 +48,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
             var proxyComponents = new List<IArchitectureComponent>(invokedMembers.Count);
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would 
             // look from a generated state machine.
-            var namePrefix = "System.Void Hast::InternalInvokationProxy().";
+            var namePrefix = "System.Void Hast::InternalInvocationProxy().";
 
             var waitingForStartedStateValue = "WaitingForStarted".ToVhdlIdValue();
             var waitingForFinishedStateValue = "WaitingForFinished".ToVhdlIdValue();
@@ -91,10 +91,11 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
 
 
                 // How many instances does this member have in form of components, e.g. how many state machines are
-                // there for this member?
+                // there for this member? This is not necessaryil the same ans the invocation instance count.
                 var targetComponentCount = transformationContext
                     .GetTransformerConfiguration()
-                    .GetMaxInvokationInstanceCountConfigurationForMember(targetMemberName.ToSimpleName()).MaxInvokationInstanceCount;
+                    .GetMaxInvocationInstanceCountConfigurationForMember(targetMemberName.ToSimpleName())
+                    .MaxInvocationInstanceCount;
 
 
                 // Creating started variables for each indexed component of the member, e.g. all state machines of a 
@@ -138,13 +139,13 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 }
 
 
-                // Building the invokation handlers.
-                foreach (var invokation in invokedMember.Value)
+                // Building the invocation handlers.
+                foreach (var invocation in invokedMember.Value)
                 {
-                    var invokerName = invokation.Key;
-                    var invokationInstanceCount = invokation.Value;
+                    var invokerName = invocation.Key;
+                    var invocationInstanceCount = invocation.Value;
 
-                    for (int i = 0; i < invokationInstanceCount; i++)
+                    for (int i = 0; i < invocationInstanceCount; i++)
                     {
                         var runningIndexName = proxyComponent
                             .CreatePrefixedSegmentedObjectName(invokerName, "runningIndex", i.ToString());
@@ -170,9 +171,9 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                         });
 
 
-                        var invokationHandlerBlock = new LogicalBlock(
-                            new LineComment("Invokation handler corresponding to " + invokerName));
-                        bodyBlock.Add(invokationHandlerBlock);
+                        var invocationHandlerBlock = new LogicalBlock(
+                            new LineComment("Invocation handler corresponding to " + invokerName));
+                        bodyBlock.Add(invocationHandlerBlock);
 
 
                         var runningStateCase = new Case
@@ -264,12 +265,12 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                         {
                                             new If
                                             {
-                                                Condition = InvokationHelper
+                                                Condition = InvocationHelper
                                                     .CreateStartedSignalReference(invokerName, targetMemberName, i),
                                                 True = new InlineBlock(
                                                 new Assignment
                                                 {
-                                                    AssignTo = InvokationHelper
+                                                    AssignTo = InvocationHelper
                                                         .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                                                     Expression = Value.False
                                                 },
@@ -298,7 +299,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                     },
                                     new Assignment
                                     {
-                                        AssignTo = InvokationHelper
+                                        AssignTo = InvocationHelper
                                             .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                                         Expression = Value.True
                                     },
@@ -373,7 +374,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                                             {
                                                 new Assignment
                                                 {
-                                                    AssignTo = InvokationHelper
+                                                    AssignTo = InvocationHelper
                                                         .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                                                     Expression = Value.False
                                                 }
@@ -408,12 +409,12 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                         // Adding reset for the finished signal.
                         proxyInResetBlock.Add(new Assignment
                         {
-                            AssignTo = InvokationHelper
+                            AssignTo = InvocationHelper
                                 .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                             Expression = Value.False
                         });
 
-                        invokationHandlerBlock.Add(runningStateCase);
+                        invocationHandlerBlock.Add(runningStateCase);
                     }
                 }
 

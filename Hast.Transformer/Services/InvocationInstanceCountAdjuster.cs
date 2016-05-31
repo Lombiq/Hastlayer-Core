@@ -11,26 +11,26 @@ using Orchard;
 
 namespace Hast.Transformer.Services
 {
-    public interface IInvokationInstanceCountAdjuster : IDependency
+    public interface IInvocationInstanceCountAdjuster : IDependency
     {
-        void AdjustInvokationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
+        void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
     }
 
 
-    public class InvokationInstanceCountAdjuster : IInvokationInstanceCountAdjuster
+    public class InvocationInstanceCountAdjuster : IInvocationInstanceCountAdjuster
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
 
-        public InvokationInstanceCountAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory)
+        public InvocationInstanceCountAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory)
         {
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
         }
 
 
-        public void AdjustInvokationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
+        public void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
-            syntaxTree.AcceptVisitor(new InvokationInstanceCountAdjustingVisitor(
+            syntaxTree.AcceptVisitor(new InvocationInstanceCountAdjustingVisitor(
                 _typeDeclarationLookupTableFactory.Create(syntaxTree), 
                 configuration));
         }

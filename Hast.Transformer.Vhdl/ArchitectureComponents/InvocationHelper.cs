@@ -10,9 +10,9 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
-    internal static class InvokationHelper
+    internal static class InvocationHelper
     {
-        public static IVhdlElement CreateInvokationStart(
+        public static IVhdlElement CreateInvocationStart(
             IArchitectureComponent component,
             string targetStateMachineName,
             int targetIndex)
@@ -34,7 +34,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             };
         }
 
-        public static IfElse<IBlockElement> CreateWaitForInvokationFinished(
+        public static IfElse<IBlockElement> CreateWaitForInvocationFinished(
             IArchitectureComponent component,
             string targetStateMachineName,
             int degreeOfParallelism,

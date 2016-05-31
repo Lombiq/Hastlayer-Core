@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Hast.Common.Configuration
 {
-    [DebuggerDisplay("{MemberNamePrefix + \" - \" + MaxInvokationInstanceCount}")]
-    public class MemberInvokationInstanceCountConfiguration
+    [DebuggerDisplay("{MemberNamePrefix + \": \" + MaxInvocationInstanceCount}")]
+    public class MemberInvocationInstanceCountConfiguration
     {
         /// <summary>
         /// Gets the prefix of the member's name. Use the same convention as with 
@@ -21,7 +21,7 @@ namespace Hast.Common.Configuration
         public string MemberNamePrefix { get; private set; }
 
         /// <summary>
-        /// Gets or sets the maximal recursion depth of the member. When using (even indirectly) recursive invokations
+        /// Gets or sets the maximal recursion depth of the member. When using (even indirectly) recursive invocations
         /// between members set the maximal depth here.
         /// </summary>
         /// <example>
@@ -54,17 +54,17 @@ namespace Hast.Common.Configuration
         }
 
         // But why do I need to cast to uint? http://stackoverflow.com/questions/10065287/why-is-ushort-ushort-equal-to-int#comment58098182_10157517
-        public uint MaxInvokationInstanceCount { get { return (uint)((MaxRecursionDepth + 1) * MaxDegreeOfParallelism); } }
+        public uint MaxInvocationInstanceCount { get { return (uint)((MaxRecursionDepth + 1) * MaxDegreeOfParallelism); } }
 
 
         /// <summary>
-        /// Constructs a new <see cref="MemberInvokationInstanceCountConfiguration"/> object.
+        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object.
         /// </summary>
         /// <param name="memberNamePrefix">
         /// The prefix of the member's name. Use the same convention as with 
-        /// <see cref="MemberInvokationInstanceCountConfiguration.MemberNamePrefix"/>.
+        /// <see cref="MemberInvocationInstanceCountConfiguration.MemberNamePrefix"/>.
         /// </param>
-        public MemberInvokationInstanceCountConfiguration(string memberNamePrefix)
+        public MemberInvocationInstanceCountConfiguration(string memberNamePrefix)
         {
             MemberNamePrefix = memberNamePrefix;
             MaxDegreeOfParallelism = 1;

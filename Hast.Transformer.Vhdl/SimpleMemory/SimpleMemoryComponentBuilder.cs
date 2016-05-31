@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
-using Hast.Transformer.Vhdl.InvokationProxyBuilders;
+using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Extensions;
 

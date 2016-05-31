@@ -14,9 +14,9 @@ using ICSharpCode.NRefactory.CSharp;
 using Hast.Common.Extensions;
 using Hast.VhdlBuilder.Representation;
 
-namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
+namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
-    public class ExternalInvokationProxyBuilder : IExternalInvokationProxyBuilder
+    public class ExternalInvocationProxyBuilder : IExternalInvocationProxyBuilder
     {
         public IArchitectureComponent BuildProxy(
             IEnumerable<IMemberTransformerResult> interfaceMemberResults,
@@ -24,7 +24,7 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
         {
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look 
             // from a generated state machine.
-            var proxyComponent = new ConfigurableComponent("System.Void Hast::ExternalInvokationProxy()");
+            var proxyComponent = new ConfigurableComponent("System.Void Hast::ExternalInvocationProxy()");
 
 
             // Since the Finished port is an out port, it can't be read. Adding an internal proxy signal so we can also 
@@ -57,10 +57,10 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                 };
 
 
-                var waitForInvokationFinishedIfElse = InvokationHelper
-                    .CreateWaitForInvokationFinished(proxyComponent, memberName, 1);
+                var waitForInvocationFinishedIfElse = InvocationHelper
+                    .CreateWaitForInvocationFinished(proxyComponent, memberName, 1);
 
-                waitForInvokationFinishedIfElse.True.Add(new Assignment
+                waitForInvocationFinishedIfElse.True.Add(new Assignment
                     {
                         AssignTo = finishedSignalReference,
                         Expression = Value.True
@@ -70,17 +70,17 @@ namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
                     {
                         Condition = new Binary
                         {
-                            Left = InvokationHelper.CreateStartedSignalReference(proxyComponent, memberName, 0),
+                            Left = InvocationHelper.CreateStartedSignalReference(proxyComponent, memberName, 0),
                             Operator = BinaryOperator.Equality,
                             Right = Value.False
                         },
-                        True = InvokationHelper.CreateInvokationStart(proxyComponent, memberName, 0),
+                        True = InvocationHelper.CreateInvocationStart(proxyComponent, memberName, 0),
                         ElseIfs = new List<If<IVhdlElement>>
                         {
                             new If
                             {
-                                Condition = waitForInvokationFinishedIfElse.Condition,
-                                True = waitForInvokationFinishedIfElse.True
+                                Condition = waitForInvocationFinishedIfElse.Condition,
+                                True = waitForInvocationFinishedIfElse.True
                             }
                         }
                     });

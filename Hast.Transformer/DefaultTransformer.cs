@@ -23,7 +23,7 @@ namespace Hast.Transformer
         private readonly ITransformerEventHandler _eventHandler;
         private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
-        private readonly IInvokationInstanceCountAdjuster _invokationInstanceCountAdjuster;
+        private readonly IInvocationInstanceCountAdjuster _invocationInstanceCountAdjuster;
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly ITransformingEngine _engine;
         private readonly IGeneratedTaskArraysInliner _generatedTaskArraysInliner;
@@ -33,7 +33,7 @@ namespace Hast.Transformer
             ITransformerEventHandler eventHandler,
             IJsonConverter jsonConverter,
             ISyntaxTreeCleaner syntaxTreeCleaner,
-            IInvokationInstanceCountAdjuster invokationInstanceCountAdjuster,
+            IInvocationInstanceCountAdjuster invocationInstanceCountAdjuster,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             ITransformingEngine engine,
             IGeneratedTaskArraysInliner generatedTaskArraysInliner)
@@ -41,7 +41,7 @@ namespace Hast.Transformer
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
             _syntaxTreeCleaner = syntaxTreeCleaner;
-            _invokationInstanceCountAdjuster = invokationInstanceCountAdjuster;
+            _invocationInstanceCountAdjuster = invocationInstanceCountAdjuster;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _engine = engine;
             _generatedTaskArraysInliner = generatedTaskArraysInliner;
@@ -136,7 +136,7 @@ namespace Hast.Transformer
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
 
-            _invokationInstanceCountAdjuster.AdjustInvokationInstanceCounts(syntaxTree, configuration);
+            _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
 
             if (configuration.TransformerConfiguration().UseSimpleMemory)

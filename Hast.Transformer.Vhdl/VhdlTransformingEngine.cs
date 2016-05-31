@@ -16,7 +16,7 @@ using Hast.Common.Extensions;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using System;
 using Orchard.Services;
-using Hast.Transformer.Vhdl.InvokationProxyBuilders;
+using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 using Hast.Transformer.Vhdl.SimpleMemory;
 
 namespace Hast.Transformer.Vhdl
@@ -28,8 +28,8 @@ namespace Hast.Transformer.Vhdl
         private readonly IArrayTypesCreator _arrayTypesCreator;
         private readonly IMethodTransformer _methodTransformer;
         private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
-        private readonly IExternalInvokationProxyBuilder _externalInvokationProxyBuilder;
-        private readonly IInternalInvokationProxyBuilder _internalInvokationProxyBuilder;
+        private readonly IExternalInvocationProxyBuilder _externalInvocationProxyBuilder;
+        private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
 
 
@@ -39,8 +39,8 @@ namespace Hast.Transformer.Vhdl
             IArrayTypesCreator arrayTypesCreator,
             IMethodTransformer methodTransformer,
             IDisplayClassFieldTransformer displayClassFieldTransformer,
-            IExternalInvokationProxyBuilder externalInvokationProxyBuilder,
-            IInternalInvokationProxyBuilder internalInvokationProxyBuilder,
+            IExternalInvocationProxyBuilder externalInvocationProxyBuilder,
+            IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
@@ -48,8 +48,8 @@ namespace Hast.Transformer.Vhdl
             _arrayTypesCreator = arrayTypesCreator;
             _methodTransformer = methodTransformer;
             _displayClassFieldTransformer = displayClassFieldTransformer;
-            _externalInvokationProxyBuilder = externalInvokationProxyBuilder;
-            _internalInvokationProxyBuilder = internalInvokationProxyBuilder;
+            _externalInvocationProxyBuilder = externalInvocationProxyBuilder;
+            _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
         }
 
@@ -119,24 +119,24 @@ namespace Hast.Transformer.Vhdl
             }
 
 
-            // Proxying external invokations
+            // Proxying external invocations
             var interfaceMemberResults = transformerResults.Where(result => result.IsInterfaceMember);
             if (!interfaceMemberResults.Any())
             {
                 throw new InvalidOperationException("There aren't any interface members, however at least one interface member is needed to execute anything on hardware.");
             }
             var memberIdTable = BuildMemberIdTable(interfaceMemberResults);
-            var externalInvocationProxy = _externalInvokationProxyBuilder.BuildProxy(interfaceMemberResults, memberIdTable);
+            var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(interfaceMemberResults, memberIdTable);
             potentiallyInvokingArchitectureComponents.Add(externalInvocationProxy);
             architecture.Declarations.Add(externalInvocationProxy.BuildDeclarations());
             architecture.Add(externalInvocationProxy.BuildBody());
 
 
-            // Proxying internal invokations
-            var internaInvokationProxies = _internalInvokationProxyBuilder.BuildProxy(
+            // Proxying internal invocations
+            var internaInvocationProxies = _internalInvocationProxyBuilder.BuildProxy(
                 potentiallyInvokingArchitectureComponents,
                 vhdlTransformationContext);
-            foreach (var proxy in internaInvokationProxies)
+            foreach (var proxy in internaInvocationProxies)
             {
                 architecture.Declarations.Add(proxy.BuildDeclarations());
                 architecture.Add(proxy.BuildBody());

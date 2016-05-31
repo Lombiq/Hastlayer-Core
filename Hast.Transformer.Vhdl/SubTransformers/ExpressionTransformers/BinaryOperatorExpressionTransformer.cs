@@ -171,7 +171,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (shouldResize)
             {
-                binaryElement = new Invokation
+                binaryElement = new Invocation
                 {
                     Target = "resize".ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>

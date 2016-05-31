@@ -34,7 +34,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
                 var conversionFunctionName = DataType.Name == KnownDataTypes.UInt32.Name ? "to_unsigned" : "to_signed";
                 var size = ((SizedDataType)DataType).Size;
 
-                return new Invokation
+                return new Invocation
                 {
                     Target = conversionFunctionName.ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>

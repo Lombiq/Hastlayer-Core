@@ -22,13 +22,13 @@ namespace Hast.Communication
 
         public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target) where T : class
         {
-            var memberInvokationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(hardwareRepresentation, target);
+            var memberInvocationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(hardwareRepresentation, target);
             if (typeof(T).IsInterface)
             {
-                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvokationHandler));
+                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvocationHandler));
             }
 
-            return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvokationHandler));
+            return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvocationHandler));
         }
 
 

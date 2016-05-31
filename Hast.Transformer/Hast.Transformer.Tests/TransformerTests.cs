@@ -94,14 +94,14 @@ namespace Hast.Transformer.Vhdl.Tests
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
 
-            config.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
-                new MemberInvokationInstanceCountConfiguration("Hast.Tests.TestAssembly1.ComplexAlgorithm.IsPrimeNumber")
+            config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+                new MemberInvocationInstanceCountConfiguration("Hast.Tests.TestAssembly1.ComplexAlgorithm.IsPrimeNumber")
                 {
                     MaxDegreeOfParallelism = 5
                 });
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             firstId = _producedContext.Id;
-            config.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Single().MaxDegreeOfParallelism = 15;
+            config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Single().MaxDegreeOfParallelism = 15;
             await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 

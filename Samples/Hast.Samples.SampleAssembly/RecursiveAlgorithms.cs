@@ -11,7 +11,7 @@ namespace Hast.Samples.SampleAssembly
     /// Showcasing some simple recursive algorithms, since recursive method calls are also supported by Hastlayer. Do
     /// note however that recursive algorithms is not the best use-case of Hastlayer and should generally be avoided.
     /// 
-    /// There is also an invokation counter for each of the methods, i.e. we'll be able to see how many times the methods
+    /// There is also an invocation counter for each of the methods, i.e. we'll be able to see how many times the methods
     /// were invoked. This is only interesting when debugging the hardware side: writing debug data to the memory like
     /// this can give you insights into how your code works on the hardware (this is even more useful if you also debug
     /// with the FPGA SDK and check the memory of the FPGA there). Note that naturally adding such memory operations
@@ -24,15 +24,15 @@ namespace Hast.Samples.SampleAssembly
     {
         public const int CalculateFibonacchiSeries_InputShortIndex = 0;
         public const int CalculateFibonacchiSeries_OutputUInt32Index = 0;
-        public const int CalculateFibonacchiSeries_InvokationCounterUInt32Index = 1;
+        public const int CalculateFibonacchiSeries_InvocationCounterUInt32Index = 1;
         public const int CalculateFactorial_InputShortIndex = 0;
         public const int CalculateFactorial_OutputUInt32Index = 0;
-        public const int CalculateFactorial_InvokationCounterUInt32Index = 1;
+        public const int CalculateFactorial_InvocationCounterUInt32Index = 1;
 
 
         public virtual void CalculateFibonacchiSeries(SimpleMemory memory)
         {
-            memory.WriteUInt32(CalculateFibonacchiSeries_InvokationCounterUInt32Index, 1);
+            memory.WriteUInt32(CalculateFibonacchiSeries_InvocationCounterUInt32Index, 1);
 
             var number = (short)memory.ReadInt32(CalculateFibonacchiSeries_InputShortIndex);
             memory.WriteUInt32(CalculateFibonacchiSeries_OutputUInt32Index, RecursivelyCalculateFibonacchiSeries(memory, number));
@@ -40,7 +40,7 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void CalculateFactorial(SimpleMemory memory)
         {
-            memory.WriteUInt32(CalculateFactorial_InvokationCounterUInt32Index, 1);
+            memory.WriteUInt32(CalculateFactorial_InvocationCounterUInt32Index, 1);
 
             var number = (short)memory.ReadInt32(CalculateFactorial_InputShortIndex);
             memory.WriteUInt32(CalculateFactorial_OutputUInt32Index, RecursivelyCalculateFactorial(memory, number));
@@ -52,8 +52,8 @@ namespace Hast.Samples.SampleAssembly
         private uint RecursivelyCalculateFibonacchiSeries(SimpleMemory memory, short number)
         {
             memory.WriteUInt32(
-                CalculateFibonacchiSeries_InvokationCounterUInt32Index, 
-                memory.ReadUInt32(CalculateFibonacchiSeries_InvokationCounterUInt32Index) + 1);
+                CalculateFibonacchiSeries_InvocationCounterUInt32Index, 
+                memory.ReadUInt32(CalculateFibonacchiSeries_InvocationCounterUInt32Index) + 1);
 
             // Here the expression should really be number == 0 || number == 1 but somehow that won't evaluate to true
             // on hardware despite the number actually reaching 0 and 1.
@@ -64,8 +64,8 @@ namespace Hast.Samples.SampleAssembly
         private uint RecursivelyCalculateFactorial(SimpleMemory memory, short number)
         {
             memory.WriteUInt32(
-                CalculateFactorial_InvokationCounterUInt32Index,
-                memory.ReadUInt32(CalculateFactorial_InvokationCounterUInt32Index) + 1);
+                CalculateFactorial_InvocationCounterUInt32Index,
+                memory.ReadUInt32(CalculateFactorial_InvocationCounterUInt32Index) + 1);
 
             // Here the expression should really be number == 0 but somehow that won't evaluate to true on hardware 
             // despite the number actually reaching 0.

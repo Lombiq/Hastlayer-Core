@@ -8,9 +8,9 @@ using Mono.Cecil;
 
 namespace Hast.Common.Configuration
 {
-    public static class InvokationInstanceCountTransformerConfigurationExtensions
+    public static class InvocationInstanceCountTransformerConfigurationExtensions
     {
-        public static MemberInvokationInstanceCountConfiguration GetMaxInvokationInstanceCountConfigurationForMember(
+        public static MemberInvocationInstanceCountConfiguration GetMaxInvocationInstanceCountConfigurationForMember(
             this TransformerConfiguration configuration,
             EntityDeclaration entity)
         {
@@ -18,7 +18,7 @@ namespace Hast.Common.Configuration
 
             if (!entity.GetFullName().IsDisplayClassMemberName())
             {
-                return configuration.GetMaxInvokationInstanceCountConfigurationForMember(simpleName);
+                return configuration.GetMaxInvocationInstanceCountConfigurationForMember(simpleName);
             }
 
             // If this is a DisplayClass member then it was generated from a lamdbda expression. So need to handle it
@@ -48,11 +48,11 @@ namespace Hast.Common.Configuration
                 // apply.
                 if (indexedNameHolder == null)
                 {
-                    return configuration.GetMaxInvokationInstanceCountConfigurationForMember(simpleName);
+                    return configuration.GetMaxInvocationInstanceCountConfigurationForMember(simpleName);
                 }
             }
 
-            return configuration.GetMaxInvokationInstanceCountConfigurationForMember(indexedNameHolder.IndexedName);
+            return configuration.GetMaxInvocationInstanceCountConfigurationForMember(indexedNameHolder.IndexedName);
         }
 
 

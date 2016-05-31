@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\MemberInvokationInstanceCountConfiguration.cs" />
+    <Compile Include="Configuration\MemberInvocationInstanceCountConfiguration.cs" />
     <Compile Include="Extensions\AnnotatableExtensions.cs" />
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
@@ -67,7 +67,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
     <Compile Include="Extensions\TransformationContextExtensions.cs" />
-    <Compile Include="Extensions\InvokationInstanceCountTransformerConfigurationExtensions.cs" />
+    <Compile Include="Extensions\InvocationInstanceCountTransformerConfigurationExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />
     <Compile Include="Models\DeclarationReferenceMetadata.cs" />
@@ -76,7 +76,7 @@
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
-    <Compile Include="Services\InvokationInstanceCountAdjuster.cs" />
+    <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemory.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Configuration\TransformerConfiguration.cs" />
     <Compile Include="Visitors\InlinableTaskArraysFindingVisitor.cs" />
     <Compile Include="Visitors\InlinableTaskArraysInliningVisitor.cs" />
-    <Compile Include="Visitors\InvokationInstanceCountAdjustingVisitor.cs" />
+    <Compile Include="Visitors\InvocationInstanceCountAdjustingVisitor.cs" />
     <Compile Include="Visitors\ReferencedNodesFlaggingVisitor.cs" />
     <Compile Include="Visitors\UnreferencedNodesRemovingVisitor.cs" />
   </ItemGroup>

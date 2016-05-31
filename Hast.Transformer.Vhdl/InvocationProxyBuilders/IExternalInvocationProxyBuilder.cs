@@ -7,9 +7,9 @@ using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Orchard;
 
-namespace Hast.Transformer.Vhdl.InvokationProxyBuilders
+namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
-    public interface IExternalInvokationProxyBuilder : IDependency
+    public interface IExternalInvocationProxyBuilder : IDependency
     {
         IArchitectureComponent BuildProxy(
             IEnumerable<IMemberTransformerResult> interfaceMemberResults, 

@@ -69,7 +69,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var memberName = targetMemberReference.MemberName;
 
             var isWrite = memberName.StartsWith("Write");
-            var invokationParameters = transformedParameters.ToList();
+            var invocationParameters = transformedParameters.ToList();
 
             if (isWrite)
             {
@@ -84,14 +84,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
-                Expression = new Invokation
+                Expression = new Invocation
                 {
                     // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
                     Target = "resize".ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>
                         {
-                            // CellIndex is conventionally the first invokation parameter. 
-                            { invokationParameters[0] },
+                            // CellIndex is conventionally the first invocation parameter. 
+                            { invocationParameters[0] },
                             SimpleMemoryTypes.CellIndexInternalSignalDataType.Size.ToVhdlValue(KnownDataTypes.UnrangedInt)
                         }
                 }
@@ -116,7 +116,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         return variableToConvert;
                     }
 
-                    string dataConversionInvokationTarget = null;
+                    string dataConversionInvocationTarget = null;
                     var memoryType = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
 
                     // Using the built-in conversion functions to handle known data types.
@@ -127,17 +127,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         if (directionIsLogicVectorToType)
                         {
-                            dataConversionInvokationTarget = "ConvertStdLogicVectorTo" + memoryType;
+                            dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + memoryType;
                         }
                         else
                         {
-                            dataConversionInvokationTarget = "Convert" + memoryType + "ToStdLogicVector";
+                            dataConversionInvocationTarget = "Convert" + memoryType + "ToStdLogicVector";
                         }
                     }
 
-                    return new Invokation
+                    return new Invocation
                     {
-                        Target = dataConversionInvokationTarget.ToVhdlIdValue(),
+                        Target = dataConversionInvocationTarget.ToVhdlIdValue(),
                         Parameters = new List<IVhdlElement> { { variableToConvert } }
                     };
                 };
@@ -148,7 +148,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     AssignTo = stateMachine.CreateSimpleMemoryDataOutSignalReference(),
                     // The data to write is conventionally the second parameter.
-                    Expression = implementSimpleMemoryTypeConversion(invokationParameters[1], false)
+                    Expression = implementSimpleMemoryTypeConversion(invocationParameters[1], false)
                 });
             }
 
@@ -243,7 +243,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         var resultReferences = _stateMachineInvocationBuilder.BuildInvocationWait(
                             targetMethod,
                             context.TransformationContext.GetTransformerConfiguration()
-                                .GetMaxInvokationInstanceCountConfigurationForMember(targetMethod).MaxDegreeOfParallelism,
+                                .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod).MaxDegreeOfParallelism,
                             memberName == "WhenAll",
                             context);
 
