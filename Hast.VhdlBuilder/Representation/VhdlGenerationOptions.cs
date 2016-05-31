@@ -38,7 +38,7 @@ namespace Hast.VhdlBuilder.Representation
         /// <summary>
         /// A simple name shortener function. Keep in mind that shortening names with this, while produces more readable
         /// code for debugging, does not guarantee unique names. Be aware that using this can add significant overhead
-        /// to VHDL generation (making it take up to 10 times longer!).
+        /// to VHDL generation (making it take 10 or even more times longer!).
         /// </summary>
         public static NameShortener SimpleNameShortener = originalName =>
             {
