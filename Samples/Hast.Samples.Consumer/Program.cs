@@ -120,7 +120,7 @@ namespace Hast.Samples.Consumer
                             numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
                         }
                         var sw = System.Diagnostics.Stopwatch.StartNew();
-                        //var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
+                        var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
                         sw.Stop();
 
                         // With 210 numbers and 50 workers this takes about ...s all together (with UART) on an FPGA and 
