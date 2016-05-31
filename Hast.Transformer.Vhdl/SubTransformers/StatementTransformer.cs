@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Name = stateMachine.CreatePrefixedObjectName(variableInitializer.Name),
                             DataType = type
                         });
-                    } 
+                    }
                 }
                 else if (isTaskFactory)
                 {
@@ -112,13 +112,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Is this a compiler-generated if statement to create a Func for a DisplayClass method? Like:
                 // if (arg_97_1 = <> c__DisplayClass9_.<> 9__0 == null) {
-                //     arg_97_1 = <> c__DisplayClass9_.<> 9__0 = new Func<object, bool>(<> c__DisplayClass9_.< ParallelizedArePrimeNumbers > b__0);
+                //     arg_97_1 = <> c__DisplayClass9_.<> 9__0 = new Func<object, bool>(<>c__DisplayClass9_.<ParallelizedArePrimeNumbers>b__0);
+                // }
+                // Similar, but slightly different:
+                // if (arg_42_1 = HastlayerOptimizedAlgorithm.<>c.<>9__3_0 == null) {
+                //     arg_42_1 = HastlayerOptimizedAlgorithm.<>c.<> 9__3_0 = new Func<object, uint>(HastlayerOptimizedAlgorithm.<> c.<> 9.<Run>b__3_0);
                 // }
                 var scope = context.Scope;
                 var isDisplayClassMethodReferenceCreatingIf =
                     ifElse.Condition.Is<BinaryOperatorExpression>(binary =>
-                        binary.Left.Is<AssignmentExpression>(assignment => 
-                            assignment.Right.Is<MemberReferenceExpression>(member => 
+                        binary.Left.Is<AssignmentExpression>(assignment =>
+                            assignment.Right.Is<MemberReferenceExpression>(member =>
+                                member.Target.Is<TypeReferenceExpression>(typeReference =>
+                                    typeReference.Type.GetFullName().IsDisplayClassName())
+                                ||
                                 member.Target.Is<IdentifierExpression>(identifier =>
                                     scope.VariableNameToDisplayClassNameMappings.ContainsKey(identifier.Identifier)))) &&
                         binary.Right is NullReferenceExpression);
@@ -133,7 +140,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var displayClassMemberReference = ((MemberReferenceExpression)funcCreateExpression.Arguments.Single());
                     var funcVariableName = ((IdentifierExpression)assignment.Left).Identifier;
 
-                    scope.FuncVariableNameToDisplayClassMethodMappings[funcVariableName] = 
+                    scope.FuncVariableNameToDisplayClassMethodMappings[funcVariableName] =
                         displayClassMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                 }
                 else
@@ -218,7 +225,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         stateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
 
 
-                    currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex); 
+                    currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
                 }
             }
             else if (statement is BlockStatement)
@@ -239,15 +246,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(whileStartStateIndex));
 
                 var repeatedState = new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions => 
-                        "Repeated state of the while loop which was started in state " + 
-                        whileStartStateIndexNameGenerator(vhdlGenerationOptions) + 
+                    new GeneratedComment(vhdlGenerationOptions =>
+                        "Repeated state of the while loop which was started in state " +
+                        whileStartStateIndexNameGenerator(vhdlGenerationOptions) +
                         "."));
                 var repeatedStateIndex = stateMachine.AddState(repeatedState);
                 var afterWhileState = new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions => 
-                        "State after the while loop which was started in state " + 
-                        whileStartStateIndexNameGenerator(vhdlGenerationOptions) + 
+                    new GeneratedComment(vhdlGenerationOptions =>
+                        "State after the while loop which was started in state " +
+                        whileStartStateIndexNameGenerator(vhdlGenerationOptions) +
                         "."));
                 var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
 
@@ -257,22 +264,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 currentBlock.Add(new LineComment(
                     "The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):"));
                 currentBlock.Add(new IfElse
-                    {
-                        Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
-                        True = stateMachine.CreateStateChange(repeatedStateIndex),
-                        Else = stateMachine.CreateStateChange(afterWhileStateIndex)
-                    });
+                {
+                    Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
+                    True = stateMachine.CreateStateChange(repeatedStateIndex),
+                    Else = stateMachine.CreateStateChange(afterWhileStateIndex)
+                });
 
                 var whileStateInnerBody = new InlineBlock();
 
                 currentBlock.ChangeBlockToDifferentState(repeatedState, repeatedStateIndex);
                 repeatedState.Add(new LineComment("The while loop's condition:"));
                 repeatedState.Add(new IfElse
-                    {
-                        Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
-                        True = whileStateInnerBody,
-                        Else = stateMachine.CreateStateChange(afterWhileStateIndex)
-                    });
+                {
+                    Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
+                    True = whileStateInnerBody,
+                    Else = stateMachine.CreateStateChange(afterWhileStateIndex)
+                });
 
                 currentBlock.ChangeBlock(whileStateInnerBody);
                 TransformInner(whileStatement.EmbeddedStatement, context);
@@ -284,9 +291,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // We need an if to check whether the state was changed in the logic. If it was then that means
                     // that the loop was exited so we mustn't overwrite the new state.
                     currentBlock.Add(
-                        new GeneratedComment(vhdlGenerationOptions => 
+                        new GeneratedComment(vhdlGenerationOptions =>
                             "Returning to the repeated state of the while loop which was started in state " +
-                            whileStartStateIndexNameGenerator(vhdlGenerationOptions) + 
+                            whileStartStateIndexNameGenerator(vhdlGenerationOptions) +
                             " if the loop wasn't exited with a state change."));
 
                     currentBlock.Add(CreateConditionalStateChange(repeatedStateIndex, context));
@@ -313,15 +320,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = context.Scope.StateMachine;
 
             return new IfElse
+            {
+                Condition = new Binary
                 {
-                    Condition = new Binary
-                    {
-                        Left = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
-                        Operator = BinaryOperator.Equality,
-                        Right = stateMachine.CreateStateName(context.Scope.CurrentBlock.CurrentStateMachineStateIndex).ToVhdlIdValue()
-                    },
-                    True = stateMachine.CreateStateChange(destinationStateIndex)
-                };
+                    Left = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
+                    Operator = BinaryOperator.Equality,
+                    Right = stateMachine.CreateStateName(context.Scope.CurrentBlock.CurrentStateMachineStateIndex).ToVhdlIdValue()
+                },
+                True = stateMachine.CreateStateChange(destinationStateIndex)
+            };
         }
     }
 }
