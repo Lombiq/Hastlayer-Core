@@ -142,6 +142,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachinesToFinishState);
             currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
 
+            if (instanceCount > 1)
+            {
+                waitForInvokationFinishedIfElse.True.Add(new Assignment
+                {
+                    AssignTo = stateMachine
+                        .CreateInvocationIndexVariableName(targetMethodName)
+                        .ToVhdlVariableReference(),
+                    Expression = 0.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                });
+            }
+
             currentBlock.ChangeBlockToDifferentState(waitForInvokationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
 
 
@@ -174,7 +185,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
         private IVhdlElement BuildInvocationBlock(
-            MethodDeclaration targetDeclaration, 
+            MethodDeclaration targetDeclaration,
             string targetMethodName,
             IEnumerable<IVhdlElement> parameters,
             IMemberStateMachine stateMachine,

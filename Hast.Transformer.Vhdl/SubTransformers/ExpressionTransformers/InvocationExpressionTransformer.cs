@@ -266,14 +266,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             index++;
                         }
 
-                        resultBlock.Add(new Assignment
-                        {
-                            AssignTo = stateMachine
-                                .CreateInvocationIndexVariableName(targetMethod.GetFullName())
-                                .ToVhdlVariableReference(),
-                            Expression = 0.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                        });
-
                         return resultBlock;
                     }
                 }
