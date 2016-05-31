@@ -45,7 +45,7 @@ namespace Hast.Samples.Consumer
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
 
                         configuration.TransformerConfiguration().MemberInvokationInstanceCountConfigurations.Add(
-                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumberInternal")
+                            new MemberInvokationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0")
                             {
                                 MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
                             });
