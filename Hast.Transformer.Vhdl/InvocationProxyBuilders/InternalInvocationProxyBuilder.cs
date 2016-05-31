@@ -11,6 +11,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
+using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
@@ -22,8 +23,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
         {
             var componentsByName = components.ToDictionary(component => component.Name);
 
-            // [invoked member name][from component name][invocation instance count]
-            var invokedMembers = new Dictionary<string, List<KeyValuePair<string, int>>>();
+            // [invoked member declaration][from component name][invocation instance count]
+            var invokedMembers = new Dictionary<EntityDeclaration, List<KeyValuePair<string, int>>>();
 
 
             // Summarizing which member was invoked with how many instances from which component.
@@ -31,13 +32,13 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             {
                 foreach (var memberInvocationCount in component.OtherMemberMaxInvocationInstanceCounts)
                 {
-                    var targetMemberName = memberInvocationCount.Key;
+                    var targetMember = memberInvocationCount.Key;
 
                     List<KeyValuePair<string, int>> invokedFromList;
 
-                    if (!invokedMembers.TryGetValue(targetMemberName, out invokedFromList))
+                    if (!invokedMembers.TryGetValue(targetMember, out invokedFromList))
                     {
-                        invokedMembers[targetMemberName] = invokedFromList = new List<KeyValuePair<string, int>>();
+                        invokedMembers[targetMember] = invokedFromList = new List<KeyValuePair<string, int>>();
                     }
 
                     invokedFromList.Add(new KeyValuePair<string, int>(component.Name, memberInvocationCount.Value));
@@ -67,7 +68,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
             foreach (var invokedMember in invokedMembers)
             {
-                var targetMemberName = invokedMember.Key;
+                var targetMemmber = invokedMember.Key;
+                var targetMemberName = targetMemmber.GetFullName();
 
                 var proxyComponent = new ConfigurableComponent(namePrefix + targetMemberName);
                 proxyComponents.Add(proxyComponent);
@@ -94,7 +96,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 // there for this member? This is not necessarily the same as the invocation instance count.
                 var targetComponentCount = transformationContext
                     .GetTransformerConfiguration()
-                    .GetMaxInvocationInstanceCountConfigurationForMember(targetMemberName.ToSimpleName())
+                    .GetMaxInvocationInstanceCountConfigurationForMember(targetMemmber)
                     .MaxInvocationInstanceCount;
 
 

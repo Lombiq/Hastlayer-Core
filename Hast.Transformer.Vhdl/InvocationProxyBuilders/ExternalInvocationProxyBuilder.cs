@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             {
                 var memberName = interfaceMemberResult.Member.GetFullName();
                 var memberId = memberIdTable.LookupMemberId(memberName);
-                proxyComponent.OtherMemberMaxInvocationInstanceCounts[memberName] = 1;
+                proxyComponent.OtherMemberMaxInvocationInstanceCounts[interfaceMemberResult.Member] = 1;
                 var when = new CaseWhen
                 {
                     Expression = memberId.ToVhdlValue(KnownDataTypes.UnrangedInt)

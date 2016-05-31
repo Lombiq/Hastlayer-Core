@@ -48,10 +48,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 .GetMaxInvocationInstanceCountConfigurationForMember(targetDeclaration).MaxDegreeOfParallelism;
 
             int previousMaxInvocationInstanceCount;
-            if (!stateMachine.OtherMemberMaxInvocationInstanceCounts.TryGetValue(targetMethodName, out previousMaxInvocationInstanceCount) ||
+            if (!stateMachine.OtherMemberMaxInvocationInstanceCounts.TryGetValue(targetDeclaration, out previousMaxInvocationInstanceCount) ||
                 previousMaxInvocationInstanceCount < maxDegreeOfParallelism)
             {
-                stateMachine.OtherMemberMaxInvocationInstanceCounts[targetMethodName] = maxDegreeOfParallelism;
+                stateMachine.OtherMemberMaxInvocationInstanceCounts[targetDeclaration] = maxDegreeOfParallelism;
             }
 
 
