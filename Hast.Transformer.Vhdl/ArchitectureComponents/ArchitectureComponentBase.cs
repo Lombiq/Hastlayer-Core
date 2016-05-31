@@ -12,6 +12,7 @@ using Orchard.Validation;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
+    [System.Diagnostics.DebuggerDisplay("{Name}")]
     public abstract class ArchitectureComponentBase : IArchitectureComponent
     {
         public string Name { get; private set; }
