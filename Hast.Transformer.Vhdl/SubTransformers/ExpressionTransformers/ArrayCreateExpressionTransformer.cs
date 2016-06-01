@@ -88,16 +88,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             // Initializing the array with the .NET default values so there are no surprises when reading values
             // without setting them previously.
-            var arrayInitializationValue = new Value { DataType = arrayInstantiationType };
-            var arrayInitializationItems = Enumerable.Repeat(elementType.DefaultValue.ToVhdl(), size);
-            if (elementType.IsLiteralArrayType())
+            var arrayInitializationValue = new Value
             {
-                arrayInitializationValue.Content = string.Concat(arrayInitializationItems);
-            }
-            else
-            {
-                arrayInitializationValue.Content = string.Join(", ", arrayInitializationItems);
-            }
+                DataType = arrayInstantiationType,
+                Content = "others => " + elementType.DefaultValue.ToVhdl()
+            };
 
             return arrayInitializationValue;
         }
