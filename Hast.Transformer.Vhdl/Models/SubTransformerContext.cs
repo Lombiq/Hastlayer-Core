@@ -44,6 +44,12 @@ namespace Hast.Transformer.Vhdl.Models
         /// <see cref="System.Threading.Tasks.TaskFactory"/> objects.
         /// </summary>
         ISet<string> TaskFactoryVariableNames { get; }
+
+        /// <summary>
+        /// Keeps track of which invoked state machines were finished in which states. This is needed not to immediately
+        /// restart a component in the state it was finished.
+        /// </summary>
+        IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; }
     }
 
 
@@ -74,6 +80,7 @@ namespace Hast.Transformer.Vhdl.Models
         public IDictionary<string, EntityDeclaration> FuncVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, EntityDeclaration>();
         public IDictionary<string, EntityDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, EntityDeclaration>();
         public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
+        public IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; } = new Dictionary<int, ISet<string>>();
     }
 
 

@@ -41,7 +41,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var targetMethodName = targetDeclaration.GetFullName();
 
 
-            currentBlock.Add(new LineComment("Starting state machine invocation for the following method: " + targetMethodName));
+            Action addInvocationStartComment = () =>
+                currentBlock
+                .Add(new LineComment("Starting state machine invocation for the following method: " + targetMethodName));
 
 
             var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
@@ -59,12 +61,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (maxDegreeOfParallelism == 1)
             {
-                currentBlock.Add(BuildInvocationBlock(
+                var invocationBlock = BuildInvocationBlock(
                     targetMethodDeclaration,
                     targetMethodName,
                     parameters,
-                    stateMachine,
-                    0));
+                    context.Scope,
+                    0);
+
+                addInvocationStartComment();
+                currentBlock.Add(invocationBlock);
             }
             else
             {
@@ -98,13 +103,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                     targetMethodDeclaration,
                                     targetMethodName,
                                     parameters,
-                                    stateMachine,
+                                    context.Scope,
                                     i)
                             }
                         }
                     });
                 }
 
+                addInvocationStartComment();
                 currentBlock.Add(proxyCase);
                 currentBlock.Add(new Assignment
                 {
@@ -178,22 +184,58 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Using the reference of the state machine's return value in place of the original method call.
                 returnVariableReferences.Add(returnVariableName.ToVhdlVariableReference());
+
+                // Noting that this component was finished in this state.
+                var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
+                ISet<string> finishedComponents;
+                if (!finishedInvokedComponentsForStates
+                    .TryGetValue(currentBlock.CurrentStateMachineStateIndex, out finishedComponents))
+                {
+                    finishedComponents = finishedInvokedComponentsForStates[currentBlock.CurrentStateMachineStateIndex] = 
+                        new HashSet<string>();
+                }
+                finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, i));
             }
 
             return returnVariableReferences;
         }
 
 
+        /// <summary>
+        /// Be aware that the method can change the current block!
+        /// </summary>
         private IVhdlElement BuildInvocationBlock(
             MethodDeclaration targetDeclaration,
             string targetMethodName,
             IEnumerable<IVhdlElement> parameters,
-            IMemberStateMachine stateMachine,
+            ISubTransformerScope scope,
             int index)
         {
-            var block = new InlineBlock();
+            var stateMachine = scope.StateMachine;
 
             var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, index);
+
+
+            // Is there an invocation await for this target in the current state? Because if yes, we can't immediately
+            // restart it (due to the latency of the invocation proxy), need to move to a new state.
+            var finishedInvokedComponentsForStates = scope.FinishedInvokedStateMachinesForStates;
+            ISet<string> finishedComponents;
+            if (finishedInvokedComponentsForStates
+                .TryGetValue(scope.CurrentBlock.CurrentStateMachineStateIndex, out finishedComponents))
+            {
+                if (finishedComponents.Contains(indexedStateMachineName))
+                {
+                    var currentBlock = scope.CurrentBlock;
+
+                    var newBlock = new InlineBlock();
+                    var newStateIndex = stateMachine.AddState(newBlock);
+                    currentBlock.Add(stateMachine.CreateStateChange(newStateIndex));
+                    currentBlock.ChangeBlockToDifferentState(newBlock, newStateIndex);
+                }
+            }
+
+
+            var invocationBlock = new InlineBlock();
 
             var methodParametersEnumerator = targetDeclaration.Parameters
                 .Where(parameter => !parameter.IsSimpleMemoryParameter())
@@ -233,7 +275,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             parameter)
                         .Expression;
                 }
-                block.Add(new Assignment
+                invocationBlock.Add(new Assignment
                 {
                     AssignTo = parameterVariableName.ToVhdlVariableReference(),
                     Expression = assignmentExpression
@@ -243,9 +285,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
 
-            block.Add(InvocationHelper.CreateInvocationStart(stateMachine, targetMethodName, index));
+            invocationBlock.Add(InvocationHelper.CreateInvocationStart(stateMachine, targetMethodName, index));
 
-            return block;
+            return invocationBlock;
         }
     }
 }

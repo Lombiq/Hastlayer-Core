@@ -394,7 +394,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     Body = new List<IVhdlElement>
                                     {
                                         {
-                                            new LineComment("Invoking components have one clock cycle to notice that the invoked state machine finished. This is so they can immediately invoke it again.")
+                                            new LineComment("Invoking components need to pull down the Started signal to false.")
                                         },
                                         {
                                             new Assignment
@@ -404,7 +404,17 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                             }
                                         },
                                         {
-                                            runningIndexCase
+                                            new IfElse
+                                            {
+                                                Condition = new Binary
+                                                {
+                                                    Left = InvocationHelper
+                                                        .CreateStartedSignalReference(invokerName, targetMemberName, i),
+                                                    Operator = BinaryOperator.Equality,
+                                                    Right = Value.False
+                                                },
+                                                True = runningIndexCase
+                                            }
                                         }
                                     }
                                 });
