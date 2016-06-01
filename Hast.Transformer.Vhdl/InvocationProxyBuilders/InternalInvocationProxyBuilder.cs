@@ -174,7 +174,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
 
                         var invocationHandlerBlock = new LogicalBlock(
-                            new LineComment("Invocation handler corresponding to " + invokerName));
+                            new LineComment(
+                                "Invocation handler #" + i.ToString() + 
+                                " out of " + invocationInstanceCount.ToString() + 
+                                " corresponding to " + invokerName));
                         bodyBlock.Add(invocationHandlerBlock);
 
 
