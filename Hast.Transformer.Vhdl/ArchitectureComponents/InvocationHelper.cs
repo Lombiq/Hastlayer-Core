@@ -43,7 +43,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             // Iteratively building a binary expression chain to OR or AND together all (Started = Finished) expressions.
             // Using (Started = Finished) so it will work even if not all state available state machines were started.
 
-            Func<int, Binary> createStartedEqualsFinishedBinary = index =>
+            Func<int, IVhdlElement> createStartedEqualsFinishedBinary = index =>
                 new Binary
                 {
                     Left = CreateStartedSignalReference(component, targetStateMachineName, index),
@@ -52,9 +52,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 };
 
 
-            IVhdlElement allInvokedStateMachinesFinishedExpression;
-
-            allInvokedStateMachinesFinishedExpression = createStartedEqualsFinishedBinary(0);
+            var allInvokedStateMachinesFinishedExpression = createStartedEqualsFinishedBinary(0);
 
             if (degreeOfParallelism > 1)
             {
