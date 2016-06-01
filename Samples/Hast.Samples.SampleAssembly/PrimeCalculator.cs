@@ -67,24 +67,20 @@ namespace Hast.Samples.SampleAssembly
 
             // At the moment Hastlayer only supports a fixed degree of parallelism so we need to pad the input array
             // if necessary, see PrimeCalculatorExtensions.
-            var numbers = new uint[MaxDegreeOfParallelism];
             var tasks = new Task<bool>[MaxDegreeOfParallelism];
             int i = 0;
             while (i < numberCount)
             {
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    numbers[m] = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
-                }
+                    var currentNumber = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
 
-                for (int m = 0; m < MaxDegreeOfParallelism; m++)
-                {
                     tasks[m] = Task.Factory.StartNew<bool>(
-                        indexObject =>
+                        numberObject =>
                         {
                             // This is a copy of the body of IsPrimeNumberInternal(). We could also call that method
                             // from this lambda but it's more efficient to just do it directly, not adding indirection.
-                            var number = numbers[(int)indexObject];
+                            var number = (uint)numberObject;
                             uint factor = number / 2;
 
                             for (uint x = 2; x <= factor; x++)
@@ -94,7 +90,7 @@ namespace Hast.Samples.SampleAssembly
 
                             return true;
                         },
-                        m);
+                        currentNumber);
                 }
 
                 // Hastlayer doesn't support async code at the moment since ILSpy doesn't handle the new Roslyn-compiled
