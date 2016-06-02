@@ -7,35 +7,20 @@ using Hast.Transformer.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
-    /// <summary>
-    /// Example for a SimpleMemory-using algorithm.
-    /// </summary>
     public class PrimeCalculator
     {
-        // It's good to have externally interesting cell indices in constants like this, so they can be used from wrappers 
-        // like below. Note the Hungarian notation-like prefixes. It's unfortunate but we need them here for clarity.
         public const int IsPrimeNumber_InputUInt32Index = 0;
         public const int IsPrimeNumber_OutputBooleanIndex = 0;
         public const int ArePrimeNumbers_InputUInt32CountIndex = 0;
         public const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
         public const int ArePrimeNumbers_OutputBooleansStartIndex = 1;
 
-        public const int MaxDegreeOfParallelism = 35;
+        public const int MaxDegreeOfParallelism = 5;
 
 
-        /// <summary>
-        /// Calculates whether a number is prime.
-        /// </summary>
-        /// <remarks>
-        /// Note that the entry point of SimpleMemory-using algorithms should be void methods having a single 
-        /// <see cref="SimpleMemory"/> argument. 
-        /// </remarks>
-        /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void IsPrimeNumber(SimpleMemory memory)
         {
-            // Reading out the input parameter.
             var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
-            // Writing back the output.
             memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(number));
         }
 
@@ -43,14 +28,11 @@ namespace Hast.Samples.SampleAssembly
         {
             IsPrimeNumber(memory);
 
-            // For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized
-            // interface method async with Task.FromResult(). In .NET <4.6 Task.FromResult(true) can be used too.
             return Task.CompletedTask;
         }
 
         public virtual void ArePrimeNumbers(SimpleMemory memory)
         {
-            // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
             for (int i = 0; i < numberCount; i++)
@@ -62,11 +44,8 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
         {
-            // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
-            // At the moment Hastlayer only supports a fixed degree of parallelism so we need to pad the input array
-            // if necessary, see PrimeCalculatorExtensions.
             var tasks = new Task<bool>[MaxDegreeOfParallelism];
             int i = 0;
             while (i < numberCount)
@@ -78,8 +57,6 @@ namespace Hast.Samples.SampleAssembly
                     tasks[m] = Task.Factory.StartNew<bool>(
                         numberObject =>
                         {
-                            // This is a copy of the body of IsPrimeNumberInternal(). We could also call that method
-                            // from this lambda but it's more efficient to just do it directly, not adding indirection.
                             var number = (uint)numberObject;
                             uint factor = number / 2;
 
@@ -93,8 +70,6 @@ namespace Hast.Samples.SampleAssembly
                         currentNumber);
                 }
 
-                // Hastlayer doesn't support async code at the moment since ILSpy doesn't handle the new Roslyn-compiled
-                // code. See: https://github.com/icsharpcode/ILSpy/issues/502
                 Task.WhenAll(tasks).Wait();
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
@@ -107,15 +82,9 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        /// <summary>
-        /// Internal implementation of prime number checking. This is here so we can use it simpler from two methods.
-        /// Because when you want to pass data between methods you can freely use supported types as arguments, you 
-        /// don't need to pass data through SimpleMemory.
-        /// </summary>
         private bool IsPrimeNumberInternal(uint number)
         {
             uint factor = number / 2;
-            //uint factor = Math.Sqrt(number); // Math.Sqrt() can't be processed because it's not a managed method.
 
             for (uint i = 2; i <= factor; i++)
             {
@@ -127,9 +96,6 @@ namespace Hast.Samples.SampleAssembly
     }
 
 
-    /// <summary>
-    /// Extension methods so the SimpleMemory-using PrimeCalculator is easier to consume.
-    /// </summary>
     public static class PrimeCalculatorExtensions
     {
         public static bool IsPrimeNumber(this PrimeCalculator primeCalculator, uint number)
