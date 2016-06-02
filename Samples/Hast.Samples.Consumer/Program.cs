@@ -40,14 +40,12 @@ namespace Hast.Samples.Consumer
 
                         var configuration = new HardwareGenerationConfiguration();
 
-                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumber");
-                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.ArePrimeNumbers");
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm");
 
                         configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
-                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0")
+                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.Run.LambdaExpression.0")
                             {
-                                MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
+                                MaxDegreeOfParallelism = HastlayerOptimizedAlgorithm.MaxDegreeOfParallelism
                             });
 
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
@@ -60,20 +58,15 @@ namespace Hast.Samples.Consumer
 
                         File.WriteAllText(@"C:\Users\Zoltán\Desktop\GPU Day\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
-                        var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
 
-                        var isPrime = primeCalculator.IsPrimeNumber(15);
-                        var isPrime2 = primeCalculator.IsPrimeNumber(13);
-                        var isPrime3 = await primeCalculator.IsPrimeNumberAsync(21);
+                        var sw = Stopwatch.StartNew();
+                        var cpuOutput = new HastlayerOptimizedAlgorithm().Run(234234);
+                        sw.Stop();
                         Debugger.Break();
 
-                        var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
-                        var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
-                        Debugger.Break();
+                        var hastlayerOptimizedAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new HastlayerOptimizedAlgorithm());
 
-                        var biggerPrimes = new uint[] { 9749, 9973, 902119, 907469, 915851 };
-                        var areBiggerPrimes = primeCalculator.ArePrimeNumbers(biggerPrimes);
-                        var parallelAreBiggerPrimes = await primeCalculator.ParallelizedArePrimeNumbers(biggerPrimes);
+                        var output = hastlayerOptimizedAlgorithm.Run(234234);
                         Debugger.Break();
                     }
                 }).Wait(); // This is a workaround for async just to be able to run all this from inside a console app.

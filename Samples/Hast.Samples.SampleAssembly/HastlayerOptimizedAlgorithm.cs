@@ -16,7 +16,7 @@ namespace Hast.Samples.SampleAssembly
         public const int Run_InputUInt32Index = 0;
         public const int Run_OutputUInt32Index = 0;
 
-        public const int MaxDegreeOfParallelism = 50;
+        public const int MaxDegreeOfParallelism = 35;
 
 
         public virtual void Run(SimpleMemory memory)
