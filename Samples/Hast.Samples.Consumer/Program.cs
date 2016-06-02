@@ -40,6 +40,8 @@ namespace Hast.Samples.Consumer
 
                         var configuration = new HardwareGenerationConfiguration();
 
+                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.IsPrimeNumber");
+                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator.ArePrimeNumbers");
                         configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
 
                         configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
@@ -69,17 +71,9 @@ namespace Hast.Samples.Consumer
                         var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
                         Debugger.Break();
 
-                        var parallelizedArePrimes = primeCalculator.ParallelizedArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
-                        Debugger.Break();
-
-                        var numberCount = PrimeCalculator.MaxDegreeOfParallelism;
-                        var numbers = new uint[numberCount];
-                        for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
-                        {
-                            numbers[i - (uint.MaxValue - numberCount)] = (uint)i;
-                        }
-
-                        var arePrimes4 = await primeCalculator.ParallelizedArePrimeNumbers(numbers);
+                        var biggerPrimes = new uint[] { 9749, 9973, 902119, 907469, 915851 };
+                        var areBiggerPrimes = primeCalculator.ArePrimeNumbers(biggerPrimes);
+                        var parallelAreBiggerPrimes = await primeCalculator.ParallelizedArePrimeNumbers(biggerPrimes);
                         Debugger.Break();
                     }
                 }).Wait(); // This is a workaround for async just to be able to run all this from inside a console app.
