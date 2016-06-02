@@ -69,7 +69,7 @@ namespace Hast.Samples.Consumer
                         var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
                         Debugger.Break();
 
-                        var parallelizedArePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
+                        var parallelizedArePrimes = primeCalculator.ParallelizedArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
                         Debugger.Break();
 
                         var numberCount = PrimeCalculator.MaxDegreeOfParallelism;
