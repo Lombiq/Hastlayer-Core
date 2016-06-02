@@ -12,7 +12,7 @@ namespace Hast.Transformer.Services
     public interface IGeneratedTaskArraysInliner : IDependency
     {
         /// <summary>
-        /// Get rid of compiler-generated <see cref="System.Threading.Tasks.Task"/> arrays.
+        /// Get rid of unnecessary compiler-generated <see cref="System.Threading.Tasks.Task"/> arrays.
         /// </summary>
         /// <example>
         /// If <see cref="System.Threading.Tasks.Task"/> objects are saved to an array sometimes the compiler generates
