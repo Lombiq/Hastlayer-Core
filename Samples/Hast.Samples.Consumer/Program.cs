@@ -69,7 +69,7 @@ namespace Hast.Samples.Consumer
                         var output = hastlayerOptimizedAlgorithm.Run(234234);
                         Debugger.Break();
                     }
-                }).Wait(); // This is a workaround for async just to be able to run all this from inside a console app.
+                }).Wait();
         }
 
 
