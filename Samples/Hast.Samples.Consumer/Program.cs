@@ -50,7 +50,7 @@ namespace Hast.Samples.Consumer
                                 MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
                             });
                         configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
-                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.LambdaExpression.0")
+                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.Run.LambdaExpression.0")
                             {
                                 MaxDegreeOfParallelism = HastlayerOptimizedAlgorithm.MaxDegreeOfParallelism
                             });
