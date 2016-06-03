@@ -78,9 +78,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
         protected Process BuildProcess(IVhdlElement notInReset, IVhdlElement inReset = null)
         {
-            Argument.ThrowIfNull(notInReset, nameof(notInReset));
-
-
             var process = new Process { Name = Name.ToExtendedVhdlId() };
 
             process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
@@ -103,18 +100,29 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 ifInResetBlock.Add(inReset);
             }
 
-            var resetIf = new IfElse
+            // Only add the ifInReset block if it contains anything apart from the one comment line.
+            if (ifInResetBlock.Body.Take(2).Count() == 2)
             {
-                Condition = new Binary
+                var resetIf = new IfElse
                 {
-                    Left = CommonPortNames.Reset.ToVhdlSignalReference(),
-                    Operator = BinaryOperator.Equality,
-                    Right = Value.OneCharacter
-                },
-                True = ifInResetBlock,
-                Else = notInReset
-            };
-            process.Add(resetIf);
+                    Condition = new Binary
+                    {
+                        Left = CommonPortNames.Reset.ToVhdlSignalReference(),
+                        Operator = BinaryOperator.Equality,
+                        Right = Value.OneCharacter
+                    },
+                    True = ifInResetBlock
+                };
+                if (notInReset != null)
+                {
+                    resetIf.Else = notInReset;
+                }
+                process.Add(resetIf);
+            }
+            else if (notInReset != null)
+            {
+                process.Add(notInReset);
+            }
 
             return process;
         }

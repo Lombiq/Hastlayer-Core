@@ -34,6 +34,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public void BuildInvocation(
             EntityDeclaration targetDeclaration,
             IEnumerable<IVhdlElement> parameters,
+            int instanceCount,
             ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
@@ -49,17 +50,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
                 .GetMaxInvocationInstanceCountConfigurationForMember(targetDeclaration).MaxDegreeOfParallelism;
 
+            if (instanceCount > maxDegreeOfParallelism)
+            {
+                throw new InvalidOperationException(
+                    "This parallelized call from " + context.Scope.Method + " to " + targetMethodName + " would do " +
+                    instanceCount +
+                    " calls in parallel but the maximal degree of parallelism for this member was set up as " +
+                    maxDegreeOfParallelism + ".");
+            }
+
             int previousMaxInvocationInstanceCount;
             if (!stateMachine.OtherMemberMaxInvocationInstanceCounts.TryGetValue(targetDeclaration, out previousMaxInvocationInstanceCount) ||
-                previousMaxInvocationInstanceCount < maxDegreeOfParallelism)
+                previousMaxInvocationInstanceCount < instanceCount)
             {
-                stateMachine.OtherMemberMaxInvocationInstanceCounts[targetDeclaration] = maxDegreeOfParallelism;
+                stateMachine.OtherMemberMaxInvocationInstanceCounts[targetDeclaration] = instanceCount;
             }
 
 
             var targetMethodDeclaration = (MethodDeclaration)targetDeclaration;
 
-            if (maxDegreeOfParallelism == 1)
+            if (instanceCount == 1)
             {
                 var invocationBlock = BuildInvocationBlock(
                     targetMethodDeclaration,
@@ -76,7 +86,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
                 var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
                 {
-                    RangeMax = (uint)maxDegreeOfParallelism - 1
+                    RangeMax = (uint)instanceCount - 1
                 };
                 var invocationIndexVariableReference = invocationIndexVariableName.ToVhdlVariableReference();
                 stateMachine.LocalVariables.AddIfNew(new Variable
@@ -91,7 +101,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Expression = invocationIndexVariableReference
                 };
 
-                for (int i = 0; i < maxDegreeOfParallelism; i++)
+                for (int i = 0; i < instanceCount; i++)
                 {
                     proxyCase.Whens.Add(new CaseWhen
                     {

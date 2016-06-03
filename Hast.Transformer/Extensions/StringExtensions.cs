@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace System
@@ -31,7 +32,7 @@ namespace System
         }
 
         /// <summary>
-        /// Checkes whether the string looks like the name of a compiler-generated DisplayClass.
+        /// Checks whether the string looks like the name of a compiler-generated DisplayClass.
         /// </summary>
         /// <example>
         /// Such a name is like following: 
@@ -40,12 +41,12 @@ namespace System
         /// </example>
         public static bool IsDisplayClassName(this string name)
         {
-            // A class anme containing "<>" would be invalid, so this is a fairly safe bet.
+            // A class anme containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
             return name.Contains("/<>c");
         }
 
         /// <summary>
-        /// Checkes whether the string looks like the name of a compiler-generated DisplayClass member.
+        /// Checks whether the string looks like the name of a compiler-generated DisplayClass member.
         /// </summary>
         /// <example>
         /// Such a name is like following: 
@@ -54,6 +55,20 @@ namespace System
         public static bool IsDisplayClassMemberName(this string name)
         {
             return name.IsDisplayClassName() && name.Contains("::");
+        }
+
+        /// <summary>
+        /// Checks whether the string looks like the name of a compiler-generated method that was created in place of a
+        /// lambda expression in the original class (not in a DisplayClass).
+        /// </summary>
+        /// <example>
+        /// Such a name is like:
+        /// "System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers2>b__9_0(System.Object)"
+        /// </example>
+        public static bool IsInlineCompilerGeneratedMethodName(this string name)
+        {
+            // A name where before the "<" there is nothing is invalid in standard C#, so this is a fairly safe bet.
+            return Regex.IsMatch(name, "^[^/]+?::<.+>.+__", RegexOptions.Compiled);
         }
     }
 }

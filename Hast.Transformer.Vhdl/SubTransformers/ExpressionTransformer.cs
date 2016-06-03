@@ -16,6 +16,7 @@ using Orchard;
 using Orchard.Logging;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
+using Hast.Common.Configuration;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -87,6 +88,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     };
                 };
 
+                Func<string> getTaskVariableIdentifier = () =>
+                {
+                    // Retrieving the variable the Task is saved to. It's either an array or a standard variable.
+                    if (assignment.Left is IndexerExpression)
+                    {
+                        return ((IdentifierExpression)((IndexerExpression)assignment.Left).Target).Identifier;
+                    }
+                    else
+                    {
+                        return ((IdentifierExpression)assignment.Left).Identifier;
+                    }
+                };
+
+                Func<EntityDeclaration, int> getMaxDegreeOfParallelism = entity =>
+                    context.TransformationContext
+                        .GetTransformerConfiguration()
+                        .GetMaxInvocationInstanceCountConfigurationForMember(entity)
+                        .MaxDegreeOfParallelism;
+
                 // If the right side of an assignment is also an assignment that means that it's a single-line assignment
                 // to multiple variables, so e.g. int a, b, c = 2; We flatten out such expression to individual simple
                 // assignments.
@@ -144,10 +164,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return Empty.Instance;
                     }
                     // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
-                    else if (assignment.Right.Is<InvocationExpression>(invocation => 
-                        invocation.Target.Is<MemberReferenceExpression>(member => 
+                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                        invocation.Target.Is<MemberReferenceExpression>(member =>
                             member.MemberName == "StartNew" &&
-                            member.Target.Is<IdentifierExpression>(identifier => 
+                            member.Target.Is<IdentifierExpression>(identifier =>
                                 scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))))
                     {
                         var taskStartArguments = ((InvocationExpression)assignment.Right).Arguments;
@@ -162,20 +182,43 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         _stateMachineInvocationBuilder.BuildInvocation(
                             targetMethod,
                             taskStartArguments.Skip(1).Select(argument => Transform(argument, context)),
+                            getMaxDegreeOfParallelism(targetMethod),
                             context);
 
-                        // Retrieving the variable the Task is saved to. It's either an array or a standard variable.
-                        IdentifierExpression taskVariable;
-                        if (assignment.Left is IndexerExpression)
-                        {
-                            taskVariable = (IdentifierExpression)((IndexerExpression)assignment.Left).Target;
-                        }
-                        else
-                        {
-                            taskVariable = (IdentifierExpression)assignment.Left;
-                        }
+                        scope.TaskVariableNameToDisplayClassMethodMappings[getTaskVariableIdentifier()] =
+                            targetMethod;
 
-                        scope.TaskVariableNameToDisplayClassMethodMappings[taskVariable.Identifier] = targetMethod;
+                        return Empty.Instance;
+                    }
+                    // Handling shorthand Task starts like:
+                    // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool> (this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
+                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                        invocation.Target.Is<MemberReferenceExpression>(memberReference =>
+                            memberReference.MemberName == "StartNew" &&
+                            memberReference.Target.GetFullName().Contains("System.Threading.Tasks.Task::Factory")) &&
+                        invocation.Arguments.First().Is<ObjectCreateExpression>(objectCreate =>
+                            objectCreate.Type.GetFullName().Contains("Func"))))
+                    {
+                        var inovocationExpression = (InvocationExpression)assignment.Right;
+                        var arguments = inovocationExpression.Arguments;
+
+                        var targetMethod = TaskParallelizationHelper
+                            .GetTargetDisplayClassMemberFromFuncCreation((ObjectCreateExpression)arguments.First())
+                            .GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                        var targetMaxDegreeOfParallelism = context.TransformationContext
+                            .GetTransformerConfiguration()
+                            .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod)
+                            .MaxDegreeOfParallelism;
+
+                        // We only need to care about he invocation here. Since this is a Task start there will be
+                        // some form of await later.
+                        _stateMachineInvocationBuilder.BuildInvocation(
+                            targetMethod,
+                            arguments.Skip(1).Select(argument => Transform(argument, context)),
+                            getMaxDegreeOfParallelism(targetMethod),
+                            context);
+
+                        scope.TaskVariableNameToDisplayClassMethodMappings[getTaskVariableIdentifier()] = targetMethod;
 
                         return Empty.Instance;
                     }

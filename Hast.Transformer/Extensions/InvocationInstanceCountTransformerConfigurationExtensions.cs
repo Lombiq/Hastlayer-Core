@@ -14,9 +14,12 @@ namespace Hast.Common.Configuration
             this TransformerConfiguration configuration,
             EntityDeclaration entity)
         {
+            var fullName = entity.GetFullName();
             var simpleName = entity.GetSimpleName();
+            var isDisplayClassMember = fullName.IsDisplayClassMemberName();
+            var isIsInlineCompilerGeneratedMethod = fullName.IsInlineCompilerGeneratedMethodName();
 
-            if (!entity.GetFullName().IsDisplayClassMemberName())
+            if (!isDisplayClassMember && !isIsInlineCompilerGeneratedMethod)
             {
                 return configuration.GetMaxInvocationInstanceCountConfigurationForMember(simpleName);
             }
@@ -29,18 +32,32 @@ namespace Hast.Common.Configuration
             // If there is no IndexedNameHolder then first we need to generate the indices for all lambdas.
             if (indexedNameHolder == null)
             {
-                // Run the index-setting logic on the members of the parent class.
+                TypeDeclaration parentType;
+                IEnumerable<EntityDeclaration> compilerGeneratedMembers;
 
-                var parentType = entity
-                    .FindFirstParentTypeDeclaration() // The DisplayClass.
-                    .FindFirstParentTypeDeclaration(); // The parent type.
+                if (isDisplayClassMember)
+                {
+                    // Run the index-setting logic on the members of the parent class.
 
-                var displayClassMembers = parentType.Members
-                    .Where(member => member.GetFullName().IsDisplayClassName())
-                    .SelectMany(displayClass => ((TypeDeclaration)displayClass).Members)
-                    .ToDictionary(displayClassMember => displayClassMember.GetFullName());
+                    parentType = entity
+                        .FindFirstParentTypeDeclaration() // The DisplayClass.
+                        .FindFirstParentTypeDeclaration(); // The parent type.
 
-                parentType.AcceptVisitor(new IndexedNameHolderSettingVisitor(displayClassMembers));
+                    compilerGeneratedMembers = parentType.Members
+                        .Where(member => member.GetFullName().IsDisplayClassName())
+                        .SelectMany(displayClass => ((TypeDeclaration)displayClass).Members);
+                }
+                else
+                {
+                    parentType = entity.FindFirstParentTypeDeclaration();
+
+                    compilerGeneratedMembers = parentType.Members
+                        .Where(member => member.GetFullName().IsInlineCompilerGeneratedMethodName());
+                }
+
+                var compilerGeneratedMembersictionary = compilerGeneratedMembers
+                    .ToDictionary(member => member.GetFullName());
+                parentType.AcceptVisitor(new IndexedNameHolderSettingVisitor(compilerGeneratedMembersictionary));
 
                 indexedNameHolder = entity.Annotation<LambdaExpressionIndexedNameHolder>();
 
@@ -63,12 +80,13 @@ namespace Hast.Common.Configuration
 
         private class IndexedNameHolderSettingVisitor : DepthFirstAstVisitor
         {
-            private readonly Dictionary<string, EntityDeclaration> _displayClassMembers;
+            private readonly Dictionary<string, EntityDeclaration> _compilerGeneratedMembers;
             private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new Dictionary<EntityDeclaration, int>();
 
-            public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> displayClassMembers)
+
+            public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> compilerGeneratedMembers)
             {
-                _displayClassMembers = displayClassMembers;
+                _compilerGeneratedMembers = compilerGeneratedMembers;
             }
 
 
@@ -81,27 +99,33 @@ namespace Hast.Common.Configuration
 
                 var memberFullName = memberReferenceExpression.GetFullName();
 
-                if (!memberFullName.IsDisplayClassMemberName()) return;
-
-                var member = _displayClassMembers[memberFullName];
-                if (member.Annotation<LambdaExpressionIndexedNameHolder>() == null)
+                if (!memberFullName.IsDisplayClassMemberName() && !memberFullName.IsInlineCompilerGeneratedMethodName())
                 {
-                    var parentMember = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>();
+                    return;
+                }
 
-                    if (!_lambdaCounts.ContainsKey(parentMember))
+                EntityDeclaration member;
+                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out member))
+                {
+                    if (member.Annotation<LambdaExpressionIndexedNameHolder>() == null)
                     {
-                        _lambdaCounts[parentMember] = 0;
-                    }
+                        var parentMember = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>();
 
-                    member.AddAnnotation(new LambdaExpressionIndexedNameHolder
-                    {
-                        IndexedName = 
-                            parentMember.GetSimpleName() + 
-                            ".LambdaExpression." + 
-                            _lambdaCounts[parentMember].ToString()
-                    });
+                        if (!_lambdaCounts.ContainsKey(parentMember))
+                        {
+                            _lambdaCounts[parentMember] = 0;
+                        }
 
-                    _lambdaCounts[parentMember]++;
+                        member.AddAnnotation(new LambdaExpressionIndexedNameHolder
+                        {
+                            IndexedName =
+                                parentMember.GetSimpleName() +
+                                ".LambdaExpression." +
+                                _lambdaCounts[parentMember].ToString()
+                        });
+
+                        _lambdaCounts[parentMember]++;
+                    } 
                 }
             }
         }

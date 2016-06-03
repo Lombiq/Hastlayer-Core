@@ -9,6 +9,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 using Orchard.Logging;
+using Hast.Transformer.Vhdl.Helpers;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -137,7 +138,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     // Drilling into the expression to find out which DisplayClass method the Func referes to.
                     var funcCreateExpression = (ObjectCreateExpression)((AssignmentExpression)assignment.Right).Right;
-                    var displayClassMemberReference = ((MemberReferenceExpression)funcCreateExpression.Arguments.Single());
+                    var displayClassMemberReference = TaskParallelizationHelper
+                        .GetTargetDisplayClassMemberFromFuncCreation(funcCreateExpression);
                     var funcVariableName = ((IdentifierExpression)assignment.Left).Identifier;
 
                     scope.FuncVariableNameToDisplayClassMethodMappings[funcVariableName] =

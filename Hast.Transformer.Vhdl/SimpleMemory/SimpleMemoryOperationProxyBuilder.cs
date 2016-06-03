@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 
             if (!simpleMemoryUsingComponents.Any()) return new BasicComponent(proxyComponentName);
 
-            var signalsAssignmentBlock = new InlineBlock(new LineComment(proxyComponentName + " start"));
+            var signalsAssignmentBlock = new InlineBlock();
 
 
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
@@ -48,9 +48,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             signalsAssignmentBlock.Add(BuildConditionalOrPortAssignment(
                 SimpleMemoryPortNames.WriteEnable,
                 simpleMemoryUsingComponents));
-
-
-            signalsAssignmentBlock.Add(new LineComment(proxyComponentName + " start"));
 
 
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look 

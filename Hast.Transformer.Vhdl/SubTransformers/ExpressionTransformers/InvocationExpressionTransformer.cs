@@ -300,7 +300,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
             _stateMachineInvocationBuilder
-                .BuildInvocation(targetDeclaration, transformedParameters, context);
+                .BuildInvocation(targetDeclaration, transformedParameters, 1, context);
 
             return _stateMachineInvocationBuilder.BuildInvocationWait(targetDeclaration, 1, true, context).Single();
         }

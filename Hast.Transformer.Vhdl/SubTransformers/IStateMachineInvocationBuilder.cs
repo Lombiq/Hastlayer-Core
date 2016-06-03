@@ -15,6 +15,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         void BuildInvocation(
             EntityDeclaration targetDeclaration,
             IEnumerable<IVhdlElement> parameters,
+            int instanceCount,
             ISubTransformerContext context);
 
         IEnumerable<IVhdlElement> BuildInvocationWait(
