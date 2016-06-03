@@ -85,6 +85,51 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 Func<int, string> getTargetMemberComponentName = index =>
                     ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, index);
 
+                Func<string, int, int, IEnumerable<IVhdlElement>> buildParameterAssignments =
+                    (invokerName, invokerIndex, targetIndex) =>
+                    {
+                        var passedParameters = componentsByName[invokerName]
+                            .GetParameterVariables()
+                            .Where(parameter =>
+                                parameter.TargetMemberFullName == targetMemberName && parameter.Index == invokerIndex);
+
+                        var targetComponentName = ArchitectureComponentNameHelper
+                            .CreateIndexedComponentName(targetMemberName, targetIndex);
+                        var targetParameters =
+                            componentsByName[targetComponentName]
+                            .GetParameterVariables()
+                            .Where(parameter => parameter.TargetMemberFullName == targetMemberName);
+
+                        return passedParameters.Select(parameter => new Assignment
+                        {
+                            AssignTo = targetParameters
+                                        .Single(p =>
+                                            p.TargetParameterName == parameter.TargetParameterName && p.IsOwn),
+                            Expression = parameter.ToReference()
+                        });
+                    };
+
+                Func<string, int, int, IVhdlElement> buildReturnAssigment =
+                    (invokerName, invokerIndex, targetIndex) =>
+                    {
+                        // Does the target have a return value?
+                        var targetComponent = componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, targetIndex)];
+                        var returnVariable =
+                            targetComponent
+                            .GlobalVariables
+                            .SingleOrDefault(variable => variable.Name == targetComponent.CreateReturnVariableName());
+
+                        if (returnVariable == null) return null;
+
+                        return new Assignment
+                        {
+                            AssignTo = componentsByName[invokerName]
+                                    .CreateReturnVariableNameForTargetComponent(targetMemberName, invokerIndex)
+                                    .ToVhdlVariableReference(),
+                            Expression = returnVariable.ToReference()
+                        };
+                    };
+
 
                 // Is this member's component only invoked from a single other component? Because then we don't need a 
                 // full invocation proxy: local Start and Finished signals can be directly connected to the target 
@@ -116,33 +161,35 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                         for (int j = 0; j < invokedFromComponent.Value; j++)
                         {
-                            var targetComponentName = invokedFromSingleComponent ? 
-                                getTargetMemberComponentName(j) : 
-                                getTargetMemberComponentName(i);
+                            var targetIndex = invokedFromSingleComponent ? j : i;
+                            var targetComponentName = getTargetMemberComponentName(targetIndex);
+                            var invokerIndex = invokedFromSingleComponent ? j : 0;
+
+                            signalConnectionsBlock.Add(new LineComment(
+                                "Signal connections for " + invokerName + " (#" + targetIndex + "):"));
 
                             signalConnectionsBlock.Add(new Assignment
                             {
                                 AssignTo = ArchitectureComponentNameHelper
                                     .CreateStartedSignalName(targetComponentName)
                                     .ToVhdlSignalReference(),
-                                Expression = invokedFromSingleComponent ?
-                                    InvocationHelper
-                                        .CreateStartedSignalReference(invokerName, targetMemberName, j) :
-                                    InvocationHelper
-                                        .CreateStartedSignalReference(invokerName, targetMemberName, 0)
+                                Expression = InvocationHelper
+                                        .CreateStartedSignalReference(invokerName, targetMemberName, invokerIndex)
                             });
+
+                            signalConnectionsBlock.Body.AddRange(buildParameterAssignments(invokerName, invokerIndex, targetIndex));
 
                             signalConnectionsBlock.Add(new Assignment
                             {
-                                AssignTo = invokedFromSingleComponent ? 
-                                    InvocationHelper
-                                        .CreateFinishedSignalReference(invokerName, targetMemberName, j) :
-                                    InvocationHelper
-                                        .CreateFinishedSignalReference(invokerName, targetMemberName, 0),
+                                AssignTo = InvocationHelper
+                                        .CreateFinishedSignalReference(invokerName, targetMemberName, invokerIndex),
                                 Expression = ArchitectureComponentNameHelper
                                     .CreateFinishedSignalName(targetComponentName)
                                     .ToVhdlSignalReference()
                             });
+
+                            var returnAssignment = buildReturnAssigment(invokerName, invokerIndex, targetIndex);
+                            if (returnAssignment != null) signalConnectionsBlock.Add(returnAssignment);
                         }
                     }
                 }
@@ -256,10 +303,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                             // WaitingForStarted state
                             {
-                                var passedParameters = componentsByName[invokerName]
-                                .GetParameterVariables()
-                                .Where(parameter => parameter.TargetMemberFullName == targetMemberName && parameter.Index == i);
-
                                 // Chaining together ifs to check all the instances of the target component whether they
                                 // are already started.
                                 IfElse notStartedComponentSelectingIfElse = null;
@@ -284,20 +327,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                             Expression = Value.True
                                         });
 
-                                    var targetParameters =
-                                        componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, c)]
-                                        .GetParameterVariables()
-                                        .Where(parameter => parameter.TargetMemberFullName == targetMemberName);
-                                    foreach (var parameter in passedParameters)
-                                    {
-                                        ifComponentStartedTrue.Add(new Assignment
-                                        {
-                                            AssignTo = targetParameters
-                                                    .Single(p =>
-                                                        p.TargetParameterName == parameter.TargetParameterName && p.IsOwn),
-                                            Expression = parameter.ToReference()
-                                        });
-                                    }
+                                    ifComponentStartedTrue.Body.AddRange(buildParameterAssignments(invokerName, i, c));
 
                                     var ifComponentStartedIfElse = new IfElse
                                     {
@@ -386,22 +416,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                             Expression = Value.True
                                         });
 
-                                    // Does the target have a return value?
-                                    var targetComponent = componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, c)];
-                                    var returnVariable =
-                                        targetComponent
-                                        .GlobalVariables
-                                        .SingleOrDefault(variable => variable.Name == targetComponent.CreateReturnVariableName());
-                                    if (returnVariable != null)
-                                    {
-                                        isFinishedIfTrue.Add(new Assignment
-                                        {
-                                            AssignTo = componentsByName[invokerName]
-                                                    .CreateReturnVariableNameForTargetComponent(targetMemberName, i)
-                                                    .ToVhdlVariableReference(),
-                                            Expression = returnVariable.ToReference()
-                                        });
-                                    }
+                                    var returnAssignment = buildReturnAssigment(invokerName, i, c);
+                                    if (returnAssignment != null) isFinishedIfTrue.Add(returnAssignment);
 
                                     var isFinishedIf = new If
                                     {
