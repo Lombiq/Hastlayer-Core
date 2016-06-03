@@ -193,10 +193,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     castInvocation.Target = "unsigned".ToVhdlIdValue();
                 }
+
+                result.IsLossy = toSize > 32;
             }
             if (toType == KnownDataTypes.StdLogicVector32)
             {
                 castInvocation.Target = "std_logic_vector".ToVhdlIdValue();
+                result.IsLossy = fromSize > 32;
             }
 
 
