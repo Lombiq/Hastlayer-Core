@@ -354,12 +354,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                 }
 
-                // Is this a Task result access like array[k].Result? We know that we've already handled the target so
-                // it stores the result objects, so just need to use them directly.
-                if (memberReference.Target.GetActualTypeReference().FullName.StartsWith("System.Threading.Tasks.Task") &&
+                // Is this a Task result access like array[k].Result or task.Result?
+                var targetTypeReference = memberReference.Target.GetActualTypeReference();
+                if (targetTypeReference.FullName.StartsWith("System.Threading.Tasks.Task") &&
                     memberReference.MemberName == "Result")
                 {
-                    return Transform(memberReference.Target, context);
+                    // If this is not an array then it doesn't need to be explicitly awaited, just access to its
+                    // Result property should await it. So doing it here.
+                    if (memberReference.Target is IdentifierExpression && !targetTypeReference.IsArray)
+                    {
+                        var targetMethod = context.Scope
+                            .TaskVariableNameToDisplayClassMethodMappings[((IdentifierExpression)memberReference.Target).Identifier];
+                        return _stateMachineInvocationBuilder
+                            .BuildSingleInvocationWait(targetMethod, 0, context);
+                    }
+                    else
+                    {
+                        // We know that we've already handled the target so it stores the result objects, so just need 
+                        // to use them directly.
+                        return Transform(memberReference.Target, context); 
+                    }
                 }
 
 

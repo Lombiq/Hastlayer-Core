@@ -18,10 +18,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             int instanceCount,
             ISubTransformerContext context);
 
-        IEnumerable<IVhdlElement> BuildInvocationWait(
+        IEnumerable<IVhdlElement> BuildMultiInvocationWait(
             EntityDeclaration targetDeclaration,
             int instanceCount,
             bool waitForAll,
+            ISubTransformerContext context);
+
+        IVhdlElement BuildSingleInvocationWait(
+            EntityDeclaration targetDeclaration,
+            int targetIndex,
             ISubTransformerContext context);
     }
 }

@@ -135,79 +135,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
         }
 
-        public IEnumerable<IVhdlElement> BuildInvocationWait(
+        public IEnumerable<IVhdlElement> BuildMultiInvocationWait(
             EntityDeclaration targetDeclaration,
             int instanceCount,
             bool waitForAll,
             ISubTransformerContext context)
         {
-            var stateMachine = context.Scope.StateMachine;
-            var currentBlock = context.Scope.CurrentBlock;
-            var targetMethodName = targetDeclaration.GetFullName();
+            return BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
+        }
 
-
-            var waitForInvocationFinishedIfElse = InvocationHelper
-                .CreateWaitForInvocationFinished(stateMachine, targetDeclaration.GetFullName(), instanceCount, waitForAll);
-
-            var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
-            var waitForInvokedStateMachinesToFinishState = new InlineBlock(
-                new LineComment(
-                    "Waiting for the state machine invocation of the following method to finish: " + targetMethodName),
-                waitForInvocationFinishedIfElse);
-
-            var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachinesToFinishState);
-            currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
-
-            if (instanceCount > 1)
-            {
-                waitForInvocationFinishedIfElse.True.Add(new Assignment
-                {
-                    AssignTo = stateMachine
-                        .CreateInvocationIndexVariableName(targetMethodName)
-                        .ToVhdlVariableReference(),
-                    Expression = 0.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                });
-            }
-
-            currentBlock.ChangeBlockToDifferentState(waitForInvocationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
-
-
-            var returnType = _typeConverter.ConvertAstType(targetDeclaration.ReturnType);
-
-            if (returnType == KnownDataTypes.Void)
-            {
-                return Enumerable.Repeat<IVhdlElement>(Empty.Instance, instanceCount);
-            }
-
-            var returnSignalReferences = new List<DataObjectReference>();
-
-            for (int i = 0; i < instanceCount; i++)
-            {
-                // Creating the return signal if it doesn't exist.
-                var returnSignalReference = stateMachine.CreateReturnSignalReferenceForTargetComponent(targetMethodName, i);
-
-                stateMachine.ExternallyDrivenSignals.AddIfNew(new Signal
-                {
-                    DataType = returnType,
-                    Name = returnSignalReference.Name
-                });
-
-                // Using the reference of the state machine's return value in place of the original method call.
-                returnSignalReferences.Add(returnSignalReference);
-
-                // Noting that this component was finished in this state.
-                var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
-                ISet<string> finishedComponents;
-                if (!finishedInvokedComponentsForStates
-                    .TryGetValue(currentBlock.CurrentStateMachineStateIndex, out finishedComponents))
-                {
-                    finishedComponents = finishedInvokedComponentsForStates[currentBlock.CurrentStateMachineStateIndex] = 
-                        new HashSet<string>();
-                }
-                finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, i));
-            }
-
-            return returnSignalReferences;
+        public IVhdlElement BuildSingleInvocationWait(
+            EntityDeclaration targetDeclaration,
+            int targetIndex,
+            ISubTransformerContext context)
+        {
+            return BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
         }
 
 
@@ -298,6 +240,94 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             invocationBlock.Add(InvocationHelper.CreateInvocationStart(stateMachine, targetMethodName, index));
 
             return invocationBlock;
+        }
+
+        private IEnumerable<IVhdlElement> BuildInvocationWait(
+            EntityDeclaration targetDeclaration,
+            int instanceCount,
+            int index,
+            bool waitForAll,
+            ISubTransformerContext context)
+        {
+            var stateMachine = context.Scope.StateMachine;
+            var currentBlock = context.Scope.CurrentBlock;
+            var targetMethodName = targetDeclaration.GetFullName();
+
+
+            var waitForInvocationFinishedIfElse = InvocationHelper
+                .CreateWaitForInvocationFinished(stateMachine, targetDeclaration.GetFullName(), instanceCount, waitForAll);
+
+            var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
+            var waitForInvokedStateMachinesToFinishState = new InlineBlock(
+                new LineComment(
+                    "Waiting for the state machine invocation of the following method to finish: " + targetMethodName),
+                waitForInvocationFinishedIfElse);
+
+            var waitForInvokedStateMachineToFinishStateIndex = stateMachine.AddState(waitForInvokedStateMachinesToFinishState);
+            currentBlock.Add(stateMachine.CreateStateChange(waitForInvokedStateMachineToFinishStateIndex));
+
+            if (instanceCount > 1)
+            {
+                waitForInvocationFinishedIfElse.True.Add(new Assignment
+                {
+                    AssignTo = stateMachine
+                        .CreateInvocationIndexVariableName(targetMethodName)
+                        .ToVhdlVariableReference(),
+                    Expression = 0.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                });
+            }
+
+            currentBlock.ChangeBlockToDifferentState(waitForInvocationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
+
+
+            var returnType = _typeConverter.ConvertAstType(targetDeclaration.ReturnType);
+
+            if (returnType == KnownDataTypes.Void)
+            {
+                return Enumerable.Repeat<IVhdlElement>(Empty.Instance, instanceCount);
+            }
+
+            var returnSignalReferences = new List<DataObjectReference>();
+
+            Action<int> buildInvocationWaitBlock = targetIndex =>
+            {
+                // Creating the return signal if it doesn't exist.
+                var returnSignalReference = stateMachine.CreateReturnSignalReferenceForTargetComponent(targetMethodName, targetIndex);
+
+                stateMachine.ExternallyDrivenSignals.AddIfNew(new Signal
+                {
+                    DataType = returnType,
+                    Name = returnSignalReference.Name
+                });
+
+                // Using the reference of the state machine's return value in place of the original method call.
+                returnSignalReferences.Add(returnSignalReference);
+
+                // Noting that this component was finished in this state.
+                var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
+                ISet<string> finishedComponents;
+                if (!finishedInvokedComponentsForStates
+                    .TryGetValue(currentBlock.CurrentStateMachineStateIndex, out finishedComponents))
+                {
+                    finishedComponents = finishedInvokedComponentsForStates[currentBlock.CurrentStateMachineStateIndex] =
+                        new HashSet<string>();
+                }
+                finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, targetIndex));
+            };
+
+            if (index == -1)
+            {
+                for (int i = 0; i < instanceCount; i++)
+                {
+                    buildInvocationWaitBlock(i);
+                } 
+            }
+            else
+            {
+                buildInvocationWaitBlock(index);
+            }
+
+            return returnSignalReferences;
         }
     }
 }

@@ -240,7 +240,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         // This array originally stored the Task<T> objects but now is just for the results, so we have 
                         // to move the results to its elements.
                         var targetMethod = context.Scope.TaskVariableNameToDisplayClassMethodMappings[taskArrayIdentifier];
-                        var resultReferences = _stateMachineInvocationBuilder.BuildInvocationWait(
+                        var resultReferences = _stateMachineInvocationBuilder.BuildMultiInvocationWait(
                             targetMethod,
                             context.TransformationContext.GetTransformerConfiguration()
                                 .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod).MaxDegreeOfParallelism,
@@ -302,7 +302,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             _stateMachineInvocationBuilder
                 .BuildInvocation(targetDeclaration, transformedParameters, 1, context);
 
-            return _stateMachineInvocationBuilder.BuildInvocationWait(targetDeclaration, 1, true, context).Single();
+            return _stateMachineInvocationBuilder.BuildMultiInvocationWait(targetDeclaration, 1, true, context).Single();
         }
     }
 }
