@@ -71,7 +71,7 @@ namespace Hast.Samples.Consumer
                             configuration);
 
 
-                        File.WriteAllText(@"E:\Projects\Munka\Lombiq\Hastlayer\HastlayerHardwareTest\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
+                        File.WriteAllText(@"C:\Users\Zoltan\Projects\HastlayerHardware\Hastlayer.ip\Hast_IP.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
                         //File.WriteAllText(@"D:\Users\Zoltán\Projects\Munka\Lombiq\Hastlayer\sigasi\Workspace\HastTest\Test.vhd", ToVhdl(hardwareRepresentation.HardwareDescription));
 
 
