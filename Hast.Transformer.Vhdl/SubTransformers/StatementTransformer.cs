@@ -99,7 +99,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     var assigmentElement = new Assignment
                     {
-                        AssignTo = stateMachine.CreateReturnVariableName().ToVhdlVariableReference(),
+                        AssignTo = stateMachine.CreateReturnSignalReference(),
                         Expression = _expressionTransformer.Transform(returnStatement.Expression, context)
                     };
                     currentBlock.Add(assigmentElement);

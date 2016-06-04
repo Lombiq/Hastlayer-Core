@@ -7,7 +7,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.Models
 {
-    public class ParameterVariable : Variable
+    public class ParameterSignal : Signal
     {
         public string TargetMemberFullName { get; private set; }
         public string TargetParameterName { get; private set; }
@@ -20,7 +20,7 @@ namespace Hast.Transformer.Vhdl.Models
         public bool IsOwn { get; set; }
 
 
-        public ParameterVariable(string targetMemberFullName, string parameterName)
+        public ParameterSignal(string targetMemberFullName, string parameterName)
         {
             TargetMemberFullName = targetMemberFullName;
             TargetParameterName = parameterName;

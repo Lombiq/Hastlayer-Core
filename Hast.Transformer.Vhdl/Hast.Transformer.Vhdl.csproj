@@ -93,7 +93,7 @@
     <Compile Include="Models\IVhdlTransformationContext.cs" />
     <Compile Include="Models\MemberIdTable.cs" />
     <Compile Include="ArchitectureComponents\MemberStateMachine.cs" />
-    <Compile Include="Models\ParameterVariable.cs" />
+    <Compile Include="Models\ParameterSignal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ArchitectureComponents\NameSuffixes.cs" />
     <Compile Include="SimpleMemory\ISimpleMemoryComponentBuilder.cs" />

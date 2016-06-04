@@ -19,25 +19,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return ArchitectureComponentNameHelper.CreateFinishedSignalName(component.Name);
         }
 
-        public static string CreateParameterVariableName(this IArchitectureComponent component, string parameterName)
-        {
-            return ArchitectureComponentNameHelper.CreateParameterVariableName(component.Name, parameterName);
-        }
-
-        public static string CreateReturnVariableName(this IArchitectureComponent component)
-        {
-            return ArchitectureComponentNameHelper.CreateReturnVariableName(component.Name);
-        }
-
-        public static string CreateReturnVariableNameForTargetComponent(
-            this IArchitectureComponent component, 
-            string targetMemberName,
-            int index)
-        {
-            return component
-                .CreatePrefixedSegmentedObjectName(targetMemberName, NameSuffixes.Return, index.ToString());
-        }
-
         public static string CreatePrefixedSegmentedObjectName(this IArchitectureComponent component, params string[] segments)
         {
             return ArchitectureComponentNameHelper.CreatePrefixedSegmentedObjectName(component.Name, segments);

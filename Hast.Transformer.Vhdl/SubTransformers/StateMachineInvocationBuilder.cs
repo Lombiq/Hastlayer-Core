@@ -179,21 +179,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return Enumerable.Repeat<IVhdlElement>(Empty.Instance, instanceCount);
             }
 
-            var returnVariableReferences = new List<DataObjectReference>();
+            var returnSignalReferences = new List<DataObjectReference>();
 
             for (int i = 0; i < instanceCount; i++)
             {
-                // Creating the return variable if it doesn't exist.
-                var returnVariableName = stateMachine.CreateReturnVariableNameForTargetComponent(targetMethodName, i);
+                // Creating the return signal if it doesn't exist.
+                var returnSignalReference = stateMachine.CreateReturnSignalReferenceForTargetComponent(targetMethodName, i);
 
-                stateMachine.GlobalVariables.AddIfNew(new Variable
+                stateMachine.ExternallyDrivenSignals.AddIfNew(new Signal
                 {
                     DataType = returnType,
-                    Name = returnVariableName
+                    Name = returnSignalReference.Name
                 });
 
                 // Using the reference of the state machine's return value in place of the original method call.
-                returnVariableReferences.Add(returnVariableName.ToVhdlVariableReference());
+                returnSignalReferences.Add(returnSignalReference);
 
                 // Noting that this component was finished in this state.
                 var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
@@ -207,7 +207,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, i));
             }
 
-            return returnVariableReferences;
+            return returnSignalReferences;
         }
 
 
@@ -254,25 +254,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             foreach (var parameter in parameters)
             {
-                // Adding variable for parameter passing if it doesn't exist.
+                // Adding signal for parameter passing if it doesn't exist.
                 var currentParameter = methodParametersEnumerator.Current;
 
-                var parameterVariableName = stateMachine
+                var parameterSignalName = stateMachine
                     .CreatePrefixedSegmentedObjectName(
                         ArchitectureComponentNameHelper
-                            .CreateParameterVariableName(targetMethodName, currentParameter.Name).TrimExtendedVhdlIdDelimiters(),
+                            .CreateParameterSignalName(targetMethodName, currentParameter.Name).TrimExtendedVhdlIdDelimiters(),
                         index.ToString());
 
-                var parameterVariableType = _typeConverter.ConvertAstType(currentParameter.Type);
-                stateMachine.GlobalVariables.AddIfNew(new ParameterVariable(targetMethodName, currentParameter.Name)
+                var parameterSignalType = _typeConverter.ConvertAstType(currentParameter.Type);
+                stateMachine.InternallyDrivenSignals.AddIfNew(new ParameterSignal(targetMethodName, currentParameter.Name)
                 {
-                    DataType = parameterVariableType,
-                    Name = parameterVariableName,
+                    DataType = parameterSignalType,
+                    Name = parameterSignalName,
                     Index = index
                 });
 
 
-                // Assign local values to be passed to the intermediary variable.
+                // Assign local values to be passed to the intermediary parameter signal.
                 var assignmentExpression = parameter;
                 // Only trying casting if the parameter is not a constant or something other than an IDataObject.
                 if (parameter is IDataObject)
@@ -281,13 +281,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         .ImplementTypeConversion(
                             stateMachine.LocalVariables
                                 .Single(variable => variable.Name == ((IDataObject)parameter).Name).DataType,
-                            parameterVariableType,
+                            parameterSignalType,
                             parameter)
                         .Expression;
                 }
                 invocationBlock.Add(new Assignment
                 {
-                    AssignTo = parameterVariableName.ToVhdlVariableReference(),
+                    AssignTo = parameterSignalName.ToVhdlSignalReference(),
                     Expression = assignmentExpression
                 });
 

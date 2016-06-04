@@ -89,7 +89,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     (invokerName, invokerIndex, targetIndex) =>
                     {
                         var passedParameters = componentsByName[invokerName]
-                            .GetParameterVariables()
+                            .GetParameterSignals()
                             .Where(parameter =>
                                 parameter.TargetMemberFullName == targetMemberName && parameter.Index == invokerIndex);
 
@@ -97,7 +97,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             .CreateIndexedComponentName(targetMemberName, targetIndex);
                         var targetParameters =
                             componentsByName[targetComponentName]
-                            .GetParameterVariables()
+                            .GetParameterSignals()
                             .Where(parameter => parameter.TargetMemberFullName == targetMemberName);
 
                         return passedParameters.Select(parameter => new Assignment
@@ -113,20 +113,21 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     (invokerName, invokerIndex, targetIndex) =>
                     {
                         // Does the target have a return value?
-                        var targetComponent = componentsByName[ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, targetIndex)];
-                        var returnVariable =
+                        var targetComponentName = ArchitectureComponentNameHelper
+                            .CreateIndexedComponentName(targetMemberName, targetIndex);
+                        var targetComponent = componentsByName[targetComponentName];
+                        var returnSignal =
                             targetComponent
-                            .GlobalVariables
-                            .SingleOrDefault(variable => variable.Name == targetComponent.CreateReturnVariableName());
+                            .InternallyDrivenSignals
+                            .SingleOrDefault(signal => signal.Name == targetComponent.CreateReturnSignalReference().Name);
 
-                        if (returnVariable == null) return null;
+                        if (returnSignal == null) return null;
 
                         return new Assignment
                         {
                             AssignTo = componentsByName[invokerName]
-                                    .CreateReturnVariableNameForTargetComponent(targetMemberName, invokerIndex)
-                                    .ToVhdlVariableReference(),
-                            Expression = returnVariable.ToReference()
+                                    .CreateReturnSignalReferenceForTargetComponent(targetMemberName, invokerIndex),
+                            Expression = returnSignal.ToReference()
                         };
                     };
 

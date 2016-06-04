@@ -106,9 +106,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var isVoid = returnType.Name == "void";
             if (!isVoid)
             {
-                stateMachine.GlobalVariables.Add(new Variable
+                stateMachine.InternallyDrivenSignals.Add(new Signal
                 {
-                    Name = stateMachine.CreateReturnVariableName(),
+                    Name = stateMachine.CreateReturnSignalReference().Name,
                     DataType = returnType
                 });
             }
@@ -121,13 +121,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // we need to have intermediary input variables, then copy their values to local variables.
 
                 var parameterDataType = _typeConverter.ConvertAstType(parameter.Type);
-                var parameterGlobalVariableName = stateMachine.CreateParameterVariableName(parameter.Name);
+                var parameterSignalReference = stateMachine.CreateParameterSignalReference(parameter.Name);
                 var parameterLocalVariableName = stateMachine.CreatePrefixedObjectName(parameter.Name);
 
-                stateMachine.GlobalVariables.Add(new ParameterVariable(methodFullName, parameter.Name)
+                stateMachine.ExternallyDrivenSignals.Add(new ParameterSignal(methodFullName, parameter.Name)
                 {
                     DataType = parameterDataType,
-                    Name = parameterGlobalVariableName,
+                    Name = parameterSignalReference.Name,
                     IsOwn = true
                 });
 
@@ -140,7 +140,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 openingBlock.Add(new Assignment
                 {
                     AssignTo = parameterLocalVariableName.ToVhdlVariableReference(),
-                    Expression = parameterGlobalVariableName.ToVhdlVariableReference()
+                    Expression = parameterSignalReference
                 });
             }
 
