@@ -30,7 +30,7 @@ namespace Hast.Samples.SampleAssembly
                     indexObject =>
                     {
                         var index = (int)indexObject;
-                        uint result = (uint)index * 2;
+                        uint result = input + (uint)index * 2;
 
                         for (int j = 0; j < 99999; j++)
                         {

@@ -50,6 +50,7 @@
     <Compile Include="PrimeCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecursiveAlgorithms.cs" />
+    <Compile Include="SimdCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
