@@ -59,7 +59,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Value.ToVhdl(vhdlGenerationOptions) + " when " + Expression.ToVhdl(vhdlGenerationOptions);
+            return
+                Value.ToVhdl(vhdlGenerationOptions) +
+                (Expression != null ? " when " + Expression.ToVhdl(vhdlGenerationOptions) : string.Empty);
         }
     }
 }

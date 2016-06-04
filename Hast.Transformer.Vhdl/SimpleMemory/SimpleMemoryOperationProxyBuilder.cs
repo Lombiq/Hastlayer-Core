@@ -86,11 +86,19 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 }
 
                 assignment.Whens.Add(new SignalAssignmentWhen
-                    {
-                        Expression = expressionBuilderForComponentsAssignment(component),
-                        Value = value
+                {
+                    Expression = expressionBuilderForComponentsAssignment(component),
+                    Value = value
                 });
             }
+
+
+            assignment.Whens.Add(new SignalAssignmentWhen
+            {
+                Value = portName == SimpleMemoryPortNames.CellIndex ? 
+                    KnownDataTypes.UnrangedInt.DefaultValue : 
+                    KnownDataTypes.StdLogicVector32.DefaultValue
+            });
 
 
             return assignment;
@@ -128,7 +136,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 assignmentExpression = firstBinary;
             }
 
-            
+
             return new Assignment
             {
                 AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
