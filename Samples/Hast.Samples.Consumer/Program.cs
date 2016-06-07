@@ -80,7 +80,8 @@ namespace Hast.Samples.Consumer
 
                         #region HastlayerOptimizedAlgorithm
                         var hastlayerOptimizedAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new HastlayerOptimizedAlgorithm());
-
+                        // This takes about 112ms on an i5 processor with two physical (four logical) cores and 21ms on
+                        // an FPGA.
                         var output = hastlayerOptimizedAlgorithm.Run(234234);
                         #endregion
 
