@@ -85,6 +85,7 @@ namespace Hast.Samples.Consumer
                         var output = hastlayerOptimizedAlgorithm.Run(234234);
                         #endregion
 
+
                         #region PrimeCalculator
                         var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
 
