@@ -40,9 +40,10 @@ namespace Hast.Samples.Consumer
                         var configuration = new HardwareGenerationConfiguration();
 
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.MonteCarloAlgorithm");
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                        //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm");
                         //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.SimdCalculator");
 
                         configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
                             new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0")
@@ -53,6 +54,11 @@ namespace Hast.Samples.Consumer
                             new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.Run.LambdaExpression.0")
                             {
                                 MaxDegreeOfParallelism = HastlayerOptimizedAlgorithm.MaxDegreeOfParallelism
+                            });
+                        configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.SimdCalculator.AddVectors.LambdaExpression.0")
+                            {
+                                MaxDegreeOfParallelism = SimdCalculator.MaxDegreeOfParallelism
                             });
                         configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
                             new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
@@ -77,6 +83,20 @@ namespace Hast.Samples.Consumer
 
                         // For testing transformation, we don't need anything else.
                         return;
+
+                        #region SimdCalculator
+                        var vectorSize = 200;
+                        var vector = new int[vectorSize];
+                        for (int i = int.MaxValue - vectorSize; i < int.MaxValue; i++)
+                        {
+                            vector[i - int.MaxValue + vectorSize] = i;
+                        }
+
+                        var simdCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new SimdCalculator());
+
+                        var sumVector = simdCalculator.AddVectors(vector, vector);
+                        #endregion
+
 
                         #region HastlayerOptimizedAlgorithm
                         var hastlayerOptimizedAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new HastlayerOptimizedAlgorithm());
