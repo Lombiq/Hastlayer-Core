@@ -149,28 +149,12 @@ namespace Hast.Samples.SampleAssembly
 
         public static async Task<bool[]> ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            // Padding the input array as necessary to have a multiple of MaxDegreeOfParallelism. This is needed because
-            // at the moment Hastlayer only supports a fixed degree of parallelism. This is the simplest way to overcome 
-            // this.
-            var originalNumberCount = numbers.Length;
-            var remainderToMaxDegreeOfParallelism = numbers.Length % PrimeCalculator.MaxDegreeOfParallelism;
-            if (remainderToMaxDegreeOfParallelism != 0)
-            {
-                numbers = numbers
-                    .Concat(new uint[PrimeCalculator.MaxDegreeOfParallelism - remainderToMaxDegreeOfParallelism])
-                    .ToArray();
-            }
-
             var results = await RunArePrimeNumbersMethod(
-                numbers,
+                numbers.PadToMultipleOf(PrimeCalculator.MaxDegreeOfParallelism),
                 memory => Task.Run(() => primeCalculator.ParallelizedArePrimeNumbers(memory)));
 
-            if (remainderToMaxDegreeOfParallelism != 0)
-            {
-                return results.Take(originalNumberCount).ToArray();
-            }
-
-            return results;
+            // The result might be longer than the input due to padding.
+            return results.CutToLength(numbers.Length);
         }
 
         private static async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner)
