@@ -43,15 +43,31 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             string name,
             DataType dataType)
         {
-            var returnVariable = new Variable
+            var variable = new Variable
             {
                 Name = component.GetNextUnusedIndexedObjectName(name),
                 DataType = dataType
             };
 
-            component.LocalVariables.Add(returnVariable);
+            component.LocalVariables.Add(variable);
 
-            return returnVariable;
+            return variable;
+        }
+
+        public static Signal CreateSignalWithNextUnusedIndexedName(
+            this IArchitectureComponent component,
+            string name,
+            DataType dataType)
+        {
+            var signal = new Signal
+            {
+                Name = component.GetNextUnusedIndexedObjectName(name),
+                DataType = dataType
+            };
+
+            component.InternallyDrivenSignals.Add(signal);
+
+            return signal;
         }
 
         public static DataObjectReference CreateParameterSignalReference(this IArchitectureComponent component, string parameterName)
