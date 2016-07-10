@@ -23,12 +23,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
         private readonly ITypeConverter _typeConverter;
+        private readonly ISpecialOperationInvocationTransformer _specialOperationInvocationTransformer;
 
 
-        public InvocationExpressionTransformer(IStateMachineInvocationBuilder stateMachineInvocationBuilder, ITypeConverter typeConverter)
+        public InvocationExpressionTransformer(
+            IStateMachineInvocationBuilder stateMachineInvocationBuilder,
+            ITypeConverter typeConverter,
+            ISpecialOperationInvocationTransformer specialOperationInvocationTransformer)
         {
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
             _typeConverter = typeConverter;
+            _specialOperationInvocationTransformer = specialOperationInvocationTransformer;
         }
 
 
@@ -295,7 +300,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))
             {
-                throw new InvalidOperationException("The invoked method " + targetMethodName + " can't be found.");
+                if (_specialOperationInvocationTransformer.IsSpecialOperationInvocation(expression))
+                {
+                    return _specialOperationInvocationTransformer
+                        .TransformSpecialOperationInvocation(expression, transformedParameters, context);
+                }
+
+                throw new InvalidOperationException(
+                    "The invoked method " + 
+                    targetMethodName + 
+                    " can't be found and thus can't be transformed. Did you forget to add an assembly to the list of the assemblies to generate hardware from?");
             }
 
 

@@ -75,6 +75,7 @@
     <Compile Include="Models\ITransformationContext.cs" />
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
+    <Compile Include="SpecialOperations\SimdOperations.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />

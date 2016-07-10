@@ -56,11 +56,6 @@ namespace Hast.Samples.Consumer
                                 MaxDegreeOfParallelism = HastlayerOptimizedAlgorithm.MaxDegreeOfParallelism
                             });
                         configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
-                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.SimdCalculator.AddVectors.LambdaExpression.0")
-                            {
-                                MaxDegreeOfParallelism = SimdCalculator.MaxDegreeOfParallelism
-                            });
-                        configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
                             new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
                             {
                                 // If we give these algorithms inputs causing a larger recursion depth then that will
@@ -85,7 +80,7 @@ namespace Hast.Samples.Consumer
                         return;
 
                         #region SimdCalculator
-                        var vectorSize = 200;
+                        var vectorSize = 20000;
                         var vector = new int[vectorSize];
                         for (int i = int.MaxValue - vectorSize; i < int.MaxValue; i++)
                         {

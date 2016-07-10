@@ -108,7 +108,9 @@
     <Compile Include="SubTransformers\ExpressionTransformers\IBinaryOperatorExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ISpecialOperationInvocationTransformer.cs" />
     <Compile Include="SubTransformers\IStateMachineInvocationBuilder.cs" />
+    <Compile Include="SubTransformers\SpecialOperationInvocationTransformer.cs" />
     <Compile Include="SubTransformers\StateMachineInvocationBuilder.cs" />
     <Compile Include="SubTransformers\IArrayTypesCreator.cs" />
     <Compile Include="SubTransformers\ICompilerGeneratedClassesVerifier.cs" />
