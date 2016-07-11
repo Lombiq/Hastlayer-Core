@@ -1,7 +1,6 @@
 ﻿using Hast.Transformer.SimpleMemory;
 using Orchard;
 using System.Threading.Tasks;
-using Hast.Communication.Models;
 using Hast.Common.Models;
 
 namespace Hast.Communication.Services
@@ -11,6 +10,11 @@ namespace Hast.Communication.Services
     /// </summary>
     public interface ICommunicationService : IDependency
     {
+        /// <summary>
+        /// Name of the channel used for the communication.
+        /// </summary>
+        string ChannelName { get; }
+
         /// <summary>
         /// Executes the given member on hardware.
         /// </summary>
