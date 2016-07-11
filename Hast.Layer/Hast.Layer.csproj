@@ -43,6 +43,7 @@
     <Compile Include="Extensibility\Events\EventHandlers.cs" />
     <Compile Include="Extensibility\Events\ExecutedOnHardwareEventArgs.cs" />
     <Compile Include="Extensibility\Events\HardwareExecutionEventProxy.cs" />
+    <Compile Include="Extensions\HastlayerExtensions.cs" />
     <Compile Include="Models\HardwareRepresentation.cs" />
     <Compile Include="Hastlayer.cs" />
     <Compile Include="HastlayerConfiguration.cs" />

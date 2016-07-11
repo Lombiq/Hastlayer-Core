@@ -1,0 +1,33 @@
+﻿using Hast.Communication.Constants;
+using Orchard.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Hast.Communication.Services
+{
+    public class CommunicationServiceSelector : ICommunicationServiceSelector
+    {
+        private readonly IEnumerable<ICommunicationService> _communicationServices;
+
+
+        public CommunicationServiceSelector(IEnumerable<ICommunicationService> communicationServices)
+        {
+            _communicationServices = communicationServices;
+        }
+
+
+        public ICommunicationService GetCommunicationService(string channelName)
+        {
+            Argument.ThrowIfNullOrEmpty(channelName, "channelName");
+
+            var communicationService = _communicationServices
+                .FirstOrDefault(service => service.ChannelName == channelName);
+
+            if (communicationService == null)
+                throw new InvalidOperationException("Communication service was not found with the given channel name.");
+
+            return communicationService;
+        }
+    }
+}

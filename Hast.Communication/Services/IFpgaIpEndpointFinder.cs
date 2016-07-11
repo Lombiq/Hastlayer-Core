@@ -1,0 +1,23 @@
+﻿using Hast.Communication.Models;
+using Orchard;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hast.Communication.Services
+{
+    /// <summary>
+    /// Service for finding FPGA endpoints connected to the available networks of this computer.
+    /// </summary>
+    public interface IFpgaIpEndpointFinder : IDependency
+    {
+        /// <summary>
+        /// Returns all FPGA endpoints connected to the available networks of this computer.
+        /// </summary>
+        /// <returns>FPGA endpoints connected to the available networks of this computer.</returns>
+        Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpoints();
+    }
+}

@@ -12,7 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System;
-using Hast.Communication.Extensibility;
+using Hast.Common.Configuration;
 
 namespace Hast.Communication
 {
@@ -27,7 +27,7 @@ namespace Hast.Communication
         }
 
 
-        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target)
+        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target, IProxyGenerationConfiguration configuration)
         {
             return invocation =>
                 {
@@ -78,7 +78,8 @@ namespace Hast.Communication
                             var task = Task.Run(async () =>
                                 {
                                     invocationContext.ExecutionInformation = await workContext
-                                        .Resolve<ICommunicationService>()
+                                        .Resolve<ICommunicationServiceSelector>()
+                                        .GetCommunicationService(configuration.CommunicationChannelName)
                                         .Execute(memory, memberId);
                                 });
                             task.Wait();
