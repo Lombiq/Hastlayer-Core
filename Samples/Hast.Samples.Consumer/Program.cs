@@ -32,6 +32,7 @@ namespace Hast.Samples.Consumer
         public static Sample SampleToRun = Sample.PrimeCalculator;
     }
 
+
     class Program
     {
         static void Main(string[] args)
