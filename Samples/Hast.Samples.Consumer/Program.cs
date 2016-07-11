@@ -29,7 +29,7 @@ namespace Hast.Samples.Consumer
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one.
         /// </summary>
-        public static Sample SampleToRun = Sample.HastlayerOptimizedAlgorithm;
+        public static Sample SampleToRun = Sample.PrimeCalculator;
     }
 
     class Program
