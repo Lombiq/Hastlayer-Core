@@ -24,7 +24,7 @@ namespace Hast.Common.Configuration
                 {
                     _default = new ProxyGenerationConfiguration
                     {
-                        CommunicationChannelName = "Ethernet"
+                        CommunicationChannelName = "Serial"
                     };
                 }
 
