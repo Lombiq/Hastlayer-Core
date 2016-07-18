@@ -42,6 +42,7 @@ namespace Hast.Communication.Services
 
             // We need retries because somehow the FPGA doesn't always catch our request.
             Logger.Information("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
+
             var currentRetries = 0;
             var receiveResults = Enumerable.Empty<UdpReceiveResult>();
             while (currentRetries <= BroadcastRetryCount)
@@ -50,13 +51,15 @@ namespace Hast.Communication.Services
 
                 // Send request to all broadcast addresses on all the supported network interfaces.
                 foreach (var suppertedNetworkInterface in NetworkInterface.GetAllNetworkInterfaces()
-                    .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up && networkInterface.SupportsMulticast == true))
+                    .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up && 
+                        networkInterface.SupportsMulticast == true))
                 {
                     // Currently we are supporting only IPv4 addresses.
                     var ipv4AddressInformations = suppertedNetworkInterface.GetIPProperties().UnicastAddresses
                         .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork);
 
-                    endpoints.AddRange(ipv4AddressInformations.Select(addressInformation => new IPEndPoint(addressInformation.Address, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse)));
+                    endpoints.AddRange(ipv4AddressInformations.Select(addressInformation => 
+                        new IPEndPoint(addressInformation.Address, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse)));
                 }
 
                 // Sending requests to all the found IP endpoints at the same time.
