@@ -45,11 +45,11 @@ namespace Hast.Samples.Consumer.SampleRunners
             }
             var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
-            var numberCount = 5;
+            var numberCount = 100;
             var numbers = new uint[numberCount];
-            for (uint i = (uint)(uint.MaxValue - numberCount); i < uint.MaxValue; i++)
+            for (uint i = 0; i < numberCount; i++)
             {
-                numbers[i - (uint.MaxValue - numberCount)] = i;
+                numbers[i] = i;
             }
             var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
 
