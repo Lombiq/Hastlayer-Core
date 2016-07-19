@@ -144,14 +144,14 @@ namespace Hast.Samples.SampleAssembly
 
         public static bool[] ArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => Task.Run(() => primeCalculator.ArePrimeNumbers(memory))).Result;
+            return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ArePrimeNumbers(memory));
         }
 
-        public static async Task<bool[]> ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
+        public static bool[] ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
         {
-            var results = await RunArePrimeNumbersMethod(
+            var results = RunArePrimeNumbersMethod(
                 numbers.PadToMultipleOf(PrimeCalculator.MaxDegreeOfParallelism),
-                memory => Task.Run(() => primeCalculator.ParallelizedArePrimeNumbers(memory)));
+                memory => primeCalculator.ParallelizedArePrimeNumbers(memory));
 
             // The result might be longer than the input due to padding.
             return results.CutToLength(numbers.Length);
@@ -168,7 +168,7 @@ namespace Hast.Samples.SampleAssembly
             return memory.ReadBoolean(PrimeCalculator.IsPrimeNumber_OutputBooleanIndex);
         }
 
-        private static async Task<bool[]> RunArePrimeNumbersMethod(uint[] numbers, Func<SimpleMemory, Task> methodRunner)
+        private static bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
             var memory = new SimpleMemory(numbers.Length + 1);
@@ -180,7 +180,7 @@ namespace Hast.Samples.SampleAssembly
             }
 
 
-            await methodRunner(memory);
+            methodRunner(memory);
 
 
             var output = new bool[numbers.Length];
