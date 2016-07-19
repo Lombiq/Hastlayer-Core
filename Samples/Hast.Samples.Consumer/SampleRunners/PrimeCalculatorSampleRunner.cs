@@ -45,14 +45,11 @@ namespace Hast.Samples.Consumer.SampleRunners
             }
             var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
-            var numberCount = 100;
-            var numbers = new uint[numberCount];
-            for (uint i = 0; i < numberCount; i++)
-            {
-                numbers[i] = i;
-            }
-            var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
 
+            // In-algorithm parallelization:
+            var numbers = new uint[] { 9749, 9973, 902119, 907469, 915851 }; ;
+
+            var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
             var arePrimes4 = await primeCalculator.ParallelizedArePrimeNumbers(numbers);
         }
     }
