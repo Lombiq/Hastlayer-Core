@@ -50,7 +50,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var numbers = new uint[] { 9749, 9973, 902119, 907469, 915851 }; ;
 
             var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
-            var arePrimes4 = await primeCalculator.ParallelizedArePrimeNumbers(numbers);
+            var arePrimes4 = primeCalculator.ParallelizedArePrimeNumbers(numbers);
         }
     }
 }
