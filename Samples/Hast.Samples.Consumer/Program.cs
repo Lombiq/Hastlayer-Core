@@ -153,6 +153,8 @@ namespace Hast.Samples.Consumer
                         }
                     }
                 }).Wait();
+
+            Console.ReadKey();
         }
     }
 }
