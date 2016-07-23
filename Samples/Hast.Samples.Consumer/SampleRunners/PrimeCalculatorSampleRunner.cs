@@ -50,9 +50,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism 
             // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see 
             // comments in the method). Thus the communication roundtrip will be slower for ParallelizedArePrimeNumbers.
-            // Because of this since PrimeCalculator.MaxDegreeOfParallelism is 30 we use 30 numbers here.
+            // Because of this since PrimeCalculator.MaxDegreeOfParallelism is 35 we use 35 numbers here.
             var numbers = new uint[]
             {
+                9749, 9973, 902119, 907469, 915851,
                 9749, 9973, 902119, 907469, 915851,
                 9749, 9973, 902119, 907469, 915851,
                 9749, 9973, 902119, 907469, 915851,
