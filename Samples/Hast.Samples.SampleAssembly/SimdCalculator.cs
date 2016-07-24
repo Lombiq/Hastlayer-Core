@@ -19,16 +19,16 @@ namespace Hast.Samples.SampleAssembly
     /// </remarks>
     public class SimdCalculator
     {
-        public const int AddVectors_VectorsElementCountInt32Index = 0;
-        public const int AddVectors_VectorElementsStartInt32Index = 1;
-        public const int AddVectors_SumVectorElementsStartInt32Index = 1;
+        public const int VectorsElementCountInt32Index = 0;
+        public const int VectorElementsStartInt32Index = 1;
+        public const int ResultVectorElementsStartInt32Index = 1;
 
         public const int MaxDegreeOfParallelism = 500;
 
 
         public virtual void AddVectors(SimpleMemory memory)
         {
-            var elementCount = memory.ReadInt32(AddVectors_VectorsElementCountInt32Index);
+            var elementCount = memory.ReadInt32(VectorsElementCountInt32Index);
 
             int i = 0;
 
@@ -40,19 +40,19 @@ namespace Hast.Samples.SampleAssembly
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    vector1[m] = memory.ReadInt32(AddVectors_VectorElementsStartInt32Index + i + m);
+                    vector1[m] = memory.ReadInt32(VectorElementsStartInt32Index + i + m);
                 }
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    vector2[m] = memory.ReadInt32(AddVectors_VectorElementsStartInt32Index + i + m + elementCount);
+                    vector2[m] = memory.ReadInt32(VectorElementsStartInt32Index + i + m + elementCount);
                 }
 
                 resultVector = SimdOperations.AddVectors(vector1, vector2, MaxDegreeOfParallelism);
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    memory.WriteInt32(AddVectors_SumVectorElementsStartInt32Index + i + m, resultVector[m]);
+                    memory.WriteInt32(ResultVectorElementsStartInt32Index + i + m, resultVector[m]);
                 }
 
                 i += MaxDegreeOfParallelism;
@@ -63,7 +63,13 @@ namespace Hast.Samples.SampleAssembly
 
     public static class SimdCalculatorExtensions
     {
-        public static int[] AddVectors(this SimdCalculator algorithm, int[] vector1, int[] vector2)
+        public static int[] AddVectors(this SimdCalculator simdCalculator, int[] vector1, int[] vector2)
+        {
+            return RunSimdOperation(vector1, vector2, memory => simdCalculator.AddVectors(memory));
+        }
+
+
+        private static int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation)
         {
             SimdOperations.ThrowIfVectorsNotEquallyLong(vector1, vector2);
 
@@ -75,21 +81,21 @@ namespace Hast.Samples.SampleAssembly
             var elementCount = vector1.Length;
             var memory = new SimpleMemory(1 + elementCount * 2);
 
-            memory.WriteInt32(SimdCalculator.AddVectors_VectorsElementCountInt32Index, 15);
+            memory.WriteInt32(SimdCalculator.VectorsElementCountInt32Index, 15);
 
             for (int i = 0; i < elementCount; i++)
             {
-                memory.WriteInt32(SimdCalculator.AddVectors_VectorElementsStartInt32Index + i, vector1[i]);
-                memory.WriteInt32(SimdCalculator.AddVectors_VectorElementsStartInt32Index + elementCount + i, vector2[i]);
+                memory.WriteInt32(SimdCalculator.VectorElementsStartInt32Index + i, vector1[i]);
+                memory.WriteInt32(SimdCalculator.VectorElementsStartInt32Index + elementCount + i, vector2[i]);
             }
 
-            algorithm.AddVectors(memory);
+            operation(memory);
 
             var result = new int[elementCount];
 
             for (int i = 0; i < elementCount; i++)
             {
-                result[i] = memory.ReadInt32(SimdCalculator.AddVectors_SumVectorElementsStartInt32Index + i);
+                result[i] = memory.ReadInt32(SimdCalculator.ResultVectorElementsStartInt32Index + i);
             }
 
             return result.CutToLength(originalElementCount);
