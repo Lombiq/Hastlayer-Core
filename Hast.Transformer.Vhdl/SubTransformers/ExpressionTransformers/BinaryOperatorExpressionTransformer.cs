@@ -27,13 +27,68 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         }
 
 
+        public IEnumerable<IVhdlElement> TransformParallelBinaryOperatorExpressions(
+              IEnumerable<IPartiallyTransformedBinaryOperatorExpression> partiallyTransformedExpressions,
+              ISubTransformerContext context)
+        {
+            var resultReferences = new List<IVhdlElement>();
+
+            var partiallyTransformedExpressionsList = partiallyTransformedExpressions.ToList();
+
+            resultReferences.Add(TransformBinaryOperatorExpressionInner(
+                partiallyTransformedExpressionsList[0],
+                false,
+                true,
+                false,
+                context));
+
+            for (int i = 1; i < partiallyTransformedExpressionsList.Count - 1; i++)
+            {
+                resultReferences.Add(TransformBinaryOperatorExpressionInner(
+                    partiallyTransformedExpressionsList[i],
+                    false,
+                    false,
+                    false,
+                    context));
+            }
+
+            resultReferences.Add(TransformBinaryOperatorExpressionInner(
+                partiallyTransformedExpressionsList[partiallyTransformedExpressionsList.Count - 1],
+                false,
+                false,
+                true,
+                context));
+
+            return resultReferences;
+        }
+
         public IVhdlElement TransformBinaryOperatorExpression(
-            BinaryOperatorExpression expression,
-            IVhdlElement leftTransformed,
-            IVhdlElement rightTransformed,
+            IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
             ISubTransformerContext context)
         {
-            var binary = new Binary { Left = leftTransformed, Right = rightTransformed };
+            return TransformBinaryOperatorExpressionInner(
+                partiallyTransformedExpression,
+                true,
+                true,
+                true,
+                context);
+        }
+
+
+        private IVhdlElement TransformBinaryOperatorExpressionInner(
+            IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
+            bool operationResultDataObjectIsVariable,
+            bool isFirstOfSimdOperations,
+            bool isLastOfSimdOperations,
+            ISubTransformerContext context)
+        {
+            var binary = new Binary
+            {
+                Left = partiallyTransformedExpression.LeftTransformed,
+                Right = partiallyTransformedExpression.RightTransformed
+            };
+
+            var expression = partiallyTransformedExpression.BinaryOperatorExpression;
 
             // Would need to decide between + and & or sll/srl and sra/sla
             // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
@@ -114,9 +169,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
             var resultType = _typeConverter.ConvertTypeReference(resultTypeReference);
             var resultTypeSize = resultType is SizedDataType ? ((SizedDataType)resultType).Size : 0;
-            var operationResultVariableReference = stateMachine
-                .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultType)
-                .ToReference();
+
+            IDataObject operationResultDataObjectReference;
+            if (operationResultDataObjectIsVariable)
+            {
+                operationResultDataObjectReference = stateMachine
+                    .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultType)
+                    .ToReference(); 
+            }
+            else
+            {
+                operationResultDataObjectReference = stateMachine
+                    .CreateSignalWithNextUnusedIndexedName("binaryOperationResult", resultType)
+                    .ToReference();
+            }
 
             IVhdlElement binaryElement = binary;
 
@@ -184,12 +250,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var operationResultAssignment = new Assignment
             {
-                AssignTo = operationResultVariableReference,
+                AssignTo = operationResultDataObjectReference,
                 Expression = binaryElement
             };
 
             // Since the current state takes more than one clock cycle we add a new state and follow up there.
-            if (!operationIsMultiCycle && currentBlock.RequiredClockCycles + clockCyclesNeededForOperation > 1)
+            if (isFirstOfSimdOperations && 
+                !operationIsMultiCycle && 
+                currentBlock.RequiredClockCycles + clockCyclesNeededForOperation > 1)
             {
                 var nextStateBlock = new InlineBlock(new LineComment(
                     "This state was added because the previous state would go over one clock cycle with any more operations."));
@@ -203,64 +271,83 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (!operationIsMultiCycle)
             {
                 currentBlock.Add(operationResultAssignment);
-                currentBlock.RequiredClockCycles += clockCyclesNeededForOperation;
+                if (isFirstOfSimdOperations)
+                {
+                    currentBlock.RequiredClockCycles += clockCyclesNeededForOperation; 
+                }
             }
             // Since the operation in itself takes more than one clock cycle we need to add a new state just to wait.
             // Then we transition from that state forward to a state where the actual algorithm continues.
             else
             {
-                var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
-                    "clockCyclesWaitedForBinaryOperationResult",
-                    KnownDataTypes.Int32);
-                var waitedCyclesCountInitialValue = "0".ToVhdlValue(waitedCyclesCountVariable.DataType);
-                waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
-                var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
-
-                var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
-
-                var waitForResultBlock = new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions =>
-                        "Waiting for the result to appear in " +
-                        operationResultVariableReference.ToVhdl(vhdlGenerationOptions) +
-                        " (have to wait " + clockCyclesToWait + " clock cycles in this state)."),
-                    new LineComment(
-                    "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."),
-                    operationResultAssignment);
-
-                var waitForResultIf = new IfElse
+                // Building the wait state, just when this is the first transform of multiple SIMD operations (or is a
+                // single operation).
+                if (isFirstOfSimdOperations)
                 {
-                    Condition = new Binary
+                    var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
+                        "clockCyclesWaitedForBinaryOperationResult",
+                        KnownDataTypes.Int32);
+                    var waitedCyclesCountInitialValue = "0".ToVhdlValue(waitedCyclesCountVariable.DataType);
+                    waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
+                    var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
+
+                    var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
+
+                    var waitForResultBlock = new InlineBlock(
+                        new GeneratedComment(vhdlGenerationOptions =>
+                            "Waiting for the result to appear in " +
+                            operationResultDataObjectReference.ToVhdl(vhdlGenerationOptions) +
+                            " (have to wait " + clockCyclesToWait + " clock cycles in this state)."),
+                        new LineComment(
+                        "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."));
+
+                    var waitForResultIf = new IfElse
                     {
-                        Left = waitedCyclesCountVariableReference,
-                        Operator = BinaryOperator.GreaterThanOrEqual,
-                        Right = clockCyclesToWait.ToVhdlValue(waitedCyclesCountVariable.DataType)
-                    }
-                };
-                waitForResultBlock.Add(waitForResultIf);
+                        Condition = new Binary
+                        {
+                            Left = waitedCyclesCountVariableReference,
+                            Operator = BinaryOperator.GreaterThanOrEqual,
+                            Right = clockCyclesToWait.ToVhdlValue(waitedCyclesCountVariable.DataType)
+                        }
+                    };
+                    waitForResultBlock.Add(waitForResultIf);
 
-                var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
-                stateMachine.States[waitForResultStateIndex].RequiredClockCycles = clockCyclesToWait;
-                currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));
+                    var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
+                    stateMachine.States[waitForResultStateIndex].RequiredClockCycles = clockCyclesToWait;
+                    currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));
+                    currentBlock.ChangeBlockToDifferentState(waitForResultBlock, waitForResultStateIndex);
 
-                var afterResultReceivedBlock = new InlineBlock();
-                var afterResultReceivedStateIndex = stateMachine.AddState(afterResultReceivedBlock);
-                waitForResultIf.True = new InlineBlock(
-                    stateMachine.CreateStateChange(afterResultReceivedStateIndex),
-                    new Assignment { AssignTo = waitedCyclesCountVariableReference, Expression = waitedCyclesCountInitialValue });
-                waitForResultIf.Else = new Assignment
+                    var afterResultReceivedBlock = new InlineBlock();
+                    var afterResultReceivedStateIndex = stateMachine.AddState(afterResultReceivedBlock);
+                    waitForResultIf.True = new InlineBlock(
+                        stateMachine.CreateStateChange(afterResultReceivedStateIndex),
+                        new Assignment { AssignTo = waitedCyclesCountVariableReference, Expression = waitedCyclesCountInitialValue });
+                    waitForResultIf.Else = new Assignment
+                    {
+                        AssignTo = waitedCyclesCountVariableReference,
+                        Expression = new Binary
+                        {
+                            Left = waitedCyclesCountVariableReference,
+                            Operator = BinaryOperator.Add,
+                            Right = "1".ToVhdlValue(waitedCyclesCountVariable.DataType)
+                        }
+                    }; 
+                }
+
+
+                currentBlock.Add(operationResultAssignment);
+
+
+                // Changing the current block to the one in the state after the wait state, just when this is the last
+                // transform of multiple SIMD operations (or is a single operation).
+                if (isLastOfSimdOperations)
                 {
-                    AssignTo = waitedCyclesCountVariableReference,
-                    Expression = new Binary
-                    {
-                        Left = waitedCyclesCountVariableReference,
-                        Operator = BinaryOperator.Add,
-                        Right = "1".ToVhdlValue(waitedCyclesCountVariable.DataType)
-                    }
-                };
-                currentBlock.ChangeBlockToDifferentState(afterResultReceivedBlock, afterResultReceivedStateIndex);
+                    // It should be the last state added above.
+                    currentBlock.ChangeBlockToDifferentState(stateMachine.States.Last().Body, stateMachine.States.Count - 1); 
+                }
             }
 
-            return operationResultVariableReference;
+            return operationResultDataObjectReference;
         }
     }
 }

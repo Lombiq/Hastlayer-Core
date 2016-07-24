@@ -89,6 +89,8 @@
     <Compile Include="Extensions\AstTypeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\TaskParallelizationHelper.cs" />
+    <Compile Include="Models\IPartiallyTransformedBinaryOperatorExpression.cs" />
+    <Compile Include="Models\PartiallyTransformedBinaryOperatorExpression.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryArchitectureComponentExtensions.cs" />
     <Compile Include="Constants\CommonPortNames.cs" />
     <Compile Include="Constants\GeneratedCodeOverviewComment.cs" />

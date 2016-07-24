@@ -276,9 +276,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var binaryExpression = (BinaryOperatorExpression)expression;
                 return _binaryOperatorExpressionTransformer.TransformBinaryOperatorExpression(
-                    binaryExpression,
-                    Transform(binaryExpression.Left, context),
-                    Transform(binaryExpression.Right, context),
+                    new PartiallyTransformedBinaryOperatorExpression
+                    {
+                        BinaryOperatorExpression = binaryExpression,
+                        LeftTransformed = Transform(binaryExpression.Left, context),
+                        RightTransformed = Transform(binaryExpression.Right, context)
+                    },
                     context);
             }
             else if (expression is InvocationExpression)

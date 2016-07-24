@@ -22,11 +22,14 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public DataType DataType { get; set; }
         public string Content { get; set; }
+        public IVhdlElement EvaluatedContent { get; set; }
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            if (DataType == null) return Content;
+            var content = EvaluatedContent != null ? EvaluatedContent.ToVhdl(vhdlGenerationOptions) : Content;
+
+            if (DataType == null) return content;
 
             // Handling signed and unsigned types specially.
             if (KnownDataTypes.Integers.Contains(DataType))
@@ -39,26 +42,34 @@ namespace Hast.VhdlBuilder.Representation.Expression
                     Target = conversionFunctionName.ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>
                     {
-                        { new Raw(Content) },
+                        { new Raw(content) },
                         { size.ToVhdlValue(KnownDataTypes.UnrangedInt) }
                     }
                 }.ToVhdl(vhdlGenerationOptions);
             }
 
-            if (DataType.TypeCategory == DataTypeCategory.Numeric || 
-                DataType.TypeCategory == DataTypeCategory.Unit) return Content;
+            if (DataType.TypeCategory == DataTypeCategory.Numeric ||
+                DataType.TypeCategory == DataTypeCategory.Unit) return content;
 
-            if (DataType.TypeCategory == DataTypeCategory.Identifier) return vhdlGenerationOptions.ShortenName(Content);
+            if (DataType.TypeCategory == DataTypeCategory.Identifier) return vhdlGenerationOptions.ShortenName(content);
 
             if (DataType.TypeCategory == DataTypeCategory.Array)
             {
-                if (DataType.IsLiteralArrayType()) return "\"" + Content + "\"";
-                else return "(" + Content + ")";
+                if (DataType.IsLiteralArrayType())
+                {
+                    return "\"" + content + "\"";
+                }
+                else if (EvaluatedContent is IBlockElement)
+                {
+                    content = ((IBlockElement)EvaluatedContent).Body.ToVhdl(vhdlGenerationOptions, ", ", string.Empty);
+                }
+
+                return "(" + content + ")";
             }
 
-            if (DataType.TypeCategory == DataTypeCategory.Character) return "'" + Content + "'";
+            if (DataType.TypeCategory == DataTypeCategory.Character) return "'" + content + "'";
 
-            return Content;
+            return content;
         }
     }
 }

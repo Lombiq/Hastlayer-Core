@@ -12,10 +12,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
     public interface IBinaryOperatorExpressionTransformer : IDependency
     {
+        IEnumerable<IVhdlElement> TransformParallelBinaryOperatorExpressions(
+              IEnumerable<IPartiallyTransformedBinaryOperatorExpression> partiallyTransformedExpressions,
+              ISubTransformerContext context);
+
         IVhdlElement TransformBinaryOperatorExpression(
-            BinaryOperatorExpression expression,
-            IVhdlElement leftTransformed,
-            IVhdlElement rightTransformed,
+            IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
             ISubTransformerContext context);
     }
 }

@@ -13,6 +13,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         public DataType ConvertTypeReference(TypeReference typeReference)
         {
+            if (typeReference.IsArray)
+            {
+                return CreateArrayType(ConvertTypeReference(typeReference.GetElementType()));
+            }
+
             switch (typeReference.FullName)
             {
                 case "System.Boolean":
@@ -163,12 +168,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             if (type.ArraySpecifiers.Count != 0)
             {
-                var elementType = ConvertAstType(type.BaseType);
-                return new VhdlBuilder.Representation.Declaration.ArrayType
-                {
-                    ElementType = elementType,
-                    Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name)
-                };
+                return CreateArrayType(ConvertAstType(type.BaseType));
             }
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
@@ -188,6 +188,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
+        }
+
+        private DataType CreateArrayType(DataType elementType)
+        {
+            return new VhdlBuilder.Representation.Declaration.ArrayType
+            {
+                ElementType = elementType,
+                Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name)
+            };
         }
     }
 }
