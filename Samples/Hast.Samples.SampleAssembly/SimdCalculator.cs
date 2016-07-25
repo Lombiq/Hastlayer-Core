@@ -140,7 +140,7 @@ namespace Hast.Samples.SampleAssembly
             var elementCount = vector1.Length;
             var memory = new SimpleMemory(1 + elementCount * 2);
 
-            memory.WriteInt32(SimdCalculator.VectorsElementCountInt32Index, 15);
+            memory.WriteInt32(SimdCalculator.VectorsElementCountInt32Index, elementCount);
 
             for (int i = 0; i < elementCount; i++)
             {
