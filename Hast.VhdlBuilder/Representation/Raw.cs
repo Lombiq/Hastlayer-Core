@@ -1,9 +1,11 @@
 ﻿
+using System.Diagnostics;
 namespace Hast.VhdlBuilder.Representation
 {
     /// <summary>
     /// Any VHDL code that's not implemented as a class.
     /// </summary>
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Raw : IVhdlElement
     {
         public string Source { get; set; }
@@ -19,7 +21,7 @@ namespace Hast.VhdlBuilder.Representation
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Source;
         }

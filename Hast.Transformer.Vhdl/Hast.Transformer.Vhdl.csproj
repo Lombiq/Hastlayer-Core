@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hast.Transformer.Vhdl</RootNamespace>
     <AssemblyName>Hast.Transformer.Vhdl</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -31,19 +31,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.Decompiler, Version=2.3.0.1827, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Hast.Transformer\Libs\ILSpy\ICSharpCode.Decompiler.dll</HintPath>
+    <Reference Include="ICSharpCode.Decompiler, Version=2.3.1.1855, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\ICSharpCode.Decompiler.2.3.1\lib\Net40\ICSharpCode.Decompiler.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="ICSharpCode.NRefactory">
-      <HintPath>..\Hast.Transformer\Libs\ILSpy\ICSharpCode.NRefactory.dll</HintPath>
+    <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="ICSharpCode.NRefactory.CSharp">
-      <HintPath>..\Hast.Transformer\Libs\ILSpy\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    <Reference Include="ICSharpCode.NRefactory.Cecil, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.Cecil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.Xml, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.Xml.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Hast.Transformer\Libs\ILSpy\Mono.Cecil.dll</HintPath>
+      <HintPath>..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Orchard\lib\newtonsoft.json\Newtonsoft.Json.dll</HintPath>
@@ -57,31 +79,96 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\SimpleMemoryNames.cs" />
-    <Compile Include="Constants\SimpleMemoryTypes.cs" />
+    <Compile Include="ArchitectureComponents\ArchitectureComponentNameExtensions.cs" />
+    <Compile Include="ArchitectureComponents\ArchitectureComponentDataObjectExtensions.cs" />
+    <Compile Include="ArchitectureComponents\BasicComponent.cs" />
+    <Compile Include="ArchitectureComponents\ConfigurableComponent.cs" />
+    <Compile Include="ArchitectureComponents\InvocationHelper.cs" />
+    <Compile Include="ArchitectureComponents\IArchitectureComponent.cs" />
+    <Compile Include="Constants\SpecialTypes.cs" />
+    <Compile Include="Extensions\AstTypeExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\BinaryChainBuilder.cs" />
+    <Compile Include="Helpers\TaskParallelizationHelper.cs" />
+    <Compile Include="Models\IPartiallyTransformedBinaryOperatorExpression.cs" />
+    <Compile Include="Models\PartiallyTransformedBinaryOperatorExpression.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryArchitectureComponentExtensions.cs" />
+    <Compile Include="Constants\CommonPortNames.cs" />
+    <Compile Include="Constants\GeneratedCodeOverviewComment.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryPortNames.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryTypes.cs" />
+    <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
-    <Compile Include="Helpers\TopologicalSortHelper.cs" />
+    <Compile Include="ArchitectureComponents\ArchitectureComponentBase.cs" />
+    <Compile Include="Helpers\ArrayTypeNameHelper.cs" />
+    <Compile Include="InvocationProxyBuilders\ExternalInvocationProxyBuilder.cs" />
+    <Compile Include="InvocationProxyBuilders\IExternalInvocationProxyBuilder.cs" />
+    <Compile Include="InvocationProxyBuilders\IInternalInvocationProxyBuilder.cs" />
+    <Compile Include="SimpleMemory\ISimpleMemoryOperationProxyBuilder.cs" />
+    <Compile Include="InvocationProxyBuilders\InternalInvocationProxyBuilder.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryOperationProxyBuilder.cs" />
+    <Compile Include="Models\IMemberTransformerResult.cs" />
+    <Compile Include="Models\IArchitectureComponentResult.cs" />
+    <Compile Include="Models\MemberTransformerResult.cs" />
+    <Compile Include="Models\ArchitectureComponentResult.cs" />
+    <Compile Include="ArchitectureComponents\MemberStateMachineFactory.cs" />
+    <Compile Include="ArchitectureComponents\MemberStateMachineExtenions.cs" />
+    <Compile Include="ArchitectureComponents\ArchitectureComponentNameHelper.cs" />
+    <Compile Include="ArchitectureComponents\IMemberStateMachine.cs" />
     <Compile Include="Models\IVhdlTransformationContext.cs" />
-    <Compile Include="MemberCallChainTable.cs" />
-    <Compile Include="MemberIdTable.cs" />
-    <Compile Include="InterfaceMethodDefinition.cs" />
+    <Compile Include="Models\MemberIdTable.cs" />
+    <Compile Include="ArchitectureComponents\MemberStateMachine.cs" />
+    <Compile Include="Models\ParameterSignal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ArchitectureComponents\NameSuffixes.cs" />
+    <Compile Include="SimpleMemory\ISimpleMemoryComponentBuilder.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryComponentBuilder.cs" />
+    <Compile Include="SubTransformers\ArrayTypesCreator.cs" />
+    <Compile Include="SubTransformers\CompilerGeneratedClassesVerifier.cs" />
+    <Compile Include="SubTransformers\DisplayClassFieldTransformer.cs" />
+    <Compile Include="SubTransformers\EnumTypesCreator.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\ArrayCreateExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\BinaryOperatorExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\IArrayCreateExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\IBinaryOperatorExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\IEnumTypesCreator.cs" />
+    <Compile Include="SubTransformers\ISpecialOperationInvocationTransformer.cs" />
+    <Compile Include="SubTransformers\IStateMachineInvocationBuilder.cs" />
+    <Compile Include="SubTransformers\SpecialOperationInvocationTransformer.cs" />
+    <Compile Include="SubTransformers\StateMachineInvocationBuilder.cs" />
+    <Compile Include="SubTransformers\IArrayTypesCreator.cs" />
+    <Compile Include="SubTransformers\ICompilerGeneratedClassesVerifier.cs" />
+    <Compile Include="SubTransformers\IDisplayClassFieldTransformer.cs" />
+    <Compile Include="SubTransformers\IExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\IMethodTransformer.cs" />
+    <Compile Include="SubTransformers\IStatementTransformer.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\ITypeConversionTransformer.cs" />
+    <Compile Include="SubTransformers\ITypeConverter.cs" />
     <Compile Include="SubTransformers\MethodTransformer.cs" />
     <Compile Include="SubTransformers\StatementTransformer.cs" />
-    <Compile Include="SubTransformers\SubTransformerContext.cs" />
+    <Compile Include="Models\SubTransformerContext.cs" />
+    <Compile Include="SubTransformers\ExpressionTransformers\TypeConversionTransformer.cs" />
     <Compile Include="SubTransformers\TypeConverter.cs" />
     <Compile Include="Models\VhdlTransformationContext.cs" />
     <Compile Include="Models\VhdlHardwareDescription.cs" />
     <Compile Include="VhdlTransformingEngine.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
+      <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
+      <Name>Hast.Synthesis</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj">
       <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>

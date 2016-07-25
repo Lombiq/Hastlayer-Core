@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Synthesis.Models;
+using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
 namespace Hast.Synthesis
@@ -14,5 +15,7 @@ namespace Hast.Synthesis
     public interface IDeviceDriver : IDependency
     {
         IDeviceManifest DeviceManifest { get; }
+
+        decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression);
     }
 }

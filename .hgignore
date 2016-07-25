@@ -7,3 +7,4 @@ desktop.ini
 *Thumbs.db
 bin/
 obj/
+packages/

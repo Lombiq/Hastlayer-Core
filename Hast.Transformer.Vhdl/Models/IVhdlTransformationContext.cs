@@ -6,8 +6,6 @@ namespace Hast.Transformer.Vhdl.Models
 {
     public interface IVhdlTransformationContext : ITransformationContext
     {
-        Module Module { get; }
-        IList<InterfaceMethodDefinition> InterfaceMethods { get; }
-        MemberCallChainTable MemberCallChainTable { get; }
+        // Nothing needed here for now, leaving for future purposes.
     }
 }

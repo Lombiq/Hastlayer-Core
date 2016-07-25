@@ -25,7 +25,7 @@ namespace Hast.Common.Configuration
         /// return type and the types of their (type) arguments, e.g.:
         /// "System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])
         /// </example>
-        public IList<string> PublicHardwareMembers { get; set; }
+        public IList<string> PublicHardwareMemberFullNames { get; set; }
 
         /// <summary>
         /// Gets or sets the collection of the name prefixes of those public members that will be accessible as hardware 
@@ -38,7 +38,7 @@ namespace Hast.Common.Configuration
         /// "Contoso.ImageProcessing" will include all members under this namespace.
         /// "Contoso.ImageProcessing.FaceRecognition.FaceDetectors" will include all members in this class.
         /// </example>
-        public IList<string> PublicHardwareMemberPrefixes { get; set; }
+        public IList<string> PublicHardwareMemberNamePrefixes { get; set; }
 
         private static IHardwareGenerationConfiguration _default;
         public static IHardwareGenerationConfiguration Default
@@ -58,8 +58,8 @@ namespace Hast.Common.Configuration
         public HardwareGenerationConfiguration()
         {
             CustomConfiguration = new Dictionary<string, object>();
-            PublicHardwareMembers = new List<string>();
-            PublicHardwareMemberPrefixes = new List<string>();
+            PublicHardwareMemberFullNames = new List<string>();
+            PublicHardwareMemberNamePrefixes = new List<string>();
         }
     }
 }

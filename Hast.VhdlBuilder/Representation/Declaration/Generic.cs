@@ -2,21 +2,28 @@
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Generic : IVhdlElement
     {
         public List<GenericItem> Items { get; set; }
 
 
-        public string ToVhdl()
+        public Generic()
         {
-            return
-                "generic (" +
-                (Items != null ? string.Join(";", Items.Select(item => item.ToVhdl())) : string.Empty) +
-                ");";
+            Items = new List<GenericItem>();
+        }
+
+
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            return Terminated.Terminate(
+                "generic (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    (Items != null ? Items.ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions)).IndentLinesIfShouldFormat(vhdlGenerationOptions) : string.Empty) +
+                ")", vhdlGenerationOptions);
         }
     }
 
@@ -32,14 +39,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        override public string ToVhdl()
+        public override IDataObject ToReference()
+        {
+            return this;
+        }
+
+        override public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return
-                Name +
+                vhdlGenerationOptions.ShortenName(Name) +
                 ": " +
-                Value.DataType.ToVhdl() +
-                ":=" +
-                Value.ToVhdl();
+                Value.DataType.ToVhdl(vhdlGenerationOptions) +
+                " := " +
+                Value.ToVhdl(vhdlGenerationOptions);
         }
     }
 }

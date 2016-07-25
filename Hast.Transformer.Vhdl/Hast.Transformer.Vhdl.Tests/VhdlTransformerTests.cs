@@ -19,6 +19,7 @@ using Moq;
 using NUnit.Framework;
 using Orchard.Tests.Utility;
 using Hast.VhdlBuilder.Extensions;
+using Hast.Transformer.Services;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -71,7 +72,8 @@ namespace Hast.Transformer.Vhdl.Tests
             var hardwareDescription = await TransformReferenceAssembliesToVhdl();
 
             Assert.AreEqual(hardwareDescription.Language, "VHDL", "The language of the hardware description wasn't properly set to VHDL");
-            Assert.AreEqual(hardwareDescription.MemberIdTable.Values.Count(), 7, "Not the proper amount of interface members were produced.");
+            // While there are 7 suitable methods the MemberIdTable will also include name alternates.
+            Assert.AreEqual(hardwareDescription.MemberIdTable.Values.Count(), 11, "Not the proper amount of interface members were produced.");
         }
 
         [Test]
@@ -81,32 +83,9 @@ namespace Hast.Transformer.Vhdl.Tests
 
             Assert.IsNotNullOrEmpty(topModule.Entity.Name, "The top module's entity doesn't have a name.");
             Assert.AreEqual(topModule.Entity, topModule.Architecture.Entity, "The top module's entity is not references by the architecture.");
-            Assert.AreEqual(topModule.Architecture.Body.Count, 1, "There is not just one element, the call proxy, in the top module's architecture's body.");
-            var callProxyProcess = topModule.Architecture.Body.Single();
-            Assert.That(callProxyProcess is Process && ((Process)callProxyProcess).Name == "CallProxy".ToExtendedVhdlId(), "There is no call proxy process.");
-        }
-
-        [Test]
-        public async Task CallProxyWellStructured()
-        {
-            var topModule = await TransformReferenceAssembliesAndGetTopModule();
-
-            Assert.That(topModule.Architecture.Body.Count == 1 &&
-                topModule.Architecture.Body.Single() is Process &&
-                ((Process)topModule.Architecture.Body.Single()).Body.Count == 1 &&
-                ((Process)topModule.Architecture.Body.Single()).Body.Single() is IfElse, "The structure of the call proxy is not correct.");
-
-            var ifElseElement = (IfElse)((Process)topModule.Architecture.Body.Single()).Body.Single();
-
-            Assert.That(ifElseElement.True is ElementCollection && ((ElementCollection)ifElseElement.True).Elements.Count == 1 && ((ElementCollection)ifElseElement.True).Elements.Single() is Case, "The structure of the call proxy's inner branching is not correct.");
-
-            var caseElement = (Case)((ElementCollection)ifElseElement.True).Elements.Single();
-            var memberSuitabilityChecker = _container.Resolve<IMemberSuitabilityChecker>();
-            var interfaceMethodCount = _eventHandler.TransformationContext.SyntaxTree
-                .GetTypes(true)
-                .Sum(type => type.Members.Count(member => memberSuitabilityChecker.IsSuitableInterfaceMember(member, _eventHandler.TransformationContext.TypeDeclarationLookupTable)));
-            // Removing 1 because there is always +1 when for "others".
-            Assert.AreEqual(caseElement.Whens.Count - 1, interfaceMethodCount, "There are not enough cases in the call proxy process for every interface member.");
+            var callProxyProcess = topModule.Architecture.Body
+                .SingleOrDefault(element => element is Process && ((Process)element).Name == "ExternalCallProxy".ToExtendedVhdlId());
+            Assert.That(callProxyProcess != null, "There is no call proxy process.");
         }
 
 

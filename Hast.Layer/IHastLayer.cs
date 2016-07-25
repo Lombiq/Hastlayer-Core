@@ -15,7 +15,7 @@ namespace Hast.Layer
     public interface IHastlayer : IDisposable
     {
         /// <summary>
-        /// Occurs when the member invokation (e.g. a method call) was transferred to hardware and finished there.
+        /// Occurs when the member invocation (e.g. a method call) was transferred to hardware and finished there.
         /// </summary>
         event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hast.Layer</RootNamespace>
     <AssemblyName>Hast.Layer</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -46,8 +46,10 @@
     <Compile Include="Extensions\HastlayerExtensions.cs" />
     <Compile Include="Models\HardwareRepresentation.cs" />
     <Compile Include="Hastlayer.cs" />
+    <Compile Include="HastlayerConfiguration.cs" />
     <Compile Include="HastlayerException.cs" />
     <Compile Include="IHastlayer.cs" />
+    <Compile Include="IHastlayerConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +79,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

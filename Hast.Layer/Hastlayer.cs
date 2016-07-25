@@ -25,32 +25,32 @@ namespace Hast.Layer
     {
         private const string ShellName = ShellSettings.DefaultName;
 
-        private readonly IEnumerable<Assembly> _extensions;
+        private readonly IHastlayerConfiguration _configuration;
         private IOrchardAppHost _host;
 
         public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 
 
         // Private so the static factory should be used.
-        private Hastlayer(IEnumerable<Assembly> extensions)
+        private Hastlayer(IHastlayerConfiguration configuration)
         {
-            _extensions = extensions;
+            _configuration = configuration;
         }
 
         /// <summary>
         /// Instantiates a new <see cref="IHastlayer"/> implementation.
         /// </summary>
-        /// <remarks>Point of this factory is that it returns an interface type instead of the implementation.</remarks>
-        /// <param name="extensions">
-        /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation pipeline.
-        /// These should be Orchard extensions.
-        /// </param>
+        /// <remarks>
+        /// Point of this factory is that it returns an interface type instead of the implementation and can throw
+        /// exceptions.</remarks>
+        /// <param name="configuration">Configuration for Hastalyer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
-        public static IHastlayer Create(IEnumerable<Assembly> extensions)
+        public static IHastlayer Create(IHastlayerConfiguration configuration)
         {
-            Argument.ThrowIfNull(extensions, nameof(extensions));
+            Argument.ThrowIfNull(configuration, nameof(configuration));
+            Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
-            return new Hastlayer(extensions);
+            return new Hastlayer(configuration);
         }
 
 
@@ -148,7 +148,7 @@ namespace Hast.Layer
                     typeof(Hast.Communication.IProxyGenerator).Assembly,
                     typeof(Hast.Synthesis.IHardwareImplementationComposer).Assembly,
                     typeof(Hast.Transformer.ITransformer).Assembly
-                }.Union(_extensions),
+                }.Union(_configuration.Extensions),
                 DefaultShellFeatureStates = new[]
                 {
                     new DefaultShellFeatureState
@@ -160,7 +160,7 @@ namespace Hast.Layer
                             "Hast.Communication",
                             "Hast.Synthesis",
                             "Hast.Transformer"
-                        }.Union(_extensions.Select(extension => extension.ShortName()))
+                        }.Union(_configuration.Extensions.Select(extension => extension.ShortName()))
                     }
                 }
             };

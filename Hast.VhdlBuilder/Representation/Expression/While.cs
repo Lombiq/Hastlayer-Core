@@ -5,7 +5,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class While : IBlockElement
     {
         public IVhdlElement Condition { get; set; }
@@ -18,14 +18,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return
-                "while " +
-                Condition.ToVhdl() +
-                " loop " +
-                Body.ToVhdl() +
-                "end loop;";
+            return Terminated.Terminate(
+                "while " + Condition.ToVhdl(vhdlGenerationOptions) + " loop " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end loop", vhdlGenerationOptions);
         }
     }
 }

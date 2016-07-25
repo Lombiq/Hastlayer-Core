@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Synthesis;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -12,74 +14,249 @@ using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 using Orchard.Logging;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.Helpers;
+using Hast.Common.Configuration;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public interface IExpressionTransformer : IDependency
-    {
-        IVhdlElement Transform(Expression expression, ISubTransformerContext context, IBlockElement block);
-    }
-
-
     public class ExpressionTransformer : IExpressionTransformer
     {
         private readonly ITypeConverter _typeConverter;
+        private readonly ITypeConversionTransformer _typeConversionTransformer;
+        private readonly IInvocationExpressionTransformer _invocationExpressionTransformer;
+        private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
+        private readonly IDeviceDriver _deviceDriver;
+        private readonly IBinaryOperatorExpressionTransformer _binaryOperatorExpressionTransformer;
+        private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
 
         public ILogger Logger { get; set; }
 
 
-        public ExpressionTransformer(ITypeConverter typeConverter)
+        public ExpressionTransformer(
+            ITypeConverter typeConverter,
+            ITypeConversionTransformer typeConversionTransformer,
+            IInvocationExpressionTransformer invocationExpressionTransformer,
+            IArrayCreateExpressionTransformer arrayCreateExpressionTransformer,
+            IDeviceDriver deviceDriver,
+            IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
+            IStateMachineInvocationBuilder stateMachineInvocationBuilder)
         {
             _typeConverter = typeConverter;
+            _typeConversionTransformer = typeConversionTransformer;
+            _invocationExpressionTransformer = invocationExpressionTransformer;
+            _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
+            _deviceDriver = deviceDriver;
+            _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
+            _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
 
             Logger = NullLogger.Instance;
         }
 
 
-        public IVhdlElement Transform(Expression expression, ISubTransformerContext context, IBlockElement block)
+        public IVhdlElement Transform(Expression expression, ISubTransformerContext context)
         {
+            var stateMachine = context.Scope.StateMachine;
+
+
+            Func<DataObjectReference, IVhdlElement> implementTypeConversionForBinaryExpressionParent = reference =>
+            {
+                var binaryExpression = (BinaryOperatorExpression)expression.Parent;
+                return _typeConversionTransformer.
+                    ImplementTypeConversionForBinaryExpression(
+                        binaryExpression,
+                        reference,
+                        binaryExpression.Left == expression);
+            };
+
+
             if (expression is AssignmentExpression)
             {
                 var assignment = (AssignmentExpression)expression;
-                return new Assignment
+
+                Func<Expression, Expression, IVhdlElement> transformSimpleAssignmentExpression = (left, right) =>
                 {
-                    AssignTo = (IDataObject)Transform(assignment.Left, context, block),
-                    Expression = Transform(assignment.Right, context, block)
+                    var leftTransformed = Transform(left, context);
+                    if (leftTransformed == Empty.Instance) return Empty.Instance;
+                    var rightTransformed = Transform(right, context);
+                    if (rightTransformed == Empty.Instance) return Empty.Instance;
+
+                    return new Assignment
+                    {
+                        AssignTo = (IDataObject)leftTransformed,
+                        Expression = rightTransformed
+                    };
                 };
+
+                Func<string> getTaskVariableIdentifier = () =>
+                {
+                    // Retrieving the variable the Task is saved to. It's either an array or a standard variable.
+                    if (assignment.Left is IndexerExpression)
+                    {
+                        return ((IdentifierExpression)((IndexerExpression)assignment.Left).Target).Identifier;
+                    }
+                    else
+                    {
+                        return ((IdentifierExpression)assignment.Left).Identifier;
+                    }
+                };
+
+                Func<EntityDeclaration, int> getMaxDegreeOfParallelism = entity =>
+                    context.TransformationContext
+                        .GetTransformerConfiguration()
+                        .GetMaxInvocationInstanceCountConfigurationForMember(entity)
+                        .MaxDegreeOfParallelism;
+
+                // If the right side of an assignment is also an assignment that means that it's a single-line assignment
+                // to multiple variables, so e.g. int a, b, c = 2; We flatten out such expression to individual simple
+                // assignments.
+                if (assignment.Right is AssignmentExpression)
+                {
+                    // Finding the rightmost expression that is the actual value assignment.
+                    var currentRight = assignment.Right;
+                    while (currentRight is AssignmentExpression)
+                    {
+                        currentRight = ((AssignmentExpression)currentRight).Right;
+                    }
+
+                    var actualAssignment = currentRight;
+
+                    var assignmentsBlock = new InlineBlock();
+
+                    assignmentsBlock.Add(transformSimpleAssignmentExpression(assignment.Left, actualAssignment));
+
+                    currentRight = assignment.Right;
+                    while (currentRight is AssignmentExpression)
+                    {
+                        var currentAssignment = ((AssignmentExpression)currentRight);
+
+                        assignmentsBlock.Add(transformSimpleAssignmentExpression(currentAssignment.Left, actualAssignment));
+                        currentRight = currentAssignment.Right;
+                    }
+
+                    return assignmentsBlock;
+                }
+                else
+                {
+                    var scope = context.Scope;
+
+                    // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
+                    // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
+                    var rightObjectCreateExpression = assignment.Right as ObjectCreateExpression;
+                    string rightObjectFullName;
+                    if (rightObjectCreateExpression != null &&
+                        (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayClassName())
+                    {
+                        context.TransformationContext.TypeDeclarationLookupTable.Lookup(rightObjectCreateExpression.Type);
+                        var leftIdentifierExpression = assignment.Left as IdentifierExpression;
+
+                        if (leftIdentifierExpression != null)
+                        {
+                            scope.VariableNameToDisplayClassNameMappings[leftIdentifierExpression.Identifier] = rightObjectFullName;
+                        }
+
+                        return Empty.Instance;
+                    }
+                    // Omitting assignments like arg_97_0 = Task.Factory;
+                    else if (assignment.Left.Is<IdentifierExpression>(identifier =>
+                        scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))
+                    {
+                        return Empty.Instance;
+                    }
+                    // Handling Task start calls like arg_9C_0[arg_9C_1] = arg_97_0.StartNew<bool>(arg_97_1, j);
+                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                        invocation.Target.Is<MemberReferenceExpression>(member =>
+                            member.MemberName == "StartNew" &&
+                            member.Target.Is<IdentifierExpression>(identifier =>
+                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))))
+                    {
+                        var taskStartArguments = ((InvocationExpression)assignment.Right).Arguments;
+
+                        // The first argument is always for the Func that referes to the method on the DisplayClass
+                        // generated for the lambda expression originally passed to the Task factory.
+                        var funcVariablename = ((IdentifierExpression)taskStartArguments.First()).Identifier;
+                        var targetMethod = scope.FuncVariableNameToDisplayClassMethodMappings[funcVariablename];
+
+                        // We only need to care about he invocation here. Since this is a Task start there will be
+                        // some form of await later.
+                        _stateMachineInvocationBuilder.BuildInvocation(
+                            targetMethod,
+                            taskStartArguments.Skip(1).Select(argument => Transform(argument, context)),
+                            getMaxDegreeOfParallelism(targetMethod),
+                            context);
+
+                        scope.TaskVariableNameToDisplayClassMethodMappings[getTaskVariableIdentifier()] =
+                            targetMethod;
+
+                        return Empty.Instance;
+                    }
+                    // Handling shorthand Task starts like:
+                    // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool> (this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
+                    else if (assignment.Right.Is<InvocationExpression>(invocation =>
+                        invocation.Target.Is<MemberReferenceExpression>(memberReference =>
+                            memberReference.MemberName == "StartNew" &&
+                            memberReference.Target.GetFullName().Contains("System.Threading.Tasks.Task::Factory")) &&
+                        invocation.Arguments.First().Is<ObjectCreateExpression>(objectCreate =>
+                            objectCreate.Type.GetFullName().Contains("Func"))))
+                    {
+                        var inovocationExpression = (InvocationExpression)assignment.Right;
+                        var arguments = inovocationExpression.Arguments;
+
+                        var targetMethod = TaskParallelizationHelper
+                            .GetTargetDisplayClassMemberFromFuncCreation((ObjectCreateExpression)arguments.First())
+                            .GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                        var targetMaxDegreeOfParallelism = context.TransformationContext
+                            .GetTransformerConfiguration()
+                            .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod)
+                            .MaxDegreeOfParallelism;
+
+                        // We only need to care about he invocation here. Since this is a Task start there will be
+                        // some form of await later.
+                        _stateMachineInvocationBuilder.BuildInvocation(
+                            targetMethod,
+                            arguments.Skip(1).Select(argument => Transform(argument, context)),
+                            getMaxDegreeOfParallelism(targetMethod),
+                            context);
+
+                        scope.TaskVariableNameToDisplayClassMethodMappings[getTaskVariableIdentifier()] = targetMethod;
+
+                        return Empty.Instance;
+                    }
+                }
+
+                return transformSimpleAssignmentExpression(assignment.Left, assignment.Right);
             }
             else if (expression is IdentifierExpression)
             {
-                var identifier = (IdentifierExpression)expression;
-                var reference = new DataObjectReference
-                {
-                    DataObjectKind = DataObjectKind.Variable,
-                    Name = identifier.Identifier.ToExtendedVhdlId()
-                };
+                var identifierExpression = (IdentifierExpression)expression;
+                var reference = stateMachine.CreatePrefixedObjectName(identifierExpression.Identifier).ToVhdlVariableReference();
 
-                if (!(identifier.Parent is BinaryOperatorExpression)) return reference;
+                if (!(identifierExpression.Parent is BinaryOperatorExpression)) return reference;
 
-                return ImplementTypeConversionForBinaryExpression((BinaryOperatorExpression)identifier.Parent, reference, context);
+                return implementTypeConversionForBinaryExpressionParent(reference);
 
             }
             else if (expression is PrimitiveExpression)
             {
                 var primitive = (PrimitiveExpression)expression;
 
-                var typeReference = expression.GetActualType();
+                var typeReference = expression.GetActualTypeReference();
                 if (typeReference != null)
                 {
                     var type = _typeConverter.ConvertTypeReference(typeReference);
                     var valueString = primitive.Value.ToString();
-                    if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.'); // Replacing decimal comma to decimal dot.
+                    // Replacing decimal comma to decimal dot.
+                    if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.');
 
-                    // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer and a type conversion would
-                    // be needed. Thus we add a .0 to the end to indicate it's a real.
+                    // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
+                    // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
                     if (type == KnownDataTypes.Real && !valueString.Contains('.'))
                     {
                         valueString += ".0";
                     }
 
-                    return new Value { DataType = type, Content = valueString }; 
+                    return valueString.ToVhdlValue(type);
                 }
                 else if (primitive.Parent is BinaryOperatorExpression)
                 {
@@ -88,22 +265,135 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         DataObjectKind = DataObjectKind.Constant,
                         Name = primitive.ToString()
                     };
-                    return ImplementTypeConversionForBinaryExpression((BinaryOperatorExpression)primitive.Parent, reference, context);
+
+                    return implementTypeConversionForBinaryExpressionParent(reference);
                 }
 
                 throw new InvalidOperationException(
                     "The type of the following primitive expression couldn't be determined: " +
                     expression.ToString());
             }
-            else if (expression is BinaryOperatorExpression) return TransformBinaryOperatorExpression((BinaryOperatorExpression)expression, context, block);
-            else if (expression is InvocationExpression) return TransformInvocationExpression((InvocationExpression)expression, context, block);
-            // These are not needed at the moment. MemberReferenceExpression is handled in TransformInvocationExpression and a
-            // ThisReferenceExpression can only happen if "this" is passed to a method, which is not supported.
-            //else if (expression is MemberReferenceExpression)
-            //{
-            //    var memberReference = (MemberReferenceExpression)expression;
-            //    return Transform(memberReference.Target, context, block) + "." + memberReference.MemberName;
-            //}
+            else if (expression is BinaryOperatorExpression)
+            {
+                var binaryExpression = (BinaryOperatorExpression)expression;
+                return _binaryOperatorExpressionTransformer.TransformBinaryOperatorExpression(
+                    new PartiallyTransformedBinaryOperatorExpression
+                    {
+                        BinaryOperatorExpression = binaryExpression,
+                        LeftTransformed = Transform(binaryExpression.Left, context),
+                        RightTransformed = Transform(binaryExpression.Right, context)
+                    },
+                    context);
+            }
+            else if (expression is InvocationExpression)
+            {
+                var invocationExpression = (InvocationExpression)expression;
+                var transformedParameters = new List<IVhdlElement>();
+
+                IEnumerable<Expression> arguments = invocationExpression.Arguments;
+
+                // When the SimpleMemory object is passed around it can be omitted since state machines access the memory
+                // directly.
+                if (context.TransformationContext.UseSimpleMemory())
+                {
+                    arguments = arguments.Where(argument =>
+                        {
+                            var actualTypeReference = argument.GetActualTypeReference();
+                            return actualTypeReference == null || !actualTypeReference.FullName.EndsWith("SimpleMemory");
+                        });
+                }
+
+                foreach (var argument in arguments)
+                {
+                    transformedParameters.Add(Transform(argument, context));
+                }
+
+                return _invocationExpressionTransformer
+                    .TransformInvocationExpression(invocationExpression, transformedParameters, context);
+            }
+            else if (expression is MemberReferenceExpression)
+            {
+                var memberReference = (MemberReferenceExpression)expression;
+                var memberFullName = memberReference.GetFullName();
+
+                // Expressions like return Task.CompletedTask;
+                if (memberFullName.IsTaskCompletedTaskPropertyName())
+                {
+                    return Empty.Instance;
+                }
+
+                // Field reference expressions in DisplayClasses are supported.
+                if (memberReference.Target is ThisReferenceExpression && memberFullName.IsDisplayClassMemberName())
+                {
+                    // These fields are global and correspond to the DisplayClass class so they shouldn't be prefixed
+                    // with the state machine's name.
+                    return memberFullName.ToExtendedVhdlId().ToVhdlVariableReference();
+                }
+
+                var targetIdentifier = (memberReference.Target as IdentifierExpression)?.Identifier;
+                if (targetIdentifier != null)
+                {
+                    string displayClassName;
+                    if (context.Scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out displayClassName))
+                    {
+                        // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
+                        if (memberReference.MemberName.EndsWith("__this"))
+                        {
+                            return Empty.Instance;
+                        }
+                        // Otherwise this is field access on the DisplayClass object (the field was created to pass variables
+                        // from the local scope to the method generated from the lambda expression). Can look something like:
+                        // <>c__DisplayClass9_.numbers = new uint[35];
+                        else
+                        {
+                            return context.TransformationContext.TypeDeclarationLookupTable
+                                .Lookup(displayClassName)
+                                .Members
+                                .Single(member => member
+                                    .Is<FieldDeclaration>(field => field.Variables.Single().Name == memberReference.MemberName))
+                                .GetFullName()
+                                .ToExtendedVhdlId()
+                                .ToVhdlVariableReference();
+                        }
+                    }
+                }
+
+                // Is this reference to an enum's member?
+                var targetTypeReferenceExpression = memberReference.Target as TypeReferenceExpression;
+                if (targetTypeReferenceExpression != null && 
+                    context.TransformationContext.TypeDeclarationLookupTable.Lookup(targetTypeReferenceExpression)?.ClassType == ClassType.Enum)
+                {
+                    return memberFullName.ToExtendedVhdlIdValue();
+                }
+
+                // Is this a Task result access like array[k].Result or task.Result?
+                var targetTypeReference = memberReference.Target.GetActualTypeReference();
+                if (targetTypeReference != null &&
+                    targetTypeReference.FullName.StartsWith("System.Threading.Tasks.Task") &&
+                    memberReference.MemberName == "Result")
+                {
+                    // If this is not an array then it doesn't need to be explicitly awaited, just access to its
+                    // Result property should await it. So doing it here.
+                    if (memberReference.Target is IdentifierExpression && !targetTypeReference.IsArray)
+                    {
+                        var targetMethod = context.Scope
+                            .TaskVariableNameToDisplayClassMethodMappings[((IdentifierExpression)memberReference.Target).Identifier];
+                        return _stateMachineInvocationBuilder
+                            .BuildSingleInvocationWait(targetMethod, 0, context);
+                    }
+                    else
+                    {
+                        // We know that we've already handled the target so it stores the result objects, so just need 
+                        // to use them directly.
+                        return Transform(memberReference.Target, context); 
+                    }
+                }
+
+
+                throw new NotSupportedException("Transformation of the member reference expression " + memberReference + " is not supported.");
+            }
+            // Not needed at the moment since ThisReferenceExpression can only happen if "this" is passed to a method, 
+            // which is not supported
             //else if (expression is ThisReferenceExpression)
             //{
             //    var thisRef = expression as ThisReferenceExpression;
@@ -112,11 +402,45 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is UnaryOperatorExpression)
             {
                 var unary = expression as UnaryOperatorExpression;
-                return new Invokation
+
+                // The increment/decrement unary operators are compiled into binary operators (e.g. i++ will be
+                // i = i + 1) so we don't have to care about those.
+
+                var transformedExpression = Transform(unary.Expression, context);
+
+                switch (unary.Operator)
                 {
-                    Target = new Value { DataType = KnownDataTypes.Identifier, Content = "not" },
-                    Parameters = new List<IVhdlElement> { Transform(unary.Expression, context, block) }
-                };
+                    case UnaryOperatorType.Minus:
+                        return new Unary
+                        {
+                            Operator = UnaryOperator.Negation,
+                            Expression = transformedExpression
+                        };
+                    case UnaryOperatorType.Not:
+                        // In VHDL there is no boolean negation operator, just the not() function.
+                        return new Invocation
+                        {
+                            Target = "not".ToVhdlValue(KnownDataTypes.Identifier),
+                            Parameters = new List<IVhdlElement> { transformedExpression }
+                        };
+                    case UnaryOperatorType.Plus:
+                        return new Unary
+                        {
+                            Operator = UnaryOperator.Identity,
+                            Expression = transformedExpression
+                        };
+                    case UnaryOperatorType.Await:
+                        if (unary.Expression is InvocationExpression &&
+                            unary.Expression.GetFullName().IsTaskFromResultMethodName())
+                        {
+                            return transformedExpression;
+                        }
+
+                        // Otherwise nothing to do.
+                        goto default;
+                    default:
+                        throw new NotSupportedException("Transformation of the unary operation " + unary.Operator + " is not supported.");
+                }
             }
             else if (expression is TypeReferenceExpression)
             {
@@ -128,335 +452,76 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     throw new InvalidOperationException("No matching type for \"" + ((SimpleType)type).Identifier + "\" found in the syntax tree. This can mean that the type's assembly was not added to the syntax tree.");
                 }
 
-                return new Value { DataType = KnownDataTypes.Identifier, Content = declaration.GetFullName() };
+                return declaration.GetFullName().ToVhdlValue(KnownDataTypes.Identifier);
             }
             else if (expression is CastExpression)
             {
-                return TransformCastExpression((CastExpression)expression, context, block);
+                var castExpression = (CastExpression)expression;
+
+                var fromType = _typeConverter.ConvertTypeReference(
+                    castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference());
+                var toType = _typeConverter.ConvertAstType(castExpression.Type);
+
+                var typeConversionResult = _typeConversionTransformer
+                    .ImplementTypeConversion(fromType, toType, Transform(castExpression.Expression, context));
+                if (typeConversionResult.IsLossy)
+                {
+                    var toTypeKeyword = ((PrimitiveType)castExpression.Type).Keyword;
+                    var fromTypeKeyword = castExpression.GetActualTypeReference().FullName;
+                    Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
+                }
+
+                return typeConversionResult.Expression;
             }
-            else throw new NotSupportedException("Expressions of type " + expression.GetType() + " are not supported.");
-        }
-
-
-        private IVhdlElement TransformBinaryOperatorExpression(BinaryOperatorExpression expression, ISubTransformerContext context, IBlockElement block)
-        {
-            var binary = new Binary
+            else if (expression is ArrayCreateExpression)
             {
-                Left = Transform(expression.Left, context, block),
-                Right = Transform(expression.Right, context, block)
-            };
-
-            //  Would need to decide between + and & or sll/srl and sra/sla
-            // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
-            switch (expression.Operator)
-            {
-                case BinaryOperatorType.Add:
-                    binary.Operator = "+";
-                    break;
-                case BinaryOperatorType.Any:
-                    break;
-                case BinaryOperatorType.BitwiseAnd:
-                    break;
-                case BinaryOperatorType.BitwiseOr:
-                    break;
-                case BinaryOperatorType.ConditionalAnd:
-                    break;
-                case BinaryOperatorType.ConditionalOr:
-                    break;
-                case BinaryOperatorType.Divide:
-                    binary.Operator = "/";
-                    break;
-                case BinaryOperatorType.Equality:
-                    binary.Operator = "=";
-                    break;
-                case BinaryOperatorType.ExclusiveOr:
-                    binary.Operator = "XOR";
-                    break;
-                case BinaryOperatorType.GreaterThan:
-                    binary.Operator = ">";
-                    break;
-                case BinaryOperatorType.GreaterThanOrEqual:
-                    binary.Operator = ">=";
-                    break;
-                case BinaryOperatorType.InEquality:
-                    binary.Operator = "/=";
-                    break;
-                case BinaryOperatorType.LessThan:
-                    binary.Operator = "<";
-                    break;
-                case BinaryOperatorType.LessThanOrEqual:
-                    binary.Operator = "<=";
-                    break;
-                case BinaryOperatorType.Modulus:
-                    binary.Operator = "mod";
-                    break;
-                case BinaryOperatorType.Multiply:
-                    binary.Operator = "*";
-                    break;
-                case BinaryOperatorType.NullCoalescing:
-                    break;
-                case BinaryOperatorType.ShiftLeft:
-                    binary.Operator = "sll";
-                    break;
-                case BinaryOperatorType.ShiftRight:
-                    binary.Operator = "srl";
-                    break;
-                case BinaryOperatorType.Subtract:
-                    binary.Operator = "-";
-                    break;
+                return _arrayCreateExpressionTransformer
+                    .Transform((ArrayCreateExpression)expression, context.Scope.StateMachine);
             }
-
-            return binary;
-        }
-
-        private IVhdlElement TransformInvocationExpression(InvocationExpression expression, ISubTransformerContext context, IBlockElement block)
-        {
-            var targetMemberReference = expression.Target as MemberReferenceExpression;
-            var transformedParameters = new List<IVhdlElement>(expression.Arguments.Select(argument =>
-                {
-                    // Procedures won't accept constants and variables as parameters simultaneously so we have to copy constants to a variable
-                    // and then use the variable as a parameter.
-                    if (argument is PrimitiveExpression)
-                    {
-                        var primitiveArgument = ((PrimitiveExpression)argument);
-                        var type = _typeConverter.ConvertTypeReference(primitiveArgument.GetActualType());
-
-                        var variable = new Variable
-                        {
-                            Name = GetNextUnusedTemporalVariableName(expression.ToString(), "argument", context),
-                            DataType = type
-                        };
-
-                        context.Scope.SubProgram.Declarations.Add(variable);
-
-                        block.Body.Add(new Terminated(new Assignment
-                        {
-                            AssignTo = variable.ToReference(),
-                            Expression = new Value { DataType = type, Content = primitiveArgument.Value.ToString() }
-                        }));
-
-                        return variable.ToReference();
-                    }
-
-                    return Transform(argument, context, block);
-                }));
-
-
-            if (context.TransformationContext.UseSimpleMemory() &&
-                targetMemberReference != null &&
-                targetMemberReference.Target is IdentifierExpression &&
-                ((IdentifierExpression)targetMemberReference.Target).Identifier == context.Scope.Method.GetSimpleMemoryParameterName())
+            else if (expression is IndexerExpression)
             {
-                // This is a SimpleMemory access.
+                var indexerExpression = expression as IndexerExpression;
 
-                var memberName = targetMemberReference.MemberName;
+                var targetVariableReference = Transform(indexerExpression.Target, context) as IDataObject;
 
-                var isWrite = memberName.StartsWith("Write");
-                var invokationParameters = transformedParameters;
-                invokationParameters.AddRange(new[]
+                if (targetVariableReference == null)
                 {
-                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = isWrite ? SimpleMemoryNames.DataOutLocal : SimpleMemoryNames.DataInLocal },
-                    new DataObjectReference { DataObjectKind = DataObjectKind.Signal, Name = isWrite ? SimpleMemoryNames.WriteAddressLocal : SimpleMemoryNames.ReadAddressLocal }
-                });
+                    throw new InvalidOperationException("The target of the indexer expression " + expression.ToString() + " couldn't be transformed to a data object reference.");
+                }
 
-                var target = "SimpleMemory" + targetMemberReference.MemberName;
-                var memoryOperationInvokation = new Invokation
+                if (indexerExpression.Arguments.Count != 1)
                 {
-                    Target = new Value { Content = target },
-                    Parameters = invokationParameters
+                    throw new NotSupportedException("Accessing elements of only single-dimensional arrays are supported.");
+                }
+
+                var indexExpression = indexerExpression.Arguments.Single();
+                return new ArrayElementAccess
+                {
+                    Array = targetVariableReference,
+                    IndexExpression = _typeConversionTransformer
+                        .ImplementTypeConversion(
+                            _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference()),
+                            KnownDataTypes.UnrangedInt,
+                            Transform(indexExpression, context))
+                        .Expression
                 };
-
-                if (isWrite) return memoryOperationInvokation;
-
-                // Looking up the type information that will tell us what the return type of the memory read is. This might
-                // be some nodes up if e.g. there is an immediate cast expression.
-                AstNode currentNode = expression;
-                while (currentNode.Annotation<TypeInformation>() == null)
-                {
-                    currentNode = currentNode.Parent;
-                }
-
-                // If this is a memory read then comes the juggling with funneling the out parameter of the memory write
-                // procedure to the original location.
-                return BuildReturnReference(target, _typeConverter.ConvertTypeReference(currentNode.GetActualType()), memoryOperationInvokation, context, block);
             }
-
-
-            var targetName = expression.GetFullName().ToExtendedVhdlId();
-
-            context.TransformationContext.MemberCallChainTable.AddTarget(context.Scope.SubProgram.Name, targetName);
-
-            var invokation = new Invokation
+            else if (expression is ParenthesizedExpression)
             {
-                Target = targetName.ToVhdlIdValue(),
-                Parameters = transformedParameters
-            };
+                var parenthesizedExpression = (ParenthesizedExpression)expression;
 
-
-            // If the parent is not an ExpressionStatement then the invocation's result is needed (i.e. the call is to a non-void method).
-            if (!(expression.Parent is ExpressionStatement))
-            {
-                AstType returnType;
-                if (targetMemberReference != null)
+                return new Parenthesized
                 {
-                    var targetFullName = expression.GetFullName();
-
-                    returnType = targetMemberReference
-                        .GetTargetType(context.TransformationContext.TypeDeclarationLookupTable)
-                        .Members
-                        .Single(member => member.GetFullName() == targetFullName)
-                        .ReturnType;
-                }
-                else
-                {
-                    throw new NotSupportedException("Expressions having other than a MemberReferenceExpression as a target are not supported.");
-                }
-
-                return BuildReturnReference(targetName, _typeConverter.Convert(returnType), invokation, context, block);
+                    Target = Transform(parenthesizedExpression.Expression, context)
+                };
             }
             else
             {
-                // Simply return the procedure invokation if there is no return value.
-                return invokation;
+                throw new NotSupportedException(
+                    "Expressions of type " +
+                    expression.GetType() + " are not supported. The expression was: " +
+                    expression.ToString());
             }
-        }
-
-        private IVhdlElement TransformCastExpression(CastExpression expression, ISubTransformerContext context, IBlockElement block)
-        {
-            // This is a temporal workaround to get around cases where operations (e.g. multiplication) with 32b numbers resulting in a 64b number
-            // would cause a cast to a 64b number type (what we don't support yet). See: https://lombiq.atlassian.net/browse/HAST-20
-            var toTypeKeyword = ((PrimitiveType)expression.Type).Keyword;
-            var fromTypeKeyword = expression.GetActualType().FullName;
-            if (toTypeKeyword == "long" || toTypeKeyword == "ulong" || fromTypeKeyword == "System.Int64" || fromTypeKeyword == "System.UInt64")
-            {
-                Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was omitted because non-32b numbers are not yet supported. If the result can indeed reach values above the 32b limit then overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
-                return Transform(expression.Expression, context, block);
-            }
-
-            var fromType = _typeConverter.ConvertTypeReference(expression.GetActualType());
-            var toType = _typeConverter.Convert(expression.Type);
-
-            return ImplementTypeConversion(fromType, toType, Transform(expression.Expression, context, block));
-        }
-
-        /// <summary>
-        /// In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if necessary.
-        /// </summary>
-        private IVhdlElement ImplementTypeConversionForBinaryExpression(
-            BinaryOperatorExpression binaryOperatorExpression, 
-            IVhdlElement expression,
-            ISubTransformerContext context)
-        {
-            // If the type of an operand can't be determined the best guess is the expression's type.
-            var expressionTypeReference = binaryOperatorExpression.GetActualType();
-            var expressionType = expressionTypeReference != null ? _typeConverter.ConvertTypeReference(expressionTypeReference) : null;
-
-            var leftTypeReference = binaryOperatorExpression.Left.GetActualType();
-            var leftType = leftTypeReference != null ? _typeConverter.ConvertTypeReference(leftTypeReference) : expressionType;
-
-            var rightTypeReference = binaryOperatorExpression.Right.GetActualType();
-            var rightType = rightTypeReference != null ? _typeConverter.ConvertTypeReference(rightTypeReference) : expressionType;
-
-            if (leftType == null || rightType == null)
-            {
-                throw new InvalidOperationException(
-                    "The type of the operands of the following expression could't be determined: " +
-                    binaryOperatorExpression.ToString());
-            }
-
-            if (leftType == rightType) return expression;
-
-            var isLeft = binaryOperatorExpression.Left == expression;
-            var thisType = isLeft ? leftType : rightType;
-            var otherType = isLeft ? rightType : leftType;
-
-            // We need to convert types in a way to keep precision. E.g. conerting an int to real is fine, but vica versa would cause
-            // information loss. However excplicit casting in this direction is allowed in CIL so we need to allow it here as well.
-            if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.Natural) && otherType == KnownDataTypes.Real))
-            {
-                Logger.Warning(
-                    "Converting from " + thisType.Name + 
-                    " to " + otherType.Name + 
-                    " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding. " +
-                    "The affected expression: " + binaryOperatorExpression.ToString() + 
-                    " in method " + context.Scope.Method.GetFullName() + ".");
-            }
-
-            return ImplementTypeConversion(thisType, otherType, expression);
-        }
-
-        private IVhdlElement ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression)
-        {
-            if (fromType == toType)
-            {
-                return expression;
-            }
-
-            var castInvokation = new Invokation();
-
-            // Trying supported cast scenarios:
-            if ((fromType == KnownDataTypes.UnrangedInt || fromType == KnownDataTypes.Natural) && toType == KnownDataTypes.Real)
-            {
-                castInvokation.Target = new Raw("real");
-            }
-            else if ((fromType == KnownDataTypes.Real || fromType == KnownDataTypes.Natural) && (toType == KnownDataTypes.UnrangedInt || toType == KnownDataTypes.Natural))
-            {
-                castInvokation.Target = new Raw("integer");
-            }
-            else if (fromType == KnownDataTypes.UnrangedInt && toType == KnownDataTypes.Natural)
-            {
-                castInvokation.Target = new Raw("natural");
-            }
-            else
-            {
-                throw new NotSupportedException("Casting from " + fromType.Name + " to " + toType.Name + " is not supported.");
-            }
-
-            castInvokation.Parameters.Add(expression);
-
-            return castInvokation;
-        }
-
-
-        /// <summary>
-        /// Making sure that the e.g. return variable names are unique per method call (to transfer procedure outputs).
-        /// </summary>
-        private static string GetNextUnusedTemporalVariableName(string targetName, string suffix, ISubTransformerContext context)
-        {
-            targetName = targetName.TrimExtendedVhdlIdDelimiters();
-
-            var procedure = context.Scope.SubProgram;
-
-            var variableName = (targetName + "." + suffix + "0").ToExtendedVhdlId();
-            var returnVariableNameIndex = 0;
-            while (procedure.Declarations.Any(declaration => declaration is Variable && ((Variable)declaration).Name == variableName))
-            {
-                variableName = (targetName + "." + suffix + ++returnVariableNameIndex).ToExtendedVhdlId();
-            }
-
-            return variableName;
-        }
-
-        private static DataObjectReference BuildReturnReference(string targetName, DataType returnType, Invokation invokation, ISubTransformerContext context, IBlockElement block)
-        {
-            var procedure = context.Scope.SubProgram;
-
-            // Procedures can't just be assigned to variables like methods as they don't have a return value, just out parameters.
-            // Thus here we create a variable for the out parameter (the return variable), run the procedure with it and then use it later too.
-            var returnVariable = new Variable
-            {
-                Name = GetNextUnusedTemporalVariableName(targetName, "return", context),
-                DataType = returnType
-            };
-
-            procedure.Declarations.Add(returnVariable);
-            invokation.Parameters.Add(returnVariable.ToReference());
-
-            // Adding the procedure invokation directly to the body so it's before the current expression...
-            block.Body.Add(new Terminated(invokation));
-
-            // ...and using the return variable in place of the original call.
-            return returnVariable.ToReference();
         }
     }
 }

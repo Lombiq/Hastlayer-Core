@@ -1,18 +1,46 @@
 ﻿using System.Diagnostics;
+using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class RangedDataType : DataType
     {
         public int RangeMin { get; set; }
-        public int RangeMax { get; set; }
+        public uint RangeMax { get; set; }
 
 
-        public override string ToVhdl()
+        public RangedDataType(DataType baseType) : base(baseType)
         {
-            if (RangeMin == 0 || RangeMax == 0) return Name;
+        }
+
+        public RangedDataType(RangedDataType previous) : base(previous)
+        {
+            RangeMin = previous.RangeMin;
+            RangeMax = previous.RangeMax;
+        }
+
+        public RangedDataType()
+        {
+        }
+
+
+        public override DataType ToReference()
+        {
+            return this;
+        }
+
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
             return Name + " range " + RangeMin + " to " + RangeMax;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RangedDataType)) return false;
+
+            var otherType = (RangedDataType)obj;
+            return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
         }
     }
 }

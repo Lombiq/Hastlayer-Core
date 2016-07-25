@@ -16,6 +16,7 @@ namespace Hast.Communication.Models
         {
         }
 
+
         public Device(IDevice previousDevice)
         {
             Identifier = previousDevice.Identifier;

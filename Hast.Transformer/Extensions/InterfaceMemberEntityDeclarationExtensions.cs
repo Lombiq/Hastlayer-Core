@@ -4,6 +4,9 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     public static class InterfaceMemberEntityDeclarationExtensions
     {
+        /// <summary>
+        /// Indicates whether the member is an interface member, i.e. should be executable from the host computer.
+        /// </summary>
         public static bool IsInterfaceMember(this EntityDeclaration member)
         {
             return member.GetInterfaceMemberMetadata() != null && member.GetInterfaceMemberMetadata().IsInterfaceMember;

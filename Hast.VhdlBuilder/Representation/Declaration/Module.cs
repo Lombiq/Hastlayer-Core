@@ -4,7 +4,7 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Module : IVhdlElement
     {
         public List<Library> Libraries { get; set; }
@@ -18,9 +18,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Libraries.ToVhdl() + Entity.ToVhdl() + Architecture.ToVhdl();
+            return
+                Libraries.ToVhdl(vhdlGenerationOptions) + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                Entity.ToVhdl(vhdlGenerationOptions) + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                Architecture.ToVhdl(vhdlGenerationOptions);
         }
     }
 }

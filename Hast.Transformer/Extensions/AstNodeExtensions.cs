@@ -7,7 +7,8 @@ namespace ICSharpCode.NRefactory.CSharp
     public static class AstNodeExtensions
     {
         /// <summary>
-        /// Retrieves the node's full name, including (if applicable) information about return type, type parameters, arguments...
+        /// Retrieves the node's full name, including (if applicable) information about return type, type parameters, 
+        /// arguments...
         /// </summary>
         public static string GetFullName(this AstNode node)
         {
@@ -17,11 +18,31 @@ namespace ICSharpCode.NRefactory.CSharp
             var memberReference = node.Annotation<MemberReference>();
             if (memberReference != null) return memberReference.FullName;
 
+            if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
+
+            if (node is ComposedType)
+            {
+                var composedType = node as ComposedType;
+
+                var name = composedType.BaseType.GetFullName();
+
+                if (composedType.ArraySpecifiers.Any())
+                {
+                    foreach (var arraySpecifier in composedType.ArraySpecifiers)
+                    {
+                        name += arraySpecifier.ToString();
+                    }
+                }
+
+                return name;
+            }
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 
         /// <summary>
-        /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's name.
+        /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's 
+        /// name.
         /// </summary>
         public static string GetSimpleName(this AstNode node)
         {
@@ -42,11 +63,12 @@ namespace ICSharpCode.NRefactory.CSharp
                 {
                     name = memberReference.Name;
                     declaringType = memberReference.DeclaringType;
-                    if (declaringType == null) name = memberDefinition.FullName;
+                    if (declaringType == null) name = memberReference.FullName;
                 }
             }
 
-            // The name is already a full name, but for a different declaring type. This is the case for explicitly implemented interface methods.
+            // The name is already a full name, but for a different declaring type. This is the case for explicitly 
+            // implemented interface methods.
             if (name.Contains('.'))
             {
                 name = name.Substring(name.LastIndexOf('.') + 1);
@@ -69,14 +91,28 @@ namespace ICSharpCode.NRefactory.CSharp
             return name;
         }
 
-        public static TypeDeclaration FindParentType(this AstNode node)
+        public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode
         {
-            while (!(node is TypeDeclaration))
+            node = node.Parent;
+
+            while (node != null && !(node is T))
             {
                 node = node.Parent;
             }
 
-            return (TypeDeclaration)node;
+            return (T)node;
+        }
+
+        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node)
+        {
+            return node.FindFirstParentOfType<TypeDeclaration>();
+        }
+
+        public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
+        {
+            var castNode = node as T;
+            if (castNode == null) return false;
+            return predicate(castNode);
         }
     }
 }
