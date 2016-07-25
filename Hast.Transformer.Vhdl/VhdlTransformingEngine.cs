@@ -105,16 +105,19 @@ namespace Hast.Transformer.Vhdl
 
 
             // Doing transformations
-            var transformerResults = await Task.WhenAll(Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext));
+            var transformerResults = await Task.WhenAll(TransformMembers(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext));
             var potentiallyInvokingArchitectureComponents = transformerResults
-                .SelectMany(result => result.ArchitectureComponentResults.Select(smResult => smResult.ArchitectureComponent).Cast<IArchitectureComponent>())
+                .SelectMany(result => 
+                    result.ArchitectureComponentResults
+                        .Select(smResult => smResult.ArchitectureComponent)
+                        .Cast<IArchitectureComponent>())
                 .ToList();
             foreach (var transformerResult in transformerResults)
             {
-                foreach (var stateMachineResult in transformerResult.ArchitectureComponentResults)
+                foreach (var architectureComponentResults in transformerResult.ArchitectureComponentResults)
                 {
-                    architecture.Declarations.Add(stateMachineResult.Declarations);
-                    architecture.Add(stateMachineResult.Body);
+                    architecture.Declarations.Add(architectureComponentResults.Declarations);
+                    architecture.Add(architectureComponentResults.Body);
                 }
             }
 
@@ -187,7 +190,7 @@ namespace Hast.Transformer.Vhdl
         }
 
 
-        private IEnumerable<Task<IMemberTransformerResult>> Traverse(
+        private IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
             AstNode node, 
             VhdlTransformationContext transformationContext,
             List<Task<IMemberTransformerResult>> memberTransformerTasks = null)
@@ -243,7 +246,7 @@ namespace Hast.Transformer.Vhdl
                         case ClassType.Interface:
                             return memberTransformerTasks; // Interfaces are irrelevant here.
                         case ClassType.Struct:
-                            break;
+                            throw new NotSupportedException("Transforming structs (" + node.GetFullName() + ") is not supported.");
                     }
                     break;
                 case NodeType.TypeReference:
@@ -256,7 +259,7 @@ namespace Hast.Transformer.Vhdl
 
             foreach (var target in traverseTo)
             {
-                Traverse(target, transformationContext, memberTransformerTasks);
+                TransformMembers(target, transformationContext, memberTransformerTasks);
             }
 
             return memberTransformerTasks;
