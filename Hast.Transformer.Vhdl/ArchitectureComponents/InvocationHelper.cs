@@ -56,13 +56,13 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
             if (degreeOfParallelism > 1)
             {
-                var binaryCondition = BinaryOperator.ConditionalAnd;
-                if (!waitForAll) binaryCondition = BinaryOperator.ConditionalOr;
+                var binaryOperator = BinaryOperator.ConditionalAnd;
+                if (!waitForAll) binaryOperator = BinaryOperator.ConditionalOr;
 
                 var currentBinary = new Binary
                 {
                     Left = createStartedEqualsFinishedBinary(1),
-                    Operator = binaryCondition
+                    Operator = binaryOperator
                 };
                 var firstBinary = currentBinary;
 
@@ -71,7 +71,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                     var newBinary = new Binary
                     {
                         Left = createStartedEqualsFinishedBinary(i),
-                        Operator = binaryCondition
+                        Operator = binaryOperator
                     };
 
                     currentBinary.Right = newBinary;
