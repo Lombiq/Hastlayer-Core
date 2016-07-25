@@ -10,12 +10,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public static class ArchitectureComponentNameHelper
     {
-        public static string CreateParameterVariableName(string componentName, string parameterName)
+        public static string CreateParameterSignalName(string componentName, string parameterName)
         {
             return CreatePrefixedSegmentedObjectName(componentName, parameterName, NameSuffixes.Parameter);
         }
 
-        public static string CreateReturnVariableName(string componentName)
+        public static string CreateReturnSignalName(string componentName)
         {
             return CreatePrefixedObjectName(componentName, NameSuffixes.Return);
         }

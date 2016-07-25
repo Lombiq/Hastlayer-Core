@@ -15,7 +15,7 @@ namespace Hast.Layer
     public interface IHastlayer : IDisposable
     {
         /// <summary>
-        /// Occurs when the member invokation (e.g. a method call) was transferred to hardware and finished there.
+        /// Occurs when the member invocation (e.g. a method call) was transferred to hardware and finished there.
         /// </summary>
         event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 
@@ -36,10 +36,11 @@ namespace Hast.Layer
         /// <typeparam name="T">Type of the object to generate a proxy for.</typeparam>
         /// <param name="hardwareRepresentation">The representation of the assemblies implemented as hardware.</param>
         /// <param name="hardwareObject">The object to generate the proxy for.</param>
+        /// <param name="configuration">Configuration for how the proxy generation should happen.</param>
         /// <returns>The generated proxy object.</returns>
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
-        Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class;
+        Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject, IProxyGenerationConfiguration configuration) where T : class;
     }
 }

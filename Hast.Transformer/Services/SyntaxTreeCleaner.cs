@@ -38,9 +38,9 @@ namespace Hast.Transformer.Services
             var noIncludedMembers = !configuration.PublicHardwareMemberFullNames.Any() && !configuration.PublicHardwareMemberNamePrefixes.Any();
             var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable);
 
-            // Starting with interface members we walk through the references to see which declarations are used (e.g. which
-            // methods are called at least once).
-            foreach (var type in syntaxTree.GetTypes(true))
+            // Starting with interface members we walk through the references to see which declarations are used (e.g. 
+            // which methods are called at least once).
+            foreach (var type in syntaxTree.GetAllTypeDeclarations())
             {
                 foreach (var member in type.Members)
                 {
@@ -55,11 +55,12 @@ namespace Hast.Transformer.Services
                     {
                         if (member is MethodDeclaration)
                         {
-                            var implementedInterfaceMethod = ((MethodDeclaration)member).FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup);
+                            var implementedInterfaceMethod = ((MethodDeclaration)member)
+                                .FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup);
                             if (implementedInterfaceMethod != null)
                             {
                                 implementedInterfaceMethod.AddReference(member);
-                                implementedInterfaceMethod.FindParentTypeDeclaration().AddReference(member);
+                                implementedInterfaceMethod.FindFirstParentTypeDeclaration().AddReference(member);
                             }
                         }
 
@@ -74,7 +75,7 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new UnreferencedNodesRemovingVisitor());
 
             // Removing orphaned base types.
-            foreach (var type in syntaxTree.GetTypes(true))
+            foreach (var type in syntaxTree.GetAllTypeDeclarations())
             {
                 foreach (var baseType in type.BaseTypes.Where(baseType => !typeDeclarationLookupTable.Lookup(baseType).IsReferenced()))
                 {

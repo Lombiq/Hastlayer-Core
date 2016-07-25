@@ -28,7 +28,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 "alias " +
                 vhdlGenerationOptions.ShortenName(Name) +
                 " : " +
-                DataType.ToReferenceVhdl(vhdlGenerationOptions) +
+                DataType.ToReference().ToVhdl(vhdlGenerationOptions) +
                 " is " +
                 vhdlGenerationOptions.ShortenName(ObjectName),
                 vhdlGenerationOptions);

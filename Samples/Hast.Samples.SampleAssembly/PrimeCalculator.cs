@@ -18,9 +18,11 @@ namespace Hast.Samples.SampleAssembly
         public const int IsPrimeNumber_OutputBooleanIndex = 0;
         public const int ArePrimeNumbers_InputUInt32CountIndex = 0;
         public const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
-        public const int ArePrimeNumbers_OutputUInt32sStartIndex = 1;
+        public const int ArePrimeNumbers_OutputBooleansStartIndex = 1;
 
-    
+        public const int MaxDegreeOfParallelism = 35;
+
+
         /// <summary>
         /// Calculates whether a number is prime.
         /// </summary>
@@ -37,38 +39,72 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(number));
         }
 
+        public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
+        {
+            IsPrimeNumber(memory);
+
+            // For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized
+            // interface method async with Task.FromResult(). In .NET <4.6 Task.FromResult(true) can be used too.
+            return Task.CompletedTask;
+        }
+
         public virtual void ArePrimeNumbers(SimpleMemory memory)
         {
-            // We need this information explicitly as we can't use arrays.
+            // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
             for (int i = 0; i < numberCount; i++)
             {
                 uint number = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i);
-                memory.WriteBoolean(ArePrimeNumbers_OutputUInt32sStartIndex + i, IsPrimeNumberInternal(number));
+                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, IsPrimeNumberInternal(number));
             }
         }
 
-        // Arrays not yet supported
-        /*public virtual int[] PrimeFactors(int number)
+        public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
         {
-            var i = 0;
-            var result = new int[50];
+            // We need this information explicitly as we can't store arrays directly in memory.
+            uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
-            int divisor = 2;
-
-            while (divisor <= number)
+            // At the moment Hastlayer only supports a fixed degree of parallelism so we need to pad the input array
+            // if necessary, see PrimeCalculatorExtensions.
+            var tasks = new Task<bool>[MaxDegreeOfParallelism];
+            int i = 0;
+            while (i < numberCount)
             {
-                if (number % divisor == 0)
+                for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    result[i++] = divisor;
-                    number /= divisor;
-                }
-                else divisor++;
-            }
+                    var currentNumber = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
 
-            return result;
-        }*/
+                    tasks[m] = Task.Factory.StartNew<bool>(
+                        numberObject =>
+                        {
+                            // This is a copy of the body of IsPrimeNumberInternal(). We could also call that method
+                            // from this lambda but it's more efficient to just do it directly, not adding indirection.
+                            var number = (uint)numberObject;
+                            uint factor = number / 2;
+
+                            for (uint x = 2; x <= factor; x++)
+                            {
+                                if ((number % x) == 0) return false;
+                            }
+
+                            return true;
+                        },
+                        currentNumber);
+                }
+
+                // Hastlayer doesn't support async code at the moment since ILSpy doesn't handle the new Roslyn-compiled
+                // code. See: https://github.com/icsharpcode/ILSpy/issues/502
+                Task.WhenAll(tasks).Wait();
+
+                for (int m = 0; m < MaxDegreeOfParallelism; m++)
+                {
+                    memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i + m, tasks[m].Result);
+                }
+
+                i += MaxDegreeOfParallelism;
+            }
+        }
 
 
         /// <summary>
@@ -98,32 +134,59 @@ namespace Hast.Samples.SampleAssembly
     {
         public static bool IsPrimeNumber(this PrimeCalculator primeCalculator, uint number)
         {
-            // One memory cell is enough for data exchange.
-            var memory = new SimpleMemory(1);
-            memory.WriteUInt32(PrimeCalculator.IsPrimeNumber_InputUInt32Index, number);
-            primeCalculator.IsPrimeNumber(memory);
-            return memory.ReadBoolean(PrimeCalculator.IsPrimeNumber_OutputBooleanIndex);
+            return RunIsPrimeNumber(number, memory => Task.Run(() => primeCalculator.IsPrimeNumber(memory))).Result;
+        }
+
+        public static Task<bool> IsPrimeNumberAsync(this PrimeCalculator primeCalculator, uint number)
+        {
+            return RunIsPrimeNumber(number, memory => primeCalculator.IsPrimeNumberAsync(memory));
         }
 
         public static bool[] ArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
+        {
+            return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ArePrimeNumbers(memory));
+        }
+
+        public static bool[] ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
+        {
+            var results = RunArePrimeNumbersMethod(
+                numbers.PadToMultipleOf(PrimeCalculator.MaxDegreeOfParallelism),
+                memory => primeCalculator.ParallelizedArePrimeNumbers(memory));
+
+            // The result might be longer than the input due to padding.
+            return results.CutToLength(numbers.Length);
+        }
+
+        private static async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner)
+        {
+            // One memory cell is enough for data exchange.
+            var memory = new SimpleMemory(1);
+            memory.WriteUInt32(PrimeCalculator.IsPrimeNumber_InputUInt32Index, number);
+
+            await methodRunner(memory);
+
+            return memory.ReadBoolean(PrimeCalculator.IsPrimeNumber_OutputBooleanIndex);
+        }
+
+        private static bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
             var memory = new SimpleMemory(numbers.Length + 1);
 
             memory.WriteUInt32(PrimeCalculator.ArePrimeNumbers_InputUInt32CountIndex, (uint)numbers.Length);
-
             for (int i = 0; i < numbers.Length; i++)
             {
                 memory.WriteUInt32(PrimeCalculator.ArePrimeNumbers_InputUInt32sStartIndex + i, numbers[i]);
             }
 
-            primeCalculator.ArePrimeNumbers(memory);
+
+            methodRunner(memory);
 
 
             var output = new bool[numbers.Length];
             for (int i = 0; i < numbers.Length; i++)
             {
-                output[i] = memory.ReadBoolean(PrimeCalculator.ArePrimeNumbers_OutputUInt32sStartIndex + i);
+                output[i] = memory.ReadBoolean(PrimeCalculator.ArePrimeNumbers_OutputBooleansStartIndex + i);
             }
             return output;
         }

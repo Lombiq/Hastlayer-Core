@@ -14,7 +14,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         {
             return
                 Terminated.Terminate(
-                    vhdlGenerationOptions.ShortenName(AssignTo.Name) +
+                    AssignTo.ToReference().ToVhdl(vhdlGenerationOptions) +
                     (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
                     Expression.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
         }

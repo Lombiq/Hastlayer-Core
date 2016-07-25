@@ -7,10 +7,12 @@ namespace System.Collections.Generic
 {
     public static class VhdlElementEnumerableExtensions
     {
-        public static string ToVhdl<T>(this IEnumerable<T> elements, IVhdlGenerationOptions vhdlGenerationOptions)
+        public static string ToVhdl<T>(
+            this IEnumerable<T> elements,
+            IVhdlGenerationOptions vhdlGenerationOptions)
             where T : IVhdlElement
         {
-            return elements.ToVhdl(vhdlGenerationOptions, string.Empty);
+            return elements.ToVhdl(vhdlGenerationOptions, string.Empty, null);
         }
 
         public static string ToVhdl<T>(
@@ -22,17 +24,31 @@ namespace System.Collections.Generic
         {
             if (elements == null || !elements.Any()) return string.Empty;
 
-            var builder = new StringBuilder();
 
-            foreach (var element in elements.Take(elements.Count() - 1))
+            // It's efficient to run this parallelized implementation even with a low number of items (or even one)
+            // because the overhead of checking whether there are more than a few elements is bigger than the below
+            // ceremony.
+            var elementsArray = elements.ToArray();
+            var lastElement = elementsArray[elementsArray.Length - 1];
+            var resultArray = new string[elementsArray.Length];
+
+            Threading.Tasks.Parallel.For(0, elementsArray.Length - 1, i =>
             {
-                builder.Append(element.ToVhdl(vhdlGenerationOptions) + elementTerminator);
+                resultArray[i] = elementsArray[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
+            });
+
+
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < resultArray.Length; i++)
+            {
+                stringBuilder.Append(resultArray[i]);
             }
 
             if (lastElementTerminator == null) lastElementTerminator = elementTerminator;
-            builder.Append(elements.Last().ToVhdl(vhdlGenerationOptions) + lastElementTerminator);
+            stringBuilder.Append(lastElement.ToVhdl(vhdlGenerationOptions) + lastElementTerminator);
 
-            return builder.ToString();
+            return stringBuilder.ToString();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Hast.Transformer.Services
         public ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree)
         {
             var typeDeclarations = syntaxTree
-                .GetTypes(true)
+                .GetAllTypeDeclarations()
                 .ToDictionary(d => d.Annotation<TypeDefinition>().FullName);
 
             return new TypeDeclarationLookupTable(typeDeclarations);

@@ -35,7 +35,7 @@ namespace Hast.Xilinx
             else if (op == BinaryOperatorType.Multiply || op == BinaryOperatorType.Divide)
             {
                 // If the Right expression results in 2^n then since the operations will be implemented with a very 
-                // compact circuit we can assume that it's "instant".
+                // compact circuit (just with wiring) we can assume that it's "instant".
                 if (expression.Right is PrimitiveExpression)
                 {
                     // LiteralValue somehow is an empty string for PrimitiveExpressions.

@@ -19,6 +19,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             Body = vhdlElements.ToList();
         }
 
+        public InlineBlock(IEnumerable<IVhdlElement> vhdlElements)
+        {
+            Body = vhdlElements.ToList();
+        }
+
         public InlineBlock()
         {
             Body = new List<IVhdlElement>();

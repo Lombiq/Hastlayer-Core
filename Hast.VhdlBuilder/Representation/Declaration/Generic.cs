@@ -39,6 +39,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
+        public override IDataObject ToReference()
+        {
+            return this;
+        }
+
         override public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return

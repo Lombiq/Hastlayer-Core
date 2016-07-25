@@ -26,7 +26,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
         public override IVhdlElement BuildBody()
         {
-            return Body ?? Empty.Instance;
+            if (Body == null) return Empty.Instance;
+
+            return new LogicalBlock(
+                new LineComment(Name + " start"),
+                Body,
+                new LineComment(Name + " end"));
         }
     }
 }

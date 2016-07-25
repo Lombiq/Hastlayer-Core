@@ -18,6 +18,25 @@ namespace ICSharpCode.NRefactory.CSharp
             var memberReference = node.Annotation<MemberReference>();
             if (memberReference != null) return memberReference.FullName;
 
+            if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
+
+            if (node is ComposedType)
+            {
+                var composedType = node as ComposedType;
+
+                var name = composedType.BaseType.GetFullName();
+
+                if (composedType.ArraySpecifiers.Any())
+                {
+                    foreach (var arraySpecifier in composedType.ArraySpecifiers)
+                    {
+                        name += arraySpecifier.ToString();
+                    }
+                }
+
+                return name;
+            }
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 
@@ -44,7 +63,7 @@ namespace ICSharpCode.NRefactory.CSharp
                 {
                     name = memberReference.Name;
                     declaringType = memberReference.DeclaringType;
-                    if (declaringType == null) name = memberDefinition.FullName;
+                    if (declaringType == null) name = memberReference.FullName;
                 }
             }
 
@@ -72,24 +91,28 @@ namespace ICSharpCode.NRefactory.CSharp
             return name;
         }
 
-        public static EntityDeclaration FindClosestParentEntityDeclaration(this AstNode node)
+        public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode
         {
-            while (!(node is EntityDeclaration))
+            node = node.Parent;
+
+            while (node != null && !(node is T))
             {
                 node = node.Parent;
             }
 
-            return (EntityDeclaration)node;
+            return (T)node;
         }
 
-        public static TypeDeclaration FindParentTypeDeclaration(this AstNode node)
+        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node)
         {
-            while (!(node is TypeDeclaration))
-            {
-                node = node.Parent;
-            }
+            return node.FindFirstParentOfType<TypeDeclaration>();
+        }
 
-            return (TypeDeclaration)node;
+        public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
+        {
+            var castNode = node as T;
+            if (castNode == null) return false;
+            return predicate(castNode);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -17,10 +19,23 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
     /// </summary>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class DataType : INamedElement
+    public class DataType : INamedElement, IReferenceableDeclaration<DataType>
     {
         public DataTypeCategory TypeCategory { get; set; }
         public string Name { get; set; }
+        public Value DefaultValue { get; set; }
+
+
+        public DataType(DataType previous) : this()
+        {
+            TypeCategory = previous.TypeCategory;
+            Name = previous.Name;
+            DefaultValue = previous.DefaultValue;
+        }
+
+        public DataType()
+        {
+        }
 
 
         /// <summary>
@@ -31,21 +46,39 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// concept from <see cref="DataObjectReference"/> which is about referencing data objects (e.g. signals), not
         /// data types.
         /// </remarks>
-        public virtual string ToReferenceVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        public virtual DataType ToReference()
         {
-            return vhdlGenerationOptions.NameShortener(Name);
+            return new DataTypeReference(this, vhdlGenerationOptions => vhdlGenerationOptions.NameShortener(Name));
         }
 
         public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return ToReferenceVhdl(vhdlGenerationOptions);
+            return vhdlGenerationOptions.NameShortener(Name);
+        }
+
+        /// <summary>
+        /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside 
+        /// double quotes.
+        /// </summary>
+        public virtual bool IsLiteralArrayType()
+        {
+            return this == KnownDataTypes.String || Name == "bit_vector" || Name == "std_logic_vector";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+
+            var otherType = (DataType)obj;
+            return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
 
 
         public static bool operator ==(DataType a, DataType b)
         {
-            // If both are null, or both are the same instance, return true.
-            if (System.Object.ReferenceEquals(a, b))
+            // If both are null, or both are the same instance, return true (ReferenceEquals() returns true if both
+            // object are null).
+            if (ReferenceEquals(a, b))
             {
                 return true;
             }
@@ -56,8 +89,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 return false;
             }
 
-            // Else return true if names match:
-            return a.Name == b.Name;
+            // Else return true if the data types match:
+            return a.Equals(b);
         }
 
         public static bool operator !=(DataType a, DataType b)

@@ -9,6 +9,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard.Logging;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -30,7 +31,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         public IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
-            ISubTransformerContext context)
+            bool isLeft)
         {
             // If the type of an operand can't be determined the best guess is the expression's type.
             var expressionTypeReference = binaryOperatorExpression.GetActualTypeReference();
@@ -72,59 +73,151 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (leftType == rightType) return variableReference;
 
-            var isLeft = false;
-            var thisType = isLeft ? leftType : rightType;
-            var otherType = isLeft ? rightType : leftType;
-
-            // We need to convert types in a way to keep precision. E.g. converting an int to real is fine, but vica 
-            // versa would cause information loss. However excplicit casting in this direction is allowed in CIL so we 
-            // need to allow it here as well.
-            if (!((thisType == KnownDataTypes.UnrangedInt || thisType == KnownDataTypes.UInt16 || thisType == KnownDataTypes.UInt32) &&
-                otherType == KnownDataTypes.Real))
+            bool convertToLeftType;
+            // Is the result type of the expression equal to one of the operands? Then convert the other operand.
+            if (expressionTypeReference == leftTypeReference || expressionTypeReference == rightTypeReference)
             {
-                Logger.Warning(
-                    "Converting from " + thisType.Name +
-                    " to " + otherType.Name +
-                    " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding. " +
-                    "The affected expression: " + binaryOperatorExpression.ToString() +
-                    " in method " + context.Scope.Method.GetFullName() + ".");
+                convertToLeftType = expressionTypeReference == leftTypeReference;
+            }
+            // If the result type of the expression is something else (e.g. if the operation is inequality then for two
+            // integer operands the result type will be boolean) then convert in a way that's lossless.
+            else
+            {
+                convertToLeftType = ImplementTypeConversion(leftType, rightType, Empty.Instance).IsLossy;
             }
 
-            return ImplementTypeConversion(thisType, otherType, variableReference);
-        }
+            var fromType = convertToLeftType ? rightType : leftType;
+            var toType = convertToLeftType ? leftType : rightType;
 
-        public IVhdlElement ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement variableReference)
-        {
-            if (fromType == toType)
+            if (isLeft && toType == leftType || !isLeft && toType == rightType)
             {
                 return variableReference;
             }
 
-            var castInvokation = new Invokation();
+            var typeConversionResult = ImplementTypeConversion(fromType, toType, variableReference);
+            if (typeConversionResult.IsLossy)
+            {
+                Logger.Warning(
+                    "Converting from " + fromType.Name +
+                    " to " + toType.Name +
+                    " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding. " +
+                    "The affected expression: " + binaryOperatorExpression.ToString() +
+                    " in member " + binaryOperatorExpression.FindFirstParentOfType<EntityDeclaration>().GetFullName() + ".");
+            }
+            return typeConversionResult.Expression;
+        }
+
+        public ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression)
+        {
+            var result = new TypeConversionResult { Expression = expression };
+
+            if (fromType == toType)
+            {
+                return result;
+            }
+
+            Func<DataType, int> getSize = dataType => ((SizedDataType)dataType).Size;
+
+            var fromSize = fromType is SizedDataType ? getSize(fromType) : 0;
+            var toSize = toType is SizedDataType ? getSize(toType) : 0;
+
+            var castInvocation = new Invocation();
+            castInvocation.Parameters.Add(expression);
+
+            Action<int> convertInvocationToResizeAndAddSizeParameter = size =>
+            {
+                // Resize is supposed to work with little endian numbers: "When truncating, the sign bit is retained
+                // along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
+                // dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
+                castInvocation.Target = "resize".ToVhdlIdValue();
+                castInvocation.Parameters
+                    .Add(size.ToVhdlValue(KnownDataTypes.UnrangedInt));
+            };
+
+            Action resizeToToSizeIfNeeded = () =>
+            {
+                // The from type should be resized to fit into the to type.
+                if (fromSize != toSize)
+                {
+                    var resizeInvocation = new Invocation();
+                    resizeInvocation.Parameters.Add(castInvocation);
+                    castInvocation = resizeInvocation;
+                    convertInvocationToResizeAndAddSizeParameter(toSize);
+                }
+            };
 
             // Trying supported cast scenarios:
-            if ((fromType == KnownDataTypes.UnrangedInt || fromType == KnownDataTypes.UInt16 || fromType == KnownDataTypes.UInt32) &&
-                toType == KnownDataTypes.Real)
+
+            if ((KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType)) ||
+                KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
             {
-                castInvokation.Target = new Raw("real");
+                // Casting to a smaller type, so we need to cut off bits.
+                if (getSize(fromType) > toSize)
+                {
+                    result.IsLossy = true;
+                    convertInvocationToResizeAndAddSizeParameter(toSize);
+                }
+                else return result;
             }
-            else if ((fromType == KnownDataTypes.Real || fromType == KnownDataTypes.UInt16 || fromType == KnownDataTypes.UInt32) && 
-                toType == KnownDataTypes.UnrangedInt)
+            else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.Real)
             {
-                castInvokation.Target = new Raw("integer");
+                castInvocation.Target = "real".ToVhdlIdValue();
             }
-            else if (fromType == KnownDataTypes.UnrangedInt && toType == KnownDataTypes.UInt16)
+            else if (KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType))
             {
-                castInvokation.Target = new Raw("natural");
+                // If the full scale of the uint wouldn't fit.
+                result.IsLossy = fromSize > toSize / 2;
+
+                castInvocation.Target = "signed".ToVhdlIdValue();
+                resizeToToSizeIfNeeded();
             }
-            else
+            else if (KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
+            {
+                result.IsLossy = true;
+                castInvocation.Target = "unsigned".ToVhdlIdValue();
+                resizeToToSizeIfNeeded();
+            }
+            else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.UnrangedInt)
+            {
+                result.IsLossy = true;
+                castInvocation.Target = "to_integer".ToVhdlIdValue();
+            }
+
+            if (fromType == KnownDataTypes.StdLogicVector32)
+            {
+                if (KnownDataTypes.SignedIntegers.Contains(toType))
+                {
+                    castInvocation.Target = "signed".ToVhdlIdValue();
+                }
+                else if (KnownDataTypes.UnsignedIntegers.Contains(toType))
+                {
+                    castInvocation.Target = "unsigned".ToVhdlIdValue();
+                }
+
+                result.IsLossy = toSize > 32;
+            }
+            if (toType == KnownDataTypes.StdLogicVector32)
+            {
+                castInvocation.Target = "std_logic_vector".ToVhdlIdValue();
+                result.IsLossy = fromSize > 32;
+            }
+
+
+            if (castInvocation.Target == null)
             {
                 throw new NotSupportedException("Casting from " + fromType.Name + " to " + toType.Name + " is not supported.");
             }
 
-            castInvokation.Parameters.Add(variableReference);
 
-            return castInvokation;
+            result.Expression = castInvocation;
+            return result;
+        }
+
+
+        private class TypeConversionResult : ITypeConversionResult
+        {
+            public IVhdlElement Expression { get; set; }
+            public bool IsLossy { get; set; }
         }
     }
 }

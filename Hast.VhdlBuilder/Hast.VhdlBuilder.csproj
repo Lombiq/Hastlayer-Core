@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hast.VhdlBuilder</RootNamespace>
     <AssemblyName>Hast.VhdlBuilder</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -41,12 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Representation\Declaration\Alias.cs" />
-    <Compile Include="Representation\Declaration\Array.cs" />
+    <Compile Include="Representation\Declaration\ArrayType.cs" />
     <Compile Include="Representation\Declaration\BlockComment.cs" />
+    <Compile Include="Representation\Declaration\IReferenceableDeclaration.cs" />
     <Compile Include="Representation\Declaration\LineComment.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
-    <Compile Include="Representation\Declaration\Empty.cs" />
+    <Compile Include="Representation\Empty.cs" />
     <Compile Include="Representation\Declaration\Generic.cs" />
     <Compile Include="Representation\Declaration\GeneratedComment.cs" />
     <Compile Include="Representation\Declaration\LogicalBlock.cs" />
@@ -61,6 +63,8 @@
     <Compile Include="Representation\Declaration\ITypedDataObject.cs" />
     <Compile Include="Representation\Declaration\Signal.cs" />
     <Compile Include="Representation\Declaration\Variable.cs" />
+    <Compile Include="Representation\Declaration\UnconstrainedArrayInstantiation.cs" />
+    <Compile Include="Representation\Expression\ArrayElementAccess.cs" />
     <Compile Include="Representation\Expression\Assignment.cs" />
     <Compile Include="ProcessUtility.cs" />
     <Compile Include="Representation\Declaration\Architecture.cs" />
@@ -78,11 +82,13 @@
     <Compile Include="Representation\Expression\Character.cs" />
     <Compile Include="Representation\Expression\ConditionalSignalAssignment.cs" />
     <Compile Include="Representation\Expression\DataObjectReference.cs" />
+    <Compile Include="Representation\Expression\DataTypeReference.cs" />
     <Compile Include="Representation\Expression\If.cs" />
     <Compile Include="Representation\Expression\IdentifierValue.cs" />
-    <Compile Include="Representation\Expression\Invokation.cs" />
+    <Compile Include="Representation\Expression\Invocation.cs" />
     <Compile Include="Representation\Expression\IfElse.cs" />
     <Compile Include="Representation\Expression\BinaryOperator.cs" />
+    <Compile Include="Representation\Expression\Parenthesized.cs" />
     <Compile Include="Representation\Expression\Return.cs" />
     <Compile Include="Representation\Expression\Unary.cs" />
     <Compile Include="Representation\Expression\UnaryOperator.cs" />

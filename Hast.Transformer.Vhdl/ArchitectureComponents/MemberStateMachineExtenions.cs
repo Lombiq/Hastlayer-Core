@@ -52,5 +52,10 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         {
             return ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State");
         }
+
+        public static string CreateInvocationIndexVariableName(this IMemberStateMachine stateMachine, string targetMethodName)
+        {
+            return stateMachine.CreatePrefixedSegmentedObjectName(targetMethodName, "invocationIndex");
+        }
     }
 }

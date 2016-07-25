@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Models;
+using Hast.Common.Configuration;
 
 namespace Hast.Communication
 {
@@ -20,15 +21,15 @@ namespace Hast.Communication
         }
 
 
-        public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target) where T : class
+        public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target, IProxyGenerationConfiguration configuration) where T : class
         {
-            var memberInvokationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(hardwareRepresentation, target);
+            var memberInvocationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(hardwareRepresentation, target, configuration);
             if (typeof(T).IsInterface)
             {
-                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvokationHandler));
+                return _proxyGenerator.CreateInterfaceProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvocationHandler));
             }
 
-            return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvokationHandler));
+            return _proxyGenerator.CreateClassProxyWithTarget<T>(target, new MemberInvocationInterceptor(memberInvocationHandler));
         }
 
 

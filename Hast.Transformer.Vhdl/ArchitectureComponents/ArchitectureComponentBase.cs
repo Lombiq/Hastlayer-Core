@@ -9,9 +9,11 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
 using Orchard.Validation;
+using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
+    [System.Diagnostics.DebuggerDisplay("{Name}")]
     public abstract class ArchitectureComponentBase : IArchitectureComponent
     {
         public string Name { get; private set; }
@@ -19,7 +21,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public IList<Variable> GlobalVariables { get; private set; }
         public IList<Signal> InternallyDrivenSignals { get; private set; }
         public IList<Signal> ExternallyDrivenSignals { get; private set; }
-        public IDictionary<string, int> OtherMemberMaxInvokationInstanceCounts { get; private set; }
+        public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; }
 
 
         protected ArchitectureComponentBase(string name)
@@ -30,7 +32,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             GlobalVariables = new List<Variable>();
             InternallyDrivenSignals = new List<Signal>();
             ExternallyDrivenSignals = new List<Signal>();
-            OtherMemberMaxInvokationInstanceCounts = new Dictionary<string, int>();
+            OtherMemberMaxInvocationInstanceCounts = new Dictionary<EntityDeclaration, int>();
         }
 
 
@@ -76,9 +78,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
         protected Process BuildProcess(IVhdlElement notInReset, IVhdlElement inReset = null)
         {
-            Argument.ThrowIfNull(notInReset, nameof(notInReset));
-
-
             var process = new Process { Name = Name.ToExtendedVhdlId() };
 
             process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
@@ -101,18 +100,29 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 ifInResetBlock.Add(inReset);
             }
 
-            var resetIf = new IfElse
+            // Only add the ifInReset block if it contains anything apart from the one comment line.
+            if (ifInResetBlock.Body.Take(2).Count() == 2)
             {
-                Condition = new Binary
+                var resetIf = new IfElse
                 {
-                    Left = CommonPortNames.Reset.ToVhdlSignalReference(),
-                    Operator = BinaryOperator.Equality,
-                    Right = Value.OneCharacter
-                },
-                True = ifInResetBlock,
-                Else = notInReset
-            };
-            process.Add(resetIf);
+                    Condition = new Binary
+                    {
+                        Left = CommonPortNames.Reset.ToVhdlSignalReference(),
+                        Operator = BinaryOperator.Equality,
+                        Right = Value.OneCharacter
+                    },
+                    True = ifInResetBlock
+                };
+                if (notInReset != null)
+                {
+                    resetIf.Else = notInReset;
+                }
+                process.Add(resetIf);
+            }
+            else if (notInReset != null)
+            {
+                process.Add(notInReset);
+            }
 
             return process;
         }

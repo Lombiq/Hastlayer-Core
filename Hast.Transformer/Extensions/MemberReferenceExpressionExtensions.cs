@@ -14,15 +14,43 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (type == null) return null;
 
-            var parent = memberReferenceExpression.Parent;
-            MemberReference memberReference = null;
-            while (memberReference == null && parent != null)
+            // A MethodReference annotation is present if the expression is for creating a delegate for a lambda expression
+            // like this: new Func<object, bool> (<>c__DisplayClass.<ParallelizedArePrimeNumbersAsync>b__0)
+            var methodReference = memberReferenceExpression.Annotation<MethodReference>();
+            if (methodReference == null)
             {
-                memberReference = parent.Annotation<MemberReference>();
-                parent = parent.Parent;
-            }
+                // A FieldDefinition annotation is present if the expression is about accessing a field.
+                var fieldDefinition = memberReferenceExpression.Annotation<FieldDefinition>();
+                if (fieldDefinition == null)
+                {
+                    var parent = memberReferenceExpression.Parent;
+                    MemberReference memberReference = null;
+                    while (memberReference == null && parent != null)
+                    {
+                        memberReference = parent.Annotation<MemberReference>();
+                        parent = parent.Parent;
+                    }
 
-            return type.Members.Where(member => member.Annotation<MemberReference>().FullName == memberReference.FullName).SingleOrDefault();
+                    var declaringType = typeDeclarationLookupTable.Lookup(memberReference.DeclaringType.FullName);
+
+                    if (declaringType == null) return null;
+
+                    return
+                        declaringType
+                        .Members
+                        .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);  
+                }
+                else
+                {
+                    return type.Members
+                        .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName); 
+                }
+            }
+            else
+            {
+                return type.Members
+                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == methodReference.FullName); 
+            }
         }
 
         public static TypeDeclaration GetTargetTypeDeclaration(
@@ -37,7 +65,7 @@ namespace ICSharpCode.NRefactory.CSharp
             else if (memberReferenceExpression.Target is BaseReferenceExpression)
             {
                 // The member is in the base class (because of single class inheritance in C#, there can be only one base class).
-                return memberReferenceExpression.FindParentTypeDeclaration().BaseTypes
+                return memberReferenceExpression.FindFirstParentTypeDeclaration().BaseTypes
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
@@ -45,10 +73,14 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 return typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
             }
+            else if (memberReferenceExpression.Target is MemberReferenceExpression)
+            {
+                return ((MemberReferenceExpression)memberReferenceExpression.Target).GetTargetTypeDeclaration(typeDeclarationLookupTable);
+            }
             else
             {
                 // The member is within this class.
-                return memberReferenceExpression.FindParentTypeDeclaration();
+                return memberReferenceExpression.FindFirstParentTypeDeclaration();
             }
         }
     }

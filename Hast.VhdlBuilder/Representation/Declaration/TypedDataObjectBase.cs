@@ -7,7 +7,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public DataType DataType { get; set; }
 
 
-        public DataObjectReference ToReference()
+        public override IDataObject ToReference()
         {
             return new DataObjectReference { DataObjectKind = DataObjectKind, Name = Name };
         }

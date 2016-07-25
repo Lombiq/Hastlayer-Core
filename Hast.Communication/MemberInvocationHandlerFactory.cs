@@ -12,7 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System;
-using Hast.Communication.Extensibility;
+using Hast.Common.Configuration;
 
 namespace Hast.Communication
 {
@@ -27,16 +27,23 @@ namespace Hast.Communication
         }
 
 
-        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target)
+        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target, IProxyGenerationConfiguration configuration)
         {
             return invocation =>
                 {
                     using (var workContext = _wca.CreateWorkContextScope())
                     {
+                        var methodAsynchronicity = GetMethodAsynchronicity(invocation);
+
+                        if (methodAsynchronicity == MethodAsynchronicity.AsyncFunction)
+                        {
+                            throw new NotSupportedException("Only async methods that return a Task, not Task<T>, are supported.");
+                        }
+
                         // Although it says Method it can also be a property.
                         var memberFullName = invocation.Method.GetFullName();
 
-                        var invokationContext = new MemberInvocationContext
+                        var invocationContext = new MemberInvocationContext
                         {
                             Invocation = invocation,
                             MemberFullName = memberFullName,
@@ -44,52 +51,77 @@ namespace Hast.Communication
                         };
 
                         var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
-                        eventHandler.MemberInvoking(invokationContext);
+                        eventHandler.MemberInvoking(invocationContext);
 
                         workContext.Resolve<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
                             {
-                                invokationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invokationContext);
+                                invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
                             });
 
-                        if (!invokationContext.HardwareExecutionIsCancelled)
+                        if (!invocationContext.HardwareExecutionIsCancelled)
                         {
                             var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
                             var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
                             if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                             {
-                                invokationContext.HardwareExecutionIsCancelled = true;
+                                invocationContext.HardwareExecutionIsCancelled = true;
                             } 
                         }
 
-                        if (invokationContext.HardwareExecutionIsCancelled) return false;
+                        if (invocationContext.HardwareExecutionIsCancelled) return false;
                   
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
                             var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
-                            // The task here is needed because the code executed on the FPGA board doesn't return, we have 
-                            // to wait for it.
-                            // The Execute method is executed on separate thread.
+                            // Need the wrapping Task to handle the async code.
                             var task = Task.Run(async () =>
                                 {
-                                    invokationContext.ExecutionInformation = await workContext
-                                        .Resolve<ICommunicationService>()
+                                    invocationContext.ExecutionInformation = await workContext
+                                        .Resolve<ICommunicationServiceSelector>()
+                                        .GetCommunicationService(configuration.CommunicationChannelName)
                                         .Execute(memory, memberId);
                                 });
                             task.Wait();
                         }
                         else
                         {
-                            throw new InvalidOperationException("Only SimpleMemory-using implementations are supported for hardware execution.");
+                            throw new NotSupportedException("Only SimpleMemory-using implementations are supported for hardware execution.");
                         }
 
-                        eventHandler.MemberExecutedOnHardware(invokationContext);
+                        eventHandler.MemberExecutedOnHardware(invocationContext);
+
+                        if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
+                        {
+                            invocation.ReturnValue = Task.FromResult(true);
+                        }
 
                         return true;
                     }
                 };
         }
 
+
+        // Code taken from http://stackoverflow.com/a/28374134/220230
+        private static MethodAsynchronicity GetMethodAsynchronicity(IInvocation invocation)
+        {
+            var returnType = invocation.Method.ReturnType;
+
+            if (returnType == typeof(Task)) return MethodAsynchronicity.AsyncAction;
+
+            if (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Task<>))
+                return MethodAsynchronicity.AsyncFunction;
+
+            return MethodAsynchronicity.Synchronous;
+        }
+
+
+        private enum MethodAsynchronicity
+        {
+            Synchronous,
+            AsyncAction,
+            AsyncFunction
+        }
 
         private class MemberInvocationContext : IMemberInvocationPipelineStepContext, IMemberHardwareExecutionContext
         {

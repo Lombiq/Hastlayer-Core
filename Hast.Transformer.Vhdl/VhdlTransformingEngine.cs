@@ -16,36 +16,53 @@ using Hast.Common.Extensions;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using System;
 using Orchard.Services;
-using Hast.Transformer.Vhdl.InvokationProxyBuilders;
+using Hast.Transformer.Vhdl.InvocationProxyBuilders;
+using Hast.Transformer.Vhdl.SimpleMemory;
 
 namespace Hast.Transformer.Vhdl
 {
     public class VhdlTransformingEngine : ITransformingEngine
     {
+        private readonly ICompilerGeneratedClassesVerifier _compilerGeneratedClassesVerifier;
         private readonly IClock _clock;
+        private readonly IArrayTypesCreator _arrayTypesCreator;
         private readonly IMethodTransformer _methodTransformer;
-        private readonly IExternalInvokationProxyBuilder _externalInvokationProxyBuilder;
-        private readonly IInternalInvokationProxyBuilder _internalInvokationProxyBuilder;
-        private readonly Lazy<ISimpleMemoryOperationProxyBuilder> _simpleMemoryOperationProxyBuilderLazy;
+        private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
+        private readonly IExternalInvocationProxyBuilder _externalInvocationProxyBuilder;
+        private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
+        private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
+        private readonly IEnumTypesCreator _enumTypesCreator;
 
 
         public VhdlTransformingEngine(
+            ICompilerGeneratedClassesVerifier compilerGeneratedClassesVerifier,
             IClock clock,
+            IArrayTypesCreator arrayTypesCreator,
             IMethodTransformer methodTransformer,
-            IExternalInvokationProxyBuilder externalInvokationProxyBuilder,
-            IInternalInvokationProxyBuilder internalInvokationProxyBuilder,
-            Lazy<ISimpleMemoryOperationProxyBuilder> simpleMemoryOperationProxyBuilderLazy)
+            IDisplayClassFieldTransformer displayClassFieldTransformer,
+            IExternalInvocationProxyBuilder externalInvocationProxyBuilder,
+            IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
+            Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
+            IEnumTypesCreator enumTypesCreator)
         {
+            _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _clock = clock;
+            _arrayTypesCreator = arrayTypesCreator;
             _methodTransformer = methodTransformer;
-            _externalInvokationProxyBuilder = externalInvokationProxyBuilder;
-            _internalInvokationProxyBuilder = internalInvokationProxyBuilder;
-            _simpleMemoryOperationProxyBuilderLazy = simpleMemoryOperationProxyBuilderLazy;
+            _displayClassFieldTransformer = displayClassFieldTransformer;
+            _externalInvocationProxyBuilder = externalInvocationProxyBuilder;
+            _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
+            _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
+            _enumTypesCreator = enumTypesCreator;
         }
 
 
         public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
+            var syntaxTree = transformationContext.SyntaxTree;
+
+            _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
+
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext);
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;
 
@@ -59,11 +76,14 @@ namespace Hast.Transformer.Vhdl
                 Name = "ieee",
                 Uses = new List<string> { "ieee.std_logic_1164.all", "ieee.numeric_std.all" }
             });
-            module.Libraries.Add(new Library
+            if (useSimpleMemory)
             {
-                Name = "Hast",
-                Uses = new List<string> { "Hast.SimpleMemory.all" }
-            });
+                module.Libraries.Add(new Library
+                {
+                    Name = "Hast",
+                    Uses = new List<string> { "Hast.SimpleMemory.all" }
+                }); 
+            }
 
 
             // Creating the Hast_IP entity. Its name can't be an extended identifier.
@@ -76,39 +96,66 @@ namespace Hast.Transformer.Vhdl
             architecture.Declarations.Add(new BlockComment(GeneratedCodeOverviewComment.Comment));
 
 
+            // Adding array types for any arrays created in code
+            // This is necessary in a separate step because in VHDL the array types themselves should be created too
+            // (like in C# we'd need to first define what an int[] is before being able to create one).
+            var arrayDeclarations = _arrayTypesCreator.CreateArrayTypes(syntaxTree);
+            if (arrayDeclarations.Any())
+            {
+                var arrayDeclarationsBlock = new LogicalBlock(new LineComment("Array declarations start"));
+                arrayDeclarationsBlock.Body.AddRange(arrayDeclarations);
+                arrayDeclarationsBlock.Add(new LineComment("Array declarations end"));
+                architecture.Declarations.Add(arrayDeclarationsBlock);
+            }
+
+
+            // Adding enum types
+            var enumDeclarations = _enumTypesCreator.CreateEnumTypes(syntaxTree);
+            if (enumDeclarations.Any())
+            {
+                var enumDeclarationsBlock = new LogicalBlock(new LineComment("Enum declarations start"));
+                enumDeclarationsBlock.Body.AddRange(enumDeclarations);
+                enumDeclarationsBlock.Add(new LineComment("Enum declarations end"));
+                architecture.Declarations.Add(enumDeclarationsBlock);
+            }
+
+
             // Doing transformations
-            var transformerResults = await Task.WhenAll(Traverse(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext));
+            var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
             var potentiallyInvokingArchitectureComponents = transformerResults
-                .SelectMany(result => result.StateMachineResults.Select(smResult => smResult.StateMachine).Cast<IArchitectureComponent>())
+                .SelectMany(result => 
+                    result.ArchitectureComponentResults
+                        .Select(smResult => smResult.ArchitectureComponent)
+                        .Cast<IArchitectureComponent>())
                 .ToList();
             foreach (var transformerResult in transformerResults)
             {
-                foreach (var stateMachineResult in transformerResult.StateMachineResults)
+                foreach (var architectureComponentResults in transformerResult.ArchitectureComponentResults)
                 {
-                    architecture.Declarations.Add(stateMachineResult.Declarations);
-                    architecture.Add(stateMachineResult.Body);
+                    architecture.Declarations.Add(architectureComponentResults.Declarations);
+                    architecture.Add(architectureComponentResults.Body);
                 }
             }
 
 
-            // Proxying external invokations
+            // Proxying external invocations
             var interfaceMemberResults = transformerResults.Where(result => result.IsInterfaceMember);
             if (!interfaceMemberResults.Any())
             {
                 throw new InvalidOperationException("There aren't any interface members, however at least one interface member is needed to execute anything on hardware.");
             }
             var memberIdTable = BuildMemberIdTable(interfaceMemberResults);
-            var externalInvocationProxy = _externalInvokationProxyBuilder.BuildProxy(interfaceMemberResults, memberIdTable);
+            var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(interfaceMemberResults, memberIdTable);
             potentiallyInvokingArchitectureComponents.Add(externalInvocationProxy);
             architecture.Declarations.Add(externalInvocationProxy.BuildDeclarations());
             architecture.Add(externalInvocationProxy.BuildBody());
 
 
-            // Proxying internal invokations
-            var internaInvokationProxies = _internalInvokationProxyBuilder.BuildProxy(
+            // Proxying internal invocations
+            var internaInvocationProxies = _internalInvocationProxyBuilder.BuildProxy(
                 potentiallyInvokingArchitectureComponents,
                 vhdlTransformationContext);
-            foreach (var proxy in internaInvokationProxies)
+            foreach (var proxy in internaInvocationProxies)
             {
                 architecture.Declarations.Add(proxy.BuildDeclarations());
                 architecture.Add(proxy.BuildBody());
@@ -118,19 +165,14 @@ namespace Hast.Transformer.Vhdl
             // Proxying SimpleMemory operations
             if (useSimpleMemory)
             {
-                var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilderLazy.Value
-                    .BuildProxy(potentiallyInvokingArchitectureComponents);
-                architecture.Declarations.Add(simpleMemoryProxyComponent.BuildDeclarations());
-                architecture.Add(simpleMemoryProxyComponent.BuildBody());
+                _simpleMemoryComponentBuilderLazy.Value.AddSimpleMemoryComponentsToArchitecture(
+                    potentiallyInvokingArchitectureComponents,
+                    architecture);
             }
 
 
             // Adding common ports
             var ports = entity.Ports;
-            if (useSimpleMemory)
-            {
-                AddSimpleMemoryPorts(ports);
-            }
             ports.Add(new Port
             {
                 Name = CommonPortNames.MemberId,
@@ -164,14 +206,14 @@ namespace Hast.Transformer.Vhdl
         }
 
 
-        private IEnumerable<Task<IMemberTransformerResult>> Traverse(
+        private IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
             AstNode node, 
             VhdlTransformationContext transformationContext,
-            List<Task<IMemberTransformerResult>> methodTransformerTasks = null)
+            List<Task<IMemberTransformerResult>> memberTransformerTasks = null)
         {
-            if (methodTransformerTasks == null)
+            if (memberTransformerTasks == null)
             {
-                methodTransformerTasks = new List<Task<IMemberTransformerResult>>();
+                memberTransformerTasks = new List<Task<IMemberTransformerResult>>();
             }
 
             var traverseTo = node.Children;
@@ -183,8 +225,15 @@ namespace Hast.Transformer.Vhdl
                 case NodeType.Member:
                     if (node is MethodDeclaration)
                     {
-                        var method = node as MethodDeclaration;
-                        methodTransformerTasks.Add(_methodTransformer.Transform(method, transformationContext));
+                        memberTransformerTasks.Add(_methodTransformer.Transform((MethodDeclaration)node, transformationContext));
+                    }
+                    else if (node is FieldDeclaration && node.GetFullName().IsDisplayClassMemberName())
+                    {
+                        memberTransformerTasks.Add(_displayClassFieldTransformer.Transform((FieldDeclaration)node, transformationContext));
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("The member " + node.ToString() + " is not supported for transformation.");
                     }
                     break;
                 case NodeType.Pattern:
@@ -204,14 +253,16 @@ namespace Hast.Transformer.Vhdl
                     switch (typeDeclaration.ClassType)
                     {
                         case ClassType.Class:
-                            traverseTo = traverseTo.Skip(traverseTo.Count(n => n.NodeType != NodeType.Member));
+                            traverseTo = traverseTo
+                                .Skip(traverseTo
+                                    .Count(n => n.NodeType != NodeType.Member && n.NodeType != NodeType.TypeDeclaration));
                             break;
                         case ClassType.Enum:
-                            break;
+                            return memberTransformerTasks; // Enums are transformed separately.
                         case ClassType.Interface:
-                            return methodTransformerTasks; // Interfaces are irrelevant here.
+                            return memberTransformerTasks; // Interfaces are irrelevant here.
                         case ClassType.Struct:
-                            break;
+                            throw new NotSupportedException("Transforming structs (" + node.GetFullName() + ") is not supported.");
                     }
                     break;
                 case NodeType.TypeReference:
@@ -224,10 +275,10 @@ namespace Hast.Transformer.Vhdl
 
             foreach (var target in traverseTo)
             {
-                Traverse(target, transformationContext, methodTransformerTasks);
+                TransformMembers(target, transformationContext, memberTransformerTasks);
             }
 
-            return methodTransformerTasks;
+            return memberTransformerTasks;
         }
 
 
@@ -250,58 +301,6 @@ namespace Hast.Transformer.Vhdl
 
 
             return memberIdTable;
-        }
-
-        private static void AddSimpleMemoryPorts(List<Port> ports)
-        {
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId(),
-                Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DataSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.DataOut.ToExtendedVhdlId(),
-                Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.DataSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.CellIndex.ToExtendedVhdlId(),
-                Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.CellIndexSignalDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.ReadEnable.ToExtendedVhdlId(),
-                Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.EnableSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.WriteEnable.ToExtendedVhdlId(),
-                Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.EnableSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.ReadsDone.ToExtendedVhdlId(),
-                Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DoneSignalsDataType
-            });
-
-            ports.Add(new Port
-            {
-                Name = SimpleMemoryPortNames.WritesDone.ToExtendedVhdlId(),
-                Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DoneSignalsDataType
-            });
         }
     }
 }

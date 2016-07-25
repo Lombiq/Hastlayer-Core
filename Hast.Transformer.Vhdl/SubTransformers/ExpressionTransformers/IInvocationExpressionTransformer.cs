@@ -13,8 +13,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     public interface IInvocationExpressionTransformer : IDependency
     {
         IVhdlElement TransformInvocationExpression(
-             InvocationExpression expression,
-             ISubTransformerContext context,
-             IEnumerable<IVhdlElement> transformedParameters);
+            InvocationExpression expression,
+            IEnumerable<IVhdlElement> transformedParameters,
+            ISubTransformerContext context);
     }
 }

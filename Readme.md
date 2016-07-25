@@ -24,7 +24,8 @@ Some general constraints you have to keep in mind:
 - Floating-point numbers like `float` and `double` and numbers bigger than 32b are not yet supported.
 - Algorithms can use a fixed-size (determined at runtime) memory space modelled as a `byte` array in the class `SimpleMemory`. For inputs that should be passed to hardware implementations and outputs that should be sent back this memory space is to be used. For internal method arguments (i.e. for data that isn't coming from the host computer or should be sent back) normal method arguments can be used.
 - Passing object references other than a `SimpleMemory` instance is not supported.
-- Using objects (including arrays) is not yet supported.
+- Using objects is not yet supported, but arrays having dimensions declared compile-time are.
+- Lambda expression are supported to an extent needed to write task parallelized code (see samples).
 
 
 ## Troubleshooting

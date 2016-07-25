@@ -47,18 +47,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     var stateMachineCount = context
                         .GetTransformerConfiguration()
-                        .GetMaxInvokationInstanceCountConfigurationForMember(method.GetSimpleName()).MaxInvokationInstanceCount;
-                    var stateMachineResults = new IMemberStateMachineResult[stateMachineCount];
+                        .GetMaxInvocationInstanceCountConfigurationForMember(method).MaxInvocationInstanceCount;
+                    var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
 
                     // Not much use to parallelize computation unless there are a lot of state machines to create or the 
                     // method is very complex. We'll need to examine when to parallelize here and determine it in runtime.
                     if (stateMachineCount > 50)
                     {
-                        var stateMachineComputingTasks = new List<Task<IMemberStateMachineResult>>();
+                        var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
 
                         for (int i = 0; i < stateMachineCount; i++)
                         {
-                            var task = new Task<IMemberStateMachineResult>(
+                            var task = new Task<IArchitectureComponentResult>(
                                 index => BuildStateMachineFromMethod(method, context, (int)index),
                                 i);
                             task.Start();
@@ -79,13 +79,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         Member = method,
                         IsInterfaceMember = method.IsInterfaceMember(),
-                        StateMachineResults = stateMachineResults
+                        ArchitectureComponentResults = stateMachineResults
                     };
                 });
         }
 
 
-        private IMemberStateMachineResult BuildStateMachineFromMethod(
+        private IArchitectureComponentResult BuildStateMachineFromMethod(
             MethodDeclaration method,
             IVhdlTransformationContext context,
             int stateMachineIndex)
@@ -98,14 +98,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var openingBlock = new InlineBlock();
 
 
-            // Handling return type.
+            // Handling the return type.
             var returnType = _typeConverter.ConvertAstType(method.ReturnType);
+            // If the return type is a Task then that means it's one of the supported simple TPL scenarios, corresponding
+            // to void in VHDL.
+            if (returnType == SpecialTypes.Task) returnType = KnownDataTypes.Void;
             var isVoid = returnType.Name == "void";
             if (!isVoid)
             {
-                stateMachine.GlobalVariables.Add(new Variable
+                stateMachine.InternallyDrivenSignals.Add(new Signal
                 {
-                    Name = stateMachine.CreateReturnVariableName(),
+                    Name = stateMachine.CreateReturnSignalReference().Name,
                     DataType = returnType
                 });
             }
@@ -118,13 +121,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // we need to have intermediary input variables, then copy their values to local variables.
 
                 var parameterDataType = _typeConverter.ConvertAstType(parameter.Type);
-                var parameterGlobalVariableName = stateMachine.CreateParameterVariableName(parameter.Name);
+                var parameterSignalReference = stateMachine.CreateParameterSignalReference(parameter.Name);
                 var parameterLocalVariableName = stateMachine.CreatePrefixedObjectName(parameter.Name);
 
-                stateMachine.GlobalVariables.Add(new ParameterVariable(methodFullName, parameter.Name)
+                stateMachine.ExternallyDrivenSignals.Add(new ParameterSignal(methodFullName, parameter.Name)
                 {
                     DataType = parameterDataType,
-                    Name = parameterGlobalVariableName,
+                    Name = parameterSignalReference.Name,
                     IsOwn = true
                 });
 
@@ -137,7 +140,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 openingBlock.Add(new Assignment
                 {
                     AssignTo = parameterLocalVariableName.ToVhdlVariableReference(),
-                    Expression = parameterGlobalVariableName.ToVhdlVariableReference()
+                    Expression = parameterSignalReference
                 });
             }
 
@@ -172,9 +175,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // We need to return the declarations and body here too so their computation can be parallelized too.
             // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to
             // be thread-safe.
-            return new MemberStateMachineResult
+            return new ArchitectureComponentResult
             {
-                StateMachine = stateMachine,
+                ArchitectureComponent = stateMachine,
                 Declarations = stateMachine.BuildDeclarations(),
                 Body = stateMachine.BuildBody()
             };

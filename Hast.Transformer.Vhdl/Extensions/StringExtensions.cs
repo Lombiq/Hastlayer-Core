@@ -4,30 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Vhdl.Extensions
+namespace System
 {
     internal static class StringExtensions
     {
-        /// <summary>
-        /// Creates a simple dot-delimited name for a full member name, whcih will include the parent types' and the
-        /// wrapping namespace's name.
-        /// </summary>
-        public static string ToSimpleName(this string fullName)
+        public static bool IsTaskFromResultMethodName(this string name)
         {
-            var simpleName = fullName;
+            return name.Contains("System.Threading.Tasks.Task::FromResult");
+        }
 
-            // Cutting off return type name.
-            var firstSpaceIndex = simpleName.IndexOf(' ');
-            if (firstSpaceIndex != -1)
-            {
-                simpleName = simpleName.Substring(firstSpaceIndex + 1);
-            }
-
-            // Cutting off everything after an opening bracket (of a method call).
-            simpleName = simpleName.Substring(0, simpleName.IndexOf('('));
-
-            // Changing the double colons that delimit a member access to a single dot.
-            return simpleName.Replace("::", ".");
+        public static bool IsTaskCompletedTaskPropertyName(this string name)
+        {
+            return name.Contains("System.Threading.Tasks.Task::CompletedTask");
         }
     }
 }

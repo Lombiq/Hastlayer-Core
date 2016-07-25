@@ -53,13 +53,15 @@ namespace Hast.VhdlBuilder.Representation.Expression
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class SignalAssignmentWhen : IVhdlElement
     {
-        public Value Value { get; set; }
+        public IVhdlElement Value { get; set; }
         public IVhdlElement Expression { get; set; }
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return Value.ToVhdl(vhdlGenerationOptions) + " when " + Expression.ToVhdl(vhdlGenerationOptions);
+            return
+                Value.ToVhdl(vhdlGenerationOptions) +
+                (Expression != null ? " when " + Expression.ToVhdl(vhdlGenerationOptions) : string.Empty);
         }
     }
 }

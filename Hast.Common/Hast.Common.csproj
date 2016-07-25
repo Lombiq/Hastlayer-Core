@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hast.Common</RootNamespace>
     <AssemblyName>Hast.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ProxyGenerationConfiguration.cs" />
     <Compile Include="Configuration\HardwareGenerationConfiguration.cs" />
     <Compile Include="Configuration\IHardwareGenerationConfiguration.cs" />
+    <Compile Include="Configuration\IProxyGenerationConfiguration.cs" />
     <Compile Include="Extensibility\Pipeline\IPipelineStep.cs" />
     <Compile Include="Extensibility\Pipeline\PipelineStepEnumerationExtensions.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
