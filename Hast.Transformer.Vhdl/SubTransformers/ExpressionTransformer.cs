@@ -17,6 +17,7 @@ using Orchard.Logging;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Common.Configuration;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -357,9 +358,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                 }
 
+                // Is this reference to an enum's member?
+                var memberTypeDefinition = memberReference.GetActualTypeReference() as TypeDefinition;
+                if (memberTypeDefinition != null && memberTypeDefinition.IsEnum)
+                {
+                    return memberFullName.ToExtendedVhdlIdValue();
+                }
+
                 // Is this a Task result access like array[k].Result or task.Result?
                 var targetTypeReference = memberReference.Target.GetActualTypeReference();
-                if (targetTypeReference.FullName.StartsWith("System.Threading.Tasks.Task") &&
+                if (targetTypeReference != null &&
+                    targetTypeReference.FullName.StartsWith("System.Threading.Tasks.Task") &&
                     memberReference.MemberName == "Result")
                 {
                     // If this is not an array then it doesn't need to be explicitly awaited, just access to its

@@ -19,16 +19,14 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
-            var vectorSize = 20000;
-            var vector = new int[vectorSize];
-            for (int i = int.MaxValue - vectorSize; i < int.MaxValue; i++)
-            {
-                vector[i - int.MaxValue + vectorSize] = i;
-            }
+            var vector = Enumerable.Range(0, 20).ToArray();
 
             var simdCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new SimdCalculator());
 
             var sumVector = simdCalculator.AddVectors(vector, vector);
+            var differenceVector = simdCalculator.SubtractVectors(vector, vector);
+            var productVector = simdCalculator.MultiplyVectors(vector, vector);
+            var quotientVector = simdCalculator.DivideVectors(vector, vector);
         }
     }
 }

@@ -31,6 +31,7 @@ namespace Hast.Transformer.Vhdl
         private readonly IExternalInvocationProxyBuilder _externalInvocationProxyBuilder;
         private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
+        private readonly IEnumTypesCreator _enumTypesCreator;
 
 
         public VhdlTransformingEngine(
@@ -41,7 +42,8 @@ namespace Hast.Transformer.Vhdl
             IDisplayClassFieldTransformer displayClassFieldTransformer,
             IExternalInvocationProxyBuilder externalInvocationProxyBuilder,
             IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
-            Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy)
+            Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
+            IEnumTypesCreator enumTypesCreator)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _clock = clock;
@@ -51,12 +53,15 @@ namespace Hast.Transformer.Vhdl
             _externalInvocationProxyBuilder = externalInvocationProxyBuilder;
             _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
+            _enumTypesCreator = enumTypesCreator;
         }
 
 
         public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
-            _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(transformationContext.SyntaxTree);
+            var syntaxTree = transformationContext.SyntaxTree;
+
+            _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
 
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext);
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;
@@ -94,7 +99,7 @@ namespace Hast.Transformer.Vhdl
             // Adding array types for any arrays created in code
             // This is necessary in a separate step because in VHDL the array types themselves should be created too
             // (like in C# we'd need to first define what an int[] is before being able to create one).
-            var arrayDeclarations = _arrayTypesCreator.CreateArrayTypes(transformationContext.SyntaxTree);
+            var arrayDeclarations = _arrayTypesCreator.CreateArrayTypes(syntaxTree);
             if (arrayDeclarations.Any())
             {
                 var arrayDeclarationsBlock = new LogicalBlock(new LineComment("Array declarations start"));
@@ -104,8 +109,19 @@ namespace Hast.Transformer.Vhdl
             }
 
 
+            // Adding enum types
+            var enumDeclarations = _enumTypesCreator.CreateEnumTypes(syntaxTree);
+            if (enumDeclarations.Any())
+            {
+                var enumDeclarationsBlock = new LogicalBlock(new LineComment("Enum declarations start"));
+                enumDeclarationsBlock.Body.AddRange(enumDeclarations);
+                enumDeclarationsBlock.Add(new LineComment("Enum declarations end"));
+                architecture.Declarations.Add(enumDeclarationsBlock);
+            }
+
+
             // Doing transformations
-            var transformerResults = await Task.WhenAll(TransformMembers(vhdlTransformationContext.SyntaxTree, vhdlTransformationContext));
+            var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
             var potentiallyInvokingArchitectureComponents = transformerResults
                 .SelectMany(result => 
                     result.ArchitectureComponentResults
@@ -242,7 +258,7 @@ namespace Hast.Transformer.Vhdl
                                     .Count(n => n.NodeType != NodeType.Member && n.NodeType != NodeType.TypeDeclaration));
                             break;
                         case ClassType.Enum:
-                            break;
+                            return memberTransformerTasks; // Enums are transformed separately.
                         case ClassType.Interface:
                             return memberTransformerTasks; // Interfaces are irrelevant here.
                         case ClassType.Struct:

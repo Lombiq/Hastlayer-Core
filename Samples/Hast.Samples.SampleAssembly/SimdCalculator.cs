@@ -8,6 +8,14 @@ using Hast.Transformer.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
+    public enum SimdOperation
+    {
+        Add,
+        Subtract,
+        Multiply,
+        Divide
+    }
+
     /// <summary>
     /// Sample to showcase SIMD (Simple Instruction Multiple Data) processing usage, i.e. operations executed in parallel
     /// on multiple elements of vectors.
@@ -23,10 +31,31 @@ namespace Hast.Samples.SampleAssembly
         public const int VectorElementsStartInt32Index = 1;
         public const int ResultVectorElementsStartInt32Index = 1;
 
-        public const int MaxDegreeOfParallelism = 500;
+        public const int MaxDegreeOfParallelism = 5;
 
 
         public virtual void AddVectors(SimpleMemory memory)
+        {
+            RunSimdOperation(memory, SimdOperation.Add);
+        }
+
+        public virtual void SubtractVectors(SimpleMemory memory)
+        {
+            RunSimdOperation(memory, SimdOperation.Subtract);
+        }
+
+        public virtual void MultiplyVectors(SimpleMemory memory)
+        {
+            RunSimdOperation(memory, SimdOperation.Multiply);
+        }
+
+        public virtual void DivideVectors(SimpleMemory memory)
+        {
+            RunSimdOperation(memory, SimdOperation.Divide);
+        }
+
+
+        private void RunSimdOperation(SimpleMemory memory, SimdOperation operation)
         {
             var elementCount = memory.ReadInt32(VectorsElementCountInt32Index);
 
@@ -48,7 +77,22 @@ namespace Hast.Samples.SampleAssembly
                     vector2[m] = memory.ReadInt32(VectorElementsStartInt32Index + i + m + elementCount);
                 }
 
-                resultVector = SimdOperations.AddVectors(vector1, vector2, MaxDegreeOfParallelism);
+                if (operation == SimdOperation.Add)
+                {
+                    resultVector = SimdOperations.AddVectors(vector1, vector2, MaxDegreeOfParallelism); 
+                }
+                else if (operation == SimdOperation.Subtract)
+                {
+                    resultVector = SimdOperations.SubtractVectors(vector1, vector2, MaxDegreeOfParallelism);
+                }
+                else if (operation == SimdOperation.Multiply)
+                {
+                    resultVector = SimdOperations.MultiplyVectors(vector1, vector2, MaxDegreeOfParallelism);
+                }
+                else if (operation == SimdOperation.Divide)
+                {
+                    resultVector = SimdOperations.DivideVectors(vector1, vector2, MaxDegreeOfParallelism);
+                }
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
@@ -66,6 +110,21 @@ namespace Hast.Samples.SampleAssembly
         public static int[] AddVectors(this SimdCalculator simdCalculator, int[] vector1, int[] vector2)
         {
             return RunSimdOperation(vector1, vector2, memory => simdCalculator.AddVectors(memory));
+        }
+
+        public static int[] SubtractVectors(this SimdCalculator simdCalculator, int[] vector1, int[] vector2)
+        {
+            return RunSimdOperation(vector1, vector2, memory => simdCalculator.SubtractVectors(memory));
+        }
+
+        public static int[] MultiplyVectors(this SimdCalculator simdCalculator, int[] vector1, int[] vector2)
+        {
+            return RunSimdOperation(vector1, vector2, memory => simdCalculator.MultiplyVectors(memory));
+        }
+
+        public static int[] DivideVectors(this SimdCalculator simdCalculator, int[] vector1, int[] vector2)
+        {
+            return RunSimdOperation(vector1, vector2, memory => simdCalculator.DivideVectors(memory));
         }
 
 

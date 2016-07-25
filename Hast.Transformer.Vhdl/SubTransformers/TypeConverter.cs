@@ -6,6 +6,7 @@ using ICSharpCode.NRefactory.TypeSystem;
 using Mono.Cecil;
 using Orchard;
 using System.Linq;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -13,11 +14,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         public DataType ConvertTypeReference(TypeReference typeReference)
         {
-            if (typeReference.IsArray)
-            {
-                return CreateArrayType(ConvertTypeReference(typeReference.GetElementType()));
-            }
-
             switch (typeReference.FullName)
             {
                 case "System.Boolean":
@@ -45,6 +41,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case "System.UInt64":
                     return ConvertPrimitive(KnownTypeCode.UInt64);
             }
+
+            if (typeReference.IsArray)
+            {
+                return CreateArrayType(ConvertTypeReference(typeReference.GetElementType()));
+            }
+
+            var typeDefinition = typeReference as TypeDefinition;
+            if (typeDefinition != null && typeDefinition.IsEnum) return CreateEnumType(typeDefinition);
 
             throw new NotSupportedException("The type " + typeReference.FullName + " is not supported for transforming.");
         }
@@ -187,16 +191,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return SpecialTypes.Task;
             }
 
+            var typeDefinition = type.Annotation<TypeDefinition>();
+            if (typeDefinition != null && typeDefinition.IsEnum) return CreateEnumType(typeDefinition);
+
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
 
-        private DataType CreateArrayType(DataType elementType)
+
+        private static DataType CreateArrayType(DataType elementType)
         {
             return new VhdlBuilder.Representation.Declaration.ArrayType
             {
                 ElementType = elementType,
                 Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name)
             };
+        }
+
+        private static DataType CreateEnumType(TypeDefinition typeDefinition)
+        {
+            return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
         }
     }
 }
