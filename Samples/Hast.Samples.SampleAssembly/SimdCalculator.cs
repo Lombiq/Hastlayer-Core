@@ -77,21 +77,22 @@ namespace Hast.Samples.SampleAssembly
                     vector2[m] = memory.ReadInt32(VectorElementsStartInt32Index + i + m + elementCount);
                 }
 
-                if (operation == SimdOperation.Add)
+                switch (operation)
                 {
-                    resultVector = SimdOperations.AddVectors(vector1, vector2, MaxDegreeOfParallelism); 
-                }
-                else if (operation == SimdOperation.Subtract)
-                {
-                    resultVector = SimdOperations.SubtractVectors(vector1, vector2, MaxDegreeOfParallelism);
-                }
-                else if (operation == SimdOperation.Multiply)
-                {
-                    resultVector = SimdOperations.MultiplyVectors(vector1, vector2, MaxDegreeOfParallelism);
-                }
-                else if (operation == SimdOperation.Divide)
-                {
-                    resultVector = SimdOperations.DivideVectors(vector1, vector2, MaxDegreeOfParallelism);
+                    case SimdOperation.Add:
+                        resultVector = SimdOperations.AddVectors(vector1, vector2, MaxDegreeOfParallelism);
+                        break;
+                    case SimdOperation.Subtract:
+                        resultVector = SimdOperations.SubtractVectors(vector1, vector2, MaxDegreeOfParallelism);
+                        break;
+                    case SimdOperation.Multiply:
+                        resultVector = SimdOperations.MultiplyVectors(vector1, vector2, MaxDegreeOfParallelism);
+                        break;
+                    case SimdOperation.Divide:
+                        resultVector = SimdOperations.DivideVectors(vector1, vector2, MaxDegreeOfParallelism);
+                        break;
+                    default:
+                        break;
                 }
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)

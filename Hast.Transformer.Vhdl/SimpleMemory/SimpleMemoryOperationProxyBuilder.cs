@@ -10,6 +10,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Orchard;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.Transformer.Vhdl.Helpers;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
@@ -108,39 +109,12 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             string portName,
             IEnumerable<IArchitectureComponent> components)
         {
-            IVhdlElement assignmentExpression = components.First().CreateSimpleMemorySignalReference(portName);
-
-            // Iteratively build a binary expression chain to OR together all the driving signals.
-            if (components.Count() > 1)
-            {
-                var currentBinary = new Binary
-                {
-                    Left = components.Skip(1).First().CreateSimpleMemorySignalReference(portName),
-                    Operator = BinaryOperator.ConditionalOr
-                };
-                var firstBinary = currentBinary;
-
-                foreach (var drivingSignal in components.Skip(2).Select(c => c.CreateSimpleMemorySignalReference(portName)))
-                {
-                    var newBinary = new Binary
-                    {
-                        Left = drivingSignal,
-                        Operator = BinaryOperator.ConditionalOr
-                    };
-
-                    currentBinary.Right = newBinary;
-                    currentBinary = newBinary;
-                }
-
-                currentBinary.Right = assignmentExpression;
-                assignmentExpression = firstBinary;
-            }
-
-
             return new Assignment
             {
                 AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
-                Expression = assignmentExpression
+                Expression = BinaryChainBuilder.BuildBinaryChain(
+                    components.Select(c => c.CreateSimpleMemorySignalReference(portName)), 
+                    BinaryOperator.ConditionalOr)
             };
         }
     }

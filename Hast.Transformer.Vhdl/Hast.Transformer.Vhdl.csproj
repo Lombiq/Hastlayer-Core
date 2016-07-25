@@ -88,6 +88,7 @@
     <Compile Include="Constants\SpecialTypes.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\BinaryChainBuilder.cs" />
     <Compile Include="Helpers\TaskParallelizationHelper.cs" />
     <Compile Include="Models\IPartiallyTransformedBinaryOperatorExpression.cs" />
     <Compile Include="Models\PartiallyTransformedBinaryOperatorExpression.cs" />

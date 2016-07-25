@@ -7,6 +7,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
+using Hast.Transformer.Vhdl.Helpers;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
@@ -43,46 +44,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             // Iteratively building a binary expression chain to OR or AND together all (Started = Finished) expressions.
             // Using (Started = Finished) so it will work even if not all state available state machines were started.
 
-            Func<int, IVhdlElement> createStartedEqualsFinishedBinary = index =>
-                new Binary
-                {
-                    Left = CreateStartedSignalReference(component, targetStateMachineName, index),
-                    Operator = BinaryOperator.Equality,
-                    Right = CreateFinishedSignalReference(component, targetStateMachineName, index)
-                };
-
-
-            var allInvokedStateMachinesFinishedExpression = createStartedEqualsFinishedBinary(0);
-
-            if (degreeOfParallelism > 1)
-            {
-                var binaryOperator = BinaryOperator.ConditionalAnd;
-                if (!waitForAll) binaryOperator = BinaryOperator.ConditionalOr;
-
-                var currentBinary = new Binary
-                {
-                    Left = createStartedEqualsFinishedBinary(1),
-                    Operator = binaryOperator
-                };
-                var firstBinary = currentBinary;
-
-                for (int i = 2; i < degreeOfParallelism; i++)
-                {
-                    var newBinary = new Binary
-                    {
-                        Left = createStartedEqualsFinishedBinary(i),
-                        Operator = binaryOperator
-                    };
-
-                    currentBinary.Right = newBinary;
-                    currentBinary = newBinary;
-                }
-
-                currentBinary.Right = allInvokedStateMachinesFinishedExpression;
-                allInvokedStateMachinesFinishedExpression = firstBinary;
-            }
-
-
             var allInvokedStateMachinesFinishedIfElseTrue = new InlineBlock();
 
             for (int i = 0; i < degreeOfParallelism; i++)
@@ -102,10 +63,19 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 });
             }
 
+            Func<int, IVhdlElement> createStartedEqualsFinishedBinary = index =>
+                new Binary
+                {
+                    Left = CreateStartedSignalReference(component, targetStateMachineName, index),
+                    Operator = BinaryOperator.Equality,
+                    Right = CreateFinishedSignalReference(component, targetStateMachineName, index)
+                };
 
             return new IfElse<IBlockElement>
             {
-                Condition = allInvokedStateMachinesFinishedExpression,
+                Condition = BinaryChainBuilder.BuildBinaryChain(
+                    Enumerable.Range(0, degreeOfParallelism).Select(i => createStartedEqualsFinishedBinary(i)),
+                    waitForAll ? BinaryOperator.ConditionalAnd : BinaryOperator.ConditionalOr),
                 True = allInvokedStateMachinesFinishedIfElseTrue
             };
         }

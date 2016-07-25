@@ -41,6 +41,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 
+            Func<int, IVhdlGenerationOptions, string> stateNameGenerator = (index, vhdlGenerationOptions) =>
+                vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
+
             if (statement is VariableDeclarationStatement)
             {
                 var variableStatement = statement as VariableDeclarationStatement;
@@ -156,8 +159,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.Add(new InlineBlock(ifElseCommentsBlock, ifElseElement));
 
                     var ifElseStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
-                    Func<int, IVhdlGenerationOptions, string> stateNameGenerator = (index, vhdlGenerationOptions) =>
-                        vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
 
                     var afterIfElseStateBlock = new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
@@ -306,6 +307,75 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 Logger.Warning("The exception throw statement \"{0}\" was omitted during transformation to be able to transform the code. However this can cause issues for certain algorithms; if it is an issue for this one then this code can't be transformed.", statement.ToString());
                 currentBlock.Add(new LineComment("A throw statement was here, which was omitted during transformation."));
+            }
+            else if (statement is SwitchStatement)
+            {
+                var switchStatement = statement as SwitchStatement;
+
+
+                var caseStatement = new Case
+                {
+                    Expression = _expressionTransformer.Transform(switchStatement.Expression, context)
+                };
+                currentBlock.Add(caseStatement);
+
+
+                // Case statements, much like if-else statements need a state added in advance where all branches will
+                // will finally return to.
+                var caseStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
+
+                var afterCaseStateBlock = new InlineBlock(
+                    new GeneratedComment(vhdlGenerationOptions =>
+                        "State after the case statement which was started in state " +
+                        stateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
+                        "."));
+                var aftercaseStateIndex = stateMachine.AddState(afterCaseStateBlock);
+
+                Func<IVhdlElement> createConditionalStateChangeToAfterCaseState = () =>
+                    new InlineBlock(
+                        new GeneratedComment(vhdlGenerationOptions =>
+                            "Going to the state after the case statement which was started in state " +
+                            stateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
+                            "."),
+                        CreateConditionalStateChange(aftercaseStateIndex, context));
+
+
+                foreach (var switchSection in switchStatement.SwitchSections)
+                {
+                    var when = new CaseWhen();
+                    caseStatement.Whens.Add(when);
+
+                    // If there are multiple labels for a switch section then those should be OR-ed together.
+                    when.Expression = BinaryChainBuilder.BuildBinaryChain(
+                        switchSection.CaseLabels.Select(caseLabel => _expressionTransformer.Transform(caseLabel.Expression, context)),
+                        BinaryOperator.ConditionalOr);
+
+                    var whenBody = new InlineBlock();
+                    when.Body.Add(whenBody);
+                    currentBlock.ChangeBlock(whenBody);
+
+                    foreach (var sectionStatement in switchSection.Statements)
+                    {
+                        Transform(sectionStatement, context);
+                    }
+
+                    currentBlock.Add(createConditionalStateChangeToAfterCaseState());
+                }
+
+
+                currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
+            }
+            else if (statement is BreakStatement)
+            {
+                var breakStatement = statement as BreakStatement;
+                
+                // If this is a break in a switch's section then nothing to do: these are not needed in VHDL.
+                if (statement.Parent is SwitchSection)
+                {
+                    return;
+                }
+
+                throw new NotSupportedException("Break statements outside of switch statements are not supported.");
             }
             else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
         }

@@ -359,8 +359,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 // Is this reference to an enum's member?
-                var memberTypeDefinition = memberReference.GetActualTypeReference() as TypeDefinition;
-                if (memberTypeDefinition != null && memberTypeDefinition.IsEnum)
+                var targetTypeReferenceExpression = memberReference.Target as TypeReferenceExpression;
+                if (targetTypeReferenceExpression != null && 
+                    context.TransformationContext.TypeDeclarationLookupTable.Lookup(targetTypeReferenceExpression)?.ClassType == ClassType.Enum)
                 {
                     return memberFullName.ToExtendedVhdlIdValue();
                 }
