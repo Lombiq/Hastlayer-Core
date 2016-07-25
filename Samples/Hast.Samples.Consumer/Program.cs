@@ -99,15 +99,6 @@ namespace Hast.Samples.Consumer
                         }
 
 
-                        configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
-                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
-                            {
-                                // If we give these algorithms inputs causing a larger recursion depth then that will
-                                // cause runtime problems.
-                                MaxRecursionDepth = 20
-                            });
-
-
                         // Generating hardware from the sample assembly with the given configuration.
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
