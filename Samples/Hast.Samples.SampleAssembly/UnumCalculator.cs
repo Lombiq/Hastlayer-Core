@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hast.Common.Types;
+using Hast.Common.Numerics;
 using Hast.Transformer.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly

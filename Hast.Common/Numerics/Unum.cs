@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Common.Types
+namespace Hast.Common.Numerics
 {
     public struct Unum //: IComparable, IFormattable, IConvertible, IComparable<Unum>, IEquatable<Unum>
     {

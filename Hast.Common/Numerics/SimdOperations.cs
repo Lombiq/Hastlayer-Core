@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.SpecialOperations
+namespace Hast.Common.Numerics
 {
     /// <summary>
     /// Special Hastlayer-supported SIMD (Single Instruction Multiple Data) operations that can be utilized to execute

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hast.Transformer.SpecialOperations;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using ICSharpCode.NRefactory.CSharp;
@@ -14,6 +13,7 @@ using Hast.Common.Configuration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.Ast;
+using Hast.Common.Numerics;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
