@@ -29,7 +29,7 @@ namespace Hast.Samples.Consumer
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one.
         /// </summary>
-        public static Sample SampleToRun = Sample.PrimeCalculator;
+        public static Sample SampleToRun = Sample.UnumCalculator;
     }
 
 
@@ -37,6 +37,8 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
+            var result = new UnumCalculator().AddToUnum(5);
+
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
             Task.Run(async () =>
@@ -94,6 +96,9 @@ namespace Hast.Samples.Consumer
                             case Sample.SimdCalculator:
                                 SimdCalculatorSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.UnumCalculator:
+                                UnumCalculatorSampleRunner.Configure(configuration);
+                                break;
                             default:
                                 break;
                         }
@@ -138,6 +143,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.SimdCalculator:
                                 await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.UnumCalculator:
+                                await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             default:
                                 break;

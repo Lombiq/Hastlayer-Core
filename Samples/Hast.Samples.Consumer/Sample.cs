@@ -8,12 +8,13 @@ namespace Hast.Samples.Consumer
 {
     internal enum Sample
     {
-        ImageProcessingAlgorithms,
         GenomeMatcher,
         HastlayerOptimizedAlgorithm,
+        ImageProcessingAlgorithms,
         MonteCarloAlgorithm,
         PrimeCalculator,
         RecursiveAlgorithms,
-        SimdCalculator
+        SimdCalculator,
+        UnumCalculator
     }
 }

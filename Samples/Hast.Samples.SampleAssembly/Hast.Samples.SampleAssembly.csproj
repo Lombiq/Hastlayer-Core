@@ -52,8 +52,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecursiveAlgorithms.cs" />
     <Compile Include="SimdCalculator.cs" />
+    <Compile Include="UnumCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
+      <Project>{6EE5898A-E450-4A1D-80AF-AD27A8BD5E69}</Project>
+      <Name>Hast.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
       <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
       <Name>Hast.Transformer</Name>

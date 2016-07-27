@@ -54,6 +54,7 @@
     <Compile Include="SampleRunners\PrimeCalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\RecursiveAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\SimdCalculatorSampleRunner.cs" />
+    <Compile Include="SampleRunners\UnumCalculatorSampleRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
