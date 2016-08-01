@@ -86,52 +86,53 @@ namespace Hast.Communication.Services
                             throw new EthernetCommunicationException("Couldn't connect to FPGA before the timeout exceeded.");
                         }
 
-                        var stream = client.GetStream();
-
-                        // We send an execution signal to make the FPGA ready to receive the data stream.
-                        var executionCommandTypeByte = new byte[] { (byte)CommandTypes.Execution };
-                        stream.Write(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
-
-                        var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
-
-                        if (executionCommandTypeResponseByte[0] != CommunicationConstants.Ethernet.Signals.Ready)
+                        using (var stream = client.GetStream())
                         {
-                            throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
+                            // We send an execution signal to make the FPGA ready to receive the data stream.
+                            var executionCommandTypeByte = new byte[] { (byte)CommandTypes.Execution };
+                            stream.Write(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
+
+                            var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
+
+                            if (executionCommandTypeResponseByte[0] != CommunicationConstants.Ethernet.Signals.Ready)
+                            {
+                                throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
+                            }
+
+                            // Here we put together the data stream.
+                            var lengthBytes = BitConverter.GetBytes(simpleMemory.Memory.Length);
+                            var memberIdBytes = BitConverter.GetBytes(memberId);
+
+                            // Copying the input length, represented as bytes, to the output buffer.
+                            var outputBuffer = BitConverter.GetBytes(simpleMemory.Memory.Length)
+                                // Copying the member ID, represented as bytes, to the output buffer.
+                                .Append(BitConverter.GetBytes(memberId))
+                                // Copying the simple memory.
+                                .Append(simpleMemory.Memory);
+
+                            // Sending data to the FPGA board.
+                            stream.Write(outputBuffer, 0, outputBuffer.Length);
+
+
+                            // Read the first batch of the TcpServer response bytes that will represent the execution time.
+                            var executionTimeBytes = await GetBytesFromStream(stream, 8);
+
+                            var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
+
+                            SetHardwareExecutionTime(context, _deviceDriver, executionTimeClockCycles);
+
+                            // Read the bytes representing the length of the simple memory.
+                            var outputByteCountBytes = await GetBytesFromStream(stream, 4);
+
+                            var outputByteCount = BitConverter.ToUInt32(outputByteCountBytes, 0);
+
+                            Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
+
+                            // Finally read the memory itself.
+                            var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount);
+
+                            simpleMemory.Memory = outputBytes;
                         }
-
-                        // Here we put together the data stream.
-                        var lengthBytes = BitConverter.GetBytes(simpleMemory.Memory.Length);
-                        var memberIdBytes = BitConverter.GetBytes(memberId);
-
-                        // Copying the input length, represented as bytes, to the output buffer.
-                        var outputBuffer = BitConverter.GetBytes(simpleMemory.Memory.Length)
-                            // Copying the member ID, represented as bytes, to the output buffer.
-                            .Append(BitConverter.GetBytes(memberId))
-                            // Copying the simple memory.
-                            .Append(simpleMemory.Memory);
-
-                        // Sending data to the FPGA board.
-                        stream.Write(outputBuffer, 0, outputBuffer.Length);
-
-
-                        // Read the first batch of the TcpServer response bytes that will represent the execution time.
-                        var executionTimeBytes = await GetBytesFromStream(stream, 8);
-
-                        var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
-
-                        SetHardwareExecutionTime(context, _deviceDriver, executionTimeClockCycles);
-
-                        // Read the bytes representing the length of the simple memory.
-                        var outputByteCountBytes = await GetBytesFromStream(stream, 4);
-
-                        var outputByteCount = BitConverter.ToUInt32(outputByteCountBytes, 0);
-
-                        Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
-
-                        // Finally read the memory itself.
-                        var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount);
-
-                        simpleMemory.Memory = outputBytes;
                     }
                 }
                 catch (SocketException ex)
