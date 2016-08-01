@@ -134,9 +134,9 @@ namespace Hast.Communication.Services
                         simpleMemory.Memory = outputBytes;
                     }
                 }
-                catch (SocketException e)
+                catch (SocketException ex)
                 {
-                    throw new EthernetCommunicationException("An unexpected error occurred during the Ethernet communication.", e);
+                    throw new EthernetCommunicationException("An unexpected error occurred during the Ethernet communication.", ex);
                 }
 
                 EndExecution(context);
