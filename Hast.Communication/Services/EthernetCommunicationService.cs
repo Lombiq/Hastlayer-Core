@@ -89,13 +89,15 @@ namespace Hast.Communication.Services
                         var stream = client.GetStream();
 
                         // We send an execution signal to make the FPGA ready to receive the data stream.
-                        var executionCommandTypeByte = new byte[1] { (byte)CommandTypes.Execution };
+                        var executionCommandTypeByte = new byte[] { (byte)CommandTypes.Execution };
                         stream.Write(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
 
                         var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
 
                         if (executionCommandTypeResponseByte[0] != CommunicationConstants.Ethernet.Signals.Ready)
+                        {
                             throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
+                        }
 
                         // Here we put together the data stream.
                         var lengthBytes = BitConverter.GetBytes(simpleMemory.Memory.Length);
