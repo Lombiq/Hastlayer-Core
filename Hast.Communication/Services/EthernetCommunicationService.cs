@@ -19,7 +19,7 @@ namespace Hast.Communication.Services
     {
         private const int TcpConnectionTimeout = 3000;
         // This has to be maximum the number set for the TCP MSS in the Hastlayer hardware project.
-        private const int ReceiveBufferSize = 1460; 
+        private const int ReceiveBufferSize = 1460;
 
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
@@ -147,10 +147,10 @@ namespace Hast.Communication.Services
         public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length)
         {
             var outputBytes = new byte[length];
-            
+
             var readPosition = 0;
             var remaining = length;
-            while(readPosition < length)
+            while (readPosition < length)
             {
                 readPosition += await stream.ReadAsync(outputBytes, readPosition, remaining > ReceiveBufferSize ? ReceiveBufferSize : remaining);
                 remaining = length - readPosition;
