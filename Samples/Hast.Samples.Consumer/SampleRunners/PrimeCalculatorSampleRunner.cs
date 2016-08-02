@@ -35,15 +35,16 @@ namespace Hast.Samples.Consumer.SampleRunners
             var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
 
             // You can also launch hardware-executed method calls in parallel. If there are multiple boards
-            // attached then all of them will be utilized. If the whole device pool is utilized calls will
+            // connected then all of them will be utilized. If the whole device pool is utilized calls will
             // wait for their turn.
-            var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
-            for (uint i = 100; i < 110; i++)
-            {
-                parallelLaunchedIsPrimeTasks
-                    .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
-            }
-            var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
+            // Uncomment if you have mulitple boards connected.
+            //var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
+            //for (uint i = 100; i < 110; i++)
+            //{
+            //    parallelLaunchedIsPrimeTasks
+            //        .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
+            //}
+            //var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
 
             // In-algorithm parallelization:
