@@ -27,7 +27,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var hastlayerOptimizedAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new HastlayerOptimizedAlgorithm());
             // This takes about 92ms on an i7 processor with 4 physical (8 logical) cores and 3ms on
-            // an FPGA (18ms all together with Ethernet communication).
+            // an FPGA.
             var output = hastlayerOptimizedAlgorithm.Run(234234);
         }
     }
