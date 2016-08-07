@@ -51,9 +51,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override bool Equals(object obj)
         {
-            if (!(obj is SizedDataType)) return false;
-
-            var otherType = (SizedDataType)obj;
+            var otherType = obj as SizedDataType;
+            if (otherType == null) return false;
             return base.Equals(obj) && 
                 (SizeExpression == null ? Size == otherType.Size : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
         }

@@ -37,9 +37,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override bool Equals(object obj)
         {
-            if (!(obj is RangedDataType)) return false;
-
-            var otherType = (RangedDataType)obj;
+            var otherType = obj as RangedDataType;
+            if (otherType == null) return false;
             return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
         }
     }
