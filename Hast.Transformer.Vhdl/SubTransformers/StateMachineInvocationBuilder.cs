@@ -173,7 +173,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var finishedInvokedComponentsForStates = scope.FinishedInvokedStateMachinesForStates;
             ISet<string> finishedComponents;
             if (finishedInvokedComponentsForStates
-                .TryGetValue(scope.CurrentBlock.CurrentStateMachineStateIndex, out finishedComponents))
+                .TryGetValue(scope.CurrentBlock.StateMachineStateIndex, out finishedComponents))
             {
                 if (finishedComponents.Contains(indexedStateMachineName))
                 {
@@ -257,7 +257,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var waitForInvocationFinishedIfElse = InvocationHelper
                 .CreateWaitForInvocationFinished(stateMachine, targetDeclaration.GetFullName(), instanceCount, waitForAll);
 
-            var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
+            var currentStateName = stateMachine.CreateStateName(currentBlock.StateMachineStateIndex);
             var waitForInvokedStateMachinesToFinishState = new InlineBlock(
                 new LineComment(
                     "Waiting for the state machine invocation of the following method to finish: " + targetMethodName),
@@ -307,9 +307,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
                 ISet<string> finishedComponents;
                 if (!finishedInvokedComponentsForStates
-                    .TryGetValue(currentBlock.CurrentStateMachineStateIndex, out finishedComponents))
+                    .TryGetValue(currentBlock.StateMachineStateIndex, out finishedComponents))
                 {
-                    finishedComponents = finishedInvokedComponentsForStates[currentBlock.CurrentStateMachineStateIndex] =
+                    finishedComponents = finishedInvokedComponentsForStates[currentBlock.StateMachineStateIndex] =
                         new HashSet<string>();
                 }
                 finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, targetIndex));
