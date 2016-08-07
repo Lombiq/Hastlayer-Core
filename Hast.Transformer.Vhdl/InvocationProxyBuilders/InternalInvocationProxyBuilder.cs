@@ -262,6 +262,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         var invokerName = invocation.Key;
                         var invocationInstanceCount = invocation.Value;
 
+                        // Check if the component would invoke itself. This can happen with recursive calls.
+                        Func<int, bool> isTargetComponentTheInvokingComponent = index =>
+                            getTargetMemberComponentName(index) == invokerName;
+
                         for (int i = 0; i < invocationInstanceCount; i++)
                         {
                             var runningIndexName = proxyComponent
@@ -272,7 +276,13 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 DataType = new RangedDataType(KnownDataTypes.UnrangedInt)
                                 {
                                     RangeMin = 0,
-                                    RangeMax = targetComponentCount - 1
+                                    // If the call is recursive and we leave out the component calling itself then there
+                                    // we just need an upper bound of targetComponentCount - 2.
+                                    RangeMax = Enumerable
+                                        .Range(0, (int)targetComponentCount)
+                                        .Any(index => isTargetComponentTheInvokingComponent(index)) ?
+                                            targetComponentCount - 2 :
+                                            targetComponentCount - 1
                                 },
                                 Name = runningIndexName
                             });
@@ -309,6 +319,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 IfElse notStartedComponentSelectingIfElse = null;
                                 for (int c = 0; c < targetComponentCount; c++)
                                 {
+                                    if (isTargetComponentTheInvokingComponent(c)) continue;
+
                                     var componentStartVariableReference = getTargetStartedVariableReference(c);
 
                                     var ifComponentStartedTrue = new InlineBlock(
@@ -394,6 +406,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                                 for (int c = 0; c < targetComponentCount; c++)
                                 {
+                                    if (isTargetComponentTheInvokingComponent(c)) continue;
+
                                     var isFinishedIfTrue = new InlineBlock(
                                         new Assignment
                                         {
@@ -512,7 +526,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     }
                     bodyBlock.Add(startedWriteBackBlock);
 
-                    proxyComponent.ProcessNotInReset = bodyBlock; 
+                    proxyComponent.ProcessNotInReset = bodyBlock;
                 }
             }
 
