@@ -93,6 +93,7 @@
     <Compile Include="Helpers\TaskParallelizationHelper.cs" />
     <Compile Include="Models\IPartiallyTransformedBinaryOperatorExpression.cs" />
     <Compile Include="Models\PartiallyTransformedBinaryOperatorExpression.cs" />
+    <Compile Include="Services\IVhdlHardwareDescriptionCachingService.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryArchitectureComponentExtensions.cs" />
     <Compile Include="Constants\CommonPortNames.cs" />
     <Compile Include="Constants\GeneratedCodeOverviewComment.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="SubTransformers\TypeConverter.cs" />
     <Compile Include="Models\VhdlTransformationContext.cs" />
     <Compile Include="Models\VhdlHardwareDescription.cs" />
+    <Compile Include="Services\VhdlHardwareDescriptionCachingService.cs" />
     <Compile Include="VhdlTransformingEngine.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Hast.Common.Models;
+using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Newtonsoft.Json;
 
@@ -35,9 +37,9 @@ namespace Hast.Transformer.Vhdl.Models
             return _memberIdTable.LookupMemberId(memberFullName);
         }
 
-        public async void Save(Stream stream)
+        public async Task Save(Stream stream)
         {
-            if (_manifest == null) throw new InvalidOperationException("There is no manifest to save");
+            if (_manifest == null) throw new InvalidOperationException("There is no manifest to save.");
 
             using (var writer = new StreamWriter(stream))
             {
@@ -47,19 +49,42 @@ namespace Hast.Transformer.Vhdl.Models
                     MemberIdTable = _memberIdTable,
                 };
 
-                await writer.WriteAsync(JsonConvert.SerializeObject(storage, Formatting.None, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+
+
+                await writer.WriteAsync(JsonConvert.SerializeObject(
+                    storage, 
+                    Formatting.None,
+                    GetJsonSerializerSettings()));
             }
         }
 
-        public async void Load(Stream stream)
+
+        public static async Task<VhdlHardwareDescription> Load(Stream stream)
         {
             using (var reader = new StreamReader(stream))
             {
-                var storage = JsonConvert.DeserializeObject<Storage>(await reader.ReadToEndAsync(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
-                
-                _manifest = storage.Manifest;
-                _memberIdTable = storage.MemberIdTable;
+                var storage = JsonConvert.DeserializeObject<Storage>(
+                        await reader.ReadToEndAsync(),
+                        GetJsonSerializerSettings());
+
+                if (storage == null) return null;
+
+                return new VhdlHardwareDescription(storage.Manifest, storage.MemberIdTable);
             }
+        }
+
+
+        private static JsonSerializerSettings GetJsonSerializerSettings()
+        {
+            var settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+            };
+
+            JsonSerializerSettingsPopulator.PopulateSettings(settings);
+
+            return settings;
         }
 
 

@@ -18,6 +18,7 @@ using System;
 using Orchard.Services;
 using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 using Hast.Transformer.Vhdl.SimpleMemory;
+using Hast.Transformer.Vhdl.Services;
 
 namespace Hast.Transformer.Vhdl
 {
@@ -32,6 +33,7 @@ namespace Hast.Transformer.Vhdl
         private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
         private readonly IEnumTypesCreator _enumTypesCreator;
+        private readonly IVhdlHardwareDescriptionCachingService _vhdlHardwareDescriptionCachingService;
 
 
         public VhdlTransformingEngine(
@@ -43,7 +45,8 @@ namespace Hast.Transformer.Vhdl
             IExternalInvocationProxyBuilder externalInvocationProxyBuilder,
             IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
-            IEnumTypesCreator enumTypesCreator)
+            IEnumTypesCreator enumTypesCreator,
+            IVhdlHardwareDescriptionCachingService vhdlHardwareDescriptionCachingService)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _clock = clock;
@@ -54,11 +57,16 @@ namespace Hast.Transformer.Vhdl
             _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
             _enumTypesCreator = enumTypesCreator;
+            _vhdlHardwareDescriptionCachingService = vhdlHardwareDescriptionCachingService;
         }
 
 
         public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
+            var cachedHardwareDescription = await _vhdlHardwareDescriptionCachingService
+                .GetHardwareDescription(transformationContext);
+            if (cachedHardwareDescription != null) return cachedHardwareDescription;
+
             var syntaxTree = transformationContext.SyntaxTree;
 
             _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
@@ -202,7 +210,9 @@ namespace Hast.Transformer.Vhdl
             ProcessUtility.AddClockToProcesses(module, CommonPortNames.Clock);
 
 
-            return new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable);
+            var hardwareDescription = new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable);
+            await _vhdlHardwareDescriptionCachingService.SetHardwareDescription(transformationContext, hardwareDescription);
+            return hardwareDescription;
         }
 
 
