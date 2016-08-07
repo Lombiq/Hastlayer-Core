@@ -68,6 +68,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
+            var customProperties = context.Scope.CustomProperties;
+
+            const string lastWriteFinishedKey = "SimpleMemory.LastWriteFinsihedStateIndex";
+            const string lastReadFinishedKey = "SimpleMemory.LastReadFinsihedStateIndex";
 
             stateMachine.AddSimpleMemorySignalsIfNew();
 
@@ -75,6 +79,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var isWrite = memberName.StartsWith("Write");
             var invocationParameters = transformedParameters.ToList();
+
+            var operationPropertyKey = isWrite ? lastWriteFinishedKey : lastReadFinishedKey;
+            if (customProperties.ContainsKey(operationPropertyKey) && 
+                customProperties[operationPropertyKey] == currentBlock.StateMachineStateIndex)
+            {
+                var operationNoun = isWrite ? "write" : "read";
+                currentBlock.Add(new LineComment("The last SimpleMemory " + operationNoun + " just finished, so need to start the next one in the next state."));
+
+                var newStateBlock = new InlineBlock();
+                var newStateIndex = stateMachine.AddState(newStateBlock);
+                currentBlock.Add(stateMachine.CreateStateChange(newStateIndex));
+                currentBlock.ChangeBlockToDifferentState(newStateBlock, newStateIndex);
+            }
 
             if (isWrite)
             {
@@ -188,6 +205,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory write finished."));
 
                 currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
+                customProperties[lastWriteFinishedKey] = memoryOperationFinishedStateIndex;
 
                 return Empty.Instance;
             }
@@ -197,6 +215,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
                 currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
+                customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
 
                 return implementSimpleMemoryTypeConversion(
                     SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
@@ -228,7 +247,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 // Is it a Task.Something().Wait() call?
                 var memberName = string.Empty;
-                if (waitTarget.Is<InvocationExpression>(invocation => 
+                if (waitTarget.Is<InvocationExpression>(invocation =>
                     invocation.Target.Is<MemberReferenceExpression>(member =>
                     {
                         memberName = member.MemberName;
@@ -239,7 +258,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     if (memberName == "WhenAll" || memberName == "WhenAny")
                     {
                         // Since it's used in a WhenAll() or WhenAny() call the argument should be an array.
-                        var taskArrayIdentifier = 
+                        var taskArrayIdentifier =
                             ((IdentifierExpression)((InvocationExpression)waitTarget).Arguments.Single()).Identifier;
 
                         // This array originally stored the Task<T> objects but now is just for the results, so we have 
@@ -307,8 +326,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
 
                 throw new InvalidOperationException(
-                    "The invoked method " + 
-                    targetMethodName + 
+                    "The invoked method " +
+                    targetMethodName +
                     " can't be found and thus can't be transformed. Did you forget to add an assembly to the list of the assemblies to generate hardware from?");
             }
 

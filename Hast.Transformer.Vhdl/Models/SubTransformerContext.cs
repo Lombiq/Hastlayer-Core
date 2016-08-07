@@ -50,6 +50,11 @@ namespace Hast.Transformer.Vhdl.Models
         /// restart a component in the state it was finished.
         /// </summary>
         IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; }
+
+        /// <summary>
+        /// Keeps track of any other custom values for the scope.
+        /// </summary>
+        IDictionary<string, dynamic> CustomProperties { get; }
     }
 
 
@@ -81,6 +86,7 @@ namespace Hast.Transformer.Vhdl.Models
         public IDictionary<string, EntityDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, EntityDeclaration>();
         public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
         public IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; } = new Dictionary<int, ISet<string>>();
+        public IDictionary<string, dynamic> CustomProperties { get; } = new Dictionary<string, dynamic>();
     }
 
 
