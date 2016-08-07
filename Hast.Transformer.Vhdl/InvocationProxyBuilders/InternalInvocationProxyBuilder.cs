@@ -448,30 +448,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                             // AfterFinished state
                             {
-                                var runningIndexCase = new Case
-                                {
-                                    Expression = runningIndexVariableReference
-                                };
-
-                                for (int c = 0; c < targetComponentCount; c++)
-                                {
-                                    runningIndexCase.Whens.Add(new CaseWhen
-                                    {
-                                        Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt),
-                                        Body = new List<IVhdlElement>
-                                        {
-                                            {
-                                                new Assignment
-                                                {
-                                                    AssignTo = InvocationHelper
-                                                        .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                                    Expression = Value.False
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-
                                 runningStateCase.Whens.Add(new CaseWhen
                                 {
                                     Expression = afterFinishedStateValue,
@@ -496,7 +472,12 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                         AssignTo = runningStateVariableReference,
                                                         Expression = waitingForStartedStateValue
                                                     },
-                                                    runningIndexCase)
+                                                    new Assignment
+                                                    {
+                                                        AssignTo = InvocationHelper
+                                                            .CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                                                        Expression = Value.False
+                                                    })
                                             }
                                         }
                                     }
