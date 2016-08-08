@@ -41,6 +41,11 @@ namespace Hast.Common.Configuration
         /// "Contoso.ImageProcessing.FaceRecognition.FaceDetectors" will include all members in this class.
         /// </example>
         IList<string> PublicHardwareMemberNamePrefixes { get; }
+
+        /// <summary>
+        /// Gets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching will happen.
+        /// </summary>
+        bool EnableCaching { get; }
     }
 
 

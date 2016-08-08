@@ -20,16 +20,21 @@ using NUnit.Framework;
 using Orchard.Tests.Utility;
 using Hast.VhdlBuilder.Extensions;
 using Hast.Transformer.Services;
+using Hast.Transformer.Vhdl.Services;
+using Hast.Common.Models;
+using Hast.Transformer.Vhdl.Events;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
     [TestFixture]
-    public class VhdlTransformerTests
+    public class TransformedVhdlManifestBuilderTests
     {
         private IContainer _container;
 
         private ITransformer _transformer;
-        private TransformationContextContainingTransformerEventHandler _eventHandler;
+        private TransformedVhdlManifestContainingVhdlTransformationEventHandler _eventHandler;
 
 
         [SetUp]
@@ -47,9 +52,12 @@ namespace Hast.Transformer.Vhdl.Tests
             builder.RegisterType<TypeConverter>().As<ITypeConverter>();
             builder.RegisterType<StatementTransformer>().As<IStatementTransformer>();
             builder.RegisterType<ExpressionTransformer>().As<IExpressionTransformer>();
+            builder.RegisterType<MemberStateMachineFactory>().As<IMemberStateMachineFactory>();
+            builder.RegisterType<ExternalInvocationProxyBuilder>().As<IExternalInvocationProxyBuilder>();
+            builder.RegisterType<TransformedVhdlManifestBuilder>().As<ITransformedVhdlManifestBuilder>();
             builder.RegisterType<VhdlTransformingEngine>().As<ITransformingEngine>();
-            _eventHandler = new TransformationContextContainingTransformerEventHandler();
-            builder.RegisterInstance(_eventHandler).As<ITransformerEventHandler>();
+            _eventHandler = new TransformedVhdlManifestContainingVhdlTransformationEventHandler();
+            builder.RegisterInstance(_eventHandler).As<IVhdlTransformationEventHandler>();
             builder.RegisterType<SyntaxTreeCleaner>().As<ISyntaxTreeCleaner>();
             builder.RegisterType<TypeDeclarationLookupTableFactory>().As<ITypeDeclarationLookupTableFactory>();
             builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
@@ -89,27 +97,28 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
 
-        private async Task<Hast.VhdlBuilder.Representation.Declaration.Module> TransformReferenceAssembliesAndGetTopModule()
+        private async Task<VhdlBuilder.Representation.Declaration.Module> TransformReferenceAssembliesAndGetTopModule()
         {
-            return (await TransformReferenceAssembliesToVhdl()).Manifest.TopModule;
+            await TransformReferenceAssembliesToVhdl();
+            return _eventHandler.TransformedVhdlManifest.Manifest.TopModule;
         }
 
         private async Task<VhdlHardwareDescription> TransformReferenceAssembliesToVhdl()
         {
-            var configuration = new HardwareGenerationConfiguration();
+            var configuration = new HardwareGenerationConfiguration { EnableCaching = false };
             configuration.TransformerConfiguration().UseSimpleMemory = false;
             return (VhdlHardwareDescription)await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, configuration);
         }
 
 
-        private class TransformationContextContainingTransformerEventHandler : ITransformerEventHandler
+        private class TransformedVhdlManifestContainingVhdlTransformationEventHandler : IVhdlTransformationEventHandler
         {
-            public ITransformationContext TransformationContext { get; set; }
+            public ITransformedVhdlManifest TransformedVhdlManifest { get; set; }
 
 
-            public void SyntaxTreeBuilt(ITransformationContext transformationContext)
+            public void TransformedVhdlManifestBuilt(ITransformedVhdlManifest transformedVhdlManifest)
             {
-                TransformationContext = transformationContext;
+                TransformedVhdlManifest = transformedVhdlManifest;
             }
         }
     }

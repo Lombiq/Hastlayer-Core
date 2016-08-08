@@ -13,23 +13,9 @@ namespace Hast.Samples.Consumer.Helpers
     {
         public static void WriteVhdlToFile(IHardwareRepresentation hardwareRepresentation)
         {
-            File.WriteAllText(Configuration.VhdlOutputFilePath, GenerateVhdl(hardwareRepresentation));
-        }
-        
-        /// <summary>
-        /// Generates a VHDL string from the given hardware representation.
-        /// </summary>
-        public static string GenerateVhdl(IHardwareRepresentation hardwareRepresentation)
-        {
-            // This will also nicely format the VHDL output just so we can take a look at it.
-            return ((Hast.Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareRepresentation.HardwareDescription)
-                .Manifest
-                .TopModule
-                .ToVhdl(new VhdlGenerationOptions
-                {
-                    FormatCode = true,
-                    NameShortener = VhdlGenerationOptions.SimpleNameShortener
-                });
+            File.WriteAllText(
+                Configuration.VhdlOutputFilePath,
+                ((Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareRepresentation.HardwareDescription).VhdlSource);
         }
     }
 }

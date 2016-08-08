@@ -46,7 +46,7 @@ namespace Hast.Transformer.Vhdl.Services
             return _appDataFolder.Combine(
                 "Hastlayer", 
                 "VhdlHardwareDescriptionCacheFiles", 
-                transformationContext.SyntaxTree.ToString().GetHashCode().ToString());
+                transformationContext.SyntaxTree.ToString().GetHashCode().ToString() + "-" + transformationContext.Id.GetHashCode());
         }
     }
 }

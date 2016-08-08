@@ -1,28 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Hast.Common.Models;
+using Hast.Common.Extensions;
 using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.SimpleMemory;
 using Hast.Transformer.Vhdl.SubTransformers;
 using Hast.VhdlBuilder;
-using Hast.VhdlBuilder.Extensions;
-using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
-using Hast.Common.Extensions;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
-using System;
 using Orchard.Services;
-using Hast.Transformer.Vhdl.InvocationProxyBuilders;
-using Hast.Transformer.Vhdl.SimpleMemory;
-using Hast.Transformer.Vhdl.Services;
 
-namespace Hast.Transformer.Vhdl
+namespace Hast.Transformer.Vhdl.Services
 {
-    public class VhdlTransformingEngine : ITransformingEngine
+    public class TransformedVhdlManifestBuilder : ITransformedVhdlManifestBuilder
     {
         private readonly ICompilerGeneratedClassesVerifier _compilerGeneratedClassesVerifier;
         private readonly IClock _clock;
@@ -33,10 +29,9 @@ namespace Hast.Transformer.Vhdl
         private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
         private readonly IEnumTypesCreator _enumTypesCreator;
-        private readonly IVhdlHardwareDescriptionCachingService _vhdlHardwareDescriptionCachingService;
 
 
-        public VhdlTransformingEngine(
+        public TransformedVhdlManifestBuilder(
             ICompilerGeneratedClassesVerifier compilerGeneratedClassesVerifier,
             IClock clock,
             IArrayTypesCreator arrayTypesCreator,
@@ -45,8 +40,7 @@ namespace Hast.Transformer.Vhdl
             IExternalInvocationProxyBuilder externalInvocationProxyBuilder,
             IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
-            IEnumTypesCreator enumTypesCreator,
-            IVhdlHardwareDescriptionCachingService vhdlHardwareDescriptionCachingService)
+            IEnumTypesCreator enumTypesCreator)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _clock = clock;
@@ -57,16 +51,11 @@ namespace Hast.Transformer.Vhdl
             _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
             _enumTypesCreator = enumTypesCreator;
-            _vhdlHardwareDescriptionCachingService = vhdlHardwareDescriptionCachingService;
         }
 
 
-        public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
+        public async Task<ITransformedVhdlManifest> BuildManifest(ITransformationContext transformationContext)
         {
-            var cachedHardwareDescription = await _vhdlHardwareDescriptionCachingService
-                .GetHardwareDescription(transformationContext);
-            if (cachedHardwareDescription != null) return cachedHardwareDescription;
-
             var syntaxTree = transformationContext.SyntaxTree;
 
             _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
@@ -90,7 +79,7 @@ namespace Hast.Transformer.Vhdl
                 {
                     Name = "Hast",
                     Uses = new List<string> { "Hast.SimpleMemory.all" }
-                }); 
+                });
             }
 
 
@@ -131,7 +120,7 @@ namespace Hast.Transformer.Vhdl
             // Doing transformations
             var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
             var potentiallyInvokingArchitectureComponents = transformerResults
-                .SelectMany(result => 
+                .SelectMany(result =>
                     result.ArchitectureComponentResults
                         .Select(smResult => smResult.ArchitectureComponent)
                         .Cast<IArchitectureComponent>())
@@ -210,14 +199,16 @@ namespace Hast.Transformer.Vhdl
             ProcessUtility.AddClockToProcesses(module, CommonPortNames.Clock);
 
 
-            var hardwareDescription = new VhdlHardwareDescription(new VhdlManifest { TopModule = module }, memberIdTable);
-            await _vhdlHardwareDescriptionCachingService.SetHardwareDescription(transformationContext, hardwareDescription);
-            return hardwareDescription;
+            return new TransformedVhdlManifest
+            {
+                Manifest = new VhdlManifest { TopModule = module },
+                MemberIdTable = memberIdTable
+            };
         }
 
 
         private IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
-            AstNode node, 
+            AstNode node,
             VhdlTransformationContext transformationContext,
             List<Task<IMemberTransformerResult>> memberTransformerTasks = null)
         {
