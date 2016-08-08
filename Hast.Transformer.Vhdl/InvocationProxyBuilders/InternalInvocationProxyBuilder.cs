@@ -91,7 +91,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         var passedParameters = componentsByName[invokerName]
                             .GetParameterSignals()
                             .Where(parameter =>
-                                parameter.TargetMemberFullName == targetMemberName && parameter.Index == invokerIndex);
+                                parameter.TargetMemberFullName == targetMemberName && 
+                                parameter.Index == invokerIndex && 
+                                !parameter.IsOwn);
 
                         var targetComponentName = ArchitectureComponentNameHelper
                             .CreateIndexedComponentName(targetMemberName, targetIndex);
