@@ -86,6 +86,7 @@
     <Compile Include="ArchitectureComponents\ConfigurableComponent.cs" />
     <Compile Include="ArchitectureComponents\InvocationHelper.cs" />
     <Compile Include="ArchitectureComponents\IArchitectureComponent.cs" />
+    <Compile Include="Configuration\VhdlTransformerConfiguration.cs" />
     <Compile Include="Constants\SpecialTypes.cs" />
     <Compile Include="Events\IVhdlTransformationEventHandler.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />

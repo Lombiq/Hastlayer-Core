@@ -52,6 +52,26 @@ namespace Hast.Common.Configuration
     public static class HardwareGenerationConfigurationExtensions
     {
         /// <summary>
+        /// Gets the custom configuration if it exists or creates and adds it if it doesn't.
+        /// </summary>
+        /// <typeparam name="T">Type of the configuration object.</typeparam>
+        /// <param name="key">Key where the custom configuration object is stored in the 
+        /// <see cref="IHardwareGenerationConfiguration"/> instance.</param>
+        /// <returns>The existing or newly created configuration object.</returns>
+        public static T GetOrAddCustomConfiguration<T>(this IHardwareGenerationConfiguration hardwareConfiguration, string key)
+            where T : new()
+        {
+            object config;
+
+            if (hardwareConfiguration.CustomConfiguration.TryGetValue(key, out config))
+            {
+                return (T)config;
+            }
+
+            return (T)(hardwareConfiguration.CustomConfiguration[key] = new T());
+        }
+
+        /// <summary>
         /// Adds a public method that will be accessible as hardware implementation.
         /// </summary>
         /// <typeparam name="T">The type of the reference that will be later fed to the proxy generator.</typeparam>

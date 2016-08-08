@@ -20,6 +20,7 @@ using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 using Hast.Transformer.Vhdl.SimpleMemory;
 using Hast.Transformer.Vhdl.Services;
 using Hast.Transformer.Vhdl.Events;
+using Hast.Transformer.Vhdl.Configuration;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -53,11 +54,8 @@ namespace Hast.Transformer.Vhdl.Services
             var transformedVhdlManifest = await _transformedVhdlManifestBuilder.BuildManifest(transformationContext);
             _vhdlTransformationEventHandler.TransformedVhdlManifestBuilt(transformedVhdlManifest);
 
-            var vhdlSource = transformedVhdlManifest.Manifest.TopModule.ToVhdl(new VhdlGenerationOptions
-            {
-                FormatCode = true,
-                NameShortener = VhdlGenerationOptions.SimpleNameShortener
-            });
+            var vhdlSource = transformedVhdlManifest.Manifest.TopModule
+                .ToVhdl(transformationContext.HardwareGenerationConfiguration.VhdlTransformerConfiguration().VhdlGenerationOptions);
             var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest.MemberIdTable);
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)
