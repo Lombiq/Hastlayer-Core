@@ -91,7 +91,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         var passedParameters = componentsByName[invokerName]
                             .GetParameterSignals()
                             .Where(parameter =>
-                                parameter.TargetMemberFullName == targetMemberName && parameter.Index == invokerIndex);
+                                parameter.TargetMemberFullName == targetMemberName && 
+                                parameter.Index == invokerIndex && 
+                                !parameter.IsOwn);
 
                         var targetComponentName = ArchitectureComponentNameHelper
                             .CreateIndexedComponentName(targetMemberName, targetIndex);
@@ -263,8 +265,14 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         var invocationInstanceCount = invocation.Value;
 
                         // Check if the component would invoke itself. This can happen with recursive calls.
-                        Func<int, bool> isTargetComponentTheInvokingComponent = index =>
-                            getTargetMemberComponentName(index) == invokerName;
+                        Func<int, IVhdlElement> createNullOperationIfTargetComponentEqualsInvokingComponent = index =>
+                        {
+                            if (getTargetMemberComponentName(index) != invokerName) return null;
+
+                            return new InlineBlock(
+                                new LineComment("The component can't invoke itself, so not putting anything here."),
+                                new Terminated(Null.Instance));
+                        };
 
                         for (int i = 0; i < invocationInstanceCount; i++)
                         {
@@ -276,13 +284,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 DataType = new RangedDataType(KnownDataTypes.UnrangedInt)
                                 {
                                     RangeMin = 0,
-                                    // If the call is recursive and we leave out the component calling itself then there
-                                    // we just need an upper bound of targetComponentCount - 2.
-                                    RangeMax = Enumerable
-                                        .Range(0, (int)targetComponentCount)
-                                        .Any(index => isTargetComponentTheInvokingComponent(index)) ?
-                                            targetComponentCount - 2 :
-                                            targetComponentCount - 1
+                                    RangeMax = targetComponentCount - 1
                                 },
                                 Name = runningIndexName
                             });
@@ -319,28 +321,32 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 IfElse notStartedComponentSelectingIfElse = null;
                                 for (int c = 0; c < targetComponentCount; c++)
                                 {
-                                    if (isTargetComponentTheInvokingComponent(c)) continue;
-
                                     var componentStartVariableReference = getTargetStartedVariableReference(c);
+                                    var ifComponentStartedTrue = createNullOperationIfTargetComponentEqualsInvokingComponent(c);
 
-                                    var ifComponentStartedTrue = new InlineBlock(
-                                        new Assignment
-                                        {
-                                            AssignTo = runningStateVariableReference,
-                                            Expression = waitingForFinishedStateValue
-                                        },
-                                        new Assignment
-                                        {
-                                            AssignTo = runningIndexVariableReference,
-                                            Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                                        },
-                                        new Assignment
-                                        {
-                                            AssignTo = componentStartVariableReference,
-                                            Expression = Value.True
-                                        });
+                                    if (ifComponentStartedTrue == null)
+                                    {
+                                        var ifComponentStartedTrueBlock = new InlineBlock(
+                                            new Assignment
+                                            {
+                                                AssignTo = runningStateVariableReference,
+                                                Expression = waitingForFinishedStateValue
+                                            },
+                                            new Assignment
+                                            {
+                                                AssignTo = runningIndexVariableReference,
+                                                Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                            },
+                                            new Assignment
+                                            {
+                                                AssignTo = componentStartVariableReference,
+                                                Expression = Value.True
+                                            });
 
-                                    ifComponentStartedTrue.Body.AddRange(buildParameterAssignments(invokerName, i, c));
+                                        ifComponentStartedTrueBlock.Body.AddRange(buildParameterAssignments(invokerName, i, c));
+
+                                        ifComponentStartedTrue = ifComponentStartedTrueBlock;
+                                    }
 
                                     var ifComponentStartedIfElse = new IfElse
                                     {
@@ -406,46 +412,49 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                                 for (int c = 0; c < targetComponentCount; c++)
                                 {
-                                    if (isTargetComponentTheInvokingComponent(c)) continue;
+                                    var caseWhenBody = createNullOperationIfTargetComponentEqualsInvokingComponent(c);
 
-                                    var isFinishedIfTrue = new InlineBlock(
-                                        new Assignment
-                                        {
-                                            AssignTo = runningStateVariableReference,
-                                            Expression = afterFinishedStateValue
-                                        },
-                                        new Assignment
-                                        {
-                                            AssignTo = InvocationHelper
-                                                .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                            Expression = Value.True
-                                        },
-                                        new Assignment
-                                        {
-                                            AssignTo = getTargetStartedVariableReference(c),
-                                            Expression = Value.False
-                                        },
-                                        new Assignment
-                                        {
-                                            AssignTo = getJustFinishedVariableReference(c),
-                                            Expression = Value.True
-                                        });
-
-                                    var returnAssignment = buildReturnAssigment(invokerName, i, c);
-                                    if (returnAssignment != null) isFinishedIfTrue.Add(returnAssignment);
-
-                                    var isFinishedIf = new If
+                                    if (caseWhenBody == null)
                                     {
-                                        Condition = ArchitectureComponentNameHelper
-                                            .CreateFinishedSignalName(getTargetMemberComponentName(c))
-                                            .ToVhdlSignalReference(),
-                                        True = isFinishedIfTrue
-                                    };
+                                        var isFinishedIfTrue = new InlineBlock(
+                                            new Assignment
+                                            {
+                                                AssignTo = runningStateVariableReference,
+                                                Expression = afterFinishedStateValue
+                                            },
+                                            new Assignment
+                                            {
+                                                AssignTo = InvocationHelper
+                                                    .CreateFinishedSignalReference(invokerName, targetMemberName, i),
+                                                Expression = Value.True
+                                            },
+                                            new Assignment
+                                            {
+                                                AssignTo = getTargetStartedVariableReference(c),
+                                                Expression = Value.False
+                                            },
+                                            new Assignment
+                                            {
+                                                AssignTo = getJustFinishedVariableReference(c),
+                                                Expression = Value.True
+                                            });
+
+                                        var returnAssignment = buildReturnAssigment(invokerName, i, c);
+                                        if (returnAssignment != null) isFinishedIfTrue.Add(returnAssignment);
+
+                                        caseWhenBody = new If
+                                        {
+                                            Condition = ArchitectureComponentNameHelper
+                                                .CreateFinishedSignalName(getTargetMemberComponentName(c))
+                                                .ToVhdlSignalReference(),
+                                            True = isFinishedIfTrue
+                                        };
+                                    }
 
                                     runningIndexCase.Whens.Add(new CaseWhen
                                     {
                                         Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt),
-                                        Body = new List<IVhdlElement> { { isFinishedIf } }
+                                        Body = new List<IVhdlElement> { { caseWhenBody } }
                                     });
                                 }
 

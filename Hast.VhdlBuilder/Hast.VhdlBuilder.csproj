@@ -93,6 +93,7 @@
     <Compile Include="Representation\Expression\Invocation.cs" />
     <Compile Include="Representation\Expression\IfElse.cs" />
     <Compile Include="Representation\Expression\BinaryOperator.cs" />
+    <Compile Include="Representation\Expression\Null.cs" />
     <Compile Include="Representation\Expression\Parenthesized.cs" />
     <Compile Include="Representation\Expression\Return.cs" />
     <Compile Include="Representation\Expression\Unary.cs" />
