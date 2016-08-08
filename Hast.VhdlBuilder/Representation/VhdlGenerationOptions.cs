@@ -128,15 +128,8 @@ namespace Hast.VhdlBuilder.Representation
         };
         public static VhdlGenerationOptions Debug { get { return _debugOptions; } }
 
-        public bool FormatCode { get; set; }
-        public NameShortener NameShortener { get; set; }
-
-
-        public VhdlGenerationOptions()
-        {
-            // No name shortening by default.
-            NameShortener = name => name;
-        }
+        public bool FormatCode { get; set; } = true;
+        public NameShortener NameShortener { get; set; } = name => name; // No name shortening by default.
     }
 
 
