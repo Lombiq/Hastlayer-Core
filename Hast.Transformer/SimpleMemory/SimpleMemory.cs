@@ -21,12 +21,17 @@ namespace Hast.Transformer.SimpleMemory
         public const uint MemoryCellSizeBytes = 4;
 
         /// <summary>
-        /// The contents of the memory representation.
+        /// Gets or sets the contents of the memory representation.
         /// </summary>
         /// <remarks>
         /// This is internal so the property can be read when handling communication with the FPGA but not by user code.
         /// </remarks>
         internal byte[] Memory { get; set; }
+
+        /// <summary>
+        /// Gets the number of cells of this memory allocation, indicating memory cells of size <see cref="MemoryCellSizeBytes"/>.
+        /// </summary>
+        public int CellCount { get; private set; }
 
 
         /// <summary>
@@ -41,6 +46,7 @@ namespace Hast.Transformer.SimpleMemory
         public SimpleMemory(int cellCount)
         {
             Memory = new byte[cellCount * MemoryCellSizeBytes];
+            CellCount = cellCount;
         }
 
 

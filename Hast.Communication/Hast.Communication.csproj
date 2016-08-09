@@ -79,6 +79,7 @@
     <Compile Include="Constants\CommandTypes.cs" />
     <Compile Include="Constants\CommunicationConstants.cs" />
     <Compile Include="Exceptions\EthernetCommunicationException.cs" />
+    <Compile Include="Exceptions\HardwareExecutionResultMismatchException.cs" />
     <Compile Include="Exceptions\SerialPortCommunicationException.cs" />
     <Compile Include="Extensibility\Events\IMemberHardwareExecutionContext.cs" />
     <Compile Include="Extensibility\Events\IMemberInvocationEventHandler.cs" />

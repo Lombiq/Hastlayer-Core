@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System;
 using Hast.Common.Configuration;
+using Hast.Communication.Exceptions;
 
 namespace Hast.Communication
 {
@@ -27,7 +28,10 @@ namespace Hast.Communication
         }
 
 
-        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target, IProxyGenerationConfiguration configuration)
+        public MemberInvocationHandler CreateMemberInvocationHandler(
+            IHardwareRepresentation hardwareRepresentation, 
+            object target,
+            IProxyGenerationConfiguration configuration)
         {
             return invocation =>
                 {
@@ -83,6 +87,36 @@ namespace Hast.Communication
                                         .Execute(memory, memberId);
                                 });
                             task.Wait();
+
+                            if (configuration.ValidateHardwareResults)
+                            {
+                                var softMemory = new SimpleMemory(memory.CellCount);
+
+                                var memoryArgumentIndex = invocation.Arguments
+                                    .Select((argument, index) => new { Argument = argument, Index = index })
+                                    .Single(argument => argument.Argument is SimpleMemory)
+                                    .Index;
+                                invocation.SetArgumentValue(memoryArgumentIndex, softMemory);
+
+                                invocation.Proceed();
+
+                                var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
+                                for (int i = 0; i < memory.CellCount; i++)
+                                {
+                                    var hardwareBytes = memory.Read4Bytes(i);
+                                    var softwareBytes = softMemory.Read4Bytes(i);
+                                    if (!hardwareBytes.SequenceEqual(softwareBytes))
+                                    {
+                                        mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
+                                            i, hardwareBytes, softwareBytes));
+                                    }
+                                }
+
+                                if (mismatches.Any())
+                                {
+                                    throw new HardwareExecutionResultMismatchException(mismatches);
+                                }
+                            }
                         }
                         else
                         {
