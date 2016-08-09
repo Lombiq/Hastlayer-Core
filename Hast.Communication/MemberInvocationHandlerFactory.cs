@@ -77,6 +77,14 @@ namespace Hast.Communication
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
+                            SimpleMemory softMemory = null;
+
+                            if (configuration.ValidateHardwareResults)
+                            {
+                                softMemory = new SimpleMemory(memory.CellCount);
+                                memory.Memory.CopyTo(softMemory.Memory, 0);
+                            }
+
                             var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
                             // Need the wrapping Task to handle the async code.
                             var task = Task.Run(async () =>
@@ -90,8 +98,6 @@ namespace Hast.Communication
 
                             if (configuration.ValidateHardwareResults)
                             {
-                                var softMemory = new SimpleMemory(memory.CellCount);
-
                                 var memoryArgumentIndex = invocation.Arguments
                                     .Select((argument, index) => new { Argument = argument, Index = index })
                                     .Single(argument => argument.Argument is SimpleMemory)
