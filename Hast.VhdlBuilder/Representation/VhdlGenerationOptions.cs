@@ -27,6 +27,11 @@ namespace Hast.VhdlBuilder.Representation
         bool FormatCode { get; }
 
         /// <summary>
+        /// Gets whether to omit added comments from the output or include them.
+        /// </summary>
+        bool OmitComments { get; }
+
+        /// <summary>
         /// Gets the delegate that will be used to shorten the name of VHDL entities when generating VHDL code.
         /// </summary>
         NameShortener NameShortener { get; }
@@ -124,11 +129,13 @@ namespace Hast.VhdlBuilder.Representation
         private static VhdlGenerationOptions _debugOptions = new VhdlGenerationOptions
         {
             FormatCode = true,
+            OmitComments = false,
             NameShortener = SimpleNameShortener
         };
         public static VhdlGenerationOptions Debug { get { return _debugOptions; } }
 
         public bool FormatCode { get; set; } = true;
+        public bool OmitComments { get; set; } = true;
         public NameShortener NameShortener { get; set; } = name => name; // No name shortening by default.
     }
 

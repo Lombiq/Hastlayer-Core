@@ -39,6 +39,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
+            if (vhdlGenerationOptions.OmitComments) return string.Empty;
+
             var stringBuilder = new StringBuilder(Lines.Count);
 
             foreach (var line in Lines)
