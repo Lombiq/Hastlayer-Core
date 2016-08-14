@@ -19,7 +19,8 @@ namespace Hast.Xilinx
             DeviceManifest = new DeviceManifest
             {
                 TechnicalName = "Nexys4 DDR",
-                ClockFrequencyHz = 100000000
+                ClockFrequencyHz = 100000000,
+                SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" }
             };
         }
 

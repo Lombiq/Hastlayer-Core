@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System;
 using Hast.Common.Configuration;
 using Hast.Communication.Exceptions;
+using Hast.Synthesis;
 
 namespace Hast.Communication
 {
@@ -29,7 +30,7 @@ namespace Hast.Communication
 
 
         public MemberInvocationHandler CreateMemberInvocationHandler(
-            IHardwareRepresentation hardwareRepresentation, 
+            IHardwareRepresentation hardwareRepresentation,
             object target,
             IProxyGenerationConfiguration configuration)
         {
@@ -69,11 +70,26 @@ namespace Hast.Communication
                             if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                             {
                                 invocationContext.HardwareExecutionIsCancelled = true;
-                            } 
+                            }
                         }
 
                         if (invocationContext.HardwareExecutionIsCancelled) return false;
-                  
+
+                        var communicationChannelName = configuration.CommunicationChannelName;
+                        var deviceDriver = workContext.Resolve<IDeviceDriver>();
+
+                        if (string.IsNullOrEmpty(communicationChannelName))
+                        {
+                            communicationChannelName = deviceDriver.DeviceManifest.SupportedCommunicationChannelNames.First();
+                        }
+
+                        if (!deviceDriver.DeviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))
+                        {
+                            throw new NotSupportedException(
+                                "The configured communication channel \"" + communicationChannelName +
+                                "\" is not supported by the current device.");
+                        }
+
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
@@ -91,7 +107,7 @@ namespace Hast.Communication
                                 {
                                     invocationContext.ExecutionInformation = await workContext
                                         .Resolve<ICommunicationServiceSelector>()
-                                        .GetCommunicationService(configuration.CommunicationChannelName)
+                                        .GetCommunicationService(communicationChannelName)
                                         .Execute(memory, memberId);
                                 });
                             task.Wait();

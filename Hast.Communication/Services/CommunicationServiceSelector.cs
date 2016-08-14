@@ -25,7 +25,7 @@ namespace Hast.Communication.Services
                 .FirstOrDefault(service => service.ChannelName == channelName);
 
             if (communicationService == null)
-                throw new InvalidOperationException("Communication service was not found with the given channel name.");
+                throw new InvalidOperationException("No communication service was found with the given channel name.");
 
             return communicationService;
         }

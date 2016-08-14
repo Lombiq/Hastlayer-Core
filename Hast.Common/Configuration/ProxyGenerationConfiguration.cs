@@ -11,7 +11,7 @@ namespace Hast.Common.Configuration
         public IDictionary<string, object> CustomConfiguration { get; set; }
 
         /// <summary>
-        /// Gets or sets the communication channel used for communicating with the FPGA (eg. Ethernet).
+        /// Gets or sets the communication channel used for communicating with the hardware device (eg. Ethernet).
         /// </summary>
         public string CommunicationChannelName { get; set; }
 
@@ -30,10 +30,7 @@ namespace Hast.Common.Configuration
             {
                 if (_default == null)
                 {
-                    _default = new ProxyGenerationConfiguration
-                    {
-                        CommunicationChannelName = "Serial"
-                    };
+                    _default = new ProxyGenerationConfiguration();
                 }
 
                 return _default;
