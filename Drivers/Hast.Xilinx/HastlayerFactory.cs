@@ -32,9 +32,10 @@ namespace Hast.Xilinx
             {
                 Extensions = new[]
                 {
-                    typeof(Hast.Transformer.Vhdl.Models.MemberIdTable).Assembly,
-                    typeof(Hast.Xilinx.VivadoHardwareImplementationComposer).Assembly
-                }.Union(configuration.Extensions)
+                    typeof(Transformer.Vhdl.Models.MemberIdTable).Assembly,
+                    typeof(VivadoHardwareImplementationComposer).Assembly
+                }.Union(configuration.Extensions),
+                
             };
 
             return Hastlayer.Create(configuration);

@@ -145,9 +145,9 @@ namespace Hast.Layer
                 ImportedExtensions = new[]
                 {
                     typeof(Hastlayer).Assembly,
-                    typeof(Hast.Communication.IProxyGenerator).Assembly,
-                    typeof(Hast.Synthesis.IHardwareImplementationComposer).Assembly,
-                    typeof(Hast.Transformer.ITransformer).Assembly
+                    typeof(IProxyGenerator).Assembly,
+                    typeof(IHardwareImplementationComposer).Assembly,
+                    typeof(ITransformer).Assembly
                 }.Union(_configuration.Extensions),
                 DefaultShellFeatureStates = new[]
                 {
@@ -167,13 +167,8 @@ namespace Hast.Layer
 
             _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
 
-            await _host.Run<IHardwareExecutionEventProxy>(proxy => Task.Run(() => proxy.RegisterExecutedOnHardwareEventHandler(eventArgs =>
-                {
-                    if (ExecutedOnHardware != null)
-                    {
-                        ExecutedOnHardware(this, eventArgs);
-                    }
-                })));
+            await _host.Run<IHardwareExecutionEventProxy>(proxy => Task.Run(() => 
+                proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs))));
 
             return _host;
         }
