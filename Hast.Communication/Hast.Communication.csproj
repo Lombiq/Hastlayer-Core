@@ -86,6 +86,7 @@
     <Compile Include="Extensibility\IMemberInvocationContext.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStep.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStepContext.cs" />
+    <Compile Include="Extensibility\Pipeline\ISerialPortConfigurator.cs" />
     <Compile Include="Extensions\UdpClientExtensions.cs" />
     <Compile Include="Extensions\TcpClientExtensions.cs" />
     <Compile Include="Extensions\SerialPortExtensions.cs" />

@@ -25,10 +25,10 @@ namespace Hast.Communication.Constants
 
         public static class Serial
         {
-            public const int BaudRate = 9600;
-            public const Parity SerialPortParity = Parity.None;
-            public const StopBits SerialPortStopBits = StopBits.One;
-            public const int WriteTimeoutInMilliseconds = 10000;
+            public const int DefaultBaudRate = 9600;
+            public const Parity DefaultParity = Parity.None;
+            public const StopBits DefaultStopBits = StopBits.One;
+            public const int DefaultWriteTimeoutMilliseconds = 10000;
             public const string ChannelName = "Serial";
 
 

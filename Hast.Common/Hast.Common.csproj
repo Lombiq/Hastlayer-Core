@@ -45,6 +45,7 @@
     <Compile Include="Configuration\IHardwareGenerationConfiguration.cs" />
     <Compile Include="Configuration\IProxyGenerationConfiguration.cs" />
     <Compile Include="Extensibility\Pipeline\IPipelineStep.cs" />
+    <Compile Include="Extensibility\Pipeline\PipelineStepBase.cs" />
     <Compile Include="Extensibility\Pipeline\PipelineStepEnumerationExtensions.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Extensions\MemberNameExtensions.cs" />
