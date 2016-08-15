@@ -55,7 +55,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             if (DataType.TypeCategory == DataTypeCategory.Array)
             {
-                if (DataType.IsLiteralArrayType())
+                if (content.Contains("others =>"))
+                {
+                    return "(" + content + ")";
+                }
+                else if (DataType.IsLiteralArrayType())
                 {
                     return "\"" + content + "\"";
                 }
