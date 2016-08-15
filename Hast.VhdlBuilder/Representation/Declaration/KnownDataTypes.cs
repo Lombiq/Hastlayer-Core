@@ -19,6 +19,17 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             DefaultValue = "false".ToVhdlValue(_boolean)
         };
 
+        private static SizedDataType _binaryString = new SizedDataType
+        {
+            TypeCategory = DataTypeCategory.Numeric,
+            Name = "signed",
+            Size = 16
+        };
+        public static SizedDataType BinaryString = new SizedDataType(_binaryString)
+        {
+            DefaultValue = default(short).ToString().ToVhdlValue(_int16)
+        };
+
         private static DataType _character = new DataType { TypeCategory = DataTypeCategory.Character, Name = "character" };
         public static DataType Character = new DataType(_character)
         {
