@@ -12,6 +12,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using ICSharpCode.NRefactory.CSharp;
+using Hast.Transformer.Vhdl.Helpers;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
@@ -296,9 +297,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                             // WaitingForStarted state
                             {
-                                // Chaining together ifs to check all the instances of the target component whether they
-                                // are already started.
-                                IfElse notStartedComponentSelectingIfElse = null;
+                                // A series of ifs to check all the instances of the target component whether they are
+                                // already started.
+                                var notStartedComponentSelectingIfsBlock = new InlineBlock();
+
                                 for (int c = 0; c < targetComponentCount; c++)
                                 {
                                     var componentStartVariableReference = getTargetStartedVariableReference(c);
@@ -334,26 +336,30 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         ifComponentStartedTrue = ifComponentStartedTrueBlock;
                                     }
 
-                                    var ifComponentStartedIfElse = new IfElse
+                                    var selectorConditions = new List<IVhdlElement>();
+                                    selectorConditions.Add(new Binary
                                     {
-                                        Condition = new Binary
+                                        Left = componentStartVariableReference,
+                                        Operator = BinaryOperator.Equality,
+                                        Right = Value.False
+                                    });
+                                    for (int s = c + 1; s < targetComponentCount; s++)
+                                    {
+                                        selectorConditions.Add(new Binary
                                         {
-                                            Left = componentStartVariableReference,
+                                            Left = getTargetStartedVariableReference(s),
                                             Operator = BinaryOperator.Equality,
-                                            Right = Value.False
-                                        },
-                                        True = ifComponentStartedTrue
-                                    };
+                                            Right = Value.True
+                                        });
+                                    }
 
-                                    if (notStartedComponentSelectingIfElse != null)
+                                    notStartedComponentSelectingIfsBlock.Add(new IfElse
                                     {
-                                        notStartedComponentSelectingIfElse.ElseIfs.Add(ifComponentStartedIfElse);
-                                    }
-                                    else
-                                    {
-                                        notStartedComponentSelectingIfElse = ifComponentStartedIfElse;
-                                    }
+                                        Condition = BinaryChainBuilder.BuildBinaryChain(selectorConditions, BinaryOperator.ConditionalAnd),
+                                        True = ifComponentStartedTrue
+                                    });
                                 }
+
                                 runningStateCase.Whens.Add(new CaseWhen
                                 {
                                     Expression = waitingForStartedStateValue,
@@ -371,7 +377,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                         .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                                                     Expression = Value.False
                                                 },
-                                                notStartedComponentSelectingIfElse)
+                                                notStartedComponentSelectingIfsBlock)
                                             }
                                         }
                                     }
@@ -500,6 +506,21 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
 
             return proxyComponents;
+        }
+
+
+        private static IVhdlElement CreateBinaryIndicatorValue(int indicatedIndex, int size)
+        {
+            // This will create a binary array where the everything until the 1 is filled with dashes (don't care values)
+            // and everything after it with zeros like: "--1000".
+            var binaryArray = Enumerable.Repeat('-', size).ToArray();
+            // Since the bit vector is downto the rightmost element is the 0th.
+            binaryArray[size - 1 - indicatedIndex] = '1';
+            for (int i = size - indicatedIndex; i < size; i++)
+            {
+                binaryArray[i] = '0';
+            }
+            return ("\"" + string.Join("", binaryArray) + "\"").ToVhdlValue(KnownDataTypes.Identifier);
         }
     }
 }
