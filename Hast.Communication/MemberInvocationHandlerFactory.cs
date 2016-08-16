@@ -106,6 +106,15 @@ namespace Hast.Communication
                             var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                             if (memory != null)
                             {
+                                var memoryByteCount = memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
+                                if (memoryByteCount > deviceDriver.DeviceManifest.AvailableMemoryBytes)
+                                {
+                                    throw new InvalidOperationException(
+                                        "The input is too large to fit into the device's memory: the input is " +
+                                        memoryByteCount + " bytes, the available memory is " +
+                                        deviceDriver.DeviceManifest.AvailableMemoryBytes + " bytes.");
+                                }
+
                                 SimpleMemory softMemory = null;
 
                                 if (configuration.ValidateHardwareResults)

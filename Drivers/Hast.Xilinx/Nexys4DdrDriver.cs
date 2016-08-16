@@ -20,7 +20,8 @@ namespace Hast.Xilinx
             {
                 TechnicalName = "Nexys4 DDR",
                 ClockFrequencyHz = 100000000,
-                SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" }
+                SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
+                AvailableMemoryBytes = 115343360 // 110MB
             };
         }
 
