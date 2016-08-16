@@ -12,12 +12,12 @@ namespace Hast.Synthesis.Models
     public interface IDeviceManifest
     {
         /// <summary>
-        /// Technical name that identifies the device.
+        /// Gets the technical name that identifies the device.
         /// </summary>
         string TechnicalName { get; }
 
         /// <summary>
-        /// The clock frequency of the board in Hz.
+        /// Gets the clock frequency of the board in Hz.
         /// </summary>
         uint ClockFrequencyHz { get; }
 
@@ -26,5 +26,10 @@ namespace Hast.Synthesis.Models
         /// as the default.
         /// </summary>
         IEnumerable<string> SupportedCommunicationChannelNames { get; }
+
+        /// <summary>
+        /// Gets the amount of memory (RAM) available to hardware implementations, in bytes.
+        /// </summary>
+        uint AvailableMemoryBytes { get; }
     }
 }
