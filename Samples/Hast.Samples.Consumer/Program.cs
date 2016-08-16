@@ -51,7 +51,7 @@ namespace Hast.Samples.Consumer
                      */
 
                     // Inititializing a Hastlayer shell for Xilinx FPGA boards.
-                    using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
+                    using (var hastlayer = Xilinx.HastlayerFactory.Create())
                     {
                         // Hooking into an event of Hastlayer so some execution information can be made visible on the
                         // console.
