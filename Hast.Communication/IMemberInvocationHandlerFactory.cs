@@ -18,7 +18,7 @@ namespace Hast.Communication
     /// <c>True</c> if the member invocation was successfully transferred to the hardware implementation, <c>false</c> 
     /// otherwise.
     /// </returns>
-    public delegate bool MemberInvocationHandler(IInvocation invocation);
+    public delegate void MemberInvocationHandler(IInvocation invocation);
 
 
     /// <summary>

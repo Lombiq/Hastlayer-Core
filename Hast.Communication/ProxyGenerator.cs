@@ -47,10 +47,7 @@ namespace Hast.Communication
         
             public void Intercept(Castle.DynamicProxy.IInvocation invocation)
             {
-                if (!_memberInvocationHandler(invocation))
-                {
-                    invocation.Proceed();
-                }
+                _memberInvocationHandler(invocation);
             }
         }
     }
