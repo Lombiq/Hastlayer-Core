@@ -10,11 +10,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Value : IVhdlElement
     {
-        public static readonly Value True = "true".ToVhdlIdValue();
-        public static readonly Value False = "false".ToVhdlIdValue();
-
         // These below need to be Lazy, because otherwise there would be a circular dependency between the static
         // ctors with KnownDataTypes (since it uses ToVhdlValue() and thus this class a lot for default values).
+        private static readonly Lazy<Value> _trueLazy = new Lazy<Value>(() => new Value { DataType = KnownDataTypes.Boolean, Content = "true" });
+        public static Value True { get { return _trueLazy.Value; } }
+        private static readonly Lazy<Value> _falseLazy = new Lazy<Value>(() => new Value { DataType = KnownDataTypes.Boolean, Content = "false" });
+        public static Value False { get { return _falseLazy.Value; } }
         private static readonly Lazy<Value> _zeroCharacterLazy = new Lazy<Value>(() => new Character('0'));
         public static Value ZeroCharacter { get { return _zeroCharacterLazy.Value; } }
         private static readonly Lazy<Value> _oneCharacterLazy = new Lazy<Value>(() => new Character('1'));
