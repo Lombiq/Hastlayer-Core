@@ -219,30 +219,81 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         .ToVhdlVariableReference();
 
 
-                    // Creating started variables for each indexed component of the member, e.g. all state machines of a 
-                    // transformed method. These are needed so inside the proxy it's immediately visible if an instance
-                    // is already started.
-                    var startedVariablesWriteBlock = new LogicalBlock(
-                            new LineComment("Temporary Started variables are needed in place of the original signals so inside the proxy it's immediately visible if an instance is already started."),
-                            new LineComment("Only true values are written to these, but not false, those are directly written to the original signals. This is so instances are not immediately restarted."));
-                    bodyBlock.Add(startedVariablesWriteBlock);
+                    DataObjectReference targetAvailableIndicatorVariableReference = null;
+                    SizedDataType targetAvailableIndicatorDataType = null;
 
-                    for (int i = 0; i < targetComponentCount; i++)
+                    if (targetComponentCount > 1)
                     {
-                        var startedVariableReference = getTargetStartedVariableReference(i);
+                        // Creating a boolean vector where each of the elements will indicate whether the target
+                        // component with that index is available and can be started. I.e. targetAvailableIndicator(0)
+                        // being true tells that the target component with index 0 can be started.
+                        // All this is necessary to avoid a ifs with large conditions which would cause timing 
+                        // errors with more than cca. 20 components. This implementation can be better implemented
+                        // with parallel paths.
+                        targetAvailableIndicatorVariableReference = proxyComponent
+                            .CreatePrefixedSegmentedObjectName("targetAvailableIndicator")
+                            .ToVhdlVariableReference();
+                        targetAvailableIndicatorDataType = new SizedDataType
+                        {
+                            Name = booleanArrayType.Name,
+                            TypeCategory = DataTypeCategory.Array,
+                            Size = targetComponentCount
+                        };
                         proxyComponent.LocalVariables.Add(new Variable
                         {
-                            DataType = KnownDataTypes.Boolean,
-                            Name = startedVariableReference.Name,
-                            InitialValue = Value.False
+                            DataType = targetAvailableIndicatorDataType,
+                            Name = targetAvailableIndicatorVariableReference.Name,
+                            InitialValue = new Value
+                            {
+                                DataType = targetAvailableIndicatorDataType,
+                                Content = "others => " + KnownDataTypes.Boolean.DefaultValue.ToVhdl()
+                            }
                         });
-                        startedVariablesWriteBlock.Add(new Assignment
+
+
+                        var availableTargetSelectingCase = new Case
                         {
-                            AssignTo = startedVariableReference,
-                            Expression = ArchitectureComponentNameHelper
-                                    .CreateStartedSignalName(getTargetMemberComponentName(i)).ToVhdlSignalReference()
-                        });
+                            Expression = targetAvailableIndicatorVariableReference
+                        };
+
+                        for (int c = 0; c < targetComponentCount; c++)
+                        {
+                            var selectorConditions = new List<IVhdlElement>();
+                            selectorConditions.Add(new Binary
+                            {
+                                Left = ArchitectureComponentNameHelper
+                                    .CreateStartedSignalName(getTargetMemberComponentName(c))
+                                    .ToVhdlSignalReference(),
+                                Operator = BinaryOperator.Equality,
+                                Right = Value.False
+                            });
+                            for (int s = c + 1; s < targetComponentCount; s++)
+                            {
+                                selectorConditions.Add(new Binary
+                                {
+                                    Left = ArchitectureComponentNameHelper
+                                        .CreateStartedSignalName(getTargetMemberComponentName(s))
+                                        .ToVhdlSignalReference(),
+                                    Operator = BinaryOperator.Equality,
+                                    Right = Value.True
+                                });
+                            }
+
+                            // Assignments to the boolean array where each element will indicate whether the 
+                            // component with the given index can be started.
+                            bodyBlock.Add(
+                                new Assignment
+                                {
+                                    AssignTo = new ArrayElementAccess
+                                    {
+                                        Array = targetAvailableIndicatorVariableReference,
+                                        IndexExpression = c.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                    },
+                                    Expression = BinaryChainBuilder.BuildBinaryChain(selectorConditions, BinaryOperator.ConditionalAnd)
+                                });
+                        }
                     }
+
 
 
                     // Building the invocation handlers.
@@ -324,15 +375,24 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         },
                                         new Assignment
                                         {
-                                            AssignTo = getTargetStartedVariableReference(targetIndex),
-                                            Expression = Value.True
-                                        },
-                                        new Assignment
-                                        {
                                             AssignTo = ArchitectureComponentNameHelper
-                                                .CreateStartedSignalName(getTargetMemberComponentName(targetIndex)).ToVhdlSignalReference(),
+                                                .CreateStartedSignalName(getTargetMemberComponentName(targetIndex))
+                                                .ToVhdlSignalReference(),
                                             Expression = Value.True
                                         });
+
+                                    if (targetComponentCount > 1)
+                                    {
+                                        componentAvailableBodyBlock.Add(new Assignment
+                                        {
+                                            AssignTo = new ArrayElementAccess
+                                            {
+                                                Array = targetAvailableIndicatorVariableReference,
+                                                IndexExpression = targetIndex.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                            },
+                                            Expression = Value.False
+                                        });
+                                    }
 
                                     componentAvailableBodyBlock.Body.AddRange(buildParameterAssignments(invokerName, i, targetIndex));
 
@@ -343,7 +403,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 if (targetComponentCount == 1)
                                 {
                                     // If there is only a single target component then the implementation can be simpler.
-                                    // Also having a case notStartedIndicator is (true) when =>... is not syntactically
+                                    // Also having a case targetAvailableIndicator is (true) when =>... isn't syntactically
                                     // correct, single-element arrays can't be matched like this. "[Synth 8-2778] type 
                                     // error near true ; expected type internalinvocationproxy_boolean_array".
 
@@ -351,33 +411,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 }
                                 else
                                 {
-                                    // Creating a boolean vector where each of the elements will indicate whether the target
-                                    // component with that index is available and can be started. I.e. notStartedIndicator(0)
-                                    // being true tells that the target component with index 0 can be started.
-                                    // All this is necessary to avoid a ifs with large conditions which would cause timing 
-                                    // errors with more than cca. 20 components. This implementation can be better implemented
-                                    // with parallel paths.
-                                    var targetAvailableIndicatorVariableReference = proxyComponent
-                                        .CreatePrefixedSegmentedObjectName(invokerName, "notStartedIndicator", i.ToString())
-                                        .ToVhdlVariableReference();
-                                    var targetAvailableIndicatorDataType = new SizedDataType
-                                    {
-                                        Name = booleanArrayType.Name,
-                                        TypeCategory = DataTypeCategory.Array,
-                                        Size = targetComponentCount
-                                    };
-                                    proxyComponent.LocalVariables.Add(new Variable
-                                    {
-                                        DataType = targetAvailableIndicatorDataType,
-                                        Name = targetAvailableIndicatorVariableReference.Name,
-                                        InitialValue = new Value
-                                        {
-                                            DataType = targetAvailableIndicatorDataType,
-                                            Content = "others => " + KnownDataTypes.Boolean.DefaultValue.ToVhdl()
-                                        }
-                                    });
-
-
                                     var availableTargetSelectingCase = new Case
                                     {
                                         Expression = targetAvailableIndicatorVariableReference
@@ -385,37 +418,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                                     for (int c = 0; c < targetComponentCount; c++)
                                     {
-                                        var selectorConditions = new List<IVhdlElement>();
-                                        selectorConditions.Add(new Binary
-                                        {
-                                            Left = getTargetStartedVariableReference(c),
-                                            Operator = BinaryOperator.Equality,
-                                            Right = Value.False
-                                        });
-                                        for (int s = c + 1; s < targetComponentCount; s++)
-                                        {
-                                            selectorConditions.Add(new Binary
-                                            {
-                                                Left = getTargetStartedVariableReference(s),
-                                                Operator = BinaryOperator.Equality,
-                                                Right = Value.True
-                                            });
-                                        }
-
-                                        // Assignments to the boolean array where each element will indicate whether the 
-                                        // component with the given index can be started.
-                                        waitingForStartedInnnerBlock.Add(
-                                            new Assignment
-                                            {
-                                                AssignTo = new ArrayElementAccess
-                                                {
-                                                    Array = targetAvailableIndicatorVariableReference,
-                                                    IndexExpression = c.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                                                },
-                                                Expression = BinaryChainBuilder.BuildBinaryChain(selectorConditions, BinaryOperator.ConditionalAnd)
-                                            });
-
-
                                         availableTargetSelectingCase.Whens.Add(new CaseWhen
                                         {
                                             Expression = CreateBooleanIndicatorValue(targetAvailableIndicatorDataType, c),
