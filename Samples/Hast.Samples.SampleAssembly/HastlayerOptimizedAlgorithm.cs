@@ -16,7 +16,7 @@ namespace Hast.Samples.SampleAssembly
         public const int Run_InputUInt32Index = 0;
         public const int Run_OutputUInt32Index = 0;
 
-        public const int MaxDegreeOfParallelism = 85;
+        public const int MaxDegreeOfParallelism = 200;
 
 
         public virtual void Run(SimpleMemory memory)
@@ -32,22 +32,9 @@ namespace Hast.Samples.SampleAssembly
                         var index = (int)indexObject;
                         uint result = input + (uint)index * 2;
 
-                        for (int j = 0; j < 99999; j++)
+                        for (int j = 0; j < 9999999; j++)
                         {
-                            var a = result + j;
-                            var b = result + j + 23;
-                            var c = j - 23;
-                            var d = -3 + j;
-                            var e = result + 2399 + result;
-                            var f = 942 - result - j;
-                            var g = result + j - 144;
-                            var h = result - j - 23449;
-                            var ii = result + j + 999;
-                            var jj = result - j + 1175;
-
-                            var sum = a + b + c + d + e + f + g + h + ii + jj;
-
-                            result += (uint)sum;
+                            result += (uint)j;
                         }
 
                         return result;
