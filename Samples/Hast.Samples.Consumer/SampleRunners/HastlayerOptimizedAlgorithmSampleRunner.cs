@@ -31,7 +31,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // a MaxDegreeOfParallelism of 200 while the device is just about 55% utilized).
             var output1 = hastlayerOptimizedAlgorithm.Run(234234);
             var output2 = hastlayerOptimizedAlgorithm.Run(123);
-            var outpu3 = hastlayerOptimizedAlgorithm.Run(9999);
+            var output3 = hastlayerOptimizedAlgorithm.Run(9999);
         }
     }
 }
