@@ -8,6 +8,7 @@ using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Declaration;
 using JsonNet.PrivateSettersContractResolvers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -68,9 +69,10 @@ namespace Hast.Transformer.Vhdl.Models
             {
                 TypeNameHandling = TypeNameHandling.Auto,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new PrivateSetterContractResolver()
+                ContractResolver = new PrivateSetterContractResolver(),
             };
 
+            settings.Converters.Add(new MemberIdTable.MemberIdTableJsonConverter());
 
             return settings;
         }
