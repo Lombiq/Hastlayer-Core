@@ -1,17 +1,14 @@
-﻿using Hast.Transformer.SimpleMemory;
-using Orchard.Logging;
-using System;
+﻿using System;
+using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Hast.Common.Models;
-using System.Net;
 using Hast.Communication.Constants;
 using Hast.Communication.Exceptions;
-using Hast.Synthesis;
-using Orchard.Caching;
-using System.Text;
-using System.Linq;
 using Hast.Communication.Models;
+using Hast.Synthesis;
+using Hast.Transformer.SimpleMemory;
+using Orchard.Logging;
 
 namespace Hast.Communication.Services
 {

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.Constants;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using Hast.VhdlBuilder.Extensions;
-using Orchard.Validation;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents

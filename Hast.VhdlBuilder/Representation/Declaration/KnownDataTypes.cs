@@ -1,5 +1,4 @@
 ﻿using System;
-using Hast.VhdlBuilder.Representation.Expression;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
 

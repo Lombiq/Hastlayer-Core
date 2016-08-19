@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using Orchard;
-using Hast.VhdlBuilder.Extensions;
 using ICSharpCode.NRefactory.CSharp;
-using Hast.Common.Extensions;
-using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {

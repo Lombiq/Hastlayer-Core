@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {

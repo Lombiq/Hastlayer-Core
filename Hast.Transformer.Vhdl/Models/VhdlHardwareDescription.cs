@@ -4,11 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Hast.Common.Models;
-using Hast.VhdlBuilder;
-using Hast.VhdlBuilder.Representation.Declaration;
 using JsonNet.PrivateSettersContractResolvers;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Hast.Transformer.Vhdl.Models
 {

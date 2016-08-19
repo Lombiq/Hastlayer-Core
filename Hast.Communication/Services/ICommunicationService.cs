@@ -1,7 +1,7 @@
-﻿using Hast.Transformer.SimpleMemory;
-using Orchard;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Hast.Common.Models;
+using Hast.Transformer.SimpleMemory;
+using Orchard;
 
 namespace Hast.Communication.Services
 {

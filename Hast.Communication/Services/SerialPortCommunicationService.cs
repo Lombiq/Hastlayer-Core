@@ -1,21 +1,19 @@
-﻿using Hast.Communication.Exceptions;
-using Hast.Transformer.SimpleMemory;
-using Orchard.Logging;
-using System;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Threading.Tasks;
-using Hast.Communication.Models;
+using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Models;
 using Hast.Communication.Constants;
-using Hast.Synthesis;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Linq;
+using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Pipeline;
-using Hast.Common.Extensibility.Pipeline;
+using Hast.Communication.Models;
+using Hast.Synthesis;
+using Hast.Transformer.SimpleMemory;
+using Orchard.Logging;
 
 namespace Hast.Communication.Services
 {

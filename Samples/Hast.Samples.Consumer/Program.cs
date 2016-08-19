@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
-using Hast.Common.Models;
-using Hast.Layer;
-using Hast.Samples.SampleAssembly;
-using System.Drawing;
-using Hast.VhdlBuilder.Representation;
 using Hast.Samples.Consumer.SampleRunners;
+using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Configuration;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Samples.Consumer
 {

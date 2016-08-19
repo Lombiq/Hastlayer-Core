@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Models;
-using Hast.VhdlBuilder.Representation.Declaration;
+﻿using Hast.Transformer.Models;
 
 namespace Hast.Transformer.Vhdl.Models
 {

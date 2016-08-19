@@ -1,10 +1,8 @@
-﻿using Hast.Transformer.Vhdl.Models;
+﻿using System.Collections.Generic;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models
 {

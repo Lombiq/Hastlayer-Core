@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hast.Layer.Extensibility.Events
+﻿namespace Hast.Layer.Extensibility.Events
 {
     public delegate void ExecutedOnHardwareEventHandler(IHastlayer sender, ExecutedOnHardwareEventArgs e);
 }

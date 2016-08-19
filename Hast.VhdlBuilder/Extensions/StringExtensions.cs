@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using System.Linq;
 
 namespace Hast.VhdlBuilder.Extensions
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hast.Communication.Models
+﻿namespace Hast.Communication.Models
 {
     /// <summary>
     /// Represents a compatible device for hardware exeuction that is in the managed device pool.

@@ -1,5 +1,4 @@
-﻿using System;
-using ICSharpCode.Decompiler.Ast;
+﻿using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.ILAst;
 using Mono.Cecil;
 

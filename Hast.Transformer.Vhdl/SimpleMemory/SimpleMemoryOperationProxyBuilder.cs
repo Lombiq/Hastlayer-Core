@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
-using Hast.Transformer.Vhdl.Constants;
-using Hast.VhdlBuilder.Representation;
-using Hast.VhdlBuilder.Representation.Expression;
-using Orchard;
-using Hast.VhdlBuilder.Extensions;
-using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.Transformer.Vhdl.Helpers;
+using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Representation;
+using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {
