@@ -205,6 +205,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 }
                 else
                 {
+                    // Note that the below implementation does not work perfectly. As the number of components increases
+                    // it becomes unstable. For example the CalculateFibonacchiSeries sample without debug memory writes
+                    // won't finish while the CalculateFactorial with them will work properly.
                     var proxyComponent = new ConfigurableComponent(proxyComponentName);
                     proxyComponents.Add(proxyComponent);
 
