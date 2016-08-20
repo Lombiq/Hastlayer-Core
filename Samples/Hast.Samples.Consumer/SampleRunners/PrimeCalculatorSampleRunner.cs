@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Layer;
@@ -35,15 +31,16 @@ namespace Hast.Samples.Consumer.SampleRunners
             var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
 
             // You can also launch hardware-executed method calls in parallel. If there are multiple boards
-            // attached then all of them will be utilized. If the whole device pool is utilized calls will
+            // connected then all of them will be utilized. If the whole device pool is utilized calls will
             // wait for their turn.
-            var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
-            for (uint i = 100; i < 110; i++)
-            {
-                parallelLaunchedIsPrimeTasks
-                    .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
-            }
-            var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
+            // Uncomment if you have mulitple boards connected.
+            //var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
+            //for (uint i = 100; i < 110; i++)
+            //{
+            //    parallelLaunchedIsPrimeTasks
+            //        .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
+            //}
+            //var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
 
             // In-algorithm parallelization:
@@ -51,15 +48,16 @@ namespace Hast.Samples.Consumer.SampleRunners
             // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see 
             // comments in the method). Thus the communication roundtrip will be slower for ParallelizedArePrimeNumbers.
             // Because of this since PrimeCalculator.MaxDegreeOfParallelism is 35 we use 35 numbers here.
+            // All of these numbers except for 9999 are primes.
             var numbers = new uint[]
             {
+                9749, 9999, 902119, 907469, 915851,
                 9749, 9973, 902119, 907469, 915851,
+                9749, 9999, 902119, 907469, 915851,
                 9749, 9973, 902119, 907469, 915851,
+                9749, 9999, 902119, 907469, 915851,
                 9749, 9973, 902119, 907469, 915851,
-                9749, 9973, 902119, 907469, 915851,
-                9749, 9973, 902119, 907469, 915851,
-                9749, 9973, 902119, 907469, 915851,
-                9749, 9973, 902119, 907469, 915851
+                9749, 9999, 902119, 907469, 915851
             };
 
             var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);

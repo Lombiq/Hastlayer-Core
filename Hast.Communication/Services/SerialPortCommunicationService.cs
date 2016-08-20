@@ -1,19 +1,19 @@
-﻿using Hast.Communication.Exceptions;
-using Hast.Transformer.SimpleMemory;
-using Orchard.Logging;
-using System;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Threading.Tasks;
-using Hast.Communication.Models;
+using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Models;
 using Hast.Communication.Constants;
+using Hast.Communication.Exceptions;
+using Hast.Communication.Extensibility.Pipeline;
+using Hast.Communication.Models;
 using Hast.Synthesis;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Linq;
+using Hast.Transformer.SimpleMemory;
+using Orchard.Logging;
 
 namespace Hast.Communication.Services
 {
@@ -22,6 +22,7 @@ namespace Hast.Communication.Services
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IDeviceDriver _deviceDriver;
+        private readonly IEnumerable<ISerialPortConfigurator> _serialPortConfigurators;
 
         public override string ChannelName
         {
@@ -35,11 +36,13 @@ namespace Hast.Communication.Services
         public SerialPortCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
-            IDeviceDriver deviceDriver)
+            IDeviceDriver deviceDriver,
+            IEnumerable<ISerialPortConfigurator> serialPortConfigurators)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
             _deviceDriver = deviceDriver;
+            _serialPortConfigurators = serialPortConfigurators;
 
             Logger = NullLogger.Instance;
         }
@@ -220,7 +223,7 @@ namespace Hast.Communication.Services
         /// Detects serial-connected compatible FPGA boards.
         /// </summary>
         /// <returns>The serial port name where the FPGA board is connected to.</returns>
-        private static async Task<IEnumerable<string>> GetFpgaPortNames()
+        private async Task<IEnumerable<string>> GetFpgaPortNames()
         {
             // Get all available serial ports in the system.
             var ports = SerialPort.GetPortNames();
@@ -276,14 +279,16 @@ namespace Hast.Communication.Services
             return fpgaPortNames;
         }
 
-        private static SerialPort CreateSerialPort()
+        private SerialPort CreateSerialPort()
         {
             var serialPort = new SerialPort();
 
-            serialPort.BaudRate = CommunicationConstants.Serial.BaudRate;
-            serialPort.Parity = CommunicationConstants.Serial.SerialPortParity;
-            serialPort.StopBits = CommunicationConstants.Serial.SerialPortStopBits;
-            serialPort.WriteTimeout = CommunicationConstants.Serial.WriteTimeoutInMilliseconds;
+            serialPort.BaudRate = CommunicationConstants.Serial.DefaultBaudRate;
+            serialPort.Parity = CommunicationConstants.Serial.DefaultParity;
+            serialPort.StopBits = CommunicationConstants.Serial.DefaultStopBits;
+            serialPort.WriteTimeout = CommunicationConstants.Serial.DefaultWriteTimeoutMilliseconds;
+
+            _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort));
 
             return serialPort;
         }

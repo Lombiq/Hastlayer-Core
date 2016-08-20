@@ -1,8 +1,7 @@
-﻿using Hast.Communication.Constants;
-using Orchard.Validation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Orchard.Validation;
 
 namespace Hast.Communication.Services
 {
@@ -25,7 +24,7 @@ namespace Hast.Communication.Services
                 .FirstOrDefault(service => service.ChannelName == channelName);
 
             if (communicationService == null)
-                throw new InvalidOperationException("Communication service was not found with the given channel name.");
+                throw new InvalidOperationException("No communication service was found with the given channel name.");
 
             return communicationService;
         }

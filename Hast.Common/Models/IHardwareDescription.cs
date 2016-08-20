@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Hast.Common.Models
 {
@@ -32,44 +27,5 @@ namespace Hast.Common.Models
         /// of their - type - arguments) of the method to look up the ID for.</param>
         /// <returns>The numerical ID of the method that identifies the call target in the hardware implementation.</returns>
         int LookupMemberId(string methodFullName);
-
-        /// <summary>
-        /// Saves the full hardware description to a stream.
-        /// </summary>
-        /// <param name="stream">The stream to write the hardware description to.</param>
-        void Save(Stream stream);
-
-        /// <summary>
-        /// Loads the previously saved hardware description from a stream.
-        /// </summary>
-        /// <param name="stream">The stream to load the hardware description from.</param>
-        void Load(Stream stream);
-    }
-
-
-    public static class HardwareDescriptionExtensions
-    {
-        public static string WriteOut(this IHardwareDescription hardwareDescription)
-        {
-            using (var stream = new MemoryStream())
-            {
-                hardwareDescription.Save(stream);
-                using (var reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        public static async void ReadIn(this IHardwareDescription hardwareDescription, string content)
-        {
-            using (var stream = new MemoryStream())
-            {
-                using (var writer = new StreamWriter(stream))
-                {
-                    await writer.WriteAsync(content);
-                }
-            }
-        }
     }
 }

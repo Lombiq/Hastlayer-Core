@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
-using Hast.Common.Models;
-using Hast.Layer;
-using Hast.Samples.SampleAssembly;
-using System.Drawing;
-using Hast.VhdlBuilder.Representation;
 using Hast.Samples.Consumer.SampleRunners;
+using Hast.Samples.SampleAssembly;
+using Hast.Transformer.Vhdl.Configuration;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Samples.Consumer
 {
@@ -52,7 +46,7 @@ namespace Hast.Samples.Consumer
                      */
 
                     // Inititializing a Hastlayer shell for Xilinx FPGA boards.
-                    using (var hastlayer = Hast.Xilinx.HastlayerFactory.Create())
+                    using (var hastlayer = Xilinx.HastlayerFactory.Create())
                     {
                         // Hooking into an event of Hastlayer so some execution information can be made visible on the
                         // console.
@@ -103,6 +97,9 @@ namespace Hast.Samples.Consumer
                                 break;
                         }
 
+                        // The generated VHDL code will contain debug-level information, though it will be a bit slower
+                        // to create.
+                        configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
 
                         // Generating hardware from the sample assembly with the given configuration.
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
@@ -153,6 +150,7 @@ namespace Hast.Samples.Consumer
                     }
                 }).Wait();
 
+            Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
         }
     }

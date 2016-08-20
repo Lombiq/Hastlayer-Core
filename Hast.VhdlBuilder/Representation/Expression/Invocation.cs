@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -7,7 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class RangedDataType : DataType
     {
         public int RangeMin { get; set; }
-        public uint RangeMax { get; set; }
+        public int RangeMax { get; set; }
 
 
         public RangedDataType(DataType baseType) : base(baseType)
@@ -37,9 +36,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override bool Equals(object obj)
         {
-            if (!(obj is RangedDataType)) return false;
-
-            var otherType = (RangedDataType)obj;
+            var otherType = obj as RangedDataType;
+            if (otherType == null) return false;
             return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
         }
     }

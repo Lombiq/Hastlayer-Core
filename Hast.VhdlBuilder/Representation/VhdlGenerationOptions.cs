@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Hast.VhdlBuilder.Representation
 {
@@ -25,6 +22,11 @@ namespace Hast.VhdlBuilder.Representation
         /// Gets whether the resulting source code will be formatted in a readable way.
         /// </summary>
         bool FormatCode { get; }
+
+        /// <summary>
+        /// Gets whether to omit added comments from the output or include them.
+        /// </summary>
+        bool OmitComments { get; }
 
         /// <summary>
         /// Gets the delegate that will be used to shorten the name of VHDL entities when generating VHDL code.
@@ -124,19 +126,14 @@ namespace Hast.VhdlBuilder.Representation
         private static VhdlGenerationOptions _debugOptions = new VhdlGenerationOptions
         {
             FormatCode = true,
+            OmitComments = false,
             NameShortener = SimpleNameShortener
         };
         public static VhdlGenerationOptions Debug { get { return _debugOptions; } }
 
-        public bool FormatCode { get; set; }
-        public NameShortener NameShortener { get; set; }
-
-
-        public VhdlGenerationOptions()
-        {
-            // No name shortening by default.
-            NameShortener = name => name;
-        }
+        public bool FormatCode { get; set; } = true;
+        public bool OmitComments { get; set; } = true;
+        public NameShortener NameShortener { get; set; } = name => name; // No name shortening by default.
     }
 
 

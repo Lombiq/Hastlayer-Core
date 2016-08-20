@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -29,6 +27,8 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public static readonly BinaryOperator ShiftRight = new BinaryOperator("srl");
         public static readonly BinaryOperator Subtract = new BinaryOperator("-");
 
+        public static readonly JsonConverter JsonConverter = new BinaryOperatorJsonConverter();
+
 
         private BinaryOperator(string source)
         {
@@ -39,6 +39,39 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return _source;
+        }
+
+
+        private class BinaryOperatorJsonConverter : JsonConverter
+        {
+            public override bool CanConvert(Type objectType)
+            {
+                return (objectType == typeof(BinaryOperator));
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            {
+                // Load the JSON for the Result into a JObject
+                var jObject = JObject.Load(reader);
+
+                return new BinaryOperator((string)jObject["Source"]);
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                var token = JToken.FromObject(value);
+                if (token.Type != JTokenType.Object)
+                {
+                    token.WriteTo(writer);
+                }
+                else
+                {
+                    var jObject = (JObject)token;
+                    jObject.AddFirst(new JProperty("Source", ((BinaryOperator)value)._source));
+                    jObject.WriteTo(writer);
+                }
+
+            }
         }
     }
 }

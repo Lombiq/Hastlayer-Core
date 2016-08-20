@@ -11,9 +11,16 @@ namespace Hast.Common.Configuration
         public IDictionary<string, object> CustomConfiguration { get; set; }
 
         /// <summary>
-        /// Communication channel used for communicating with the FPGA (eg. Ethernet).
+        /// Gets or sets the communication channel used for communicating with the hardware device (eg. Ethernet).
         /// </summary>
         public string CommunicationChannelName { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the results coming from the hardware implementation should be validated against a
+        /// software execution. If set to <c>true</c> then both a hardware and software invocation will happen and the
+        /// result of the two compared. If there is a mismatch then an exception will be thrown.
+        /// </summary>
+        public bool ValidateHardwareResults { get; set; }
 
 
         private static IProxyGenerationConfiguration _default;
@@ -23,10 +30,7 @@ namespace Hast.Common.Configuration
             {
                 if (_default == null)
                 {
-                    _default = new ProxyGenerationConfiguration
-                    {
-                        CommunicationChannelName = "Serial"
-                    };
+                    _default = new ProxyGenerationConfiguration();
                 }
 
                 return _default;

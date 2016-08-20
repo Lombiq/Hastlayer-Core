@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -26,7 +21,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             // There are no block comments in VHDL so if the code is not formatted there can't be any comments.
-            if (!vhdlGenerationOptions.FormatCode) return string.Empty;
+            if (!vhdlGenerationOptions.FormatCode || vhdlGenerationOptions.OmitComments) return string.Empty;
 
             return "-- " + Text + vhdlGenerationOptions.NewLineIfShouldFormat();
         }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Layer;
@@ -29,8 +25,8 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms());
 
-            var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries((short)13); // 233
-            var factorial = recursiveAlgorithms.CalculateFactorial((short)6); // 720 
+            var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries(13); // 233
+            var factorial = recursiveAlgorithms.CalculateFactorial(6); // 720 
         }
     }
 }

@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using Hast.Common;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Communication;
 using Hast.Layer.Extensibility.Events;
+using Hast.Layer.Models;
 using Hast.Synthesis;
 using Hast.Transformer;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
 using Orchard.Environment.Configuration;
-using Orchard.Validation;
 using Orchard.Exceptions;
 using Orchard.Logging;
-using Hast.Layer.Models;
+using Orchard.Validation;
 
 namespace Hast.Layer
 {
@@ -145,9 +143,9 @@ namespace Hast.Layer
                 ImportedExtensions = new[]
                 {
                     typeof(Hastlayer).Assembly,
-                    typeof(Hast.Communication.IProxyGenerator).Assembly,
-                    typeof(Hast.Synthesis.IHardwareImplementationComposer).Assembly,
-                    typeof(Hast.Transformer.ITransformer).Assembly
+                    typeof(IProxyGenerator).Assembly,
+                    typeof(IHardwareImplementationComposer).Assembly,
+                    typeof(ITransformer).Assembly
                 }.Union(_configuration.Extensions),
                 DefaultShellFeatureStates = new[]
                 {
@@ -167,13 +165,8 @@ namespace Hast.Layer
 
             _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
 
-            await _host.Run<IHardwareExecutionEventProxy>(proxy => Task.Run(() => proxy.RegisterExecutedOnHardwareEventHandler(eventArgs =>
-                {
-                    if (ExecutedOnHardware != null)
-                    {
-                        ExecutedOnHardware(this, eventArgs);
-                    }
-                })));
+            await _host.Run<IHardwareExecutionEventProxy>(proxy => Task.Run(() => 
+                proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs))));
 
             return _host;
         }

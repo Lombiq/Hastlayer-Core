@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Hast.Layer;
 
 namespace Hast.Xilinx
@@ -32,9 +27,10 @@ namespace Hast.Xilinx
             {
                 Extensions = new[]
                 {
-                    typeof(Hast.Transformer.Vhdl.Models.MemberIdTable).Assembly,
-                    typeof(Hast.Xilinx.VivadoHardwareImplementationComposer).Assembly
-                }.Union(configuration.Extensions)
+                    typeof(Transformer.Vhdl.Models.MemberIdTable).Assembly,
+                    typeof(VivadoHardwareImplementationComposer).Assembly
+                }.Union(configuration.Extensions),
+                
             };
 
             return Hastlayer.Create(configuration);

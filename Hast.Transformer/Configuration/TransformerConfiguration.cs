@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Common.Configuration
@@ -50,19 +49,9 @@ namespace Hast.Common.Configuration
 
     public static class HardwareGenerationConfigurationTransformerExtensions
     {
-        private const string ConfigKey = "Hast.Transformer.Configuration";
-
-
         public static TransformerConfiguration TransformerConfiguration(this IHardwareGenerationConfiguration hardwareConfiguration)
         {
-            object config;
-
-            if (hardwareConfiguration.CustomConfiguration.TryGetValue(ConfigKey, out config))
-            {
-                return (TransformerConfiguration)config;
-            }
-
-            return (TransformerConfiguration)(hardwareConfiguration.CustomConfiguration[ConfigKey] = new TransformerConfiguration());
+            return hardwareConfiguration.GetOrAddCustomConfiguration<TransformerConfiguration>("Hast.Transformer.Configuration");
         }
     }
 }

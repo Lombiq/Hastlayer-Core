@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -39,6 +38,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
+            if (vhdlGenerationOptions.OmitComments) return string.Empty;
+
             var stringBuilder = new StringBuilder(Lines.Count);
 
             foreach (var line in Lines)

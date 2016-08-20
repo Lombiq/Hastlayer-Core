@@ -1,10 +1,8 @@
-﻿using Hast.Transformer.Vhdl.Models;
+﻿using System.Collections.Generic;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -50,12 +48,17 @@ namespace Hast.Transformer.Vhdl.Models
         /// restart a component in the state it was finished.
         /// </summary>
         IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; }
+
+        /// <summary>
+        /// Keeps track of any other custom values for the scope.
+        /// </summary>
+        IDictionary<string, dynamic> CustomProperties { get; }
     }
 
 
     public interface ICurrentBlock
     {
-        int CurrentStateMachineStateIndex { get; }
+        int StateMachineStateIndex { get; }
         decimal RequiredClockCycles { get; set; }
 
         void Add(IVhdlElement element);
@@ -81,6 +84,7 @@ namespace Hast.Transformer.Vhdl.Models
         public IDictionary<string, EntityDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, EntityDeclaration>();
         public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
         public IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; } = new Dictionary<int, ISet<string>>();
+        public IDictionary<string, dynamic> CustomProperties { get; } = new Dictionary<string, dynamic>();
     }
 
 
@@ -89,18 +93,18 @@ namespace Hast.Transformer.Vhdl.Models
         private readonly IMemberStateMachine _stateMachine;
         private IBlockElement _currentBlock;
 
-        public int CurrentStateMachineStateIndex { get; private set; }
+        public int StateMachineStateIndex { get; private set; }
 
         public decimal RequiredClockCycles
         {
             get
             {
-                return _stateMachine.States[CurrentStateMachineStateIndex].RequiredClockCycles;
+                return _stateMachine.States[StateMachineStateIndex].RequiredClockCycles;
             }
 
             set
             {
-                _stateMachine.States[CurrentStateMachineStateIndex].RequiredClockCycles = value;
+                _stateMachine.States[StateMachineStateIndex].RequiredClockCycles = value;
             }
         }
 
@@ -109,7 +113,7 @@ namespace Hast.Transformer.Vhdl.Models
             : this(stateMachine)
         {
             _currentBlock = currentBlock;
-            CurrentStateMachineStateIndex = stateMachineStateIndex;
+            StateMachineStateIndex = stateMachineStateIndex;
         }
 
         public CurrentBlock(IMemberStateMachine stateMachine)
@@ -125,7 +129,7 @@ namespace Hast.Transformer.Vhdl.Models
 
         public void ChangeBlockToDifferentState(IBlockElement newBlock, int stateMachineStateIndex)
         {
-            CurrentStateMachineStateIndex = stateMachineStateIndex;
+            StateMachineStateIndex = stateMachineStateIndex;
             ChangeBlock(newBlock);
         }
 

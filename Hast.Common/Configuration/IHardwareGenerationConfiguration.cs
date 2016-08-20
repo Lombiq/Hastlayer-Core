@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
 
 namespace Hast.Common.Configuration
@@ -41,11 +38,36 @@ namespace Hast.Common.Configuration
         /// "Contoso.ImageProcessing.FaceRecognition.FaceDetectors" will include all members in this class.
         /// </example>
         IList<string> PublicHardwareMemberNamePrefixes { get; }
+
+        /// <summary>
+        /// Gets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching will happen.
+        /// </summary>
+        bool EnableCaching { get; }
     }
 
 
     public static class HardwareGenerationConfigurationExtensions
     {
+        /// <summary>
+        /// Gets the custom configuration if it exists or creates and adds it if it doesn't.
+        /// </summary>
+        /// <typeparam name="T">Type of the configuration object.</typeparam>
+        /// <param name="key">Key where the custom configuration object is stored in the 
+        /// <see cref="IHardwareGenerationConfiguration"/> instance.</param>
+        /// <returns>The existing or newly created configuration object.</returns>
+        public static T GetOrAddCustomConfiguration<T>(this IHardwareGenerationConfiguration hardwareConfiguration, string key)
+            where T : new()
+        {
+            object config;
+
+            if (hardwareConfiguration.CustomConfiguration.TryGetValue(key, out config))
+            {
+                return (T)config;
+            }
+
+            return (T)(hardwareConfiguration.CustomConfiguration[key] = new T());
+        }
+
         /// <summary>
         /// Adds a public method that will be accessible as hardware implementation.
         /// </summary>

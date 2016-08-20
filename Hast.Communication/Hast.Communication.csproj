@@ -79,12 +79,14 @@
     <Compile Include="Constants\CommandTypes.cs" />
     <Compile Include="Constants\CommunicationConstants.cs" />
     <Compile Include="Exceptions\EthernetCommunicationException.cs" />
+    <Compile Include="Exceptions\HardwareExecutionResultMismatchException.cs" />
     <Compile Include="Exceptions\SerialPortCommunicationException.cs" />
     <Compile Include="Extensibility\Events\IMemberHardwareExecutionContext.cs" />
     <Compile Include="Extensibility\Events\IMemberInvocationEventHandler.cs" />
     <Compile Include="Extensibility\IMemberInvocationContext.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStep.cs" />
     <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStepContext.cs" />
+    <Compile Include="Extensibility\Pipeline\ISerialPortConfigurator.cs" />
     <Compile Include="Extensions\UdpClientExtensions.cs" />
     <Compile Include="Extensions\TcpClientExtensions.cs" />
     <Compile Include="Extensions\SerialPortExtensions.cs" />

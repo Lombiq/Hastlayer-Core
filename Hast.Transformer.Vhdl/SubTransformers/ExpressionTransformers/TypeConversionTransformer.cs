@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard.Logging;
-using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -151,13 +147,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if ((KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType)) ||
                 KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
             {
-                // Casting to a smaller type, so we need to cut off bits.
-                if (getSize(fromType) > toSize)
+                if (fromSize == toSize) return result;
+
+                // Casting to a smaller type, so we need to cut off bits. Casting to a bigger type is not lossy but
+                // still needs resize.
+                if (fromSize > toSize)
                 {
                     result.IsLossy = true;
-                    convertInvocationToResizeAndAddSizeParameter(toSize);
                 }
-                else return result;
+
+                convertInvocationToResizeAndAddSizeParameter(toSize);
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.Real)
             {

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hast.Common.Configuration
 {
@@ -54,7 +50,7 @@ namespace Hast.Common.Configuration
         }
 
         // But why do I need to cast to uint? http://stackoverflow.com/questions/10065287/why-is-ushort-ushort-equal-to-int#comment58098182_10157517
-        public uint MaxInvocationInstanceCount { get { return (uint)((MaxRecursionDepth + 1) * MaxDegreeOfParallelism); } }
+        public int MaxInvocationInstanceCount { get { return (MaxRecursionDepth + 1) * MaxDegreeOfParallelism; } }
 
 
         /// <summary>

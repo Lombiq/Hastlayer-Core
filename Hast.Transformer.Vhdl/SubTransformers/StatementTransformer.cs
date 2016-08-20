@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Linq;
-using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.Helpers;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
-using Orchard;
 using Orchard.Logging;
-using Hast.Transformer.Vhdl.Helpers;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -158,7 +157,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var ifElseCommentsBlock = new LogicalBlock();
                     currentBlock.Add(new InlineBlock(ifElseCommentsBlock, ifElseElement));
 
-                    var ifElseStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
+                    var ifElseStartStateIndex = currentBlock.StateMachineStateIndex;
 
                     var afterIfElseStateBlock = new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
@@ -186,7 +185,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.ChangeBlockToDifferentState(trueStateBlock, trueStateIndex);
                     TransformInner(ifElse.TrueStatement, context);
                     currentBlock.Add(createConditionalStateChangeToAfterIfElseState());
-                    var trueEndStateIndex = currentBlock.CurrentStateMachineStateIndex;
+                    var trueEndStateIndex = currentBlock.StateMachineStateIndex;
 
                     var falseStateIndex = 0;
                     var falseEndStateIndex = 0;
@@ -202,7 +201,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         currentBlock.ChangeBlockToDifferentState(falseStateBlock, falseStateIndex);
                         TransformInner(ifElse.FalseStatement, context);
                         currentBlock.Add(createConditionalStateChangeToAfterIfElseState());
-                        falseEndStateIndex = currentBlock.CurrentStateMachineStateIndex;
+                        falseEndStateIndex = currentBlock.StateMachineStateIndex;
                     }
                     else
                     {
@@ -244,7 +243,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var whileStatement = statement as WhileStatement;
 
-                var whileStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
+                var whileStartStateIndex = currentBlock.StateMachineStateIndex;
                 Func<IVhdlGenerationOptions, string> whileStartStateIndexNameGenerator = vhdlGenerationOptions =>
                     vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(whileStartStateIndex));
 
@@ -322,7 +321,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Case statements, much like if-else statements need a state added in advance where all branches will
                 // will finally return to.
-                var caseStartStateIndex = currentBlock.CurrentStateMachineStateIndex;
+                var caseStartStateIndex = currentBlock.StateMachineStateIndex;
 
                 var afterCaseStateBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
@@ -397,7 +396,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     Left = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
                     Operator = BinaryOperator.Equality,
-                    Right = stateMachine.CreateStateName(context.Scope.CurrentBlock.CurrentStateMachineStateIndex).ToVhdlIdValue()
+                    Right = stateMachine.CreateStateName(context.Scope.CurrentBlock.StateMachineStateIndex).ToVhdlIdValue()
                 },
                 True = stateMachine.CreateStateChange(destinationStateIndex)
             };

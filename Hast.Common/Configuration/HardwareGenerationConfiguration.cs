@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Hast.Common.Configuration
 {
@@ -40,6 +36,12 @@ namespace Hast.Common.Configuration
         /// </example>
         public IList<string> PublicHardwareMemberNamePrefixes { get; set; }
 
+        /// <summary>
+        /// Gets or sets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
+        /// will happen. Defaults to <c>true</c>.
+        /// </summary>
+        public bool EnableCaching { get; set; }
+
         private static IHardwareGenerationConfiguration _default;
         public static IHardwareGenerationConfiguration Default
         {
@@ -60,6 +62,7 @@ namespace Hast.Common.Configuration
             CustomConfiguration = new Dictionary<string, object>();
             PublicHardwareMemberFullNames = new List<string>();
             PublicHardwareMemberNamePrefixes = new List<string>();
+            EnableCaching = true;
         }
     }
 }

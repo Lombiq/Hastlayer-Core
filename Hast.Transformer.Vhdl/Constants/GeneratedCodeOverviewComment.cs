@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hast.Transformer.Vhdl.Constants
+﻿namespace Hast.Transformer.Vhdl.Constants
 {
     /// <summary>
     /// Stores an overview comment that will be inserted into the generated VHDL code to help understanding it.

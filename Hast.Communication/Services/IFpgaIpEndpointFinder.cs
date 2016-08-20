@@ -1,11 +1,7 @@
-﻿using Hast.Communication.Models;
-using Orchard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Communication.Models;
+using Orchard;
 
 namespace Hast.Communication.Services
 {

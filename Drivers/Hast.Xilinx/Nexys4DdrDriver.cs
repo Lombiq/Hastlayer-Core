@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using ICSharpCode.NRefactory.CSharp;
@@ -19,7 +15,9 @@ namespace Hast.Xilinx
             DeviceManifest = new DeviceManifest
             {
                 TechnicalName = "Nexys4 DDR",
-                ClockFrequencyHz = 100000000
+                ClockFrequencyHz = 100000000,
+                SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
+                AvailableMemoryBytes = 115343360 // 110MB
             };
         }
 

@@ -1,18 +1,20 @@
-﻿using Castle.DynamicProxy;
-using Hast.Common.Extensibility.Pipeline;
-using Hast.Common.Extensions;
-using Hast.Common.Models;
-using Hast.Communication.Extensibility.Events;
-using Hast.Communication.Extensibility.Pipeline;
-using Hast.Communication.Services;
-using Hast.Transformer.SimpleMemory;
-using Orchard;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using System;
+using Castle.DynamicProxy;
 using Hast.Common.Configuration;
+using Hast.Common.Extensibility.Pipeline;
+using Hast.Common.Extensions;
+using Hast.Common.Models;
+using Hast.Communication.Exceptions;
+using Hast.Communication.Extensibility.Events;
+using Hast.Communication.Extensibility.Pipeline;
+using Hast.Communication.Services;
+using Hast.Synthesis;
+using Hast.Transformer.SimpleMemory;
+using Orchard;
 
 namespace Hast.Communication
 {
@@ -27,76 +29,158 @@ namespace Hast.Communication
         }
 
 
-        public MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target, IProxyGenerationConfiguration configuration)
+        public MemberInvocationHandler CreateMemberInvocationHandler(
+            IHardwareRepresentation hardwareRepresentation,
+            object target,
+            IProxyGenerationConfiguration configuration)
         {
             return invocation =>
                 {
-                    using (var workContext = _wca.CreateWorkContextScope())
+                    var methodAsynchronicity = GetMethodAsynchronicity(invocation);
+
+                    if (methodAsynchronicity == MethodAsynchronicity.AsyncFunction)
                     {
-                        var methodAsynchronicity = GetMethodAsynchronicity(invocation);
+                        throw new NotSupportedException("Only async methods that return a Task, not Task<T>, are supported.");
+                    }
 
-                        if (methodAsynchronicity == MethodAsynchronicity.AsyncFunction)
+
+                    Func<Task> invocationHandler = async () =>
+                    {
+                        using (var workContext = _wca.CreateWorkContextScope())
                         {
-                            throw new NotSupportedException("Only async methods that return a Task, not Task<T>, are supported.");
-                        }
+                            // Although it says Method it can also be a property.
+                            var memberFullName = invocation.Method.GetFullName();
 
-                        // Although it says Method it can also be a property.
-                        var memberFullName = invocation.Method.GetFullName();
-
-                        var invocationContext = new MemberInvocationContext
-                        {
-                            Invocation = invocation,
-                            MemberFullName = memberFullName,
-                            HardwareRepresentation = hardwareRepresentation
-                        };
-
-                        var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
-                        eventHandler.MemberInvoking(invocationContext);
-
-                        workContext.Resolve<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
+                            var invocationContext = new MemberInvocationContext
                             {
-                                invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
-                            });
+                                Invocation = invocation,
+                                MemberFullName = memberFullName,
+                                HardwareRepresentation = hardwareRepresentation
+                            };
 
-                        if (!invocationContext.HardwareExecutionIsCancelled)
-                        {
-                            var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
-                            var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
-                            if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
-                            {
-                                invocationContext.HardwareExecutionIsCancelled = true;
-                            } 
-                        }
+                            var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
+                            eventHandler.MemberInvoking(invocationContext);
 
-                        if (invocationContext.HardwareExecutionIsCancelled) return false;
-                  
-                        var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
-                        if (memory != null)
-                        {
-                            var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
-                            // Need the wrapping Task to handle the async code.
-                            var task = Task.Run(async () =>
+                            workContext.Resolve<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
                                 {
-                                    invocationContext.ExecutionInformation = await workContext
-                                        .Resolve<ICommunicationServiceSelector>()
-                                        .GetCommunicationService(configuration.CommunicationChannelName)
-                                        .Execute(memory, memberId);
+                                    invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
                                 });
-                            task.Wait();
-                        }
-                        else
-                        {
-                            throw new NotSupportedException("Only SimpleMemory-using implementations are supported for hardware execution.");
-                        }
 
-                        eventHandler.MemberExecutedOnHardware(invocationContext);
+                            if (!invocationContext.HardwareExecutionIsCancelled)
+                            {
+                                var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
+                                var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
+                                if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
+                                {
+                                    invocationContext.HardwareExecutionIsCancelled = true;
+                                }
+                            }
 
-                        if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
-                        {
-                            invocation.ReturnValue = Task.FromResult(true);
+                            if (invocationContext.HardwareExecutionIsCancelled)
+                            {
+                                invocation.Proceed();
+
+                                if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
+                                {
+                                    await (Task)invocation.ReturnValue;
+                                }
+
+                                return;
+                            }
+
+                            var communicationChannelName = configuration.CommunicationChannelName;
+                            var deviceDriver = workContext.Resolve<IDeviceDriver>();
+
+                            if (string.IsNullOrEmpty(communicationChannelName))
+                            {
+                                communicationChannelName = deviceDriver.DeviceManifest.SupportedCommunicationChannelNames.First();
+                            }
+
+                            if (!deviceDriver.DeviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))
+                            {
+                                throw new NotSupportedException(
+                                    "The configured communication channel \"" + communicationChannelName +
+                                    "\" is not supported by the current device.");
+                            }
+
+                            var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
+                            if (memory != null)
+                            {
+                                var memoryByteCount = memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
+                                if (memoryByteCount > deviceDriver.DeviceManifest.AvailableMemoryBytes)
+                                {
+                                    throw new InvalidOperationException(
+                                        "The input is too large to fit into the device's memory: the input is " +
+                                        memoryByteCount + " bytes, the available memory is " +
+                                        deviceDriver.DeviceManifest.AvailableMemoryBytes + " bytes.");
+                                }
+
+                                SimpleMemory softMemory = null;
+
+                                if (configuration.ValidateHardwareResults)
+                                {
+                                    softMemory = new SimpleMemory(memory.CellCount);
+                                    memory.Memory.CopyTo(softMemory.Memory, 0);
+
+                                    var memoryArgumentIndex = invocation.Arguments
+                                        .Select((argument, index) => new { Argument = argument, Index = index })
+                                        .Single(argument => argument.Argument is SimpleMemory)
+                                        .Index;
+                                    invocation.SetArgumentValue(memoryArgumentIndex, softMemory);
+
+                                    // This needs to happen before the awaited Execute() call below, otherwise the Task
+                                    // in ReturnValue wouldn't be the original one any more.
+                                    invocation.Proceed();
+
+                                    if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
+                                    {
+                                        await (Task)invocation.ReturnValue;
+                                    }
+                                }
+
+                                var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
+                                invocationContext.ExecutionInformation = await workContext
+                                    .Resolve<ICommunicationServiceSelector>()
+                                    .GetCommunicationService(communicationChannelName)
+                                    .Execute(memory, memberId);
+
+                                if (configuration.ValidateHardwareResults)
+                                {
+                                    var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
+                                    for (int i = 0; i < memory.CellCount; i++)
+                                    {
+                                        var hardwareBytes = memory.Read4Bytes(i);
+                                        var softwareBytes = softMemory.Read4Bytes(i);
+                                        if (!hardwareBytes.SequenceEqual(softwareBytes))
+                                        {
+                                            mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
+                                                i, hardwareBytes, softwareBytes));
+                                        }
+                                    }
+
+                                    if (mismatches.Any())
+                                    {
+                                        throw new HardwareExecutionResultMismatchException(mismatches);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                throw new NotSupportedException("Only SimpleMemory-using implementations are supported for hardware execution.");
+                            }
+
+                            eventHandler.MemberExecutedOnHardware(invocationContext);
                         }
+                    };
 
-                        return true;
+
+                    if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
+                    {
+                        invocation.ReturnValue = invocationHandler();
+                    }
+                    else
+                    {
+                        invocationHandler().Wait();
                     }
                 };
         }

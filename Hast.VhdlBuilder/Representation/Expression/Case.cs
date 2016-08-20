@@ -12,6 +12,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Expression { get; set; }
         public List<CaseWhen> Whens { get; set; }
 
+        /// <summary>
+        /// Gets or sets whether the case expression is a matching case (case?) new to VHDL 2008. 
+        /// </summary>
+        public bool IsMatching { get; set; }
+
 
         public Case()
         {
@@ -24,7 +29,10 @@ namespace Hast.VhdlBuilder.Representation.Expression
             var builder = new StringBuilder();
 
             builder
-                .Append("case ")
+                .Append("case");
+            if (IsMatching) builder.Append("?");
+            builder
+                .Append(" ")
                 .Append(Expression.ToVhdl(vhdlGenerationOptions))
                 .Append(" is ")
                 .Append(vhdlGenerationOptions.NewLineIfShouldFormat());
@@ -35,6 +43,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             }
 
             builder.Append("end case");
+            if (IsMatching) builder.Append("?");
 
             return Terminated.Terminate(builder.ToString(), vhdlGenerationOptions);
         }

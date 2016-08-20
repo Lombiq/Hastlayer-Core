@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
-using Hast.Transformer.Vhdl.Constants;
-using Hast.Transformer.Vhdl.Models;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {

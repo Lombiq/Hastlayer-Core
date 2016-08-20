@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -30,6 +32,7 @@ namespace Hast.Transformer.Vhdl.Models
 
         public int MaxId { get; private set; }
 
+        [JsonProperty(TypeNameHandling = TypeNameHandling.None)]
         public IEnumerable<MemberMapping> Values { get { return _mappings.Values; } }
 
 
@@ -48,6 +51,41 @@ namespace Hast.Transformer.Vhdl.Models
             MemberMapping mapping;
             if (_mappings.TryGetValue(memberFullName, out mapping)) return mapping.Id;
             throw new InvalidOperationException("No member ID mapping found for the given member name: " + memberFullName);
+        }
+
+
+        public class MemberIdTableJsonConverter : JsonConverter
+        {
+            public override bool CanWrite { get { return false; } }
+
+
+            public override bool CanConvert(Type objectType)
+            {
+                return objectType == typeof(MemberIdTable);
+            }
+
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer)
+            {
+                var jObject = JObject.Load(reader);
+
+                var table = new MemberIdTable();
+                var dummyMapping = new MemberMapping();
+
+                foreach (var mappingJObject in jObject[nameof(table.Values)])
+                {
+                    table.SetMapping((string)mappingJObject[nameof(dummyMapping.MemberName)], (int)mappingJObject[nameof(dummyMapping.Id)]);
+                }
+
+                return table;
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+            }
         }
     }
 }

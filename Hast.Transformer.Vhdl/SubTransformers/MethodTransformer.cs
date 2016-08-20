@@ -1,18 +1,15 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Vhdl.Constants;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Hast.Common.Configuration;
+using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
-using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
-using Orchard;
-using System.Linq;
-using Hast.Transformer.Models;
-using System.Threading.Tasks;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
-using Hast.Common.Configuration;
-using System;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {

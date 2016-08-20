@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Common.Numerics;
 using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.SpecialOperations;
 
 namespace Hast.Samples.SampleAssembly
 {

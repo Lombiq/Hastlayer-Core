@@ -1,6 +1,5 @@
-﻿using Hast.Transformer.SimpleMemory;
-using System;
-using System.Drawing;
+﻿using System.Drawing;
+using Hast.Transformer.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {

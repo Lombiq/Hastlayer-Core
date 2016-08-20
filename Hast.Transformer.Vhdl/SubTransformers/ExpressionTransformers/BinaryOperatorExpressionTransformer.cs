@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Synthesis;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
-using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -175,7 +173,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 operationResultDataObjectReference = stateMachine
                     .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultType)
-                    .ToReference(); 
+                    .ToReference();
             }
             else
             {
@@ -189,14 +187,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var leftTypeReference = expression.Left.GetActualTypeReference();
             var rightTypeReference = expression.Right.GetActualTypeReference();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
-            var shouldResize =
+            var shouldResizeResult =
                 (
                     // If the type of the result is the same as the type of the binary expression but the expression is a
                     // multiplication then this means that the result of the operation wouldn't fit into the result type.
                     // This is allowed in .NET (an explicit cast is needed in C# but that will be removed by the compiler)
                     // but will fail in VHDL with something like "[Synth 8-690] width mismatch in assignment; target has 
                     // 16 bits, source has 32 bits." In this cases we need to add a type conversion. Also see the block
-                    // below
+                    // below.
                     // E.g. ushort = ushort * ushort is valid in IL but in VHDL it must have a length truncation:
                     // unsigned(15 downto 0) = resize(unsigned(15 downto 0) * unsigned(15 downto 0), 16)
                     isMultiplication &&
@@ -213,7 +211,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 var rightType = _typeConverter.ConvertTypeReference(rightTypeReference);
                 var rightTypeSize = rightType is SizedDataType ? ((SizedDataType)rightType).Size : 0;
 
-                shouldResize = shouldResize ||
+                shouldResizeResult = shouldResizeResult ||
                     (
                         // If the operands and the result has the same size then the result won't fit.
                         isMultiplication &&
@@ -235,7 +233,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     );
             }
 
-            if (shouldResize)
+            if (shouldResizeResult)
             {
                 binaryElement = new Invocation
                 {
@@ -255,8 +253,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             };
 
             // Since the current state takes more than one clock cycle we add a new state and follow up there.
-            if (isFirstOfSimdOperations && 
-                !operationIsMultiCycle && 
+            if (isFirstOfSimdOperations &&
+                !operationIsMultiCycle &&
                 currentBlock.RequiredClockCycles + clockCyclesNeededForOperation > 1)
             {
                 var nextStateBlock = new InlineBlock(new LineComment(
@@ -273,7 +271,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 currentBlock.Add(operationResultAssignment);
                 if (isFirstOfSimdOperations)
                 {
-                    currentBlock.RequiredClockCycles += clockCyclesNeededForOperation; 
+                    currentBlock.RequiredClockCycles += clockCyclesNeededForOperation;
                 }
             }
             // Since the operation in itself takes more than one clock cycle we need to add a new state just to wait.
@@ -331,7 +329,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             Operator = BinaryOperator.Add,
                             Right = "1".ToVhdlValue(waitedCyclesCountVariable.DataType)
                         }
-                    }; 
+                    };
                 }
 
 
@@ -343,7 +341,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 if (isLastOfSimdOperations)
                 {
                     // It should be the last state added above.
-                    currentBlock.ChangeBlockToDifferentState(stateMachine.States.Last().Body, stateMachine.States.Count - 1); 
+                    currentBlock.ChangeBlockToDifferentState(stateMachine.States.Last().Body, stateMachine.States.Count - 1);
                 }
             }
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Hast.VhdlBuilder.Extensions;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {

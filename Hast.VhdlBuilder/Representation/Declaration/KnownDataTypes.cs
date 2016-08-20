@@ -1,5 +1,4 @@
 ﻿using System;
-using Hast.VhdlBuilder.Representation.Expression;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
 
@@ -17,6 +16,17 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public static DataType Boolean = new DataType(_boolean)
         {
             DefaultValue = "false".ToVhdlValue(_boolean)
+        };
+
+        private static SizedDataType _binaryString = new SizedDataType
+        {
+            TypeCategory = DataTypeCategory.Numeric,
+            Name = "signed",
+            Size = 16
+        };
+        public static SizedDataType BinaryString = new SizedDataType(_binaryString)
+        {
+            DefaultValue = default(short).ToString().ToVhdlValue(_int16)
         };
 
         private static DataType _character = new DataType { TypeCategory = DataTypeCategory.Character, Name = "character" };

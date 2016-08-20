@@ -1,15 +1,10 @@
-﻿using Hast.Communication.Exceptions;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
+using Hast.Common.Models;
+using Hast.Communication.Models;
+using Hast.Synthesis;
 using Hast.Transformer.SimpleMemory;
 using Orchard.Logging;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.IO.Ports;
-using System.Threading.Tasks;
-using Hast.Communication.Models;
-using Hast.Common.Models;
-using Hast.Communication.Constants;
-using Hast.Synthesis;
 
 namespace Hast.Communication.Services
 {

@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hast.Common.Configuration;
+using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
-using Hast.VhdlBuilder.Extensions;
-using Hast.Transformer.Models;
-using Hast.Common.Configuration;
-using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -86,7 +84,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
                 var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
                 {
-                    RangeMax = (uint)instanceCount - 1
+                    RangeMax = instanceCount - 1
                 };
                 var invocationIndexVariableReference = invocationIndexVariableName.ToVhdlVariableReference();
                 stateMachine.LocalVariables.AddIfNew(new Variable
@@ -173,7 +171,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var finishedInvokedComponentsForStates = scope.FinishedInvokedStateMachinesForStates;
             ISet<string> finishedComponents;
             if (finishedInvokedComponentsForStates
-                .TryGetValue(scope.CurrentBlock.CurrentStateMachineStateIndex, out finishedComponents))
+                .TryGetValue(scope.CurrentBlock.StateMachineStateIndex, out finishedComponents))
             {
                 if (finishedComponents.Contains(indexedStateMachineName))
                 {
@@ -257,7 +255,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var waitForInvocationFinishedIfElse = InvocationHelper
                 .CreateWaitForInvocationFinished(stateMachine, targetDeclaration.GetFullName(), instanceCount, waitForAll);
 
-            var currentStateName = stateMachine.CreateStateName(currentBlock.CurrentStateMachineStateIndex);
+            var currentStateName = stateMachine.CreateStateName(currentBlock.StateMachineStateIndex);
             var waitForInvokedStateMachinesToFinishState = new InlineBlock(
                 new LineComment(
                     "Waiting for the state machine invocation of the following method to finish: " + targetMethodName),
@@ -307,9 +305,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
                 ISet<string> finishedComponents;
                 if (!finishedInvokedComponentsForStates
-                    .TryGetValue(currentBlock.CurrentStateMachineStateIndex, out finishedComponents))
+                    .TryGetValue(currentBlock.StateMachineStateIndex, out finishedComponents))
                 {
-                    finishedComponents = finishedInvokedComponentsForStates[currentBlock.CurrentStateMachineStateIndex] =
+                    finishedComponents = finishedInvokedComponentsForStates[currentBlock.StateMachineStateIndex] =
                         new HashSet<string>();
                 }
                 finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, targetIndex));

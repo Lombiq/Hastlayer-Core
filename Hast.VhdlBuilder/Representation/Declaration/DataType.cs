@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -67,9 +66,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override bool Equals(object obj)
         {
-            if (obj == null) return false;
-
-            var otherType = (DataType)obj;
+            var otherType = obj as DataType;
+            if (otherType == null) return false;
             return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
 

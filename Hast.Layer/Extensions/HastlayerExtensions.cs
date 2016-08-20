@@ -1,6 +1,6 @@
-﻿using Hast.Common.Configuration;
+﻿using System.Threading.Tasks;
+using Hast.Common.Configuration;
 using Hast.Common.Models;
-using System.Threading.Tasks;
 
 namespace Hast.Layer
 {
