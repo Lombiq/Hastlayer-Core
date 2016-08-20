@@ -1,6 +1,6 @@
 ﻿using System;
+using Hast.Common.Numerics;
 using Hast.Transformer.SimpleMemory;
-using Hast.Transformer.SpecialOperations;
 
 namespace Hast.Samples.SampleAssembly
 {
