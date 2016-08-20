@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hast.Transformer.SpecialOperations
+namespace Hast.Common.Numerics
 {
     /// <summary>
     /// Special Hastlayer-supported SIMD (Single Instruction Multiple Data) operations that can be utilized to execute
