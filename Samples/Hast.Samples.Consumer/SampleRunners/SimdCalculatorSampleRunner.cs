@@ -29,7 +29,9 @@ namespace Hast.Samples.Consumer.SampleRunners
         }
 
 
-        // Checking if the hardware result is correct by running it agains the software implementation.
+        // Checking if the hardware result is correct by running it agains the software implementation. Note that this
+        // can be also done by Hastlayer automatically on the SimpleMemory level by setting 
+        // ProxyGenerationConfiguration.ValidateHardwareResults to true when calling GenerateProxy().
         private static int[] ThrowIfNotCorrect(SimdCalculator proxied, Func<SimdCalculator, int[]> operation)
         {
             var hardwareResult = operation(proxied);
@@ -46,6 +48,11 @@ namespace Hast.Samples.Consumer.SampleRunners
                 {
                     if (hardwareResult[i] != softwareResult[i])
                     {
+                        // Uncomment this to list errors in a file.
+                        //System.IO.File.AppendAllText(
+                        //    "Errors.txt", 
+                        //    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
+
                         throw new InvalidOperationException(
                             "The hardware result and the software result is not the same on index " + i.ToString() + ": " +
                             hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + ".");
