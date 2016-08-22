@@ -111,9 +111,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         .Is<MemberReferenceExpression>(memberReference => memberReference.GetFullName() == _fieldFullName));
                 if (isSearchedFieldAccess)
                 {
-                    ArrayDataType = _arrayCreateExpressionTransformer
-                        .Transform(arrayCreateExpression, new BasicComponent("dummy"))
-                        .DataType; 
+                    ArrayDataType = _arrayCreateExpressionTransformer.CreateArrayInstantiation(arrayCreateExpression);
                 }
             }
         }

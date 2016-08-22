@@ -89,6 +89,7 @@
     <Compile Include="Configuration\VhdlTransformerConfiguration.cs" />
     <Compile Include="Constants\SpecialTypes.cs" />
     <Compile Include="Events\IVhdlTransformationEventHandler.cs" />
+    <Compile Include="Extensions\ArrayCreateExpressionExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\BinaryChainBuilder.cs" />
