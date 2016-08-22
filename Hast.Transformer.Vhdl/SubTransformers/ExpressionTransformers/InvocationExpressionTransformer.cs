@@ -82,7 +82,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 customProperties[operationPropertyKey] == currentBlock.StateMachineStateIndex)
             {
                 var operationNoun = isWrite ? "write" : "read";
-                currentBlock.Add(new LineComment("The last SimpleMemory " + operationNoun + " just finished, so need to start the next one in the next state."));
+                currentBlock.Add(new LineComment(
+                    "The last SimpleMemory " + operationNoun + " just finished, so need to start the next one in the next state."));
 
                 stateMachine.AddNewStateAndChangeCurrentBlock(context);
             }
