@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -38,7 +40,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (method.Modifiers.HasFlag(Modifiers.Extern))
                     {
                         throw new InvalidOperationException(
-                            "The method " + method.GetFullName() + 
+                            "The method " + method.GetFullName() +
                             " can't be transformed because it's extern. Only managed code can be transformed.");
                     }
 
@@ -117,7 +119,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // to from the inside (since in .NET a method argument can also be assigned to from inside the method)
                 // we need to have intermediary input variables, then copy their values to local variables.
 
-                var parameterDataType = _typeConverter.ConvertAstType(parameter.Type);
+                var parameterDataType = _typeConverter.ConvertParameterType(parameter);
                 var parameterSignalReference = stateMachine.CreateParameterSignalReference(parameter.Name);
                 var parameterLocalVariableName = stateMachine.CreatePrefixedObjectName(parameter.Name);
 

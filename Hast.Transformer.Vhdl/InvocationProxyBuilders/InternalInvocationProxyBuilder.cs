@@ -57,7 +57,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             {
                 ElementType = KnownDataTypes.Boolean,
                 // Prefixing the name so it won't clash with boolean arrays created by the transforming logic.
-                Name = ArrayTypeNameHelper.CreateArrayTypeName("InternalInvocationProxy_" + KnownDataTypes.Boolean.Name)
+                Name = ArrayHelper.CreateArrayTypeName("InternalInvocationProxy_" + KnownDataTypes.Boolean.Name)
             };
             var runningStates = new VhdlBuilder.Representation.Declaration.Enum
             {

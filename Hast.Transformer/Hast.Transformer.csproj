@@ -101,6 +101,7 @@
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
+    <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemory.cs" />

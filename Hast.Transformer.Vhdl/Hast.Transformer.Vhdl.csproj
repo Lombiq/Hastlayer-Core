@@ -97,6 +97,7 @@
     <Compile Include="JsonNet.PrivateSettersContractResolvers\PrivateSettersContractResolvers.cs" />
     <Compile Include="Models\IPartiallyTransformedBinaryOperatorExpression.cs" />
     <Compile Include="Models\ITransformedVhdlManifest.cs" />
+    <Compile Include="Models\ParameterArrayLength.cs" />
     <Compile Include="Models\PartiallyTransformedBinaryOperatorExpression.cs" />
     <Compile Include="Models\TransformedVhdlManifest.cs" />
     <Compile Include="Services\ITransformedVhdlManifestBuilder.cs" />
@@ -110,7 +111,7 @@
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
     <Compile Include="ArchitectureComponents\ArchitectureComponentBase.cs" />
-    <Compile Include="Helpers\ArrayTypeNameHelper.cs" />
+    <Compile Include="Helpers\ArrayHelper.cs" />
     <Compile Include="InvocationProxyBuilders\ExternalInvocationProxyBuilder.cs" />
     <Compile Include="InvocationProxyBuilders\IExternalInvocationProxyBuilder.cs" />
     <Compile Include="InvocationProxyBuilders\IInternalInvocationProxyBuilder.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="ArchitectureComponents\NameSuffixes.cs" />
     <Compile Include="SimpleMemory\ISimpleMemoryComponentBuilder.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryComponentBuilder.cs" />
+    <Compile Include="SubTransformers\ArrayParameterLengthSetter.cs" />
     <Compile Include="SubTransformers\ArrayTypesCreator.cs" />
     <Compile Include="SubTransformers\CompilerGeneratedClassesVerifier.cs" />
     <Compile Include="SubTransformers\DisplayClassFieldTransformer.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="SubTransformers\ExpressionTransformers\IBinaryOperatorExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\IArrayParameterLengthSetter.cs" />
     <Compile Include="SubTransformers\IEnumTypesCreator.cs" />
     <Compile Include="SubTransformers\ISpecialOperationInvocationTransformer.cs" />
     <Compile Include="SubTransformers\IStateMachineInvocationBuilder.cs" />

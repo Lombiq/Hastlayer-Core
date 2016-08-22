@@ -47,7 +47,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var dataType = _typeConverter.ConvertAstType(field.ReturnType);
 
                     // The field is an array so need to instantiate it.
-                    if (field.ReturnType.Is<ComposedType>(composed => composed.ArraySpecifiers.Any()))
+                    if (field.ReturnType.IsArray())
                     {
                         var visitor = new ArrayCreationDataTypeRetrievingVisitor(
                             fieldFullName,

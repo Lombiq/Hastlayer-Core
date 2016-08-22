@@ -42,10 +42,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var targetMemberReference = expression.Target as MemberReferenceExpression;
 
             // This is a SimpleMemory access.
-            if (context.TransformationContext.UseSimpleMemory() &&
-                targetMemberReference != null &&
-                targetMemberReference.Target.Is<IdentifierExpression>(identifier =>
-                    identifier.Identifier == context.Scope.Method.GetSimpleMemoryParameterName()))
+            if (expression.IsSimpleMemoryInvocation())
             {
                 return TransformSimpleMemoryInvocation(expression, transformedParameters, targetMemberReference, context);
             }

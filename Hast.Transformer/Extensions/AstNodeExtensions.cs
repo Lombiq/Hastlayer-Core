@@ -18,11 +18,14 @@ namespace ICSharpCode.NRefactory.CSharp
             var memberReference = node.Annotation<MemberReference>();
             if (memberReference != null) return memberReference.FullName;
 
+            var parameterReference = node.Annotation<ParameterReference>();
+            if (parameterReference != null) return CreateEntityBasedName(node, parameterReference.Name);
+
             if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
 
             if (node is ComposedType)
             {
-                var composedType = node as ComposedType;
+                var composedType = (ComposedType)node;
 
                 var name = composedType.BaseType.GetFullName();
 
@@ -35,6 +38,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 }
 
                 return name;
+            }
+
+            if (node is IdentifierExpression)
+            {
+                return CreateEntityBasedName(node, ((IdentifierExpression)node).Identifier);
             }
 
             throw new InvalidOperationException("This node doesn't have a name.");
@@ -108,11 +116,22 @@ namespace ICSharpCode.NRefactory.CSharp
             return node.FindFirstParentOfType<TypeDeclaration>();
         }
 
+        public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node)
+        {
+            return node.FindFirstParentOfType<EntityDeclaration>();
+        }
+
         public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
         {
             var castNode = node as T;
             if (castNode == null) return false;
             return predicate(castNode);
+        }
+
+
+        private static string CreateEntityBasedName(AstNode node, string name)
+        {
+            return node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
         }
     }
 }

@@ -200,7 +200,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             .CreateParameterSignalName(targetMethodName, currentParameter.Name).TrimExtendedVhdlIdDelimiters(),
                         index.ToString());
 
-                var parameterSignalType = _typeConverter.ConvertAstType(currentParameter.Type);
+                var parameterSignalType = _typeConverter.ConvertParameterType(currentParameter);
                 stateMachine.InternallyDrivenSignals.AddIfNew(new ParameterSignal(targetMethodName, currentParameter.Name)
                 {
                     DataType = parameterSignalType,

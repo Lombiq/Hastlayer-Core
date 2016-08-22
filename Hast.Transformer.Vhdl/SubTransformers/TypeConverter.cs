@@ -169,7 +169,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertComposed(ComposedType type)
         {
-            if (type.ArraySpecifiers.Count != 0)
+            if (type.IsArray())
             {
                 return CreateArrayType(ConvertAstType(type.BaseType));
             }
@@ -202,7 +202,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return new VhdlBuilder.Representation.Declaration.ArrayType
             {
                 ElementType = elementType,
-                Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name)
+                Name = ArrayHelper.CreateArrayTypeName(elementType.Name)
             };
         }
 

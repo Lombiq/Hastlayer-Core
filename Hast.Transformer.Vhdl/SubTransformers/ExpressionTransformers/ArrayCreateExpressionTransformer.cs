@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         
         public UnconstrainedArrayInstantiation CreateArrayInstantiation(ArrayCreateExpression expression)
         {
-            return CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
+            return ArrayHelper.CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
         }
 
         public Value Transform(ArrayCreateExpression expression, IArchitectureComponent component)
@@ -57,7 +57,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             var elementType = _typeConverter.ConvertAstType(expression.Type);
-            var arrayInstantiationType = CreateArrayInstantiation(elementType, length);
+            var arrayInstantiationType = ArrayHelper.CreateArrayInstantiation(elementType, length);
 
             // Finding the variable or member where the array is used and changing its type to the array instantiation.
             var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
@@ -85,17 +85,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             };
 
             return arrayInitializationValue;
-        }
-
-
-        private static UnconstrainedArrayInstantiation CreateArrayInstantiation(DataType elementType, int length)
-        {
-            return new UnconstrainedArrayInstantiation
-            {
-                Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name),
-                RangeFrom = 0,
-                RangeTo = length - 1
-            };
         }
     }
 }
