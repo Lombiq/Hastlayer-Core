@@ -251,6 +251,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             }
                         });
 
+                        bodyBlock.Add(new LineComment(
+                            "Building a boolean array where each of the elements will indicate whether the component with the given index should be started next."));
 
                         for (int c = 0; c < targetComponentCount; c++)
                         {
