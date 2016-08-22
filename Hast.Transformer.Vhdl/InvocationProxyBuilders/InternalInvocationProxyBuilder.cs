@@ -252,11 +252,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         });
 
 
-                        var availableTargetSelectingCase = new Case
-                        {
-                            Expression = targetAvailableIndicatorVariableReference
-                        };
-
                         for (int c = 0; c < targetComponentCount; c++)
                         {
                             var selectorConditions = new List<IVhdlElement>();
