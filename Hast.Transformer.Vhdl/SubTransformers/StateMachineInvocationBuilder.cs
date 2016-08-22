@@ -177,10 +177,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     var currentBlock = scope.CurrentBlock;
 
-                    var newBlock = new InlineBlock();
-                    var newStateIndex = stateMachine.AddState(newBlock);
-                    currentBlock.Add(stateMachine.CreateStateChange(newStateIndex));
-                    currentBlock.ChangeBlockToDifferentState(newBlock, newStateIndex);
+                    stateMachine.AddNewStateAndChangeCurrentBlock(scope);
                 }
             }
 

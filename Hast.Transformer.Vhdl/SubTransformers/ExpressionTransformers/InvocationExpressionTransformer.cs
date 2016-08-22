@@ -84,10 +84,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 var operationNoun = isWrite ? "write" : "read";
                 currentBlock.Add(new LineComment("The last SimpleMemory " + operationNoun + " just finished, so need to start the next one in the next state."));
 
-                var newStateBlock = new InlineBlock();
-                var newStateIndex = stateMachine.AddState(newStateBlock);
-                currentBlock.Add(stateMachine.CreateStateChange(newStateIndex));
-                currentBlock.ChangeBlockToDifferentState(newStateBlock, newStateIndex);
+                stateMachine.AddNewStateAndChangeCurrentBlock(context);
             }
 
             if (isWrite)

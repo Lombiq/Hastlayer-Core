@@ -259,9 +259,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 var nextStateBlock = new InlineBlock(new LineComment(
                     "This state was added because the previous state would go over one clock cycle with any more operations."));
-                var nextStateIndex = stateMachine.AddState(nextStateBlock);
-                currentBlock.Add(stateMachine.CreateStateChange(nextStateIndex));
-                currentBlock.ChangeBlockToDifferentState(nextStateBlock, nextStateIndex);
+                stateMachine.AddNewStateAndChangeCurrentBlock(context, nextStateBlock);
             }
 
             // If the operation in itself doesn't take more than one clock cycle then we simply add the operation to the
@@ -310,10 +308,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     };
                     waitForResultBlock.Add(waitForResultIf);
 
-                    var waitForResultStateIndex = stateMachine.AddState(waitForResultBlock);
+                    var waitForResultStateIndex = stateMachine.AddNewStateAndChangeCurrentBlock(context, waitForResultBlock);
                     stateMachine.States[waitForResultStateIndex].RequiredClockCycles = clockCyclesToWait;
-                    currentBlock.Add(stateMachine.CreateStateChange(waitForResultStateIndex));
-                    currentBlock.ChangeBlockToDifferentState(waitForResultBlock, waitForResultStateIndex);
 
                     var afterResultReceivedBlock = new InlineBlock();
                     var afterResultReceivedStateIndex = stateMachine.AddState(afterResultReceivedBlock);

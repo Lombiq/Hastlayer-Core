@@ -1,5 +1,7 @@
-﻿using Hast.VhdlBuilder.Extensions;
+﻿using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
+using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
@@ -28,6 +30,26 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 AssignTo = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
                 Expression = stateMachine.CreateStateName(destinationStateIndex).ToVhdlIdValue()
             };
+        }
+
+        public static int AddNewStateAndChangeCurrentBlock(
+            this IMemberStateMachine stateMachine,
+            ISubTransformerContext context,
+            IBlockElement newBlock = null)
+        {
+            return stateMachine.AddNewStateAndChangeCurrentBlock(context.Scope, newBlock);
+        }
+
+        public static int AddNewStateAndChangeCurrentBlock(
+            this IMemberStateMachine stateMachine,
+            ISubTransformerScope scope,
+            IBlockElement newBlock = null)
+        {
+            if (newBlock == null) newBlock = new InlineBlock();
+            var newStateIndex = scope.StateMachine.AddState(newBlock);
+            scope.CurrentBlock.Add(scope.StateMachine.CreateStateChange(newStateIndex));
+            scope.CurrentBlock.ChangeBlockToDifferentState(newBlock, newStateIndex);
+            return newStateIndex;
         }
 
         /// <summary>
