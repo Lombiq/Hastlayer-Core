@@ -106,10 +106,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 base.VisitArrayCreateExpression(arrayCreateExpression);
 
-                var isSearchFieldAccess = arrayCreateExpression.Parent
+                var isSearchedFieldAccess = arrayCreateExpression.Parent
                     .Is<AssignmentExpression>(assignment => assignment.Left
                         .Is<MemberReferenceExpression>(memberReference => memberReference.GetFullName() == _fieldFullName));
-                if (isSearchFieldAccess)
+                if (isSearchedFieldAccess)
                 {
                     ArrayDataType = _arrayCreateExpressionTransformer
                         .Transform(arrayCreateExpression, new BasicComponent("dummy"))

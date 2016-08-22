@@ -20,7 +20,7 @@ namespace Hast.Transformer.Visitors
                 methodDeclaration.Body.AcceptVisitor(castExpressionFindingVisitor);
 
                 // Simply changing the parameter's type and removing the cast. Note that this will leave corresponding
-                // compiler-generated Funcs intacts and thus wrong. E.g. there will be similar lines added to the
+                // compiler-generated Funcs intact and thus wrong. E.g. there will be similar lines added to the
                 // lambda's calling method:
                 // Func<object, bool> arg_57_1;
                 // if (arg_57_1 = PrimeCalculator.<> c.<> 9__9_0 == null) {
