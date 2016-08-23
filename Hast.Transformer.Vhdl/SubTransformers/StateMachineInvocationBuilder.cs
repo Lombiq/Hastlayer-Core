@@ -166,19 +166,37 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, index);
 
 
-            // Is there an invocation await for this target in the current state? Because if yes, we can't immediately
-            // restart it (due to the latency of the invocation proxy), need to move to a new state.
+            // Due to the time needed for the invocation proxy to register that the invoked state machine is not started
+            // any more the same state machine can be restarted in the second state counted from the await state at 
+            // earliest. Thus adding a new state and also a wait state if necessary.
             var finishedInvokedComponentsForStates = scope.FinishedInvokedStateMachinesForStates;
             ISet<string> finishedComponents;
-            if (finishedInvokedComponentsForStates
-                .TryGetValue(scope.CurrentBlock.StateMachineStateIndex, out finishedComponents))
-            {
-                if (finishedComponents.Contains(indexedStateMachineName))
-                {
-                    var currentBlock = scope.CurrentBlock;
 
-                    stateMachine.AddNewStateAndChangeCurrentBlock(scope);
-                }
+            // Would the invocation be restarted in the same state? We need to add a state just to wait, then a new state
+            // for the new invocation start.
+            if (finishedInvokedComponentsForStates
+                .TryGetValue(scope.CurrentBlock.StateMachineStateIndex, out finishedComponents) &&
+                finishedComponents.Contains(indexedStateMachineName))
+            {
+                scope.CurrentBlock.Add(new LineComment(
+                    "The last invocation for the target state machine just finished, so need to start the next one in a later state."));
+
+                stateMachine.AddNewStateAndChangeCurrentBlock(
+                    scope,
+                    new InlineBlock(new LineComment(
+                        "This state was just added to leave time for the invocation proxy to register that the previous invocation finished.")));
+
+                stateMachine.AddNewStateAndChangeCurrentBlock(scope);
+            }
+            // Are we one state later from the await for some other reason already? Still another state needs to be added
+            // got leave time for the invocation proxy.
+            else if (finishedInvokedComponentsForStates
+                .TryGetValue(scope.CurrentBlock.StateMachineStateIndex - 1, out finishedComponents) &&
+                finishedComponents.Contains(indexedStateMachineName))
+            {
+                scope.CurrentBlock.Add(new LineComment(
+                    "The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state."));
+                stateMachine.AddNewStateAndChangeCurrentBlock(scope);
             }
 
 
@@ -282,7 +300,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return Enumerable.Repeat<IVhdlElement>(Empty.Instance, instanceCount);
             }
 
-            var returnSignalReferences = new List<DataObjectReference>();
+            var returnVariableReferences = new List<IDataObject>();
 
             Action<int> buildInvocationWaitBlock = targetIndex =>
             {
@@ -295,8 +313,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Name = returnSignalReference.Name
                 });
 
+                // The return signal's value needs to be copied over to a local variable. Otherwise if we'd re-use the
+                // signal with multiple invocations the last invocation's value would be present in all references.
+                var returnVariableReference = stateMachine
+                    .CreateVariableWithNextUnusedIndexedName(NameSuffixes.Return, returnType)
+                    .ToReference();
+
+                currentBlock.Add(new Assignment
+                {
+                    AssignTo = returnVariableReference,
+                    Expression = returnSignalReference
+                });
+
                 // Using the reference of the state machine's return value in place of the original method call.
-                returnSignalReferences.Add(returnSignalReference);
+                returnVariableReferences.Add(returnVariableReference);
 
                 // Noting that this component was finished in this state.
                 var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
@@ -315,14 +345,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 for (int i = 0; i < instanceCount; i++)
                 {
                     buildInvocationWaitBlock(i);
-                } 
+                }
             }
             else
             {
                 buildInvocationWaitBlock(index);
             }
 
-            return returnSignalReferences;
+            return returnVariableReferences;
         }
     }
 }
