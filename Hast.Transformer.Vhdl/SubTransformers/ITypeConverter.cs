@@ -19,16 +19,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         public static DataType ConvertParameterType(this ITypeConverter typeConverter, ParameterDeclaration parameter)
         {
-            if (!parameter.Type.IsArray())
+            var parameterType = parameter.Annotation<ParameterDefinition>().ParameterType;
+
+            // This is an out or ref parameter.
+            if (parameterType.IsByReference)
             {
-                return typeConverter.ConvertAstType(parameter.Type);
+                parameterType = ((ByReferenceType)parameterType).ElementType;
             }
-            else
+
+            if (!parameterType.IsArray)
             {
-                return ArrayHelper.CreateArrayInstantiation(
-                    typeConverter.ConvertAstType(((ComposedType)parameter.Type).BaseType),
-                    parameter.Annotation<ParameterArrayLength>().Length);
+                return typeConverter.ConvertTypeReference(parameterType);
             }
+
+            return ArrayHelper.CreateArrayInstantiation(
+                typeConverter.ConvertTypeReference(parameterType.GetElementType()),
+                parameter.Annotation<ParameterArrayLength>().Length);
         }
     }
 }

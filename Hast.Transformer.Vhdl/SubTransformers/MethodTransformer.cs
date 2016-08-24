@@ -12,6 +12,7 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -113,34 +114,71 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             // Handling in/out method parameters.
-            foreach (var parameter in method.Parameters.Where(p => !p.IsSimpleMemoryParameter()))
+            var isFirstOutFlowingParameter = true;
+            foreach (var parameter in method.GetNonSimpleMemoryParameters())
             {
                 // Since input parameters are assigned to from the outside but they could be attempted to be also assigned
                 // to from the inside (since in .NET a method argument can also be assigned to from inside the method)
                 // we need to have intermediary input variables, then copy their values to local variables.
 
                 var parameterDataType = _typeConverter.ConvertParameterType(parameter);
-                var parameterSignalReference = stateMachine.CreateParameterSignalReference(parameter.Name);
-                var parameterLocalVariableName = stateMachine.CreatePrefixedObjectName(parameter.Name);
+                var parameterSignalReference = stateMachine
+                    .CreateParameterSignalReference(parameter.Name, ParameterFlowDirection.In);
+                var parameterLocalVariableReference = stateMachine.CreatePrefixedObjectName(parameter.Name).ToVhdlVariableReference();
 
-                stateMachine.ExternallyDrivenSignals.Add(new ParameterSignal(methodFullName, parameter.Name)
+                stateMachine.ExternallyDrivenSignals.Add(new ParameterSignal(
+                    methodFullName, 
+                    parameter.Name,
+                    0,
+                    true)
                 {
                     DataType = parameterDataType,
-                    Name = parameterSignalReference.Name,
-                    IsOwn = true
+                    Name = parameterSignalReference.Name
                 });
 
                 stateMachine.LocalVariables.Add(new Variable
                 {
                     DataType = parameterDataType,
-                    Name = parameterLocalVariableName
+                    Name = parameterLocalVariableReference.Name
                 });
 
                 openingBlock.Add(new Assignment
                 {
-                    AssignTo = parameterLocalVariableName.ToVhdlVariableReference(),
+                    AssignTo = parameterLocalVariableReference,
                     Expression = parameterSignalReference
                 });
+
+                // If the parameter can be modified inside and those changes should be passed back then we need to write
+                // the local variables back to parameters.
+                if (parameter.IsOutFlowing())
+                {
+                    if (isFirstOutFlowingParameter)
+                    {
+                        isFirstOutFlowingParameter = false;
+
+                        stateMachine.States[1].Body.Add(new LineComment(
+                            "Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too."));
+                    }
+
+                    var outParameterSignalReference = stateMachine
+                        .CreateParameterSignalReference(parameter.Name, ParameterFlowDirection.Out);
+
+                    stateMachine.InternallyDrivenSignals.Add(new ParameterSignal(
+                        methodFullName,
+                        parameter.Name,
+                        0,
+                        true)
+                    {
+                        DataType = parameterDataType,
+                        Name = outParameterSignalReference.Name
+                    });
+
+                    stateMachine.States[1].Body.Add(new Assignment
+                    {
+                        AssignTo = outParameterSignalReference,
+                        Expression = parameterLocalVariableReference
+                    });
+                }
             }
 
 

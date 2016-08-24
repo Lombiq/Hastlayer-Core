@@ -6,7 +6,7 @@ namespace Hast.Transformer.Vhdl.Models
     {
         public string TargetMemberFullName { get; private set; }
         public string TargetParameterName { get; private set; }
-        public int Index { get; set; }
+        public int Index { get; private set; }
 
         /// <summary>
         /// Indicates whether the parameter is the own (in or out) parameter of the component (as opposed to being
@@ -15,10 +15,17 @@ namespace Hast.Transformer.Vhdl.Models
         public bool IsOwn { get; set; }
 
 
-        public ParameterSignal(string targetMemberFullName, string parameterName)
+        public ParameterSignal(string targetMemberFullName, string targetParameterName)
+            : this(targetMemberFullName, targetParameterName, 0, false)
+        {
+        }
+
+        public ParameterSignal(string targetMemberFullName, string targetParameterName, int index, bool isOwn)
         {
             TargetMemberFullName = targetMemberFullName;
-            TargetParameterName = parameterName;
+            TargetParameterName = targetParameterName;
+            Index = index;
+            IsOwn = isOwn;
         }
     }
 }
