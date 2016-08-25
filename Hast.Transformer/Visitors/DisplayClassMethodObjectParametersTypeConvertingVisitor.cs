@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Visitors
 {
@@ -32,6 +33,7 @@ namespace Hast.Transformer.Visitors
                 if (castExpression != null)
                 {
                     objectParameter.Type = castExpression.Type.Clone();
+                    objectParameter.Annotation<ParameterDefinition>().ParameterType = castExpression.GetActualTypeReference(true);
                     castExpression.ReplaceWith(castExpression.Expression);
                     castExpression.Remove();
                 }
