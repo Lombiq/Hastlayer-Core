@@ -2,11 +2,18 @@
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
+    public enum ParameterFlowDirection
+    {
+        In,
+        Out
+    }
+
+
     public static class ArchitectureComponentNameHelper
     {
-        public static string CreateParameterSignalName(string componentName, string parameterName)
+        public static string CreateParameterSignalName(string componentName, string parameterName, ParameterFlowDirection direction)
         {
-            return CreatePrefixedSegmentedObjectName(componentName, parameterName, NameSuffixes.Parameter);
+            return CreatePrefixedSegmentedObjectName(componentName, parameterName, NameSuffixes.Parameter, direction.ToString());
         }
 
         public static string CreateReturnSignalName(string componentName)

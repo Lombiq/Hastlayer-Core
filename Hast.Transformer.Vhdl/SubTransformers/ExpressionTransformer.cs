@@ -199,7 +199,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         var inovocationExpression = (InvocationExpression)assignment.Right;
                         var arguments = inovocationExpression.Arguments;
 
-                        var targetMethod = TaskParallelizationHelper
+                        var targetMethod = (MethodDeclaration)TaskParallelizationHelper
                             .GetTargetDisplayClassMemberFromFuncCreation((ObjectCreateExpression)arguments.First())
                             .GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                         var targetMaxDegreeOfParallelism = context.TransformationContext
@@ -207,7 +207,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod)
                             .MaxDegreeOfParallelism;
 
-                        // We only need to care about he invocation here. Since this is a Task start there will be
+                        // We only need to care about the invocation here. Since this is a Task start there will be
                         // some form of await later.
                         _stateMachineInvocationBuilder.BuildInvocation(
                             targetMethod,

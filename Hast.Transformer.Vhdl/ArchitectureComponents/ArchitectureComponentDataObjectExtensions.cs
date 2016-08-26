@@ -30,9 +30,14 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 .Union(component.LocalVariables);
         }
 
-        public static IEnumerable<ParameterSignal> GetParameterSignals(this IArchitectureComponent component)
+        public static IEnumerable<ParameterSignal> GetInParameterSignals(this IArchitectureComponent component)
         {
-            return component.GetAllSignals().Where(signal => signal is ParameterSignal).Cast<ParameterSignal>();
+            return FilterParameterSignals(component.ExternallyDrivenSignals);
+        }
+
+        public static IEnumerable<ParameterSignal> GetOutParameterSignals(this IArchitectureComponent component)
+        {
+            return FilterParameterSignals(component.InternallyDrivenSignals);
         }
 
         public static Variable CreateVariableWithNextUnusedIndexedName(
@@ -67,10 +72,13 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return signal;
         }
 
-        public static DataObjectReference CreateParameterSignalReference(this IArchitectureComponent component, string parameterName)
+        public static DataObjectReference CreateParameterSignalReference(
+            this IArchitectureComponent component, 
+            string parameterName, 
+            ParameterFlowDirection direction)
         {
             return ArchitectureComponentNameHelper
-                .CreateParameterSignalName(component.Name, parameterName)
+                .CreateParameterSignalName(component.Name, parameterName, direction)
                 .ToVhdlSignalReference();
         }
 
@@ -89,6 +97,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return component
                 .CreatePrefixedSegmentedObjectName(targetMemberName, NameSuffixes.Return, index.ToString())
                 .ToVhdlSignalReference();
+        }
+
+
+        private static IEnumerable<ParameterSignal> FilterParameterSignals(IEnumerable<Signal> signals)
+        {
+            return signals.Where(signal => signal is ParameterSignal).Cast<ParameterSignal>();
         }
     }
 }

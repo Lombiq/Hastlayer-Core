@@ -21,6 +21,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         }
         
         
+        public UnconstrainedArrayInstantiation CreateArrayInstantiation(ArrayCreateExpression expression)
+        {
+            return ArrayHelper.CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
+        }
+
         public Value Transform(ArrayCreateExpression expression, IArchitectureComponent component)
         {
             if (expression.Arguments.Count != 1)
@@ -32,23 +37,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 throw new NotSupportedException("Only single-dimensional arrays are supported.");
             }
 
-            var sizeArgument = expression.Arguments.Single();
+            var length = expression.GetStaticLength();
 
-            if (!(sizeArgument is PrimitiveExpression))
+            if (length < 1)
             {
-                throw new NotSupportedException("Only arrays with statically defined dimension sizes are supported. Consider adding the dimension sizes directly into the array initialization or use a const field.");
-            }
-
-            var size = int.Parse(sizeArgument.ToString());
-
-            if (size < 1)
-            {
-                throw new InvalidOperationException("An array should have a size greater than 1.");
+                throw new InvalidOperationException("An array should have a length greater than 1.");
             }
 
 
             // Arrays are tricky: the variable declaration can happen earlier but without an array creation (i.e.
-            // at that point the size of the array won't be known) so we have to go back to the variable declaration
+            // at that point the length of the array won't be known) so we have to go back to the variable declaration
             // and set its data type to the unconstrained array instantiation.
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
@@ -59,12 +57,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             var elementType = _typeConverter.ConvertAstType(expression.Type);
-            var arrayInstantiationType = new UnconstrainedArrayInstantiation
-            {
-                Name = ArrayTypeNameHelper.CreateArrayTypeName(elementType.Name),
-                RangeFrom = 0,
-                RangeTo = size - 1
-            };
+            var arrayInstantiationType = ArrayHelper.CreateArrayInstantiation(elementType, length);
 
             // Finding the variable or member where the array is used and changing its type to the array instantiation.
             var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?

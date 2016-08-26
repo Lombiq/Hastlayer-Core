@@ -57,7 +57,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             {
                 ElementType = KnownDataTypes.Boolean,
                 // Prefixing the name so it won't clash with boolean arrays created by the transforming logic.
-                Name = ArrayTypeNameHelper.CreateArrayTypeName("InternalInvocationProxy_" + KnownDataTypes.Boolean.Name)
+                Name = ArrayHelper.CreateArrayTypeName("InternalInvocationProxy_" + KnownDataTypes.Boolean.Name)
             };
             var runningStates = new VhdlBuilder.Representation.Declaration.Enum
             {
@@ -90,11 +90,11 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 Func<int, string> getTargetMemberComponentName = index =>
                     ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, index);
 
-                Func<string, int, int, IEnumerable<IVhdlElement>> buildParameterAssignments =
+                Func<string, int, int, IEnumerable<IVhdlElement>> buildInParameterAssignments =
                     (invokerName, invokerIndex, targetIndex) =>
                     {
                         var passedParameters = componentsByName[invokerName]
-                            .GetParameterSignals()
+                            .GetOutParameterSignals()
                             .Where(parameter =>
                                 parameter.TargetMemberFullName == targetMemberName &&
                                 parameter.Index == invokerIndex &&
@@ -104,14 +104,17 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             .CreateIndexedComponentName(targetMemberName, targetIndex);
                         var targetParameters =
                             componentsByName[targetComponentName]
-                            .GetParameterSignals()
-                            .Where(parameter => parameter.TargetMemberFullName == targetMemberName);
+                            .GetInParameterSignals()
+                            .Where(parameter => 
+                                parameter.TargetMemberFullName == targetMemberName &&
+                                parameter.IsOwn);
+
+                        if (!targetParameters.Any()) return Enumerable.Empty<IVhdlElement>();
 
                         return passedParameters.Select(parameter => new Assignment
                         {
                             AssignTo = targetParameters
-                                        .Single(p =>
-                                            p.TargetParameterName == parameter.TargetParameterName && p.IsOwn),
+                                        .Single(p => p.TargetParameterName == parameter.TargetParameterName),
                             Expression = parameter.ToReference()
                         });
                     };
@@ -136,6 +139,35 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     .CreateReturnSignalReferenceForTargetComponent(targetMemberName, invokerIndex),
                             Expression = returnSignal.ToReference()
                         };
+                    };
+
+                Func<string, int, int, IEnumerable<IVhdlElement>> buildOutParameterAssignments =
+                    (invokerName, invokerIndex, targetIndex) =>
+                    {
+                        var targetComponentName = ArchitectureComponentNameHelper
+                            .CreateIndexedComponentName(targetMemberName, targetIndex);
+                        var passedBackParameters =
+                            componentsByName[targetComponentName]
+                            .GetOutParameterSignals()
+                            .Where(parameter =>
+                                parameter.TargetMemberFullName == targetMemberName &&
+                                parameter.IsOwn);
+
+                        var receivingParameters = componentsByName[invokerName]
+                                    .GetInParameterSignals()
+                                    .Where(parameter =>
+                                        parameter.TargetMemberFullName == targetMemberName &&
+                                        parameter.Index == invokerIndex &&
+                                        !parameter.IsOwn);
+
+                        if (!receivingParameters.Any()) return Enumerable.Empty<IVhdlElement>();
+
+                        return passedBackParameters.Select(parameter => new Assignment
+                        {
+                            AssignTo = receivingParameters
+                                        .Single(p => p.TargetParameterName == parameter.TargetParameterName),
+                            Expression = parameter.ToReference()
+                        });
                     };
 
 
@@ -185,7 +217,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         .CreateStartedSignalReference(invokerName, targetMemberName, invokerIndex)
                             });
 
-                            signalConnectionsBlock.Body.AddRange(buildParameterAssignments(invokerName, invokerIndex, targetIndex));
+                            signalConnectionsBlock.Body.AddRange(buildInParameterAssignments(invokerName, invokerIndex, targetIndex));
 
                             signalConnectionsBlock.Add(new Assignment
                             {
@@ -198,6 +230,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                             var returnAssignment = buildReturnAssigment(invokerName, invokerIndex, targetIndex);
                             if (returnAssignment != null) signalConnectionsBlock.Add(returnAssignment);
+                            signalConnectionsBlock.Body.AddRange(buildOutParameterAssignments(invokerName, invokerIndex, targetIndex));
                         }
                     }
                 }
@@ -392,7 +425,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         });
                                     }
 
-                                    componentAvailableBodyBlock.Body.AddRange(buildParameterAssignments(invokerName, i, targetIndex));
+                                    componentAvailableBodyBlock.Body.AddRange(buildInParameterAssignments(invokerName, i, targetIndex));
 
                                     return componentAvailableBodyBlock;
                                 };
@@ -493,6 +526,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                                         var returnAssignment = buildReturnAssigment(invokerName, i, c);
                                         if (returnAssignment != null) isFinishedIfTrue.Add(returnAssignment);
+
+                                        isFinishedIfTrue.Body.AddRange(buildOutParameterAssignments(invokerName, i, c));
 
                                         caseWhenBody = new If
                                         {

@@ -11,24 +11,24 @@ namespace ICSharpCode.NRefactory.CSharp
         /// The <see cref="TypeDeclaration"/> of the interface's method that the declaration implements a method of, 
         /// or <c>null</c> if the declaration is not an implementation of any method of any interface.
         /// </returns>
-        public static MethodDeclaration FindImplementedInterfaceMethod(this MethodDeclaration declaration, Func<AstType, TypeDeclaration> lookupDeclaration)
+        public static MethodDeclaration FindImplementedInterfaceMethod(this MethodDeclaration method, Func<AstType, TypeDeclaration> lookupDeclaration)
         {
             // This is an explicitly implemented method so just returning the interface's type declaration directly.
-            if (!declaration.PrivateImplementationType.IsNull)
+            if (!method.PrivateImplementationType.IsNull)
             {
-                var interfaceDeclaration = lookupDeclaration(declaration.PrivateImplementationType);
+                var interfaceDeclaration = lookupDeclaration(method.PrivateImplementationType);
                 if (interfaceDeclaration != null)
                 {
-                    return interfaceDeclaration.FindMatchingMethod(declaration, lookupDeclaration);
+                    return interfaceDeclaration.FindMatchingMethod(method, lookupDeclaration);
                 }
                 return null;
             }
 
             // Otherwise if it's not public it can't be a member declared in an interface.
-            if (declaration.Modifiers != Modifiers.Public) return null;
+            if (method.Modifiers != Modifiers.Public) return null;
 
             // Searching for an implemented interface with the same member.
-            var parent = (TypeDeclaration)declaration.Parent;
+            var parent = (TypeDeclaration)method.Parent;
             foreach (var baseType in parent.BaseTypes) // BaseTypes are flattened, so interface inheritance is taken into account.
             {
                 if (baseType.NodeType == NodeType.TypeReference)
@@ -38,7 +38,7 @@ namespace ICSharpCode.NRefactory.CSharp
 
                     if (baseTypeDeclaration.ClassType == ClassType.Interface)
                     {
-                        var matchingMethod = baseTypeDeclaration.FindMatchingMethod(declaration, lookupDeclaration);
+                        var matchingMethod = baseTypeDeclaration.FindMatchingMethod(method, lookupDeclaration);
                         if (matchingMethod != null) return matchingMethod;
                     }
                 }

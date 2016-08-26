@@ -42,10 +42,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var targetMemberReference = expression.Target as MemberReferenceExpression;
 
             // This is a SimpleMemory access.
-            if (context.TransformationContext.UseSimpleMemory() &&
-                targetMemberReference != null &&
-                targetMemberReference.Target.Is<IdentifierExpression>(identifier =>
-                    identifier.Identifier == context.Scope.Method.GetSimpleMemoryParameterName()))
+            if (expression.IsSimpleMemoryInvocation())
             {
                 return TransformSimpleMemoryInvocation(expression, transformedParameters, targetMemberReference, context);
             }
@@ -304,7 +301,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     targetDeclaration = expression
                         .FindFirstParentTypeDeclaration() // This is the level of the DisplayClass.
                         .FindFirstParentTypeDeclaration() // The parent class of the DisplayClass.
-                        .Members.Single(member => member.GetFullName() == targetMethodName);
+                        .Members
+                        .Single(member => member.GetFullName() == targetMethodName);
                 }
             }
             else
@@ -326,11 +324,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     " can't be found and thus can't be transformed. Did you forget to add an assembly to the list of the assemblies to generate hardware from?");
             }
 
+            var methodDeclaration = (MethodDeclaration)targetDeclaration;
 
-            _stateMachineInvocationBuilder
-                .BuildInvocation(targetDeclaration, transformedParameters, 1, context);
-
-            return _stateMachineInvocationBuilder.BuildMultiInvocationWait(targetDeclaration, 1, true, context).Single();
+            var buildInvocationResult = _stateMachineInvocationBuilder
+                .BuildInvocation(methodDeclaration, transformedParameters, 1, context);
+            var invocationWait = _stateMachineInvocationBuilder.BuildSingleInvocationWait(methodDeclaration, 0, context);
+            context.Scope.CurrentBlock.Add(new InlineBlock(buildInvocationResult.OutParameterBackAssignments));
+            return invocationWait;
         }
     }
 }
