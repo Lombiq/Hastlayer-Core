@@ -20,17 +20,27 @@ namespace Hast.Samples.SampleAssembly
             var input = memory.ReadUInt32(Run_InputUInt32Index);
             var tasks = new Task<uint>[MaxDegreeOfParallelism];
 
-            for (int i = 0; i < MaxDegreeOfParallelism; i++)
+            for (uint i = 0; i < MaxDegreeOfParallelism; i++)
             {
-                tasks[i] = Task.Factory.StartNew<uint>(
+                tasks[i] = Task.Factory.StartNew(
                     indexObject =>
                     {
-                        var index = (int)indexObject;
-                        uint result = input + (uint)index * 2;
+                        var index = (uint)indexObject;
+                        uint result = input + index * 2;
 
-                        for (int j = 0; j < 9999999; j++)
+                        var even = true;
+                        for (int j = 2; j < 9999999; j++)
                         {
-                            result += (uint)j;
+                            if (even)
+                            {
+                                result += index; 
+                            }
+                            else
+                            {
+                                result -= index;
+                            }
+
+                            even = !even;
                         }
 
                         return result;
