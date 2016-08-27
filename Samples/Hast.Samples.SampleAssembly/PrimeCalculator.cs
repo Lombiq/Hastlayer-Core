@@ -53,8 +53,22 @@ namespace Hast.Samples.SampleAssembly
             for (int i = 0; i < numberCount; i++)
             {
                 uint number = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i);
-                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, IsPrimeNumberInternal(number));
+                var inputOutput = new PrimeInputOutput();
+                inputOutput.Number = number;
+                IsPrimeNumberInternal(inputOutput);
+                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, inputOutput.IsPrime);
             }
+        }
+
+        private void IsPrimeNumberInternal(PrimeInputOutput inputOutput)
+        {
+            inputOutput.IsPrime = IsPrimeNumberInternal(inputOutput.Number);
+        }
+
+        private class PrimeInputOutput
+        {
+            public uint Number { get; set; }
+            public bool IsPrime { get; set; }
         }
 
         public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
