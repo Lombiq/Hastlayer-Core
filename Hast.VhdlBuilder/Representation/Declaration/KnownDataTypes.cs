@@ -20,7 +20,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         private static SizedDataType _binaryString = new SizedDataType
         {
-            TypeCategory = DataTypeCategory.Numeric,
+            TypeCategory = DataTypeCategory.Scalar,
             Name = "signed",
             Size = 16
         };
@@ -37,7 +37,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public static Identifier Identifier = new Identifier();
 
-        public static DataType _unrangedInt = new DataType { TypeCategory = DataTypeCategory.Numeric, Name = "integer" };
+        public static DataType _unrangedInt = new DataType { TypeCategory = DataTypeCategory.Scalar, Name = "integer" };
         public static DataType UnrangedInt = new DataType(_unrangedInt)
         {
             DefaultValue = default(int).ToVhdlValue(_unrangedInt)
@@ -46,7 +46,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         private static SizedDataType _int16 = new SizedDataType
         {
-            TypeCategory = DataTypeCategory.Numeric,
+            TypeCategory = DataTypeCategory.Scalar,
             Name = "signed",
             Size = 16
         };
@@ -112,7 +112,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             DefaultValue = default(string).ToVhdlValue(_string)
         };
 
-        private static DataType _real = new DataType { TypeCategory = DataTypeCategory.Numeric, Name = "real" };
+        private static DataType _real = new DataType { TypeCategory = DataTypeCategory.Scalar, Name = "real" };
         public static DataType Real = new DataType(_real)
         {
             DefaultValue = default(double).ToString().ToVhdlValue(_real)

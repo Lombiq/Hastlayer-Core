@@ -242,7 +242,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var type = _typeConverter.ConvertTypeReference(typeReference);
                     var valueString = primitive.Value.ToString();
                     // Replacing decimal comma to decimal dot.
-                    if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.');
+                    if (type.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
 
                     // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
                     // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.

@@ -49,7 +49,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
                 }.ToVhdl(vhdlGenerationOptions);
             }
 
-            if (DataType.TypeCategory == DataTypeCategory.Numeric ||
+            if (DataType.TypeCategory == DataTypeCategory.Scalar ||
                 DataType.TypeCategory == DataTypeCategory.Unit) return content;
 
             if (DataType.TypeCategory == DataTypeCategory.Identifier) return vhdlGenerationOptions.ShortenName(content);
