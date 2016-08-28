@@ -50,25 +50,11 @@ namespace Hast.Samples.SampleAssembly
             // We need this information explicitly as we can't store arrays directly in memory.
             uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
 
-            for (int i = default(int); i < numberCount; i++)
+            for (int i = 0; i < numberCount; i++)
             {
                 uint number = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i);
-                var inputOutput = new PrimeInputOutput();
-                inputOutput.Number = number;
-                IsPrimeNumberInternal(inputOutput);
-                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, inputOutput.IsPrime);
+                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, IsPrimeNumberInternal(number));
             }
-        }
-
-        private void IsPrimeNumberInternal(PrimeInputOutput inputOutput)
-        {
-            inputOutput.IsPrime = IsPrimeNumberInternal(inputOutput.Number);
-        }
-
-        private struct PrimeInputOutput
-        {
-            public uint Number { get; set; }
-            public bool IsPrime { get; set; }
         }
 
         public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
