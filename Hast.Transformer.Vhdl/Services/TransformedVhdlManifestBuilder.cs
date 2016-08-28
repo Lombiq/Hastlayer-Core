@@ -263,6 +263,7 @@ namespace Hast.Transformer.Vhdl.Services
                     switch (typeDeclaration.ClassType)
                     {
                         case ClassType.Class:
+                        case ClassType.Struct:
                             memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
                             traverseTo = traverseTo.Where(n => 
                                 n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);
@@ -271,8 +272,6 @@ namespace Hast.Transformer.Vhdl.Services
                             return memberTransformerTasks; // Enums are transformed separately.
                         case ClassType.Interface:
                             return memberTransformerTasks; // Interfaces are irrelevant here.
-                        case ClassType.Struct:
-                            throw new NotSupportedException("Transforming structs (" + node.GetFullName() + ") is not supported.");
                     }
                     break;
                 case NodeType.TypeReference:

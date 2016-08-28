@@ -524,35 +524,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is ObjectCreateExpression)
             {
-                // Objects are mimicked with records and those don't need instantiation. However it's useful to
-                // initialize all record fields to their default or initial values (otherwise if e.g. a class is
-                // instantiated in a loop in the second run the old values could be accessed in VHDL).
-
-                var recordType = (Record)_typeConverter.ConvertAstType(((ObjectCreateExpression)expression).Type);
-                // This will only work if the newly created object is assigned to a variable or something else. It won't
-                // work if the newly created object is directly passed to a method for example).
-                var recordInstanceAssignmentTarget = expression
-                    .FindFirstParentOfType<AssignmentExpression>()
-                    .Left;
-                var recordInstanceIdentifier = recordInstanceAssignmentTarget is IdentifierExpression ?
-                    recordInstanceAssignmentTarget :
-                    recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
-                var recordInstanceReference = Transform(recordInstanceIdentifier, context);
-
-                foreach (var field in recordType.Fields)
-                {
-                    scope.CurrentBlock.Add(new Assignment
-                    {
-                        AssignTo = new RecordFieldAccess
-                        {
-                            Instance = (IDataObject)recordInstanceReference,
-                            FieldName = field.Name
-                        },
-                        Expression = field.DataType.DefaultValue
-                    });
-                }
+                InitializeRecord(expression, ((ObjectCreateExpression)expression).Type, context);
 
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
+                return Empty.Instance;
+            }
+            else if (expression is DefaultValueExpression)
+            {
+                // The only case when a default() will remain in the syntax tree is for composed types. For primitives
+                // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
+                InitializeRecord(expression, ((DefaultValueExpression)expression).Type, context);
+
+                // There is no need for struct instantiation per se, nothing should be on the right side of an assignment.
                 return Empty.Instance;
             }
             else
@@ -561,6 +544,38 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     "Expressions of type " +
                     expression.GetType() + " are not supported. The expression was: " +
                     expression.ToString());
+            }
+        }
+
+
+        private void InitializeRecord(Expression expression, AstType recordAstType, ISubTransformerContext context)
+        {
+            // Objects are mimicked with records and those don't need instantiation. However it's useful to
+            // initialize all record fields to their default or initial values (otherwise if e.g. a class is
+            // instantiated in a loop in the second run the old values could be accessed in VHDL).
+
+            var recordType = (Record)_typeConverter.ConvertAstType(recordAstType);
+            // This will only work if the newly created object is assigned to a variable or something else. It won't
+            // work if the newly created object is directly passed to a method for example).
+            var recordInstanceAssignmentTarget = expression
+                .FindFirstParentOfType<AssignmentExpression>()
+                .Left;
+            var recordInstanceIdentifier = recordInstanceAssignmentTarget is IdentifierExpression ?
+                recordInstanceAssignmentTarget :
+                recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
+            var recordInstanceReference = Transform(recordInstanceIdentifier, context);
+
+            foreach (var field in recordType.Fields)
+            {
+                context.Scope.CurrentBlock.Add(new Assignment
+                {
+                    AssignTo = new RecordFieldAccess
+                    {
+                        Instance = (IDataObject)recordInstanceReference,
+                        FieldName = field.Name
+                    },
+                    Expression = field.DataType.DefaultValue
+                });
             }
         }
     }
