@@ -5,7 +5,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public enum DataTypeCategory
     {
-        Numeric,
+        Scalar,
         Identifier, // Like in type T_STATE is (IDLE, READ, END_CYC); e.g IDLE or even boolean
         Array,
         Character,

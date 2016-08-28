@@ -7,12 +7,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Record : DataType
     {
-        public List<TypedDataObjectBase> Members { get; set; }
+        public List<RecordField> Fields { get; set; }
 
 
         public Record()
         {
-            Members = new List<TypedDataObjectBase>();
+            Fields = new List<RecordField>();
+            TypeCategory = DataTypeCategory.Composite;
         }
 
 
@@ -20,8 +21,25 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             return Terminated.Terminate(
                 "type " + vhdlGenerationOptions.ShortenName(Name) + " is record " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    Members.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    Fields.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "end record", vhdlGenerationOptions);
+        }
+    }
+
+
+    public class RecordField : TypedDataObjectBase
+    {
+        public RecordField()
+        {
+            DataObjectKind = DataObjectKind.Variable;
+        }
+
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            return Terminated.Terminate(
+                vhdlGenerationOptions.ShortenName(Name) +
+                (DataType != null ? ": " + DataType.ToReference().ToVhdl(vhdlGenerationOptions) : string.Empty),
+                vhdlGenerationOptions);
         }
     }
 }

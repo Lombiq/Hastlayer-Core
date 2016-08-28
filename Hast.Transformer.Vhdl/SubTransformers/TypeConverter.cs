@@ -11,6 +11,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class TypeConverter : ITypeConverter
     {
+        private readonly IRecordComposer _recordComposer;
+
+
+        public TypeConverter(IRecordComposer recordComposer)
+        {
+            _recordComposer = recordComposer;
+        }
+
+
         public DataType ConvertTypeReference(TypeReference typeReference)
         {
             switch (typeReference.FullName)
@@ -47,7 +56,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             var typeDefinition = typeReference as TypeDefinition;
-            if (typeDefinition != null && typeDefinition.IsEnum) return CreateEnumType(typeDefinition);
+            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition);
 
             throw new NotSupportedException("The type " + typeReference.FullName + " is not supported for transforming.");
         }
@@ -57,6 +66,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
             else if (type is ComposedType) return ConvertComposed((ComposedType)type);
             else if (type is SimpleType) return ConvertSimple((SimpleType)type);
+
+            var typeDefinition = type.Annotation<TypeDefinition>();
+            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition);
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
@@ -191,9 +203,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             var typeDefinition = type.Annotation<TypeDefinition>();
-            if (typeDefinition != null && typeDefinition.IsEnum) return CreateEnumType(typeDefinition);
+            if (typeDefinition != null && typeDefinition.IsEnum) return ConvertTypeDefinition(typeDefinition);
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
+        }
+
+        private DataType ConvertTypeDefinition(TypeDefinition typeDefinition)
+        {
+            if (typeDefinition.IsEnum)
+            {
+                return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
+            }
+
+            if (typeDefinition.IsClass)
+            {
+                return _recordComposer.CreateRecordFromType(typeDefinition);
+            }
+
+            throw new NotSupportedException(
+                "The TypeDefinition " + typeDefinition.FullName + " is not supported for transforming.");
         }
 
 
@@ -204,11 +232,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 ElementType = elementType,
                 Name = ArrayHelper.CreateArrayTypeName(elementType.Name)
             };
-        }
-
-        private static DataType CreateEnumType(TypeDefinition typeDefinition)
-        {
-            return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
         }
     }
 }

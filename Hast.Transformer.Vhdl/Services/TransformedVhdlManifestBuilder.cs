@@ -29,6 +29,7 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
         private readonly IEnumTypesCreator _enumTypesCreator;
         private readonly IArrayParameterLengthSetter _arrayParameterLengthSetter;
+        private readonly IPocoTransformer _pocoTransformer;
 
 
         public TransformedVhdlManifestBuilder(
@@ -41,7 +42,8 @@ namespace Hast.Transformer.Vhdl.Services
             IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
             IEnumTypesCreator enumTypesCreator,
-            IArrayParameterLengthSetter arrayParameterLengthSetter)
+            IArrayParameterLengthSetter arrayParameterLengthSetter,
+            IPocoTransformer pocoTransformer)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _clock = clock;
@@ -53,6 +55,7 @@ namespace Hast.Transformer.Vhdl.Services
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
             _enumTypesCreator = enumTypesCreator;
             _arrayParameterLengthSetter = arrayParameterLengthSetter;
+            _pocoTransformer = pocoTransformer;
         }
 
 
@@ -128,7 +131,7 @@ namespace Hast.Transformer.Vhdl.Services
             var potentiallyInvokingArchitectureComponents = transformerResults
                 .SelectMany(result =>
                     result.ArchitectureComponentResults
-                        .Select(smResult => smResult.ArchitectureComponent)
+                        .Select(componentResult => componentResult.ArchitectureComponent)
                         .Cast<IArchitectureComponent>())
                 .ToList();
             foreach (var transformerResult in transformerResults)
@@ -238,7 +241,7 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         memberTransformerTasks.Add(_displayClassFieldTransformer.Transform((FieldDeclaration)node, transformationContext));
                     }
-                    else
+                    else if (!(node is PropertyDeclaration))
                     {
                         throw new NotSupportedException("The member " + node.ToString() + " is not supported for transformation.");
                     }
@@ -260,16 +263,15 @@ namespace Hast.Transformer.Vhdl.Services
                     switch (typeDeclaration.ClassType)
                     {
                         case ClassType.Class:
-                            traverseTo = traverseTo
-                                .Skip(traverseTo
-                                    .Count(n => n.NodeType != NodeType.Member && n.NodeType != NodeType.TypeDeclaration));
+                        case ClassType.Struct:
+                            memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
+                            traverseTo = traverseTo.Where(n => 
+                                n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);
                             break;
                         case ClassType.Enum:
                             return memberTransformerTasks; // Enums are transformed separately.
                         case ClassType.Interface:
                             return memberTransformerTasks; // Interfaces are irrelevant here.
-                        case ClassType.Struct:
-                            throw new NotSupportedException("Transforming structs (" + node.GetFullName() + ") is not supported.");
                     }
                     break;
                 case NodeType.TypeReference:

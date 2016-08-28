@@ -6,40 +6,51 @@ namespace ICSharpCode.NRefactory.CSharp
     public static class TypeDeclarationExtensions
     {
         /// <summary>
-        /// Searches for a method on the type that has the same signature as the supplied method.
+        /// Searches for a member on the type that has the same signature as the supplied member.
         /// </summary>
-        /// <returns>The declaration of the matching method if found, <c>null</c> otherwise.</returns>
-        public static MethodDeclaration FindMatchingMethod(
+        /// <returns>The declaration of the matching member if found, <c>null</c> otherwise.</returns>
+        public static T FindMatchingMember<T>(
             this TypeDeclaration typeDeclaration, 
-            MethodDeclaration methodDeclaration, 
+            T memberDeclaration, 
             Func<AstType, TypeDeclaration> lookupDeclaration)
+            where T : EntityDeclaration
         {
+            var isMethod = memberDeclaration is MethodDeclaration;
+
             // Searching for members that have the exact same signature.
-            var matchedMember = typeDeclaration.Members.SingleOrDefault(member =>
+            return (T)typeDeclaration.Members.SingleOrDefault(member =>
             {
-                if (member.Name == methodDeclaration.Name && member is MethodDeclaration)
+                if (member.Name == memberDeclaration.Name)
                 {
-                    var method = (MethodDeclaration)member;
-                    if ((typeDeclaration.ClassType == ClassType.Interface || method.Modifiers == methodDeclaration.Modifiers) && // Only checking for modifiers is the type is not an interface.
-                        method.ReturnType.AstTypeEquals(methodDeclaration.ReturnType, lookupDeclaration) &&
-                        method.Parameters.Count == methodDeclaration.Parameters.Count)
+                    var isMatching =
+                        // Only checking for modifiers if the type is not an interface.
+                        (typeDeclaration.ClassType == ClassType.Interface || member.Modifiers == memberDeclaration.Modifiers) &&
+                        member.ReturnType.AstTypeEquals(memberDeclaration.ReturnType, lookupDeclaration);
+
+                    if (isMatching && isMethod && member is MethodDeclaration)
                     {
-                        foreach (var interfaceMethodParameter in method.Parameters)
+                        var methodToMatch = (MethodDeclaration)(object)memberDeclaration;
+                        var currentMethod = (MethodDeclaration)member;
+
+                        if (currentMethod.Parameters.Count == methodToMatch.Parameters.Count)
                         {
-                            if (!methodDeclaration.Parameters.Any(parameter => parameter.Type.AstTypeEquals(interfaceMethodParameter.Type, lookupDeclaration)))
+                            foreach (var interfaceMethodParameter in currentMethod.Parameters)
                             {
-                                return false;
+                                if (!methodToMatch.Parameters.Any(parameter => parameter.Type.AstTypeEquals(interfaceMethodParameter.Type, lookupDeclaration)))
+                                {
+                                    return false;
+                                }
                             }
+
+                            return true;
                         }
-                        return true;
                     }
+
+                    return isMatching;
                 }
 
                 return false;
             });
-
-            if (matchedMember != null) return (MethodDeclaration)matchedMember;
-            return null;
         }
     }
 }

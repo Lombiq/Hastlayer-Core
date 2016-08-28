@@ -253,6 +253,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         var localVariableDataType = stateMachine.LocalVariables
                             .Single(variable => variable.Name == ((IDataObject)parameter).Name).DataType;
 
+                        if (localVariableDataType is Record)
+                        {
+                            var fieldAccess = parameter as RecordFieldAccess;
+                            if (fieldAccess != null)
+                            {
+                                // A member of and object was passed to a method, i.e. Method(object.Property).
+                                localVariableDataType = ((Record)localVariableDataType).Fields
+                                    .Single(member => member.Name == fieldAccess.FieldName)
+                                    .DataType;
+                            }
+
+                            // Else the whole object was passed, i.e. Method(object). Nothing else to do.
+                        }
+
                         if (flowDirection == ParameterFlowDirection.Out)
                         {
                             assignmentExpression = _typeConversionTransformer

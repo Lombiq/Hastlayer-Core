@@ -53,7 +53,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public IVhdlElement Transform(Expression expression, ISubTransformerContext context)
         {
-            var stateMachine = context.Scope.StateMachine;
+            var scope = context.Scope;
+            var stateMachine = scope.StateMachine;
 
 
             Func<DataObjectReference, IVhdlElement> implementTypeConversionForBinaryExpressionParent = reference =>
@@ -135,8 +136,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    var scope = context.Scope;
-
                     // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
                     // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
                     var rightObjectCreateExpression = assignment.Right as ObjectCreateExpression;
@@ -243,7 +242,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var type = _typeConverter.ConvertTypeReference(typeReference);
                     var valueString = primitive.Value.ToString();
                     // Replacing decimal comma to decimal dot.
-                    if (type.TypeCategory == DataTypeCategory.Numeric) valueString = valueString.Replace(',', '.');
+                    if (type.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
 
                     // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
                     // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
@@ -330,7 +329,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (targetIdentifier != null)
                 {
                     string displayClassName;
-                    if (context.Scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out displayClassName))
+                    if (scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out displayClassName))
                     {
                         // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
                         if (memberReference.MemberName.EndsWith("__this"))
@@ -372,7 +371,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // Result property should await it. So doing it here.
                     if (memberReference.Target is IdentifierExpression && !targetTypeReference.IsArray)
                     {
-                        var targetMethod = context.Scope
+                        var targetMethod = scope
                             .TaskVariableNameToDisplayClassMethodMappings[((IdentifierExpression)memberReference.Target).Identifier];
                         return _stateMachineInvocationBuilder
                             .BuildSingleInvocationWait(targetMethod, 0, context);
@@ -385,15 +384,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                 }
 
-
-                throw new NotSupportedException("Transformation of the member reference expression " + memberReference + " is not supported.");
+                // Otherwise it's reference to an object's member.
+                return new RecordFieldAccess
+                {
+                    Instance = (IDataObject)Transform(memberReference.Target, context),
+                    FieldName = memberReference.MemberName.ToExtendedVhdlId()
+                };
             }
             // Not needed at the moment since ThisReferenceExpression can only happen if "this" is passed to a method, 
             // which is not supported
             //else if (expression is ThisReferenceExpression)
             //{
             //    var thisRef = expression as ThisReferenceExpression;
-            //    return context.Scope.Method.Parent.GetFullName();
+            //    return scope.Method.Parent.GetFullName();
             //}
             else if (expression is UnaryOperatorExpression)
             {
@@ -435,7 +438,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // Otherwise nothing to do.
                         goto default;
                     default:
-                        throw new NotSupportedException("Transformation of the unary operation " + unary.Operator + " is not supported.");
+                        throw new NotSupportedException(
+                            "Transformation of the unary operation " + unary.Operator + " is not supported.");
                 }
             }
             else if (expression is TypeReferenceExpression)
@@ -445,7 +449,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (declaration == null)
                 {
-                    throw new InvalidOperationException("No matching type for \"" + ((SimpleType)type).Identifier + "\" found in the syntax tree. This can mean that the type's assembly was not added to the syntax tree.");
+                    throw new InvalidOperationException(
+                        "No matching type for \"" + ((SimpleType)type).Identifier + 
+                        "\" found in the syntax tree. This can mean that the type's assembly was not added to the syntax tree.");
                 }
 
                 return declaration.GetFullName().ToVhdlValue(KnownDataTypes.Identifier);
@@ -464,7 +470,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     var toTypeKeyword = ((PrimitiveType)castExpression.Type).Keyword;
                     var fromTypeKeyword = castExpression.GetActualTypeReference().FullName;
-                    Logger.Warning("A cast from " + fromTypeKeyword + " to " + toTypeKeyword + " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " + expression.ToString() + " in method " + context.Scope.Method.GetFullName() + ".");
+                    Logger.Warning(
+                        "A cast from " + fromTypeKeyword + " to " + toTypeKeyword + 
+                        " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " + 
+                        expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
                 }
 
                 return typeConversionResult.Expression;
@@ -472,7 +481,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is ArrayCreateExpression)
             {
                 return _arrayCreateExpressionTransformer
-                    .Transform((ArrayCreateExpression)expression, context.Scope.StateMachine);
+                    .Transform((ArrayCreateExpression)expression, scope.StateMachine);
             }
             else if (expression is IndexerExpression)
             {
@@ -482,7 +491,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (targetVariableReference == null)
                 {
-                    throw new InvalidOperationException("The target of the indexer expression " + expression.ToString() + " couldn't be transformed to a data object reference.");
+                    throw new InvalidOperationException(
+                        "The target of the indexer expression " + expression.ToString() + 
+                        " couldn't be transformed to a data object reference.");
                 }
 
                 if (indexerExpression.Arguments.Count != 1)
@@ -511,12 +522,60 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Target = Transform(parenthesizedExpression.Expression, context)
                 };
             }
+            else if (expression is ObjectCreateExpression)
+            {
+                InitializeRecord(expression, ((ObjectCreateExpression)expression).Type, context);
+
+                // There is no need for object creation per se, nothing should be on the right side of an assignment.
+                return Empty.Instance;
+            }
+            else if (expression is DefaultValueExpression)
+            {
+                // The only case when a default() will remain in the syntax tree is for composed types. For primitives
+                // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
+                InitializeRecord(expression, ((DefaultValueExpression)expression).Type, context);
+
+                // There is no need for struct instantiation per se, nothing should be on the right side of an assignment.
+                return Empty.Instance;
+            }
             else
             {
                 throw new NotSupportedException(
                     "Expressions of type " +
                     expression.GetType() + " are not supported. The expression was: " +
                     expression.ToString());
+            }
+        }
+
+
+        private void InitializeRecord(Expression expression, AstType recordAstType, ISubTransformerContext context)
+        {
+            // Objects are mimicked with records and those don't need instantiation. However it's useful to
+            // initialize all record fields to their default or initial values (otherwise if e.g. a class is
+            // instantiated in a loop in the second run the old values could be accessed in VHDL).
+
+            var recordType = (Record)_typeConverter.ConvertAstType(recordAstType);
+            // This will only work if the newly created object is assigned to a variable or something else. It won't
+            // work if the newly created object is directly passed to a method for example).
+            var recordInstanceAssignmentTarget = expression
+                .FindFirstParentOfType<AssignmentExpression>()
+                .Left;
+            var recordInstanceIdentifier = recordInstanceAssignmentTarget is IdentifierExpression ?
+                recordInstanceAssignmentTarget :
+                recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
+            var recordInstanceReference = Transform(recordInstanceIdentifier, context);
+
+            foreach (var field in recordType.Fields)
+            {
+                context.Scope.CurrentBlock.Add(new Assignment
+                {
+                    AssignTo = new RecordFieldAccess
+                    {
+                        Instance = (IDataObject)recordInstanceReference,
+                        FieldName = field.Name
+                    },
+                    Expression = field.DataType.DefaultValue
+                });
             }
         }
     }
