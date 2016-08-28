@@ -548,7 +548,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Instance = (IDataObject)recordInstanceReference,
                             FieldName = field.Name
                         },
-                        Expression = field.InitialValue
+                        Expression = field.DataType.DefaultValue
                     });
                 }
 

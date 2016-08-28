@@ -11,6 +11,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class TypeConverter : ITypeConverter
     {
+        private readonly IRecordComposer _recordComposer;
+
+
+        public TypeConverter(IRecordComposer recordComposer)
+        {
+            _recordComposer = recordComposer;
+        }
+
+
         public DataType ConvertTypeReference(TypeReference typeReference)
         {
             switch (typeReference.FullName)
@@ -208,15 +217,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (typeDefinition.IsClass)
             {
-                return new Record
-                {
-                    Name = typeDefinition.FullName.ToExtendedVhdlId(),
-                    Fields = typeDefinition.Properties.Select(property => new RecordField
-                    {
-                        DataType = ConvertTypeReference(property.PropertyType),
-                        Name = property.Name.ToExtendedVhdlId()
-                    }).ToList()
-                };
+                return _recordComposer.CreateRecordFromType(typeDefinition);
             }
 
             throw new NotSupportedException(

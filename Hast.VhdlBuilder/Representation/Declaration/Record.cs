@@ -27,11 +27,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     }
 
 
-    public class RecordField : TypedDataObject
+    public class RecordField : TypedDataObjectBase
     {
         public RecordField()
         {
             DataObjectKind = DataObjectKind.Variable;
+        }
+
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            return Terminated.Terminate(
+                vhdlGenerationOptions.ShortenName(Name) +
+                (DataType != null ? ": " + DataType.ToReference().ToVhdl(vhdlGenerationOptions) : string.Empty),
+                vhdlGenerationOptions);
         }
     }
 }
