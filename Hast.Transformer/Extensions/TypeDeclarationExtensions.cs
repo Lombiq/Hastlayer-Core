@@ -20,7 +20,7 @@ namespace ICSharpCode.NRefactory.CSharp
                 if (member.Name == methodDeclaration.Name && member is MethodDeclaration)
                 {
                     var method = (MethodDeclaration)member;
-                    if ((typeDeclaration.ClassType == ClassType.Interface || method.Modifiers == methodDeclaration.Modifiers) && // Only checking for modifiers is the type is not an interface.
+                    if ((typeDeclaration.ClassType == ClassType.Interface || method.Modifiers == methodDeclaration.Modifiers) && // Only checking for modifiers if the type is not an interface.
                         method.ReturnType.AstTypeEquals(methodDeclaration.ReturnType, lookupDeclaration) &&
                         method.Parameters.Count == methodDeclaration.Parameters.Count)
                     {
