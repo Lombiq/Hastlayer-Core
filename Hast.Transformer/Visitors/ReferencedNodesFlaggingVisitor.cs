@@ -43,10 +43,9 @@ namespace Hast.Transformer.Visitors
             member.FindFirstParentTypeDeclaration().AddReference(memberReferenceExpression);
 
             // And also the interfaces implemented by it.
-            if (member is MethodDeclaration)
+            if (member is MethodDeclaration || member is PropertyDeclaration)
             {
-                var implementedInterfaceMethod = 
-                    ((MethodDeclaration)member).FindImplementedInterfaceMethod(_typeDeclarationLookupTable.Lookup);
+                var implementedInterfaceMethod = member.FindImplementedInterfaceMethod(_typeDeclarationLookupTable.Lookup);
                 if (implementedInterfaceMethod != null)
                 {
                     implementedInterfaceMethod.AddReference(member);
