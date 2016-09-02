@@ -23,7 +23,7 @@ namespace Hast.Samples.Consumer
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one.
         /// </summary>
-        public static Sample SampleToRun = Sample.PrimeCalculator;
+        public static Sample SampleToRun = Sample.DeflateCompressor;
     }
 
 
@@ -62,11 +62,15 @@ namespace Hast.Samples.Consumer
 
 
                         var configuration = new HardwareGenerationConfiguration();
+                        configuration.EnableCaching = false;
 
 
                         // Letting the configuration of samples run.
                         switch (Configuration.SampleToRun)
                         {
+                            case Sample.DeflateCompressor:
+                                DeflateCompressorSampleRunner.Configure(configuration);
+                                break;
                             case Sample.GenomeMatcher:
                                 GenomeMatcherSampleRunner.Configure(configuration);
                                 break;
@@ -111,10 +115,14 @@ namespace Hast.Samples.Consumer
                             Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
                         }
 
+                        return;
 
                         // Running samples.
                         switch (Configuration.SampleToRun)
                         {
+                            case Sample.DeflateCompressor:
+                                await DeflateCompressorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
                             case Sample.GenomeMatcher:
                                 await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
@@ -143,7 +151,7 @@ namespace Hast.Samples.Consumer
                 }).Wait();
 
             Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

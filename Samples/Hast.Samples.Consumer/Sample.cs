@@ -2,8 +2,9 @@
 {
     internal enum Sample
     {
-        ImageProcessingAlgorithms,
         GenomeMatcher,
+        DeflateCompressor,
+        ImageProcessingAlgorithms,
         HastlayerOptimizedAlgorithm,
         MonteCarloAlgorithm,
         PrimeCalculator,
