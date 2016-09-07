@@ -21,11 +21,14 @@ Some general constraints you have to keep in mind:
 
 - Only public virtual methods, or methods that implement a method defined in an interface will be accessible from the outside.
 - Always use the smallest data type necessary, e.g. `short` instead of `int` if 16b is enough, and unsigned types like `uint` if you don't need negative numbers.
-- Floating-point numbers like `float` and `double` and numbers bigger than 32b are not yet supported.
+- Supported primitive types: `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `bool`.  Floating-point numbers like `float` and `double` and numbers bigger than 64b are not yet supported.
+- The most important language constructs like `if` and `else` statements, `while` and `for` loops, type casting, binary operations (e.g. arithmetic, in/equality operators...) on allowed types are supported.
 - Algorithms can use a fixed-size (determined at runtime) memory space modelled as a `byte` array in the class `SimpleMemory`. For inputs that should be passed to hardware implementations and outputs that should be sent back this memory space is to be used. For internal method arguments (i.e. for data that isn't coming from the host computer or should be sent back) normal method arguments can be used.
 - Passing object references other than a `SimpleMemory` instance is not supported.
-- Using objects is not yet supported, but arrays having dimensions declared compile-time are.
-- Lambda expression are supported to an extent needed to write task parallelized code (see samples).
+- Using objects created of classes or structs containing only properties is supported.
+- Arrays having dimensions declared compile-time are supported.
+- Task-based parallelism is with TPL is supported to a limited degree. Lambda expression are supported to an extent needed to use tasks (see samples).
+- Operation-level, SIMD-like parallelism is supported, see samples.
 
 
 ## Troubleshooting
