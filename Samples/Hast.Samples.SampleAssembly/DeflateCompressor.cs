@@ -8,7 +8,8 @@ using Hast.Transformer.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Sample demonstrating de/compression with the deflate algorithm.
+    /// Sample demonstrating de/compression with the deflate algorithm. A port of this JS deflate/inflate implementation:
+    /// https://github.com/dankogai/js-deflate (included in the js-deflate folder).
     /// </summary>
     public class DeflateCompressor
     {
