@@ -25,19 +25,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public bool CanTransform(FieldDeclaration field)
+        public bool IsDisplayClassField(FieldDeclaration field)
         {
-            return
-                field.GetFullName().IsDisplayClassMemberName() &&
-                // Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
-                // like: public PrimeCalculator <>4__this;
-                !field.Variables.Any(variable => variable.Name.EndsWith("__this")) &&
-                // Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return types 
-                // as the original lambda. Nothing needs to be done with this.
-                !(field.ReturnType.Is<SimpleType>(simple => simple.Identifier == "Func")) &&
-                // Sometimes the compiler adds a static field containing an object of the parent class as below:
-                // public static readonly HastlayerOptimizedAlgorithm.<>c <>9 = new HastlayerOptimizedAlgorithm.<>c ();
-                field.Modifiers != (Modifiers.Public | Modifiers.Static | Modifiers.Readonly);
+            return field.GetFullName().IsDisplayClassMemberName();
         }
 
         public Task<IMemberTransformerResult> Transform(FieldDeclaration field, IVhdlTransformationContext context)
@@ -46,25 +36,40 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var fieldFullName = field.GetFullName();
                 var fieldComponent = new BasicComponent(fieldFullName);
-                var dataType = _typeConverter.ConvertAstType(field.ReturnType);
 
-                // The field is an array so need to instantiate it.
-                if (field.ReturnType.IsArray())
+
+                var shouldTransform =
+                    // Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
+                    // like: public PrimeCalculator <>4__this;
+                    !field.Variables.Any(variable => variable.Name.EndsWith("__this")) &&
+                    // Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return types 
+                    // as the original lambda. Nothing needs to be done with this.
+                    !(field.ReturnType.Is<SimpleType>(simple => simple.Identifier == "Func")) &&
+                    // Sometimes the compiler adds a static field containing an object of the parent class as below:
+                    // public static readonly HastlayerOptimizedAlgorithm.<>c <>9 = new HastlayerOptimizedAlgorithm.<>c ();
+                    field.Modifiers != (Modifiers.Public | Modifiers.Static | Modifiers.Readonly);
+                if (shouldTransform)
                 {
-                    var visitor = new ArrayCreationDataTypeRetrievingVisitor(
-                        fieldFullName,
-                        _arrayCreateExpressionTransformer);
+                    var dataType = _typeConverter.ConvertAstType(field.ReturnType);
 
-                    context.SyntaxTree.AcceptVisitor(visitor);
+                    // The field is an array so need to instantiate it.
+                    if (field.ReturnType.IsArray())
+                    {
+                        var visitor = new ArrayCreationDataTypeRetrievingVisitor(
+                            fieldFullName,
+                            _arrayCreateExpressionTransformer);
 
-                    dataType = visitor.ArrayDataType;
+                        context.SyntaxTree.AcceptVisitor(visitor);
+
+                        dataType = visitor.ArrayDataType;
+                    }
+
+                    fieldComponent.GlobalVariables.Add(new Variable
+                    {
+                        Name = fieldFullName.ToExtendedVhdlId(),
+                        DataType = dataType
+                    });
                 }
-
-                fieldComponent.GlobalVariables.Add(new Variable
-                {
-                    Name = fieldFullName.ToExtendedVhdlId(),
-                    DataType = dataType
-                });
 
                 return (IMemberTransformerResult)new MemberTransformerResult
                 {

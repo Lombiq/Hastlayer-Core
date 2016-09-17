@@ -243,7 +243,7 @@ namespace Hast.Transformer.Vhdl.Services
                     else if (node is FieldDeclaration)
                     {
                         var field = (FieldDeclaration)node;
-                        if (_displayClassFieldTransformer.CanTransform(field))
+                        if (_displayClassFieldTransformer.IsDisplayClassField(field))
                         {
                             memberTransformerTasks.Add(_displayClassFieldTransformer.Transform(field, transformationContext));
                         }
