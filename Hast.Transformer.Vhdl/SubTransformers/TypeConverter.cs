@@ -186,6 +186,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return CreateArrayType(ConvertAstType(type.BaseType));
             }
 
+            // If the type is used in an array initialization then the type will be in the only child.
+            if (type.Children.SingleOrDefault() is SimpleType)
+            {
+                return ConvertSimple((SimpleType)type.Children.SingleOrDefault());
+            }
+
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
 
@@ -203,7 +209,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             var typeDefinition = type.Annotation<TypeDefinition>();
-            if (typeDefinition != null && typeDefinition.IsEnum) return ConvertTypeDefinition(typeDefinition);
+            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition);
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }

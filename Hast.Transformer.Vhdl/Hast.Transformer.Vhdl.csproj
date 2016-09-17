@@ -150,10 +150,12 @@
     <Compile Include="SubTransformers\IArrayParameterLengthSetter.cs" />
     <Compile Include="SubTransformers\IEnumTypesCreator.cs" />
     <Compile Include="SubTransformers\IPocoTransformer.cs" />
+    <Compile Include="SubTransformers\IReadonlyStaticFieldTransformer.cs" />
     <Compile Include="SubTransformers\IRecordComposer.cs" />
     <Compile Include="SubTransformers\ISpecialOperationInvocationTransformer.cs" />
     <Compile Include="SubTransformers\IStateMachineInvocationBuilder.cs" />
     <Compile Include="SubTransformers\PocoTransformer.cs" />
+    <Compile Include="SubTransformers\ReadonlyStaticFieldTransformer.cs" />
     <Compile Include="SubTransformers\RecordComposer.cs" />
     <Compile Include="SubTransformers\SpecialOperationInvocationTransformer.cs" />
     <Compile Include="SubTransformers\StateMachineInvocationBuilder.cs" />

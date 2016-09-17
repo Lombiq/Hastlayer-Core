@@ -28,7 +28,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public Value Transform(ArrayCreateExpression expression, IArchitectureComponent component)
         {
-            if (expression.Arguments.Count != 1)
+            if (expression.Arguments.Any() && expression.Arguments.Count != 1)
             {
                 // For the sake of maximal compatibility with synthesis tools we don't allow multi-dimensional
                 // arrays, see: http://vhdl.renerta.com/mobile/source/vhd00006.htm "Synthesis tools do generally not 
@@ -47,42 +47,58 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             // Arrays are tricky: the variable declaration can happen earlier but without an array creation (i.e.
             // at that point the length of the array won't be known) so we have to go back to the variable declaration
-            // and set its data type to the unconstrained array instantiation.
+            // and set its data type to the unconstrained array instantiation. This is unless the array is also 
+            // immediately initialized (i.e. new[] { 1, 2, 3 }-style).
+
+            var isInitialized = expression.Initializer != null;
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
-            if (parentAssignmentExpression == null || 
-                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression))
+            if ((parentAssignmentExpression == null || 
+                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)) &&
+                !isInitialized)
             {
-                throw new NotSupportedException("Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
+                throw new NotSupportedException(
+                    "Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
             }
 
             var elementType = _typeConverter.ConvertAstType(expression.Type);
             var arrayInstantiationType = ArrayHelper.CreateArrayInstantiation(elementType, length);
 
-            // Finding the variable or member where the array is used and changing its type to the array instantiation.
-            var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
-                ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
-                ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
-            var parentDataObjectName = component.CreatePrefixedObjectName(parentIdentifier);
-            var parentDataObject = component
-                .GetAllDataObjects()
-                .Where(dataObject => dataObject.Name == parentDataObjectName)
-                .SingleOrDefault();
-            // We'll only find the data object if it's in the same architecture component. So e.g. separately transformed
-            // fields (possibly in compiler-generated and inner DisplayClasses) won't be handled: those should be dealt
-            // with separately.
-            if (parentDataObject != null)
+            if (!isInitialized)
             {
-                parentDataObject.DataType = arrayInstantiationType; 
+                // Finding the variable or member where the array is used and changing its type to the array instantiation.
+                var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
+                    ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
+                    ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
+                var parentDataObjectName = component.CreatePrefixedObjectName(parentIdentifier);
+                var parentDataObject = component
+                    .GetAllDataObjects()
+                    .Where(dataObject => dataObject.Name == parentDataObjectName)
+                    .SingleOrDefault();
+                // We'll only find the data object if it's in the same architecture component. So e.g. separately transformed
+                // fields (possibly in compiler-generated and inner DisplayClasses) won't be handled: those should be dealt
+                // with separately.
+                if (parentDataObject != null)
+                {
+                    parentDataObject.DataType = arrayInstantiationType;
+                } 
             }
 
-            // Initializing the array with the .NET default values so there are no surprises when reading values
-            // without setting them previously.
+            // Initializing the array with the .NET default values (so there are no surprises when reading values
+            // without setting them previously) or the initialized values.
             var arrayInitializationValue = new Value
             {
-                DataType = arrayInstantiationType,
-                Content = "others => " + elementType.DefaultValue.ToVhdl()
+                DataType = arrayInstantiationType
             };
+
+            if (isInitialized)
+            {
+                //arrayInitializationValue.EvaluatedContent = 
+            }
+            else
+            {
+                arrayInitializationValue.Content = "others => " + elementType.DefaultValue.ToVhdl();
+            }
 
             return arrayInitializationValue;
         }

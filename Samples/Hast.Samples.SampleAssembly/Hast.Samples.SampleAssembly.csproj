@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeflateCompressor.cs" />
+    <Compile Include="Deflate\DeflateBuffer.cs" />
+    <Compile Include="Deflate\DeflateCompressor.cs" />
+    <Compile Include="Deflate\DeflateCompressorExtensions.cs" />
+    <Compile Include="Deflate\DeflateConfiguration.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="GenomeMatcher.cs" />
     <Compile Include="HastlayerOptimizedAlgorithm.cs" />

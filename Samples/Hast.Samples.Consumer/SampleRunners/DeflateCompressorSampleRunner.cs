@@ -8,6 +8,7 @@ using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Samples.SampleAssembly.Deflate;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -15,7 +16,7 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.DeflateCompressor");
+            configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.Deflate.DeflateCompressor");
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)

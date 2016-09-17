@@ -5,36 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.SimpleMemory;
 
-namespace Hast.Samples.SampleAssembly
+namespace Hast.Samples.SampleAssembly.Deflate
 {
-    /// <summary>
-    /// Sample demonstrating de/compression with the deflate algorithm. A port of this JS deflate/inflate implementation:
-    /// https://github.com/dankogai/js-deflate (included in the js-deflate folder).
-    /// </summary>
-    public class DeflateCompressor
-    {
-        public const int Deflate_InputOutputCountInt32Index = 0;
-        public const int Deflate_InputOutputStartIndex = 1;
-
-
-        public virtual void Deflate(SimpleMemory memory)
-        {
-            var inputCount = memory.ReadInt32(Deflate_InputOutputCountInt32Index);
-
-        }
-
-
-        private class DeflateBuffer
-        {
-
-        }
-    }
-
-
     public static class DeflateCompressorExtensions
     {
         public static byte[] Deflate(this DeflateCompressor deflateCompressor, byte[] dataToCompress)
         {
+            ThrowIfConfigurationInvalid();
+
             var inputCellCount = (int)Math.Ceiling((double)dataToCompress.Length / SimpleMemory.MemoryCellSizeBytes);
             var memory = new SimpleMemory(inputCellCount + 1);
 
@@ -71,6 +49,28 @@ namespace Hast.Samples.SampleAssembly
             }
 
             return output;
+        }
+
+
+        private static void ThrowIfConfigurationInvalid()
+        {
+            // Also taken over from the JS version.
+            if (DeflateCompressor.zip_LIT_BUFSIZE > DeflateCompressor.zip_INBUFSIZ)
+            {
+                throw new InvalidOperationException("error: zip_INBUFSIZ is too small");
+            }
+            if ((DeflateCompressor.zip_WSIZE << 1) > (1 << DeflateCompressor.zip_BITS))
+            {
+                throw new InvalidOperationException("error: zip_WSIZE is too large");
+            }
+            if (DeflateCompressor.zip_HASH_BITS > DeflateCompressor.zip_BITS - 1)
+            {
+                throw new InvalidOperationException("error: zip_HASH_BITS is too large");
+            }
+            if (DeflateCompressor.zip_HASH_BITS < 8 || DeflateCompressor.zip_MAX_MATCH != 258)
+            {
+                throw new InvalidOperationException("error: Code too clever");
+            }
         }
     }
 }
