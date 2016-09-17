@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // and set its data type to the unconstrained array instantiation. This is unless the array is also 
             // immediately initialized (i.e. new[] { 1, 2, 3 }-style).
 
-            var isInitialized = expression.Initializer != null;
+            var isInitialized = expression.Initializer.Elements.Count != 0;
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
             if ((parentAssignmentExpression == null || 
