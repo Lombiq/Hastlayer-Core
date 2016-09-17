@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
+using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -20,6 +21,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConverterLazy = typeConverterLazy;
         }
 
+
+        public bool IsSupportedRecordMember(AstNode node)
+        {
+            return node is PropertyDeclaration;
+        }
 
         public Record CreateRecordFromType(TypeDefinition typeDefinition)
         {

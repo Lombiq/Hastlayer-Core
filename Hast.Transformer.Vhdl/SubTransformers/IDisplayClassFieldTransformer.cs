@@ -10,6 +10,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     /// </summary>
     public interface IDisplayClassFieldTransformer : IDependency
     {
+        bool CanTransform(FieldDeclaration field);
         Task<IMemberTransformerResult> Transform(FieldDeclaration field, IVhdlTransformationContext context);
     }
 }
