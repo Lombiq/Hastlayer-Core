@@ -30,7 +30,6 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly IEnumTypesCreator _enumTypesCreator;
         private readonly IArrayParameterLengthSetter _arrayParameterLengthSetter;
         private readonly IPocoTransformer _pocoTransformer;
-        private readonly IReadonlyStaticFieldTransformer _readonlyStaticFieldTransformer;
 
 
         public TransformedVhdlManifestBuilder(
@@ -44,8 +43,7 @@ namespace Hast.Transformer.Vhdl.Services
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
             IEnumTypesCreator enumTypesCreator,
             IArrayParameterLengthSetter arrayParameterLengthSetter,
-            IPocoTransformer pocoTransformer,
-            IReadonlyStaticFieldTransformer readonlyStaticFieldTransformer)
+            IPocoTransformer pocoTransformer)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _clock = clock;
@@ -58,7 +56,6 @@ namespace Hast.Transformer.Vhdl.Services
             _enumTypesCreator = enumTypesCreator;
             _arrayParameterLengthSetter = arrayParameterLengthSetter;
             _pocoTransformer = pocoTransformer;
-            _readonlyStaticFieldTransformer = readonlyStaticFieldTransformer;
         }
 
 
@@ -246,10 +243,6 @@ namespace Hast.Transformer.Vhdl.Services
                         if (_displayClassFieldTransformer.IsDisplayClassField(field))
                         {
                             memberTransformerTasks.Add(_displayClassFieldTransformer.Transform(field, transformationContext));
-                        }
-                        else if (_readonlyStaticFieldTransformer.CanTransform(field))
-                        {
-                            memberTransformerTasks.Add(_readonlyStaticFieldTransformer.Transform(field, transformationContext));
                         }
                         else
                         {
