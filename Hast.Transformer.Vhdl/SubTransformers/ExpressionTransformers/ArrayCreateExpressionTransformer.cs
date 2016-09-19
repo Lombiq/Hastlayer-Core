@@ -19,14 +19,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         {
             _typeConverter = typeConverter;
         }
-        
-        
+
+
         public UnconstrainedArrayInstantiation CreateArrayInstantiation(ArrayCreateExpression expression)
         {
             return ArrayHelper.CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
         }
 
-        public Value Transform(ArrayCreateExpression expression, IArchitectureComponent component)
+        public Value Transform(
+            ArrayCreateExpression expression,
+            IArchitectureComponent component,
+            IEnumerable<IVhdlElement> transformedInitializerElements)
         {
             if (expression.Arguments.Any() && expression.Arguments.Count != 1)
             {
@@ -53,7 +56,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var isInitialized = expression.Initializer.Elements.Count != 0;
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
-            if ((parentAssignmentExpression == null || 
+            if ((parentAssignmentExpression == null ||
                 !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)) &&
                 !isInitialized)
             {
@@ -64,24 +67,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var elementType = _typeConverter.ConvertAstType(expression.Type);
             var arrayInstantiationType = ArrayHelper.CreateArrayInstantiation(elementType, length);
 
-            if (!isInitialized)
+            // Finding the variable or member where the array is used and changing its type to the array instantiation.
+            var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
+                ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
+                ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
+            var parentDataObjectName = component.CreatePrefixedObjectName(parentIdentifier);
+            var parentDataObject = component
+                .GetAllDataObjects()
+                .Where(dataObject => dataObject.Name == parentDataObjectName)
+                .SingleOrDefault();
+            // We'll only find the data object if it's in the same architecture component. So e.g. separately transformed
+            // fields (possibly in compiler-generated and inner DisplayClasses) won't be handled: those should be dealt
+            // with separately.
+            if (parentDataObject != null)
             {
-                // Finding the variable or member where the array is used and changing its type to the array instantiation.
-                var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
-                    ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
-                    ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
-                var parentDataObjectName = component.CreatePrefixedObjectName(parentIdentifier);
-                var parentDataObject = component
-                    .GetAllDataObjects()
-                    .Where(dataObject => dataObject.Name == parentDataObjectName)
-                    .SingleOrDefault();
-                // We'll only find the data object if it's in the same architecture component. So e.g. separately transformed
-                // fields (possibly in compiler-generated and inner DisplayClasses) won't be handled: those should be dealt
-                // with separately.
-                if (parentDataObject != null)
-                {
-                    parentDataObject.DataType = arrayInstantiationType;
-                } 
+                parentDataObject.DataType = arrayInstantiationType;
             }
 
             // Initializing the array with the .NET default values (so there are no surprises when reading values
@@ -93,7 +93,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (isInitialized)
             {
-                //arrayInitializationValue.EvaluatedContent = 
+                arrayInitializationValue.EvaluatedContent = new InlineBlock(transformedInitializerElements);
             }
             else
             {

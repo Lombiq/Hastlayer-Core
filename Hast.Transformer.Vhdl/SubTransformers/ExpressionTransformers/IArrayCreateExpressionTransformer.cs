@@ -1,4 +1,6 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using System.Collections.Generic;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
@@ -9,6 +11,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     public interface IArrayCreateExpressionTransformer : IDependency
     {
         UnconstrainedArrayInstantiation CreateArrayInstantiation(ArrayCreateExpression expression);
-        Value Transform(ArrayCreateExpression expression, IArchitectureComponent component);
+        Value Transform(
+            ArrayCreateExpression expression,
+            IArchitectureComponent component,
+            IEnumerable<IVhdlElement> transformedInitializerElements);
     }
 }

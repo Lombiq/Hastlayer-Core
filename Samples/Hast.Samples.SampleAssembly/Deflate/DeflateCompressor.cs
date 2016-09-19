@@ -65,105 +65,109 @@ namespace Hast.Samples.SampleAssembly.Deflate
         private const int zip_REPZ_11_138 = 18;
         private const int zip_HEAP_SIZE = 2 * zip_L_CODES + 1;
         private const int zip_H_SHIFT = (zip_HASH_BITS + zip_MIN_MATCH - 1) / zip_MIN_MATCH;
-
-        /* constant tables */
-        private static readonly int[] zip_extra_lbits = new[]
-        {
-            0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0
-        };
-        private static readonly int[] zip_extra_dbits = new[]
-        {
-            0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13
-        };
-        private static readonly int[] zip_extra_blbits = new[]
-        {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 7
-        };
-        private static readonly int[] zip_bl_order = new[]
-        {
-            16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15
-        };
-        private static readonly DeflateConfiguration[] zip_configuration_table = new[]
-        {
-            new DeflateConfiguration
-            {
-               good_length = 0,
-               max_lazy = 0,
-               nice_length = 0,
-               max_chain = 0
-            },
-            new DeflateConfiguration
-            {
-               good_length = 4,
-               max_lazy = 4,
-               nice_length = 8,
-               max_chain = 4
-            },
-            new DeflateConfiguration
-            {
-               good_length = 4,
-               max_lazy = 5,
-               nice_length = 16,
-               max_chain = 8
-            },
-            new DeflateConfiguration
-            {
-               good_length = 4,
-               max_lazy = 6,
-               nice_length = 32,
-               max_chain = 32
-            },
-            new DeflateConfiguration
-            {
-               good_length = 4,
-               max_lazy = 4,
-               nice_length = 16,
-               max_chain = 16
-            },
-            new DeflateConfiguration
-            {
-               good_length = 8,
-               max_lazy = 16,
-               nice_length = 32,
-               max_chain = 32
-            },
-            new DeflateConfiguration
-            {
-               good_length = 8,
-               max_lazy = 16,
-               nice_length = 128,
-               max_chain = 128
-            },
-            new DeflateConfiguration
-            {
-               good_length = 8,
-               max_lazy = 32,
-               nice_length = 128,
-               max_chain = 256
-            },
-            new DeflateConfiguration
-            {
-               good_length = 32,
-               max_lazy = 128,
-               nice_length = 258,
-               max_chain = 1024
-            },
-            new DeflateConfiguration
-            {
-               good_length = 32,
-               max_lazy = 258,
-               nice_length = 258,
-               max_chain = 4096
-            }
-        };
         #endregion
 
 
         public virtual void Deflate(SimpleMemory memory)
         {
+            // These should rather be static readonly fields.
+            #region ConstantTables
+            var zip_extra_lbits = new[]
+            {
+                0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0
+            };
+            var zip_extra_dbits = new[]
+            {
+                0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13
+            };
+            var zip_extra_blbits = new[]
+            {
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 7
+            };
+            var zip_bl_order = new[]
+            {
+                16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15
+            };
+            var zip_configuration_table = new[]
+            {
+                new DeflateConfiguration
+                {
+                   good_length = 0,
+                   max_lazy = 0,
+                   nice_length = 0,
+                   max_chain = 0
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 4,
+                   max_lazy = 4,
+                   nice_length = 8,
+                   max_chain = 4
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 4,
+                   max_lazy = 5,
+                   nice_length = 16,
+                   max_chain = 8
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 4,
+                   max_lazy = 6,
+                   nice_length = 32,
+                   max_chain = 32
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 4,
+                   max_lazy = 4,
+                   nice_length = 16,
+                   max_chain = 16
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 8,
+                   max_lazy = 16,
+                   nice_length = 32,
+                   max_chain = 32
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 8,
+                   max_lazy = 16,
+                   nice_length = 128,
+                   max_chain = 128
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 8,
+                   max_lazy = 32,
+                   nice_length = 128,
+                   max_chain = 256
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 32,
+                   max_lazy = 128,
+                   nice_length = 258,
+                   max_chain = 1024
+                },
+                new DeflateConfiguration
+                {
+                   good_length = 32,
+                   max_lazy = 258,
+                   nice_length = 258,
+                   max_chain = 4096
+                }
+            };
+            #endregion
+
             var inputCount = memory.ReadInt32(Deflate_InputOutputCountInt32Index);
 
             var z = zip_configuration_table[3];
+            var sa = z.good_length;
+            var y = zip_extra_lbits[5];
         }
     }
 }
