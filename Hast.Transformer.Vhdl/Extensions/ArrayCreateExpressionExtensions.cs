@@ -29,5 +29,10 @@ namespace ICSharpCode.NRefactory.CSharp
                 return expression.Initializer.Elements.Count;
             }
         }
+
+        public static bool HasInitializer(this ArrayCreateExpression expression)
+        {
+            return expression.Initializer.Elements.Count != 0;
+        }
     }
 }

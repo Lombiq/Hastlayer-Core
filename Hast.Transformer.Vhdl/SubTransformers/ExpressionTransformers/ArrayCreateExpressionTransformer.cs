@@ -53,12 +53,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // and set its data type to the unconstrained array instantiation. This is unless the array is also 
             // immediately initialized (i.e. new[] { 1, 2, 3 }-style).
 
-            var isInitialized = expression.Initializer.Elements.Count != 0;
+            var hasInitializer = expression.HasInitializer();
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
             if ((parentAssignmentExpression == null ||
                 !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)) &&
-                !isInitialized)
+                !hasInitializer)
             {
                 throw new NotSupportedException(
                     "Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
@@ -91,7 +91,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 DataType = arrayInstantiationType
             };
 
-            if (isInitialized)
+            if (hasInitializer)
             {
                 arrayInitializationValue.EvaluatedContent = new InlineBlock(transformedInitializerElements);
             }
