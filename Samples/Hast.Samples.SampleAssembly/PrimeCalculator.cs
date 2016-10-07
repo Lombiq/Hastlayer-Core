@@ -17,7 +17,7 @@ namespace Hast.Samples.SampleAssembly
         public const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
         public const int ArePrimeNumbers_OutputBooleansStartIndex = 1;
 
-        public const int MaxDegreeOfParallelism = 35;
+        public const int MaxDegreeOfParallelism = 30;
 
 
         /// <summary>
