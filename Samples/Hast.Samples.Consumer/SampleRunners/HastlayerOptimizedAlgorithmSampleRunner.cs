@@ -33,6 +33,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             //var sw = System.Diagnostics.Stopwatch.StartNew();
             //var cpuOutput = new HastlayerOptimizedAlgorithm().Run(234234);
             //sw.Stop();
+            //System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + "ms.");
         }
     }
 }
