@@ -1,4 +1,6 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
+﻿using Hast.Transformer.Vhdl.Helpers;
+using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 using Orchard;
@@ -10,5 +12,29 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         DataType ConvertTypeReference(TypeReference typeReference);
         DataType ConvertAstType(AstType type);
         DataType ConvertAndDeclareAstType(AstType type, IDeclarableElement declarable);
+    }
+
+
+    public static class TypeConvertedExtensions
+    {
+        public static DataType ConvertParameterType(this ITypeConverter typeConverter, ParameterDeclaration parameter)
+        {
+            var parameterType = parameter.Annotation<ParameterDefinition>().ParameterType;
+
+            // This is an out or ref parameter.
+            if (parameterType.IsByReference)
+            {
+                parameterType = ((ByReferenceType)parameterType).ElementType;
+            }
+
+            if (!parameterType.IsArray)
+            {
+                return typeConverter.ConvertTypeReference(parameterType);
+            }
+
+            return ArrayHelper.CreateArrayInstantiation(
+                typeConverter.ConvertTypeReference(parameterType.GetElementType()),
+                parameter.Annotation<ParameterArrayLength>().Length);
+        }
     }
 }

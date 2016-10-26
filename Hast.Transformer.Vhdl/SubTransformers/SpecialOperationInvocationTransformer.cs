@@ -124,12 +124,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // should always happen in a separate state.
             if (stateMachine.States.Count == preTransformationStateCount)
             {
-                var currentBlock = context.Scope.CurrentBlock;
-
-                var resultAccessBlock = new InlineBlock();
-                var resultAccessStateIndex = stateMachine.AddState(resultAccessBlock);
-                currentBlock.Add(stateMachine.CreateStateChange(resultAccessStateIndex));
-                currentBlock.ChangeBlockToDifferentState(resultAccessBlock, resultAccessStateIndex);
+                stateMachine.AddNewStateAndChangeCurrentBlock(context);
             }
 
             // Returning the results as an array initialization value (i.e.: array := (result1, result2);)

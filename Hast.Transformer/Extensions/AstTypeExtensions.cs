@@ -19,5 +19,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 return lookupDeclaration(astType) == lookupDeclaration(other);
             }
         }
+
+        public static bool IsArray(this AstType type)
+        {
+            var composedType = type as ComposedType;
+            return composedType != null && composedType.ArraySpecifiers.Count != 0;
+        }
     }
 }

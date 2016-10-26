@@ -17,7 +17,7 @@ namespace Hast.Samples.SampleAssembly
         public const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
         public const int ArePrimeNumbers_OutputBooleansStartIndex = 1;
 
-        public const int MaxDegreeOfParallelism = 35;
+        public const int MaxDegreeOfParallelism = 30;
 
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var currentNumber = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
 
-                    tasks[m] = Task.Factory.StartNew<bool>(
+                    tasks[m] = Task.Factory.StartNew(
                         numberObject =>
                         {
                             // This is a copy of the body of IsPrimeNumberInternal(). We could also call that method

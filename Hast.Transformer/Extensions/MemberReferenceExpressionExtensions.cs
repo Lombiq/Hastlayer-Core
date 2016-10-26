@@ -48,8 +48,15 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else
             {
+                var memberName = methodReference.FullName;
+
+                // If this is a member reference to a property then both a MethodReference (for the setter or getter)
+                // and a PropertyReference will be there, but the latter will contain the member name.
+                var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
+                if (propertyReference != null) memberName = propertyReference.FullName;
+
                 return type.Members
-                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == methodReference.FullName); 
+                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName); 
             }
         }
 
