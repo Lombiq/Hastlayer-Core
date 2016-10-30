@@ -163,13 +163,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var resultTypeReference = expression.GetActualTypeReference(true);
             if (resultTypeReference == null)
             {
-                var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
-                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference();
-
-                if (firstNonParenthesizedExpressionParent is CastExpression)
-                {
-                    resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
-                }
+                resultTypeReference = expression.FindFirstNonParenthesizedExpressionParent().GetActualTypeReference();
             }
             var resultType = _typeConverter.ConvertTypeReference(resultTypeReference);
             var resultTypeSize = resultType is SizedDataType ? ((SizedDataType)resultType).Size : 0;
@@ -192,7 +186,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var leftTypeReference = expression.Left.GetActualTypeReference();
             var rightTypeReference = expression.Right.GetActualTypeReference();
-            var isInflaterOperation = expression.Operator == BinaryOperatorType.Multiply || expression.Operator == BinaryOperatorType.Add;
+            var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
             var shouldResizeResult =
                 (
                     // If the type of the result is the same as the type of the binary expression but the expression is a
@@ -203,7 +197,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     // below.
                     // E.g. ushort = ushort * ushort is valid in IL but in VHDL it must have a length truncation:
                     // unsigned(15 downto 0) = resize(unsigned(15 downto 0) * unsigned(15 downto 0), 16)
-                    isInflaterOperation &&
+                    isMultiplication &&
                     (
                         resultTypeReference == expression.GetActualTypeReference() ||
                         resultTypeReference == leftTypeReference && resultTypeReference == rightTypeReference
@@ -220,7 +214,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 shouldResizeResult = shouldResizeResult ||
                     (
                         // If the operands and the result has the same size then the result won't fit.
-                        isInflaterOperation &&
+                        isMultiplication &&
                         resultTypeSize != 0 &&
                         resultTypeSize == leftTypeSize &&
                         resultTypeSize == rightTypeSize
@@ -234,11 +228,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     )
                     ||
                     (
-                        // If the operand and result sizes don't match except if it's a multiplication or addition and 
-                        // the result is bigger.
-                        resultTypeSize != 0 && 
-                            (resultTypeSize != leftTypeSize || resultTypeSize != rightTypeSize) &&
-                            !isInflaterOperation
+                        // If the operand and result sizes don't match.
+                        resultTypeSize != 0 && (resultTypeSize != leftTypeSize || resultTypeSize != rightTypeSize)
                     );
             }
 

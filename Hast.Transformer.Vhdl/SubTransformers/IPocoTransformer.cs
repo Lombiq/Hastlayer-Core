@@ -14,6 +14,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     /// </summary>
     public interface IPocoTransformer : IDependency
     {
+        bool IsSupportedMember(AstNode node);
         Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
     }
 }

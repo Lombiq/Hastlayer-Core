@@ -12,6 +12,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface IRecordComposer : IDependency
     {
+        bool IsSupportedRecordMember(AstNode node);
         Record CreateRecordFromType(TypeDefinition typeDefinition);
     }
 

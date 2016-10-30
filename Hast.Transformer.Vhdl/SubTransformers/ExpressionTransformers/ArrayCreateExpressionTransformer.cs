@@ -19,16 +19,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         {
             _typeConverter = typeConverter;
         }
-        
-        
+
+
         public UnconstrainedArrayInstantiation CreateArrayInstantiation(ArrayCreateExpression expression)
         {
             return ArrayHelper.CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
         }
 
-        public Value Transform(ArrayCreateExpression expression, IArchitectureComponent component)
+        public Value Transform(
+            ArrayCreateExpression expression,
+            IArchitectureComponent component,
+            IEnumerable<IVhdlElement> transformedInitializerElements)
         {
-            if (expression.Arguments.Count != 1)
+            if (expression.Arguments.Any() && expression.Arguments.Count != 1)
             {
                 // For the sake of maximal compatibility with synthesis tools we don't allow multi-dimensional
                 // arrays, see: http://vhdl.renerta.com/mobile/source/vhd00006.htm "Synthesis tools do generally not 
@@ -47,13 +50,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             // Arrays are tricky: the variable declaration can happen earlier but without an array creation (i.e.
             // at that point the length of the array won't be known) so we have to go back to the variable declaration
-            // and set its data type to the unconstrained array instantiation.
+            // and set its data type to the unconstrained array instantiation. This is unless the array is also 
+            // immediately initialized (i.e. new[] { 1, 2, 3 }-style).
+
+            var hasInitializer = expression.HasInitializer();
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
-            if (parentAssignmentExpression == null || 
-                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression))
+            if ((parentAssignmentExpression == null ||
+                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)) &&
+                !hasInitializer)
             {
-                throw new NotSupportedException("Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
+                throw new NotSupportedException(
+                    "Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
             }
 
             var elementType = _typeConverter.ConvertAstType(expression.Type);
@@ -73,16 +81,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // with separately.
             if (parentDataObject != null)
             {
-                parentDataObject.DataType = arrayInstantiationType; 
+                parentDataObject.DataType = arrayInstantiationType;
             }
 
-            // Initializing the array with the .NET default values so there are no surprises when reading values
-            // without setting them previously.
+            // Initializing the array with the .NET default values (so there are no surprises when reading values
+            // without setting them previously) or the initialized values.
             var arrayInitializationValue = new Value
             {
-                DataType = arrayInstantiationType,
-                Content = "others => " + elementType.DefaultValue.ToVhdl()
+                DataType = arrayInstantiationType
             };
+
+            if (hasInitializer)
+            {
+                arrayInitializationValue.EvaluatedContent = new InlineBlock(transformedInitializerElements);
+            }
+            else
+            {
+                arrayInitializationValue.Content = "others => " + elementType.DefaultValue.ToVhdl();
+            }
 
             return arrayInitializationValue;
         }

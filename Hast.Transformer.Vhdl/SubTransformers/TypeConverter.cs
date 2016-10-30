@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public DataType ConvertAstType(AstType type)
         {
-            if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
+            if (type is PrimitiveType) return ConvertPrimitive(((PrimitiveType)type).KnownTypeCode);
             else if (type is ComposedType) return ConvertComposed((ComposedType)type);
             else if (type is SimpleType) return ConvertSimple((SimpleType)type);
 
@@ -186,6 +186,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return CreateArrayType(ConvertAstType(type.BaseType));
             }
 
+            // If the type is used in an array initialization and is a non-primitive type then the actual type will be 
+            // the only child.
+            if (type.Children.SingleOrDefault() is SimpleType)
+            {
+                return ConvertSimple((SimpleType)type.Children.SingleOrDefault());
+            }
+
+            // If the type is used in an array initialization and is a primitive type then the actual type will be the
+            // BaseType.
+            if (type.BaseType is PrimitiveType)
+            {
+                return ConvertPrimitive(((PrimitiveType)type.BaseType).KnownTypeCode);
+            }
+
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
 
@@ -203,7 +217,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             var typeDefinition = type.Annotation<TypeDefinition>();
-            if (typeDefinition != null && typeDefinition.IsEnum) return ConvertTypeDefinition(typeDefinition);
+            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition);
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }

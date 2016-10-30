@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
@@ -23,6 +24,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
         }
 
+
+        public bool IsDisplayClassField(FieldDeclaration field)
+        {
+            return field.GetFullName().IsDisplayClassMemberName();
+        }
 
         public Task<IMemberTransformerResult> Transform(FieldDeclaration field, IVhdlTransformationContext context)
         {
