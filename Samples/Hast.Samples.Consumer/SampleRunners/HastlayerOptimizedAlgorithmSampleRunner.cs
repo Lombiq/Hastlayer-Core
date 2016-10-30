@@ -29,6 +29,11 @@ namespace Hast.Samples.Consumer.SampleRunners
             var output1 = hastlayerOptimizedAlgorithm.Run(234234);
             var output2 = hastlayerOptimizedAlgorithm.Run(123);
             var output3 = hastlayerOptimizedAlgorithm.Run(9999);
+            // Uncomment the below code to see how the algorithm would perform on CPU.
+            //var sw = System.Diagnostics.Stopwatch.StartNew();
+            //var cpuOutput = new HastlayerOptimizedAlgorithm().Run(234234);
+            //sw.Stop();
+            //System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + "ms.");
         }
     }
 }
