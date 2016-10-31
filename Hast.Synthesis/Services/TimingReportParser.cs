@@ -96,7 +96,13 @@ namespace Hast.Synthesis.Services
 
             public decimal GetLatencyNs(BinaryOperatorType binaryOperator, ushort operandSizeBits, bool isSigned)
             {
-                return _timings[GetKey(binaryOperator, operandSizeBits, isSigned)];
+                decimal latency;
+                if (_timings.TryGetValue(GetKey(binaryOperator, operandSizeBits, isSigned), out latency))
+                {
+                    return latency;
+                }
+
+                return -1;
             }
 
 

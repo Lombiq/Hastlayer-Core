@@ -181,7 +181,13 @@ mod	signed8	signed8	sync	impl	19,436	-0,05599976
             }
 
             // With a 100 Mhz clock one clock cycle takes 10ns, so just need to divide by 10. 
-            return TimingReport.GetLatencyNs(binaryOperator, operandSizeBits, isSigned) / 10;
+            var latency = TimingReport.GetLatencyNs(binaryOperator, operandSizeBits, isSigned) / 10;
+
+            // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
+            // be latency data).
+            if (latency < 0) return 0.1M;
+
+            return latency;
         }
     }
 }
