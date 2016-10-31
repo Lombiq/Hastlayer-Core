@@ -201,10 +201,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     )
                 );
 
-            var leftType = _typeConverter.ConvertTypeReference(leftTypeReference);
-            var leftTypeSize = leftType is SizedDataType ? ((SizedDataType)leftType).Size : 0;
-            var rightType = _typeConverter.ConvertTypeReference(rightTypeReference);
-            var rightTypeSize = rightType is SizedDataType ? ((SizedDataType)rightType).Size : 0;
+            DataType leftType = null;
+            var leftTypeSize = 0;
+            if (leftTypeReference != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
+            {
+                leftType = _typeConverter.ConvertTypeReference(leftTypeReference);
+                leftTypeSize = leftType is SizedDataType ? ((SizedDataType)leftType).Size : 0; 
+            }
+            DataType rightType = null;
+            var rightTypeSize = 0;
+            if (rightTypeReference != null)
+            {
+                rightType = _typeConverter.ConvertTypeReference(rightTypeReference);
+                rightTypeSize = rightType is SizedDataType ? ((SizedDataType)rightType).Size : 0; 
+            }
 
             if (leftTypeReference != null && rightTypeReference != null)
             {
@@ -250,12 +260,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             };
 
             var maxOperandSize = (ushort)Math.Max(leftTypeSize, rightTypeSize);
+            if (maxOperandSize == 0) maxOperandSize = (ushort)resultTypeSize;
             decimal clockCyclesNeededForOperation;
             var clockCyclesNeededForSignedOperation = _deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
             var clockCyclesNeededForUnsignedOperation = _deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
-            if (leftType.Name == rightType.Name)
+            if (leftType != null && rightType != null && leftType.Name == rightType.Name)
             {
                 clockCyclesNeededForOperation = leftType.Name == "signed" ? 
                     clockCyclesNeededForSignedOperation : 
