@@ -157,9 +157,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 
-            var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForBinaryOperation(expression);
-            var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
-
             var resultTypeReference = expression.GetActualTypeReference(true);
             if (resultTypeReference == null)
             {
@@ -204,13 +201,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     )
                 );
 
+            var leftType = _typeConverter.ConvertTypeReference(leftTypeReference);
+            var leftTypeSize = leftType is SizedDataType ? ((SizedDataType)leftType).Size : 0;
+            var rightType = _typeConverter.ConvertTypeReference(rightTypeReference);
+            var rightTypeSize = rightType is SizedDataType ? ((SizedDataType)rightType).Size : 0;
+
             if (leftTypeReference != null && rightTypeReference != null)
             {
-                var leftType = _typeConverter.ConvertTypeReference(leftTypeReference);
-                var leftTypeSize = leftType is SizedDataType ? ((SizedDataType)leftType).Size : 0;
-                var rightType = _typeConverter.ConvertTypeReference(rightTypeReference);
-                var rightTypeSize = rightType is SizedDataType ? ((SizedDataType)rightType).Size : 0;
-
                 shouldResizeResult = shouldResizeResult ||
                     (
                         // If the operands and the result has the same size then the result won't fit.
@@ -251,6 +248,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 AssignTo = operationResultDataObjectReference,
                 Expression = binaryElement
             };
+
+            var maxOperandSize = (ushort)Math.Max(leftTypeSize, rightTypeSize);
+            decimal clockCyclesNeededForOperation;
+            var clockCyclesNeededForSignedOperation = _deviceDriver
+                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
+            var clockCyclesNeededForUnsignedOperation = _deviceDriver
+                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
+            if (leftType.Name == rightType.Name)
+            {
+                clockCyclesNeededForOperation = leftType.Name == "signed" ? 
+                    clockCyclesNeededForSignedOperation : 
+                    clockCyclesNeededForUnsignedOperation;
+            }
+            else
+            {
+                // If the operands have different signs then let's take the slower version just to be safe.
+                clockCyclesNeededForOperation = Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation);
+            }
+            
+            var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
             // Since the current state takes more than one clock cycle we add a new state and follow up there.
             if (isFirstOfSimdOperations &&
