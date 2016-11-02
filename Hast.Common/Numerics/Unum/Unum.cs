@@ -4,10 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Common.Numerics
+namespace Hast.Common.Numerics.Unum
 {
-    public struct Unum //: IComparable, IFormattable, IConvertible, IComparable<Unum>, IEquatable<Unum>
+    public struct Unum// : IComparable, IFormattable, IConvertible, IComparable<Unum>, IEquatable<Unum>
     {
+        #region Unum structure
+        private bool _signBit;
+        private bool[] _exponentBits;
+        private bool[] _fractionBits;
+        private bool _uBit;
+        private bool[] _exponentSizeBits;
+        private bool[] _fractionSizeBits;
+        #endregion
+
+        private byte _size;
+        private byte _uTagSize;
+        private bool[] _uTag => new[] { _uBit }.Union(_exponentSizeBits).Union(_fractionSizeBits).ToArray();
+
+
+        public Unum(byte eSize, byte fSize)
+        {
+            var eSizeSize = UnumHelper.SegmentSizeToSegmentSizeSize(eSize);
+            var fSizeSize = UnumHelper.SegmentSizeToSegmentSizeSize(fSize);
+
+            _signBit = false;
+            _exponentBits = new bool[eSize];
+            _fractionBits = new bool[fSize];
+            _uBit = false;
+            _exponentSizeBits = new bool[eSizeSize];
+            _fractionSizeBits = new bool[fSizeSize];
+
+            _uTagSize = (byte)(1 + eSizeSize + fSizeSize);
+            _size = (byte)(1 + eSizeSize + fSizeSize + _uTagSize);
+        }
+
+
+
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
