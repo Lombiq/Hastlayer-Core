@@ -123,7 +123,7 @@ namespace Hast.Transformer.Vhdl.Services
 
 
             // Preparing arrays passed as method parameters
-            _arrayParameterLengthSetter.SetArrayParamterSizes(syntaxTree);
+            _arrayParameterLengthSetter.SetArrayParameterSizes(syntaxTree);
 
 
             // Doing transformations

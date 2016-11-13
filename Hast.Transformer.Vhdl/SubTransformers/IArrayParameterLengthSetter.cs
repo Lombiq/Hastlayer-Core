@@ -10,6 +10,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface IArrayParameterLengthSetter : IDependency
     {
-        void SetArrayParamterSizes(SyntaxTree syntaxTree);
+        void SetArrayParameterSizes(SyntaxTree syntaxTree);
     }
 }
