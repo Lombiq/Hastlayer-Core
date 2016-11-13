@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -18,6 +20,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public IList<Signal> InternallyDrivenSignals { get; private set; }
         public IList<Signal> ExternallyDrivenSignals { get; private set; }
         public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; }
+        public DependentTypesTable DependentTypesTable { get; private set; }
 
 
         protected ArchitectureComponentBase(string name)
@@ -29,6 +32,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             InternallyDrivenSignals = new List<Signal>();
             ExternallyDrivenSignals = new List<Signal>();
             OtherMemberMaxInvocationInstanceCounts = new Dictionary<EntityDeclaration, int>();
+            DependentTypesTable = new DependentTypesTable();
         }
 
 

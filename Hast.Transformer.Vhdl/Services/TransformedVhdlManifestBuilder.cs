@@ -6,6 +6,7 @@ using Hast.Common.Extensions;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SimpleMemory;
@@ -97,6 +98,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             architecture.Declarations.Add(new BlockComment(GeneratedCodeOverviewComment.Comment));
 
+            var dependentTypesTables = new List<DependentTypesTable>();
 
             // Adding array types for any arrays created in code
             // This is necessary in a separate step because in VHDL the array types themselves should be created too
@@ -104,10 +106,12 @@ namespace Hast.Transformer.Vhdl.Services
             var arrayDeclarations = _arrayTypesCreator.CreateArrayTypes(syntaxTree);
             if (arrayDeclarations.Any())
             {
-                var arrayDeclarationsBlock = new LogicalBlock(new LineComment("Array declarations start"));
-                arrayDeclarationsBlock.Body.AddRange(arrayDeclarations);
-                arrayDeclarationsBlock.Add(new LineComment("Array declarations end"));
-                architecture.Declarations.Add(arrayDeclarationsBlock);
+                var arrayTypeDependentTypes = new DependentTypesTable();
+                foreach (var arrayDeclaration in arrayDeclarations)
+                {
+                    arrayTypeDependentTypes.AddDependency(arrayDeclaration, arrayDeclaration.ElementType.Name);
+                }
+                dependentTypesTables.Add(arrayTypeDependentTypes);
             }
 
 
@@ -134,13 +138,40 @@ namespace Hast.Transformer.Vhdl.Services
                         .Select(componentResult => componentResult.ArchitectureComponent)
                         .Cast<IArchitectureComponent>())
                 .ToList();
-            foreach (var transformerResult in transformerResults)
+            var architectureComponentResults = transformerResults.SelectMany(transformerResult => transformerResult.ArchitectureComponentResults);
+            foreach (var architectureComponentResult in architectureComponentResults)
             {
-                foreach (var architectureComponentResults in transformerResult.ArchitectureComponentResults)
+                if (architectureComponentResult.ArchitectureComponent.DependentTypesTable.GetTypes().Any())
                 {
-                    architecture.Declarations.Add(architectureComponentResults.Declarations);
-                    architecture.Add(architectureComponentResults.Body);
+                    dependentTypesTables.Add(architectureComponentResult.ArchitectureComponent.DependentTypesTable);
                 }
+            }
+
+
+            // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
+            // of a record type) than the type depending on the other one should come after the other one in the code
+            // file.
+            var allDependentTypes = dependentTypesTables.SelectMany(table => table.GetTypes()).ToDictionary(type => type.Name);
+            var sortedDependentTypes = TopologicalSortHelper.Sort(
+                allDependentTypes.Values,
+                sortedType => dependentTypesTables
+                    .SelectMany(table => table.GetDependencies(sortedType))
+                    .Where(type => type != null && allDependentTypes.ContainsKey(type))
+                    .Select(type => allDependentTypes[type]));
+            if (sortedDependentTypes.Any())
+            {
+                var dependentTypesDeclarationsBlock = new LogicalBlock(new LineComment("Custom inter-dependent type declarations start"));
+                dependentTypesDeclarationsBlock.Body.AddRange(sortedDependentTypes);
+                dependentTypesDeclarationsBlock.Add(new LineComment("Custom inter-dependent type declarations end"));
+                architecture.Declarations.Add(dependentTypesDeclarationsBlock);
+            }
+
+
+            // Adding architecture component declarations. These should come after custom inter-dependent type declarations.
+            foreach (var architectureComponentResult in architectureComponentResults)
+            {
+                architecture.Declarations.Add(architectureComponentResult.Declarations);
+                architecture.Add(architectureComponentResult.Body);
             }
 
 
@@ -273,7 +304,7 @@ namespace Hast.Transformer.Vhdl.Services
                         case ClassType.Class:
                         case ClassType.Struct:
                             memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
-                            traverseTo = traverseTo.Where(n => 
+                            traverseTo = traverseTo.Where(n =>
                                 n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);
                             break;
                         case ClassType.Enum:

@@ -95,12 +95,14 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\BinaryChainBuilder.cs" />
     <Compile Include="Helpers\TaskParallelizationHelper.cs" />
+    <Compile Include="Helpers\TopologicalSortHelper.cs" />
     <Compile Include="JsonNet.PrivateSettersContractResolvers\PrivateSettersContractResolvers.cs" />
     <Compile Include="Models\IPartiallyTransformedBinaryOperatorExpression.cs" />
     <Compile Include="Models\ITransformedVhdlManifest.cs" />
     <Compile Include="Models\ParameterArrayLength.cs" />
     <Compile Include="Models\PartiallyTransformedBinaryOperatorExpression.cs" />
     <Compile Include="Models\TransformedVhdlManifest.cs" />
+    <Compile Include="Models\DependentTypesTable.cs" />
     <Compile Include="Services\ITransformedVhdlManifestBuilder.cs" />
     <Compile Include="Services\IVhdlHardwareDescriptionCachingService.cs" />
     <Compile Include="Services\TransformedVhdlManifestBuilder.cs" />

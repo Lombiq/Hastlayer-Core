@@ -17,9 +17,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
         
         
-        public IEnumerable<IVhdlElement> CreateArrayTypes(SyntaxTree syntaxTree)
+        public IEnumerable<ArrayType> CreateArrayTypes(SyntaxTree syntaxTree)
         {
-            var arrayDeclarations = new Dictionary<string, IVhdlElement>();
+            var arrayDeclarations = new Dictionary<string, ArrayType>();
 
             syntaxTree.AcceptVisitor(new ArrayCreationCheckingVisitor(_typeConverter, arrayDeclarations));
 
@@ -30,12 +30,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private class ArrayCreationCheckingVisitor : DepthFirstAstVisitor
         {
             private readonly ITypeConverter _typeConverter;
-            private readonly Dictionary<string, IVhdlElement> _arrayDeclarations;
+            private readonly Dictionary<string, ArrayType> _arrayDeclarations;
 
 
             public ArrayCreationCheckingVisitor(
                 ITypeConverter typeConverter,
-                Dictionary<string, IVhdlElement> arrayDeclarations)
+                Dictionary<string, ArrayType> arrayDeclarations)
             {
                 _typeConverter = typeConverter;
                 _arrayDeclarations = arrayDeclarations;

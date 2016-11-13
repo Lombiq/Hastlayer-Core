@@ -39,7 +39,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (record.Fields.Any())
                 {
-                    component.Declarations = record;
+                    component.DependentTypesTable.AddBaseType(record);
                 }
 
                 result.ArchitectureComponentResults = new List<IArchitectureComponentResult>
