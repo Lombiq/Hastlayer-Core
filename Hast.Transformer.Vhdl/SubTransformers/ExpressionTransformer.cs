@@ -481,10 +481,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is ArrayCreateExpression)
             {
                 var arrayCreateExpression = (ArrayCreateExpression)expression;
-                var transformedInitializerElements = arrayCreateExpression.Initializer.Elements
-                    .Select(initializerElement => Transform(initializerElement, context));
-                return _arrayCreateExpressionTransformer
-                    .Transform(arrayCreateExpression, scope.StateMachine, transformedInitializerElements);
+                IVhdlElement transformedExpression = null;
+
+                // TODO: here we need to handle object initializers in array initializers.
+                if (arrayCreateExpression.Initializer.Elements.Any() && 
+                    !(arrayCreateExpression.Initializer.Elements.First() is ObjectCreateExpression))
+                {
+                    var transformedInitializerElements = arrayCreateExpression.Initializer.Elements
+                        .Select(initializerElement => Transform(initializerElement, context));
+
+                    transformedExpression = _arrayCreateExpressionTransformer
+                        .Transform(arrayCreateExpression, scope.StateMachine, transformedInitializerElements);
+                }
+                else
+                {
+                    transformedExpression = Empty.Instance;
+                }
+
+                return transformedExpression;
             }
             else if (expression is IndexerExpression)
             {
