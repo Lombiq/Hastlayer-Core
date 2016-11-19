@@ -123,7 +123,7 @@ namespace Hast.Transformer.Vhdl.Services
 
 
             // Preparing arrays passed as method parameters
-            _arrayParameterLengthSetter.SetArrayParamterSizes(syntaxTree);
+            _arrayParameterLengthSetter.SetArrayParameterSizes(syntaxTree);
 
 
             // Doing transformations
@@ -237,11 +237,19 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         memberTransformerTasks.Add(_methodTransformer.Transform((MethodDeclaration)node, transformationContext));
                     }
-                    else if (node is FieldDeclaration && node.GetFullName().IsDisplayClassMemberName())
+                    else if (node is FieldDeclaration)
                     {
-                        memberTransformerTasks.Add(_displayClassFieldTransformer.Transform((FieldDeclaration)node, transformationContext));
+                        var field = (FieldDeclaration)node;
+                        if (_displayClassFieldTransformer.IsDisplayClassField(field))
+                        {
+                            memberTransformerTasks.Add(_displayClassFieldTransformer.Transform(field, transformationContext));
+                        }
+                        else
+                        {
+                            throw new NotSupportedException("The field " + node.ToString() + " is not supported for transformation.");
+                        }
                     }
-                    else if (!(node is PropertyDeclaration))
+                    else if (!_pocoTransformer.IsSupportedMember(node))
                     {
                         throw new NotSupportedException("The member " + node.ToString() + " is not supported for transformation.");
                     }

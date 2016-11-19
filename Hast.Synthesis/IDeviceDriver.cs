@@ -16,6 +16,6 @@ namespace Hast.Synthesis
     {
         IDeviceManifest DeviceManifest { get; }
 
-        decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression);
+        decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, ushort operandSizeBits, bool isSigned);
     }
 }

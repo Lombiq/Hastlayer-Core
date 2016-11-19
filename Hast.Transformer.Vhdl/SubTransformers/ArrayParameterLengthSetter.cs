@@ -10,7 +10,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class ArrayParameterLengthSetter : IArrayParameterLengthSetter
     {
-        public void SetArrayParamterSizes(SyntaxTree syntaxTree)
+        public void SetArrayParameterSizes(SyntaxTree syntaxTree)
         {
             var methodsWithArrayParameters = syntaxTree
                 .GetAllTypeDeclarations()

@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\CsvHelper.3.0.0-beta7\lib\net451\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
       <HintPath>..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.dll</HintPath>
       <Private>True</Private>
@@ -77,7 +81,10 @@
     <Compile Include="Models\DeviceManifest.cs" />
     <Compile Include="Models\HardwareImplementation.cs" />
     <Compile Include="Models\IDeviceManifest.cs" />
+    <Compile Include="Models\ITimingReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ITimingReportParser.cs" />
+    <Compile Include="Services\TimingReportParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

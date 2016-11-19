@@ -20,6 +20,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
+        public bool IsSupportedMember(AstNode node)
+        {
+            return _recordComposer.IsSupportedRecordMember(node);
+        }
+
         public Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {
             return Task.Run<IMemberTransformerResult>(() =>

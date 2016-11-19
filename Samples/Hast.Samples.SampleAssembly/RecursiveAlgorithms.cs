@@ -50,9 +50,7 @@ namespace Hast.Samples.SampleAssembly
                 CalculateFibonacchiSeries_InvocationCounterUInt32Index, 
                 memory.ReadUInt32(CalculateFibonacchiSeries_InvocationCounterUInt32Index) + 1);
 
-            // Here the expression should really be number == 0 || number == 1 but somehow that won't evaluate to true
-            // on hardware despite the number actually reaching 0 and 1.
-            if (number <= 1) return (uint)number;
+            if (number == 0 || number == 1) return (uint)number;
             return RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 2)) + RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 1));
         }
 

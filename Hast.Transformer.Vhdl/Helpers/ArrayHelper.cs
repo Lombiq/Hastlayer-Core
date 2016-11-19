@@ -1,4 +1,5 @@
 ﻿using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.Helpers
 {
@@ -6,7 +7,7 @@ namespace Hast.Transformer.Vhdl.Helpers
     {
         public static string CreateArrayTypeName(string elementTypeName)
         {
-            return elementTypeName + "_Array";
+            return (elementTypeName.TrimExtendedVhdlIdDelimiters() + "_Array").ToExtendedVhdlId();
         }
 
         public static UnconstrainedArrayInstantiation CreateArrayInstantiation(DataType elementType, int length)
