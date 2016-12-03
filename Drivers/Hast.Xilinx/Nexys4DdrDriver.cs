@@ -107,8 +107,8 @@ namespace Hast.Xilinx
 /	signed64	signed64	sync	impl	269,541	-0,142
 /	unsigned16	unsigned16	sync	impl	32,060	-0,071
 /	signed16	signed16	sync	impl	40,748	-0,042
-/	unsigned8	unsigned8	sync	impl	13,953	-0,022
-/	signed8	signed8	sync	impl	16,962	-0,037
+/	unsigned8	unsigned8	sync	synth	14,137	-0,119
+/	signed8	signed8	sync	synth	17,218	-0,136
 *	unsigned128	unsigned256	sync	synth	7,632	-1,580
 *	signed128	signed256	sync	synth	9,585	-0,104
 *	unsigned32	unsigned64	sync	impl	5,558	-0,337
@@ -127,8 +127,8 @@ mod	unsigned64	unsigned64	sync	impl	259,775	-0,046
 mod	signed64	signed64	sync	impl	273,363	-0,672
 mod	unsigned16	unsigned16	sync	impl	35,100	-0,295
 mod	signed16	signed16	sync	impl	40,313	-0,296
-mod	unsigned8	unsigned8	sync	impl	15,090	-0,037
-mod	signed8	signed8	sync	impl	19,436	-0,056
+mod	unsigned8	unsigned8	sync	synth	16,159	-0,136
+mod	signed8	signed8	sync	synth	20,480	-0,136
 ";
                     _timingReport = _timingReportParser.Parse(timingReport);
                 }
