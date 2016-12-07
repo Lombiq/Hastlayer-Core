@@ -3,54 +3,54 @@
     public struct Unum// : IComparable, IFormattable, IConvertible, IComparable<Unum>, IEquatable<Unum>
     {
         #region Unum structure
-        private byte _exponentSizeSize; // "esizesize"
-        private byte _fractionSizeSize; // "fsizesize"
+        public byte ExponentSizeSize { get; private set; } // "esizesize"
+        public byte FractionSizeSize { get; private set; } // "fsizesize"
 
-        private byte _exponentSizeMax; // "esizemax"
-        private byte _fractionSizeMax; // "fsizemax"
+        public byte ExponentSizeMax { get; private set; } // "esizemax"
+        public byte FractionSizeMax { get; private set; } // "fsizemax"
 
-        private byte _unumTagSize; // "utagsize"
-        private byte _size; // "maxubits"
+        public byte UnumTagSize { get; private set; } // "utagsize"
+        public byte Size { get; private set; } // "maxubits"
         #endregion
 
         #region Unum blocks
-        private bool _signBit;
-        private bool[] _exponentBits;
-        private bool[] _fractionBits;
+        public bool SignBit { get; private set; }
+        public bool[] ExponentBits { get; private set; }
+        public bool[] FractionBits { get; private set; }
 
-        private bool _uncertaintyBit;
-        private bool[] _exponentSizeBits;
-        private bool[] _fractionSizeBits;
+        public bool UncertaintyBit { get; private set; }
+        public bool[] ExponentSizeBits { get; private set; }
+        public bool[] FractionSizeBits { get; private set; }
         #endregion
 
         #region Unum masks
-        private uint _uncertaintyBitMask; // "ubitmask"
-        private uint _exponentSizeMask; // "esizemask"
-        private uint _fractionSizeMask; // "fsizemask"
-        private uint _exponentAndFractionSizeMask; // "efsizemask"
-        private uint _unumTagMask; // "utagmask"
+        public uint UncertaintyBitMask { get; private set; } // "ubitmask"
+        public uint ExponentSizeMask { get; private set; } // "esizemask"
+        public uint FractionSizeMask { get; private set; }// "fsizemask"
+        public uint ExponentAndFractionSizeMask { get; private set; } // "efsizemask"
+        public uint UnumTagMask { get; private set; } // "utagmask"
+
+        // uint is too small for a not particularly big unum, to be refactored.
+        //public uint SignBitMask { get; private set; } // "signbigu", a unum in which all bits are zero except the sign bit;
         #endregion
 
         #region Unum metadata
         // Bit masks should be at least of size "_unumTagSize + 1", instead of fixed 32 bits.
         // The precision where it could matter is ridiculously high though, so it shouldn't matter for now.
 
-        private uint _uLP; // Unit in the Last Place or Unit of Least Precision.
+        public uint ULP { get; private set; } // Unit in the Last Place or Unit of Least Precision.
 
-        private uint _positiveInfinity; // "posinfu", the positive infinity for the given unum environment.
-        private uint _negativeInfinity; // "neginfu", the negative infinity for the given unum environment.
+        public uint PositiveInfinity { get; private set; } // "posinfu", the positive infinity for the given unum environment.
+        public uint NegativeInfinity { get; private set; } // "neginfu", the negative infinity for the given unum environment.
 
-        private uint _quietNotANumber; // "qNaNu"
-        private uint _signalingNotANumber; // "sNaNu"
+        public uint QuietNotANumber { get; private set; } // "qNaNu"
+        public uint SignalingNotANumber { get; private set; } // "sNaNu"
 
-        private uint _largestPositive; // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
-        private uint _smallestPositive; // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
+        public uint LargestPositive { get; private set; } // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
+        public uint SmallestPositive { get; private set; } // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
 
-        private uint _largestNegative; // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
-        private uint _minrealu; // "minrealu", looks like to be exactly the same as "negbigu".
-
-        // uint is too small for a not particularly big unum, to be refactored.
-        private uint _signBitOne; // "signbigu", a unum in which all bits are zero except the sign bit;
+        public uint LargestNegative { get; private set; } // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
+        public uint MinRealU { get; private set; } // "minrealu", looks like to be exactly the same as "negbigu".
 
         //private uint _smallNormal; // "smallnormalu"
         #endregion
@@ -59,49 +59,47 @@
         public Unum(byte exponentSizeSize, byte fractionSizeSize)
         {
             // Initializing structure.
-            _exponentSizeSize = exponentSizeSize;
-            _fractionSizeSize = fractionSizeSize;
+            ExponentSizeSize = exponentSizeSize;
+            FractionSizeSize = fractionSizeSize;
 
-            _exponentSizeMax = (byte)(1 << _exponentSizeSize);
-            _fractionSizeMax = (byte)(1 << _fractionSizeSize);
+            ExponentSizeMax = (byte)(1 << ExponentSizeSize);
+            FractionSizeMax = (byte)(1 << FractionSizeSize);
 
-            _unumTagSize = (byte)(1 + _exponentSizeSize + _fractionSizeSize);
-            _size = (byte)(1 + _exponentSizeMax + _fractionSizeMax + _unumTagSize);
+            UnumTagSize = (byte)(1 + ExponentSizeSize + FractionSizeSize);
+            Size = (byte)(1 + ExponentSizeMax + FractionSizeMax + UnumTagSize);
 
             // Initializing blocks.
-            _signBit = false;
-            _uncertaintyBit = false;
+            SignBit = false;
+            UncertaintyBit = false;
 
-            _exponentBits = new bool[_exponentSizeMax];
-            _fractionBits = new bool[_fractionSizeMax];
+            ExponentBits = new bool[ExponentSizeMax];
+            FractionBits = new bool[FractionSizeMax];
 
-            _exponentSizeBits = new bool[_exponentSizeSize];
-            _fractionSizeBits = new bool[_fractionSizeSize];
+            ExponentSizeBits = new bool[ExponentSizeSize];
+            FractionSizeBits = new bool[FractionSizeSize];
 
             // Initializing masks.
-            _uncertaintyBitMask = ((uint)1 << (_unumTagSize - 1));
-            _fractionSizeMask = (((uint)1 << _fractionSizeMax) - 1);
-            _exponentSizeMask = (_uncertaintyBitMask - 1) - _fractionSizeMask;
-            _exponentAndFractionSizeMask = _exponentSizeMask | _fractionSizeMask;
-            _unumTagMask = _uncertaintyBitMask | _exponentAndFractionSizeMask;
+            UncertaintyBitMask = ((uint)1 << (UnumTagSize - 1));
+            FractionSizeMask = (((uint)1 << FractionSizeMax) - 1);
+            ExponentSizeMask = (UncertaintyBitMask - 1) - FractionSizeMask;
+            ExponentAndFractionSizeMask = ExponentSizeMask | FractionSizeMask;
+            UnumTagMask = UncertaintyBitMask | ExponentAndFractionSizeMask;
 
             // Initializing metadata.
-            _uLP = (uint)1 << _unumTagSize;
+            ULP = (uint)1 << UnumTagSize;
 
-            _signBitOne = (uint)1 << _size - 1;
+            PositiveInfinity = ((uint)1 << Size - 1) - 1 - UncertaintyBitMask;
+            NegativeInfinity = PositiveInfinity + ((uint)1 << Size - 1);
 
-            _positiveInfinity = _signBitOne - 1 - _uncertaintyBitMask;
-            _negativeInfinity = _positiveInfinity + _signBitOne;
+            LargestPositive = PositiveInfinity - ULP;
+            SmallestPositive = ExponentAndFractionSizeMask + ULP;
 
-            _largestPositive = _positiveInfinity - _uLP;
-            _smallestPositive = _exponentAndFractionSizeMask + _uLP;
+            LargestNegative = NegativeInfinity - ULP;
 
-            _largestNegative = _negativeInfinity - _uLP;
+            MinRealU = LargestPositive + ((uint)1 << Size - 1);
 
-            _minrealu = _largestPositive + _signBitOne;
-
-            _quietNotANumber = _positiveInfinity + _uncertaintyBitMask;
-            _signalingNotANumber = _negativeInfinity + _uncertaintyBitMask;
+            QuietNotANumber = PositiveInfinity + UncertaintyBitMask;
+            SignalingNotANumber = NegativeInfinity + UncertaintyBitMask;
 
             //_smallNormal = _exponentAndFractionSizeMask + 1 << _size - 1 - _exponentSizeMax;
         }
