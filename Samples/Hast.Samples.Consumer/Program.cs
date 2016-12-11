@@ -95,6 +95,7 @@ namespace Hast.Samples.Consumer
                         // The generated VHDL code will contain debug-level information, though it will be a bit slower
                         // to create.
                         configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
+                        configuration.EnableCaching = false;
 
                         // Generating hardware from the sample assembly with the given configuration.
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
@@ -110,6 +111,7 @@ namespace Hast.Samples.Consumer
                         {
                             Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
                         }
+                        return;
 
 
                         // Running samples.
