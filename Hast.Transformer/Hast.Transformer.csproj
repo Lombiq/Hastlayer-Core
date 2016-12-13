@@ -99,6 +99,7 @@
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
+    <Compile Include="Services\InstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Visitors\DisplayClassMethodObjectParametersTypeConvertingVisitor.cs" />
     <Compile Include="Visitors\InlinableTaskArraysFindingVisitor.cs" />
     <Compile Include="Visitors\InlinableTaskArraysInliningVisitor.cs" />
+    <Compile Include="Visitors\InstanceMethodsToStaticConvertingVisitor.cs" />
     <Compile Include="Visitors\InvocationInstanceCountAdjustingVisitor.cs" />
     <Compile Include="Visitors\ReferencedNodesFlaggingVisitor.cs" />
     <Compile Include="Visitors\UnreferencedNodesRemovingVisitor.cs" />

@@ -28,6 +28,7 @@ namespace Hast.Transformer
         private readonly ITransformingEngine _engine;
         private readonly IGeneratedTaskArraysInliner _generatedTaskArraysInliner;
         private readonly IObjectVariableTypesConverter _objectVariableTypesConverter;
+        private readonly IInstanceMethodsToStaticConverter _instanceMethodsToStaticConverter;
 
 
         public DefaultTransformer(
@@ -38,7 +39,8 @@ namespace Hast.Transformer
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             ITransformingEngine engine,
             IGeneratedTaskArraysInliner generatedTaskArraysInliner,
-            IObjectVariableTypesConverter objectVariableTypesConverter)
+            IObjectVariableTypesConverter objectVariableTypesConverter,
+            IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -48,6 +50,7 @@ namespace Hast.Transformer
             _engine = engine;
             _generatedTaskArraysInliner = generatedTaskArraysInliner;
             _objectVariableTypesConverter = objectVariableTypesConverter;
+            _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
         }
 
 
@@ -139,6 +142,7 @@ namespace Hast.Transformer
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
+            _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
