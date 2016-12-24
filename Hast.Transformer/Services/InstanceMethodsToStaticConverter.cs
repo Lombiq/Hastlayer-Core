@@ -45,7 +45,7 @@ namespace Hast.Transformer.Services
     {
         public void ConvertInstanceMethodsToStatic(SyntaxTree syntaxTree)
         {
-            syntaxTree.AcceptVisitor(new InstanceMethodsToStaticConvertingVisitor());
+            syntaxTree.AcceptVisitor(new InstanceMethodsToStaticConvertingVisitor(syntaxTree));
         }
     }
 }
