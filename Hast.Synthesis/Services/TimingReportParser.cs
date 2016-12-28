@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -30,9 +31,26 @@ namespace Hast.Synthesis.Services
                 while (csvReader.Read())
                 {
                     var operatorString = csvReader.GetField<string>("Op");
+
+                    // "not" is a unary operator, the others are not directly applicable in .NET.
+                    var skippedOperators = new[] { "not", "nand", "nor", "xnor" };
+                    if (skippedOperators.Contains(operatorString))
+                    {
+                        continue;
+                    }
+
                     BinaryOperatorType binaryOperator;
                     switch (operatorString)
                     {
+                        case "and":
+                            binaryOperator = BinaryOperatorType.BitwiseAnd;
+                            break;
+                        case "or":
+                            binaryOperator = BinaryOperatorType.BitwiseOr;
+                            break;
+                        case "xor":
+                            binaryOperator = BinaryOperatorType.ExclusiveOr;
+                            break;
                         case "+":
                             binaryOperator = BinaryOperatorType.Add;
                             break;
@@ -70,9 +88,14 @@ namespace Hast.Synthesis.Services
                             throw new NotSupportedException("Unrecognized binary operator in timing report: " + operatorString);
                     }
 
-                    var operandTypes = csvReader.GetField<string>("InType");
-                    var isSigned = operandTypes.StartsWith("signed");
-                    var operandSizeBits = ushort.Parse(isSigned ? operandTypes.Substring(6) : operandTypes.Substring(8));
+                    var operandType = csvReader.GetField<string>("InType");
+                    var isSigned = operandType.StartsWith("signed");
+                    var operandSizeMatch = Regex.Match(operandType, "([0-9]+)", RegexOptions.Compiled);
+                    if (!operandSizeMatch.Success)
+                    {
+                        throw new InvalidOperationException("The \"" + operandType + "\" operand type doesn't have a size.");
+                    }
+                    var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value);
 
                     var dpd = decimal.Parse(csvReader.GetField<string>("DPD"), NumberStyles.AllowDecimalPoint);
 
