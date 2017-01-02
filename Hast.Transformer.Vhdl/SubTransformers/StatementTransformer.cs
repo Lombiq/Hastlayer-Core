@@ -104,6 +104,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         AssignTo = stateMachine.CreateReturnSignalReference(),
                         Expression = _expressionTransformer.Transform(returnStatement.Expression, context)
                     };
+
+                    // If the expression is an assignment we can't assign it to the return signal, so need to split it.
+                    // This happens with lines like:
+                    // return (Number += increaseBy);
+                    if (assigmentElement.Expression is Assignment)
+                    {
+                        currentBlock.Add(assigmentElement.Expression);
+                        assigmentElement.Expression = ((Assignment)assigmentElement.Expression).AssignTo;
+                    }
+
                     currentBlock.Add(assigmentElement);
                 }
 
