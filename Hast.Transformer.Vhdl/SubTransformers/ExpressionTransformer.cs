@@ -400,10 +400,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             //}
             else if (expression is UnaryOperatorExpression)
             {
-                var unary = expression as UnaryOperatorExpression;
-
                 // The increment/decrement unary operators are compiled into binary operators (e.g. i++ will be
                 // i = i + 1) so we don't have to care about those.
+
+                var unary = expression as UnaryOperatorExpression;
+
+
+                var expressionSize = _typeConverter.ConvertTypeReference(unary.Expression.GetActualTypeReference()).GetSize();
+                var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForUnaryOperation(unary, expressionSize, false);
+
+                stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);
+                scope.CurrentBlock.RequiredClockCycles += clockCyclesNeededForOperation;
 
                 var transformedExpression = Transform(unary.Expression, context);
 

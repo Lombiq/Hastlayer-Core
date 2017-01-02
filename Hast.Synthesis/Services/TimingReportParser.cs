@@ -32,14 +32,15 @@ namespace Hast.Synthesis.Services
                 {
                     var operatorString = csvReader.GetField<string>("Op");
 
-                    // "not" is a unary operator, the others are not directly applicable in .NET.
-                    var skippedOperators = new[] { "not", "nand", "nor", "xnor" };
+                    // These are not directly applicable in .NET.
+                    var skippedOperators = new[] { "nand", "nor", "xnor" };
                     if (skippedOperators.Contains(operatorString))
                     {
                         continue;
                     }
 
-                    BinaryOperatorType binaryOperator;
+                    BinaryOperatorType? binaryOperator = null;
+                    UnaryOperatorType? unaryOperator = null;
                     switch (operatorString)
                     {
                         case "and":
@@ -84,8 +85,11 @@ namespace Hast.Synthesis.Services
                         case "/=":
                             binaryOperator = BinaryOperatorType.InEquality;
                             break;
+                        case "not":
+                            unaryOperator = UnaryOperatorType.Not;
+                            break;
                         default:
-                            throw new NotSupportedException("Unrecognized binary operator in timing report: " + operatorString);
+                            throw new NotSupportedException("Unrecognized operator in timing report: " + operatorString + ".");
                     }
 
                     var operandType = csvReader.GetField<string>("InType");
@@ -99,7 +103,14 @@ namespace Hast.Synthesis.Services
 
                     var dpd = decimal.Parse(csvReader.GetField<string>("DPD"), NumberStyles.AllowDecimalPoint);
 
-                    timingReport.SetLatencyNs(binaryOperator, operandSizeBits, isSigned, dpd);
+                    if (binaryOperator.HasValue)
+                    {
+                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, dpd); 
+                    }
+                    else if (unaryOperator.HasValue)
+                    {
+                        timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, dpd);
+                    }
                 }
 
                 return timingReport;
@@ -112,15 +123,36 @@ namespace Hast.Synthesis.Services
             private readonly Dictionary<string, decimal> _timings = new Dictionary<string, decimal>();
 
 
-            public void SetLatencyNs(BinaryOperatorType binaryOperator, ushort operandSizeBits, bool isSigned, decimal timing)
+            public void SetLatencyNs(dynamic operatorTyper, int operandSizeBits, bool isSigned, decimal timing)
             {
-                _timings[GetKey(binaryOperator, operandSizeBits, isSigned)] = timing;
+                _timings[GetKey(operatorTyper, operandSizeBits, isSigned)] = timing;
+
+                // If the operand type is 1 that means that the operation also works with single-bit non-composite types
+                // where the latter may not have an explicit size. E.g. and std_logic_vector1 would be the same as 
+                // std_logic but the latter is not a sized data type (and thus it's apparent size will be 0, despite it
+                // being stored in at least one bit).
+                // Therefore, saving a 0 bit version here too.
+                if (operandSizeBits == 1)
+                {
+                    SetLatencyNs(operatorTyper, 0, isSigned, timing);
+                }
             }
 
-            public decimal GetLatencyNs(BinaryOperatorType binaryOperator, ushort operandSizeBits, bool isSigned)
+            public decimal GetLatencyNs(BinaryOperatorType binaryOperator, int operandSizeBits, bool isSigned)
+            {
+                return GetLatencyNsInternal(binaryOperator, operandSizeBits, isSigned);
+            }
+
+            public decimal GetLatencyNs(UnaryOperatorType unaryOperator, int operandSizeBits, bool isSigned)
+            {
+                return GetLatencyNsInternal(unaryOperator, operandSizeBits, isSigned);
+            }
+
+
+            private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned)
             {
                 decimal latency;
-                if (_timings.TryGetValue(GetKey(binaryOperator, operandSizeBits, isSigned), out latency))
+                if (_timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned), out latency))
                 {
                     return latency;
                 }
@@ -128,10 +160,9 @@ namespace Hast.Synthesis.Services
                 return -1;
             }
 
-
-            private static string GetKey(BinaryOperatorType binaryOperator, ushort operandSizeBits, bool isSigned)
+            private static string GetKey(dynamic operatorType, int operandSizeBits, bool isSigned)
             {
-                return binaryOperator.ToString() + operandSizeBits.ToString() + isSigned.ToString();
+                return operatorType.ToString() + operandSizeBits.ToString() + isSigned.ToString();
             }
         }
     }

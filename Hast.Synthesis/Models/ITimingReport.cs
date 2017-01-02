@@ -19,6 +19,15 @@ namespace Hast.Synthesis.Models
         /// <param name="operandSizeBits">The size of the operation's operands, in bits.</param>
         /// <param name="isSigned">Indicates whether the operands are signed.</param>
         /// <returns>The latency, in ns, what the operation will roughly take. -1 if no timing data was found.</returns>
-        decimal GetLatencyNs(BinaryOperatorType binaryOperator, ushort operandSizeBits, bool isSigned);
+        decimal GetLatencyNs(BinaryOperatorType binaryOperator, int operandSizeBits, bool isSigned);
+
+        /// <summary>
+        /// Retrieves the timing value for the given unary operation.
+        /// </summary>
+        /// <param name="unaryOperator">The operator of the unary operation.</param>
+        /// <param name="operandSizeBits">The size of the operation's operands, in bits.</param>
+        /// <param name="isSigned">Indicates whether the operands are signed.</param>
+        /// <returns>The latency, in ns, what the operation will roughly take. -1 if no timing data was found.</returns>
+        decimal GetLatencyNs(UnaryOperatorType unaryOperator, int operandSizeBits, bool isSigned);
     }
 }
