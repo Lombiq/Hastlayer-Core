@@ -56,4 +56,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 (SizeExpression == null ? Size == otherType.Size : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
         }
     }
+
+
+    public static class SizedDataTypeExtensions
+    {
+        public static int GetSize(this DataType type)
+        {
+            return type is SizedDataType ? ((SizedDataType)type).Size : 0;
+        }
+    }
 }

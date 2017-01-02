@@ -189,7 +189,7 @@ mod	signed8	signed8	sync	synth	20,480	-0,136
         }
 
 
-        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, ushort operandSizeBits, bool isSigned)
+        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
         {
             var binaryOperator = expression.Operator;
 
@@ -217,6 +217,18 @@ mod	signed8	signed8	sync	synth	20,480	-0,136
 
             // With a 100 Mhz clock one clock cycle takes 10ns, so just need to divide by 10. 
             var latency = TimingReport.GetLatencyNs(binaryOperator, operandSizeBits, isSigned) / 10;
+
+            // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
+            // be latency data).
+            if (latency < 0) return 0.1M;
+
+            return latency;
+        }
+
+        public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned)
+        {
+            // With a 100 Mhz clock one clock cycle takes 10ns, so just need to divide by 10. 
+            var latency = TimingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned) / 10;
 
             // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
             // be latency data).
