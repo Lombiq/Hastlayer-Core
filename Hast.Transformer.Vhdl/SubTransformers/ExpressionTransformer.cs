@@ -490,19 +490,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var arrayCreateExpression = (ArrayCreateExpression)expression;
                 IVhdlElement transformedExpression = null;
 
-                // TODO: here we need to handle object initializers in array initializers.
                 if (arrayCreateExpression.Initializer.Elements.Any() && 
-                    !(arrayCreateExpression.Initializer.Elements.First() is ObjectCreateExpression))
+                    arrayCreateExpression.Initializer.Elements.First() is ObjectCreateExpression)
+                {
+                    // TODO: here we need to handle object initializers in array initializers.
+
+                    transformedExpression = Empty.Instance;
+                }
+                else
                 {
                     var transformedInitializerElements = arrayCreateExpression.Initializer.Elements
                         .Select(initializerElement => Transform(initializerElement, context));
 
                     transformedExpression = _arrayCreateExpressionTransformer
                         .Transform(arrayCreateExpression, scope.StateMachine, transformedInitializerElements);
-                }
-                else
-                {
-                    transformedExpression = Empty.Instance;
                 }
 
                 return transformedExpression;
