@@ -22,6 +22,9 @@ namespace Hast.Transformer.Visitors
 
         public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
+            // Omitting DisplayClasses because those are handled separately.
+            if (methodDeclaration.GetFullName().IsDisplayClassMemberName()) return;
+
             base.VisitMethodDeclaration(methodDeclaration);
 
             var parentType = methodDeclaration.FindFirstParentTypeDeclaration();
