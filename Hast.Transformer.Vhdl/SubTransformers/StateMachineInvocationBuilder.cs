@@ -253,6 +253,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         var localVariableDataType = stateMachine.LocalVariables
                             .Single(variable => variable.Name == ((IDataObject)parameter).Name).DataType;
 
+                        // If the parameter is an array access then the actual variable type should be the array
+                        // element's type.
+                        if (localVariableDataType is ArrayType && parameter is ArrayElementAccess)
+                        {
+                            localVariableDataType = ((ArrayType)localVariableDataType).ElementType;
+                        }
+
                         if (localVariableDataType is Record)
                         {
                             var fieldAccess = parameter as RecordFieldAccess;
