@@ -33,11 +33,16 @@ namespace Hast.Samples.SampleAssembly
             // Reading out the input parameter.
             var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
 
-            var numberObject = new TestNumber { Number = number };
-            numberObject.IncreaseNumber(5);
+            var numberObjects = new[]
+            {
+                new TestNumber { Number = number },
+                new TestNumber { Number = number + 4 },
+                new TestNumber { Number = 24 }
+            };
+            numberObjects[0].IncreaseNumber(5);
 
             // Writing back the output.
-            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(numberObject.Number));
+            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(numberObjects[0].Number));
         }
 
 
