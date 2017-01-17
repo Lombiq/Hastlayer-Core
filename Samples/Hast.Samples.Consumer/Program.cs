@@ -96,6 +96,14 @@ namespace Hast.Samples.Consumer
                         // to create.
                         configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
 
+                        #region Hack
+                        // You just had to open this region, didn't you?
+                        // If VHDL is written to a file just after GenerateHardware() somehow an exception will be 
+                        // thrown from inside Hastlayer. This shouldn't happen and the exception has nothing to do with
+                        // files. It's a mystery. But having this dummy file write here solves it.
+                        //System.IO.File.WriteAllText(Configuration.VhdlOutputFilePath, "dummy");
+                        #endregion
+
                         // Generating hardware from the sample assembly with the given configuration.
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
