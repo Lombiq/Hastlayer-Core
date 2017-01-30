@@ -15,6 +15,7 @@ namespace Hast.Transformer.Vhdl.Helpers
             return new UnconstrainedArrayInstantiation
             {
                 Name = CreateArrayTypeName(elementType.Name),
+                ElementType = elementType,
                 RangeFrom = 0,
                 RangeTo = length - 1
             };

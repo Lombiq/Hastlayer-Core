@@ -269,6 +269,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             localVariableDataType = ((ArrayType)localVariableDataType).ElementType;
                         }
 
+                        if (localVariableDataType is UnconstrainedArrayInstantiation &&
+                            (parameter is ArrayElementAccess || parameter is RecordFieldAccess))
+                        {
+                            localVariableDataType = ((UnconstrainedArrayInstantiation)localVariableDataType).ElementType;
+                        }
+
                         if (localVariableDataType is Record)
                         {
                             var fieldAccess = parameter as RecordFieldAccess;

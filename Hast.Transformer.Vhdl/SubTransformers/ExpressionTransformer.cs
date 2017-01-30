@@ -610,9 +610,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var recordInstanceAssignmentTarget = expression
                 .FindFirstParentOfType<AssignmentExpression>()
                 .Left;
-            var recordInstanceIdentifier = recordInstanceAssignmentTarget is IdentifierExpression ?
-                recordInstanceAssignmentTarget :
-                recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
+            var recordInstanceIdentifier = 
+                recordInstanceAssignmentTarget is IdentifierExpression || recordInstanceAssignmentTarget is IndexerExpression ?
+                    recordInstanceAssignmentTarget :
+                    recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
             var recordInstanceReference = (IDataObject)Transform(recordInstanceIdentifier, context);
 
             foreach (var field in record.Fields)

@@ -8,6 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class UnconstrainedArrayInstantiation : DataType
     {
+        public DataType ElementType { get; set; }
         public int RangeFrom { get; set; }
         public int RangeTo { get; set; }
 

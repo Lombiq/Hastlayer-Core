@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             return ArrayHelper.CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
         }
 
-        public Value Transform(
+        public IVhdlElement Transform(
             ArrayCreateExpression expression,
             IArchitectureComponent component,
             IEnumerable<IVhdlElement> transformedInitializerElements)
@@ -97,7 +97,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
             else
             {
-                arrayInitializationValue.Content = "others => " + elementType.DefaultValue.ToVhdl();
+                if (elementType.DefaultValue != null)
+                {
+                    arrayInitializationValue.Content = "others => " + elementType.DefaultValue.ToVhdl();
+                }
+                else
+                {
+                    // If there's no default value then we can't initialize the array. This is the case when objects
+                    // are stored in the array and that's no problem, since objects are initialized during instantiation
+                    // any way.
+                    return Empty.Instance;
+                }
             }
 
             return arrayInitializationValue;
