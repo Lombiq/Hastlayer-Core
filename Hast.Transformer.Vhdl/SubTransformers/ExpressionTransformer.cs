@@ -355,7 +355,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Is this reference to an enum's member?
                 var targetTypeReferenceExpression = memberReference.Target as TypeReferenceExpression;
-                if (targetTypeReferenceExpression != null && 
+                if (targetTypeReferenceExpression != null &&
                     context.TransformationContext.TypeDeclarationLookupTable.Lookup(targetTypeReferenceExpression)?.ClassType == ClassType.Enum)
                 {
                     return memberFullName.ToExtendedVhdlIdValue();
@@ -380,7 +380,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         // We know that we've already handled the target so it stores the result objects, so just need 
                         // to use them directly.
-                        return Transform(memberReference.Target, context); 
+                        return Transform(memberReference.Target, context);
                     }
                 }
 
@@ -457,7 +457,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (declaration == null)
                 {
                     throw new InvalidOperationException(
-                        "No matching type for \"" + ((SimpleType)type).Identifier + 
+                        "No matching type for \"" + ((SimpleType)type).Identifier +
                         "\" found in the syntax tree. This can mean that the type's assembly was not added to the syntax tree.");
                 }
 
@@ -478,8 +478,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var toTypeKeyword = ((PrimitiveType)castExpression.Type).Keyword;
                     var fromTypeKeyword = castExpression.GetActualTypeReference().FullName;
                     Logger.Warning(
-                        "A cast from " + fromTypeKeyword + " to " + toTypeKeyword + 
-                        " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " + 
+                        "A cast from " + fromTypeKeyword + " to " + toTypeKeyword +
+                        " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
                 }
 
@@ -488,25 +488,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is ArrayCreateExpression)
             {
                 var arrayCreateExpression = (ArrayCreateExpression)expression;
-                IVhdlElement transformedExpression = null;
 
-                if (arrayCreateExpression.Initializer.Elements.Any() && 
-                    arrayCreateExpression.Initializer.Elements.First() is ObjectCreateExpression)
-                {
-                    // TODO: here we need to handle object initializers in array initializers.
+                var transformedInitializerElements = arrayCreateExpression.Initializer.Elements
+                    .Select(initializerElement => Transform(initializerElement, context));
 
-                    transformedExpression = Empty.Instance;
-                }
-                else
-                {
-                    var transformedInitializerElements = arrayCreateExpression.Initializer.Elements
-                        .Select(initializerElement => Transform(initializerElement, context));
-
-                    transformedExpression = _arrayCreateExpressionTransformer
-                        .Transform(arrayCreateExpression, scope.StateMachine, transformedInitializerElements);
-                }
-
-                return transformedExpression;
+                  return _arrayCreateExpressionTransformer
+                    .Transform(arrayCreateExpression, transformedInitializerElements, context);
             }
             else if (expression is IndexerExpression)
             {
@@ -517,7 +504,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (targetVariableReference == null)
                 {
                     throw new InvalidOperationException(
-                        "The target of the indexer expression " + expression.ToString() + 
+                        "The target of the indexer expression " + expression.ToString() +
                         " couldn't be transformed to a data object reference.");
                 }
 
@@ -610,7 +597,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var recordInstanceAssignmentTarget = expression
                 .FindFirstParentOfType<AssignmentExpression>()
                 .Left;
-            var recordInstanceIdentifier = 
+            var recordInstanceIdentifier =
                 recordInstanceAssignmentTarget is IdentifierExpression || recordInstanceAssignmentTarget is IndexerExpression ?
                     recordInstanceAssignmentTarget :
                     recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -28,8 +30,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public IVhdlElement Transform(
             ArrayCreateExpression expression,
-            IArchitectureComponent component,
-            IEnumerable<IVhdlElement> transformedInitializerElements)
+            IEnumerable<IVhdlElement> transformedInitializerElements,
+            ISubTransformerContext context)
         {
             if (expression.Arguments.Any() && expression.Arguments.Count != 1)
             {
@@ -47,6 +49,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 throw new InvalidOperationException("An array should have a length greater than 1.");
             }
 
+
+            var scope = context.Scope;
+            var stateMachine = scope.StateMachine;
 
             // Arrays are tricky: the variable declaration can happen earlier but without an array creation (i.e.
             // at that point the length of the array won't be known) so we have to go back to the variable declaration
@@ -71,8 +76,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
                 ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
                 ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
-            var parentDataObjectName = component.CreatePrefixedObjectName(parentIdentifier);
-            var parentDataObject = component
+            var parentDataObjectName = stateMachine.CreatePrefixedObjectName(parentIdentifier);
+            var parentDataObject = stateMachine
                 .GetAllDataObjects()
                 .Where(dataObject => dataObject.Name == parentDataObjectName)
                 .SingleOrDefault();
@@ -93,7 +98,37 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (hasInitializer)
             {
-                arrayInitializationValue.EvaluatedContent = new InlineBlock(transformedInitializerElements);
+                if (expression.Initializer.Elements.Any(element => element is ObjectCreateExpression))
+                {
+                    // Object initializers can't be transformed to be part of an inline VHDL array initialization, so
+                    // the array's elements should be initialized one by one instead.
+
+                    var i = 0;
+                    var transformedElementsEnumerator = transformedInitializerElements.GetEnumerator();
+                    transformedElementsEnumerator.MoveNext();
+                    foreach (var element in expression.Initializer.Elements)
+                    {
+                        scope.CurrentBlock.Add(new Assignment
+                        {
+                            AssignTo = new ArrayElementAccess
+                            {
+                                Array = parentDataObject,
+                                IndexExpression = i.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                            },
+                            Expression = transformedElementsEnumerator.Current
+                        });
+
+                        i++;
+                        transformedElementsEnumerator.MoveNext();
+                    }
+                }
+                else
+                {
+                    // If the array initialization only contains primitive expressions or variable references then that
+                    // can be transformed into a VHDL array initialization.
+
+                    arrayInitializationValue.EvaluatedContent = new InlineBlock(transformedInitializerElements);
+                }
             }
             else
             {
