@@ -586,6 +586,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var record = (Record)_typeConverter.ConvertAstType(recordAstType);
 
+            if (record.Fields.Any())
+            {
+                context.Scope.CurrentBlock.Add(new LineComment("Initializing record fields to their defaults."));
+            }
+
             // This will only work if the newly created object is assigned to a variable or something else. It won't
             // work if the newly created object is directly passed to a method for example.
             var recordInstanceAssignmentTarget = expression
