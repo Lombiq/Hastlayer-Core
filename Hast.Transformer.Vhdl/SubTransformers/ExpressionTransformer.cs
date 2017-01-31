@@ -487,13 +487,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is ArrayCreateExpression)
             {
-                var arrayCreateExpression = (ArrayCreateExpression)expression;
-
-                var transformedInitializerElements = arrayCreateExpression.Initializer.Elements
-                    .Select(initializerElement => Transform(initializerElement, context));
-
-                  return _arrayCreateExpressionTransformer
-                    .Transform(arrayCreateExpression, transformedInitializerElements, context);
+                return _arrayCreateExpressionTransformer.Transform((ArrayCreateExpression)expression, context);
             }
             else if (expression is IndexerExpression)
             {

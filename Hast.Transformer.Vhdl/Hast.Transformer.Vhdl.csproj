@@ -137,6 +137,7 @@
     <Compile Include="ArchitectureComponents\NameSuffixes.cs" />
     <Compile Include="SimpleMemory\ISimpleMemoryComponentBuilder.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryComponentBuilder.cs" />
+    <Compile Include="SubTransformers\ArrayInitializerExpander.cs" />
     <Compile Include="SubTransformers\ArrayParameterLengthSetter.cs" />
     <Compile Include="SubTransformers\ArrayTypesCreator.cs" />
     <Compile Include="SubTransformers\CompilerGeneratedClassesVerifier.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="SubTransformers\ExpressionTransformers\IBinaryOperatorExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\IInvocationExpressionTransformer.cs" />
     <Compile Include="SubTransformers\ExpressionTransformers\InvocationExpressionTransformer.cs" />
+    <Compile Include="SubTransformers\IArrayInitializerExpander.cs" />
     <Compile Include="SubTransformers\IArrayParameterLengthSetter.cs" />
     <Compile Include="SubTransformers\IEnumTypesCreator.cs" />
     <Compile Include="SubTransformers\IPocoTransformer.cs" />
@@ -198,6 +200,10 @@
     <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
       <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
       <Name>Hast.VhdlBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj">
+      <Project>{3e852853-2d19-49bb-b6c9-39b01d6e9785}</Project>
+      <Name>Lombiq.OrchardAppHost</Name>
     </ProjectReference>
     <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>

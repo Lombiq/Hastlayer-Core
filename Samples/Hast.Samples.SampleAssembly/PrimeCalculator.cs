@@ -33,15 +33,15 @@ namespace Hast.Samples.SampleAssembly
             // Reading out the input parameter.
             var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
 
-            var numberObjects = new[]
-            {
-                new TestNumber { Number = number },
-                new TestNumber { Number = number + 4 },
-                new TestNumber { Number = 24 }
-            };
+            //var numberObjects = new[]
+            //{
+            //    new TestNumber { Number = number },
+            //    new TestNumber { Number = number + 4 },
+            //    new TestNumber { Number = 24 }
+            //};
             // This will be also compiled as an array initializer with an object initializer in IL:
-            //var numberObjects = new TestNumber[1];
-            //numberObjects[0] = new TestNumber { Number = number };
+            var numberObjects = new TestNumber[1];
+            numberObjects[0] = new TestNumber { Number = number };
 
             numberObjects[0].IncreaseNumber(5);
 

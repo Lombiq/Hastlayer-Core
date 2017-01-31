@@ -28,10 +28,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             return ArrayHelper.CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
         }
 
-        public IVhdlElement Transform(
-            ArrayCreateExpression expression,
-            IEnumerable<IVhdlElement> transformedInitializerElements,
-            ISubTransformerContext context)
+        public IVhdlElement Transform(ArrayCreateExpression expression, ISubTransformerContext context)
         {
             if (expression.Arguments.Any() && expression.Arguments.Count != 1)
             {
@@ -56,14 +53,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Arrays are tricky: the variable declaration can happen earlier but without an array creation (i.e.
             // at that point the length of the array won't be known) so we have to go back to the variable declaration
             // and set its data type to the unconstrained array instantiation. This is unless the array is also 
-            // immediately initialized (i.e. new[] { 1, 2, 3 }-style).
-
-            var hasInitializer = expression.HasInitializer();
+            // immediately initialized (i.e. new[] { 1, 2, 3 }-style), but such forms are converted into one-by-one 
+            // element assignments.
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
             if ((parentAssignmentExpression == null ||
-                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)) &&
-                !hasInitializer)
+                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)))
             {
                 throw new NotSupportedException(
                     "Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
@@ -89,63 +84,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 parentDataObject.DataType = arrayInstantiationType;
             }
 
-            // Initializing the array with the .NET default values (so there are no surprises when reading values
-            // without setting them previously) or the initialized values.
-            var arrayInitializationValue = new Value
+
+            if (elementType.DefaultValue != null)
             {
-                DataType = arrayInstantiationType
-            };
-
-            if (hasInitializer)
-            {
-                if (expression.Initializer.Elements.Any(element => element is ObjectCreateExpression))
+                // Initializing the array with the .NET default values (so there are no surprises when reading values
+                // without setting them previously).
+                return new Value
                 {
-                    // Object initializers can't be transformed to be part of an inline VHDL array initialization, so
-                    // the array's elements should be initialized one by one instead.
-
-                    var i = 0;
-                    var transformedElementsEnumerator = transformedInitializerElements.GetEnumerator();
-                    transformedElementsEnumerator.MoveNext();
-                    foreach (var element in expression.Initializer.Elements)
-                    {
-                        scope.CurrentBlock.Add(new Assignment
-                        {
-                            AssignTo = new ArrayElementAccess
-                            {
-                                Array = parentDataObject,
-                                IndexExpression = i.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                            },
-                            Expression = transformedElementsEnumerator.Current
-                        });
-
-                        i++;
-                        transformedElementsEnumerator.MoveNext();
-                    }
-                }
-                else
-                {
-                    // If the array initialization only contains primitive expressions or variable references then that
-                    // can be transformed into a VHDL array initialization.
-
-                    arrayInitializationValue.EvaluatedContent = new InlineBlock(transformedInitializerElements);
-                }
+                    DataType = arrayInstantiationType,
+                    Content = "others => " + elementType.DefaultValue.ToVhdl()
+                };
             }
             else
             {
-                if (elementType.DefaultValue != null)
-                {
-                    arrayInitializationValue.Content = "others => " + elementType.DefaultValue.ToVhdl();
-                }
-                else
-                {
-                    // If there's no default value then we can't initialize the array. This is the case when objects
-                    // are stored in the array and that's no problem, since objects are initialized during instantiation
-                    // any way.
-                    return Empty.Instance;
-                }
+                // If there's no default value then we can't initialize the array. This is the case when objects
+                // are stored in the array and that's no problem, since objects are initialized during instantiation
+                // any way.
+                return Empty.Instance;
             }
-
-            return arrayInitializationValue;
         }
     }
 }

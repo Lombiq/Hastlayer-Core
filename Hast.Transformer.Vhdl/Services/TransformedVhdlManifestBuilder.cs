@@ -31,6 +31,7 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly IEnumTypesCreator _enumTypesCreator;
         private readonly IArrayParameterLengthSetter _arrayParameterLengthSetter;
         private readonly IPocoTransformer _pocoTransformer;
+        private readonly IArrayInitializerExpander _arrayInitializerExpander;
 
 
         public TransformedVhdlManifestBuilder(
@@ -44,7 +45,8 @@ namespace Hast.Transformer.Vhdl.Services
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
             IEnumTypesCreator enumTypesCreator,
             IArrayParameterLengthSetter arrayParameterLengthSetter,
-            IPocoTransformer pocoTransformer)
+            IPocoTransformer pocoTransformer,
+            IArrayInitializerExpander arrayInitializerExpander)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _clock = clock;
@@ -57,6 +59,7 @@ namespace Hast.Transformer.Vhdl.Services
             _enumTypesCreator = enumTypesCreator;
             _arrayParameterLengthSetter = arrayParameterLengthSetter;
             _pocoTransformer = pocoTransformer;
+            _arrayInitializerExpander = arrayInitializerExpander;
         }
 
 
@@ -128,6 +131,10 @@ namespace Hast.Transformer.Vhdl.Services
 
             // Preparing arrays passed as method parameters
             _arrayParameterLengthSetter.SetArrayParameterSizes(syntaxTree);
+
+
+            // Exanding array initializers to one-by-one array element assignments.
+            _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
 
 
             // Doing transformations

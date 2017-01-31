@@ -13,9 +13,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         UnconstrainedArrayInstantiation CreateArrayInstantiation(ArrayCreateExpression expression);
 
-        IVhdlElement Transform(
-            ArrayCreateExpression expression,
-            IEnumerable<IVhdlElement> transformedInitializerElements,
-            ISubTransformerContext context);
+        IVhdlElement Transform(ArrayCreateExpression expression, ISubTransformerContext context);
     }
 }
