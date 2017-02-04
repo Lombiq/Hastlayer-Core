@@ -101,8 +101,13 @@
     <Compile Include="Services\ArrayInitializerExpander.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IArrayInitializerExpander.cs" />
+    <Compile Include="Services\IGeneratedTaskArraysInliner.cs" />
+    <Compile Include="Services\IInstanceMethodsToStaticConverter.cs" />
+    <Compile Include="Services\IInvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\InstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
+    <Compile Include="Services\IObjectVariableTypesConverter.cs" />
+    <Compile Include="Services\ISyntaxTreeCleaner.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
@@ -116,13 +121,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TransformerExtensions.cs" />
     <Compile Include="Configuration\TransformerConfiguration.cs" />
-    <Compile Include="Visitors\DisplayClassMethodObjectParametersTypeConvertingVisitor.cs" />
-    <Compile Include="Visitors\InlinableTaskArraysFindingVisitor.cs" />
-    <Compile Include="Visitors\InlinableTaskArraysInliningVisitor.cs" />
-    <Compile Include="Visitors\InstanceMethodsToStaticConvertingVisitor.cs" />
-    <Compile Include="Visitors\InvocationInstanceCountAdjustingVisitor.cs" />
-    <Compile Include="Visitors\ReferencedNodesFlaggingVisitor.cs" />
-    <Compile Include="Visitors\UnreferencedNodesRemovingVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj">

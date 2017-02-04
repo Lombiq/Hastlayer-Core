@@ -2,21 +2,11 @@
 using Hast.Common.Configuration;
 using Hast.Common.Extensions;
 using Hast.Transformer.Models;
-using Hast.Transformer.Visitors;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
 namespace Hast.Transformer.Services
 {
-    /// <summary>
-    /// Removes nodes from the syntax tree that aren't needed.
-    /// </summary>
-    public interface ISyntaxTreeCleaner : IDependency
-    {
-        void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
-    }
-
-
     public class SyntaxTreeCleaner : ISyntaxTreeCleaner
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
@@ -93,6 +83,115 @@ namespace Hast.Transformer.Services
             }
 
             // Note that at this point the reference counters are out of date and would need to be refreshed to be used.
+        }
+
+
+        private class ReferencedNodesFlaggingVisitor : DepthFirstAstVisitor
+        {
+            private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
+
+
+            public ReferencedNodesFlaggingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable)
+            {
+                _typeDeclarationLookupTable = typeDeclarationLookupTable;
+            }
+
+
+            public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
+            {
+                base.VisitMemberReferenceExpression(memberReferenceExpression);
+
+
+                if (memberReferenceExpression.Target is TypeReferenceExpression)
+                {
+                    var typeReferenceExpression = (TypeReferenceExpression)memberReferenceExpression.Target;
+                    if (typeReferenceExpression.Type.Is<SimpleType>(simple => simple.Identifier == "MethodImplOptions"))
+                    {
+                        // This can happen when a method is extern (see: https://msdn.microsoft.com/en-us/library/e59b22c5.aspx),
+                        // thus has no body but has the MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.
+                        return;
+                    }
+                }
+
+
+                var member = memberReferenceExpression.GetMemberDeclaration(_typeDeclarationLookupTable);
+
+                if (member == null || member.WasVisited()) return;
+
+                // Using the reference expression as the "from", since e.g. two calls to the same method should be counted 
+                // twice, even if from the same method.
+                member.AddReference(memberReferenceExpression);
+
+                // Referencing the member's parent as well.
+                member.FindFirstParentTypeDeclaration().AddReference(memberReferenceExpression);
+
+                // And also the interfaces implemented by it.
+                if (member is MethodDeclaration || member is PropertyDeclaration)
+                {
+                    var implementedInterfaceMethod = member.FindImplementedInterfaceMethod(_typeDeclarationLookupTable.Lookup);
+                    if (implementedInterfaceMethod != null)
+                    {
+                        implementedInterfaceMethod.AddReference(member);
+                        implementedInterfaceMethod.FindFirstParentTypeDeclaration().AddReference(member);
+                    }
+                }
+
+                member.SetVisited();
+
+                // Since when e.g. another method is referenced that is above the level of this expression in the syntax
+                // tree, thus it won't be visited unless we start a visitor there too.
+                member.AcceptVisitor(this);
+            }
+        }
+
+        private class UnreferencedNodesRemovingVisitor : DepthFirstAstVisitor
+        {
+            public override void VisitCustomEventDeclaration(CustomEventDeclaration eventDeclaration)
+            {
+                base.VisitCustomEventDeclaration(eventDeclaration);
+                RemoveIfUnreferenced(eventDeclaration);
+            }
+
+            public override void VisitEventDeclaration(EventDeclaration eventDeclaration)
+            {
+                base.VisitEventDeclaration(eventDeclaration);
+                RemoveIfUnreferenced(eventDeclaration);
+            }
+
+            public override void VisitDelegateDeclaration(DelegateDeclaration delegateDeclaration)
+            {
+                base.VisitDelegateDeclaration(delegateDeclaration);
+                RemoveIfUnreferenced(delegateDeclaration);
+            }
+
+            public override void VisitExternAliasDeclaration(ExternAliasDeclaration externAliasDeclaration)
+            {
+                base.VisitExternAliasDeclaration(externAliasDeclaration);
+                RemoveIfUnreferenced(externAliasDeclaration);
+            }
+
+            public override void VisitTypeDeclaration(TypeDeclaration typeDeclaration)
+            {
+                base.VisitTypeDeclaration(typeDeclaration);
+
+                var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
+
+                if (typeDeclaration.Members.Count == unreferencedMembers.Count())
+                {
+                    typeDeclaration.Remove();
+                }
+
+                foreach (var member in unreferencedMembers)
+                {
+                    member.Remove();
+                }
+            }
+
+
+            private static void RemoveIfUnreferenced(AstNode node)
+            {
+                if (!node.IsReferenced()) node.Remove();
+            }
         }
     }
 }

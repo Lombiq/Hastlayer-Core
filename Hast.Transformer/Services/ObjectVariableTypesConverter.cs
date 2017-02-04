@@ -1,41 +1,87 @@
-﻿using Hast.Transformer.Visitors;
-using ICSharpCode.NRefactory.CSharp;
+﻿using ICSharpCode.NRefactory.CSharp;
 using Orchard;
+using System;
+using System.Linq;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
-    /// <summary>
-    /// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be determined.
-    /// </summary>
-    /// <example>
-    /// Currently the following kind of constructs are supported:
-    /// 
-    /// <c>
-    /// // The numberObject variable will be converted to uint since apparently it is one.
-    /// internal bool <ParallelizedArePrimeNumbers>b__9_0 (object numberObject)
-    /// {
-    ///     uint num;
-    ///     num = (uint)numberObject;
-    ///     // ...
-    /// }
-    /// </c>
-    /// </example>
-    /// <remarks>
-    /// This is necessary because unlike an object-typed variable in .NET that due to dynamic memory allocations can
-    /// hold any data in hardware the variable size should be statically determined (like fixed 32b). So compatibility
-    /// with .NET object variables is not complete, thus attempting to close the loop here.
-    /// </remarks>
-    public interface IObjectVariableTypesConverter : IDependency
-    {
-        void ConvertObjectVariableTypes(SyntaxTree syntaxTree);
-    }
-
-
     public class ObjectVariableTypesConverter : IObjectVariableTypesConverter
     {
         public void ConvertObjectVariableTypes(SyntaxTree syntaxTree)
         {
             syntaxTree.AcceptVisitor(new DisplayClassMethodObjectParametersTypeConvertingVisitor());
+        }
+
+
+        private class DisplayClassMethodObjectParametersTypeConvertingVisitor : DepthFirstAstVisitor
+        {
+            public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
+            {
+                base.VisitMethodDeclaration(methodDeclaration);
+
+                if (!methodDeclaration.GetFullName().IsDisplayClassMemberName()) return;
+
+                foreach (var objectParameter in methodDeclaration.Parameters
+                    .Where(parameter => parameter.Type.Is<PrimitiveType>(type =>
+                        type.KnownTypeCode == ICSharpCode.NRefactory.TypeSystem.KnownTypeCode.Object)))
+                {
+                    var castExpressionFindingVisitor = new ParameterCastExpressionFindingVisitor(objectParameter.Name);
+                    methodDeclaration.Body.AcceptVisitor(castExpressionFindingVisitor);
+
+                    // Simply changing the parameter's type and removing the cast. Note that this will leave corresponding
+                    // compiler-generated Funcs intact and thus wrong. E.g. there will be similar lines added to the
+                    // lambda's calling method:
+                    // Func<object, bool> arg_57_1;
+                    // if (arg_57_1 = PrimeCalculator.<> c.<> 9__9_0 == null) {
+                    //     arg_57_1 = PrimeCalculator.<> c.<> 9__9_0 = new Func<object, bool>(PrimeCalculator.<> c.<> 9.< ParallelizedArePrimeNumbers > b__9_0);
+                    // }
+                    // This will remain, despite the Func's type now correctly being e.g. Func<uint, bool>.
+
+                    var castExpression = castExpressionFindingVisitor.Expression;
+                    if (castExpression != null)
+                    {
+                        objectParameter.Type = castExpression.Type.Clone();
+                        objectParameter.Annotation<ParameterDefinition>().ParameterType = castExpression.GetActualTypeReference(true);
+                        castExpression.ReplaceWith(castExpression.Expression);
+                        castExpression.Remove();
+                    }
+                }
+            }
+
+
+            private class ParameterCastExpressionFindingVisitor : DepthFirstAstVisitor
+            {
+                private readonly string _parameterName;
+
+                public CastExpression Expression { get; private set; }
+
+
+                public ParameterCastExpressionFindingVisitor(string parameterName)
+                {
+                    _parameterName = parameterName;
+                }
+
+
+                public override void VisitCastExpression(CastExpression castExpression)
+                {
+                    base.VisitCastExpression(castExpression);
+
+                    if (castExpression.Expression.Is<IdentifierExpression>(identifier => identifier.Identifier == _parameterName))
+                    {
+                        // If there are multiple casts for the given parameter then we'll deal with it as an object unless
+                        // all casts are for the same type.
+                        if (Expression == null || Expression.Type == castExpression.Type)
+                        {
+                            Expression = castExpression;
+                        }
+                        else
+                        {
+                            Expression = null;
+                        }
+                    }
+                }
+            }
         }
     }
 }
