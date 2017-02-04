@@ -1,7 +1,6 @@
 ﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
-using Orchard;
 
 namespace Hast.Transformer.Services
 {

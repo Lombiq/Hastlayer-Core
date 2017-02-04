@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ICSharpCode.NRefactory.CSharp;
-using Orchard;
 
 namespace Hast.Transformer.Services
 {

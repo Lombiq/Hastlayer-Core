@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;

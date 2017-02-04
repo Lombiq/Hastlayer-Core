@@ -1,7 +1,6 @@
-﻿using ICSharpCode.NRefactory.CSharp;
-using Orchard;
-using System;
+﻿using System;
 using System.Linq;
+using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
 namespace Hast.Transformer.Services

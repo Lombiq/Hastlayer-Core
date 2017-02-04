@@ -1,5 +1,5 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder.Extensions;
+﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.Helpers
 {

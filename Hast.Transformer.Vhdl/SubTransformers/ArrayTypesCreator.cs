@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Hast.Transformer.Vhdl.Helpers;
-using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 
