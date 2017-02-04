@@ -1,5 +1,5 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder.Extensions;
+﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.Helpers
 {
@@ -15,6 +15,7 @@ namespace Hast.Transformer.Vhdl.Helpers
             return new UnconstrainedArrayInstantiation
             {
                 Name = CreateArrayTypeName(elementType.Name),
+                ElementType = elementType,
                 RangeFrom = 0,
                 RangeTo = length - 1
             };

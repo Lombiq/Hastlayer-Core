@@ -355,7 +355,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Is this reference to an enum's member?
                 var targetTypeReferenceExpression = memberReference.Target as TypeReferenceExpression;
-                if (targetTypeReferenceExpression != null && 
+                if (targetTypeReferenceExpression != null &&
                     context.TransformationContext.TypeDeclarationLookupTable.Lookup(targetTypeReferenceExpression)?.ClassType == ClassType.Enum)
                 {
                     return memberFullName.ToExtendedVhdlIdValue();
@@ -380,7 +380,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         // We know that we've already handled the target so it stores the result objects, so just need 
                         // to use them directly.
-                        return Transform(memberReference.Target, context); 
+                        return Transform(memberReference.Target, context);
                     }
                 }
 
@@ -457,7 +457,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (declaration == null)
                 {
                     throw new InvalidOperationException(
-                        "No matching type for \"" + ((SimpleType)type).Identifier + 
+                        "No matching type for \"" + ((SimpleType)type).Identifier +
                         "\" found in the syntax tree. This can mean that the type's assembly was not added to the syntax tree.");
                 }
 
@@ -478,8 +478,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var toTypeKeyword = ((PrimitiveType)castExpression.Type).Keyword;
                     var fromTypeKeyword = castExpression.GetActualTypeReference().FullName;
                     Logger.Warning(
-                        "A cast from " + fromTypeKeyword + " to " + toTypeKeyword + 
-                        " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " + 
+                        "A cast from " + fromTypeKeyword + " to " + toTypeKeyword +
+                        " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
                 }
 
@@ -487,11 +487,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is ArrayCreateExpression)
             {
-                var arrayCreateExpression = (ArrayCreateExpression)expression;
-                var transformedInitializerElements = arrayCreateExpression.Initializer.Elements
-                    .Select(initializerElement => Transform(initializerElement, context));
-                return _arrayCreateExpressionTransformer
-                    .Transform(arrayCreateExpression, scope.StateMachine, transformedInitializerElements);
+                return _arrayCreateExpressionTransformer.Transform((ArrayCreateExpression)expression, context);
             }
             else if (expression is IndexerExpression)
             {
@@ -502,7 +498,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (targetVariableReference == null)
                 {
                     throw new InvalidOperationException(
-                        "The target of the indexer expression " + expression.ToString() + 
+                        "The target of the indexer expression " + expression.ToString() +
                         " couldn't be transformed to a data object reference.");
                 }
 
@@ -534,7 +530,31 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is ObjectCreateExpression)
             {
-                InitializeRecord(expression, ((ObjectCreateExpression)expression).Type, context);
+                var objectCreateExpression = (ObjectCreateExpression)expression;
+
+                var initiailizationResult = InitializeRecord(expression, objectCreateExpression.Type, context);
+
+                if (objectCreateExpression.Initializer.Elements.Any())
+                {
+                    foreach (var initializerElement in objectCreateExpression.Initializer.Elements)
+                    {
+                        var namedInitializerExpression = initializerElement as NamedExpression;
+                        if (namedInitializerExpression == null)
+                        {
+                            throw new NotSupportedException("Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs).");
+                        }
+
+                        context.Scope.CurrentBlock.Add(new Assignment
+                        {
+                            AssignTo = new RecordFieldAccess
+                            {
+                                Instance = initiailizationResult.RecordInstanceReference,
+                                FieldName = namedInitializerExpression.Name.ToExtendedVhdlId()
+                            },
+                            Expression = Transform(namedInitializerExpression.Expression, context)
+                        });
+                    }
+                }
 
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
                 return Empty.Instance;
@@ -558,35 +578,55 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        private void InitializeRecord(Expression expression, AstType recordAstType, ISubTransformerContext context)
+        private RecordInitializationResult InitializeRecord(Expression expression, AstType recordAstType, ISubTransformerContext context)
         {
             // Objects are mimicked with records and those don't need instantiation. However it's useful to
             // initialize all record fields to their default or initial values (otherwise if e.g. a class is
             // instantiated in a loop in the second run the old values could be accessed in VHDL).
 
-            var recordType = (Record)_typeConverter.ConvertAstType(recordAstType);
+            var record = (Record)_typeConverter.ConvertAstType(recordAstType);
+
+            if (record.Fields.Any())
+            {
+                context.Scope.CurrentBlock.Add(new LineComment("Initializing record fields to their defaults."));
+            }
+
             // This will only work if the newly created object is assigned to a variable or something else. It won't
-            // work if the newly created object is directly passed to a method for example).
+            // work if the newly created object is directly passed to a method for example.
             var recordInstanceAssignmentTarget = expression
                 .FindFirstParentOfType<AssignmentExpression>()
                 .Left;
-            var recordInstanceIdentifier = recordInstanceAssignmentTarget is IdentifierExpression ?
-                recordInstanceAssignmentTarget :
-                recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
-            var recordInstanceReference = Transform(recordInstanceIdentifier, context);
+            var recordInstanceIdentifier =
+                recordInstanceAssignmentTarget is IdentifierExpression || recordInstanceAssignmentTarget is IndexerExpression ?
+                    recordInstanceAssignmentTarget :
+                    recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
+            var recordInstanceReference = (IDataObject)Transform(recordInstanceIdentifier, context);
 
-            foreach (var field in recordType.Fields)
+            foreach (var field in record.Fields)
             {
                 context.Scope.CurrentBlock.Add(new Assignment
                 {
                     AssignTo = new RecordFieldAccess
                     {
-                        Instance = (IDataObject)recordInstanceReference,
+                        Instance = recordInstanceReference,
                         FieldName = field.Name
                     },
                     Expression = field.DataType.DefaultValue
                 });
             }
+
+            return new RecordInitializationResult
+            {
+                Record = record,
+                RecordInstanceReference = recordInstanceReference
+            };
+        }
+
+
+        private class RecordInitializationResult
+        {
+            public Record Record { get; set; }
+            public IDataObject RecordInstanceReference { get; set; }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -39,6 +40,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// in more than one instance at a given time).
         /// </summary>
         IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; }
+
+        /// <summary>
+        /// Stores dependency relations between VDHL types, for custom types declared in this component that need this.
+        /// </summary>
+        DependentTypesTable DependentTypesTable { get; }
 
         /// <summary>
         /// Produces the declarations corresponding to the component that should be inserted into the head of the

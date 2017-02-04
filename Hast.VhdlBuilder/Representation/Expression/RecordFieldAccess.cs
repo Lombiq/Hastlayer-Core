@@ -36,7 +36,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            return vhdlGenerationOptions.ShortenName(Instance.Name) + "." + FieldName;
+            return Instance.ToReference().ToVhdl(vhdlGenerationOptions) + "." + FieldName;
         }
     }
 }
