@@ -32,35 +32,9 @@ namespace Hast.Samples.SampleAssembly
         {
             // Reading out the input parameter.
             var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
-
-            var numberObjects = new[]
-            {
-                new TestNumber { Number = number },
-                new TestNumber { Number = number + 4 },
-                new TestNumber { Number = 24 }
-            };
-            // This will be also compiled as an array initializer with an object initializer in IL:
-            //var numberObjects = new TestNumber[1];
-            //numberObjects[0] = new TestNumber { Number = number };
-
-            numberObjects[1].IncreaseNumber(5);
-
             // Writing back the output.
-            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(numberObjects[1].Number));
+            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(number));
         }
-
-
-        private class TestNumber
-        {
-            public uint Number { get; set; }
-
-            
-            public uint IncreaseNumber(uint increaseBy)
-            {
-                return (Number += increaseBy);
-            }
-        }
-
 
         public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
         {
