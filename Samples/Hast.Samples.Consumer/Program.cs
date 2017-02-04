@@ -145,7 +145,7 @@ namespace Hast.Samples.Consumer
                 }).Wait();
 
             Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }
