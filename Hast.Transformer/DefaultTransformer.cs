@@ -29,6 +29,7 @@ namespace Hast.Transformer
         private readonly IGeneratedTaskArraysInliner _generatedTaskArraysInliner;
         private readonly IObjectVariableTypesConverter _objectVariableTypesConverter;
         private readonly IInstanceMethodsToStaticConverter _instanceMethodsToStaticConverter;
+        private readonly IArrayInitializerExpander _arrayInitializerExpander;
 
 
         public DefaultTransformer(
@@ -40,7 +41,8 @@ namespace Hast.Transformer
             ITransformingEngine engine,
             IGeneratedTaskArraysInliner generatedTaskArraysInliner,
             IObjectVariableTypesConverter objectVariableTypesConverter,
-            IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter)
+            IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
+            IArrayInitializerExpander arrayInitializerExpander)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -51,6 +53,7 @@ namespace Hast.Transformer
             _generatedTaskArraysInliner = generatedTaskArraysInliner;
             _objectVariableTypesConverter = objectVariableTypesConverter;
             _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
+            _arrayInitializerExpander = arrayInitializerExpander;
         }
 
 
@@ -139,10 +142,14 @@ namespace Hast.Transformer
             }
 
 
+            // Clean-up.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
+
+            // Transformations making the syntax tree easier to process.
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
+            _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 

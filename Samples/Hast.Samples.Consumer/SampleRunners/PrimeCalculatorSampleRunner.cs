@@ -23,8 +23,8 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
 
-            var isPrime = primeCalculator.IsPrimeNumber(15);
-            var isPrime2 = primeCalculator.IsPrimeNumber(13);
+            var isPrime = primeCalculator.IsPrimeNumber(0);
+            var isPrime2 = primeCalculator.IsPrimeNumber(4);
         }
     }
 }

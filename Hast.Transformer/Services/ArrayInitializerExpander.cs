@@ -8,7 +8,7 @@ using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
-namespace Hast.Transformer.Vhdl.SubTransformers
+namespace Hast.Transformer.Services
 {
     public class ArrayInitializerExpander : IArrayInitializerExpander
     {

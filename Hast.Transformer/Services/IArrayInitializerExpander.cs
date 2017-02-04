@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
-namespace Hast.Transformer.Vhdl.SubTransformers
+namespace Hast.Transformer.Services
 {
     /// <summary>
     /// Converts inline array initalizers into one-by-one array element assignments so these can be transformed in a

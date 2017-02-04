@@ -111,7 +111,6 @@ namespace Hast.Samples.Consumer
                         {
                             Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
                         }
-                        return;
 
 
                         // Running samples.
