@@ -1,39 +1,9 @@
-﻿using Hast.Transformer.Visitors;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ICSharpCode.NRefactory.CSharp;
-using Orchard;
 
 namespace Hast.Transformer.Services
 {
-    public interface IGeneratedTaskArraysInliner : IDependency
-    {
-        /// <summary>
-        /// Get rid of unnecessary compiler-generated <see cref="System.Threading.Tasks.Task"/> arrays.
-        /// </summary>
-        /// <example>
-        /// If <see cref="System.Threading.Tasks.Task"/> objects are saved to an array sometimes the compiler generates
-        /// another array variable without any apparent use. This makes transforming needlessly more complicated. E.g.:
-        /// 
-        /// <c>
-        /// Task<bool>[] array;
-        /// Task<bool>[] arg_95_0;
-        /// array = new Task<bool>[35];
-        /// while (j < 35)
-        /// {
-        ///     arg_95_0 = array;
-        ///     arg_95_0[arg_95_1] = arg_90_0.StartNew<bool>(arg_90_1, j);
-        ///     j = j + 1;
-        /// }
-        /// Task.WhenAll<bool> (array).Wait();
-        /// </c>
-        /// 
-        /// Note that while there was the variable named <c>array</c> the compiler created <c>arg_95_0</c> and used it
-        /// instead, but just inside the loop.
-        /// </example>
-        /// <param name="syntaxTree"></param>
-        void InlineGeneratedTaskArrays(SyntaxTree syntaxTree);
-    }
-
-
     public class GeneratedTaskArraysInliner : IGeneratedTaskArraysInliner
     {
         public void InlineGeneratedTaskArrays(SyntaxTree syntaxTree)
@@ -41,6 +11,78 @@ namespace Hast.Transformer.Services
             var inlinableTaskArraysFindingVisitor = new InlinableTaskArraysFindingVisitor();
             syntaxTree.AcceptVisitor(inlinableTaskArraysFindingVisitor);
             syntaxTree.AcceptVisitor(new InlinableTaskArraysInliningVisitor(inlinableTaskArraysFindingVisitor.InlinableVariableMapping));
+        }
+
+
+        private class InlinableTaskArraysFindingVisitor : DepthFirstAstVisitor
+        {
+            public Dictionary<string, string> InlinableVariableMapping { get; set; } = new Dictionary<string, string>();
+
+
+            public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
+            {
+                base.VisitAssignmentExpression(assignmentExpression);
+
+                // AssigmentExpression, Left = arg_*, Right.GetActualType().FullName.StartsWith("System.Threading.Tasks.Task`1<")
+
+                var compilerGeneratedVariableName = string.Empty;
+                if (assignmentExpression.Left.Is<IdentifierExpression>(identifier =>
+                        (compilerGeneratedVariableName = identifier.Identifier).StartsWith("arg_")) &&
+                    assignmentExpression.Right.GetActualTypeReference().FullName.StartsWith("System.Threading.Tasks.Task`1<"))
+                {
+                    InlinableVariableMapping[compilerGeneratedVariableName] =
+                        ((IdentifierExpression)assignmentExpression.Right).Identifier;
+                }
+            }
+        }
+
+        private class InlinableTaskArraysInliningVisitor : DepthFirstAstVisitor
+        {
+            private readonly Dictionary<string, string> _inlinableVariableMappings;
+
+
+            public InlinableTaskArraysInliningVisitor(Dictionary<string, string> inlinableVariableMappings)
+            {
+                _inlinableVariableMappings = inlinableVariableMappings;
+            }
+
+
+            public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
+            {
+                base.VisitIdentifierExpression(identifierExpression);
+
+                if (IsInlinableVariableIdentifier(identifierExpression))
+                {
+                    var parentAssignment = identifierExpression.FindFirstParentOfType<AssignmentExpression>();
+                    // If this is in an arg_9C_0 = array; kind of assignment, then remove the whole assignment's statement.
+                    if (parentAssignment != null &&
+                        parentAssignment.Left == identifierExpression &&
+                        parentAssignment.Right.GetActualTypeReference().FullName.StartsWith("System.Threading.Tasks.Task`1<"))
+                    {
+                        parentAssignment.FindFirstParentOfType<ExpressionStatement>().Remove();
+                    }
+                    else
+                    {
+                        identifierExpression.Identifier = _inlinableVariableMappings[identifierExpression.Identifier];
+                    }
+                }
+            }
+
+            public override void VisitVariableDeclarationStatement(VariableDeclarationStatement variableDeclarationStatement)
+            {
+                base.VisitVariableDeclarationStatement(variableDeclarationStatement);
+
+                if (_inlinableVariableMappings.ContainsKey(variableDeclarationStatement.Variables.Single().Name))
+                {
+                    variableDeclarationStatement.Remove();
+                }
+            }
+
+
+            private bool IsInlinableVariableIdentifier(IdentifierExpression identifierExpression)
+            {
+                return _inlinableVariableMappings.ContainsKey(identifierExpression.Identifier);
+            }
         }
     }
 }

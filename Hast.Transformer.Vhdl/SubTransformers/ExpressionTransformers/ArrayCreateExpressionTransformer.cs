@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -26,10 +27,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             return ArrayHelper.CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
         }
 
-        public Value Transform(
-            ArrayCreateExpression expression,
-            IArchitectureComponent component,
-            IEnumerable<IVhdlElement> transformedInitializerElements)
+        public IVhdlElement Transform(ArrayCreateExpression expression, ISubTransformerContext context)
         {
             if (expression.Arguments.Any() && expression.Arguments.Count != 1)
             {
@@ -48,17 +46,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
 
+            var scope = context.Scope;
+            var stateMachine = scope.StateMachine;
+
             // Arrays are tricky: the variable declaration can happen earlier but without an array creation (i.e.
             // at that point the length of the array won't be known) so we have to go back to the variable declaration
             // and set its data type to the unconstrained array instantiation. This is unless the array is also 
-            // immediately initialized (i.e. new[] { 1, 2, 3 }-style).
-
-            var hasInitializer = expression.HasInitializer();
+            // immediately initialized (i.e. new[] { 1, 2, 3 }-style), but such forms are converted into one-by-one 
+            // element assignments.
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
             if ((parentAssignmentExpression == null ||
-                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)) &&
-                !hasInitializer)
+                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)))
             {
                 throw new NotSupportedException(
                     "Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
@@ -71,8 +70,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
                 ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
                 ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
-            var parentDataObjectName = component.CreatePrefixedObjectName(parentIdentifier);
-            var parentDataObject = component
+            var parentDataObjectName = stateMachine.CreatePrefixedObjectName(parentIdentifier);
+            var parentDataObject = stateMachine
                 .GetAllDataObjects()
                 .Where(dataObject => dataObject.Name == parentDataObjectName)
                 .SingleOrDefault();
@@ -84,23 +83,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 parentDataObject.DataType = arrayInstantiationType;
             }
 
-            // Initializing the array with the .NET default values (so there are no surprises when reading values
-            // without setting them previously) or the initialized values.
-            var arrayInitializationValue = new Value
-            {
-                DataType = arrayInstantiationType
-            };
 
-            if (hasInitializer)
+            if (elementType.DefaultValue != null)
             {
-                arrayInitializationValue.EvaluatedContent = new InlineBlock(transformedInitializerElements);
+                // Initializing the array with the .NET default values (so there are no surprises when reading values
+                // without setting them previously).
+                return new Value
+                {
+                    DataType = arrayInstantiationType,
+                    Content = "others => " + elementType.DefaultValue.ToVhdl()
+                };
             }
             else
             {
-                arrayInitializationValue.Content = "others => " + elementType.DefaultValue.ToVhdl();
+                // If there's no default value then we can't initialize the array. This is the case when objects
+                // are stored in the array and that's no problem, since objects are initialized during instantiation
+                // any way.
+                return Empty.Instance;
             }
-
-            return arrayInitializationValue;
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
@@ -39,7 +37,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (record.Fields.Any())
                 {
-                    component.Declarations = record;
+                    component.DependentTypesTable.AddBaseType(record);
                 }
 
                 result.ArchitectureComponentResults = new List<IArchitectureComponentResult>

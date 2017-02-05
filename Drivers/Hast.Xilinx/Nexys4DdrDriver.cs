@@ -19,6 +19,50 @@ namespace Hast.Xilinx
                 {
                     var timingReport =
 @"Op	InType	OutType	Template	DesignStat	DPD	TWD
+not	std_logic_vector1	std_logic_vector1	sync	impl	1,002	-0,032
+not	std_logic_vector128	std_logic_vector128	sync	synth	1,084	-0,136
+not	std_logic_vector32	std_logic_vector32	sync	impl	1,448	-0,032
+not	std_logic_vector64	std_logic_vector64	sync	impl	1,441	-0,030
+not	std_logic_vector16	std_logic_vector16	sync	impl	1,771	-0,045
+not	std_logic_vector8	std_logic_vector8	sync	impl	1,374	-0,035
+and	std_logic_vector1	std_logic_vector1	sync	impl	1,238	-0,007
+and	std_logic_vector128	std_logic_vector128	sync	synth	1,243	-0,136
+and	std_logic_vector32	std_logic_vector32	sync	impl	1,386	-0,031
+and	std_logic_vector64	std_logic_vector64	sync	impl	1,734	-0,045
+and	std_logic_vector16	std_logic_vector16	sync	impl	1,390	-0,005
+and	std_logic_vector8	std_logic_vector8	sync	impl	1,397	-0,007
+nand	std_logic_vector1	std_logic_vector1	sync	impl	1,238	-0,007
+nand	std_logic_vector128	std_logic_vector128	sync	synth	1,243	-0,136
+nand	std_logic_vector32	std_logic_vector32	sync	impl	1,386	-0,031
+nand	std_logic_vector64	std_logic_vector64	sync	impl	1,734	-0,045
+nand	std_logic_vector16	std_logic_vector16	sync	impl	1,390	-0,005
+nand	std_logic_vector8	std_logic_vector8	sync	impl	1,397	-0,007
+or	std_logic_vector1	std_logic_vector1	sync	impl	1,238	-0,007
+or	std_logic_vector128	std_logic_vector128	sync	synth	1,243	-0,136
+or	std_logic_vector32	std_logic_vector32	sync	impl	1,386	-0,031
+or	std_logic_vector64	std_logic_vector64	sync	impl	1,734	-0,045
+or	std_logic_vector16	std_logic_vector16	sync	impl	1,390	-0,005
+or	std_logic_vector8	std_logic_vector8	sync	impl	1,397	-0,007
+nor	std_logic_vector1	std_logic_vector1	sync	impl	1,238	-0,007
+nor	std_logic_vector128	std_logic_vector128	sync	synth	1,243	-0,136
+nor	std_logic_vector32	std_logic_vector32	sync	impl	1,386	-0,031
+nor	std_logic_vector64	std_logic_vector64	sync	impl	1,734	-0,045
+nor	std_logic_vector16	std_logic_vector16	sync	impl	1,390	-0,005
+nor	std_logic_vector8	std_logic_vector8	sync	impl	1,397	-0,007
+xor	std_logic_vector1	std_logic_vector1	sync	impl	1,238	-0,007
+xor	std_logic_vector128	std_logic_vector128	sync	synth	1,243	-0,136
+xor	std_logic_vector32	std_logic_vector32	sync	impl	1,386	-0,031
+xor	std_logic_vector64	std_logic_vector64	sync	impl	1,734	-0,045
+xor	std_logic_vector16	std_logic_vector16	sync	impl	1,390	-0,005
+xor	std_logic_vector8	std_logic_vector8	sync	impl	1,397	-0,007
+xnor	std_logic_vector1	std_logic_vector1	sync	impl	1,238	-0,007
+xnor	std_logic_vector128	std_logic_vector128	sync	synth	1,243	-0,136
+xnor	std_logic_vector32	std_logic_vector32	sync	impl	1,386	-0,031
+xnor	std_logic_vector64	std_logic_vector64	sync	impl	1,734	-0,045
+xnor	std_logic_vector16	std_logic_vector16	sync	impl	1,390	-0,005
+xnor	std_logic_vector8	std_logic_vector8	sync	impl	1,397	-0,007
++	unsigned1	unsigned1	sync	impl	1,238	-0,007
++	signed1	signed1	sync	impl	1,238	-0,007
 +	unsigned128	unsigned128	sync	synth	5,643	-0,104
 +	signed128	signed128	sync	synth	5,643	-0,104
 +	unsigned32	unsigned32	sync	impl	3,156	0,024
@@ -29,6 +73,8 @@ namespace Hast.Xilinx
 +	signed16	signed16	sync	impl	2,939	-0,002
 +	unsigned8	unsigned8	sync	impl	2,276	-0,001
 +	signed8	signed8	sync	impl	2,276	-0,001
+>	unsigned1	boolean	sync	impl	1,238	-0,007
+>	signed1	boolean	sync	impl	1,238	-0,007
 >	unsigned128	boolean	sync	synth	3,902	-0,363
 >	signed128	boolean	sync	synth	3,902	-0,363
 >	unsigned32	boolean	sync	impl	2,755	-0,201
@@ -39,6 +85,8 @@ namespace Hast.Xilinx
 >	signed16	boolean	sync	impl	2,212	-0,253
 >	unsigned8	boolean	sync	impl	2,058	-0,257
 >	signed8	boolean	sync	impl	2,058	-0,257
+<	unsigned1	boolean	sync	impl	1,238	-0,007
+<	signed1	boolean	sync	impl	1,238	-0,007
 <	unsigned128	boolean	sync	synth	3,902	-0,363
 <	signed128	boolean	sync	synth	3,902	-0,363
 <	unsigned32	boolean	sync	impl	2,610	-0,205
@@ -49,6 +97,8 @@ namespace Hast.Xilinx
 <	signed16	boolean	sync	impl	2,212	-0,253
 <	unsigned8	boolean	sync	impl	2,099	-0,258
 <	signed8	boolean	sync	impl	2,099	-0,258
+>=	unsigned1	boolean	sync	impl	1,238	-0,007
+>=	signed1	boolean	sync	impl	1,238	-0,007
 >=	unsigned128	boolean	sync	synth	3,902	-0,363
 >=	signed128	boolean	sync	synth	3,902	-0,363
 >=	unsigned32	boolean	sync	impl	2,755	-0,201
@@ -59,6 +109,8 @@ namespace Hast.Xilinx
 >=	signed16	boolean	sync	impl	2,212	-0,253
 >=	unsigned8	boolean	sync	impl	2,058	-0,257
 >=	signed8	boolean	sync	impl	2,058	-0,257
+<=	unsigned1	boolean	sync	impl	1,238	-0,007
+<=	signed1	boolean	sync	impl	1,238	-0,007
 <=	unsigned128	boolean	sync	synth	3,902	-0,363
 <=	signed128	boolean	sync	synth	3,902	-0,363
 <=	unsigned32	boolean	sync	impl	2,610	-0,205
@@ -69,6 +121,8 @@ namespace Hast.Xilinx
 <=	signed16	boolean	sync	impl	2,212	-0,253
 <=	unsigned8	boolean	sync	impl	2,099	-0,258
 <=	signed8	boolean	sync	impl	2,099	-0,258
+=	unsigned1	boolean	sync	impl	1,238	-0,007
+=	signed1	boolean	sync	impl	1,238	-0,007
 =	unsigned128	boolean	sync	synth	3,576	-0,119
 =	signed128	boolean	sync	synth	3,576	-0,119
 =	unsigned32	boolean	sync	impl	2,751	-0,015
@@ -79,6 +133,8 @@ namespace Hast.Xilinx
 =	signed16	boolean	sync	impl	2,440	0,037
 =	unsigned8	boolean	sync	impl	2,260	-0,030
 =	signed8	boolean	sync	impl	2,260	-0,030
+/=	unsigned1	boolean	sync	impl	1,238	-0,007
+/=	signed1	boolean	sync	impl	1,238	-0,007
 /=	unsigned128	boolean	sync	synth	3,576	-0,119
 /=	signed128	boolean	sync	synth	3,576	-0,119
 /=	unsigned32	boolean	sync	impl	2,751	-0,015
@@ -89,6 +145,8 @@ namespace Hast.Xilinx
 /=	signed16	boolean	sync	impl	2,353	0,029
 /=	unsigned8	boolean	sync	impl	2,260	-0,030
 /=	signed8	boolean	sync	impl	2,260	-0,030
+-	unsigned1	unsigned1	sync	impl	1,238	-0,007
+-	signed1	signed1	sync	impl	1,238	-0,007
 -	unsigned128	unsigned128	sync	synth	5,643	-0,104
 -	signed128	signed128	sync	synth	5,643	-0,104
 -	unsigned32	unsigned32	sync	impl	3,156	0,024
@@ -99,6 +157,8 @@ namespace Hast.Xilinx
 -	signed16	signed16	sync	impl	2,939	-0,002
 -	unsigned8	unsigned8	sync	impl	2,276	-0,001
 -	signed8	signed8	sync	impl	2,276	-0,001
+/	unsigned1	unsigned1	sync	impl	1,238	-0,007
+/	signed1	signed1	sync	impl	1,238	-0,007
 /	unsigned128	unsigned128	sync	synth	677,589	-0,119
 /	signed128	signed128	sync	synth	692,922	-0,136
 /	unsigned32	unsigned32	sync	impl	85,347	-0,114
@@ -107,8 +167,10 @@ namespace Hast.Xilinx
 /	signed64	signed64	sync	impl	269,541	-0,142
 /	unsigned16	unsigned16	sync	impl	32,060	-0,071
 /	signed16	signed16	sync	impl	40,748	-0,042
-/	unsigned8	unsigned8	sync	impl	13,953	-0,022
-/	signed8	signed8	sync	impl	16,962	-0,037
+/	unsigned8	unsigned8	sync	synth	14,137	-0,119
+/	signed8	signed8	sync	synth	17,218	-0,136
+*	unsigned1	unsigned2	sync	impl	1,238	-0,007
+*	signed1	signed2	sync	impl	1,238	-0,007
 *	unsigned128	unsigned256	sync	synth	7,632	-1,580
 *	signed128	signed256	sync	synth	9,585	-0,104
 *	unsigned32	unsigned64	sync	impl	5,558	-0,337
@@ -119,6 +181,8 @@ namespace Hast.Xilinx
 *	signed16	signed32	sync	impl	7,728	0
 *	unsigned8	unsigned16	sync	impl	6,827	-0,001
 *	signed8	signed16	sync	impl	6,361	0,044
+mod	unsigned1	unsigned1	sync	impl	1,238	-0,007
+mod	signed1	signed1	sync	impl	1,238	-0,007
 mod	unsigned128	unsigned128	sync	synth	684,293	-0,136
 mod	signed128	signed128	sync	synth	711,833	-0,737
 mod	unsigned32	unsigned32	sync	impl	90,102	-0,310
@@ -127,8 +191,8 @@ mod	unsigned64	unsigned64	sync	impl	259,775	-0,046
 mod	signed64	signed64	sync	impl	273,363	-0,672
 mod	unsigned16	unsigned16	sync	impl	35,100	-0,295
 mod	signed16	signed16	sync	impl	40,313	-0,296
-mod	unsigned8	unsigned8	sync	impl	15,090	-0,037
-mod	signed8	signed8	sync	impl	19,436	-0,056
+mod	unsigned8	unsigned8	sync	synth	16,159	-0,136
+mod	signed8	signed8	sync	synth	20,480	-0,136
 ";
                     _timingReport = _timingReportParser.Parse(timingReport);
                 }
@@ -154,7 +218,7 @@ mod	signed8	signed8	sync	impl	19,436	-0,056
         }
 
 
-        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, ushort operandSizeBits, bool isSigned)
+        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
         {
             var binaryOperator = expression.Operator;
 
@@ -182,6 +246,18 @@ mod	signed8	signed8	sync	impl	19,436	-0,056
 
             // With a 100 Mhz clock one clock cycle takes 10ns, so just need to divide by 10. 
             var latency = TimingReport.GetLatencyNs(binaryOperator, operandSizeBits, isSigned) / 10;
+
+            // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
+            // be latency data).
+            if (latency < 0) return 0.1M;
+
+            return latency;
+        }
+
+        public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned)
+        {
+            // With a 100 Mhz clock one clock cycle takes 10ns, so just need to divide by 10. 
+            var latency = TimingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned) / 10;
 
             // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
             // be latency data).

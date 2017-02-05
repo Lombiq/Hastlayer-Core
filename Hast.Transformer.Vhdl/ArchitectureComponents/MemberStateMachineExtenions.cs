@@ -32,6 +32,28 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             };
         }
 
+        /// <summary>
+        /// Adds a state change to the current block if the current block wouldn't fit into one clock cycle with the
+        /// given operation.
+        /// </summary>
+        public static int AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(
+            this IMemberStateMachine stateMachine,
+            ISubTransformerContext context,
+            decimal clockCyclesNeededForNewOperation)
+        {
+            var currentBlock = context.Scope.CurrentBlock;
+
+            // No state change needed.
+            if (currentBlock.RequiredClockCycles + clockCyclesNeededForNewOperation <= 1)
+            {
+                return currentBlock.StateMachineStateIndex;
+            }
+
+            var nextStateBlock = new InlineBlock(new LineComment(
+                "This state was added because the previous state would go over one clock cycle with any more operations."));
+            return stateMachine.AddNewStateAndChangeCurrentBlock(context, nextStateBlock);
+        }
+
         public static int AddNewStateAndChangeCurrentBlock(
             this IMemberStateMachine stateMachine,
             ISubTransformerContext context,

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mono.Cecil;
 
@@ -119,6 +120,25 @@ namespace ICSharpCode.NRefactory.CSharp
         public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node)
         {
             return node.FindFirstParentOfType<EntityDeclaration>();
+        }
+
+        public static T FindFirstChildOfType<T>(this AstNode node) where T : AstNode
+        {
+            var children = new Queue<AstNode>(node.Children);
+
+            while (children.Count != 0)
+            {
+                var currentChild = children.Dequeue();
+
+                if (currentChild is T) return (T)currentChild;
+
+                foreach (var child in currentChild.Children)
+                {
+                    children.Enqueue(child);
+                }
+            }
+
+            return null;
         }
 
         public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode

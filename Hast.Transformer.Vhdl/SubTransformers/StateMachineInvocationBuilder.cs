@@ -250,8 +250,30 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // Only trying casting if the parameter is not a constant or something other than an IDataObject.
                     if (parameter is IDataObject)
                     {
+                        // Note: the below logic covers the most frequent cases to determine the passed local variable's
+                        // data type. However it won't work with arbitrarily deep object graphs, e.g. array inside
+                        // object inside array. For this a more generic, iterative implementation could be developed 
+                        // that would search until the leaf of the object tree is found (the data type can't be passed 
+                        // in the data object references themselves, since at that level (e.g. on the level of a variable
+                        // reference) only the reference's name is known, the data type not necessarily.
+
                         var localVariableDataType = stateMachine.LocalVariables
                             .Single(variable => variable.Name == ((IDataObject)parameter).Name).DataType;
+
+                        // If the parameter is an array access then the actual variable type should be the array
+                        // element's type, or if the array element is a record, then its fields' type (in the latter
+                        // case the next block will be also run to determine the record field's type).
+                        if (localVariableDataType is ArrayType && 
+                            (parameter is ArrayElementAccess || parameter is RecordFieldAccess))
+                        {
+                            localVariableDataType = ((ArrayType)localVariableDataType).ElementType;
+                        }
+
+                        if (localVariableDataType is UnconstrainedArrayInstantiation &&
+                            (parameter is ArrayElementAccess || parameter is RecordFieldAccess))
+                        {
+                            localVariableDataType = ((UnconstrainedArrayInstantiation)localVariableDataType).ElementType;
+                        }
 
                         if (localVariableDataType is Record)
                         {

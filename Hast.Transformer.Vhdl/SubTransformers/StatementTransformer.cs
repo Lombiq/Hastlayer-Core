@@ -87,10 +87,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var expressionStatement = statement as ExpressionStatement;
 
-                var expressionElement =
-                    _expressionTransformer.Transform(expressionStatement.Expression, context)
-                    .Terminate();
-                currentBlock.Add(expressionElement);
+                var expressionElement = _expressionTransformer.Transform(expressionStatement.Expression, context);
+
+                // If the element is just a DataObjectReference (so e.g. a variable reference) alone then it needs to
+                // be discarded. This can happen e.g. with calls to non-void methods where the return value is not
+                // assigned: That causes the return value's reference to be orphaned.
+                if (!(expressionElement is DataObjectReference))
+                {
+                    currentBlock.Add(expressionElement.Terminate()); 
+                }
             }
             else if (statement is ReturnStatement)
             {
@@ -104,6 +109,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         AssignTo = stateMachine.CreateReturnSignalReference(),
                         Expression = _expressionTransformer.Transform(returnStatement.Expression, context)
                     };
+
+                    // If the expression is an assignment we can't assign it to the return signal, so need to split it.
+                    // This happens with lines like:
+                    // return (Number += increaseBy);
+                    if (assigmentElement.Expression is Assignment)
+                    {
+                        currentBlock.Add(assigmentElement.Expression);
+                        assigmentElement.Expression = ((Assignment)assigmentElement.Expression).AssignTo;
+                    }
+
                     currentBlock.Add(assigmentElement);
                 }
 
