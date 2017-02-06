@@ -24,11 +24,11 @@
         #endregion
 
         #region Unum masks
-        public uint UncertaintyBitMask { get; private set; } // "ubitmask"
-        public uint ExponentSizeMask { get; private set; } // "esizemask"
-        public uint FractionSizeMask { get; private set; }// "fsizemask"
-        public uint ExponentAndFractionSizeMask { get; private set; } // "efsizemask"
-        public uint UnumTagMask { get; private set; } // "utagmask"
+        public BitMask UncertaintyBitMask { get; private set; } // "ubitmask"
+        public BitMask ExponentSizeMask { get; private set; } // "esizemask"
+        public BitMask FractionSizeMask { get; private set; }// "fsizemask"
+        public BitMask ExponentAndFractionSizeMask { get; private set; } // "efsizemask"
+        public BitMask UnumTagMask { get; private set; } // "utagmask"
 
         // uint is too small for a not particularly big unum, to be refactored.
         //public uint SignBitMask { get; private set; } // "signbigu", a unum in which all bits are zero except the sign bit;
@@ -38,19 +38,19 @@
         // Bit masks should be at least of size "_unumTagSize + 1", instead of fixed 32 bits.
         // The precision where it could matter is ridiculously high though, so it shouldn't matter for now.
 
-        public uint ULP { get; private set; } // Unit in the Last Place or Unit of Least Precision.
+        public BitMask ULP { get; private set; } // Unit in the Last Place or Unit of Least Precision.
 
-        public uint PositiveInfinity { get; private set; } // "posinfu", the positive infinity for the given unum environment.
-        public uint NegativeInfinity { get; private set; } // "neginfu", the negative infinity for the given unum environment.
+        public BitMask PositiveInfinity { get; private set; } // "posinfu", the positive infinity for the given unum environment.
+        public BitMask NegativeInfinity { get; private set; } // "neginfu", the negative infinity for the given unum environment.
 
-        public uint QuietNotANumber { get; private set; } // "qNaNu"
-        public uint SignalingNotANumber { get; private set; } // "sNaNu"
+        public BitMask QuietNotANumber { get; private set; } // "qNaNu"
+        public BitMask SignalingNotANumber { get; private set; } // "sNaNu"
 
-        public uint LargestPositive { get; private set; } // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
-        public uint SmallestPositive { get; private set; } // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
+        public BitMask LargestPositive { get; private set; } // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
+        public BitMask SmallestPositive { get; private set; } // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
 
-        public uint LargestNegative { get; private set; } // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
-        public uint MinRealU { get; private set; } // "minrealu", looks like to be exactly the same as "negbigu".
+        public BitMask LargestNegative { get; private set; } // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
+        public BitMask MinRealU { get; private set; } // "minrealu", looks like to be exactly the same as "negbigu".
 
         //private uint _smallNormal; // "smallnormalu"
         #endregion
@@ -79,17 +79,30 @@
             FractionSizeBits = new bool[FractionSizeSize];
 
             // Initializing masks.
-            UncertaintyBitMask = ((uint)1 << (UnumTagSize - 1));
-            FractionSizeMask = (((uint)1 << FractionSizeMax) - 1);
+            UncertaintyBitMask = new BitMask(Size, false);
+            BitMask.SetOne(UncertaintyBitMask, (uint)UnumTagSize - 1);
+
+            FractionSizeMask = new BitMask(Size, false);
+            BitMask.SetOne(FractionSizeMask, FractionSizeSize);
+            FractionSizeMask--;
+
+
             ExponentSizeMask = (UncertaintyBitMask - 1) - FractionSizeMask;
             ExponentAndFractionSizeMask = ExponentSizeMask | FractionSizeMask;
             UnumTagMask = UncertaintyBitMask | ExponentAndFractionSizeMask;
 
             // Initializing metadata.
-            ULP = (uint)1 << UnumTagSize;
+            ULP = new BitMask(Size, false);
+            BitMask.SetOne(ULP, UnumTagSize);
 
-            PositiveInfinity = ((uint)1 << Size - 1) - 1 - UncertaintyBitMask;
-            NegativeInfinity = PositiveInfinity + ((uint)1 << Size - 1);
+            PositiveInfinity = new BitMask(Size, false);
+            BitMask.SetOne(PositiveInfinity, (uint)Size - 1);
+            PositiveInfinity -= 1;
+            PositiveInfinity -= UncertaintyBitMask;
+
+            NegativeInfinity = new BitMask(Size, false);
+            BitMask.SetOne(NegativeInfinity, (uint)Size - 1);
+            NegativeInfinity += PositiveInfinity;
 
             LargestPositive = PositiveInfinity - ULP;
             SmallestPositive = ExponentAndFractionSizeMask + ULP;
