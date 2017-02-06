@@ -72,6 +72,30 @@ namespace Hast.Common.Numerics
         }
 
 
+        public static bool operator ==(BitMask left, BitMask right)
+        {
+            if (left == null ^ right == null) return false;
+            if (left == null && right == null) return true;
+            if (left.Size != right.Size) return false;
+
+            for (int i = 0; i < left.SegmentCount; i++)
+                if (left.Segments[i] != right.Segments[i]) return false;
+
+            return true;
+        }
+
+        public static bool operator !=(BitMask left, BitMask right)
+        {
+            if (left == null ^ right == null) return true;
+            if (left == null && right == null) return false;
+            if (left.Size != right.Size) return true;
+
+            for (int i = 0; i < left.SegmentCount; i++)
+                if (left.Segments[i] != right.Segments[i]) return true;
+
+            return false;
+        }
+
         public static BitMask operator +(BitMask left, uint right)
         {
             if (left.SegmentCount == 0) return left;
@@ -160,6 +184,28 @@ namespace Hast.Common.Numerics
                 msbAfter = GetSegmentMSB(mask.Segments[i]);
                 carry = !msbBefore && msbAfter;
             }
+
+            return mask;
+        }
+
+        public static BitMask operator ++(BitMask mask)
+        {
+            return mask + 1;
+        }
+
+        public static BitMask operator --(BitMask mask)
+        {
+            return mask - 1;
+        }
+
+        public static BitMask operator |(BitMask left, BitMask right)
+        {
+            if (left.Size != right.Size) return new BitMask(left.Size, false);
+
+            var mask = new BitMask(left);
+
+            for (int i = 0; i < mask.SegmentCount; i++)
+                mask.Segments[i] = left.Segments[i] | right.Segments[i];
 
             return mask;
         }
