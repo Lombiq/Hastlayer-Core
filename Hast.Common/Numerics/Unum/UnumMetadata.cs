@@ -19,8 +19,7 @@
         public BitMask FractionSizeMask { get; private set; } // "fsizemask"
         public BitMask ExponentAndFractionSizeMask { get; private set; } // "efsizemask"
         public BitMask UnumTagMask { get; private set; } // "utagmask"
-
-        //public uint SignBitMask { get; private set; } // "signbigu", a unum in which all bits are zero except the sign bit;
+        public BitMask SignBitMask { get; private set; } // "signbigu", a unum in which all bits are zero except the sign bit;
         #endregion
 
         #region Unum special values
@@ -62,10 +61,12 @@
             BitMask.SetOne(FractionSizeMask, FractionSizeSize);
             FractionSizeMask--;
 
-
             ExponentSizeMask = (UncertaintyBitMask - 1) - FractionSizeMask;
             ExponentAndFractionSizeMask = ExponentSizeMask | FractionSizeMask;
             UnumTagMask = UncertaintyBitMask | ExponentAndFractionSizeMask;
+
+            SignBitMask = new BitMask(Size, false);
+            BitMask.SetOne(SignBitMask, (uint)Size - 1);
 
             // Initializing metadata.
             ULP = new BitMask(Size, false);

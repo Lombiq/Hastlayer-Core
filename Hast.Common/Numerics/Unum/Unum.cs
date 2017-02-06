@@ -31,8 +31,7 @@
         public BitMask FractionSizeMask { get { return _metadata.FractionSizeMask; } } // "fsizemask"
         public BitMask ExponentAndFractionSizeMask { get { return _metadata.ExponentAndFractionSizeMask; } } // "efsizemask"
         public BitMask UnumTagMask { get { return _metadata.UnumTagMask; } } // "utagmask"
-
-        //public uint SignBitMask { get { return _metadata.ExponentSizeSize; } } // "signbigu", a unum in which all bits are zero except the sign bit;
+        public BitMask SignBitMask { get { return _metadata.SignBitMask; } } // "signbigu"
         #endregion
 
         #region Unum metadata

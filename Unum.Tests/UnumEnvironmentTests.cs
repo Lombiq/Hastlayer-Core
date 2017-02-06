@@ -85,6 +85,14 @@ namespace Unum.Tests
         }
 
         [Test]
+        public void SignBitMaskIsCorrect()
+        {
+            Assert.That(new BitMask(_unum_3_2.Size, false) + 0x40000 == _unum_3_2.SignBitMask); // 1  0000 0000  0000  0 000 00
+            Assert.That(new BitMask(_unum_3_4.Size, false).Segments[0] == _unum_3_4.SignBitMask.Segments[0] &&
+                _unum_3_4.SignBitMask.Segments[1] == 1); // 1  0000 0000  0000 0000 0000 0000  0 000 0000
+        }
+
+        [Test]
         public void PositiveInfinityIsCorrect()
         {
             Assert.That(new BitMask(_unum_3_2.Size, false) + 0x3FFDF == _unum_3_2.PositiveInfinity); // 0  1111 1111  1111  0 111 11
