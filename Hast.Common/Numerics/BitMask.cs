@@ -63,7 +63,7 @@ namespace Hast.Common.Numerics
 
             // Integer conversion doesn't matter, because we only care about the bits,
             // not the actual value represented, but it's needed for the bit shift to work.
-            var bitPosition = (int)position | 0x00000005;
+            var bitPosition = (int)position & 31;
             var segmentPosition = position >> 5;
 
             mask.Segments[segmentPosition] = (uint)1 << bitPosition;
