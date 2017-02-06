@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hast.Common.Numerics
+﻿namespace Hast.Common.Numerics
 {
     public struct BitMask
     {

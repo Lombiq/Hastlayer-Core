@@ -2,15 +2,17 @@
 {
     public struct Unum// : IComparable, IFormattable, IConvertible, IComparable<Unum>, IEquatable<Unum>
     {
+        private UnumMetadata _metadata;
+
         #region Unum structure
-        public byte ExponentSizeSize { get; private set; } // "esizesize"
-        public byte FractionSizeSize { get; private set; } // "fsizesize"
+        public byte ExponentSizeSize { get { return _metadata.ExponentSizeSize; } } // "esizesize"
+        public byte FractionSizeSize { get { return _metadata.FractionSizeSize; } } // "fsizesize"
 
-        public byte ExponentSizeMax { get; private set; } // "esizemax"
-        public byte FractionSizeMax { get; private set; } // "fsizemax"
+        public byte ExponentSizeMax { get { return _metadata.ExponentSizeMax; } } // "esizemax"
+        public byte FractionSizeMax { get { return _metadata.FractionSizeMax; } } // "fsizemax"
 
-        public byte UnumTagSize { get; private set; } // "utagsize"
-        public byte Size { get; private set; } // "maxubits"
+        public byte UnumTagSize { get { return _metadata.UnumTagSize; } } // "utagsize"
+        public byte Size { get { return _metadata.Size; } } // "maxubits"
         #endregion
 
         #region Unum blocks
@@ -24,33 +26,33 @@
         #endregion
 
         #region Unum masks
-        public BitMask UncertaintyBitMask { get; private set; } // "ubitmask"
-        public BitMask ExponentSizeMask { get; private set; } // "esizemask"
-        public BitMask FractionSizeMask { get; private set; }// "fsizemask"
-        public BitMask ExponentAndFractionSizeMask { get; private set; } // "efsizemask"
-        public BitMask UnumTagMask { get; private set; } // "utagmask"
+        public BitMask UncertaintyBitMask { get { return _metadata.UncertaintyBitMask; } } // "ubitmask"
+        public BitMask ExponentSizeMask { get { return _metadata.ExponentSizeMask; } } // "esizemask"
+        public BitMask FractionSizeMask { get { return _metadata.FractionSizeMask; } }// "fsizemask"
+        public BitMask ExponentAndFractionSizeMask { get { return _metadata.ExponentAndFractionSizeMask; } } // "efsizemask"
+        public BitMask UnumTagMask { get { return _metadata.UnumTagMask; } } // "utagmask"
 
         // uint is too small for a not particularly big unum, to be refactored.
-        //public uint SignBitMask { get; private set; } // "signbigu", a unum in which all bits are zero except the sign bit;
+        //public uint SignBitMask { get { return _metadata.ExponentSizeSize; } } // "signbigu", a unum in which all bits are zero except the sign bit;
         #endregion
 
         #region Unum metadata
         // Bit masks should be at least of size "_unumTagSize + 1", instead of fixed 32 bits.
         // The precision where it could matter is ridiculously high though, so it shouldn't matter for now.
 
-        public BitMask ULP { get; private set; } // Unit in the Last Place or Unit of Least Precision.
+        public BitMask ULP { get { return _metadata.ULP; } } // Unit in the Last Place or Unit of Least Precision.
 
-        public BitMask PositiveInfinity { get; private set; } // "posinfu", the positive infinity for the given unum environment.
-        public BitMask NegativeInfinity { get; private set; } // "neginfu", the negative infinity for the given unum environment.
+        public BitMask PositiveInfinity { get { return _metadata.PositiveInfinity; } } // "posinfu", the positive infinity for the given unum environment.
+        public BitMask NegativeInfinity { get { return _metadata.NegativeInfinity; } } // "neginfu", the negative infinity for the given unum environment.
 
-        public BitMask QuietNotANumber { get; private set; } // "qNaNu"
-        public BitMask SignalingNotANumber { get; private set; } // "sNaNu"
+        public BitMask QuietNotANumber { get { return _metadata.QuietNotANumber; } } // "qNaNu"
+        public BitMask SignalingNotANumber { get { return _metadata.SignalingNotANumber; } } // "sNaNu"
 
-        public BitMask LargestPositive { get; private set; } // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
-        public BitMask SmallestPositive { get; private set; } // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
+        public BitMask LargestPositive { get { return _metadata.LargestPositive; } } // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
+        public BitMask SmallestPositive { get { return _metadata.SmallestPositive; } } // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
 
-        public BitMask LargestNegative { get; private set; } // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
-        public BitMask MinRealU { get; private set; } // "minrealu", looks like to be exactly the same as "negbigu".
+        public BitMask LargestNegative { get { return _metadata.LargestNegative; } } // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
+        public BitMask MinRealU { get { return _metadata.MinRealU; } } // "minrealu", looks like to be exactly the same as "negbigu".
 
         //private uint _smallNormal; // "smallnormalu"
         #endregion
@@ -58,65 +60,31 @@
 
         public Unum(byte exponentSizeSize, byte fractionSizeSize)
         {
-            // Initializing structure.
-            ExponentSizeSize = exponentSizeSize;
-            FractionSizeSize = fractionSizeSize;
+            _metadata = new UnumMetadata(exponentSizeSize, fractionSizeSize);
 
-            ExponentSizeMax = (byte)(1 << ExponentSizeSize);
-            FractionSizeMax = (byte)(1 << FractionSizeSize);
-
-            UnumTagSize = (byte)(1 + ExponentSizeSize + FractionSizeSize);
-            Size = (byte)(1 + ExponentSizeMax + FractionSizeMax + UnumTagSize);
-
-            // Initializing blocks.
             SignBit = false;
             UncertaintyBit = false;
 
-            ExponentBits = new bool[ExponentSizeMax];
-            FractionBits = new bool[FractionSizeMax];
+            ExponentBits = new bool[_metadata.ExponentSizeMax];
+            FractionBits = new bool[_metadata.FractionSizeMax];
 
-            ExponentSizeBits = new bool[ExponentSizeSize];
-            FractionSizeBits = new bool[FractionSizeSize];
-
-            // Initializing masks.
-            UncertaintyBitMask = new BitMask(Size, false);
-            BitMask.SetOne(UncertaintyBitMask, (uint)UnumTagSize - 1);
-
-            FractionSizeMask = new BitMask(Size, false);
-            BitMask.SetOne(FractionSizeMask, FractionSizeSize);
-            FractionSizeMask--;
-
-
-            ExponentSizeMask = (UncertaintyBitMask - 1) - FractionSizeMask;
-            ExponentAndFractionSizeMask = ExponentSizeMask | FractionSizeMask;
-            UnumTagMask = UncertaintyBitMask | ExponentAndFractionSizeMask;
-
-            // Initializing metadata.
-            ULP = new BitMask(Size, false);
-            BitMask.SetOne(ULP, UnumTagSize);
-
-            PositiveInfinity = new BitMask(Size, false);
-            BitMask.SetOne(PositiveInfinity, (uint)Size - 1);
-            PositiveInfinity -= 1;
-            PositiveInfinity -= UncertaintyBitMask;
-
-            NegativeInfinity = new BitMask(Size, false);
-            BitMask.SetOne(NegativeInfinity, (uint)Size - 1);
-            NegativeInfinity += PositiveInfinity;
-
-            LargestPositive = PositiveInfinity - ULP;
-            SmallestPositive = ExponentAndFractionSizeMask + ULP;
-
-            LargestNegative = NegativeInfinity - ULP;
-
-            MinRealU = LargestPositive + ((uint)1 << Size - 1);
-
-            QuietNotANumber = PositiveInfinity + UncertaintyBitMask;
-            SignalingNotANumber = NegativeInfinity + UncertaintyBitMask;
-
-            //_smallNormal = _exponentAndFractionSizeMask + 1 << _size - 1 - _exponentSizeMax;
+            ExponentSizeBits = new bool[_metadata.ExponentSizeSize];
+            FractionSizeBits = new bool[_metadata.FractionSizeSize];
         }
 
+        public Unum(UnumMetadata metadata)
+        {
+            _metadata = metadata;
+
+            SignBit = false;
+            UncertaintyBit = false;
+
+            ExponentBits = new bool[_metadata.ExponentSizeMax];
+            FractionBits = new bool[_metadata.FractionSizeMax];
+
+            ExponentSizeBits = new bool[_metadata.ExponentSizeSize];
+            FractionSizeBits = new bool[_metadata.FractionSizeSize];
+        }
 
 
         public override bool Equals(object obj)
