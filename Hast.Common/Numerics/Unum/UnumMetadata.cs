@@ -16,18 +16,14 @@
         #region Unum masks
         public BitMask UncertaintyBitMask { get; private set; } // "ubitmask"
         public BitMask ExponentSizeMask { get; private set; } // "esizemask"
-        public BitMask FractionSizeMask { get; private set; }// "fsizemask"
+        public BitMask FractionSizeMask { get; private set; } // "fsizemask"
         public BitMask ExponentAndFractionSizeMask { get; private set; } // "efsizemask"
         public BitMask UnumTagMask { get; private set; } // "utagmask"
 
-        // uint is too small for a not particularly big unum, to be refactored.
         //public uint SignBitMask { get; private set; } // "signbigu", a unum in which all bits are zero except the sign bit;
         #endregion
 
         #region Unum special values
-        // Bit masks should be at least of size "_unumTagSize + 1", instead of fixed 32 bits.
-        // The precision where it could matter is ridiculously high though, so it shouldn't matter for now.
-
         public BitMask ULP { get; private set; } // Unit in the Last Place or Unit of Least Precision.
 
         public BitMask PositiveInfinity { get; private set; } // "posinfu", the positive infinity for the given unum environment.

@@ -28,31 +28,27 @@
         #region Unum masks
         public BitMask UncertaintyBitMask { get { return _metadata.UncertaintyBitMask; } } // "ubitmask"
         public BitMask ExponentSizeMask { get { return _metadata.ExponentSizeMask; } } // "esizemask"
-        public BitMask FractionSizeMask { get { return _metadata.FractionSizeMask; } }// "fsizemask"
+        public BitMask FractionSizeMask { get { return _metadata.FractionSizeMask; } } // "fsizemask"
         public BitMask ExponentAndFractionSizeMask { get { return _metadata.ExponentAndFractionSizeMask; } } // "efsizemask"
         public BitMask UnumTagMask { get { return _metadata.UnumTagMask; } } // "utagmask"
 
-        // uint is too small for a not particularly big unum, to be refactored.
         //public uint SignBitMask { get { return _metadata.ExponentSizeSize; } } // "signbigu", a unum in which all bits are zero except the sign bit;
         #endregion
 
         #region Unum metadata
-        // Bit masks should be at least of size "_unumTagSize + 1", instead of fixed 32 bits.
-        // The precision where it could matter is ridiculously high though, so it shouldn't matter for now.
-
         public BitMask ULP { get { return _metadata.ULP; } } // Unit in the Last Place or Unit of Least Precision.
 
-        public BitMask PositiveInfinity { get { return _metadata.PositiveInfinity; } } // "posinfu", the positive infinity for the given unum environment.
-        public BitMask NegativeInfinity { get { return _metadata.NegativeInfinity; } } // "neginfu", the negative infinity for the given unum environment.
+        public BitMask PositiveInfinity { get { return _metadata.PositiveInfinity; } } // "posinfu"
+        public BitMask NegativeInfinity { get { return _metadata.NegativeInfinity; } } // "neginfu"
 
         public BitMask QuietNotANumber { get { return _metadata.QuietNotANumber; } } // "qNaNu"
         public BitMask SignalingNotANumber { get { return _metadata.SignalingNotANumber; } } // "sNaNu"
 
-        public BitMask LargestPositive { get { return _metadata.LargestPositive; } } // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
-        public BitMask SmallestPositive { get { return _metadata.SmallestPositive; } } // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
+        public BitMask LargestPositive { get { return _metadata.LargestPositive; } } // "maxrealu"
+        public BitMask SmallestPositive { get { return _metadata.SmallestPositive; } } // "smallsubnormalu"
 
-        public BitMask LargestNegative { get { return _metadata.LargestNegative; } } // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
-        public BitMask MinRealU { get { return _metadata.MinRealU; } } // "minrealu", looks like to be exactly the same as "negbigu".
+        public BitMask LargestNegative { get { return _metadata.LargestNegative; } } // "negbigu"
+        public BitMask MinRealU { get { return _metadata.MinRealU; } } // "minrealu"
 
         //private uint _smallNormal; // "smallnormalu"
         #endregion
