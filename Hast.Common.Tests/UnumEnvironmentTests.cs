@@ -23,14 +23,14 @@ namespace Hast.Common.Tests
 
 
         [Test]
-        public void ExponentSizeSizeIsCorrect()
+        public void UnumExponentSizeSizeIsCorrect()
         {
             Assert.AreEqual(3, _unum_3_2.ExponentSizeSize);
             Assert.AreEqual(3, _unum_3_4.ExponentSizeSize);
         }
 
         [Test]
-        public void FractionSizeSizeIsCorrect()
+        public void UnumFractionSizeSizeIsCorrect()
         {
             Assert.AreEqual(2, _unum_3_2.FractionSizeSize);
             Assert.AreEqual(4, _unum_3_4.FractionSizeSize);
@@ -51,50 +51,50 @@ namespace Hast.Common.Tests
         }
 
         [Test]
-        public void UncertaintyBitMaskIsCorrect()
+        public void UnumUncertaintyBitMaskIsCorrect()
         {
             // 0  0000 0000  0000  1 000 00
-            Assert.That(new BitMask(_unum_3_2.Size, 0x20) == _unum_3_2.UncertaintyBitMask,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x20), _unum_3_2.UncertaintyBitMask,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.UncertaintyBitMask)));
 
             // 0  0000 0000  0000 0000 0000 0000  1 000 0000
-            Assert.That(new BitMask(_unum_3_4.Size, 0x80, 0) == _unum_3_4.UncertaintyBitMask,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0x80, 0), _unum_3_4.UncertaintyBitMask,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.UncertaintyBitMask)));
         }
 
         [Test]
-        public void ExponentSizeMaskIsCorrect()
+        public void UnumExponentSizeMaskIsCorrect()
         {
             // 0  0000 0000  0000  0 111 00
-            Assert.That(new BitMask(_unum_3_2.Size, 0x1C) == _unum_3_2.ExponentSizeMask,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x1C), _unum_3_2.ExponentSizeMask,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.ExponentSizeMask)));
 
             // 0  0000 0000  0000 0000 0000 0000  0 111 0000
-            Assert.That(new BitMask(_unum_3_4.Size, 0x70, 0) == _unum_3_4.ExponentSizeMask,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0x70, 0), _unum_3_4.ExponentSizeMask,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.ExponentSizeMask)));
         }
 
         [Test]
-        public void FractionSizeMaskIsCorrect()
+        public void UnumFractionSizeMaskIsCorrect()
         {
             // 0  0000 0000  0000  0 000 11
-            Assert.That(new BitMask(_unum_3_2.Size, 3) == _unum_3_2.FractionSizeMask,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 3), _unum_3_2.FractionSizeMask,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.FractionSizeMask)));
 
             // 0  0000 0000  0000 0000 0000 0000  0 000 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0xF, 0) == _unum_3_4.FractionSizeMask,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0xF, 0), _unum_3_4.FractionSizeMask,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.FractionSizeMask)));
         }
 
         [Test]
-        public void ExponentAndFractionSizeMaskIsCorrect()
+        public void UnumExponentAndFractionSizeMaskIsCorrect()
         {
             // 0  0000 0000  0000  0 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x1F) == _unum_3_2.ExponentAndFractionSizeMask,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x1F), _unum_3_2.ExponentAndFractionSizeMask,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.ExponentAndFractionSizeMask)));
 
             // 0  0000 0000  0000 0000 0000 0000  0 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0x7F, 0) == _unum_3_4.ExponentAndFractionSizeMask,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0x7F, 0), _unum_3_4.ExponentAndFractionSizeMask,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.ExponentAndFractionSizeMask)));
         }
 
@@ -102,107 +102,107 @@ namespace Hast.Common.Tests
         public void UnumTagMaskIsCorrect()
         {
             // 0  0000 0000  0000  1 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x3F) == _unum_3_2.UnumTagMask,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x3F), _unum_3_2.UnumTagMask,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.UnumTagMask)));
 
             // 0  0000 0000  0000 0000 0000 0000  1 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0xFF, 0) == _unum_3_4.UnumTagMask,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0xFF, 0), _unum_3_4.UnumTagMask,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.UnumTagMask)));
         }
 
         [Test]
-        public void SignBitMaskIsCorrect()
+        public void UnumSignBitMaskIsCorrect()
         {
             // 1  0000 0000  0000  0 000 00
-            Assert.That(new BitMask(_unum_3_2.Size, 0x40000) == _unum_3_2.SignBitMask,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x40000), _unum_3_2.SignBitMask,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.SignBitMask)));
 
             // 1  0000 0000  0000 0000 0000 0000  0 000 0000
-            Assert.That(new BitMask(_unum_3_4.Size, 0, 1) == _unum_3_4.SignBitMask,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0, 1), _unum_3_4.SignBitMask,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.SignBitMask)));
         }
 
         [Test]
-        public void PositiveInfinityIsCorrect()
+        public void UnumPositiveInfinityIsCorrect()
         {
             // 0  1111 1111  1111  0 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x3FFDF) == _unum_3_2.PositiveInfinity,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x3FFDF), _unum_3_2.PositiveInfinity,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.PositiveInfinity)));
 
             // 0  1111 1111  1111 1111 1111 1111  0 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0xFFFFFF7F, 0) == _unum_3_4.PositiveInfinity,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0xFFFFFF7F, 0), _unum_3_4.PositiveInfinity,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.PositiveInfinity)));
         }
 
         [Test]
-        public void NegativeInfinityIsCorrect()
+        public void UnumNegativeInfinityIsCorrect()
         {
             // 1  1111 1111  1111  0 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x7FFDF) == _unum_3_2.NegativeInfinity,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x7FFDF), _unum_3_2.NegativeInfinity,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.NegativeInfinity)));
 
             // 1  1111 1111  1111 1111 1111 1111  0 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0xFFFFFF7F, 1) == _unum_3_4.NegativeInfinity,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0xFFFFFF7F, 1), _unum_3_4.NegativeInfinity,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.NegativeInfinity)));
         }
 
         [Test]
-        public void QuietNotANumberIsCorrect()
+        public void UnumQuietNotANumberIsCorrect()
         {
             // 0  1111 1111  1111  1 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x3FFFF) == _unum_3_2.QuietNotANumber,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x3FFFF), _unum_3_2.QuietNotANumber,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.QuietNotANumber)));
 
             // 0  1111 1111  1111 1111 1111 1111  1 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0xFFFFFFFF, 0) == _unum_3_4.QuietNotANumber,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0xFFFFFFFF, 0), _unum_3_4.QuietNotANumber,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.QuietNotANumber)));
         }
 
         [Test]
-        public void SignalingNotANumberIsCorrect()
+        public void UnumSignalingNotANumberIsCorrect()
         {
             // 1  1111 1111  1111  1 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x7FFFF) == _unum_3_2.SignalingNotANumber,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x7FFFF), _unum_3_2.SignalingNotANumber,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.SignalingNotANumber)));
 
             // 1  1111 1111  1111 1111 1111 1111  1 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0xFFFFFFFF, 1) == _unum_3_4.SignalingNotANumber,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0xFFFFFFFF, 1), _unum_3_4.SignalingNotANumber,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.SignalingNotANumber)));
         }
 
         [Test]
-        public void LargestPositiveIsCorrect()
+        public void UnumLargestPositiveIsCorrect()
         {
             // 0  1111 1111  1110  0 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x3FF9F) == _unum_3_2.LargestPositive,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x3FF9F), _unum_3_2.LargestPositive,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.LargestPositive)));
 
             // 0  1111 1111  1111 1111 1111 1110  0 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0xFFFFFE7F, 0) == _unum_3_4.LargestPositive,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0xFFFFFE7F, 0), _unum_3_4.LargestPositive,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.LargestPositive)));
         }
 
         [Test]
-        public void SmallestPositiveIsCorrect()
+        public void UnumSmallestPositiveIsCorrect()
         {
             // 0  0000 0000  0001  0 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x5F) == _unum_3_2.SmallestPositive,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x5F), _unum_3_2.SmallestPositive,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.SmallestPositive)));
 
             // 0  0000 0000  0000 0000 0000 0001  0 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0x17F, 0) == _unum_3_4.SmallestPositive,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0x17F, 0), _unum_3_4.SmallestPositive,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.SmallestPositive)));
         }
 
         [Test]
-        public void LargestNegativeIsCorrect()
+        public void UnumLargestNegativeIsCorrect()
         {
             // 1  1111 1111  1110  0 111 11
-            Assert.That(new BitMask(_unum_3_2.Size, 0x7FF9F) == _unum_3_2.LargestNegative,
+            Assert.AreEqual(new BitMask(_unum_3_2.Size, 0x7FF9F), _unum_3_2.LargestNegative,
                 TestFailureMessageBuilder(_unum_3_2, nameof(_unum_3_2.LargestNegative)));
 
             // 1  1111 1111  1111 1111 1111 1110  0 111 1111
-            Assert.That(new BitMask(_unum_3_4.Size, 0xFFFFFE7F, 1) == _unum_3_4.LargestNegative,
+            Assert.AreEqual(new BitMask(_unum_3_4.Size, 0xFFFFFE7F, 1), _unum_3_4.LargestNegative,
                 TestFailureMessageBuilder(_unum_3_4, nameof(_unum_3_4.LargestNegative)));
         }
 
