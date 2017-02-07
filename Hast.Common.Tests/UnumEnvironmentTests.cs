@@ -1,20 +1,21 @@
 ﻿using Hast.Common.Numerics;
+using Hast.Common.Numerics.Unum;
 using NUnit.Framework;
 
-namespace Unum.Tests
+namespace Hast.Common.Tests
 {
     [TestFixture]
     public class UnumEnvironmentTests
     {
-        private Hast.Common.Numerics.Unum.Unum _unum_3_2;
-        private Hast.Common.Numerics.Unum.Unum _unum_3_4;
+        private Unum _unum_3_2;
+        private Unum _unum_3_4;
 
 
         [SetUp]
         public void Init()
         {
-            _unum_3_2 = new Hast.Common.Numerics.Unum.Unum(3, 2);
-            _unum_3_4 = new Hast.Common.Numerics.Unum.Unum(3, 4);
+            _unum_3_2 = new Unum(3, 2);
+            _unum_3_4 = new Unum(3, 4);
         }
 
         [TestFixtureTearDown]
@@ -145,6 +146,13 @@ namespace Unum.Tests
             Assert.That(new BitMask(_unum_3_2.Size, false) + 0x7FF9F == _unum_3_2.LargestNegative); // 1  1111 1111  1110  0 111 11
             Assert.That((new BitMask(_unum_3_4.Size, false) + 0xFFFFFE7F).Segments[0] == _unum_3_4.LargestNegative.Segments[0] &&
                 _unum_3_4.LargestNegative.Segments[1] == 1); // 1  1111 1111  1111 1111 1111 1110  0 111 1111
+        }
+
+
+        private string TestFailureMessageBuilder(Unum unum, string propertyName)
+        {
+            return string.Format("Testing the \"{0}\" property of the Unum ({1}, {2}) environment failed.",
+                propertyName, unum.ExponentSizeSize, unum.FractionSizeSize);
         }
     }
 }
