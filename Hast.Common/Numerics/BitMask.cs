@@ -37,7 +37,7 @@
         public BitMask(uint size, bool allOne)
         {
             Size = size;
-            SegmentCount = size == 0 ? 0 : (size >> 5) + 1;
+            SegmentCount = size == 0 ? 0 : (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
             Segments = new uint[SegmentCount];
 
             if (allOne) for (int i = 0; i < SegmentCount; i++) Segments[i] = uint.MaxValue;
@@ -46,7 +46,8 @@
         public BitMask(uint size, params uint[] segments)
         {
             SegmentCount = (uint)segments.Length;
-            Size = size == 0 ? SegmentCount << 5 : size;
+            Size = size == 0 || size <= (segments.Length - 1) << 5 || size > segments.Length << 5
+                ? SegmentCount << 5 : size;
             Segments = new uint[SegmentCount];
 
             segments.CopyTo(Segments, 0);
@@ -64,7 +65,7 @@
 
         public static BitMask SetOne(BitMask mask, uint position)
         {
-            if (position > mask.Size) return new BitMask(mask.Size, false);
+            if (position >= mask.Size) return new BitMask(mask.Size, false);
 
             // Integer conversion doesn't matter, because we only care about the bits,
             // not the actual value represented, but it's needed for the bit shift to work.
