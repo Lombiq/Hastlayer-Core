@@ -5,14 +5,14 @@
         private UnumMetadata _metadata;
 
         #region Unum structure
-        public byte ExponentSizeSize { get { return _metadata.ExponentSizeSize; } } // "esizesize"
-        public byte FractionSizeSize { get { return _metadata.FractionSizeSize; } } // "fsizesize"
+        public byte ExponentSizeSize => _metadata.ExponentSizeSize; // "esizesize"
+        public byte FractionSizeSize => _metadata.FractionSizeSize; // "fsizesize"
 
-        public byte ExponentSizeMax { get { return _metadata.ExponentSizeMax; } } // "esizemax"
-        public byte FractionSizeMax { get { return _metadata.FractionSizeMax; } } // "fsizemax"
+        public byte ExponentSizeMax => _metadata.ExponentSizeMax; // "esizemax"
+        public byte FractionSizeMax => _metadata.FractionSizeMax; // "fsizemax"
 
-        public byte UnumTagSize { get { return _metadata.UnumTagSize; } } // "utagsize"
-        public byte Size { get { return _metadata.Size; } } // "maxubits"
+        public byte UnumTagSize => _metadata.UnumTagSize; // "utagsize"
+        public byte Size => _metadata.Size; // "maxubits"
         #endregion
 
         #region Unum blocks
@@ -26,28 +26,28 @@
         #endregion
 
         #region Unum masks
-        public BitMask UncertaintyBitMask { get { return _metadata.UncertaintyBitMask; } } // "ubitmask"
-        public BitMask ExponentSizeMask { get { return _metadata.ExponentSizeMask; } } // "esizemask"
-        public BitMask FractionSizeMask { get { return _metadata.FractionSizeMask; } } // "fsizemask"
-        public BitMask ExponentAndFractionSizeMask { get { return _metadata.ExponentAndFractionSizeMask; } } // "efsizemask"
-        public BitMask UnumTagMask { get { return _metadata.UnumTagMask; } } // "utagmask"
-        public BitMask SignBitMask { get { return _metadata.SignBitMask; } } // "signbigu"
+        public BitMask UncertaintyBitMask => _metadata.UncertaintyBitMask; // "ubitmask"
+        public BitMask ExponentSizeMask => _metadata.ExponentSizeMask; // "esizemask"
+        public BitMask FractionSizeMask => _metadata.FractionSizeMask; // "fsizemask"
+        public BitMask ExponentAndFractionSizeMask => _metadata.ExponentAndFractionSizeMask; // "efsizemask"
+        public BitMask UnumTagMask => _metadata.UnumTagMask; // "utagmask"
+        public BitMask SignBitMask => _metadata.SignBitMask; // "signbigu"
         #endregion
 
         #region Unum metadata
-        public BitMask ULP { get { return _metadata.ULP; } } // Unit in the Last Place or Unit of Least Precision.
+        public BitMask ULP => _metadata.ULP; // Unit in the Last Place or Unit of Least Precision.
 
-        public BitMask PositiveInfinity { get { return _metadata.PositiveInfinity; } } // "posinfu"
-        public BitMask NegativeInfinity { get { return _metadata.NegativeInfinity; } } // "neginfu"
+        public BitMask PositiveInfinity => _metadata.PositiveInfinity; // "posinfu"
+        public BitMask NegativeInfinity => _metadata.NegativeInfinity; // "neginfu"
 
-        public BitMask QuietNotANumber { get { return _metadata.QuietNotANumber; } } // "qNaNu"
-        public BitMask SignalingNotANumber { get { return _metadata.SignalingNotANumber; } } // "sNaNu"
+        public BitMask QuietNotANumber => _metadata.QuietNotANumber; // "qNaNu"
+        public BitMask SignalingNotANumber => _metadata.SignalingNotANumber; // "sNaNu"
 
-        public BitMask LargestPositive { get { return _metadata.LargestPositive; } } // "maxrealu"
-        public BitMask SmallestPositive { get { return _metadata.SmallestPositive; } } // "smallsubnormalu"
+        public BitMask LargestPositive => _metadata.LargestPositive; // "maxrealu"
+        public BitMask SmallestPositive => _metadata.SmallestPositive; // "smallsubnormalu"
 
-        public BitMask LargestNegative { get { return _metadata.LargestNegative; } } // "negbigu"
-        public BitMask MinRealU { get { return _metadata.MinRealU; } } // "minrealu"
+        public BitMask LargestNegative => _metadata.LargestNegative; // "negbigu"
+        public BitMask MinRealU => _metadata.MinRealU; // "minrealu"
 
         //private uint _smallNormal; // "smallnormalu"
         #endregion
