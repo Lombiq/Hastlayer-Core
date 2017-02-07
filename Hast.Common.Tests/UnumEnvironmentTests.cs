@@ -207,10 +207,7 @@ namespace Hast.Common.Tests
         }
 
 
-        private string TestFailureMessageBuilder(Unum unum, string propertyName)
-        {
-            return string.Format("Testing the \"{0}\" property of the Unum ({1}, {2}) environment failed.",
-                propertyName, unum.ExponentSizeSize, unum.FractionSizeSize);
-        }
+        private string TestFailureMessageBuilder(Unum unum, string propertyName) =>
+            $"Testing the \"{propertyName}\" property of the Unum ({unum.ExponentSizeSize}, {unum.FractionSizeSize}) environment failed.";
     }
 }
