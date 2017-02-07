@@ -2,8 +2,6 @@
 {
     public struct BitMask
     {
-        private const uint _32BitMSBMask = 0x80000000;
-
         public uint Size { get; private set; }
         public uint SegmentCount { get; private set; }
         public uint[] Segments { get; private set; }
@@ -72,8 +70,9 @@
 
         public static bool operator ==(BitMask left, BitMask right)
         {
-            if (left == null ^ right == null) return false;
+            if (ReferenceEquals(left, right)) return true;
             if (left == null && right == null) return true;
+            if (left == null || right == null) return false;
             if (left.Size != right.Size) return false;
 
             for (int i = 0; i < left.SegmentCount; i++)
@@ -84,8 +83,9 @@
 
         public static bool operator !=(BitMask left, BitMask right)
         {
-            if (left == null ^ right == null) return true;
+            if (!ReferenceEquals(left, right)) return false;
             if (left == null && right == null) return false;
+            if (left == null || right == null) return true;
             if (left.Size != right.Size) return true;
 
             for (int i = 0; i < left.SegmentCount; i++)
@@ -206,6 +206,20 @@
                 mask.Segments[i] = left.Segments[i] | right.Segments[i];
 
             return mask;
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            return this == (BitMask)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            var segmentHashCodes = new int[SegmentCount];
+            for (int i = 0; i < SegmentCount; i++) segmentHashCodes[i] = Segments[i].GetHashCode();
+
+            return segmentHashCodes.GetHashCode();
         }
 
 
