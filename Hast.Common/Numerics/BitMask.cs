@@ -195,15 +195,9 @@
             return mask;
         }
 
-        public static BitMask operator ++(BitMask mask)
-        {
-            return mask + 1;
-        }
+        public static BitMask operator ++(BitMask mask) => mask + 1;
 
-        public static BitMask operator --(BitMask mask)
-        {
-            return mask - 1;
-        }
+        public static BitMask operator --(BitMask mask) => mask - 1;
 
         public static BitMask operator |(BitMask left, BitMask right)
         {
@@ -218,10 +212,7 @@
         }
 
 
-        public override bool Equals(object obj)
-        {
-            return this == (BitMask)obj;
-        }
+        public override bool Equals(object obj) => this == (BitMask)obj;
 
         public override int GetHashCode()
         {
@@ -232,9 +223,6 @@
         }
 
 
-        private static bool GetSegmentMSB(uint segment)
-        {
-           return segment >> 31 == 1;
-        }
+        private static bool GetSegmentMSB(uint segment) => segment >> 31 == 1;
     }
 }
