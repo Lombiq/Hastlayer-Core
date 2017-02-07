@@ -36,24 +36,25 @@ namespace Hast.Common.Tests
         [Test]
         public void BitMaskSetOneIsCorrect()
         {
-            var masks = new BitMask[]
+            var masksAndPositions = new Tuple<BitMask, uint>[]
             {
-                new BitMask(32, false), new BitMask(32, false), new BitMask(32, false), new BitMask(32, false),
-                new BitMask(32, false), new BitMask(33, false), new BitMask(100, false), new BitMask(100, false)
-            };
-            var positions = new uint[]
-            {
-                0, 1, 5, 10,
-                31, 32, 33, 95
+                Tuple.Create(new BitMask(32, false), (uint)0),
+                Tuple.Create(new BitMask(32, false), (uint)0),
+                Tuple.Create(new BitMask(32, false), (uint)0),
+                Tuple.Create(new BitMask(32, false), (uint)0),
+                Tuple.Create(new BitMask(32, false), (uint)0),
+                Tuple.Create(new BitMask(33, false), (uint)0),
+                Tuple.Create(new BitMask(100, false), (uint)0),
+                Tuple.Create(new BitMask(100, false), (uint)0)
             };
 
-            for (int i = 0; i < positions.Length; i++)
+            for (int i = 0; i < masksAndPositions.Length; i++)
             {
-                var segment = positions[i] / 32;
-                var position = positions[i] % 32;
+                var segment = masksAndPositions[i].Item2 / 32;
+                var position = masksAndPositions[i].Item2 % 32;
 
-                Assert.AreEqual(1, BitMask.SetOne(masks[i], positions[i]).Segments[segment] >> (int)position,
-                    $"Position: {positions[i]}: Segment {segment}, Position: {position}");
+                Assert.AreEqual(1, BitMask.SetOne(masksAndPositions[i].Item1, masksAndPositions[i].Item2).Segments[segment] >> (int)position,
+                    $"Position: {masksAndPositions[i]}: Segment {segment}, Position: {position}");
             }
         }
 
@@ -66,6 +67,18 @@ namespace Hast.Common.Tests
             };
 
             foreach (var mask in masks) Assert.AreEqual(mask, new BitMask(mask));
+        }
+
+        [Test]
+        public void BitMaskIntegerAdditionIsCorrect()
+        {
+            Assert.AreEqual(1, (new BitMask(0) + 1).Segments[0]);
+            Assert.AreEqual(0xFFFF << 1, (new BitMask(0xFFFF) + 0xFFFF).Segments[0]);
+            Assert.AreEqual(0xFFFFFFFF, (new BitMask(0xFFFFFFFE) + 1).Segments[0]);
+            Assert.AreEqual(0xFFFFFFFF, (new BitMask(0xEFFFFFFF) + 0x10000000).Segments[0]);
+            Assert.AreEqual(0, (new BitMask(0xFFFFFFFF) + 1).Segments[0]);
+
+            Assert.AreEqual(new BitMask(65, 0, 0, 1), new BitMask(65, 0xFFFFFFFF, 0xFFFFFFFF, 0) + 1);
         }
     }
 }
