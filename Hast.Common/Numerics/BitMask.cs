@@ -43,6 +43,15 @@
             if (allOne) for (int i = 0; i < SegmentCount; i++) Segments[i] = uint.MaxValue;
         }
 
+        public BitMask(uint size, params uint[] segments)
+        {
+            SegmentCount = (uint)segments.Length;
+            Size = size == 0 ? SegmentCount << 5 : size;
+            Segments = new uint[SegmentCount];
+
+            segments.CopyTo(Segments, 0);
+        }
+
         public BitMask(BitMask source)
         {
             Size = source.Size;
