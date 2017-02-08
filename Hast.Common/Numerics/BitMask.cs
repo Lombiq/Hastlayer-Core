@@ -192,8 +192,5 @@
         }
 
         public override string ToString() => string.Join(", ", Segments);
-
-
-        private static bool GetSegmentMSB(uint segment) => segment >> 31 == 1;
     }
 }
