@@ -80,7 +80,7 @@ namespace Hast.Common.Tests
         public void BitMaskIntegerAdditionIsCorrect()
         {
             Assert.AreEqual(1, (new BitMask(new uint[] { 0 }) + 1).Segments[0]);
-            Assert.AreEqual(0xFFFF << 1, (new BitMask(new uint[] { 0xFFFF }) + 0xFFFF).Segments[0]);
+            Assert.AreEqual(0x1FFFE, (new BitMask(new uint[] { 0xFFFF }) + 0xFFFF).Segments[0]);
             Assert.AreEqual(0xFFFFFFFF, (new BitMask(new uint[] { 0xFFFFFFFE }) + 1).Segments[0]);
             Assert.AreEqual(0xFFFFFFFF, (new BitMask(new uint[] { 0xEFFFFFFF }) + 0x10000000).Segments[0]);
             Assert.AreEqual(0, (new BitMask(new uint[] { 0xFFFFFFFF }) + 1).Segments[0]);
@@ -91,6 +91,7 @@ namespace Hast.Common.Tests
         [Test]
         public void BitMaskIntegerSubtractionIsCorrect()
         {
+            Assert.AreEqual(0, (new BitMask(new uint[] { 1 }) - 1).Segments[0]);
             Assert.AreEqual(0, (new BitMask(new uint[] { 0xFFFFFFFF }) - 0xFFFFFFFF).Segments[0]);
             Assert.AreEqual(1, (new BitMask(new uint[] { 0xFFFFFFFF }) - 0xFFFFFFFE).Segments[0]);
             Assert.AreEqual(0xFFFFFFFF, (new BitMask(new uint[] { 0 }) - 1).Segments[0]);
@@ -109,6 +110,17 @@ namespace Hast.Common.Tests
                             new BitMask(new uint[] { 0xFFFFFFFF, 0 }) + new BitMask(new uint[] { 0xFFFFFFFF, 0 }));
             Assert.AreEqual(new BitMask(new uint[] { 0xFFFFFFFE, 0xFFFFFFFF, 1 }),
                             new BitMask(new uint[] { 0xFFFFFFFF, 0xFFFFFFFF, 0 }) + new BitMask(new uint[] { 0xFFFFFFFF, 0xFFFFFFFF, 0 }));
+        }
+
+        [Test]
+        public void BitMaskSubtractionIsCorrect()
+        {
+            Assert.AreEqual(new BitMask(new uint[] { 0xAAAAAAAA }),
+                            new BitMask(new uint[] { 0xFFFFFFFF }) - new BitMask(new uint[] { 0x55555555 }));
+            Assert.AreEqual(new BitMask(new uint[] { 0xFFFFFFFF, 0 }),
+                            new BitMask(new uint[] { 0xFFFFFFFE, 1 }) - new BitMask(new uint[] { 0xFFFFFFFF, 0 }));
+            Assert.AreEqual(new BitMask(new uint[] { 0xFFFFFFFF, 0xFFFFFFFF, 0 }),
+                            new BitMask(new uint[] { 0xFFFFFFFE, 0xFFFFFFFF, 1 }) - new BitMask(new uint[] { 0xFFFFFFFF, 0xFFFFFFFF, 0 }));
         }
     }
 }
