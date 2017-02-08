@@ -5,52 +5,38 @@
         public uint Size { get; private set; }
         public uint SegmentCount { get; private set; }
         public uint[] Segments { get; private set; }
-        
 
-        public BitMask(uint value)
+
+        public BitMask(uint[] segments)
         {
-            Size = 32;
-            SegmentCount = 1;
+            SegmentCount = (uint)segments.Length;
+            Size = SegmentCount << 5;
             Segments = new uint[SegmentCount];
 
-            Segments[0] = value;
+            segments.CopyTo(Segments, 0);
         }
 
-        public BitMask(int value)
+        public BitMask(uint[] segments, uint size = 0)
         {
-            if (value < 0)
+            SegmentCount = (uint)segments.Length;
+            Size = SegmentCount << 5;
+            if (size > Size)
             {
-                Size = 0;
-                SegmentCount = 0;
-                Segments = new uint[SegmentCount];
-            } 
-            else
-            {
-                Size = 1;
-                SegmentCount = 1;
-                Segments = new uint[SegmentCount];
-
-                Segments[0] = (uint)value;
+                Size = size;
+                SegmentCount = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
             }
+            Segments = new uint[SegmentCount];
+
+            segments.CopyTo(Segments, 0);
         }
 
         public BitMask(uint size, bool allOne)
         {
-            Size = size;
-            SegmentCount = size == 0 ? 0 : (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
+            SegmentCount = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
+            Size = SegmentCount << 5;
             Segments = new uint[SegmentCount];
 
             if (allOne) for (int i = 0; i < SegmentCount; i++) Segments[i] = uint.MaxValue;
-        }
-
-        public BitMask(uint size, params uint[] segments)
-        {
-            SegmentCount = (uint)segments.Length;
-            Size = size == 0 || size <= (segments.Length - 1) << 5 || size > segments.Length << 5
-                ? SegmentCount << 5 : size;
-            Segments = new uint[SegmentCount];
-
-            segments.CopyTo(Segments, 0);
         }
 
         public BitMask(BitMask source)
@@ -59,7 +45,7 @@
             SegmentCount = source.SegmentCount;
             Segments = new uint[SegmentCount];
 
-            for (int i = 0; i < SegmentCount; i++) Segments[i] = source.Segments[i];
+            if (source.Segments != null) source.Segments.CopyTo(Segments, 0);
         }
 
 
@@ -167,7 +153,7 @@
 
                 if (carry) mask.Segments[i]++;
                 mask.Segments[i] += right.Segments[i];
-                
+
                 msbAfter = GetSegmentMSB(mask.Segments[i]);
                 carry = msbBefore && !msbAfter;
             }
@@ -222,6 +208,8 @@
 
             return segmentHashCodes.GetHashCode();
         }
+
+        public override string ToString() => string.Join(", ", Segments);
 
 
         private static bool GetSegmentMSB(uint segment) => segment >> 31 == 1;
