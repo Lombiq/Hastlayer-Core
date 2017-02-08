@@ -90,93 +90,75 @@
             return false;
         }
 
-        public static BitMask operator +(BitMask left, uint right)
-        {
-            if (left.SegmentCount == 0) return left;
+        public static BitMask operator +(BitMask left, uint right) => left + new BitMask(new uint[] { right });
 
-            var mask = new BitMask(left);
+        public static BitMask operator -(BitMask left, uint right) => left - new BitMask(new uint[] { right });
 
-            var msbBefore = GetSegmentMSB(mask.Segments[0]);
-            mask.Segments[0] += right;
-            var msbAfter = GetSegmentMSB(mask.Segments[0]);
-
-            if (msbBefore && !msbAfter) // Carry from the first segment.
-                for (int i = 1; i < mask.SegmentCount; i++)
-                {
-                    // Does the carry bubble up through this segment?
-                    if (mask.Segments[i] == uint.MaxValue) mask.Segments[i] = 0;
-                    else
-                    {
-                        mask.Segments[i]++;
-                        break;
-                    }
-                }
-
-            return mask;
-        }
-
-        public static BitMask operator -(BitMask left, uint right)
-        {
-            if (left.SegmentCount == 0) return left;
-
-            var mask = new BitMask(left);
-
-            var msbBefore = GetSegmentMSB(mask.Segments[0]);
-            mask.Segments[0] -= right;
-            var msbAfter = GetSegmentMSB(mask.Segments[0]);
-
-            if (!msbBefore && msbAfter) // Carry from the first segment.
-                for (int i = 1; i < mask.SegmentCount; i++)
-                {
-                    // Does the carry bubble up through this segment?
-                    if (mask.Segments[i] == 0) mask.Segments[i] = uint.MaxValue;
-                    else
-                    {
-                        mask.Segments[i]--;
-                        break;
-                    }
-                }
-
-            return mask;
-        }
-
+        /// <summary>
+        /// Bit-by-bit addition of two masks with "ripple-carry".
+        /// </summary>
+        /// <param name="left">Left operand BitMask.</param>
+        /// <param name="right">Right operand BitMask.</param>
+        /// <returns>The sum of the masks with respect to the size of the left operand.</returns>
         public static BitMask operator +(BitMask left, BitMask right)
         {
-            if (left.Size != right.Size) return new BitMask(left.Size, false);
+            if (left.SegmentCount == 0 || right.SegmentCount == 0) return left;
 
-            var mask = new BitMask(left);
-            bool carry = false, msbBefore, msbAfter;
+            var mask = new BitMask(left.Size, false);
+            bool carry = false, leftBit, rightBit;
+            int buffer, segment = 0, position = 0;
 
-            for (int i = 0; i < mask.SegmentCount; i++)
+            for (int i = 0; i < mask.Size; i++)
             {
-                msbBefore = GetSegmentMSB(mask.Segments[i]);
+                leftBit = (left.Segments[segment] >> position) % 2 == 1;
+                rightBit = i >= right.Size ? false : (right.Segments[segment] >> position) % 2 == 1;
 
-                if (carry) mask.Segments[i]++;
-                mask.Segments[i] += right.Segments[i];
+                buffer = (leftBit ? 1 : 0) + (rightBit ? 1 : 0) + (carry ? 1 : 0);
 
-                msbAfter = GetSegmentMSB(mask.Segments[i]);
-                carry = msbBefore && !msbAfter;
+                if (buffer % 2 == 1) mask.Segments[segment] += (uint)(1 << position);
+                carry = buffer >> 1 == 1;
+
+                position++;
+                if (position >> 5 == 1)
+                {
+                    position = 0;
+                    segment++;
+                }
             }
 
             return mask;
         }
 
+        /// <summary>
+        /// Bit-by-bit subtraction of two masks with "ripple-carry".
+        /// </summary>
+        /// <param name="left">Left operand BitMask.</param>
+        /// <param name="right">Right operand BitMask.</param>
+        /// <returns>The difference between the masks with respect to the size of the left operand.</returns>
         public static BitMask operator -(BitMask left, BitMask right)
         {
-            if (left.Size != right.Size) return new BitMask(left.Size, false);
+            if (left.SegmentCount == 0 || right.SegmentCount == 0) return left;
 
-            var mask = new BitMask(left);
-            bool carry = false, msbBefore, msbAfter;
+            var mask = new BitMask(left.Size, false);
+            bool carry = false, leftBit, rightBit;
+            int buffer, segment = 0, position = 0;
 
-            for (int i = 0; i < mask.SegmentCount; i++)
+            for (int i = 0; i < mask.Size; i++)
             {
-                msbBefore = GetSegmentMSB(mask.Segments[i]);
+                leftBit = (left.Segments[segment] >> position) % 2 == 1;
+                rightBit = i >= right.Size ? false : (right.Segments[segment] >> position) % 2 == 1;
 
-                if (carry) mask.Segments[i]++;
-                mask.Segments[i] -= right.Segments[i];
+                buffer = 2 + (leftBit ? 1 : 0) - (rightBit ? 1 : 0) - (carry ? 1 : 0);
 
-                msbAfter = GetSegmentMSB(mask.Segments[i]);
-                carry = !msbBefore && msbAfter;
+                if (buffer % 2 == 1) mask.Segments[segment] += (uint)(1 << position);
+                carry = buffer >> 1 == 0;
+
+                position++;
+                if (position >> 5 == 1)
+                {
+                    position = 0;
+                    segment++;
+                }
             }
 
             return mask;
