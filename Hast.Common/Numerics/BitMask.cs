@@ -49,16 +49,17 @@
         }
 
 
-        public static BitMask SetOne(BitMask mask, uint position)
+        public static BitMask SetOne(BitMask mask, uint index)
         {
-            if (position >= mask.Size) return new BitMask(mask.Size, false);
+            if (index > mask.Size) return mask;
 
             // Integer conversion doesn't matter, because we only care about the bits,
             // not the actual value represented, but it's needed for the bit shift to work.
-            var bitPosition = (int)position & 31;
-            var segmentPosition = position >> 5;
+            var bitPosition = index % 32;
+            var segmentPosition = index >> 5;
 
-            mask.Segments[segmentPosition] = (uint)1 << bitPosition;
+            if ((mask.Segments[segmentPosition] >> (int)bitPosition) % 2 == 0)
+                mask.Segments[segmentPosition] += (uint)1 << (int)bitPosition;
 
             return mask;
         }

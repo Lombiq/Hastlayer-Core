@@ -43,26 +43,15 @@ namespace Hast.Common.Tests
         [Test]
         public void BitMaskSetOneIsCorrect()
         {
-            var masksAndPositions = new Tuple<BitMask, uint>[]
-            {
-                Tuple.Create(new BitMask(32, false), (uint)0),
-                Tuple.Create(new BitMask(32, false), (uint)0),
-                Tuple.Create(new BitMask(32, false), (uint)0),
-                Tuple.Create(new BitMask(32, false), (uint)0),
-                Tuple.Create(new BitMask(32, false), (uint)0),
-                Tuple.Create(new BitMask(33, false), (uint)0),
-                Tuple.Create(new BitMask(100, false), (uint)0),
-                Tuple.Create(new BitMask(100, false), (uint)0)
-            };
-
-            for (int i = 0; i < masksAndPositions.Length; i++)
-            {
-                var segment = masksAndPositions[i].Item2 / 32;
-                var position = masksAndPositions[i].Item2 % 32;
-
-                Assert.AreEqual(1, BitMask.SetOne(masksAndPositions[i].Item1, masksAndPositions[i].Item2).Segments[segment] >> (int)position,
-                    $"Position: {masksAndPositions[i]}: Segment {segment}, Position: {position}");
-            }
+            Assert.AreEqual(1, BitMask.SetOne(new BitMask(new uint[] { 0 }), 0).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 5), BitMask.SetOne(new BitMask(32, false), 5).Segments[0]);
+            Assert.AreEqual(0xFFFF, BitMask.SetOne(new BitMask(new uint[] { 0xFFFF }), 5).Segments[0]);
+            Assert.AreEqual(0xFFFF + Math.Pow(2, 30), BitMask.SetOne(new BitMask(new uint[] { 0xFFFF }), 30).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 31), BitMask.SetOne(new BitMask(new uint[] { 0 }), 31).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 32) - 1, BitMask.SetOne(new BitMask(new uint[] { 0xFFFFFFFE }), 0).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 32) - 1, BitMask.SetOne(new BitMask(new uint[] { 0x7FFFFFFF }), 31).Segments[0]);
+            Assert.AreEqual(new BitMask(new uint[] { 0, 0, 0xFFFF }), BitMask.SetOne(new BitMask(new uint[] { 0, 0, 0xFFFF }), 79));
+            Assert.AreEqual(new BitMask(new uint[] { 0, 0, 0x1FFFF }), BitMask.SetOne(new BitMask(new uint[] { 0, 0, 0xFFFF }), 80));
         }
 
         [Test]
