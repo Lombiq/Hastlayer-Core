@@ -1,0 +1,176 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Hast.Samples.Kpz
+{
+    ///<summary>The main form showing the log and and the output graph of the algorithm.</summary>
+    public partial class ChartForm : Form
+    {
+        //<CONFIGURATION>
+        int _numKpzIterations = 100;
+        int _kpzWidth = 8;
+        int _kpzHeight = 8;
+        bool _showInspector = true;
+        //</CONFIGURATION>
+
+        ///<summary>
+        /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
+        /// so that the GUI keeps responding while the algortithm is running.
+        ///</summary>
+        BackgroundWorker _backgroundWorker;
+        Kpz _kpz;
+        InspectForm _inspectForm;
+
+        public ChartForm()
+        {
+            InitializeComponent();
+            _backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            _backgroundWorker.WorkerSupportsCancellation = true;
+            _backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(backgroundWorker_DoWork);
+            _backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(
+                backgroundWorker_RunWorkerCompleted
+            );
+        }
+
+        ///<summary>It adds a line to the log.</summary>
+        private void LogIt(string what)
+        {
+            listLog.Items.Add(what);
+            listLog.SelectedIndex = listLog.Items.Count - 1;
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            if (!_backgroundWorker.IsBusy)
+            {
+                buttonStart.Text = "Stop";
+                progressBar.Maximum = _numKpzIterations;
+                _backgroundWorker.RunWorkerAsync(2000);
+            }
+            else
+            {
+                buttonStart.Text = "Start";
+                _backgroundWorker.CancelAsync();
+            }
+        }
+
+        ///<summary>
+        /// It runs the KPZ algorithm in the background.
+        /// See also: <see cref="BackgroundWorker"/>
+        ///</summary>
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Do not access the form's BackgroundWorker reference directly.
+            // Instead, use the reference provided by the sender parameter.
+            var bw = sender as BackgroundWorker;
+            RunKpz(bw);
+            // If the operation was canceled by the user, set the DoWorkEventArgs.Cancel property to true.
+            if (bw.CancellationPending) e.Cancel = true;
+        }
+
+        ///<summary>
+        /// It is called when the <see cref="BackgroundWorker"/> is finished with the KPZ algorithm.
+        ///</summary>
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled) LogIt("Operation was cancelled.");
+            else if (e.Error != null) LogIt(String.Format("An error occurred: {0}", e.Error.Message));
+            else LogIt("Operation finished.");
+            buttonStart.Enabled = false;
+            progressBar.Visible = false;
+            if (_showInspector)
+            {
+                _inspectForm = new InspectForm(_kpz.StateLogger);
+                _inspectForm.Show();
+            }
+        }
+
+        ///<summary>
+        /// GUI controls cannot be directly updated from inside the <see cref="BackgroundWorker"/>.
+        /// One solution for this is using <see cref="System.Windows.Threading.Dispatcher.Invoke"/> to
+        /// schedule an update in the GUI thread.
+        /// AsyncLogIt schedules a <see cref="LogIt"/> operation on the GUI thread from within the
+        /// <see cref="BackgroundWorker"/>.
+        ///</summary>
+        private void AsyncLogIt(string what)
+        {
+            this.Invoke(new Action(() =>
+            {
+                LogIt(what);
+            }));
+        }
+
+        ///<summary>
+        /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the
+        /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>
+        ///</summary>
+        private void AsyncUpdateProgressBar(int progress)
+        {
+            this.Invoke(new Action(() =>
+            {
+                progressBar.Value = progress;
+            }));
+        }
+
+        ///<summary>
+        /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the
+        /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>
+        ///</summary>
+        private void AsyncUpdateChart(int iteration)
+        {
+            //The chart is updated (and the statistics are calculated) 10 times in every logarithmic scale step, e.g.
+            //in iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
+            int iterationNext10Pow = (int)Math.Pow(10, Math.Floor(Math.Log10(iteration) + 1));
+            bool updateChartInThisIteartion = iteration < 10 || ((iteration + 1) % (iterationNext10Pow / 10)) == 0;
+            if (updateChartInThisIteartion)
+            {
+                double mean;
+                bool periodicityValid;
+                int periodicityInvalidXCount;
+                int periodicityInvalidYCount;
+                int[,] heightMap = _kpz.GenerateHeightMap(
+                    out mean, out periodicityValid, out periodicityInvalidXCount, out periodicityInvalidYCount);
+                if (!periodicityValid)
+                {
+                    AsyncLogIt(String.Format("Warning: Periodicity invalid (x: {0}, y: {1})",
+                        periodicityInvalidXCount, periodicityInvalidYCount));
+                }
+                double surfaceRoughness = _kpz.HeightMapStandardDeviation(heightMap, mean);
+                this.Invoke(new Action(() =>
+                {
+                    LogIt(String.Format("iteration: {0}, surfaceRoughness: {1}", iteration, surfaceRoughness));
+                    chartKPZ.Series[0].Points.AddXY(iteration + 1, surfaceRoughness);
+                    chartKPZ.ChartAreas[0].AxisX.IsLogarithmic = true;
+                }));
+            }
+        }
+
+        ///<summary>
+        /// This is the function that is ran in the background by <see cref="BackgroundWorker"/>.
+        ///</summary>
+        private void RunKpz(BackgroundWorker bw)
+        {
+            AsyncLogIt("Creating KPZ data structure...");
+            _kpz = new Kpz(_kpzWidth, _kpzHeight, 0.5, 0.5, _showInspector);
+            AsyncLogIt("Filling grid with initial data...");
+            _kpz.InitializeGrid();
+            AsyncLogIt("Starting KPZ iterations...");
+            for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
+            {
+                _kpz.DoIteration();
+                AsyncUpdateProgressBar(currentIteration);
+                AsyncUpdateChart(currentIteration);
+                if (bw.CancellationPending) return;
+            }
+            AsyncLogIt("Done.");
+        }
+
+    }
+}
