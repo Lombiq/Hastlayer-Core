@@ -13,12 +13,10 @@ namespace Hast.Samples.Kpz
     ///<summary>The main form showing the log and and the output graph of the algorithm.</summary>
     public partial class ChartForm : Form
     {
-        //<CONFIGURATION>
-        int _numKpzIterations = 100;
-        int _kpzWidth = 8;
-        int _kpzHeight = 8;
-        bool _showInspector = true;
-        //</CONFIGURATION>
+        private int _numKpzIterations { get { return (int)nudIterations.Value; } }
+        private int _kpzWidth { get { return (int)nudTableWidth.Value; }}
+        private int _kpzHeight { get { return (int)nudTableHeight.Value; } }
+        private bool _showInspector { get { return checkShowInspector.Checked; } }
 
         ///<summary>
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
@@ -48,6 +46,7 @@ namespace Hast.Samples.Kpz
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            panelTop.Enabled = false;
             if (!_backgroundWorker.IsBusy)
             {
                 buttonStart.Text = "Stop";
@@ -172,5 +171,9 @@ namespace Hast.Samples.Kpz
             AsyncLogIt("Done.");
         }
 
+        private void labelShowInspector_Click(object sender, EventArgs e)
+        {
+            checkShowInspector.Checked = !checkShowInspector.Checked;
+        }
     }
 }
