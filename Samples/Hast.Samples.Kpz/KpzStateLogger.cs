@@ -59,9 +59,9 @@ namespace Hast.Samples.Kpz
         static KpzNode[,] CopyOfGrid(KpzNode[,] Grid)
         {
             KpzNode[,] toReturn = new KpzNode[Grid.GetLength(0), Grid.GetLength(1)];
-            for(int x=0; x<Grid.GetLength(0); x++)
+            for (int x = 0; x < Grid.GetLength(0); x++)
             {
-                for(int y=0; y<Grid.GetLength(1); y++)
+                for (int y = 0; y < Grid.GetLength(1); y++)
                 {
                     toReturn[x, y] = new KpzNode();
                     toReturn[x, y].dx = Grid[x, y].dx;
@@ -80,7 +80,7 @@ namespace Hast.Samples.Kpz
             {
                 Description = Description,
                 Grid = CopyOfGrid(Grid),
-                HeightMap = new int[0,0],
+                HeightMap = new int[0, 0],
                 HightlightColor = Color.Transparent,
                 HighlightedCoords = new List<KpzCoords>()
             });
@@ -94,7 +94,7 @@ namespace Hast.Samples.Kpz
             Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
             {
                 Description = Description,
-                Grid = new KpzNode[0,0],
+                Grid = new KpzNode[0, 0],
                 HeightMap = CopyOfHeightMap(HeightMap),
                 HightlightColor = Color.Transparent,
                 HighlightedCoords = new List<KpzCoords>()
@@ -110,8 +110,8 @@ namespace Hast.Samples.Kpz
             Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
             {
                 Description = Description,
-                Grid = new KpzNode[0,0],
-                HeightMap = new int[0,0],
+                Grid = new KpzNode[0, 0],
+                HeightMap = new int[0, 0],
                 HightlightColor = Color.Transparent,
                 HighlightedCoords = new List<KpzCoords>()
             });
@@ -126,15 +126,15 @@ namespace Hast.Samples.Kpz
         public void AddKpzAction(string Description, KpzNode[,] Grid, KpzCoords Center, KpzNeighbours Neighbours, bool ChangedGrid)
         {
             List<KpzCoords> highlightedCoords = new List<KpzCoords>();
-            highlightedCoords.Add(new KpzCoords{x=Center.x, y=Center.y});
-            highlightedCoords.Add(new KpzCoords{x=Neighbours.nxCoords.x, y=Neighbours.nxCoords.y});
-            highlightedCoords.Add(new KpzCoords{x=Neighbours.nyCoords.x, y=Neighbours.nyCoords.y});
+            highlightedCoords.Add(new KpzCoords { x = Center.x, y = Center.y });
+            highlightedCoords.Add(new KpzCoords { x = Neighbours.nxCoords.x, y = Neighbours.nxCoords.y });
+            highlightedCoords.Add(new KpzCoords { x = Neighbours.nyCoords.x, y = Neighbours.nyCoords.y });
             Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
             {
                 Description = Description,
                 Grid = CopyOfGrid(Grid),
-                HeightMap = new int[0,0],
-                HightlightColor = (ChangedGrid)? Color.LightGreen : Color.Salmon, // green or red
+                HeightMap = new int[0, 0],
+                HightlightColor = (ChangedGrid) ? Color.LightGreen : Color.Salmon, // green or red
                 HighlightedCoords = highlightedCoords
             });
         }

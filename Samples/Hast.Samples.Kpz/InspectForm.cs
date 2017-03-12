@@ -45,7 +45,7 @@ namespace Hast.Samples.Kpz
             for (int y = 0; y < arr.GetLength(1); y++)
             {
                 var dgvRow = new DataGridViewRow();
-                for(int x = 0; x < arr.GetLength(0); x++)
+                for (int x = 0; x < arr.GetLength(0); x++)
                 {
                     dgvRow.Cells.Add(new DataGridViewTextBoxCell() { Value = arr[x, y] });
                 }
@@ -68,7 +68,8 @@ namespace Hast.Samples.Kpz
                 var dgvRow = new DataGridViewRow();
                 for (int x = 0; x < arr.GetLength(0); x++)
                 {
-                    dgvRow.Cells.Add(new DataGridViewTextBoxCell() {
+                    dgvRow.Cells.Add(new DataGridViewTextBoxCell()
+                    {
                         Value = String.Format("{0}{1}", (arr[x, y].dx) ? "1" : "0", (arr[x, y].dy) ? "1" : "0")
                     });
                 }
@@ -84,7 +85,7 @@ namespace Hast.Samples.Kpz
         /// <param name="Color">is the background color to be set on the given table cells.</param>
         private void DgvAddHighlight(List<KpzCoords> HighlightedCoords, Color HighlightColor)
         {
-            foreach(var coord in HighlightedCoords)
+            foreach (var coord in HighlightedCoords)
             {
                 dgv.Rows[coord.y].Cells[coord.x].Style.BackColor = HighlightColor;
             }
@@ -104,7 +105,7 @@ namespace Hast.Samples.Kpz
                 (a) => listActions.Items.Add(String.Format("{0} {1}", i++, a.Description))
                 );
             }
-            catch(Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
 
         /// <summary>
@@ -129,7 +130,7 @@ namespace Hast.Samples.Kpz
                 {
                     dgv.Rows.Clear();
                 }
-                if(action.HighlightedCoords.Count > 0)
+                if (action.HighlightedCoords.Count > 0)
                 {
                     DgvAddHighlight(action.HighlightedCoords, action.HightlightColor);
                 }
