@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Hast.Samples.Kpz
 {
-    ///<summary>
-    ///This form allows us to inspect the KPZ algorithm step by step.
-    ///It relies heavily on the <see cref="KpzStateLogger"/> class.
-    ///</summary>
+    /// <summary>
+    /// This form allows us to inspect the KPZ algorithm step by step.
+    /// It relies heavily on the <see cref="KpzStateLogger"/> class.
+    /// </summary>
     public partial class InspectForm : Form
     {
         KpzStateLogger _stateLogger;

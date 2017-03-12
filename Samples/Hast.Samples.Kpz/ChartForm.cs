@@ -18,23 +18,23 @@ namespace Hast.Samples.Kpz
         private int _kpzHeight { get { return (int)nudTableHeight.Value; } }
         private bool _showInspector { get { return checkShowInspector.Checked; } }
 
-        ///<summary>
+        /// <summary>
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
         /// so that the GUI keeps responding while the algortithm is running.
-        ///</summary>
+        /// </summary>
         BackgroundWorker _backgroundWorker;
 
-        ///<summary>
-        ///The Kpz object is used to perform the KPZ algorithm, to input its parameters and return the result.
-        ///</summary>
+        /// <summary>
+        /// The Kpz object is used to perform the KPZ algorithm, to input its parameters and return the result.
+        /// </summary>
         Kpz _kpz;
 
-        ///<summary>InspectForm allows us to inspect the results of the KPZ algorithm on a GUI interface.</summary>
+        /// <summary>InspectForm allows us to inspect the results of the KPZ algorithm on a GUI interface.</summary>
         InspectForm _inspectForm;
 
-        ///<summary>
-        ///The constructor initializes the <see cref="_backgroundWorker" />.
-        ///</summary>
+        /// <summary>
+        /// The constructor initializes the <see cref="_backgroundWorker" />.
+        /// </summary>
         public ChartForm()
         {
             InitializeComponent();
@@ -46,17 +46,17 @@ namespace Hast.Samples.Kpz
             );
         }
 
-        ///<summary>It adds a line to the log.</summary>
+        /// <summary>It adds a line to the log.</summary>
         private void LogIt(string what)
         {
             listLog.Items.Add(what);
             listLog.SelectedIndex = listLog.Items.Count - 1;
         }
 
-        ///<summary>
-        ///Clicking on <see cref="buttonStart" /> starts the KPZ algorithm in the background.
-        ///When the algorithm is running, it can also be used to stop it.
-        ///</summary>
+        /// <summary>
+        /// Clicking on <see cref="buttonStart" /> starts the KPZ algorithm in the background.
+        /// When the algorithm is running, it can also be used to stop it.
+        /// </summary>
         private void buttonStart_Click(object sender, EventArgs e)
         {
             panelTop.Enabled = false;
@@ -73,10 +73,10 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        ///<summary>
+        /// <summary>
         /// It runs the KPZ algorithm in the background.
         /// See also: <see cref="BackgroundWorker"/>
-        ///</summary>
+        /// </summary>
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Do not access the form's BackgroundWorker reference directly.
@@ -87,9 +87,9 @@ namespace Hast.Samples.Kpz
             if (bw.CancellationPending) e.Cancel = true;
         }
 
-        ///<summary>
+        /// <summary>
         /// It is called when the <see cref="BackgroundWorker"/> is finished with the KPZ algorithm.
-        ///</summary>
+        /// </summary>
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled) LogIt("Operation was cancelled.");
@@ -104,13 +104,13 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        ///<summary>
+        /// <summary>
         /// GUI controls cannot be directly updated from inside the <see cref="BackgroundWorker"/>.
         /// One solution for this is using <see cref="System.Windows.Threading.Dispatcher.Invoke"/> to
         /// schedule an update in the GUI thread.
         /// AsyncLogIt schedules a <see cref="LogIt"/> operation on the GUI thread from within the
         /// <see cref="BackgroundWorker"/>.
-        ///</summary>
+        /// </summary>
         private void AsyncLogIt(string what)
         {
             this.Invoke(new Action(() =>
@@ -119,10 +119,10 @@ namespace Hast.Samples.Kpz
             }));
         }
 
-        ///<summary>
+        /// <summary>
         /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the
         /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>
-        ///</summary>
+        /// </summary>
         private void AsyncUpdateProgressBar(int progress)
         {
             this.Invoke(new Action(() =>
@@ -131,14 +131,14 @@ namespace Hast.Samples.Kpz
             }));
         }
 
-        ///<summary>
+        /// <summary>
         /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the
         /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>
-        ///</summary>
+        /// </summary>
         private void AsyncUpdateChart(int iteration)
         {
-            //The chart is updated (and the statistics are calculated) 10 times in every logarithmic scale step, e.g.
-            //in iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
+            // The chart is updated (and the statistics are calculated) 10 times in every logarithmic scale step, e.g.
+            // in iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
             int iterationNext10Pow = (int)Math.Pow(10, Math.Floor(Math.Log10(iteration) + 1));
             bool updateChartInThisIteartion = iteration < 10 || ((iteration + 1) % (iterationNext10Pow / 10)) == 0;
             if (updateChartInThisIteartion)
@@ -164,9 +164,9 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        ///<summary>
+        /// <summary>
         /// This is the function that is ran in the background by <see cref="BackgroundWorker"/>.
-        ///</summary>
+        /// </summary>
         private void RunKpz(BackgroundWorker bw)
         {
             AsyncLogIt("Creating KPZ data structure...");
@@ -184,10 +184,10 @@ namespace Hast.Samples.Kpz
             AsyncLogIt("Done.");
         }
 
-        ///<summary>
-        ///<see cref="labelShowInspector" /> is next to <see cref="checkShowInspector" />, and clicking on it
-        ///can be used to toggle the checkbox.
-        ///</summary>
+        /// <summary>
+        /// <see cref="labelShowInspector" /> is next to <see cref="checkShowInspector" />, and clicking on it
+        /// can be used to toggle the checkbox.
+        /// </summary>
         private void labelShowInspector_Click(object sender, EventArgs e)
         {
             checkShowInspector.Checked = !checkShowInspector.Checked;
