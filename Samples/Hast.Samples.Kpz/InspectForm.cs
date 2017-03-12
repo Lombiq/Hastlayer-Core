@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +19,8 @@ namespace Hast.Samples.Kpz
         KpzStateLogger _stateLogger;
 
         /// <summary>
-        /// When the form is loaded, <see cref="listIterations"/> is initialized with the interations available in <see cref="_stateLogger"/>.
+        /// When the form is loaded, <see cref="listIterations"/> is initialized with the interations available in
+        /// <see cref="_stateLogger"/>.
         /// </summary>
         /// <param name="StateLogger">is the data source to be displayed on the form.</param>
         public InspectForm(KpzStateLogger StateLogger)
@@ -53,9 +54,9 @@ namespace Hast.Samples.Kpz
         }
 
         /// <summary>
-        /// This function displays a 2D array of <see cref="KpzNode"/> items on the <see cref="DataGridView"/> 
+        /// This function displays a 2D array of <see cref="KpzNode"/> items on the <see cref="DataGridView"/>
         /// on the form. dx and dy values are shown as binary digits, e.g. 10 in a cell means that dx=1 and dy=0
-        /// for that <see cref="KpzNode"/>. 
+        /// for that <see cref="KpzNode"/>.
         /// </summary>
         /// <param name="arr">is the input array.</param>
         private void DgvShowKpzNodeArray(KpzNode[,] arr)
@@ -67,12 +68,20 @@ namespace Hast.Samples.Kpz
                 var dgvRow = new DataGridViewRow();
                 for (int x = 0; x < arr.GetLength(0); x++)
                 {
-                    dgvRow.Cells.Add(new DataGridViewTextBoxCell() { Value = String.Format("{0}{1}", (arr[x, y].dx) ? "1" : "0", (arr[x, y].dy) ? "1" : "0") });
+                    dgvRow.Cells.Add(new DataGridViewTextBoxCell() {
+                        Value = String.Format("{0}{1}", (arr[x, y].dx) ? "1" : "0", (arr[x, y].dy) ? "1" : "0")
+                    });
                 }
                 dgv.Rows.Add(dgvRow);
             }
         }
 
+        /// <summary>
+        /// This function adds highlight (by applying background color) to a list of table cells in the
+        /// <see cref="DataGridView" />.
+        /// </summary>
+        /// <param name="HighlightedCoords">is the list of table cell indexes to be highlighted.</param>
+        /// <param name="Color">is the background color to be set on the given table cells.</param>
         private void DgvAddHighlight(List<KpzCoords> HighlightedCoords, Color HighlightColor)
         {
             foreach(var coord in HighlightedCoords)
@@ -80,54 +89,50 @@ namespace Hast.Samples.Kpz
                 dgv.Rows[coord.y].Cells[coord.x].Style.BackColor = HighlightColor;
             }
         }
-        private void InspectForm_Load(object sender, EventArgs e)
-        {
-            /*int[,] b = new int[2, 2];
-            b[0, 0] = 3;
-            b[0, 1] = 2;
-            b[1, 0] = 7;
-            b[1, 1] = 8;
-            List<int[]> a = new List<int[]>();
-            a.Add(new int[3]);
-            a[0][0] = 5;
-            a[0][1] = 2;
-            a[0][2] = 1;
-            dgv.DataSource = b;*/
 
-        }
-
+        /// <summary>
+        /// This function adds highlight (by applying background color) to a list of table cells in the
+        /// <see cref="DataGridView" />.
+        /// </summary>
         private void listIterations_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 listActions.Items.Clear();
                 int i = 0;
-                _stateLogger.Iterations[listIterations.SelectedIndex].Actions.ForEach((a) => listActions.Items.Add(String.Format("{0} {1}", i++, a.Description)));
+                _stateLogger.Iterations[listIterations.SelectedIndex].Actions.ForEach(
+                (a) => listActions.Items.Add(String.Format("{0} {1}", i++, a.Description))
+                );
             }
             catch(Exception ex) { Console.WriteLine(ex.ToString()); }
         }
 
+        /// <summary>
+        /// If an item in <see cref="listActions" /> is clicked, the <see cref="DataGridView" /> is updated.
+        /// </summary>
         private void listActions_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                KpzAction action = _stateLogger.Iterations[listIterations.SelectedIndex].Actions[listActions.SelectedIndex];
-            if (action.Grid.GetLength(0) > 0)
-            {
-                DgvShowKpzNodeArray(action.Grid);
-            }
-            else if (action.HeightMap.GetLength(0) > 0)
-            {
-                DgvShowIntArray(action.HeightMap);
-            }
-            else
-            {
-                dgv.Rows.Clear();
-            }
-            if(action.HighlightedCoords.Count > 0)
-            {
-                DgvAddHighlight(action.HighlightedCoords, action.HightlightColor);
-            }
+                KpzAction action = _stateLogger
+                    .Iterations[listIterations.SelectedIndex]
+                    .Actions[listActions.SelectedIndex];
+                if (action.Grid.GetLength(0) > 0)
+                {
+                    DgvShowKpzNodeArray(action.Grid);
+                }
+                else if (action.HeightMap.GetLength(0) > 0)
+                {
+                    DgvShowIntArray(action.HeightMap);
+                }
+                else
+                {
+                    dgv.Rows.Clear();
+                }
+                if(action.HighlightedCoords.Count > 0)
+                {
+                    DgvAddHighlight(action.HighlightedCoords, action.HightlightColor);
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }

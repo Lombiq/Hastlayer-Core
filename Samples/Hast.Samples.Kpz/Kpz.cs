@@ -6,38 +6,78 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Kpz
 {
-    public struct KpzNeighbours
-    {
-        public KpzNode nx;
-        public KpzNode ny;
-        public KpzCoords nxCoords;
-        public KpzCoords nyCoords;
-    }
+
+    ///<summary>
+    ///This struct is used to built the grid that the KPZ algorithm works on.
+    ///Every node on the grid stores the derivatives of a 2D function in X and Y direction.
+    ///</summary>
     public class KpzNode
     {
         public bool dx; //Right
         public bool dy; //Bottom
     }
+
+
+    ///<summary>
+    ///This struct stores the right and bottom neighbours of a particular node on the grid.
+    ///It stores both their values and coordinates.
+    ///</summary>
+    public struct KpzNeighbours
+    {
+        public KpzNode nx; //Right neighbour value
+        public KpzNode ny; //Left neighbour value
+        public KpzCoords nxCoords; //Right neighbour coordinates
+        public KpzCoords nyCoords; //Left neighbour coordinates
+    }
+
+    ///<summary>
+    ///This struct stores the coordinates of a <see cref="KpzNode" /> on the grid.
+    ///</summary>
     public struct KpzCoords
     {
         public int x;
         public int y;
     }
 
-
+    ///<summary>
+    ///This class performs the calculations of the KPZ algorithm.
+    ///</summary>
     public class Kpz
     {
+        ///<summary>It returns the width of the grid.</summary>
         public int gridWidth { get { return grid.GetLength(0); } }
+        ///<summary>It returns the height of the grid.</summary>
         public int gridHeight { get { return grid.GetLength(1); } }
+        ///<summary>The 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.</summary>
         KpzNode[,] grid;
+        ///<summary>The probability of pyramid to hole change.</summary>
         private double probabilityP = 0.5d;
+        ///<summary>The probability of hole to pyramid change.</summary>
         private double probabilityQ = 0.5d;
+        ///<summary>The pseudorandom generator is used at various places in the algorithm.</summary>
         private Random random = new Random();
-
+        ///<summary>See <see cref="StateLogger" /></summary>
         private bool enableStateLogger = false;
+        ///<summary>
+        ///The <see cref="StateLogger" /> (if enabled) allows us to inspect the state of the algorithm at
+        ///given steps during its execution. This object can be later passed on to <see cref="InspectForm" />
+        ///to graphically represent it on a UI.
+        ///<note type="caution">
+        /// Use a small grid and a low amount of iterations if enabled. It will use a lot of memory.
+        ///</note>
+        ///</summary>
         public KpzStateLogger StateLogger;
 
-        public Kpz(int newGridWidth, int newGridHeight, double probabilityP, double probabilityQ, bool enableStateLogger)
+        ///<summary>
+        ///The constructor initializes the parameters of <see cref="Kpz" />, see:
+        ///<see cref="gridWidth" />, <see cref="gridHeight" />,
+        ///<see cref="probabilityP" />, <see cref="probabilityQ" />,
+        ///<see cref="StateLogger" />.
+        ///</summary>
+        public Kpz
+        (
+            int newGridWidth, int newGridHeight, double probabilityP, double probabilityQ, bool enableStateLogger
+        )
         {
             grid = new KpzNode[newGridWidth, newGridHeight];
             this.probabilityP = probabilityP;
@@ -46,9 +86,9 @@ namespace Hast.Samples.Kpz
             if(this.enableStateLogger) StateLogger = new KpzStateLogger();
         }
 
+        ///<summary>It fills the <see cref="grid" /> with random data.</summary>
         public void RandomizeGrid()
         {
-            //Fill grid with random numbers
             for(int x=0; x<gridWidth; x++)
             {
                 for(int y=0; y<gridHeight; y++)
@@ -61,9 +101,11 @@ namespace Hast.Samples.Kpz
             if(enableStateLogger) StateLogger.AddKpzAction("RandomizeGrid", grid);
         }
 
+        ///<summary>
+        ///Fill grid with a pattern that already contains pyramids and holes, so the KPZ algorithm can work on it.
+        ///</summary>
         public void InitializeGrid()
         {
-            //Fill grid with a pattern that is already valid as pyramids
             for(int x=0; x<gridWidth; x++)
             {
                 for(int y=0; y<gridHeight; y++)
@@ -76,36 +118,60 @@ namespace Hast.Samples.Kpz
             if(enableStateLogger) StateLogger.AddKpzAction("InitializeGrid", grid);
         }
 
+        ///<summary>
+        ///It is used during heightmap generation.
+        ///It converts <see cref="KpzNode.dx" /> and <see cref="KpzNode.dy" /> boolean values to +1 and -1 integer
+        ///values.
+        ///</summary>
         static int Bool2Delta(bool what)
         {
             return (what)?1:-1;
         }
 
-        public int[,] GenerateHeightMap(out double mean, out bool periodicityValid, out int periodicityInvalidXCount, out int periodicityInvalidYCount)
+        ///<summary>
+        ///It generates a heightmap from the <see cref="grid" />.
+        ///</summary>
+        ///<param name="mean"> output is the mean of the heightmap to be used in statistic calculations later.</param>
+        ///<param name="periodicityValid">
+        /// output is true if the periodicity of <see cref="grid" /> is correct at the boundaries.
+        ///</param>
+        ///<param name="periodicityInvalidXCount">
+        /// output is the number of periodicity errors counted at the borders in the X direction
+        /// (between left and right borders).
+        ///</param>
+        ///<param name="periodicityInvalidYCount">
+        /// output is the number of periodicity errors counted at the borders in the Y direction
+        /// (between top and bottom borders).
+        ///</param>
+        ///<returns>the heightmap.</returns>
+        public int[,] GenerateHeightMap
+        (
+            out double mean,
+            out bool periodicityValid,
+            out int periodicityInvalidXCount,
+            out int periodicityInvalidYCount
+        )
         {
             const bool doVerboseLoggingToConsole = true;
             int[,] heightMap = new int[gridWidth, gridHeight];
             int heightNow = 0;
             mean = 0;
-            //int meanNumItems = 0;
             periodicityValid = true;
             periodicityInvalidXCount = periodicityInvalidYCount = 0;
             for(int y=0; y<gridHeight; y++)
             {
-                //if(y>0) heightNow = heightMap[0,y-1] + Bool2Delta(grid[0, y].dy);
                 for(int x=0; x<gridWidth; x++)
                 {
                     heightNow += Bool2Delta(grid[(x+1)%gridWidth, y].dx);
                     heightMap[x, y] = heightNow;
-                    //mean = mean * (meanNumItems/(meanNumItems+1)) + heightNow/(meanNumItems+1);
                     mean += heightNow;
-                    //meanNumItems++;
                 }
                 if(heightNow + Bool2Delta(grid[1, y].dx) != heightMap[0, y])
                 {
                     periodicityValid = false;
                     periodicityInvalidXCount++;
-                    if(doVerboseLoggingToConsole) Console.WriteLine(String.Format("periodicityInvalidX at line {0}", y));
+                    if(doVerboseLoggingToConsole)
+                        Console.WriteLine(String.Format("periodicityInvalidX at line {0}", y));
                 }
                 heightNow += Bool2Delta(grid[0, (y+1)%gridHeight].dy);
             }
@@ -113,15 +179,23 @@ namespace Hast.Samples.Kpz
             {
                 periodicityValid = false;
                 periodicityInvalidYCount++;
-                if(doVerboseLoggingToConsole) Console.WriteLine(String.Format("periodicityInvalidY {0} + {1} != {2}", heightMap[0, gridHeight-1], Bool2Delta(grid[0, 0].dy), heightMap[0, 0]));
+                if(doVerboseLoggingToConsole)
+                    Console.WriteLine(String.Format("periodicityInvalidY {0} + {1} != {2}", heightMap[0, gridHeight-1],
+                        Bool2Delta(grid[0, 0].dy), heightMap[0, 0]));
             }
             if(enableStateLogger) StateLogger.AddKpzAction("GenerateHeightMap", heightMap);
             mean /= gridWidth * gridHeight;
             return heightMap;
         }
 
+        ///<summary>
+        ///It calculates the standard deviation of a heightmap created with <see cref="GenerateHeightMap" />.
+        ///The idea is available at
+        ///<a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Two-pass_algorithm">Wikipedia</a>.
+        ///</summary>
+        ///<param name="mean">is the mean of the heightmap that was output by <see cref="GenerateHeightMap" />.</param>
         public double HeightMapStandardDeviation(int[,] inputHeightMap, double mean)
-        { //Idea: https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Two-pass_algorithm
+        { //Idea:
             double variance = 0;
             for(int y=0; y<gridHeight; y++)
             {
@@ -132,13 +206,20 @@ namespace Hast.Samples.Kpz
             }
             variance /= gridWidth*gridHeight-1;
             double standardDeviation = Math.Sqrt(variance);
-            if(enableStateLogger) StateLogger.AddKpzAction(String.Format("HeightMapStandardDeviation: {0}", standardDeviation));
+            if(enableStateLogger)
+                StateLogger.AddKpzAction(String.Format("HeightMapStandardDeviation: {0}", standardDeviation));
             return standardDeviation;
         }
 
+        ///<summary>
+        ///Detects pyramid or hole (if any) at the given coordinates in the <see cref="grid" />, and randomly switch
+        // between pyramid and hole, based on <see cref="probabilityP" /> and <see cref="probabilityQ" /> parameters.
+        ///</summary>
+        ///<param name="p">
+        /// contains the coordinates where the function looks if there is a pyramid or hole in the <see cref="grid" />.
+        ///</param>
         private void RandomlySwitchFourCells(KpzNode[,] grid, KpzCoords p)
         {
-            //Detect pyramid or hole. Randomly switch between pyramid and hole.
             var neighbours = GetNeighbours(grid, p);
             var currentPoint = grid[p.x, p.y];
             bool changedGrid = false;
@@ -162,19 +243,26 @@ namespace Hast.Samples.Kpz
             if(enableStateLogger) StateLogger.AddKpzAction("RandomlySwitchFourCells", grid, p, neighbours, changedGrid);
         }
 
+        ///<summary>
+        ///Runs an iteration of the KPZ algorithm (with <see cref="gridWidth"/> × <see cref="gridHeight"/> steps).
+        ///</summary>
         public void DoIteration()
         {
-            //We randomly choose a point in the grid.
             var numberOfStepsInIteration = gridWidth*gridHeight;
             if(enableStateLogger) StateLogger.NewKpzIteration();
             for(int i=0;i<numberOfStepsInIteration;i++)
             {
+                //We randomly choose a point on the grid.
                 //If there is a pyramid or hole, we randomly swtich them.
                 var randomPoint = new KpzCoords{ x=random.Next(0, gridWidth), y=random.Next(0, gridHeight) };
                 RandomlySwitchFourCells(grid, randomPoint);
             }
         }
 
+        ///<summary>
+        ///Gets the right and bottom neighbours of the point given with the coordinates <see cref="p" />
+        ///in the <see cref="grid" />.
+        ///</summary>
         private KpzNeighbours GetNeighbours(KpzNode[,] grid, KpzCoords p)
         {
             KpzNeighbours toReturn;

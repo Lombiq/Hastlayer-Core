@@ -14,7 +14,7 @@ namespace Hast.Samples.Kpz
     public partial class ChartForm : Form
     {
         private int _numKpzIterations { get { return (int)nudIterations.Value; } }
-        private int _kpzWidth { get { return (int)nudTableWidth.Value; }}
+        private int _kpzWidth { get { return (int)nudTableWidth.Value; } }
         private int _kpzHeight { get { return (int)nudTableHeight.Value; } }
         private bool _showInspector { get { return checkShowInspector.Checked; } }
 
@@ -23,9 +23,18 @@ namespace Hast.Samples.Kpz
         /// so that the GUI keeps responding while the algortithm is running.
         ///</summary>
         BackgroundWorker _backgroundWorker;
+
+        ///<summary>
+        ///The Kpz object is used to perform the KPZ algorithm, to input its parameters and return the result.
+        ///</summary>
         Kpz _kpz;
+
+        ///<summary>InspectForm allows us to inspect the results of the KPZ algorithm on a GUI interface.</summary>
         InspectForm _inspectForm;
 
+        ///<summary>
+        ///The constructor initializes the <see cref="_backgroundWorker" />.
+        ///</summary>
         public ChartForm()
         {
             InitializeComponent();
@@ -44,6 +53,10 @@ namespace Hast.Samples.Kpz
             listLog.SelectedIndex = listLog.Items.Count - 1;
         }
 
+        ///<summary>
+        ///Clicking on <see cref="buttonStart" /> starts the KPZ algorithm in the background.
+        ///When the algorithm is running, it can also be used to stop it.
+        ///</summary>
         private void buttonStart_Click(object sender, EventArgs e)
         {
             panelTop.Enabled = false;
@@ -171,6 +184,10 @@ namespace Hast.Samples.Kpz
             AsyncLogIt("Done.");
         }
 
+        ///<summary>
+        ///<see cref="labelShowInspector" /> is next to <see cref="checkShowInspector" />, and clicking on it
+        ///can be used to toggle the checkbox.
+        ///</summary>
         private void labelShowInspector_Click(object sender, EventArgs e)
         {
             checkShowInspector.Checked = !checkShowInspector.Checked;
