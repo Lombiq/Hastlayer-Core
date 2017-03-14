@@ -5,8 +5,8 @@ namespace Hast.Common.Configuration
     public class HardwareGenerationConfiguration : IHardwareGenerationConfiguration
     {
         /// <summary>
-        /// Gets or sets a dictionary that can contain settings for non-default configuration options (like ones required by 
-        /// specific transformer implementations).
+        /// Gets or sets a dictionary that can contain settings for non-default configuration options (like ones required 
+        /// by specific transformer implementations).
         /// </summary>
         public IDictionary<string, object> CustomConfiguration { get; set; }
 

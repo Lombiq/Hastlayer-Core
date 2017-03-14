@@ -3,7 +3,8 @@
 namespace Hast.Common.Models
 {
     /// <summary>
-    /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented logic.
+    /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented 
+    /// logic.
     /// </summary>
     public interface IHardwareDescription
     {
