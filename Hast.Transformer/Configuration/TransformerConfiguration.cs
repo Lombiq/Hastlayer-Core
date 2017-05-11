@@ -1,15 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Common.Configuration
 {
     public class TransformerConfiguration
     {
+        private readonly ConcurrentDictionary<string, MemberInvocationInstanceCountConfiguration> _memberInvocationInstanceCountConfigurations =
+            new ConcurrentDictionary<string, MemberInvocationInstanceCountConfiguration>();
+
         /// <summary>
         /// Gets or sets the list of the member invocation instance counts, i.e. how many times a member can be invoked
         /// at a given time.
         /// </summary>
-        public IList<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations { get; set; }
+        public IEnumerable<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations
+        {
+            get { return _memberInvocationInstanceCountConfigurations.Values; }
+        }
 
         /// <summary>
         /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
@@ -21,27 +28,27 @@ namespace Hast.Common.Configuration
         public TransformerConfiguration()
         {
             UseSimpleMemory = true;
-            MemberInvocationInstanceCountConfigurations = new List<MemberInvocationInstanceCountConfiguration>();
         }
-    }
 
 
-    public static class TransformerConfigurationExtensions
-    {
-        public static MemberInvocationInstanceCountConfiguration GetMaxInvocationInstanceCountConfigurationForMember(
-            this TransformerConfiguration configuration, 
+        public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration)
+        {
+            _memberInvocationInstanceCountConfigurations
+                .AddOrUpdate(configuration.MemberNamePrefix, configuration, (key, previousConfiguration) => configuration);
+        }
+
+        public MemberInvocationInstanceCountConfiguration GetMaxInvocationInstanceCountConfigurationForMember(
             string simpleMemberName)
         {
-            var maxRecursionDepthConfig = configuration
-                .MemberInvocationInstanceCountConfigurations
-                .ToArray() // To prevent "Collection was modified" exception.
+            var maxRecursionDepthConfig = MemberInvocationInstanceCountConfigurations
+                //.ToArray() // To prevent "Collection was modified" exception.
                 .FirstOrDefault(config => simpleMemberName.StartsWith(config.MemberNamePrefix));
 
             if (maxRecursionDepthConfig != null) return maxRecursionDepthConfig;
 
             // Adding the configuration so if the object is modified it's saved in the TransformerConfiguration.
             var newConfiguration = new MemberInvocationInstanceCountConfiguration(simpleMemberName);
-            configuration.MemberInvocationInstanceCountConfigurations.Add(newConfiguration);
+            AddMemberInvocationInstanceCountConfiguration(newConfiguration);
             return newConfiguration;
         }
     }

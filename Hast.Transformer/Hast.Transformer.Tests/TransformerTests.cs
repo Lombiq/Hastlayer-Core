@@ -94,7 +94,7 @@ namespace Hast.Transformer.Vhdl.Tests
             Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
 
-            config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+            config.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfiguration("Hast.Tests.TestAssembly1.ComplexAlgorithm.IsPrimeNumber")
                 {
                     MaxDegreeOfParallelism = 5

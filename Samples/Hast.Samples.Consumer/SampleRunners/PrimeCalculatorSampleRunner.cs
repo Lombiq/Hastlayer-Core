@@ -12,7 +12,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
 
-            configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+            configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0")
                 {
                     MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism

@@ -12,7 +12,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm");
 
-            configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+            configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.Run.LambdaExpression.0")
                 {
                     MaxDegreeOfParallelism = HastlayerOptimizedAlgorithm.MaxDegreeOfParallelism

@@ -12,7 +12,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
 
-            configuration.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Add(
+            configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
                 {
                     // If we give these algorithms inputs causing a larger recursion depth then that will
