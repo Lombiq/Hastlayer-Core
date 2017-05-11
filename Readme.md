@@ -8,9 +8,9 @@
 
 On how to use Hastlayer in your own application see the sample projects in the solution.
 
-Created by [Lombiq Technologies](http://lombiq.com/). 
+Created by [Lombiq Technologies](https://lombiq.com/). 
 
-Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard Application Host](http://orchardapphost.codeplex.com/) to utilize [Orchard](http://orchard.codeplex.com/) as the application framework.
+Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard Application Host](https://github.com/Lombiq/Orchard-Application-Host) to utilize [Orchard](http://orchardproject.net/) as the application framework.
 
 
 ## Writing Hastlayer-compatible .NET code
