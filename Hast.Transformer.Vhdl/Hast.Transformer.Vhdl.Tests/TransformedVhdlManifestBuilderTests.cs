@@ -63,8 +63,8 @@ namespace Hast.Transformer.Vhdl.Tests
                 var hardwareDescription = await TransformReferenceAssembliesToVhdl(transformer);
 
                 Assert.AreEqual(hardwareDescription.Language, "VHDL", "The language of the hardware description wasn't properly set to VHDL");
-                // While there are 7 suitable methods the MemberIdTable will also include name alternates.
-                Assert.AreEqual(hardwareDescription.MemberIdTable.Values.Count(), 18, "Not the proper amount of interface members were produced.");
+                Assert.AreEqual(hardwareDescription.HardwareMembers.Count(), 18, "Not the proper amount of hardware members were produced.");
+                Assert.IsNotEmpty(hardwareDescription.VhdlSource, "The VHDL source was empty.");
             });
         }
 
