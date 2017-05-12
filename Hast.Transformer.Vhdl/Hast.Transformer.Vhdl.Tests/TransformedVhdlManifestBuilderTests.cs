@@ -39,17 +39,12 @@ namespace Hast.Transformer.Vhdl.Tests
     [TestFixture]
     public class TransformedVhdlManifestBuilderTests : IntegrationTestBase
     {
-        private TransformedVhdlManifestContainingVhdlTransformationEventHandler _eventHandler;
-
-
         public TransformedVhdlManifestBuilderTests()
         {
             _requiredExtension.AddRange(new[] { typeof(ITransformer).Assembly, typeof(MemberIdTable).Assembly });
 
             _shellRegistrationBuilder = builder =>
             {
-                _eventHandler = new TransformedVhdlManifestContainingVhdlTransformationEventHandler();
-                builder.RegisterInstance(_eventHandler).As<IVhdlTransformationEventHandler>();
                 builder.RegisterInstance(new StubMemberSuitabilityChecker()).As<IMemberSuitabilityChecker>();
             };
         }
@@ -73,7 +68,7 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             await _host.Run<ITransformer, IVhdlTransformationEventHandler>(async (transformer, eventHandler) =>
             {
-                var topModule = await TransformReferenceAssembliesAndGetTopModule(transformer);
+                var topModule = (await TransformReferenceAssembliesToVhdl(transformer)).VhdlManifestIfFresh.TopModule;
 
                 Assert.That(topModule.Entity.Name, Is.Not.Null.Or.Empty, "The top module's entity doesn't have a name.");
                 Assert.AreEqual(topModule.Entity, topModule.Architecture.Entity, "The top module's entity is not references by the architecture.");
@@ -84,14 +79,6 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
 
-        private async Task<VhdlBuilder.Representation.Declaration.Module> TransformReferenceAssembliesAndGetTopModule(
-            ITransformer transformer)
-        {
-            await TransformReferenceAssembliesToVhdl(transformer);
-            // This will only work if a single  test runs at once.
-            return _eventHandler.TransformedVhdlManifest.Manifest.TopModule;
-        }
-
         private async Task<VhdlHardwareDescription> TransformReferenceAssembliesToVhdl(ITransformer transformer)
         {
             var configuration = new HardwareGenerationConfiguration { EnableCaching = false };
@@ -99,17 +86,6 @@ namespace Hast.Transformer.Vhdl.Tests
             return (VhdlHardwareDescription)await transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, configuration);
         }
 
-
-        private class TransformedVhdlManifestContainingVhdlTransformationEventHandler : IVhdlTransformationEventHandler
-        {
-            public ITransformedVhdlManifest TransformedVhdlManifest { get; set; }
-
-
-            public void TransformedVhdlManifestBuilt(ITransformedVhdlManifest transformedVhdlManifest)
-            {
-                TransformedVhdlManifest = transformedVhdlManifest;
-            }
-        }
 
         private class StubMemberSuitabilityChecker : IMemberSuitabilityChecker
         {

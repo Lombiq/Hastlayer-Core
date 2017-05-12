@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Hast.Common.Models;
+using Hast.VhdlBuilder.Representation.Declaration;
 using JsonNet.PrivateSettersContractResolvers;
 using Newtonsoft.Json;
 
@@ -18,15 +19,23 @@ namespace Hast.Transformer.Vhdl.Models
         public MemberIdTable MemberIdTable { get; private set; }
         public IEnumerable<string> HardwareMembers { get { return MemberIdTable.Values.Select(mapping => mapping.MemberName); } }
 
+        /// <summary>
+        /// The VHDL manifest (syntax tree) of the implemented hardware. WARNING: this property is only filled if the
+        /// manifest was freshly built, it will be <c>null</c> if the result comes from cache! (In both cases
+        /// <see cref="VhdlSource"/> will contain the VHDL source code.)
+        /// </summary>
+        public VhdlManifest VhdlManifestIfFresh { get; private set; }
+
 
         public VhdlHardwareDescription()
         {
         }
 
-        public VhdlHardwareDescription(string vhdlSource, MemberIdTable memberIdTable)
+        public VhdlHardwareDescription(string vhdlSource, ITransformedVhdlManifest transformedVhdlManifest)
         {
             VhdlSource = vhdlSource;
-            MemberIdTable = memberIdTable;
+            MemberIdTable = transformedVhdlManifest.MemberIdTable;
+            VhdlManifestIfFresh = transformedVhdlManifest.Manifest;
         }
 
 
@@ -37,7 +46,7 @@ namespace Hast.Transformer.Vhdl.Models
 
         public async Task Save(Stream stream)
         {
-            if (VhdlSource == null) throw new InvalidOperationException("There is no manifest to save.");
+            if (VhdlSource == null) throw new InvalidOperationException("There is no VHDL source to save.");
 
             using (var writer = new StreamWriter(stream))
             {
