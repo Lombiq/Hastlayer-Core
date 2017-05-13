@@ -33,6 +33,9 @@ using Autofac.Core;
 using Orchard.Tests.Utility;
 using Orchard.Environment;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
+using Hast.VhdlBuilder.Testing;
+using Hast.VhdlBuilder.Representation;
+using Shouldly;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -57,9 +60,9 @@ namespace Hast.Transformer.Vhdl.Tests
             {
                 var hardwareDescription = await TransformReferenceAssembliesToVhdl(transformer);
 
-                Assert.AreEqual(hardwareDescription.Language, "VHDL", "The language of the hardware description wasn't properly set to VHDL");
-                Assert.AreEqual(hardwareDescription.HardwareMembers.Count(), 18, "Not the proper amount of hardware members were produced.");
-                Assert.IsNotEmpty(hardwareDescription.VhdlSource, "The VHDL source was empty.");
+                hardwareDescription.Language.ShouldBe("VHDL");
+                hardwareDescription.HardwareMembers.Count().ShouldBe(18);
+                hardwareDescription.VhdlSource.ShouldNotBeNullOrEmpty();
             });
         }
 
@@ -70,11 +73,11 @@ namespace Hast.Transformer.Vhdl.Tests
             {
                 var topModule = (await TransformReferenceAssembliesToVhdl(transformer)).VhdlManifestIfFresh.TopModule;
 
-                Assert.That(topModule.Entity.Name, Is.Not.Null.Or.Empty, "The top module's entity doesn't have a name.");
-                Assert.AreEqual(topModule.Entity, topModule.Architecture.Entity, "The top module's entity is not references by the architecture.");
-                var callProxyProcess = topModule.Architecture.Body
-                    .SingleOrDefault(element => element is Process && ((Process)element).Name == "ExternalCallProxy".ToExtendedVhdlId());
-                Assert.That(callProxyProcess != null, "There is no call proxy process.");
+                topModule.Entity.Name.ShouldNotBeNullOrEmpty();
+                topModule.Entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
+
+                Should.NotThrow(() => 
+                    topModule.Architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy")));
             });
         }
 
