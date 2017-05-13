@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Autofac;
-using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Events;
-using Hast.Transformer.Vhdl.Models;
-using ICSharpCode.NRefactory.CSharp;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
 using NUnit.Framework;
