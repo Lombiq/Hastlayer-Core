@@ -11,17 +11,34 @@ namespace Hast.VhdlBuilder.Testing
 {
     public static class VhdlElementEnumerableExtensions
     {
-        public static void ShouldContain<T>(this IEnumerable<IVhdlElement> elements, Expression<Func<T, bool>> predicate)
+        public static bool ShouldContain<T>(this IEnumerable<IVhdlElement> elements)
             where T : class, IVhdlElement
         {
-            if (Contains(elements, predicate)) return;
+            return elements.ShouldContain<T>(null);
+        }
+
+        public static bool ShouldContain<T>(
+            this IEnumerable<IVhdlElement> elements,
+            Expression<Func<T, bool>> predicate)
+            where T : class, IVhdlElement
+        {
+            if (elements.Contains(predicate)) return true;
 
             throw new VhdlStructureAssertionFailedException(
-                "The block of elements didn't contain any " + typeof(T).Name + " elements matching " + predicate + ".",
+                "The block of elements didn't contain any " + typeof(T).Name + " elements" +
+                (predicate == null ? "." : " matching " + predicate + "."),
                 elements.ToVhdl(VhdlGenerationOptions.Debug));
         }
 
-        public static void ShouldRecursivelyContain<T>(this IEnumerable<IVhdlElement> elements, Expression<Func<T, bool>> predicate)
+        public static bool ShouldRecursivelyContain<T>(this IEnumerable<IVhdlElement> elements)
+            where T : class, IVhdlElement
+        {
+            return elements.ShouldRecursivelyContain<T>(null);
+        }
+
+        public static bool ShouldRecursivelyContain<T>(
+            this IEnumerable<IVhdlElement> elements,
+            Expression<Func<T, bool>> predicate)
             where T : class, IVhdlElement
         {
             var queue = new Queue<IVhdlElement>(elements);
@@ -30,7 +47,7 @@ namespace Hast.VhdlBuilder.Testing
             {
                 var element = queue.Dequeue();
 
-                if (element.Is(predicate)) return;
+                if (element.Is(predicate)) return true;
 
                 if (element is IBlockElement)
                 {
@@ -42,11 +59,18 @@ namespace Hast.VhdlBuilder.Testing
             }
 
             throw new VhdlStructureAssertionFailedException(
-                "The block of elements nor their children didn't contain any " + typeof(T).Name + " elements matching " + predicate + ".",
+                "The block of elements nor their children didn't contain any " + typeof(T).Name + " elements" +
+                (predicate == null ? "." : " matching " + predicate + "."),
                 elements.ToVhdl(VhdlGenerationOptions.Debug));
         }
 
-        public static bool Contains<T>(IEnumerable<IVhdlElement> elements, Expression<Func<T, bool>> predicate)
+        public static bool Contains<T>(this IEnumerable<IVhdlElement> elements)
+            where T : class, IVhdlElement
+        {
+            return elements.Contains<T>(null);
+        }
+
+        public static bool Contains<T>(this IEnumerable<IVhdlElement> elements, Expression<Func<T, bool>> predicate)
             where T : class, IVhdlElement
         {
             foreach (var element in elements)
