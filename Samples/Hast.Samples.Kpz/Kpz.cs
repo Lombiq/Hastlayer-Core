@@ -11,10 +11,24 @@ namespace Hast.Samples.Kpz
     /// This struct is used to built the grid that the KPZ algorithm works on.
     /// Every node on the grid stores the derivatives of a 2D function in X and Y direction.
     /// </summary>
-    public class KpzNode
+    public class KpzNode 
     {
         public bool dx; // Right
         public bool dy; // Bottom
+
+        public uint SerializeToUInt32() //TODO: lehet hogy ennek megis structnak kellene lennie, metodusok nelkul?
+        {
+            return ((dx)?1U:0)|((dy)?2U:0);
+        }
+
+        public static KpzNode DeserializeFromUInt32(uint value)
+        {
+            KpzNode node = new KpzNode();
+            node.dx = (value & 1) != 0;
+            node.dy = (value & 2) != 0;
+            return node;
+        }
+
     }
 
 
@@ -253,7 +267,7 @@ namespace Hast.Samples.Kpz
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
                 // We randomly choose a point on the grid.
-                // If there is a pyramid or hole, we randomly swtich them.
+                // If there is a pyramid or hole, we randomly switch them.
                 var randomPoint = new KpzCoords { x = random.Next(0, gridWidth), y = random.Next(0, gridHeight) };
                 RandomlySwitchFourCells(grid, randomPoint);
             }

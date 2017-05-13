@@ -60,6 +60,7 @@
       <DependentUpon>InspectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Kpz.cs" />
+    <Compile Include="KpzKernels.cs" />
     <Compile Include="KpzStateLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +100,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\kpzinspector-bar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hast.Algorithms\Hast.Algorithms.csproj">
+      <Project>{0dc6fd30-4c53-4805-996b-e34a98efebaa}</Project>
+      <Name>Hast.Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
+      <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
+      <Name>Hast.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
+      <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
+      <Name>Hast.Layer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
