@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using Autofac;
 using Hast.Common.Configuration;
-using Hast.Tests.TestAssembly1;
-using Hast.Tests.TestAssembly2;
+using Hast.TestInputs.ClassStructure1;
+using Hast.TestInputs.ClassStructure2;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Events;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
+using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Testing;
 using ICSharpCode.NRefactory.CSharp;
@@ -54,7 +55,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 topModule.Entity.Name.ShouldNotBeNullOrEmpty();
                 topModule.Entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
 
-                Should.NotThrow(() => 
+                Should.NotThrow(() =>
                     topModule.Architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy")));
             });
         }
@@ -64,7 +65,7 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             var configuration = new HardwareGenerationConfiguration { EnableCaching = false };
             configuration.TransformerConfiguration().UseSimpleMemory = false;
-            return (VhdlHardwareDescription)await transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, configuration);
+            return (VhdlHardwareDescription)await transformer.Transform(new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly }, configuration);
         }
 
 

@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{39AB568D-B7FD-40C3-A8DD-003E0BE92982}</ProjectGuid>
+    <ProjectGuid>{76651174-9A95-4711-9891-5173F95E7277}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Tests.TestAssembly1</RootNamespace>
-    <AssemblyName>Hast.Tests.TestAssembly1</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Hast.TestInputs.ClassStructure1</RootNamespace>
+    <AssemblyName>Hast.TestInputs.ClassStructure1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,18 +36,19 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComplexAlgorithm.cs" />
     <Compile Include="ComplexTypes\BaseClass.cs" />
     <Compile Include="ComplexTypes\ComplexTypeHierarchy.cs" />
     <Compile Include="ComplexTypes\IBaseInterface.cs" />
     <Compile Include="ComplexTypes\IInterface1.cs" />
     <Compile Include="ComplexTypes\IInterface2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaticClass.cs" />
-    <Compile Include="UnusedDeclarations.cs" />
+    <Compile Include="ComplexTypes\StaticClass.cs" />
+    <Compile Include="RootClass.cs" />
+    <Compile Include="ComplexTypes\UnusedDeclarations.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

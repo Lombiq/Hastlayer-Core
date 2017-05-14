@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Tests.TestAssembly1.ComplexTypes
+namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {
     /// <summary>
     /// A type demonstrating a "complex" type hierarchy with base classes and interfaces.

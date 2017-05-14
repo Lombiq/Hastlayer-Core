@@ -115,13 +115,13 @@
       <Project>{040554F7-5565-4D82-8AAB-CDCD745CA822}</Project>
       <Name>Hast.Synthesis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Tests.TestAssembly1\Hast.Tests.TestAssembly1.csproj">
-      <Project>{39ab568d-b7fd-40c3-a8dd-003e0be92982}</Project>
-      <Name>Hast.Tests.TestAssembly1</Name>
+    <ProjectReference Include="..\..\Hast.TestInputs.ClassStructure1\Hast.TestInputs.ClassStructure1.csproj">
+      <Project>{76651174-9A95-4711-9891-5173F95E7277}</Project>
+      <Name>Hast.TestInputs.ClassStructure1</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Tests.TestAssembly2\Hast.Tests.TestAssembly2.csproj">
-      <Project>{9a026174-8d66-4e74-8689-9f2eef2b8cf1}</Project>
-      <Name>Hast.Tests.TestAssembly2</Name>
+    <ProjectReference Include="..\..\Hast.TestInputs.ClassStructure2\Hast.TestInputs.ClassStructure2.csproj">
+      <Project>{F2D3C071-F051-414F-BAAB-DC750E61C3C9}</Project>
+      <Name>Hast.TestInputs.ClassStructure2</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
       <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
@@ -168,6 +168,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

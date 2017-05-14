@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hast.Tests.TestAssembly1;
+using Hast.TestInputs.ClassStructure1.ComplexTypes;
 
-namespace Hast.Tests.TestAssembly2
+namespace Hast.TestInputs.ClassStructure2
 {
     /// <summary>
     /// Demonstrates access to a static class (similar how e.g. the Math class would be used).
