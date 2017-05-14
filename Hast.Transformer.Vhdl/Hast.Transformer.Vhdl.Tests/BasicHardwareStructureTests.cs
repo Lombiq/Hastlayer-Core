@@ -1,10 +1,12 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Autofac;
 using Hast.Common.Configuration;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
 using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Configuration;
 using Hast.Transformer.Vhdl.Events;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
@@ -19,9 +21,9 @@ using Shouldly;
 namespace Hast.Transformer.Vhdl.Tests
 {
     [TestFixture]
-    public class TransformedVhdlManifestBuilderBasicTests : TransformedVhdlManifestBuilderTestsBase
+    public class BasicHardwareStructureTests : VhdlTransformingTestFixtureBase
     {
-        public TransformedVhdlManifestBuilderBasicTests() : base()
+        public BasicHardwareStructureTests() : base()
         {
         }
 
@@ -31,7 +33,7 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             await _host.Run<ITransformer>(async transformer =>
             {
-                var hardwareDescription = await TransformReferenceAssembliesToVhdl(transformer);
+                var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
 
                 hardwareDescription.Language.ShouldBe("VHDL");
                 hardwareDescription.HardwareMembers.Count().ShouldBe(18);
@@ -44,9 +46,9 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task BasicVhdlStructureIsCorrect()
         {
-            await _host.Run<ITransformer, IVhdlTransformationEventHandler>(async (transformer, eventHandler) =>
+            await _host.Run<ITransformer>(async transformer =>
             {
-                var topModule = (await TransformReferenceAssembliesToVhdl(transformer)).VhdlManifestIfFresh.TopModule;
+                var topModule = (await TransformClassStrutureExamplesToVhdl(transformer)).VhdlManifestIfFresh.TopModule;
 
                 var architecture = topModule.Architecture;
                 architecture.Name.ShouldNotBeNullOrEmpty();
@@ -63,11 +65,15 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
 
-        private async Task<VhdlHardwareDescription> TransformReferenceAssembliesToVhdl(ITransformer transformer)
+        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdl(ITransformer transformer)
         {
-            var configuration = new HardwareGenerationConfiguration { EnableCaching = false };
-            configuration.TransformerConfiguration().UseSimpleMemory = false;
-            return (VhdlHardwareDescription)await transformer.Transform(new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly }, configuration);
+            return TransformAssembliesToVhdl(
+                transformer,
+                new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
+                configuration =>
+                {
+                    configuration.TransformerConfiguration().UseSimpleMemory = false;
+                });
         }
     }
 }

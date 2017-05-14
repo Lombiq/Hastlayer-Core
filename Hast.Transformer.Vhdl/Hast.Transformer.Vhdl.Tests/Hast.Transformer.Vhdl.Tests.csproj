@@ -158,9 +158,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTestingServices\FilteredAutoMockSource.cs" />
-    <Compile Include="IntegrationTestingServices\IntegrationTestsBase.cs" />
-    <Compile Include="TransformedVhdlManifestBuilderBasicTests.cs" />
-    <Compile Include="TransformedVhdlManifestBuilderTestsBase.cs" />
+    <Compile Include="IntegrationTestingServices\IntegrationTestFixtureBase.cs" />
+    <Compile Include="BasicHardwareStructureTests.cs" />
+    <Compile Include="VerificationTests\ShouldMatchApprovedExtensions.cs" />
+    <Compile Include="VerificationTests\TestInputAssembliesVerificationTests.cs" />
+    <Compile Include="VhdlTransformingTestFixtureBase.cs" />
+    <Compile Include="VerificationTests\VerificationTestFixtureBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -169,5 +172,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

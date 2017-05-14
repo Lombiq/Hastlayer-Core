@@ -22,13 +22,7 @@ namespace Hast.Common.Configuration
         /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
         /// array.
         /// </summary>
-        public bool UseSimpleMemory { get; set; }
-
-
-        public TransformerConfiguration()
-        {
-            UseSimpleMemory = true;
-        }
+        public bool UseSimpleMemory { get; set; } = true;
 
 
         public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration)

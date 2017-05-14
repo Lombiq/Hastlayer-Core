@@ -10,7 +10,7 @@ using Orchard.Events;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {
-    public abstract class IntegrationTestsBase
+    public abstract class IntegrationTestFixtureBase
     {
         protected List<Assembly> _requiredExtension = new List<Assembly>();
         protected Action<ContainerBuilder> _shellRegistrationBuilder;
