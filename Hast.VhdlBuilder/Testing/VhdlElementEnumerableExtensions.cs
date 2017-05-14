@@ -30,6 +30,13 @@ namespace Hast.VhdlBuilder.Testing
                 elements.ToVhdl(VhdlGenerationOptions.Debug));
         }
 
+        public static bool ShouldRecursivelyContain(
+            this IEnumerable<IVhdlElement> elements,
+            Expression<Func<IVhdlElement, bool>> predicate)
+        {
+            return elements.ShouldRecursivelyContain<IVhdlElement>(predicate);
+        }
+
         public static bool ShouldRecursivelyContain<T>(this IEnumerable<IVhdlElement> elements)
             where T : class, IVhdlElement
         {

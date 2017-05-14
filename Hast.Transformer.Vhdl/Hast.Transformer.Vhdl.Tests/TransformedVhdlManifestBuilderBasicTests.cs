@@ -19,16 +19,10 @@ using Shouldly;
 namespace Hast.Transformer.Vhdl.Tests
 {
     [TestFixture]
-    public class TransformedVhdlManifestBuilderTests : IntegrationTestBase
+    public class TransformedVhdlManifestBuilderBasicTests : TransformedVhdlManifestBuilderTestsBase
     {
-        public TransformedVhdlManifestBuilderTests()
+        public TransformedVhdlManifestBuilderBasicTests() : base()
         {
-            _requiredExtension.AddRange(new[] { typeof(ITransformer).Assembly, typeof(MemberIdTable).Assembly });
-
-            _shellRegistrationBuilder = builder =>
-            {
-                builder.RegisterInstance(new StubMemberSuitabilityChecker()).As<IMemberSuitabilityChecker>();
-            };
         }
 
 
@@ -41,7 +35,9 @@ namespace Hast.Transformer.Vhdl.Tests
 
                 hardwareDescription.Language.ShouldBe("VHDL");
                 hardwareDescription.HardwareMembers.Count().ShouldBe(18);
+                hardwareDescription.MemberIdTable.Values.Count().ShouldBe(18);
                 hardwareDescription.VhdlSource.ShouldNotBeNullOrEmpty();
+                hardwareDescription.VhdlManifestIfFresh.ShouldNotBeNull(); // Since caching is off.
             });
         }
 
@@ -52,11 +48,17 @@ namespace Hast.Transformer.Vhdl.Tests
             {
                 var topModule = (await TransformReferenceAssembliesToVhdl(transformer)).VhdlManifestIfFresh.TopModule;
 
-                topModule.Entity.Name.ShouldNotBeNullOrEmpty();
-                topModule.Entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
+                var architecture = topModule.Architecture;
+                architecture.Name.ShouldNotBeNullOrEmpty();
+                architecture.Declarations.ShouldRecursivelyContain(element => element is Signal);
+                architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy"));
 
-                Should.NotThrow(() =>
-                    topModule.Architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy")));
+                var entity = topModule.Entity;
+                entity.Name.ShouldNotBeNullOrEmpty();
+                entity.Ports.Count.ShouldBe(5);
+                entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
+
+                topModule.Libraries.Any().ShouldBeTrue();
             });
         }
 
@@ -66,15 +68,6 @@ namespace Hast.Transformer.Vhdl.Tests
             var configuration = new HardwareGenerationConfiguration { EnableCaching = false };
             configuration.TransformerConfiguration().UseSimpleMemory = false;
             return (VhdlHardwareDescription)await transformer.Transform(new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly }, configuration);
-        }
-
-
-        private class StubMemberSuitabilityChecker : IMemberSuitabilityChecker
-        {
-            public bool IsSuitableInterfaceMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)
-            {
-                return true;
-            }
         }
     }
 }

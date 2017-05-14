@@ -158,8 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTestingServices\FilteredAutoMockSource.cs" />
-    <Compile Include="IntegrationTestingServices\IntegrationTestBase.cs" />
-    <Compile Include="TransformedVhdlManifestBuilderTests.cs" />
+    <Compile Include="IntegrationTestingServices\IntegrationTestsBase.cs" />
+    <Compile Include="TransformedVhdlManifestBuilderBasicTests.cs" />
+    <Compile Include="TransformedVhdlManifestBuilderTestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

@@ -1,4 +1,6 @@
-﻿namespace Hast.VhdlBuilder.Representation.Declaration
+﻿using System.Diagnostics;
+
+namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public enum PortMode
     {
@@ -9,6 +11,7 @@
     }
 
 
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Port : TypedDataObjectBase
     {
         public PortMode Mode { get; set; }
