@@ -34,13 +34,15 @@ namespace Hast.Transformer.Services
                 foreach (var member in type.Members)
                 {
                     var fullName = member.GetFullName();
-                    if (
+                    if ((
                             (noIncludedMembers || 
                             configuration.PublicHardwareMemberFullNames.Contains(fullName) || 
                             fullName.GetMemberNameAlternates().Intersect(configuration.PublicHardwareMemberFullNames).Any() || 
                             configuration.PublicHardwareMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) 
                         &&
-                            _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
+                            _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable)
+                        ) ||
+                        member is ConstructorDeclaration)
                     {
                         if (member is MethodDeclaration)
                         {
@@ -53,7 +55,10 @@ namespace Hast.Transformer.Services
                             }
                         }
 
-                        member.SetInterfaceMember();
+                        if (!(member is ConstructorDeclaration))
+                        {
+                            member.SetInterfaceMember();
+                        }
                         member.AddReference(syntaxTree);
                         member.AcceptVisitor(referencedNodesFlaggingVisitor);
                     }

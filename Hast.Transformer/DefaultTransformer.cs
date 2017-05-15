@@ -30,6 +30,8 @@ namespace Hast.Transformer
         private readonly IObjectVariableTypesConverter _objectVariableTypesConverter;
         private readonly IInstanceMethodsToStaticConverter _instanceMethodsToStaticConverter;
         private readonly IArrayInitializerExpander _arrayInitializerExpander;
+        private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
+        private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
 
 
         public DefaultTransformer(
@@ -42,7 +44,9 @@ namespace Hast.Transformer
             IGeneratedTaskArraysInliner generatedTaskArraysInliner,
             IObjectVariableTypesConverter objectVariableTypesConverter,
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
-            IArrayInitializerExpander arrayInitializerExpander)
+            IArrayInitializerExpander arrayInitializerExpander,
+            IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
+            IConstructorsToMethodsConverter constructorsToMethodsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -54,6 +58,8 @@ namespace Hast.Transformer
             _objectVariableTypesConverter = objectVariableTypesConverter;
             _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
             _arrayInitializerExpander = arrayInitializerExpander;
+            _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
+            _constructorsToMethodsConverter = constructorsToMethodsConverter;
         }
 
 
@@ -62,7 +68,10 @@ namespace Hast.Transformer
             var firstAssembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPaths.First()));
             var transformationId = firstAssembly.FullName;
             var decompiledContext = new DecompilerContext(firstAssembly.MainModule);
-            decompiledContext.Settings.AnonymousMethods = false;
+
+            var decompilerSettings = decompiledContext.Settings;
+            decompilerSettings.AnonymousMethods = false;
+
             var astBuilder = new AstBuilder(decompiledContext);
             astBuilder.AddAssembly(firstAssembly);
 
@@ -85,6 +94,7 @@ namespace Hast.Transformer
             // we only have while statements in the AST, not for statements mixed in). So we need to remove the unuseful
             // pipeline steps and run them by hand.
             var syntaxTree = astBuilder.SyntaxTree;
+
             IEnumerable<IAstTransform> pipeline = TransformationPipeline.CreatePipeline(decompiledContext);
             // We allow the commented out pipeline steps. Must revisit after ILSpy update.
             pipeline = pipeline
@@ -94,8 +104,9 @@ namespace Hast.Transformer
                 // Re-creates delegates e.g. from compiler-generated DisplayClasses.
                 //.Without("DelegateConstruction")
 
-                // Re-creates e.g. for statements from while statements.
+                // Re-creates e.g. for statements from while statements. Instead we use NoForPatternStatementTransform.
                 .Without("PatternStatementTransform")
+                .Union(new[] { new NoForPatternStatementTransform(decompiledContext) })
 
                 // Converts e.g. num6 = num6 + 1; to num6 += 1.
                 .Without("ReplaceMethodCallsWithOperators")
@@ -142,12 +153,15 @@ namespace Hast.Transformer
             }
 
 
+            _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
+
             // Clean-up.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             // Transformations making the syntax tree easier to process.
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
+            _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
 
@@ -169,7 +183,6 @@ namespace Hast.Transformer
             };
 
             _eventHandler.SyntaxTreeBuilt(context);
-
 
             return _engine.Transform(context);
         }

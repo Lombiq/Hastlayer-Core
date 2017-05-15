@@ -25,7 +25,8 @@ namespace Hast.Samples.SampleAssembly
             {
                 new NumberContainer { Number = inputNumber },
                 new NumberContainer { Number = inputNumber + 4 },
-                new NumberContainer { Number = 24 }
+                new NumberContainer { Number = 24 },
+                new NumberContainer(9)
             };
 
             // Array elements can be accessed and modified as usual.
@@ -38,13 +39,13 @@ namespace Hast.Samples.SampleAssembly
             numberContainer.Number = 5;
             numberContainer.IncreaseNumber(5);
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 numberContainers1[i].IncreaseNumber(numberContainer.Number);
             }
 
             uint sum = 0;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 sum += numberContainers1[i].Number;
             }
@@ -57,12 +58,24 @@ namespace Hast.Samples.SampleAssembly
     // Although this is a public class it could also be an inner class and/or a non-public one too.
     public class NumberContainer
     {
-        public uint Number { get; set; }
+        // You can initialize properties C# 6-style too.
+        public uint Number { get; set; } = 99;
 
 
         public uint IncreaseNumber(uint increaseBy)
         {
             return (Number += increaseBy);
+        }
+
+
+        // Constructors can be used, with or without parameters.
+        public NumberContainer()
+        {
+        }
+
+        public NumberContainer(uint number)
+        {
+            Number = number;
         }
     }
 

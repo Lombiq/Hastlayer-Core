@@ -534,6 +534,32 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var initiailizationResult = InitializeRecord(expression, objectCreateExpression.Type, context);
 
+                // Running the constructor, which needs to be done before intializers.
+                var constructor = context.TransformationContext.TypeDeclarationLookupTable
+                    .Lookup(objectCreateExpression.Type)
+                    .Members
+                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.GetFullName()) as MethodDeclaration;
+                if (constructor != null)
+                {
+                    scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
+
+                    var constructorInvocation = new InvocationExpression(
+                        new MemberReferenceExpression(
+                            new TypeReferenceExpression(objectCreateExpression.Type.Clone()), 
+                            constructor.Name),
+                        // Passing ctor parameters, and an object reference as the first one (since all methods were
+                        // converted to static with the first parameter being @this).
+                        new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
+                            .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
+
+                    foreach (var annotation in expression.Annotations)
+                    {
+                        constructorInvocation.AddAnnotation(annotation);
+                    }
+
+                    Transform(constructorInvocation, context);
+                }
+
                 if (objectCreateExpression.Initializer.Elements.Any())
                 {
                     foreach (var initializerElement in objectCreateExpression.Initializer.Elements)
@@ -618,7 +644,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return new RecordInitializationResult
             {
                 Record = record,
-                RecordInstanceReference = recordInstanceReference
+                RecordInstanceReference = recordInstanceReference,
+                RecordInstanceIdentifier = recordInstanceIdentifier
             };
         }
 
@@ -627,6 +654,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             public Record Record { get; set; }
             public IDataObject RecordInstanceReference { get; set; }
+            public Expression RecordInstanceIdentifier { get; set; }
         }
     }
 }
