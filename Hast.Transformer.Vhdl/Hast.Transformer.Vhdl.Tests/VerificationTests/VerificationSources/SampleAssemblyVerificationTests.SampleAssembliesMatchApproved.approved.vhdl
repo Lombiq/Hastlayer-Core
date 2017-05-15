@@ -1560,10 +1560,11 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
                         -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\.
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.array2\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ := to_signed(0, 32);
                         -- Starting a while loop.
                         -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < to_signed(4, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < \ObjectOrientedShowcase::Run(SimpleMemory).0.array\'length;
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
                         else 
@@ -1593,7 +1594,7 @@ begin
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ => 
                         -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\.
                         -- The while loop's condition:
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < to_signed(4, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < \ObjectOrientedShowcase::Run(SimpleMemory).0.array\'length;
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\) then 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\;
@@ -1607,7 +1608,7 @@ begin
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ := to_signed(0, 32);
                         -- Starting a while loop.
                         -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ < to_signed(4, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ < \ObjectOrientedShowcase::Run(SimpleMemory).0.array\'length;
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
                         else 
@@ -1617,7 +1618,7 @@ begin
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.i\));
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array2\(to_integer(to_signed(0, 32))).\Number\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1638,7 +1639,7 @@ begin
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\ => 
                         -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
                         -- The while loop's condition:
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.5\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ < to_signed(4, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.5\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ < \ObjectOrientedShowcase::Run(SimpleMemory).0.array\'length;
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.5\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.6\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ + \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.j\)).\Number\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.6\;

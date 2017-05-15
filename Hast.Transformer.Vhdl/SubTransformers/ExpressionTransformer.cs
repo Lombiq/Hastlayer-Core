@@ -309,6 +309,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is MemberReferenceExpression)
             {
                 var memberReference = (MemberReferenceExpression)expression;
+
+                // Handling array.Length with the VHDL length attribute.
+                if (memberReference.MemberName == "Length" && memberReference.Target.GetActualTypeReference().IsArray)
+                {
+                    return new Raw("{0}'length", Transform(memberReference.Target, context));
+                }
+
                 var memberFullName = memberReference.GetFullName();
 
                 // Expressions like return Task.CompletedTask;

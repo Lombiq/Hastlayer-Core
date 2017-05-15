@@ -41,14 +41,15 @@ namespace Hast.Samples.SampleAssembly
             {
                 numberContainer.IncreaseNumber(5);
             }
+            numberContainers2[0] = numberContainer;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < numberContainers1.Length; i++)
             {
-                numberContainers1[i].IncreaseNumber(numberContainer.Number);
+                numberContainers1[i].IncreaseNumber(numberContainers2[0].Number);
             }
 
             uint sum = 0;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < numberContainers1.Length; i++)
             {
                 sum += numberContainers1[i].Number;
             }
