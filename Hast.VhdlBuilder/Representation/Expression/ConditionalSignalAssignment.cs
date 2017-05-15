@@ -22,13 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             }
         }
 
-        public List<SignalAssignmentWhen> Whens { get; set; }
-
-
-        public ConditionalSignalAssignment()
-        {
-            Whens = new List<SignalAssignmentWhen>();
-        }
+        public List<SignalAssignmentWhen> Whens { get; set; } = new List<SignalAssignmentWhen>();
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
@@ -54,11 +48,8 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Expression { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return
-                Value.ToVhdl(vhdlGenerationOptions) +
-                (Expression != null ? " when " + Expression.ToVhdl(vhdlGenerationOptions) : string.Empty);
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Value.ToVhdl(vhdlGenerationOptions) +
+            (Expression != null ? " when " + Expression.ToVhdl(vhdlGenerationOptions) : string.Empty);
     }
 }

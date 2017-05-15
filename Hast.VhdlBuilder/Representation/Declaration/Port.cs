@@ -23,14 +23,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return
-                vhdlGenerationOptions.ShortenName(Name) +
-                ": " +
-                Mode +
-                " " +
-                DataType.ToVhdl(vhdlGenerationOptions);
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.ShortenName(Name) +
+            ": " +
+            Mode +
+            " " +
+            DataType.ToVhdl(vhdlGenerationOptions);
     }
 }

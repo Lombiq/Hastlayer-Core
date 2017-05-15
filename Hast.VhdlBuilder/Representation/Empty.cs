@@ -5,8 +5,7 @@
     /// </summary>
     public class Empty : IVhdlElement
     {
-        private static readonly Empty _instance = new Empty();
-        public static Empty Instance { get { return _instance; } }
+        public static Empty Instance { get; } = new Empty();
 
 
         private Empty()
@@ -14,9 +13,6 @@
         }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return string.Empty;
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => string.Empty;
     }
 }

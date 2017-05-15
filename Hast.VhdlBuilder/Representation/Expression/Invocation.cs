@@ -9,21 +9,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class Invocation : IVhdlElement
     {
         public IVhdlElement Target { get; set; }
-        public List<IVhdlElement> Parameters { get; set; }
+        public List<IVhdlElement> Parameters { get; set; } = new List<IVhdlElement>();
 
-
-        public Invocation()
-        {
-            Parameters = new List<IVhdlElement>();
-        }
-
-
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return 
-                Target.ToVhdl(vhdlGenerationOptions) +
-                (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Target.ToVhdl(vhdlGenerationOptions) +
+            (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
     }
 
 
@@ -34,9 +24,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public INamedElement ActualParameter { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return vhdlGenerationOptions.ShortenName(FormalParameter.Name) + " => " + vhdlGenerationOptions.ShortenName(ActualParameter.Name);
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.ShortenName(FormalParameter.Name) + " => " + vhdlGenerationOptions.ShortenName(ActualParameter.Name);
     }
 }

@@ -31,11 +31,9 @@ namespace Hast.VhdlBuilder.Representation
         }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Parameters == null || !Parameters.Any() ? 
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Parameters == null || !Parameters.Any() ? 
                 Source : 
                 string.Format(Source, Parameters.Select(element => element.ToVhdl(vhdlGenerationOptions)).ToArray());
-        }
     }
 }
