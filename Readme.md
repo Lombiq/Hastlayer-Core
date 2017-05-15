@@ -4,13 +4,13 @@
 
 ## Overview
 
-[Hastlayer](http://www.hastlayer.com/) - Be the hardware. Transforming .NET assemblies into FPGA hardware for faster execution.
+[Hastlayer](http://www.hastlayer.com/) - Be the hardware. Transforming .NET assemblies into FPGA hardware for faster execution. This is the PC-side component of Hastlayer, the one that transforms .NET assemblies, programs attached FPGAs and communicates with said FPGAs.
 
 On how to use Hastlayer in your own application see the sample projects in the solution.
 
-Created by [Lombiq Technologies](http://lombiq.com/). 
+Created by [Lombiq Technologies](https://lombiq.com/). 
 
-Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard Application Host](http://orchardapphost.codeplex.com/) to utilize [Orchard](http://orchard.codeplex.com/) as the application framework.
+Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard Application Host](https://github.com/Lombiq/Orchard-Application-Host) to utilize [Orchard](http://orchardproject.net/) as the application framework.
 
 
 ## Writing Hastlayer-compatible .NET code
@@ -24,7 +24,7 @@ Some general constraints you have to keep in mind:
 - Supported primitive types: `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `bool`.  Floating-point numbers like `float` and `double` and numbers bigger than 64b are not yet supported.
 - The most important language constructs like `if` and `else` statements, `while` and `for` loops, type casting, binary operations (e.g. arithmetic, in/equality operators...) on allowed types are supported.
 - Algorithms can use a fixed-size (determined at runtime) memory space modelled as a `byte` array in the class `SimpleMemory`. For inputs that should be passed to hardware implementations and outputs that should be sent back this memory space is to be used. For internal method arguments (i.e. for data that isn't coming from the host computer or should be sent back) normal method arguments can be used.
-- Arrays having dimensions declared compile-time are supported.
+- Single-dimensional arrays having their size declared compile-time are supported.
 - Using objects created of classes or structs containing only properties and methods is supported. Using these objects as usual (e.g. passing them as method arguments, storing them in arrays) is also supported.
 - Task-based parallelism is with TPL is supported to a limited degree. Lambda expression are supported to an extent needed to use tasks (see samples).
 - Operation-level, SIMD-like parallelism is supported, see samples.
