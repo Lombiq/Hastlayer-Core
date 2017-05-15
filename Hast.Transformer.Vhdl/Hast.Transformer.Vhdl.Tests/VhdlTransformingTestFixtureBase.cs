@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Hast.Common.Configuration;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Configuration;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
-using Hast.VhdlBuilder.Representation;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.Tests

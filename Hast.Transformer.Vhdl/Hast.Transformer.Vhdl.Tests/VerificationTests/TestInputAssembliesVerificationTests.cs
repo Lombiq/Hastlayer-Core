@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using Lombiq.OrchardAppHost;
-using Hast.TestInputs.ClassStructure2;
-using Hast.TestInputs.ClassStructure1;
-using Shouldly;
-using System.Text.RegularExpressions;
+﻿using System.Threading.Tasks;
 using Hast.Common.Configuration;
+using Hast.TestInputs.ClassStructure1;
+using Hast.TestInputs.ClassStructure2;
+using Lombiq.OrchardAppHost;
+using NUnit.Framework;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
