@@ -35,6 +35,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         var transformerConfiguration = configuration.TransformerConfiguration();
 
+                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.ObjectOrientedShowcase");
+
                         configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm");
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.Run.LambdaExpression.0")

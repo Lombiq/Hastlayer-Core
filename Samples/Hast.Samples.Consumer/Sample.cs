@@ -2,10 +2,11 @@
 {
     internal enum Sample
     {
-        ImageProcessingAlgorithms,
         GenomeMatcher,
         HastlayerOptimizedAlgorithm,
+        ImageProcessingAlgorithms,
         MonteCarloAlgorithm,
+        ObjectOrientedShowcase,
         PrimeCalculator,
         RecursiveAlgorithms,
         SimdCalculator
