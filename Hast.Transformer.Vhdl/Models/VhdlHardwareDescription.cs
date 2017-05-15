@@ -24,6 +24,7 @@ namespace Hast.Transformer.Vhdl.Models
         /// manifest was freshly built, it will be <c>null</c> if the result comes from cache! (In both cases
         /// <see cref="VhdlSource"/> will contain the VHDL source code.)
         /// </summary>
+        [JsonIgnore]
         public VhdlManifest VhdlManifestIfFresh { get; private set; }
 
 
