@@ -15,11 +15,6 @@ namespace Hast.Transformer.Vhdl.Tests
     [TestFixture]
     public class BasicHardwareStructureTests : VhdlTransformingTestFixtureBase
     {
-        public BasicHardwareStructureTests() : base()
-        {
-        }
-
-
         [Test]
         public async Task BasicHardwareDescriptionPropertiesAreCorrect()
         {
