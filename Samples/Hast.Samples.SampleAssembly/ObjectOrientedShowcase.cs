@@ -37,7 +37,10 @@ namespace Hast.Samples.SampleAssembly
             var numberContainers2 = new NumberContainer[1];
             var numberContainer = new NumberContainer();
             numberContainer.Number = 5;
-            numberContainer.IncreaseNumber(5);
+            if (!numberContainer.WasIncreased)
+            {
+                numberContainer.IncreaseNumber(5);
+            }
 
             for (int i = 0; i < 4; i++)
             {
@@ -61,9 +64,13 @@ namespace Hast.Samples.SampleAssembly
         // You can initialize properties C# 6-style too.
         public uint Number { get; set; } = 99;
 
+        // Fields can be used too.
+        public bool WasIncreased;
+
 
         public uint IncreaseNumber(uint increaseBy)
         {
+            WasIncreased = true;
             return (Number += increaseBy);
         }
 

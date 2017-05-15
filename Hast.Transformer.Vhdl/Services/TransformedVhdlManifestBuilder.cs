@@ -268,17 +268,9 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         memberTransformerTasks.Add(_methodTransformer.Transform((MethodDeclaration)node, transformationContext));
                     }
-                    else if (node is FieldDeclaration)
+                    else if (node is FieldDeclaration && _displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node))
                     {
-                        var field = (FieldDeclaration)node;
-                        if (_displayClassFieldTransformer.IsDisplayClassField(field))
-                        {
-                            memberTransformerTasks.Add(_displayClassFieldTransformer.Transform(field, transformationContext));
-                        }
-                        else
-                        {
-                            throw new NotSupportedException("The field " + node.ToString() + " is not supported for transformation.");
-                        }
+                        memberTransformerTasks.Add(_displayClassFieldTransformer.Transform((FieldDeclaration)node, transformationContext));
                     }
                     else if (!_pocoTransformer.IsSupportedMember(node))
                     {

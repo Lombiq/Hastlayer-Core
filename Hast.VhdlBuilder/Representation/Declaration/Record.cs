@@ -27,6 +27,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     }
 
 
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class RecordField : TypedDataObjectBase
     {
         public RecordField()
