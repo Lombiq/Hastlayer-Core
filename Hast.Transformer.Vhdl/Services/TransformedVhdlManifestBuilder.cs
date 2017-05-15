@@ -303,7 +303,10 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         case ClassType.Class:
                         case ClassType.Struct:
-                            memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
+                            if (!typeDeclaration.GetFullName().IsDisplayClassName())
+                            {
+                                memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext)); 
+                            }
                             traverseTo = traverseTo.Where(n =>
                                 n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);
                             break;
