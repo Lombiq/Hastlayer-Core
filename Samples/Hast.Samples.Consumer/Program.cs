@@ -114,7 +114,8 @@ namespace Hast.Samples.Consumer
                             new[]
                             {
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
-                                typeof(PrimeCalculator).Assembly
+                                typeof(PrimeCalculator).Assembly,
+                                typeof(Common.Numerics.Unum.Unum).Assembly
                             },
                             configuration);
 
