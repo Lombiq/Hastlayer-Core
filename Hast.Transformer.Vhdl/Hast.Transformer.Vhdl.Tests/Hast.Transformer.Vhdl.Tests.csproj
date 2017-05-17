@@ -123,6 +123,10 @@
       <Project>{F2D3C071-F051-414F-BAAB-DC750E61C3C9}</Project>
       <Name>Hast.TestInputs.ClassStructure2</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.TestInputs.Various\Hast.TestInputs.Various.csproj">
+      <Project>{7D8AE520-75D5-4BFC-B617-7FEEA7B1983C}</Project>
+      <Name>Hast.TestInputs.Various</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
       <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
       <Name>Hast.VhdlBuilder</Name>

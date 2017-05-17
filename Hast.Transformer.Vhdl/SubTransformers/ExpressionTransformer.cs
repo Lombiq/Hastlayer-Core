@@ -12,6 +12,7 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Testing;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard.Logging;
 
@@ -474,18 +475,39 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var castExpression = (CastExpression)expression;
 
-                var fromType = _typeConverter.ConvertTypeReference(
-                    castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference());
+                var fromTypeReference = castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference();
+                var fromType = _typeConverter.ConvertTypeReference(fromTypeReference);
                 var toType = _typeConverter.ConvertAstType(castExpression.Type);
 
+                var innerExpressionResult = Transform(castExpression.Expression, context);
+
+                // If the inner expression produced a data object then let's check the size of that: if it's the same
+                // size as the target type of the cast then no need to cast again.
+                var resultDataObject = innerExpressionResult as IDataObject;
+                var resultParentesized = innerExpressionResult as Parenthesized;
+                if (resultDataObject == null && resultParentesized != null)
+                {
+                    resultDataObject = resultParentesized.Target as IDataObject;
+                }
+
+                if (resultDataObject != null)
+                {
+                    var resultDataObjectDeclaration = stateMachine
+                        .GetAllDataObjects()
+                        .SingleOrDefault(dataObject => dataObject.Name == resultDataObject.Name);
+
+                    if (resultDataObjectDeclaration != null)
+                    {
+                        fromType = resultDataObjectDeclaration.DataType;
+                    }
+                }
+
                 var typeConversionResult = _typeConversionTransformer
-                    .ImplementTypeConversion(fromType, toType, Transform(castExpression.Expression, context));
+                    .ImplementTypeConversion(fromType, toType, innerExpressionResult);
                 if (typeConversionResult.IsLossy)
                 {
-                    var toTypeKeyword = ((PrimitiveType)castExpression.Type).Keyword;
-                    var fromTypeKeyword = castExpression.GetActualTypeReference().FullName;
                     Logger.Warning(
-                        "A cast from " + fromTypeKeyword + " to " + toTypeKeyword +
+                        "A cast from " + fromType.ToVhdl() + " to " + toType.ToVhdl() +
                         " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
                 }

@@ -9,6 +9,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -16,12 +17,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         private readonly IDeviceDriver _deviceDriver;
         private readonly ITypeConverter _typeConverter;
+        private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
-        public BinaryOperatorExpressionTransformer(IDeviceDriver deviceDriver, ITypeConverter typeConverter)
+        public BinaryOperatorExpressionTransformer(
+            IDeviceDriver deviceDriver, 
+            ITypeConverter typeConverter, 
+            ITypeConversionTransformer typeConversionTransformer)
         {
             _deviceDriver = deviceDriver;
             _typeConverter = typeConverter;
+            _typeConversionTransformer = typeConversionTransformer;
         }
 
 
@@ -157,13 +163,27 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 
+            var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
+
             var resultTypeReference = expression.GetActualTypeReference(true);
             if (resultTypeReference == null)
             {
-                resultTypeReference = expression.FindFirstNonParenthesizedExpressionParent().GetActualTypeReference();
+                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference();
             }
+
+            TypeReference preCastTypeReference = null;
+            // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
+            // to a smaller type here, then a resize to a bigger type as a result of the cast.
+            if (firstNonParenthesizedExpressionParent is CastExpression)
+            {
+                preCastTypeReference = resultTypeReference;
+                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
+            }
+
             var resultType = _typeConverter.ConvertTypeReference(resultTypeReference);
             var resultTypeSize = resultType.GetSize();
+
+
 
             IDataObject operationResultDataObjectReference;
             if (operationResultDataObjectIsVariable)
@@ -206,21 +226,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (leftTypeReference != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
             {
                 leftType = _typeConverter.ConvertTypeReference(leftTypeReference);
-                leftTypeSize = leftType.GetSize(); 
+                leftTypeSize = leftType.GetSize();
             }
             DataType rightType = null;
             var rightTypeSize = 0;
             if (rightTypeReference != null)
             {
                 rightType = _typeConverter.ConvertTypeReference(rightTypeReference);
-                rightTypeSize = rightType.GetSize(); 
+                rightTypeSize = rightType.GetSize();
             }
 
             if (leftTypeReference != null && rightTypeReference != null)
             {
                 shouldResizeResult = shouldResizeResult ||
                     (
-                        // If the operands and the result has the same size then the result won't fit.
+                        // If the operands and the result have the same size then the result won't fit.
                         isMultiplication &&
                         resultTypeSize != 0 &&
                         resultTypeSize == leftTypeSize &&
@@ -242,15 +262,25 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (shouldResizeResult)
             {
-                binaryElement = new Invocation
+                if (firstNonParenthesizedExpressionParent is CastExpression)
                 {
-                    Target = "resize".ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement>
+                    binaryElement = _typeConversionTransformer.ImplementTypeConversion(
+                        _typeConverter.ConvertTypeReference(preCastTypeReference),
+                        resultType,
+                        binary).Expression;
+                }
+                else
+                {
+                    binaryElement = new Invocation
+                    {
+                        Target = "resize".ToVhdlIdValue(),
+                        Parameters = new List<IVhdlElement>
                     {
                         { binary },
                         { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
                     }
-                };
+                    };
+                }
             }
 
             var operationResultAssignment = new Assignment
@@ -268,8 +298,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
             if (leftType != null && rightType != null && leftType.Name == rightType.Name)
             {
-                clockCyclesNeededForOperation = leftType.Name == "signed" ? 
-                    clockCyclesNeededForSignedOperation : 
+                clockCyclesNeededForOperation = leftType.Name == "signed" ?
+                    clockCyclesNeededForSignedOperation :
                     clockCyclesNeededForUnsignedOperation;
             }
             else
@@ -277,7 +307,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // If the operands have different signs then let's take the slower version just to be safe.
                 clockCyclesNeededForOperation = Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation);
             }
-            
+
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
             // If the current state takes more than one clock cycle we add a new state and follow up there.
