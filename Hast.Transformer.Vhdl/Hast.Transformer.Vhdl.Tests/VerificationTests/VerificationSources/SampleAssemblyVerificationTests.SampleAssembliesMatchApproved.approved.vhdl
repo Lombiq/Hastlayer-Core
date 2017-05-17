@@ -81,6 +81,82 @@ architecture Imp of Hast_IP is
     -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).0 declarations end
 
 
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).1 declarations start
+    -- State machine states:
+    type \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._States\ is (
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_0\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_1\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\);
+    -- Signals:
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Finished\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Started\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).1 declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).2 declarations start
+    -- State machine states:
+    type \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._States\ is (
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_0\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_1\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\);
+    -- Signals:
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Finished\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Started\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).2 declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).3 declarations start
+    -- State machine states:
+    type \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._States\ is (
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_0\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_1\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_2\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_4\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_6\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_7\);
+    -- Signals:
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Finished\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Started\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).3 declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).4 declarations start
+    -- State machine states:
+    type \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._States\ is (
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_0\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_1\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_2\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_4\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_6\, 
+        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_7\);
+    -- Signals:
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Finished\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Started\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).4 declarations end
+
+
     -- System.Void Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._States\ is (
@@ -102,9 +178,25 @@ architecture Imp of Hast_IP is
     Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.0\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.1\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.2\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.3\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.4\: boolean := false;
     Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._Started\: boolean := false;
     Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.0\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.1\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.2\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.3\: boolean := false;
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.4\: boolean := false;
     Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.Void Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -1233,6 +1325,538 @@ begin
     -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).0 state machine end
 
 
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).1 state machine start
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._StateMachine\: process (\Clock\) 
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\: \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._States\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_0\;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag2\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.2\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.3\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Finished\ <= false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.return\ <= to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_0\;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ := to_signed(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag2\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.2\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.3\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.6\ := to_signed(0, 32);
+            else 
+                case \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ is 
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Started\ = true) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Started\ = true) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Finished\ <= true;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Finished\ <= false;
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\ => 
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject.parameter.In\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.0\ := resize(\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\ * to_unsigned(2, 32), 32);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.1\ := \System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::input\ + \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.0\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.1\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\ := True;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ := to_signed(2, 32);
+                        -- Starting a while loop.
+                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ < to_signed(9999999, 32);
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.2\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\.
+                        -- The while loop's condition:
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.3\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ < to_signed(9999999, 32);
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.3\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\ and ends in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\.
+                            --     * The false branch starts in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\ and ends in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\.
+                            --     * Execution after either branch will continue in the following state: \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\.
+
+                            if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag2\) then 
+                                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\;
+                            else 
+                                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\;
+                            end if;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\ => 
+                        -- State after the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.return\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\ => 
+                        -- State after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\ := not(\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.6\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ + to_signed(1, 32);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.6\;
+                        -- Returning to the repeated state of the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\ if the loop wasn't exited with a state change.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\ => 
+                        -- True branch of the if-else started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ + \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\;
+                        -- Going to the state after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\ => 
+                        -- False branch of the if-else started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ - \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\;
+                        -- Going to the state after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).1 state machine end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).2 state machine start
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._StateMachine\: process (\Clock\) 
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\: \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._States\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_0\;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag2\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.2\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.3\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Finished\ <= false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.return\ <= to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_0\;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ := to_signed(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag2\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.2\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.3\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.6\ := to_signed(0, 32);
+            else 
+                case \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ is 
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Started\ = true) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Started\ = true) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Finished\ <= true;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Finished\ <= false;
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\ => 
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject.parameter.In\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.0\ := resize(\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\ * to_unsigned(2, 32), 32);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.1\ := \System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::input\ + \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.0\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.1\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\ := True;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ := to_signed(2, 32);
+                        -- Starting a while loop.
+                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ < to_signed(9999999, 32);
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.2\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\.
+                        -- The while loop's condition:
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.3\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ < to_signed(9999999, 32);
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.3\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\ and ends in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\.
+                            --     * The false branch starts in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\ and ends in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\.
+                            --     * Execution after either branch will continue in the following state: \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\.
+
+                            if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag2\) then 
+                                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\;
+                            else 
+                                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\;
+                            end if;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\ => 
+                        -- State after the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.return\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\ => 
+                        -- State after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\ := not(\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.6\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ + to_signed(1, 32);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.6\;
+                        -- Returning to the repeated state of the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\ if the loop wasn't exited with a state change.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\ => 
+                        -- True branch of the if-else started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ + \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\;
+                        -- Going to the state after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\ => 
+                        -- False branch of the if-else started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ - \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\;
+                        -- Going to the state after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).2 state machine end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).3 state machine start
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._StateMachine\: process (\Clock\) 
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\: \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._States\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_0\;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag2\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.2\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.3\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Finished\ <= false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.return\ <= to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_0\;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.indexObject\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.i\ := to_signed(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag2\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.2\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.3\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.6\ := to_signed(0, 32);
+            else 
+                case \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ is 
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Started\ = true) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Started\ = true) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Finished\ <= true;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Finished\ <= false;
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_2\ => 
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.indexObject\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.indexObject.parameter.In\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.indexObject\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.0\ := resize(\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num\ * to_unsigned(2, 32), 32);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.1\ := \System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::input\ + \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.0\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.1\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag\ := True;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.i\ := to_signed(2, 32);
+                        -- Starting a while loop.
+                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.i\ < to_signed(9999999, 32);
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.2\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_2\.
+                        -- The while loop's condition:
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.3\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.i\ < to_signed(9999999, 32);
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.3\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_6\ and ends in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_6\.
+                            --     * The false branch starts in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_7\ and ends in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_7\.
+                            --     * Execution after either branch will continue in the following state: \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\.
+
+                            if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag2\) then 
+                                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_6\;
+                            else 
+                                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_7\;
+                            end if;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_4\ => 
+                        -- State after the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_2\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.return\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\ => 
+                        -- State after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag\ := not(\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.flag\);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.6\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.i\ + to_signed(1, 32);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.i\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.6\;
+                        -- Returning to the repeated state of the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_2\ if the loop wasn't exited with a state change.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_6\ => 
+                        -- True branch of the if-else started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.4\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\ + \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.4\;
+                        -- Going to the state after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_6\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_7\ => 
+                        -- False branch of the if-else started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.5\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\ - \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.5\;
+                        -- Going to the state after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_7\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).3 state machine end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).4 state machine start
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._StateMachine\: process (\Clock\) 
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\: \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._States\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_0\;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag2\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.2\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.3\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Finished\ <= false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.return\ <= to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_0\;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.indexObject\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.i\ := to_signed(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag2\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.2\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.3\ := false;
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.6\ := to_signed(0, 32);
+            else 
+                case \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ is 
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Started\ = true) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Started\ = true) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Finished\ <= true;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Finished\ <= false;
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_2\ => 
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.indexObject\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.indexObject.parameter.In\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.indexObject\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.0\ := resize(\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num\ * to_unsigned(2, 32), 32);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.1\ := \System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::input\ + \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.0\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.1\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag\ := True;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.i\ := to_signed(2, 32);
+                        -- Starting a while loop.
+                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.i\ < to_signed(9999999, 32);
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.2\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_2\.
+                        -- The while loop's condition:
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.3\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.i\ < to_signed(9999999, 32);
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.3\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_6\ and ends in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_6\.
+                            --     * The false branch starts in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_7\ and ends in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_7\.
+                            --     * Execution after either branch will continue in the following state: \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\.
+
+                            if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag2\) then 
+                                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_6\;
+                            else 
+                                \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_7\;
+                            end if;
+                        else 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_4\ => 
+                        -- State after the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_2\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.return\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\ => 
+                        -- State after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag\ := not(\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.flag\);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.6\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.i\ + to_signed(1, 32);
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.i\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.6\;
+                        -- Returning to the repeated state of the while loop which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_2\ if the loop wasn't exited with a state change.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_6\ => 
+                        -- True branch of the if-else started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.4\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\ + \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.4\;
+                        -- Going to the state after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_6\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_7\ => 
+                        -- False branch of the if-else started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\.
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.5\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\ - \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num\;
+                        \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.5\;
+                        -- Going to the state after the if-else which was started in state \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\.
+                        if (\HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ = \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_7\) then 
+                            \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).4 state machine end
+
+
     -- System.Void Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
     \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State\: \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._States\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State_0\;
@@ -1243,8 +1867,13 @@ begin
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
+        Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\: integer range 0 to 4 := 0;
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.4\: boolean := false;
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1259,6 +1888,14 @@ begin
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.0\ <= to_unsigned(0, 32);
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.0\ <= false;
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.1\ <= to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.1\ <= false;
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.2\ <= to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.2\ <= false;
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.3\ <= to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.3\ <= false;
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.4\ <= to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.4\ <= false;
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State_0\;
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.arg_57_1\ := to_signed(0, 32);
@@ -1266,8 +1903,13 @@ begin
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.i\ := to_signed(0, 32);
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\ := false;
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\ := 0;
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.0\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.1\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.2\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.3\ := to_unsigned(0, 32);
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.4\ := to_unsigned(0, 32);
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.3\ := false;
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.4\ := false;
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.5\ := to_unsigned(0, 32);
@@ -1322,8 +1964,24 @@ begin
                         if (\HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\) then 
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.arg_57_1\ := signed(\HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\);
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32)
-                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.0\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\;
-                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.0\ <= true;
+                            case \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\ is 
+                                when 0 => 
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.0\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\;
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.0\ <= true;
+                                when 1 => 
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.1\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\;
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.1\ <= true;
+                                when 2 => 
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.2\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\;
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.2\ <= true;
+                                when 3 => 
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.3\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\;
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.3\ <= true;
+                                when 4 => 
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.4\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\;
+                                    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.4\ <= true;
+                            end case;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\ + 1;
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\ + to_unsigned(1, 32);
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\;
                         else 
@@ -1336,10 +1994,23 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32)
-                        if (\HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.0\ = \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.0\) then 
+                        if (\HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.1\ = \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.1\ and \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.2\ = \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.2\ and \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.3\ = \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.3\ and \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.4\ = \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.4\ and \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.0\ = \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.0\) then 
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.0\ <= false;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.1\ <= false;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.2\ <= false;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.3\ <= false;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.4\ <= false;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\ := 0;
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.0\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.0\;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.1\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.1\;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.2\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.2\;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.3\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.3\;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.4\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.4\;
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\(0) := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.0\;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\(1) := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.1\;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\(2) := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.2\;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\(3) := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.3\;
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\(4) := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.return.4\;
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.i\ := to_signed(0, 32);
                             -- Starting a while loop.
@@ -5968,6 +6639,26 @@ begin
     \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.indexObject.parameter.In\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.0\;
     \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.0\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._Finished\;
     \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.0\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.return\;
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#1):
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Started\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.1\;
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject.parameter.In\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.1\;
+    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.1\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Finished\;
+    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.1\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.return\;
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#2):
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Started\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.2\;
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject.parameter.In\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.2\;
+    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.2\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Finished\;
+    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.2\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.return\;
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#3):
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Started\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.3\;
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.indexObject.parameter.In\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.3\;
+    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.3\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Finished\;
+    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.3\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.return\;
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#4):
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Started\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.4\;
+    \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.indexObject.parameter.In\ <= \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.4\;
+    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.4\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Finished\;
+    \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.4\ <= \HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.return\;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32) end
 
 

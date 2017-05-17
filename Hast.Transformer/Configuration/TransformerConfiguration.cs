@@ -35,8 +35,9 @@ namespace Hast.Common.Configuration
             string simpleMemberName)
         {
             var maxRecursionDepthConfig = MemberInvocationInstanceCountConfigurations
-                //.ToArray() // To prevent "Collection was modified" exception.
-                .FirstOrDefault(config => simpleMemberName.StartsWith(config.MemberNamePrefix));
+                .Where(config => simpleMemberName.StartsWith(config.MemberNamePrefix))
+                .OrderByDescending(config => config.MemberNamePrefix.Length)
+                .FirstOrDefault();
 
             if (maxRecursionDepthConfig != null) return maxRecursionDepthConfig;
 
