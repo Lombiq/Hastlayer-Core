@@ -48,13 +48,21 @@ namespace Hast.Samples.SampleAssembly
                 numberContainers1[i].IncreaseNumber(numberContainers2[0].Number);
             }
 
+            // You can also pass arrays and other objects around to other methods.
+            memory.WriteUInt32(Run_OutputUInt32Index, SumNumberCointainers(numberContainers1));
+        }
+
+
+        private uint SumNumberCointainers(NumberContainer[] numberContainers)
+        {
             uint sum = 0;
-            for (int i = 0; i < numberContainers1.Length; i++)
+
+            for (int i = 0; i < numberContainers.Length; i++)
             {
-                sum += numberContainers1[i].Number;
+                sum += numberContainers[i].Number;
             }
 
-            memory.WriteUInt32(Run_OutputUInt32Index, sum);
+            return sum;
         }
     }
 

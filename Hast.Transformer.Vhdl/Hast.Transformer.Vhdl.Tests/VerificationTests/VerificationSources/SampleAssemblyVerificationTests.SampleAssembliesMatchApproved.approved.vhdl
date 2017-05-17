@@ -129,8 +129,7 @@ architecture Imp of Hast_IP is
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\, 
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\, 
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\, 
-        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\, 
-        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\);
+        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\);
     -- Signals:
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0._Finished\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -145,6 +144,8 @@ architecture Imp of Hast_IP is
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\: boolean := false;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.Out.0\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0._Started\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Finished.0\: boolean := false;
@@ -153,7 +154,27 @@ architecture Imp of Hast_IP is
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\: \Hast.Samples.SampleAssembly.NumberContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.In.0\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Finished.0\: boolean := false;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]).0 declarations start
+    -- State machine states:
+    type \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._States\ is (
+        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_0\, 
+        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_1\, 
+        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\, 
+        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_3\, 
+        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\);
+    -- Signals:
+    Signal \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Finished\: boolean := false;
+    Signal \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers.parameter.Out\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
+    Signal \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Started\: boolean := false;
+    Signal \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers.parameter.In\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
+    -- System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]).0 declarations end
 
 
     -- System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32).0 declarations start
@@ -1376,8 +1397,6 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\: \Hast.Samples.SampleAssembly.NumberContainer\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.flag\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1385,10 +1404,7 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\: boolean := false;
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1402,12 +1418,11 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.flag\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ := to_signed(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ := to_signed(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.1\ := to_unsigned(0, 32);
@@ -1415,10 +1430,7 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.2\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := false;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.5\ := false;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\ := to_unsigned(0, 32);
             else 
                 case \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ is 
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\ => 
@@ -1604,16 +1616,10 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
                         -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\.
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := to_unsigned(0, 32);
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ := to_signed(0, 32);
-                        -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ < \ObjectOrientedShowcase::Run(SimpleMemory).0.array\'length;
-                        if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\) then 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
-                        else 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
-                        end if;
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[])
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\ <= true;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
@@ -1637,27 +1643,19 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\ => 
-                        -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
-                        -- The while loop's condition:
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.5\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ < \ObjectOrientedShowcase::Run(SimpleMemory).0.array\'length;
-                        if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.5\) then 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.6\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ + \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.j\)).\Number\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.6\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ + to_signed(1, 32);
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.j\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.7\;
-                        else 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[])
+                        if (\ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Finished.0\) then 
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\ <= false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.In.0\;
+                            -- Begin SimpleMemory write.
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\ObjectOrientedShowcase::Run(SimpleMemory).0.return.3\);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
-                        -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
-                        -- Begin SimpleMemory write.
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\ObjectOrientedShowcase::Run(SimpleMemory).0.num2\);
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -1670,6 +1668,88 @@ begin
         end if;
     end process;
     -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+
+
+    -- System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]).0 state machine start
+    \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._StateMachine\: process (\Clock\) 
+        Variable \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\: \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._States\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_0\;
+        Variable \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
+        Variable \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\: boolean := false;
+        Variable \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\: boolean := false;
+        Variable \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Finished\ <= false;
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.return\ <= to_unsigned(0, 32);
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_0\;
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ := to_unsigned(0, 32);
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ := to_signed(0, 32);
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\ := false;
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\ := false;
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.3\ := to_signed(0, 32);
+            else 
+                case \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ is 
+                    when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Started\ = true) then 
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Started\ = true) then 
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Finished\ <= true;
+                        else 
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Finished\ <= false;
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers.parameter.Out\ <= \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\ => 
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers.parameter.In\;
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ := to_unsigned(0, 32);
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ := to_signed(0, 32);
+                        -- Starting a while loop.
+                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ < \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\'length;
+                        if (\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\) then 
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_3\;
+                        else 
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\.
+                        -- The while loop's condition:
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ < \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\'length;
+                        if (\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\) then 
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.2\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ + \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\(to_integer(\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\)).\Number\;
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.2\;
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.3\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ + to_signed(1, 32);
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.3\;
+                        else 
+                            \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\ => 
+                        -- State after the while loop which was started in state \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\.
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.return\ <= \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\;
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]).0 state machine end
 
 
     -- System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32).0 state machine start
@@ -5919,6 +5999,16 @@ begin
     \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\ <= \NumberContainer::IncreaseNumber(UInt32).0.return\;
     \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\ <= \NumberContainer::IncreaseNumber(UInt32).0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]) start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\;
+    \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.Out.0\;
+    \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Finished.0\ <= \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Finished\;
+    \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).return.0\ <= \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.return\;
+    \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.In.0\ <= \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32) start
