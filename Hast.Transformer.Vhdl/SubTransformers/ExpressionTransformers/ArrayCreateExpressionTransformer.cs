@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     "Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
             }
 
-            var elementType = _typeConverter.ConvertAstType(expression.Type);
+            var elementType = _typeConverter.ConvertAstType(expression.GetElementType());
             var arrayInstantiationType = ArrayHelper.CreateArrayInstantiation(elementType, length);
 
             // Finding the variable or member where the array is used and changing its type to the array instantiation.
