@@ -8,7 +8,7 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {
     public interface IBaseInterface
     {
-        int BaseInterfaceMethod1();
-        int BaseInterfaceMethod2();
+        void BaseInterfaceMethod1();
+        void BaseInterfaceMethod2();
     }
 }

@@ -8,9 +8,9 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {
     public class BaseClass
     {
-        protected bool BaseClassMethod1()
+        protected void BaseClassMethod1()
         {
-            return true;
+            var x = 1;
         }
     }
 }

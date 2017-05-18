@@ -8,6 +8,6 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {
     public interface IInterface2
     {
-        int Interface2Method1();
+        void Interface2Method1();
     }
 }

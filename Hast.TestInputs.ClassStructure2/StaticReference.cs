@@ -12,14 +12,17 @@ namespace Hast.TestInputs.ClassStructure2
     /// </summary>
     public class StaticReference
     {
-        public virtual int StaticClassUsingMethod()
+        public virtual void StaticClassUsingMethod()
         {
-            if (!StaticClass.StaticMethod())
+            StaticClass.StaticMethod();
+            if (true)
             {
-                return 2;
+                var x = 1;
+                var y = x;
             }
 
-            return 3 + 4;
+            var x2 = 2;
+            var y2 = x2;
         }
     }
 }

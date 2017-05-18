@@ -91,7 +91,7 @@ namespace Hast.Transformer.Vhdl.Tests
             var config = CreateConfig();
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             var firstId = _producedContext.Id;
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(TestInputs.ClassStructure2.StaticReference).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
 
@@ -124,7 +124,7 @@ namespace Hast.Transformer.Vhdl.Tests
         [Test]
         public async Task UnusedDeclarationsArentInTheSyntaxTree()
         {
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(TestInputs.ClassStructure2.StaticReference).Assembly }, CreateConfig());
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(8, "Not the number of types remained in the syntax tree than there are used.");
@@ -140,11 +140,11 @@ namespace Hast.Transformer.Vhdl.Tests
             var configuration = CreateConfig();
             configuration.PublicHardwareMemberFullNames = new[]
             {
-                "System.Int32 Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32)",
-                "System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()"
+                "System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32)",
+                "System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()"
             };
 
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(TestInputs.ClassStructure2.StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(3, "Not the number of types remained in the syntax tree than there are used.");
@@ -170,7 +170,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 "Hast.TestInputs.ClassStructure1.ComplexTypes"
             };
 
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(TestInputs.ClassStructure2.StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(6, "Not the number of types remained in the syntax tree than there are used.");

@@ -11,9 +11,9 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
     /// </summary>
     public class UnusedDeclarations
     {
-        public bool UnusedMethod()
+        public void UnusedMethod()
         {
-            return true;
+            var x = 1;
         }
     }
 }

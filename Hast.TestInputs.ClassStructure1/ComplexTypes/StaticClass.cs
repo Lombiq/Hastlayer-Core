@@ -11,9 +11,9 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
     /// </summary>
     public static class StaticClass
     {
-        public static bool StaticMethod()
+        public static void StaticMethod()
         {
-            return true;
+            var x = 1;
         }
     }
 }

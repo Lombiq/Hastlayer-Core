@@ -26,7 +26,7 @@ architecture Imp of Hast_IP is
     -- * The ExternalInvocationProxy process dispatches invocations that were started from the outside to the state machines.
     -- * The InternalInvocationProxy processes dispatch invocations between state machines.
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 declarations start
     -- State machine states:
     type \RootClass::VirtualMethod(Int32).0._States\ is (
         \RootClass::VirtualMethod(Int32).0._State_0\, 
@@ -34,13 +34,12 @@ architecture Imp of Hast_IP is
         \RootClass::VirtualMethod(Int32).0._State_2\);
     -- Signals:
     Signal \RootClass::VirtualMethod(Int32).0._Finished\: boolean := false;
-    Signal \RootClass::VirtualMethod(Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \RootClass::VirtualMethod(Int32).0._Started\: boolean := false;
     Signal \RootClass::VirtualMethod(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 declarations end
 
 
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 declarations start
     -- State machine states:
     type \BaseClass::BaseClassMethod1().0._States\ is (
         \BaseClass::BaseClassMethod1().0._State_0\, 
@@ -48,12 +47,11 @@ architecture Imp of Hast_IP is
         \BaseClass::BaseClassMethod1().0._State_2\);
     -- Signals:
     Signal \BaseClass::BaseClassMethod1().0._Finished\: boolean := false;
-    Signal \BaseClass::BaseClassMethod1().0.return\: boolean := false;
     Signal \BaseClass::BaseClassMethod1().0._Started\: boolean := false;
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._States\ is (
         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_0\, 
@@ -62,15 +60,13 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_3\);
     -- Signals:
     Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._Started\: boolean := false;
     Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod().return.0\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::Interface1Method2().0._States\ is (
         \ComplexTypeHierarchy::Interface1Method2().0._State_0\, 
@@ -78,28 +74,20 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::Interface1Method2().0._State_2\, 
         \ComplexTypeHierarchy::Interface1Method2().0._State_3\, 
         \ComplexTypeHierarchy::Interface1Method2().0._State_4\, 
-        \ComplexTypeHierarchy::Interface1Method2().0._State_5\, 
-        \ComplexTypeHierarchy::Interface1Method2().0._State_6\, 
-        \ComplexTypeHierarchy::Interface1Method2().0._State_7\, 
-        \ComplexTypeHierarchy::Interface1Method2().0._State_8\, 
-        \ComplexTypeHierarchy::Interface1Method2().0._State_9\);
+        \ComplexTypeHierarchy::Interface1Method2().0._State_5\);
     -- Signals:
     Signal \ComplexTypeHierarchy::Interface1Method2().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0._Started\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1().return.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod().return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod().return.0\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::Interface2Method1().0._States\ is (
         \ComplexTypeHierarchy::Interface2Method1().0._State_0\, 
@@ -108,15 +96,13 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::Interface2Method1().0._State_3\);
     -- Signals:
     Signal \ComplexTypeHierarchy::Interface2Method1().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface2Method1().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface2Method1().0._Started\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2().return.0\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._States\ is (
         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State_0\, 
@@ -124,12 +110,11 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State_2\);
     -- Signals:
     Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._Started\: boolean := false;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::BaseInterfaceMethod2().0._States\ is (
         \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_0\, 
@@ -138,15 +123,13 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_3\);
     -- Signals:
     Signal \ComplexTypeHierarchy::BaseInterfaceMethod2().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::BaseInterfaceMethod2().0._Started\: boolean := false;
     Signal \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod().return.0\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._States\ is (
         \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_0\, 
@@ -155,15 +138,13 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_3\);
     -- Signals:
     Signal \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._Started\: boolean := false;
     Signal \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod().return.0\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::PrivateMethod().0._States\ is (
         \ComplexTypeHierarchy::PrivateMethod().0._State_0\, 
@@ -172,15 +153,13 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::PrivateMethod().0._State_3\);
     -- Signals:
     Signal \ComplexTypeHierarchy::PrivateMethod().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::PrivateMethod().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::PrivateMethod().0._Started\: boolean := false;
     Signal \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod().return.0\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::UnusedMethod().0._States\ is (
         \ComplexTypeHierarchy::UnusedMethod().0._State_0\, 
@@ -188,12 +167,11 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::UnusedMethod().0._State_2\);
     -- Signals:
     Signal \ComplexTypeHierarchy::UnusedMethod().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::UnusedMethod().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::UnusedMethod().0._Started\: boolean := false;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::StaticMethod().0._States\ is (
         \ComplexTypeHierarchy::StaticMethod().0._State_0\, 
@@ -201,12 +179,11 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::StaticMethod().0._State_2\);
     -- Signals:
     Signal \ComplexTypeHierarchy::StaticMethod().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::StaticMethod().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::StaticMethod().0._Started\: boolean := false;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 declarations end
 
 
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod().0 declarations start
     -- State machine states:
     type \StaticClass::StaticMethod().0._States\ is (
         \StaticClass::StaticMethod().0._State_0\, 
@@ -214,12 +191,11 @@ architecture Imp of Hast_IP is
         \StaticClass::StaticMethod().0._State_2\);
     -- Signals:
     Signal \StaticClass::StaticMethod().0._Finished\: boolean := false;
-    Signal \StaticClass::StaticMethod().0.return\: boolean := false;
     Signal \StaticClass::StaticMethod().0._Started\: boolean := false;
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod().0 declarations end
 
 
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod().0 declarations start
     -- State machine states:
     type \UnusedDeclarations::UnusedMethod().0._States\ is (
         \UnusedDeclarations::UnusedMethod().0._State_0\, 
@@ -227,29 +203,23 @@ architecture Imp of Hast_IP is
         \UnusedDeclarations::UnusedMethod().0._State_2\);
     -- Signals:
     Signal \UnusedDeclarations::UnusedMethod().0._Finished\: boolean := false;
-    Signal \UnusedDeclarations::UnusedMethod().0.return\: boolean := false;
     Signal \UnusedDeclarations::UnusedMethod().0._Started\: boolean := false;
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod().0 declarations end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 declarations start
+    -- System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 declarations start
     -- State machine states:
     type \StaticReference::StaticClassUsingMethod().0._States\ is (
         \StaticReference::StaticClassUsingMethod().0._State_0\, 
         \StaticReference::StaticClassUsingMethod().0._State_1\, 
         \StaticReference::StaticClassUsingMethod().0._State_2\, 
-        \StaticReference::StaticClassUsingMethod().0._State_3\, 
-        \StaticReference::StaticClassUsingMethod().0._State_4\, 
-        \StaticReference::StaticClassUsingMethod().0._State_5\, 
-        \StaticReference::StaticClassUsingMethod().0._State_6\);
+        \StaticReference::StaticClassUsingMethod().0._State_3\);
     -- Signals:
     Signal \StaticReference::StaticClassUsingMethod().0._Finished\: boolean := false;
-    Signal \StaticReference::StaticClassUsingMethod().0.return\: signed(31 downto 0) := to_signed(0, 32);
     Signal \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Started.0\: boolean := false;
     Signal \StaticReference::StaticClassUsingMethod().0._Started\: boolean := false;
     Signal \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Finished.0\: boolean := false;
-    Signal \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod().return.0\: boolean := false;
-    -- System.Int32 Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 declarations end
+    -- System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 declarations end
 
 
     -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 declarations start
@@ -310,7 +280,7 @@ architecture Imp of Hast_IP is
 
 begin 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 state machine start
     \RootClass::VirtualMethod(Int32).0._StateMachine\: process (\Clock\) 
         Variable \RootClass::VirtualMethod(Int32).0._State\: \RootClass::VirtualMethod(Int32).0._States\ := \RootClass::VirtualMethod(Int32).0._State_0\;
         Variable \RootClass::VirtualMethod(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
@@ -319,7 +289,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \RootClass::VirtualMethod(Int32).0._Finished\ <= false;
-                \RootClass::VirtualMethod(Int32).0.return\ <= to_signed(0, 32);
                 \RootClass::VirtualMethod(Int32).0._State\ := \RootClass::VirtualMethod(Int32).0._State_0\;
                 \RootClass::VirtualMethod(Int32).0.input\ := to_signed(0, 32);
             else 
@@ -343,17 +312,16 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RootClass::VirtualMethod(Int32).0._State_2\ => 
                         \RootClass::VirtualMethod(Int32).0.input\ := \RootClass::VirtualMethod(Int32).0.input.parameter.In\;
-                        \RootClass::VirtualMethod(Int32).0.return\ <= to_signed(5, 32);
                         \RootClass::VirtualMethod(Int32).0._State\ := \RootClass::VirtualMethod(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 state machine end
 
 
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 state machine start
     \BaseClass::BaseClassMethod1().0._StateMachine\: process (\Clock\) 
         Variable \BaseClass::BaseClassMethod1().0._State\: \BaseClass::BaseClassMethod1().0._States\ := \BaseClass::BaseClassMethod1().0._State_0\;
     begin 
@@ -361,7 +329,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \BaseClass::BaseClassMethod1().0._Finished\ <= false;
-                \BaseClass::BaseClassMethod1().0.return\ <= false;
                 \BaseClass::BaseClassMethod1().0._State\ := \BaseClass::BaseClassMethod1().0._State_0\;
             else 
                 case \BaseClass::BaseClassMethod1().0._State\ is 
@@ -383,31 +350,25 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BaseClass::BaseClassMethod1().0._State_2\ => 
-                        \BaseClass::BaseClassMethod1().0.return\ <= True;
                         \BaseClass::BaseClassMethod1().0._State\ := \BaseClass::BaseClassMethod1().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 state machine start
     \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State\: \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._States\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_0\;
-        Variable \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.return.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._Finished\ <= false;
-                \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_0\;
-                \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.return.0\ := to_signed(0, 32);
-                \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.binaryOperationResult.0\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State\ is 
                     when \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_0\ => 
@@ -428,17 +389,14 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         if (\ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.return.0\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod().return.0\;
-                            \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.binaryOperationResult.0\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.return.0\ + to_signed(3, 32);
-                            \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.return\ <= \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.binaryOperationResult.0\;
                             \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -446,36 +404,21 @@ begin
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 state machine start
     \ComplexTypeHierarchy::Interface1Method2().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::Interface1Method2().0._State\: \ComplexTypeHierarchy::Interface1Method2().0._States\ := \ComplexTypeHierarchy::Interface1Method2().0._State_0\;
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.flag\: boolean := false;
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.result\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.return.0\: boolean := false;
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.return.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.return.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.return.3\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::Interface1Method2().0._Finished\ <= false;
-                \ComplexTypeHierarchy::Interface1Method2().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_0\;
-                \ComplexTypeHierarchy::Interface1Method2().0.flag\ := false;
-                \ComplexTypeHierarchy::Interface1Method2().0.result\ := to_signed(0, 32);
-                \ComplexTypeHierarchy::Interface1Method2().0.return.0\ := false;
-                \ComplexTypeHierarchy::Interface1Method2().0.return.1\ := to_signed(0, 32);
-                \ComplexTypeHierarchy::Interface1Method2().0.return.2\ := to_signed(0, 32);
-                \ComplexTypeHierarchy::Interface1Method2().0.binaryOperationResult.0\ := to_signed(0, 32);
-                \ComplexTypeHierarchy::Interface1Method2().0.return.3\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::Interface1Method2().0._State\ is 
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_0\ => 
@@ -496,103 +439,52 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1()
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1()
                         \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ <= true;
                         \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1()
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1()
                         if (\ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\) then 
                             \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::Interface1Method2().0.return.0\ := \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1().return.0\;
-                            \ComplexTypeHierarchy::Interface1Method2().0.flag\ := \ComplexTypeHierarchy::Interface1Method2().0.return.0\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \ComplexTypeHierarchy::Interface1Method2().0._State_5\ and ends in state \ComplexTypeHierarchy::Interface1Method2().0._State_7\.
-                            --     * The false branch starts in state \ComplexTypeHierarchy::Interface1Method2().0._State_8\ and ends in state \ComplexTypeHierarchy::Interface1Method2().0._State_9\.
-                            --     * Execution after either branch will continue in the following state: \ComplexTypeHierarchy::Interface1Method2().0._State_4\.
-
-                            if (\ComplexTypeHierarchy::Interface1Method2().0.flag\) then 
-                                \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_5\;
-                            else 
-                                \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_8\;
-                            end if;
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
+                            \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
+                            \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_4\ => 
-                        -- State after the if-else which was started in state \ComplexTypeHierarchy::Interface1Method2().0._State_3\.
-                        \ComplexTypeHierarchy::Interface1Method2().0.return\ <= \ComplexTypeHierarchy::Interface1Method2().0.result\;
-                        \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_1\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
+                        if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
+                            \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
+                            \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
+                            \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_5\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_5\ => 
-                        -- True branch of the if-else started in state \ComplexTypeHierarchy::Interface1Method2().0._State_3\.
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
-                        \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
-                        \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ComplexTypeHierarchy::Interface1Method2().0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
-                        if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
-                            \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::Interface1Method2().0.return.1\ := \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod().return.0\;
-                            -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
-                            \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
-                            \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ComplexTypeHierarchy::Interface1Method2().0._State_7\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::Interface1Method2().0.return.2\ := \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod().return.0\;
-                            \ComplexTypeHierarchy::Interface1Method2().0.binaryOperationResult.0\ := \ComplexTypeHierarchy::Interface1Method2().0.return.1\ + \ComplexTypeHierarchy::Interface1Method2().0.return.2\;
-                            \ComplexTypeHierarchy::Interface1Method2().0.result\ := \ComplexTypeHierarchy::Interface1Method2().0.binaryOperationResult.0\;
-                            -- Going to the state after the if-else which was started in state \ComplexTypeHierarchy::Interface1Method2().0._State_3\.
-                            if (\ComplexTypeHierarchy::Interface1Method2().0._State\ = \ComplexTypeHierarchy::Interface1Method2().0._State_7\) then 
-                                \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_4\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ComplexTypeHierarchy::Interface1Method2().0._State_8\ => 
-                        -- False branch of the if-else started in state \ComplexTypeHierarchy::Interface1Method2().0._State_3\.
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
-                        \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
-                        \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ComplexTypeHierarchy::Interface1Method2().0._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
-                        if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
-                            \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::Interface1Method2().0.return.3\ := \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod().return.0\;
-                            \ComplexTypeHierarchy::Interface1Method2().0.result\ := \ComplexTypeHierarchy::Interface1Method2().0.return.3\;
-                            -- Going to the state after the if-else which was started in state \ComplexTypeHierarchy::Interface1Method2().0._State_3\.
-                            if (\ComplexTypeHierarchy::Interface1Method2().0._State\ = \ComplexTypeHierarchy::Interface1Method2().0._State_9\) then 
-                                \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_4\;
-                            end if;
+                            \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0 state machine start
     \ComplexTypeHierarchy::Interface2Method1().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::Interface2Method1().0._State\: \ComplexTypeHierarchy::Interface2Method1().0._States\ := \ComplexTypeHierarchy::Interface2Method1().0._State_0\;
-        Variable \ComplexTypeHierarchy::Interface2Method1().0.return.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ComplexTypeHierarchy::Interface2Method1().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::Interface2Method1().0._Finished\ <= false;
-                \ComplexTypeHierarchy::Interface2Method1().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface2Method1().0._State\ := \ComplexTypeHierarchy::Interface2Method1().0._State_0\;
-                \ComplexTypeHierarchy::Interface2Method1().0.return.0\ := to_signed(0, 32);
-                \ComplexTypeHierarchy::Interface2Method1().0.binaryOperationResult.0\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::Interface2Method1().0._State\ is 
                     when \ComplexTypeHierarchy::Interface2Method1().0._State_0\ => 
@@ -613,17 +505,14 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface2Method1().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2()
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2()
                         \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ <= true;
                         \ComplexTypeHierarchy::Interface2Method1().0._State\ := \ComplexTypeHierarchy::Interface2Method1().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface2Method1().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2()
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2()
                         if (\ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ = \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Finished.0\) then 
                             \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::Interface2Method1().0.return.0\ := \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2().return.0\;
-                            \ComplexTypeHierarchy::Interface2Method1().0.binaryOperationResult.0\ := to_signed(10, 32) + \ComplexTypeHierarchy::Interface2Method1().0.return.0\;
-                            \ComplexTypeHierarchy::Interface2Method1().0.return\ <= \ComplexTypeHierarchy::Interface2Method1().0.binaryOperationResult.0\;
                             \ComplexTypeHierarchy::Interface2Method1().0._State\ := \ComplexTypeHierarchy::Interface2Method1().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -631,10 +520,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0 state machine start
     \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State\: \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._States\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State_0\;
     begin 
@@ -642,7 +531,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._Finished\ <= false;
-                \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State_0\;
             else 
                 case \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State\ is 
@@ -664,29 +552,25 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State_2\ => 
-                        \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0.return\ <= to_signed(5, 32);
                         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0 state machine start
     \ComplexTypeHierarchy::BaseInterfaceMethod2().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State\: \ComplexTypeHierarchy::BaseInterfaceMethod2().0._States\ := \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_0\;
-        Variable \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::BaseInterfaceMethod2().0._Finished\ <= false;
-                \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State\ := \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_0\;
-                \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return.0\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State\ is 
                     when \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_0\ => 
@@ -707,16 +591,14 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State\ := \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         if (\ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ = \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return.0\ := \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod().return.0\;
-                            \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return\ <= \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return.0\;
                             \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State\ := \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -724,22 +606,19 @@ begin
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0 state machine start
     \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State\: \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._States\ := \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_0\;
-        Variable \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.return.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._Finished\ <= false;
-                \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State\ := \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_0\;
-                \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.return.0\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State\ is 
                     when \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_0\ => 
@@ -760,16 +639,14 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State\ := \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         if (\ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.return.0\ := \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod().return.0\;
-                            \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.return\ <= \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.return.0\;
                             \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State\ := \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -777,24 +654,19 @@ begin
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 state machine start
     \ComplexTypeHierarchy::PrivateMethod().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::PrivateMethod().0._State\: \ComplexTypeHierarchy::PrivateMethod().0._States\ := \ComplexTypeHierarchy::PrivateMethod().0._State_0\;
-        Variable \ComplexTypeHierarchy::PrivateMethod().0.return.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ComplexTypeHierarchy::PrivateMethod().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::PrivateMethod().0._Finished\ <= false;
-                \ComplexTypeHierarchy::PrivateMethod().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::PrivateMethod().0._State\ := \ComplexTypeHierarchy::PrivateMethod().0._State_0\;
-                \ComplexTypeHierarchy::PrivateMethod().0.return.0\ := to_signed(0, 32);
-                \ComplexTypeHierarchy::PrivateMethod().0.binaryOperationResult.0\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::PrivateMethod().0._State\ is 
                     when \ComplexTypeHierarchy::PrivateMethod().0._State_0\ => 
@@ -815,17 +687,14 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::PrivateMethod().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::PrivateMethod().0._State\ := \ComplexTypeHierarchy::PrivateMethod().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::PrivateMethod().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         if (\ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ = \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
-                            \ComplexTypeHierarchy::PrivateMethod().0.return.0\ := \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod().return.0\;
-                            \ComplexTypeHierarchy::PrivateMethod().0.binaryOperationResult.0\ := to_signed(5, 32) + \ComplexTypeHierarchy::PrivateMethod().0.return.0\;
-                            \ComplexTypeHierarchy::PrivateMethod().0.return\ <= \ComplexTypeHierarchy::PrivateMethod().0.binaryOperationResult.0\;
                             \ComplexTypeHierarchy::PrivateMethod().0._State\ := \ComplexTypeHierarchy::PrivateMethod().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -833,10 +702,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 state machine start
     \ComplexTypeHierarchy::UnusedMethod().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::UnusedMethod().0._State\: \ComplexTypeHierarchy::UnusedMethod().0._States\ := \ComplexTypeHierarchy::UnusedMethod().0._State_0\;
     begin 
@@ -844,7 +713,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::UnusedMethod().0._Finished\ <= false;
-                \ComplexTypeHierarchy::UnusedMethod().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::UnusedMethod().0._State\ := \ComplexTypeHierarchy::UnusedMethod().0._State_0\;
             else 
                 case \ComplexTypeHierarchy::UnusedMethod().0._State\ is 
@@ -866,17 +734,16 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::UnusedMethod().0._State_2\ => 
-                        \ComplexTypeHierarchy::UnusedMethod().0.return\ <= to_signed(234, 32);
                         \ComplexTypeHierarchy::UnusedMethod().0._State\ := \ComplexTypeHierarchy::UnusedMethod().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 state machine start
     \ComplexTypeHierarchy::StaticMethod().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::StaticMethod().0._State\: \ComplexTypeHierarchy::StaticMethod().0._States\ := \ComplexTypeHierarchy::StaticMethod().0._State_0\;
     begin 
@@ -884,7 +751,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::StaticMethod().0._Finished\ <= false;
-                \ComplexTypeHierarchy::StaticMethod().0.return\ <= to_signed(0, 32);
                 \ComplexTypeHierarchy::StaticMethod().0._State\ := \ComplexTypeHierarchy::StaticMethod().0._State_0\;
             else 
                 case \ComplexTypeHierarchy::StaticMethod().0._State\ is 
@@ -906,17 +772,16 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::StaticMethod().0._State_2\ => 
-                        \ComplexTypeHierarchy::StaticMethod().0.return\ <= to_signed(7, 32);
                         \ComplexTypeHierarchy::StaticMethod().0._State\ := \ComplexTypeHierarchy::StaticMethod().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 state machine end
 
 
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod().0 state machine start
     \StaticClass::StaticMethod().0._StateMachine\: process (\Clock\) 
         Variable \StaticClass::StaticMethod().0._State\: \StaticClass::StaticMethod().0._States\ := \StaticClass::StaticMethod().0._State_0\;
     begin 
@@ -924,7 +789,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \StaticClass::StaticMethod().0._Finished\ <= false;
-                \StaticClass::StaticMethod().0.return\ <= false;
                 \StaticClass::StaticMethod().0._State\ := \StaticClass::StaticMethod().0._State_0\;
             else 
                 case \StaticClass::StaticMethod().0._State\ is 
@@ -946,17 +810,16 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \StaticClass::StaticMethod().0._State_2\ => 
-                        \StaticClass::StaticMethod().0.return\ <= True;
                         \StaticClass::StaticMethod().0._State\ := \StaticClass::StaticMethod().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod().0 state machine end
 
 
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod().0 state machine start
     \UnusedDeclarations::UnusedMethod().0._StateMachine\: process (\Clock\) 
         Variable \UnusedDeclarations::UnusedMethod().0._State\: \UnusedDeclarations::UnusedMethod().0._States\ := \UnusedDeclarations::UnusedMethod().0._State_0\;
     begin 
@@ -964,7 +827,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \UnusedDeclarations::UnusedMethod().0._Finished\ <= false;
-                \UnusedDeclarations::UnusedMethod().0.return\ <= false;
                 \UnusedDeclarations::UnusedMethod().0._State\ := \UnusedDeclarations::UnusedMethod().0._State_0\;
             else 
                 case \UnusedDeclarations::UnusedMethod().0._State\ is 
@@ -986,33 +848,25 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \UnusedDeclarations::UnusedMethod().0._State_2\ => 
-                        \UnusedDeclarations::UnusedMethod().0.return\ <= True;
                         \UnusedDeclarations::UnusedMethod().0._State\ := \UnusedDeclarations::UnusedMethod().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod().0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 state machine start
+    -- System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 state machine start
     \StaticReference::StaticClassUsingMethod().0._StateMachine\: process (\Clock\) 
         Variable \StaticReference::StaticClassUsingMethod().0._State\: \StaticReference::StaticClassUsingMethod().0._States\ := \StaticReference::StaticClassUsingMethod().0._State_0\;
-        Variable \StaticReference::StaticClassUsingMethod().0.flag\: boolean := false;
-        Variable \StaticReference::StaticClassUsingMethod().0.result\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \StaticReference::StaticClassUsingMethod().0.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \StaticReference::StaticClassUsingMethod().0._Finished\ <= false;
-                \StaticReference::StaticClassUsingMethod().0.return\ <= to_signed(0, 32);
                 \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Started.0\ <= false;
                 \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_0\;
-                \StaticReference::StaticClassUsingMethod().0.flag\ := false;
-                \StaticReference::StaticClassUsingMethod().0.result\ := to_signed(0, 32);
-                \StaticReference::StaticClassUsingMethod().0.return.0\ := false;
             else 
                 case \StaticReference::StaticClassUsingMethod().0._State\ is 
                     when \StaticReference::StaticClassUsingMethod().0._State_0\ => 
@@ -1033,55 +887,22 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \StaticReference::StaticClassUsingMethod().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod()
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod()
                         \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Started.0\ <= true;
                         \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \StaticReference::StaticClassUsingMethod().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod()
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod()
                         if (\StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Started.0\ = \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Finished.0\) then 
                             \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Started.0\ <= false;
-                            \StaticReference::StaticClassUsingMethod().0.return.0\ := \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod().return.0\;
-                            \StaticReference::StaticClassUsingMethod().0.flag\ := not(\StaticReference::StaticClassUsingMethod().0.return.0\);
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \StaticReference::StaticClassUsingMethod().0._State_5\ and ends in state \StaticReference::StaticClassUsingMethod().0._State_5\.
-                            --     * The false branch starts in state \StaticReference::StaticClassUsingMethod().0._State_6\ and ends in state \StaticReference::StaticClassUsingMethod().0._State_6\.
-                            --     * Execution after either branch will continue in the following state: \StaticReference::StaticClassUsingMethod().0._State_4\.
-
-                            if (\StaticReference::StaticClassUsingMethod().0.flag\) then 
-                                \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_5\;
-                            else 
-                                \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_6\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \StaticReference::StaticClassUsingMethod().0._State_4\ => 
-                        -- State after the if-else which was started in state \StaticReference::StaticClassUsingMethod().0._State_3\.
-                        \StaticReference::StaticClassUsingMethod().0.return\ <= \StaticReference::StaticClassUsingMethod().0.result\;
-                        \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \StaticReference::StaticClassUsingMethod().0._State_5\ => 
-                        -- True branch of the if-else started in state \StaticReference::StaticClassUsingMethod().0._State_3\.
-                        \StaticReference::StaticClassUsingMethod().0.result\ := to_signed(2, 32);
-                        -- Going to the state after the if-else which was started in state \StaticReference::StaticClassUsingMethod().0._State_3\.
-                        if (\StaticReference::StaticClassUsingMethod().0._State\ = \StaticReference::StaticClassUsingMethod().0._State_5\) then 
-                            \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \StaticReference::StaticClassUsingMethod().0._State_6\ => 
-                        -- False branch of the if-else started in state \StaticReference::StaticClassUsingMethod().0._State_3\.
-                        \StaticReference::StaticClassUsingMethod().0.result\ := to_signed(7, 32);
-                        -- Going to the state after the if-else which was started in state \StaticReference::StaticClassUsingMethod().0._State_3\.
-                        if (\StaticReference::StaticClassUsingMethod().0._State\ = \StaticReference::StaticClassUsingMethod().0._State_6\) then 
-                            \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_4\;
+                            \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 state machine end
+    -- System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 state machine end
 
 
     -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 state machine start
@@ -1287,7 +1108,7 @@ begin
     -- System.Void Hast::ExternalInvocationProxy() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod() start
     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
@@ -1315,7 +1136,7 @@ begin
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0
                 case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\) then 
@@ -1331,7 +1152,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.runningState.0\ := AfterFinished;
                                     \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::PrivateMethod().0._Started\ <= false;
-                                    \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod().return.0\ <= \ComplexTypeHierarchy::PrivateMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1343,7 +1163,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0
                 case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\) then 
@@ -1359,7 +1179,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ := AfterFinished;
                                     \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::PrivateMethod().0._Started\ <= false;
-                                    \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod().return.0\ <= \ComplexTypeHierarchy::PrivateMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1371,7 +1190,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0
                 case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\) then 
@@ -1387,7 +1206,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.runningState.0\ := AfterFinished;
                                     \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::PrivateMethod().0._Started\ <= false;
-                                    \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod().return.0\ <= \ComplexTypeHierarchy::PrivateMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1415,7 +1233,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
                                     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::PrivateMethod().0._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().return.0\ <= \ComplexTypeHierarchy::PrivateMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1429,10 +1246,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1() start
     \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
@@ -1450,7 +1267,7 @@ begin
                 \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0
                 case \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\) then 
@@ -1466,7 +1283,6 @@ begin
                                     \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ := AfterFinished;
                                     \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\ <= true;
                                     \BaseClass::BaseClassMethod1().0._Started\ <= false;
-                                    \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1().return.0\ <= \BaseClass::BaseClassMethod1().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1494,7 +1310,6 @@ begin
                                     \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
                                     \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\ <= true;
                                     \BaseClass::BaseClassMethod1().0._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1().return.0\ <= \BaseClass::BaseClassMethod1().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1508,10 +1323,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod() start
     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::Interface1Method2().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
@@ -1539,7 +1354,7 @@ begin
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0
                 case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\) then 
@@ -1555,7 +1370,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ := AfterFinished;
                                     \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::StaticMethod().0._Started\ <= false;
-                                    \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod().return.0\ <= \ComplexTypeHierarchy::StaticMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1567,7 +1381,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2().0
                 case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::BaseInterfaceMethod2().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\) then 
@@ -1583,7 +1397,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::BaseInterfaceMethod2().0.runningState.0\ := AfterFinished;
                                     \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::StaticMethod().0._Started\ <= false;
-                                    \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod().return.0\ <= \ComplexTypeHierarchy::StaticMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1595,7 +1408,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0
                 case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::PrivateMethod().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\) then 
@@ -1611,7 +1424,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::PrivateMethod().0.runningState.0\ := AfterFinished;
                                     \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::StaticMethod().0._Started\ <= false;
-                                    \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod().return.0\ <= \ComplexTypeHierarchy::StaticMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1639,7 +1451,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
                                     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::StaticMethod().0._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().return.0\ <= \ComplexTypeHierarchy::StaticMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1653,10 +1464,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2() start
     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2().ComplexTypeHierarchy::Interface2Method1().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2().ComplexTypeHierarchy::Interface2Method1().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
@@ -1674,7 +1485,7 @@ begin
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1().0
                 case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2().ComplexTypeHierarchy::Interface2Method1().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\) then 
@@ -1690,7 +1501,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2().ComplexTypeHierarchy::Interface2Method1().0.runningState.0\ := AfterFinished;
                                     \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::BaseInterfaceMethod2().0._Started\ <= false;
-                                    \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2().return.0\ <= \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1718,7 +1528,6 @@ begin
                                     \Hast::InternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2().Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
                                     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Finished.0\ <= true;
                                     \ComplexTypeHierarchy::BaseInterfaceMethod2().0._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2().return.0\ <= \ComplexTypeHierarchy::BaseInterfaceMethod2().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1732,10 +1541,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod() start
     \Hast::InternalInvocationProxy().StaticClass::StaticMethod()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().StaticClass::StaticMethod().StaticReference::StaticClassUsingMethod().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().StaticClass::StaticMethod().StaticReference::StaticClassUsingMethod().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
@@ -1753,7 +1562,7 @@ begin
                 \Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Int32 Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0
                 case \Hast::InternalInvocationProxy().StaticClass::StaticMethod().StaticReference::StaticClassUsingMethod().0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Started.0\) then 
@@ -1769,7 +1578,6 @@ begin
                                     \Hast::InternalInvocationProxy().StaticClass::StaticMethod().StaticReference::StaticClassUsingMethod().0.runningState.0\ := AfterFinished;
                                     \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Finished.0\ <= true;
                                     \StaticClass::StaticMethod().0._Started\ <= false;
-                                    \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod().return.0\ <= \StaticClass::StaticMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1797,7 +1605,6 @@ begin
                                     \Hast::InternalInvocationProxy().StaticClass::StaticMethod().Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
                                     \Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Finished.0\ <= true;
                                     \StaticClass::StaticMethod().0._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().StaticClass::StaticMethod().return.0\ <= \StaticClass::StaticMethod().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -1811,79 +1618,70 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \RootClass::VirtualMethod(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Started.0\;
     \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\ <= \RootClass::VirtualMethod(Int32).0._Finished\;
-    \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32).return.0\ <= \RootClass::VirtualMethod(Int32).0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._Started\ <= \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Started.0\;
     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Finished.0\ <= \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._Finished\;
-    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().return.0\ <= \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ComplexTypeHierarchy::Interface1Method2().0._Started\ <= \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Started.0\;
     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Finished.0\ <= \ComplexTypeHierarchy::Interface1Method2().0._Finished\;
-    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2().return.0\ <= \ComplexTypeHierarchy::Interface1Method2().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ComplexTypeHierarchy::Interface2Method1().0._Started\ <= \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Started.0\;
     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Finished.0\ <= \ComplexTypeHierarchy::Interface2Method1().0._Finished\;
-    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1().return.0\ <= \ComplexTypeHierarchy::Interface2Method1().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface2Method1() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._Started\ <= \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Started.0\;
     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Finished.0\ <= \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0._Finished\;
-    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().return.0\ <= \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._Started\ <= \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Started.0\;
     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Finished.0\ <= \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._Finished\;
-    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().return.0\ <= \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ComplexTypeHierarchy::UnusedMethod().0._Started\ <= \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Started.0\;
     \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Finished.0\ <= \ComplexTypeHierarchy::UnusedMethod().0._Finished\;
-    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod().return.0\ <= \ComplexTypeHierarchy::UnusedMethod().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \UnusedDeclarations::UnusedMethod().0._Started\ <= \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\;
     \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Finished.0\ <= \UnusedDeclarations::UnusedMethod().0._Finished\;
-    \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod().return.0\ <= \UnusedDeclarations::UnusedMethod().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \StaticReference::StaticClassUsingMethod().0._Started\ <= \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\;
     \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Finished.0\ <= \StaticReference::StaticClassUsingMethod().0._Finished\;
-    \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod().return.0\ <= \StaticReference::StaticClassUsingMethod().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod() end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting() start
