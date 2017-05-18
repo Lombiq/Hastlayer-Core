@@ -22,6 +22,11 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration =>
                     {
                         configuration.TransformerConfiguration().UseSimpleMemory = false;
+                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfiguration("Hast.TestInputs.Various.ParallelCases.WhenAllWhenAnyAwaitedTasks.LambdaExpression.0")
+                            {
+                                MaxDegreeOfParallelism = 3
+                            });
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
