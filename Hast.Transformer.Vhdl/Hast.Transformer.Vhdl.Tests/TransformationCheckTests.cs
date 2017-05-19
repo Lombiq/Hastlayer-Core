@@ -21,8 +21,8 @@ namespace Hast.Transformer.Vhdl.Tests
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidParallelCases.InvalidExternalVariableAssignment"),
-                typeof(NotSupportedException));
+                    TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidParallelCases.InvalidExternalVariableAssignment"),
+                    typeof(NotSupportedException));
             });
         }
 
@@ -32,8 +32,23 @@ namespace Hast.Transformer.Vhdl.Tests
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidArrayUsingCases.InvalidArrayUsage"),
-                typeof(InvalidOperationException));
+                    TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidArrayUsingCases.InvalidArrayAssignment"),
+                    typeof(InvalidOperationException));
+
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidArrayUsingCases.ArraySizeIsNotStatic"),
+                    typeof(NotSupportedException));
+            });
+        }
+
+        [Test]
+        public async Task InvalidLanguageConstructsArePrevented()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidLanguageConstructCases.BreakStatements"),
+                    typeof(NotSupportedException));
             });
         }
 
