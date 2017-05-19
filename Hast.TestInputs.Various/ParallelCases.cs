@@ -18,6 +18,7 @@ namespace Hast.TestInputs.Various
                     indexObject =>
                     {
                         var index = (uint)indexObject;
+                        index += input;
                         return index % 2 == 0;
                     }, i);
             }

@@ -239,46 +239,52 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 declarations end
 
 
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).0 declarations start
+    -- System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input declarations start
+    -- Shared (global) variables:
+    shared Variable \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input declarations end
+
+
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).0 declarations start
     -- State machine states:
-    type \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._States\ is (
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_0\, 
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_1\, 
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_2\);
+    type \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._States\ is (
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_0\, 
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_1\, 
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_2\);
     -- Signals:
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Finished\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.return\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).0 declarations end
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).0 declarations end
 
 
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).1 declarations start
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).1 declarations start
     -- State machine states:
-    type \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._States\ is (
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_0\, 
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_1\, 
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_2\);
+    type \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._States\ is (
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_0\, 
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_1\, 
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_2\);
     -- Signals:
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Finished\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.return\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).1 declarations end
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).1 declarations end
 
 
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).2 declarations start
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).2 declarations start
     -- State machine states:
-    type \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._States\ is (
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_0\, 
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_1\, 
-        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_2\);
+    type \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._States\ is (
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_0\, 
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_1\, 
+        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_2\);
     -- Signals:
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Finished\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.return\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\: boolean := false;
-    Signal \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).2 declarations end
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\: boolean := false;
+    Signal \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).2 declarations end
 
 
     -- System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0 declarations start
@@ -293,20 +299,20 @@ architecture Imp of Hast_IP is
         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_6\);
     -- Signals:
     Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._Finished\: boolean := false;
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\: boolean := false;
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\: boolean := false;
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\: boolean := false;
     Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._Started\: boolean := false;
     Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\: boolean := false;
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\: boolean := false;
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\: boolean := false;
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\: boolean := false;
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.1\: boolean := false;
-    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.2\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\: boolean := false;
+    Signal \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\: boolean := false;
     -- System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0 declarations end
 
 
@@ -328,7 +334,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\: boolean := false;
@@ -345,7 +351,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
@@ -1041,160 +1047,172 @@ begin
     -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 state machine end
 
 
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).0 state machine start
-    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._StateMachine\: process (\Clock\) 
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State\: \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._States\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_0\;
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.binaryOperationResult.1\: boolean := false;
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).0 state machine start
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._StateMachine\: process (\Clock\) 
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\: \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._States\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_0\;
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.2\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Finished\ <= false;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.return\ <= false;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_0\;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.num\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.binaryOperationResult.1\ := false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\ <= false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\ <= false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_0\;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.2\ := false;
             else 
-                case \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State\ is 
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_0\ => 
+                case \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\ is 
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ = true) then 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_2\;
+                        if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ = true) then 
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_1\ => 
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ = true) then 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Finished\ <= true;
+                        if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ = true) then 
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\ <= true;
                         else 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Finished\ <= false;
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_0\;
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\ <= false;
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_2\ => 
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject.parameter.In\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.num\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.binaryOperationResult.0\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.num\ mod to_unsigned(2, 32);
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.binaryOperationResult.1\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.binaryOperationResult.0\ = to_unsigned(0, 32);
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.return\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.binaryOperationResult.1\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._State_1\;
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_2\ => 
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.0\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.1\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ mod to_unsigned(2, 32);
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.2\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.1\ = to_unsigned(0, 32);
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.2\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).0 state machine end
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).0 state machine end
 
 
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).1 state machine start
-    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._StateMachine\: process (\Clock\) 
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State\: \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._States\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_0\;
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.binaryOperationResult.1\: boolean := false;
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).1 state machine start
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._StateMachine\: process (\Clock\) 
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\: \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._States\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_0\;
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.2\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Finished\ <= false;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.return\ <= false;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_0\;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.num\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.binaryOperationResult.1\ := false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\ <= false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\ <= false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_0\;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.2\ := false;
             else 
-                case \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State\ is 
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_0\ => 
+                case \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\ is 
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ = true) then 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_2\;
+                        if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ = true) then 
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_1\ => 
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ = true) then 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Finished\ <= true;
+                        if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ = true) then 
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\ <= true;
                         else 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Finished\ <= false;
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_0\;
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\ <= false;
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_2\ => 
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject.parameter.In\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.num\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.binaryOperationResult.0\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.num\ mod to_unsigned(2, 32);
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.binaryOperationResult.1\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.binaryOperationResult.0\ = to_unsigned(0, 32);
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.return\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.binaryOperationResult.1\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._State_1\;
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_2\ => 
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.0\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.1\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ mod to_unsigned(2, 32);
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.2\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.1\ = to_unsigned(0, 32);
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.2\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).1 state machine end
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).1 state machine end
 
 
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).2 state machine start
-    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._StateMachine\: process (\Clock\) 
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State\: \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._States\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_0\;
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.binaryOperationResult.1\: boolean := false;
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).2 state machine start
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._StateMachine\: process (\Clock\) 
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\: \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._States\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_0\;
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.2\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Finished\ <= false;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.return\ <= false;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_0\;
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.num\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.binaryOperationResult.1\ := false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\ <= false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\ <= false;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_0\;
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.2\ := false;
             else 
-                case \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State\ is 
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_0\ => 
+                case \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\ is 
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ = true) then 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_2\;
+                        if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ = true) then 
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_1\ => 
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ = true) then 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Finished\ <= true;
+                        if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ = true) then 
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\ <= true;
                         else 
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Finished\ <= false;
-                            \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_0\;
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\ <= false;
+                            \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_2\ => 
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject.parameter.In\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.num\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.binaryOperationResult.0\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.num\ mod to_unsigned(2, 32);
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.binaryOperationResult.1\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.binaryOperationResult.0\ = to_unsigned(0, 32);
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.return\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.binaryOperationResult.1\;
-                        \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State\ := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._State_1\;
+                    when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_2\ => 
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.0\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.1\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ mod to_unsigned(2, 32);
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.2\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.1\ = to_unsigned(0, 32);
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.2\;
+                        \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32).2 state machine end
+    -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).2 state machine end
 
 
     -- System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0 state machine start
@@ -1203,10 +1221,10 @@ begin
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\: \boolean_Array\(0 to 2);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_3E_1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\: boolean := false;
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\: boolean := false;
-        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.0\: boolean := false;
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.1\: boolean := false;
@@ -1219,19 +1237,19 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._Finished\ <= false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.0\ <= to_unsigned(0, 32);
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ <= false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.1\ <= to_unsigned(0, 32);
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\ <= false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.2\ <= to_unsigned(0, 32);
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\ <= false;
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\ <= to_unsigned(0, 32);
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= false;
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\ <= to_unsigned(0, 32);
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\ <= false;
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\ <= to_unsigned(0, 32);
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ <= false;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_0\;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input\ := to_unsigned(0, 32);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := to_unsigned(0, 32);
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_3E_1\ := to_signed(0, 32);
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\ := to_signed(0, 32);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\ := false;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\ := false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).invocationIndex\ := 0;
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ := 0;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.0\ := false;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.1\ := false;
@@ -1260,6 +1278,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_2\ => 
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input.parameter.In\;
+                        \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input\;
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\ := (others => false);
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := to_unsigned(0, 32);
                         -- Starting a while loop.
@@ -1276,20 +1295,20 @@ begin
                         -- The while loop's condition:
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ < to_unsigned(3, 32);
                         if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_3E_1\ := signed(\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\);
-                            -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32)
-                            case \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).invocationIndex\ is 
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\ := signed(\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\);
+                            -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32)
+                            case \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ is 
                                 when 0 => 
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.0\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ <= true;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= true;
                                 when 1 => 
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.1\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\ <= true;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\ <= true;
                                 when 2 => 
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.2\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\ <= true;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ <= true;
                             end case;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).invocationIndex\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).invocationIndex\ + 1;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ + 1;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.2\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ + to_unsigned(1, 32);
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.2\;
                         else 
@@ -1301,15 +1320,15 @@ begin
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_5\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32)
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\ and \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\ and \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ <= false;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\ <= false;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\ <= false;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).invocationIndex\ := 0;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.0\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.1\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.1\;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.2\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32)
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ and \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ and \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\) then 
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= false;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\ <= false;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ <= false;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ := 0;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.0\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.1\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.2\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(0) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.0\;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(1) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.1\;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(2) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.2\;
@@ -1317,15 +1336,15 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32)
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\ or \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\ or \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ <= false;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\ <= false;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\ <= false;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).invocationIndex\ := 0;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.3\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.4\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.1\;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.5\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32)
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ or \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ or \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\) then 
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= false;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\ <= false;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ <= false;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ := 0;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.3\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.4\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.5\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(0) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.3\;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(1) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.4\;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(2) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.5\;
@@ -1362,7 +1381,7 @@ begin
                 \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
@@ -1474,10 +1493,10 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 15 => 
-                            if (\Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ <= false;
+                            if (\Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when 16 => 
@@ -2015,284 +2034,284 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32) start
-    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(2 downto 0) := (others => false);
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32) start
+    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)\: process (\Clock\) 
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(2 downto 0) := (others => false);
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\: integer range 0 to 2 := 0;
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\: integer range 0 to 2 := 0;
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\: integer range 0 to 2 := 0;
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\: integer range 0 to 2 := 0;
+        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\ := (others => false);
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 0;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 0;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\ <= false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\ <= false;
-                \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= false;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ := (others => false);
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 0;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 0;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= false;
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= false;
+                \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
             else 
                 -- Building a boolean array where each of the elements will indicate whether the component with the given index should be started next.
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(0) := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ = true and \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ = true and \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ = false;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(1) := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ = true and \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ = false;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(2) := \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ = false;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ = true and \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ = true and \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ = false;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ = true and \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ = false;
+                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ = false;
 
                 -- Invocation handler #0 out of 3 corresponding to System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0
-                case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ is 
+                case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\ is 
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\) then 
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
+                            case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ is 
                                 when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 0;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(0) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.0\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 0;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\;
                                 when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 1;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(1) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.0\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 1;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\;
                                 when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 2;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(2) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.0\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 2;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ is 
                             when 0 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
                                 end if;
                             when 1 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
                                 end if;
                             when 2 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForStarted;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= false;
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForStarted;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
                         end if;
                 end case;
 
 
                 -- Invocation handler #1 out of 3 corresponding to System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0
-                case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ is 
+                case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ is 
                     when WaitingForStarted => 
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\ <= false;
-                            case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\ is 
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\) then 
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= false;
+                            case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ is 
                                 when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 0;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(0) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.1\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 0;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\;
                                 when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 1;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(1) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.1\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 1;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\;
                                 when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 2;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(2) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.1\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 2;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\;
                                 when others => 
                                     null;
                             end case;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ is 
+                        case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ is 
                             when 0 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.1\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
                                 end if;
                             when 1 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.1\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
                                 end if;
                             when 2 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.1\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.1\ = false) then 
-                            \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForStarted;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.1\ <= false;
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\ = false) then 
+                            \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForStarted;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= false;
                         end if;
                 end case;
 
 
                 -- Invocation handler #2 out of 3 corresponding to System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0
-                case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ is 
+                case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ is 
                     when WaitingForStarted => 
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\ <= false;
-                            case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\ is 
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\) then 
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= false;
+                            case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ is 
                                 when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 0;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(0) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.2\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 0;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\;
                                 when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 1;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(1) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.2\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 1;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\;
                                 when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 2;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(2) := false;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).indexObject.parameter.Out.2\;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 2;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := false;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\;
                                 when others => 
                                     null;
                             end case;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ is 
+                        case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ is 
                             when 0 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.2\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
                                 end if;
                             when 1 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.2\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
                                 end if;
                             when 2 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.2\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= false;
+                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.2\ = false) then 
-                            \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForStarted;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.2\ <= false;
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ = false) then 
+                            \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForStarted;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= false;
                         end if;
                 end case;
 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Hast::ExternalInvocationProxy()
-                case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ is 
+                case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\) then 
-                            \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\ is 
+                        if (\Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\) then 
+                            \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
+                            case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ is 
                                 when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(0) := false;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := false;
                                 when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 1;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(1) := false;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 1;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := false;
                                 when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 2;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).targetAvailableIndicator\(2) := false;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 2;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := false;
                                 when others => 
                                     null;
                             end case;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ is 
                             when 0 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).0.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
+                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= false;
+                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
                                 end if;
                             when 1 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).1.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
+                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= false;
+                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
                                 end if;
                             when 2 => 
-                                if (\ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).return.0\ <= \ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).2.return\;
+                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\) then 
+                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
+                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
+                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= false;
+                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                            \Hast::ExternalInvocationProxy().ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(UInt32)._Finished.0\ <= false;
+                        if (\Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
+                            \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
                         end if;
                 end case;
 
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Various.ParallelCases/<>c::<WhenAllWhenAnyAwaitedTasks>b__0_0(System.UInt32) end
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32) start
