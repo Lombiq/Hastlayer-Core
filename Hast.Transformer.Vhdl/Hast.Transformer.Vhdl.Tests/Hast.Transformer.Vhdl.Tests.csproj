@@ -168,6 +168,7 @@
     <Compile Include="IntegrationTestingServices\FilteredAutoMockSource.cs" />
     <Compile Include="IntegrationTestingServices\IntegrationTestFixtureBase.cs" />
     <Compile Include="BasicHardwareStructureTests.cs" />
+    <Compile Include="TransformationCheckTests.cs" />
     <Compile Include="VerificationTests\SampleAssemblyVerificationTests.cs" />
     <Compile Include="VerificationTests\ShouldMatchApprovedExtensions.cs" />
     <Compile Include="VerificationTests\TestInputAssembliesVerificationTests.cs" />
