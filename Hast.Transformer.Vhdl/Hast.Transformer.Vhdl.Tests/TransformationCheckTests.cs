@@ -20,9 +20,20 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             await _host.Run<ITransformer>(async transformer =>
             {
-                await Should.ThrowAsync(() => 
-                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Various.ParallelCases.InvalidExternalVariableAssignment"), 
+                await Should.ThrowAsync(() =>
+                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Various.ParallelCases.InvalidExternalVariableAssignment"),
                 typeof(NotSupportedException));
+            });
+        }
+
+        [Test]
+        public async Task InvalidArrayUsageIsPrevented()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                await Should.ThrowAsync(() =>
+                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Various.ArrayUsingCases.InvalidArrayUsage"),
+                typeof(InvalidOperationException));
             });
         }
 
