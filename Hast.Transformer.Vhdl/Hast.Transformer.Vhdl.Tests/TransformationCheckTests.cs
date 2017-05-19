@@ -7,8 +7,8 @@ using Hast.Common.Configuration;
 using NUnit.Framework;
 using Lombiq.OrchardAppHost;
 using Hast.Transformer.Vhdl.Models;
-using Hast.TestInputs.Various;
 using Shouldly;
+using Hast.TestInputs.Invalid;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.Tests
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Various.ParallelCases.InvalidExternalVariableAssignment"),
+                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidParallelCases.InvalidExternalVariableAssignment"),
                 typeof(NotSupportedException));
             });
         }
@@ -32,7 +32,7 @@ namespace Hast.Transformer.Vhdl.Tests
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Various.ArrayUsingCases.InvalidArrayUsage"),
+                TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidArrayUsingCases.InvalidArrayUsage"),
                 typeof(InvalidOperationException));
             });
         }
@@ -44,7 +44,7 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             return TransformAssembliesToVhdl(
                 transformer,
-                new[] { typeof(ParallelCases).Assembly },
+                new[] { typeof(InvalidParallelCases).Assembly },
                 configuration =>
                 {
                     configuration.TransformerConfiguration().UseSimpleMemory = false;

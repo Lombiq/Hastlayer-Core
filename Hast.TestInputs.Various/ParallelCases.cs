@@ -28,15 +28,5 @@ namespace Hast.TestInputs.Various
             Task.WhenAll(tasks).Wait();
             Task.WhenAny(tasks).Wait();
         }
-
-        public void InvalidExternalVariableAssignment(uint input)
-        {
-            var task = Task.Factory.StartNew(
-                () =>
-                {
-                    input = 4;
-                    return true;
-                });
-        }
     }
 }

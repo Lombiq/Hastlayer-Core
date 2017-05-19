@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.TestInputs.Various
+namespace Hast.TestInputs.Invalid
 {
-    public class ArrayUsingCases
+    public class InvalidArrayUsingCases
     {
         public void InvalidArrayUsage()
         {

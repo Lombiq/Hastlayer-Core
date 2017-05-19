@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7D8AE520-75D5-4BFC-B617-7FEEA7B1983C}</ProjectGuid>
+    <ProjectGuid>{BB94F93A-F607-4A19-8127-7C8D333F8131}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.TestInputs.Various</RootNamespace>
-    <AssemblyName>Hast.TestInputs.Various</AssemblyName>
+    <RootNamespace>Hast.TestInputs.Invalid</RootNamespace>
+    <AssemblyName>Hast.TestInputs.Invalid</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CastingCases.cs" />
-    <Compile Include="ParallelCases.cs" />
+    <Compile Include="InvalidArrayUsingCases.cs" />
+    <Compile Include="InvalidParallelCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
