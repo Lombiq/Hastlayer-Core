@@ -5,6 +5,7 @@ using System.Reflection;
 using Autofac;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
+using Lombiq.OrchardAppHost.Environment.Tasks;
 using NUnit.Framework;
 using Orchard.Events;
 
@@ -34,6 +35,7 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 
             var autoMockSource = new FilteredAutoMockSource();
             autoMockSource.AutoMockSource.Ignore<IEventHandler>();
+            autoMockSource.AutoMockSource.Ignore<IAsyncBackgroundTask>();
 
             var registrations = new AppHostRegistrations
             {
