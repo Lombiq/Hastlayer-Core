@@ -10,7 +10,7 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.GenomeMatcher");
+            configuration.AddPublicHardwareType<GenomeMatcher>();
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)

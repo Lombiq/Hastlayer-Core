@@ -71,19 +71,19 @@ namespace Hast.Common.Configuration
         /// <summary>
         /// Adds a public method that will be accessible as hardware implementation.
         /// </summary>
-        /// <typeparam name="T">The type of the reference that will be later fed to the proxy generator.</typeparam>
+        /// <typeparam name="T">The type of the object that will be later fed to the proxy generator.</typeparam>
         /// <param name="expression">An expression with a call to the method.</param>
         public static void AddPublicHardwareMethod<T>(
             this IHardwareGenerationConfiguration configuration, 
-            Expression<Action<T>> expression)
-        {
-            var methodCallExpression = expression.Body as MethodCallExpression;
-            if (methodCallExpression == null)
-            {
-                throw new InvalidOperationException("The supplied expression is not a method call.");
-            }
-            configuration.PublicHardwareMemberFullNames.Add(methodCallExpression.Method.GetFullName());
-        }
+            Expression<Action<T>> expression) =>
+            configuration.PublicHardwareMemberFullNames.Add(expression.GetMethodFullName());
+
+        /// <summary>
+        /// Adds a public type the suitable methods of which will be accessible as hardware implementation.
+        /// </summary>
+        /// <typeparam name="T">The type of the object that will be later fed to the proxy generator.</typeparam>
+        public static void AddPublicHardwareType<T>(this IHardwareGenerationConfiguration configuration) =>
+            configuration.PublicHardwareMemberNamePrefixes.Add(typeof(T).FullName);
 
         // Properties could be added similarly once properties are supported for direct hardware invocation. This is
         // unlikely (since it wouldn't be of much use), though properties inside the generated hardware is already

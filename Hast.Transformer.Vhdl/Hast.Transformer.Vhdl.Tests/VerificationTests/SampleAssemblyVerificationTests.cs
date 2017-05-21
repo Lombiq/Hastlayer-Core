@@ -35,30 +35,30 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         var transformerConfiguration = configuration.TransformerConfiguration();
 
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.ObjectOrientedShowcase");
+                        configuration.AddPublicHardwareType<ObjectOrientedShowcase>();
 
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm");
+                        configuration.AddPublicHardwareType<HastlayerOptimizedAlgorithm>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm.Run.LambdaExpression.0")
+                            new MemberInvocationInstanceCountConfigurationForMethod<HastlayerOptimizedAlgorithm>(p => p.Run(null), 0)
                             {
                                 MaxDegreeOfParallelism = 5 // Using a smaller degree because we don't need excess repetition.
                             });
 
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+                        configuration.AddPublicHardwareType<PrimeCalculator>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0")
+                            new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(null), 0)
                             {
                                 MaxDegreeOfParallelism = 5
                             });
 
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.RecursiveAlgorithms");
+                        configuration.AddPublicHardwareType<RecursiveAlgorithms>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfiguration("Hast.Samples.SampleAssembly.RecursiveAlgorithms.Recursively")
+                            new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")
                             {
                                 MaxRecursionDepth = 5
                             });
 
-                        configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.SimdCalculator");
+                        configuration.AddPublicHardwareType<SimdCalculator>();
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();

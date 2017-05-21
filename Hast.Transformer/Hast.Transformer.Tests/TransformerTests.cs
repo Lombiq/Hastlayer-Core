@@ -140,8 +140,8 @@ namespace Hast.Transformer.Vhdl.Tests
             var configuration = CreateConfig();
             configuration.PublicHardwareMemberFullNames = new[]
             {
-                "System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32)",
-                "System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()"
+                "System.Void " + typeof(RootClass).FullName + "::" + nameof(RootClass.VirtualMethod) + "(System.Int32)",
+                "System.Void " + typeof(ComplexTypeHierarchy).FullName + "::" + typeof(IInterface1).FullName + "." + nameof(IInterface1.Interface1Method1) + "()"
             };
 
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(TestInputs.ClassStructure2.StaticReference).Assembly }, configuration);
@@ -166,8 +166,8 @@ namespace Hast.Transformer.Vhdl.Tests
             var configuration = CreateConfig();
             configuration.PublicHardwareMemberNamePrefixes = new[]
             {
-                "Hast.TestInputs.ClassStructure1.RootClass.VirtualMethod",
-                "Hast.TestInputs.ClassStructure1.ComplexTypes"
+                typeof(RootClass).FullName + "." + nameof(RootClass.VirtualMethod),
+                typeof(ComplexTypeHierarchy).Namespace
             };
 
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(TestInputs.ClassStructure2.StaticReference).Assembly }, configuration);

@@ -9,6 +9,7 @@ using Lombiq.OrchardAppHost;
 using Hast.Transformer.Vhdl.Models;
 using Shouldly;
 using Hast.TestInputs.Invalid;
+using System.Linq.Expressions;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -21,7 +22,7 @@ namespace Hast.Transformer.Vhdl.Tests
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                    TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidParallelCases.InvalidExternalVariableAssignment"),
+                    TransformInvalidTestInputs<InvalidParallelCases>(transformer, c => c.InvalidExternalVariableAssignment(0)),
                     typeof(NotSupportedException));
             });
         }
@@ -32,11 +33,11 @@ namespace Hast.Transformer.Vhdl.Tests
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                    TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidArrayUsingCases.InvalidArrayAssignment"),
+                    TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
                     typeof(InvalidOperationException));
 
                 await Should.ThrowAsync(() =>
-                    TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidArrayUsingCases.ArraySizeIsNotStatic"),
+                    TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.ArraySizeIsNotStatic(0)),
                     typeof(NotSupportedException));
             });
         }
@@ -47,15 +48,15 @@ namespace Hast.Transformer.Vhdl.Tests
             await _host.Run<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                    TransformInvalidTestInputs(transformer, "Hast.TestInputs.Invalid.InvalidLanguageConstructCases.BreakStatements"),
+                    TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.BreakStatements()),
                     typeof(NotSupportedException));
             });
         }
 
 
-        private Task<VhdlHardwareDescription> TransformInvalidTestInputs(
-            ITransformer transformer, 
-            string memberNamePrefixToInclude)
+        private Task<VhdlHardwareDescription> TransformInvalidTestInputs<T>(
+            ITransformer transformer,
+            Expression<Action<T>> expression)
         {
             return TransformAssembliesToVhdl(
                 transformer,
@@ -63,7 +64,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 configuration =>
                 {
                     configuration.TransformerConfiguration().UseSimpleMemory = false;
-                    configuration.PublicHardwareMemberNamePrefixes.Add(memberNamePrefixToInclude);
+                    configuration.AddPublicHardwareMethod<T>(expression);
                 });
         }
     }
