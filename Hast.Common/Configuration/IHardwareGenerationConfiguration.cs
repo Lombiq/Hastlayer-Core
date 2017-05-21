@@ -73,7 +73,9 @@ namespace Hast.Common.Configuration
         /// </summary>
         /// <typeparam name="T">The type of the reference that will be later fed to the proxy generator.</typeparam>
         /// <param name="expression">An expression with a call to the method.</param>
-        public static void AddPublicHardwareMethod<T>(this IHardwareGenerationConfiguration configuration, Expression<Action<T>> expression)
+        public static void AddPublicHardwareMethod<T>(
+            this IHardwareGenerationConfiguration configuration, 
+            Expression<Action<T>> expression)
         {
             var methodCallExpression = expression.Body as MethodCallExpression;
             if (methodCallExpression == null)
