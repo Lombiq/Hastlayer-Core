@@ -37,10 +37,9 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private class StubMemberSuitabilityChecker : IMemberSuitabilityChecker
         {
-            public bool IsSuitableInterfaceMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)
-            {
-                return true;
-            }
+            public bool IsSuitableInterfaceMember(
+                EntityDeclaration member,
+                ITypeDeclarationLookupTable typeDeclarationLookupTable) => true;
         }
     }
 }
