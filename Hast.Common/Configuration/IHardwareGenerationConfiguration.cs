@@ -85,6 +85,8 @@ namespace Hast.Common.Configuration
             configuration.PublicHardwareMemberFullNames.Add(methodCallExpression.Method.GetFullName());
         }
 
-        // Properties could be added similarly once properties are supported.
+        // Properties could be added similarly once properties are supported for direct hardware invocation. This is
+        // unlikely (since it wouldn't be of much use), though properties inside the generated hardware is already
+        // supported.
     }
 }
