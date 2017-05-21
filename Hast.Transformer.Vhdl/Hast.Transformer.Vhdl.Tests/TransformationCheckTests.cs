@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
-using NUnit.Framework;
-using Lombiq.OrchardAppHost;
-using Hast.Transformer.Vhdl.Models;
-using Shouldly;
 using Hast.TestInputs.Invalid;
-using System.Linq.Expressions;
+using Hast.Transformer.Vhdl.Models;
+using Lombiq.OrchardAppHost;
+using NUnit.Framework;
+using Shouldly;
 
 namespace Hast.Transformer.Vhdl.Tests
 {

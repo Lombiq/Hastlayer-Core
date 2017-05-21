@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.TestInputs.ClassStructure1.ComplexTypes;
+﻿using Hast.TestInputs.ClassStructure1.ComplexTypes;
 
 namespace Hast.TestInputs.ClassStructure2
 {

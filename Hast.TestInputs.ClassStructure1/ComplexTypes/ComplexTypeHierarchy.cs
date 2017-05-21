@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hast.TestInputs.ClassStructure1.ComplexTypes
+﻿namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {
     /// <summary>
     /// A type demonstrating a "complex" type hierarchy with base classes and interfaces.
