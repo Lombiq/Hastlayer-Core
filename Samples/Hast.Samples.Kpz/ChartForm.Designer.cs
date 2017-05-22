@@ -93,8 +93,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 134F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 636);
             this.tableLayoutPanel1.TabIndex = 2;
@@ -115,7 +115,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(3, 3);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(617, 144);
+            this.panelTop.Size = new System.Drawing.Size(617, 128);
             this.panelTop.TabIndex = 4;
             // 
             // label4
@@ -267,18 +267,20 @@
             // progressBar
             // 
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.Location = new System.Drawing.Point(3, 153);
+            this.progressBar.Location = new System.Drawing.Point(10, 144);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(10, 10, 0, 10);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(417, 34);
+            this.progressBar.Size = new System.Drawing.Size(413, 36);
             this.progressBar.TabIndex = 1;
             // 
             // buttonStart
             // 
             this.buttonStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonStart.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonStart.Location = new System.Drawing.Point(426, 153);
+            this.buttonStart.Location = new System.Drawing.Point(433, 144);
+            this.buttonStart.Margin = new System.Windows.Forms.Padding(10);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(194, 34);
+            this.buttonStart.Size = new System.Drawing.Size(180, 36);
             this.buttonStart.TabIndex = 2;
             this.buttonStart.Text = "Start KPZ";
             this.buttonStart.UseVisualStyleBackColor = true;

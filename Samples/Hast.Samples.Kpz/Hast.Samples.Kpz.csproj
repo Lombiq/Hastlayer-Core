@@ -60,6 +60,7 @@
       <DependentUpon>InspectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Kpz.cs" />
+    <Compile Include="KpzHast.cs" />
     <Compile Include="KpzKernels.cs" />
     <Compile Include="KpzStateLogger.cs" />
     <Compile Include="Program.cs" />
@@ -102,6 +103,10 @@
     <None Include="Resources\kpzinspector-bar.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Drivers\Hast.Xilinx\Hast.Xilinx.csproj">
+      <Project>{02be2213-f0e5-4107-bea4-ae396525a644}</Project>
+      <Name>Hast.Xilinx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Algorithms\Hast.Algorithms.csproj">
       <Project>{0dc6fd30-4c53-4805-996b-e34a98efebaa}</Project>
       <Name>Hast.Algorithms</Name>
@@ -113,6 +118,22 @@
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj">
+      <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
+      <Name>Hast.Transformer.Vhdl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
+      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
+      <Name>Hast.Transformer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
+      <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
+      <Name>Hast.VhdlBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.Samples.Consumer\Hast.Samples.Consumer.csproj">
+      <Project>{7249d1e5-abec-40bb-9238-5e54ab0e1e94}</Project>
+      <Name>Hast.Samples.Consumer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -199,5 +199,8 @@ namespace Hast.Samples.Kpz
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             if (comboTarget.SelectedIndex > 0) nudTableWidth.Value = nudTableHeight.Value = 8;
         }
+
+        private bool IsTargetFPGASimulation { get { return comboTarget.SelectedIndex == 1; } }
+        private bool IsTargetFPGA { get { return comboTarget.SelectedIndex == 2; } }
     }
 }

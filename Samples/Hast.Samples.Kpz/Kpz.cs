@@ -4,8 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Hast.Samples.Kpz
 {
+
+    public enum KpzTarget
+    {
+        CPU, FPGA, FPGASimulation
+    }
 
     /// <summary>
     /// This struct is used to built the grid that the KPZ algorithm works on.
@@ -53,10 +59,11 @@ namespace Hast.Samples.Kpz
         public int y;
     }
 
+
     /// <summary>
     /// This class performs the calculations of the KPZ algorithm.
     /// </summary>
-    public class Kpz
+    public partial class Kpz
     {
         /// <summary>It returns the width of the grid.</summary>
         public int gridWidth { get { return grid.GetLength(0); } }
@@ -82,6 +89,8 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public KpzStateLogger StateLogger;
 
+        private KpzTarget kpzTarget = KpzTarget.CPU;
+
         /// <summary>
         /// The constructor initializes the parameters of <see cref="Kpz" />, see:
         /// <see cref="gridWidth" />, <see cref="gridHeight" />,
@@ -90,7 +99,12 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public Kpz
         (
-            int newGridWidth, int newGridHeight, double probabilityP, double probabilityQ, bool enableStateLogger
+            int newGridWidth, 
+            int newGridHeight, 
+            double probabilityP, 
+            double probabilityQ, 
+            bool enableStateLogger,
+            KpzTarget target
         )
         {
             grid = new KpzNode[newGridWidth, newGridHeight];
@@ -98,6 +112,7 @@ namespace Hast.Samples.Kpz
             this.probabilityQ = probabilityQ;
             this.enableStateLogger = enableStateLogger;
             if (this.enableStateLogger) StateLogger = new KpzStateLogger();
+            kpzTarget = target;
         }
 
         /// <summary>It fills the <see cref="grid" /> with random data.</summary>
@@ -295,5 +310,4 @@ namespace Hast.Samples.Kpz
             return toReturn;
         }
     }
-
 }
