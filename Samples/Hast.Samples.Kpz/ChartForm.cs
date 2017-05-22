@@ -44,6 +44,7 @@ namespace Hast.Samples.Kpz
             _backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(
                 backgroundWorker_RunWorkerCompleted
             );
+            comboTarget.SelectedIndex = 0;
         }
 
         /// <summary>It adds a line to the log.</summary>
@@ -191,6 +192,12 @@ namespace Hast.Samples.Kpz
         private void labelShowInspector_Click(object sender, EventArgs e)
         {
             checkShowInspector.Checked = !checkShowInspector.Checked;
+        }
+
+        private void comboTarget_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
+            if (comboTarget.SelectedIndex > 0) nudTableWidth.Value = nudTableHeight.Value = 8;
         }
     }
 }

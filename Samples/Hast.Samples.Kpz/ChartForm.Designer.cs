@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartKPZ = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboTarget = new System.Windows.Forms.ComboBox();
             this.labelShowInspector = new System.Windows.Forms.Label();
             this.checkShowInspector = new System.Windows.Forms.CheckBox();
             this.nudTableHeight = new System.Windows.Forms.NumericUpDown();
@@ -60,21 +62,21 @@
             // 
             // chartKPZ
             // 
-            chartArea3.AxisY.IsLogarithmic = true;
-            chartArea3.Name = "ChartArea1";
-            this.chartKPZ.ChartAreas.Add(chartArea3);
+            chartArea2.AxisY.IsLogarithmic = true;
+            chartArea2.Name = "ChartArea1";
+            this.chartKPZ.ChartAreas.Add(chartArea2);
             this.chartKPZ.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.chartKPZ.Legends.Add(legend3);
+            legend2.Name = "Legend1";
+            this.chartKPZ.Legends.Add(legend2);
             this.chartKPZ.Location = new System.Drawing.Point(0, 0);
             this.chartKPZ.Name = "chartKPZ";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "defaultSeries";
-            this.chartKPZ.Series.Add(series3);
-            this.chartKPZ.Size = new System.Drawing.Size(617, 198);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "defaultSeries";
+            this.chartKPZ.Series.Add(series2);
+            this.chartKPZ.Size = new System.Drawing.Size(617, 235);
             this.chartKPZ.TabIndex = 0;
             this.chartKPZ.Text = "chart1";
             // 
@@ -91,15 +93,17 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 510);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 636);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // panelTop
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.panelTop, 2);
+            this.panelTop.Controls.Add(this.label4);
+            this.panelTop.Controls.Add(this.comboTarget);
             this.panelTop.Controls.Add(this.labelShowInspector);
             this.panelTop.Controls.Add(this.checkShowInspector);
             this.panelTop.Controls.Add(this.nudTableHeight);
@@ -111,8 +115,33 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(3, 3);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(617, 84);
+            this.panelTop.Size = new System.Drawing.Size(617, 144);
             this.panelTop.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(9, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(134, 23);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Target platform:";
+            // 
+            // comboTarget
+            // 
+            this.comboTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboTarget.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboTarget.FormattingEnabled = true;
+            this.comboTarget.Items.AddRange(new object[] {
+            "Original algorithm (CPU)",
+            "Hastlayer simulation (CPU)",
+            "Hastlayer accelerated (FPGA)"});
+            this.comboTarget.Location = new System.Drawing.Point(202, 91);
+            this.comboTarget.Name = "comboTarget";
+            this.comboTarget.Size = new System.Drawing.Size(406, 31);
+            this.comboTarget.TabIndex = 8;
+            this.comboTarget.SelectedIndexChanged += new System.EventHandler(this.comboTarget_SelectedIndexChanged);
             // 
             // labelShowInspector
             // 
@@ -238,7 +267,7 @@
             // progressBar
             // 
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.Location = new System.Drawing.Point(3, 93);
+            this.progressBar.Location = new System.Drawing.Point(3, 153);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(417, 34);
             this.progressBar.TabIndex = 1;
@@ -247,7 +276,7 @@
             // 
             this.buttonStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonStart.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonStart.Location = new System.Drawing.Point(426, 93);
+            this.buttonStart.Location = new System.Drawing.Point(426, 153);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(194, 34);
             this.buttonStart.TabIndex = 2;
@@ -259,7 +288,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.splitContainer1, 2);
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 133);
+            this.splitContainer1.Location = new System.Drawing.Point(3, 193);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -270,8 +299,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.chartKPZ);
-            this.splitContainer1.Size = new System.Drawing.Size(617, 374);
-            this.splitContainer1.SplitterDistance = 172;
+            this.splitContainer1.Size = new System.Drawing.Size(617, 440);
+            this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 3;
             // 
             // listLog
@@ -282,14 +311,14 @@
             this.listLog.ItemHeight = 23;
             this.listLog.Location = new System.Drawing.Point(0, 0);
             this.listLog.Name = "listLog";
-            this.listLog.Size = new System.Drawing.Size(617, 172);
+            this.listLog.Size = new System.Drawing.Size(617, 201);
             this.listLog.TabIndex = 0;
             // 
             // ChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(623, 510);
+            this.ClientSize = new System.Drawing.Size(623, 636);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(639, 548);
             this.Name = "ChartForm";
@@ -326,5 +355,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudTableWidth;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboTarget;
+        private System.Windows.Forms.Label label4;
     }
 }
