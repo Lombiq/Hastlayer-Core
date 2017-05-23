@@ -28,54 +28,58 @@ namespace Hast.Samples.Kpz
         MWC64X prngDecision = new MWC64X();
 
         /// <summary>Push table into FPGA.</summary>
-        /// <param name="grid">The grid to copy.</param>
+        /// <param name="gridSrc">The grid to copy.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
-        public static SimpleMemory CopyFromGridToSimpleMemory(KpzNode[,] grid, uint[] randomValues)
+        public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
         {
-            SimpleMemory memory = new SimpleMemory(grid.width() * grid.height() + 2); //Let's start by having dx and dy in each byte.
-            memory.WriteUInt32(KpzKernels_GridWidthIndex, (uint)grid.width());
-            memory.WriteUInt32(KpzKernels_GridHeightIndex, (uint)grid.height());
-            for (int x = 0; x < grid.height(); x++)
+            //SimpleMemory memory = new SimpleMemory(grid.width() * grid.height() + 2); //Let's start by having dx and dy in each byte.
+            memoryDst.WriteUInt32(KpzKernels_GridWidthIndex, (uint)gridSrc.width());
+            memoryDst.WriteUInt32(KpzKernels_GridHeightIndex, (uint)gridSrc.height());
+            for (int x = 0; x < gridSrc.height(); x++)
             {
-                for (int y = 0; y < grid.width(); y++)
+                for (int y = 0; y < gridSrc.width(); y++)
                 {
-                    KpzNode node = grid[x, y];
-                    memory.WriteUInt32(x * grid.height() + y + KpzKernels_GridStartIndex, node.SerializeToUInt32());
+                    KpzNode node = gridSrc[x, y];
+                    memoryDst.WriteUInt32(x * gridSrc.height() + y + KpzKernels_GridStartIndex, node.SerializeToUInt32());
                 }
             }
-            return memory;
         }
 
         /// <summary>Pull table from the FPGA.</summary>
         /// <param name="memory">The <see cref="SimpleMemory"/> instance.</param>
         /// <param name="image">The original image.</param>
         /// <returns>Returns the processed image.</returns>
-        private static KpzNode[,] CopyFromSimpleMemoryToGrid(SimpleMemory memory, int gridWidth, int gridHeight)
+        public static void CopyFromSimpleMemoryToGrid(KpzNode[,] grid, SimpleMemory memory)
         {
-            KpzNode[,] grid = new KpzNode[gridWidth, gridHeight];
-            for (int x = 0; x < gridWidth; x++)
+            for (int x = 0; x < grid.width(); x++)
             {
-                for (int y = 0; y < gridHeight; y++)
+                for (int y = 0; y < grid.height(); y++)
                 {
-                    grid[x, y] = KpzNode.DeserializeFromUInt32(memory.ReadUInt32(x * gridHeight + y + KpzKernels_GridStartIndex));
+                    grid[x, y] = KpzNode.DeserializeFromUInt32(memory.ReadUInt32(x * grid.height() + y + KpzKernels_GridStartIndex));
                 }
             }
-            return grid;
         }
 
-        public void DoIteration(KpzNode[,] grid)
+        public virtual void DoIteration(SimpleMemory memory, bool testMode)
         {
+            int gridWidth = (int)memory.ReadUInt32(KpzKernels_GridWidthIndex);
+            int gridHeight = (int)memory.ReadUInt32(KpzKernels_GridHeightIndex);
+            KpzNode[,] grid = new KpzNode[gridWidth, gridHeight]; 
+            CopyFromSimpleMemoryToGrid(grid, memory);
             //assume that GridWidth and GridHeight are 2^N
-            var numberOfStepsInIteration = grid.width() * grid.height();
+            var numberOfStepsInIteration = (testMode) ? 1 : gridWidth * gridHeight;
 
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
                 // We randomly choose a point on the grid. If there is a pyramid or hole, we randomly switch them.
                 var randomValue = prngCoords.GetNextRandom();
-                var randomPoint = new KpzCoords { x = (int)(randomValue & (gridWidth-1)),
-                    y = (int)((randomValue>>16) & (gridHeight-1)) };
-                RandomlySwitchFourCells(grid, randomPoint);
+                var randomPoint = new KpzCoords {
+                    x = (int)(randomValue & (gridWidth-1)),
+                    y = (int)((randomValue>>16) & (gridHeight-1))
+                };
+                RandomlySwitchFourCells(grid, randomPoint, testMode);
             }
+            CopyFromGridToSimpleMemory(grid, memory);
         }
 
         /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="grid" />, and randomly switch
@@ -84,7 +88,7 @@ namespace Hast.Samples.Kpz
         /// <param name="p">
         /// contains the coordinates where the function looks if there is a pyramid or hole in the <see cref="grid" />.
         /// </param>
-        private void RandomlySwitchFourCells(KpzNode[,] grid, KpzCoords p)
+        private void RandomlySwitchFourCells(KpzNode[,] grid, KpzCoords p, bool forceSwitch)
         {
             uint randomNumber = prngDecision.GetNextRandom();
             uint randomVariable1 = randomNumber & ((1 << 16) - 1);
@@ -95,10 +99,10 @@ namespace Hast.Samples.Kpz
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
                 ((currentPoint.dx && !neighbours.nx.dx) && (currentPoint.dy && !neighbours.ny.dy) &&
-                (randomVariable1 < integerProbabilityP)) ||
+                (forceSwitch || randomVariable1 < integerProbabilityP)) ||
                 // If we get the pattern {10, 10} we have a hole:
                 ((!currentPoint.dx && neighbours.nx.dx) && (!currentPoint.dy && neighbours.ny.dy) &&
-                (randomVariable2 < integerProbabilityQ))
+                (forceSwitch || randomVariable2 < integerProbabilityQ))
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.
@@ -133,7 +137,6 @@ namespace Hast.Samples.Kpz
         }
     }
 
-
     public static class KpzKernelsExtensions
     {
         public static uint TestAddWrapper(this KpzKernels kpz, uint a, uint b)
@@ -143,6 +146,14 @@ namespace Hast.Samples.Kpz
             sm.WriteUInt32(1, b);
             kpz.TestAdd(sm);
             return sm.ReadUInt32(2);
+        }
+
+        public static void DoSingleIterationWrapper(this KpzKernels kpz, KpzNode[,] hostGrid)
+        {
+            SimpleMemory sm = new SimpleMemory(hostGrid.width() * hostGrid.height() + KpzKernels.KpzKernels_GridStartIndex);
+            KpzKernels.CopyFromGridToSimpleMemory(hostGrid, sm);
+            kpz.DoIteration(sm, true);
+            KpzKernels.CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
     }
 }

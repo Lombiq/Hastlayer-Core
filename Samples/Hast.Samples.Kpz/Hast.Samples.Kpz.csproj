@@ -43,7 +43,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -116,61 +115,25 @@
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj">
-      <Project>{71b55241-a31c-43f5-9b46-40b53099df56}</Project>
-      <Name>Hast.Communication</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj">
-      <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
-      <Name>Hast.Synthesis</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Hast.Tests.MWC64XTest\Hast.Tests.MWC64XTest.csproj">
       <Project>{0d0e85d3-154a-41fd-9214-4e275a78763d}</Project>
       <Name>Hast.Tests.MWC64XTest</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Tests.TestAssembly1\Hast.Tests.TestAssembly1.csproj">
-      <Project>{39ab568d-b7fd-40c3-a8dd-003e0be92982}</Project>
-      <Name>Hast.Tests.TestAssembly1</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Tests.TestAssembly2\Hast.Tests.TestAssembly2.csproj">
-      <Project>{9a026174-8d66-4e74-8689-9f2eef2b8cf1}</Project>
-      <Name>Hast.Tests.TestAssembly2</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj">
       <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
       <Name>Hast.Transformer.Vhdl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.Tests\Hast.Transformer.Vhdl.Tests.csproj">
-      <Project>{5b56676e-75e4-4d10-9db4-ac446bd597ce}</Project>
-      <Name>Hast.Transformer.Vhdl.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
-      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
+      <Project>{55FFEC87-B87B-4BB6-B50D-26560C8F815A}</Project>
       <Name>Hast.Transformer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.Tests\Hast.Transformer.Tests.csproj">
-      <Project>{da432b51-28d1-4d5e-9a3a-59127c809c5d}</Project>
-      <Name>Hast.Transformer.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj">
-      <Project>{131e80d3-29bd-496c-be31-45a329ae3e67}</Project>
+      <Project>{131E80D3-29BD-496C-BE31-45A329AE3E67}</Project>
       <Name>Hast.VhdlBuilder</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hast.Samples.Consumer\Hast.Samples.Consumer.csproj">
-      <Project>{7249d1e5-abec-40bb-9238-5e54ab0e1e94}</Project>
-      <Name>Hast.Samples.Consumer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hast.Samples.Demo\Hast.Samples.Demo.csproj">
-      <Project>{cbac105a-e50f-4202-a647-cfd674e6c0f8}</Project>
-      <Name>Hast.Samples.Demo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
-      <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
-      <Name>Hast.Samples.SampleAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
