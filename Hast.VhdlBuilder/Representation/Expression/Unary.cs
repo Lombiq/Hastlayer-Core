@@ -9,9 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public UnaryOperator Operator { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Operator.ToVhdl(vhdlGenerationOptions) + Expression.ToVhdl(vhdlGenerationOptions);
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Operator.ToVhdl(vhdlGenerationOptions) + Expression.ToVhdl(vhdlGenerationOptions);
     }
 }

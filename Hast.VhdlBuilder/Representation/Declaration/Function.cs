@@ -9,18 +9,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Function : ISubProgram
     {
         public string Name { get; set; }
-        public List<FunctionArgument> Arguments { get; set; }
+        public List<FunctionArgument> Arguments { get; set; } = new List<FunctionArgument>();
         public DataType ReturnType { get; set; }
-        public List<IVhdlElement> Declarations { get; set; }
-        public List<IVhdlElement> Body { get; set; }
-
-
-        public Function()
-        {
-            Arguments = new List<FunctionArgument>();
-            Declarations = new List<IVhdlElement>();
-            Body = new List<IVhdlElement>();
-        }
+        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
@@ -41,13 +33,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
     public class FunctionArgument : TypedDataObjectBase
     {
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return
-                (DataObjectKind.ToString() ?? string.Empty) +
-                vhdlGenerationOptions.ShortenName(Name) +
-                ": " +
-                DataType.ToVhdl(vhdlGenerationOptions);
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            (DataObjectKind.ToString() ?? string.Empty) +
+            vhdlGenerationOptions.ShortenName(Name) +
+            ": " +
+            DataType.ToVhdl(vhdlGenerationOptions);
     }
 }

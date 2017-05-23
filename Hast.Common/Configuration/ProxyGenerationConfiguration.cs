@@ -8,7 +8,7 @@ namespace Hast.Common.Configuration
         /// Gets or sets a dictionary that can contain settings for non-default configuration options (like the name of 
         /// the communication channel).
         /// </summary>
-        public IDictionary<string, object> CustomConfiguration { get; set; }
+        public IDictionary<string, object> CustomConfiguration { get; set; } = new Dictionary<string, object>();
 
         /// <summary>
         /// Gets or sets the communication channel used for communicating with the hardware device (eg. Ethernet).
@@ -35,12 +35,6 @@ namespace Hast.Common.Configuration
 
                 return _default;
             }
-        }
-
-
-        public ProxyGenerationConfiguration()
-        {
-            CustomConfiguration = new Dictionary<string, object>();
         }
     }
 }

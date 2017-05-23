@@ -11,15 +11,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public string Name { get; set; }
         public Entity Entity { get; set; }
-        public List<IVhdlElement> Declarations { get; set; }
-        public List<IVhdlElement> Body { get; set; }
-
-
-        public Architecture()
-        {
-            Declarations = new List<IVhdlElement>();
-            Body = new List<IVhdlElement>();
-        }
+        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)

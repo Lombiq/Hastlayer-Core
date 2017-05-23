@@ -268,17 +268,9 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         memberTransformerTasks.Add(_methodTransformer.Transform((MethodDeclaration)node, transformationContext));
                     }
-                    else if (node is FieldDeclaration)
+                    else if (node is FieldDeclaration && _displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node))
                     {
-                        var field = (FieldDeclaration)node;
-                        if (_displayClassFieldTransformer.IsDisplayClassField(field))
-                        {
-                            memberTransformerTasks.Add(_displayClassFieldTransformer.Transform(field, transformationContext));
-                        }
-                        else
-                        {
-                            throw new NotSupportedException("The field " + node.ToString() + " is not supported for transformation.");
-                        }
+                        memberTransformerTasks.Add(_displayClassFieldTransformer.Transform((FieldDeclaration)node, transformationContext));
                     }
                     else if (!_pocoTransformer.IsSupportedMember(node))
                     {
@@ -303,7 +295,10 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         case ClassType.Class:
                         case ClassType.Struct:
-                            memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
+                            if (!typeDeclaration.GetFullName().IsDisplayClassName())
+                            {
+                                memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext)); 
+                            }
                             traverseTo = traverseTo.Where(n =>
                                 n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);
                             break;

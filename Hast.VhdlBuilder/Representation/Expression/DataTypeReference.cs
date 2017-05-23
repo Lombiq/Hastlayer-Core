@@ -16,9 +16,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return _vhdlGenerator(vhdlGenerationOptions);
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => _vhdlGenerator(vhdlGenerationOptions);
     }
 }

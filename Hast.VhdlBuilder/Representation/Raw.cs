@@ -1,5 +1,8 @@
 ﻿
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+
 namespace Hast.VhdlBuilder.Representation
 {
     /// <summary>
@@ -9,21 +12,28 @@ namespace Hast.VhdlBuilder.Representation
     public class Raw : IVhdlElement
     {
         public string Source { get; set; }
+        public List<IVhdlElement> Parameters { get; set; } = new List<IVhdlElement>();
 
 
         public Raw()
         {
         }
 
-        public Raw(string source)
+        /// <summary>
+        /// The raw VHDL source code to add to the syntax tree. Can contain lazily evaluated parameters with the 
+        /// <c>string.Format()</c> syntax.
+        /// </summary>
+        /// <param name="source"></param>
+        public Raw(string source, params IVhdlElement[] parameters)
         {
             Source = source;
+            Parameters = parameters.ToList();
         }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Source;
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Parameters == null || !Parameters.Any() ? 
+                Source : 
+                string.Format(Source, Parameters.Select(element => element.ToVhdl(vhdlGenerationOptions)).ToArray());
     }
 }

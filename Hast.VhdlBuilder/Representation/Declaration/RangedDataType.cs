@@ -24,15 +24,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override DataType ToReference()
-        {
-            return this;
-        }
+        public override DataType ToReference() => this;
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Name + " range " + RangeMin + " to " + RangeMax;
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => 
+            Name + " range " + RangeMin + " to " + RangeMax;
 
         public override bool Equals(object obj)
         {

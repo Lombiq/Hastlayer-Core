@@ -51,6 +51,7 @@
     <Compile Include="SampleRunners\HastlayerOptimizedAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\MonteCarloAlgorithmSampleRunner.cs" />
+    <Compile Include="SampleRunners\ObjectOrientedShowcaseSampleRunner.cs" />
     <Compile Include="SampleRunners\PrimeCalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\RecursiveAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\SimdCalculatorSampleRunner.cs" />

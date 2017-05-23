@@ -24,15 +24,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement IndexExpression { get; set; }
 
 
-        public override IDataObject ToReference()
-        {
-            return this;
-        }
+        public override IDataObject ToReference() => this;
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return
-                vhdlGenerationOptions.ShortenName(Array.Name) + "(" + IndexExpression.ToVhdl(vhdlGenerationOptions) + ")";
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.ShortenName(Array.Name) + "(" + IndexExpression.ToVhdl(vhdlGenerationOptions) + ")";
     }
 }

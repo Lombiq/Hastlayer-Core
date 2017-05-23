@@ -79,6 +79,9 @@ namespace Hast.Samples.Consumer
                             case Sample.MonteCarloAlgorithm:
                                 MonteCarloAlgorithmSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.ObjectOrientedShowcase:
+                                ObjectOrientedShowcaseSampleRunner.Configure(configuration);
+                                break;
                             case Sample.PrimeCalculator:
                                 PrimeCalculatorSampleRunner.Configure(configuration);
                                 break;
@@ -134,6 +137,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.MonteCarloAlgorithm:
                                 await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.ObjectOrientedShowcase:
+                                await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.PrimeCalculator:
                                 await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);

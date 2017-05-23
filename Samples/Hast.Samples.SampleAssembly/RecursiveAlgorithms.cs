@@ -60,9 +60,7 @@ namespace Hast.Samples.SampleAssembly
                 CalculateFactorial_InvocationCounterUInt32Index,
                 memory.ReadUInt32(CalculateFactorial_InvocationCounterUInt32Index) + 1);
 
-            // Here the expression should really be number == 0 but somehow that won't evaluate to true on hardware 
-            // despite the number actually reaching 0.
-            if (number <= 0) return 1;
+            if (number == 0) return 1;
             return (uint)(number * RecursivelyCalculateFactorial(memory, (short)(number - 1)));
         }
     }

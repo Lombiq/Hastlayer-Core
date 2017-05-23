@@ -392,7 +392,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 throw new NotSupportedException("Break statements outside of switch statements are not supported.");
             }
-            else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported to be transformed to VHDL.");
+            else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported.");
         }
 
         /// <summary>

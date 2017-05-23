@@ -16,12 +16,9 @@
         }
 
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return
-                vhdlGenerationOptions.NewLineIfShouldFormat() +
-                base.ToVhdl(vhdlGenerationOptions) +
-                vhdlGenerationOptions.NewLineIfShouldFormat();
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.NewLineIfShouldFormat() +
+            base.ToVhdl(vhdlGenerationOptions) +
+            vhdlGenerationOptions.NewLineIfShouldFormat();
     }
 }

@@ -19,16 +19,12 @@ namespace Hast.VhdlBuilder.Representation
         }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Terminate(Element.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Terminate(Element.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
 
 
-        public static string Terminator(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return ";" + vhdlGenerationOptions.NewLineIfShouldFormat();
-        }
+        public static string Terminator(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            ";" + vhdlGenerationOptions.NewLineIfShouldFormat();
 
         public static string Terminate(string vhdl, IVhdlGenerationOptions vhdlGenerationOptions)
         {
@@ -43,9 +39,6 @@ namespace Hast.VhdlBuilder.Representation
 
     public static class TerminatedExtensions
     {
-        public static IVhdlElement Terminate(this IVhdlElement element)
-        {
-            return new Terminated(element);
-        }
+        public static IVhdlElement Terminate(this IVhdlElement element) => new Terminated(element);
     }
 }

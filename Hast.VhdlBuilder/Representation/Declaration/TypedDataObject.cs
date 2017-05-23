@@ -18,9 +18,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Terminated.Terminate(
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Terminated.Terminate(
                 DataObjectKind.ToString() +
                 " " +
                 vhdlGenerationOptions.ShortenName(Name) +
@@ -28,6 +27,5 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 // The default value should be specified with ":=", even for signals.
                 (InitialValue != null ? ( " := " + InitialValue.ToVhdl(vhdlGenerationOptions)) : string.Empty),
                 vhdlGenerationOptions);
-        }
     }
 }

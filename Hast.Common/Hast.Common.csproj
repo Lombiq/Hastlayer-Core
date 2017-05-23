@@ -47,6 +47,7 @@
     <Compile Include="Extensibility\Pipeline\IPipelineStep.cs" />
     <Compile Include="Extensibility\Pipeline\PipelineStepBase.cs" />
     <Compile Include="Extensibility\Pipeline\PipelineStepEnumerationExtensions.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Extensions\MemberNameExtensions.cs" />
     <Compile Include="Models\IHardwareExecutionInformation.cs" />

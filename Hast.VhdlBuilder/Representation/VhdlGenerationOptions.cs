@@ -139,18 +139,14 @@ namespace Hast.VhdlBuilder.Representation
 
     public static class VhdlGenerationOptionsExtensions
     {
-        public static string NewLineIfShouldFormat(this IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return vhdlGenerationOptions.FormatCode ? Environment.NewLine : string.Empty;
-        }
+        public static string NewLineIfShouldFormat(this IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.FormatCode ? Environment.NewLine : string.Empty;
 
-        public static string IndentIfShouldFormat(this IVhdlGenerationOptions vhdlGenerationOptions)
-        {
+        public static string IndentIfShouldFormat(this IVhdlGenerationOptions vhdlGenerationOptions) =>
             // Using spaces instead of tabs.
-            return vhdlGenerationOptions.FormatCode ?
+            vhdlGenerationOptions.FormatCode ?
                 "    " :
                 string.Empty;
-        }
 
         public static string ShortenName(this IVhdlGenerationOptions vhdlGenerationOptions, string originalName)
         {
