@@ -14,7 +14,7 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.UnumCalculator");
+            configuration.AddPublicHardwareType<UnumCalculator>();
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
