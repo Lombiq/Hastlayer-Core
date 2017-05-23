@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using Hast.Common.Configuration;
-using Hast.Transformer.Vhdl.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Layer;
-using Hast.VhdlBuilder.Representation;
+using Hast.Transformer.Vhdl.Configuration;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Kpz
 {
@@ -13,7 +13,7 @@ namespace Hast.Samples.Kpz
         public delegate void LogItDelegate(string toLog);
         public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
 
-        private void InitializeHastlayer()
+        private async Task InitializeHastlayer()
         {
             LogItFunction("Creating Hastlayer Factory...");
             var hastlayer = Xilinx.HastlayerFactory.Create();
@@ -39,10 +39,7 @@ namespace Hast.Samples.Kpz
             #endregion
 
             LogItFunction("Generating hardware...");
-            var taskToGenerateHardware = hastlayer.GenerateHardware( new[] { typeof(KpzKernels).Assembly }, configuration);
-            taskToGenerateHardware.Start();
-            taskToGenerateHardware.Wait();
-            var hardwareRepresentation = taskToGenerateHardware.Result;
+            var hardwareRepresentation = await hastlayer.GenerateHardware( new[] { typeof(KpzKernels).Assembly }, configuration);
             File.WriteAllText(
                 VhdlOutputFilePath,
                 ((Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareRepresentation.HardwareDescription).VhdlSource
@@ -52,13 +49,10 @@ namespace Hast.Samples.Kpz
             KpzKernels kpzKernels;
             if (kpzTarget == KpzTarget.FPGA)
             {
-                var taskToGenerateProxy = hastlayer.GenerateProxy<KpzKernels>(hardwareRepresentation, new KpzKernels());
-                taskToGenerateProxy.Start();
-                taskToGenerateProxy.Wait();
-                kpzKernels = taskToGenerateProxy.Result;
+                kpzKernels = await hastlayer.GenerateProxy<KpzKernels>(hardwareRepresentation, new KpzKernels());
                 LogItFunction("FPGA target detected");
             }
-            else if (kpzTarget == KpzTarget.FPGASimulation)
+            else //if (kpzTarget == KpzTarget.FPGASimulation)
             {
                 kpzKernels = new KpzKernels();
                 LogItFunction("Simulation target detected");

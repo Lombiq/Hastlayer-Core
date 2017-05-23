@@ -65,6 +65,7 @@ namespace Hast.Samples.Kpz
             {
                 buttonStart.Text = "Stop";
                 progressBar.Maximum = _numKpzIterations;
+                ComputationTarget = CurrentComputationTarget; //ComboBox value cannot be accessed from BackgroundWorker
                 _backgroundWorker.RunWorkerAsync(2000);
             }
             else
@@ -171,7 +172,7 @@ namespace Hast.Samples.Kpz
         private void RunKpz(BackgroundWorker bw)
         {
             AsyncLogIt("Creating KPZ data structure...");
-            _kpz = new Kpz(_kpzWidth, _kpzHeight, 0.5, 0.5, _showInspector);
+            _kpz = new Kpz(_kpzWidth, _kpzHeight, 0.5, 0.5, _showInspector, ComputationTarget);
             AsyncLogIt("Filling grid with initial data...");
             _kpz.InitializeGrid();
             AsyncLogIt("Starting KPZ iterations...");
@@ -200,7 +201,19 @@ namespace Hast.Samples.Kpz
             if (comboTarget.SelectedIndex > 0) nudTableWidth.Value = nudTableHeight.Value = 8;
         }
 
-        private bool IsTargetFPGASimulation { get { return comboTarget.SelectedIndex == 1; } }
-        private bool IsTargetFPGA { get { return comboTarget.SelectedIndex == 2; } }
+        private KpzTarget CurrentComputationTarget {
+            get
+            {
+                switch(comboTarget.SelectedIndex)
+                {
+                    case 0: return KpzTarget.CPU;
+                    case 1: return KpzTarget.FPGA;
+                    case 2: return KpzTarget.FPGASimulation;
+                }
+                return KpzTarget.CPU;
+            }
+        }
+
+        KpzTarget ComputationTarget;
     }
 }

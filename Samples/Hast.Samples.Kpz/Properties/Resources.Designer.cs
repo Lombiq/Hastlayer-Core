@@ -73,7 +73,7 @@ namespace Hast.Samples.Kpz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap kpzinspectorSimpleBar {
+        internal static System.Drawing.Bitmap kpzinspector_simple_bar {
             get {
                 object obj = ResourceManager.GetObject("kpzinspector-simple-bar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

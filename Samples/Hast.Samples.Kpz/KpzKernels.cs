@@ -21,8 +21,8 @@ namespace Hast.Samples.Kpz
         public const int KpzKernels_GridHeightIndex = 0;
         public const int KpzKernels_GridWidthIndex = 1;
         public const int KpzKernels_GridStartIndex = 2;
-        uint gridWidth;
-        uint gridHeight;
+        uint gridWidth = 0; //TODO
+        uint gridHeight = 0;
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         MWC64X prngCoords = new MWC64X();
         MWC64X prngDecision = new MWC64X();
@@ -63,12 +63,10 @@ namespace Hast.Samples.Kpz
             return grid;
         }
 
-        public void DoIteration(SimpleMemory memory)
+        public void DoIteration(KpzNode[,] grid)
         {
-            gridWidth = memory.ReadUInt32(KpzKernels_GridWidthIndex);
-            gridHeight = memory.ReadUInt32(KpzKernels_GridHeightIndex);
             //assume that GridWidth and GridHeight are 2^N
-            var numberOfStepsInIteration = gridWidth * gridHeight;
+            var numberOfStepsInIteration = grid.width() * grid.height();
 
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
@@ -135,5 +133,16 @@ namespace Hast.Samples.Kpz
         }
     }
 
-  
+
+    public static class KpzKernelsExtensions
+    {
+        public static uint TestAddWrapper(this KpzKernels kpz, uint a, uint b)
+        {
+            SimpleMemory sm = new SimpleMemory(3);
+            sm.WriteUInt32(0, a);
+            sm.WriteUInt32(1, b);
+            kpz.TestAdd(sm);
+            return sm.ReadUInt32(2);
+        }
+    }
 }
