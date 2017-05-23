@@ -55,8 +55,14 @@ namespace Hast.Samples.Kpz
             uint resultCPU  = 4313+123;
             if(resultCPU == resultFPGA) LogItFunction(String.Format("Success: {0} == {1}", resultFPGA, resultCPU));
             else LogItFunction(String.Format("Fail: {0} != {1}", resultFPGA, resultCPU));
-            LogItFunction("Testing FPGA with TestKpzNode...");
-            LogItFunction(String.Format("{0} --> {1}", 2, kpzKernels.TestKpzNodeWrapper(2), 3, kpzKernels.TestKpzNodeWrapper(3)));
+
+            LogItFunction("Testing FPGA with TestAddOut...");
+            resultFPGA = kpzKernels.TestAddOutWrapper(4313,123);
+            resultCPU  = 4313+123;
+            if(resultCPU == resultFPGA) LogItFunction(String.Format("Success: {0} == {1}", resultFPGA, resultCPU));
+            else LogItFunction(String.Format("Fail: {0} != {1}", resultFPGA, resultCPU));
+            //LogItFunction("Testing FPGA with TestKpzNode...");
+            //LogItFunction(String.Format("{0} --> {1}", 2, kpzKernels.TestKpzNodeWrapper(2), 3, kpzKernels.TestKpzNodeWrapper(3)));
             //How to run the same algorithm on the CPU and the FPGA?
             //Run on FPGA:     var output3 = hastlayerOptimizedAlgorithm.Run(9999);
             //Run on CPU:      var cpuOutput = new HastlayerOptimizedAlgorithm().Run(234234);

@@ -28,7 +28,6 @@ namespace Hast.Samples.Kpz
         MWC64X prngCoords = new MWC64X();
         MWC64X prngDecision = new MWC64X();
 
-        /*
         private bool getGridDx(int x, int y)
         {
             return (gridRaw[x + y * gridWidth] & 1) > 0;
@@ -51,8 +50,8 @@ namespace Hast.Samples.Kpz
 
         private void CopyToSimpleMemoryFromRawGrid(SimpleMemory memory)
         {
-            memory.WriteUInt32(KpzKernels.KpzKernels_GridWidthIndex, gridWidth);
-            memory.WriteUInt32(KpzKernels.KpzKernels_GridHeightIndex, gridHeight);
+            memory.WriteUInt32(KpzKernels.KpzKernels_GridWidthIndex, (uint)gridWidth);
+            memory.WriteUInt32(KpzKernels.KpzKernels_GridHeightIndex, (uint)gridHeight);
             for (int y = 0; y < gridHeight; y++)
             {
                 for (int x = 0; x < gridWidth; x++)
@@ -87,12 +86,7 @@ namespace Hast.Samples.Kpz
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
                 // We randomly choose a point on the grid. If there is a pyramid or hole, we randomly switch them.
-                var randomValue = prngCoords.GetNextRandom();
-                var randomPoint = new KpzCoords {
-                    x = (int)(randomValue & (gridWidth-1)),
-                    y = (int)((randomValue>>16) & (gridHeight-1))
-                };
-                RandomlySwitchFourCells(randomPoint, testMode);
+                RandomlySwitchFourCells(testMode);
             }
             CopyToSimpleMemoryFromRawGrid(memory);
         }
@@ -103,11 +97,14 @@ namespace Hast.Samples.Kpz
         /// <param name="p">
         /// contains the coordinates where the function looks if there is a pyramid or hole in the <see cref="grid" />.
         /// </param>
-        private void RandomlySwitchFourCells(KpzCoords p, bool forceSwitch)
+        private void RandomlySwitchFourCells(bool forceSwitch)
         {
-            uint randomNumber = prngDecision.GetNextRandom();
-            uint randomVariable1 = randomNumber & ((1 << 16) - 1);
-            uint randomVariable2 = (randomNumber >> 16) & ((1 << 16) - 1);
+            var randomNumber1 = prngCoords.GetNextRandom();
+            var randomPointX = (int)(randomNumber1 & (gridWidth - 1));
+            var randomPointY = (int)((randomNumber1 >> 16) & (gridHeight - 1));
+            uint randomNumber2 = prngDecision.GetNextRandom();
+            uint randomVariable1 = randomNumber2 & ((1 << 16) - 1);
+            uint randomVariable2 = (randomNumber2 >> 16) & ((1 << 16) - 1);
             var neighbours = GetNeighbourIndexes(p);
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
@@ -150,7 +147,18 @@ namespace Hast.Samples.Kpz
             toReturn.nyIndex = bottomNeighbourY * gridWidth + bottomNeighbourX;
             return toReturn;
         }
-        */
+
+        public void TestAddInner(uint a, uint b, out uint c)
+        {
+            c = a + b;
+        }
+
+        public virtual void TestAddOut(SimpleMemory memory)
+        {
+            uint c;
+            TestAddInner(memory.ReadUInt32(0), memory.ReadUInt32(1), out c);
+            memory.WriteUInt32(2, c);
+        }
 
         public virtual void TestAdd(SimpleMemory memory)
         {
@@ -161,6 +169,15 @@ namespace Hast.Samples.Kpz
 
     public static class KpzKernelsExtensions
     {
+        public static uint TestAddOutWrapper(this KpzKernels kpz, uint a, uint b)
+        {
+            SimpleMemory sm = new SimpleMemory(3);
+            sm.WriteUInt32(0, a);
+            sm.WriteUInt32(1, b);
+            kpz.TestAddOut(sm);
+            return sm.ReadUInt32(2);
+        }
+
         public static uint TestAddWrapper(this KpzKernels kpz, uint a, uint b)
         {
             SimpleMemory sm = new SimpleMemory(3);
