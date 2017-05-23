@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hast.Tests.TestAssembly1.ComplexTypes
+﻿namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {
     /// <summary>
     /// A type demonstrating a "complex" type hierarchy with base classes and interfaces.
@@ -12,44 +6,47 @@ namespace Hast.Tests.TestAssembly1.ComplexTypes
     public class ComplexTypeHierarchy : BaseClass, IInterface1, IInterface2
     {
         // Explicit interface implementation.
-        int IInterface1.Interface1Method1()
+        void IInterface1.Interface1Method1()
         {
-            return PrivateMethod() + 3;
+            PrivateMethod();
         }
 
         // Implicit interface implementation.
-        public int Interface1Method2()
+        public void Interface1Method2()
         {
-            if (BaseClassMethod1())
+            BaseClassMethod1();
+
+            if (true)
             {
-                return PrivateMethod() + StaticMethod();
+                PrivateMethod();
+                StaticMethod();
             }
             else
             {
-                return PrivateMethod();
+                PrivateMethod();
             }
         }
 
-        public int Interface2Method1()
+        public void Interface2Method1()
         {
-            return 10 + BaseInterfaceMethod2();
+            BaseInterfaceMethod2();
         }
 
         // Explicit interface implementation.
-        int IBaseInterface.BaseInterfaceMethod1()
+        void IBaseInterface.BaseInterfaceMethod1()
         {
-            return 5;
+            var x = 1;
         }
 
-        public int BaseInterfaceMethod2()
+        public void BaseInterfaceMethod2()
         {
-            return StaticMethod();
+            StaticMethod();
         }
 
         // A method that can't be a hardware interface since it's not a public virtual or an interface-declared method.
-        public int NonVirtualNonInterfaceMehod()
+        public void NonVirtualNonInterfaceMehod()
         {
-            return PrivateMethod();
+            PrivateMethod();
         }
 
         // A generic method. Not yet supported.
@@ -60,21 +57,21 @@ namespace Hast.Tests.TestAssembly1.ComplexTypes
         //}
 
 
-        private int PrivateMethod()
+        private void PrivateMethod()
         {
-            return 5 + StaticMethod();
+            StaticMethod();
         }
 
         // Method not referenced anywhere.
-        private int UnusedMethod()
+        private void UnusedMethod()
         {
-            return 234;
+            var x = 1;
         }
 
 
-        private static int StaticMethod()
+        private static void StaticMethod()
         {
-            return 7;
+            var x = 1;
         }
     }
 }

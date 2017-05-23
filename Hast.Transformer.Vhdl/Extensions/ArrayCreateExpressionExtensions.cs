@@ -27,9 +27,16 @@ namespace ICSharpCode.NRefactory.CSharp
             }
         }
 
-        public static bool HasInitializer(this ArrayCreateExpression expression)
+        public static bool HasInitializer(this ArrayCreateExpression expression) => expression.Initializer.Elements.Count != 0;
+
+        public static AstType GetElementType(this ArrayCreateExpression expression)
         {
-            return expression.Initializer.Elements.Count != 0;
+            // Sometimes instead of 
+            // new Task<uint>[2]
+            // an array instantiation will be in form of 
+            // new Task<bool>[2][] {}
+            // even if the task is still one-dimensional. In this case its type will be a ComposedType.
+            return expression.Type is ComposedType ? ((ComposedType)expression.Type).BaseType : expression.Type;
         }
     }
 }

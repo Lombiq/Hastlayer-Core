@@ -36,18 +36,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return _source;
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => _source;
 
 
         private class BinaryOperatorJsonConverter : JsonConverter
         {
-            public override bool CanConvert(Type objectType)
-            {
-                return (objectType == typeof(BinaryOperator));
-            }
+            public override bool CanConvert(Type objectType) => (objectType == typeof(BinaryOperator));
 
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
             {

@@ -8,7 +8,7 @@ namespace Hast.Common.Configuration
         /// Gets or sets a dictionary that can contain settings for non-default configuration options (like ones required 
         /// by specific transformer implementations).
         /// </summary>
-        public IDictionary<string, object> CustomConfiguration { get; set; }
+        public IDictionary<string, object> CustomConfiguration { get; set; } = new Dictionary<string, object>();
 
         /// <summary>
         /// Gets or sets the collection of the full name of those public members that will be accessible as hardware 
@@ -21,7 +21,7 @@ namespace Hast.Common.Configuration
         /// return type and the types of their (type) arguments, e.g.:
         /// "System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])
         /// </example>
-        public IList<string> PublicHardwareMemberFullNames { get; set; }
+        public IList<string> PublicHardwareMemberFullNames { get; set; } = new List<string>();
 
         /// <summary>
         /// Gets or sets the collection of the name prefixes of those public members that will be accessible as hardware 
@@ -34,13 +34,13 @@ namespace Hast.Common.Configuration
         /// "Contoso.ImageProcessing" will include all members under this namespace.
         /// "Contoso.ImageProcessing.FaceRecognition.FaceDetectors" will include all members in this class.
         /// </example>
-        public IList<string> PublicHardwareMemberNamePrefixes { get; set; }
+        public IList<string> PublicHardwareMemberNamePrefixes { get; set; } = new List<string>();
 
         /// <summary>
         /// Gets or sets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
         /// will happen. Defaults to <c>true</c>.
         /// </summary>
-        public bool EnableCaching { get; set; }
+        public bool EnableCaching { get; set; } = true;
 
         private static IHardwareGenerationConfiguration _default;
         public static IHardwareGenerationConfiguration Default
@@ -54,15 +54,6 @@ namespace Hast.Common.Configuration
 
                 return _default;
             }
-        }
-
-
-        public HardwareGenerationConfiguration()
-        {
-            CustomConfiguration = new Dictionary<string, object>();
-            PublicHardwareMemberFullNames = new List<string>();
-            PublicHardwareMemberNamePrefixes = new List<string>();
-            EnableCaching = true;
         }
     }
 }

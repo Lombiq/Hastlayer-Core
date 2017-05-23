@@ -9,21 +9,13 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class While : IBlockElement
     {
         public IVhdlElement Condition { get; set; }
-        public List<IVhdlElement> Body { get; set; }
+        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
 
-        public While()
-        {
-            Body = new List<IVhdlElement>();
-        }
-
-
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Terminated.Terminate(
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Terminated.Terminate(
                 "while " + Condition.ToVhdl(vhdlGenerationOptions) + " loop " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "end loop", vhdlGenerationOptions);
-        }
     }
 }

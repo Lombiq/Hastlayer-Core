@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq.Expressions;
 
 namespace Hast.Common.Configuration
 {
@@ -57,13 +58,43 @@ namespace Hast.Common.Configuration
         /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object.
         /// </summary>
         /// <param name="memberNamePrefix">
-        /// The prefix of the member's name. Use the same convention as with 
-        /// <see cref="MemberInvocationInstanceCountConfiguration.MemberNamePrefix"/>.
+        /// The prefix of the member's name. Use the same convention as with <see cref="MemberNamePrefix"/>.
         /// </param>
         public MemberInvocationInstanceCountConfiguration(string memberNamePrefix)
         {
             MemberNamePrefix = memberNamePrefix;
             MaxDegreeOfParallelism = 1;
         }
+    }
+
+
+    public class MemberInvocationInstanceCountConfigurationForMethod<T> : MemberInvocationInstanceCountConfiguration
+    {
+        /// <summary>
+        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a method (or methods)
+        /// with the given name prefix.
+        /// </summary>
+        /// <param name="methodNamePrefix">The prefix of the method's name (or methods' names).</param>
+        public MemberInvocationInstanceCountConfigurationForMethod(
+            string methodNamePrefix) : base(typeof(T).FullName + "." + methodNamePrefix) { }
+
+        /// <summary>
+        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a method.
+        /// </summary>
+        /// <param name="expression">An expression with a call to the method.</param>
+        public MemberInvocationInstanceCountConfigurationForMethod(
+            Expression<Action<T>> expression) : base(expression.GetMethodSimpleName()) { }
+
+        /// <summary>
+        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a lambda expression
+        /// inside a method.
+        /// </summary>
+        /// <param name="expression">An expression with a call to the method.</param>
+        /// <param name="lambdaExpressionIndex">
+        /// The lambda expression's zero-based index (i.e. is it the 0th, or 1st lambda in the method?).
+        /// </param>
+        public MemberInvocationInstanceCountConfigurationForMethod(
+            Expression<Action<T>> expression, int lambdaExpressionIndex)
+            : base(expression.GetMethodSimpleName() + ".LambdaExpression." + lambdaExpressionIndex.ToString()) { }
     }
 }

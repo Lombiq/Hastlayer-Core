@@ -27,10 +27,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override DataType ToReference()
-        {
-            return this;
-        }
+        public override DataType ToReference() => this;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
@@ -60,9 +57,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
     public static class SizedDataTypeExtensions
     {
-        public static int GetSize(this DataType type)
-        {
-            return type is SizedDataType ? ((SizedDataType)type).Size : 0;
-        }
+        public static int GetSize(this DataType type) => type is SizedDataType ? ((SizedDataType)type).Size : 0;
     }
 }

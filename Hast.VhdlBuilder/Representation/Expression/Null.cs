@@ -14,11 +14,8 @@
         }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            // It shouldn't be always terminated, so not terminating it here. See: 
-            // http://www.vhdl.renerta.com/mobile/source/vhd00045.htm
-            return "null";
-        }
+        // It shouldn't be always terminated, so not terminating it here. See: 
+        // http://www.vhdl.renerta.com/mobile/source/vhd00045.htm
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => "null";
     }
 }

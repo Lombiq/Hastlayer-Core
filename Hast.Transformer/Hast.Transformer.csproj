@@ -99,8 +99,11 @@
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
     <Compile Include="Services\ArrayInitializerExpander.cs" />
+    <Compile Include="Services\ConstructorsToMethodsConverter.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IArrayInitializerExpander.cs" />
+    <Compile Include="Services\IAutoPropertyInitializationFixer.cs" />
+    <Compile Include="Services\IConstructorsToMethodsConverter.cs" />
     <Compile Include="Services\IGeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IInstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\IInvocationInstanceCountAdjuster.cs" />
@@ -108,7 +111,9 @@
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\IObjectVariableTypesConverter.cs" />
     <Compile Include="Services\ISyntaxTreeCleaner.cs" />
+    <Compile Include="Services\NoForPatternStatementTransform.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
+    <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />

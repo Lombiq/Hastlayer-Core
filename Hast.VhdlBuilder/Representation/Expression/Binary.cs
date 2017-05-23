@@ -10,12 +10,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Right { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return
-                Left.ToVhdl(vhdlGenerationOptions) +
-                " " + Operator.ToVhdl(vhdlGenerationOptions) + " " +
-                Right.ToVhdl(vhdlGenerationOptions);
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Left.ToVhdl(vhdlGenerationOptions) +
+            " " + Operator.ToVhdl(vhdlGenerationOptions) + " " +
+            Right.ToVhdl(vhdlGenerationOptions);
     }
 }

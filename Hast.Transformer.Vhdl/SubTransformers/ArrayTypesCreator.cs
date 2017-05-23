@@ -14,8 +14,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             _typeConverter = typeConverter;
         }
-        
-        
+
+
         public IEnumerable<ArrayType> CreateArrayTypes(SyntaxTree syntaxTree)
         {
             var arrayDeclarations = new Dictionary<string, ArrayType>();
@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 base.VisitArrayCreateExpression(arrayCreateExpression);
 
-                var elementType = _typeConverter.ConvertAstType(arrayCreateExpression.Type);
+                var elementType = _typeConverter.ConvertAstType(arrayCreateExpression.GetElementType());
 
                 if (_arrayDeclarations.ContainsKey(elementType.Name)) return;
 

@@ -10,18 +10,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class Case : IVhdlElement
     {
         public IVhdlElement Expression { get; set; }
-        public List<CaseWhen> Whens { get; set; }
+        public List<CaseWhen> Whens { get; set; } = new List<CaseWhen>();
 
         /// <summary>
         /// Gets or sets whether the case expression is a matching case (case?) new to VHDL 2008. 
         /// </summary>
         public bool IsMatching { get; set; }
-
-
-        public Case()
-        {
-            Whens = new List<CaseWhen>();
-        }
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
@@ -54,22 +48,13 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class CaseWhen : IBlockElement
     {
         public IVhdlElement Expression { get; set; }
-        public List<IVhdlElement> Body { get; set; }
+        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
 
-        public CaseWhen()
-        {
-            Body = new List<IVhdlElement>();
-        }
-
-
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return 
-                "when " + Expression.ToVhdl(vhdlGenerationOptions) + " => " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                (Body.Count != 0 ? 
-                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : 
-                    Terminated.Terminate(vhdlGenerationOptions.IndentIfShouldFormat () + "null", vhdlGenerationOptions));
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            "when " + Expression.ToVhdl(vhdlGenerationOptions) + " => " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+            (Body.Count != 0 ? 
+                Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : 
+                Terminated.Terminate(vhdlGenerationOptions.IndentIfShouldFormat () + "null", vhdlGenerationOptions));
     }
 }

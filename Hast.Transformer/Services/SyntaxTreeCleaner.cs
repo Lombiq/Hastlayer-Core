@@ -3,6 +3,7 @@ using Hast.Common.Configuration;
 using Hast.Common.Extensions;
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
@@ -34,13 +35,14 @@ namespace Hast.Transformer.Services
                 foreach (var member in type.Members)
                 {
                     var fullName = member.GetFullName();
-                    if (
-                            (noIncludedMembers || 
-                            configuration.PublicHardwareMemberFullNames.Contains(fullName) || 
-                            fullName.GetMemberNameAlternates().Intersect(configuration.PublicHardwareMemberFullNames).Any() || 
-                            configuration.PublicHardwareMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix))) 
+                    if ((
+                            (noIncludedMembers ||
+                            configuration.PublicHardwareMemberFullNames.Contains(fullName) ||
+                            fullName.GetMemberNameAlternates().Intersect(configuration.PublicHardwareMemberFullNames).Any() ||
+                            configuration.PublicHardwareMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix)))
                         &&
-                            _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable))
+                            _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable)
+                        ))
                     {
                         if (member is MethodDeclaration)
                         {
@@ -95,6 +97,21 @@ namespace Hast.Transformer.Services
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
             }
 
+
+            public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
+            {
+                base.VisitObjectCreateExpression(objectCreateExpression);
+
+                var instantiatedType = _typeDeclarationLookupTable.Lookup(objectCreateExpression.Type);
+
+                if (instantiatedType == null) return;
+
+                instantiatedType.AddReference(objectCreateExpression);
+                // Looking up the constructor used.
+                instantiatedType.Members
+                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.Annotation<MethodDefinition>().FullName)
+                    ?.AddReference(objectCreateExpression);
+            }
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {

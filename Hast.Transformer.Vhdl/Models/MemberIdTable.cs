@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Hast.Transformer.Vhdl.Models
 {
+    [DebuggerDisplay("{MemberName + \" - \" + Id}")]
     public class MemberMapping
     {
         public string MemberName { get; set; }
