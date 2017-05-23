@@ -127,7 +127,7 @@ namespace Hast.Samples.Kpz
             return toReturn;
         }
 
-        public void TestAdd(SimpleMemory memory)
+        public virtual void TestAdd(SimpleMemory memory)
         {
             memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
         }

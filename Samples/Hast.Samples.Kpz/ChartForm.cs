@@ -44,7 +44,7 @@ namespace Hast.Samples.Kpz
             _backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(
                 backgroundWorker_RunWorkerCompleted
             );
-            comboTarget.SelectedIndex = 0;
+            comboTarget.SelectedIndex = 1;
         }
 
         /// <summary>It adds a line to the log.</summary>
@@ -175,6 +175,15 @@ namespace Hast.Samples.Kpz
             _kpz = new Kpz(_kpzWidth, _kpzHeight, 0.5, 0.5, _showInspector, ComputationTarget);
             AsyncLogIt("Filling grid with initial data...");
             _kpz.InitializeGrid();
+            if(ComputationTarget!=KpzTarget.Cpu)
+            {
+                AsyncLogIt("Initializing Hastlayer...");
+                _kpz.LogItFunction = AsyncLogIt;
+                Task hastlayerTask = new Task(() => _kpz.InitializeHastlayer());
+                hastlayerTask.Start();
+                hastlayerTask.Wait();
+            }
+
             AsyncLogIt("Starting KPZ iterations...");
             for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
             {
@@ -206,11 +215,11 @@ namespace Hast.Samples.Kpz
             {
                 switch(comboTarget.SelectedIndex)
                 {
-                    case 0: return KpzTarget.CPU;
-                    case 1: return KpzTarget.FPGA;
-                    case 2: return KpzTarget.FPGASimulation;
+                    case 0: return KpzTarget.Cpu;
+                    case 1: return KpzTarget.FpgaSimulation;
+                    case 2: return KpzTarget.Fpga;
                 }
-                return KpzTarget.CPU;
+                return KpzTarget.Cpu;
             }
         }
 

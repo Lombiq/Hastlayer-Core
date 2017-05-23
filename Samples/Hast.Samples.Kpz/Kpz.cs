@@ -10,7 +10,7 @@ namespace Hast.Samples.Kpz
 
     public enum KpzTarget
     {
-        CPU, FPGA, FPGASimulation
+        Cpu, Fpga, FpgaSimulation
     }
 
     /// <summary>
@@ -89,7 +89,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public KpzStateLogger StateLogger;
 
-        private KpzTarget kpzTarget = KpzTarget.CPU;
+        private KpzTarget kpzTarget = KpzTarget.Cpu;
 
         /// <summary>
         /// The constructor initializes the parameters of <see cref="Kpz" />, see:

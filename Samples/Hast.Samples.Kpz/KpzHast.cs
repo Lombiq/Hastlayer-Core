@@ -13,7 +13,7 @@ namespace Hast.Samples.Kpz
         public delegate void LogItDelegate(string toLog);
         public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
 
-        private async Task InitializeHastlayer()
+        public async void InitializeHastlayer()
         {
             LogItFunction("Creating Hastlayer Factory...");
             var hastlayer = Xilinx.HastlayerFactory.Create();
@@ -30,14 +30,6 @@ namespace Hast.Samples.Kpz
             configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = 
                 Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug;
 
-            #region Hack
-            // You just had to open this region, didn't you?
-            // If VHDL is written to a file just after GenerateHardware() somehow an exception will be
-            // thrown from inside Hastlayer. This shouldn't happen and the exception has nothing to do with
-            // files. It's a mystery. But having this dummy file write here solves it.
-            System.IO.File.WriteAllText(VhdlOutputFilePath, "dummy");
-            #endregion
-
             LogItFunction("Generating hardware...");
             var hardwareRepresentation = await hastlayer.GenerateHardware( new[] { typeof(KpzKernels).Assembly }, configuration);
             File.WriteAllText(
@@ -47,7 +39,7 @@ namespace Hast.Samples.Kpz
 
             LogItFunction("Generating proxy...");
             KpzKernels kpzKernels;
-            if (kpzTarget == KpzTarget.FPGA)
+            if (kpzTarget == KpzTarget.Fpga)
             {
                 kpzKernels = await hastlayer.GenerateProxy<KpzKernels>(hardwareRepresentation, new KpzKernels());
                 LogItFunction("FPGA target detected");
