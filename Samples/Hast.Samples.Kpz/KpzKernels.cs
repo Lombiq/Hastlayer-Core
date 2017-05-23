@@ -21,51 +21,66 @@ namespace Hast.Samples.Kpz
         public const int KpzKernels_GridHeightIndex = 0;
         public const int KpzKernels_GridWidthIndex = 1;
         public const int KpzKernels_GridStartIndex = 2;
-        uint gridWidth = 0; //TODO
-        uint gridHeight = 0;
+        int gridWidth = 0; 
+        int gridHeight = 0;
+        uint[] gridRaw;
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         MWC64X prngCoords = new MWC64X();
         MWC64X prngDecision = new MWC64X();
 
-        /// <summary>Push table into FPGA.</summary>
-        /// <param name="gridSrc">The grid to copy.</param>
-        /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
-        public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
+        /*
+        private bool getGridDx(int x, int y)
         {
-            //SimpleMemory memory = new SimpleMemory(grid.width() * grid.height() + 2); //Let's start by having dx and dy in each byte.
-            memoryDst.WriteUInt32(KpzKernels_GridWidthIndex, (uint)gridSrc.width());
-            memoryDst.WriteUInt32(KpzKernels_GridHeightIndex, (uint)gridSrc.height());
-            for (int x = 0; x < gridSrc.height(); x++)
+            return (gridRaw[x + y * gridWidth] & 1) > 0;
+        }
+
+        private bool getGridDy(int x, int y)
+        {
+            return (gridRaw[x + y * gridWidth] & 2) > 0;
+        }
+
+        private void setGridDx(int x, int y, bool value)
+        {
+            gridRaw[x + y * gridWidth] = (gridRaw[x + y * gridWidth] & ~1U) | ((value) ? 1U : 0);
+        }
+
+        private void setGridDy(int x, int y, bool value)
+        {
+            gridRaw[x + y * gridWidth] = (gridRaw[x + y * gridWidth] & ~2U) | ((value) ? 2U : 0);
+        }
+
+        private void CopyToSimpleMemoryFromRawGrid(SimpleMemory memory)
+        {
+            memory.WriteUInt32(KpzKernels.KpzKernels_GridWidthIndex, gridWidth);
+            memory.WriteUInt32(KpzKernels.KpzKernels_GridHeightIndex, gridHeight);
+            for (int y = 0; y < gridHeight; y++)
             {
-                for (int y = 0; y < gridSrc.width(); y++)
+                for (int x = 0; x < gridWidth; x++)
                 {
-                    KpzNode node = gridSrc[x, y];
-                    memoryDst.WriteUInt32(x * gridSrc.height() + y + KpzKernels_GridStartIndex, node.SerializeToUInt32());
+                    int index = y * gridWidth + x;
+                    memory.WriteUInt32(index + KpzKernels.KpzKernels_GridStartIndex, gridRaw[index]);
                 }
             }
         }
 
-        /// <summary>Pull table from the FPGA.</summary>
-        /// <param name="memory">The <see cref="SimpleMemory"/> instance.</param>
-        /// <param name="image">The original image.</param>
-        /// <returns>Returns the processed image.</returns>
-        public static void CopyFromSimpleMemoryToGrid(KpzNode[,] grid, SimpleMemory memory)
+        private void CopyFromSimpleMemoryToRawGrid(SimpleMemory memory)
         {
-            for (int x = 0; x < grid.width(); x++)
+            for (int x = 0; x < gridWidth; x++)
             {
-                for (int y = 0; y < grid.height(); y++)
+                for (int y = 0; y < gridHeight; y++)
                 {
-                    grid[x, y] = KpzNode.DeserializeFromUInt32(memory.ReadUInt32(x * grid.height() + y + KpzKernels_GridStartIndex));
+                    int index = y * gridWidth + x;
+                    gridRaw[index] = memory.ReadUInt32(index + KpzKernels.KpzKernels_GridStartIndex);
                 }
             }
         }
 
-        public virtual void DoIteration(SimpleMemory memory, bool testMode)
+        public void DoIteration(SimpleMemory memory, bool testMode)
         {
-            int gridWidth = (int)memory.ReadUInt32(KpzKernels_GridWidthIndex);
-            int gridHeight = (int)memory.ReadUInt32(KpzKernels_GridHeightIndex);
-            KpzNode[,] grid = new KpzNode[gridWidth, gridHeight]; 
-            CopyFromSimpleMemoryToGrid(grid, memory);
+            gridWidth = (int)memory.ReadUInt32(KpzKernels_GridWidthIndex);
+            gridHeight = (int)memory.ReadUInt32(KpzKernels_GridHeightIndex);
+            gridRaw = new uint[gridWidth*gridHeight]; 
+            CopyFromSimpleMemoryToRawGrid(memory);
             //assume that GridWidth and GridHeight are 2^N
             var numberOfStepsInIteration = (testMode) ? 1 : gridWidth * gridHeight;
 
@@ -77,9 +92,9 @@ namespace Hast.Samples.Kpz
                     x = (int)(randomValue & (gridWidth-1)),
                     y = (int)((randomValue>>16) & (gridHeight-1))
                 };
-                RandomlySwitchFourCells(grid, randomPoint, testMode);
+                RandomlySwitchFourCells(randomPoint, testMode);
             }
-            CopyFromGridToSimpleMemory(grid, memory);
+            CopyToSimpleMemoryFromRawGrid(memory);
         }
 
         /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="grid" />, and randomly switch
@@ -88,13 +103,12 @@ namespace Hast.Samples.Kpz
         /// <param name="p">
         /// contains the coordinates where the function looks if there is a pyramid or hole in the <see cref="grid" />.
         /// </param>
-        private void RandomlySwitchFourCells(KpzNode[,] grid, KpzCoords p, bool forceSwitch)
+        private void RandomlySwitchFourCells(KpzCoords p, bool forceSwitch)
         {
             uint randomNumber = prngDecision.GetNextRandom();
             uint randomVariable1 = randomNumber & ((1 << 16) - 1);
             uint randomVariable2 = (randomNumber >> 16) & ((1 << 16) - 1);
-            var neighbours = GetNeighbours(grid, p);
-            var currentPoint = grid[p.x, p.y];
+            var neighbours = GetNeighbourIndexes(p);
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
@@ -113,28 +127,36 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        private KpzNeighbours GetNeighbours(KpzNode[,] grid, KpzCoords p)
+        public struct KpzNeighbourIndexes
         {
-            KpzNeighbours toReturn;
-            toReturn.nxCoords = new KpzCoords
-            {
-                x = (p.x < gridWidth - 1) ? p.x + 1 : 0,
-                y = p.y
-            };
-            toReturn.nyCoords = new KpzCoords
-            {
-                x = p.x,
-                y = (p.y < gridHeight - 1) ? p.y + 1 : 0
-            };
-            toReturn.nx = grid[toReturn.nxCoords.x, toReturn.nxCoords.y];
-            toReturn.ny = grid[toReturn.nyCoords.x, toReturn.nyCoords.y];
+            public int nxIndex; // Right neighbour coordinates
+            public int nyIndex; // Bottom neighbour coordinates
+        }
+
+        public struct KpzCoords
+        {
+            public int x;
+            public int y;
+        }
+
+        private KpzNeighbourIndexes GetNeighbourIndexes(KpzCoords p)
+        {
+            KpzNeighbourIndexes toReturn;
+            int rightNeighbourX = (p.x < gridWidth - 1) ? p.x + 1 : 0;
+            int rightNeighbourY = p.y;
+            int bottomNeighbourX = p.x;
+            int bottomNeighbourY = (p.y < gridHeight - 1) ? p.y + 1 : 0;
+            toReturn.nxIndex = rightNeighbourY * gridWidth + rightNeighbourX;
+            toReturn.nyIndex = bottomNeighbourY * gridWidth + bottomNeighbourX;
             return toReturn;
         }
+        */
 
         public virtual void TestAdd(SimpleMemory memory)
         {
             memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
         }
+
     }
 
     public static class KpzKernelsExtensions
@@ -148,12 +170,48 @@ namespace Hast.Samples.Kpz
             return sm.ReadUInt32(2);
         }
 
+        /*
         public static void DoSingleIterationWrapper(this KpzKernels kpz, KpzNode[,] hostGrid)
         {
             SimpleMemory sm = new SimpleMemory(hostGrid.width() * hostGrid.height() + KpzKernels.KpzKernels_GridStartIndex);
-            KpzKernels.CopyFromGridToSimpleMemory(hostGrid, sm);
+            CopyFromGridToSimpleMemory(hostGrid, sm);
             kpz.DoIteration(sm, true);
-            KpzKernels.CopyFromSimpleMemoryToGrid(hostGrid, sm);
+            CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
+        */
+
+        /// <summary>Push table into FPGA.</summary>
+        /// <param name="gridSrc">The grid to copy.</param>
+        /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
+        public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
+        {
+            //SimpleMemory memory = new SimpleMemory(grid.width() * grid.height() + 2); //Let's start by having dx and dy in each byte.
+            memoryDst.WriteUInt32(KpzKernels.KpzKernels_GridWidthIndex, (uint)gridSrc.width());
+            memoryDst.WriteUInt32(KpzKernels.KpzKernels_GridHeightIndex, (uint)gridSrc.height());
+            for (int x = 0; x < gridSrc.height(); x++)
+            {
+                for (int y = 0; y < gridSrc.width(); y++)
+                {
+                    KpzNode node = gridSrc[x, y];
+                    memoryDst.WriteUInt32(x * gridSrc.height() + y + KpzKernels.KpzKernels_GridStartIndex, node.SerializeToUInt32());
+                }
+            }
+        }
+
+        /// <summary>Pull table from the FPGA.</summary>
+        /// <param name="memory">The <see cref="SimpleMemory"/> instance.</param>
+        /// <param name="image">The original image.</param>
+        /// <returns>Returns the processed image.</returns>
+        public static void CopyFromSimpleMemoryToGrid(KpzNode[,] grid, SimpleMemory memory)
+        {
+            for (int x = 0; x < grid.width(); x++)
+            {
+                for (int y = 0; y < grid.height(); y++)
+                {
+                    grid[x, y] = KpzNode.DeserializeFromUInt32(memory.ReadUInt32(x * grid.height() + y + KpzKernels.KpzKernels_GridStartIndex));
+                }
+            }
+        }
+
     }
 }
