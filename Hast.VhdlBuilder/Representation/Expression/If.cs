@@ -10,13 +10,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public T True { get; set; }
 
 
-        public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Terminated.Terminate(
+        public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Terminated.Terminate(
                 "if (" + Condition.ToVhdl(vhdlGenerationOptions) + ") then " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     True.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "end if", vhdlGenerationOptions);
-        }
     }
 
 

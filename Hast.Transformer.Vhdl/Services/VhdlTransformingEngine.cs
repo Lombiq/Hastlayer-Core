@@ -39,7 +39,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             var vhdlSource = transformedVhdlManifest.Manifest.TopModule
                 .ToVhdl(transformationContext.HardwareGenerationConfiguration.VhdlTransformerConfiguration().VhdlGenerationOptions);
-            var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest.MemberIdTable);
+            var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest);
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)
             {

@@ -19,14 +19,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override DataType ToReference()
-        {
-            return this;
-        }
+        public override DataType ToReference() => this;
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return vhdlGenerationOptions.NameShortener(Name) + "(" + RangeFrom + " to " + RangeTo + ")";
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.NameShortener(Name) + "(" + RangeFrom + " to " + RangeTo + ")";
     }
 }

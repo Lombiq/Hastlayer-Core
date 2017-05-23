@@ -32,17 +32,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
         }
 
-        public List<Generic> Generics { get; set; }
-        public List<Port> Ports { get; set; }
-        public List<IVhdlElement> Declarations { get; set; }
-
-
-        public Entity()
-        {
-            Generics = new List<Generic>();
-            Declarations = new List<IVhdlElement>();
-            Ports = new List<Port>();
-        }
+        public List<Generic> Generics { get; set; } = new List<Generic>();
+        public List<Port> Ports { get; set; } = new List<Port>();
+        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
@@ -71,9 +63,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         /// <param name="name">The unsafe name to convert.</param>
         /// <returns>The cleaned name.</returns>
-        public static string ToSafeEntityName(string name)
-        {
-            return Regex.Replace(name, "[^" + SafeNameCharacterSet + "]", "_", RegexOptions.IgnoreCase);
-        }
+        public static string ToSafeEntityName(string name) =>
+            Regex.Replace(name, "[^" + SafeNameCharacterSet + "]", "_", RegexOptions.IgnoreCase);
     }
 }

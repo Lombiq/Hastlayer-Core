@@ -9,13 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public Component Component { get; set; }
         public string Label { get; set; }
-        public List<PortMapping> PortMappings { get; set; }
-
-
-        public ComponentInstance()
-        {
-            PortMappings = new List<PortMapping>();
-        }
+        public List<PortMapping> PortMappings { get; set; } = new List<PortMapping>();
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
@@ -40,9 +34,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string To { get; set; }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return vhdlGenerationOptions.ShortenName(From) + " => " + vhdlGenerationOptions.ShortenName(To);
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.ShortenName(From) + " => " + vhdlGenerationOptions.ShortenName(To);
     }
 }

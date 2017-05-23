@@ -9,17 +9,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Procedure : ISubProgram
     {
         public string Name { get; set; }
-        public List<ProcedureParameter> Parameters { get; set; }
-        public List<IVhdlElement> Declarations { get; set; }
-        public List<IVhdlElement> Body { get; set; }
-
-
-        public Procedure()
-        {
-            Parameters = new List<ProcedureParameter>();
-            Declarations = new List<IVhdlElement>();
-            Body = new List<IVhdlElement>();
-        }
+        public List<ProcedureParameter> Parameters { get; set; } = new List<ProcedureParameter>();
+        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
@@ -54,15 +46,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public ProcedureParameterType ParameterType { get; set; }
 
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return
-                (DataObjectKind.ToString() ?? string.Empty) +
-                vhdlGenerationOptions.ShortenName(Name) +
-                ": " +
-                ParameterType +
-                " " +
-                DataType.ToVhdl(vhdlGenerationOptions);
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            (DataObjectKind.ToString() ?? string.Empty) +
+            vhdlGenerationOptions.ShortenName(Name) +
+            ": " +
+            ParameterType +
+            " " +
+            DataType.ToVhdl(vhdlGenerationOptions);
     }
 }

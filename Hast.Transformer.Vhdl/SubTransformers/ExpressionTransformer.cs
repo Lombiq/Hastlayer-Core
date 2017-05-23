@@ -12,6 +12,7 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Testing;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard.Logging;
 
@@ -309,6 +310,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is MemberReferenceExpression)
             {
                 var memberReference = (MemberReferenceExpression)expression;
+
+                // Handling array.Length with the VHDL length attribute.
+                if (memberReference.MemberName == "Length" && memberReference.Target.GetActualTypeReference().IsArray)
+                {
+                    return new Raw("{0}'length", Transform(memberReference.Target, context));
+                }
+
                 var memberFullName = memberReference.GetFullName();
 
                 // Expressions like return Task.CompletedTask;
@@ -467,18 +475,39 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var castExpression = (CastExpression)expression;
 
-                var fromType = _typeConverter.ConvertTypeReference(
-                    castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference());
+                var fromTypeReference = castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference();
+                var fromType = _typeConverter.ConvertTypeReference(fromTypeReference);
                 var toType = _typeConverter.ConvertAstType(castExpression.Type);
 
+                var innerExpressionResult = Transform(castExpression.Expression, context);
+
+                // If the inner expression produced a data object then let's check the size of that: if it's the same
+                // size as the target type of the cast then no need to cast again.
+                var resultDataObject = innerExpressionResult as IDataObject;
+                var resultParentesized = innerExpressionResult as Parenthesized;
+                if (resultDataObject == null && resultParentesized != null)
+                {
+                    resultDataObject = resultParentesized.Target as IDataObject;
+                }
+
+                if (resultDataObject != null)
+                {
+                    var resultDataObjectDeclaration = stateMachine
+                        .GetAllDataObjects()
+                        .SingleOrDefault(dataObject => dataObject.Name == resultDataObject.Name);
+
+                    if (resultDataObjectDeclaration != null)
+                    {
+                        fromType = resultDataObjectDeclaration.DataType;
+                    }
+                }
+
                 var typeConversionResult = _typeConversionTransformer
-                    .ImplementTypeConversion(fromType, toType, Transform(castExpression.Expression, context));
+                    .ImplementTypeConversion(fromType, toType, innerExpressionResult);
                 if (typeConversionResult.IsLossy)
                 {
-                    var toTypeKeyword = ((PrimitiveType)castExpression.Type).Keyword;
-                    var fromTypeKeyword = castExpression.GetActualTypeReference().FullName;
                     Logger.Warning(
-                        "A cast from " + fromTypeKeyword + " to " + toTypeKeyword +
+                        "A cast from " + fromType.ToVhdl() + " to " + toType.ToVhdl() +
                         " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
                 }
@@ -533,6 +562,32 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var objectCreateExpression = (ObjectCreateExpression)expression;
 
                 var initiailizationResult = InitializeRecord(expression, objectCreateExpression.Type, context);
+
+                // Running the constructor, which needs to be done before intializers.
+                var constructor = context.TransformationContext.TypeDeclarationLookupTable
+                    .Lookup(objectCreateExpression.Type)
+                    .Members
+                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.GetFullName()) as MethodDeclaration;
+                if (constructor != null)
+                {
+                    scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
+
+                    var constructorInvocation = new InvocationExpression(
+                        new MemberReferenceExpression(
+                            new TypeReferenceExpression(objectCreateExpression.Type.Clone()), 
+                            constructor.Name),
+                        // Passing ctor parameters, and an object reference as the first one (since all methods were
+                        // converted to static with the first parameter being @this).
+                        new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
+                            .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
+
+                    foreach (var annotation in expression.Annotations)
+                    {
+                        constructorInvocation.AddAnnotation(annotation);
+                    }
+
+                    Transform(constructorInvocation, context);
+                }
 
                 if (objectCreateExpression.Initializer.Elements.Any())
                 {
@@ -618,7 +673,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return new RecordInitializationResult
             {
                 Record = record,
-                RecordInstanceReference = recordInstanceReference
+                RecordInstanceReference = recordInstanceReference,
+                RecordInstanceIdentifier = recordInstanceIdentifier
             };
         }
 
@@ -627,6 +683,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             public Record Record { get; set; }
             public IDataObject RecordInstanceReference { get; set; }
+            public Expression RecordInstanceIdentifier { get; set; }
         }
     }
 }

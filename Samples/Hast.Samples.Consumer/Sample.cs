@@ -6,6 +6,7 @@
         HastlayerOptimizedAlgorithm,
         ImageProcessingAlgorithms,
         MonteCarloAlgorithm,
+        ObjectOrientedShowcase,
         PrimeCalculator,
         RecursiveAlgorithms,
         SimdCalculator,

@@ -45,24 +45,18 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// concept from <see cref="DataObjectReference"/> which is about referencing data objects (e.g. signals), not
         /// data types.
         /// </remarks>
-        public virtual DataType ToReference()
-        {
-            return new DataTypeReference(this, vhdlGenerationOptions => vhdlGenerationOptions.NameShortener(Name));
-        }
+        public virtual DataType ToReference() =>
+            new DataTypeReference(this, vhdlGenerationOptions => vhdlGenerationOptions.NameShortener(Name));
 
-        public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return vhdlGenerationOptions.NameShortener(Name);
-        }
+        public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.NameShortener(Name);
 
         /// <summary>
         /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside 
         /// double quotes.
         /// </summary>
-        public virtual bool IsLiteralArrayType()
-        {
-            return this == KnownDataTypes.String || Name == "bit_vector" || Name == "std_logic_vector";
-        }
+        public virtual bool IsLiteralArrayType() =>
+            this == KnownDataTypes.String || Name == "bit_vector" || Name == "std_logic_vector";
 
         public override bool Equals(object obj)
         {
@@ -91,9 +85,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return a.Equals(b);
         }
 
-        public static bool operator !=(DataType a, DataType b)
-        {
-            return !(a == b);
-        }
+        public static bool operator !=(DataType a, DataType b) => !(a == b);
     }
 }

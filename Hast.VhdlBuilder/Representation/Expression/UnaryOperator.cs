@@ -17,9 +17,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return _source;
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => _source;
     }
 }

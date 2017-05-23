@@ -8,9 +8,7 @@ namespace Hast.VhdlBuilder
     /// </summary>
     public static class JsonSerializerSettingsPopulator
     {
-        public static void PopulateSettings(JsonSerializerSettings settings)
-        {
+        public static void PopulateSettings(JsonSerializerSettings settings) =>
             settings.Converters.Add(BinaryOperator.JsonConverter);
-        }
     }
 }

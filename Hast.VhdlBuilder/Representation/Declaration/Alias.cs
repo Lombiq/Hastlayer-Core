@@ -17,9 +17,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Terminated.Terminate(
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Terminated.Terminate(
                 "alias " +
                 vhdlGenerationOptions.ShortenName(Name) +
                 " : " +
@@ -27,6 +26,5 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " is " +
                 vhdlGenerationOptions.ShortenName(ObjectName),
                 vhdlGenerationOptions);
-        }
     }
 }

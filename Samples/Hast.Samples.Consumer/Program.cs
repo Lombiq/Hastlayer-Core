@@ -81,6 +81,9 @@ namespace Hast.Samples.Consumer
                             case Sample.MonteCarloAlgorithm:
                                 MonteCarloAlgorithmSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.ObjectOrientedShowcase:
+                                ObjectOrientedShowcaseSampleRunner.Configure(configuration);
+                                break;
                             case Sample.PrimeCalculator:
                                 PrimeCalculatorSampleRunner.Configure(configuration);
                                 break;
@@ -100,14 +103,6 @@ namespace Hast.Samples.Consumer
                         // The generated VHDL code will contain debug-level information, though it will be a bit slower
                         // to create.
                         configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
-
-                        #region Hack
-                        // You just had to open this region, didn't you?
-                        // If VHDL is written to a file just after GenerateHardware() somehow an exception will be 
-                        // thrown from inside Hastlayer. This shouldn't happen and the exception has nothing to do with
-                        // files. It's a mystery. But having this dummy file write here solves it.
-                        //System.IO.File.WriteAllText(Configuration.VhdlOutputFilePath, "dummy");
-                        #endregion
 
                         // Generating hardware from the sample assembly with the given configuration.
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
@@ -140,6 +135,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.MonteCarloAlgorithm:
                                 await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.ObjectOrientedShowcase:
+                                await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.PrimeCalculator:
                                 await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);

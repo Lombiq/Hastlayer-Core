@@ -14,9 +14,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return (Shared ? "shared " : string.Empty) + base.ToVhdl(vhdlGenerationOptions);
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            (Shared ? "shared " : string.Empty) + base.ToVhdl(vhdlGenerationOptions);
     }
 }

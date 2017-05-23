@@ -65,5 +65,16 @@ namespace System
             // A name where before the "<" there is nothing is invalid in standard C#, so this is a fairly safe bet.
             return Regex.IsMatch(name, "^[^/]+?::<.+>.+__", RegexOptions.Compiled);
         }
+
+        /// <summary>
+        /// Determines whether the string looks like the name of a compiler-generated field that backs an auto-property.
+        /// </summary>
+        /// <example>
+        /// Such a field's name looks like "<Number>k__BackingField". It will contain the name of the property.
+        /// </example>
+        public static bool IsBackingFieldName(this string name)
+        {
+            return Regex.IsMatch(name, "<(.*)>.*BackingField");
+        }
     }
 }

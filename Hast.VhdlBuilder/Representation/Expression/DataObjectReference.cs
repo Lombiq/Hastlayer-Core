@@ -10,14 +10,8 @@ namespace Hast.VhdlBuilder.Representation.Expression
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class DataObjectReference : DataObjectBase
     {
-        public override IDataObject ToReference()
-        {
-            return this;
-        }
+        public override IDataObject ToReference() => this;
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return vhdlGenerationOptions.ShortenName(Name);
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => vhdlGenerationOptions.ShortenName(Name);
     }
 }

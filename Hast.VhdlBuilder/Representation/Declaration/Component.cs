@@ -8,13 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Component : INamedElement
     {
         public string Name { get; set; }
-        public List<Port> Ports { get; set; }
-
-
-        public Component()
-        {
-            Ports = new List<Port>();
-        }
+        public List<Port> Ports { get; set; } = new List<Port>();
 
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)

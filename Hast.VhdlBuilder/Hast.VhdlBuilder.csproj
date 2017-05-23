@@ -120,6 +120,9 @@
     <Compile Include="Extensions\VhdlElementEnumerableExtensions.cs" />
     <Compile Include="Representation\Declaration\VhdlManifest.cs" />
     <Compile Include="Representation\VhdlGenerationOptions.cs" />
+    <Compile Include="Testing\VhdlStructureAssertionFailedException.cs" />
+    <Compile Include="Testing\VhdlElementEnumerableExtensions.cs" />
+    <Compile Include="Testing\VhdlElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
