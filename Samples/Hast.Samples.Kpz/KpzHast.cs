@@ -31,7 +31,10 @@ namespace Hast.Samples.Kpz
                 Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug;
 
             LogItFunction("Generating hardware...");
-            var hardwareRepresentation = await hastlayer.GenerateHardware( new[] { typeof(KpzKernels).Assembly }, configuration);
+            var hardwareRepresentation = await hastlayer.GenerateHardware( new[] {
+                typeof(KpzKernels).Assembly,
+                typeof(Hast.Algorithms.MWC64X).Assembly
+            }, configuration);
             File.WriteAllText(
                 VhdlOutputFilePath,
                 ((Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareRepresentation.HardwareDescription).VhdlSource
