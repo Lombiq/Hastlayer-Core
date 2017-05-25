@@ -22,8 +22,25 @@ namespace Hast.Samples.Kpz
         public const int gridHeight = 8;
         uint[] gridRaw = new uint[gridWidth * gridHeight];
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
-        MWC64X prngCoords = new MWC64X();
-        MWC64X prngDecision = new MWC64X();
+
+        ulong randomState1 = 7215152093156152310UL; //random seed
+        ulong randomState2 = 8322404672673255311UL; //random seed
+
+        public uint GetNextRandom1()
+        {
+            uint c = (uint)(randomState1 >> 32);
+            uint x = (uint)(randomState1 & 0xFFFFFFFFUL);
+            randomState1 = x * ((ulong)4294883355UL) + c;
+            return x ^ c;
+        }
+
+        public uint GetNextRandom2()
+        {
+            uint c = (uint)(randomState2 >> 32);
+            uint x = (uint)(randomState2 & 0xFFFFFFFFUL);
+            randomState2 = x * ((ulong)4294883355UL) + c;
+            return x ^ c;
+        }
 
         private int getIndexFromXY(int x, int y)
         {
@@ -97,17 +114,23 @@ namespace Hast.Samples.Kpz
         /// </param>
         private void RandomlySwitchFourCells(bool forceSwitch)
         {
-            var randomNumber1 = prngCoords.GetNextRandom();
+            var randomNumber1 = GetNextRandom1();
             var centerX = (int)(randomNumber1 & (gridWidth - 1));
             var centerY = (int)((randomNumber1 >> 16) & (gridHeight - 1));
             int centerIndex = getIndexFromXY(centerX, centerY);
-            uint randomNumber2 = prngDecision.GetNextRandom();
+            uint randomNumber2 = GetNextRandom2();
             uint randomVariable1 = randomNumber2 & ((1 << 16) - 1);
             uint randomVariable2 = (randomNumber2 >> 16) & ((1 << 16) - 1);
             int rightNeighbourIndex;
             int bottomNeighbourIndex;
-            GetNeighbourIndexes(centerX, centerY, out rightNeighbourIndex, out bottomNeighbourIndex);
-            // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
+            //get neighbour indexes:
+            int rightNeighbourX = (centerX < gridWidth - 1) ? centerX + 1 : 0;
+            int rightNeighbourY = centerY;
+            int bottomNeighbourX = centerX;
+            int bottomNeighbourY = (centerY < gridHeight - 1) ? centerY + 1 : 0;
+            rightNeighbourIndex  = rightNeighbourY * gridWidth + rightNeighbourX;
+            bottomNeighbourIndex = bottomNeighbourY * gridWidth + bottomNeighbourX;
+           // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
                 ((getGridDx(centerIndex) && !getGridDx(rightNeighbourIndex)) && (getGridDy(centerIndex) && !getGridDy(bottomNeighbourIndex)) &&
@@ -125,32 +148,6 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        private void GetNeighbourIndexes(
-            int x, int y,
-            out int rightNeighbourIndex, 
-            out int bottomNeighbourIndex
-        )
-        {
-            int rightNeighbourX = (x < gridWidth - 1) ? x + 1 : 0;
-            int rightNeighbourY = y;
-            int bottomNeighbourX = x;
-            int bottomNeighbourY = (y < gridHeight - 1) ? y + 1 : 0;
-            rightNeighbourIndex  = rightNeighbourY * gridWidth + rightNeighbourX;
-            bottomNeighbourIndex = bottomNeighbourY * gridWidth + bottomNeighbourX;
-        }
-
-        public void TestAddInner(uint a, uint b, out uint c)
-        {
-            c = a + b;
-        }
-
-        public virtual void TestAddOut(SimpleMemory memory)
-        {
-            uint c;
-            TestAddInner(memory.ReadUInt32(0), memory.ReadUInt32(1), out c);
-            memory.WriteUInt32(2, c);
-        }
-
         public virtual void TestAdd(SimpleMemory memory)
         {
             memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
@@ -160,14 +157,6 @@ namespace Hast.Samples.Kpz
 
     public static class KpzKernelsExtensions
     {
-        public static uint TestAddOutWrapper(this KpzKernels kpz, uint a, uint b)
-        {
-            SimpleMemory sm = new SimpleMemory(3);
-            sm.WriteUInt32(0, a);
-            sm.WriteUInt32(1, b);
-            kpz.TestAddOut(sm);
-            return sm.ReadUInt32(2);
-        }
 
         public static uint TestAddWrapper(this KpzKernels kpz, uint a, uint b)
         {
@@ -177,16 +166,6 @@ namespace Hast.Samples.Kpz
             kpz.TestAdd(sm);
             return sm.ReadUInt32(2);
         }
-
-
-        public static void DoSingleIterationWrapper(this KpzKernels kpz, KpzNode[,] hostGrid, bool pushToFpga)
-        {
-            SimpleMemory sm = new SimpleMemory(KpzKernels.gridWidth * KpzKernels.gridHeight);
-            if(pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
-            kpz.DoIteration(sm, true);
-            CopyFromSimpleMemoryToGrid(hostGrid, sm);
-        }
-
 
         /// <summary>Push table into FPGA.</summary>
         public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
