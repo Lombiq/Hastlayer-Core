@@ -14,24 +14,18 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
     public abstract class ArchitectureComponentBase : IArchitectureComponent
     {
         public string Name { get; private set; }
-        public IList<Variable> LocalVariables { get; private set; }
-        public IList<Variable> GlobalVariables { get; private set; }
-        public IList<Signal> InternallyDrivenSignals { get; private set; }
-        public IList<Signal> ExternallyDrivenSignals { get; private set; }
-        public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; }
-        public DependentTypesTable DependentTypesTable { get; private set; }
+        public IList<Variable> LocalVariables { get; private set; } = new List<Variable>();
+        public IList<Variable> GlobalVariables { get; private set; } = new List<Variable>();
+        public IList<Signal> InternallyDrivenSignals { get; private set; } = new List<Signal>();
+        public IList<Signal> ExternallyDrivenSignals { get; private set; } = new List<Signal>();
+        public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; } = 
+            new Dictionary<EntityDeclaration, int>();
+        public DependentTypesTable DependentTypesTable { get; private set; } = new DependentTypesTable();
 
 
         protected ArchitectureComponentBase(string name)
         {
             Name = name;
-
-            LocalVariables = new List<Variable>();
-            GlobalVariables = new List<Variable>();
-            InternallyDrivenSignals = new List<Signal>();
-            ExternallyDrivenSignals = new List<Signal>();
-            OtherMemberMaxInvocationInstanceCounts = new Dictionary<EntityDeclaration, int>();
-            DependentTypesTable = new DependentTypesTable();
         }
 
 
