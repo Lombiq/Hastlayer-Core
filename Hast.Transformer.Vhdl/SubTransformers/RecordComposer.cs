@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -44,15 +45,32 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .Select(member =>
                     {
                         var name = member.Name;
+                        ArrayCreateExpression arrayCreateExpression = null;
 
                         if (member is FieldDeclaration)
                         {
-                            name = ((FieldDeclaration)member).Variables.Single().Name;
+                            var variable = ((FieldDeclaration)member).Variables.Single();
+                            name = variable.Name;
+                            arrayCreateExpression = variable.Initializer as ArrayCreateExpression;
+                        }
+
+                        DataType type = null;
+                        if (member.ReturnType.IsArray() && arrayCreateExpression != null)
+                        {
+                            type = ArrayHelper.CreateArrayInstantiation(
+                                _typeConverterLazy.Value.ConvertAstType(
+                                    arrayCreateExpression.GetElementType(),
+                                    typeDeclarationLookupTable),
+                                arrayCreateExpression.GetStaticLength());
+                        }
+                        else
+                        {
+                            type = _typeConverterLazy.Value.ConvertAstType(member.ReturnType, typeDeclarationLookupTable);
                         }
 
                         return new RecordField
                         {
-                            DataType = _typeConverterLazy.Value.ConvertAstType(member.ReturnType, typeDeclarationLookupTable),
+                            DataType = type,
                             Name = name.ToExtendedVhdlId()
                         };
 
