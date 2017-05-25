@@ -47,8 +47,8 @@ architecture Imp of Hast_IP is
     -- Custom inter-dependent type declarations start
     type \unsigned_Array\ is array (integer range <>) of unsigned(31 downto 0);
     type \Hast.Samples.SampleAssembly.NumberContainer\ is record 
-        \Number\: unsigned(31 downto 0);
         \WasIncreased\: boolean;
+        \Number\: unsigned(31 downto 0);
     end record;
     type \Hast.Samples.SampleAssembly.NumberContainer_Array\ is array (integer range <>) of \Hast.Samples.SampleAssembly.NumberContainer\;
     type \boolean_Array\ is array (integer range <>) of boolean;
@@ -2134,8 +2134,8 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\DataIn\);
                             -- Initializing record fields to their defaults.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := to_unsigned(0, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\WasIncreased\ := false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32)));
@@ -2150,8 +2150,8 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\;
                             -- Initializing record fields to their defaults.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := to_unsigned(0, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\WasIncreased\ := false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32)));
@@ -2167,8 +2167,8 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ + to_unsigned(4, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\;
                             -- Initializing record fields to their defaults.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\Number\ := to_unsigned(0, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\WasIncreased\ := false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32)));
@@ -2183,8 +2183,8 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\Number\ := to_unsigned(24, 32);
                             -- Initializing record fields to their defaults.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))).\Number\ := to_unsigned(0, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))).\WasIncreased\ := false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))).\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor(System.UInt32)
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32)));
@@ -2212,8 +2212,8 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
                             -- Initializing record fields to their defaults.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\ := to_unsigned(0, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\ := false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;

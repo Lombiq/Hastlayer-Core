@@ -58,15 +58,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return CreateArrayType(ConvertTypeReference(typeReference.GetElementType(), typeDeclarationLookupTable));
             }
 
-            var typeDefinition = typeReference as TypeDefinition;
-            if (typeDefinition == null)
-            {
-                typeDefinition = typeDeclarationLookupTable.Lookup(typeReference.FullName)?.Annotation<TypeDefinition>();
-            }
-            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition, typeDeclarationLookupTable);
-
-            throw new NotSupportedException(
-                "The declaration of the type " + typeReference.FullName + " couldn't be found. Did you forget to add an assembly to the list of the assemblies to generate hardware from?");
+            return ConvertTypeDefinition(typeReference as TypeDefinition, typeReference.FullName, typeDeclarationLookupTable);
         }
 
         public DataType ConvertAstType(AstType type, ITypeDeclarationLookupTable typeDeclarationLookupTable)
@@ -89,10 +81,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (type is SimpleType) return ConvertSimple((SimpleType)type, typeDeclarationLookupTable);
 
-            var typeDefinition = type.Annotation<TypeDefinition>();
-            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition, typeDeclarationLookupTable);
-
-            throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
+            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), typeDeclarationLookupTable);
         }
 
         public DataType ConvertAndDeclareAstType(
@@ -241,14 +230,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return SpecialTypes.Task;
             }
 
-            var typeDefinition = type.Annotation<TypeDefinition>();
-            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition, typeDeclarationLookupTable);
-
-            throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
+            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), typeDeclarationLookupTable);
         }
 
-        private DataType ConvertTypeDefinition(TypeDefinition typeDefinition, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+        private DataType ConvertTypeDefinition(TypeDefinition typeDefinition, string typeFullName, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
+            if (typeDefinition == null)
+            {
+                typeDefinition = typeDeclarationLookupTable.Lookup(typeFullName)?.Annotation<TypeDefinition>();
+            }
+
+            if (typeDefinition == null)
+            {
+                throw new InvalidOperationException(
+                    "The declaration of the type " + typeFullName + " couldn't be found. Did you forget to add an assembly to the list of the assemblies to generate hardware from?");
+            }
+
             if (typeDefinition.IsEnum)
             {
                 return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
@@ -256,11 +253,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (typeDefinition.IsClass)
             {
-                return _recordComposer.CreateRecordFromType(typeDefinition, typeDeclarationLookupTable);
+                return _recordComposer.CreateRecordFromType(
+                    typeDeclarationLookupTable.Lookup(typeDefinition.FullName), 
+                    typeDeclarationLookupTable);
             }
 
             throw new NotSupportedException(
-                "The TypeDefinition " + typeDefinition.FullName + " is not supported for transforming.");
+                "The type " + typeDefinition.FullName + " is not supported for transforming.");
         }
 
 

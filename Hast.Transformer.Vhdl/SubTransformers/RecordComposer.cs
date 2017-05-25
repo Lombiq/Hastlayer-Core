@@ -25,24 +25,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return node is PropertyDeclaration || node is FieldDeclaration;
         }
 
-        public Record CreateRecordFromType(TypeDefinition typeDefinition, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+        public Record CreateRecordFromType(TypeDeclaration typeDeclaration, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             // Process only those fields that aren't backing fields of auto-properties (since those properties are 
             // handled as properties) nor const fields (those are inserted as literals by the compiler where they're
             // used).
-            var recordFields = typeDefinition.Properties
-                .Cast<MemberReference>()
-                .Union(typeDefinition.Fields.Where(field => !field.Name.IsBackingFieldName() && !field.HasConstant).Cast<MemberReference>())
+            var recordFields = typeDeclaration.Members
+                .Where(member => 
+                    member is PropertyDeclaration || 
+                    member.Is<FieldDeclaration>(field => !field.GetFullName().IsBackingFieldName()))
                 .Select(member =>
                 {
-                    var typeReference = member is FieldDefinition ?
-                            ((FieldDefinition)member).FieldType :
-                            ((PropertyDefinition)member).PropertyType;
+                    var name = member.Name;
+
+                    if (member is FieldDeclaration)
+                    {
+                        name = ((FieldDeclaration)member).Variables.Single().Name;
+                    }
 
                     return new RecordField
                     {
-                        DataType = _typeConverterLazy.Value.ConvertTypeReference(typeReference, typeDeclarationLookupTable),
-                        Name = member.Name.ToExtendedVhdlId()
+                        DataType = _typeConverterLazy.Value.ConvertAstType(member.ReturnType, typeDeclarationLookupTable),
+                        Name = name.ToExtendedVhdlId()
                     };
 
                 })
@@ -50,7 +54,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             return new Record
             {
-                Name = typeDefinition.FullName.ToExtendedVhdlId(),
+                Name = typeDeclaration.GetFullName().ToExtendedVhdlId(),
                 Fields = recordFields
             };
         }
