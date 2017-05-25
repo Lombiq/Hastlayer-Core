@@ -151,7 +151,10 @@ namespace Hast.Transformer.Vhdl.Services
             // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
             // of a record type) than the type depending on the other one should come after the other one in the code
             // file.
-            var allDependentTypes = dependentTypesTables.SelectMany(table => table.GetTypes()).ToDictionary(type => type.Name);
+            var allDependentTypes = dependentTypesTables
+                .SelectMany(table => table.GetTypes())
+                .GroupBy(type => type.Name) // A dependency relation can be present multiple times, so need to group first.
+                .ToDictionary(group => group.Key, group => group.First());
             var sortedDependentTypes = TopologicalSortHelper.Sort(
                 allDependentTypes.Values,
                 sortedType => dependentTypesTables
