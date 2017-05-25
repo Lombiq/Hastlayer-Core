@@ -179,15 +179,15 @@ namespace Hast.Samples.Kpz
             {
                 AsyncLogIt("Initializing Hastlayer...");
                 _kpz.LogItFunction = AsyncLogIt;
-                Task hastlayerTask = new Task(() => _kpz.InitializeHastlayer());
-                hastlayerTask.Start();
+                var hastlayerTask = _kpz.InitializeHastlayer();
                 hastlayerTask.Wait();
             }
 
             AsyncLogIt("Starting KPZ iterations...");
             for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
             {
-                _kpz.DoIteration();
+                if(ComputationTarget==KpzTarget.Cpu) _kpz.DoIteration();
+                else _kpz.Kernels.DoSingleIterationWrapper(_kpz.grid, true);
                 AsyncUpdateProgressBar(currentIteration);
                 AsyncUpdateChart(currentIteration);
                 if (bw.CancellationPending) return;

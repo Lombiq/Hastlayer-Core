@@ -12,8 +12,9 @@ namespace Hast.Samples.Kpz
         public string VhdlOutputFilePath = @"Hast_IP.vhd";
         public delegate void LogItDelegate(string toLog);
         public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
+        public KpzKernels Kernels;
 
-        public async void InitializeHastlayer()
+        public async Task InitializeHastlayer()
         {
             LogItFunction("Creating Hastlayer Factory...");
             var hastlayer = Xilinx.HastlayerFactory.Create();
@@ -41,20 +42,19 @@ namespace Hast.Samples.Kpz
                 );
 
             LogItFunction("Generating proxy...");
-            KpzKernels kpzKernels;
             if (kpzTarget == KpzTarget.Fpga)
             {
-                kpzKernels = await hastlayer.GenerateProxy<KpzKernels>(hardwareRepresentation, new KpzKernels());
+                Kernels = await hastlayer.GenerateProxy<KpzKernels>(hardwareRepresentation, new KpzKernels());
                 LogItFunction("FPGA target detected");
             }
             else //if (kpzTarget == KpzTarget.FPGASimulation)
             {
-                kpzKernels = new KpzKernels();
+                Kernels = new KpzKernels();
                 LogItFunction("Simulation target detected");
             }
 
             LogItFunction("Testing FPGA with TestAdd...");
-            uint resultFPGA = kpzKernels.TestAddWrapper(4313,123);
+            uint resultFPGA = Kernels.TestAddWrapper(4313,123);
             uint resultCPU  = 4313+123;
             if(resultCPU == resultFPGA) LogItFunction(String.Format("Success: {0} == {1}", resultFPGA, resultCPU));
             else LogItFunction(String.Format("Fail: {0} != {1}", resultFPGA, resultCPU));

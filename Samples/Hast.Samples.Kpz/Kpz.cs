@@ -70,7 +70,7 @@ namespace Hast.Samples.Kpz
         /// <summary>It returns the height of the grid.</summary>
         public int gridHeight { get { return grid.GetLength(1); } }
         /// <summary>The 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.</summary>
-        KpzNode[,] grid;
+        public KpzNode[,] grid;
         /// <summary>The probability of pyramid to hole change.</summary>
         private double probabilityP = 0.5d;
         /// <summary>The probability of hole to pyramid change.</summary>

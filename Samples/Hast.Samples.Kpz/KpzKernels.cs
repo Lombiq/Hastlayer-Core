@@ -91,7 +91,7 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        public void DoIteration(SimpleMemory memory, bool testMode)
+        public virtual void DoIteration(SimpleMemory memory, bool testMode)
         {
             gridRaw = new uint[gridWidth*gridHeight]; 
             CopyFromSimpleMemoryToRawGrid(memory);
@@ -158,13 +158,21 @@ namespace Hast.Samples.Kpz
     public static class KpzKernelsExtensions
     {
 
-        public static uint TestAddWrapper(this KpzKernels kpz, uint a, uint b)
+        public static uint TestAddWrapper(this KpzKernels kernels, uint a, uint b)
         {
             SimpleMemory sm = new SimpleMemory(3);
             sm.WriteUInt32(0, a);
             sm.WriteUInt32(1, b);
-            kpz.TestAdd(sm);
+            kernels.TestAdd(sm);
             return sm.ReadUInt32(2);
+        }
+
+        public static void DoSingleIterationWrapper(this KpzKernels kernels, KpzNode[,] hostGrid, bool pushToFpga)
+        {
+            SimpleMemory sm = new SimpleMemory(KpzKernels.gridWidth * KpzKernels.gridHeight);
+            if(pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
+            kernels.DoIteration(sm, true);
+            CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
 
         /// <summary>Push table into FPGA.</summary>
@@ -191,6 +199,5 @@ namespace Hast.Samples.Kpz
                 }
             }
         }
-
     }
 }
