@@ -145,11 +145,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     break;
                 //case BinaryOperatorType.NullCoalescing:
                 //    break;
+                // Left and right shift for numerical types is a function call in VHDL, so handled separately. See
+                // below.
                 case BinaryOperatorType.ShiftLeft:
-                    binary.Operator = BinaryOperator.ShiftLeft;
-                    break;
                 case BinaryOperatorType.ShiftRight:
-                    binary.Operator = BinaryOperator.ShiftRight;
                     break;
                 case BinaryOperatorType.Subtract:
                     binary.Operator = BinaryOperator.Subtract;
@@ -199,6 +198,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             IVhdlElement binaryElement = binary;
+
+            if (expression.Operator == BinaryOperatorType.ShiftLeft || expression.Operator == BinaryOperatorType.ShiftRight)
+            {
+                binaryElement = new Invocation
+                {
+                    Target = (expression.Operator == BinaryOperatorType.ShiftLeft ? "shift_left" : "shift_right").ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement> { { binary.Left }, { Invocation.ToInteger(binary.Right) } }
+                };
+            }
 
             var leftTypeReference = expression.Left.GetActualTypeReference();
             var rightTypeReference = expression.Right.GetActualTypeReference();
@@ -266,7 +274,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     binaryElement = _typeConversionTransformer.ImplementTypeConversion(
                         _typeConverter.ConvertTypeReference(preCastTypeReference, typeDeclarationLookupTable),
                         resultType,
-                        binary).Expression;
+                        binaryElement).Expression;
                 }
                 else
                 {
@@ -274,10 +282,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         Target = "resize".ToVhdlIdValue(),
                         Parameters = new List<IVhdlElement>
-                    {
-                        { binary },
-                        { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
-                    }
+                        {
+                            { binaryElement },
+                            { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
+                        }
                     };
                 }
             }

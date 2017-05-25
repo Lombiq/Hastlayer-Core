@@ -98,17 +98,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
-                Expression = new Invocation
-                {
-                    // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
-                    Target = "resize".ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement>
-                        {
-                            // CellIndex is conventionally the first invocation parameter. 
-                            { invocationParameters[0] },
-                            SimpleMemoryTypes.CellIndexInternalSignalDataType.Size.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                        }
-                }
+                // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
+                // CellIndex is conventionally the first invocation parameter. 
+                Expression = Invocation.Resize(invocationParameters[0], SimpleMemoryTypes.CellIndexInternalSignalDataType.Size)
             });
 
             var enablePortReference = isWrite ?

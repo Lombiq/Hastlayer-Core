@@ -75,11 +75,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 // a type conversion.
                 if (portName == SimpleMemoryPortNames.CellIndex)
                 {
-                    value = new Invocation
-                    {
-                        Target = "to_integer".ToVhdlIdValue(),
-                        Parameters = new List<IVhdlElement> { { value } }
-                    };
+                    value = Invocation.ToInteger(value);
                 }
 
                 assignment.Whens.Add(new SignalAssignmentWhen
