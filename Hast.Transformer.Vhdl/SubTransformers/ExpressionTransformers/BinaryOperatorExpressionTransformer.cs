@@ -105,15 +105,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     break;
                 //case BinaryOperatorType.Any:
                 //    break;
-                //case BinaryOperatorType.BitwiseAnd:
-                //    break;
-                //case BinaryOperatorType.BitwiseOr:
-                //    break;
+                case BinaryOperatorType.BitwiseAnd:
                 case BinaryOperatorType.ConditionalAnd:
-                    binary.Operator = BinaryOperator.ConditionalAnd;
+                    binary.Operator = BinaryOperator.And;
                     break;
+                case BinaryOperatorType.BitwiseOr:
                 case BinaryOperatorType.ConditionalOr:
-                    binary.Operator = BinaryOperator.ConditionalOr;
+                    binary.Operator = BinaryOperator.Or;
                     break;
                 case BinaryOperatorType.Divide:
                     binary.Operator = BinaryOperator.Divide;

@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             {
                 Condition = BinaryChainBuilder.BuildBinaryChain(
                     Enumerable.Range(0, degreeOfParallelism).Select(i => createStartedEqualsFinishedBinary(i)),
-                    waitForAll ? BinaryOperator.ConditionalAnd : BinaryOperator.ConditionalOr),
+                    waitForAll ? BinaryOperator.And : BinaryOperator.Or),
                 True = allInvokedStateMachinesFinishedIfElseTrue
             };
         }

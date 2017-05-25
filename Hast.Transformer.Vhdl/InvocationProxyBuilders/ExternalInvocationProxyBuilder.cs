@@ -97,7 +97,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         Operator = BinaryOperator.Equality,
                         Right = Value.True
                     },
-                    Operator = BinaryOperator.ConditionalAnd,
+                    Operator = BinaryOperator.And,
                     Right = new Binary
                     {
                         Left = finishedSignalReference,
@@ -121,7 +121,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 Operator = BinaryOperator.Equality,
                                 Right = Value.False
                             },
-                            Operator = BinaryOperator.ConditionalAnd,
+                            Operator = BinaryOperator.And,
                             Right = new Binary
                             {
                                 Left = finishedSignalReference,

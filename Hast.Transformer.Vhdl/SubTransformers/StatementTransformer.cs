@@ -364,7 +364,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // If there are multiple labels for a switch section then those should be OR-ed together.
                     when.Expression = BinaryChainBuilder.BuildBinaryChain(
                         switchSection.CaseLabels.Select(caseLabel => _expressionTransformer.Transform(caseLabel.Expression, context)),
-                        BinaryOperator.ConditionalOr);
+                        BinaryOperator.Or);
 
                     var whenBody = new InlineBlock();
                     when.Body.Add(whenBody);
