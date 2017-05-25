@@ -36,7 +36,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Member = typeDeclaration
                 };
 
-                var record = _recordComposer.CreateRecordFromType(typeDeclaration);
+                var record = _recordComposer.CreateRecordFromType(typeDeclaration, context.TypeDeclarationLookupTable);
                 var component = new BasicComponent(record.Name);
 
                 if (record.Fields.Any())

@@ -1,4 +1,5 @@
-﻿using Hast.VhdlBuilder.Representation;
+﻿using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
@@ -22,7 +23,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
-            bool isLeft);
+            bool isLeft, 
+            IVhdlTransformationContext context);
 
         ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression);
     }

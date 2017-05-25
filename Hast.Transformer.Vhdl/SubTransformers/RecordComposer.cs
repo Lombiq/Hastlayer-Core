@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Hast.Transformer.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -24,7 +25,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return node is PropertyDeclaration || node is FieldDeclaration;
         }
 
-        public Record CreateRecordFromType(TypeDefinition typeDefinition)
+        public Record CreateRecordFromType(TypeDefinition typeDefinition, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             // Process only those fields that aren't backing fields of auto-properties (since those properties are 
             // handled as properties) nor const fields (those are inserted as literals by the compiler where they're
@@ -40,7 +41,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     return new RecordField
                     {
-                        DataType = _typeConverterLazy.Value.ConvertTypeReference(typeReference),
+                        DataType = _typeConverterLazy.Value.ConvertTypeReference(typeReference, typeDeclarationLookupTable),
                         Name = member.Name.ToExtendedVhdlId()
                     };
 

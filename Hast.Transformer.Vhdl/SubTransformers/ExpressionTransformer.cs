@@ -56,6 +56,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
+            var typeDeclarationLookupTable = context.TransformationContext.TypeDeclarationLookupTable;
 
 
             Func<DataObjectReference, IVhdlElement> implementTypeConversionForBinaryExpressionParent = reference =>
@@ -65,7 +66,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     ImplementTypeConversionForBinaryExpression(
                         binaryExpression,
                         reference,
-                        binaryExpression.Left == expression);
+                        binaryExpression.Left == expression,
+                        context.TransformationContext);
             };
 
 
@@ -240,7 +242,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var typeReference = expression.GetActualTypeReference();
                 if (typeReference != null)
                 {
-                    var type = _typeConverter.ConvertTypeReference(typeReference);
+                    var type = _typeConverter.ConvertTypeReference(typeReference, typeDeclarationLookupTable);
                     var valueString = primitive.Value.ToString();
                     // Replacing decimal comma to decimal dot.
                     if (type.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
@@ -263,6 +265,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     };
 
                     return implementTypeConversionForBinaryExpressionParent(reference);
+                }
+                else if (primitive.Parent is CastExpression)
+                {
+                    return primitive.Value
+                        .ToString()
+                        .ToVhdlValue(_typeConverter.ConvertAstType(((CastExpression)primitive.Parent).Type, typeDeclarationLookupTable));
                 }
 
                 throw new InvalidOperationException(
@@ -414,7 +422,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var unary = expression as UnaryOperatorExpression;
 
 
-                var expressionSize = _typeConverter.ConvertTypeReference(unary.Expression.GetActualTypeReference()).GetSize();
+                var expressionSize = _typeConverter
+                    .ConvertTypeReference(unary.Expression.GetActualTypeReference(), typeDeclarationLookupTable)
+                    .GetSize();
                 var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForUnaryOperation(unary, expressionSize, false);
 
                 stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);
@@ -476,8 +486,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var castExpression = (CastExpression)expression;
 
                 var fromTypeReference = castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference();
-                var fromType = _typeConverter.ConvertTypeReference(fromTypeReference);
-                var toType = _typeConverter.ConvertAstType(castExpression.Type);
+                var fromType = _typeConverter.ConvertTypeReference(fromTypeReference, typeDeclarationLookupTable);
+                var toType = _typeConverter.ConvertAstType(castExpression.Type, typeDeclarationLookupTable);
 
                 var innerExpressionResult = Transform(castExpression.Expression, context);
 
@@ -542,7 +552,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Array = targetVariableReference,
                     IndexExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
-                            _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference()),
+                            _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), typeDeclarationLookupTable),
                             KnownDataTypes.UnrangedInt,
                             Transform(indexExpression, context))
                         .Expression
@@ -639,7 +649,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // initialize all record fields to their default or initial values (otherwise if e.g. a class is
             // instantiated in a loop in the second run the old values could be accessed in VHDL).
 
-            var record = (Record)_typeConverter.ConvertAstType(recordAstType);
+            var record = (Record)_typeConverter.ConvertAstType(
+                recordAstType, 
+                context.TransformationContext.TypeDeclarationLookupTable);
 
             if (record.Fields.Any())
             {

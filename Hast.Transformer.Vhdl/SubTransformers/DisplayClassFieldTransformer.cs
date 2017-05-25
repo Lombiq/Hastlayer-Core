@@ -50,14 +50,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     field.Modifiers != (Modifiers.Public | Modifiers.Static | Modifiers.Readonly);
                 if (shouldTransform)
                 {
-                    var dataType = _typeConverter.ConvertAstType(field.ReturnType);
+                    var dataType = _typeConverter.ConvertAstType(field.ReturnType, context.TypeDeclarationLookupTable);
 
                     // The field is an array so need to instantiate it.
                     if (field.ReturnType.IsArray())
                     {
                         var visitor = new ArrayCreationDataTypeRetrievingVisitor(
                             fieldFullName,
-                            _arrayCreateExpressionTransformer);
+                            _arrayCreateExpressionTransformer,
+                            context);
 
                         context.SyntaxTree.AcceptVisitor(visitor);
 
@@ -93,16 +94,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             private readonly string _fieldFullName;
             private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
+            private readonly IVhdlTransformationContext _context;
 
             public DataType ArrayDataType { get; private set; }
 
 
             public ArrayCreationDataTypeRetrievingVisitor(
                 string fieldDefinitionFullName,
-                IArrayCreateExpressionTransformer arrayCreateExpressionTransformer)
+                IArrayCreateExpressionTransformer arrayCreateExpressionTransformer, 
+                IVhdlTransformationContext context)
             {
                 _fieldFullName = fieldDefinitionFullName;
                 _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
+                _context = context;
             }
 
 
@@ -117,7 +121,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         .Is<MemberReferenceExpression>(memberReference => memberReference.GetFullName() == _fieldFullName));
                 if (isSearchedFieldAccess)
                 {
-                    ArrayDataType = _arrayCreateExpressionTransformer.CreateArrayInstantiation(arrayCreateExpression);
+                    ArrayDataType = _arrayCreateExpressionTransformer
+                        .CreateArrayInstantiation(arrayCreateExpression, _context);
                 }
             }
         }

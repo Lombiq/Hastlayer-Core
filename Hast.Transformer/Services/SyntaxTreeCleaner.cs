@@ -109,7 +109,7 @@ namespace Hast.Transformer.Services
                 instantiatedType.AddReference(objectCreateExpression);
                 // Looking up the constructor used.
                 instantiatedType.Members
-                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.Annotation<MethodDefinition>().FullName)
+                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.Annotation<MethodReference>().FullName)
                     ?.AddReference(objectCreateExpression);
             }
 

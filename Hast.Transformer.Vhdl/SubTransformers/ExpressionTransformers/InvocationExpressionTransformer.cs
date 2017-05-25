@@ -244,7 +244,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         memberName = member.MemberName;
                         return member.Target.Is<TypeReferenceExpression>(type =>
-                            _typeConverter.ConvertAstType(type.Type) == SpecialTypes.Task);
+                            _typeConverter.ConvertAstType(
+                                type.Type, 
+                                context.TransformationContext.TypeDeclarationLookupTable) == SpecialTypes.Task);
                     })))
                 {
                     if (memberName == "WhenAll" || memberName == "WhenAny")

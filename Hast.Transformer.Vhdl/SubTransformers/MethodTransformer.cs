@@ -89,13 +89,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var methodFullName = method.GetFullName();
             var stateMachine = _memberStateMachineFactory
                 .CreateStateMachine(ArchitectureComponentNameHelper.CreateIndexedComponentName(methodFullName, stateMachineIndex));
+            var typeDeclarationLookupTable = context.TypeDeclarationLookupTable;
 
             // Adding the opening state's block.
             var openingBlock = new InlineBlock();
 
 
             // Handling the return type.
-            var returnType = _typeConverter.ConvertAstType(method.ReturnType);
+            var returnType = _typeConverter.ConvertAstType(method.ReturnType, typeDeclarationLookupTable);
             // If the return type is a Task then that means it's one of the supported simple TPL scenarios, corresponding
             // to void in VHDL.
             if (returnType == SpecialTypes.Task) returnType = KnownDataTypes.Void;
@@ -117,7 +118,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // to from the inside (since in .NET a method argument can also be assigned to from inside the method)
                 // we need to have intermediary input variables, then copy their values to local variables.
 
-                var parameterDataType = _typeConverter.ConvertParameterType(parameter);
+                var parameterDataType = _typeConverter.ConvertParameterType(parameter, typeDeclarationLookupTable);
                 var parameterSignalReference = stateMachine
                     .CreateParameterSignalReference(parameter.Name, ParameterFlowDirection.In);
                 var parameterLocalVariableReference = stateMachine.CreatePrefixedObjectName(parameter.Name).ToVhdlVariableReference();
