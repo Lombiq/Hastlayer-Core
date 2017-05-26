@@ -27,7 +27,7 @@ namespace Hast.Samples.Kpz
                 );
             };
             var configuration = new HardwareGenerationConfiguration();
-            configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernels");
+            configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernels");
             configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = 
                 Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug;
 
