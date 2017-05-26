@@ -27,6 +27,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IDeviceDriver _deviceDriver;
         private readonly IBinaryOperatorExpressionTransformer _binaryOperatorExpressionTransformer;
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
+        private readonly IRecordComposer _recordComposer;
 
         public ILogger Logger { get; set; }
 
@@ -38,7 +39,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IArrayCreateExpressionTransformer arrayCreateExpressionTransformer,
             IDeviceDriver deviceDriver,
             IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
-            IStateMachineInvocationBuilder stateMachineInvocationBuilder)
+            IStateMachineInvocationBuilder stateMachineInvocationBuilder,
+            IRecordComposer recordComposer)
         {
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
@@ -47,6 +49,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _deviceDriver = deviceDriver;
             _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
+            _recordComposer = recordComposer;
 
             Logger = NullLogger.Instance;
         }
@@ -649,9 +652,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // initialize all record fields to their default or initial values (otherwise if e.g. a class is
             // instantiated in a loop in the second run the old values could be accessed in VHDL).
 
-            var record = (Record)_typeConverter.ConvertAstType(
-                recordAstType, 
-                context.TransformationContext.TypeDeclarationLookupTable);
+            var typeDeclarationLookupTable = context.TransformationContext.TypeDeclarationLookupTable;
+            var typeDeclaration = typeDeclarationLookupTable.Lookup(recordAstType);
+
+            if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(recordAstType.GetFullName());
+
+            var record = _recordComposer.CreateRecordFromType(typeDeclaration, typeDeclarationLookupTable);
 
             if (record.Fields.Any())
             {
@@ -671,6 +677,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             foreach (var field in record.Fields)
             {
+                var initializationValue = field.DataType.DefaultValue;
+
+                var typeField = typeDeclaration.Members
+                    .SingleOrDefault(member => 
+                        member.Is<FieldDeclaration>(f => 
+                            f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) as FieldDeclaration;
+                if (typeField != null)
+                {
+                    var fieldInitializer = typeField.Variables.Single().Initializer;
+                    if (fieldInitializer != Expression.Null)
+                    {
+                        initializationValue = (Value)Transform(fieldInitializer, context);
+                    }
+                }
+                
                 context.Scope.CurrentBlock.Add(new Assignment
                 {
                     AssignTo = new RecordFieldAccess
@@ -678,7 +699,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         Instance = recordInstanceReference,
                         FieldName = field.Name
                     },
-                    Expression = field.DataType.DefaultValue
+                    Expression = initializationValue
                 });
             }
 

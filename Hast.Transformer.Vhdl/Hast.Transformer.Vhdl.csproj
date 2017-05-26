@@ -94,6 +94,7 @@
     <Compile Include="Extensions\ParameterDeclarationExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\BinaryChainBuilder.cs" />
+    <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\TaskParallelizationHelper.cs" />
     <Compile Include="Helpers\TopologicalSortHelper.cs" />
     <Compile Include="JsonNet.PrivateSettersContractResolvers\PrivateSettersContractResolvers.cs" />

@@ -240,11 +240,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 typeDefinition = typeDeclarationLookupTable.Lookup(typeFullName)?.Annotation<TypeDefinition>();
             }
 
-            if (typeDefinition == null)
-            {
-                throw new InvalidOperationException(
-                    "The declaration of the type " + typeFullName + " couldn't be found. Did you forget to add an assembly to the list of the assemblies to generate hardware from?");
-            }
+            if (typeDefinition == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeFullName);
 
             if (typeDefinition.IsEnum)
             {
