@@ -32,6 +32,7 @@ namespace Hast.Transformer
         private readonly IArrayInitializerExpander _arrayInitializerExpander;
         private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
+        private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
 
 
         public DefaultTransformer(
@@ -46,7 +47,8 @@ namespace Hast.Transformer
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
             IArrayInitializerExpander arrayInitializerExpander,
             IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
-            IConstructorsToMethodsConverter constructorsToMethodsConverter)
+            IConstructorsToMethodsConverter constructorsToMethodsConverter,
+            IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -60,6 +62,7 @@ namespace Hast.Transformer
             _arrayInitializerExpander = arrayInitializerExpander;
             _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
+            _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
         }
 
 
@@ -164,6 +167,7 @@ namespace Hast.Transformer
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
+            _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
