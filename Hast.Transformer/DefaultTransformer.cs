@@ -213,7 +213,7 @@ namespace Hast.Transformer
                     if (member.Is<MethodDeclaration>(method => string.IsNullOrEmpty(method.GetSimpleMemoryParameterName())))
                     {
                         throw new InvalidOperationException(
-                            "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter.");
+                            "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
                     }
                 }
             }
