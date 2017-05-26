@@ -11,6 +11,7 @@ using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SimpleMemory;
 using Hast.Transformer.Vhdl.SubTransformers;
+using Hast.Transformer.Vhdl.Verifiers;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -21,6 +22,7 @@ namespace Hast.Transformer.Vhdl.Services
     public class TransformedVhdlManifestBuilder : ITransformedVhdlManifestBuilder
     {
         private readonly ICompilerGeneratedClassesVerifier _compilerGeneratedClassesVerifier;
+        private readonly IHardwareEntryPointsVerifier _hardwareEntryPointsVerifier;
         private readonly IClock _clock;
         private readonly IArrayTypesCreator _arrayTypesCreator;
         private readonly IMethodTransformer _methodTransformer;
@@ -35,6 +37,7 @@ namespace Hast.Transformer.Vhdl.Services
 
         public TransformedVhdlManifestBuilder(
             ICompilerGeneratedClassesVerifier compilerGeneratedClassesVerifier,
+            IHardwareEntryPointsVerifier hardwareEntryPointsVerifier,
             IClock clock,
             IArrayTypesCreator arrayTypesCreator,
             IMethodTransformer methodTransformer,
@@ -47,6 +50,7 @@ namespace Hast.Transformer.Vhdl.Services
             IPocoTransformer pocoTransformer)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
+            _hardwareEntryPointsVerifier = hardwareEntryPointsVerifier;
             _clock = clock;
             _arrayTypesCreator = arrayTypesCreator;
             _methodTransformer = methodTransformer;
@@ -65,6 +69,7 @@ namespace Hast.Transformer.Vhdl.Services
             var syntaxTree = transformationContext.SyntaxTree;
 
             _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
+            _hardwareEntryPointsVerifier.VerifyHardwareEntryPoints(syntaxTree, transformationContext.TypeDeclarationLookupTable);
 
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext);
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;

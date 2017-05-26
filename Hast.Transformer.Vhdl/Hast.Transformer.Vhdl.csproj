@@ -140,7 +140,7 @@
     <Compile Include="SimpleMemory\SimpleMemoryComponentBuilder.cs" />
     <Compile Include="SubTransformers\ArrayParameterLengthSetter.cs" />
     <Compile Include="SubTransformers\ArrayTypesCreator.cs" />
-    <Compile Include="SubTransformers\CompilerGeneratedClassesVerifier.cs" />
+    <Compile Include="Verifiers\CompilerGeneratedClassesVerifier.cs" />
     <Compile Include="SubTransformers\DisplayClassFieldTransformer.cs" />
     <Compile Include="SubTransformers\EnumTypesCreator.cs" />
     <Compile Include="SubTransformers\ExpressionTransformer.cs" />
@@ -161,7 +161,8 @@
     <Compile Include="SubTransformers\SpecialOperationInvocationTransformer.cs" />
     <Compile Include="SubTransformers\StateMachineInvocationBuilder.cs" />
     <Compile Include="SubTransformers\IArrayTypesCreator.cs" />
-    <Compile Include="SubTransformers\ICompilerGeneratedClassesVerifier.cs" />
+    <Compile Include="Verifiers\HardwareEntryPointsVerifier.cs" />
+    <Compile Include="Verifiers\ICompilerGeneratedClassesVerifier.cs" />
     <Compile Include="SubTransformers\IDisplayClassFieldTransformer.cs" />
     <Compile Include="SubTransformers\IExpressionTransformer.cs" />
     <Compile Include="SubTransformers\IMethodTransformer.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Models\VhdlHardwareDescription.cs" />
     <Compile Include="Services\VhdlHardwareDescriptionCachingService.cs" />
     <Compile Include="Services\VhdlTransformingEngine.cs" />
+    <Compile Include="Verifiers\IHardwareEntryPointsVerifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
