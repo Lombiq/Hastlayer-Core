@@ -61,7 +61,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var parentAssignmentExpression = expression.Parent as AssignmentExpression;
             if ((parentAssignmentExpression == null ||
-                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)))
+                !(parentAssignmentExpression.Left is IdentifierExpression || parentAssignmentExpression.Left is MemberReferenceExpression)) &&
+                !(expression.Parent is VariableInitializer))
             {
                 throw new NotSupportedException(
                     "Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
@@ -72,23 +73,27 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 context.TransformationContext.TypeDeclarationLookupTable);
             var arrayInstantiationType = ArrayHelper.CreateArrayInstantiation(elementType, length);
 
-            // Finding the variable or member where the array is used and changing its type to the array instantiation.
-            var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
-                ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
-                ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
-            var parentDataObjectName = stateMachine.CreatePrefixedObjectName(parentIdentifier);
-            var parentDataObject = stateMachine
-                .GetAllDataObjects()
-                .Where(dataObject => dataObject.Name == parentDataObjectName)
-                .SingleOrDefault();
-            // We'll only find the data object if it's in the same architecture component. So e.g. separately transformed
-            // fields (possibly in compiler-generated and inner DisplayClasses) won't be handled: those should be dealt
-            // with separately.
-            if (parentDataObject != null)
+            // If the array is assigned to a field initializer then setting the field's data type is handled in 
+            // RecordComposer.
+            if (!(expression.Parent is VariableInitializer))
             {
-                parentDataObject.DataType = arrayInstantiationType;
+                // Finding the variable or member where the array is used and changing its type to the array instantiation.
+                var parentIdentifier = parentAssignmentExpression.Left is IdentifierExpression ?
+                    ((IdentifierExpression)parentAssignmentExpression.Left).Identifier :
+                    ((MemberReferenceExpression)parentAssignmentExpression.Left).MemberName;
+                var parentDataObjectName = stateMachine.CreatePrefixedObjectName(parentIdentifier);
+                var parentDataObject = stateMachine
+                    .GetAllDataObjects()
+                    .Where(dataObject => dataObject.Name == parentDataObjectName)
+                    .SingleOrDefault();
+                // We'll only find the data object if it's in the same architecture component. So e.g. separately transformed
+                // fields (possibly in compiler-generated and inner DisplayClasses) won't be handled: those should be dealt
+                // with separately.
+                if (parentDataObject != null)
+                {
+                    parentDataObject.DataType = arrayInstantiationType;
+                } 
             }
-
 
             if (elementType.DefaultValue != null)
             {
