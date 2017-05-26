@@ -12,7 +12,7 @@ namespace Hast.Samples.Kpz
         public string VhdlOutputFilePath = @"Hast_IP.vhd";
         public delegate void LogItDelegate(string toLog);
         public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
-        public KpzKernels Kernels;
+        public KpzKernelsInterface Kernels;
 
         public async Task InitializeHastlayer()
         {
@@ -33,7 +33,7 @@ namespace Hast.Samples.Kpz
 
             LogItFunction("Generating hardware...");
             var hardwareRepresentation = await hastlayer.GenerateHardware( new[] {
-                typeof(KpzKernels).Assembly,
+                typeof(KpzKernelsInterface).Assembly,
              //   typeof(Hast.Algorithms.MWC64X).Assembly
             }, configuration);
             File.WriteAllText(
@@ -44,12 +44,12 @@ namespace Hast.Samples.Kpz
             LogItFunction("Generating proxy...");
             if (kpzTarget == KpzTarget.Fpga)
             {
-                Kernels = await hastlayer.GenerateProxy<KpzKernels>(hardwareRepresentation, new KpzKernels());
+                Kernels = await hastlayer.GenerateProxy<KpzKernelsInterface>(hardwareRepresentation, new KpzKernelsInterface());
                 LogItFunction("FPGA target detected");
             }
             else //if (kpzTarget == KpzTarget.FPGASimulation)
             {
-                Kernels = new KpzKernels();
+                Kernels = new KpzKernelsInterface();
                 LogItFunction("Simulation target detected");
             }
 
