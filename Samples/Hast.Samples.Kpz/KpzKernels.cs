@@ -23,9 +23,7 @@ namespace Hast.Samples.Kpz
             KpzKernels kernels = new KpzKernels();
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
             //assume that GridWidth and GridHeight are 2^N
-            int numberOfStepsInIteration = 0;
-            if (testMode) numberOfStepsInIteration = 1;
-            else numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
+            var numberOfStepsInIteration = testMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
 
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
@@ -43,7 +41,7 @@ namespace Hast.Samples.Kpz
 
     public class KpzKernels
     {
-        public const int GridWidth = 8; 
+        public const int GridWidth = 8;
         public const int GridHeight = 8;
         uint[] gridRaw = new uint[GridWidth * GridHeight];
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
@@ -84,12 +82,14 @@ namespace Hast.Samples.Kpz
 
         private void setGridDx(int index, bool value)
         {
-            gridRaw[index] = (gridRaw[index] & ~1U) | ((value) ? 1U : 0);
+            var rightOperand = value ? 1U : 0;
+            gridRaw[index] = (gridRaw[index] & ~1U) | rightOperand;
         }
 
         private void setGridDy(int index, bool value)
         {
-            gridRaw[index] = (gridRaw[index] & ~2U) | ((value) ? 2U : 0);
+            var rightOperand = value ? 2U : 0;
+            gridRaw[index] = (gridRaw[index] & ~2U) | rightOperand;
         }
 
         public void CopyToSimpleMemoryFromRawGrid(SimpleMemory memory)
@@ -137,9 +137,9 @@ namespace Hast.Samples.Kpz
             int rightNeighbourY = centerY;
             int bottomNeighbourX = centerX;
             int bottomNeighbourY = (centerY < GridHeight - 1) ? centerY + 1 : 0;
-            rightNeighbourIndex  = rightNeighbourY * GridWidth + rightNeighbourX;
+            rightNeighbourIndex = rightNeighbourY * GridWidth + rightNeighbourX;
             bottomNeighbourIndex = bottomNeighbourY * GridWidth + bottomNeighbourX;
-           // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
+            // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
                 ((getGridDx(centerIndex) && !getGridDx(rightNeighbourIndex)) && (getGridDy(centerIndex) && !getGridDy(bottomNeighbourIndex)) &&
@@ -173,7 +173,7 @@ namespace Hast.Samples.Kpz
         public static void DoSingleIterationWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga)
         {
             SimpleMemory sm = new SimpleMemory(KpzKernels.GridWidth * KpzKernels.GridHeight);
-            if(pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
+            if (pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
             kernels.DoIteration(sm, true);
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
