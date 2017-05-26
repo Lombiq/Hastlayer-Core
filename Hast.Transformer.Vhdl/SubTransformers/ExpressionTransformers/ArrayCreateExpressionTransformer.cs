@@ -94,11 +94,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 // Initializing the array with the .NET default values (so there are no surprises when reading values
                 // without setting them previously).
-                return new Value
-                {
-                    DataType = arrayInstantiationType,
-                    Content = "others => " + elementType.DefaultValue.ToVhdl()
-                };
+                return ArrayType.CreateDefaultInitialization((DataType)arrayInstantiationType, elementType);
             }
             else
             {
