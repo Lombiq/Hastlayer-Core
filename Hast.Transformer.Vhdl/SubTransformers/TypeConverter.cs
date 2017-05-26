@@ -29,6 +29,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 case "System.Boolean":
                     return ConvertPrimitive(KnownTypeCode.Boolean);
+                case "System.Byte":
+                    return ConvertPrimitive(KnownTypeCode.Byte);
                 case "System.Char":
                     return ConvertPrimitive(KnownTypeCode.Char);
                 case "System.Decimal":
@@ -43,6 +45,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return ConvertPrimitive(KnownTypeCode.Int64);
                 case "System.Object":
                     return ConvertPrimitive(KnownTypeCode.Object);
+                case "System.SByte":
+                    return ConvertPrimitive(KnownTypeCode.SByte);
                 case "System.String":
                     return ConvertPrimitive(KnownTypeCode.String);
                 case "System.UInt16":
@@ -111,7 +115,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Boolean:
                     return KnownDataTypes.Boolean;
                 case KnownTypeCode.Byte:
-                    break;
+                    return KnownDataTypes.UInt8;
                 case KnownTypeCode.Char:
                     return KnownDataTypes.Character;
                 case KnownTypeCode.DBNull:
@@ -165,7 +169,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Object:
                     return KnownDataTypes.StdLogicVector32;
                 case KnownTypeCode.SByte:
-                    break;
+                    return KnownDataTypes.Int8;
                 case KnownTypeCode.Single:
                     break;
                 case KnownTypeCode.String:

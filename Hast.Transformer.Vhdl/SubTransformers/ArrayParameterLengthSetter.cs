@@ -19,19 +19,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (!methodsWithArrayParameters.Any()) return;
 
-            syntaxTree.AcceptVisitor(new InvocationExpressionsFindingVisitor(methodsWithArrayParameters));
+            syntaxTree.AcceptVisitor(new ArrayParameterPassingFindingVisitor(methodsWithArrayParameters));
         }
 
 
-        private class InvocationExpressionsFindingVisitor : DepthFirstAstVisitor
+        private class ArrayParameterPassingFindingVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, MethodDeclaration> _methodsWithArrayParameters;
 
 
-            public InvocationExpressionsFindingVisitor(IEnumerable<MethodDeclaration> methodsWithArrayParameters)
+            public ArrayParameterPassingFindingVisitor(IEnumerable<MethodDeclaration> methodsWithArrayParameters)
             {
                 _methodsWithArrayParameters = methodsWithArrayParameters.ToDictionary(method => method.GetFullName());
             }
+
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {
@@ -39,10 +40,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (invocationExpression.IsSimpleMemoryInvocation()) return;
 
-                MethodDeclaration method;
-                if (!_methodsWithArrayParameters.TryGetValue(invocationExpression.GetFullName(), out method)) return;
+                ProcessExpression(invocationExpression, invocationExpression.Arguments);
+            }
 
-                var arrayArguments = invocationExpression.Arguments
+            public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
+            {
+                base.VisitObjectCreateExpression(objectCreateExpression);
+                ProcessExpression(objectCreateExpression, objectCreateExpression.Arguments);
+            }
+
+
+            private void ProcessExpression(Expression expression, AstNodeCollection<Expression> arguments)
+            {
+                MethodDeclaration method;
+                if (!_methodsWithArrayParameters.TryGetValue(expression.GetFullName(), out method)) return;
+
+                var arrayArguments = arguments
                     .Where(argument => argument.GetActualTypeReference().IsArray)
                     .ToArray();
                 var arrayParameters = method.Parameters
@@ -53,7 +66,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     var arrayCreationLengthFindingVisitor = new ArrayCreationLengthFindingVisitor(arrayArguments[i].GetFullName());
 
-                    invocationExpression.FindFirstParentEntityDeclaration().AcceptVisitor(arrayCreationLengthFindingVisitor);
+                    expression.FindFirstParentEntityDeclaration().AcceptVisitor(arrayCreationLengthFindingVisitor);
 
                     var existingParameterArrayLength = arrayParameters[i].Annotation<ParameterArrayLength>();
                     if (existingParameterArrayLength == null)
@@ -66,8 +79,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             "Array sizes should be statically defined but the array parameter \"" +
                             arrayParameters[i].GetFullName() +
                             "\" was assigned to from multiple differently sized sources (the firstly assigned array had the length " +
-                            existingParameterArrayLength.Length + ", the secondly assigned " + 
-                            arrayCreationLengthFindingVisitor.Length + 
+                            existingParameterArrayLength.Length + ", the secondly assigned " +
+                            arrayCreationLengthFindingVisitor.Length +
                             "). Make sure that all arrays passed to this parameter are of the same size.");
                     }
                 }

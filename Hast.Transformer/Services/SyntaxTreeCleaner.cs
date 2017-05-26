@@ -107,10 +107,15 @@ namespace Hast.Transformer.Services
                 if (instantiatedType == null) return;
 
                 instantiatedType.AddReference(objectCreateExpression);
+
                 // Looking up the constructor used.
-                instantiatedType.Members
-                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.Annotation<MethodReference>().FullName)
-                    ?.AddReference(objectCreateExpression);
+                var constructor = instantiatedType.Members
+                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.Annotation<MethodReference>().FullName);
+                if (constructor != null)
+                {
+                    constructor.AddReference(objectCreateExpression);
+                    constructor.AcceptVisitor(this);
+                }
             }
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
