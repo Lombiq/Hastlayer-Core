@@ -1,4 +1,5 @@
-﻿using Hast.Transformer.Vhdl.Helpers;
+﻿using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -9,15 +10,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface ITypeConverter : IDependency
     {
-        DataType ConvertTypeReference(TypeReference typeReference);
-        DataType ConvertAstType(AstType type);
-        DataType ConvertAndDeclareAstType(AstType type, IDeclarableElement declarable);
+        DataType ConvertTypeReference(
+            TypeReference typeReference,
+            ITypeDeclarationLookupTable typeDeclarationLookupTable);
+
+        DataType ConvertAstType(AstType type, ITypeDeclarationLookupTable typeDeclarationLookupTable);
+        DataType ConvertAndDeclareAstType(
+            AstType type, 
+            IDeclarableElement declarable,
+            ITypeDeclarationLookupTable typeDeclarationLookupTable);
     }
 
 
     public static class TypeConvertedExtensions
     {
-        public static DataType ConvertParameterType(this ITypeConverter typeConverter, ParameterDeclaration parameter)
+        public static DataType ConvertParameterType(
+            this ITypeConverter typeConverter, 
+            ParameterDeclaration parameter,
+            ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             var parameterType = parameter.Annotation<ParameterDefinition>().ParameterType;
 
@@ -29,11 +39,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (!parameterType.IsArray)
             {
-                return typeConverter.ConvertTypeReference(parameterType);
+                return typeConverter.ConvertTypeReference(parameterType, typeDeclarationLookupTable);
             }
 
             return ArrayHelper.CreateArrayInstantiation(
-                typeConverter.ConvertTypeReference(parameterType.GetElementType()),
+                typeConverter.ConvertTypeReference(parameterType.GetElementType(), typeDeclarationLookupTable),
                 parameter.Annotation<ParameterArrayLength>().Length);
         }
     }

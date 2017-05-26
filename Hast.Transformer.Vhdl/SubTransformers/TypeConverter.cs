@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -20,7 +21,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public DataType ConvertTypeReference(TypeReference typeReference)
+        public DataType ConvertTypeReference(
+            TypeReference typeReference, 
+            ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             switch (typeReference.FullName)
             {
@@ -52,16 +55,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (typeReference.IsArray)
             {
-                return CreateArrayType(ConvertTypeReference(typeReference.GetElementType()));
+                return CreateArrayType(ConvertTypeReference(typeReference.GetElementType(), typeDeclarationLookupTable));
             }
 
-            var typeDefinition = typeReference as TypeDefinition;
-            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition);
-
-            throw new NotSupportedException("The type " + typeReference.FullName + " is not supported for transforming.");
+            return ConvertTypeDefinition(typeReference as TypeDefinition, typeReference.FullName, typeDeclarationLookupTable);
         }
 
-        public DataType ConvertAstType(AstType type)
+        public DataType ConvertAstType(AstType type, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             if (type is PrimitiveType) return ConvertPrimitive(((PrimitiveType)type).KnownTypeCode);
             else if (type is ComposedType)
@@ -76,20 +76,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    return ConvertComposed(composedType); 
+                    return ConvertComposed(composedType, typeDeclarationLookupTable); 
                 }
             }
-            else if (type is SimpleType) return ConvertSimple((SimpleType)type);
+            else if (type is SimpleType) return ConvertSimple((SimpleType)type, typeDeclarationLookupTable);
 
-            var typeDefinition = type.Annotation<TypeDefinition>();
-            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition);
-
-            throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
+            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), typeDeclarationLookupTable);
         }
 
-        public DataType ConvertAndDeclareAstType(AstType type, IDeclarableElement declarable)
+        public DataType ConvertAndDeclareAstType(
+            AstType type, 
+            IDeclarableElement declarable,
+            ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            var vhdlType = ConvertAstType(type);
+            var vhdlType = ConvertAstType(type, typeDeclarationLookupTable);
 
             if (vhdlType.TypeCategory == DataTypeCategory.Array || vhdlType.TypeCategory == DataTypeCategory.Composite)
             {
@@ -193,18 +193,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             throw new NotSupportedException("The type " + typeCode.ToString() + " is not supported for transforming.");
         }
 
-        private DataType ConvertComposed(ComposedType type)
+        private DataType ConvertComposed(ComposedType type, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             if (type.IsArray())
             {
-                return CreateArrayType(ConvertAstType(type.BaseType));
+                return CreateArrayType(ConvertAstType(type.BaseType, typeDeclarationLookupTable));
             }
 
             // If the type is used in an array initialization and is a non-primitive type then the actual type will be 
             // the only child.
             if (type.Children.SingleOrDefault() is SimpleType)
             {
-                return ConvertSimple((SimpleType)type.Children.SingleOrDefault());
+                return ConvertSimple((SimpleType)type.Children.SingleOrDefault(), typeDeclarationLookupTable);
             }
 
             // If the type is used in an array initialization and is a primitive type then the actual type will be the
@@ -217,27 +217,31 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
 
-        private DataType ConvertSimple(SimpleType type)
+        private DataType ConvertSimple(SimpleType type, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             if (type.Identifier == nameof(System.Threading.Tasks.Task))
             {
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)
                 {
-                    return ConvertAstType(type.TypeArguments.Single());
+                    return ConvertAstType(type.TypeArguments.Single(), typeDeclarationLookupTable);
                 }
 
                 return SpecialTypes.Task;
             }
 
-            var typeDefinition = type.Annotation<TypeDefinition>();
-            if (typeDefinition != null) return ConvertTypeDefinition(typeDefinition);
-
-            throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
+            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), typeDeclarationLookupTable);
         }
 
-        private DataType ConvertTypeDefinition(TypeDefinition typeDefinition)
+        private DataType ConvertTypeDefinition(TypeDefinition typeDefinition, string typeFullName, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
+            if (typeDefinition == null)
+            {
+                typeDefinition = typeDeclarationLookupTable.Lookup(typeFullName)?.Annotation<TypeDefinition>();
+            }
+
+            if (typeDefinition == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeFullName);
+
             if (typeDefinition.IsEnum)
             {
                 return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
@@ -245,11 +249,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (typeDefinition.IsClass)
             {
-                return _recordComposer.CreateRecordFromType(typeDefinition);
+                return _recordComposer.CreateRecordFromType(
+                    typeDeclarationLookupTable.Lookup(typeDefinition.FullName), 
+                    typeDeclarationLookupTable);
             }
 
             throw new NotSupportedException(
-                "The TypeDefinition " + typeDefinition.FullName + " is not supported for transforming.");
+                "The type " + typeDefinition.FullName + " is not supported for transforming.");
         }
 
 

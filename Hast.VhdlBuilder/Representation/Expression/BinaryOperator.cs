@@ -11,8 +11,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         private readonly string _source;
 
         public static readonly BinaryOperator Add = new BinaryOperator("+");
-        public static readonly BinaryOperator ConditionalAnd = new BinaryOperator("and");
-        public static readonly BinaryOperator ConditionalOr = new BinaryOperator("or");
+        public static readonly BinaryOperator And = new BinaryOperator("and");
         public static readonly BinaryOperator Divide = new BinaryOperator("/");
         public static readonly BinaryOperator Equality = new BinaryOperator("=");
         public static readonly BinaryOperator ExclusiveOr = new BinaryOperator("xor");
@@ -23,8 +22,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public static readonly BinaryOperator LessThanOrEqual = new BinaryOperator("<=");
         public static readonly BinaryOperator Modulus = new BinaryOperator("mod");
         public static readonly BinaryOperator Multiply = new BinaryOperator("*");
-        public static readonly BinaryOperator ShiftLeft = new BinaryOperator("sll");
-        public static readonly BinaryOperator ShiftRight = new BinaryOperator("srl");
+        public static readonly BinaryOperator Or = new BinaryOperator("or");
+        public static readonly BinaryOperator ShiftLeftLogical = new BinaryOperator("sll");
+        public static readonly BinaryOperator ShiftRightLogical = new BinaryOperator("srl");
         public static readonly BinaryOperator Subtract = new BinaryOperator("-");
 
         public static readonly JsonConverter JsonConverter = new BinaryOperatorJsonConverter();

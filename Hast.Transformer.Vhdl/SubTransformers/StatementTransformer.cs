@@ -39,6 +39,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
+            var typeDeclarationLookupTable = context.TransformationContext.TypeDeclarationLookupTable;
 
             Func<int, IVhdlGenerationOptions, string> stateNameGenerator = (index, vhdlGenerationOptions) =>
                 vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
@@ -67,7 +68,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     );
                 if (!omitStatement)
                 {
-                    var type = _typeConverter.ConvertAstType(variableType);
+                    var type = _typeConverter.ConvertAstType(variableType, typeDeclarationLookupTable);
 
                     foreach (var variableInitializer in variableStatement.Variables)
                     {
@@ -101,7 +102,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var returnStatement = statement as ReturnStatement;
 
-                var returnType = _typeConverter.ConvertAstType(context.Scope.Method.ReturnType);
+                var returnType = _typeConverter.ConvertAstType(context.Scope.Method.ReturnType, typeDeclarationLookupTable);
                 if (returnType != KnownDataTypes.Void && returnType != SpecialTypes.Task)
                 {
                     var assigmentElement = new Assignment
@@ -363,7 +364,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // If there are multiple labels for a switch section then those should be OR-ed together.
                     when.Expression = BinaryChainBuilder.BuildBinaryChain(
                         switchSection.CaseLabels.Select(caseLabel => _expressionTransformer.Transform(caseLabel.Expression, context)),
-                        BinaryOperator.ConditionalOr);
+                        BinaryOperator.Or);
 
                     var whenBody = new InlineBlock();
                     when.Body.Add(whenBody);

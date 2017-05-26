@@ -22,9 +22,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         }
 
 
-        public UnconstrainedArrayInstantiation CreateArrayInstantiation(ArrayCreateExpression expression)
+        public UnconstrainedArrayInstantiation CreateArrayInstantiation(
+            ArrayCreateExpression expression, 
+            IVhdlTransformationContext context)
         {
-            return ArrayHelper.CreateArrayInstantiation(_typeConverter.ConvertAstType(expression.Type), expression.GetStaticLength());
+            return ArrayHelper.CreateArrayInstantiation(
+                _typeConverter.ConvertAstType(expression.Type, context.TypeDeclarationLookupTable), 
+                expression.GetStaticLength());
         }
 
         public IVhdlElement Transform(ArrayCreateExpression expression, ISubTransformerContext context)
@@ -63,7 +67,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     "Only array-using constructs where the newly created array is assigned to a variable or member is supported.");
             }
 
-            var elementType = _typeConverter.ConvertAstType(expression.GetElementType());
+            var elementType = _typeConverter.ConvertAstType(
+                expression.GetElementType(), 
+                context.TransformationContext.TypeDeclarationLookupTable);
             var arrayInstantiationType = ArrayHelper.CreateArrayInstantiation(elementType, length);
 
             // Finding the variable or member where the array is used and changing its type to the array instantiation.

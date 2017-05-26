@@ -11,6 +11,7 @@ using Hast.Transformer.Vhdl.InvocationProxyBuilders;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SimpleMemory;
 using Hast.Transformer.Vhdl.SubTransformers;
+using Hast.Transformer.Vhdl.Verifiers;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -21,6 +22,7 @@ namespace Hast.Transformer.Vhdl.Services
     public class TransformedVhdlManifestBuilder : ITransformedVhdlManifestBuilder
     {
         private readonly ICompilerGeneratedClassesVerifier _compilerGeneratedClassesVerifier;
+        private readonly IHardwareEntryPointsVerifier _hardwareEntryPointsVerifier;
         private readonly IClock _clock;
         private readonly IArrayTypesCreator _arrayTypesCreator;
         private readonly IMethodTransformer _methodTransformer;
@@ -35,6 +37,7 @@ namespace Hast.Transformer.Vhdl.Services
 
         public TransformedVhdlManifestBuilder(
             ICompilerGeneratedClassesVerifier compilerGeneratedClassesVerifier,
+            IHardwareEntryPointsVerifier hardwareEntryPointsVerifier,
             IClock clock,
             IArrayTypesCreator arrayTypesCreator,
             IMethodTransformer methodTransformer,
@@ -47,6 +50,7 @@ namespace Hast.Transformer.Vhdl.Services
             IPocoTransformer pocoTransformer)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
+            _hardwareEntryPointsVerifier = hardwareEntryPointsVerifier;
             _clock = clock;
             _arrayTypesCreator = arrayTypesCreator;
             _methodTransformer = methodTransformer;
@@ -65,6 +69,7 @@ namespace Hast.Transformer.Vhdl.Services
             var syntaxTree = transformationContext.SyntaxTree;
 
             _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
+            _hardwareEntryPointsVerifier.VerifyHardwareEntryPoints(syntaxTree, transformationContext.TypeDeclarationLookupTable);
 
             var vhdlTransformationContext = new VhdlTransformationContext(transformationContext);
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;
@@ -103,7 +108,7 @@ namespace Hast.Transformer.Vhdl.Services
             // Adding array types for any arrays created in code
             // This is necessary in a separate step because in VHDL the array types themselves should be created too
             // (like in C# we'd need to first define what an int[] is before being able to create one).
-            var arrayDeclarations = _arrayTypesCreator.CreateArrayTypes(syntaxTree);
+            var arrayDeclarations = _arrayTypesCreator.CreateArrayTypes(syntaxTree, vhdlTransformationContext);
             if (arrayDeclarations.Any())
             {
                 var arrayTypeDependentTypes = new DependentTypesTable();
@@ -151,7 +156,10 @@ namespace Hast.Transformer.Vhdl.Services
             // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
             // of a record type) than the type depending on the other one should come after the other one in the code
             // file.
-            var allDependentTypes = dependentTypesTables.SelectMany(table => table.GetTypes()).ToDictionary(type => type.Name);
+            var allDependentTypes = dependentTypesTables
+                .SelectMany(table => table.GetTypes())
+                .GroupBy(type => type.Name) // A dependency relation can be present multiple times, so need to group first.
+                .ToDictionary(group => group.Key, group => group.First());
             var sortedDependentTypes = TopologicalSortHelper.Sort(
                 allDependentTypes.Values,
                 sortedType => dependentTypesTables
@@ -176,13 +184,14 @@ namespace Hast.Transformer.Vhdl.Services
 
 
             // Proxying external invocations
-            var interfaceMemberResults = transformerResults.Where(result => result.IsInterfaceMember);
-            if (!interfaceMemberResults.Any())
+            var hardwareEntryPointMemberResults = transformerResults.Where(result => result.IsHardwareEntryPointMember);
+            if (!hardwareEntryPointMemberResults.Any())
             {
-                throw new InvalidOperationException("There aren't any interface members, however at least one interface member is needed to execute anything on hardware.");
+                throw new InvalidOperationException(
+                    "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware.");
             }
-            var memberIdTable = BuildMemberIdTable(interfaceMemberResults);
-            var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(interfaceMemberResults, memberIdTable);
+            var memberIdTable = BuildMemberIdTable(hardwareEntryPointMemberResults);
+            var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(hardwareEntryPointMemberResults, memberIdTable);
             potentiallyInvokingArchitectureComponents.Add(externalInvocationProxy);
             architecture.Declarations.Add(externalInvocationProxy.BuildDeclarations());
             architecture.Add(externalInvocationProxy.BuildBody());
@@ -325,12 +334,12 @@ namespace Hast.Transformer.Vhdl.Services
         }
 
 
-        private static MemberIdTable BuildMemberIdTable(IEnumerable<IMemberTransformerResult> interfaceMemberResults)
+        private static MemberIdTable BuildMemberIdTable(IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults)
         {
             var memberIdTable = new MemberIdTable();
             var memberId = 0;
 
-            foreach (var interfaceMemberResult in interfaceMemberResults)
+            foreach (var interfaceMemberResult in hardwareEntryPointMemberResults)
             {
                 var methodFullName = interfaceMemberResult.Member.GetFullName();
                 memberIdTable.SetMapping(methodFullName, memberId);
