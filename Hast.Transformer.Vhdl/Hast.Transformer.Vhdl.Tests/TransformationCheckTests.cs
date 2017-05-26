@@ -61,7 +61,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 configuration =>
                 {
                     configuration.TransformerConfiguration().UseSimpleMemory = false;
-                    configuration.AddPublicHardwareMethod<T>(expression);
+                    configuration.AddHardwareEntryPointMethod<T>(expression);
                 });
         }
     }

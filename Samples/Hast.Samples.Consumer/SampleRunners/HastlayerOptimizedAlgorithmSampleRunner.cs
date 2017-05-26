@@ -10,7 +10,7 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.AddPublicHardwareType<HastlayerOptimizedAlgorithm>();
+            configuration.AddHardwareEntryPointType<HastlayerOptimizedAlgorithm>();
 
             configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfigurationForMethod<HastlayerOptimizedAlgorithm>(p => p.Run(null), 0)

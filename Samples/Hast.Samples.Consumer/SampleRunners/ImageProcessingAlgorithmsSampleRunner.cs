@@ -11,8 +11,8 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.AddPublicHardwareType<ImageContrastModifier>();
-            configuration.AddPublicHardwareType<ImageFilter>();
+            configuration.AddHardwareEntryPointType<ImageContrastModifier>();
+            configuration.AddHardwareEntryPointType<ImageFilter>();
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)

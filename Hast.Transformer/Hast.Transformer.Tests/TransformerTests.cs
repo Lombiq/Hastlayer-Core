@@ -106,17 +106,17 @@ namespace Hast.Transformer.Vhdl.Tests
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
-            config.PublicHardwareMemberFullNames = new[] { "aaa" };
+            config.HardwareEntryPointMemberFullNames = new[] { "aaa" };
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
-            config.PublicHardwareMemberFullNames = new[] { "bbb" };
+            config.HardwareEntryPointMemberFullNames = new[] { "bbb" };
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
 
-            config.PublicHardwareMemberNamePrefixes = new[] { "aaa" };
+            config.HardwareEntryPointMemberNamePrefixes = new[] { "aaa" };
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
-            config.PublicHardwareMemberNamePrefixes = new[] { "bbb" };
+            config.HardwareEntryPointMemberNamePrefixes = new[] { "bbb" };
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
@@ -138,7 +138,7 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task IncludedMembersAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
-            configuration.PublicHardwareMemberFullNames = new[]
+            configuration.HardwareEntryPointMemberFullNames = new[]
             {
                 "System.Void " + typeof(RootClass).FullName + "::" + nameof(RootClass.VirtualMethod) + "(System.Int32)",
                 "System.Void " + typeof(ComplexTypeHierarchy).FullName + "::" + typeof(IInterface1).FullName + "." + nameof(IInterface1.Interface1Method1) + "()"
@@ -164,7 +164,7 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task IncludedMembersPrefixedAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
-            configuration.PublicHardwareMemberNamePrefixes = new[]
+            configuration.HardwareEntryPointMemberNamePrefixes = new[]
             {
                 typeof(RootClass).FullName + "." + nameof(RootClass.VirtualMethod),
                 typeof(ComplexTypeHierarchy).Namespace

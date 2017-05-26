@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 return (IMemberTransformerResult)new MemberTransformerResult
                 {
-                    IsInterfaceMember = false,
+                    IsHardwareEntryPointMember = false,
                     Member = field,
                     ArchitectureComponentResults = new[]
                     {

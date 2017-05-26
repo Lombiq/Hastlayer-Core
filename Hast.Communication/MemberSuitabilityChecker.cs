@@ -5,10 +5,10 @@ using ICSharpCode.NRefactory.CSharp;
 namespace Hast.Communication
 {
     // The implementation is here because it depends on the Communication component and its proxy generator on what can 
-    // be used as interface members.
+    // be used as hardware entry point members.
     public class MemberSuitabilityChecker : IMemberSuitabilityChecker
     {
-        public bool IsSuitableInterfaceMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+        public bool IsSuitableHardwareEntryPointMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             if (member is MethodDeclaration)
             {

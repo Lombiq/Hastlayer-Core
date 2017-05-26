@@ -13,7 +13,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
     public class ExternalInvocationProxyBuilder : IExternalInvocationProxyBuilder
     {
         public IArchitectureComponent BuildProxy(
-            IEnumerable<IMemberTransformerResult> interfaceMemberResults,
+            IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults,
             MemberIdTable memberIdTable)
         {
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look 
@@ -40,11 +40,11 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
             var memberSelectingCase = new Case { Expression = CommonPortNames.MemberId.ToVhdlIdValue() };
 
-            foreach (var interfaceMemberResult in interfaceMemberResults)
+            foreach (var hardwareEntryPointMemberResult in hardwareEntryPointMemberResults)
             {
-                var memberName = interfaceMemberResult.Member.GetFullName();
+                var memberName = hardwareEntryPointMemberResult.Member.GetFullName();
                 var memberId = memberIdTable.LookupMemberId(memberName);
-                proxyComponent.OtherMemberMaxInvocationInstanceCounts[interfaceMemberResult.Member] = 1;
+                proxyComponent.OtherMemberMaxInvocationInstanceCounts[hardwareEntryPointMemberResult.Member] = 1;
                 var when = new CaseWhen
                 {
                     Expression = memberId.ToVhdlValue(KnownDataTypes.UnrangedInt)

@@ -179,13 +179,14 @@ namespace Hast.Transformer.Vhdl.Services
 
 
             // Proxying external invocations
-            var interfaceMemberResults = transformerResults.Where(result => result.IsInterfaceMember);
-            if (!interfaceMemberResults.Any())
+            var hardwareEntryPointMemberResults = transformerResults.Where(result => result.IsHardwareEntryPointMember);
+            if (!hardwareEntryPointMemberResults.Any())
             {
-                throw new InvalidOperationException("There aren't any interface members, however at least one interface member is needed to execute anything on hardware.");
+                throw new InvalidOperationException(
+                    "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware.");
             }
-            var memberIdTable = BuildMemberIdTable(interfaceMemberResults);
-            var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(interfaceMemberResults, memberIdTable);
+            var memberIdTable = BuildMemberIdTable(hardwareEntryPointMemberResults);
+            var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(hardwareEntryPointMemberResults, memberIdTable);
             potentiallyInvokingArchitectureComponents.Add(externalInvocationProxy);
             architecture.Declarations.Add(externalInvocationProxy.BuildDeclarations());
             architecture.Add(externalInvocationProxy.BuildBody());
@@ -328,12 +329,12 @@ namespace Hast.Transformer.Vhdl.Services
         }
 
 
-        private static MemberIdTable BuildMemberIdTable(IEnumerable<IMemberTransformerResult> interfaceMemberResults)
+        private static MemberIdTable BuildMemberIdTable(IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults)
         {
             var memberIdTable = new MemberIdTable();
             var memberId = 0;
 
-            foreach (var interfaceMemberResult in interfaceMemberResults)
+            foreach (var interfaceMemberResult in hardwareEntryPointMemberResults)
             {
                 var methodFullName = interfaceMemberResult.Member.GetFullName();
                 memberIdTable.SetMapping(methodFullName, memberId);

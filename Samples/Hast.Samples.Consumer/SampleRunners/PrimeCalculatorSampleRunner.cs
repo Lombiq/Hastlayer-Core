@@ -11,7 +11,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
             // You can add complete types whose methods you'd like to invoke on the hardware from the outside like this.
-            configuration.AddPublicHardwareType<PrimeCalculator>();
+            configuration.AddHardwareEntryPointType<PrimeCalculator>();
             // A not statically typed way of doing the same as above would be:
             //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
             // Note that the bottom version can also be used to add multiple types from under a namespace.
