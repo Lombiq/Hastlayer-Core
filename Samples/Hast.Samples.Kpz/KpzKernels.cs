@@ -23,7 +23,9 @@ namespace Hast.Samples.Kpz
             KpzKernels kernels = new KpzKernels();
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
             //assume that GridWidth and GridHeight are 2^N
-            var numberOfStepsInIteration = (testMode) ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
+            int numberOfStepsInIteration = 0;
+            if (testMode) numberOfStepsInIteration = 1;
+            else numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
 
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
