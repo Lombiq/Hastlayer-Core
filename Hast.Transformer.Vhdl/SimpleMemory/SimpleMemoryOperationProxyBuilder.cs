@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 component => new Binary
                 {
                     Left = component.CreateSimpleMemoryReadEnableSignalReference(),
-                    Operator = BinaryOperator.ConditionalOr,
+                    Operator = BinaryOperator.Or,
                     Right = component.CreateSimpleMemoryWriteEnableSignalReference()
                 }));
 
@@ -75,11 +75,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 // a type conversion.
                 if (portName == SimpleMemoryPortNames.CellIndex)
                 {
-                    value = new Invocation
-                    {
-                        Target = "to_integer".ToVhdlIdValue(),
-                        Parameters = new List<IVhdlElement> { { value } }
-                    };
+                    value = Invocation.ToInteger(value);
                 }
 
                 assignment.Whens.Add(new SignalAssignmentWhen
@@ -110,7 +106,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
                 Expression = BinaryChainBuilder.BuildBinaryChain(
                     components.Select(c => c.CreateSimpleMemorySignalReference(portName)), 
-                    BinaryOperator.ConditionalOr)
+                    BinaryOperator.Or)
             };
         }
     }

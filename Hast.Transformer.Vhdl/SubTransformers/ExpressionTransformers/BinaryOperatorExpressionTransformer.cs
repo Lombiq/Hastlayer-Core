@@ -93,6 +93,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             };
 
             var expression = partiallyTransformedExpression.BinaryOperatorExpression;
+            var typeDeclarationLookupTable = context.TransformationContext.TypeDeclarationLookupTable;
 
             // Would need to decide between + and & or sll/srl and sra/sla
             // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
@@ -104,15 +105,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     break;
                 //case BinaryOperatorType.Any:
                 //    break;
-                //case BinaryOperatorType.BitwiseAnd:
-                //    break;
-                //case BinaryOperatorType.BitwiseOr:
-                //    break;
+                case BinaryOperatorType.BitwiseAnd:
                 case BinaryOperatorType.ConditionalAnd:
-                    binary.Operator = BinaryOperator.ConditionalAnd;
+                    binary.Operator = BinaryOperator.And;
                     break;
+                case BinaryOperatorType.BitwiseOr:
                 case BinaryOperatorType.ConditionalOr:
-                    binary.Operator = BinaryOperator.ConditionalOr;
+                    binary.Operator = BinaryOperator.Or;
                     break;
                 case BinaryOperatorType.Divide:
                     binary.Operator = BinaryOperator.Divide;
@@ -146,11 +145,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     break;
                 //case BinaryOperatorType.NullCoalescing:
                 //    break;
+                // Left and right shift for numerical types is a function call in VHDL, so handled separately. See
+                // below.
                 case BinaryOperatorType.ShiftLeft:
-                    binary.Operator = BinaryOperator.ShiftLeft;
-                    break;
                 case BinaryOperatorType.ShiftRight:
-                    binary.Operator = BinaryOperator.ShiftRight;
                     break;
                 case BinaryOperatorType.Subtract:
                     binary.Operator = BinaryOperator.Subtract;
@@ -180,7 +178,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
             }
 
-            var resultType = _typeConverter.ConvertTypeReference(resultTypeReference);
+            var resultType = _typeConverter.ConvertTypeReference(resultTypeReference, typeDeclarationLookupTable);
             var resultTypeSize = resultType.GetSize();
 
 
@@ -200,6 +198,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             IVhdlElement binaryElement = binary;
+
+            if (expression.Operator == BinaryOperatorType.ShiftLeft || expression.Operator == BinaryOperatorType.ShiftRight)
+            {
+                binaryElement = new Invocation
+                {
+                    Target = (expression.Operator == BinaryOperatorType.ShiftLeft ? "shift_left" : "shift_right").ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement> { { binary.Left }, { Invocation.ToInteger(binary.Right) } }
+                };
+            }
 
             var leftTypeReference = expression.Left.GetActualTypeReference();
             var rightTypeReference = expression.Right.GetActualTypeReference();
@@ -225,14 +232,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var leftTypeSize = 0;
             if (leftTypeReference != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
             {
-                leftType = _typeConverter.ConvertTypeReference(leftTypeReference);
+                leftType = _typeConverter.ConvertTypeReference(leftTypeReference, typeDeclarationLookupTable);
                 leftTypeSize = leftType.GetSize();
             }
             DataType rightType = null;
             var rightTypeSize = 0;
             if (rightTypeReference != null)
             {
-                rightType = _typeConverter.ConvertTypeReference(rightTypeReference);
+                rightType = _typeConverter.ConvertTypeReference(rightTypeReference, typeDeclarationLookupTable);
                 rightTypeSize = rightType.GetSize();
             }
 
@@ -265,9 +272,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 if (firstNonParenthesizedExpressionParent is CastExpression)
                 {
                     binaryElement = _typeConversionTransformer.ImplementTypeConversion(
-                        _typeConverter.ConvertTypeReference(preCastTypeReference),
+                        _typeConverter.ConvertTypeReference(preCastTypeReference, typeDeclarationLookupTable),
                         resultType,
-                        binary).Expression;
+                        binaryElement).Expression;
                 }
                 else
                 {
@@ -275,10 +282,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         Target = "resize".ToVhdlIdValue(),
                         Parameters = new List<IVhdlElement>
-                    {
-                        { binary },
-                        { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
-                    }
+                        {
+                            { binaryElement },
+                            { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
+                        }
                     };
                 }
             }

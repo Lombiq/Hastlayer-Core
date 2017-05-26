@@ -12,7 +12,7 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.AddPublicHardwareType<SimdCalculator>();
+            configuration.AddHardwareEntryPointType<SimdCalculator>();
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)

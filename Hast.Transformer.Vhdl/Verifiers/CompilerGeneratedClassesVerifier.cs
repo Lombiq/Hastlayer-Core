@@ -4,7 +4,7 @@ using System.Linq;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
-namespace Hast.Transformer.Vhdl.SubTransformers
+namespace Hast.Transformer.Vhdl.Verifiers
 {
     public class CompilerGeneratedClassesVerifier : ICompilerGeneratedClassesVerifier
     {

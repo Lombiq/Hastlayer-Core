@@ -83,8 +83,8 @@ namespace Hast.Transformer
             }
 
             transformationId +=
-                string.Join("-", configuration.PublicHardwareMemberFullNames) +
-                string.Join("-", configuration.PublicHardwareMemberNamePrefixes) +
+                string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
+                string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
                 _jsonConverter.Serialize(configuration.CustomConfiguration);
 
 
@@ -208,12 +208,12 @@ namespace Hast.Transformer
         {
             foreach (var type in syntaxTree.GetAllTypeDeclarations())
             {
-                foreach (var member in type.Members.Where(m => m.IsInterfaceMember()))
+                foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
                 {
                     if (member.Is<MethodDeclaration>(method => string.IsNullOrEmpty(method.GetSimpleMemoryParameterName())))
                     {
                         throw new InvalidOperationException(
-                            "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter.");
+                            "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
                     }
                 }
             }

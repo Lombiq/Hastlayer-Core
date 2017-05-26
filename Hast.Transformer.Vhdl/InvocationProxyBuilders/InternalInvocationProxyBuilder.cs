@@ -320,7 +320,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         Array = targetAvailableIndicatorVariableReference,
                                         IndexExpression = c.ToVhdlValue(KnownDataTypes.UnrangedInt)
                                     },
-                                    Expression = BinaryChainBuilder.BuildBinaryChain(selectorConditions, BinaryOperator.ConditionalAnd)
+                                    Expression = BinaryChainBuilder.BuildBinaryChain(selectorConditions, BinaryOperator.And)
                                 });
                         }
                     }

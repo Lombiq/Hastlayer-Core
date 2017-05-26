@@ -10,7 +10,7 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.AddPublicHardwareType<RecursiveAlgorithms>();
+            configuration.AddHardwareEntryPointType<RecursiveAlgorithms>();
 
             configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")

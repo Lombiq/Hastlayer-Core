@@ -41,7 +41,8 @@ namespace Hast.Samples.SampleAssembly
             IsPrimeNumber(memory);
 
             // For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized
-            // interface method async with Task.FromResult(). In .NET <4.6 Task.FromResult(true) can be used too.
+            // hardware entry ponit method async with Task.FromResult(). In .NET <4.6 Task.FromResult(true) can be used 
+            // too.
             return Task.CompletedTask;
         }
 

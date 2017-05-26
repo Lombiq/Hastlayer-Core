@@ -13,7 +13,7 @@ namespace Hast.Transformer.Vhdl.Models
     public interface IMemberTransformerResult
     {
         EntityDeclaration Member { get; }
-        bool IsInterfaceMember { get; }
+        bool IsHardwareEntryPointMember { get; }
         IEnumerable<IArchitectureComponentResult> ArchitectureComponentResults { get; }
     }
 }

@@ -7,8 +7,9 @@ namespace Hast.Transformer
     public interface IMemberSuitabilityChecker : IDependency
     {
         /// <summary>
-        /// Checks whether a member is suitable to be part of the hardware implementation's interface.
+        /// Checks whether a member is suitable to be among the hardware members that are directly executable from the 
+        /// host computer.
         /// </summary>
-        bool IsSuitableInterfaceMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable);
+        bool IsSuitableHardwareEntryPointMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable);
     }
 }

@@ -71,7 +71,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     targetDeclaration,
                     targetMethodName,
                     parameters,
-                    context.Scope,
+                    context,
                     0);
 
                 addInvocationStartComment();
@@ -106,7 +106,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         targetDeclaration,
                         targetMethodName,
                         parameters,
-                        context.Scope,
+                        context,
                         i);
 
                     outParameterBackAssignments.AddRange(buildInvocationBlockResult.OutParameterBackAssignments);
@@ -165,9 +165,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             MethodDeclaration targetDeclaration,
             string targetMethodName,
             IEnumerable<IVhdlElement> parameters,
-            ISubTransformerScope scope,
+            ISubTransformerContext context,
             int index)
         {
+            var scope = context.Scope;
             var stateMachine = scope.StateMachine;
 
             var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, index);
@@ -219,7 +220,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 // Managing signals for parameter passing.
                 var targetParameter = methodParametersEnumerator.Current;
-                var parameterSignalType = _typeConverter.ConvertParameterType(targetParameter);
+                var parameterSignalType = _typeConverter
+                    .ConvertParameterType(targetParameter, context.TransformationContext.TypeDeclarationLookupTable);
 
                 Func<ParameterFlowDirection, Assignment> createParameterAssignment = (flowDirection) =>
                 {
@@ -369,7 +371,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.ChangeBlockToDifferentState(waitForInvocationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
 
 
-            var returnType = _typeConverter.ConvertAstType(targetDeclaration.ReturnType);
+            var returnType = _typeConverter
+                .ConvertAstType(targetDeclaration.ReturnType, context.TransformationContext.TypeDeclarationLookupTable);
 
             if (returnType == KnownDataTypes.Void)
             {
