@@ -1865,6 +1865,7 @@ begin
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.arg_57_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\: integer range 0 to 4 := 0;
@@ -1944,7 +1945,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::input\ := ConvertStdLogicVectorToUInt32(\DataIn\);
+                            \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \System.UInt32 Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::input\ := ConvertStdLogicVectorToUInt32(\HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.dataIn.0\);
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
                             \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\ := to_unsigned(0, 32);
                             -- Starting a while loop.
@@ -2068,6 +2070,7 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\: \Hast.Samples.SampleAssembly.NumberContainer\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.flag\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -2132,7 +2135,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\DataIn\);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\);
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := to_unsigned(0, 32);
@@ -3184,6 +3188,7 @@ begin
     \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3228,7 +3233,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\DataIn\);
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\);
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\;
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= true;
@@ -3316,9 +3322,11 @@ begin
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return.0\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -3372,7 +3380,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\DataIn\);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\);
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                             -- Starting a while loop.
                             -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
@@ -3407,7 +3416,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\DataIn\);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\);
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := to_signed(1, 32) + \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\;
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\;
@@ -3457,12 +3467,14 @@ begin
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.arg_5D_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\: integer range 0 to 4 := 0;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\: boolean := false;
@@ -3550,7 +3562,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\DataIn\);
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\);
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\ := (others => false);
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                             -- Starting a while loop.
@@ -3609,7 +3622,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := ConvertStdLogicVectorToUInt32(\DataIn\);
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
+                            \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\);
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.arg_5D_1\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\;
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32)
                             case \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ is 
@@ -3837,6 +3851,7 @@ begin
     \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State\: \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._States\ := \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_0\;
         Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3893,7 +3908,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\DataIn\), 16);
+                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\), 16);
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
@@ -3931,6 +3947,7 @@ begin
     \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State\: \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._States\ := \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_0\;
         Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3987,7 +4004,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\DataIn\), 16);
+                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\), 16);
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
@@ -4027,6 +4045,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\: boolean := false;
@@ -4091,7 +4110,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= true;
@@ -4188,6 +4208,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\: boolean := false;
@@ -4252,7 +4273,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= true;
@@ -4349,6 +4371,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\: boolean := false;
@@ -4413,7 +4436,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= true;
@@ -4510,6 +4534,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\: boolean := false;
@@ -4574,7 +4599,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= true;
@@ -4671,6 +4697,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.2\: boolean := false;
@@ -4735,7 +4762,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ <= true;
@@ -4832,6 +4860,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.2\: boolean := false;
@@ -4896,7 +4925,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ <= true;
@@ -4993,6 +5023,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -5049,7 +5080,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= true;
@@ -5124,6 +5156,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -5180,7 +5213,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= true;
@@ -5255,6 +5289,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -5311,7 +5346,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= true;
@@ -5386,6 +5422,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -5442,7 +5479,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= true;
@@ -5517,6 +5555,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -5573,7 +5612,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ <= true;
@@ -5648,6 +5688,7 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.number\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.flag\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.result\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.1\: boolean := false;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -5704,7 +5745,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ <= false;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\DataIn\) + to_unsigned(1, 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.dataIn.0\ := \DataIn\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.dataIn.0\) + to_unsigned(1, 32);
                             -- Begin SimpleMemory write.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ <= true;
@@ -5981,18 +6023,21 @@ begin
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.0\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.1\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.2\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.3\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\: std_logic_vector(31 downto 0);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.7\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\: std_logic_vector(31 downto 0);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\: boolean := false;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\: boolean := false;
@@ -6184,7 +6229,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\ := ConvertStdLogicVectorToInt32(\DataIn\);
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\ := \DataIn\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\ := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := to_signed(0, 32);
                             -- Starting a while loop.
                             -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
@@ -6253,7 +6299,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\)) := ConvertStdLogicVectorToInt32(\DataIn\);
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\ := \DataIn\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\)) := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.6\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ + to_signed(1, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.6\;
                             -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\ if the loop wasn't exited with a state change.
@@ -6416,7 +6463,8 @@ begin
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
-                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\)) := ConvertStdLogicVectorToInt32(\DataIn\);
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\ := \DataIn\;
+                            \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\)) := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.12\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ + to_signed(1, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.12\;
                             -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\ if the loop wasn't exited with a state change.
