@@ -283,7 +283,7 @@ namespace Hast.Samples.Kpz
             StateLogger.AddKpzAction("Using Hastlayer!");
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
-                Kernels.DoSingleIterationWrapper(grid, true);
+                Kernels.DoSingleIterationWrapper(grid, true, random.NextUInt64(), random.NextUInt64());
                 if (enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", grid, gridBefore);
             }
         }
@@ -323,6 +323,17 @@ namespace Hast.Samples.Kpz
             };
             toReturn.nx = grid[toReturn.nxCoords.x, toReturn.nxCoords.y];
             toReturn.ny = grid[toReturn.nyCoords.x, toReturn.nyCoords.y];
+            return toReturn;
+        }
+    }
+
+    static class RandomExtensions
+    {
+        public static ulong NextUInt64(this Random random)
+        {
+            uint val1 = (uint)random.Next();
+            uint val2 = (uint)random.Next();
+            ulong toReturn = val1 | ((ulong)val2 << 32);
             return toReturn;
         }
     }

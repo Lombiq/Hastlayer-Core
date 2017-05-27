@@ -18,9 +18,9 @@ namespace Hast.Samples.Kpz
 
     public class KpzKernelsInterface
     {
-        public virtual void DoIteration(SimpleMemory memory, bool testMode)
+        public virtual void DoIteration(SimpleMemory memory, bool testMode, ulong randomSeed1, ulong randomSeed2)
         {
-            KpzKernels kernels = new KpzKernels();
+            KpzKernels kernels = new KpzKernels(randomSeed1, randomSeed2);
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
             //assume that GridWidth and GridHeight are 2^N
             var numberOfStepsInIteration = testMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
@@ -46,8 +46,15 @@ namespace Hast.Samples.Kpz
         uint[] gridRaw = new uint[GridWidth * GridHeight];
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
 
-        ulong randomState1 = 7215152093156152310UL; //random seed
-        ulong randomState2 = 8322404672673255311UL; //random seed
+        //ulong randomState1 = 7215152093156152310UL; //random seed
+        //ulong randomState2 = 8322404672673255311UL; //random seed
+        ulong randomState1, randomState2;
+
+        public KpzKernels(ulong randomSeed1, ulong randomSeed2)
+        {
+            randomState1 = randomSeed1;
+            randomState2 = randomSeed2;
+        }
 
         public uint GetNextRandom1()
         {
@@ -170,11 +177,11 @@ namespace Hast.Samples.Kpz
             return sm.ReadUInt32(2);
         }
 
-        public static void DoSingleIterationWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga)
+        public static void DoSingleIterationWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, ulong randomSeed1, ulong randomSeed2)
         {
             SimpleMemory sm = new SimpleMemory(KpzKernels.GridWidth * KpzKernels.GridHeight);
             if (pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
-            kernels.DoIteration(sm, true);
+            kernels.DoIteration(sm, true, randomSeed1, randomSeed2);
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
 
