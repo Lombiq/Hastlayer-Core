@@ -214,10 +214,23 @@ namespace Hast.Transformer
             {
                 foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
                 {
-                    if (member.Is<MethodDeclaration>(method => string.IsNullOrEmpty(method.GetSimpleMemoryParameterName())))
+                    var method = member as MethodDeclaration;
+
+                    if (method != null)
                     {
-                        throw new InvalidOperationException(
-                            "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
+                        var methodName = member.GetFullName();
+
+                        if (string.IsNullOrEmpty(method.GetSimpleMemoryParameterName()))
+                        {
+                            throw new InvalidOperationException(
+                                "The method " + methodName + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
+                        }
+
+                        if (method.Parameters.Count > 1)
+                        {
+                            throw new InvalidOperationException(
+                                "The method " + methodName + " contains parameters apart from the SimpleMemory parameter. Hardware entry points should only have a single SimpleMemory parameter and nothing else.");
+                        }
                     }
                 }
             }

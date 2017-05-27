@@ -19,15 +19,17 @@ Take a look at the sample projects in the Sample solution folder. Those are ther
 
 Some general constraints you have to keep in mind:
 
-- Only public virtual methods, or methods that implement a method defined in an interface will be accessible from the outside.
-- Always use the smallest data type necessary, e.g. `short` instead of `int` if 16b is enough, and unsigned types like `uint` if you don't need negative numbers.
-- Supported primitive types: `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `bool`.  Floating-point numbers like `float` and `double` and numbers bigger than 64b are not yet supported.
-- The most important language constructs like `if` and `else` statements, `while` and `for` loops, type casting, binary operations (e.g. arithmetic, in/equality operators...) on allowed types are supported.
+- Only public virtual methods, or methods that implement a method defined in an interface will be accessible from the outside, i.e. can be hardware entry points.
+- Always use the smallest data type necessary, e.g. `short` instead of `int` if 16b is enough (or even `byte`), and unsigned types like `uint` if you don't need negative numbers.
+- Supported primitive types: `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `bool`.  Floating-point numbers like `float` and `double` and numbers bigger than 64b are not yet supported.
+- The most important language constructs like `if` and `else` statements, `while` and `for` loops, type casting, binary operations (e.g. arithmetic, in/equality operators...), conditional expressions (ternary operator) on allowed types are supported.
 - Algorithms can use a fixed-size (determined at runtime) memory space modelled as a `byte` array in the class `SimpleMemory`. For inputs that should be passed to hardware implementations and outputs that should be sent back this memory space is to be used. For internal method arguments (i.e. for data that isn't coming from the host computer or should be sent back) normal method arguments can be used.
 - Single-dimensional arrays having their size declared compile-time are supported.
-- Using objects created of classes or structs containing only properties and methods is supported. Using these objects as usual (e.g. passing them as method arguments, storing them in arrays) is also supported.
+- Using objects created of custom classes are supported. Using these objects as usual (e.g. passing them as method arguments, storing them in arrays) is also supported. However hardware entry point types can only contain methods.
 - Task-based parallelism is with TPL is supported to a limited degree. Lambda expression are supported to an extent needed to use tasks (see samples).
 - Operation-level, SIMD-like parallelism is supported, see samples.
+
+See the samples to get an understanding of what you can do in Hastlayer-compatible .NET code.
 
 
 ## Troubleshooting
