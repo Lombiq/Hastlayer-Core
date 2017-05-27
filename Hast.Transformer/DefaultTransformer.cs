@@ -32,6 +32,7 @@ namespace Hast.Transformer
         private readonly IArrayInitializerExpander _arrayInitializerExpander;
         private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
+        private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
 
 
         public DefaultTransformer(
@@ -46,7 +47,8 @@ namespace Hast.Transformer
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
             IArrayInitializerExpander arrayInitializerExpander,
             IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
-            IConstructorsToMethodsConverter constructorsToMethodsConverter)
+            IConstructorsToMethodsConverter constructorsToMethodsConverter,
+            IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -60,6 +62,7 @@ namespace Hast.Transformer
             _arrayInitializerExpander = arrayInitializerExpander;
             _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
+            _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
         }
 
 
@@ -164,6 +167,7 @@ namespace Hast.Transformer
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
+            _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
@@ -210,10 +214,23 @@ namespace Hast.Transformer
             {
                 foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
                 {
-                    if (member.Is<MethodDeclaration>(method => string.IsNullOrEmpty(method.GetSimpleMemoryParameterName())))
+                    var method = member as MethodDeclaration;
+
+                    if (method != null)
                     {
-                        throw new InvalidOperationException(
-                            "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
+                        var methodName = member.GetFullName();
+
+                        if (string.IsNullOrEmpty(method.GetSimpleMemoryParameterName()))
+                        {
+                            throw new InvalidOperationException(
+                                "The method " + methodName + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
+                        }
+
+                        if (method.Parameters.Count > 1)
+                        {
+                            throw new InvalidOperationException(
+                                "The method " + methodName + " contains parameters apart from the SimpleMemory parameter. Hardware entry points should only have a single SimpleMemory parameter and nothing else.");
+                        }
                     }
                 }
             }

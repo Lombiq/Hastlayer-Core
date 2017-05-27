@@ -21,8 +21,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
         public BinaryOperatorExpressionTransformer(
-            IDeviceDriver deviceDriver, 
-            ITypeConverter typeConverter, 
+            IDeviceDriver deviceDriver,
+            ITypeConverter typeConverter,
             ITypeConversionTransformer typeConversionTransformer)
         {
             _deviceDriver = deviceDriver;
@@ -267,27 +267,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     );
             }
 
-            if (shouldResizeResult)
+            if (firstNonParenthesizedExpressionParent is CastExpression)
             {
-                if (firstNonParenthesizedExpressionParent is CastExpression)
+                binaryElement = _typeConversionTransformer.ImplementTypeConversion(
+                    _typeConverter.ConvertTypeReference(preCastTypeReference, typeDeclarationLookupTable),
+                    resultType,
+                    binaryElement).Expression;
+            }
+            else if (shouldResizeResult)
+            {
+                binaryElement = new Invocation
                 {
-                    binaryElement = _typeConversionTransformer.ImplementTypeConversion(
-                        _typeConverter.ConvertTypeReference(preCastTypeReference, typeDeclarationLookupTable),
-                        resultType,
-                        binaryElement).Expression;
-                }
-                else
-                {
-                    binaryElement = new Invocation
-                    {
-                        Target = "resize".ToVhdlIdValue(),
-                        Parameters = new List<IVhdlElement>
+                    Target = "resize".ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement>
                         {
                             { binaryElement },
                             { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
                         }
-                    };
-                }
+                };
             }
 
             var operationResultAssignment = new Assignment

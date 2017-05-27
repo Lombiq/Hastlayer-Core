@@ -201,9 +201,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
                 customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
 
-                return implementSimpleMemoryTypeConversion(
-                    SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
-                    true);
+                var dataInTemporaryVariableReference = stateMachine
+                        .CreateVariableWithNextUnusedIndexedName("dataIn", SimpleMemoryTypes.DataSignalsDataType)
+                        .ToReference();
+                currentBlock.Add(new Assignment
+                {
+                    AssignTo = dataInTemporaryVariableReference,
+                    Expression = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference()
+                });
+
+                return implementSimpleMemoryTypeConversion(dataInTemporaryVariableReference, true);
             }
         }
 

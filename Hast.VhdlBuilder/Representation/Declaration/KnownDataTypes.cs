@@ -44,12 +44,18 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         };
 
 
-        private static SizedDataType _int16 = new SizedDataType
+        private static SizedDataType _int8 = new SizedDataType
         {
             TypeCategory = DataTypeCategory.Scalar,
             Name = "signed",
-            Size = 16
+            Size = 8
         };
+        public static SizedDataType Int8 = new SizedDataType(_int8)
+        {
+            DefaultValue = default(sbyte).ToString().ToVhdlValue(_int8)
+        };
+
+        private static SizedDataType _int16 = new SizedDataType(_int8) { Size = 16 };
         public static SizedDataType Int16 = new SizedDataType(_int16)
         {
             DefaultValue = default(short).ToString().ToVhdlValue(_int16)
@@ -64,13 +70,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private static SizedDataType _int64 = new SizedDataType(_int16) { Size = 64 };
         public static SizedDataType Int64 = new SizedDataType(_int64)
         {
-            DefaultValue = default(Int64).ToString().ToVhdlValue(_int64)
+            DefaultValue = default(long).ToString().ToVhdlValue(_int64)
         };
 
         public static SizedDataType[] SignedIntegers = new[] { Int16, Int32, Int64 };
 
 
-        private static SizedDataType _uint16 = new SizedDataType(_int16) { Name = "unsigned" };
+        private static SizedDataType _uint8 = new SizedDataType(_int16) { Name = "unsigned", Size = 8 };
+        public static SizedDataType UInt8 = new SizedDataType(_uint8)
+        {
+            DefaultValue = default(byte).ToString().ToVhdlValue(_uint8)
+        };
+
+        private static SizedDataType _uint16 = new SizedDataType(_uint8) { Size = 16 };
         public static SizedDataType UInt16 = new SizedDataType(_uint16)
         {
             DefaultValue = default(ushort).ToString().ToVhdlValue(_uint16)
@@ -85,10 +97,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private static SizedDataType _uint64 = new SizedDataType(_uint16) { Size = 64 };
         public static SizedDataType UInt64 = new SizedDataType(_uint64)
         {
-            DefaultValue = default(UInt64).ToString().ToVhdlValue(_uint64)
+            DefaultValue = default(ulong).ToString().ToVhdlValue(_uint64)
         };
 
-        public static SizedDataType[] UnsignedIntegers = new[] { UInt16, UInt32, UInt64 };
+        public static SizedDataType[] UnsignedIntegers = new[] { UInt8, UInt16, UInt32, UInt64 };
 
 
         public static SizedDataType[] Integers = SignedIntegers.Union(UnsignedIntegers).ToArray();

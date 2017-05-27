@@ -257,6 +257,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         valueString += ".0";
                     }
 
+                    // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648 
+                    // to +2147483647). Thus if the literal is larger than an integer we need to use the binary notation 
+                    // without these functions.
+                    if (type.Name == KnownDataTypes.Int8.Name || type.Name == KnownDataTypes.UInt8.Name)
+                    {
+                        var value = Convert.ToInt64(valueString);
+
+                        if (value < -2147483648 || value > 2147483647)
+                        {
+                            var binaryLiteral = Convert.ToString(value, 2);
+
+                            scope.CurrentBlock.Add(new LineComment(
+                                "Since the integer literal " + valueString + 
+                                " was out of the VHDL integer range it was substituted with a binary literal (" +
+                                binaryLiteral + ")."));
+
+                            return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = type.GetSize() }); 
+                        }
+                    }
+
                     return valueString.ToVhdlValue(type);
                 }
                 else if (primitive.Parent is BinaryOperatorExpression)

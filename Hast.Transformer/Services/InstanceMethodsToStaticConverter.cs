@@ -80,7 +80,18 @@ namespace Hast.Transformer.Services
                     base.VisitThisReferenceExpression(thisReferenceExpression);
 
                     var thisIdentifierExpression = new IdentifierExpression("this");
-                    thisIdentifierExpression.AddAnnotation(thisReferenceExpression.Annotation<TypeInformation>());
+                    var typeInformation = thisReferenceExpression.Annotation<TypeInformation>();
+
+                    if (typeInformation == null)
+                    {
+                        var parentTypeDefinition = thisReferenceExpression
+                            .FindFirstParentTypeDeclaration()
+                            .Annotation<TypeDefinition>();
+
+                        typeInformation = new TypeInformation(parentTypeDefinition, parentTypeDefinition); 
+                    }
+
+                    thisIdentifierExpression.AddAnnotation(typeInformation);
                     thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
                 }
             }
