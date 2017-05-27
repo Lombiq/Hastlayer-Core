@@ -184,6 +184,7 @@ namespace Hast.Samples.Kpz
                 _kpz.InitializeHastlayer(_verifyOutput).Wait();
             }
 
+            var sw = System.Diagnostics.Stopwatch.StartNew();
             AsyncLogIt("Starting KPZ iterations...");
             for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
             {
@@ -201,7 +202,8 @@ namespace Hast.Samples.Kpz
                 AsyncUpdateChart(currentIteration);
                 if (bw.CancellationPending) return;
             }
-            AsyncLogIt("Done.");
+            sw.Stop();
+            AsyncLogIt("Done. Total time measured: "+sw.ElapsedMilliseconds+" ms");
         }
 
         /// <summary>

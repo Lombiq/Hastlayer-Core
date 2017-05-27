@@ -23,10 +23,9 @@ namespace Hast.Samples.Kpz
             var hastlayer = Xilinx.HastlayerFactory.Create();
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {
-                LogItFunction(
-                    "Executing " + e.MemberFullName + " on hardware took " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " milliseconds (all together)"
+                LogItFunction("Hastlayer timer: " +
+                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) / " +
+                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"
                 );
             };
 
