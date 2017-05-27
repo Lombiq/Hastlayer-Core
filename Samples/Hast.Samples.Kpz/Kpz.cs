@@ -275,6 +275,22 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// Runs an iteration of the KPZ algorithm (with <see cref="gridWidth"/> × <see cref="gridHeight"/> steps).
         /// </summary>
+        public void DoHastIteration()
+        {
+            var numberOfStepsInIteration = gridWidth * gridHeight;
+            KpzNode[,] gridBefore = (KpzNode[,])grid.Clone();
+            if (enableStateLogger) StateLogger.NewKpzIteration();
+            StateLogger.AddKpzAction("Using Hastlayer!");
+            for (int i = 0; i < numberOfStepsInIteration; i++)
+            {
+                Kernels.DoSingleIterationWrapper(grid, true);
+                if (enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", grid, gridBefore);
+            }
+        }
+
+        /// <summary>
+        /// Runs an iteration of the KPZ algorithm (with <see cref="gridWidth"/> × <see cref="gridHeight"/> steps).
+        /// </summary>
         public void DoIteration()
         {
             var numberOfStepsInIteration = gridWidth * gridHeight;

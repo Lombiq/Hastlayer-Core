@@ -118,6 +118,35 @@ namespace Hast.Samples.Kpz
         }
 
         /// <summary>
+        /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration, and highlights all 
+        /// the cells changed between <see cref="Grid" /> and <see cref="GridBefore" /> with yellow color.
+        /// </summary>
+        public void AddKpzAction(string Description, KpzNode[,] Grid, KpzNode[,] GridBefore)
+        {
+            List<KpzCoords> highlightedCoords = new List<KpzCoords>();
+
+            for (int x = 0; x < Grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < Grid.GetLength(1); y++)
+                {
+                    if (GridBefore[x, y].dx != Grid[x, y].dx || GridBefore[x, y].dy != Grid[x, y].dy)
+                    {
+                        highlightedCoords.Add(new KpzCoords { x = x, y = y });
+                    }
+                }
+            }
+
+            Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
+            {
+                Description = Description,
+                Grid = CopyOfGrid(Grid),
+                HeightMap = new int[0, 0],
+                HightlightColor = Color.Orange,
+                HighlightedCoords = highlightedCoords
+            });
+        }
+
+        /// <summary>
         /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration, with cells
         /// to highlight (<see cref="Center" /> and <see cref="Neighbours" />). If the values in the grid were updated,
         /// they are highlighted with a green color, else they are highlighted with a red color, based on the parameter

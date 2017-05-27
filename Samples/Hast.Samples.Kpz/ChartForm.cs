@@ -179,15 +179,14 @@ namespace Hast.Samples.Kpz
             {
                 AsyncLogIt("Initializing Hastlayer...");
                 _kpz.LogItFunction = AsyncLogIt;
-                var hastlayerTask = _kpz.InitializeHastlayer();
-                hastlayerTask.Wait();
+                _kpz.InitializeHastlayer().Wait();
             }
 
             AsyncLogIt("Starting KPZ iterations...");
             for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
             {
-                if(ComputationTarget==KpzTarget.Cpu) _kpz.DoIteration();
-                else _kpz.Kernels.DoSingleIterationWrapper(_kpz.grid, true);
+                if (ComputationTarget == KpzTarget.Cpu) _kpz.DoIteration();
+                else _kpz.DoHastIteration();
                 AsyncUpdateProgressBar(currentIteration);
                 AsyncUpdateChart(currentIteration);
                 if (bw.CancellationPending) return;
@@ -207,7 +206,11 @@ namespace Hast.Samples.Kpz
         private void comboTarget_SelectedIndexChanged(object sender, EventArgs e)
         {
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
-            if (comboTarget.SelectedIndex > 0) nudTableWidth.Value = nudTableHeight.Value = 8;
+            if (comboTarget.SelectedIndex > 0)
+            {
+                nudTableWidth.Value = nudTableHeight.Value = 8;
+                nudIterations.Value = 1;
+            }
         }
 
         private KpzTarget CurrentComputationTarget {
