@@ -89,14 +89,12 @@ namespace Hast.Samples.Kpz
 
         private void setGridDx(int index, bool value)
         {
-            var rightOperand = value ? 1U : 0;
-            gridRaw[index] = (gridRaw[index] & ~1U) | rightOperand;
+            gridRaw[index] = (gridRaw[index] & ~1U) | (value ? 1U : 0);
         }
 
         private void setGridDy(int index, bool value)
         {
-            var rightOperand = value ? 2U : 0;
-            gridRaw[index] = (gridRaw[index] & ~2U) | rightOperand;
+            gridRaw[index] = (gridRaw[index] & ~2U) | (value ? 2U : 0);
         }
 
         public void CopyToSimpleMemoryFromRawGrid(SimpleMemory memory)
