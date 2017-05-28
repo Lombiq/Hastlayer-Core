@@ -272,6 +272,9 @@ namespace Hast.Samples.Kpz
             if (enableStateLogger) StateLogger.AddKpzAction("RandomlySwitchFourCells", grid, p, neighbours, changedGrid);
         }
 
+        bool HastlayerGridAlreadyPushed = false;
+
+
         /// <summary>
         /// Runs an iteration of the KPZ algorithm (with <see cref="gridWidth"/> × <see cref="gridHeight"/> steps).
         /// </summary>
@@ -280,10 +283,23 @@ namespace Hast.Samples.Kpz
             var numberOfStepsInIteration = gridWidth * gridHeight;
             KpzNode[,] gridBefore = (KpzNode[,])grid.Clone();
             if (enableStateLogger) StateLogger.NewKpzIteration();
-            StateLogger.AddKpzAction("Using Hastlayer!");
+            Kernels.DoSingleIterationWrapper(grid, !HastlayerGridAlreadyPushed, false, random.NextUInt64(), random.NextUInt64());
+            if (enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", grid, gridBefore);
+            //HastlayerGridAlreadyPushed = true; //If commented out, push always
+        }
+
+        /// <summary>
+        /// Runs an iteration of the KPZ algorithm (with <see cref="gridWidth"/> × <see cref="gridHeight"/> steps).
+        /// It allows us to debug the steps of the algorithms one by one.
+        /// </summary>
+        public void DoHastIterationDebug()
+        {
+            var numberOfStepsInIteration = gridWidth * gridHeight;
+            KpzNode[,] gridBefore = (KpzNode[,])grid.Clone();
+            if (enableStateLogger) StateLogger.NewKpzIteration();
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
-                Kernels.DoSingleIterationWrapper(grid, true, random.NextUInt64(), random.NextUInt64());
+                Kernels.DoSingleIterationWrapper(grid, true, true, random.NextUInt64(), random.NextUInt64());
                 if (enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", grid, gridBefore);
             }
         }

@@ -18,17 +18,18 @@ namespace Hast.Samples.Kpz
 
     public class KpzKernelsInterface
     {
-        public virtual void DoIteration(SimpleMemory memory, bool testMode, ulong randomSeed1, ulong randomSeed2)
+        public virtual void DoIteration(SimpleMemory memory)
         {
-            KpzKernels kernels = new KpzKernels(randomSeed1, randomSeed2);
+            KpzKernels kernels = new KpzKernels();
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
+            kernels.InitializeParametersFromMemory(memory);
             //assume that GridWidth and GridHeight are 2^N
-            var numberOfStepsInIteration = testMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
+            var numberOfStepsInIteration = kernels.TestMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
 
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
                 // We randomly choose a point on the grid. If there is a pyramid or hole, we randomly switch them.
-                kernels.RandomlySwitchFourCells(testMode);
+                kernels.RandomlySwitchFourCells(kernels.TestMode);
             }
             kernels.CopyToSimpleMemoryFromRawGrid(memory);
         }
@@ -45,15 +46,34 @@ namespace Hast.Samples.Kpz
         public const int GridHeight = 8;
         uint[] gridRaw = new uint[GridWidth * GridHeight];
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
+        public bool TestMode = false;
 
         //ulong randomState1 = 7215152093156152310UL; //random seed
         //ulong randomState2 = 8322404672673255311UL; //random seed
         ulong randomState1, randomState2;
 
-        public KpzKernels(ulong randomSeed1, ulong randomSeed2)
+        public static int CellIndexOfStepMode()
         {
-            randomState1 = randomSeed1;
-            randomState2 = randomSeed2;
+            return GridWidth * GridHeight + 4;
+        }
+
+        public static int CellIndexOfRandomStates()
+        {
+            return GridWidth * GridHeight;
+        }
+
+        public static int SizeOfSimpleMemory()
+        {
+            return GridWidth * GridHeight + 5;
+        }
+
+        public void InitializeParametersFromMemory(SimpleMemory memory)
+        {
+            randomState1 = (((ulong)memory.ReadUInt32(CellIndexOfRandomStates())) << 32) | 
+                memory.ReadUInt32(CellIndexOfRandomStates()+1);
+            randomState2 = (((ulong)memory.ReadUInt32(CellIndexOfRandomStates()+2)) << 32) | 
+                memory.ReadUInt32(CellIndexOfRandomStates()+3);
+            TestMode = (memory.ReadUInt32(CellIndexOfStepMode()) & 1) == 1;
         }
 
         public uint GetNextRandom1()
@@ -175,11 +195,24 @@ namespace Hast.Samples.Kpz
             return sm.ReadUInt32(2);
         }
 
-        public static void DoSingleIterationWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, ulong randomSeed1, ulong randomSeed2)
+        public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1, ulong randomSeed2)
         {
-            SimpleMemory sm = new SimpleMemory(KpzKernels.GridWidth * KpzKernels.GridHeight);
-            if (pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
-            kernels.DoIteration(sm, true, randomSeed1, randomSeed2);
+            memoryDst.WriteUInt32(KpzKernels.CellIndexOfRandomStates(), (uint)(randomSeed1&0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.CellIndexOfRandomStates()+1, (uint)((randomSeed1>>32)&0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.CellIndexOfRandomStates()+2, (uint)(randomSeed2&0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.CellIndexOfRandomStates()+3, (uint)((randomSeed2>>32)&0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.CellIndexOfStepMode(), (testMode)?1U:0U);
+        }
+
+        public static void DoSingleIterationWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, bool testMode, ulong randomSeed1, ulong randomSeed2)
+        {
+            SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory());
+            if (pushToFpga)
+            {
+                CopyParametersToMemory(sm, testMode, randomSeed1, randomSeed2);
+                CopyFromGridToSimpleMemory(hostGrid, sm);
+            }
+            kernels.DoIteration(sm);
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
 

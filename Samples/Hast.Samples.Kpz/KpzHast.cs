@@ -13,9 +13,12 @@ namespace Hast.Samples.Kpz
         public delegate void LogItDelegate(string toLog);
         public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
         public KpzKernelsInterface Kernels;
+        private bool _verifyOutput;
 
-        public async Task InitializeHastlayer()
+        public async Task InitializeHastlayer(bool verifyOutput)
         {
+            _verifyOutput = verifyOutput;
+
             LogItFunction("Creating Hastlayer Factory...");
             var hastlayer = Xilinx.HastlayerFactory.Create();
             hastlayer.ExecutedOnHardware += (sender, e) =>
@@ -26,6 +29,7 @@ namespace Hast.Samples.Kpz
                     e.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " milliseconds (all together)"
                 );
             };
+
             var configuration = new HardwareGenerationConfiguration();
             configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernels");
             configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = 
@@ -44,7 +48,9 @@ namespace Hast.Samples.Kpz
             LogItFunction("Generating proxy...");
             if (kpzTarget == KpzTarget.Fpga)
             {
-                Kernels = await hastlayer.GenerateProxy<KpzKernelsInterface>(hardwareRepresentation, new KpzKernelsInterface());
+                ProxyGenerationConfiguration proxyConf = new ProxyGenerationConfiguration();
+                proxyConf.ValidateHardwareResults = _verifyOutput;
+                Kernels = await hastlayer.GenerateProxy<KpzKernelsInterface>(hardwareRepresentation, new KpzKernelsInterface(), proxyConf);
                 LogItFunction("FPGA target detected");
             }
             else //if (kpzTarget == KpzTarget.FPGASimulation)
@@ -58,12 +64,6 @@ namespace Hast.Samples.Kpz
             uint resultCPU  = 4313+123;
             if(resultCPU == resultFPGA) LogItFunction(String.Format("Success: {0} == {1}", resultFPGA, resultCPU));
             else LogItFunction(String.Format("Fail: {0} != {1}", resultFPGA, resultCPU));
-
-            //LogItFunction("Testing FPGA with TestKpzNode...");
-            //LogItFunction(String.Format("{0} --> {1}", 2, kpzKernels.TestKpzNodeWrapper(2), 3, kpzKernels.TestKpzNodeWrapper(3)));
-            //How to run the same algorithm on the CPU and the FPGA?
-            //Run on FPGA:     var output3 = hastlayerOptimizedAlgorithm.Run(9999);
-            //Run on CPU:      var cpuOutput = new HastlayerOptimizedAlgorithm().Run(234234);
         }
     }
 }

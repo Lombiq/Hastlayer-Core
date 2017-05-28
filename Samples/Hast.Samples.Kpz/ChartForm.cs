@@ -17,6 +17,8 @@ namespace Hast.Samples.Kpz
         private int _kpzWidth { get { return (int)nudTableWidth.Value; } }
         private int _kpzHeight { get { return (int)nudTableHeight.Value; } }
         private bool _showInspector { get { return checkShowInspector.Checked; } }
+        private bool _verifyOutput { get { return checkVerifyOutput.Checked; } }
+        private bool _stepByStep { get { return checkStep.Checked; } }
 
         /// <summary>
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
@@ -179,14 +181,22 @@ namespace Hast.Samples.Kpz
             {
                 AsyncLogIt("Initializing Hastlayer...");
                 _kpz.LogItFunction = AsyncLogIt;
-                _kpz.InitializeHastlayer().Wait();
+                _kpz.InitializeHastlayer(_verifyOutput).Wait();
             }
 
             AsyncLogIt("Starting KPZ iterations...");
             for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
             {
-                if (ComputationTarget == KpzTarget.Cpu) _kpz.DoIteration();
-                else _kpz.DoHastIteration();
+                if (ComputationTarget == KpzTarget.Cpu)
+                {
+                    _kpz.DoIteration();
+                }
+                else
+                {
+                    if (_stepByStep) _kpz.DoHastIterationDebug();
+                    else _kpz.DoHastIteration();
+
+                }
                 AsyncUpdateProgressBar(currentIteration);
                 AsyncUpdateChart(currentIteration);
                 if (bw.CancellationPending) return;
@@ -206,6 +216,8 @@ namespace Hast.Samples.Kpz
         private void comboTarget_SelectedIndexChanged(object sender, EventArgs e)
         {
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
+            checkStep.Enabled = comboTarget.SelectedIndex != 0;
+            checkVerifyOutput.Enabled = comboTarget.SelectedIndex == 2;
             if (comboTarget.SelectedIndex > 0)
             {
                 nudTableWidth.Value = nudTableHeight.Value = 8;
@@ -227,5 +239,15 @@ namespace Hast.Samples.Kpz
         }
 
         KpzTarget ComputationTarget;
+
+        private void labelVerifyOutput_Click(object sender, EventArgs e)
+        {
+            if (checkVerifyOutput.Enabled) checkVerifyOutput.Checked = !checkVerifyOutput.Checked;
+        }
+
+        private void labelStepByStep_Click(object sender, EventArgs e)
+        {
+            if (checkStep.Enabled) checkStep.Checked = !checkStep.Checked;
+        }
     }
 }

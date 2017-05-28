@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartKPZ = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.checkVerifyOutput = new System.Windows.Forms.CheckBox();
+            this.labelVerifyOutput = new System.Windows.Forms.Label();
+            this.labelStepByStep = new System.Windows.Forms.Label();
+            this.checkStep = new System.Windows.Forms.CheckBox();
+            this.labelShowInspector = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboTarget = new System.Windows.Forms.ComboBox();
-            this.labelShowInspector = new System.Windows.Forms.Label();
             this.checkShowInspector = new System.Windows.Forms.CheckBox();
             this.nudTableHeight = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,21 +66,21 @@
             // 
             // chartKPZ
             // 
-            chartArea2.AxisY.IsLogarithmic = true;
-            chartArea2.Name = "ChartArea1";
-            this.chartKPZ.ChartAreas.Add(chartArea2);
+            chartArea3.AxisY.IsLogarithmic = true;
+            chartArea3.Name = "ChartArea1";
+            this.chartKPZ.ChartAreas.Add(chartArea3);
             this.chartKPZ.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartKPZ.Legends.Add(legend2);
+            legend3.Name = "Legend1";
+            this.chartKPZ.Legends.Add(legend3);
             this.chartKPZ.Location = new System.Drawing.Point(0, 0);
             this.chartKPZ.Name = "chartKPZ";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "defaultSeries";
-            this.chartKPZ.Series.Add(series2);
-            this.chartKPZ.Size = new System.Drawing.Size(617, 235);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "defaultSeries";
+            this.chartKPZ.Series.Add(series3);
+            this.chartKPZ.Size = new System.Drawing.Size(617, 219);
             this.chartKPZ.TabIndex = 0;
             this.chartKPZ.Text = "chart1";
             // 
@@ -93,7 +97,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 134F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 165F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 636);
@@ -102,9 +106,13 @@
             // panelTop
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.panelTop, 2);
+            this.panelTop.Controls.Add(this.checkVerifyOutput);
+            this.panelTop.Controls.Add(this.labelVerifyOutput);
+            this.panelTop.Controls.Add(this.labelStepByStep);
+            this.panelTop.Controls.Add(this.checkStep);
+            this.panelTop.Controls.Add(this.labelShowInspector);
             this.panelTop.Controls.Add(this.label4);
             this.panelTop.Controls.Add(this.comboTarget);
-            this.panelTop.Controls.Add(this.labelShowInspector);
             this.panelTop.Controls.Add(this.checkShowInspector);
             this.panelTop.Controls.Add(this.nudTableHeight);
             this.panelTop.Controls.Add(this.label3);
@@ -115,14 +123,64 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(3, 3);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(617, 128);
+            this.panelTop.Size = new System.Drawing.Size(617, 159);
             this.panelTop.TabIndex = 4;
+            // 
+            // checkVerifyOutput
+            // 
+            this.checkVerifyOutput.AutoSize = true;
+            this.checkVerifyOutput.Location = new System.Drawing.Point(482, 93);
+            this.checkVerifyOutput.Name = "checkVerifyOutput";
+            this.checkVerifyOutput.Size = new System.Drawing.Size(15, 14);
+            this.checkVerifyOutput.TabIndex = 14;
+            this.checkVerifyOutput.UseVisualStyleBackColor = true;
+            // 
+            // labelVerifyOutput
+            // 
+            this.labelVerifyOutput.AutoSize = true;
+            this.labelVerifyOutput.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelVerifyOutput.Location = new System.Drawing.Point(311, 86);
+            this.labelVerifyOutput.Name = "labelVerifyOutput";
+            this.labelVerifyOutput.Size = new System.Drawing.Size(132, 23);
+            this.labelVerifyOutput.TabIndex = 13;
+            this.labelVerifyOutput.Text = "Validate results:";
+            this.labelVerifyOutput.Click += new System.EventHandler(this.labelVerifyOutput_Click);
+            // 
+            // labelStepByStep
+            // 
+            this.labelStepByStep.AutoSize = true;
+            this.labelStepByStep.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelStepByStep.Location = new System.Drawing.Point(311, 47);
+            this.labelStepByStep.Name = "labelStepByStep";
+            this.labelStepByStep.Size = new System.Drawing.Size(109, 23);
+            this.labelStepByStep.TabIndex = 12;
+            this.labelStepByStep.Text = "Step by step:";
+            this.labelStepByStep.Click += new System.EventHandler(this.labelStepByStep_Click);
+            // 
+            // checkStep
+            // 
+            this.checkStep.AutoSize = true;
+            this.checkStep.Location = new System.Drawing.Point(482, 54);
+            this.checkStep.Name = "checkStep";
+            this.checkStep.Size = new System.Drawing.Size(15, 14);
+            this.checkStep.TabIndex = 11;
+            this.checkStep.UseVisualStyleBackColor = true;
+            // 
+            // labelShowInspector
+            // 
+            this.labelShowInspector.AutoSize = true;
+            this.labelShowInspector.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelShowInspector.Location = new System.Drawing.Point(309, 6);
+            this.labelShowInspector.Name = "labelShowInspector";
+            this.labelShowInspector.Size = new System.Drawing.Size(134, 23);
+            this.labelShowInspector.TabIndex = 10;
+            this.labelShowInspector.Text = "Show inspector:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(9, 91);
+            this.label4.Location = new System.Drawing.Point(9, 125);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(134, 23);
             this.label4.TabIndex = 9;
@@ -137,29 +195,18 @@
             "Original algorithm (CPU)",
             "Hastlayer simulation (CPU)",
             "Hastlayer accelerated (FPGA)"});
-            this.comboTarget.Location = new System.Drawing.Point(202, 91);
+            this.comboTarget.Location = new System.Drawing.Point(202, 125);
             this.comboTarget.Name = "comboTarget";
-            this.comboTarget.Size = new System.Drawing.Size(406, 31);
+            this.comboTarget.Size = new System.Drawing.Size(408, 31);
             this.comboTarget.TabIndex = 8;
             this.comboTarget.SelectedIndexChanged += new System.EventHandler(this.comboTarget_SelectedIndexChanged);
-            // 
-            // labelShowInspector
-            // 
-            this.labelShowInspector.AutoSize = true;
-            this.labelShowInspector.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelShowInspector.Location = new System.Drawing.Point(9, 47);
-            this.labelShowInspector.Name = "labelShowInspector";
-            this.labelShowInspector.Size = new System.Drawing.Size(134, 23);
-            this.labelShowInspector.TabIndex = 7;
-            this.labelShowInspector.Text = "Show inspector:";
-            this.labelShowInspector.Click += new System.EventHandler(this.labelShowInspector_Click);
             // 
             // checkShowInspector
             // 
             this.checkShowInspector.AutoSize = true;
             this.checkShowInspector.Checked = true;
             this.checkShowInspector.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkShowInspector.Location = new System.Drawing.Point(202, 56);
+            this.checkShowInspector.Location = new System.Drawing.Point(482, 13);
             this.checkShowInspector.Name = "checkShowInspector";
             this.checkShowInspector.Size = new System.Drawing.Size(15, 14);
             this.checkShowInspector.TabIndex = 6;
@@ -168,7 +215,7 @@
             // nudTableHeight
             // 
             this.nudTableHeight.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.nudTableHeight.Location = new System.Drawing.Point(515, 45);
+            this.nudTableHeight.Location = new System.Drawing.Point(202, 84);
             this.nudTableHeight.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -192,7 +239,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(332, 47);
+            this.label3.Location = new System.Drawing.Point(9, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 23);
             this.label3.TabIndex = 4;
@@ -201,7 +248,7 @@
             // nudTableWidth
             // 
             this.nudTableWidth.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.nudTableWidth.Location = new System.Drawing.Point(515, 8);
+            this.nudTableWidth.Location = new System.Drawing.Point(202, 45);
             this.nudTableWidth.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -225,7 +272,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(332, 8);
+            this.label2.Location = new System.Drawing.Point(9, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 23);
             this.label2.TabIndex = 2;
@@ -267,7 +314,7 @@
             // progressBar
             // 
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.Location = new System.Drawing.Point(10, 144);
+            this.progressBar.Location = new System.Drawing.Point(10, 175);
             this.progressBar.Margin = new System.Windows.Forms.Padding(10, 10, 0, 10);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(413, 36);
@@ -277,7 +324,7 @@
             // 
             this.buttonStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonStart.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonStart.Location = new System.Drawing.Point(433, 144);
+            this.buttonStart.Location = new System.Drawing.Point(433, 175);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(10);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(180, 36);
@@ -290,7 +337,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.splitContainer1, 2);
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 193);
+            this.splitContainer1.Location = new System.Drawing.Point(3, 224);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -301,8 +348,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.chartKPZ);
-            this.splitContainer1.Size = new System.Drawing.Size(617, 440);
-            this.splitContainer1.SplitterDistance = 201;
+            this.splitContainer1.Size = new System.Drawing.Size(617, 409);
+            this.splitContainer1.SplitterDistance = 186;
             this.splitContainer1.TabIndex = 3;
             // 
             // listLog
@@ -313,7 +360,7 @@
             this.listLog.ItemHeight = 23;
             this.listLog.Location = new System.Drawing.Point(0, 0);
             this.listLog.Name = "listLog";
-            this.listLog.Size = new System.Drawing.Size(617, 201);
+            this.listLog.Size = new System.Drawing.Size(617, 186);
             this.listLog.TabIndex = 0;
             // 
             // ChartForm
@@ -351,7 +398,6 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nudIterations;
-        private System.Windows.Forms.Label labelShowInspector;
         private System.Windows.Forms.CheckBox checkShowInspector;
         private System.Windows.Forms.NumericUpDown nudTableHeight;
         private System.Windows.Forms.Label label3;
@@ -359,5 +405,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboTarget;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkStep;
+        private System.Windows.Forms.Label labelShowInspector;
+        private System.Windows.Forms.Label labelStepByStep;
+        private System.Windows.Forms.CheckBox checkVerifyOutput;
+        private System.Windows.Forms.Label labelVerifyOutput;
     }
 }
