@@ -288,6 +288,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
             }
 
+            // Handling special operations here.
+            if (_specialOperationInvocationTransformer.IsSpecialOperationInvocation(expression))
+            {
+                return _specialOperationInvocationTransformer
+                    .TransformSpecialOperationInvocation(expression, transformedParameters, context);
+            }
+
 
             EntityDeclaration targetDeclaration = null;
 
@@ -313,12 +320,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))
             {
-                if (_specialOperationInvocationTransformer.IsSpecialOperationInvocation(expression))
-                {
-                    return _specialOperationInvocationTransformer
-                        .TransformSpecialOperationInvocation(expression, transformedParameters, context);
-                }
-
                 throw new InvalidOperationException(
                     "The invoked method " +
                     targetMethodName +
