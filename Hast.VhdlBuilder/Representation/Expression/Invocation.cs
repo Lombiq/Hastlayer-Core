@@ -17,23 +17,26 @@ namespace Hast.VhdlBuilder.Representation.Expression
             (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
 
 
-        public static Invocation ToInteger(IVhdlElement value)
-        {
-            return new Invocation
+        public static Invocation ToInteger(IVhdlElement value) => 
+            new Invocation
             {
                 Target = "to_integer".ToVhdlIdValue(),
                 Parameters = new List<IVhdlElement> { { value } }
             };
-        }
 
-        public static Invocation Resize(IVhdlElement value, int size)
-        {
-            return new Invocation
+        public static Invocation Resize(IVhdlElement value, int size) => InvokeSizingFunction("resize", value, size);
+
+        public static Invocation ToSigned(IVhdlElement value, int size) => InvokeSizingFunction("to_signed", value, size);
+
+        public static Invocation ToUnsigned(IVhdlElement value, int size) => InvokeSizingFunction("to_unsigned", value, size);
+
+
+        private static Invocation InvokeSizingFunction(string functionName, IVhdlElement value, int size) =>
+            new Invocation
             {
-                Target = "resize".ToVhdlIdValue(),
+                Target = functionName.ToVhdlIdValue(),
                 Parameters = new List<IVhdlElement> { { value }, { size.ToVhdlValue(KnownDataTypes.UnrangedInt) } }
             };
-        }
     }
 
 

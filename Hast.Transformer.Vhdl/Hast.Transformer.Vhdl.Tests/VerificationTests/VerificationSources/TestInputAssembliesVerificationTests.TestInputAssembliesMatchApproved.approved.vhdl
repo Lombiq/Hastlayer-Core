@@ -27,7 +27,11 @@ architecture Imp of Hast_IP is
     -- * The InternalInvocationProxy processes dispatch invocations between state machines.
 
     -- Custom inter-dependent type declarations start
+    type \signed_Array\ is array (integer range <>) of signed(31 downto 0);
     type \boolean_Array\ is array (integer range <>) of boolean;
+    type \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\ is record 
+        \Array\: \signed_Array\(0 to 4);
+    end record;
     -- Custom inter-dependent type declarations end
 
 
@@ -44,16 +48,20 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 declarations end
 
 
-    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 declarations start
+    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32).0 declarations start
     -- State machine states:
-    type \BaseClass::BaseClassMethod1().0._States\ is (
-        \BaseClass::BaseClassMethod1().0._State_0\, 
-        \BaseClass::BaseClassMethod1().0._State_1\, 
-        \BaseClass::BaseClassMethod1().0._State_2\);
+    type \BaseClass::BaseClassMethod1(Int32).0._States\ is (
+        \BaseClass::BaseClassMethod1(Int32).0._State_0\, 
+        \BaseClass::BaseClassMethod1(Int32).0._State_1\, 
+        \BaseClass::BaseClassMethod1(Int32).0._State_2\);
     -- Signals:
-    Signal \BaseClass::BaseClassMethod1().0._Finished\: boolean := false;
-    Signal \BaseClass::BaseClassMethod1().0._Started\: boolean := false;
-    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 declarations end
+    Signal \BaseClass::BaseClassMethod1(Int32).0._Finished\: boolean := false;
+    Signal \BaseClass::BaseClassMethod1(Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \BaseClass::BaseClassMethod1(Int32).0.this.parameter.Out\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
+    Signal \BaseClass::BaseClassMethod1(Int32).0._Started\: boolean := false;
+    Signal \BaseClass::BaseClassMethod1(Int32).0.this.parameter.In\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
+    Signal \BaseClass::BaseClassMethod1(Int32).0.a.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32).0 declarations end
 
 
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 declarations start
@@ -82,11 +90,14 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::Interface1Method2().0._State_5\);
     -- Signals:
     Signal \ComplexTypeHierarchy::Interface1Method2().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\: boolean := false;
+    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.Out.0\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
+    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0._Started\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\: boolean := false;
+    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.In.0\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
+    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Finished.0\: boolean := false;
+    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\: boolean := false;
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 declarations end
@@ -164,18 +175,6 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 declarations end
 
 
-    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 declarations start
-    -- State machine states:
-    type \ComplexTypeHierarchy::UnusedMethod().0._States\ is (
-        \ComplexTypeHierarchy::UnusedMethod().0._State_0\, 
-        \ComplexTypeHierarchy::UnusedMethod().0._State_1\, 
-        \ComplexTypeHierarchy::UnusedMethod().0._State_2\);
-    -- Signals:
-    Signal \ComplexTypeHierarchy::UnusedMethod().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::UnusedMethod().0._Started\: boolean := false;
-    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 declarations end
-
-
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 declarations start
     -- State machine states:
     type \ComplexTypeHierarchy::StaticMethod().0._States\ is (
@@ -225,6 +224,41 @@ architecture Imp of Hast_IP is
     Signal \StaticReference::StaticClassUsingMethod().0._Started\: boolean := false;
     Signal \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Finished.0\: boolean := false;
     -- System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]).0 declarations start
+    -- State machine states:
+    type \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._States\ is (
+        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_0\, 
+        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_1\, 
+        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_2\);
+    -- Signals:
+    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Finished\: boolean := false;
+    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.Out\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
+    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.Out\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Started\: boolean := false;
+    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.In\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
+    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.In\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 declarations start
+    -- State machine states:
+    type \ArrayUsingCases::PassArrayToConstructor().0._States\ is (
+        \ArrayUsingCases::PassArrayToConstructor().0._State_0\, 
+        \ArrayUsingCases::PassArrayToConstructor().0._State_1\, 
+        \ArrayUsingCases::PassArrayToConstructor().0._State_2\, 
+        \ArrayUsingCases::PassArrayToConstructor().0._State_3\);
+    -- Signals:
+    Signal \ArrayUsingCases::PassArrayToConstructor().0._Finished\: boolean := false;
+    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.Out.0\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
+    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.Out.0\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\: boolean := false;
+    Signal \ArrayUsingCases::PassArrayToConstructor().0._Started\: boolean := false;
+    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.In.0\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
+    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.In.0\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Finished.0\: boolean := false;
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 declarations end
 
 
     -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 declarations start
@@ -320,38 +354,30 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
@@ -407,42 +433,54 @@ begin
     -- System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 state machine end
 
 
-    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 state machine start
-    \BaseClass::BaseClassMethod1().0._StateMachine\: process (\Clock\) 
-        Variable \BaseClass::BaseClassMethod1().0._State\: \BaseClass::BaseClassMethod1().0._States\ := \BaseClass::BaseClassMethod1().0._State_0\;
+    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32).0 state machine start
+    \BaseClass::BaseClassMethod1(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \BaseClass::BaseClassMethod1(Int32).0._State\: \BaseClass::BaseClassMethod1(Int32).0._States\ := \BaseClass::BaseClassMethod1(Int32).0._State_0\;
+        Variable \BaseClass::BaseClassMethod1(Int32).0.this\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
+        Variable \BaseClass::BaseClassMethod1(Int32).0.a\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BaseClass::BaseClassMethod1(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \BaseClass::BaseClassMethod1().0._Finished\ <= false;
-                \BaseClass::BaseClassMethod1().0._State\ := \BaseClass::BaseClassMethod1().0._State_0\;
+                \BaseClass::BaseClassMethod1(Int32).0._Finished\ <= false;
+                \BaseClass::BaseClassMethod1(Int32).0.return\ <= to_signed(0, 32);
+                \BaseClass::BaseClassMethod1(Int32).0._State\ := \BaseClass::BaseClassMethod1(Int32).0._State_0\;
+                \BaseClass::BaseClassMethod1(Int32).0.a\ := to_signed(0, 32);
+                \BaseClass::BaseClassMethod1(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
             else 
-                case \BaseClass::BaseClassMethod1().0._State\ is 
-                    when \BaseClass::BaseClassMethod1().0._State_0\ => 
+                case \BaseClass::BaseClassMethod1(Int32).0._State\ is 
+                    when \BaseClass::BaseClassMethod1(Int32).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\BaseClass::BaseClassMethod1().0._Started\ = true) then 
-                            \BaseClass::BaseClassMethod1().0._State\ := \BaseClass::BaseClassMethod1().0._State_2\;
+                        if (\BaseClass::BaseClassMethod1(Int32).0._Started\ = true) then 
+                            \BaseClass::BaseClassMethod1(Int32).0._State\ := \BaseClass::BaseClassMethod1(Int32).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BaseClass::BaseClassMethod1().0._State_1\ => 
+                    when \BaseClass::BaseClassMethod1(Int32).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\BaseClass::BaseClassMethod1().0._Started\ = true) then 
-                            \BaseClass::BaseClassMethod1().0._Finished\ <= true;
+                        if (\BaseClass::BaseClassMethod1(Int32).0._Started\ = true) then 
+                            \BaseClass::BaseClassMethod1(Int32).0._Finished\ <= true;
                         else 
-                            \BaseClass::BaseClassMethod1().0._Finished\ <= false;
-                            \BaseClass::BaseClassMethod1().0._State\ := \BaseClass::BaseClassMethod1().0._State_0\;
+                            \BaseClass::BaseClassMethod1(Int32).0._Finished\ <= false;
+                            \BaseClass::BaseClassMethod1(Int32).0._State\ := \BaseClass::BaseClassMethod1(Int32).0._State_0\;
                         end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \BaseClass::BaseClassMethod1(Int32).0.this.parameter.Out\ <= \BaseClass::BaseClassMethod1(Int32).0.this\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BaseClass::BaseClassMethod1().0._State_2\ => 
-                        \BaseClass::BaseClassMethod1().0._State\ := \BaseClass::BaseClassMethod1().0._State_1\;
+                    when \BaseClass::BaseClassMethod1(Int32).0._State_2\ => 
+                        \BaseClass::BaseClassMethod1(Int32).0.this\ := \BaseClass::BaseClassMethod1(Int32).0.this.parameter.In\;
+                        \BaseClass::BaseClassMethod1(Int32).0.a\ := \BaseClass::BaseClassMethod1(Int32).0.a.parameter.In\;
+                        \BaseClass::BaseClassMethod1(Int32).0.binaryOperationResult.0\ := \BaseClass::BaseClassMethod1(Int32).0.a\ + to_signed(1, 32);
+                        \BaseClass::BaseClassMethod1(Int32).0.return\ <= \BaseClass::BaseClassMethod1(Int32).0.binaryOperationResult.0\;
+                        \BaseClass::BaseClassMethod1(Int32).0._State\ := \BaseClass::BaseClassMethod1(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1().0 state machine end
+    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32).0 state machine end
 
 
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 state machine start
@@ -496,15 +534,19 @@ begin
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 state machine start
     \ComplexTypeHierarchy::Interface1Method2().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::Interface1Method2().0._State\: \ComplexTypeHierarchy::Interface1Method2().0._States\ := \ComplexTypeHierarchy::Interface1Method2().0._State_0\;
+        Variable \ComplexTypeHierarchy::Interface1Method2().0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ComplexTypeHierarchy::Interface1Method2().0.return.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::Interface1Method2().0._Finished\ <= false;
-                \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ <= false;
+                \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_0\;
+                \ComplexTypeHierarchy::Interface1Method2().0.num\ := to_signed(0, 32);
+                \ComplexTypeHierarchy::Interface1Method2().0.return.0\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::Interface1Method2().0._State\ is 
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_0\ => 
@@ -525,14 +567,17 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1()
-                        \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32)
+                        \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.Out.0\ <= to_signed(4, 32);
+                        \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\ <= true;
                         \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1()
-                        if (\ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\) then 
-                            \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ <= false;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32)
+                        if (\ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Finished.0\) then 
+                            \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\ <= false;
+                            \ComplexTypeHierarchy::Interface1Method2().0.return.0\ := \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).return.0\;
+                            \ComplexTypeHierarchy::Interface1Method2().0.num\ := \ComplexTypeHierarchy::Interface1Method2().0.return.0\;
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
                             \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_4\;
@@ -791,44 +836,6 @@ begin
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod().0 state machine end
 
 
-    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 state machine start
-    \ComplexTypeHierarchy::UnusedMethod().0._StateMachine\: process (\Clock\) 
-        Variable \ComplexTypeHierarchy::UnusedMethod().0._State\: \ComplexTypeHierarchy::UnusedMethod().0._States\ := \ComplexTypeHierarchy::UnusedMethod().0._State_0\;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \ComplexTypeHierarchy::UnusedMethod().0._Finished\ <= false;
-                \ComplexTypeHierarchy::UnusedMethod().0._State\ := \ComplexTypeHierarchy::UnusedMethod().0._State_0\;
-            else 
-                case \ComplexTypeHierarchy::UnusedMethod().0._State\ is 
-                    when \ComplexTypeHierarchy::UnusedMethod().0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\ComplexTypeHierarchy::UnusedMethod().0._Started\ = true) then 
-                            \ComplexTypeHierarchy::UnusedMethod().0._State\ := \ComplexTypeHierarchy::UnusedMethod().0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ComplexTypeHierarchy::UnusedMethod().0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\ComplexTypeHierarchy::UnusedMethod().0._Started\ = true) then 
-                            \ComplexTypeHierarchy::UnusedMethod().0._Finished\ <= true;
-                        else 
-                            \ComplexTypeHierarchy::UnusedMethod().0._Finished\ <= false;
-                            \ComplexTypeHierarchy::UnusedMethod().0._State\ := \ComplexTypeHierarchy::UnusedMethod().0._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ComplexTypeHierarchy::UnusedMethod().0._State_2\ => 
-                        \ComplexTypeHierarchy::UnusedMethod().0._State\ := \ComplexTypeHierarchy::UnusedMethod().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod().0 state machine end
-
-
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod().0 state machine start
     \ComplexTypeHierarchy::StaticMethod().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::StaticMethod().0._State\: \ComplexTypeHierarchy::StaticMethod().0._States\ := \ComplexTypeHierarchy::StaticMethod().0._State_0\;
@@ -989,6 +996,117 @@ begin
         end if;
     end process;
     -- System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod().0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]).0 state machine start
+    \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._StateMachine\: process (\Clock\) 
+        Variable \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State\: \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._States\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_0\;
+        Variable \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
+        Variable \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Finished\ <= false;
+                \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.Out\ <= (others => to_signed(0, 32));
+                \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_0\;
+                \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\ := (others => to_signed(0, 32));
+            else 
+                case \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State\ is 
+                    when \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Started\ = true) then 
+                            \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Started\ = true) then 
+                            \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Finished\ <= true;
+                        else 
+                            \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Finished\ <= false;
+                            \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.Out\ <= \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this\;
+                        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.Out\ <= \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_2\ => 
+                        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.In\;
+                        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.In\;
+                        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this\.\Array\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\;
+                        \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 state machine start
+    \ArrayUsingCases::PassArrayToConstructor().0._StateMachine\: process (\Clock\) 
+        Variable \ArrayUsingCases::PassArrayToConstructor().0._State\: \ArrayUsingCases::PassArrayToConstructor().0._States\ := \ArrayUsingCases::PassArrayToConstructor().0._State_0\;
+        Variable \ArrayUsingCases::PassArrayToConstructor().0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
+        Variable \ArrayUsingCases::PassArrayToConstructor().0.num\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ArrayUsingCases::PassArrayToConstructor().0._Finished\ <= false;
+                \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.Out.0\ <= (others => to_signed(0, 32));
+                \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\ <= false;
+                \ArrayUsingCases::PassArrayToConstructor().0._State\ := \ArrayUsingCases::PassArrayToConstructor().0._State_0\;
+                \ArrayUsingCases::PassArrayToConstructor().0.array\ := (others => to_signed(0, 32));
+                \ArrayUsingCases::PassArrayToConstructor().0.num\ := to_signed(0, 32);
+            else 
+                case \ArrayUsingCases::PassArrayToConstructor().0._State\ is 
+                    when \ArrayUsingCases::PassArrayToConstructor().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ArrayUsingCases::PassArrayToConstructor().0._Started\ = true) then 
+                            \ArrayUsingCases::PassArrayToConstructor().0._State\ := \ArrayUsingCases::PassArrayToConstructor().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases::PassArrayToConstructor().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ArrayUsingCases::PassArrayToConstructor().0._Started\ = true) then 
+                            \ArrayUsingCases::PassArrayToConstructor().0._Finished\ <= true;
+                        else 
+                            \ArrayUsingCases::PassArrayToConstructor().0._Finished\ <= false;
+                            \ArrayUsingCases::PassArrayToConstructor().0._State\ := \ArrayUsingCases::PassArrayToConstructor().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases::PassArrayToConstructor().0._State_2\ => 
+                        \ArrayUsingCases::PassArrayToConstructor().0.array\ := (others => to_signed(0, 32));
+                        -- Initializing record fields to their defaults.
+                        \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\.\Array\ := (others => to_signed(0, 32));
+                        -- Invoking the target's constructor.
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[])
+                        \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.Out.0\ <= \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\;
+                        \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.Out.0\ <= \ArrayUsingCases::PassArrayToConstructor().0.array\;
+                        \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\ <= true;
+                        \ArrayUsingCases::PassArrayToConstructor().0._State\ := \ArrayUsingCases::PassArrayToConstructor().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases::PassArrayToConstructor().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[])
+                        if (\ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\ = \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Finished.0\) then 
+                            \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\ <= false;
+                            \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\ := \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.In.0\;
+                            \ArrayUsingCases::PassArrayToConstructor().0.array\ := \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.In.0\;
+                            \ArrayUsingCases::PassArrayToConstructor().0.num\ := to_signed(\ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\.\Array\'length, 32);
+                            \ArrayUsingCases::PassArrayToConstructor().0._State\ := \ArrayUsingCases::PassArrayToConstructor().0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 state machine end
 
 
     -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 state machine start
@@ -1219,7 +1337,7 @@ begin
     \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._StateMachine\: process (\Clock\) 
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\: \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._States\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_0\;
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\: \boolean_Array\(0 to 2);
+        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\: \boolean_Array\(0 to 2) := (others => false);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\: boolean := false;
@@ -1245,6 +1363,7 @@ begin
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ <= false;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_0\;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input\ := to_unsigned(0, 32);
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\ := (others => false);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := to_unsigned(0, 32);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\ := to_signed(0, 32);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\ := false;
@@ -1367,21 +1486,17 @@ begin
                 -- Synchronous reset
                 \FinishedInternal\ <= false;
                 \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
@@ -1395,111 +1510,83 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 1 => 
-                            if (\Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Started.0\ = \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Started.0\ <= false;
-                                \FinishedInternal\ <= true;
-                            end if;
-                        when 2 => 
                             if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 3 => 
+                        when 2 => 
                             if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 4 => 
+                        when 3 => 
                             if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface2Method1()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 5 => 
+                        when 4 => 
                             if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IBaseInterface.BaseInterfaceMethod1()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 6 => 
+                        when 5 => 
                             if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 7 => 
+                        when 6 => 
                             if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 8 => 
-                            if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
-                                \FinishedInternal\ <= true;
-                            end if;
-                        when 9 => 
-                            if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Started.0\ <= false;
-                                \FinishedInternal\ <= true;
-                            end if;
-                        when 10 => 
-                            if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Started.0\ = \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
-                                \FinishedInternal\ <= true;
-                            end if;
-                        when 11 => 
+                        when 7 => 
                             if (\Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Started.0\ = \Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().StaticClass::StaticMethod()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 12 => 
+                        when 8 => 
                             if (\Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ = \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 13 => 
+                        when 9 => 
                             if (\Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ = \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 14 => 
+                        when 10 => 
+                            if (\Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\ = \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 11 => 
                             if (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ = \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 15 => 
-                            if (\Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ <= false;
-                                \FinishedInternal\ <= true;
-                            end if;
-                        when 16 => 
+                        when 12 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
@@ -1529,8 +1616,6 @@ begin
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1541,12 +1626,9 @@ begin
                 \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
                 \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= false;
                 \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= false;
-                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0
@@ -1629,114 +1711,20 @@ begin
                         end if;
                 end case;
 
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast::ExternalInvocationProxy()
-                case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Started.0\) then 
-                            \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                            \ComplexTypeHierarchy::PrivateMethod().0._Started\ <= true;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningIndex.0\ is 
-                            when 0 => 
-                                if (\ComplexTypeHierarchy::PrivateMethod().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= true;
-                                    \ComplexTypeHierarchy::PrivateMethod().0._Started\ <= false;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                            \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::PrivateMethod()._Finished.0\ <= false;
-                        end if;
-                end case;
-
             end if;
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1() start
-    \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1()\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\ <= false;
-                \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\ <= false;
-            else 
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0
-                case \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\) then 
-                            \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningIndex.0\ := 0;
-                            \BaseClass::BaseClassMethod1().0._Started\ <= true;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\BaseClass::BaseClassMethod1().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ := AfterFinished;
-                                    \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\ <= true;
-                                    \BaseClass::BaseClassMethod1().0._Started\ <= false;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().ComplexTypeHierarchy::Interface1Method2().0.runningState.0\ := WaitingForStarted;
-                            \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast::ExternalInvocationProxy()
-                case \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Started.0\) then 
-                            \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                            \BaseClass::BaseClassMethod1().0._Started\ <= true;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningIndex.0\ is 
-                            when 0 => 
-                                if (\BaseClass::BaseClassMethod1().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\ <= true;
-                                    \BaseClass::BaseClassMethod1().0._Started\ <= false;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BaseClass::BaseClassMethod1().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                            \Hast::ExternalInvocationProxy().BaseClass::BaseClassMethod1()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-            end if;
-        end if;
-    end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1() end
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32) start
+    -- Signal connections for System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 (#0):
+    \BaseClass::BaseClassMethod1(Int32).0._Started\ <= \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\;
+    \BaseClass::BaseClassMethod1(Int32).0.this.parameter.In\ <= \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.Out.0\;
+    \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Finished.0\ <= \BaseClass::BaseClassMethod1(Int32).0._Finished\;
+    \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).return.0\ <= \BaseClass::BaseClassMethod1(Int32).0.return\;
+    \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.In.0\ <= \BaseClass::BaseClassMethod1(Int32).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod() start
@@ -1747,8 +1735,6 @@ begin
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::BaseInterfaceMethod2().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::PrivateMethod().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::PrivateMethod().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1759,12 +1745,9 @@ begin
                 \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::BaseInterfaceMethod2().0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::PrivateMethod().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::PrivateMethod().0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= false;
                 \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= false;
                 \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= false;
-                \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0
@@ -1844,33 +1827,6 @@ begin
                         if (\ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().ComplexTypeHierarchy::PrivateMethod().0.runningState.0\ := WaitingForStarted;
                             \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast::ExternalInvocationProxy()
-                case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Started.0\) then 
-                            \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                            \ComplexTypeHierarchy::StaticMethod().0._Started\ <= true;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningIndex.0\ is 
-                            when 0 => 
-                                if (\ComplexTypeHierarchy::StaticMethod().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= true;
-                                    \ComplexTypeHierarchy::StaticMethod().0._Started\ <= false;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().ComplexTypeHierarchy::StaticMethod().Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                            \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::StaticMethod()._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -2034,283 +1990,33 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod() end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]) start
+    -- Signal connections for System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 (#0):
+    \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Started\ <= \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\;
+    \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.In\ <= \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.Out.0\;
+    \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.In\ <= \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.Out.0\;
+    \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Finished.0\ <= \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Finished\;
+    \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.In.0\ <= \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.Out\;
+    \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.In.0\ <= \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32) start
-    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(2 downto 0) := (others => false);
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\: integer range 0 to 2 := 0;
-        Variable \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ := (others => false);
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 0;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 0;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= false;
-                \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
-            else 
-                -- Building a boolean array where each of the elements will indicate whether the component with the given index should be started next.
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ = true and \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ = true and \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ = false;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ = true and \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ = false;
-                \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ = false;
-
-                -- Invocation handler #0 out of 3 corresponding to System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0
-                case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 0;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 1;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ := 2;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
-                                end if;
-                            when 1 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
-                                end if;
-                            when 2 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.0\ := WaitingForStarted;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #1 out of 3 corresponding to System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0
-                case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ is 
-                    when WaitingForStarted => 
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= false;
-                            case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 0;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 1;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ := 2;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.1\ is 
-                            when 0 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
-                                end if;
-                            when 1 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
-                                end if;
-                            when 2 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\ = false) then 
-                            \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.1\ := WaitingForStarted;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #2 out of 3 corresponding to System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0
-                case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ is 
-                    when WaitingForStarted => 
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= false;
-                            case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 0;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 1;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ := 2;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := false;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningIndex.2\ is 
-                            when 0 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
-                                end if;
-                            when 1 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
-                                end if;
-                            when 2 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := AfterFinished;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= false;
-                                    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ = false) then 
-                            \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.runningState.2\ := WaitingForStarted;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast::ExternalInvocationProxy()
-                case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\) then 
-                            \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, true) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(0) := false;
-                                when (false, true, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 1;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(1) := false;
-                                when (true, false, false) => 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ := 2;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).targetAvailableIndicator\(2) := false;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningIndex.0\ is 
-                            when 0 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
-                                end if;
-                            when 1 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
-                                end if;
-                            when 2 => 
-                                if (\ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= true;
-                                    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= false;
-                                    \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                            \Hast::ExternalInvocationProxy().ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-            end if;
-        end if;
-    end process;
+    -- Signal connections for System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0 (#0):
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\;
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.0\;
+    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Finished\;
+    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.0\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\;
+    -- Signal connections for System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0 (#1):
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Started\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.1\;
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.1\;
+    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.1\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._Finished\;
+    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.1\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\;
+    -- Signal connections for System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0 (#2):
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Started\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\;
+    \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).indexObject.parameter.Out.2\;
+    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Finished.2\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._Finished\;
+    \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).return.2\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\;
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32) end
 
 
@@ -2356,13 +2062,6 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::NonVirtualNonInterfaceMehod() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod() start
-    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
-    \ComplexTypeHierarchy::UnusedMethod().0._Started\ <= \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Started.0\;
-    \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::UnusedMethod()._Finished.0\ <= \ComplexTypeHierarchy::UnusedMethod().0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::UnusedMethod() end
-
-
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.UnusedDeclarations::UnusedMethod() start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \UnusedDeclarations::UnusedMethod().0._Started\ <= \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\;
@@ -2375,6 +2074,13 @@ begin
     \StaticReference::StaticClassUsingMethod().0._Started\ <= \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\;
     \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Finished.0\ <= \StaticReference::StaticClassUsingMethod().0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure2.StaticReference::StaticClassUsingMethod() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor() start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ArrayUsingCases::PassArrayToConstructor().0._Started\ <= \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\;
+    \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Finished.0\ <= \ArrayUsingCases::PassArrayToConstructor().0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting() start

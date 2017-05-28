@@ -30,7 +30,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
                 .Cast<TypeDeclaration>();
 
             if (hardwareEntryPointTypes.Any(type => 
-                type.Members.Any(member => member is FieldDeclaration || member is PropertyDeclaration || member.GetFullName().Contains(".ctor"))))
+                type.Members.Any(member => member is FieldDeclaration || member is PropertyDeclaration || member.GetFullName().IsConstructorName())))
             {
                 throw new NotSupportedException("Fields, properties and constructors are not supported in hardware entry point types.");
             }

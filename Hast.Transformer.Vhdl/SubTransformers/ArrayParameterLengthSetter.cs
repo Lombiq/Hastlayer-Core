@@ -20,6 +20,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (!methodsWithArrayParameters.Any()) return;
 
             syntaxTree.AcceptVisitor(new ArrayParameterPassingFindingVisitor(methodsWithArrayParameters));
+            syntaxTree.AcceptVisitor(new ConstructorsWithArrayParametersFindingVisitor());
         }
 
 
@@ -110,6 +111,61 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 Length = arrayCreateExpression.GetStaticLength();
+            }
+        }
+
+        private class ConstructorsWithArrayParametersFindingVisitor : DepthFirstAstVisitor
+        {
+            public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
+            {
+                base.VisitMethodDeclaration(methodDeclaration);
+
+                if (!methodDeclaration.GetFullName().IsConstructorName()) return;
+
+                var arrayParameters = methodDeclaration
+                    .Parameters
+                    .Where(parameter => parameter.Type.IsArray())
+                    .ToDictionary(parameter => parameter.Name, parameter => parameter.Annotation<ParameterArrayLength>());
+
+                if (!arrayParameters.Any()) return;
+
+                methodDeclaration.AcceptVisitor(new ArrayAssignmentFindingVisitor(arrayParameters));
+            }
+        }
+
+        private class ArrayAssignmentFindingVisitor : DepthFirstAstVisitor
+        {
+            private readonly Dictionary<string, ParameterArrayLength> _parameters;
+
+
+            public ArrayAssignmentFindingVisitor(Dictionary<string, ParameterArrayLength> parameters)
+            {
+                _parameters = parameters;
+            }
+
+
+            public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
+            {
+                base.VisitAssignmentExpression(assignmentExpression);
+
+                // Is this an assignment like localVariable/_field/Property = arrayParameter?
+                // If yes, then pass through the array size to the variable or member.
+                var identifierExpression = assignmentExpression.Right as IdentifierExpression;
+
+                if (identifierExpression == null) return;
+
+                ParameterArrayLength parameterArrayLength;
+                if (!_parameters.TryGetValue(identifierExpression.Identifier, out parameterArrayLength)) return;
+
+                var memberReferenceExpression = assignmentExpression.Left as MemberReferenceExpression;
+                if (memberReferenceExpression != null)
+                {
+                    assignmentExpression
+                        .FindFirstParentTypeDeclaration()
+                        .Members
+                        .Single(member => member.Name == memberReferenceExpression.MemberName)
+                        .AddAnnotation(parameterArrayLength);
+                }
             }
         }
     }
