@@ -49,6 +49,7 @@
     <Compile Include="JsonSerializerSettingsPopulator.cs" />
     <Compile Include="Representation\Declaration\Alias.cs" />
     <Compile Include="Representation\Declaration\ArrayType.cs" />
+    <Compile Include="Representation\Declaration\ArrayTypeBase.cs" />
     <Compile Include="Representation\Declaration\BitVector.cs" />
     <Compile Include="Representation\Declaration\BlockComment.cs" />
     <Compile Include="Representation\Declaration\IReferenceableDeclaration.cs" />

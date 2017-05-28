@@ -2,9 +2,9 @@
 {
     public class BaseClass
     {
-        protected void BaseClassMethod1()
+        protected int BaseClassMethod1(int a)
         {
-            var x = 1;
+            return a + 1;
         }
     }
 }

@@ -305,6 +305,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         }
                     }
 
+                    // In this case the parameter is e.g. a primitive value, no need to assign to it.
+                    if (flowDirection == ParameterFlowDirection.In && !(parameter is IDataObject))
+                    {
+                        return null;
+                    }
+
                     return new Assignment
                     {
                         // If the parameter is of direction In then the parameter element should contain an IDataObject.
@@ -317,7 +323,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 invocationBlock.Add(createParameterAssignment(ParameterFlowDirection.Out));
                 if (targetParameter.IsOutFlowing())
                 {
-                    outParameterBackAssignments.Add(createParameterAssignment(ParameterFlowDirection.In));
+                    var assignment = createParameterAssignment(ParameterFlowDirection.In);
+                    if (assignment != null) outParameterBackAssignments.Add(assignment);
                 }
 
                 methodParametersEnumerator.MoveNext();

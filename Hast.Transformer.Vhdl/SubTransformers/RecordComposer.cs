@@ -2,6 +2,7 @@
 using System.Linq;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Helpers;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -55,13 +56,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         }
 
                         DataType type = null;
-                        if (member.ReturnType.IsArray() && arrayCreateExpression != null)
+                        if (member.ReturnType.IsArray())
                         {
+                            var arrayLength = arrayCreateExpression != null ?
+                                arrayCreateExpression.GetStaticLength() :
+                                member.Annotation<ParameterArrayLength>().Length;
+
                             type = ArrayHelper.CreateArrayInstantiation(
                                 _typeConverterLazy.Value.ConvertAstType(
-                                    arrayCreateExpression.GetElementType(),
+                                    ((ComposedType)member.ReturnType).BaseType,
                                     typeDeclarationLookupTable),
-                                arrayCreateExpression.GetStaticLength());
+                                arrayLength);
                         }
                         else
                         {
