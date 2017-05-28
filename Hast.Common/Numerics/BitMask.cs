@@ -1,4 +1,6 @@
-﻿namespace Hast.Common.Numerics
+﻿using System;
+
+namespace Hast.Common.Numerics
 {
     public struct BitMask
     {
@@ -13,7 +15,7 @@
             Size = SegmentCount << 5;
             Segments = new uint[SegmentCount];
 
-            segments.CopyTo(Segments, 0);
+            Array.Copy(segments, Segments, 0);
         }
 
         public BitMask(uint[] segments, uint size = 0)
@@ -27,7 +29,7 @@
             }
             Segments = new uint[SegmentCount];
 
-            segments.CopyTo(Segments, 0);
+            Array.Copy(segments, Segments, 0);
         }
 
         public BitMask(uint size, bool allOne)
@@ -45,7 +47,7 @@
             SegmentCount = source.SegmentCount;
             Segments = new uint[SegmentCount];
 
-            if (source.Segments != null) source.Segments.CopyTo(Segments, 0);
+            if (source.Segments != null) Array.Copy(source.Segments, Segments, 0);
         }
 
 
