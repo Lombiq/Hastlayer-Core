@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Hast.Transformer.Models;
 using Mono.Cecil;
 
@@ -35,8 +36,16 @@ namespace ICSharpCode.NRefactory.CSharp
                 var fieldDefinition = memberReferenceExpression.Annotation<FieldDefinition>();
                 if (fieldDefinition != null)
                 {
-                    return type.Members
-                        .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName);
+                    if (!fieldDefinition.FullName.IsBackingFieldName())
+                    {
+                        return type.Members
+                            .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName); 
+                    }
+                    else
+                    {
+                        return type.Members
+                            .SingleOrDefault(member => member.Name == memberReferenceExpression.MemberName && member is PropertyDeclaration);
+                    }
                 }
                 else
                 {
