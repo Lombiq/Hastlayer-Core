@@ -17,11 +17,28 @@ namespace ICSharpCode.NRefactory.CSharp
             // A MethodReference annotation is present if the expression is for creating a delegate for a lambda expression
             // like this: new Func<object, bool> (<>c__DisplayClass.<ParallelizedArePrimeNumbersAsync>b__0)
             var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-            if (methodReference == null)
+            if (methodReference != null)
+            {
+                var memberName = methodReference.FullName;
+
+                // If this is a member reference to a property then both a MethodReference (for the setter or getter)
+                // and a PropertyReference will be there, but the latter will contain the member name.
+                var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
+                if (propertyReference != null) memberName = propertyReference.FullName;
+
+                return type.Members
+                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName);
+            }
+            else
             {
                 // A FieldDefinition annotation is present if the expression is about accessing a field.
                 var fieldDefinition = memberReferenceExpression.Annotation<FieldDefinition>();
-                if (fieldDefinition == null)
+                if (fieldDefinition != null)
+                {
+                    return type.Members
+                        .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName);
+                }
+                else
                 {
                     var parent = memberReferenceExpression.Parent;
                     MemberReference memberReference = null;
@@ -38,25 +55,8 @@ namespace ICSharpCode.NRefactory.CSharp
                     return
                         declaringType
                         .Members
-                        .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);  
+                        .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);
                 }
-                else
-                {
-                    return type.Members
-                        .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName); 
-                }
-            }
-            else
-            {
-                var memberName = methodReference.FullName;
-
-                // If this is a member reference to a property then both a MethodReference (for the setter or getter)
-                // and a PropertyReference will be there, but the latter will contain the member name.
-                var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
-                if (propertyReference != null) memberName = propertyReference.FullName;
-
-                return type.Members
-                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName); 
             }
         }
 
