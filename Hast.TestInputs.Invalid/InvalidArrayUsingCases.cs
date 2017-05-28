@@ -1,4 +1,6 @@
-﻿namespace Hast.TestInputs.Invalid
+﻿using System;
+
+namespace Hast.TestInputs.Invalid
 {
     public class InvalidArrayUsingCases
     {
@@ -16,6 +18,13 @@
         public void ArraySizeIsNotStatic(int arraySize)
         {
             var array = new int[arraySize + 1];
+        }
+
+        public void ArrayCopyToIsNotFullCopy()
+        {
+            var array1 = new int[5];
+            var array2 = new int[5];
+            Array.Copy(array1, array2, 5);
         }
 
 

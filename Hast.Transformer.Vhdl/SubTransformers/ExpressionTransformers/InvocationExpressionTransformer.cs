@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
@@ -18,6 +19,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     // structure, not to have one giant TransformInvocationExpression method.
     public class InvocationExpressionTransformer : IInvocationExpressionTransformer
     {
+        private static IEnumerable<string> _arrayCopyToMethodNames = typeof(Array)
+            .GetMethods()
+            .Where(method => method.Name == nameof(Array.Copy) && method.GetParameters().Count() == 3)
+            .Select(method => method.GetFullName());
+
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
         private readonly ITypeConverter _typeConverter;
         private readonly ISpecialOperationInvocationTransformer _specialOperationInvocationTransformer;
@@ -293,6 +299,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 return _specialOperationInvocationTransformer
                     .TransformSpecialOperationInvocation(expression, transformedParameters, context);
+            }
+
+            // Support for Array.Copy().
+            if (_arrayCopyToMethodNames.Contains(targetMethodName))
+            {
+                if (!expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(primitive => primitive.Value.ToString() == "0"))
+                {
+                    throw new NotSupportedException(
+                        "Array.Copy() is only supported if the second argument is 0, i.e. the whole array is copied.");
+                }
+
+                return new Assignment
+                {
+                    AssignTo = (IDataObject)transformedParameters.Skip(1).First(),
+                    Expression = transformedParameters.First()
+                };
             }
 
 
