@@ -1860,7 +1860,7 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
     \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State\: \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._States\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State_0\;
-        Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\: \unsigned_Array\(0 to 199);
+        Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\: \unsigned_Array\(0 to 199) := (others => to_unsigned(0, 32));
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.arg_57_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1898,6 +1898,7 @@ begin
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.4\ <= to_unsigned(0, 32);
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.HastlayerOptimizedAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.4\ <= false;
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State\ := \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0._State_0\;
+                \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.arg_57_1\ := to_signed(0, 32);
                 \HastlayerOptimizedAlgorithm::Run(SimpleMemory).0.num2\ := to_unsigned(0, 32);
@@ -3461,7 +3462,7 @@ begin
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\: \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._States\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\: \boolean_Array\(0 to 29);
+        Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\: \boolean_Array\(0 to 29) := (others => false);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -3508,6 +3509,7 @@ begin
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.4\ <= false;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_0\;
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := to_unsigned(0, 32);
+                \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\ := (others => false);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\ := to_signed(0, 32);
                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := to_unsigned(0, 32);
@@ -6017,9 +6019,9 @@ begin
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation\: \Hast.Samples.SampleAssembly.SimdOperation\;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\: \signed_Array\(0 to 29);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\: \signed_Array\(0 to 29);
-        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\: \signed_Array\(0 to 29);
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\: \signed_Array\(0 to 29) := (others => to_signed(0, 32));
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\: \signed_Array\(0 to 29) := (others => to_signed(0, 32));
+        Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\: \signed_Array\(0 to 29) := (others => to_signed(0, 32));
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\: signed(31 downto 0) := to_signed(0, 32);
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\: signed(31 downto 0) := to_signed(0, 32);
@@ -6176,6 +6178,9 @@ begin
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_0\;
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := to_signed(0, 32);
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\ := (others => to_signed(0, 32));
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\ := (others => to_signed(0, 32));
+                \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (others => to_signed(0, 32));
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ := to_signed(0, 32);
                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ := to_signed(0, 32);

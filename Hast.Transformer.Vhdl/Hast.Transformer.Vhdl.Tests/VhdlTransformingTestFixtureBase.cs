@@ -39,7 +39,9 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             public bool IsSuitableHardwareEntryPointMember(
                 EntityDeclaration member,
-                ITypeDeclarationLookupTable typeDeclarationLookupTable) => true;
+                ITypeDeclarationLookupTable typeDeclarationLookupTable) => 
+                (member.HasModifier(Modifiers.Public) && member.FindFirstParentTypeDeclaration().HasModifier(Modifiers.Public)) ||
+                member.Modifiers == Modifiers.None;
         }
     }
 }

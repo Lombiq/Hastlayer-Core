@@ -14,7 +14,7 @@
         // Implicit interface implementation.
         public void Interface1Method2()
         {
-            BaseClassMethod1();
+            var x = BaseClassMethod1(4);
 
             if (true)
             {

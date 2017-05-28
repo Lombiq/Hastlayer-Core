@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services
@@ -48,7 +49,7 @@ namespace Hast.Transformer.Services
 
                             return
                                 invocation != null &&
-                                invocation.Target.Is<MemberReferenceExpression>(reference => reference.MemberName == ".ctor");
+                                invocation.Target.Is<MemberReferenceExpression>(reference => reference.MemberName.IsConstructorName());
                         })?.Remove(); 
                 }
 

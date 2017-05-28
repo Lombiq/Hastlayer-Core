@@ -45,8 +45,7 @@ namespace System
         /// Such a name is like following: 
         /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator/<>c__DisplayClass2::numbers"
         /// </example>
-        public static bool IsDisplayClassMemberName(this string name) =>
-            name.IsDisplayClassName() && name.Contains("::");
+        public static bool IsDisplayClassMemberName(this string name) => name.IsDisplayClassName() && name.Contains("::");
 
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated method that was created in place of a
@@ -66,7 +65,11 @@ namespace System
         /// <example>
         /// Such a field's name looks like "<Number>k__BackingField". It will contain the name of the property.
         /// </example>
-        public static bool IsBackingFieldName(this string name) =>
-            Regex.IsMatch(name, "<(.*)>.*BackingField");
+        public static bool IsBackingFieldName(this string name) => Regex.IsMatch(name, "<(.*)>.*BackingField");
+
+        /// <summary>
+        /// Determines whether the string looks like the name of a constructor.
+        /// </summary>
+        public static bool IsConstructorName(this string name) => name.Contains(".ctor");
     }
 }
