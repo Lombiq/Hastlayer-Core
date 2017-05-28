@@ -14,7 +14,7 @@ namespace System.Reflection
                 method.ReturnType.FullName + " " +
                 method.ReflectedType.FullName + "::" +
                 method.Name + 
-                "(" + string.Join(", ", method.GetParameters().Select(parameter => parameter.ParameterType.FullName)) + ")";
+                "(" + string.Join(",", method.GetParameters().Select(parameter => parameter.ParameterType.FullName)) + ")";
         }
     }
 }
