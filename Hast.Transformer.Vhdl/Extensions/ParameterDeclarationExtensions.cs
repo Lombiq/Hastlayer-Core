@@ -5,7 +5,7 @@ namespace ICSharpCode.NRefactory.CSharp
     public static class ParameterDeclarationExtensions
     {
         /// <summary>
-        /// Determines whether the parameter has and "out-flowing" characteristic, i.e. changes to it inside the parent
+        /// Determines whether the parameter has an "out-flowing" characteristic, i.e. changes to it inside the parent
         /// method should be reflected in the argument passed in too. A parameter is out-flowing if it contains a 
         /// reference type or is explicitly passed by reference, or if it's an out parameter.
         /// </summary>
