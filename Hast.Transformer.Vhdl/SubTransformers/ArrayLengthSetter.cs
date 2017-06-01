@@ -6,7 +6,7 @@ using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class ArrayParameterLengthSetter : IArrayParameterLengthSetter
+    public class ArrayLengthSetter : IArrayLengthSetter
     {
         public void SetArrayParameterSizes(SyntaxTree syntaxTree)
         {
@@ -69,10 +69,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     expression.FindFirstParentEntityDeclaration().AcceptVisitor(arrayCreationLengthFindingVisitor);
 
-                    var existingParameterArrayLength = arrayParameters[i].Annotation<ParameterArrayLength>();
+                    var existingParameterArrayLength = arrayParameters[i].Annotation<ArrayLength>();
                     if (existingParameterArrayLength == null)
                     {
-                        arrayParameters[i].AddAnnotation(new ParameterArrayLength(arrayCreationLengthFindingVisitor.Length));
+                        arrayParameters[i].AddAnnotation(new ArrayLength(arrayCreationLengthFindingVisitor.Length));
                     }
                     else if (existingParameterArrayLength.Length != arrayCreationLengthFindingVisitor.Length)
                     {
@@ -125,7 +125,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var arrayParameters = methodDeclaration
                     .Parameters
                     .Where(parameter => parameter.Type.IsArray())
-                    .ToDictionary(parameter => parameter.Name, parameter => parameter.Annotation<ParameterArrayLength>());
+                    .ToDictionary(parameter => parameter.Name, parameter => parameter.Annotation<ArrayLength>());
 
                 if (!arrayParameters.Any()) return;
 
@@ -135,10 +135,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private class ArrayAssignmentFindingVisitor : DepthFirstAstVisitor
         {
-            private readonly Dictionary<string, ParameterArrayLength> _parameters;
+            private readonly Dictionary<string, ArrayLength> _parameters;
 
 
-            public ArrayAssignmentFindingVisitor(Dictionary<string, ParameterArrayLength> parameters)
+            public ArrayAssignmentFindingVisitor(Dictionary<string, ArrayLength> parameters)
             {
                 _parameters = parameters;
             }
@@ -154,7 +154,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (identifierExpression == null) return;
 
-                ParameterArrayLength parameterArrayLength;
+                ArrayLength parameterArrayLength;
                 if (!_parameters.TryGetValue(identifierExpression.Identifier, out parameterArrayLength)) return;
 
                 var memberReferenceExpression = assignmentExpression.Left as MemberReferenceExpression;

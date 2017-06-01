@@ -1,11 +1,11 @@
 ﻿namespace Hast.Transformer.Vhdl.Models
 {
-    public class ParameterArrayLength
+    public class ArrayLength
     {
         public int Length { get; private set; }
 
 
-        public ParameterArrayLength(int length)
+        public ArrayLength(int length)
         {
             Length = length;
         }

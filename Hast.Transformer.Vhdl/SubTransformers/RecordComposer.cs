@@ -60,7 +60,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         {
                             var arrayLength = arrayCreateExpression != null ?
                                 arrayCreateExpression.GetStaticLength() :
-                                member.Annotation<ParameterArrayLength>().Length;
+                                member.Annotation<ArrayLength>().Length;
 
                             type = ArrayHelper.CreateArrayInstantiation(
                                 _typeConverterLazy.Value.ConvertAstType(

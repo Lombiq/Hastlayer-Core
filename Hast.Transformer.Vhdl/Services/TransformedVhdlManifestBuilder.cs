@@ -31,7 +31,7 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
         private readonly IEnumTypesCreator _enumTypesCreator;
-        private readonly IArrayParameterLengthSetter _arrayParameterLengthSetter;
+        private readonly IArrayLengthSetter _arrayLengthSetter;
         private readonly IPocoTransformer _pocoTransformer;
 
 
@@ -46,7 +46,7 @@ namespace Hast.Transformer.Vhdl.Services
             IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
             IEnumTypesCreator enumTypesCreator,
-            IArrayParameterLengthSetter arrayParameterLengthSetter,
+            IArrayLengthSetter arrayLengthSetter,
             IPocoTransformer pocoTransformer)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
@@ -59,7 +59,7 @@ namespace Hast.Transformer.Vhdl.Services
             _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
             _enumTypesCreator = enumTypesCreator;
-            _arrayParameterLengthSetter = arrayParameterLengthSetter;
+            _arrayLengthSetter = arrayLengthSetter;
             _pocoTransformer = pocoTransformer;
         }
 
@@ -132,7 +132,7 @@ namespace Hast.Transformer.Vhdl.Services
 
 
             // Preparing arrays passed as method parameters
-            _arrayParameterLengthSetter.SetArrayParameterSizes(syntaxTree);
+            _arrayLengthSetter.SetArrayParameterSizes(syntaxTree);
 
 
             // Doing transformations
