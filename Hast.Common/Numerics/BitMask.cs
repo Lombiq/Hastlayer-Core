@@ -183,6 +183,85 @@ namespace Hast.Common.Numerics
             return mask;
         }
 
+        public static BitMask operator &(BitMask left, BitMask right)
+        {
+            if (left.Size != right.Size) return new BitMask(left.Size, false);
+
+            var mask = new BitMask(left);
+
+            for (int i = 0; i < mask.SegmentCount; i++)
+                mask.Segments[i] = left.Segments[i] & right.Segments[i];
+
+            return mask;
+        }
+
+        /// <summary>
+        /// Bitshifting of a BitMask to the right by an integer. Shifts left if negative value is given.
+        /// </summary>
+        /// <param name="left">Left operand BitMask to shift.</param>
+        /// <param name="right">Right operand int tells how many bits to shift by.</param>
+        /// <returns>BitMask of size of left BitMask, shifted left by number of bits given in the right integer. </returns>
+        public static BitMask operator >>(BitMask left, int right)
+        {
+            if (right < 0) return left << -right;
+
+            bool carryOld, carryNew;
+            uint segmentMaskWithLeadingOne = 0x80000000; //1000 0000 0000 0000 0000 0000 0000 0000 
+
+            for (int i = 0; i < right; i++)
+            {
+
+                carryOld = false;
+
+
+                for (int j = 0; j < left.SegmentCount; j++)
+                {
+                    carryNew = left.Segments[j] % 2 == 1;
+                    left.Segments[j] = (left.Segments[j] >> 1);
+                    if (carryOld) left.Segments[j] = left.Segments[j] | segmentMaskWithLeadingOne;
+                    carryOld = carryNew;
+
+
+                }
+            }
+            return left;
+        }
+
+        /// <summary>
+        /// Bitshifting of a BitMask to the left by an integer. Shifts right if negative value is given.
+        /// </summary>
+        /// <param name="left">Left operand BitMask.</param>
+        /// <param name="right">Right operand int tells how many bits to shift by.</param>
+        /// <returns>BitMask of size of left BitMask, shifted right by number of bits given in the right integer. </returns>
+        public static BitMask operator <<(BitMask left, int right)
+        {
+            if (right < 0) return left >> -right;
+
+            bool carryOld, carryNew;
+            uint segmentMaskWithLeadingOne = 0x80000000; //1000 0000 0000 0000 0000 0000 0000 0000 
+            uint segmentMaskWithClosingOne = 1;          //0000 0000 0000 0000 0000 0000 0000 0001 
+
+            for (int i = 0; i < right; i++)
+            {
+
+                carryOld = false;
+
+
+                for (int j = (int)left.SegmentCount - 1; j >= 0; j--)
+                {
+                    carryNew = ((left.Segments[j] & segmentMaskWithLeadingOne) == segmentMaskWithLeadingOne);
+                    left.Segments[j] = (left.Segments[j] << 1);
+                    if (carryOld) left.Segments[j] = left.Segments[j] | segmentMaskWithClosingOne;
+                    carryOld = carryNew;
+
+
+                }
+            }
+            return left;
+
+
+        }
+
 
         public override bool Equals(object obj) => this == (BitMask)obj;
 
