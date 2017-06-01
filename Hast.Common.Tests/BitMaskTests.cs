@@ -111,5 +111,38 @@ namespace Hast.Common.Tests
             Assert.AreEqual(new BitMask(new uint[] { 0xFFFFFFFF, 0xFFFFFFFF, 0 }),
                             new BitMask(new uint[] { 0xFFFFFFFE, 0xFFFFFFFF, 1 }) - new BitMask(new uint[] { 0xFFFFFFFF, 0xFFFFFFFF, 0 }));
         }
+
+        [Test]
+        public void BitMaskBitShiftLeftIsCorrect()
+        {
+            Assert.AreEqual(new BitMask(new uint[] { 0x80000000 }),
+                            new BitMask(new uint[] { 1 }) << 31);
+            Assert.AreEqual(new BitMask(new uint[] { 0x80000000, 0x00000000 }),
+                           new BitMask(new uint[] { 0, 1 }) << 63);
+            Assert.AreEqual(new BitMask(new uint[] { 0 }),
+                            new BitMask(new uint[] { 0x00000001 }) << 32);
+            Assert.AreEqual(new BitMask(new uint[] { 0x80000000, 0x00000000 }),
+                            new BitMask(new uint[] { 0x00800000, 0x00000000 }) << 8);
+            Assert.AreEqual(new BitMask(new uint[] { 1 }),
+                            new BitMask(new uint[] { 0x80000000 }) << -31);
+
+        }
+
+        [Test]
+        public void BitMaskBitShiftRightIsCorrect()
+        {
+            Assert.AreEqual(new BitMask(new uint[] { 0x00800000, 0x00000000 }),
+                            new BitMask(new uint[] { 0x80000000, 0x00000000 }) >> 8);
+            Assert.AreEqual(new BitMask(new uint[] { 1 }),
+                            new BitMask(new uint[] { 0x80000000 }) >> 31);
+            Assert.AreEqual(new BitMask(new uint[] { 0, 1 }),
+                            new BitMask(new uint[] { 0x80000000, 0x00000000 }) >> 63);
+            Assert.AreEqual(new BitMask(new uint[] { 0 }),
+                            new BitMask(new uint[] { 0x80000000 }) >> 32);
+            Assert.AreEqual(new BitMask(new uint[] { 0x80000000 }),
+                            new BitMask(new uint[] { 1 }) >> -31);
+
+
+        }
     }
 }
