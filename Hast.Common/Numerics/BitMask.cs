@@ -15,7 +15,7 @@ namespace Hast.Common.Numerics
             Size = SegmentCount << 5;
             Segments = new uint[SegmentCount];
 
-            Array.Copy(segments, Segments, 0);
+            Array.Copy(segments, Segments, SegmentCount);
         }
 
         public BitMask(uint[] segments, uint size = 0)
@@ -29,7 +29,9 @@ namespace Hast.Common.Numerics
             }
             Segments = new uint[SegmentCount];
 
-            Array.Copy(segments, Segments, 0);
+            Array.Copy(segments, Segments, segments.Length);
+            for (int i = 1; i < SegmentCount - segments.Length; i++)
+                Array.Copy(new uint[] { 0 }, 0, Segments, segments.Length + i, 1);
         }
 
         public BitMask(uint size, bool allOne)
@@ -47,7 +49,7 @@ namespace Hast.Common.Numerics
             SegmentCount = source.SegmentCount;
             Segments = new uint[SegmentCount];
 
-            if (source.Segments != null) Array.Copy(source.Segments, Segments, 0);
+            if (source.Segments != null) Array.Copy(source.Segments, Segments, SegmentCount);
         }
 
 
