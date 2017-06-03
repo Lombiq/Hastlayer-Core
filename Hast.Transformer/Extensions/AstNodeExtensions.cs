@@ -112,15 +112,11 @@ namespace ICSharpCode.NRefactory.CSharp
             return (T)node;
         }
 
-        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node)
-        {
-            return node.FindFirstParentOfType<TypeDeclaration>();
-        }
+        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node) =>
+            node.FindFirstParentOfType<TypeDeclaration>();
 
-        public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node)
-        {
-            return node.FindFirstParentOfType<EntityDeclaration>();
-        }
+        public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node) =>
+            node.FindFirstParentOfType<EntityDeclaration>();
 
         public static T FindFirstChildOfType<T>(this AstNode node) where T : AstNode
         {
@@ -158,9 +154,7 @@ namespace ICSharpCode.NRefactory.CSharp
         }
 
 
-        private static string CreateEntityBasedName(AstNode node, string name)
-        {
-            return node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
-        }
+        private static string CreateEntityBasedName(AstNode node, string name) => 
+            node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
     }
 }
