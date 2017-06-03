@@ -84,6 +84,8 @@ namespace Hast.Transformer.Services
             }
 
             // Note that at this point the reference counters are out of date and would need to be refreshed to be used.
+
+            syntaxTree.AcceptVisitor(new ReferenceMetadataCleanUpVisitor());
         }
 
 
@@ -212,6 +214,16 @@ namespace Hast.Transformer.Services
             private static void RemoveIfUnreferenced(AstNode node)
             {
                 if (!node.IsReferenced()) node.Remove();
+            }
+        }
+
+        private class ReferenceMetadataCleanUpVisitor : DepthFirstAstVisitor
+        {
+            protected override void VisitChildren(AstNode node)
+            {
+                base.VisitChildren(node);
+
+                node.RemoveReferenceMetadata();
             }
         }
     }
