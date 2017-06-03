@@ -142,6 +142,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
+                    InvocationExpression invocationExpression;
+
                     // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
                     // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
                     var rightObjectCreateExpression = assignment.Right as ObjectCreateExpression;
@@ -170,9 +172,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         invocation.Target.Is<MemberReferenceExpression>(member =>
                             member.MemberName == "StartNew" &&
                             member.Target.Is<IdentifierExpression>(identifier =>
-                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))))
+                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier))), 
+                        out invocationExpression))
                     {
-                        var taskStartArguments = ((InvocationExpression)assignment.Right).Arguments;
+                        var taskStartArguments = invocationExpression.Arguments;
 
                         // The first argument is always for the Func that referes to the method on the DisplayClass
                         // generated for the lambda expression originally passed to the Task factory.
@@ -199,10 +202,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             memberReference.MemberName == "StartNew" &&
                             memberReference.Target.GetFullName().Contains("System.Threading.Tasks.Task::Factory")) &&
                         invocation.Arguments.First().Is<ObjectCreateExpression>(objectCreate =>
-                            objectCreate.Type.GetFullName().Contains("Func"))))
+                            objectCreate.Type.GetFullName().Contains("Func")),
+                        out invocationExpression))
                     {
-                        var inovocationExpression = (InvocationExpression)assignment.Right;
-                        var arguments = inovocationExpression.Arguments;
+                        var arguments = invocationExpression.Arguments;
 
                         var targetMethod = (MethodDeclaration)TaskParallelizationHelper
                             .GetTargetDisplayClassMemberFromFuncCreation((ObjectCreateExpression)arguments.First())

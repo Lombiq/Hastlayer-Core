@@ -143,7 +143,16 @@ namespace ICSharpCode.NRefactory.CSharp
 
         public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
         {
-            var castNode = node as T;
+            T castNode;
+            return node.Is(predicate, out castNode);
+        }
+
+        public static bool Is<T>(this AstNode node, out T castNode) where T : AstNode =>
+            node.Is(n => true, out castNode);
+
+        public static bool Is<T>(this AstNode node, Predicate<T> predicate, out T castNode) where T : AstNode
+        {
+            castNode = node as T;
             if (castNode == null) return false;
             return predicate(castNode);
         }
