@@ -162,12 +162,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var currentBlock = context.Scope.CurrentBlock;
 
             var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
-
-            var resultTypeReference = expression.GetActualTypeReference(true);
-            if (resultTypeReference == null)
-            {
-                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference();
-            }
+            var resultTypeReference = expression.GetResultTypeReference();
 
             TypeReference preCastTypeReference = null;
             // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize

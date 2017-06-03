@@ -46,6 +46,16 @@ namespace ICSharpCode.NRefactory.CSharp
                 return CreateEntityBasedName(node, ((IdentifierExpression)node).Identifier);
             }
 
+            if (node is BinaryOperatorExpression)
+            {
+                return CreateEntityBasedName(node, node.ToString());
+            }
+
+            if (node is IndexerExpression)
+            {
+                return ((IndexerExpression)node).Target.GetFullName();
+            }
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 
@@ -151,6 +161,18 @@ namespace ICSharpCode.NRefactory.CSharp
             castNode = node as T;
             if (castNode == null) return false;
             return predicate(castNode);
+        }
+
+        public static AstNode FindFirstNonParenthesizedExpressionParent(this AstNode node)
+        {
+            var parent = node.Parent;
+
+            while (parent is ParenthesizedExpression && parent != null)
+            {
+                parent = parent.Parent;
+            }
+
+            return parent;
         }
 
 

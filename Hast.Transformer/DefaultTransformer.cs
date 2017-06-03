@@ -33,6 +33,7 @@ namespace Hast.Transformer
         private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
+        private readonly IConstantValuesSubstituter _constantValuesSubstituter;
 
 
         public DefaultTransformer(
@@ -48,7 +49,8 @@ namespace Hast.Transformer
             IArrayInitializerExpander arrayInitializerExpander,
             IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
-            IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter)
+            IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
+            IConstantValuesSubstituter constantValuesSubstituter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -63,6 +65,7 @@ namespace Hast.Transformer
             _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
+            _constantValuesSubstituter = constantValuesSubstituter;
         }
 
 
@@ -167,6 +170,8 @@ namespace Hast.Transformer
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
+            // Needs to run before ConditionalExpressionsToIfElsesConverter.
+            _constantValuesSubstituter.SubstituteConstantValues(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);

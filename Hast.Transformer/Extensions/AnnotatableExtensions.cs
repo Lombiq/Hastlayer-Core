@@ -15,6 +15,9 @@ namespace ICSharpCode.NRefactory.CSharp
                 else return typeInformation.InferredType ?? typeInformation.ExpectedType;
             }
 
+            var typeReference = annotable.Annotation<TypeReference>();
+            if (typeReference != null) return typeReference;
+
             var ilVariable = annotable.Annotation<ILVariable>();
             if (ilVariable != null) return ilVariable.Type;
 
