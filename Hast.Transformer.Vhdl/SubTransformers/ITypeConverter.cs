@@ -44,7 +44,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             return ArrayHelper.CreateArrayInstantiation(
                 typeConverter.ConvertTypeReference(parameterType.GetElementType(), typeDeclarationLookupTable),
-                parameter.Annotation<ArrayLength>().Length);
+                parameter.Annotation<ConstantArrayLength>().Length);
         }
     }
 }

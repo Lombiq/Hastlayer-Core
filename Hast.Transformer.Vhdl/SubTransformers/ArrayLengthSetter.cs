@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Models;
 using ICSharpCode.NRefactory.CSharp;
 
@@ -69,18 +70,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     expression.FindFirstParentEntityDeclaration().AcceptVisitor(arrayCreationLengthFindingVisitor);
 
-                    var existingParameterArrayLength = arrayParameters[i].Annotation<ArrayLength>();
-                    if (existingParameterArrayLength == null)
+                    var existingArrayLength = arrayParameters[i].Annotation<ConstantArrayLength>();
+                    if (existingArrayLength == null)
                     {
-                        arrayParameters[i].AddAnnotation(new ArrayLength(arrayCreationLengthFindingVisitor.Length));
+                        arrayParameters[i].AddAnnotation(new ConstantArrayLength(arrayCreationLengthFindingVisitor.Length));
                     }
-                    else if (existingParameterArrayLength.Length != arrayCreationLengthFindingVisitor.Length)
+                    else if (existingArrayLength.Length != arrayCreationLengthFindingVisitor.Length)
                     {
                         throw new InvalidOperationException(
                             "Array sizes should be statically defined but the array parameter \"" +
                             arrayParameters[i].GetFullName() +
                             "\" was assigned to from multiple differently sized sources (the firstly assigned array had the length " +
-                            existingParameterArrayLength.Length + ", the secondly assigned " +
+                            existingArrayLength.Length + ", the secondly assigned " +
                             arrayCreationLengthFindingVisitor.Length +
                             "). Make sure that all arrays passed to this parameter are of the same size.");
                     }
@@ -125,7 +126,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var arrayParameters = methodDeclaration
                     .Parameters
                     .Where(parameter => parameter.Type.IsArray())
-                    .ToDictionary(parameter => parameter.Name, parameter => parameter.Annotation<ArrayLength>());
+                    .ToDictionary(parameter => parameter.Name, parameter => parameter.Annotation<ConstantArrayLength>());
 
                 if (!arrayParameters.Any()) return;
 
@@ -135,10 +136,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private class ArrayAssignmentFindingVisitor : DepthFirstAstVisitor
         {
-            private readonly Dictionary<string, ArrayLength> _parameters;
+            private readonly Dictionary<string, ConstantArrayLength> _parameters;
 
 
-            public ArrayAssignmentFindingVisitor(Dictionary<string, ArrayLength> parameters)
+            public ArrayAssignmentFindingVisitor(Dictionary<string, ConstantArrayLength> parameters)
             {
                 _parameters = parameters;
             }
@@ -154,8 +155,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (identifierExpression == null) return;
 
-                ArrayLength parameterArrayLength;
-                if (!_parameters.TryGetValue(identifierExpression.Identifier, out parameterArrayLength)) return;
+                ConstantArrayLength arrayLength;
+                if (!_parameters.TryGetValue(identifierExpression.Identifier, out arrayLength)) return;
 
                 var memberReferenceExpression = assignmentExpression.Left as MemberReferenceExpression;
                 if (memberReferenceExpression != null)
@@ -164,7 +165,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         .FindFirstParentTypeDeclaration()
                         .Members
                         .Single(member => member.Name == memberReferenceExpression.MemberName)
-                        .AddAnnotation(parameterArrayLength);
+                        .AddAnnotation(arrayLength);
                 }
             }
         }
