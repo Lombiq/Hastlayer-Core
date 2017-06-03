@@ -261,16 +261,35 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 declarations end
 
 
-    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 declarations start
+    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 declarations start
     -- State machine states:
-    type \CastingCases::NumberCasting().0._States\ is (
-        \CastingCases::NumberCasting().0._State_0\, 
-        \CastingCases::NumberCasting().0._State_1\, 
-        \CastingCases::NumberCasting().0._State_2\);
+    type \CastingCases::NumberCasting(Int16,Int16).0._States\ is (
+        \CastingCases::NumberCasting(Int16,Int16).0._State_0\, 
+        \CastingCases::NumberCasting(Int16,Int16).0._State_1\, 
+        \CastingCases::NumberCasting(Int16,Int16).0._State_2\);
     -- Signals:
-    Signal \CastingCases::NumberCasting().0._Finished\: boolean := false;
-    Signal \CastingCases::NumberCasting().0._Started\: boolean := false;
-    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 declarations end
+    Signal \CastingCases::NumberCasting(Int16,Int16).0._Finished\: boolean := false;
+    Signal \CastingCases::NumberCasting(Int16,Int16).0._Started\: boolean := false;
+    Signal \CastingCases::NumberCasting(Int16,Int16).0.a.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
+    Signal \CastingCases::NumberCasting(Int16,Int16).0.b.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
+    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32).0 declarations start
+    -- State machine states:
+    type \ConstantsUsingCases::ConstantValuedVariables(Int32).0._States\ is (
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\);
+    -- Signals:
+    Signal \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32).0 declarations end
 
 
     -- System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input declarations start
@@ -364,7 +383,8 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Finished.0\: boolean := false;
@@ -377,7 +397,8 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
@@ -1109,60 +1130,189 @@ begin
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 state machine end
 
 
-    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 state machine start
-    \CastingCases::NumberCasting().0._StateMachine\: process (\Clock\) 
-        Variable \CastingCases::NumberCasting().0._State\: \CastingCases::NumberCasting().0._States\ := \CastingCases::NumberCasting().0._State_0\;
-        Variable \CastingCases::NumberCasting().0.num\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \CastingCases::NumberCasting().0.num2\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \CastingCases::NumberCasting().0.num3\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \CastingCases::NumberCasting().0.num4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \CastingCases::NumberCasting().0.binaryOperationResult.0\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \CastingCases::NumberCasting().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 state machine start
+    \CastingCases::NumberCasting(Int16,Int16).0._StateMachine\: process (\Clock\) 
+        Variable \CastingCases::NumberCasting(Int16,Int16).0._State\: \CastingCases::NumberCasting(Int16,Int16).0._States\ := \CastingCases::NumberCasting(Int16,Int16).0._State_0\;
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.a\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.b\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.num\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \CastingCases::NumberCasting().0._Finished\ <= false;
-                \CastingCases::NumberCasting().0._State\ := \CastingCases::NumberCasting().0._State_0\;
-                \CastingCases::NumberCasting().0.num\ := to_signed(0, 16);
-                \CastingCases::NumberCasting().0.num2\ := to_signed(0, 16);
-                \CastingCases::NumberCasting().0.num3\ := to_signed(0, 16);
-                \CastingCases::NumberCasting().0.num4\ := to_signed(0, 32);
-                \CastingCases::NumberCasting().0.binaryOperationResult.0\ := to_signed(0, 16);
-                \CastingCases::NumberCasting().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \CastingCases::NumberCasting(Int16,Int16).0._Finished\ <= false;
+                \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_0\;
+                \CastingCases::NumberCasting(Int16,Int16).0.a\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.b\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.num\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.num2\ := to_signed(0, 32);
+                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
-                case \CastingCases::NumberCasting().0._State\ is 
-                    when \CastingCases::NumberCasting().0._State_0\ => 
+                case \CastingCases::NumberCasting(Int16,Int16).0._State\ is 
+                    when \CastingCases::NumberCasting(Int16,Int16).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\CastingCases::NumberCasting().0._Started\ = true) then 
-                            \CastingCases::NumberCasting().0._State\ := \CastingCases::NumberCasting().0._State_2\;
+                        if (\CastingCases::NumberCasting(Int16,Int16).0._Started\ = true) then 
+                            \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \CastingCases::NumberCasting().0._State_1\ => 
+                    when \CastingCases::NumberCasting(Int16,Int16).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\CastingCases::NumberCasting().0._Started\ = true) then 
-                            \CastingCases::NumberCasting().0._Finished\ <= true;
+                        if (\CastingCases::NumberCasting(Int16,Int16).0._Started\ = true) then 
+                            \CastingCases::NumberCasting(Int16,Int16).0._Finished\ <= true;
                         else 
-                            \CastingCases::NumberCasting().0._Finished\ <= false;
-                            \CastingCases::NumberCasting().0._State\ := \CastingCases::NumberCasting().0._State_0\;
+                            \CastingCases::NumberCasting(Int16,Int16).0._Finished\ <= false;
+                            \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \CastingCases::NumberCasting().0._State_2\ => 
-                        \CastingCases::NumberCasting().0.num\ := to_signed(2, 16);
-                        \CastingCases::NumberCasting().0.num2\ := to_signed(345, 16);
-                        \CastingCases::NumberCasting().0.binaryOperationResult.0\ := resize(\CastingCases::NumberCasting().0.num\ * \CastingCases::NumberCasting().0.num2\, 16);
-                        \CastingCases::NumberCasting().0.num3\ := \CastingCases::NumberCasting().0.binaryOperationResult.0\;
-                        \CastingCases::NumberCasting().0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting().0.num\ * \CastingCases::NumberCasting().0.num2\, 32);
-                        \CastingCases::NumberCasting().0.num4\ := (\CastingCases::NumberCasting().0.binaryOperationResult.1\);
-                        \CastingCases::NumberCasting().0._State\ := \CastingCases::NumberCasting().0._State_1\;
+                    when \CastingCases::NumberCasting(Int16,Int16).0._State_2\ => 
+                        \CastingCases::NumberCasting(Int16,Int16).0.a\ := \CastingCases::NumberCasting(Int16,Int16).0.a.parameter.In\;
+                        \CastingCases::NumberCasting(Int16,Int16).0.b\ := \CastingCases::NumberCasting(Int16,Int16).0.b.parameter.In\;
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 16);
+                        \CastingCases::NumberCasting(Int16,Int16).0.num\ := \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\;
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
+                        \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
+                        \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 state machine end
+    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32).0 state machine start
+    \ConstantsUsingCases::ConstantValuedVariables(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\: \ConstantsUsingCases::ConstantValuedVariables(Int32).0._States\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\;
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\: \signed_Array\(0 to 36) := (others => to_signed(0, 32));
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\: boolean := false;
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\: boolean := false;
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\: boolean := false;
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.3\: boolean := false;
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\ <= false;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num3\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num4\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\ := (others => to_signed(0, 32));
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\ := false;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\ := false;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\ := false;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.3\ := false;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
+            else 
+                case \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ is 
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\ <= true;
+                        else 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\ <= false;
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\ => 
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input.parameter.In\;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num\ := to_signed(4, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\ := to_signed(36, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\ := to_signed(37, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num3\ := to_signed(148, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\ := to_signed(148, 32) + \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num4\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\ := (others => to_signed(0, 32));
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := to_signed(5, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\ < to_signed(5, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\ and ends in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\.
+                        --     * Execution after either branch will continue in the following state: \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\.
+
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\ => 
+                        -- State after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(153, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.3\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ = to_signed(10, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.3\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\ and ends in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\.
+                        --     * Execution after either branch will continue in the following state: \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\.
+
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\ => 
+                        -- True branch of the if-else started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.2\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ + to_signed(8, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.2\;
+                        -- Going to the state after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ = \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\ => 
+                        -- State after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\.
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.4\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ + to_signed(10, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.4\;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\ => 
+                        -- True branch of the if-else started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\.
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(5, 32);
+                        -- Going to the state after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\.
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ = \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32).0 state machine end
 
 
     -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).0 state machine start
@@ -1496,7 +1646,8 @@ begin
                 \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
@@ -1580,13 +1731,20 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 11 => 
-                            if (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ = \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= false;
+                            if (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ = \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when 12 => 
+                            if (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 13 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
@@ -2083,11 +2241,18 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
-    \CastingCases::NumberCasting().0._Started\ <= \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\;
-    \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\ <= \CastingCases::NumberCasting().0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting() end
+    \CastingCases::NumberCasting(Int16,Int16).0._Started\ <= \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\;
+    \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Finished.0\ <= \CastingCases::NumberCasting(Int16,Int16).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\ <= \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32) start
