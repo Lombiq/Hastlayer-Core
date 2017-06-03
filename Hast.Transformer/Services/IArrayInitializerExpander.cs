@@ -5,7 +5,7 @@ namespace Hast.Transformer.Services
 {
     /// <summary>
     /// Converts inline array initalizers into one-by-one array element assignments so these can be transformed in a
-    /// simpler ways.
+    /// simpler way.
     /// </summary>
     /// <example>
     /// var x = new[] { 1, 2, 3 };
