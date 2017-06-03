@@ -14,30 +14,29 @@ namespace Hast.Common.Numerics
             SegmentCount = (uint)segments.Length;
             Size = SegmentCount << 5;
             Segments = new uint[SegmentCount];
-
             Array.Copy(segments, Segments, SegmentCount);
         }
 
         public BitMask(uint[] segments, uint size = 0)
         {
             SegmentCount = (uint)segments.Length;
-            Size = SegmentCount << 5;
-            if (size > Size)
+            Size = size;
+            if (size > SegmentCount << 5)
             {
-                Size = size;
+
                 SegmentCount = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
             }
             Segments = new uint[SegmentCount];
 
             Array.Copy(segments, Segments, segments.Length);
-            for (int i = 1; i < SegmentCount - segments.Length; i++)
+            for (int i = 0; i < SegmentCount - segments.Length; i++)
                 Array.Copy(new uint[] { 0 }, 0, Segments, segments.Length + i, 1);
         }
 
         public BitMask(uint size, bool allOne)
         {
             SegmentCount = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
-            Size = SegmentCount << 5;
+            Size = size;
             Segments = new uint[SegmentCount];
 
             if (allOne) for (int i = 0; i < SegmentCount; i++) Segments[i] = uint.MaxValue;
@@ -262,6 +261,12 @@ namespace Hast.Common.Numerics
             return left;
 
 
+        }
+
+
+        public uint getLowest32Bits()
+        {
+            return Segments[0];
         }
 
 
