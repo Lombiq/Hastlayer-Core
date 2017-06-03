@@ -209,7 +209,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         var targetMethod = (MethodDeclaration)TaskParallelizationHelper
                             .GetTargetDisplayClassMemberFromFuncCreation((ObjectCreateExpression)arguments.First())
-                            .GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                            .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                         var targetMaxDegreeOfParallelism = context.TransformationContext
                             .GetTransformerConfiguration()
                             .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod)

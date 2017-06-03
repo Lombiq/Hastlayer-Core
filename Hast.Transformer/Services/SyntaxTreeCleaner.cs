@@ -136,7 +136,7 @@ namespace Hast.Transformer.Services
                 }
 
 
-                var member = memberReferenceExpression.GetMemberDeclaration(_typeDeclarationLookupTable);
+                var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
                 if (member == null || member.WasVisited()) return;
 

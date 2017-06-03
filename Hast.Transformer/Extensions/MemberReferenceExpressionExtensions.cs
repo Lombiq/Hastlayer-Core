@@ -7,11 +7,11 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     public static class MemberReferenceExpressionExtensions
     {
-        public static EntityDeclaration GetMemberDeclaration(
+        public static EntityDeclaration FindMemberDeclaration(
             this MemberReferenceExpression memberReferenceExpression, 
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            var type = memberReferenceExpression.GetTargetTypeDeclaration(typeDeclarationLookupTable);
+            var type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable);
 
             if (type == null) return null;
 
@@ -69,7 +69,7 @@ namespace ICSharpCode.NRefactory.CSharp
             }
         }
 
-        public static TypeDeclaration GetTargetTypeDeclaration(
+        public static TypeDeclaration FindTargetTypeDeclaration(
             this MemberReferenceExpression memberReferenceExpression, 
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
@@ -91,7 +91,7 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else if (memberReferenceExpression.Target is MemberReferenceExpression)
             {
-                return ((MemberReferenceExpression)memberReferenceExpression.Target).GetTargetTypeDeclaration(typeDeclarationLookupTable);
+                return ((MemberReferenceExpression)memberReferenceExpression.Target).FindTargetTypeDeclaration(typeDeclarationLookupTable);
             }
             else
             {

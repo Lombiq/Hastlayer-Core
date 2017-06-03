@@ -162,7 +162,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     scope.FuncVariableNameToDisplayClassMethodMappings[funcVariableName] =
                         (MethodDeclaration)displayClassMemberReference
-                        .GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                        .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                 }
                 else
                 {

@@ -336,7 +336,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
             else
             {
-                targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                targetDeclaration = targetMemberReference.FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
             }
 
             if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))
