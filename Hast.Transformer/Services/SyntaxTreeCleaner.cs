@@ -35,7 +35,6 @@ namespace Hast.Transformer.Services
                 foreach (var member in type.Members)
                 {
                     var fullName = member.GetFullName();
-                    var z = _memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable);
                     if ((
                             (noIncludedMembers ||
                             configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
