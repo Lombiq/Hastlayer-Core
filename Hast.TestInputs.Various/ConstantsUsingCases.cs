@@ -44,5 +44,58 @@ namespace Hast.TestInputs.Various
             }
             w += 10;
         }
+
+        public void ConstantPassingToObject()
+        {
+            var arraySize = 5;
+            var array = new uint[arraySize];
+
+            // These constructor parameters can be substituted.
+            var arrayHolder = new ArrayHolder1(array);
+            var arrayHolder2 = new ArrayHolder1((uint)arraySize);
+            var arrayHolder3 = new ArrayHolder1((uint)arraySize);
+
+            // These constructor parameters can't be substituted because there are different ones.
+            var arrayHolder4 = new ArrayHolder2((uint)arraySize);
+            var arrayHolder5 = new ArrayHolder2((uint)arraySize + 8);
+        }
+
+
+        private class ArrayHolder1
+        {
+            public uint ArrayLength { get; }
+            public uint ArrayLengthCopy { get; }
+            public uint[] Array { get; }
+
+
+            public ArrayHolder1(uint[] array)
+            {
+                ArrayLength = (uint)array.Length;
+                ArrayLengthCopy = ArrayLength << 5;
+                Array = new uint[ArrayLength];
+            }
+
+            public ArrayHolder1(uint size)
+            {
+                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
+                ArrayLengthCopy = ArrayLength << 5;
+                Array = new uint[ArrayLength];
+            }
+        }
+
+        private class ArrayHolder2
+        {
+            public uint ArrayLength { get; }
+            public uint ArrayLengthCopy { get; }
+            public uint[] Array { get; }
+
+
+            public ArrayHolder2(uint size)
+            {
+                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
+                ArrayLengthCopy = ArrayLength << 5;
+                Array = new uint[ArrayLength];
+            }
+        }
     }
 }

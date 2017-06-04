@@ -87,13 +87,34 @@ namespace Hast.Transformer.Services
 
                 if (primitiveExpressionParent is ICSharpCode.NRefactory.CSharp.Attribute) return;
 
-
                 // The unnecessary type arguments for the Is<T> calls are left in because they'll be needed after
                 // migrating to C# 7 and using out variables.
+                ParenthesizedExpression parenthesizedExpression;
+                if (primitiveExpressionParent.Is<ParenthesizedExpression>(out parenthesizedExpression) &&
+                    parenthesizedExpression.Expression == primitiveExpression)
+                {
+                    var newExpression = (PrimitiveExpression)primitiveExpression.Clone();
+                    parenthesizedExpression.ReplaceWith(newExpression);
+                    primitiveExpression = newExpression;
+                    primitiveExpressionParent = newExpression.Parent;
+                }
+
+                CastExpression castExpression;
+                if (primitiveExpressionParent.Is<CastExpression>(out castExpression))
+                {
+                    var newExpression = new PrimitiveExpression(_astExpressionEvaluator.EvaluateCastExpression(castExpression));
+                    newExpression.AddAnnotation(primitiveExpressionParent.GetActualTypeReference(true));
+
+                    primitiveExpressionParent.ReplaceWith(newExpression);
+                    primitiveExpressionParent = newExpression.Parent;
+                    primitiveExpression = newExpression;
+                }
+
                 IdentifierExpression identifierExpression = null;
                 InvocationExpression invocationExpression;
                 ArrayCreateExpression arrayCreateExpression;
                 BinaryOperatorExpression binaryOperatorExpression;
+                ObjectCreateExpression objectCreateExpression;
 
                 Func<AstNode, bool> handleAssignmentExpression = parent =>
                 {
@@ -165,6 +186,47 @@ namespace Hast.Transformer.Services
                         }
                     }
                 }
+                else if (primitiveExpressionParent.Is<ObjectCreateExpression>(out objectCreateExpression))
+                {
+                    var parameter = FindConstructorParameterForPassedExpression(objectCreateExpression, primitiveExpression);
+
+                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, primitiveExpression, true);
+                }
+            }
+
+            public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
+            {
+                base.VisitObjectCreateExpression(objectCreateExpression);
+
+                // Marking all parameters where a non-constant parameter is passed as non-constant.
+                foreach (var argument in objectCreateExpression.Arguments)
+                {
+                    if (!(argument is PrimitiveExpression))
+                    {
+                        _constantValuesTable.MarkAsNonConstant(FindConstructorParameterForPassedExpression(objectCreateExpression, argument));
+                    }
+                }
+            }
+
+
+            // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression().
+            private ParameterDeclaration FindConstructorParameterForPassedExpression(
+                ObjectCreateExpression objectCreateExpression,
+                Expression expression)
+            {
+                var parameterSimpleName = objectCreateExpression
+                    .Annotation<MethodDefinition>()
+                    .Parameters[objectCreateExpression.Arguments.ToList().FindIndex(argumentExpression => argumentExpression == expression)]
+                    .Name;
+
+                var constructorFullName = objectCreateExpression.GetFullName();
+
+                return ((MethodDeclaration)_typeDeclarationLookupTable
+                    .Lookup(objectCreateExpression.Type.GetFullName())
+                    .Members
+                    .Single(member => member.GetFullName() == constructorFullName))
+                    .Parameters
+                    .Single(p => p.Name == parameterSimpleName);
             }
         }
 
@@ -273,11 +335,28 @@ namespace Hast.Transformer.Services
                 new Dictionary<string, PrimitiveExpression>();
 
 
-            public void MarkAsPotentiallyConstant(AstNode valueHolder, PrimitiveExpression expression)
+            public void MarkAsPotentiallyConstant(
+                AstNode valueHolder,
+                PrimitiveExpression expression,
+                bool disallowDifferentValues = false)
             {
                 Argument.ThrowIfNull(expression, nameof(expression));
 
-                _constantValuedVariablesAndMembers[valueHolder.GetFullName()] = expression;
+                var holderName = valueHolder.GetFullName();
+
+                if (disallowDifferentValues)
+                {
+
+                    PrimitiveExpression existingExpression;
+                    if (_constantValuedVariablesAndMembers.TryGetValue(holderName, out existingExpression) &&
+                        existingExpression != null)
+                    {
+                        // Simply using != would yield a reference equality check.
+                        if (!expression.Value.Equals(existingExpression.Value)) expression = null;
+                    }
+                }
+
+                _constantValuedVariablesAndMembers[holderName] = expression;
             }
 
             public void MarkAsNonConstant(AstNode valueHolder)

@@ -170,9 +170,8 @@ namespace Hast.Transformer
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
-            // Needs to run before ConditionalExpressionsToIfElsesConverter.
-            _constantValuesSubstituter.SubstituteConstantValues(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
+            _constantValuesSubstituter.SubstituteConstantValues(syntaxTree);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
