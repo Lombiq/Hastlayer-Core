@@ -37,8 +37,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return _cacheManager.Get("ComposedRecord." + typeDeclaration.GetFullName(), true, context =>
             {
                 // Process only those fields that aren't backing fields of auto-properties (since those properties are 
-                // handled as properties) nor const fields (those are inserted as literals by the compiler where they're
-                // used).
+                // handled as properties).
                 var recordFields = typeDeclaration.Members
                     .Where(member =>
                         member is PropertyDeclaration ||
