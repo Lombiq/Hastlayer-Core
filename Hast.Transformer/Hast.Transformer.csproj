@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DynamicExpresso.Core, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Orchard\src\packages\DynamicExpresso.Core.1.3.3.5\lib\net40\DynamicExpresso.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ICSharpCode.Decompiler, Version=2.3.1.1855, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
       <HintPath>..\Orchard\src\packages\ICSharpCode.Decompiler.2.3.1\lib\Net40\ICSharpCode.Decompiler.dll</HintPath>
       <Private>True</Private>
@@ -106,11 +102,13 @@
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
     <Compile Include="Services\ArrayInitializerExpander.cs" />
+    <Compile Include="Services\AstExpressionEvaluator.cs" />
     <Compile Include="Services\ConditionalExpressionsToIfElsesConverter.cs" />
     <Compile Include="Services\ConstantValuesSubstituter.cs" />
     <Compile Include="Services\ConstructorsToMethodsConverter.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IArrayInitializerExpander.cs" />
+    <Compile Include="Services\IAstExpressionEvaluator.cs" />
     <Compile Include="Services\IAutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\IConditionalExpressionsToIfElsesConverter.cs" />
     <Compile Include="Services\IConstantValuesSubstituter.cs" />

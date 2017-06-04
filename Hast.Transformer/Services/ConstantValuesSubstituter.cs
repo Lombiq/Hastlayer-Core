@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DynamicExpresso;
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 using Orchard.Validation;
 
 namespace Hast.Transformer.Services
@@ -15,11 +16,15 @@ namespace Hast.Transformer.Services
     public class ConstantValuesSubstituter : IConstantValuesSubstituter
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
+        private readonly IAstExpressionEvaluator _astExpressionEvaluator;
 
 
-        public ConstantValuesSubstituter(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory)
+        public ConstantValuesSubstituter(
+            ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
+            IAstExpressionEvaluator astExpressionEvaluator)
         {
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
+            _astExpressionEvaluator = astExpressionEvaluator;
         }
 
 
@@ -39,9 +44,8 @@ namespace Hast.Transformer.Services
 
                 var constantValuesTable = new ConstantValuesTable();
 
-                var constantValuesMarkingVisitor = new ConstantValuesMarkingVisitor(
-                    constantValuesTable, typeDeclarationLookupTable);
-                syntaxTree.AcceptVisitor(constantValuesMarkingVisitor);
+                syntaxTree.AcceptVisitor(new ConstantValuesMarkingVisitor(
+                    constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator));
                 syntaxTree.AcceptVisitor(new ConstantValuesSubstitutingVisitor(constantValuesTable));
 
                 File.WriteAllText("source.cs", syntaxTree.ToString());
@@ -59,18 +63,19 @@ namespace Hast.Transformer.Services
 
         private class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
         {
-            private static Interpreter _interpreter = new Interpreter();
-
             private readonly ConstantValuesTable _constantValuesTable;
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
+            private readonly IAstExpressionEvaluator _astExpressionEvaluator;
 
 
             public ConstantValuesMarkingVisitor(
                 ConstantValuesTable constantValuesTable,
-                ITypeDeclarationLookupTable typeDeclarationLookupTable)
+                ITypeDeclarationLookupTable typeDeclarationLookupTable,
+                IAstExpressionEvaluator astExpressionEvaluator)
             {
                 _constantValuesTable = constantValuesTable;
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
+                _astExpressionEvaluator = astExpressionEvaluator;
             }
 
 
@@ -121,7 +126,7 @@ namespace Hast.Transformer.Services
 
                         if (method != null)
                         {
-                            System.Diagnostics.Debugger.Break();
+                            Debugger.Break();
                             //method.Parameters.Single(parameter => parameter.GetFullName() == invocationExpression.Arguments.Single(argument => argument.va))
                         }
                     }
@@ -130,7 +135,7 @@ namespace Hast.Transformer.Services
                 {
                     //if (!handleAssignmentExpression(arrayCreateExpression.Parent))
                     //{
-                    //    System.Diagnostics.Debugger.Break();
+                    //    Debugger.Break();
                     //}
                 }
                 else if (primitiveExpressionParent.Is<BinaryOperatorExpression>(out binaryOperatorExpression))
@@ -142,18 +147,8 @@ namespace Hast.Transformer.Services
 
                     if (otherExpression is PrimitiveExpression)
                     {
-                        // Due to some literal formats not being supported (like "u" for uints, see: 
-                        // https://github.com/davideicardi/DynamicExpresso/issues/62) it's safer to cast everything. 
-                        // But the "System.Int32" format is not supported, just "Int32"...
-
-                        var expressionString =
-                            "(" + left.GetActualTypeReference().FullName.Replace("System.", string.Empty) + ")" +
-                            ((PrimitiveExpression)left).Value.ToString() +
-                            " " + BinaryOperatorExpression.GetOperatorRole(binaryOperatorExpression.Operator).Token + " " +
-                            "(" + right.GetActualTypeReference().FullName.Replace("System.", string.Empty) + ")" +
-                            ((PrimitiveExpression)right).Value.ToString();
-
-                        var newExpression = new PrimitiveExpression(_interpreter.Eval(expressionString));
+                        var newExpression = new PrimitiveExpression(
+                            _astExpressionEvaluator.EvaluateBinaryOperatorExpression(binaryOperatorExpression));
                         var resultType = binaryOperatorExpression.GetResultTypeReference();
                         newExpression.AddAnnotation(resultType);
                         if (resultType.FullName == typeof(bool).FullName)

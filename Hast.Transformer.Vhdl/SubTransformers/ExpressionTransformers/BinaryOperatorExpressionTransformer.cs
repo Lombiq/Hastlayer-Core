@@ -154,7 +154,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     binary.Operator = BinaryOperator.Subtract;
                     break;
                 default:
-                    throw new NotImplementedException("Support for the binary operator " + expression.Operator + " is not implemented.");
+                    throw new NotImplementedException("Binary operator " + expression.Operator + " is not supported.");
             }
 
 
