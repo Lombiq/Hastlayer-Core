@@ -58,15 +58,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         DataType type = null;
                         if (member.ReturnType.IsArray())
                         {
-                            var arrayLength = arrayCreateExpression != null ?
-                                arrayCreateExpression.GetStaticLength() :
-                                member.Annotation<ConstantArrayLength>().Length;
+                            var arrayLength = arrayCreateExpression?.GetStaticLength();
+                            arrayLength = arrayLength ?? member.Annotation<ConstantArrayLength>()?.Length;
+
+                            if (arrayLength == null)
+                            {
+                                throw new NotSupportedException(
+                                    "The length of the array " + member.GetFullName() + 
+                                    " couldn't be statically determined. Only arrays with dimensions defined at compile-time are supported.");
+                            }
 
                             type = ArrayHelper.CreateArrayInstantiation(
                                 _typeConverterLazy.Value.ConvertAstType(
                                     ((ComposedType)member.ReturnType).BaseType,
                                     typeDeclarationLookupTable),
-                                arrayLength);
+                                arrayLength.Value);
                         }
                         else
                         {
