@@ -114,6 +114,7 @@ namespace Hast.Transformer.Services
                 ArrayCreateExpression arrayCreateExpression;
                 BinaryOperatorExpression binaryOperatorExpression;
                 ObjectCreateExpression objectCreateExpression;
+                ReturnStatement returnStatement;
 
                 Func<AstNode, bool> handleAssignmentExpression = parent =>
                 {
@@ -139,17 +140,12 @@ namespace Hast.Transformer.Services
 
                 if (primitiveExpressionParent.Is<InvocationExpression>(out invocationExpression))
                 {
-                    MemberReferenceExpression memberReferenceExpression;
-                    if (invocationExpression.Is<MemberReferenceExpression>(out memberReferenceExpression))
-                    {
-                        var method = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable) as MethodDeclaration;
-
-                        if (method != null)
-                        {
-                            Debugger.Break();
-                            //method.Parameters.Single(parameter => parameter.GetFullName() == invocationExpression.Arguments.Single(argument => argument.va))
-                        }
-                    }
+                    _constantValuesTable.MarkAsPotentiallyConstant(
+                            FindMethodParameterForPassedExpression(
+                                invocationExpression,
+                                primitiveExpression),
+                            primitiveExpression,
+                            true);
                 }
                 else if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression))
                 {
@@ -191,6 +187,14 @@ namespace Hast.Transformer.Services
 
                     _constantValuesTable.MarkAsPotentiallyConstant(parameter, primitiveExpression, true);
                 }
+                else if (primitiveExpressionParent.Is<ReturnStatement>(out returnStatement) && 
+                    returnStatement.Expression == primitiveExpression)
+                {
+                    _constantValuesTable.MarkAsPotentiallyConstant(
+                        primitiveExpression.FindFirstParentEntityDeclaration(), 
+                        primitiveExpression, 
+                        true);
+                }
             }
 
             public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
@@ -207,21 +211,50 @@ namespace Hast.Transformer.Services
                 }
             }
 
+            public override void VisitInvocationExpression(InvocationExpression invocationExpression)
+            {
+                base.VisitInvocationExpression(invocationExpression);
 
-            // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression().
+                // Marking all parameters where a non-constant parameter is passed as non-constant.
+                foreach (var argument in invocationExpression.Arguments)
+                {
+                    if (!(argument is PrimitiveExpression))
+                    {
+                        _constantValuesTable.MarkAsNonConstant(FindMethodParameterForPassedExpression(invocationExpression, argument));
+                    }
+                }
+            }
+
+
             private ParameterDeclaration FindConstructorParameterForPassedExpression(
                 ObjectCreateExpression objectCreateExpression,
-                Expression expression)
+                Expression passedExpression) =>
+                FindParameterForExpressionPassedToInvocation(objectCreateExpression, objectCreateExpression.Arguments, passedExpression);
+
+            private ParameterDeclaration FindMethodParameterForPassedExpression(
+                InvocationExpression invocationExpression,
+                Expression passedExpression) =>
+                FindParameterForExpressionPassedToInvocation(invocationExpression, invocationExpression.Arguments, passedExpression);
+
+            // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression()
+            // and VisitInvocationExpression().
+            private ParameterDeclaration FindParameterForExpressionPassedToInvocation(
+                Expression invocationExpression,
+                AstNodeCollection<Expression> invocationArguments,
+                Expression passedExpression)
             {
-                var parameterSimpleName = objectCreateExpression
-                    .Annotation<MethodDefinition>()
-                    .Parameters[objectCreateExpression.Arguments.ToList().FindIndex(argumentExpression => argumentExpression == expression)]
+                var methodDefinition = invocationExpression.Annotation<MethodDefinition>();
+
+                if (methodDefinition == null) return null;
+
+                var parameterSimpleName = methodDefinition
+                    .Parameters[invocationArguments.ToList().FindIndex(argumentExpression => argumentExpression == passedExpression)]
                     .Name;
 
-                var constructorFullName = objectCreateExpression.GetFullName();
+                var constructorFullName = invocationExpression.GetFullName();
 
                 return ((MethodDeclaration)_typeDeclarationLookupTable
-                    .Lookup(objectCreateExpression.Type.GetFullName())
+                    .Lookup(methodDefinition.DeclaringType.FullName)
                     .Members
                     .Single(member => member.GetFullName() == constructorFullName))
                     .Parameters
@@ -255,6 +288,27 @@ namespace Hast.Transformer.Services
                 }
             }
 
+            public override void VisitReturnStatement(ReturnStatement returnStatement)
+            {
+                base.VisitReturnStatement(returnStatement);
+
+                // Method substitution is only valid if there is only one return statement in the method so unmarking 
+                // if there are more.
+                if (!(returnStatement.Expression is PrimitiveExpression))
+                {
+                    _constantValuesTable.MarkAsNonConstant(returnStatement.FindFirstParentEntityDeclaration());
+                }
+                else
+                {
+                    // If this is not the same value as marked previously in ConstantValuesMarkingVisitor then the
+                    // method will be unmarked.
+                    _constantValuesTable.MarkAsPotentiallyConstant(
+                        returnStatement.FindFirstParentEntityDeclaration(),
+                        (PrimitiveExpression)returnStatement.Expression,
+                        true);
+                }
+            }
+
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
             {
                 base.VisitIdentifierExpression(identifierExpression);
@@ -265,6 +319,12 @@ namespace Hast.Transformer.Services
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
+
+                // If this is a member reference to a method then nothing to do.
+                if (memberReferenceExpression.Parent.Is<InvocationExpression>(invocation => invocation.Target == memberReferenceExpression))
+                {
+                    return;
+                }
 
                 SubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
             }
@@ -313,6 +373,14 @@ namespace Hast.Transformer.Services
                 }
             }
 
+            public override void VisitInvocationExpression(InvocationExpression invocationExpression)
+            {
+                base.VisitInvocationExpression(invocationExpression);
+
+                // Substituting method invocations that have a constant return value.
+                SubstituteValueHolderInExpressionIfInSuitableAssignment(invocationExpression);
+            }
+
 
             private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
             {
@@ -347,8 +415,7 @@ namespace Hast.Transformer.Services
                 PrimitiveExpression expression,
                 bool disallowDifferentValues = false)
             {
-                Argument.ThrowIfNull(expression, nameof(expression));
-
+                if (valueHolder == null) return;
 
                 Action<string> saveMark = name =>
                 {
@@ -376,6 +443,8 @@ namespace Hast.Transformer.Services
 
             public void MarkAsNonConstant(AstNode valueHolder)
             {
+                if (valueHolder == null) return;
+
                 var holderName = valueHolder.GetFullName();
                 _constantValuedVariablesAndMembers[holderName] = null;
                 if (holderName.IsBackingFieldName())

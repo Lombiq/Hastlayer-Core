@@ -45,6 +45,14 @@ namespace Hast.TestInputs.Various
             w += 10;
         }
 
+        public void ConstantPassingToMethod(int input)
+        {
+            var x = 15;
+            var y = x * 10 - 5;
+            // The result of StaticConstantUsingMethod() can even be inlined here.
+            var z = ConstantUsingMethod(y, input) + StaticConstantUsingMethod(y);
+        }
+
         public void ConstantPassingToObject()
         {
             var arraySize = 5;
@@ -60,6 +68,11 @@ namespace Hast.TestInputs.Various
             var arrayHolder5 = new ArrayHolder2((uint)arraySize + 8);
         }
 
+
+        private int ConstantUsingMethod(int input1, int input2) => input1 * 2 + 8 - input2;
+
+
+        private static int StaticConstantUsingMethod(int input) => input * 2 + 8;
 
         private class ArrayHolder1
         {

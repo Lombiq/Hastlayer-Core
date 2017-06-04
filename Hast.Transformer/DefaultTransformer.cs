@@ -161,10 +161,10 @@ namespace Hast.Transformer
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
 
-            // Clean-up.
+            // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            // Transformations making the syntax tree easier to process.
+            // Conversions making the syntax tree easier to process.
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
@@ -172,6 +172,9 @@ namespace Hast.Transformer
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _constantValuesSubstituter.SubstituteConstantValues(syntaxTree);
+
+            // If the conversions removed something let's clean them up here.
+            _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
