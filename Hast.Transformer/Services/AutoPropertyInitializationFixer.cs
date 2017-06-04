@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
@@ -30,10 +31,7 @@ namespace Hast.Transformer.Services
 
                 if (memberReferenceExpression.Annotation<FieldDefinition>() == null) return;
 
-                // The backing field's name will be something like "<Number>k__BackingField". It will contain the name
-                // of the property.
-                memberReferenceExpression.MemberName = 
-                    Regex.Replace(memberReferenceExpression.MemberName, "<(.*)>.*BackingField", match => match.Groups[1].Value);
+                memberReferenceExpression.MemberName = memberReferenceExpression.MemberName.ConvertSimpleBackingFieldNameToPropertyName();
             }
         }
     }

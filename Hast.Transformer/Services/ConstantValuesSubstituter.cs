@@ -37,7 +37,7 @@ namespace Hast.Transformer.Services
 
             string codeOutput;
             var passCount = 0;
-            const int maxPassCount = 50;
+            const int maxPassCount = 1000;
             do
             {
                 codeOutput = syntaxTree.ToString();
@@ -110,7 +110,6 @@ namespace Hast.Transformer.Services
                     primitiveExpression = newExpression;
                 }
 
-                IdentifierExpression identifierExpression = null;
                 InvocationExpression invocationExpression;
                 ArrayCreateExpression arrayCreateExpression;
                 BinaryOperatorExpression binaryOperatorExpression;
@@ -118,19 +117,19 @@ namespace Hast.Transformer.Services
 
                 Func<AstNode, bool> handleAssignmentExpression = parent =>
                 {
-                    // Don't substitute if the value holder is not assigned to or if this is inside an if statement.
-                    if (!parent.Is<AssignmentExpression>(assignment =>
-                            assignment.Left.Is<IdentifierExpression>(out identifierExpression)))
-                    {
-                        return false;
-                    }
+                    // Don't substitute if the value holder is not assigned to or if this is inside an if or while 
+                    // statement.
+
+                    var assignment = parent as AssignmentExpression;
+
+                    if (assignment == null) return false;
 
                     if (primitiveExpression.IsIn<IfElseStatement>() || primitiveExpression.IsIn<WhileStatement>())
                     {
                         return false;
                     }
 
-                    _constantValuesTable.MarkAsPotentiallyConstant(identifierExpression, primitiveExpression);
+                    _constantValuesTable.MarkAsPotentiallyConstant(assignment.Left, primitiveExpression);
 
                     return true;
                 };
@@ -246,11 +245,11 @@ namespace Hast.Transformer.Services
                 base.VisitAssignmentExpression(assignmentExpression);
 
                 // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect
-                // anything in the outer scope after this.
+                // anything in the outer scope after this. Neither if this is assigning a non-constant value.
                 // This could eventually be made more sophisticated by taking care of variable scopes too, so these
                 // assignments would affect variables inside the scope still.
-                if (assignmentExpression.Left is IdentifierExpression &&
-                    (IsInWhile(assignmentExpression) || assignmentExpression.IsIn<IfElseStatement>()))
+                if ((assignmentExpression.Left is IdentifierExpression || assignmentExpression.Left is MemberReferenceExpression) &&
+                    (IsInWhile(assignmentExpression) || assignmentExpression.IsIn<IfElseStatement>() || !(assignmentExpression.Right is PrimitiveExpression)))
                 {
                     _constantValuesTable.MarkAsNonConstant(assignmentExpression.Left);
                 }
@@ -260,25 +259,15 @@ namespace Hast.Transformer.Services
             {
                 base.VisitIdentifierExpression(identifierExpression);
 
-                // If this is an identifier on the left side of an assignment then nothing to do. If it's in a while
-                // statement then it can't be safely substituted (due to e.g. loop variables).
-                if (identifierExpression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == identifierExpression) ||
-                    IsInWhile(identifierExpression))
-                {
-                    return;
-                }
-
-                PrimitiveExpression valueExpression;
-                if (_constantValuesTable.RetrieveAndDeleteConstantValue(identifierExpression, out valueExpression))
-                {
-                    identifierExpression.ReplaceWith(valueExpression.Clone());
-                }
+                SubstituteValueHolderInExpressionIfInSuitableAssignment(identifierExpression);
             }
 
-            //public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
-            //{
-            //    base.VisitMemberReferenceExpression(memberReferenceExpression);
-            //}
+            public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
+            {
+                base.VisitMemberReferenceExpression(memberReferenceExpression);
+
+                SubstituteValueHolderInExpressionIfInSuitableAssignment(memberReferenceExpression);
+            }
 
             public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
             {
@@ -325,6 +314,24 @@ namespace Hast.Transformer.Services
             }
 
 
+            private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
+            {
+                // If this is an value holder on the left side of an assignment then nothing to do. If it's in a while
+                // statement then it can't be safely substituted (due to e.g. loop variables).
+                if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
+                    IsInWhile(expression))
+                {
+                    return;
+                }
+
+                PrimitiveExpression valueExpression;
+                if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression))
+                {
+                    expression.ReplaceWith(valueExpression.Clone());
+                }
+            }
+
+
             private static bool IsInWhile(AstNode node) => node.IsIn<WhileStatement>();
         }
 
@@ -342,26 +349,39 @@ namespace Hast.Transformer.Services
             {
                 Argument.ThrowIfNull(expression, nameof(expression));
 
+
+                Action<string> saveMark = name =>
+                {
+                    if (disallowDifferentValues)
+                    {
+
+                        PrimitiveExpression existingExpression;
+                        if (_constantValuedVariablesAndMembers.TryGetValue(name, out existingExpression) &&
+                            existingExpression != null)
+                        {
+                            // Simply using != would yield a reference equality check.
+                            if (!expression.Value.Equals(existingExpression.Value)) expression = null;
+                        }
+                    }
+
+                    _constantValuedVariablesAndMembers[name] = expression;
+                };
+
                 var holderName = valueHolder.GetFullName();
 
-                if (disallowDifferentValues)
-                {
+                saveMark(holderName);
 
-                    PrimitiveExpression existingExpression;
-                    if (_constantValuedVariablesAndMembers.TryGetValue(holderName, out existingExpression) &&
-                        existingExpression != null)
-                    {
-                        // Simply using != would yield a reference equality check.
-                        if (!expression.Value.Equals(existingExpression.Value)) expression = null;
-                    }
-                }
-
-                _constantValuedVariablesAndMembers[holderName] = expression;
+                if (holderName.IsBackingFieldName()) saveMark(holderName.ConvertFullBackingFieldNameToPropertyName());
             }
 
             public void MarkAsNonConstant(AstNode valueHolder)
             {
-                _constantValuedVariablesAndMembers[valueHolder.GetFullName()] = null;
+                var holderName = valueHolder.GetFullName();
+                _constantValuedVariablesAndMembers[holderName] = null;
+                if (holderName.IsBackingFieldName())
+                {
+                    _constantValuedVariablesAndMembers[holderName.ConvertFullBackingFieldNameToPropertyName()] = null;
+                }
             }
 
             public bool RetrieveAndDeleteConstantValue(AstNode valueHolder, out PrimitiveExpression valueExpression)

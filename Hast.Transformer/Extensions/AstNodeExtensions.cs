@@ -56,6 +56,13 @@ namespace ICSharpCode.NRefactory.CSharp
                 return ((IndexerExpression)node).Target.GetFullName();
             }
 
+            // This is a member on a type that's not transformed, like System.Array.
+            if (node is MemberReferenceExpression)
+            {
+                var memberReferenceExpression = (MemberReferenceExpression)node;
+                return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
+            }
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 

@@ -86,15 +86,11 @@ namespace Hast.TestInputs.Various
         private class ArrayHolder2
         {
             public uint ArrayLength { get; }
-            public uint ArrayLengthCopy { get; }
-            public uint[] Array { get; }
 
 
             public ArrayHolder2(uint size)
             {
                 ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
-                ArrayLengthCopy = ArrayLength << 5;
-                Array = new uint[ArrayLength];
             }
         }
     }
