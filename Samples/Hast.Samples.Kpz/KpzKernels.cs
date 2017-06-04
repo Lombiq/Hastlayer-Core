@@ -38,6 +38,17 @@ namespace Hast.Samples.Kpz
         {
             memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
         }
+
+        public virtual void TestPrng(SimpleMemory memory)
+        {
+            KpzKernels kernels = new KpzKernels();
+            kernels.InitializeParametersFromMemory(memory);
+            var numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
+            for (int i = 0; i < numberOfStepsInIteration; i++)
+            {
+                memory.WriteUInt32(i, kernels.GetNextRandom1());
+            }
+        }
     }
 
     public class KpzKernels
@@ -193,6 +204,23 @@ namespace Hast.Samples.Kpz
             sm.WriteUInt32(1, b);
             kernels.TestAdd(sm);
             return sm.ReadUInt32(2);
+        }
+
+        public static uint[] TestPrngWrapper(this KpzKernelsInterface kernels)
+        {
+            uint[] numbers = new uint[KpzKernels.GridWidth*KpzKernels.GridHeight];
+            SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory());
+
+            CopyParametersToMemory(sm, false, 0x5289a3b89ac5f211, 0x5289a3b89ac5f211);
+
+            kernels.TestPrng(sm);
+
+            for (int i = 0; i < KpzKernels.GridWidth*KpzKernels.GridHeight; i++)
+            {
+                numbers[i] = sm.ReadUInt32(i);
+            }
+
+            return numbers;
         }
 
         public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1, ulong randomSeed2)
