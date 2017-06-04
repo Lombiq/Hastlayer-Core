@@ -94,9 +94,9 @@ namespace Hast.Common.Numerics
             return false;
         }
 
-        public static BitMask operator +(BitMask left, uint right) => left + new BitMask(new uint[] { right });
+        public static BitMask operator +(BitMask left, uint right) => left + new BitMask(new uint[] { right }, left.Size);
 
-        public static BitMask operator -(BitMask left, uint right) => left - new BitMask(new uint[] { right });
+        public static BitMask operator -(BitMask left, uint right) => left - new BitMask(new uint[] { right }, left.Size);
 
         /// <summary>
         /// Bit-by-bit addition of two masks with "ripple-carry".
