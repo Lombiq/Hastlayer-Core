@@ -282,9 +282,7 @@ architecture Imp of Hast_IP is
         \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\, 
         \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\, 
         \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\, 
-        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\, 
-        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\, 
-        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\);
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\);
     -- Signals:
     Signal \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\: boolean := false;
     Signal \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\: boolean := false;
@@ -1201,9 +1199,6 @@ begin
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\: boolean := false;
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\: boolean := false;
-        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.3\: boolean := false;
-        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1222,9 +1217,6 @@ begin
                 \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\ := false;
                 \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\ := false;
-                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.3\ := false;
-                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
             else 
                 case \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ is 
                     when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\ => 
@@ -1271,41 +1263,16 @@ begin
                     when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(153, 32);
-                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.3\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ = to_signed(10, 32);
-                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.3\;
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\ and ends in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\.
-                        --     * Execution after either branch will continue in the following state: \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\.
-
-                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\) then 
-                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\;
-                        end if;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\ := False;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(163, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\ => 
                         -- True branch of the if-else started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
-                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.2\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ + to_signed(8, 32);
-                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.2\;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := to_signed(13, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
                         if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ = \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\) then 
                             \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\ => 
-                        -- State after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\.
-                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.4\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ + to_signed(10, 32);
-                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.4\;
-                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\ => 
-                        -- True branch of the if-else started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\.
-                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(5, 32);
-                        -- Going to the state after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\.
-                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ = \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_6\) then 
-                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;

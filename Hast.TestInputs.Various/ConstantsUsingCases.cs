@@ -35,8 +35,8 @@ namespace Hast.TestInputs.Various
                 v = 10;
             }
 
-            // While w only has constant values it's not just assigned to but also read between assignments so can only
-            // be partially substituted.
+            // Since w only has constant values the condition can be evaluated compile-time and due to it being false
+            // the whole if can be removed.
             var w = z + 5;
             if (w == 10)
             {

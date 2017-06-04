@@ -110,6 +110,15 @@ namespace ICSharpCode.NRefactory.CSharp
             return name;
         }
 
+        public static bool IsIn<T>(this AstNode node) where T : AstNode =>
+            node.FindFirstParentOfType<T>() != null;
+
+        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node) =>
+            node.FindFirstParentOfType<TypeDeclaration>();
+
+        public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node) =>
+            node.FindFirstParentOfType<EntityDeclaration>();
+
         public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode
         {
             node = node.Parent;
@@ -122,13 +131,10 @@ namespace ICSharpCode.NRefactory.CSharp
             return (T)node;
         }
 
-        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node) =>
-            node.FindFirstParentOfType<TypeDeclaration>();
+        public static T FindFirstChildOfType<T>(this AstNode node) where T : AstNode =>
+            node.FindFirstChildOfType<T>(n => true);
 
-        public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node) =>
-            node.FindFirstParentOfType<EntityDeclaration>();
-
-        public static T FindFirstChildOfType<T>(this AstNode node) where T : AstNode
+        public static T FindFirstChildOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
         {
             var children = new Queue<AstNode>(node.Children);
 
@@ -136,7 +142,8 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 var currentChild = children.Dequeue();
 
-                if (currentChild is T) return (T)currentChild;
+                var castCurrentChild = currentChild as T;
+                if (castCurrentChild != null && predicate(castCurrentChild)) return castCurrentChild;
 
                 foreach (var child in currentChild.Children)
                 {
