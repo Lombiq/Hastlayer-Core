@@ -85,6 +85,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 return CreateParentEntityBasedName(node, ilVariable.Name);
             }
 
+            if (node is PrimitiveExpression)
+            {
+                return ((PrimitiveExpression)node).Value.ToString();
+            }
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 

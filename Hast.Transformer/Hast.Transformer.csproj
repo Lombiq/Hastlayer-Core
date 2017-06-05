@@ -95,6 +95,7 @@
     <Compile Include="Extensions\InvocationInstanceCountTransformerConfigurationExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
     <Compile Include="Helpers\AstInsertionHelper.cs" />
+    <Compile Include="Helpers\ConstantValueSubstitutionHelper.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />
     <Compile Include="Models\ArraySizeHolder.cs" />
     <Compile Include="Models\DeclarationReferenceMetadata.cs" />
