@@ -39,22 +39,28 @@ namespace Hast.Transformer.Services
             var arraySizeHolder = new ArraySizeHolder();
             var constantValuesTable = new ConstantValuesTable();
 
+            var constantValuesMarkingVisitor = new ConstantValuesMarkingVisitor(
+                constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator, arraySizeHolder);
+            var globallyNonConstantValuesUnmarkingVisitor =
+                new GloballyNonConstantValuesUnmarkingVisitor(constantValuesTable, typeDeclarationLookupTable);
+            var constantValuesSubstitutingVisitor = new ConstantValuesSubstitutingVisitor(constantValuesTable, arraySizeHolder);
 
             string codeOutput;
+            var updatedArraysCount = 0;
             var passCount = 0;
             const int maxPassCount = 1000;
             do
             {
                 codeOutput = syntaxTree.ToString();
+                updatedArraysCount = constantValuesMarkingVisitor.ArraySizesUpdated.Count;
 
-                syntaxTree.AcceptVisitor(new ConstantValuesMarkingVisitor(
-                    constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator, arraySizeHolder));
-                syntaxTree.AcceptVisitor(new GloballyNonConstantValuesUnmarkingVisitor(
-                    constantValuesTable, typeDeclarationLookupTable));
-                syntaxTree.AcceptVisitor(new ConstantValuesSubstitutingVisitor(constantValuesTable, arraySizeHolder));
+                syntaxTree.AcceptVisitor(constantValuesMarkingVisitor);
+                syntaxTree.AcceptVisitor(globallyNonConstantValuesUnmarkingVisitor);
+                syntaxTree.AcceptVisitor(constantValuesSubstitutingVisitor);
 
                 passCount++;
-            } while ((codeOutput != syntaxTree.ToString() || passCount < 6) && passCount < maxPassCount);
+            } while ((codeOutput != syntaxTree.ToString() || constantValuesMarkingVisitor.ArraySizesUpdated.Count != updatedArraysCount) && 
+                    passCount < maxPassCount);
 
             if (passCount == maxPassCount)
             {
@@ -74,6 +80,8 @@ namespace Hast.Transformer.Services
             private readonly IAstExpressionEvaluator _astExpressionEvaluator;
             private readonly IArraySizeHolder _arraySizeHolder;
 
+            public HashSet<string> ArraySizesUpdated { get; }
+
 
             public ConstantValuesMarkingVisitor(
                 ConstantValuesTable constantValuesTable,
@@ -85,6 +93,8 @@ namespace Hast.Transformer.Services
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
                 _astExpressionEvaluator = astExpressionEvaluator;
                 _arraySizeHolder = arraySizeHolder;
+
+                ArraySizesUpdated = new HashSet<string>();
             }
 
 
@@ -224,11 +234,14 @@ namespace Hast.Transformer.Services
             {
                 var parent = arrayHolder.Parent;
 
+                Action<AstNode> updateArraySizesUpdated = node => ArraySizesUpdated.Add(node.GetFullName());
+
                 AssignmentExpression assignmentExpression;
 
                 if (parent.Is<AssignmentExpression>(out assignmentExpression))
                 {
                     _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
+                    updateArraySizesUpdated(assignmentExpression.Left);
                 }
                 else if (parent is InvocationExpression)
                 {
@@ -241,15 +254,17 @@ namespace Hast.Transformer.Services
                     if (parameter == null) return;
 
                     _arraySizeHolder.SetSize(parameter, arrayLength);
+                    updateArraySizesUpdated(parameter);
                 }
                 else if (parent is ObjectCreateExpression)
                 {
-                    _arraySizeHolder.SetSize(
-                        ConstantValueSubstitutionHelper.FindConstructorParameterForPassedExpression(
+                    var parameter = ConstantValueSubstitutionHelper.FindConstructorParameterForPassedExpression(
                             (ObjectCreateExpression)parent,
                             (Expression)arrayHolder,
-                            _typeDeclarationLookupTable),
-                        arrayLength);
+                            _typeDeclarationLookupTable);
+
+                    _arraySizeHolder.SetSize(parameter, arrayLength);
+                    updateArraySizesUpdated(parameter);
                 }
             }
         }
