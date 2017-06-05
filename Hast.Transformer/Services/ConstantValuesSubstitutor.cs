@@ -15,13 +15,13 @@ using Orchard.Validation;
 
 namespace Hast.Transformer.Services
 {
-    public class ConstantValuesSubstituter : IConstantValuesSubstituter
+    public class ConstantValuesSubstitutor : IConstantValuesSubstitutor
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly IAstExpressionEvaluator _astExpressionEvaluator;
 
 
-        public ConstantValuesSubstituter(
+        public ConstantValuesSubstitutor(
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             IAstExpressionEvaluator astExpressionEvaluator)
         {

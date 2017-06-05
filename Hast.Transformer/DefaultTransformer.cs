@@ -33,7 +33,7 @@ namespace Hast.Transformer
         private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
-        private readonly IConstantValuesSubstituter _constantValuesSubstituter;
+        private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
 
 
         public DefaultTransformer(
@@ -50,7 +50,7 @@ namespace Hast.Transformer
             IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
-            IConstantValuesSubstituter constantValuesSubstituter)
+            IConstantValuesSubstitutor constantValuesSubstitutor)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -65,7 +65,7 @@ namespace Hast.Transformer
             _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
-            _constantValuesSubstituter = constantValuesSubstituter;
+            _constantValuesSubstitutor = constantValuesSubstitutor;
         }
 
 
@@ -171,7 +171,7 @@ namespace Hast.Transformer
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
-            var arraySizeHolder = _constantValuesSubstituter.SubstituteConstantValues(syntaxTree);
+            var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree);
 
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
