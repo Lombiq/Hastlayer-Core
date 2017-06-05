@@ -39,13 +39,13 @@ namespace Hast.Transformer.Services
             var arraySizeHolder = new ArraySizeHolder();
             var constantValuesTable = new ConstantValuesTable();
 
+
             string codeOutput;
             var passCount = 0;
             const int maxPassCount = 1000;
             do
             {
                 codeOutput = syntaxTree.ToString();
-
 
                 syntaxTree.AcceptVisitor(new ConstantValuesMarkingVisitor(
                     constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator, arraySizeHolder));
@@ -132,7 +132,12 @@ namespace Hast.Transformer.Services
                     !primitiveExpression.IsIn<IfElseStatement>() &&
                     !primitiveExpression.IsIn<WhileStatement>())
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(assignmentExpression.Left, primitiveExpression);
+                    // Checking on MemberReferenceExpression because properties and fields can globally have a single
+                    // substitution.
+                    _constantValuesTable.MarkAsPotentiallyConstant(
+                        assignmentExpression.Left, 
+                        primitiveExpression,
+                        assignmentExpression.Left is MemberReferenceExpression);
                 }
                 else if (primitiveExpressionParent.Is<InvocationExpression>(out invocationExpression))
                 {
@@ -179,7 +184,7 @@ namespace Hast.Transformer.Services
                 else if (primitiveExpressionParent.Is<ObjectCreateExpression>(out objectCreateExpression))
                 {
                     var parameter = ConstantValueSubstitutionHelper.FindConstructorParameterForPassedExpression(
-                        objectCreateExpression, 
+                        objectCreateExpression,
                         primitiveExpression,
                         _typeDeclarationLookupTable);
 
@@ -345,6 +350,32 @@ namespace Hast.Transformer.Services
                         true);
                 }
             }
+
+            // Since fields and properties can be read even without initializing them they can be only substituted if 
+            // they are read-only (or just have their data type defaults assigned to them). This is possible with 
+            // readonly fields and auto-properties having only getters.
+            // So to prevent anything else from being substituted marking those as non-constant (this could be improved
+            // to still substitute the .NET default value if nothing else is assigned, but this should be exteremly rare).
+
+            public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
+            {
+                base.VisitPropertyDeclaration(propertyDeclaration);
+
+                if (propertyDeclaration.Setter != Accessor.Null)
+                {
+                    _constantValuesTable.MarkAsNonConstant(propertyDeclaration);
+                }
+            }
+
+            public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
+            {
+                base.VisitFieldDeclaration(fieldDeclaration);
+
+                if (!fieldDeclaration.HasModifier(Modifiers.Readonly))
+                {
+                    _constantValuesTable.MarkAsNonConstant(fieldDeclaration);
+                }
+            }
         }
 
         private class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
@@ -354,7 +385,7 @@ namespace Hast.Transformer.Services
 
 
             public ConstantValuesSubstitutingVisitor(
-                ConstantValuesTable constantValuesTable, 
+                ConstantValuesTable constantValuesTable,
                 IArraySizeHolder arraySizeHolder)
             {
                 _constantValuesTable = constantValuesTable;
@@ -508,13 +539,14 @@ namespace Hast.Transformer.Services
                 {
                     if (disallowDifferentValues)
                     {
-
                         PrimitiveExpression existingExpression;
-                        if (_constantValuedVariablesAndMembers.TryGetValue(name, out existingExpression) &&
-                            existingExpression != null)
+                        if (_constantValuedVariablesAndMembers.TryGetValue(name, out existingExpression))
                         {
                             // Simply using != would yield a reference equality check.
-                            if (!expression.Value.Equals(existingExpression.Value)) expression = null;
+                            if (existingExpression == null || !expression.Value.Equals(existingExpression.Value))
+                            {
+                                expression = null;
+                            }
                         }
                     }
 

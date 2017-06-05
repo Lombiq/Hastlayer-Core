@@ -1282,7 +1282,7 @@ begin
         Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\: \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._States\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_0\;
         Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
         Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditational55452594\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditional-946041062\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1290,7 +1290,7 @@ begin
                 \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Finished\ <= false;
                 \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_0\;
                 \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size\ := to_unsigned(0, 32);
-                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditational55452594\ := to_unsigned(0, 32);
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditional-946041062\ := to_unsigned(0, 32);
             else 
                 case \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ is 
                     when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_0\ => 
@@ -1315,7 +1315,7 @@ begin
                     when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_2\ => 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this.parameter.In\;
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size.parameter.In\;
-                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditational55452594\ := to_unsigned(5, 32);
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditional-946041062\ := to_unsigned(5, 32);
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\ArrayLength\ := to_unsigned(5, 32);
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\ArrayLengthCopy\ := to_unsigned(160, 32);
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\Array\ := (others => to_unsigned(0, 32));
@@ -1333,7 +1333,7 @@ begin
         Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\: \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._States\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_0\;
         Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
         Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational41991368\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional-946041062\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\: boolean := false;
         Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1345,7 +1345,7 @@ begin
                 \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Finished\ <= false;
                 \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_0\;
                 \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\ := to_unsigned(0, 32);
-                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational41991368\ := to_unsigned(0, 32);
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional-946041062\ := to_unsigned(0, 32);
                 \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\ := false;
                 \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
@@ -1391,13 +1391,13 @@ begin
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := shift_right(\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\, to_integer(to_signed(5, 32)));
-                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ + \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational41991368\;
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ + \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional-946041062\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\ => 
                         -- True branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
-                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational41991368\ := to_unsigned(0, 32);
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional-946041062\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
                         if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\) then 
                             \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\;
@@ -1405,7 +1405,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\ => 
                         -- False branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
-                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational41991368\ := to_unsigned(5, 32);
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional-946041062\ := to_unsigned(5, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
                         if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\) then 
                             \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\;
