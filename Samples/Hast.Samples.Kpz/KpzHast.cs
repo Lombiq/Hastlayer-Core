@@ -59,29 +59,25 @@ namespace Hast.Samples.Kpz
                 LogItFunction("Simulation target detected");
             }
 
-            LogItFunction("Testing FPGA with TestAdd...");
+            LogItFunction("Running TestAdd...");
             uint resultFpga = Kernels.TestAddWrapper(4313,123);
             uint resultCpu  = 4313+123;
             if(resultCpu == resultFpga) LogItFunction(String.Format("Success: {0} == {1}", resultFpga, resultCpu));
             else LogItFunction(String.Format("Fail: {0} != {1}", resultFpga, resultCpu));
 
-            if(kpzTarget != KpzTarget.FpgaSimulation)
+            LogItFunction("Running TestPrng...");
+            KpzKernelsInterface KernelsCpu = new KpzKernelsInterface();
+            uint[] resultPrngFpga = Kernels.TestPrngWrapper();
+            uint[] resultPrngCpu = KernelsCpu.TestPrngWrapper();
+            string numbersFpga = "", numbersCpu = "";
+            for (int i = 0; i < 10; i++)
             {
-                LogItFunction("Testing FPGA with TestPrng...");
-                uint[] resultPrngFpga = Kernels.TestPrngWrapper();
-                KpzKernelsInterface KernelsCpu = new KpzKernelsInterface();
-                uint[] resultPrngCpu = KernelsCpu.TestPrngWrapper();
-                string numbersFpga = "", numbersCpu = "";
-                for (int i = 0; i < 10; i++)
-                {
-                    numbersCpu += resultPrngCpu[i].ToString() + "";
-                    numbersFpga += resultPrngFpga[i].ToString() + "";
-                }
-                Console.WriteLine("TestPrng CPU results: " + numbersCpu);
-                Console.WriteLine("TestPrng FPGA results: " + numbersFpga);
-                LogItFunction("Done.");
+                numbersCpu += resultPrngCpu[i].ToString() + " ";
+                numbersFpga += resultPrngFpga[i].ToString() + " ";
             }
-
+            Console.WriteLine("TestPrng CPU results: " + numbersCpu);
+            if (kpzTarget != KpzTarget.FpgaSimulation) Console.WriteLine("TestPrng FPGA results: " + numbersFpga);
+            LogItFunction("Done.");
         }
     }
 }

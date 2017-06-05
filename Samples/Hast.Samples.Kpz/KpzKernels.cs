@@ -18,7 +18,8 @@ namespace Hast.Samples.Kpz
 
     public class KpzKernelsInterface
     {
-        public virtual void DoIteration(SimpleMemory memory)
+        //public virtual void DoIteration(SimpleMemory memory)
+        public void DoIteration(SimpleMemory memory)
         {
             KpzKernels kernels = new KpzKernels();
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
@@ -90,7 +91,8 @@ namespace Hast.Samples.Kpz
         public uint GetNextRandom1()
         {
             uint c = (uint)(randomState1 >> 32);
-            uint x = (uint)(randomState1 & 0xFFFFFFFFUL);
+            ulong xl = randomState1 & 0xffffffffUL;
+            uint x = (uint)xl;
             randomState1 = x * ((ulong)4294883355UL) + c;
             return x ^ c;
         }
@@ -240,7 +242,7 @@ namespace Hast.Samples.Kpz
                 CopyParametersToMemory(sm, testMode, randomSeed1, randomSeed2);
                 CopyFromGridToSimpleMemory(hostGrid, sm);
             }
-            kernels.DoIteration(sm);
+            // kernels.DoIteration(sm);
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
 
