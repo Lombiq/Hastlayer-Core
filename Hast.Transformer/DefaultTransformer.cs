@@ -21,6 +21,7 @@ namespace Hast.Transformer
     public class DefaultTransformer : ITransformer
     {
         private readonly ITransformerEventHandler _eventHandler;
+        private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
         private readonly IInvocationInstanceCountAdjuster _invocationInstanceCountAdjuster;
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
@@ -35,6 +36,7 @@ namespace Hast.Transformer
 
         public DefaultTransformer(
             ITransformerEventHandler eventHandler,
+            IJsonConverter jsonConverter,
             ISyntaxTreeCleaner syntaxTreeCleaner,
             IInvocationInstanceCountAdjuster invocationInstanceCountAdjuster,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
@@ -47,6 +49,7 @@ namespace Hast.Transformer
             IConstructorsToMethodsConverter constructorsToMethodsConverter)
         {
             _eventHandler = eventHandler;
+            _jsonConverter = jsonConverter;
             _syntaxTreeCleaner = syntaxTreeCleaner;
             _invocationInstanceCountAdjuster = invocationInstanceCountAdjuster;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
@@ -82,7 +85,7 @@ namespace Hast.Transformer
             transformationId +=
                 string.Join("-", configuration.PublicHardwareMemberFullNames) +
                 string.Join("-", configuration.PublicHardwareMemberNamePrefixes) +
-                string.Join(";", configuration.CustomConfiguration.OrderBy(kvp => kvp.Key).Select(x => x.Key + "=" + x.Value));
+                _jsonConverter.Serialize(configuration.CustomConfiguration);
 
 
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
