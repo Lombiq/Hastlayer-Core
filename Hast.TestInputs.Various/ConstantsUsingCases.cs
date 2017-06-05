@@ -61,7 +61,7 @@ namespace Hast.TestInputs.Various
             // These constructor parameters can be substituted.
             var arrayHolder = new ArrayHolder1(array);
             var arrayHolder2 = new ArrayHolder1((uint)arraySize);
-            var arrayHolder3 = new ArrayHolder1((uint)arraySize);
+            var arrayHolder3 = new ArrayHolder1((uint)array.Length);
 
             // These constructor parameters can't be substituted because there are different ones.
             var arrayHolder4 = new ArrayHolder2((uint)arraySize);
@@ -90,7 +90,7 @@ namespace Hast.TestInputs.Various
 
             public ArrayHolder1(uint size)
             {
-                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
+                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)5);
                 ArrayLengthCopy = ArrayLength << 5;
                 Array = new uint[ArrayLength];
             }
@@ -103,7 +103,7 @@ namespace Hast.TestInputs.Various
 
             public ArrayHolder2(uint size)
             {
-                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
+                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)5);
             }
         }
     }

@@ -171,7 +171,7 @@ namespace Hast.Transformer
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
-            _constantValuesSubstituter.SubstituteConstantValues(syntaxTree);
+            var arraySizeHolder = _constantValuesSubstituter.SubstituteConstantValues(syntaxTree);
 
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
@@ -190,7 +190,8 @@ namespace Hast.Transformer
                 Id = transformationId,
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
-                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree)
+                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
+                ArraySizeHolder = arraySizeHolder
             };
 
             _eventHandler.SyntaxTreeBuilt(context);

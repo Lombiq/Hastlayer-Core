@@ -346,7 +346,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var memberReference = (MemberReferenceExpression)expression;
 
                 // Handling array.Length with the VHDL length attribute.
-                if (memberReference.MemberName == "Length" && memberReference.Target.GetActualTypeReference().IsArray)
+                if (memberReference.IsArrayLengthAccess())
                 {
                     // The length will always be a 32b int, but since everything else is signed or unsigned, we need to
                     // convert.

@@ -96,8 +96,10 @@
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
     <Compile Include="Helpers\AstInsertionHelper.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />
+    <Compile Include="Models\ArraySizeHolder.cs" />
     <Compile Include="Models\DeclarationReferenceMetadata.cs" />
     <Compile Include="Models\HardwareEntryPointMemberMetadata.cs" />
+    <Compile Include="Models\IArraySizeHolder.cs" />
     <Compile Include="Models\ITransformationContext.cs" />
     <Compile Include="Models\TransformationContext.cs" />
     <Compile Include="Models\ITypeDeclarationLookupTable.cs" />

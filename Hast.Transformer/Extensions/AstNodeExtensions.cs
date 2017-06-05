@@ -63,6 +63,21 @@ namespace ICSharpCode.NRefactory.CSharp
                 return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
             }
 
+            if (node is Identifier)
+            {
+                return ((Identifier)node).Name;
+            }
+
+            if (node is Attribute)
+            {
+                return ((Attribute)node).Type.GetFullName();
+            }
+
+            if (node is TypeReferenceExpression)
+            {
+                return ((TypeReferenceExpression)node).Type.GetFullName();
+            }
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 

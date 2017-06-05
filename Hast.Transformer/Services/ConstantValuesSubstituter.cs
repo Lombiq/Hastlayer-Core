@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 using Orchard.Validation;
@@ -28,12 +29,14 @@ namespace Hast.Transformer.Services
         }
 
 
-        public void SubstituteConstantValues(SyntaxTree syntaxTree)
+        public IArraySizeHolder SubstituteConstantValues(SyntaxTree syntaxTree)
         {
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
 
             // Gradually propagating the constant values through the syntax tree so this needs multiple passes. So 
             // running them until nothing changes.
+
+            var arraySizeHolder = new ArraySizeHolder();
 
             string codeOutput;
             var passCount = 0;
@@ -45,10 +48,9 @@ namespace Hast.Transformer.Services
                 var constantValuesTable = new ConstantValuesTable();
 
                 syntaxTree.AcceptVisitor(new ConstantValuesMarkingVisitor(
-                    constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator));
-                syntaxTree.AcceptVisitor(new ConstantValuesSubstitutingVisitor(constantValuesTable));
+                    constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator, arraySizeHolder));
+                syntaxTree.AcceptVisitor(new ConstantValuesSubstitutingVisitor(constantValuesTable, arraySizeHolder));
 
-                File.WriteAllText("source.cs", syntaxTree.ToString());
                 passCount++;
             } while (codeOutput != syntaxTree.ToString() && passCount < maxPassCount);
 
@@ -58,6 +60,8 @@ namespace Hast.Transformer.Services
                     "Constant substitution needs more than " + maxPassCount +
                     "passes through the syntax tree. This most possibly indicates some error or the assembly being processed is exceptionally big.");
             }
+
+            return arraySizeHolder;
         }
 
 
@@ -66,16 +70,19 @@ namespace Hast.Transformer.Services
             private readonly ConstantValuesTable _constantValuesTable;
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
             private readonly IAstExpressionEvaluator _astExpressionEvaluator;
+            private readonly IArraySizeHolder _arraySizeHolder;
 
 
             public ConstantValuesMarkingVisitor(
                 ConstantValuesTable constantValuesTable,
                 ITypeDeclarationLookupTable typeDeclarationLookupTable,
-                IAstExpressionEvaluator astExpressionEvaluator)
+                IAstExpressionEvaluator astExpressionEvaluator,
+                IArraySizeHolder arraySizeHolder)
             {
                 _constantValuesTable = constantValuesTable;
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
                 _astExpressionEvaluator = astExpressionEvaluator;
+                _arraySizeHolder = arraySizeHolder;
             }
 
 
@@ -110,35 +117,22 @@ namespace Hast.Transformer.Services
                     primitiveExpression = newExpression;
                 }
 
+                AssignmentExpression assignmentExpression;
                 InvocationExpression invocationExpression;
                 ArrayCreateExpression arrayCreateExpression;
                 BinaryOperatorExpression binaryOperatorExpression;
                 ObjectCreateExpression objectCreateExpression;
                 ReturnStatement returnStatement;
 
-                Func<AstNode, bool> handleAssignmentExpression = parent =>
+
+                // Don't substitute if this is inside an if or while statement.
+                if (primitiveExpressionParent.Is<AssignmentExpression>(out assignmentExpression) &&
+                    !primitiveExpression.IsIn<IfElseStatement>() &&
+                    !primitiveExpression.IsIn<WhileStatement>())
                 {
-                    // Don't substitute if the value holder is not assigned to or if this is inside an if or while 
-                    // statement.
-
-                    var assignment = parent as AssignmentExpression;
-
-                    if (assignment == null) return false;
-
-                    if (primitiveExpression.IsIn<IfElseStatement>() || primitiveExpression.IsIn<WhileStatement>())
-                    {
-                        return false;
-                    }
-
-                    _constantValuesTable.MarkAsPotentiallyConstant(assignment.Left, primitiveExpression);
-
-                    return true;
-                };
-
-
-                if (handleAssignmentExpression(primitiveExpressionParent)) return;
-
-                if (primitiveExpressionParent.Is<InvocationExpression>(out invocationExpression))
+                    _constantValuesTable.MarkAsPotentiallyConstant(assignmentExpression.Left, primitiveExpression);
+                }
+                else if (primitiveExpressionParent.Is<InvocationExpression>(out invocationExpression))
                 {
                     _constantValuesTable.MarkAsPotentiallyConstant(
                             FindMethodParameterForPassedExpression(
@@ -147,12 +141,10 @@ namespace Hast.Transformer.Services
                             primitiveExpression,
                             true);
                 }
-                else if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression))
+                else if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression) &&
+                    arrayCreateExpression.Arguments.Single() == primitiveExpression)
                 {
-                    //if (!handleAssignmentExpression(arrayCreateExpression.Parent))
-                    //{
-                    //    Debugger.Break();
-                    //}
+                    PassLengthOfArrayHolderToParent(arrayCreateExpression, Convert.ToInt32(primitiveExpression.Value));
                 }
                 else if (primitiveExpressionParent.Is<BinaryOperatorExpression>(out binaryOperatorExpression))
                 {
@@ -174,10 +166,10 @@ namespace Hast.Transformer.Services
 
                         _constantValuesTable.MarkAsPotentiallyConstant(binaryOperatorExpression, newExpression);
 
-                        AssignmentExpression assignmentExpression;
-                        if (binaryOperatorExpression.Parent.Is<AssignmentExpression>(out assignmentExpression))
+                        AssignmentExpression assignment;
+                        if (binaryOperatorExpression.Parent.Is<AssignmentExpression>(out assignment))
                         {
-                            _constantValuesTable.MarkAsNonConstant(assignmentExpression.Left);
+                            _constantValuesTable.MarkAsNonConstant(assignment.Left);
                         }
                     }
                 }
@@ -187,12 +179,12 @@ namespace Hast.Transformer.Services
 
                     _constantValuesTable.MarkAsPotentiallyConstant(parameter, primitiveExpression, true);
                 }
-                else if (primitiveExpressionParent.Is<ReturnStatement>(out returnStatement) && 
+                else if (primitiveExpressionParent.Is<ReturnStatement>(out returnStatement) &&
                     returnStatement.Expression == primitiveExpression)
                 {
                     _constantValuesTable.MarkAsPotentiallyConstant(
-                        primitiveExpression.FindFirstParentEntityDeclaration(), 
-                        primitiveExpression, 
+                        primitiveExpression.FindFirstParentEntityDeclaration(),
+                        primitiveExpression,
                         true);
                 }
             }
@@ -225,25 +217,42 @@ namespace Hast.Transformer.Services
                 }
             }
 
+            protected override void VisitChildren(AstNode node)
+            {
+                base.VisitChildren(node);
+
+                if ((!(node is IdentifierExpression) &&
+                    !(node is MemberReferenceExpression)) ||
+                    node.GetActualTypeReference()?.IsArray == false)
+                {
+                    return;
+                }
+
+                var existingSize = _arraySizeHolder.GetSize(node);
+
+                if (existingSize == null) return;
+
+                PassLengthOfArrayHolderToParent(node, existingSize.Length);
+            }
 
             private ParameterDeclaration FindConstructorParameterForPassedExpression(
                 ObjectCreateExpression objectCreateExpression,
                 Expression passedExpression) =>
-                FindParameterForExpressionPassedToInvocation(objectCreateExpression, objectCreateExpression.Arguments, passedExpression);
+                FindParameterForExpressionPassedToCall(objectCreateExpression, objectCreateExpression.Arguments, passedExpression);
 
             private ParameterDeclaration FindMethodParameterForPassedExpression(
                 InvocationExpression invocationExpression,
                 Expression passedExpression) =>
-                FindParameterForExpressionPassedToInvocation(invocationExpression, invocationExpression.Arguments, passedExpression);
+                FindParameterForExpressionPassedToCall(invocationExpression, invocationExpression.Arguments, passedExpression);
 
             // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression()
             // and VisitInvocationExpression().
-            private ParameterDeclaration FindParameterForExpressionPassedToInvocation(
-                Expression invocationExpression,
+            private ParameterDeclaration FindParameterForExpressionPassedToCall(
+                Expression callExpression,
                 AstNodeCollection<Expression> invocationArguments,
                 Expression passedExpression)
             {
-                var methodDefinition = invocationExpression.Annotation<MethodDefinition>();
+                var methodDefinition = callExpression.Annotation<MethodDefinition>();
 
                 if (methodDefinition == null) return null;
 
@@ -251,7 +260,7 @@ namespace Hast.Transformer.Services
                     .Parameters[invocationArguments.ToList().FindIndex(argumentExpression => argumentExpression == passedExpression)]
                     .Name;
 
-                var constructorFullName = invocationExpression.GetFullName();
+                var constructorFullName = callExpression.GetFullName();
 
                 return ((MethodDeclaration)_typeDeclarationLookupTable
                     .Lookup(methodDefinition.DeclaringType.FullName)
@@ -260,16 +269,43 @@ namespace Hast.Transformer.Services
                     .Parameters
                     .Single(p => p.Name == parameterSimpleName);
             }
+
+            private void PassLengthOfArrayHolderToParent(AstNode arrayHolder, int arrayLength)
+            {
+                var parent = arrayHolder.Parent;
+
+                AssignmentExpression assignmentExpression;
+
+                if (parent.Is<AssignmentExpression>(out assignmentExpression))
+                {
+                    _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
+                }
+                else if (parent is InvocationExpression)
+                {
+                    _arraySizeHolder.SetSize(
+                        FindMethodParameterForPassedExpression((InvocationExpression)parent, (Expression)arrayHolder),
+                        arrayLength);
+                }
+                else if (parent is ObjectCreateExpression)
+                {
+                    _arraySizeHolder.SetSize(
+                        FindConstructorParameterForPassedExpression((ObjectCreateExpression)parent, (Expression)arrayHolder),
+                        arrayLength);
+                }
+            }
         }
 
         private class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
         {
             private readonly ConstantValuesTable _constantValuesTable;
+            private readonly IArraySizeHolder _arraySizeHolder;
 
 
-            public ConstantValuesSubstitutingVisitor(ConstantValuesTable constantValuesTable)
+            public ConstantValuesSubstitutingVisitor(
+                ConstantValuesTable constantValuesTable, IArraySizeHolder arraySizeHolder)
             {
                 _constantValuesTable = constantValuesTable;
+                _arraySizeHolder = arraySizeHolder;
             }
 
 
@@ -323,6 +359,24 @@ namespace Hast.Transformer.Services
                 // If this is a member reference to a method then nothing to do.
                 if (memberReferenceExpression.Parent.Is<InvocationExpression>(invocation => invocation.Target == memberReferenceExpression))
                 {
+                    return;
+                }
+
+                if (memberReferenceExpression.IsArrayLengthAccess())
+                {
+                    var arraySize = _arraySizeHolder.GetSize(memberReferenceExpression.Target);
+
+                    if (arraySize != null)
+                    {
+                        var newExpression = new PrimitiveExpression(arraySize.Length);
+                        var typeInformation = memberReferenceExpression.Annotation<TypeInformation>();
+                        if (typeInformation != null)
+                        {
+                            newExpression.AddAnnotation(typeInformation);
+                        }
+                        memberReferenceExpression.ReplaceWith(newExpression);
+                    }
+
                     return;
                 }
 

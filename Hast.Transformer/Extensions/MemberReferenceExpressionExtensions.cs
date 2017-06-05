@@ -99,5 +99,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 return memberReferenceExpression.FindFirstParentTypeDeclaration();
             }
         }
+
+        /// <summary>
+        /// Determines if the member reference is an access to an array's Length property.
+        /// </summary>
+        public static bool IsArrayLengthAccess(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualTypeReference().IsArray;
     }
 }
