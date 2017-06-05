@@ -60,6 +60,10 @@ namespace Hast.TestInputs.Various
 
             // These constructor parameters can be substituted.
             var arrayHolder = new ArrayHolder1(array);
+            var array1 = arrayHolder.Array;
+            var arrayLength1 = arrayHolder.ArrayLength;
+            var arrayLengthCopy1 = arrayHolder.ArrayLengthCopy;
+            var NonSubstitutableArrayLengthCopy1 = arrayHolder.NonSubstitutableArrayLengthCopy;
             var arrayHolder2 = new ArrayHolder1((uint)arraySize);
             var arrayHolder3 = new ArrayHolder1((uint)array.Length);
 
@@ -78,6 +82,7 @@ namespace Hast.TestInputs.Various
         {
             public uint ArrayLength { get; }
             public uint ArrayLengthCopy { get; }
+            public uint NonSubstitutableArrayLengthCopy { get; set; }
             public uint[] Array { get; }
 
 
@@ -85,6 +90,7 @@ namespace Hast.TestInputs.Various
             {
                 ArrayLength = (uint)array.Length;
                 ArrayLengthCopy = ArrayLength << 5;
+                NonSubstitutableArrayLengthCopy = ArrayLengthCopy;
                 Array = new uint[ArrayLength];
             }
 
@@ -92,6 +98,7 @@ namespace Hast.TestInputs.Various
             {
                 ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)5);
                 ArrayLengthCopy = ArrayLength << 5;
+                NonSubstitutableArrayLengthCopy = ArrayLengthCopy;
                 Array = new uint[ArrayLength];
             }
         }
