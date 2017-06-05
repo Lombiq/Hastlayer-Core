@@ -31,7 +31,6 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
         private readonly IEnumTypesCreator _enumTypesCreator;
-        private readonly IArrayLengthSetter _arrayLengthSetter;
         private readonly IPocoTransformer _pocoTransformer;
 
 
@@ -46,7 +45,6 @@ namespace Hast.Transformer.Vhdl.Services
             IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
             IEnumTypesCreator enumTypesCreator,
-            IArrayLengthSetter arrayLengthSetter,
             IPocoTransformer pocoTransformer)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
@@ -59,7 +57,6 @@ namespace Hast.Transformer.Vhdl.Services
             _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
             _enumTypesCreator = enumTypesCreator;
-            _arrayLengthSetter = arrayLengthSetter;
             _pocoTransformer = pocoTransformer;
         }
 
@@ -129,10 +126,6 @@ namespace Hast.Transformer.Vhdl.Services
                 enumDeclarationsBlock.Add(new LineComment("Enum declarations end"));
                 architecture.Declarations.Add(enumDeclarationsBlock);
             }
-
-
-            // Preparing arrays passed as method parameters
-            _arrayLengthSetter.SetArrayParameterSizes(syntaxTree);
 
 
             // Doing transformations

@@ -249,7 +249,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         member.Target.Is<TypeReferenceExpression>(type =>
                             _typeConverter.ConvertAstType(
                                 type.Type, 
-                                context.TransformationContext.TypeDeclarationLookupTable) == SpecialTypes.Task),
+                                context.TransformationContext) == SpecialTypes.Task),
                         out memberReference)))
                 {
                     var memberName = memberReference.MemberName;

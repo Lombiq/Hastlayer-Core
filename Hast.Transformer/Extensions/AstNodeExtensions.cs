@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.Decompiler.ILAst;
 using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp
@@ -20,7 +21,7 @@ namespace ICSharpCode.NRefactory.CSharp
             if (memberReference != null) return memberReference.FullName;
 
             var parameterReference = node.Annotation<ParameterReference>();
-            if (parameterReference != null) return CreateEntityBasedName(node, parameterReference.Name);
+            if (parameterReference != null) return CreateParentEntityBasedName(node, parameterReference.Name);
 
             if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
 
@@ -43,12 +44,12 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (node is IdentifierExpression)
             {
-                return CreateEntityBasedName(node, ((IdentifierExpression)node).Identifier);
+                return CreateParentEntityBasedName(node, ((IdentifierExpression)node).Identifier);
             }
 
             if (node is BinaryOperatorExpression)
             {
-                return CreateEntityBasedName(node, node.ToString());
+                return CreateParentEntityBasedName(node, node.ToString());
             }
 
             if (node is IndexerExpression)
@@ -76,6 +77,12 @@ namespace ICSharpCode.NRefactory.CSharp
             if (node is TypeReferenceExpression)
             {
                 return ((TypeReferenceExpression)node).Type.GetFullName();
+            }
+
+            var ilVariable = node.Annotation<ILVariable>();
+            if (ilVariable != null)
+            {
+                return CreateParentEntityBasedName(node, ilVariable.Name);
             }
 
             throw new InvalidOperationException("This node doesn't have a name.");
@@ -205,7 +212,7 @@ namespace ICSharpCode.NRefactory.CSharp
         }
 
 
-        private static string CreateEntityBasedName(AstNode node, string name) => 
+        private static string CreateParentEntityBasedName(AstNode node, string name) => 
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
     }
 }

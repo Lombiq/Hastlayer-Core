@@ -221,7 +221,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Managing signals for parameter passing.
                 var targetParameter = methodParametersEnumerator.Current;
                 var parameterSignalType = _typeConverter
-                    .ConvertParameterType(targetParameter, context.TransformationContext.TypeDeclarationLookupTable);
+                    .ConvertParameterType(targetParameter, context.TransformationContext);
 
                 Func<ParameterFlowDirection, Assignment> createParameterAssignment = (flowDirection) =>
                 {
@@ -379,7 +379,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             var returnType = _typeConverter
-                .ConvertAstType(targetDeclaration.ReturnType, context.TransformationContext.TypeDeclarationLookupTable);
+                .ConvertAstType(targetDeclaration.ReturnType, context.TransformationContext);
 
             if (returnType == KnownDataTypes.Void)
             {

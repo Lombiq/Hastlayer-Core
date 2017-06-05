@@ -93,7 +93,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             };
 
             var expression = partiallyTransformedExpression.BinaryOperatorExpression;
-            var typeDeclarationLookupTable = context.TransformationContext.TypeDeclarationLookupTable;
 
             // Would need to decide between + and & or sll/srl and sra/sla
             // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
@@ -173,7 +172,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
             }
 
-            var resultType = _typeConverter.ConvertTypeReference(resultTypeReference, typeDeclarationLookupTable);
+            var resultType = _typeConverter.ConvertTypeReference(resultTypeReference, context.TransformationContext);
             var resultTypeSize = resultType.GetSize();
 
 
@@ -227,14 +226,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var leftTypeSize = 0;
             if (leftTypeReference != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
             {
-                leftType = _typeConverter.ConvertTypeReference(leftTypeReference, typeDeclarationLookupTable);
+                leftType = _typeConverter.ConvertTypeReference(leftTypeReference, context.TransformationContext);
                 leftTypeSize = leftType.GetSize();
             }
             DataType rightType = null;
             var rightTypeSize = 0;
             if (rightTypeReference != null)
             {
-                rightType = _typeConverter.ConvertTypeReference(rightTypeReference, typeDeclarationLookupTable);
+                rightType = _typeConverter.ConvertTypeReference(rightTypeReference, context.TransformationContext);
                 rightTypeSize = rightType.GetSize();
             }
 
@@ -265,7 +264,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (firstNonParenthesizedExpressionParent is CastExpression)
             {
                 binaryElement = _typeConversionTransformer.ImplementTypeConversion(
-                    _typeConverter.ConvertTypeReference(preCastTypeReference, typeDeclarationLookupTable),
+                    _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext),
                     resultType,
                     binaryElement).Expression;
             }

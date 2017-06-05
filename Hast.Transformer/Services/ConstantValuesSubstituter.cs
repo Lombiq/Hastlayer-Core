@@ -52,7 +52,7 @@ namespace Hast.Transformer.Services
                 syntaxTree.AcceptVisitor(new ConstantValuesSubstitutingVisitor(constantValuesTable, arraySizeHolder));
 
                 passCount++;
-            } while (codeOutput != syntaxTree.ToString() && passCount < maxPassCount);
+            } while ((codeOutput != syntaxTree.ToString() || passCount < 6) && passCount < maxPassCount);
 
             if (passCount == maxPassCount)
             {
@@ -222,7 +222,7 @@ namespace Hast.Transformer.Services
                 base.VisitChildren(node);
 
                 if ((!(node is IdentifierExpression) &&
-                    !(node is MemberReferenceExpression)) ||
+                    (!(node is MemberReferenceExpression) || IsMethodInvocation((MemberReferenceExpression)node))) ||
                     node.GetActualTypeReference()?.IsArray == false)
                 {
                     return;
@@ -256,18 +256,24 @@ namespace Hast.Transformer.Services
 
                 if (methodDefinition == null) return null;
 
-                var parameterSimpleName = methodDefinition
-                    .Parameters[invocationArguments.ToList().FindIndex(argumentExpression => argumentExpression == passedExpression)]
-                    .Name;
+                var targetFullName = callExpression.GetFullName();
 
-                var constructorFullName = callExpression.GetFullName();
-
-                return ((MethodDeclaration)_typeDeclarationLookupTable
+                var parameters = ((MethodDeclaration)_typeDeclarationLookupTable
                     .Lookup(methodDefinition.DeclaringType.FullName)
                     .Members
-                    .Single(member => member.GetFullName() == constructorFullName))
+                    .Single(member => member.GetFullName() == targetFullName))
                     .Parameters
-                    .Single(p => p.Name == parameterSimpleName);
+                    .ToList();
+
+                var arguments = invocationArguments.ToList();
+                var argumentIndex = arguments.FindIndex(argumentExpression => argumentExpression == passedExpression);
+
+                // Depending on whether a @this parameter was added to the method or used during invocation we need to
+                // adjust the argument's index if there is a mismatch between the invocation and the method.
+                if (parameters.Count < arguments.Count) argumentIndex--;
+                else if (parameters.Count > arguments.Count) argumentIndex++;
+
+                return parameters[argumentIndex];
             }
 
             private void PassLengthOfArrayHolderToParent(AstNode arrayHolder, int arrayLength)
@@ -282,9 +288,12 @@ namespace Hast.Transformer.Services
                 }
                 else if (parent is InvocationExpression)
                 {
-                    _arraySizeHolder.SetSize(
-                        FindMethodParameterForPassedExpression((InvocationExpression)parent, (Expression)arrayHolder),
-                        arrayLength);
+                    var parameter = FindMethodParameterForPassedExpression((InvocationExpression)parent, (Expression)arrayHolder);
+
+                    // The parameter can be null for special invocations like Task.WhenAll().
+                    if (parameter == null) return;
+
+                    _arraySizeHolder.SetSize(parameter, arrayLength);
                 }
                 else if (parent is ObjectCreateExpression)
                 {
@@ -293,6 +302,10 @@ namespace Hast.Transformer.Services
                         arrayLength);
                 }
             }
+
+
+            public static bool IsMethodInvocation(MemberReferenceExpression memberReferenceExpression) =>
+                memberReferenceExpression.Parent.Is<InvocationExpression>(invocation => invocation.Target == memberReferenceExpression);
         }
 
         private class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
@@ -357,10 +370,7 @@ namespace Hast.Transformer.Services
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
                 // If this is a member reference to a method then nothing to do.
-                if (memberReferenceExpression.Parent.Is<InvocationExpression>(invocation => invocation.Target == memberReferenceExpression))
-                {
-                    return;
-                }
+                if (ConstantValuesMarkingVisitor.IsMethodInvocation(memberReferenceExpression)) return;
 
                 if (memberReferenceExpression.IsArrayLengthAccess())
                 {

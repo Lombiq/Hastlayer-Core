@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 base.VisitArrayCreateExpression(arrayCreateExpression);
 
                 var elementType = _typeConverter
-                    .ConvertAstType(arrayCreateExpression.GetElementType(), _context.TypeDeclarationLookupTable);
+                    .ConvertAstType(arrayCreateExpression.GetElementType(), _context);
 
                 if (_arrayDeclarations.ContainsKey(elementType.Name)) return;
 
