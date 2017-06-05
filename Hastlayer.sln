@@ -64,7 +64,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Various", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Invalid", "Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj", "{BB94F93A-F607-4A19-8127-7C8D333F8131}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Common.Tests", "Hast.Common.Tests\Hast.Common.Tests.csproj", "{E77C13E5-DA6A-4A9D-9601-B17BDBFE50BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Common.Tests", "Hast.Common\Hast.Common.Tests\Hast.Common.Tests.csproj", "{E77C13E5-DA6A-4A9D-9601-B17BDBFE50BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
