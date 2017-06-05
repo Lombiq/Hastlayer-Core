@@ -81,18 +81,7 @@ namespace Hast.Common.Numerics
             return true;
         }
 
-        public static bool operator !=(BitMask left, BitMask right)
-        {
-            if (!ReferenceEquals(left, right)) return false;
-            if (left == null && right == null) return false;
-            if (left == null || right == null) return true;
-            if (left.Size != right.Size) return true;
-
-            for (int i = 0; i < left.SegmentCount; i++)
-                if (left.Segments[i] != right.Segments[i]) return true;
-
-            return false;
-        }
+        public static bool operator !=(BitMask left, BitMask right) => !(left == right);
 
         public static BitMask operator +(BitMask left, uint right) => left + new BitMask(new uint[] { right }, left.Size);
 
