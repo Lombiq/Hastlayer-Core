@@ -10,7 +10,7 @@ namespace Hast.TestInputs.Invalid
                 () =>
                 {
                     input = 4;
-                    return true;
+                    return input == 5;
                 });
         }
     }

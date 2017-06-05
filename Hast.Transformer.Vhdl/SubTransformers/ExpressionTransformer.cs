@@ -206,8 +206,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         var arguments = invocationExpression.Arguments;
 
+                        var funcCreateExpression = (ObjectCreateExpression)arguments.First();
+
+                        if (funcCreateExpression.Arguments.Single() is PrimitiveExpression)
+                        {
+                            throw new InvalidOperationException(
+                                "The return value of the Task started as " + invocationExpression.ToString() +
+                                " was substituted with a constant (" + funcCreateExpression.Arguments.Single().ToString() +
+                                "). This means that the body of the Task isn't computing anything. Most possibly this is not what you wanted.");
+                        }
+
                         var targetMethod = (MethodDeclaration)TaskParallelizationHelper
-                            .GetTargetDisplayClassMemberFromFuncCreation((ObjectCreateExpression)arguments.First())
+                            .GetTargetDisplayClassMemberFromFuncCreation(funcCreateExpression)
                             .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                         var targetMaxDegreeOfParallelism = context.TransformationContext
                             .GetTransformerConfiguration()

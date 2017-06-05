@@ -29,7 +29,7 @@ namespace Hast.Transformer.Models
                 IArraySize existingSize;
                 if (_arraySizes.TryGetValue(key, out existingSize) && existingSize.Length != length)
                 {
-                    throw new InvalidOperationException(
+                    throw new NotSupportedException(
                         "Array sizes should be statically defined but the array stored in the array holder \"" +
                         key + "\" has multiple length assigned (previously it had a length of " + existingSize.Length +
                         " and secondly a  length of " + length +
