@@ -34,6 +34,7 @@ namespace Hast.Transformer
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
         private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
+        private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
 
 
         public DefaultTransformer(
@@ -50,7 +51,8 @@ namespace Hast.Transformer
             IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
-            IConstantValuesSubstitutor constantValuesSubstitutor)
+            IConstantValuesSubstitutor constantValuesSubstitutor,
+            IOperatorsToMethodsConverter operatorsToMethodsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -66,6 +68,7 @@ namespace Hast.Transformer
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
             _constantValuesSubstitutor = constantValuesSubstitutor;
+            _operatorsToMethodsConverter = operatorsToMethodsConverter;
         }
 
 
@@ -168,6 +171,7 @@ namespace Hast.Transformer
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
+            _operatorsToMethodsConverter.ConvertOperatorsToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);

@@ -96,6 +96,7 @@
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
     <Compile Include="Helpers\AstInsertionHelper.cs" />
     <Compile Include="Helpers\ConstantValueSubstitutionHelper.cs" />
+    <Compile Include="Helpers\MethodDeclarationFactory.cs" />
     <Compile Include="Helpers\Sha2456Helper.cs" />
     <Compile Include="IMemberSuitabilityChecker.cs" />
     <Compile Include="Models\ArraySizeHolder.cs" />
@@ -123,10 +124,12 @@
     <Compile Include="Services\InstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\IObjectVariableTypesConverter.cs" />
+    <Compile Include="Services\IOperatorsToMethodsConverter.cs" />
     <Compile Include="Services\ISyntaxTreeCleaner.cs" />
     <Compile Include="Services\NoForPatternStatementTransform.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
     <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
+    <Compile Include="Services\OperatorsToMethodsConverter.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />
