@@ -626,6 +626,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var initiailizationResult = InitializeRecord(expression, objectCreateExpression.Type, context);
 
+                if (initiailizationResult.RecordInstanceIdentifier == null)
+                {
+                    throw new NotSupportedException(
+                        "Passing newly created objects to methods or constructors is not supported. Assign the object to a variable first.");
+                }
+
                 // Running the constructor, which needs to be done before intializers.
                 var constructor = context.TransformationContext.TypeDeclarationLookupTable
                     .Lookup(objectCreateExpression.Type)
@@ -681,9 +687,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 // The only case when a default() will remain in the syntax tree is for composed types. For primitives
                 // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
-                InitializeRecord(expression, ((DefaultValueExpression)expression).Type, context);
+                var initiailizationResult = InitializeRecord(expression, ((DefaultValueExpression)expression).Type, context);
 
-                // There is no need for struct instantiation per se, nothing should be on the right side of an assignment.
+                if (initiailizationResult.ShouldReturnReference) return initiailizationResult.RecordInstanceReference;
+
+                // There is no need for struct instantiation per se if the value was originally passed assigned to a
+                // variable/field/property, nothing should be on the right side of an assignment.
                 return Empty.Instance;
             }
             else
@@ -713,16 +722,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 context.Scope.CurrentBlock.Add(new LineComment("Initializing record fields to their defaults."));
             }
 
-            // This will only work if the newly created object is assigned to a variable or something else. It won't
-            // work if the newly created object is directly passed to a method for example.
-            var recordInstanceAssignmentTarget = expression
-                .FindFirstParentOfType<AssignmentExpression>()
-                .Left;
-            var recordInstanceIdentifier =
-                recordInstanceAssignmentTarget is IdentifierExpression || recordInstanceAssignmentTarget is IndexerExpression ?
-                    recordInstanceAssignmentTarget :
-                    recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
-            var recordInstanceReference = (IDataObject)Transform(recordInstanceIdentifier, context);
+            var result = new RecordInitializationResult { Record = record };
+
+            var parentAssignment = expression.FindFirstParentOfType<AssignmentExpression>();
+
+            if (parentAssignment != null)
+            {
+                // This will only work if the newly created object is assigned to a variable or something else. It won't
+                // work if the newly created object is directly passed to a method for example.
+                var recordInstanceAssignmentTarget = parentAssignment.Left;
+                result.RecordInstanceIdentifier =
+                    recordInstanceAssignmentTarget is IdentifierExpression || recordInstanceAssignmentTarget is IndexerExpression ?
+                        recordInstanceAssignmentTarget :
+                        recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
+                result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
+            }
+            else
+            {
+                result.ShouldReturnReference = true;
+                result.RecordInstanceReference = context.Scope.StateMachine
+                    .CreateVariableWithNextUnusedIndexedName("instance", record)
+                    .ToReference();
+            }
 
             foreach (var field in record.Fields)
             {
@@ -745,24 +766,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     AssignTo = new RecordFieldAccess
                     {
-                        Instance = recordInstanceReference,
+                        Instance = result.RecordInstanceReference,
                         FieldName = field.Name
                     },
                     Expression = initializationValue
                 });
             }
 
-            return new RecordInitializationResult
-            {
-                Record = record,
-                RecordInstanceReference = recordInstanceReference,
-                RecordInstanceIdentifier = recordInstanceIdentifier
-            };
+            return result;
         }
 
 
         private class RecordInitializationResult
         {
+            public bool ShouldReturnReference { get; set; }
             public Record Record { get; set; }
             public IDataObject RecordInstanceReference { get; set; }
             public Expression RecordInstanceIdentifier { get; set; }
