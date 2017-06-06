@@ -364,6 +364,8 @@ namespace Hast.Transformer.Services
             // readonly fields and auto-properties having only getters.
             // So to prevent anything else from being substituted marking those as non-constant (this could be improved
             // to still substitute the .NET default value if nothing else is assigned, but this should be exteremly rare).
+            // With the scope-using substitution this restriction seems to be safe to remove, however since with read-
+            // only memmbers potentially constant values are also enforced in .NET it's safer to leave it like this.
 
             public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
             {
