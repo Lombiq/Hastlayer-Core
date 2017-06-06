@@ -2,6 +2,7 @@
 using Autofac;
 using Hast.Common.Configuration;
 using Hast.Communication;
+using Hast.Samples.Kpz;
 using Hast.Samples.SampleAssembly;
 using Lombiq.OrchardAppHost;
 using NUnit.Framework;
@@ -28,7 +29,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly },
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(KpzKernelsInterface).Assembly },
                     configuration =>
                     {
                         // Only testing well-tested samples.
@@ -59,6 +60,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             });
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
+
+                        configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
