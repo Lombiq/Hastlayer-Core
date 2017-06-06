@@ -18,11 +18,15 @@ namespace Hast.Samples.SampleAssembly
             var number = memory.ReadInt32(AddToUnum_InputInt32Index);
 
             Unum unum = 10;
+            // Adding this line only because otherwise the whole data structure would be cleaned up as unused.
+            var sign = unum.SignBit;
 
             int x = (int)unum;
             Unum y = number;
 
             var result = number + unum;
+
+            memory.WriteInt32(AddToUnum_OutputInt32Index, (int)result);
         }
     }
 
