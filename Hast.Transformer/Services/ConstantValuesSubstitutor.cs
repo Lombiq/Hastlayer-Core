@@ -266,6 +266,11 @@ namespace Hast.Transformer.Services
                     _arraySizeHolder.SetSize(parameter, arrayLength);
                     updateArraySizesUpdated(parameter);
                 }
+                else if (parent is VariableInitializer)
+                {
+                    _arraySizeHolder.SetSize(parent, arrayLength);
+                    updateArraySizesUpdated(parent);
+                }
             }
         }
 

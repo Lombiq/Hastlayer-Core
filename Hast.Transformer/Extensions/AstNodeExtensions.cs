@@ -90,6 +90,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 return ((PrimitiveExpression)node).Value.ToString();
             }
 
+            if (node is VariableInitializer)
+            {
+                return node.FindFirstParentEntityDeclaration().GetFullName();
+            }
+
             throw new InvalidOperationException("This node doesn't have a name.");
         }
 
