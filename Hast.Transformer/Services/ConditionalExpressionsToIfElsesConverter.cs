@@ -8,6 +8,7 @@ using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.ILAst;
 using ICSharpCode.NRefactory.CSharp;
 
+
 namespace Hast.Transformer.Services
 {
     public class ConditionalExpressionsToIfElsesConverter : IConditionalExpressionsToIfElsesConverter
@@ -32,7 +33,7 @@ namespace Hast.Transformer.Services
                     !(assignment.Left is IdentifierExpression) ||
                     !(assignment.Parent is ExpressionStatement))
                 {
-                    var variableName = "conditational" + conditionalExpression.GetHashCode().ToString();
+                    var variableName = "conditational" + Sha2456Helper.ComputeHash(conditionalExpression.ToString());
                     var variableTypeReference = conditionalExpression.GetActualTypeReference();
 
                     // First creating a variable for the result.

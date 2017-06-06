@@ -59,7 +59,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
-            var typeDeclarationLookupTable = context.TransformationContext.TypeDeclarationLookupTable;
 
 
             Func<DataObjectReference, IVhdlElement> implementTypeConversionForBinaryExpressionParent = reference =>
@@ -142,6 +141,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
+                    InvocationExpression invocationExpression;
+
                     // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
                     // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
                     var rightObjectCreateExpression = assignment.Right as ObjectCreateExpression;
@@ -170,9 +171,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         invocation.Target.Is<MemberReferenceExpression>(member =>
                             member.MemberName == "StartNew" &&
                             member.Target.Is<IdentifierExpression>(identifier =>
-                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier)))))
+                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier))), 
+                        out invocationExpression))
                     {
-                        var taskStartArguments = ((InvocationExpression)assignment.Right).Arguments;
+                        var taskStartArguments = invocationExpression.Arguments;
 
                         // The first argument is always for the Func that referes to the method on the DisplayClass
                         // generated for the lambda expression originally passed to the Task factory.
@@ -199,14 +201,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             memberReference.MemberName == "StartNew" &&
                             memberReference.Target.GetFullName().Contains("System.Threading.Tasks.Task::Factory")) &&
                         invocation.Arguments.First().Is<ObjectCreateExpression>(objectCreate =>
-                            objectCreate.Type.GetFullName().Contains("Func"))))
+                            objectCreate.Type.GetFullName().Contains("Func")),
+                        out invocationExpression))
                     {
-                        var inovocationExpression = (InvocationExpression)assignment.Right;
-                        var arguments = inovocationExpression.Arguments;
+                        var arguments = invocationExpression.Arguments;
+
+                        var funcCreateExpression = (ObjectCreateExpression)arguments.First();
+
+                        if (funcCreateExpression.Arguments.Single() is PrimitiveExpression)
+                        {
+                            throw new InvalidOperationException(
+                                "The return value of the Task started as " + invocationExpression.ToString() +
+                                " was substituted with a constant (" + funcCreateExpression.Arguments.Single().ToString() +
+                                "). This means that the body of the Task isn't computing anything. Most possibly this is not what you wanted.");
+                        }
 
                         var targetMethod = (MethodDeclaration)TaskParallelizationHelper
-                            .GetTargetDisplayClassMemberFromFuncCreation((ObjectCreateExpression)arguments.First())
-                            .GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                            .GetTargetDisplayClassMemberFromFuncCreation(funcCreateExpression)
+                            .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                         var targetMaxDegreeOfParallelism = context.TransformationContext
                             .GetTransformerConfiguration()
                             .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod)
@@ -245,7 +257,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var typeReference = expression.GetActualTypeReference();
                 if (typeReference != null)
                 {
-                    var type = _typeConverter.ConvertTypeReference(typeReference, typeDeclarationLookupTable);
+                    var type = _typeConverter.ConvertTypeReference(typeReference, context.TransformationContext);
                     var valueString = primitive.Value.ToString();
                     // Replacing decimal comma to decimal dot.
                     if (type.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
@@ -262,12 +274,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // without these functions.
                     if (type.Name == KnownDataTypes.Int8.Name || type.Name == KnownDataTypes.UInt8.Name)
                     {
-                        var value = Convert.ToInt64(valueString);
+                        var binaryLiteral = string.Empty;
 
-                        if (value < -2147483648 || value > 2147483647)
+                        if (type.Name == KnownDataTypes.Int8.Name)
                         {
-                            var binaryLiteral = Convert.ToString(value, 2);
+                            var value = Convert.ToInt64(valueString);
+                            if (value < -2147483648 || value > 2147483647) binaryLiteral = Convert.ToString(value, 2);
+                        }
+                        else
+                        {
+                            var value = Convert.ToUInt64(valueString);
+                            if (value > 2147483647) binaryLiteral = Convert.ToString((long)value, 2);
+                        }
 
+                        if (!string.IsNullOrEmpty(binaryLiteral))
+                        {
                             scope.CurrentBlock.Add(new LineComment(
                                 "Since the integer literal " + valueString + 
                                 " was out of the VHDL integer range it was substituted with a binary literal (" +
@@ -284,7 +305,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var reference = new DataObjectReference
                     {
                         DataObjectKind = DataObjectKind.Constant,
-                        Name = primitive.ToString()
+                        Name = primitive.Value.ToString()
                     };
 
                     return implementTypeConversionForBinaryExpressionParent(reference);
@@ -293,7 +314,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     return primitive.Value
                         .ToString()
-                        .ToVhdlValue(_typeConverter.ConvertAstType(((CastExpression)primitive.Parent).Type, typeDeclarationLookupTable));
+                        .ToVhdlValue(_typeConverter.ConvertAstType(((CastExpression)primitive.Parent).Type, context.TransformationContext));
                 }
 
                 throw new InvalidOperationException(
@@ -343,7 +364,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var memberReference = (MemberReferenceExpression)expression;
 
                 // Handling array.Length with the VHDL length attribute.
-                if (memberReference.MemberName == "Length" && memberReference.Target.GetActualTypeReference().IsArray)
+                if (memberReference.IsArrayLengthAccess())
                 {
                     // The length will always be a 32b int, but since everything else is signed or unsigned, we need to
                     // convert.
@@ -448,7 +469,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                 var expressionSize = _typeConverter
-                    .ConvertTypeReference(unary.Expression.GetActualTypeReference(), typeDeclarationLookupTable)
+                    .ConvertTypeReference(unary.Expression.GetActualTypeReference(), context.TransformationContext)
                     .GetSize();
                 var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForUnaryOperation(unary, expressionSize, false);
 
@@ -511,8 +532,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var castExpression = (CastExpression)expression;
 
                 var fromTypeReference = castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference();
-                var fromType = _typeConverter.ConvertTypeReference(fromTypeReference, typeDeclarationLookupTable);
-                var toType = _typeConverter.ConvertAstType(castExpression.Type, typeDeclarationLookupTable);
+                var fromType = _typeConverter.ConvertTypeReference(fromTypeReference, context.TransformationContext);
+                var toType = _typeConverter.ConvertAstType(castExpression.Type, context.TransformationContext);
 
                 var innerExpressionResult = Transform(castExpression.Expression, context);
 
@@ -533,7 +554,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     if (resultDataObjectDeclaration != null)
                     {
-                        fromType = resultDataObjectDeclaration.DataType;
+                        if (resultDataObjectDeclaration.DataType is Record)
+                        {
+                            fromType = ((Record)resultDataObjectDeclaration.DataType)
+                                .Fields
+                                .Single(field => field.Name == ((RecordFieldAccess)resultDataObject).FieldName)
+                                .DataType;
+                        }
+                        else fromType = resultDataObjectDeclaration.DataType;
                     }
                 }
 
@@ -577,7 +605,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Array = targetVariableReference,
                     IndexExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
-                            _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), typeDeclarationLookupTable),
+                            _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), context.TransformationContext),
                             KnownDataTypes.UnrangedInt,
                             Transform(indexExpression, context))
                         .Expression
@@ -674,12 +702,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // initialize all record fields to their default or initial values (otherwise if e.g. a class is
             // instantiated in a loop in the second run the old values could be accessed in VHDL).
 
-            var typeDeclarationLookupTable = context.TransformationContext.TypeDeclarationLookupTable;
-            var typeDeclaration = typeDeclarationLookupTable.Lookup(recordAstType);
+            var typeDeclaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(recordAstType);
 
             if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(recordAstType.GetFullName());
 
-            var record = _recordComposer.CreateRecordFromType(typeDeclaration, typeDeclarationLookupTable);
+            var record = _recordComposer.CreateRecordFromType(typeDeclaration, context.TransformationContext);
 
             if (record.Fields.Any())
             {

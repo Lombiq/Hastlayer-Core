@@ -28,9 +28,19 @@ architecture Imp of Hast_IP is
 
     -- Custom inter-dependent type declarations start
     type \signed_Array\ is array (integer range <>) of signed(31 downto 0);
+    type \unsigned_Array\ is array (integer range <>) of unsigned(31 downto 0);
     type \boolean_Array\ is array (integer range <>) of boolean;
     type \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\ is record 
         \Array\: \signed_Array\(0 to 4);
+    end record;
+    type \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\ is record 
+        \ArrayLength\: unsigned(31 downto 0);
+        \ArrayLengthCopy\: unsigned(31 downto 0);
+        \NonSubstitutableArrayLengthCopy\: unsigned(31 downto 0);
+        \Array\: \unsigned_Array\(0 to 4);
+    end record;
+    type \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\ is record 
+        \ArrayLength\: unsigned(31 downto 0);
     end record;
     -- Custom inter-dependent type declarations end
 
@@ -46,22 +56,6 @@ architecture Imp of Hast_IP is
     Signal \RootClass::VirtualMethod(Int32).0._Started\: boolean := false;
     Signal \RootClass::VirtualMethod(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 declarations end
-
-
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32).0 declarations start
-    -- State machine states:
-    type \BaseClass::BaseClassMethod1(Int32).0._States\ is (
-        \BaseClass::BaseClassMethod1(Int32).0._State_0\, 
-        \BaseClass::BaseClassMethod1(Int32).0._State_1\, 
-        \BaseClass::BaseClassMethod1(Int32).0._State_2\);
-    -- Signals:
-    Signal \BaseClass::BaseClassMethod1(Int32).0._Finished\: boolean := false;
-    Signal \BaseClass::BaseClassMethod1(Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \BaseClass::BaseClassMethod1(Int32).0.this.parameter.Out\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
-    Signal \BaseClass::BaseClassMethod1(Int32).0._Started\: boolean := false;
-    Signal \BaseClass::BaseClassMethod1(Int32).0.this.parameter.In\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
-    Signal \BaseClass::BaseClassMethod1(Int32).0.a.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32).0 declarations end
 
 
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 declarations start
@@ -86,18 +80,12 @@ architecture Imp of Hast_IP is
         \ComplexTypeHierarchy::Interface1Method2().0._State_1\, 
         \ComplexTypeHierarchy::Interface1Method2().0._State_2\, 
         \ComplexTypeHierarchy::Interface1Method2().0._State_3\, 
-        \ComplexTypeHierarchy::Interface1Method2().0._State_4\, 
-        \ComplexTypeHierarchy::Interface1Method2().0._State_5\);
+        \ComplexTypeHierarchy::Interface1Method2().0._State_4\);
     -- Signals:
     Signal \ComplexTypeHierarchy::Interface1Method2().0._Finished\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.Out.0\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0._Started\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.In.0\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Finished.0\: boolean := false;
-    Signal \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\: boolean := false;
     Signal \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\: boolean := false;
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 declarations end
@@ -261,16 +249,149 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 declarations end
 
 
-    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 declarations start
+    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 declarations start
     -- State machine states:
-    type \CastingCases::NumberCasting().0._States\ is (
-        \CastingCases::NumberCasting().0._State_0\, 
-        \CastingCases::NumberCasting().0._State_1\, 
-        \CastingCases::NumberCasting().0._State_2\);
+    type \CastingCases::NumberCasting(Int16,Int16).0._States\ is (
+        \CastingCases::NumberCasting(Int16,Int16).0._State_0\, 
+        \CastingCases::NumberCasting(Int16,Int16).0._State_1\, 
+        \CastingCases::NumberCasting(Int16,Int16).0._State_2\);
     -- Signals:
-    Signal \CastingCases::NumberCasting().0._Finished\: boolean := false;
-    Signal \CastingCases::NumberCasting().0._Started\: boolean := false;
-    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 declarations end
+    Signal \CastingCases::NumberCasting(Int16,Int16).0._Finished\: boolean := false;
+    Signal \CastingCases::NumberCasting(Int16,Int16).0._Started\: boolean := false;
+    Signal \CastingCases::NumberCasting(Int16,Int16).0.a.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
+    Signal \CastingCases::NumberCasting(Int16,Int16).0.b.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
+    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[]).0 declarations start
+    -- State machine states:
+    type \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._States\ is (
+        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_0\, 
+        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_1\, 
+        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_2\);
+    -- Signals:
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Finished\: boolean := false;
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.Out\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.Out\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Started\: boolean := false;
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.In\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.In\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[]).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32).0 declarations start
+    -- State machine states:
+    type \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._States\ is (
+        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_0\, 
+        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_1\, 
+        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_2\);
+    -- Signals:
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Finished\: boolean := false;
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this.parameter.Out\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Started\: boolean := false;
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this.parameter.In\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32).0 declarations start
+    -- State machine states:
+    type \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._States\ is (
+        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_0\, 
+        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_1\, 
+        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\, 
+        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\, 
+        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\, 
+        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\);
+    -- Signals:
+    Signal \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Finished\: boolean := false;
+    Signal \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this.parameter.Out\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+    Signal \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Started\: boolean := false;
+    Signal \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this.parameter.In\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+    Signal \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32).0 declarations start
+    -- State machine states:
+    type \ConstantsUsingCases::ConstantValuedVariables(Int32).0._States\ is (
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\, 
+        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\);
+    -- Signals:
+    Signal \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToMethod(System.Int32).0 declarations start
+    -- State machine states:
+    type \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._States\ is (
+        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_0\, 
+        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_1\, 
+        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_2\, 
+        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_3\);
+    -- Signals:
+    Signal \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Finished\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input1.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input2.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Started.0\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Started\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Finished.0\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToMethod(System.Int32).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject().0 declarations start
+    -- State machine states:
+    type \ConstantsUsingCases::ConstantPassingToObject().0._States\ is (
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_0\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_1\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_2\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_3\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_4\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_5\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_6\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_7\);
+    -- Signals:
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0._Finished\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.Out.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.Out.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.Out.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0._Started\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Finished.0\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Finished.0\: boolean := false;
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject().0 declarations end
+
+
+    -- System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32).0 declarations start
+    -- State machine states:
+    type \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._States\ is (
+        \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_0\, 
+        \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_1\, 
+        \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_2\);
+    -- Signals:
+    Signal \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Finished\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Started\: boolean := false;
+    Signal \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input1.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32).0 declarations end
 
 
     -- System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input declarations start
@@ -364,7 +485,10 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Finished.0\: boolean := false;
@@ -377,7 +501,10 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
@@ -433,56 +560,6 @@ begin
     -- System.Void Hast.TestInputs.ClassStructure1.RootClass::VirtualMethod(System.Int32).0 state machine end
 
 
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32).0 state machine start
-    \BaseClass::BaseClassMethod1(Int32).0._StateMachine\: process (\Clock\) 
-        Variable \BaseClass::BaseClassMethod1(Int32).0._State\: \BaseClass::BaseClassMethod1(Int32).0._States\ := \BaseClass::BaseClassMethod1(Int32).0._State_0\;
-        Variable \BaseClass::BaseClassMethod1(Int32).0.this\: \Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass\;
-        Variable \BaseClass::BaseClassMethod1(Int32).0.a\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BaseClass::BaseClassMethod1(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \BaseClass::BaseClassMethod1(Int32).0._Finished\ <= false;
-                \BaseClass::BaseClassMethod1(Int32).0.return\ <= to_signed(0, 32);
-                \BaseClass::BaseClassMethod1(Int32).0._State\ := \BaseClass::BaseClassMethod1(Int32).0._State_0\;
-                \BaseClass::BaseClassMethod1(Int32).0.a\ := to_signed(0, 32);
-                \BaseClass::BaseClassMethod1(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
-            else 
-                case \BaseClass::BaseClassMethod1(Int32).0._State\ is 
-                    when \BaseClass::BaseClassMethod1(Int32).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\BaseClass::BaseClassMethod1(Int32).0._Started\ = true) then 
-                            \BaseClass::BaseClassMethod1(Int32).0._State\ := \BaseClass::BaseClassMethod1(Int32).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \BaseClass::BaseClassMethod1(Int32).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\BaseClass::BaseClassMethod1(Int32).0._Started\ = true) then 
-                            \BaseClass::BaseClassMethod1(Int32).0._Finished\ <= true;
-                        else 
-                            \BaseClass::BaseClassMethod1(Int32).0._Finished\ <= false;
-                            \BaseClass::BaseClassMethod1(Int32).0._State\ := \BaseClass::BaseClassMethod1(Int32).0._State_0\;
-                        end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \BaseClass::BaseClassMethod1(Int32).0.this.parameter.Out\ <= \BaseClass::BaseClassMethod1(Int32).0.this\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \BaseClass::BaseClassMethod1(Int32).0._State_2\ => 
-                        \BaseClass::BaseClassMethod1(Int32).0.this\ := \BaseClass::BaseClassMethod1(Int32).0.this.parameter.In\;
-                        \BaseClass::BaseClassMethod1(Int32).0.a\ := \BaseClass::BaseClassMethod1(Int32).0.a.parameter.In\;
-                        \BaseClass::BaseClassMethod1(Int32).0.binaryOperationResult.0\ := \BaseClass::BaseClassMethod1(Int32).0.a\ + to_signed(1, 32);
-                        \BaseClass::BaseClassMethod1(Int32).0.return\ <= \BaseClass::BaseClassMethod1(Int32).0.binaryOperationResult.0\;
-                        \BaseClass::BaseClassMethod1(Int32).0._State\ := \BaseClass::BaseClassMethod1(Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32).0 state machine end
-
-
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0 state machine start
     \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State\: \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._States\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_0\;
@@ -535,18 +612,15 @@ begin
     \ComplexTypeHierarchy::Interface1Method2().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::Interface1Method2().0._State\: \ComplexTypeHierarchy::Interface1Method2().0._States\ := \ComplexTypeHierarchy::Interface1Method2().0._State_0\;
         Variable \ComplexTypeHierarchy::Interface1Method2().0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.return.0\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ComplexTypeHierarchy::Interface1Method2().0._Finished\ <= false;
-                \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_0\;
                 \ComplexTypeHierarchy::Interface1Method2().0.num\ := to_signed(0, 32);
-                \ComplexTypeHierarchy::Interface1Method2().0.return.0\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::Interface1Method2().0._State\ is 
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_0\ => 
@@ -567,32 +641,21 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32)
-                        \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.Out.0\ <= to_signed(4, 32);
-                        \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\ <= true;
+                        \ComplexTypeHierarchy::Interface1Method2().0.num\ := to_signed(5, 32);
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
+                        \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32)
-                        if (\ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Finished.0\) then 
-                            \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\ <= false;
-                            \ComplexTypeHierarchy::Interface1Method2().0.return.0\ := \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).return.0\;
-                            \ComplexTypeHierarchy::Interface1Method2().0.num\ := \ComplexTypeHierarchy::Interface1Method2().0.return.0\;
-                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
-                            \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
-                            \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ComplexTypeHierarchy::Interface1Method2().0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
-                            \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_5\;
+                            \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ComplexTypeHierarchy::Interface1Method2().0._State_5\ => 
+                    when \ComplexTypeHierarchy::Interface1Method2().0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
@@ -1098,7 +1161,7 @@ begin
                             \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\ <= false;
                             \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\ := \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.In.0\;
                             \ArrayUsingCases::PassArrayToConstructor().0.array\ := \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.In.0\;
-                            \ArrayUsingCases::PassArrayToConstructor().0.num\ := to_signed(\ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\.\Array\'length, 32);
+                            \ArrayUsingCases::PassArrayToConstructor().0.num\ := to_signed(5, 32);
                             \ArrayUsingCases::PassArrayToConstructor().0._State\ := \ArrayUsingCases::PassArrayToConstructor().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1109,60 +1172,622 @@ begin
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 state machine end
 
 
-    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 state machine start
-    \CastingCases::NumberCasting().0._StateMachine\: process (\Clock\) 
-        Variable \CastingCases::NumberCasting().0._State\: \CastingCases::NumberCasting().0._States\ := \CastingCases::NumberCasting().0._State_0\;
-        Variable \CastingCases::NumberCasting().0.num\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \CastingCases::NumberCasting().0.num2\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \CastingCases::NumberCasting().0.num3\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \CastingCases::NumberCasting().0.num4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \CastingCases::NumberCasting().0.binaryOperationResult.0\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \CastingCases::NumberCasting().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 state machine start
+    \CastingCases::NumberCasting(Int16,Int16).0._StateMachine\: process (\Clock\) 
+        Variable \CastingCases::NumberCasting(Int16,Int16).0._State\: \CastingCases::NumberCasting(Int16,Int16).0._States\ := \CastingCases::NumberCasting(Int16,Int16).0._State_0\;
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.a\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.b\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.num\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \CastingCases::NumberCasting().0._Finished\ <= false;
-                \CastingCases::NumberCasting().0._State\ := \CastingCases::NumberCasting().0._State_0\;
-                \CastingCases::NumberCasting().0.num\ := to_signed(0, 16);
-                \CastingCases::NumberCasting().0.num2\ := to_signed(0, 16);
-                \CastingCases::NumberCasting().0.num3\ := to_signed(0, 16);
-                \CastingCases::NumberCasting().0.num4\ := to_signed(0, 32);
-                \CastingCases::NumberCasting().0.binaryOperationResult.0\ := to_signed(0, 16);
-                \CastingCases::NumberCasting().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \CastingCases::NumberCasting(Int16,Int16).0._Finished\ <= false;
+                \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_0\;
+                \CastingCases::NumberCasting(Int16,Int16).0.a\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.b\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.num\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.num2\ := to_signed(0, 32);
+                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
-                case \CastingCases::NumberCasting().0._State\ is 
-                    when \CastingCases::NumberCasting().0._State_0\ => 
+                case \CastingCases::NumberCasting(Int16,Int16).0._State\ is 
+                    when \CastingCases::NumberCasting(Int16,Int16).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\CastingCases::NumberCasting().0._Started\ = true) then 
-                            \CastingCases::NumberCasting().0._State\ := \CastingCases::NumberCasting().0._State_2\;
+                        if (\CastingCases::NumberCasting(Int16,Int16).0._Started\ = true) then 
+                            \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \CastingCases::NumberCasting().0._State_1\ => 
+                    when \CastingCases::NumberCasting(Int16,Int16).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\CastingCases::NumberCasting().0._Started\ = true) then 
-                            \CastingCases::NumberCasting().0._Finished\ <= true;
+                        if (\CastingCases::NumberCasting(Int16,Int16).0._Started\ = true) then 
+                            \CastingCases::NumberCasting(Int16,Int16).0._Finished\ <= true;
                         else 
-                            \CastingCases::NumberCasting().0._Finished\ <= false;
-                            \CastingCases::NumberCasting().0._State\ := \CastingCases::NumberCasting().0._State_0\;
+                            \CastingCases::NumberCasting(Int16,Int16).0._Finished\ <= false;
+                            \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \CastingCases::NumberCasting().0._State_2\ => 
-                        \CastingCases::NumberCasting().0.num\ := to_signed(2, 16);
-                        \CastingCases::NumberCasting().0.num2\ := to_signed(345, 16);
-                        \CastingCases::NumberCasting().0.binaryOperationResult.0\ := resize(\CastingCases::NumberCasting().0.num\ * \CastingCases::NumberCasting().0.num2\, 16);
-                        \CastingCases::NumberCasting().0.num3\ := \CastingCases::NumberCasting().0.binaryOperationResult.0\;
-                        \CastingCases::NumberCasting().0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting().0.num\ * \CastingCases::NumberCasting().0.num2\, 32);
-                        \CastingCases::NumberCasting().0.num4\ := (\CastingCases::NumberCasting().0.binaryOperationResult.1\);
-                        \CastingCases::NumberCasting().0._State\ := \CastingCases::NumberCasting().0._State_1\;
+                    when \CastingCases::NumberCasting(Int16,Int16).0._State_2\ => 
+                        \CastingCases::NumberCasting(Int16,Int16).0.a\ := \CastingCases::NumberCasting(Int16,Int16).0.a.parameter.In\;
+                        \CastingCases::NumberCasting(Int16,Int16).0.b\ := \CastingCases::NumberCasting(Int16,Int16).0.b.parameter.In\;
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 16);
+                        \CastingCases::NumberCasting(Int16,Int16).0.num\ := \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\;
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
+                        \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
+                        \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting().0 state machine end
+    -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[]).0 state machine start
+    \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._StateMachine\: process (\Clock\) 
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\: \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._States\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_0\;
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Finished\ <= false;
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.Out\ <= (others => to_unsigned(0, 32));
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_0\;
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array\ := (others => to_unsigned(0, 32));
+            else 
+                case \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\ is 
+                    when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Started\ = true) then 
+                            \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Started\ = true) then 
+                            \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Finished\ <= true;
+                        else 
+                            \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Finished\ <= false;
+                            \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.Out\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\;
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.Out\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_2\ => 
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.In\;
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.In\;
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\ArrayLength\ := to_unsigned(5, 32);
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\ArrayLengthCopy\ := to_unsigned(160, 32);
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(160, 32);
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\Array\ := (others => to_unsigned(0, 32));
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[]).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32).0 state machine start
+    \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._StateMachine\: process (\Clock\) 
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\: \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._States\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_0\;
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditational109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Finished\ <= false;
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_0\;
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size\ := to_unsigned(0, 32);
+                \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditational109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(0, 32);
+            else 
+                case \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ is 
+                    when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Started\ = true) then 
+                            \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Started\ = true) then 
+                            \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Finished\ <= true;
+                        else 
+                            \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Finished\ <= false;
+                            \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this.parameter.Out\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_2\ => 
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this.parameter.In\;
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size.parameter.In\;
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditational109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(5, 32);
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\ArrayLength\ := to_unsigned(5, 32);
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\ArrayLengthCopy\ := to_unsigned(160, 32);
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(160, 32);
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\Array\ := (others => to_unsigned(0, 32));
+                        \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32).0 state machine start
+    \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._StateMachine\: process (\Clock\) 
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\: \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._States\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_0\;
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\: boolean := false;
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Finished\ <= false;
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_0\;
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\ := to_unsigned(0, 32);
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(0, 32);
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\ := false;
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+            else 
+                case \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ is 
+                    when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Started\ = true) then 
+                            \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Started\ = true) then 
+                            \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Finished\ <= true;
+                        else 
+                            \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Finished\ <= false;
+                            \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this.parameter.Out\ <= \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\ => 
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this.parameter.In\;
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size.parameter.In\;
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\ mod to_unsigned(32, 32);
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ = 0;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\ and ends in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
+                        --     * The false branch starts in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\ and ends in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\.
+                        --     * Execution after either branch will continue in the following state: \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\.
+
+                        if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\) then 
+                            \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\;
+                        else 
+                            \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\ => 
+                        -- State after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := shift_right(\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\, to_integer(to_signed(5, 32)));
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ + \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\;
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\;
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\ => 
+                        -- True branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
+                        if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\) then 
+                            \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\ => 
+                        -- False branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditational109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(5, 32);
+                        -- Going to the state after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\.
+                        if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\) then 
+                            \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32).0 state machine start
+    \ConstantsUsingCases::ConstantValuedVariables(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\: \ConstantsUsingCases::ConstantValuedVariables(Int32).0._States\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\;
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\: \signed_Array\(0 to 36) := (others => to_signed(0, 32));
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\: boolean := false;
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\: boolean := false;
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\ <= false;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num3\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num4\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\ := (others => to_signed(0, 32));
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\ := false;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\ := false;
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\ := false;
+            else 
+                case \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ is 
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\ <= true;
+                        else 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\ <= false;
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\ => 
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input.parameter.In\;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num\ := to_signed(4, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\ := to_signed(36, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\ := to_signed(37, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num3\ := to_signed(148, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\ := to_signed(148, 32) + \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num4\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\ := (others => to_signed(0, 32));
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := to_signed(5, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\ < to_signed(5, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\ and ends in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\.
+                        --     * Execution after either branch will continue in the following state: \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\.
+
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\ => 
+                        -- State after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(153, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\ := False;
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(163, 32);
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\ => 
+                        -- True branch of the if-else started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
+                        \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := to_signed(13, 32);
+                        -- Going to the state after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
+                        if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ = \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\) then 
+                            \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToMethod(System.Int32).0 state machine start
+    \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State\: \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._States\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_0\;
+        Variable \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Finished\ <= false;
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input1.parameter.Out.0\ <= to_signed(0, 32);
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input2.parameter.Out.0\ <= to_signed(0, 32);
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Started.0\ <= false;
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_0\;
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num2\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num3\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.return.0\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+            else 
+                case \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State\ is 
+                    when \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Finished\ <= true;
+                        else 
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Finished\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_2\ => 
+                        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input.parameter.In\;
+                        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num\ := to_signed(15, 32);
+                        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num2\ := to_signed(145, 32);
+                        -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32)
+                        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input1.parameter.Out.0\ <= to_signed(145, 32);
+                        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input2.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input\;
+                        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Started.0\ <= true;
+                        \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32)
+                        if (\ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.return.0\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).return.0\;
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.binaryOperationResult.0\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.return.0\ + to_signed(298, 32);
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num3\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.binaryOperationResult.0\;
+                            \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToMethod(System.Int32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject().0 state machine start
+    \ConstantsUsingCases::ConstantPassingToObject().0._StateMachine\: process (\Clock\) 
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0._State\: \ConstantsUsingCases::ConstantPassingToObject().0._States\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_0\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.array\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.array2\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayLength\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayLengthCopy\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.nonSubstitutableArrayLengthCopy\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ConstantsUsingCases::ConstantPassingToObject().0._Finished\ <= false;
+                \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\ <= (others => to_unsigned(0, 32));
+                \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ <= false;
+                \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(0, 32);
+                \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
+                \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(0, 32);
+                \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= false;
+                \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_0\;
+                \ConstantsUsingCases::ConstantPassingToObject().0.num\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantPassingToObject().0.array\ := (others => to_unsigned(0, 32));
+                \ConstantsUsingCases::ConstantPassingToObject().0.array2\ := (others => to_unsigned(0, 32));
+                \ConstantsUsingCases::ConstantPassingToObject().0.arrayLength\ := to_unsigned(0, 32);
+                \ConstantsUsingCases::ConstantPassingToObject().0.arrayLengthCopy\ := to_unsigned(0, 32);
+                \ConstantsUsingCases::ConstantPassingToObject().0.nonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
+            else 
+                case \ConstantsUsingCases::ConstantPassingToObject().0._State\ is 
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0._Finished\ <= true;
+                        else 
+                            \ConstantsUsingCases::ConstantPassingToObject().0._Finished\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_2\ => 
+                        \ConstantsUsingCases::ConstantPassingToObject().0.num\ := to_signed(5, 32);
+                        \ConstantsUsingCases::ConstantPassingToObject().0.array\ := (others => to_unsigned(0, 32));
+                        -- Initializing record fields to their defaults.
+                        \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\ArrayLength\ := to_unsigned(0, 32);
+                        \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\ArrayLengthCopy\ := to_unsigned(0, 32);
+                        \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
+                        \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\Array\ := (others => to_unsigned(0, 32));
+                        -- Invoking the target's constructor.
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[])
+                        \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\;
+                        \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.array\;
+                        \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ <= true;
+                        \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[])
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.array\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.array2\ := \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\Array\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayLength\ := to_unsigned(5, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayLengthCopy\ := to_unsigned(160, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.nonSubstitutableArrayLengthCopy\ := \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\NonSubstitutableArrayLengthCopy\;
+                            -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\ArrayLength\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\ArrayLengthCopy\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\Array\ := (others => to_unsigned(0, 32));
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(5, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= true;
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_4\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
+                            -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\ArrayLength\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\ArrayLengthCopy\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\Array\ := (others => to_unsigned(0, 32));
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(5, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= true;
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_5\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
+                            -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\ArrayLength\ := to_unsigned(0, 32);
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(5, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= true;
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\;
+                            -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\ArrayLength\ := to_unsigned(0, 32);
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(13, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= true;
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_7\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject().0 state machine end
+
+
+    -- System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32).0 state machine start
+    \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State\: \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._States\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_0\;
+        Variable \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Finished\ <= false;
+                \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.return\ <= to_signed(0, 32);
+                \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_0\;
+                \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input1\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2\ := to_signed(0, 32);
+                \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+            else 
+                case \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State\ is 
+                    when \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Started\ = true) then 
+                            \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Finished\ <= true;
+                        else 
+                            \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Finished\ <= false;
+                            \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_2\ => 
+                        \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input1\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input1.parameter.In\;
+                        \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2.parameter.In\;
+                        \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.binaryOperationResult.0\ := to_signed(298, 32) - \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2\;
+                        \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.return\ <= \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.binaryOperationResult.0\;
+                        \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32).0 state machine end
 
 
     -- System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32).0 state machine start
@@ -1496,7 +2121,10 @@ begin
                 \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
@@ -1580,13 +2208,34 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 11 => 
-                            if (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ = \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\ <= false;
+                            if (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ = \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when 12 => 
+                            if (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 13 => 
+                            if (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 14 => 
+                            if (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ = \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 15 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
@@ -1715,16 +2364,6 @@ begin
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod() end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32) start
-    -- Signal connections for System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 (#0):
-    \BaseClass::BaseClassMethod1(Int32).0._Started\ <= \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Started.0\;
-    \BaseClass::BaseClassMethod1(Int32).0.this.parameter.In\ <= \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.Out.0\;
-    \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32)._Finished.0\ <= \BaseClass::BaseClassMethod1(Int32).0._Finished\;
-    \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).return.0\ <= \BaseClass::BaseClassMethod1(Int32).0.return\;
-    \ComplexTypeHierarchy::Interface1Method2().0.BaseClass::BaseClassMethod1(Int32).this.parameter.In.0\ <= \BaseClass::BaseClassMethod1(Int32).0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.ClassStructure1.ComplexTypes.BaseClass::BaseClassMethod1(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod() start
@@ -2001,6 +2640,47 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32) start
+    -- Signal connections for System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToMethod(System.Int32).0 (#0):
+    \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Started\ <= \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Started.0\;
+    \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input1.parameter.In\ <= \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input1.parameter.Out.0\;
+    \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2.parameter.In\ <= \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input2.parameter.Out.0\;
+    \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32)._Finished.0\ <= \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._Finished\;
+    \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).return.0\ <= \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[]) start
+    -- Signal connections for System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject().0 (#0):
+    \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Started\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\;
+    \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.In\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.Out.0\;
+    \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.In\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\;
+    \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Finished.0\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Finished\;
+    \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.Out\;
+    \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[]) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32) start
+    -- Signal connections for System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject().0 (#0):
+    \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Started\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\;
+    \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this.parameter.In\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.Out.0\;
+    \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size.parameter.In\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\;
+    \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._Finished\;
+    \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32) start
+    -- Signal connections for System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject().0 (#0):
+    \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Started\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\;
+    \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this.parameter.In\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.Out.0\;
+    \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size.parameter.In\ <= \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\;
+    \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Finished.0\ <= \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._Finished\;
+    \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\ <= \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32) start
     -- Signal connections for System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32).0 (#0):
     \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._Started\ <= \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.0\;
@@ -2083,11 +2763,32 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting() start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
-    \CastingCases::NumberCasting().0._Started\ <= \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Started.0\;
-    \Hast::ExternalInvocationProxy().CastingCases::NumberCasting()._Finished.0\ <= \CastingCases::NumberCasting().0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting() end
+    \CastingCases::NumberCasting(Int16,Int16).0._Started\ <= \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\;
+    \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Finished.0\ <= \CastingCases::NumberCasting(Int16,Int16).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\ <= \ConstantsUsingCases::ConstantValuedVariables(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantValuedVariables(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToMethod(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Finished.0\ <= \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToMethod(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject() start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ConstantsUsingCases::ConstantPassingToObject().0._Started\ <= \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\;
+    \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32) start

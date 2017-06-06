@@ -34,7 +34,7 @@ namespace Hast.Transformer.Services
 
                 var parentType = methodDeclaration.FindFirstParentTypeDeclaration();
 
-                // We only have to deal with instance methods of non-hardware classes.
+                // We only have to deal with instance methods of non-hardware entry point classes.
                 if (methodDeclaration.HasModifier(Modifiers.Static) ||
                     methodDeclaration.IsHardwareEntryPointMember() ||
                     parentType.Members.Any(member => member.IsHardwareEntryPointMember()))

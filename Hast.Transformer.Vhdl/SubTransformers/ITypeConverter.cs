@@ -12,13 +12,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         DataType ConvertTypeReference(
             TypeReference typeReference,
-            ITypeDeclarationLookupTable typeDeclarationLookupTable);
+            IVhdlTransformationContext context);
 
-        DataType ConvertAstType(AstType type, ITypeDeclarationLookupTable typeDeclarationLookupTable);
+        DataType ConvertAstType(AstType type, IVhdlTransformationContext context);
         DataType ConvertAndDeclareAstType(
             AstType type, 
             IDeclarableElement declarable,
-            ITypeDeclarationLookupTable typeDeclarationLookupTable);
+            IVhdlTransformationContext context);
     }
 
 
@@ -27,7 +27,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public static DataType ConvertParameterType(
             this ITypeConverter typeConverter, 
             ParameterDeclaration parameter,
-            ITypeDeclarationLookupTable typeDeclarationLookupTable)
+            IVhdlTransformationContext context)
         {
             var parameterType = parameter.Annotation<ParameterDefinition>().ParameterType;
 
@@ -39,12 +39,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (!parameterType.IsArray)
             {
-                return typeConverter.ConvertTypeReference(parameterType, typeDeclarationLookupTable);
+                return typeConverter.ConvertTypeReference(parameterType, context);
             }
 
             return ArrayHelper.CreateArrayInstantiation(
-                typeConverter.ConvertTypeReference(parameterType.GetElementType(), typeDeclarationLookupTable),
-                parameter.Annotation<ParameterArrayLength>().Length);
+                typeConverter.ConvertTypeReference(parameterType.GetElementType(), context),
+                context.ArraySizeHolder.GetSizeOrThrow(parameter).Length);
         }
     }
 }

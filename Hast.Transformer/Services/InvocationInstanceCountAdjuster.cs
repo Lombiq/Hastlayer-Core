@@ -46,7 +46,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                var referencedMember = memberReferenceExpression.GetMemberDeclaration(_typeDeclarationLookupTable);
+                var referencedMember = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
                 if (referencedMember == null) return;
 

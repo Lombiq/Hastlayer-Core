@@ -243,17 +243,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 var waitTarget = ((MemberReferenceExpression)expression.Target).Target;
 
                 // Is it a Task.Something().Wait() call?
-                var memberName = string.Empty;
+                MemberReferenceExpression memberReference = null;
                 if (waitTarget.Is<InvocationExpression>(invocation =>
                     invocation.Target.Is<MemberReferenceExpression>(member =>
-                    {
-                        memberName = member.MemberName;
-                        return member.Target.Is<TypeReferenceExpression>(type =>
+                        member.Target.Is<TypeReferenceExpression>(type =>
                             _typeConverter.ConvertAstType(
                                 type.Type, 
-                                context.TransformationContext.TypeDeclarationLookupTable) == SpecialTypes.Task);
-                    })))
+                                context.TransformationContext) == SpecialTypes.Task),
+                        out memberReference)))
                 {
+                    var memberName = memberReference.MemberName;
                     if (memberName == "WhenAll" || memberName == "WhenAny")
                     {
                         // Since it's used in a WhenAll() or WhenAny() call the argument should be an array.
@@ -337,7 +336,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
             else
             {
-                targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                targetDeclaration = targetMemberReference.FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
             }
 
             if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))

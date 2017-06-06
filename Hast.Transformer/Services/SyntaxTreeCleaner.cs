@@ -35,7 +35,6 @@ namespace Hast.Transformer.Services
                 foreach (var member in type.Members)
                 {
                     var fullName = member.GetFullName();
-                    var z = _memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable);
                     if ((
                             (noIncludedMembers ||
                             configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
@@ -85,6 +84,8 @@ namespace Hast.Transformer.Services
             }
 
             // Note that at this point the reference counters are out of date and would need to be refreshed to be used.
+
+            syntaxTree.AcceptVisitor(new ReferenceMetadataCleanUpVisitor());
         }
 
 
@@ -136,7 +137,7 @@ namespace Hast.Transformer.Services
                 }
 
 
-                var member = memberReferenceExpression.GetMemberDeclaration(_typeDeclarationLookupTable);
+                var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
                 if (member == null || member.WasVisited()) return;
 
@@ -213,6 +214,16 @@ namespace Hast.Transformer.Services
             private static void RemoveIfUnreferenced(AstNode node)
             {
                 if (!node.IsReferenced()) node.Remove();
+            }
+        }
+
+        private class ReferenceMetadataCleanUpVisitor : DepthFirstAstVisitor
+        {
+            protected override void VisitChildren(AstNode node)
+            {
+                base.VisitChildren(node);
+
+                node.RemoveReferenceMetadata();
             }
         }
     }

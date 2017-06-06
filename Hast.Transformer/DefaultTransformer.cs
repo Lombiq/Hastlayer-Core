@@ -33,6 +33,7 @@ namespace Hast.Transformer
         private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
+        private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
 
 
         public DefaultTransformer(
@@ -48,7 +49,8 @@ namespace Hast.Transformer
             IArrayInitializerExpander arrayInitializerExpander,
             IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
-            IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter)
+            IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
+            IConstantValuesSubstitutor constantValuesSubstitutor)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -63,6 +65,7 @@ namespace Hast.Transformer
             _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
+            _constantValuesSubstitutor = constantValuesSubstitutor;
         }
 
 
@@ -158,16 +161,20 @@ namespace Hast.Transformer
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
 
-            // Clean-up.
+            // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            // Transformations making the syntax tree easier to process.
+            // Conversions making the syntax tree easier to process.
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
+            var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree);
+
+            // If the conversions removed something let's clean them up here.
+            _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
@@ -183,7 +190,8 @@ namespace Hast.Transformer
                 Id = transformationId,
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
-                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree)
+                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
+                ArraySizeHolder = arraySizeHolder
             };
 
             _eventHandler.SyntaxTreeBuilt(context);

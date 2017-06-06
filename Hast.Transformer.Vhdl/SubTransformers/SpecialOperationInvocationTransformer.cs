@@ -132,7 +132,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 DataType = _typeConverter.ConvertTypeReference(
                     expression.GetActualTypeReference(), 
-                    context.TransformationContext.TypeDeclarationLookupTable),
+                    context.TransformationContext),
                 EvaluatedContent = new InlineBlock(resultReferences)
             };
         }

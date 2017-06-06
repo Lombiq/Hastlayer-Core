@@ -14,14 +14,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public class RecordComposer : IRecordComposer
     {
         // Needs Lazy because unfortunately TypeConverter and RecordComposer depend on each other.
-        private readonly Lazy<ITypeConverter> _typeConverterLazy;
+        private readonly Lazy<IDeclarableTypeCreator> _declarableTypeCreatorLazy;
         private readonly ICacheManager _cacheManager;
 
 
-        public RecordComposer(Lazy<ITypeConverter> typeConverterLazy, ICacheManager cacheManager)
+        public RecordComposer(ICacheManager cacheManager, Lazy<IDeclarableTypeCreator> declarableTypeCreatorLazy)
         {
-            _typeConverterLazy = typeConverterLazy;
             _cacheManager = cacheManager;
+            _declarableTypeCreatorLazy = declarableTypeCreatorLazy;
         }
 
 
@@ -30,15 +30,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return node is PropertyDeclaration || node is FieldDeclaration;
         }
 
-        public Record CreateRecordFromType(TypeDeclaration typeDeclaration, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+        public Record CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {
             // Using transient caching because when processing an assembly all references to a class or struct will 
             // result in the record being composed.
-            return _cacheManager.Get("ComposedRecord." + typeDeclaration.GetFullName(), true, context =>
+            return _cacheManager.Get("ComposedRecord." + typeDeclaration.GetFullName(), true, ctx =>
             {
                 // Process only those fields that aren't backing fields of auto-properties (since those properties are 
-                // handled as properties) nor const fields (those are inserted as literals by the compiler where they're
-                // used).
+                // handled as properties).
                 var recordFields = typeDeclaration.Members
                     .Where(member =>
                         member is PropertyDeclaration ||
@@ -55,27 +54,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             arrayCreateExpression = variable.Initializer as ArrayCreateExpression;
                         }
 
-                        DataType type = null;
-                        if (member.ReturnType.IsArray())
-                        {
-                            var arrayLength = arrayCreateExpression != null ?
-                                arrayCreateExpression.GetStaticLength() :
-                                member.Annotation<ParameterArrayLength>().Length;
-
-                            type = ArrayHelper.CreateArrayInstantiation(
-                                _typeConverterLazy.Value.ConvertAstType(
-                                    ((ComposedType)member.ReturnType).BaseType,
-                                    typeDeclarationLookupTable),
-                                arrayLength);
-                        }
-                        else
-                        {
-                            type = _typeConverterLazy.Value.ConvertAstType(member.ReturnType, typeDeclarationLookupTable);
-                        }
-
                         return new RecordField
                         {
-                            DataType = type,
+                            DataType = _declarableTypeCreatorLazy.Value.CreateDeclarableType(member, member.ReturnType, context),
                             Name = name.ToExtendedVhdlId()
                         };
 
