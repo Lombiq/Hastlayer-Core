@@ -274,12 +274,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // without these functions.
                     if (type.Name == KnownDataTypes.Int8.Name || type.Name == KnownDataTypes.UInt8.Name)
                     {
-                        var value = Convert.ToInt64(valueString);
+                        var binaryLiteral = string.Empty;
 
-                        if (value < -2147483648 || value > 2147483647)
+                        if (type.Name == KnownDataTypes.Int8.Name)
                         {
-                            var binaryLiteral = Convert.ToString(value, 2);
+                            var value = Convert.ToInt64(valueString);
+                            if (value < -2147483648 || value > 2147483647) binaryLiteral = Convert.ToString(value, 2);
+                        }
+                        else
+                        {
+                            var value = Convert.ToUInt64(valueString);
+                            if (value > 2147483647) binaryLiteral = Convert.ToString((long)value, 2);
+                        }
 
+                        if (!string.IsNullOrEmpty(binaryLiteral))
+                        {
                             scope.CurrentBlock.Add(new LineComment(
                                 "Since the integer literal " + valueString + 
                                 " was out of the VHDL integer range it was substituted with a binary literal (" +
