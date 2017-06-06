@@ -15,7 +15,10 @@ namespace Hast.Common.Configuration
         /// </summary>
         public IEnumerable<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations
         {
-            get { return _memberInvocationInstanceCountConfigurations.Values; }
+            // Since _memberInvocationInstanceCountConfigurations is a ConcurrentDictionary the order of its items is 
+            // not necessarily the same on all machines or during all executions. Thus we need sorting so the 
+            // transformation ID is deterministic (see DefaultTransformer in Hast.Transformer).
+            get { return _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix); }
         }
 
         /// <summary>
