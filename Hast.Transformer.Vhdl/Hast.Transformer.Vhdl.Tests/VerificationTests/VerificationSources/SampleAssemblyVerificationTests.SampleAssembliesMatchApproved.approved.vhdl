@@ -2765,7 +2765,7 @@ begin
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\ := True;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= True;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\ => 
@@ -2888,7 +2888,7 @@ begin
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\ := True;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= True;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\ => 
@@ -3011,7 +3011,7 @@ begin
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\ := True;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= True;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\ => 
@@ -3134,7 +3134,7 @@ begin
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.result\ := True;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.result\;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.return\ <= True;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_5\ => 
@@ -3257,7 +3257,7 @@ begin
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.result\ := True;
-                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.result\;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.return\ <= True;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_5\ => 
@@ -3921,7 +3921,7 @@ begin
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\.
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\ := True;
-                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\;
+                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\ <= True;
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\ => 

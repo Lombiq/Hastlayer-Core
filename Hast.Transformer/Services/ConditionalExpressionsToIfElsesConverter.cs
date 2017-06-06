@@ -56,13 +56,21 @@ namespace Hast.Transformer.Services
                     conditionalExpression = newConditionalExpression;
                 }
 
+                // Enclosing the assignments into BlockStatements because this is also what normal if-else statements 
+                // are decompiled into. This is also necessary to establish a variable scope.
                 var trueAssignment = (AssignmentExpression)assignment.Clone();
                 trueAssignment.Right = conditionalExpression.TrueExpression.Clone();
+                var trueBlock = new BlockStatement();
+                trueBlock.Statements.Add(new ExpressionStatement(trueAssignment));
+
                 var falseAssignment = (AssignmentExpression)assignment.Clone();
                 falseAssignment.Right = conditionalExpression.FalseExpression.Clone();
+                var falseBlock = new BlockStatement();
+                falseBlock.Statements.Add(new ExpressionStatement(falseAssignment));
 
                 conditionalExpression.Parent.Parent
-                    .ReplaceWith(new IfElseStatement(conditionalExpression.Condition.Clone(), trueAssignment, falseAssignment));
+                    .ReplaceWith(new IfElseStatement(
+                        conditionalExpression.Condition.Clone(), trueBlock, falseBlock));
             }
         }
     }

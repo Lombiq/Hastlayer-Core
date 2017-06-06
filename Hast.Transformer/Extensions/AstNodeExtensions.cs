@@ -158,13 +158,27 @@ namespace ICSharpCode.NRefactory.CSharp
         public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node) =>
             node.FindFirstParentOfType<EntityDeclaration>();
 
-        public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode
+        public static BlockStatement FindFirstParentBlockStatement(this AstNode node) =>
+            node.FindFirstParentOfType<BlockStatement>();
+
+        public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode =>
+            node.FindFirstParentOfType<T>(n => true);
+
+        public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
         {
+            int height;
+            return node.FindFirstParentOfType<T>(predicate, out height);
+        }
+
+        public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate, out int height) where T : AstNode
+        {
+            height = 1;
             node = node.Parent;
 
-            while (node != null && !(node is T))
+            while (node != null && !(node is T && predicate((T)node)))
             {
                 node = node.Parent;
+                height++;
             }
 
             return (T)node;
@@ -222,7 +236,7 @@ namespace ICSharpCode.NRefactory.CSharp
         }
 
 
-        private static string CreateParentEntityBasedName(AstNode node, string name) => 
+        private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
     }
 }
