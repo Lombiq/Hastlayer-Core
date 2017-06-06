@@ -18,7 +18,8 @@ namespace Hast.Samples.Kpz
 
     public class KpzKernelsInterface
     {
-        public virtual void DoIteration(SimpleMemory memory)
+        //public virtual void DoIteration(SimpleMemory memory)
+        public void DoIteration(SimpleMemory memory)
         {
             KpzKernels kernels = new KpzKernels();
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
@@ -37,6 +38,17 @@ namespace Hast.Samples.Kpz
         public virtual void TestAdd(SimpleMemory memory)
         {
             memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
+        }
+
+        public virtual void TestPrng(SimpleMemory memory)
+        {
+            KpzKernels kernels = new KpzKernels();
+            kernels.InitializeParametersFromMemory(memory);
+            var numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
+            for (int i = 0; i < numberOfStepsInIteration; i++)
+            {
+                memory.WriteUInt32(i, kernels.GetNextRandom1());
+            }
         }
     }
 
@@ -79,8 +91,8 @@ namespace Hast.Samples.Kpz
         public uint GetNextRandom1()
         {
             uint c = (uint)(randomState1 >> 32);
-            uint x = (uint)(randomState1 & 0xFFFFFUL);
-            randomState1 = x * ((ulong)423355UL) + c;
+            ulong xl = randomState1 & 0xffffffffUL;
+            uint x = (uint)xl;
             return x ^ c;
         }
 
@@ -195,6 +207,23 @@ namespace Hast.Samples.Kpz
             return sm.ReadUInt32(2);
         }
 
+        public static uint[] TestPrngWrapper(this KpzKernelsInterface kernels)
+        {
+            uint[] numbers = new uint[KpzKernels.GridWidth*KpzKernels.GridHeight];
+            SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory());
+
+            CopyParametersToMemory(sm, false, 0x5289a3b89ac5f211, 0x5289a3b89ac5f211);
+
+            kernels.TestPrng(sm);
+
+            for (int i = 0; i < KpzKernels.GridWidth*KpzKernels.GridHeight; i++)
+            {
+                numbers[i] = sm.ReadUInt32(i);
+            }
+
+            return numbers;
+        }
+
         public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1, ulong randomSeed2)
         {
             memoryDst.WriteUInt32(KpzKernels.CellIndexOfRandomStates(), (uint)(randomSeed1&0xFFFFFFFFUL));
@@ -212,7 +241,7 @@ namespace Hast.Samples.Kpz
                 CopyParametersToMemory(sm, testMode, randomSeed1, randomSeed2);
                 CopyFromGridToSimpleMemory(hostGrid, sm);
             }
-            kernels.DoIteration(sm);
+            // kernels.DoIteration(sm);
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
 
