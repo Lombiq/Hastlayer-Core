@@ -5,6 +5,7 @@ using System.Reflection;
 using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SimpleMemory;
 using Hast.VhdlBuilder.Extensions;
@@ -303,16 +304,37 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Support for Array.Copy().
             if (_arrayCopyToMethodNames.Contains(targetMethodName))
             {
-                if (!expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(primitive => primitive.Value.ToString() == "0"))
+                IVhdlElement assignmentExpression = null;
+
+                PrimitiveExpression lengthExpression;
+                if (expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(out lengthExpression))
+                {
+                    if (lengthExpression.Value.ToString() == "0")
+                    {
+                        // If the whole array is copied then it can be transformed into a simple assignment.
+                        assignmentExpression = transformedParameters.First(); 
+                    }
+                    else
+                    {
+                        // Otherwise slicing the array.
+                        assignmentExpression = new UnconstrainedArrayInstantiation
+                        {
+                            Name = ((IDataObject)transformedParameters.First()).Name,
+                            RangeFrom = 0,
+                            RangeTo = Convert.ToInt32(lengthExpression.Value) - 1
+                        };
+                    }
+                }
+                else
                 {
                     throw new NotSupportedException(
-                        "Array.Copy() is only supported if the second argument is 0, i.e. the whole array is copied.");
+                        "Array.Copy() is only supported if the second argument can be determined compile-time.");
                 }
 
                 return new Assignment
                 {
                     AssignTo = (IDataObject)transformedParameters.Skip(1).First(),
-                    Expression = transformedParameters.First()
+                    Expression = assignmentExpression
                 };
             }
 
