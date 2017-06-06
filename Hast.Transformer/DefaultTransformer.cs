@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,7 @@ using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.Ast.Transforms;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
+using Newtonsoft.Json;
 using Orchard.Services;
 
 namespace Hast.Transformer
@@ -21,7 +23,6 @@ namespace Hast.Transformer
     public class DefaultTransformer : ITransformer
     {
         private readonly ITransformerEventHandler _eventHandler;
-        private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
         private readonly IInvocationInstanceCountAdjuster _invocationInstanceCountAdjuster;
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
@@ -36,7 +37,6 @@ namespace Hast.Transformer
 
         public DefaultTransformer(
             ITransformerEventHandler eventHandler,
-            IJsonConverter jsonConverter,
             ISyntaxTreeCleaner syntaxTreeCleaner,
             IInvocationInstanceCountAdjuster invocationInstanceCountAdjuster,
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
@@ -49,7 +49,6 @@ namespace Hast.Transformer
             IConstructorsToMethodsConverter constructorsToMethodsConverter)
         {
             _eventHandler = eventHandler;
-            _jsonConverter = jsonConverter;
             _syntaxTreeCleaner = syntaxTreeCleaner;
             _invocationInstanceCountAdjuster = invocationInstanceCountAdjuster;
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
@@ -84,9 +83,11 @@ namespace Hast.Transformer
 
             transformationId +=
                 string.Join("-", configuration.PublicHardwareMemberFullNames) +
-                string.Join("-", configuration.PublicHardwareMemberNamePrefixes) +
-                _jsonConverter.Serialize(configuration.CustomConfiguration);
+                string.Join("-", configuration.PublicHardwareMemberNamePrefixes);
 
+            // Since TransformerConfiguration.MemberInvocationInstanceCountConfigurations is a ConcurrentDictionary
+            // the order of its items is not the same on all machines or during all executions. Thus we need some sorting.
+            transformationId += JsonConvert.SerializeObject(configuration.CustomConfiguration, new OrderedDictionaryConverter());
 
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
             // see: https://github.com/icsharpcode/ILSpy/issues/686. But we can't run that directly since that would
@@ -194,8 +195,8 @@ namespace Hast.Transformer
                 if (string.IsNullOrEmpty(assembly.Location))
                 {
                     throw new ArgumentException(
-                        "No assembly used for hardware generation can be an in-memory one, but the assembly named \"" + 
-                        assembly.FullName + 
+                        "No assembly used for hardware generation can be an in-memory one, but the assembly named \"" +
+                        assembly.FullName +
                         "\" is.");
                 }
             }
@@ -216,6 +217,48 @@ namespace Hast.Transformer
                             "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter.");
                     }
                 }
+            }
+        }
+
+
+        // Mainly taken from: https://stackoverflow.com/a/27043792/220230
+        private class OrderedDictionaryConverter : JsonConverter
+        {
+            public override bool CanConvert(Type objectType) =>
+                objectType.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>));
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                var type = value.GetType();
+
+                if (type.GenericTypeArguments.First() != typeof(string)) ThrowNotSupported();
+
+                var keys = (IEnumerable<string>)type.GetProperty("Keys").GetValue(value, null);
+                var indexer = type.GetProperty("Item", typeof(object), new Type[] { typeof(string) });
+
+                if (indexer == null) ThrowNotSupported();
+
+                writer.WriteStartArray();
+                foreach (var key in keys.OrderBy(k => k))
+                {
+                    writer.WriteStartArray();
+                    serializer.Serialize(writer, key);
+                    serializer.Serialize(writer, indexer.GetValue(value, new object[] { key }));
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndArray();
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            {
+                throw new NotImplementedException();
+            }
+
+
+            private static void ThrowNotSupported()
+            {
+                throw new NotSupportedException(
+                    "For custom hardware generation configuration only dictionaries with string keys and indexers are supported.");
             }
         }
     }
