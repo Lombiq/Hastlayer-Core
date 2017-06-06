@@ -20,11 +20,11 @@ namespace Hast.TestInputs.Invalid
             var array = new int[arraySize + 1];
         }
 
-        public void ArrayCopyToIsNotFullCopy()
+        public void ArrayCopyToIsNotStaticCopy(int input)
         {
             var array1 = new int[5];
             var array2 = new int[5];
-            Array.Copy(array1, array2, 5);
+            Array.Copy(array1, array2, input);
         }
 
 
