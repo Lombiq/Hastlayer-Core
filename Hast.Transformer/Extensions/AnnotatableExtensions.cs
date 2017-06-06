@@ -21,6 +21,12 @@ namespace ICSharpCode.NRefactory.CSharp
             var ilVariable = annotable.Annotation<ILVariable>();
             if (ilVariable != null) return ilVariable.Type;
 
+            var fieldReference = annotable.Annotation<FieldReference>();
+            if (fieldReference != null) return fieldReference.FieldType;
+
+            var propertyReference = annotable.Annotation<PropertyReference>();
+            if (propertyReference != null) return propertyReference.PropertyType;
+
             return null;
         }
     }

@@ -554,7 +554,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     if (resultDataObjectDeclaration != null)
                     {
-                        fromType = resultDataObjectDeclaration.DataType;
+                        if (resultDataObjectDeclaration.DataType is Record)
+                        {
+                            fromType = ((Record)resultDataObjectDeclaration.DataType)
+                                .Fields
+                                .Single(field => field.Name == ((RecordFieldAccess)resultDataObject).FieldName)
+                                .DataType;
+                        }
+                        else fromType = resultDataObjectDeclaration.DataType;
                     }
                 }
 
