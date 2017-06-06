@@ -37,14 +37,18 @@ namespace Hast.Transformer.Helpers
             Expression passedExpression,
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            var methodDefinition = callExpression.Annotation<MethodDefinition>();
+            var methodReference = callExpression.Annotation<MethodReference>();
 
-            if (methodDefinition == null) return null;
+            if (methodReference == null) return null;
 
             var targetFullName = callExpression.GetFullName();
 
-            var parameters = ((MethodDeclaration)typeDeclarationLookupTable
-                .Lookup(methodDefinition.DeclaringType.FullName)
+            var targetType = typeDeclarationLookupTable.Lookup(methodReference.DeclaringType.FullName);
+
+            // This can happen e.g. with SimpleMemory calls: the type is not transformed.
+            if (targetType == null) return null;
+
+            var parameters = ((MethodDeclaration)targetType
                 .Members
                 .Single(member => member.GetFullName() == targetFullName))
                 .Parameters
