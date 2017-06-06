@@ -41,8 +41,8 @@ namespace Hast.Transformer.Services
 
             var constantValuesMarkingVisitor = new ConstantValuesMarkingVisitor(
                 constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator, arraySizeHolder);
-            var globallyNonConstantValuesUnmarkingVisitor =
-                new GloballyNonConstantValuesUnmarkingVisitor(constantValuesTable, typeDeclarationLookupTable);
+            var globalValueHoldersHandlingVisitor =
+                new GlobalValueHoldersHandlingVisitor(constantValuesTable, typeDeclarationLookupTable);
             var constantValuesSubstitutingVisitor = new ConstantValuesSubstitutingVisitor(constantValuesTable, arraySizeHolder);
 
             string codeOutput;
@@ -55,11 +55,11 @@ namespace Hast.Transformer.Services
                 updatedArraysCount = constantValuesMarkingVisitor.ArraySizesUpdated.Count;
 
                 syntaxTree.AcceptVisitor(constantValuesMarkingVisitor);
-                syntaxTree.AcceptVisitor(globallyNonConstantValuesUnmarkingVisitor);
+                syntaxTree.AcceptVisitor(globalValueHoldersHandlingVisitor);
                 syntaxTree.AcceptVisitor(constantValuesSubstitutingVisitor);
 
                 passCount++;
-            } while ((codeOutput != syntaxTree.ToString() || constantValuesMarkingVisitor.ArraySizesUpdated.Count != updatedArraysCount) && 
+            } while ((codeOutput != syntaxTree.ToString() || constantValuesMarkingVisitor.ArraySizesUpdated.Count != updatedArraysCount) &&
                     passCount < maxPassCount);
 
             if (passCount == maxPassCount)
@@ -130,11 +130,8 @@ namespace Hast.Transformer.Services
                 }
 
                 AssignmentExpression assignmentExpression;
-                InvocationExpression invocationExpression;
                 ArrayCreateExpression arrayCreateExpression;
                 BinaryOperatorExpression binaryOperatorExpression;
-                ObjectCreateExpression objectCreateExpression;
-                ReturnStatement returnStatement;
 
 
                 // Don't substitute if this is inside an if or while statement.
@@ -142,22 +139,9 @@ namespace Hast.Transformer.Services
                     !primitiveExpression.IsIn<IfElseStatement>() &&
                     !primitiveExpression.IsIn<WhileStatement>())
                 {
-                    // Checking on MemberReferenceExpression because properties and fields can globally have a single
-                    // substitution.
                     _constantValuesTable.MarkAsPotentiallyConstant(
-                        assignmentExpression.Left, 
-                        primitiveExpression,
-                        assignmentExpression.Left is MemberReferenceExpression);
-                }
-                else if (primitiveExpressionParent.Is<InvocationExpression>(out invocationExpression))
-                {
-                    _constantValuesTable.MarkAsPotentiallyConstant(
-                            ConstantValueSubstitutionHelper.FindMethodParameterForPassedExpression(
-                                invocationExpression,
-                                primitiveExpression,
-                                _typeDeclarationLookupTable),
-                            primitiveExpression,
-                            true);
+                        assignmentExpression.Left,
+                        primitiveExpression);
                 }
                 else if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression) &&
                     arrayCreateExpression.Arguments.Single() == primitiveExpression)
@@ -191,23 +175,8 @@ namespace Hast.Transformer.Services
                         }
                     }
                 }
-                else if (primitiveExpressionParent.Is<ObjectCreateExpression>(out objectCreateExpression))
-                {
-                    var parameter = ConstantValueSubstitutionHelper.FindConstructorParameterForPassedExpression(
-                        objectCreateExpression,
-                        primitiveExpression,
-                        _typeDeclarationLookupTable);
 
-                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, primitiveExpression, true);
-                }
-                else if (primitiveExpressionParent.Is<ReturnStatement>(out returnStatement) &&
-                    returnStatement.Expression == primitiveExpression)
-                {
-                    _constantValuesTable.MarkAsPotentiallyConstant(
-                        primitiveExpression.FindFirstParentEntityDeclaration(),
-                        primitiveExpression,
-                        true);
-                }
+                // ObjectCreateExpression, ReturnStatement, InvocationExpression are handled in GlobalValueHoldersHandlingVisitor.
             }
 
 
@@ -277,16 +246,16 @@ namespace Hast.Transformer.Services
         /// <summary>
         /// The value of parameters of an object creation or method invocation, a member (in this case: field or 
         /// property) or what's returned from a method can only be substituted if they have a globally unique value, 
-        /// since these are used not just from a single method (in contrast to variables).
-        /// Filtering out unsuitable ones here.
+        /// since these are used not just from a single method (in contrast to variables). Thus these need special
+        /// care, handling them here.
         /// </summary>
-        private class GloballyNonConstantValuesUnmarkingVisitor : DepthFirstAstVisitor
+        private class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
         {
             private readonly ConstantValuesTable _constantValuesTable;
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
 
-            public GloballyNonConstantValuesUnmarkingVisitor(
+            public GlobalValueHoldersHandlingVisitor(
                 ConstantValuesTable constantValuesTable,
                 ITypeDeclarationLookupTable typeDeclarationLookupTable)
             {
@@ -302,10 +271,16 @@ namespace Hast.Transformer.Services
                 // Marking all parameters where a non-constant parameter is passed as non-constant.
                 foreach (var argument in objectCreateExpression.Arguments)
                 {
-                    if (!(argument is PrimitiveExpression))
+                    var parameter = ConstantValueSubstitutionHelper
+                        .FindConstructorParameterForPassedExpression(objectCreateExpression, argument, _typeDeclarationLookupTable);
+
+                    if (argument is PrimitiveExpression)
                     {
-                        _constantValuesTable.MarkAsNonConstant(ConstantValueSubstitutionHelper
-                            .FindConstructorParameterForPassedExpression(objectCreateExpression, argument, _typeDeclarationLookupTable));
+                        _constantValuesTable.MarkAsPotentiallyConstant(parameter, (PrimitiveExpression)argument, true);
+                    }
+                    else
+                    {
+                        _constantValuesTable.MarkAsNonConstant(parameter);
                     }
                 }
             }
@@ -317,10 +292,16 @@ namespace Hast.Transformer.Services
                 // Marking all parameters where a non-constant parameter is passed as non-constant.
                 foreach (var argument in invocationExpression.Arguments)
                 {
-                    if (!(argument is PrimitiveExpression))
+                    var parameter = ConstantValueSubstitutionHelper
+                        .FindMethodParameterForPassedExpression(invocationExpression, argument, _typeDeclarationLookupTable);
+
+                    if (argument is PrimitiveExpression)
                     {
-                        _constantValuesTable.MarkAsNonConstant(ConstantValueSubstitutionHelper
-                            .FindMethodParameterForPassedExpression(invocationExpression, argument, _typeDeclarationLookupTable));
+                        _constantValuesTable.MarkAsPotentiallyConstant(parameter, (PrimitiveExpression)argument, true);
+                    }
+                    else
+                    {
+                        _constantValuesTable.MarkAsNonConstant(parameter);
                     }
                 }
             }
@@ -354,20 +335,18 @@ namespace Hast.Transformer.Services
             {
                 base.VisitReturnStatement(returnStatement);
 
-                // Method substitution is only valid if there is only one return statement in the method so unmarking 
-                // if there are more.
-                if (!(returnStatement.Expression is PrimitiveExpression))
+                // Method substitution is only valid if there is only one return statement in the method (or multiple
+                // ones but returning the same constant value).
+                if (returnStatement.Expression is PrimitiveExpression)
                 {
-                    _constantValuesTable.MarkAsNonConstant(returnStatement.FindFirstParentEntityDeclaration());
-                }
-                else
-                {
-                    // If this is not the same value as marked previously in ConstantValuesMarkingVisitor then the
-                    // method will be unmarked.
                     _constantValuesTable.MarkAsPotentiallyConstant(
                         returnStatement.FindFirstParentEntityDeclaration(),
                         (PrimitiveExpression)returnStatement.Expression,
                         true);
+                }
+                else
+                {
+                    _constantValuesTable.MarkAsNonConstant(returnStatement.FindFirstParentEntityDeclaration());
                 }
             }
 
