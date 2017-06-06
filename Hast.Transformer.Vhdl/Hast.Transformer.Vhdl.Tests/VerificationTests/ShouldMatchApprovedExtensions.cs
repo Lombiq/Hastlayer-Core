@@ -28,7 +28,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             return configurationBuilder
                 .SubFolder(System.IO.Path.Combine("VerificationSources"))
                 .WithFileExtension("vhdl")
-                .WithScrubber(source => Regex.Replace(source, @"-- Date and time:([0-9\.\s\:]*UTC)", "-- (Date and time removed for approval testing.)"));
+                .WithScrubber(source => Regex.Replace(source, @"-- Date and time:([0-9\-\s\:]*UTC)", "-- (Date and time removed for approval testing.)"));
         }
     }
 }
