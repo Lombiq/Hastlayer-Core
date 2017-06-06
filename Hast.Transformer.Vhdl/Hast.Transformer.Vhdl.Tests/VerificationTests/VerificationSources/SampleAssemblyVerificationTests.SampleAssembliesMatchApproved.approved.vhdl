@@ -1218,32 +1218,6 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::TestAdd(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfStepMode().0 declarations start
-    -- State machine states:
-    type \KpzKernels::CellIndexOfStepMode().0._States\ is (
-        \KpzKernels::CellIndexOfStepMode().0._State_0\, 
-        \KpzKernels::CellIndexOfStepMode().0._State_1\, 
-        \KpzKernels::CellIndexOfStepMode().0._State_2\);
-    -- Signals:
-    Signal \KpzKernels::CellIndexOfStepMode().0._Finished\: boolean := false;
-    Signal \KpzKernels::CellIndexOfStepMode().0.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::CellIndexOfStepMode().0._Started\: boolean := false;
-    -- System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfStepMode().0 declarations end
-
-
-    -- System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates().0 declarations start
-    -- State machine states:
-    type \KpzKernels::CellIndexOfRandomStates().0._States\ is (
-        \KpzKernels::CellIndexOfRandomStates().0._State_0\, 
-        \KpzKernels::CellIndexOfRandomStates().0._State_1\, 
-        \KpzKernels::CellIndexOfRandomStates().0._State_2\);
-    -- Signals:
-    Signal \KpzKernels::CellIndexOfRandomStates().0._Finished\: boolean := false;
-    Signal \KpzKernels::CellIndexOfRandomStates().0.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::CellIndexOfRandomStates().0._Started\: boolean := false;
-    -- System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates().0 declarations end
-
-
     -- System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._States\ is (
@@ -1258,26 +1232,16 @@ architecture Imp of Hast_IP is
         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\, 
         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_9\, 
         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\, 
-        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\, 
-        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\, 
-        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_13\, 
-        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_14\, 
-        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_15\);
+        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\);
     -- Signals:
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Started.0\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Started\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.In\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Finished.0\: boolean := false;
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates().return.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Finished.0\: boolean := false;
-    Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode().return.0\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -7199,134 +7163,36 @@ begin
     -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::TestAdd(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfStepMode().0 state machine start
-    \KpzKernels::CellIndexOfStepMode().0._StateMachine\: process (\Clock\) 
-        Variable \KpzKernels::CellIndexOfStepMode().0._State\: \KpzKernels::CellIndexOfStepMode().0._States\ := \KpzKernels::CellIndexOfStepMode().0._State_0\;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \KpzKernels::CellIndexOfStepMode().0._Finished\ <= false;
-                \KpzKernels::CellIndexOfStepMode().0.return\ <= to_signed(0, 32);
-                \KpzKernels::CellIndexOfStepMode().0._State\ := \KpzKernels::CellIndexOfStepMode().0._State_0\;
-            else 
-                case \KpzKernels::CellIndexOfStepMode().0._State\ is 
-                    when \KpzKernels::CellIndexOfStepMode().0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\KpzKernels::CellIndexOfStepMode().0._Started\ = true) then 
-                            \KpzKernels::CellIndexOfStepMode().0._State\ := \KpzKernels::CellIndexOfStepMode().0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::CellIndexOfStepMode().0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\KpzKernels::CellIndexOfStepMode().0._Started\ = true) then 
-                            \KpzKernels::CellIndexOfStepMode().0._Finished\ <= true;
-                        else 
-                            \KpzKernels::CellIndexOfStepMode().0._Finished\ <= false;
-                            \KpzKernels::CellIndexOfStepMode().0._State\ := \KpzKernels::CellIndexOfStepMode().0._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::CellIndexOfStepMode().0._State_2\ => 
-                        \KpzKernels::CellIndexOfStepMode().0.return\ <= to_signed(68, 32);
-                        \KpzKernels::CellIndexOfStepMode().0._State\ := \KpzKernels::CellIndexOfStepMode().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfStepMode().0 state machine end
-
-
-    -- System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates().0 state machine start
-    \KpzKernels::CellIndexOfRandomStates().0._StateMachine\: process (\Clock\) 
-        Variable \KpzKernels::CellIndexOfRandomStates().0._State\: \KpzKernels::CellIndexOfRandomStates().0._States\ := \KpzKernels::CellIndexOfRandomStates().0._State_0\;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \KpzKernels::CellIndexOfRandomStates().0._Finished\ <= false;
-                \KpzKernels::CellIndexOfRandomStates().0.return\ <= to_signed(0, 32);
-                \KpzKernels::CellIndexOfRandomStates().0._State\ := \KpzKernels::CellIndexOfRandomStates().0._State_0\;
-            else 
-                case \KpzKernels::CellIndexOfRandomStates().0._State\ is 
-                    when \KpzKernels::CellIndexOfRandomStates().0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\KpzKernels::CellIndexOfRandomStates().0._Started\ = true) then 
-                            \KpzKernels::CellIndexOfRandomStates().0._State\ := \KpzKernels::CellIndexOfRandomStates().0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::CellIndexOfRandomStates().0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\KpzKernels::CellIndexOfRandomStates().0._Started\ = true) then 
-                            \KpzKernels::CellIndexOfRandomStates().0._Finished\ <= true;
-                        else 
-                            \KpzKernels::CellIndexOfRandomStates().0._Finished\ <= false;
-                            \KpzKernels::CellIndexOfRandomStates().0._State\ := \KpzKernels::CellIndexOfRandomStates().0._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::CellIndexOfRandomStates().0._State_2\ => 
-                        \KpzKernels::CellIndexOfRandomStates().0.return\ <= to_signed(64, 32);
-                        \KpzKernels::CellIndexOfRandomStates().0._State\ := \KpzKernels::CellIndexOfRandomStates().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates().0 state machine end
-
-
     -- System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
     \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\: \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._States\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\;
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\: \Hast.Samples.Kpz.KpzKernels\;
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.8\: boolean := false;
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\ <= false;
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Started.0\ <= false;
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\;
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.0\ := to_signed(0, 32);
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 64);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.1\ := to_signed(0, 32);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 64);
                 \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 64);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.2\ := to_signed(0, 32);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 64);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.3\ := to_signed(0, 32);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 64);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.4\ := to_signed(0, 32);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.8\ := false;
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := to_unsigned(0, 64);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := false;
             else 
                 case \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ is 
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_0\ => 
@@ -7350,139 +7216,90 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_2\ => 
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.In\;
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates()
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= true;
+                        -- Begin SimpleMemory read.
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(64, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates()
-                        if (\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ = \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Finished.0\) then 
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= false;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.0\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates().return.0\;
-                            -- Begin SimpleMemory read.
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.0\, 32);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := resize(shift_left(resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(to_signed(32, 32))), 64);
-                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_5\;
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
                         end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\ => 
+                        -- Begin SimpleMemory read.
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(65, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_5\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates()
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= true;
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\;
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates()
-                        if (\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ = \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Finished.0\) then 
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= false;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates().return.0\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.1\ + to_signed(1, 32);
-                            -- Begin SimpleMemory read.
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\, 32);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_7\;
-                        end if;
+                        -- Begin SimpleMemory read.
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(66, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_7\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64), 64);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\;
-                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\ := \DataIn\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := resize(shift_left(resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(to_signed(32, 32))), 64);
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates()
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= true;
+                        -- Begin SimpleMemory read.
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(67, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates()
-                        if (\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ = \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Finished.0\) then 
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= false;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.2\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates().return.0\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.2\ + to_signed(2, 32);
-                            -- Begin SimpleMemory read.
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\, 32);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := resize(shift_left(resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(to_signed(32, 32))), 64);
-                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\ => 
-                        -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates()
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= true;
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates()
-                        if (\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ = \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Finished.0\) then 
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\ <= false;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.3\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates().return.0\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.3\ + to_signed(3, 32);
-                            -- Begin SimpleMemory read.
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\, 32);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_13\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_13\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.6\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ or resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64), 64);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState2\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.6\;
-                            -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfStepMode()
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Started.0\ <= true;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_14\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState2\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_14\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfStepMode()
-                        if (\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Started.0\ = \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Finished.0\) then 
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Started.0\ <= false;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.4\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode().return.0\;
-                            -- Begin SimpleMemory read.
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.return.4\, 32);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_15\;
-                        end if;
+                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\ => 
+                        -- Begin SimpleMemory read.
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(68, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_15\ => 
+                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.7\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\) and to_unsigned(1, 32);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.8\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.7\ = to_unsigned(1, 32);
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\TestMode\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.8\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\) and to_unsigned(1, 32);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ = to_unsigned(1, 32);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\TestMode\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7543,9 +7360,9 @@ begin
                         \KpzKernels::GetNextRandom1().0.this\ := \KpzKernels::GetNextRandom1().0.this.parameter.In\;
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\ := resize(shift_right(\KpzKernels::GetNextRandom1().0.this\.\randomState1\, to_integer(to_signed(32, 32))), 32);
                         \KpzKernels::GetNextRandom1().0.num\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.0\);
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\ := resize(\KpzKernels::GetNextRandom1().0.this\.\randomState1\ and resize(unsigned(to_unsigned(-1, 64)), 64), 32);
+                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\ := resize(\KpzKernels::GetNextRandom1().0.this\.\randomState1\ and to_unsigned(1048575, 64), 32);
                         \KpzKernels::GetNextRandom1().0.num2\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.1\);
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ := resize(resize(\KpzKernels::GetNextRandom1().0.num2\, 64) * resize(unsigned(to_unsigned(-83941, 64)), 64), 64);
+                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ := resize(resize(\KpzKernels::GetNextRandom1().0.num2\, 64) * to_unsigned(423355, 64), 64);
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\ := resize(\KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ + resize(\KpzKernels::GetNextRandom1().0.num\, 64), 64);
                         \KpzKernels::GetNextRandom1().0.this\.\randomState1\ := \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\;
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom1().0.num2\ xor \KpzKernels::GetNextRandom1().0.num\;
@@ -7609,9 +7426,9 @@ begin
                         \KpzKernels::GetNextRandom2().0.this\ := \KpzKernels::GetNextRandom2().0.this.parameter.In\;
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\ := resize(shift_right(\KpzKernels::GetNextRandom2().0.this\.\randomState2\, to_integer(to_signed(32, 32))), 32);
                         \KpzKernels::GetNextRandom2().0.num\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.0\);
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\ := resize(\KpzKernels::GetNextRandom2().0.this\.\randomState2\ and resize(unsigned(to_unsigned(-1, 64)), 64), 32);
+                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\ := resize(\KpzKernels::GetNextRandom2().0.this\.\randomState2\ and to_unsigned(65535, 64), 32);
                         \KpzKernels::GetNextRandom2().0.num2\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.1\);
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ := resize(resize(\KpzKernels::GetNextRandom2().0.num2\, 64) * resize(unsigned(to_unsigned(-83941, 64)), 64), 64);
+                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ := resize(resize(\KpzKernels::GetNextRandom2().0.num2\, 64) * to_unsigned(42355, 64), 64);
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\ := resize(\KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ + resize(\KpzKernels::GetNextRandom2().0.num\, 64), 64);
                         \KpzKernels::GetNextRandom2().0.this\.\randomState2\ := \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\;
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom2().0.num2\ xor \KpzKernels::GetNextRandom2().0.num\;
@@ -10812,22 +10629,6 @@ begin
     \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Finished.0\ <= \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Finished\;
     \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.In.0\ <= \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory) end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates() start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
-    \KpzKernels::CellIndexOfRandomStates().0._Started\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Started.0\;
-    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates()._Finished.0\ <= \KpzKernels::CellIndexOfRandomStates().0._Finished\;
-    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfRandomStates().return.0\ <= \KpzKernels::CellIndexOfRandomStates().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfRandomStates() end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfStepMode() start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
-    \KpzKernels::CellIndexOfStepMode().0._Started\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Started.0\;
-    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode()._Finished.0\ <= \KpzKernels::CellIndexOfStepMode().0._Finished\;
-    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.KpzKernels::CellIndexOfStepMode().return.0\ <= \KpzKernels::CellIndexOfStepMode().0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.KpzKernels::CellIndexOfStepMode() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1() start

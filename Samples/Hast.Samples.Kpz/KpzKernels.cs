@@ -79,16 +79,16 @@ namespace Hast.Samples.Kpz
         public uint GetNextRandom1()
         {
             uint c = (uint)(randomState1 >> 32);
-            uint x = (uint)(randomState1 & 0xFFFFFFFFUL);
-            randomState1 = x * ((ulong)4294883355UL) + c;
+            uint x = (uint)(randomState1 & 0xFFFFFUL);
+            randomState1 = x * ((ulong)423355UL) + c;
             return x ^ c;
         }
 
         public uint GetNextRandom2()
         {
             uint c = (uint)(randomState2 >> 32);
-            uint x = (uint)(randomState2 & 0xFFFFFFFFUL);
-            randomState2 = x * ((ulong)4294883355UL) + c;
+            uint x = (uint)(randomState2 & 0xFFFFUL);
+            randomState2 = x * ((ulong)42355UL) + c;
             return x ^ c;
         }
 
