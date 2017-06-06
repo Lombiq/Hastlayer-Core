@@ -4,9 +4,9 @@ namespace Hast.Common.Numerics
 {
     public struct BitMask
     {
-        public uint Size { get; private set; }
-        public uint SegmentCount { get; private set; }
-        public uint[] Segments { get; private set; }
+        public uint Size { get; }
+        public uint SegmentCount { get; }
+        public uint[] Segments { get; }
 
 
         public BitMask(uint[] segments)
