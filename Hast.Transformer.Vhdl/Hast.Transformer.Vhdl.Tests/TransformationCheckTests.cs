@@ -31,7 +31,7 @@ namespace Hast.Transformer.Vhdl.Tests
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
-                    typeof(InvalidOperationException));
+                    typeof(NotSupportedException));
 
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.ArraySizeIsNotStatic(0)),

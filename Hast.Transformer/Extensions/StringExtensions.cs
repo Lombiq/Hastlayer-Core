@@ -68,6 +68,32 @@ namespace System
         public static bool IsBackingFieldName(this string name) => Regex.IsMatch(name, "<(.*)>.*BackingField");
 
         /// <summary>
+        /// Converts the full name of a property-backing auto-generated field's name to the corresponding property's
+        /// name.
+        /// </summary>
+        /// <remarks>
+        /// Such a field's name looks like 
+        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::<ArrayLength>k__BackingField".
+        /// It will contain the name of the property. This needs to be converted into the corresponding full property name:
+        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::ArrayLength()"
+        /// </remarks>
+        public static string ConvertFullBackingFieldNameToPropertyName(this string name) =>
+             name.ConvertSimpleBackingFieldNameToPropertyName() + "()";
+
+        /// <summary>
+        /// Converts the simple name of a property-backing auto-generated field's name to the corresponding property's
+        /// name.
+        /// </summary>
+        /// <remarks>
+        /// Such a field's name looks like 
+        /// "<Number>k__BackingField".
+        /// It will contain the name of the property. This needs to be converted into the corresponding simple property
+        /// name: "Number".
+        /// </remarks>
+        public static string ConvertSimpleBackingFieldNameToPropertyName(this string name) =>
+             Regex.Replace(name, "<(.*)>.*BackingField", match => match.Groups[1].Value);
+
+        /// <summary>
         /// Determines whether the string looks like the name of a constructor.
         /// </summary>
         public static bool IsConstructorName(this string name) => name.Contains(".ctor");

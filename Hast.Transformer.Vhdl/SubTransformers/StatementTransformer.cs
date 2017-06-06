@@ -16,14 +16,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         private readonly ITypeConverter _typeConverter;
         private readonly IExpressionTransformer _expressionTransformer;
+        private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
         public ILogger Logger { get; set; }
 
 
-        public StatementTransformer(ITypeConverter typeConverter, IExpressionTransformer expressionTransformer)
+        public StatementTransformer(
+            ITypeConverter typeConverter, 
+            IExpressionTransformer expressionTransformer, 
+            IDeclarableTypeCreator declarableTypeCreator)
         {
             _typeConverter = typeConverter;
             _expressionTransformer = expressionTransformer;
+            _declarableTypeCreator = declarableTypeCreator;
 
             Logger = NullLogger.Instance;
         }
@@ -38,8 +43,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private void TransformInner(Statement statement, ISubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
-            var currentBlock = context.Scope.CurrentBlock;
-            var typeDeclarationLookupTable = context.TransformationContext.TypeDeclarationLookupTable;
+            var currentBlock = context.Scope.CurrentBlock;;
 
             Func<int, IVhdlGenerationOptions, string> stateNameGenerator = (index, vhdlGenerationOptions) =>
                 vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
@@ -68,14 +72,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     );
                 if (!omitStatement)
                 {
-                    var type = _typeConverter.ConvertAstType(variableType, typeDeclarationLookupTable);
-
                     foreach (var variableInitializer in variableStatement.Variables)
                     {
                         stateMachine.LocalVariables.Add(new Variable
                         {
                             Name = stateMachine.CreatePrefixedObjectName(variableInitializer.Name),
-                            DataType = type
+                            DataType = _declarableTypeCreator.CreateDeclarableType(variableInitializer, variableType, context.TransformationContext)
                         });
                     }
                 }
@@ -102,7 +104,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var returnStatement = statement as ReturnStatement;
 
-                var returnType = _typeConverter.ConvertAstType(context.Scope.Method.ReturnType, typeDeclarationLookupTable);
+                var returnType = _typeConverter.ConvertAstType(context.Scope.Method.ReturnType, context.TransformationContext);
                 if (returnType != KnownDataTypes.Void && returnType != SpecialTypes.Task)
                 {
                     var assigmentElement = new Assignment
@@ -162,7 +164,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     scope.FuncVariableNameToDisplayClassMethodMappings[funcVariableName] =
                         (MethodDeclaration)displayClassMemberReference
-                        .GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                        .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
                 }
                 else
                 {

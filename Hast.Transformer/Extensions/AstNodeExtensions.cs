@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.Decompiler.ILAst;
 using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp
@@ -20,7 +21,7 @@ namespace ICSharpCode.NRefactory.CSharp
             if (memberReference != null) return memberReference.FullName;
 
             var parameterReference = node.Annotation<ParameterReference>();
-            if (parameterReference != null) return CreateEntityBasedName(node, parameterReference.Name);
+            if (parameterReference != null) return CreateParentEntityBasedName(node, parameterReference.Name);
 
             if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
 
@@ -43,7 +44,50 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (node is IdentifierExpression)
             {
-                return CreateEntityBasedName(node, ((IdentifierExpression)node).Identifier);
+                return CreateParentEntityBasedName(node, ((IdentifierExpression)node).Identifier);
+            }
+
+            if (node is BinaryOperatorExpression)
+            {
+                return CreateParentEntityBasedName(node, node.ToString());
+            }
+
+            if (node is IndexerExpression)
+            {
+                return ((IndexerExpression)node).Target.GetFullName();
+            }
+
+            // This is a member on a type that's not transformed, like System.Array.
+            if (node is MemberReferenceExpression)
+            {
+                var memberReferenceExpression = (MemberReferenceExpression)node;
+                return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
+            }
+
+            if (node is Identifier)
+            {
+                return ((Identifier)node).Name;
+            }
+
+            if (node is Attribute)
+            {
+                return ((Attribute)node).Type.GetFullName();
+            }
+
+            if (node is TypeReferenceExpression)
+            {
+                return ((TypeReferenceExpression)node).Type.GetFullName();
+            }
+
+            var ilVariable = node.Annotation<ILVariable>();
+            if (ilVariable != null)
+            {
+                return CreateParentEntityBasedName(node, ilVariable.Name);
+            }
+
+            if (node is PrimitiveExpression)
+            {
+                return ((PrimitiveExpression)node).Value.ToString();
             }
 
             throw new InvalidOperationException("This node doesn't have a name.");
@@ -100,6 +144,15 @@ namespace ICSharpCode.NRefactory.CSharp
             return name;
         }
 
+        public static bool IsIn<T>(this AstNode node) where T : AstNode =>
+            node.FindFirstParentOfType<T>() != null;
+
+        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node) =>
+            node.FindFirstParentOfType<TypeDeclaration>();
+
+        public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node) =>
+            node.FindFirstParentOfType<EntityDeclaration>();
+
         public static T FindFirstParentOfType<T>(this AstNode node) where T : AstNode
         {
             node = node.Parent;
@@ -112,17 +165,10 @@ namespace ICSharpCode.NRefactory.CSharp
             return (T)node;
         }
 
-        public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node)
-        {
-            return node.FindFirstParentOfType<TypeDeclaration>();
-        }
+        public static T FindFirstChildOfType<T>(this AstNode node) where T : AstNode =>
+            node.FindFirstChildOfType<T>(n => true);
 
-        public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node)
-        {
-            return node.FindFirstParentOfType<EntityDeclaration>();
-        }
-
-        public static T FindFirstChildOfType<T>(this AstNode node) where T : AstNode
+        public static T FindFirstChildOfType<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
         {
             var children = new Queue<AstNode>(node.Children);
 
@@ -130,7 +176,8 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 var currentChild = children.Dequeue();
 
-                if (currentChild is T) return (T)currentChild;
+                var castCurrentChild = currentChild as T;
+                if (castCurrentChild != null && predicate(castCurrentChild)) return castCurrentChild;
 
                 foreach (var child in currentChild.Children)
                 {
@@ -143,15 +190,34 @@ namespace ICSharpCode.NRefactory.CSharp
 
         public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode
         {
-            var castNode = node as T;
+            T castNode;
+            return node.Is(predicate, out castNode);
+        }
+
+        public static bool Is<T>(this AstNode node, out T castNode) where T : AstNode =>
+            node.Is(n => true, out castNode);
+
+        public static bool Is<T>(this AstNode node, Predicate<T> predicate, out T castNode) where T : AstNode
+        {
+            castNode = node as T;
             if (castNode == null) return false;
             return predicate(castNode);
         }
 
-
-        private static string CreateEntityBasedName(AstNode node, string name)
+        public static AstNode FindFirstNonParenthesizedExpressionParent(this AstNode node)
         {
-            return node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
+            var parent = node.Parent;
+
+            while (parent is ParenthesizedExpression && parent != null)
+            {
+                parent = parent.Parent;
+            }
+
+            return parent;
         }
+
+
+        private static string CreateParentEntityBasedName(AstNode node, string name) => 
+            node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
     }
 }

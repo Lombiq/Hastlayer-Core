@@ -45,5 +45,13 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             return metadata;
         }
+
+        public static void RemoveReferenceMetadata(this AstNode node)
+        {
+            if (node.GetReferenceMetadata() != null)
+            {
+                node.RemoveAnnotations<DeclarationReferenceMetadata>();
+            }
+        }
     }
 }

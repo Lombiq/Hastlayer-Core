@@ -18,7 +18,7 @@ namespace ICSharpCode.NRefactory.CSharp
                         "Only arrays with statically defined dimension length are supported. Consider adding the dimension sizes directly into the array initialization or use a const field.");
                 }
 
-                return int.Parse(lengthArgument.ToString()); 
+                return int.Parse(((PrimitiveExpression)lengthArgument).Value.ToString()); 
             }
             // The array is initialized in-place, i.e. new[] { 1, 2, 3 }-style.
             else

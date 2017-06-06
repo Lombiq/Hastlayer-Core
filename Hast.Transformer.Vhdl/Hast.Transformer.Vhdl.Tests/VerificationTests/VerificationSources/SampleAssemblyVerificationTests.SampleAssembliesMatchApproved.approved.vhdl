@@ -2639,7 +2639,7 @@ begin
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ := to_signed(0, 32);
                         -- Starting a while loop.
                         -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < to_signed(\ObjectOrientedShowcase::Run(SimpleMemory).0.array\'length, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
                         else 
@@ -2669,7 +2669,7 @@ begin
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ => 
                         -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\.
                         -- The while loop's condition:
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < to_signed(\ObjectOrientedShowcase::Run(SimpleMemory).0.array\'length, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\) then 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\;
@@ -2783,7 +2783,7 @@ begin
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ := to_signed(0, 32);
                         -- Starting a while loop.
                         -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ < to_signed(\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\'length, 32);
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\) then 
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_3\;
                         else 
@@ -2793,7 +2793,7 @@ begin
                     when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\.
                         -- The while loop's condition:
-                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ < to_signed(\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\'length, 32);
+                        \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\) then 
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.2\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ + \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\(to_integer(\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\)).\Number\;
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.2\;
@@ -2947,7 +2947,7 @@ begin
                         \NumberContainer::.ctor(UInt32).0.this\ := \NumberContainer::.ctor(UInt32).0.this.parameter.In\;
                         \NumberContainer::.ctor(UInt32).0.number\ := \NumberContainer::.ctor(UInt32).0.number.parameter.In\;
                         \NumberContainer::.ctor(UInt32).0.this\.\Number\ := to_unsigned(99, 32);
-                        \NumberContainer::.ctor(UInt32).0.this\.\Number\ := \NumberContainer::.ctor(UInt32).0.number\;
+                        \NumberContainer::.ctor(UInt32).0.this\.\Number\ := to_unsigned(9, 32);
                         \NumberContainer::.ctor(UInt32).0._State\ := \NumberContainer::.ctor(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;

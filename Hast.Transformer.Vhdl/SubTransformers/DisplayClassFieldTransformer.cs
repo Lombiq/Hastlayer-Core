@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     field.Modifiers != (Modifiers.Public | Modifiers.Static | Modifiers.Readonly);
                 if (shouldTransform)
                 {
-                    var dataType = _typeConverter.ConvertAstType(field.ReturnType, context.TypeDeclarationLookupTable);
+                    var dataType = _typeConverter.ConvertAstType(field.ReturnType, context);
 
                     // The field is an array so need to instantiate it.
                     if (field.ReturnType.IsArray())

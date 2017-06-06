@@ -31,12 +31,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             bool isLeft, 
             IVhdlTransformationContext context)
         {
-            var typeDeclarationLookupTable = context.TypeDeclarationLookupTable;
-
             // If the type of an operand can't be determined the best guess is the expression's type.
             var expressionTypeReference = binaryOperatorExpression.GetActualTypeReference();
             var expressionType = expressionTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(expressionTypeReference, typeDeclarationLookupTable) : 
+                _typeConverter.ConvertTypeReference(expressionTypeReference, context) : 
                 null;
 
             var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
@@ -63,11 +61,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             var leftType = leftTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(leftTypeReference, typeDeclarationLookupTable) : 
+                _typeConverter.ConvertTypeReference(leftTypeReference, context) : 
                 expressionType;
 
             var rightType = rightTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(rightTypeReference, typeDeclarationLookupTable) : 
+                _typeConverter.ConvertTypeReference(rightTypeReference, context) : 
                 expressionType;
 
             if (leftType == null || rightType == null)
