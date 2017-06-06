@@ -277,8 +277,8 @@ namespace Hast.Transformer.Services
         /// <summary>
         /// The value of parameters of an object creation or method invocation, a member (in this case: field or 
         /// property) or what's returned from a method can only be substituted if they have a globally unique value, 
-        /// since these are used not just from a single method. Filtering out unsuitable ones here.
-        /// This is in contrast with variables.
+        /// since these are used not just from a single method (in contrast to variables).
+        /// Filtering out unsuitable ones here.
         /// </summary>
         private class GloballyNonConstantValuesUnmarkingVisitor : DepthFirstAstVisitor
         {
@@ -418,7 +418,8 @@ namespace Hast.Transformer.Services
                 base.VisitAssignmentExpression(assignmentExpression);
 
                 // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect
-                // anything in the outer scope after this. Neither if this is assigning a non-constant value.
+                // anything in the outer scope after this ("after this" works because the visitor visits nodes in
+                // topological order). Neither if this is assigning a non-constant value.
                 // This could eventually be made more sophisticated by taking care of variable scopes too, so these
                 // assignments would affect variables inside the scope still.
                 if (assignmentExpression.Left is IdentifierExpression &&
