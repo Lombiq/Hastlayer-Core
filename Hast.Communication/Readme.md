@@ -24,7 +24,7 @@ You can set up a peer to peer connection as following:
 	- You can also use [DHCP Server for Windows](http://www.dhcpserver.de/):
 		1. Use the wizard to set up the server for the statically configured NIC(s). You can leave everything on default in the wizard but don't forget to write out the INI file. Also make sure to configure the firewall exception.
 		2. Run the server app and start the server by clicking "Continue as tray app". You don't need to install it as a service.
-4. Start up the software on the FPGA board and wait for it to receive an IP address.
+4. Start up the software on the FPGA board (make sure to configure the software to use Ehternet communication: change the `COMMUNICATION_CHANNEL` symbol's value to `ETHERNET` under the _HastlayerOperatingSystem_ project's properties, C/C++ Build, Settings, Microblaze g++ compiler, Symbols) and wait for it to receive an IP address.
 
 Also tried but don't recommend [Tftpd32](http://tftpd32.jounin.net/) (needs manual configuration for the given NICs), [Tiny DHCP Server](http://softcab.com/dhcp-server/index.php) (also needs manual configuration) and [haneWIN DHCP Server](http://www.hanewin.net/dhcp-e.htm) (30 days shareware).
 
