@@ -53,6 +53,13 @@ namespace Hast.Common.Tests
             Assert.AreEqual(new BitMask(new uint[] { 0, 0, 0xFFFF }), BitMask.SetOne(new BitMask(new uint[] { 0, 0, 0xFFFF }), 79));
             Assert.AreEqual(new BitMask(new uint[] { 0, 0, 0x1FFFF }), BitMask.SetOne(new BitMask(new uint[] { 0, 0, 0xFFFF }), 80));
         }
+        [Test]
+        public void BitMaskSeZeroIsCorrect()
+        {
+            Assert.AreEqual(0, BitMask.SetZero(new BitMask(new uint[] { 1 }), 0).Segments[0]);
+            Assert.AreEqual(0x7FFF, BitMask.SetZero(new BitMask(new uint[] { 0xFFFF }), 15).Segments[0]);
+
+        }
 
         [Test]
         public void BitMaskConstructorCorrectlyCopiesBitMask()
@@ -141,6 +148,16 @@ namespace Hast.Common.Tests
                             new BitMask(new uint[] { 0x80000000 }) >> 32);
             Assert.AreEqual(new BitMask(new uint[] { 0x80000000 }),
                             new BitMask(new uint[] { 1 }) >> -31);
+
+
+        }
+
+        [Test]
+        public void FindLeadingOneIsCorrect()
+        {
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000002, 0x00000000 }).FindLeadingOne(),2);
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000002, 0x00000001 }).FindLeadingOne(), 33);
+
 
 
         }
