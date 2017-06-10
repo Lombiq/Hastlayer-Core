@@ -19,7 +19,7 @@ namespace Hast.Samples.SampleAssembly
 
             Unum unum = 10;
             // Adding this line only because otherwise the whole data structure would be cleaned up as unused.
-            var sign = unum.SignBit;
+            var sign = unum.IsPositive();
 
             int x = (int)unum;
             Unum y = number;
