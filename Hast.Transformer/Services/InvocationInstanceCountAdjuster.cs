@@ -54,7 +54,8 @@ namespace Hast.Transformer.Services
                     .GetMaxInvocationInstanceCountConfigurationForMember(referencedMember);
 
                 var invokingMemberMaxInvocationConfiguration = _transformerConfiguration
-                    .GetMaxInvocationInstanceCountConfigurationForMember(memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>());
+                    .GetMaxInvocationInstanceCountConfigurationForMember(memberReferenceExpression
+                    .FindFirstParentOfType<EntityDeclaration>());
 
                 if (invokingMemberMaxInvocationConfiguration.MaxInvocationInstanceCount > referencedMemberMaxInvocationConfiguration.MaxInvocationInstanceCount)
                 {
