@@ -11,6 +11,7 @@ namespace Hast.Synthesis.Models
         public string TechnicalName { get; set; }
         public uint ClockFrequencyHz { get; set; }
         public IEnumerable<string> SupportedCommunicationChannelNames { get; set; } = Enumerable.Empty<string>();
+        public virtual string DefaultCommunicationChannelName { get { return SupportedCommunicationChannelNames.First(); } }
         public uint AvailableMemoryBytes { get; set; }
     }
 }
