@@ -11,5 +11,18 @@ namespace Hast.Algorithms
             state = x * ((ulong)4294883355UL) + c;
             return x ^ c;
         }
+
+        ulong randomState1 = 7215152093156152310UL; //random seed
+        public uint GetNextRandom1()
+        {
+            unchecked
+            {
+                uint c = (uint)(this.randomState1 >> 32);
+                ulong xl = this.randomState1 & (ulong)-1;
+                uint x = (uint)xl;
+                this.randomState1 = (ulong)x * (ulong)-83941 + (ulong)c;
+                return x ^ c;
+            }
+        }
     }
 }

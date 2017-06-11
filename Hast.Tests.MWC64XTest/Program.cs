@@ -12,6 +12,8 @@ namespace Hast.Tests.MWC64XTest
     {
         static void Main(string[] args)
         {
+            Main2();
+            return;
             if (args.Length < 2)
             {
                 Console.WriteLine("Usage: " + System.AppDomain.CurrentDomain.FriendlyName + " <num_random_samples> <output_file_path>");
@@ -24,6 +26,16 @@ namespace Hast.Tests.MWC64XTest
             {
                 bw.Write(prng.GetNextRandom());
             }
+        }
+
+        static void Main2()
+        {
+            MWC64X prng = new MWC64X();
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine(String.Format("GetNextRandom: {0}, GetNextRandom1: {1}", prng.GetNextRandom(), prng.GetNextRandom1()));
+            }
+            Console.Read();
         }
     }
 }

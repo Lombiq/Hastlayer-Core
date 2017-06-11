@@ -88,12 +88,31 @@ namespace Hast.Samples.Kpz
             TestMode = (memory.ReadUInt32(CellIndexOfStepMode()) & 1) == 1;
         }
 
+        ulong literal1;
+        ulong literal2;
+
+        /*
+        public uint InitializeRandom1()
+        {
+            uint literal1Low = 0xffffffff;
+            uint literal1High = 0xffffffff;
+            literal1 = 0;
+            literal1 |= literal1Low;
+            literal1 |= (literal1High<<32);
+            uint literal2Low = 0xffffffff;
+            uint literal2High = 0xffffffff;
+            literal2 = 0;
+            literal2 |= literal2Low;
+            literal2 |= (literal2High<<32);
+        }
+        */
+
         public uint GetNextRandom1()
         {
             uint c = (uint)(randomState1 >> 32);
-            ulong xl = randomState1 & 0xffffffffUL;
+            ulong xl = randomState1 & (ulong)0xc0000000ffffffffUL;
             uint x = (uint)xl;
-            randomState1 = x * ((ulong)4294883355UL) + c;
+            randomState1 = x * (ulong)0xfffeb81bUL + c;
             return x ^ c;
         }
 
