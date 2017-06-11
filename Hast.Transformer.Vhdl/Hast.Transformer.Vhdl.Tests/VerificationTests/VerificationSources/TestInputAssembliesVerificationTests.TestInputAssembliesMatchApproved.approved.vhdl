@@ -2257,8 +2257,8 @@ begin
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State\: \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._States\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State_0\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.calculator\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.instance.0\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -2297,10 +2297,10 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.binaryOperationResult.0\;
                         -- Initializing record fields to their defaults.
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.calculator\.\Number\ := to_unsigned(0, 32);
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.calculator\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\;
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.instance.0\.\Number\ := to_unsigned(0, 32);
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.instance.0\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\;
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.calculator\;
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.instance.0\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2309,7 +2309,7 @@ begin
                         if (\ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Started.0\ = \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Finished.0\) then 
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Started.0\ <= false;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.return.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven().return.0\;
-                            \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.calculator\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven().this.parameter.In.0\;
+                            \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.instance.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven().this.parameter.In.0\;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.return\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.return.0\;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State_1\;
                         end if;
@@ -2326,8 +2326,8 @@ begin
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State\: \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._States\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State_0\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.calculator\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.instance.0\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -2366,10 +2366,10 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.binaryOperationResult.0\;
                         -- Initializing record fields to their defaults.
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.calculator\.\Number\ := to_unsigned(0, 32);
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.calculator\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\;
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.instance.0\.\Number\ := to_unsigned(0, 32);
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.instance.0\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\;
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.calculator\;
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.instance.0\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2378,7 +2378,7 @@ begin
                         if (\ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven()._Started.0\ = \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven()._Finished.0\) then 
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven()._Started.0\ <= false;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.return.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven().return.0\;
-                            \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.calculator\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven().this.parameter.In.0\;
+                            \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.instance.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven().this.parameter.In.0\;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.return\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.return.0\;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State_1\;
                         end if;
@@ -2395,8 +2395,8 @@ begin
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State\: \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._States\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State_0\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.calculator\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.instance.0\: \Hast.TestInputs.Various.ParallelCases/Calculator\;
         Variable \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -2435,10 +2435,10 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.binaryOperationResult.0\;
                         -- Initializing record fields to their defaults.
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.calculator\.\Number\ := to_unsigned(0, 32);
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.calculator\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\;
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.instance.0\.\Number\ := to_unsigned(0, 32);
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.instance.0\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\;
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
-                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.calculator\;
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.instance.0\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2447,7 +2447,7 @@ begin
                         if (\ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven()._Started.0\ = \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven()._Finished.0\) then 
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven()._Started.0\ <= false;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.return.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven().return.0\;
-                            \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.calculator\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven().this.parameter.In.0\;
+                            \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.instance.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven().this.parameter.In.0\;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.return\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.return.0\;
                             \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State_1\;
                         end if;

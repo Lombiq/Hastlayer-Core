@@ -36,8 +36,7 @@ namespace Hast.TestInputs.Various
                     {
                         var index = (uint)indexObject;
                         index += input;
-                        var calculator = new Calculator { Number = index };
-                        return calculator.IsEven();
+                        return new Calculator { Number = index }.IsEven();
                     }, i);
             }
 
