@@ -98,23 +98,40 @@ namespace Hast.Common.Numerics
 
         public static bool operator >(BitMask left, BitMask right)
         {
-            
 
-            for (uint i = left.SegmentCount-1; i >= 0; i--)
+
+            for (int i = (int)left.SegmentCount - 1; i >= 0; i--)
+            
                 if (left.Segments[i] > right.Segments[i]) return true;
+            
 
             return false;
         }
+
+
         public static bool operator <(BitMask left, BitMask right) 
         {
             
 
-            for (uint i = left.SegmentCount-1; i > 0; i--)
+            for (int i = (int)left.SegmentCount-1; i > 0; i--)
                 if (left.Segments[i] < right.Segments[i]) return true;
 
             return false;
         }
 
+        public static bool operator >=(BitMask left, BitMask right)
+        {
+
+            return !(left < right);
+
+        }
+
+        public static bool operator <=(BitMask left, BitMask right)
+        {
+
+            return !(left > right);
+
+        }
 
         public static bool operator !=(BitMask left, BitMask right)
         {

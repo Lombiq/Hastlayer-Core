@@ -102,9 +102,6 @@ namespace Hast.Common.Numerics.Unum
             UnumBits = WholeUnum;
         }
 
-    
-
-
         public void Negate()
         {
             UnumBits ^= SignBitMask;
@@ -121,6 +118,7 @@ namespace Hast.Common.Numerics.Unum
             return ((UnumBits & SignBitMask) == new BitMask(Size, false));
 
         }
+
         #region  methods for Utag independent Masks and values
         public uint ExponentSize() //esize 
         {
@@ -152,7 +150,7 @@ namespace Hast.Common.Numerics.Unum
         {
             return (ExponentMask() & UnumBits) >> (int)(UnumTagSize + FractionSize());
         }
-        
+
         public BitMask Fraction() //frac
         {
             return (FractionMask() & UnumBits) >> (int)(UnumTagSize);
@@ -180,6 +178,7 @@ namespace Hast.Common.Numerics.Unum
 
         public int ExponentValueWithBias() //expovalue
         {
+            //if (Exponent().getLowest32Bits() == 0) return 0;
             int Value = (int)Exponent().getLowest32Bits() - Bias() + 1;
             return HiddenBitIsOne() ? Value - 1 : Value;
         }
@@ -207,7 +206,8 @@ namespace Hast.Common.Numerics.Unum
         }
 
         #region operations for exact Unums
-        public static Unum AddExactUnums(Unum left, Unum right) 
+
+        public static Unum AddExactUnums(Unum left, Unum right)
         {
             BitMask ScratchPad1 = new BitMask(left.Size, false);  // It could be only FractionSizeMax +2 long if Hastlayer enabled it
             BitMask ScratchPad2 = new BitMask(left.Size, false); //Could be done with only 1 Scratchpad, but more complexity
@@ -216,7 +216,7 @@ namespace Hast.Common.Numerics.Unum
             if ((left.isPositiveInfinity() && right.isNegativeInfinity()) || (left.isNegativeInfinity() && right.isPositiveInfinity())) return new Unum(left.QuietNotANumber, left._metadata);
             if (left.isPositiveInfinity() || right.isPositiveInfinity()) return new Unum(left.PositiveInfinity, left._metadata);
             if (left.isNegativeInfinity() || right.isNegativeInfinity()) return new Unum(left.NegativeInfinity, left._metadata);
-            if (left.isZero()) return right; 
+            if (left.isZero()) return right;
             if (right.isZero()) return left;
 
             //We will get these from the environment later
@@ -241,7 +241,7 @@ namespace Hast.Common.Numerics.Unum
 
                 if (!SignBitsMatch)
                 {
-                    if (left.FractionWithHiddenBit() > right.FractionWithHiddenBit()) //left is bigger
+                    if (left.FractionWithHiddenBit() >= right.FractionWithHiddenBit()) //left is bigger
                     {
                         ResultSignBit = !left.IsPositive();
 
@@ -293,7 +293,15 @@ namespace Hast.Common.Numerics.Unum
                 BitMask.ShiftToRightEnd(ScratchPad1);
             }
 
-            ResultFractionSize = (ScratchPad1.FindLeadingOne() == 0) ? 0 : ScratchPad1.FindLeadingOne() - 1;
+            if (ScratchPad1.FindLeadingOne() == 0)
+            {
+                ResultFractionSize = 0;
+                ResultExponent = ScratchPad1;
+            }
+            else
+            {
+                ResultFractionSize = ScratchPad1.FindLeadingOne() - 1;
+            }
 
             if (ResultExponent.FindLeadingOne() != 0) //Erease hidden bit if there is one
             {
@@ -308,6 +316,7 @@ namespace Hast.Common.Numerics.Unum
 
             return ResultUnum;
         }
+
         #region Helper methods for Addition
         public static BitMask AddAlignedFractions(BitMask left, BitMask right, bool SignBitsMatch)
         {
@@ -341,7 +350,6 @@ namespace Hast.Common.Numerics.Unum
             input.Negate();
             return input;
         }
-
         public static Unum MultiplyExactUnums(Unum left, Unum right)
         {
             return new Unum();
@@ -367,7 +375,9 @@ namespace Hast.Common.Numerics.Unum
         {
             return base.ToString();
         }
+
         #region operators
+
         public static Unum operator +(Unum left, Unum right)
         {
             if (left.IsExact() && right.IsExact()) return AddExactUnums(left, right);
@@ -380,6 +390,7 @@ namespace Hast.Common.Numerics.Unum
             if (x.IsExact()) return NegateExactUnum(x);
             return new Unum();
         }
+
         public static Unum operator -(Unum left, Unum right)
         {
             if (left.IsExact() && right.IsExact()) return SubtractExactUnums(left, right);
@@ -479,11 +490,12 @@ namespace Hast.Common.Numerics.Unum
             result.SetUnumBits(ResultSign, Exponent, Fraction, false, ExponentSize - 1, FractionSize);
             return result;
         }
+
         public static implicit operator Unum(float x)
         {
             return new Unum();
         }
-      
+
         //public static implicit operator Unum(double x)
         //{
         //}

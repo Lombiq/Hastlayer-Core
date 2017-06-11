@@ -110,17 +110,19 @@ namespace Hast.Common.Tests
             var bitmask3 = new BitMask(new uint[] { 0x7E012B }, 33);
             var unum3 = Unum.AddExactUnums(unum1, unum2);
             Assert.AreEqual(unum3.UnumBits, bitmask3);
+
             var unum_res2 = Unum.AddExactUnums(unum2, unum1);
             Assert.AreEqual(unum3.UnumBits, unum_res2.UnumBits);
 
             Unum zero = 0;
-
             var bitmask5 = new BitMask(new uint[] { 0xE40 }, 33);
             var unum5 = new Unum(bitmask5, 3, 4);
             var unum7 = Unum.AddExactUnums(zero, unum5);
-            Assert.AreEqual(unum5, unum7);
-            var bitmask4 = new BitMask(new uint[] { 0x18F400CF }, 33);
+            Assert.AreEqual(unum5.UnumBits, unum7.UnumBits);
+
+
             // case of inexact result, example2 from book p117
+            var bitmask4 = new BitMask(new uint[] { 0x18F400CF }, 33);
             Unum unum_1000 = 1000;
             var unum6 = Unum.AddExactUnums(unum_1000, unum5);
             Assert.AreEqual(unum6.UnumBits, bitmask4);
@@ -130,6 +132,11 @@ namespace Hast.Common.Tests
             Unum unum_6000 = 6000;
 
             Assert.AreEqual(Unum.AddExactUnums(unum_5000, unum_1000).UnumBits, unum_6000.UnumBits);
+
+            Unum negative_thirty = -30;
+            Unum thirty = 30;
+            Assert.AreEqual(Unum.AddExactUnums(thirty, negative_thirty).UnumBits, zero.UnumBits);
+
         }
 
 
