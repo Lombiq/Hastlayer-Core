@@ -155,11 +155,10 @@ namespace Hast.Common.Tests
         [Test]
         public void FindLeadingOneIsCorrect()
         {
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000002, 0x00000000 }).FindLeadingOne(),2);
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000000, 0x00000000 }).FindLeadingOne(), 0);
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000001, 0x00000000 }).FindLeadingOne(), 1);
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000002, 0x00000000 }).FindLeadingOne(), 2);
             Assert.AreEqual(new BitMask(new uint[] { 0x00000002, 0x00000001 }).FindLeadingOne(), 33);
-
-
-
         }
     }
 }
