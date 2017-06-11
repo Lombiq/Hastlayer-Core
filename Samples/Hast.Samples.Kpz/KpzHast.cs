@@ -65,6 +65,7 @@ namespace Hast.Samples.Kpz
             if(resultCpu == resultFpga) LogItFunction(String.Format("Success: {0} == {1}", resultFpga, resultCpu));
             else LogItFunction(String.Format("Fail: {0} != {1}", resultFpga, resultCpu));
 
+            /*
             LogItFunction("Running TestPrng...");
             KpzKernelsInterface KernelsCpu = new KpzKernelsInterface();
             uint[] resultPrngFpga = Kernels.TestPrngWrapper();
@@ -78,6 +79,7 @@ namespace Hast.Samples.Kpz
             Console.WriteLine("TestPrng CPU results: " + numbersCpu);
             if (kpzTarget != KpzTarget.FpgaSimulation) Console.WriteLine("TestPrng FPGA results: " + numbersFpga);
             LogItFunction("Done.");
+            */
         }
     }
 }
