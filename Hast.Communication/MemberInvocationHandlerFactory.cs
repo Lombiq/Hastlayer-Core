@@ -93,7 +93,7 @@ namespace Hast.Communication
 
                             if (string.IsNullOrEmpty(communicationChannelName))
                             {
-                                communicationChannelName = deviceDriver.DeviceManifest.SupportedCommunicationChannelNames.First();
+                                communicationChannelName = deviceDriver.DeviceManifest.DefaultCommunicationChannelName;
                             }
 
                             if (!deviceDriver.DeviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))

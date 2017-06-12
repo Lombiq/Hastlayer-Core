@@ -28,6 +28,14 @@ namespace Hast.Synthesis.Models
         IEnumerable<string> SupportedCommunicationChannelNames { get; }
 
         /// <summary>
+        /// The default communication channel to be used if none is configured.
+        /// </summary>
+        /// <remarks>
+        /// Should be one of the channels in <see cref="SupportedCommunicationChannelNames"/>.
+        /// </remarks>
+        string DefaultCommunicationChannelName { get; }
+
+        /// <summary>
         /// Gets the amount of memory (RAM) available to hardware implementations, in bytes.
         /// </summary>
         uint AvailableMemoryBytes { get; }
