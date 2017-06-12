@@ -24,5 +24,32 @@ namespace Hast.TestInputs.Various
             Task.WhenAll(tasks).Wait();
             Task.WhenAny(tasks).Wait();
         }
+
+        public void ObjectUsingTasks(uint input)
+        {
+            var tasks = new Task<bool>[3];
+
+            for (uint i = 0; i < 3; i++)
+            {
+                tasks[i] = Task.Factory.StartNew(
+                    indexObject =>
+                    {
+                        var index = (uint)indexObject;
+                        index += input;
+                        return new Calculator { Number = index }.IsEven();
+                    }, i);
+            }
+
+            Task.WhenAll(tasks).Wait();
+        }
+
+
+        private class Calculator
+        {
+            public uint Number { get; set; }
+
+
+            public bool IsEven() => Number % 2 == 0;
+        }
     }
 }

@@ -626,12 +626,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var initiailizationResult = InitializeRecord(expression, objectCreateExpression.Type, context);
 
-                if (initiailizationResult.RecordInstanceIdentifier == null)
-                {
-                    throw new NotSupportedException(
-                        "Passing newly created objects to methods or constructors is not supported. Assign the object to a variable first.");
-                }
-
                 // Running the constructor, which needs to be done before intializers.
                 var constructor = context.TransformationContext.TypeDeclarationLookupTable
                     .Lookup(objectCreateExpression.Type)
@@ -681,7 +675,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
-                return Empty.Instance;
+                return initiailizationResult.ShouldReturnReference ? 
+                    (IVhdlElement)initiailizationResult.RecordInstanceReference : 
+                    Empty.Instance;
             }
             else if (expression is DefaultValueExpression)
             {
@@ -743,6 +739,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 result.RecordInstanceReference = context.Scope.StateMachine
                     .CreateVariableWithNextUnusedIndexedName("instance", record)
                     .ToReference();
+                var variableNameSegments = result.RecordInstanceReference.Name
+                    .TrimExtendedVhdlIdDelimiters()
+                    .Split(new[] { '.' });
+                var identifier = variableNameSegments[variableNameSegments.Length - 2] + 
+                    "." + 
+                    variableNameSegments[variableNameSegments.Length - 1];
+                result.RecordInstanceIdentifier = new IdentifierExpression(identifier);
             }
 
             foreach (var field in record.Fields)
