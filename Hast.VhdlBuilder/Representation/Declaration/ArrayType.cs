@@ -1,19 +1,14 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class ArrayType : DataType // Not named "Array" to avoid naming clash with System.Array.
+    public class ArrayType : ArrayTypeBase // Not named "Array" to avoid naming clash with System.Array.
     {
         public DataType RangeType { get; set; } = KnownDataTypes.UnrangedInt;
         public int MaxLength { get; set; }
-        public DataType ElementType { get; set; }
-
-
-        public ArrayType()
-        {
-            TypeCategory = DataTypeCategory.Array;
-        }
 
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>

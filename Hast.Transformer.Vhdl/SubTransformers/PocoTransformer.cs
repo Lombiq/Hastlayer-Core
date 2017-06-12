@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -36,12 +37,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Member = typeDeclaration
                 };
 
-                var record = _recordComposer.CreateRecordFromType(typeDeclaration);
+                var record = _recordComposer.CreateRecordFromType(typeDeclaration, context);
                 var component = new BasicComponent(record.Name);
 
                 if (record.Fields.Any())
                 {
-                    component.DependentTypesTable.AddBaseType(record);
+                    var hasDependency = false;
+
+                    foreach (var field in record.Fields)
+                    {
+                        if (field.DataType is ArrayType || field.DataType is Record)
+                        {
+                            component.DependentTypesTable.AddDependency(record, field.DataType.Name);
+                            hasDependency = true;
+                        }
+                    }
+
+                    if (!hasDependency) component.DependentTypesTable.AddBaseType(record);
                 }
 
                 result.ArchitectureComponentResults = new List<IArchitectureComponentResult>

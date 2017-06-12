@@ -1,4 +1,6 @@
 ﻿using System;
+using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
@@ -9,22 +11,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public interface IRecordComposer : IDependency
     {
         bool IsSupportedRecordMember(AstNode node);
-        Record CreateRecordFromType(TypeDefinition typeDefinition);
-    }
-
-
-    public static class RecordComposerExtensions
-    {
-        public static Record CreateRecordFromType(this IRecordComposer recordComposer, TypeDeclaration typeDeclaration)
-        {
-            var typeDefinition = typeDeclaration.Annotation<TypeDefinition>();
-
-            if (typeDefinition == null)
-            {
-                throw new ArgumentException("The given TypeDeclaration doesn't have a TypeDefinition annotation.");
-            }
-
-            return recordComposer.CreateRecordFromType(typeDefinition);
-        }
+        Record CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
     }
 }

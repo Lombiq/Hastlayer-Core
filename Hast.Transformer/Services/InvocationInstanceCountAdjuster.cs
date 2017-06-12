@@ -46,7 +46,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                var referencedMember = memberReferenceExpression.GetMemberDeclaration(_typeDeclarationLookupTable);
+                var referencedMember = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
                 if (referencedMember == null) return;
 
@@ -54,7 +54,8 @@ namespace Hast.Transformer.Services
                     .GetMaxInvocationInstanceCountConfigurationForMember(referencedMember);
 
                 var invokingMemberMaxInvocationConfiguration = _transformerConfiguration
-                    .GetMaxInvocationInstanceCountConfigurationForMember(memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>());
+                    .GetMaxInvocationInstanceCountConfigurationForMember(memberReferenceExpression
+                    .FindFirstParentOfType<EntityDeclaration>());
 
                 if (invokingMemberMaxInvocationConfiguration.MaxInvocationInstanceCount > referencedMemberMaxInvocationConfiguration.MaxInvocationInstanceCount)
                 {

@@ -31,10 +31,14 @@ namespace Hast.Transformer.Vhdl.Tests
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
-                    typeof(InvalidOperationException));
+                    typeof(NotSupportedException));
 
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.ArraySizeIsNotStatic(0)),
+                    typeof(NotSupportedException));
+
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.ArrayCopyToIsNotStaticCopy(0)),
                     typeof(NotSupportedException));
             });
         }
@@ -50,6 +54,17 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
+        [Test]
+        public async Task InvalidHardwareEntryPointsArePrevented()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
+                    typeof(NotSupportedException));
+            });
+        }
+
 
         private Task<VhdlHardwareDescription> TransformInvalidTestInputs<T>(
             ITransformer transformer,
@@ -61,7 +76,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 configuration =>
                 {
                     configuration.TransformerConfiguration().UseSimpleMemory = false;
-                    configuration.AddPublicHardwareMethod<T>(expression);
+                    configuration.AddHardwareEntryPointMethod(expression);
                 });
         }
     }

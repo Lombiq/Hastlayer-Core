@@ -35,18 +35,14 @@ namespace Hast.VhdlBuilder.Representation.Expression
             // Handling signed and unsigned types specially.
             if (KnownDataTypes.Integers.Contains(DataType))
             {
-                var conversionFunctionName = DataType.Name == KnownDataTypes.UInt32.Name ? "to_unsigned" : "to_signed";
+                // Using ToVhdlValue() on content would cause a stack overflow, since this would be called again. So
+                // this needs to be the root of the Value callchain.
+                var value = new Raw(content);
                 var size = ((SizedDataType)DataType).Size;
 
-                return new Invocation
-                {
-                    Target = conversionFunctionName.ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement>
-                    {
-                        { new Raw(content) },
-                        { size.ToVhdlValue(KnownDataTypes.UnrangedInt) }
-                    }
-                }.ToVhdl(vhdlGenerationOptions);
+                return (DataType.Name == KnownDataTypes.UInt32.Name ?
+                    Invocation.ToUnsigned(value, size) :
+                    Invocation.ToSigned(value, size)).ToVhdl(vhdlGenerationOptions);
             }
 
             if (DataType.TypeCategory == DataTypeCategory.Scalar ||

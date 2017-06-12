@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Hast.Transformer.Helpers;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services
@@ -20,27 +22,18 @@ namespace Hast.Transformer.Services
             {
                 base.VisitConstructorDeclaration(constructorDeclaration);
 
-                var constructorMethod = new MethodDeclaration();
-
-                foreach (var annotation in constructorDeclaration.Annotations)
-                {
-                    constructorMethod.AddAnnotation(annotation);
-                }
-
-                foreach (var parameter in constructorDeclaration.Parameters)
-                {
-                    constructorMethod.Parameters.Add(parameter.Clone());
-                }
-
-                constructorMethod.Name = constructorDeclaration.Name;
-                constructorMethod.Body = (BlockStatement)constructorDeclaration.Body.Clone();
-                constructorMethod.ReturnType = new PrimitiveType("void");
+                var method = MethodDeclarationFactory.CreateMethod(
+                    constructorDeclaration.Name,
+                    constructorDeclaration.Annotations,
+                    constructorDeclaration.Parameters,
+                    constructorDeclaration.Body,
+                    new PrimitiveType("void"));
 
                 // If the type has no base type then remove the automatically added base.ctor() call from the 
                 // constructor as it won't reference anything transformable.
                 if (!constructorDeclaration.FindFirstParentTypeDeclaration().BaseTypes.Any())
                 {
-                    constructorMethod.Body
+                    method.Body
                         .OfType<ExpressionStatement>()
                         .SingleOrDefault(statement =>
                         {
@@ -48,11 +41,11 @@ namespace Hast.Transformer.Services
 
                             return
                                 invocation != null &&
-                                invocation.Target.Is<MemberReferenceExpression>(reference => reference.MemberName == ".ctor");
+                                invocation.Target.Is<MemberReferenceExpression>(reference => reference.MemberName.IsConstructorName());
                         })?.Remove(); 
                 }
 
-                constructorDeclaration.ReplaceWith(constructorMethod);
+                constructorDeclaration.ReplaceWith(method);
             }
         }
     }

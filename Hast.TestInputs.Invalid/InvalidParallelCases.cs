@@ -9,8 +9,9 @@ namespace Hast.TestInputs.Invalid
             var task = Task.Factory.StartNew(
                 () =>
                 {
-                    input = 4;
-                    return true;
+                    // If this would be something like input = 5 then it would correctly be substituted with a const.
+                    input += 5;
+                    return input == 5;
                 });
         }
     }

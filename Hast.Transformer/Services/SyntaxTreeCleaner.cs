@@ -25,11 +25,11 @@ namespace Hast.Transformer.Services
         public void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
-            var noIncludedMembers = !configuration.PublicHardwareMemberFullNames.Any() && !configuration.PublicHardwareMemberNamePrefixes.Any();
+            var noIncludedMembers = !configuration.HardwareEntryPointMemberFullNames.Any() && !configuration.HardwareEntryPointMemberNamePrefixes.Any();
             var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable);
 
-            // Starting with interface members we walk through the references to see which declarations are used (e.g. 
-            // which methods are called at least once).
+            // Starting with hardware entry point members we walk through the references to see which declarations are 
+            // used (e.g. which methods are called at least once).
             foreach (var type in syntaxTree.GetAllTypeDeclarations())
             {
                 foreach (var member in type.Members)
@@ -37,11 +37,11 @@ namespace Hast.Transformer.Services
                     var fullName = member.GetFullName();
                     if ((
                             (noIncludedMembers ||
-                            configuration.PublicHardwareMemberFullNames.Contains(fullName) ||
-                            fullName.GetMemberNameAlternates().Intersect(configuration.PublicHardwareMemberFullNames).Any() ||
-                            configuration.PublicHardwareMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix)))
+                            configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
+                            fullName.GetMemberNameAlternates().Intersect(configuration.HardwareEntryPointMemberFullNames).Any() ||
+                            configuration.HardwareEntryPointMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix)))
                         &&
-                            _memberSuitabilityChecker.IsSuitableInterfaceMember(member, typeDeclarationLookupTable)
+                            _memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable)
                         ))
                     {
                         if (member is MethodDeclaration)
@@ -55,7 +55,7 @@ namespace Hast.Transformer.Services
                             }
                         }
 
-                        member.SetInterfaceMember();
+                        member.SetHardwareEntryPointMember();
                         member.AddReference(syntaxTree);
                         member.AcceptVisitor(referencedNodesFlaggingVisitor);
                     }
@@ -84,6 +84,8 @@ namespace Hast.Transformer.Services
             }
 
             // Note that at this point the reference counters are out of date and would need to be refreshed to be used.
+
+            syntaxTree.AcceptVisitor(new ReferenceMetadataCleanUpVisitor());
         }
 
 
@@ -107,10 +109,15 @@ namespace Hast.Transformer.Services
                 if (instantiatedType == null) return;
 
                 instantiatedType.AddReference(objectCreateExpression);
+
                 // Looking up the constructor used.
-                instantiatedType.Members
-                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.Annotation<MethodDefinition>().FullName)
-                    ?.AddReference(objectCreateExpression);
+                var constructor = instantiatedType.Members
+                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.Annotation<MethodReference>().FullName);
+                if (constructor != null)
+                {
+                    constructor.AddReference(objectCreateExpression);
+                    constructor.AcceptVisitor(this);
+                }
             }
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
@@ -130,7 +137,7 @@ namespace Hast.Transformer.Services
                 }
 
 
-                var member = memberReferenceExpression.GetMemberDeclaration(_typeDeclarationLookupTable);
+                var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
                 if (member == null || member.WasVisited()) return;
 
@@ -207,6 +214,16 @@ namespace Hast.Transformer.Services
             private static void RemoveIfUnreferenced(AstNode node)
             {
                 if (!node.IsReferenced()) node.Remove();
+            }
+        }
+
+        private class ReferenceMetadataCleanUpVisitor : DepthFirstAstVisitor
+        {
+            protected override void VisitChildren(AstNode node)
+            {
+                base.VisitChildren(node);
+
+                node.RemoveReferenceMetadata();
             }
         }
     }

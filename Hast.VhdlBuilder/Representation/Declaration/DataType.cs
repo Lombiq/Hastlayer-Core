@@ -22,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public DataTypeCategory TypeCategory { get; set; }
         public string Name { get; set; }
-        public Value DefaultValue { get; set; }
+        public virtual Value DefaultValue { get; set; }
 
 
         public DataType(DataType previous) : this()

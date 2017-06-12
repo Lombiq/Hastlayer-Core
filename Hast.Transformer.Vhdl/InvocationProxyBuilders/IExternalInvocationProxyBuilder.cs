@@ -8,7 +8,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
     public interface IExternalInvocationProxyBuilder : IDependency
     {
         IArchitectureComponent BuildProxy(
-            IEnumerable<IMemberTransformerResult> interfaceMemberResults, 
+            IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults, 
             MemberIdTable memberIdTable);
     }
 }

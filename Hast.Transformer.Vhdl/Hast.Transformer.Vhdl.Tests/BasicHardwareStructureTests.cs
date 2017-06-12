@@ -23,8 +23,8 @@ namespace Hast.Transformer.Vhdl.Tests
                 var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
 
                 hardwareDescription.Language.ShouldBe("VHDL");
-                hardwareDescription.HardwareMembers.Count().ShouldBe(18);
-                hardwareDescription.MemberIdTable.Values.Count().ShouldBe(18);
+                hardwareDescription.HardwareMembers.Count().ShouldBe(14);
+                hardwareDescription.MemberIdTable.Values.Count().ShouldBe(14);
                 hardwareDescription.VhdlSource.ShouldNotBeNullOrEmpty();
                 hardwareDescription.VhdlManifestIfFresh.ShouldNotBeNull(); // Since caching is off.
             });

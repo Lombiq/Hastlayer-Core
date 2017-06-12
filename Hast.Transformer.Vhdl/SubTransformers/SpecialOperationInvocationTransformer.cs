@@ -130,7 +130,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Returning the results as an array initialization value (i.e.: array := (result1, result2);)
             return new Value
             {
-                DataType = _typeConverter.ConvertTypeReference(expression.GetActualTypeReference()),
+                DataType = _typeConverter.ConvertTypeReference(
+                    expression.GetActualTypeReference(), 
+                    context.TransformationContext),
                 EvaluatedContent = new InlineBlock(resultReferences)
             };
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -27,11 +28,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         public IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
-            bool isLeft)
+            bool isLeft, 
+            IVhdlTransformationContext context)
         {
             // If the type of an operand can't be determined the best guess is the expression's type.
             var expressionTypeReference = binaryOperatorExpression.GetActualTypeReference();
-            var expressionType = expressionTypeReference != null ? _typeConverter.ConvertTypeReference(expressionTypeReference) : null;
+            var expressionType = expressionTypeReference != null ? 
+                _typeConverter.ConvertTypeReference(expressionTypeReference, context) : 
+                null;
 
             var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
             var rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference();
@@ -56,9 +60,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 leftTypeReference = expressionTypeReference;
             }
 
-            var leftType = leftTypeReference != null ? _typeConverter.ConvertTypeReference(leftTypeReference) : expressionType;
+            var leftType = leftTypeReference != null ? 
+                _typeConverter.ConvertTypeReference(leftTypeReference, context) : 
+                expressionType;
 
-            var rightType = rightTypeReference != null ? _typeConverter.ConvertTypeReference(rightTypeReference) : expressionType;
+            var rightType = rightTypeReference != null ? 
+                _typeConverter.ConvertTypeReference(rightTypeReference, context) : 
+                expressionType;
 
             if (leftType == null || rightType == null)
             {

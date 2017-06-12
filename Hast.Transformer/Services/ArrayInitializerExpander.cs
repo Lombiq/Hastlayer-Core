@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
@@ -59,19 +60,9 @@ namespace Hast.Transformer.Services
                         right: initializerElements[i]
                         ));
 
-                    var parentStatement = arrayCreateExpression.FindFirstParentOfType<Statement>();
-                    var enclosingNode = parentStatement.Parent;
-                    if (enclosingNode is BlockStatement)
-                    {
-                        ((BlockStatement)enclosingNode).Statements.InsertAfter(parentStatement, elementAssignmentStatement);
-                    }
-                    else
-                    {
-                        enclosingNode.InsertChildAfter(
-                            parentStatement,
-                            elementAssignmentStatement,
-                            new ICSharpCode.NRefactory.Role<ExpressionStatement>("ExpressionStatement"));
-                    }
+                    AstInsertionHelper.InsertStatementAfter(
+                        arrayCreateExpression.FindFirstParentOfType<Statement>(), 
+                        elementAssignmentStatement);
                 }
             }
         }

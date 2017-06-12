@@ -35,30 +35,30 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         var transformerConfiguration = configuration.TransformerConfiguration();
 
-                        configuration.AddPublicHardwareType<ObjectOrientedShowcase>();
+                        configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
-                        configuration.AddPublicHardwareType<HastlayerOptimizedAlgorithm>();
+                        configuration.AddHardwareEntryPointType<HastlayerOptimizedAlgorithm>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<HastlayerOptimizedAlgorithm>(p => p.Run(null), 0)
                             {
                                 MaxDegreeOfParallelism = 5 // Using a smaller degree because we don't need excess repetition.
                             });
 
-                        configuration.AddPublicHardwareType<PrimeCalculator>();
+                        configuration.AddHardwareEntryPointType<PrimeCalculator>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(null), 0)
                             {
                                 MaxDegreeOfParallelism = 5
                             });
 
-                        configuration.AddPublicHardwareType<RecursiveAlgorithms>();
+                        configuration.AddHardwareEntryPointType<RecursiveAlgorithms>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")
                             {
                                 MaxRecursionDepth = 5
                             });
 
-                        configuration.AddPublicHardwareType<SimdCalculator>();
+                        configuration.AddHardwareEntryPointType<SimdCalculator>();
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();

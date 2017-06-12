@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SimpleMemory;
 using Hast.VhdlBuilder.Extensions;
@@ -18,6 +20,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     // structure, not to have one giant TransformInvocationExpression method.
     public class InvocationExpressionTransformer : IInvocationExpressionTransformer
     {
+        private static IEnumerable<string> _arrayCopyToMethodNames = typeof(Array)
+            .GetMethods()
+            .Where(method => method.Name == nameof(Array.Copy) && method.GetParameters().Count() == 3)
+            .Select(method => method.GetFullName());
+
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
         private readonly ITypeConverter _typeConverter;
         private readonly ISpecialOperationInvocationTransformer _specialOperationInvocationTransformer;
@@ -98,17 +105,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
-                Expression = new Invocation
-                {
-                    // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
-                    Target = "resize".ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement>
-                        {
-                            // CellIndex is conventionally the first invocation parameter. 
-                            { invocationParameters[0] },
-                            SimpleMemoryTypes.CellIndexInternalSignalDataType.Size.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                        }
-                }
+                // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
+                // CellIndex is conventionally the first invocation parameter. 
+                Expression = Invocation.Resize(invocationParameters[0], SimpleMemoryTypes.CellIndexInternalSignalDataType.Size)
             });
 
             var enablePortReference = isWrite ?
@@ -209,9 +208,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
                 customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
 
-                return implementSimpleMemoryTypeConversion(
-                    SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
-                    true);
+                var dataInTemporaryVariableReference = stateMachine
+                        .CreateVariableWithNextUnusedIndexedName("dataIn", SimpleMemoryTypes.DataSignalsDataType)
+                        .ToReference();
+                currentBlock.Add(new Assignment
+                {
+                    AssignTo = dataInTemporaryVariableReference,
+                    Expression = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference()
+                });
+
+                return implementSimpleMemoryTypeConversion(dataInTemporaryVariableReference, true);
             }
         }
 
@@ -238,15 +244,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 var waitTarget = ((MemberReferenceExpression)expression.Target).Target;
 
                 // Is it a Task.Something().Wait() call?
-                var memberName = string.Empty;
+                MemberReferenceExpression memberReference = null;
                 if (waitTarget.Is<InvocationExpression>(invocation =>
                     invocation.Target.Is<MemberReferenceExpression>(member =>
-                    {
-                        memberName = member.MemberName;
-                        return member.Target.Is<TypeReferenceExpression>(type =>
-                            _typeConverter.ConvertAstType(type.Type) == SpecialTypes.Task);
-                    })))
+                        member.Target.Is<TypeReferenceExpression>(type =>
+                            _typeConverter.ConvertAstType(
+                                type.Type, 
+                                context.TransformationContext) == SpecialTypes.Task),
+                        out memberReference)))
                 {
+                    var memberName = memberReference.MemberName;
                     if (memberName == "WhenAll" || memberName == "WhenAny")
                     {
                         // Since it's used in a WhenAll() or WhenAny() call the argument should be an array.
@@ -287,6 +294,50 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
             }
 
+            // Handling special operations here.
+            if (_specialOperationInvocationTransformer.IsSpecialOperationInvocation(expression))
+            {
+                return _specialOperationInvocationTransformer
+                    .TransformSpecialOperationInvocation(expression, transformedParameters, context);
+            }
+
+            // Support for Array.Copy().
+            if (_arrayCopyToMethodNames.Contains(targetMethodName))
+            {
+                IVhdlElement assignmentExpression = null;
+
+                PrimitiveExpression lengthExpression;
+                if (expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(out lengthExpression))
+                {
+                    if (lengthExpression.Value.ToString() == "0")
+                    {
+                        // If the whole array is copied then it can be transformed into a simple assignment.
+                        assignmentExpression = transformedParameters.First(); 
+                    }
+                    else
+                    {
+                        // Otherwise slicing the array.
+                        assignmentExpression = new UnconstrainedArrayInstantiation
+                        {
+                            Name = ((IDataObject)transformedParameters.First()).Name,
+                            RangeFrom = 0,
+                            RangeTo = Convert.ToInt32(lengthExpression.Value) - 1
+                        };
+                    }
+                }
+                else
+                {
+                    throw new NotSupportedException(
+                        "Array.Copy() is only supported if the second argument can be determined compile-time.");
+                }
+
+                return new Assignment
+                {
+                    AssignTo = (IDataObject)transformedParameters.Skip(1).First(),
+                    Expression = assignmentExpression
+                };
+            }
+
 
             EntityDeclaration targetDeclaration = null;
 
@@ -307,17 +358,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
             else
             {
-                targetDeclaration = targetMemberReference.GetMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
+                targetDeclaration = targetMemberReference.FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable);
             }
 
             if (targetDeclaration == null || !(targetDeclaration is MethodDeclaration))
             {
-                if (_specialOperationInvocationTransformer.IsSpecialOperationInvocation(expression))
-                {
-                    return _specialOperationInvocationTransformer
-                        .TransformSpecialOperationInvocation(expression, transformedParameters, context);
-                }
-
                 throw new InvalidOperationException(
                     "The invoked method " +
                     targetMethodName +

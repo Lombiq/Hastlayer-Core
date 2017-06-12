@@ -32,6 +32,9 @@ namespace Hast.Transformer
         private readonly IArrayInitializerExpander _arrayInitializerExpander;
         private readonly IAutoPropertyInitializationFixer _autoPropertyInitializationFixer;
         private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
+        private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
+        private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
+        private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
 
 
         public DefaultTransformer(
@@ -46,7 +49,10 @@ namespace Hast.Transformer
             IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
             IArrayInitializerExpander arrayInitializerExpander,
             IAutoPropertyInitializationFixer autoPropertyInitializationFixer,
-            IConstructorsToMethodsConverter constructorsToMethodsConverter)
+            IConstructorsToMethodsConverter constructorsToMethodsConverter,
+            IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
+            IConstantValuesSubstitutor constantValuesSubstitutor,
+            IOperatorsToMethodsConverter operatorsToMethodsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -60,6 +66,9 @@ namespace Hast.Transformer
             _arrayInitializerExpander = arrayInitializerExpander;
             _autoPropertyInitializationFixer = autoPropertyInitializationFixer;
             _constructorsToMethodsConverter = constructorsToMethodsConverter;
+            _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
+            _constantValuesSubstitutor = constantValuesSubstitutor;
+            _operatorsToMethodsConverter = operatorsToMethodsConverter;
         }
 
 
@@ -83,8 +92,8 @@ namespace Hast.Transformer
             }
 
             transformationId +=
-                string.Join("-", configuration.PublicHardwareMemberFullNames) +
-                string.Join("-", configuration.PublicHardwareMemberNamePrefixes) +
+                string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
+                string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
                 _jsonConverter.Serialize(configuration.CustomConfiguration);
 
 
@@ -155,15 +164,21 @@ namespace Hast.Transformer
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
 
-            // Clean-up.
+            // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            // Transformations making the syntax tree easier to process.
+            // Conversions making the syntax tree easier to process.
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
+            _operatorsToMethodsConverter.ConvertOperatorsToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
+            _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
+            var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree);
+
+            // If the conversions removed something let's clean them up here.
+            _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
@@ -179,7 +194,8 @@ namespace Hast.Transformer
                 Id = transformationId,
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
-                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree)
+                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
+                ArraySizeHolder = arraySizeHolder
             };
 
             _eventHandler.SyntaxTreeBuilt(context);
@@ -208,12 +224,25 @@ namespace Hast.Transformer
         {
             foreach (var type in syntaxTree.GetAllTypeDeclarations())
             {
-                foreach (var member in type.Members.Where(m => m.IsInterfaceMember()))
+                foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
                 {
-                    if (member.Is<MethodDeclaration>(method => string.IsNullOrEmpty(method.GetSimpleMemoryParameterName())))
+                    var method = member as MethodDeclaration;
+
+                    if (method != null)
                     {
-                        throw new InvalidOperationException(
-                            "The method " + member.GetFullName() + " doesn't have a necessary SimpleMemory parameter.");
+                        var methodName = member.GetFullName();
+
+                        if (string.IsNullOrEmpty(method.GetSimpleMemoryParameterName()))
+                        {
+                            throw new InvalidOperationException(
+                                "The method " + methodName + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
+                        }
+
+                        if (method.Parameters.Count > 1)
+                        {
+                            throw new InvalidOperationException(
+                                "The method " + methodName + " contains parameters apart from the SimpleMemory parameter. Hardware entry points should only have a single SimpleMemory parameter and nothing else.");
+                        }
                     }
                 }
             }

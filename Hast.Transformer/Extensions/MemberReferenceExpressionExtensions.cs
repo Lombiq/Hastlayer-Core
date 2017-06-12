@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Hast.Transformer.Models;
 using Mono.Cecil;
 
@@ -6,22 +7,47 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     public static class MemberReferenceExpressionExtensions
     {
-        public static EntityDeclaration GetMemberDeclaration(
+        public static EntityDeclaration FindMemberDeclaration(
             this MemberReferenceExpression memberReferenceExpression, 
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            var type = memberReferenceExpression.GetTargetTypeDeclaration(typeDeclarationLookupTable);
+            var type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable);
 
             if (type == null) return null;
 
             // A MethodReference annotation is present if the expression is for creating a delegate for a lambda expression
             // like this: new Func<object, bool> (<>c__DisplayClass.<ParallelizedArePrimeNumbersAsync>b__0)
             var methodReference = memberReferenceExpression.Annotation<MethodReference>();
-            if (methodReference == null)
+            if (methodReference != null)
+            {
+                var memberName = methodReference.FullName;
+
+                // If this is a member reference to a property then both a MethodReference (for the setter or getter)
+                // and a PropertyReference will be there, but the latter will contain the member name.
+                var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
+                if (propertyReference != null) memberName = propertyReference.FullName;
+
+                return type.Members
+                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName);
+            }
+            else
             {
                 // A FieldDefinition annotation is present if the expression is about accessing a field.
                 var fieldDefinition = memberReferenceExpression.Annotation<FieldDefinition>();
-                if (fieldDefinition == null)
+                if (fieldDefinition != null)
+                {
+                    if (!fieldDefinition.FullName.IsBackingFieldName())
+                    {
+                        return type.Members
+                            .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName); 
+                    }
+                    else
+                    {
+                        return type.Members
+                            .SingleOrDefault(member => member.Name == memberReferenceExpression.MemberName && member is PropertyDeclaration);
+                    }
+                }
+                else
                 {
                     var parent = memberReferenceExpression.Parent;
                     MemberReference memberReference = null;
@@ -38,29 +64,12 @@ namespace ICSharpCode.NRefactory.CSharp
                     return
                         declaringType
                         .Members
-                        .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);  
+                        .SingleOrDefault(member => member.Annotation<MemberReference>().FullName == memberReference.FullName);
                 }
-                else
-                {
-                    return type.Members
-                        .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName); 
-                }
-            }
-            else
-            {
-                var memberName = methodReference.FullName;
-
-                // If this is a member reference to a property then both a MethodReference (for the setter or getter)
-                // and a PropertyReference will be there, but the latter will contain the member name.
-                var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
-                if (propertyReference != null) memberName = propertyReference.FullName;
-
-                return type.Members
-                    .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == memberName); 
             }
         }
 
-        public static TypeDeclaration GetTargetTypeDeclaration(
+        public static TypeDeclaration FindTargetTypeDeclaration(
             this MemberReferenceExpression memberReferenceExpression, 
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
@@ -82,7 +91,7 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else if (memberReferenceExpression.Target is MemberReferenceExpression)
             {
-                return ((MemberReferenceExpression)memberReferenceExpression.Target).GetTargetTypeDeclaration(typeDeclarationLookupTable);
+                return ((MemberReferenceExpression)memberReferenceExpression.Target).FindTargetTypeDeclaration(typeDeclarationLookupTable);
             }
             else
             {
@@ -90,5 +99,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 return memberReferenceExpression.FindFirstParentTypeDeclaration();
             }
         }
+
+        /// <summary>
+        /// Determines if the member reference is an access to an array's Length property.
+        /// </summary>
+        public static bool IsArrayLengthAccess(this MemberReferenceExpression memberReferenceExpression) =>
+            memberReferenceExpression.MemberName == "Length" && memberReferenceExpression.Target.GetActualTypeReference().IsArray;
     }
 }
