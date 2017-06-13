@@ -136,7 +136,6 @@ namespace Hast.Transformer.Services
                 BinaryOperatorExpression binaryOperatorExpression;
 
 
-                // Don't substitute if this is inside an if or while statement.
                 if (primitiveExpressionParent.Is<AssignmentExpression>(out assignmentExpression))
                 {
                     _constantValuesTable.MarkAsPotentiallyConstant(
