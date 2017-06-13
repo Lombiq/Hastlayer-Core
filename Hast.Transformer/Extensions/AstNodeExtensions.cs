@@ -47,11 +47,6 @@ namespace ICSharpCode.NRefactory.CSharp
                 return CreateParentEntityBasedName(node, ((IdentifierExpression)node).Identifier);
             }
 
-            if (node is BinaryOperatorExpression)
-            {
-                return CreateParentEntityBasedName(node, node.ToString());
-            }
-
             if (node is IndexerExpression)
             {
                 return ((IndexerExpression)node).Target.GetFullName();
@@ -95,7 +90,14 @@ namespace ICSharpCode.NRefactory.CSharp
                 return node.FindFirstParentEntityDeclaration().GetFullName();
             }
 
-            throw new InvalidOperationException("This node doesn't have a name.");
+            // The node doesn't really have a name so give it one that is suitably unique.
+            // This should contain one or more ILRange objects which maybe correspond to the node's location in the 
+            // original IL.
+            var ilRanges = node.Annotation<List<ILRange>>();
+            if (ilRanges == null) ilRanges = node.Parent.Annotation<List<ILRange>>(); // Maybe the parent has one.
+            return CreateParentEntityBasedName(
+                node, 
+                node.ToString() + (ilRanges != null && ilRanges.Any() ? ilRanges.First().ToString() : string.Empty));
         }
 
         /// <summary>
