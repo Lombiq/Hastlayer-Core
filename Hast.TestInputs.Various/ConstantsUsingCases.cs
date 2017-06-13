@@ -66,10 +66,11 @@ namespace Hast.TestInputs.Various
             var NonSubstitutableArrayLengthCopy1 = arrayHolder.NonSubstitutableArrayLengthCopy;
             var arrayHolder2 = new ArrayHolder1((uint)arraySize);
             var arrayHolder3 = new ArrayHolder1((uint)array.Length);
+            var arrayHolder4 = new ArrayHolder1(arrayHolder3);
 
             // These constructor parameters can't be substituted because there are different ones.
-            var arrayHolder4 = new ArrayHolder2((uint)arraySize);
-            var arrayHolder5 = new ArrayHolder2((uint)arraySize + 8);
+            var arrayHolder5 = new ArrayHolder2((uint)arraySize);
+            var arrayHolder6 = new ArrayHolder2((uint)arraySize + 8);
         }
 
 
@@ -100,6 +101,11 @@ namespace Hast.TestInputs.Various
                 ArrayLengthCopy = ArrayLength << 5;
                 NonSubstitutableArrayLengthCopy = ArrayLengthCopy;
                 Array = new uint[ArrayLength];
+            }
+
+            public ArrayHolder1(ArrayHolder1 previous) : this(previous.Array)
+            {
+
             }
         }
 
