@@ -352,7 +352,7 @@ namespace Hast.Transformer.Services
                         _syntaxTree,
                         true);
                 }
-                else
+                else if (!returnStatement.Expression.GetFullName().IsBackingFieldName())
                 {
                     _constantValuesTable.MarkAsNonConstant(returnStatement.FindFirstParentEntityDeclaration(), _syntaxTree);
                 }
