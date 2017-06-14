@@ -561,31 +561,22 @@ namespace Hast.Transformer.Services
 
                 if (valueHolder == null) return;
 
-                Action<string> saveMark = name =>
-                {
-                    var valueDescriptors = GetOrCreateValueDescriptors(name);
+                var valueDescriptors = GetOrCreateValueDescriptors(valueHolder.GetFullNameWithUnifiedPropertyName());
 
-                    if (disallowDifferentValues)
+                if (disallowDifferentValues && expression != null)
+                {
+                    PrimitiveExpression existingExpression;
+                    if (valueDescriptors.TryGetValue(scope, out existingExpression))
                     {
-                        PrimitiveExpression existingExpression;
-                        if (valueDescriptors.TryGetValue(scope, out existingExpression))
+                        // Simply using != would yield a reference equality check.
+                        if (existingExpression == null || !expression.Value.Equals(existingExpression.Value))
                         {
-                            // Simply using != would yield a reference equality check.
-                            if (existingExpression == null || !expression.Value.Equals(existingExpression.Value))
-                            {
-                                expression = null;
-                            }
+                            expression = null;
                         }
                     }
+                }
 
-                    valueDescriptors[scope] = expression;
-                };
-
-                var holderName = valueHolder.GetFullName();
-
-                saveMark(holderName);
-
-                if (holderName.IsBackingFieldName()) saveMark(holderName.ConvertFullBackingFieldNameToPropertyName());
+                valueDescriptors[scope] = expression;
             }
 
             public void MarkAsNonConstant(AstNode valueHolder, AstNode scope)
@@ -594,23 +585,14 @@ namespace Hast.Transformer.Services
 
                 Argument.ThrowIfNull(scope, nameof(scope));
 
-                Action<string> saveMark = name => GetOrCreateValueDescriptors(name)[scope] = null;
-
-                var holderName = valueHolder.GetFullName();
-
-                saveMark(holderName);
-
-                if (holderName.IsBackingFieldName())
-                {
-                    saveMark(holderName.ConvertFullBackingFieldNameToPropertyName());
-                }
+                GetOrCreateValueDescriptors(valueHolder.GetFullNameWithUnifiedPropertyName())[scope] = null;
             }
 
             public bool RetrieveAndDeleteConstantValue(AstNode valueHolder, out PrimitiveExpression valueExpression)
             {
                 Dictionary<AstNode, PrimitiveExpression> valueDescriptors;
 
-                if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullName(), out valueDescriptors) &&
+                if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullNameWithUnifiedPropertyName(), out valueDescriptors) &&
                     valueDescriptors.Any())
                 {
                     // Finding the value defined for the scope which is closest.

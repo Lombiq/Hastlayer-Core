@@ -101,6 +101,30 @@ namespace ICSharpCode.NRefactory.CSharp
         }
 
         /// <summary>
+        /// Retrieves the node's full name (see <see cref="GetFullName(AstNode)"/>) and if it's a property, produces
+        /// a unified name for all of its forms (like backing field, compiler-generated get/set methods).
+        /// </summary>
+        public static string GetFullNameWithUnifiedPropertyName(this AstNode node)
+        {
+            var name = node.GetFullName();
+
+            // If this is a compiler-generated property getter or setter method then get the real property name.
+            var methodDefinition = node.Annotation<MethodDefinition>();
+            if (methodDefinition != null && (methodDefinition.IsGetter || methodDefinition.IsSetter))
+            {
+                name = methodDefinition.IsGetter ?
+                    name.Replace("::get_", "::") :
+                    name.Replace("::set_", "::");
+            }
+            else if (name.IsBackingFieldName())
+            {
+                name = name.ConvertFullBackingFieldNameToPropertyName();
+            }
+
+            return name;
+        }
+
+        /// <summary>
         /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's 
         /// name.
         /// </summary>
