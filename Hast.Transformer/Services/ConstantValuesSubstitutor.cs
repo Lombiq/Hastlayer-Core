@@ -58,6 +58,8 @@ namespace Hast.Transformer.Services
                 syntaxTree.AcceptVisitor(globalValueHoldersHandlingVisitor);
                 syntaxTree.AcceptVisitor(constantValuesSubstitutingVisitor);
 
+                constantValuesTable.Clear();
+
                 passCount++;
             } while ((codeOutput != syntaxTree.ToString() || constantValuesMarkingVisitor.ArraySizesUpdated.Count != updatedArraysCount) &&
                     passCount < maxPassCount);
@@ -611,15 +613,17 @@ namespace Hast.Transformer.Services
                         .OrderBy(valueWithHeight => valueWithHeight.Height)
                         .First();
 
-                    valueDescriptors.Clear();
-
                     valueExpression = closestValueDescriptorWithHeight.ValueDescriptor.Value;
-                    return valueExpression != null && closestValueDescriptorWithHeight.Height != int.MaxValue;
+                    var suitableValueFound = valueExpression != null && closestValueDescriptorWithHeight.Height != int.MaxValue;
+                    if (suitableValueFound) valueDescriptors.Clear();
+                    return suitableValueFound;
                 }
 
                 valueExpression = null;
                 return false;
             }
+
+            public void Clear() => _valueHoldersAndValueDescriptors.Clear();
 
 
             private Dictionary<AstNode, PrimitiveExpression> GetOrCreateValueDescriptors(string holderName)
