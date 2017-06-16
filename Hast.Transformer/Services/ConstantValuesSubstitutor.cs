@@ -36,15 +36,19 @@ namespace Hast.Transformer.Services
             // running them until nothing changes.
 
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
+            var objectHoldersToConstructorsMappings = new Dictionary<string, MethodDeclaration>();
+
+            syntaxTree.AcceptVisitor(new ObjectHoldersToConstructorsMappingVisitor(typeDeclarationLookupTable, objectHoldersToConstructorsMappings));
+
             var arraySizeHolder = new ArraySizeHolder();
             var constantValuesTable = new ConstantValuesTable();
 
             var constantValuesMarkingVisitor = new ConstantValuesMarkingVisitor(
                 constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator, arraySizeHolder);
-            var globalValueHoldersHandlingVisitor =
-                new GlobalValueHoldersHandlingVisitor(constantValuesTable, typeDeclarationLookupTable, syntaxTree);
-            var constantValuesSubstitutingVisitor =
-                new ConstantValuesSubstitutingVisitor(constantValuesTable, arraySizeHolder, typeDeclarationLookupTable);
+            var globalValueHoldersHandlingVisitor = new GlobalValueHoldersHandlingVisitor(
+                constantValuesTable, typeDeclarationLookupTable, syntaxTree);
+            var constantValuesSubstitutingVisitor = new ConstantValuesSubstitutingVisitor(
+                constantValuesTable, arraySizeHolder, typeDeclarationLookupTable, objectHoldersToConstructorsMappings);
 
             string codeOutput;
             var updatedArraysCount = 0;
@@ -75,6 +79,46 @@ namespace Hast.Transformer.Services
             return arraySizeHolder;
         }
 
+
+        private class ObjectHoldersToConstructorsMappingVisitor : DepthFirstAstVisitor
+        {
+            private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
+            private readonly Dictionary<string, MethodDeclaration> _objectHoldersToConstructorsMappings;
+
+
+            public ObjectHoldersToConstructorsMappingVisitor(
+                ITypeDeclarationLookupTable typeDeclarationLookupTable,
+                Dictionary<string, MethodDeclaration> objectHoldersToConstructorsMappings)
+            {
+                _typeDeclarationLookupTable = typeDeclarationLookupTable;
+                _objectHoldersToConstructorsMappings = objectHoldersToConstructorsMappings;
+            }
+
+
+            public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
+            {
+                base.VisitObjectCreateExpression(objectCreateExpression);
+
+                AssignmentExpression parentAssignment;
+                if (objectCreateExpression.Parent.Is<AssignmentExpression>(assignment =>
+                    assignment.Left.GetActualTypeReference()?.FullName == objectCreateExpression.Type.GetFullName(),
+                    out parentAssignment))
+                {
+                    var constructorName = objectCreateExpression.GetFullName();
+
+                    var constructorDeclaration =
+                        (MethodDeclaration)_typeDeclarationLookupTable
+                        .Lookup(objectCreateExpression.Type.GetFullName())
+                        .Members
+                        .SingleOrDefault(member => member.GetFullName() == constructorName);
+
+                    if (constructorDeclaration != null)
+                    {
+                        _objectHoldersToConstructorsMappings[parentAssignment.Left.GetFullName()] = constructorDeclaration;
+                    }
+                }
+            }
+        }
 
         private class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
         {
@@ -388,7 +432,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitPropertyDeclaration(propertyDeclaration);
 
-                if (propertyDeclaration.Setter != Accessor.Null)
+                if (!propertyDeclaration.IsReadOnlyMember())
                 {
                     _constantValuesTable.MarkAsNonConstant(propertyDeclaration, _syntaxTree);
                 }
@@ -398,7 +442,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitFieldDeclaration(fieldDeclaration);
 
-                if (!fieldDeclaration.HasModifier(Modifiers.Readonly))
+                if (!fieldDeclaration.IsReadOnlyMember())
                 {
                     _constantValuesTable.MarkAsNonConstant(fieldDeclaration, _syntaxTree);
                 }
@@ -410,16 +454,19 @@ namespace Hast.Transformer.Services
             private readonly ConstantValuesTable _constantValuesTable;
             private readonly IArraySizeHolder _arraySizeHolder;
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
+            private readonly Dictionary<string, MethodDeclaration> _objectHoldersToConstructorsMappings;
 
 
             public ConstantValuesSubstitutingVisitor(
                 ConstantValuesTable constantValuesTable,
                 IArraySizeHolder arraySizeHolder,
-                ITypeDeclarationLookupTable typeDeclarationLookupTable)
+                ITypeDeclarationLookupTable typeDeclarationLookupTable,
+                Dictionary<string, MethodDeclaration> objectHoldersToConstructorsMappings)
             {
                 _constantValuesTable = constantValuesTable;
                 _arraySizeHolder = arraySizeHolder;
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
+                _objectHoldersToConstructorsMappings = objectHoldersToConstructorsMappings;
             }
 
 
@@ -567,8 +614,39 @@ namespace Hast.Transformer.Services
                     expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
                     {
                         var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
+
                         if (member == null) return false;
-                        return _constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression);
+
+                        MethodDeclaration constructor;
+                        if (_constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
+                        {
+                            return true;
+                        }
+                        else if (member.IsReadOnlyMember() &&
+                                _objectHoldersToConstructorsMappings
+                                    .TryGetValue(memberReferenceExpression.Target.GetFullName(), out constructor))
+                        {
+                            // Try to substitute this member reference's value with a value set in the corresponding
+                            // constructor.
+                            var memberFullName = member.GetFullName();
+
+                            // Trying to find a place where the same member is references on the same ("this") instance.
+                            var memberReferenceExpressionInConstructor = constructor
+                                .FindFirstChildOfType<MemberReferenceExpression>(memberReference =>
+                                    memberReference.FindMemberDeclaration(_typeDeclarationLookupTable).GetFullName() == memberFullName &&
+                                    memberReference.Target.Is<IdentifierExpression>(identifier => identifier.Identifier == "this"));
+
+                            if (memberReferenceExpressionInConstructor == null) return false;
+
+                            // Using the substitution also used in the constructor. This should be safe to do even if
+                            // in the ctor there are multiple assignments because an unretrieved constant will only
+                            // remain the in the ConstantValuesTable if there are no more substitutions needed in the
+                            // ctor.
+                            return _constantValuesTable
+                                .RetrieveAndDeleteConstantValue(memberReferenceExpressionInConstructor, out valueExpression);
+                        }
+
+                        return false;
                     }))
                 {
                     expression.ReplaceWith(valueExpression.Clone());

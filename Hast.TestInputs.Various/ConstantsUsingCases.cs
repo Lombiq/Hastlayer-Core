@@ -55,22 +55,24 @@ namespace Hast.TestInputs.Various
 
         public void ConstantPassingToObject()
         {
-            var arraySize = 5;
-            var array = new uint[arraySize];
+            var initialArrayLength = 5;
+            var initialArray = new uint[initialArrayLength];
 
             // These constructor parameters can be substituted.
-            var arrayHolder = new ArrayHolder1(array);
-            var array1 = arrayHolder.Array;
-            var arrayLength1 = arrayHolder.ArrayLength;
+            var arrayHolder = new ArrayHolder1(initialArray);
+            var arrayFromObject = arrayHolder.Array;
+            var arrayLengthFromObject = arrayHolder.ArrayLength;
             var arrayLengthCopy1 = arrayHolder.ArrayLengthCopy;
-            var NonSubstitutableArrayLengthCopy1 = arrayHolder.NonSubstitutableArrayLengthCopy;
-            var arrayHolder2 = new ArrayHolder1((uint)arraySize);
-            var arrayHolder3 = new ArrayHolder1((uint)array.Length);
-            var arrayHolder4 = new ArrayHolder1(arrayHolder3);
+            var nonSubstitutableArrayLengthCopy = arrayHolder.NonSubstitutableArrayLengthCopy;
+            var arrayHolder2 = new ArrayHolder1(arrayFromObject);
+            var arrayHolder3 = new ArrayHolder1((uint)initialArrayLength);
+            var arrayHolder4 = new ArrayHolder1((uint)initialArray.Length);
+            var arrayHolder5 = new ArrayHolder1(arrayLengthFromObject);
+            var arrayHolder6 = new ArrayHolder1(arrayHolder3);
 
             // These constructor parameters can't be substituted because there are different ones.
-            var arrayHolder5 = new ArrayHolder2((uint)arraySize);
-            var arrayHolder6 = new ArrayHolder2((uint)arraySize + 8);
+            var arrayHolder7 = new ArrayHolder2((uint)initialArrayLength);
+            var arrayHolder8 = new ArrayHolder2((uint)initialArrayLength + 8);
         }
 
 
@@ -105,7 +107,6 @@ namespace Hast.TestInputs.Various
 
             public ArrayHolder1(ArrayHolder1 previous) : this(previous.Array)
             {
-
             }
         }
 

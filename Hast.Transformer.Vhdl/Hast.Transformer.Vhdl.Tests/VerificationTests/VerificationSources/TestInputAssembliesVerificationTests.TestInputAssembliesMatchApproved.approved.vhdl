@@ -383,7 +383,9 @@ architecture Imp of Hast_IP is
         \ConstantsUsingCases::ConstantPassingToObject().0._State_5\, 
         \ConstantsUsingCases::ConstantPassingToObject().0._State_6\, 
         \ConstantsUsingCases::ConstantPassingToObject().0._State_7\, 
-        \ConstantsUsingCases::ConstantPassingToObject().0._State_8\);
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_8\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_9\, 
+        \ConstantsUsingCases::ConstantPassingToObject().0._State_10\);
     -- Signals:
     Signal \ConstantsUsingCases::ConstantPassingToObject().0._Finished\: boolean := false;
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.Out.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
@@ -1836,8 +1838,10 @@ begin
         Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
         Variable \ConstantsUsingCases::ConstantPassingToObject().0.previous\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
         Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
-        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder7\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1907,18 +1911,19 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\Array\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(5, 32);
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= true;
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[])
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.array2\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ <= true;
                             \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantPassingToObject().0._State_4\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
-                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\) then 
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[])
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.array2\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\;
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\.\ArrayLength\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\.\ArrayLengthCopy\ := to_unsigned(0, 32);
@@ -1943,49 +1948,85 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\Array\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1)
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).previous.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.previous\;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Started.0\ <= true;
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(5, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= true;
                             \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantPassingToObject().0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1)
-                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Finished.0\) then 
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Started.0\ <= false;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).this.parameter.In.0\;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.previous\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).previous.parameter.In.0\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\ArrayLength\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\ArrayLengthCopy\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\Array\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(5, 32);
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= true;
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(5, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= true;
                             \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantPassingToObject().0._State_7\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
-                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Finished.0\) then 
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= false;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32)
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\ArrayLength\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\ArrayLengthCopy\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\Array\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(13, 32);
-                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= true;
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).previous.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.previous\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Started.0\ <= true;
                             \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantPassingToObject().0._State_8\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1)
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).this.parameter.In.0\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.previous\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).previous.parameter.In.0\;
+                            -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\.\ArrayLength\ := to_unsigned(0, 32);
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(5, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= true;
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
                         if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Finished.0\) then 
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= false;
-                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\;
+                            -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder7\.\ArrayLength\ := to_unsigned(0, 32);
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder7\;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).size.parameter.Out.0\ <= to_unsigned(13, 32);
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= true;
+                            \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ConstantsUsingCases::ConstantPassingToObject().0._State_10\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
+                        if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Finished.0\) then 
+                            \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= false;
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder7\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\;
                             \ConstantsUsingCases::ConstantPassingToObject().0._State\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
