@@ -371,7 +371,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return Invocation.ToSigned(new Raw("{0}'length", Transform(memberReference.Target, context)), 32);
                 }
 
-                var memberFullName = memberReference.GetFullName();
+                var memberFullName = memberReference.GetMemberFullName();
 
                 // Expressions like return Task.CompletedTask;
                 if (memberFullName.IsTaskCompletedTaskPropertyName())

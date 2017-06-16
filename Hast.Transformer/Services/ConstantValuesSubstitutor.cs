@@ -43,7 +43,8 @@ namespace Hast.Transformer.Services
                 constantValuesTable, typeDeclarationLookupTable, _astExpressionEvaluator, arraySizeHolder);
             var globalValueHoldersHandlingVisitor =
                 new GlobalValueHoldersHandlingVisitor(constantValuesTable, typeDeclarationLookupTable, syntaxTree);
-            var constantValuesSubstitutingVisitor = new ConstantValuesSubstitutingVisitor(constantValuesTable, arraySizeHolder);
+            var constantValuesSubstitutingVisitor =
+                new ConstantValuesSubstitutingVisitor(constantValuesTable, arraySizeHolder, typeDeclarationLookupTable);
 
             string codeOutput;
             var updatedArraysCount = 0;
@@ -199,6 +200,13 @@ namespace Hast.Transformer.Services
 
                 var existingSize = _arraySizeHolder.GetSize(node);
 
+                if (existingSize == null && node is MemberReferenceExpression)
+                {
+                    var member = ((MemberReferenceExpression)node).FindMemberDeclaration(_typeDeclarationLookupTable);
+                    if (member == null) return;
+                    existingSize = _arraySizeHolder.GetSize(member);
+                }
+
                 if (existingSize == null) return;
 
                 PassLengthOfArrayHolderToParent(node, existingSize.Length);
@@ -215,6 +223,12 @@ namespace Hast.Transformer.Services
 
                 if (parent.Is<AssignmentExpression>(out assignmentExpression))
                 {
+                    if (assignmentExpression.Left is MemberReferenceExpression)
+                    {
+                        _arraySizeHolder.SetSize(
+                            ((MemberReferenceExpression)assignmentExpression.Left).FindMemberDeclaration(_typeDeclarationLookupTable),
+                            arrayLength);
+                    }
                     _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
                     updateArraySizesUpdated(assignmentExpression.Left);
                 }
@@ -327,16 +341,18 @@ namespace Hast.Transformer.Services
                     return;
                 }
 
+                var memberEntity = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
+
                 // If a primitive value is assigned then re-mark it so if there are multiple different such assignments
                 // then the member will be unmarked.
                 if (parentAssignment.Right is PrimitiveExpression)
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(
-                        memberReferenceExpression, (PrimitiveExpression)parentAssignment.Right, _syntaxTree, true);
+                    _constantValuesTable
+                        .MarkAsPotentiallyConstant(memberEntity, (PrimitiveExpression)parentAssignment.Right, _syntaxTree, true);
                 }
                 else
                 {
-                    _constantValuesTable.MarkAsNonConstant(memberReferenceExpression, _syntaxTree);
+                    _constantValuesTable.MarkAsNonConstant(memberEntity, _syntaxTree);
                 }
             }
 
@@ -393,14 +409,17 @@ namespace Hast.Transformer.Services
         {
             private readonly ConstantValuesTable _constantValuesTable;
             private readonly IArraySizeHolder _arraySizeHolder;
+            private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
 
             public ConstantValuesSubstitutingVisitor(
                 ConstantValuesTable constantValuesTable,
-                IArraySizeHolder arraySizeHolder)
+                IArraySizeHolder arraySizeHolder,
+                ITypeDeclarationLookupTable typeDeclarationLookupTable)
             {
                 _constantValuesTable = constantValuesTable;
                 _arraySizeHolder = arraySizeHolder;
+                _typeDeclarationLookupTable = typeDeclarationLookupTable;
             }
 
 
@@ -430,7 +449,7 @@ namespace Hast.Transformer.Services
                             binary.Left is PrimitiveExpression))
                 {
                     _constantValuesTable.MarkAsNonConstant(
-                        assignmentExpression.Left, 
+                        assignmentExpression.Left,
                         assignmentExpression.FindFirstParentBlockStatement());
                 }
             }
@@ -452,6 +471,12 @@ namespace Hast.Transformer.Services
                 if (memberReferenceExpression.IsArrayLengthAccess())
                 {
                     var arraySize = _arraySizeHolder.GetSize(memberReferenceExpression.Target);
+
+                    if (arraySize == null && memberReferenceExpression.Target is MemberReferenceExpression)
+                    {
+                        arraySize = _arraySizeHolder.GetSize(
+                            ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(_typeDeclarationLookupTable));
+                    }
 
                     if (arraySize != null)
                     {
@@ -536,7 +561,15 @@ namespace Hast.Transformer.Services
                 }
 
                 PrimitiveExpression valueExpression;
-                if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression))
+                // First checking if there is a substitution for the expression; if not then if it's a member reference
+                // then check whether there is a global substitution for the member.
+                if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression) ||
+                    expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
+                    {
+                        var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
+                        if (member == null) return false;
+                        return _constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression);
+                    }))
                 {
                     expression.ReplaceWith(valueExpression.Clone());
                 }

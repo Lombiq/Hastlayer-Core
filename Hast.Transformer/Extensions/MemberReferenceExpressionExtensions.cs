@@ -100,6 +100,13 @@ namespace ICSharpCode.NRefactory.CSharp
             }
         }
 
+        public static string GetMemberFullName(this MemberReferenceExpression memberReferenceExpression)
+        {
+            var memberDefinition = memberReferenceExpression.Annotation<IMemberDefinition>();
+            if (memberDefinition != null) return memberDefinition.FullName;
+            return null;
+        }
+
         /// <summary>
         /// Determines if the member reference is an access to an array's Length property.
         /// </summary>
