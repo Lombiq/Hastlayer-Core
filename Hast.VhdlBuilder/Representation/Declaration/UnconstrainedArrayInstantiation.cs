@@ -8,6 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class UnconstrainedArrayInstantiation : ArrayTypeBase
     {
+        public IDataObject ArrayReference { get; set; }
         public int RangeFrom { get; set; }
         public int RangeTo { get; set; }
 
@@ -15,6 +16,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public override DataType ToReference() => this;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            vhdlGenerationOptions.NameShortener(Name) + "(" + RangeFrom + " to " + RangeTo + ")";
+            (ArrayReference == null ? vhdlGenerationOptions.NameShortener(Name) : ArrayReference.ToVhdl(vhdlGenerationOptions))
+            + "(" + RangeFrom + " to " + RangeTo + ")";
     }
 }
