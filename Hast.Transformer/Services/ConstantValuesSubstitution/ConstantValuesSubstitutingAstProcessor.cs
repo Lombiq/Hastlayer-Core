@@ -72,7 +72,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 if (reUseOriginalConstantValuesTable) _constantValuesTable.OverWrite(originalConstantValuesTable.Clone());
                 else _constantValuesTable.Clear();
 
-                System.IO.File.WriteAllText("source.cs", rootNode.ToString());
                 passCount++;
             } while ((codeOutput != rootNode.ToString() ||
                         constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count != hiddenlyUpdatedNodesUpdatedCount) &&

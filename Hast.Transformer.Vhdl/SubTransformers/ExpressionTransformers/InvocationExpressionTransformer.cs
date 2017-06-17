@@ -319,7 +319,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         // Otherwise slicing the array.
                         assignmentExpression = new UnconstrainedArrayInstantiation
                         {
-                            Name = ((IDataObject)transformedParameters.First()).Name,
+                            ArrayReference = (IDataObject)transformedParameters.First(),
                             RangeFrom = 0,
                             RangeTo = Convert.ToInt32(lengthExpression.Value) - 1
                         };
