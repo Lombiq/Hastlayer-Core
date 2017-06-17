@@ -14,6 +14,12 @@ namespace ICSharpCode.NRefactory.CSharp
         /// </summary>
         public static string GetFullName(this AstNode node)
         {
+            if (node is MemberReferenceExpression)
+            {
+                var memberReferenceExpression = (MemberReferenceExpression)node;
+                return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
+            }
+
             var memberDefinition = node.Annotation<IMemberDefinition>();
             if (memberDefinition != null) return memberDefinition.FullName;
 
@@ -47,21 +53,9 @@ namespace ICSharpCode.NRefactory.CSharp
                 return CreateParentEntityBasedName(node, ((IdentifierExpression)node).Identifier);
             }
 
-            if (node is BinaryOperatorExpression)
-            {
-                return CreateParentEntityBasedName(node, node.ToString());
-            }
-
             if (node is IndexerExpression)
             {
                 return ((IndexerExpression)node).Target.GetFullName();
-            }
-
-            // This is a member on a type that's not transformed, like System.Array.
-            if (node is MemberReferenceExpression)
-            {
-                var memberReferenceExpression = (MemberReferenceExpression)node;
-                return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
             }
 
             if (node is Identifier)
@@ -95,7 +89,38 @@ namespace ICSharpCode.NRefactory.CSharp
                 return node.FindFirstParentEntityDeclaration().GetFullName();
             }
 
-            throw new InvalidOperationException("This node doesn't have a name.");
+            // The node doesn't really have a name so give it one that is suitably unique.
+            // This should contain one or more ILRange objects which maybe correspond to the node's location in the 
+            // original IL.
+            var ilRanges = node.Annotation<List<ILRange>>();
+            if (ilRanges == null) ilRanges = node.Parent.Annotation<List<ILRange>>(); // Maybe the parent has one.
+            return CreateParentEntityBasedName(
+                node, 
+                node.ToString() + (ilRanges != null && ilRanges.Any() ? ilRanges.First().ToString() : string.Empty));
+        }
+
+        /// <summary>
+        /// Retrieves the node's full name (see <see cref="GetFullName(AstNode)"/>) and if it's a property, produces
+        /// a unified name for all of its forms (like backing field, compiler-generated get/set methods).
+        /// </summary>
+        public static string GetFullNameWithUnifiedPropertyName(this AstNode node)
+        {
+            var name = node.GetFullName();
+
+            // If this is a compiler-generated property getter or setter method then get the real property name.
+            var methodDefinition = node.Annotation<MethodDefinition>();
+            if (methodDefinition != null && (methodDefinition.IsGetter || methodDefinition.IsSetter))
+            {
+                name = methodDefinition.IsGetter ?
+                    name.Replace("::get_", "::") :
+                    name.Replace("::set_", "::");
+            }
+            else if (name.IsBackingFieldName())
+            {
+                name = name.ConvertFullBackingFieldNameToPropertyName();
+            }
+
+            return name;
         }
 
         /// <summary>

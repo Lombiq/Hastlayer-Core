@@ -371,7 +371,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return Invocation.ToSigned(new Raw("{0}'length", Transform(memberReference.Target, context)), 32);
                 }
 
-                var memberFullName = memberReference.GetFullName();
+                var memberFullName = memberReference.GetMemberFullName();
 
                 // Expressions like return Task.CompletedTask;
                 if (memberFullName.IsTaskCompletedTaskPropertyName())
@@ -453,13 +453,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     FieldName = memberReference.MemberName.ToExtendedVhdlId()
                 };
             }
-            // Not needed at the moment since ThisReferenceExpression can only happen if "this" is passed to a method, 
-            // which is not supported
-            //else if (expression is ThisReferenceExpression)
-            //{
-            //    var thisRef = expression as ThisReferenceExpression;
-            //    return scope.Method.Parent.GetFullName();
-            //}
             else if (expression is UnaryOperatorExpression)
             {
                 // The increment/decrement unary operators are compiled into binary operators (e.g. i++ will be

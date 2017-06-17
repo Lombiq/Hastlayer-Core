@@ -95,7 +95,7 @@ namespace Hast.Common.Configuration
                 // Only dealing with method references.
                 if (memberReferenceExpression.Annotation<MethodDefinition>() == null) return;
 
-                var memberFullName = memberReferenceExpression.GetFullName();
+                var memberFullName = memberReferenceExpression.GetMemberFullName();
 
                 if (!memberFullName.IsDisplayClassMemberName() && !memberFullName.IsInlineCompilerGeneratedMethodName())
                 {
