@@ -50,5 +50,9 @@ namespace ICSharpCode.NRefactory.CSharp
 
             return null;
         }
+
+        public static bool IsReadOnlyMember(this EntityDeclaration entityDeclaration) =>
+            entityDeclaration.Is<PropertyDeclaration>(property => property.Setter == Accessor.Null) ||
+            entityDeclaration.Is<FieldDeclaration>(field => field.HasModifier(Modifiers.Readonly));
     }
 }

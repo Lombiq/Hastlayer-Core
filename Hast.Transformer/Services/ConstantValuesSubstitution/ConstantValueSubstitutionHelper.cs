@@ -7,11 +7,13 @@ using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
-namespace Hast.Transformer.Helpers
+namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     internal static class ConstantValueSubstitutionHelper
     {
         public static bool IsInWhile(AstNode node) => node.IsIn<WhileStatement>();
+
+        public static bool IsInIfElse(AstNode node) => node.IsIn<IfElseStatement>();
 
         public static bool IsMethodInvocation(MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.Parent.Is<InvocationExpression>(invocation => invocation.Target == memberReferenceExpression);

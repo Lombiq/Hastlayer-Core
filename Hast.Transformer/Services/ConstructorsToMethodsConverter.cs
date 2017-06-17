@@ -2,6 +2,7 @@
 using System.Linq;
 using Hast.Transformer.Helpers;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
@@ -43,6 +44,35 @@ namespace Hast.Transformer.Services
                                 invocation != null &&
                                 invocation.Target.Is<MemberReferenceExpression>(reference => reference.MemberName.IsConstructorName());
                         })?.Remove(); 
+                }
+
+                // If there is a constructor initializer (like Ctor() : this(bla)) then handle that too by adding an
+                // explicit call.
+                if (constructorDeclaration.Initializer != ConstructorInitializer.Null)
+                {
+                    if (constructorDeclaration.Initializer.ConstructorInitializerType != ConstructorInitializerType.This)
+                    {
+                        throw new NotSupportedException(
+                            "Only this() constructor initializers are supported. Unsupported constructor: " +
+                            Environment.NewLine +
+                            constructorDeclaration.ToString());
+                    }
+
+                    var invocation = new InvocationExpression(
+                        new MemberReferenceExpression(new ThisReferenceExpression(), constructorDeclaration.Name),
+                        constructorDeclaration.Initializer.Arguments.Select(argument => argument.Clone()));
+
+                    invocation.AddAnnotation(constructorDeclaration.Initializer.Annotation<MethodDefinition>());
+
+                    var invocationStatement = new ExpressionStatement(invocation);
+                    if (method.Body.Any())
+                    {
+                        AstInsertionHelper.InsertStatementBefore(method.Body.First(), invocationStatement);
+                    }
+                    else
+                    {
+                        method.Body.Add(invocationStatement);
+                    }
                 }
 
                 constructorDeclaration.ReplaceWith(method);

@@ -45,6 +45,22 @@ namespace Hast.Transformer.Services
                 arrayCreateExpression.Arguments.Clear();
                 arrayCreateExpression.Arguments.Add(sizeArgument);
 
+                var parentAssignment = arrayCreateExpression.FindFirstParentOfType<AssignmentExpression>();
+
+                // The array wasn't assigned to a variable or anything but rather directly passed to a method or
+                // constructor. Thus first need to add a variable first to allow uniform processing later.
+                if (parentAssignment == null)
+                {
+                    var temporaryVariableName = Sha2456Helper.ComputeHash(arrayCreateExpression.GetFullName());
+                    parentAssignment = new AssignmentExpression(
+                        new IdentifierExpression(temporaryVariableName),
+                        arrayCreateExpression.Clone());
+
+                    AstInsertionHelper.InsertStatementBefore(
+                        arrayCreateExpression.FindFirstParentOfType<Statement>(),
+                        new ExpressionStatement(parentAssignment));
+                }
+
                 for (int i = initializerElements.Length - 1; i >= 0; i--)
                 {
                     var indexArgument = new PrimitiveExpression(i);
@@ -52,8 +68,7 @@ namespace Hast.Transformer.Services
 
                     var elementAssignmentStatement = new ExpressionStatement(new AssignmentExpression(
                         left: new IndexerExpression(
-                            target: arrayCreateExpression
-                                .FindFirstParentOfType<AssignmentExpression>()
+                            target: parentAssignment
                                 .Left // This should be the IdentifierExpression that the array was assigned to.
                                 .Clone(),
                             arguments: indexArgument),

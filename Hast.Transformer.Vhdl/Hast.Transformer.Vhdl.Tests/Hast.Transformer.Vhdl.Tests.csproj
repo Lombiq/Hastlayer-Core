@@ -96,8 +96,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Shouldly, Version=2.8.3.0, Culture=neutral, PublicKeyToken=6042cbcb05cbc941, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Hast.Transformer\Hast.Transformer.Tests\Libs\Shouldly.dll</HintPath>
+      <HintPath>..\..\Orchard\src\packages\Shouldly.2.8.3\lib\net451\Shouldly.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
