@@ -118,6 +118,59 @@ namespace Hast.Transformer.Services
                     }
                 }
             }
+
+
+            protected override void VisitChildren(AstNode node)
+            {
+                base.VisitChildren(node);
+
+                if ((!(node is IdentifierExpression) &&
+                    (!(node is MemberReferenceExpression) || ConstantValueSubstitutionHelper.IsMethodInvocation((MemberReferenceExpression)node))))
+                {
+                    return;
+                }
+
+                MethodDeclaration constructorDeclaration;
+
+                if (!_objectHoldersToConstructorsMappings.TryGetValue(node.GetFullName(), out constructorDeclaration))
+                {
+                    return;
+                }
+
+                var parent = node.Parent;
+
+                AssignmentExpression assignmentExpression;
+
+                if (parent.Is<AssignmentExpression>(assignment => assignment.Right == node, out assignmentExpression))
+                {
+                    _objectHoldersToConstructorsMappings[assignmentExpression.Left.GetFullName()] = constructorDeclaration;
+                }
+                else if (parent is InvocationExpression)
+                {
+                    var parameter = ConstantValueSubstitutionHelper.FindMethodParameterForPassedExpression(
+                        (InvocationExpression)parent,
+                        (Expression)node,
+                        _typeDeclarationLookupTable);
+
+                    // The parameter can be null for special invocations like Task.WhenAll().
+                    if (parameter == null) return;
+
+                    _objectHoldersToConstructorsMappings[parameter.GetFullName()] = constructorDeclaration;
+                }
+                else if (parent is ObjectCreateExpression)
+                {
+                    var parameter = ConstantValueSubstitutionHelper.FindConstructorParameterForPassedExpression(
+                            (ObjectCreateExpression)parent,
+                            (Expression)node,
+                            _typeDeclarationLookupTable);
+
+                    _objectHoldersToConstructorsMappings[parameter.GetFullName()] = constructorDeclaration;
+                }
+                else if (parent is VariableInitializer)
+                {
+                    _objectHoldersToConstructorsMappings[parent.GetFullName()] = constructorDeclaration;
+                }
+            }
         }
 
         private class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
@@ -265,7 +318,7 @@ namespace Hast.Transformer.Services
 
                 AssignmentExpression assignmentExpression;
 
-                if (parent.Is<AssignmentExpression>(out assignmentExpression))
+                if (parent.Is<AssignmentExpression>(assignment => assignment.Right == arrayHolder, out assignmentExpression))
                 {
                     if (assignmentExpression.Left is MemberReferenceExpression)
                     {
