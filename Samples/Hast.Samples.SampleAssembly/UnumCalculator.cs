@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.SimpleMemory;
 using Hast.Common.Numerics.Unum;
+using Hast.Common.Numerics;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -17,14 +18,27 @@ namespace Hast.Samples.SampleAssembly
         {
             var number = memory.ReadInt32(AddToUnum_InputInt32Index);
 
-            Unum unum = 10;
-            // Adding this line only because otherwise the whole data structure would be cleaned up as unused.
-            var sign = unum.IsPositive();
+            // Some basic BitMask play until we have a proper sample.
+            var b = new BitMask(5, true);
+            var z = b.SegmentCount;
+            var b2 = new BitMask(b);
+            var c = new BitMask(5, true);
+            var d = new BitMask(b.Segments);
+            var size = b.Size;
+            var e = new BitMask(size, false);
 
-            int x = (int)unum;
-            Unum y = number;
+            var x = b | c;
 
-            var result = number + unum;
+            var result = x.Size;
+
+            //Unum unum = 10;
+            //// Adding this line only because otherwise the whole data structure would be cleaned up as unused.
+            //var sign = unum.IsPositive();
+
+            //int x = (int)unum;
+            //Unum y = number;
+
+            //var result = number + unum;
 
             memory.WriteInt32(AddToUnum_OutputInt32Index, (int)result);
         }
