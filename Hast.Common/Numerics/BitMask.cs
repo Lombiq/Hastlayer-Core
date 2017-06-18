@@ -286,7 +286,7 @@ namespace Hast.Common.Numerics
                 carryOld = false;
 
 
-                for (int j = 0; j < left.SegmentCount; j++)
+                for (int j = (int)left.SegmentCount - 1; j >= 0; j--)
                 {
                     carryNew = left.Segments[j] % 2 == 1;
                     left.Segments[j] = (left.Segments[j] >> 1);
