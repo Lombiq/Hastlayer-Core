@@ -73,25 +73,32 @@ namespace ICSharpCode.NRefactory.CSharp
             this MemberReferenceExpression memberReferenceExpression, 
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            if (memberReferenceExpression.Target is TypeReferenceExpression)
+            var target = memberReferenceExpression.Target;
+
+            if (target is TypeReferenceExpression)
             {
                 // The member is in a different class.
-                return typeDeclarationLookupTable.Lookup((TypeReferenceExpression)memberReferenceExpression.Target);
+                return typeDeclarationLookupTable.Lookup((TypeReferenceExpression)target);
             }
-            else if (memberReferenceExpression.Target is BaseReferenceExpression)
+            else if (target is BaseReferenceExpression)
             {
                 // The member is in the base class (because of single class inheritance in C#, there can be only one base class).
                 return memberReferenceExpression.FindFirstParentTypeDeclaration().BaseTypes
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
-            else if (memberReferenceExpression.Target is IdentifierExpression)
+            else if (target is IdentifierExpression)
             {
-                return typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
+                return typeDeclarationLookupTable.Lookup(target.GetActualTypeReference().FullName);
             }
-            else if (memberReferenceExpression.Target is MemberReferenceExpression)
+            else if (target is MemberReferenceExpression)
             {
-                return ((MemberReferenceExpression)memberReferenceExpression.Target).FindTargetTypeDeclaration(typeDeclarationLookupTable);
+                return ((MemberReferenceExpression)target).FindTargetTypeDeclaration(typeDeclarationLookupTable);
+            }
+            else if (target is ObjectCreateExpression)
+            {
+                // The member is referenced in an object initializer.
+                return typeDeclarationLookupTable.Lookup(((ObjectCreateExpression)target).Type);
             }
             else
             {
