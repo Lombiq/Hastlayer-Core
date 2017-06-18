@@ -252,6 +252,37 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod().0 declarations start
+    -- State machine states:
+    type \ArrayUsingCases::PassArrayFromMethod().0._States\ is (
+        \ArrayUsingCases::PassArrayFromMethod().0._State_0\, 
+        \ArrayUsingCases::PassArrayFromMethod().0._State_1\, 
+        \ArrayUsingCases::PassArrayFromMethod().0._State_2\, 
+        \ArrayUsingCases::PassArrayFromMethod().0._State_3\);
+    -- Signals:
+    Signal \ArrayUsingCases::PassArrayFromMethod().0._Finished\: boolean := false;
+    Signal \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).arrayLength.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Started.0\: boolean := false;
+    Signal \ArrayUsingCases::PassArrayFromMethod().0._Started\: boolean := false;
+    Signal \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Finished.0\: boolean := false;
+    Signal \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).return.0\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod().0 declarations end
+
+
+    -- System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32).0 declarations start
+    -- State machine states:
+    type \ArrayUsingCases::ArrayProducingMethod(Int32).0._States\ is (
+        \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_0\, 
+        \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_1\, 
+        \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_2\);
+    -- Signals:
+    Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0._Finished\: boolean := false;
+    Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0.return\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0._Started\: boolean := false;
+    Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32).0 declarations end
+
+
     -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 declarations start
     -- State machine states:
     type \CastingCases::NumberCasting(Int16,Int16).0._States\ is (
@@ -659,6 +690,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\: boolean := false;
@@ -676,6 +708,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Finished.0\: boolean := false;
@@ -1346,6 +1379,109 @@ begin
         end if;
     end process;
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod().0 state machine start
+    \ArrayUsingCases::PassArrayFromMethod().0._StateMachine\: process (\Clock\) 
+        Variable \ArrayUsingCases::PassArrayFromMethod().0._State\: \ArrayUsingCases::PassArrayFromMethod().0._States\ := \ArrayUsingCases::PassArrayFromMethod().0._State_0\;
+        Variable \ArrayUsingCases::PassArrayFromMethod().0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \ArrayUsingCases::PassArrayFromMethod().0.return.0\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ArrayUsingCases::PassArrayFromMethod().0._Finished\ <= false;
+                \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).arrayLength.parameter.Out.0\ <= to_signed(0, 32);
+                \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Started.0\ <= false;
+                \ArrayUsingCases::PassArrayFromMethod().0._State\ := \ArrayUsingCases::PassArrayFromMethod().0._State_0\;
+                \ArrayUsingCases::PassArrayFromMethod().0.array\ := (others => to_signed(0, 32));
+                \ArrayUsingCases::PassArrayFromMethod().0.return.0\ := (others => to_signed(0, 32));
+            else 
+                case \ArrayUsingCases::PassArrayFromMethod().0._State\ is 
+                    when \ArrayUsingCases::PassArrayFromMethod().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ArrayUsingCases::PassArrayFromMethod().0._Started\ = true) then 
+                            \ArrayUsingCases::PassArrayFromMethod().0._State\ := \ArrayUsingCases::PassArrayFromMethod().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases::PassArrayFromMethod().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ArrayUsingCases::PassArrayFromMethod().0._Started\ = true) then 
+                            \ArrayUsingCases::PassArrayFromMethod().0._Finished\ <= true;
+                        else 
+                            \ArrayUsingCases::PassArrayFromMethod().0._Finished\ <= false;
+                            \ArrayUsingCases::PassArrayFromMethod().0._State\ := \ArrayUsingCases::PassArrayFromMethod().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases::PassArrayFromMethod().0._State_2\ => 
+                        -- Starting state machine invocation for the following method: System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32)
+                        \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).arrayLength.parameter.Out.0\ <= to_signed(5, 32);
+                        \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Started.0\ <= true;
+                        \ArrayUsingCases::PassArrayFromMethod().0._State\ := \ArrayUsingCases::PassArrayFromMethod().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases::PassArrayFromMethod().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32)
+                        if (\ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Started.0\ = \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Finished.0\) then 
+                            \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Started.0\ <= false;
+                            \ArrayUsingCases::PassArrayFromMethod().0.return.0\ := \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).return.0\;
+                            \ArrayUsingCases::PassArrayFromMethod().0.array\ := \ArrayUsingCases::PassArrayFromMethod().0.return.0\;
+                            \ArrayUsingCases::PassArrayFromMethod().0._State\ := \ArrayUsingCases::PassArrayFromMethod().0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod().0 state machine end
+
+
+    -- System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32).0 state machine start
+    \ArrayUsingCases::ArrayProducingMethod(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ArrayUsingCases::ArrayProducingMethod(Int32).0._State\: \ArrayUsingCases::ArrayProducingMethod(Int32).0._States\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_0\;
+        Variable \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ArrayUsingCases::ArrayProducingMethod(Int32).0._Finished\ <= false;
+                \ArrayUsingCases::ArrayProducingMethod(Int32).0.return\ <= (others => to_signed(0, 32));
+                \ArrayUsingCases::ArrayProducingMethod(Int32).0._State\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_0\;
+                \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength\ := to_signed(0, 32);
+                \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\ := (others => to_signed(0, 32));
+            else 
+                case \ArrayUsingCases::ArrayProducingMethod(Int32).0._State\ is 
+                    when \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ArrayUsingCases::ArrayProducingMethod(Int32).0._Started\ = true) then 
+                            \ArrayUsingCases::ArrayProducingMethod(Int32).0._State\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ArrayUsingCases::ArrayProducingMethod(Int32).0._Started\ = true) then 
+                            \ArrayUsingCases::ArrayProducingMethod(Int32).0._Finished\ <= true;
+                        else 
+                            \ArrayUsingCases::ArrayProducingMethod(Int32).0._Finished\ <= false;
+                            \ArrayUsingCases::ArrayProducingMethod(Int32).0._State\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_2\ => 
+                        \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength.parameter.In\;
+                        \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\ := (others => to_signed(0, 32));
+                        \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\(to_integer(to_signed(3, 32))) := to_signed(10, 32);
+                        \ArrayUsingCases::ArrayProducingMethod(Int32).0.return\ <= \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\;
+                        \ArrayUsingCases::ArrayProducingMethod(Int32).0._State\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32).0 state machine end
 
 
     -- System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16).0 state machine start
@@ -2896,6 +3032,7 @@ begin
                 \Hast::ExternalInvocationProxy().UnusedDeclarations::UnusedMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().StaticReference::StaticClassUsingMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= false;
@@ -2984,41 +3121,48 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 11 => 
+                            if (\Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Started.0\ = \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 12 => 
                             if (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ = \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().CastingCases::NumberCasting(Int16,Int16)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 12 => 
+                        when 13 => 
                             if (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 13 => 
+                        when 14 => 
                             if (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 14 => 
+                        when 15 => 
                             if (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ = \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 15 => 
+                        when 16 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 16 => 
+                        when 17 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\) then 
@@ -3423,6 +3567,15 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32) start
+    -- Signal connections for System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod().0 (#0):
+    \ArrayUsingCases::ArrayProducingMethod(Int32).0._Started\ <= \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Started.0\;
+    \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength.parameter.In\ <= \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).arrayLength.parameter.Out.0\;
+    \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Finished.0\ <= \ArrayUsingCases::ArrayProducingMethod(Int32).0._Finished\;
+    \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).return.0\ <= \ArrayUsingCases::ArrayProducingMethod(Int32).0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[]) start
     \Hast::InternalInvocationProxy().ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -3670,6 +3823,13 @@ begin
     \ArrayUsingCases::PassArrayToConstructor().0._Started\ <= \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Started.0\;
     \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayToConstructor()._Finished.0\ <= \ArrayUsingCases::PassArrayToConstructor().0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod() start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ArrayUsingCases::PassArrayFromMethod().0._Started\ <= \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Started.0\;
+    \Hast::ExternalInvocationProxy().ArrayUsingCases::PassArrayFromMethod()._Finished.0\ <= \ArrayUsingCases::PassArrayFromMethod().0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.CastingCases::NumberCasting(System.Int16,System.Int16) start

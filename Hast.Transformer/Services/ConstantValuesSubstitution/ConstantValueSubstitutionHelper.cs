@@ -59,6 +59,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             var arguments = invocationArguments.ToList();
             var argumentIndex = arguments.FindIndex(argumentExpression => argumentExpression == passedExpression);
 
+            if (argumentIndex == -1) return null;
+
             // Depending on whether a @this parameter was added to the method or used during invocation we need to
             // adjust the argument's index if there is a mismatch between the invocation and the method.
             if (parameters.Count < arguments.Count) argumentIndex--;
