@@ -8,7 +8,124 @@ namespace Hast.Common.Tests
     [TestFixture]
     public class UnumTests
     {
+        private UnumMetadata _metaData_3_2;
+        private UnumMetadata _metaData_3_4;
 
+        [SetUp]
+        public void Init()
+        {
+            _metaData_3_2 = new UnumMetadata(3, 2);
+            _metaData_3_4 = new UnumMetadata(3, 4);
+        }
+
+        [TestFixtureTearDown]
+        public void Clean() { }
+
+        [Test]
+        public void UnumIsCorrectlyConstructedFromFloat()
+        {
+
+            var first = new Unum(_metaData_3_4, (float)30.0);
+            var second = new Unum(_metaData_3_4, (float)9999999999999);
+
+
+            var bitmask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
+            var bitmask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
+
+
+            Assert.AreEqual(first.UnumBits, bitmask_1);
+            Assert.AreEqual(second.UnumBits, bitmask_2);
+
+        }
+
+        [Test]
+        public void UnumIsCorrectlyConstructedFromInt()
+        {
+            var unumZero = new Unum(_metaData_3_4, 0);
+            var unumThirty = new Unum(_metaData_3_4, 30);
+            var unumThousand = new Unum(_metaData_3_4, 1000);
+            var unumNegativeThirty = new Unum(_metaData_3_4, -30);
+            var unumNegativeThousand = new Unum(_metaData_3_4, -1000);
+            var unum6000 = new Unum(_metaData_3_4, 6000);
+            var unum5000 = new Unum(_metaData_3_4, 5000);
+
+            var bitmask0 = new BitMask(new uint[] { 0 }, _metaData_3_4.Size);
+            var bitmask30 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
+            var bitmask1000 = new BitMask(new uint[] { 0x63D45 }, _metaData_3_4.Size);
+            var bitmaskMinus1000 = new BitMask(new uint[] { 0x63D45, 1 }, _metaData_3_4.Size);
+            var bitmaskMinus30 = new BitMask(new uint[] { 0x3F22, 1 }, _metaData_3_4.Size);
+            var bitmask6000 = new BitMask(new uint[] { 0x1B7747 }, _metaData_3_4.Size);
+            var bitmask5000 = new BitMask(new uint[] { 0x367148 }, _metaData_3_4.Size);
+
+            Assert.AreEqual(unumZero.UnumBits, bitmask0);
+            Assert.AreEqual(unumThirty.UnumBits, bitmask30);
+            Assert.AreEqual(unumThousand.UnumBits, bitmask1000);
+            Assert.AreEqual(unumNegativeThirty.UnumBits, bitmaskMinus30);
+            Assert.AreEqual(unum6000.UnumBits, bitmask6000);
+            Assert.AreEqual(unum5000.UnumBits, bitmask5000);
+            Assert.AreEqual(unumNegativeThousand.UnumBits, bitmaskMinus1000);
+
+        }
+
+
+        [Test]
+        public void UnumIsCorrectlyConstructedFromUInt()
+        {
+
+            var unumZero = new Unum(_metaData_3_4, (uint)0);
+            var unumThirty = new Unum(_metaData_3_4, (uint)30);
+            var unumThousand = new Unum(_metaData_3_4, (uint)1000);
+            var unum6000 = new Unum(_metaData_3_4, (uint)6000);
+            var unum5000 = new Unum(_metaData_3_4, (uint)5000);
+
+            var bitmask0 = new BitMask(new uint[] { 0 }, _metaData_3_4.Size);
+            var bitmask30 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
+            var bitmask1000 = new BitMask(new uint[] { 0x63D45 }, _metaData_3_4.Size);
+            var bitmask6000 = new BitMask(new uint[] { 0x1B7747 }, _metaData_3_4.Size);
+            var bitmask5000 = new BitMask(new uint[] { 0x367148 }, _metaData_3_4.Size);
+
+            Assert.AreEqual(unumZero.UnumBits, bitmask0);
+            Assert.AreEqual(unumThirty.UnumBits, bitmask30);
+            Assert.AreEqual(unumThousand.UnumBits, bitmask1000);
+
+            Assert.AreEqual(unum6000.UnumBits, bitmask6000);
+            Assert.AreEqual(unum5000.UnumBits, bitmask5000);
+
+
+
+        }
+        [Test]
+        public void UnumIsCorrectlyConstructedFromDouble()
+        {
+
+            var first = new Unum(_metaData_3_4, (double)30.0);
+            var second = new Unum(_metaData_3_4, (double)9999999999999);
+
+
+            var bitmask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
+            var bitmask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
+
+
+            Assert.AreEqual(first.UnumBits, bitmask_1);
+            Assert.AreEqual(second.UnumBits, bitmask_2);
+
+        }
+        //[Test]
+        //public void UnumIsCorrectlyConstructedFromLong()
+        //{
+
+        //    var first = new Unum(_metaData_3_4, (long)30);
+        //    var second = new Unum(_metaData_3_4, (long)9999999999999);
+
+
+        //    var bitmask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
+        //    var bitmask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
+
+
+        //    Assert.AreEqual(first.UnumBits, bitmask_1);
+        //    Assert.AreEqual(second.UnumBits, bitmask_2);
+
+        //}
 
         [Test]
         public void IsExactIsCorrect()
@@ -114,7 +231,7 @@ namespace Hast.Common.Tests
             var unum_res2 = Unum.AddExactUnums(unum2, unum1);
             Assert.AreEqual(unum3.UnumBits, unum_res2.UnumBits);
 
-            Unum zero = 0;
+            var zero = new Unum(_metaData_3_4, 0);
             var bitmask5 = new BitMask(new uint[] { 0xE40 }, 33);
             var unum5 = new Unum(bitmask5, 3, 4);
             var unum7 = Unum.AddExactUnums(zero, unum5);
@@ -123,18 +240,18 @@ namespace Hast.Common.Tests
 
             // case of inexact result, example2 from book p117
             var bitmask4 = new BitMask(new uint[] { 0x18F400CF }, 33);
-            Unum unum_1000 = 1000;
+            var unum_1000 = new Unum(_metaData_3_4, 1000);
             var unum6 = Unum.AddExactUnums(unum_1000, unum5);
             Assert.AreEqual(unum6.UnumBits, bitmask4);
 
 
-            Unum unum_5000 = 5000;
-            Unum unum_6000 = 6000;
+            var unum_5000 = new Unum(_metaData_3_4, 5000);
+            var unum_6000 = new Unum(_metaData_3_4, 6000);
 
             Assert.AreEqual(Unum.AddExactUnums(unum_5000, unum_1000).UnumBits, unum_6000.UnumBits);
 
-            Unum negative_thirty = -30;
-            Unum thirty = 30;
+            var negative_thirty = new Unum(_metaData_3_4, -30);
+            var thirty = new Unum(_metaData_3_4, 30);
             Assert.AreEqual(Unum.AddExactUnums(thirty, negative_thirty).UnumBits, zero.UnumBits);
 
         }
@@ -154,16 +271,16 @@ namespace Hast.Common.Tests
             var unum3 = Unum.SubtractExactUnums(unum1, unum2);
 
             Assert.AreEqual(unum3.UnumBits, bitmask3);
-            Unum unum5000 = 5000;
-            Unum unum6000 = 6000;
-            Unum unum1000 = 1000;
+            var unum5000 = new Unum(_metaData_3_4, 5000);
+            var unum6000 = new Unum(_metaData_3_4, 6000);
+            var unum1000 = new Unum(_metaData_3_4, 1000);
 
             var unumRes = Unum.SubtractExactUnums(unum6000, unum5000);
             Assert.AreEqual(unumRes.UnumBits, unum1000.UnumBits);
 
 
-            Unum unumThirty = 30;
-            Unum unumZero = 0;
+            Unum unumThirty = new Unum(_metaData_3_4, 30);
+            Unum unumZero = new Unum(_metaData_3_4, 0);
             Assert.AreEqual(Unum.SubtractExactUnums(unumThirty, unumThirty).UnumBits, unumZero.UnumBits);
 
 
@@ -185,13 +302,13 @@ namespace Hast.Common.Tests
         [Test]
         public void IntToUnumIsCorrect()
         {
-            Unum unumZero = 0;
-            Unum unumThirty = 30;
-            Unum unumThousand = 1000;
-            Unum unumNegativeThirty = -30;
-            Unum unumNegativeThousand = -1000;
-            Unum unum6000 = 6000;
-            Unum unum5000 = 5000;
+            var unumZero = new Unum(_metaData_3_4, 0);
+            var unumThirty = new Unum(_metaData_3_4, 30);
+            var unumThousand = new Unum(_metaData_3_4, 1000);
+            var unumNegativeThirty = new Unum(_metaData_3_4, -30);
+            var unumNegativeThousand = new Unum(_metaData_3_4, -1000);
+            var unum6000 = new Unum(_metaData_3_4, 6000);
+            var unum5000 = new Unum(_metaData_3_4, 5000);
 
             var bitmask0 = new BitMask(new uint[] { 0 }, 33);
             var bitmask30 = new BitMask(new uint[] { 0x3F22 }, 33);
@@ -217,10 +334,11 @@ namespace Hast.Common.Tests
         public void UnumToUintIsCorrect()
         {
 
-            Unum unumThirty = 30;
-            Unum unumThousand = 1000;
-            Unum unum6000 = 6000;
-            Unum unum5000 = 5000;
+
+            var unumThirty = new Unum(_metaData_3_4, 30);
+            var unumThousand = new Unum(_metaData_3_4, 1000);
+            var unum6000 = new Unum(_metaData_3_4, 6000);
+            var unum5000 = new Unum(_metaData_3_4, 5000);
 
             var thirty = (uint)unumThirty;
             var thousand = (uint)unumThousand;
@@ -241,26 +359,26 @@ namespace Hast.Common.Tests
         public void UnumToIntIsCorrect()
         {
 
-            Unum thirtyUnum = 30;
-            Unum thousandUnum = 1000;
-            Unum negative_thirty = -30;
-            Unum negative_thousand = -1000;
-            Unum unum_6000 = 6000;
-            Unum unum_5000 = 5000;
-            Unum tooBigUnum = 9999999999999;
-            Unum tooBigNegativeUnum = -9999999999999;
+            
+            var unumThirty = new Unum(_metaData_3_4, 30);
+            var unumThousand = new Unum(_metaData_3_4, 1000);
+            var unumNegativeThirty = new Unum(_metaData_3_4, -30);
+            var unumNegativeThousand = new Unum(_metaData_3_4, -1000);
+            
+            var tooBigUnum = new Unum(_metaData_3_4,   9999999999999);
+            var tooBigNegativeUnum = new Unum(_metaData_3_4, -9999999999999);
 
-            //var thirty = (int)thirtyUnum;
-            //var thousand = (int)thousandUnum;
-            //var negativeThirty = (int)negative_thirty;
-            //var negativeThousand = (int)negative_thousand;
+            var thirty = (int)unumThirty;
+            var thousand = (int)unumThousand;
+            var negativeThirty = (int)unumNegativeThirty;
+            var negativeThousand = (int)unumNegativeThousand;
             var tooBig = (int)tooBigUnum;
             var tooBigNegative = (int)tooBigNegativeUnum;
 
-            //Assert.AreEqual(thirty, 30);
-            //Assert.AreEqual(thousand, 1000);
-            //Assert.AreEqual(negativeThirty, -30);
-            //Assert.AreEqual(negativeThousand, -1000);
+            Assert.AreEqual(thirty, 30);
+            Assert.AreEqual(thousand, 1000);
+            Assert.AreEqual(negativeThirty, -30);
+            Assert.AreEqual(negativeThousand, -1000);
             Assert.AreEqual(tooBig, int.MaxValue);
             Assert.AreEqual(tooBigNegative, int.MinValue);
 
@@ -269,8 +387,8 @@ namespace Hast.Common.Tests
         [Test]
         public void FloatToUnumIsCorrect()
         {
-            Unum first = (float)30.0;
-            Unum second = 9999999999999;
+            var first = new Unum(_metaData_3_4, (float)30.0);
+            var second = new Unum(_metaData_3_4, (float)9999999999999);
 
 
             var bitmask_1 = new BitMask(new uint[] { 0x3F22 }, 33);
@@ -286,18 +404,19 @@ namespace Hast.Common.Tests
         public void UnumToFloatIsCorrect()
         {
 
-            Unum thirtyUnum = 30;
-            Unum thousandUnum = 1000;
-            Unum negative_thirty = -30;
-            Unum negative_thousand = -1000;
 
-            Unum tooBigUnum = 9999999999999;
-            Unum tooBigNegativeUnum = -9999999999999;
+            var unumThirty = new Unum(_metaData_3_4, 30);
+            var unumThousand = new Unum(_metaData_3_4, 1000);
+            var unumNegativeThirty = new Unum(_metaData_3_4, -30);
+            var unumNegativeThousand = new Unum(_metaData_3_4, -1000);
 
-            var thirty = (float)thirtyUnum;
-            var thousand = (float)thousandUnum;
-            var negativeThirty = (float)negative_thirty;
-            var negativeThousand = (float)negative_thousand;
+            var tooBigUnum = new Unum(_metaData_3_4,(float) 9999999999999);
+            var tooBigNegativeUnum = new Unum(_metaData_3_4, (float)-9999999999999);
+
+            var thirty = (float)unumThirty;
+            var thousand = (float)unumThousand;
+            var negativeThirty = (float)unumNegativeThirty;
+            var negativeThousand = (float)unumNegativeThousand;
             var tooBig = (float)tooBigUnum;
             var tooBigNegative = (float)tooBigNegativeUnum;
 
@@ -320,26 +439,26 @@ namespace Hast.Common.Tests
         public void UnumToDoubleIsCorrect()
         {
 
-            Unum thirtyUnum = 30;
-            Unum thousandUnum = 1000;
-            Unum negative_thirty = -30;
-            Unum negative_thousand = -1000;
+            var unumThirty = new Unum(_metaData_3_4, 30);
+            var unumThousand = new Unum(_metaData_3_4, 1000);
+            var unumNegativeThirty = new Unum(_metaData_3_4, -30);
+            var unumNegativeThousand = new Unum(_metaData_3_4, -1000);
 
-            Unum tooBigUnum = 9999999999999;
-            Unum tooBigNegativeUnum = -9999999999999;
+            var tooBigUnum = new Unum(_metaData_3_4, (double)9999999999999);
+            var tooBigNegativeUnum = new Unum(_metaData_3_4, (double)-9999999999999);
 
-            var thirty = (double)thirtyUnum;
-            var thousand = (double)thousandUnum;
-            var negativeThirty = (double)negative_thirty;
-            var negativeThousand = (double)negative_thousand;
+            var thirty = (double)unumThirty;
+            var thousand = (double)unumThousand;
+            var negativeThirty = (double)unumNegativeThirty;
+            var negativeThousand = (double)unumNegativeThousand;
             var tooBig = (double)tooBigUnum;
             var tooBigNegative = (double)tooBigNegativeUnum;
 
 
-            Assert.AreEqual(thirty, 30);
-            Assert.AreEqual(thousand, 1000);
-            Assert.AreEqual(negativeThirty, -30);
-            Assert.AreEqual(negativeThousand, -1000);
+            Assert.AreEqual(thirty, (double)30);
+            Assert.AreEqual(thousand, (double)1000);
+            Assert.AreEqual(negativeThirty, (double)-30);
+            Assert.AreEqual(negativeThousand, (double)-1000);
             Assert.AreEqual(tooBig, (double)9999891824640); // Some information is lost due to limited size of Unum.
             Assert.AreEqual(tooBigNegative, (double)-9999891824640); // Some information is lost due to limited size of Unum.
 
