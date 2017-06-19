@@ -13,8 +13,6 @@ namespace Hast.Transformer.Vhdl.Models
     {
         public static readonly string IsNullFieldName = "IsNull".ToExtendedVhdlId();
 
-        public IDataObject IsNullFieldReference { get; private set; }
-
 
         public NullableRecord()
         {
@@ -24,7 +22,6 @@ namespace Hast.Transformer.Vhdl.Models
                 Name = IsNullFieldName
             };
 
-            IsNullFieldReference = isNullField.ToReference();
             Fields.Add(isNullField);
         }
 
