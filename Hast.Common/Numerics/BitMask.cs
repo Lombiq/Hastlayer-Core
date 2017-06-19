@@ -48,7 +48,9 @@ namespace Hast.Common.Numerics
             SegmentCount = source.SegmentCount;
             Segments = new uint[SegmentCount];
 
-            if (source.Segments != null) Array.Copy(source.Segments, Segments, SegmentCount);
+            // Nullcheck on Arrays is not supported yet in Hastlayer, but source.Segments
+            // can only be null if source.Size is zero, so it's safe to check that instead.
+            if (source.Size > 0) Array.Copy(source.Segments, Segments, SegmentCount);
         }
 
 
