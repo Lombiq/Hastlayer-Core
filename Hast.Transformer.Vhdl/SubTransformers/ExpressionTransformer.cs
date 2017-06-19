@@ -81,7 +81,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     var leftTransformed = Transform(left, context);
                     if (leftTransformed == Empty.Instance) return Empty.Instance;
-                    var rightTransformed = Transform(right, context);
+
+                    IVhdlElement rightTransformed;
+                    if (right is NullReferenceExpression)
+                    {
+                        leftTransformed = NullableRecord.CreateIsNullFieldAccess((IDataObject)leftTransformed);
+                        rightTransformed = Value.True;
+                    }
+                    else
+                    {
+                        rightTransformed = Transform(right, context);
+                    }
                     if (rightTransformed == Empty.Instance) return Empty.Instance;
 
                     return new Assignment
@@ -171,7 +181,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         invocation.Target.Is<MemberReferenceExpression>(member =>
                             member.MemberName == "StartNew" &&
                             member.Target.Is<IdentifierExpression>(identifier =>
-                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier))), 
+                                scope.TaskFactoryVariableNames.Contains(identifier.Identifier))),
                         out invocationExpression))
                     {
                         var taskStartArguments = invocationExpression.Arguments;
@@ -290,11 +300,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         if (!string.IsNullOrEmpty(binaryLiteral))
                         {
                             scope.CurrentBlock.Add(new LineComment(
-                                "Since the integer literal " + valueString + 
+                                "Since the integer literal " + valueString +
                                 " was out of the VHDL integer range it was substituted with a binary literal (" +
                                 binaryLiteral + ")."));
 
-                            return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = type.GetSize() }); 
+                            return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = type.GetSize() });
                         }
                     }
 
@@ -324,12 +334,33 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is BinaryOperatorExpression)
             {
                 var binaryExpression = (BinaryOperatorExpression)expression;
+
+
+                IVhdlElement leftTransformed;
+                IVhdlElement rightTransformed;
+
+                if (binaryExpression.Left is NullReferenceExpression)
+                {
+                    rightTransformed = NullableRecord.CreateIsNullFieldAccess((IDataObject)Transform(binaryExpression.Right, context));
+                    leftTransformed = Value.True;
+                }
+                else if (binaryExpression.Right is NullReferenceExpression)
+                {
+                    leftTransformed = NullableRecord.CreateIsNullFieldAccess((IDataObject)Transform(binaryExpression.Left, context));
+                    rightTransformed = Value.True;
+                }
+                else
+                {
+                    leftTransformed = Transform(binaryExpression.Left, context);
+                    rightTransformed = Transform(binaryExpression.Right, context);
+                }
+
                 return _binaryOperatorExpressionTransformer.TransformBinaryOperatorExpression(
                     new PartiallyTransformedBinaryOperatorExpression
                     {
                         BinaryOperatorExpression = binaryExpression,
-                        LeftTransformed = Transform(binaryExpression.Left, context),
-                        RightTransformed = Transform(binaryExpression.Right, context)
+                        LeftTransformed = leftTransformed,
+                        RightTransformed = rightTransformed
                     },
                     context);
             }
@@ -630,7 +661,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     var constructorInvocation = new InvocationExpression(
                         new MemberReferenceExpression(
-                            new TypeReferenceExpression(objectCreateExpression.Type.Clone()), 
+                            new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
                             constructor.Name),
                         // Passing ctor parameters, and an object reference as the first one (since all methods were
                         // converted to static with the first parameter being @this).
@@ -668,8 +699,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
-                return initiailizationResult.ShouldReturnReference ? 
-                    (IVhdlElement)initiailizationResult.RecordInstanceReference : 
+                return initiailizationResult.ShouldReturnReference ?
+                    (IVhdlElement)initiailizationResult.RecordInstanceReference :
                     Empty.Instance;
             }
             else if (expression is DefaultValueExpression)
@@ -677,6 +708,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // The only case when a default() will remain in the syntax tree is for composed types. For primitives
                 // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
                 var initiailizationResult = InitializeRecord(expression, ((DefaultValueExpression)expression).Type, context);
+
+                context.Scope.CurrentBlock.Add(new Assignment
+                {
+                    AssignTo = new RecordFieldAccess
+                    {
+                        Instance = initiailizationResult.RecordInstanceReference,
+                        FieldName = initiailizationResult.Record.IsNullFieldReference.Name
+                    },
+                    Expression = Value.True
+                });
 
                 if (initiailizationResult.ShouldReturnReference) return initiailizationResult.RecordInstanceReference;
 
@@ -735,8 +776,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var variableNameSegments = result.RecordInstanceReference.Name
                     .TrimExtendedVhdlIdDelimiters()
                     .Split(new[] { '.' });
-                var identifier = variableNameSegments[variableNameSegments.Length - 2] + 
-                    "." + 
+                var identifier = variableNameSegments[variableNameSegments.Length - 2] +
+                    "." +
                     variableNameSegments[variableNameSegments.Length - 1];
                 result.RecordInstanceIdentifier = new IdentifierExpression(identifier);
             }
@@ -746,8 +787,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var initializationValue = field.DataType.DefaultValue;
 
                 var typeField = typeDeclaration.Members
-                    .SingleOrDefault(member => 
-                        member.Is<FieldDeclaration>(f => 
+                    .SingleOrDefault(member =>
+                        member.Is<FieldDeclaration>(f =>
                             f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) as FieldDeclaration;
                 if (typeField != null)
                 {
@@ -757,7 +798,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         initializationValue = (Value)Transform(fieldInitializer, context);
                     }
                 }
-                
+
                 context.Scope.CurrentBlock.Add(new Assignment
                 {
                     AssignTo = new RecordFieldAccess
@@ -776,7 +817,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private class RecordInitializationResult
         {
             public bool ShouldReturnReference { get; set; }
-            public Record Record { get; set; }
+            public NullableRecord Record { get; set; }
             public IDataObject RecordInstanceReference { get; set; }
             public Expression RecordInstanceIdentifier { get; set; }
         }

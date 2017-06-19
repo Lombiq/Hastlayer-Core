@@ -47,6 +47,7 @@ architecture Imp of Hast_IP is
     -- Custom inter-dependent type declarations start
     type \unsigned_Array\ is array (integer range <>) of unsigned(31 downto 0);
     type \Hast.Samples.SampleAssembly.NumberContainer\ is record 
+        \IsNull\: boolean;
         \WasIncreased\: boolean;
         \Number\: unsigned(31 downto 0);
     end record;
@@ -2139,6 +2140,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\);
                             -- Initializing record fields to their defaults.
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
@@ -2155,6 +2157,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\;
                             -- Initializing record fields to their defaults.
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
@@ -2172,6 +2175,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ + to_unsigned(4, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\;
                             -- Initializing record fields to their defaults.
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
@@ -2188,6 +2192,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\Number\ := to_unsigned(24, 32);
                             -- Initializing record fields to their defaults.
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))).\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))).\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
@@ -2217,6 +2222,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
                             -- Initializing record fields to their defaults.
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.

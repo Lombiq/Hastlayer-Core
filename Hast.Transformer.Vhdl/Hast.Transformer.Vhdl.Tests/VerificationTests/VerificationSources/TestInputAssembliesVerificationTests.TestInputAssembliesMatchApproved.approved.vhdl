@@ -31,18 +31,26 @@ architecture Imp of Hast_IP is
     type \unsigned_Array\ is array (integer range <>) of unsigned(31 downto 0);
     type \boolean_Array\ is array (integer range <>) of boolean;
     type \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\ is record 
+        \IsNull\: boolean;
         \Array\: \signed_Array\(0 to 4);
     end record;
     type \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\ is record 
+        \IsNull\: boolean;
         \ArrayLength\: unsigned(31 downto 0);
         \ArrayLengthCopy\: unsigned(31 downto 0);
         \NonSubstitutableArrayLengthCopy\: unsigned(31 downto 0);
         \Array\: \unsigned_Array\(0 to 4);
     end record;
     type \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\ is record 
+        \IsNull\: boolean;
         \ArrayLength\: unsigned(31 downto 0);
     end record;
+    type \Hast.TestInputs.Various.ObjectUsingCases/MyClass\ is record 
+        \IsNull\: boolean;
+        \MyProperty\: signed(31 downto 0);
+    end record;
     type \Hast.TestInputs.Various.ParallelCases/Calculator\ is record 
+        \IsNull\: boolean;
         \Number\: unsigned(31 downto 0);
     end record;
     -- Custom inter-dependent type declarations end
@@ -460,6 +468,22 @@ architecture Imp of Hast_IP is
     -- System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage().0 declarations start
+    -- State machine states:
+    type \ObjectUsingCases::NullUsage().0._States\ is (
+        \ObjectUsingCases::NullUsage().0._State_0\, 
+        \ObjectUsingCases::NullUsage().0._State_1\, 
+        \ObjectUsingCases::NullUsage().0._State_2\, 
+        \ObjectUsingCases::NullUsage().0._State_3\, 
+        \ObjectUsingCases::NullUsage().0._State_4\, 
+        \ObjectUsingCases::NullUsage().0._State_5\, 
+        \ObjectUsingCases::NullUsage().0._State_6\);
+    -- Signals:
+    Signal \ObjectUsingCases::NullUsage().0._Finished\: boolean := false;
+    Signal \ObjectUsingCases::NullUsage().0._Started\: boolean := false;
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage().0 declarations end
+
+
     -- System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven().0 declarations start
     -- State machine states:
     type \ParallelCases/Calculator::IsEven().0._States\ is (
@@ -695,6 +719,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
@@ -713,6 +738,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
@@ -1356,6 +1382,7 @@ begin
                     when \ArrayUsingCases::PassArrayToConstructor().0._State_2\ => 
                         \ArrayUsingCases::PassArrayToConstructor().0.array\ := (others => to_signed(0, 32));
                         -- Initializing record fields to their defaults.
+                        \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\.\IsNull\ := false;
                         \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\.\Array\ := (others => to_signed(0, 32));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[])
@@ -2020,6 +2047,7 @@ begin
                         \ConstantsUsingCases::ConstantPassingToObject().0.num\ := to_signed(5, 32);
                         \ConstantsUsingCases::ConstantPassingToObject().0.array\ := (others => to_unsigned(0, 32));
                         -- Initializing record fields to their defaults.
+                        \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\IsNull\ := false;
                         \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\ArrayLength\ := to_unsigned(0, 32);
                         \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\ArrayLengthCopy\ := to_unsigned(0, 32);
                         \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
@@ -2042,6 +2070,7 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayLengthCopy\ := to_unsigned(160, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.nonSubstitutableArrayLengthCopy\ := \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\NonSubstitutableArrayLengthCopy\;
                             -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\ArrayLength\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\ArrayLengthCopy\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
@@ -2061,6 +2090,7 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\;
                             \ConstantsUsingCases::ConstantPassingToObject().0.array2\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\;
                             -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.previous\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\.\ArrayLength\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\.\ArrayLengthCopy\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
@@ -2079,6 +2109,7 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
                             -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\ArrayLength\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\ArrayLengthCopy\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
@@ -2097,6 +2128,7 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
                             -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\ArrayLength\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\ArrayLengthCopy\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
@@ -2115,6 +2147,7 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
                             -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\ArrayLength\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\ArrayLengthCopy\ := to_unsigned(0, 32);
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(0, 32);
@@ -2134,6 +2167,7 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).this.parameter.In.0\;
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).previous.parameter.In.0\;
                             -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\.\ArrayLength\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
@@ -2149,6 +2183,7 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\;
                             -- Initializing record fields to their defaults.
+                            \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder7\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder7\.\ArrayLength\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32)
@@ -2220,6 +2255,108 @@ begin
         end if;
     end process;
     -- System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage().0 state machine start
+    \ObjectUsingCases::NullUsage().0._StateMachine\: process (\Clock\) 
+        Variable \ObjectUsingCases::NullUsage().0._State\: \ObjectUsingCases::NullUsage().0._States\ := \ObjectUsingCases::NullUsage().0._State_0\;
+        Variable \ObjectUsingCases::NullUsage().0.myClass\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+        Variable \ObjectUsingCases::NullUsage().0.flag\: boolean := false;
+        Variable \ObjectUsingCases::NullUsage().0.flag2\: boolean := false;
+        Variable \ObjectUsingCases::NullUsage().0.binaryOperationResult.0\: boolean := false;
+        Variable \ObjectUsingCases::NullUsage().0.binaryOperationResult.1\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ObjectUsingCases::NullUsage().0._Finished\ <= false;
+                \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_0\;
+                \ObjectUsingCases::NullUsage().0.flag\ := false;
+                \ObjectUsingCases::NullUsage().0.flag2\ := false;
+                \ObjectUsingCases::NullUsage().0.binaryOperationResult.0\ := false;
+                \ObjectUsingCases::NullUsage().0.binaryOperationResult.1\ := false;
+            else 
+                case \ObjectUsingCases::NullUsage().0._State\ is 
+                    when \ObjectUsingCases::NullUsage().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ObjectUsingCases::NullUsage().0._Started\ = true) then 
+                            \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::NullUsage().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ObjectUsingCases::NullUsage().0._Started\ = true) then 
+                            \ObjectUsingCases::NullUsage().0._Finished\ <= true;
+                        else 
+                            \ObjectUsingCases::NullUsage().0._Finished\ <= false;
+                            \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::NullUsage().0._State_2\ => 
+                        -- Initializing record fields to their defaults.
+                        \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := false;
+                        \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(0, 32);
+                        \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(5, 32);
+                        \ObjectUsingCases::NullUsage().0.binaryOperationResult.0\ := \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ = true;
+                        \ObjectUsingCases::NullUsage().0.flag\ := \ObjectUsingCases::NullUsage().0.binaryOperationResult.0\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ObjectUsingCases::NullUsage().0._State_4\ and ends in state \ObjectUsingCases::NullUsage().0._State_4\.
+                        --     * Execution after either branch will continue in the following state: \ObjectUsingCases::NullUsage().0._State_3\.
+
+                        if (\ObjectUsingCases::NullUsage().0.flag\) then 
+                            \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::NullUsage().0._State_3\ => 
+                        -- State after the if-else which was started in state \ObjectUsingCases::NullUsage().0._State_2\.
+                        \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := true;
+                        \ObjectUsingCases::NullUsage().0.binaryOperationResult.1\ := \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ /= true;
+                        \ObjectUsingCases::NullUsage().0.flag2\ := \ObjectUsingCases::NullUsage().0.binaryOperationResult.1\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ObjectUsingCases::NullUsage().0._State_6\ and ends in state \ObjectUsingCases::NullUsage().0._State_6\.
+                        --     * Execution after either branch will continue in the following state: \ObjectUsingCases::NullUsage().0._State_5\.
+
+                        if (\ObjectUsingCases::NullUsage().0.flag2\) then 
+                            \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::NullUsage().0._State_4\ => 
+                        -- True branch of the if-else started in state \ObjectUsingCases::NullUsage().0._State_2\.
+                        -- Initializing record fields to their defaults.
+                        \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := false;
+                        \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \ObjectUsingCases::NullUsage().0._State_2\.
+                        if (\ObjectUsingCases::NullUsage().0._State\ = \ObjectUsingCases::NullUsage().0._State_4\) then 
+                            \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::NullUsage().0._State_5\ => 
+                        -- State after the if-else which was started in state \ObjectUsingCases::NullUsage().0._State_3\.
+                        \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::NullUsage().0._State_6\ => 
+                        -- True branch of the if-else started in state \ObjectUsingCases::NullUsage().0._State_3\.
+                        \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(10, 32);
+                        -- Going to the state after the if-else which was started in state \ObjectUsingCases::NullUsage().0._State_3\.
+                        if (\ObjectUsingCases::NullUsage().0._State\ = \ObjectUsingCases::NullUsage().0._State_6\) then 
+                            \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage().0 state machine end
 
 
     -- System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven().0 state machine start
@@ -2585,6 +2722,7 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.binaryOperationResult.0\;
                         -- Initializing record fields to their defaults.
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.instance.0\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.instance.0\.\Number\ := to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.instance.0\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\;
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
@@ -2654,6 +2792,7 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.binaryOperationResult.0\;
                         -- Initializing record fields to their defaults.
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.instance.0\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.instance.0\.\Number\ := to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.instance.0\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\;
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
@@ -2723,6 +2862,7 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.binaryOperationResult.0\;
                         -- Initializing record fields to their defaults.
+                        \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.instance.0\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.instance.0\.\Number\ := to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.instance.0\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\;
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
@@ -3037,6 +3177,7 @@ begin
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
             else 
@@ -3156,13 +3297,20 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 16 => 
+                            if (\Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ = \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 17 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 17 => 
+                        when 18 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\) then 
@@ -3858,6 +4006,13 @@ begin
     \ConstantsUsingCases::ConstantPassingToObject().0._Started\ <= \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\;
     \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage() start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ObjectUsingCases::NullUsage().0._Started\ <= \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\;
+    \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\ <= \ObjectUsingCases::NullUsage().0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32) start
