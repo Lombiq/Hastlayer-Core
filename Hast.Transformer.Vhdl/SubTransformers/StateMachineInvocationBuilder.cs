@@ -16,16 +16,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class StateMachineInvocationBuilder : IStateMachineInvocationBuilder
     {
-        private readonly ITypeConverter _typeConverter;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
+        private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
 
         public StateMachineInvocationBuilder(
-            ITypeConverter typeConverter,
-            ITypeConversionTransformer typeConversionTransformer)
+            ITypeConversionTransformer typeConversionTransformer,
+            IDeclarableTypeCreator declarableTypeCreator)
         {
-            _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
+            _declarableTypeCreator = declarableTypeCreator;
         }
 
 
@@ -220,8 +220,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 // Managing signals for parameter passing.
                 var targetParameter = methodParametersEnumerator.Current;
-                var parameterSignalType = _typeConverter
-                    .ConvertParameterType(targetParameter, context.TransformationContext);
+                var parameterSignalType = _declarableTypeCreator
+                    .CreateDeclarableType(targetParameter, targetParameter.Type, context.TransformationContext);
 
                 Func<ParameterFlowDirection, Assignment> createParameterAssignment = (flowDirection) =>
                 {
@@ -378,8 +378,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.ChangeBlockToDifferentState(waitForInvocationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
 
 
-            var returnType = _typeConverter
-                .ConvertAstType(targetDeclaration.ReturnType, context.TransformationContext);
+            var returnType = _declarableTypeCreator
+                .CreateDeclarableType(targetDeclaration, targetDeclaration.ReturnType, context.TransformationContext);
 
             if (returnType == KnownDataTypes.Void)
             {

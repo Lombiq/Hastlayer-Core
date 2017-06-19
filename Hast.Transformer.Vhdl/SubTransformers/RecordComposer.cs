@@ -30,7 +30,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return node is PropertyDeclaration || node is FieldDeclaration;
         }
 
-        public Record CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
+        public NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {
             // Using transient caching because when processing an assembly all references to a class or struct will 
             // result in the record being composed.
@@ -60,14 +60,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             Name = name.ToExtendedVhdlId()
                         };
 
-                    })
-                    .ToList();
+                    });
 
-                return new Record
-                {
-                    Name = typeDeclaration.GetFullName().ToExtendedVhdlId(),
-                    Fields = recordFields
-                };
+                return RecordHelper.CreateNullableRecord(typeDeclaration.GetFullName().ToExtendedVhdlId(), recordFields);
             });
         }
     }

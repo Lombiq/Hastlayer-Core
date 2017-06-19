@@ -118,6 +118,17 @@ namespace Hast.Transformer.Services
                     constructor.AddReference(objectCreateExpression);
                     constructor.AcceptVisitor(this);
                 }
+
+                // Also marking those members referenced that are used in an object initializer.
+                if (objectCreateExpression.Initializer.Elements.Any())
+                {
+                    foreach (var element in objectCreateExpression.Initializer.Elements)
+                    {
+                        instantiatedType.Members
+                            .SingleOrDefault(member => member.GetFullName() == element.GetFullName())
+                            .AddReference(objectCreateExpression); ;
+                    }
+                }
             }
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)

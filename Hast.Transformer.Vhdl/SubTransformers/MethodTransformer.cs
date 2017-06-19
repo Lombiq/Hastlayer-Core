@@ -15,18 +15,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public class MethodTransformer : IMethodTransformer
     {
         private readonly IMemberStateMachineFactory _memberStateMachineFactory;
-        private readonly ITypeConverter _typeConverter;
         private readonly IStatementTransformer _statementTransformer;
+        private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
 
         public MethodTransformer(
             IMemberStateMachineFactory memberStateMachineFactory,
-            ITypeConverter typeConverter,
-            IStatementTransformer statementTransformer)
+            IStatementTransformer statementTransformer,
+            IDeclarableTypeCreator declarableTypeCreator)
         {
             _memberStateMachineFactory = memberStateMachineFactory;
-            _typeConverter = typeConverter;
             _statementTransformer = statementTransformer;
+            _declarableTypeCreator = declarableTypeCreator;
         }
 
 
@@ -95,7 +95,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
             // Handling the return type.
-            var returnType = _typeConverter.ConvertAstType(method.ReturnType, context);
+            var returnType = _declarableTypeCreator.CreateDeclarableType(method, method.ReturnType, context);
             // If the return type is a Task then that means it's one of the supported simple TPL scenarios, corresponding
             // to void in VHDL.
             if (returnType == SpecialTypes.Task) returnType = KnownDataTypes.Void;
@@ -117,7 +117,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // to from the inside (since in .NET a method argument can also be assigned to from inside the method)
                 // we need to have intermediary input variables, then copy their values to local variables.
 
-                var parameterDataType = _typeConverter.ConvertParameterType(parameter, context);
+                var parameterDataType = _declarableTypeCreator.CreateDeclarableType(parameter, parameter.Type, context);
                 var parameterSignalReference = stateMachine
                     .CreateParameterSignalReference(parameter.Name, ParameterFlowDirection.In);
                 var parameterLocalVariableReference = stateMachine.CreatePrefixedObjectName(parameter.Name).ToVhdlVariableReference();
