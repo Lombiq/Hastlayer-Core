@@ -7,13 +7,15 @@
         public byte FractionSizeSize { get; private set; } // "fsizesize"
 
         public byte ExponentSizeMax { get; private set; } // "esizemax"
-        public byte FractionSizeMax { get; private set; } // "fsizemax"
+        public ushort FractionSizeMax { get; private set; } // "fsizemax"
 
         public byte UnumTagSize { get; private set; } // "utagsize"
-        public byte Size { get; private set; } // "maxubits"
+        public ushort Size { get; private set; } // "maxubits"
         #endregion
 
         #region Unum masks
+        public BitMask EmptyBitMask { get; private set; }
+
         public BitMask UncertaintyBitMask { get; private set; } // "ubitmask"
         public BitMask ExponentSizeMask { get; private set; } // "esizemask"
         public BitMask FractionSizeMask { get; private set; } // "fsizemask"
@@ -48,10 +50,10 @@
             FractionSizeSize = fractionSizeSize;
 
             ExponentSizeMax = (byte)(1 << ExponentSizeSize);
-            FractionSizeMax = (byte)(1 << FractionSizeSize);
+            FractionSizeMax = (ushort)(1 << FractionSizeSize);
 
             UnumTagSize = (byte)(1 + ExponentSizeSize + FractionSizeSize);
-            Size = (byte)(1 + ExponentSizeMax + FractionSizeMax + UnumTagSize);
+            Size = (ushort)(1 + ExponentSizeMax + FractionSizeMax + UnumTagSize);
 
             // Initializing masks.
             UncertaintyBitMask = new BitMask(Size, false);
@@ -69,6 +71,7 @@
             BitMask.SetOne(SignBitMask, (uint)Size - 1);
 
             // Initializing metadata.
+            EmptyBitMask = new BitMask(Size, false);
             ULP = new BitMask(Size, false);
             BitMask.SetOne(ULP, UnumTagSize);
 

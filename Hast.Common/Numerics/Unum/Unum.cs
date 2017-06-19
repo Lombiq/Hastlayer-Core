@@ -15,10 +15,10 @@ namespace Hast.Common.Numerics.Unum
         public byte FractionSizeSize => _metadata.FractionSizeSize; // "fsizesize"
 
         public byte ExponentSizeMax => _metadata.ExponentSizeMax; // "esizemax"
-        public byte FractionSizeMax => _metadata.FractionSizeMax; // "fsizemax"
+        public ushort FractionSizeMax => _metadata.FractionSizeMax; // "fsizemax"
 
         public byte UnumTagSize => _metadata.UnumTagSize; // "utagsize"
-        public byte Size => _metadata.Size; // "maxubits"
+        public ushort Size => _metadata.Size; // "maxubits"
 
         #endregion
 
@@ -96,6 +96,7 @@ namespace Hast.Common.Numerics.Unum
 
         }
 
+        // This doesn't work for all cases yet.
         public Unum(UnumMetadata environment, float x)
         {
             _metadata = environment;
@@ -181,7 +182,7 @@ namespace Hast.Common.Numerics.Unum
 
 
 
-            if (FractionSizeMax +1 < resultFractionSize ) 
+            if (FractionSizeMax + 1 < resultFractionSize)
             {
 
 
@@ -192,7 +193,7 @@ namespace Hast.Common.Numerics.Unum
                 uncertain = true;
             }
             else
-                if (resultFractionSize >0) resultFractionSize = (resultFractionSize - 1);
+                if (resultFractionSize > 0) resultFractionSize = (resultFractionSize - 1);
 
 
 
@@ -249,6 +250,50 @@ namespace Hast.Common.Numerics.Unum
 
             SetUnumBits(false, exponent, fraction, false, exponentSize - 1, fractionSize);
         }
+        public Unum(UnumMetadata environment, uint[] input)
+        {
+
+            _metadata = environment;
+            UnumBits = _metadata.EmptyBitMask;
+
+            // Copying input to UnumBits BitMask.
+            for (var i = input.Length-1 ; i >0; i--)
+            {
+                UnumBits += input[i];
+                UnumBits <<= 32;
+            }
+            UnumBits += input[0];
+            if (UnumBits == _metadata.EmptyBitMask) return;
+            
+            
+            // Handling Signbit.
+            var signBit = (input[input.Length - 1] > uint.MaxValue / 2);
+            UnumBits <<= 1;
+            UnumBits >>= 1;
+            
+            //Calcuating exponent value and size.  
+            var exponentValue = UnumBits.FindLeadingOne() - 1; 
+            var exponentSize = 0;
+            var j = 1;
+            while (j<exponentValue)
+            {
+                j <<= 1;
+                exponentSize++;
+            }
+            if (exponentValue > (1 << (int)exponentSize - 1)) exponentSize++;
+            var bias = (1 << (int)(exponentSize - 1)) - 1;
+            exponentValue += (uint)bias;
+            var exponentMask = _metadata.EmptyBitMask + exponentValue;
+
+            // Calculating Fraction.
+            BitMask.ShiftToRightEnd(UnumBits);
+            var fractionSize = UnumBits.FindLeadingOne() - 1;
+            if (fractionSize > 0) fractionSize -= 1;
+            BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
+
+
+            SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize - 1, fractionSize);
+        }
 
         public Unum(UnumMetadata environment, int x)
         {
@@ -261,6 +306,7 @@ namespace Hast.Common.Numerics.Unum
 
         }
 
+        // This doesn't work for all cases yet.
         public Unum(UnumMetadata environment, double x)
         {
             _metadata = environment;
@@ -382,7 +428,7 @@ namespace Hast.Common.Numerics.Unum
             }
 
 
-            SetExponentBits(ExponentValueToExponentBits((int)(doubleExponentBits - 1023),Size));
+            SetExponentBits(ExponentValueToExponentBits((int)(doubleExponentBits - 1023), Size));
 
         }
 
@@ -406,6 +452,7 @@ namespace Hast.Common.Numerics.Unum
 
             UnumBits = WholeUnum;
         }
+
 
         public void SetSignBit(bool signBit)
         {
@@ -920,6 +967,7 @@ namespace Hast.Common.Numerics.Unum
             return result;
         }
 
+        // This is not well tested yet.
         public static explicit operator float(Unum x)
         {
             if (x.IsNan()) return float.NaN;
@@ -943,6 +991,7 @@ namespace Hast.Common.Numerics.Unum
             return (x.IsPositive()) ? BitConverter.ToSingle(BitConverter.GetBytes(result), 0)
                 : -BitConverter.ToSingle(BitConverter.GetBytes(result), 0);
         }
+
         #endregion
         public override bool Equals(object obj)
         {
