@@ -40,6 +40,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
             var rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference();
 
+            // If this some null check then no need for any type conversion.
+            if (binaryOperatorExpression.Left is NullReferenceExpression || binaryOperatorExpression.Right is NullReferenceExpression)
+            {
+                return variableReference;
+            }
+
             // We won't get a type reference if the expression is a PrimitiveExpression (a constant). In this case we'll
             // assume that the type of the two sides is the same.
             if (binaryOperatorExpression.Left is PrimitiveExpression || binaryOperatorExpression.Right is PrimitiveExpression)

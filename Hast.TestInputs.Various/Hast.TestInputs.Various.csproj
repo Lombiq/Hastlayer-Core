@@ -43,6 +43,7 @@
     <Compile Include="ArrayUsingCases.cs" />
     <Compile Include="CastingCases.cs" />
     <Compile Include="ConstantsUsingCases.cs" />
+    <Compile Include="ObjectUsingCases.cs" />
     <Compile Include="ParallelCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

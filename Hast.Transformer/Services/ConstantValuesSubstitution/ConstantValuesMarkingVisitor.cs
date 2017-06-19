@@ -118,8 +118,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             base.VisitChildren(node);
 
-            if ((!(node is IdentifierExpression) &&
-                (!(node is MemberReferenceExpression) || ConstantValueSubstitutionHelper.IsMethodInvocation((MemberReferenceExpression)node))))
+            if (!(node is IdentifierExpression) &&
+                !(node is MemberReferenceExpression))
             {
                 return;
             }
@@ -140,7 +140,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parent.GetFullName()] =
                     constructorDeclaration;
 
-                ProcessParent(node, assignment => processParent(assignment.Left), processParent, processParent, processParent);
+                ProcessParent(
+                    node, 
+                    assignment => processParent(assignment.Left), 
+                    processParent, 
+                    processParent, 
+                    processParent,
+                    returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()));
             }
             else
             {
@@ -175,7 +181,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 },
                 parameter => _arraySizeHolder.SetSize(parameter, arrayLength),
                 parameter => _arraySizeHolder.SetSize(parameter, arrayLength),
-                variableInitializer => _arraySizeHolder.SetSize(variableInitializer, arrayLength));
+                variableInitializer => _arraySizeHolder.SetSize(variableInitializer, arrayLength),
+                returnStatement => _arraySizeHolder.SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength));
 
 
         private void ProcessParent(
@@ -183,7 +190,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             Action<AssignmentExpression> assignmentHandler,
             Action<ParameterDeclaration> invocationParameterHandler,
             Action<ParameterDeclaration> objectCreationParameterHandler,
-            Action<VariableInitializer> variableInitializerHandler)
+            Action<VariableInitializer> variableInitializerHandler,
+            Action<ReturnStatement> returnStatementHandler)
         {
             var parent = node.Parent;
 
@@ -191,7 +199,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             AssignmentExpression assignmentExpression;
 
-            if (parent.Is<AssignmentExpression>(assignment => assignment.Right == node, out assignmentExpression))
+            if (parent.Is<AssignmentExpression>(assignment => assignment.Right == node, out assignmentExpression) ||
+                parent.Is<InvocationExpression>(invocation => invocation.Target == node && invocation.Parent.Is<AssignmentExpression>(out assignmentExpression)))
             {
                 assignmentHandler(assignmentExpression);
                 updateHiddenlyUpdatedNodesUpdated(assignmentExpression.Left);
@@ -222,6 +231,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             else if (parent is VariableInitializer)
             {
                 variableInitializerHandler((VariableInitializer)parent);
+                updateHiddenlyUpdatedNodesUpdated(parent);
+            }
+            else if (parent is ReturnStatement)
+            {
+                returnStatementHandler((ReturnStatement)parent);
                 updateHiddenlyUpdatedNodesUpdated(parent);
             }
         }
