@@ -80,7 +80,6 @@
     <Compile Include="IHardwareImplementationComposer.cs" />
     <Compile Include="Models\DeviceManifest.cs" />
     <Compile Include="Models\HardwareImplementation.cs" />
-    <Compile Include="Models\IDeviceManifest.cs" />
     <Compile Include="Models\ITimingReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ITimingReportParser.cs" />

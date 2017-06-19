@@ -9,5 +9,6 @@ namespace Hast.Layer.Models
         public IEnumerable<Assembly> SoftAssemblies { get; set; }
         public IHardwareDescription HardwareDescription { get; set; }
         public IHardwareImplementation HardwareImplementation { get; set; }
+        public IDeviceManifest DeviceManifest { get; set; }
     }
 }
