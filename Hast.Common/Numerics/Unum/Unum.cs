@@ -122,44 +122,13 @@ namespace Hast.Common.Numerics.Unum
 
 
             var floatBits = BitConverter.ToUInt32(BitConverter.GetBytes(x), 0);
-            SetSignBit((floatBits > uint.MaxValue / 2));
+            var resultSignBit = (floatBits > uint.MaxValue / 2);
             var floatExponentBits = (BitConverter.ToUInt32(BitConverter.GetBytes(x), 0) << 1) >> 24;
             var floatFractionBits = (BitConverter.ToUInt32(BitConverter.GetBytes(x), 0) << 9) >> 9;
             uint resultFractionSize = 23;
             var uncertain = false;
-
-
-
-            if (floatFractionBits == 0)
-            {
-                resultFractionSize = 0;
-
-            }
-            else
-            {
-                while (floatFractionBits % 2 == 0)
-                {
-
-                    resultFractionSize -= 1;
-                    floatFractionBits >>= 1;
-                }
-
-            }
-
-
-
-            if (FractionSizeMax < resultFractionSize - 1)
-            {
-
-
-                //resultFractionSize -= resultFractionSize - result.FractionSizeMax;
-
-
-                SetFractionSizeBits((uint)FractionSizeMax - 1);
-                uncertain = true;
-            }
-            else
-                SetFractionSizeBits(resultFractionSize - 1);
+            BitMask resultFraction;
+            uint floatFractionBitsSize = 23;
 
 
 
@@ -191,21 +160,60 @@ namespace Hast.Common.Numerics.Unum
                 return;
             }
 
-            SetExponentSizeBits(ExponentValueToExponentSize((int)floatExponentBits - 127) - 1);
 
-            if (uncertain)
+            if (floatFractionBits == 0)
             {
-                SetFractionBits(new BitMask(
-                    new uint[] { floatFractionBits >> (int)resultFractionSize - FractionSizeMax }, Size));
-                SetUncertainityBit(true);
+                resultFractionSize = 0;
+
             }
             else
             {
-                SetFractionBits(new BitMask(new uint[] { floatFractionBits }, Size));
+                while (floatFractionBits % 2 == 0)
+                {
+
+                    resultFractionSize -= 1;
+                    floatFractionBits >>= 1;
+                    floatFractionBitsSize = resultFractionSize;
+
+                }
+
             }
 
 
-            SetExponentBits(new BitMask(Size, false) + ExponentValueToExponentBits((int)(floatExponentBits - 127)));
+
+            if (FractionSizeMax +1 < resultFractionSize ) 
+            {
+
+
+                //resultFractionSize -= resultFractionSize - result.FractionSizeMax;
+
+
+                resultFractionSize = ((uint)FractionSizeMax - 1);
+                uncertain = true;
+            }
+            else
+                if (resultFractionSize >0) resultFractionSize = (resultFractionSize - 1);
+
+
+
+            var resultExponentSize = (ExponentValueToExponentSize((int)floatExponentBits - 127) - 1);
+
+            if (uncertain)
+            {
+                resultFraction = (new BitMask(
+                    new uint[] { floatFractionBits >> (int)floatFractionBitsSize - FractionSizeMax }, Size)); //there is the problem
+
+            }
+            else
+            {
+                resultFraction = (new BitMask(new uint[] { floatFractionBits }, Size));
+            }
+
+
+            var resultExponent = ExponentValueToExponentBits((int)(floatExponentBits - 127), Size);
+
+            SetUnumBits(resultSignBit, resultExponent, resultFraction, uncertain, resultExponentSize,
+                 resultFractionSize);
 
 
 
@@ -234,7 +242,8 @@ namespace Hast.Common.Numerics.Unum
             exponent += (uint)bias;
 
             BitMask.ShiftToRightEnd(fraction);
-            var fractionSize = fraction.FindLeadingOne() - 2;
+            var fractionSize = fraction.FindLeadingOne() - 1;
+            if (fractionSize>0) fractionSize -=  1;
             BitMask.SetZero(fraction, fraction.FindLeadingOne() - 1);
 
 
@@ -373,7 +382,7 @@ namespace Hast.Common.Numerics.Unum
             }
 
 
-            SetExponentBits(new BitMask(Size, false) + ExponentValueToExponentBits((int)(doubleExponentBits - 1023)));
+            SetExponentBits(ExponentValueToExponentBits((int)(doubleExponentBits - 1023),Size));
 
         }
 
@@ -649,7 +658,7 @@ namespace Hast.Common.Numerics.Unum
 
 
             var resultExponent = new BitMask(left.Size, false) +
-                                 ExponentValueToExponentBits(resultExponentValue + exponentChange);
+                                 ExponentValueToExponentBits(resultExponentValue + exponentChange,left.Size);
             resultExponentSize = ExponentValueToExponentSize(resultExponentValue + exponentChange) - 1;
 
 
@@ -732,13 +741,14 @@ namespace Hast.Common.Numerics.Unum
 
         #endregion
 
+
         #region Helper methods for operations and conversions
 
-        public static BitMask ExponentValueToExponentBits(int value)
+        public static BitMask ExponentValueToExponentBits(int value, uint size)
         {
             if (value > 0)
             {
-                var exponent = new BitMask(new uint[] { (uint)value });
+                var exponent = new BitMask(new uint[] { (uint)value }, size);
                 var exponentSize = ExponentValueToExponentSize(value);
                 var bias = (1 << (int)(exponentSize - 1)) - 1;
                 exponent += (uint)bias;
@@ -746,7 +756,7 @@ namespace Hast.Common.Numerics.Unum
             }
             else
             {
-                var exponent = new BitMask(new uint[] { (uint)-value });
+                var exponent = new BitMask(new uint[] { (uint)-value }, size);
                 var exponentSize = ExponentValueToExponentSize(value);
                 var Bias = (1 << (int)(exponentSize - 1)) - 1;
                 exponent += (uint)Bias;
@@ -805,22 +815,22 @@ namespace Hast.Common.Numerics.Unum
 
         public static Unum operator +(Unum left, Unum right)
         {
-            if (left.IsExact() && right.IsExact()) return AddExactUnums(left, right);
+            return AddExactUnums(left, right);
 
-            return new Unum();
+
         }
 
         public static Unum operator -(Unum x)
         {
-            if (x.IsExact()) return NegateExactUnum(x);
-            return new Unum();
+            return NegateExactUnum(x);
+
         }
+
 
         public static Unum operator -(Unum left, Unum right)
         {
-            if (left.IsExact() && right.IsExact()) return SubtractExactUnums(left, right);
+            return SubtractExactUnums(left, right);
 
-            return new Unum();
         }
 
         //public static Unum operator *(Unum left, Unum right)
@@ -838,8 +848,7 @@ namespace Hast.Common.Numerics.Unum
 
         public static bool operator ==(Unum left, Unum right)
         {
-            if (left.IsExact() && right.IsExact()) return AreEqualExactUnums(left, right);
-            return false;
+            return AreEqualExactUnums(left, right);
         }
 
         public static bool operator !=(Unum left, Unum right)
@@ -848,9 +857,14 @@ namespace Hast.Common.Numerics.Unum
         }
 
         //public static bool operator <(Unum left, Unum right)
-        //{
+        // {
+        //     if (left.IsPositive() != right.IsPositive()) return left.IsPositive();
+        //     if (left.ExponentValueWithBias() > right.ExponentValueWithBias()) return left.IsPositive();
+        //     if (left.ExponentValueWithBias() < right.ExponentValueWithBias()) return right.IsPositive();
+        //    // if (left.FractionWithHiddenBit())
+        //     return false;
 
-        //}
+        // }
 
         //public static bool operator >(Unum left, Unum right)
         //{
@@ -894,10 +908,10 @@ namespace Hast.Common.Numerics.Unum
             }
             if (!x.IsPositive())
             {
-                return -BitConverter.ToInt32(BitConverter.GetBytes(result), 0);
+                return -(int)result;
             }
 
-            return BitConverter.ToInt32(BitConverter.GetBytes(result), 0);
+            return (int)result;
         }
 
         public static explicit operator uint(Unum x)

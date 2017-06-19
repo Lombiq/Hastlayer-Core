@@ -132,6 +132,8 @@ namespace Hast.Common.Tests
                             new BitMask(new uint[] { 0x00800000, 0x00000000 }) << 8);
             Assert.AreEqual(new BitMask(new uint[] { 1 }),
                             new BitMask(new uint[] { 0x80000000 }) << -31);
+            Assert.AreEqual(new BitMask(new uint[] { 1, 0 } ) << 63,
+                new BitMask(new uint[] { 0x00000000, 0x80000000 }) );
 
         }
 
