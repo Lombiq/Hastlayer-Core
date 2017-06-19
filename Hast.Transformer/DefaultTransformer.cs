@@ -95,7 +95,10 @@ namespace Hast.Transformer
             transformationId +=
                 string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
                 string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
-                _jsonConverter.Serialize(configuration.CustomConfiguration);
+                _jsonConverter.Serialize(configuration.CustomConfiguration) +
+                // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a 
+                // Hastlayer update.
+                GetType().Assembly.FullName;
 
 
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
