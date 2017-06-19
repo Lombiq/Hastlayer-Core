@@ -124,8 +124,8 @@ namespace Hast.Common.Tests
         {
             Assert.AreEqual(new BitMask(new uint[] { 0x80000000 }),
                             new BitMask(new uint[] { 1 }) << 31);
-            Assert.AreEqual(new BitMask(new uint[] { 0x80000000, 0x00000000 }),
-                           new BitMask(new uint[] { 0, 1 }) << 63);
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000000, 0x80000000 }),
+                           new BitMask(new uint[] { 1, 0 }) << 63);
             Assert.AreEqual(new BitMask(new uint[] { 0 }),
                             new BitMask(new uint[] { 0x00000001 }) << 32);
             Assert.AreEqual(new BitMask(new uint[] { 0x80000000, 0x00000000 }),

@@ -319,7 +319,7 @@ namespace Hast.Common.Numerics
                 carryOld = false;
 
 
-                for (int j = (int)left.SegmentCount - 1; j >= 0; j--)
+                for (int j = 0; j < left.SegmentCount; j++)
                 {
                     carryNew = ((left.Segments[j] & segmentMaskWithLeadingOne) == segmentMaskWithLeadingOne);
                     left.Segments[j] = (left.Segments[j] << 1);
