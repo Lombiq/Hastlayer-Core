@@ -12,10 +12,8 @@ namespace ICSharpCode.NRefactory.CSharp
             return parameter.Name;
         }
 
-        public static IEnumerable<ParameterDeclaration> GetNonSimpleMemoryParameters(this MethodDeclaration method)
-        {
-            return method.Parameters.Where(p => !p.IsSimpleMemoryParameter());
-        }
+        public static IEnumerable<ParameterDeclaration> GetNonSimpleMemoryParameters(this MethodDeclaration method) =>
+            method.Parameters.Where(p => !p.IsSimpleMemoryParameter());
     }
 }
 

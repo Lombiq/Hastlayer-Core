@@ -80,32 +80,18 @@ namespace Hast.Transformer.SimpleMemory
             return output;
         }
 
-        public void WriteUInt32(int cellIndex, uint number)
-        {
-            Write4Bytes(cellIndex, BitConverter.GetBytes(number));
-        }
+        public void WriteUInt32(int cellIndex, uint number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 
-        public uint ReadUInt32(int cellIndex)
-        {
-            return BitConverter.ToUInt32(Read4Bytes(cellIndex), 0);
-        }
+        public uint ReadUInt32(int cellIndex) =>BitConverter.ToUInt32(Read4Bytes(cellIndex), 0);
 
-        public void WriteInt32(int cellIndex, int number)
-        {
-            Write4Bytes(cellIndex, BitConverter.GetBytes(number));
-        }
+        public void WriteInt32(int cellIndex, int number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 
-        public int ReadInt32(int cellIndex)
-        {
-            return BitConverter.ToInt32(Read4Bytes(cellIndex), 0);
-        }
+        public int ReadInt32(int cellIndex) => BitConverter.ToInt32(Read4Bytes(cellIndex), 0);
 
-        public void WriteBoolean(int cellIndex, bool boolean)
-        {
+        public void WriteBoolean(int cellIndex, bool boolean) =>
             // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
             // so on the FPGA-side we can depend on it.
             Write4Bytes(cellIndex, boolean ? new byte[] { 255, 255, 255, 255 } : new byte[] { 0, 0, 0, 0 });
-        }
 
         public bool ReadBoolean(int cellIndex)
         {
@@ -114,14 +100,8 @@ namespace Hast.Transformer.SimpleMemory
         }
 
         // Characters are not perfectly handled on the FPGA-side and are not really crucial, so de-activating these for now.
-        //public void WriteChar(int cellIndex, char character)
-        //{
-        //    Write4Bytes(cellIndex, BitConverter.GetBytes(character));
-        //}
+        //public void WriteChar(int cellIndex, char character) => Write4Bytes(cellIndex, BitConverter.GetBytes(character));
 
-        //public char ReadChar(int cellIndex)
-        //{
-        //    return BitConverter.ToChar(Read4Bytes(cellIndex), 0);
-        //}
+        //public char ReadChar(int cellIndex) => BitConverter.ToChar(Read4Bytes(cellIndex), 0);
     }
 }
