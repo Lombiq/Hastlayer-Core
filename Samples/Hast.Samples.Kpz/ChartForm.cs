@@ -186,6 +186,7 @@ namespace Hast.Samples.Kpz
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
             AsyncLogIt("Starting KPZ iterations...");
+
             for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
             {
                 if (ComputationTarget == KpzTarget.Cpu)
@@ -195,7 +196,7 @@ namespace Hast.Samples.Kpz
                 else
                 {
                     if (_stepByStep) _kpz.DoHastIterationDebug();
-                    else _kpz.DoHastIteration();
+                    else { _kpz.DoHastIterations((uint)_numKpzIterations); break; }
 
                 }
                 AsyncUpdateProgressBar(currentIteration);
