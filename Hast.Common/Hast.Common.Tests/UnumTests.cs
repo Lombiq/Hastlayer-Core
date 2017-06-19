@@ -68,7 +68,35 @@ namespace Hast.Common.Tests
 
 
         }
+        [Test]
+        public void FractionToUintArrayIsCorrect()
+        {
+            uint[] maxValue;
+            maxValue = new uint[8];
+            for (int i = 0; i < 8; i++)
+            {
+                maxValue[i] = uint.MaxValue;
+            }
+            maxValue[7] >>= 1;
+            var first = new Unum(_metaData_4_8, maxValue);
+            var second = new Unum(_metaData_4_8, new uint[] { 500000 }); //0xC7A1250C
+            var third = new Unum(_metaData_4_8, new uint[] { 594967295 });
+            var zero = new Unum(_metaData_4_8, new uint[] { 0 });
 
+
+
+            var bitmask_2 = new BitMask(new uint[] { 0xC7A1250C }, _metaData_4_8.Size);
+            var bitmask_3 = new BitMask(new uint[] { 0xCF5FE51C, 0xF06E }, _metaData_4_8.Size);
+
+
+
+            Assert.AreEqual(second.FractionToUintArray(), new uint[] { 500000, 0, 0, 0, 0, 0, 0, 0, 0 });
+            Assert.AreEqual(third.FractionToUintArray(), new uint[] { 594967295 ,0,0,0,0,0,0,0,0 });
+            Assert.AreEqual(first.FractionToUintArray(), new uint[] { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x7FFFFFFF, 0 });
+       
+
+        }
 
 
         //[Test]

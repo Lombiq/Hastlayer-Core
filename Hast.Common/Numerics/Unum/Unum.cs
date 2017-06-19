@@ -494,7 +494,16 @@ namespace Hast.Common.Numerics.Unum
 
         #endregion
 
-
+        public uint[] FractionToUintArray()
+        {
+            var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - (int)FractionSize();
+            var result = new uint[resultMask.SegmentCount];
+            for (var i = 0; i < resultMask.SegmentCount; i++)
+            {
+                result[i] = resultMask.Segments[i];
+            }
+            return result;
+        }
         public void Negate()
         {
             UnumBits ^= SignBitMask;
