@@ -30,7 +30,7 @@ namespace Hast.Common.Numerics
             for (int i = segments.Length; i < SegmentCount; i++) Segments[i] = 0;
         }
 
-        public BitMask(uint size, bool allOne)
+        public BitMask(uint size, bool allOne = false)
         {
             SegmentCount = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
             Size = size;
@@ -160,7 +160,7 @@ namespace Hast.Common.Numerics
         {
             if (left.SegmentCount == 0 || right.SegmentCount == 0) return left;
 
-            var mask = new BitMask(left.Size, false);
+            var mask = new BitMask(left.Size);
             bool carry = false, leftBit, rightBit;
             int buffer, segment = 0, position = 0;
 
@@ -195,7 +195,7 @@ namespace Hast.Common.Numerics
         {
             if (left.SegmentCount == 0 || right.SegmentCount == 0) return left;
 
-            var mask = new BitMask(left.Size, false);
+            var mask = new BitMask(left.Size);
             bool carry = false, leftBit, rightBit;
             int buffer, segment = 0, position = 0;
 
@@ -226,7 +226,7 @@ namespace Hast.Common.Numerics
 
         public static BitMask operator |(BitMask left, BitMask right)
         {
-            if (left.Size != right.Size) return new BitMask(left.Size, false);
+            if (left.Size != right.Size) return new BitMask(left.Size);
 
             var mask = new BitMask(left);
 
@@ -238,7 +238,7 @@ namespace Hast.Common.Numerics
 
         public static BitMask operator &(BitMask left, BitMask right)
         {
-            if (left.Size != right.Size) return new BitMask(left.Size, false);
+            if (left.Size != right.Size) return new BitMask(left.Size);
 
             var mask = new BitMask(left);
 
@@ -249,7 +249,7 @@ namespace Hast.Common.Numerics
         }
         public static BitMask operator ^(BitMask left, BitMask right)
         {
-            if (left.Size != right.Size) return new BitMask(left.Size, false);
+            if (left.Size != right.Size) return new BitMask(left.Size);
 
             var mask = new BitMask(left);
 
@@ -336,7 +336,7 @@ namespace Hast.Common.Numerics
         
         public static BitMask ShiftToRightEnd(BitMask input)
         {
-            if (input == new BitMask(input.Size, false)) return input;
+            if (input == new BitMask(input.Size)) return input;
             while(input.Segments[0] % 2 == 0)
             {
                 input >>= 1;

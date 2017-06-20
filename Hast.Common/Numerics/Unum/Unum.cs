@@ -66,7 +66,7 @@ namespace Hast.Common.Numerics.Unum
             _metadata = new UnumMetadata(exponentSizeSize, fractionSizeSize);
 
 
-            UnumBits = new BitMask(_metadata.Size, false);
+            UnumBits = new BitMask(_metadata.Size);
         }
 
         public Unum(UnumMetadata metadata)
@@ -74,7 +74,7 @@ namespace Hast.Common.Numerics.Unum
             _metadata = metadata;
 
 
-            UnumBits = new BitMask(_metadata.Size, false);
+            UnumBits = new BitMask(_metadata.Size);
 
         }
 
@@ -119,7 +119,7 @@ namespace Hast.Common.Numerics.Unum
                 return;
             }
 
-            UnumBits = new BitMask(_metadata.Size, false);
+            UnumBits = new BitMask(_metadata.Size);
 
 
             var floatBits = BitConverter.ToUInt32(BitConverter.GetBytes(x), 0);
@@ -147,11 +147,11 @@ namespace Hast.Common.Numerics.Unum
                 {
                     if (IsPositive())
                     {
-                        UnumBits = new BitMask(Size, false);
+                        UnumBits = new BitMask(Size);
                     }
                     else
                     {
-                        UnumBits = new BitMask(Size, false);
+                        UnumBits = new BitMask(Size);
                         Negate();
                     }
 
