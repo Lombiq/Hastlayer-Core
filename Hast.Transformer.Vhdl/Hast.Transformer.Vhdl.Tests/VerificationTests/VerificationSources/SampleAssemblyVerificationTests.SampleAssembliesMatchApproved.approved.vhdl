@@ -60,6 +60,7 @@ architecture Imp of Hast_IP is
         \integerProbabilityP\: unsigned(31 downto 0);
         \integerProbabilityQ\: unsigned(31 downto 0);
         \TestMode\: boolean;
+        \NumberOfIterations\: unsigned(31 downto 0);
         \randomState1\: unsigned(63 downto 0);
         \randomState2\: unsigned(63 downto 0);
     end record;
@@ -1162,42 +1163,44 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations end
 
 
-    -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
-    type \KpzKernelsInterface::DoIteration(SimpleMemory).0._States\ is (
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_0\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_1\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_2\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_3\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_4\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_5\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_6\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_7\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_8\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_9\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_10\, 
-        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_11\);
+    type \KpzKernelsInterface::DoIterations(SimpleMemory).0._States\ is (
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_0\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_1\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_2\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_3\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_7\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_12\, 
+        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_13\);
     -- Signals:
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0._Finished\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0._Started\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Finished.0\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Finished.0\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\: boolean := false;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
-    Signal \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Finished.0\: boolean := false;
-    -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0._Finished\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0._Started\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\: boolean := false;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.In.0\: \Hast.Samples.Kpz.KpzKernels\;
+    Signal \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Finished.0\: boolean := false;
+    -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
 
 
     -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::TestAdd(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
@@ -1234,7 +1237,9 @@ architecture Imp of Hast_IP is
         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\, 
         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_9\, 
         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\, 
-        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\);
+        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\, 
+        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\, 
+        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_13\);
     -- Signals:
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\: boolean := false;
     Signal \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.Kpz.KpzKernels\;
@@ -1516,7 +1521,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().KpzKernelsInterface::TestAdd(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().HastlayerOptimizedAlgorithm::Run(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Finished.0\: boolean := false;
@@ -1530,7 +1535,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().KpzKernelsInterface::TestAdd(SimpleMemory)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
@@ -6921,168 +6926,204 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 state machine end
 
 
-    -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0._StateMachine\: process (\Clock\) 
-        Variable \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\: \KpzKernelsInterface::DoIteration(SimpleMemory).0._States\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_0\;
-        Variable \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\: \Hast.Samples.Kpz.KpzKernels\;
-        Variable \KpzKernelsInterface::DoIteration(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsInterface::DoIteration(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
-        Variable \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0._StateMachine\: process (\Clock\) 
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\: \KpzKernelsInterface::DoIterations(SimpleMemory).0._States\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_0\;
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\: \Hast.Samples.Kpz.KpzKernels\;
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0._Finished\ <= false;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ <= false;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ <= false;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\ <= false;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ <= false;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ <= false;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_0\;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.num\ := to_signed(0, 32);
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.i\ := to_signed(0, 32);
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.0\ := false;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.1\ := false;
-                \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0._Finished\ <= false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ <= false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ <= false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\ <= false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ <= false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ <= false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_0\;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\ := to_signed(0, 32);
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ := to_signed(0, 32);
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := to_signed(0, 32);
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\ := false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\ := false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\ := false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\ := false;
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
             else 
-                case \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ is 
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_0\ => 
+                case \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ is 
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0._Started\ = true) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_2\;
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._Started\ = true) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_1\ => 
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0._Started\ = true) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._Finished\ <= true;
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._Started\ = true) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._Finished\ <= true;
                         else 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._Finished\ <= false;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_0\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._Finished\ <= false;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_2\ => 
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_2\ => 
                         -- Initializing record fields to their defaults.
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\IsNull\ := false;
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\gridRaw\ := (others => to_unsigned(0, 32));
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\integerProbabilityP\ := to_unsigned(32767, 32);
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\integerProbabilityQ\ := to_unsigned(32767, 32);
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\TestMode\ := False;
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\randomState1\ := to_unsigned(0, 64);
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\randomState2\ := to_unsigned(0, 64);
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\IsNull\ := false;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\gridRaw\ := (others => to_unsigned(0, 32));
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\integerProbabilityP\ := to_unsigned(32767, 32);
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\integerProbabilityQ\ := to_unsigned(32767, 32);
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\ := False;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\ := to_unsigned(1, 32);
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\randomState1\ := to_unsigned(0, 64);
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\randomState2\ := to_unsigned(0, 64);
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::CopyFromSimpleMemoryToRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory)
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\;
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ <= true;
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_3\;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ <= true;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_3\ => 
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::CopyFromSimpleMemoryToRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory)
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Finished.0\) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ <= false;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.In.0\;
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Finished.0\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ <= false;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.In.0\;
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory)
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ <= true;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_4\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ <= true;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_4\ => 
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory)
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Finished.0\) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ <= false;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.In.0\;
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Finished.0\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ <= false;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.In.0\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_6\ and ends in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_6\.
-                            --     * The false branch starts in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_7\ and ends in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_7\.
-                            --     * Execution after either branch will continue in the following state: \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_5\.
+                            --     * The true branch starts in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\ and ends in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\.
+                            --     * The false branch starts in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_7\ and ends in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_7\.
+                            --     * Execution after either branch will continue in the following state: \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\.
 
-                            if (\KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\TestMode\) then 
-                                \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_6\;
+                            if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\) then 
+                                \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\;
                             else 
-                                \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_7\;
+                                \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_7\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_5\ => 
-                        -- State after the if-else which was started in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_4\.
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.i\ := to_signed(0, 32);
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\ => 
+                        -- State after the if-else which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ := to_signed(0, 32);
                         -- Starting a while loop.
                         -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.0\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0.i\ < \KpzKernelsInterface::DoIteration(SimpleMemory).0.num\;
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.0\) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_8\;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\ := resize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\, 64) < signed((resize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\, 64)));
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\;
                         else 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_9\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_6\ => 
-                        -- True branch of the if-else started in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_4\.
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.num\ := to_signed(1, 32);
-                        -- Going to the state after the if-else which was started in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_4\.
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_6\) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_5\;
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\ => 
+                        -- True branch of the if-else started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\ := to_signed(1, 32);
+                        -- Going to the state after the if-else which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_7\ => 
-                        -- False branch of the if-else started in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_4\.
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.num\ := to_signed(64, 32);
-                        -- Going to the state after the if-else which was started in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_4\.
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_7\) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_5\;
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_7\ => 
+                        -- False branch of the if-else started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\ := to_signed(64, 32);
+                        -- Going to the state after the if-else which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_7\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_8\ => 
-                        -- Repeated state of the while loop which was started in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_5\.
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\.
                         -- The while loop's condition:
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0.i\ < \KpzKernelsInterface::DoIteration(SimpleMemory).0.num\;
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.1\) then 
-                            -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean)
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\.\TestMode\;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ <= true;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_10\;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\ := resize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\, 64) < signed((resize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\, 64)));
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := to_signed(0, 32);
+                            -- Starting a while loop.
+                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ < \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\;
+                            if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\) then 
+                                \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\;
+                            else 
+                                \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\;
+                            end if;
                         else 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_9\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_9\ => 
-                        -- State after the while loop which was started in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_5\.
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\ => 
+                        -- State after the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\.
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory)
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\;
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ <= true;
-                        \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_11\;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ <= true;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_10\ => 
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\.
+                        -- The while loop's condition:
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ < \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\;
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\) then 
+                            -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean)
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ <= true;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_12\;
+                        else 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\ => 
+                        -- State after the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\.
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ + to_signed(1, 32);
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\;
+                        -- Returning to the repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\ if the loop wasn't exited with a state change.
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean)
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ = \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ <= false;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.In.0\;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0.i\ + to_signed(1, 32);
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.i\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0.binaryOperationResult.2\;
-                            -- Returning to the repeated state of the while loop which was started in state \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_5\ if the loop wasn't exited with a state change.
-                            if (\KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_10\) then 
-                                \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_8\;
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ <= false;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.In.0\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.4\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ + to_signed(1, 32);
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.4\;
+                            -- Returning to the repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\ if the loop wasn't exited with a state change.
+                            if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_12\) then 
+                                \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_11\ => 
+                    when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory)
-                        if (\KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Finished.0\) then 
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ <= false;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.In.0\;
-                            \KpzKernelsInterface::DoIteration(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIteration(SimpleMemory).0._State_1\;
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Finished.0\) then 
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ <= false;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.In.0\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
 
 
     -- System.Void Hast.Samples.Kpz.KpzKernelsInterface::TestAdd(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
@@ -7186,6 +7227,7 @@ begin
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
+        Variable \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7308,6 +7350,23 @@ begin
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\) and to_unsigned(1, 32);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ = to_unsigned(1, 32);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\TestMode\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\;
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\ => 
+                        -- Begin SimpleMemory read.
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(69, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_13\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\ := \DataIn\;
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\NumberOfIterations\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.5\);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8656,7 +8715,7 @@ begin
                 \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().KpzKernelsInterface::TestAdd(SimpleMemory)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
@@ -8747,10 +8806,10 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 12 => 
-                            if (\Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Started.0\ <= false;
+                            if (\Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when 13 => 
@@ -10607,39 +10666,39 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::CopyFromSimpleMemoryToRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
-    \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Started\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\;
-    \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.In\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.Out.0\;
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Finished.0\ <= \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Finished\;
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.In.0\ <= \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.Out\;
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Started\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\;
+    \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.In\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.Out.0\;
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Finished.0\ <= \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._Finished\;
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.In.0\ <= \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::CopyFromSimpleMemoryToRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
-    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Started\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\;
-    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.In\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.Out.0\;
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Finished.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\;
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.In.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.Out\;
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Started\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\;
+    \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.In\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.Out.0\;
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Finished.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._Finished\;
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.In.0\ <= \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.SimpleMemory.SimpleMemory) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0._Started\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.In\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.Out.0\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch.parameter.In\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\;
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0._Finished\;
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.In.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.Out\;
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0._Started\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.In\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.Out.0\;
+    \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch.parameter.In\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\;
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0._Finished\;
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.In.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory) start
-    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
-    \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Started\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\;
-    \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.In\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.Out.0\;
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Finished.0\ <= \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Finished\;
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.In.0\ <= \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.Out\;
+    -- Signal connections for System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Started\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\;
+    \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.In\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.Out.0\;
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Finished.0\ <= \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._Finished\;
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.In.0\ <= \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.SimpleMemory.SimpleMemory) end
 
 
@@ -10796,11 +10855,11 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
-    \KpzKernelsInterface::DoIteration(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Started.0\;
-    \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIteration(SimpleMemory)._Finished.0\ <= \KpzKernelsInterface::DoIteration(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIteration(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    \KpzKernelsInterface::DoIterations(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Started.0\;
+    \Hast::ExternalInvocationProxy().KpzKernelsInterface::DoIterations(SimpleMemory)._Finished.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernelsInterface::DoIterations(Hast.Transformer.SimpleMemory.SimpleMemory) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.Kpz.KpzKernelsInterface::TestAdd(Hast.Transformer.SimpleMemory.SimpleMemory) start
