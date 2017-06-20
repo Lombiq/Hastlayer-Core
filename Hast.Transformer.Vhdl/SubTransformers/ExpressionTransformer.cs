@@ -711,11 +711,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 context.Scope.CurrentBlock.Add(new Assignment
                 {
-                    AssignTo = new RecordFieldAccess
-                    {
-                        Instance = initiailizationResult.RecordInstanceReference,
-                        FieldName = initiailizationResult.Record.IsNullFieldReference.Name
-                    },
+                    AssignTo = NullableRecord.CreateIsNullFieldAccess(initiailizationResult.RecordInstanceReference),
                     Expression = Value.True
                 });
 

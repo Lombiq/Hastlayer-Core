@@ -79,8 +79,8 @@ namespace Hast.Layer
                 HardwareRepresentation hardwareRepresentation = null;
 
                 await (await GetHost())
-                    .Run<ITransformer, IHardwareImplementationComposer>(
-                        async (transformer, hardwareImplementationComposer) =>
+                    .Run<ITransformer, IHardwareImplementationComposer, IDeviceDriver>(
+                        async (transformer, hardwareImplementationComposer, deviceDriver) =>
                         {
                             var hardwareDescription = await transformer.Transform(assemblies, configuration);
 
@@ -90,7 +90,8 @@ namespace Hast.Layer
                             {
                                 SoftAssemblies = assemblies,
                                 HardwareDescription = hardwareDescription,
-                                HardwareImplementation = hardwareImplementation
+                                HardwareImplementation = hardwareImplementation,
+                                DeviceManifest = deviceDriver.DeviceManifest
                             };
                         }, ShellName, false);
 
