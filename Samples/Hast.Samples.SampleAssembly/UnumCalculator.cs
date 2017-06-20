@@ -18,27 +18,26 @@ namespace Hast.Samples.SampleAssembly
         {
             var number = memory.ReadInt32(AddToUnum_InputInt32Index);
 
-            // Some basic BitMask play until we have a proper sample.
-            var b = new BitMask(5, true);
-            var z = b.SegmentCount;
-            var b2 = new BitMask(b);
-            var c = new BitMask(5, true);
-            var d = new BitMask(b.Segments);
-            var size = b.Size;
-            var e = new BitMask(size, false);
+            //// Some basic BitMask play until we have a proper sample.
+            //var b = new BitMask(5, true);
+            //var z = b.SegmentCount;
+            //var b2 = new BitMask(b);
+            //var c = new BitMask(5, true);
+            //var d = new BitMask(b.Segments);
+            //var size = b.Size;
+            //var e = new BitMask(size, false);
 
-            var x = b | c;
+            //var x = b | c;
 
-            var result = x.Size;
+            //var result = x.Size;
 
-            //Unum unum = 10;
-            //// Adding this line only because otherwise the whole data structure would be cleaned up as unused.
-            //var sign = unum.IsPositive();
+            var environment = new UnumMetadata(10, 12);
 
-            //int x = (int)unum;
-            //Unum y = number;
+            var a = new Unum(environment, 10);
+            var sign = a.IsPositive();
+            var b = new Unum(environment, number);
 
-            //var result = number + unum;
+            var result = a + b;
 
             memory.WriteInt32(AddToUnum_OutputInt32Index, (int)result);
         }
