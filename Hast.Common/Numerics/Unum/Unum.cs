@@ -242,7 +242,7 @@ namespace Hast.Common.Numerics.Unum
             BitMask.ShiftToRightEnd(UnumBits);
             var fractionSize = UnumBits.FindLeadingOne() - 1;
             if (fractionSize > 0) fractionSize -= 1;
-            BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
+            if (exponent != _metadata.EmptyBitMask) BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
 
 
             SetUnumBits(false, exponent, UnumBits, false, exponentSize - 1, fractionSize);
@@ -484,6 +484,20 @@ namespace Hast.Common.Numerics.Unum
 
         #endregion
 
+        public void IncreaseExponentByOne()
+        {
+            if (ExponentValueWithBias() < 1 << (ExponentSizeMax))
+            {
+                SetExponentBits(Exponent() + 1);
+            }
+            if (ExponentSize() < ExponentSizeMax)
+            {
+                SetExponentSizeBits(ExponentValueToExponentSize(ExponentValueWithBias()+1));
+                SetExponentBits(Exponent() + 1);
+            }
+           
+        }
+
         public uint[] FractionToUintArray()
         {
             var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - (int)FractionSize();
@@ -495,6 +509,7 @@ namespace Hast.Common.Numerics.Unum
             }
             return result;
         }
+
         public void Negate()
         {
             UnumBits ^= SignBitMask;

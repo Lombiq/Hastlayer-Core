@@ -31,13 +31,18 @@ namespace Hast.Samples.SampleAssembly
 
             //var result = x.Size;
 
-            var environment = new UnumMetadata(10, 12);
-
-            var a = new Unum(environment, 10);
+            //This is a draft of what will happen here.
+            var environment = new UnumMetadata(4, 8);
+            var a = new Unum(environment, 1);
             var sign = a.IsPositive();
-            var b = new Unum(environment, number);
-
-            var result = a + b;
+            var b = new Unum(environment, 0);
+            for (var i = 1; i <= number; i++)
+            {
+                a += a;
+                b += a;
+            }
+            var result = b;
+            var resultArray = b.FractionToUintArray();
 
             memory.WriteInt32(AddToUnum_OutputInt32Index, (int)result);
         }
