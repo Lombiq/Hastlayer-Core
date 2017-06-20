@@ -784,28 +784,31 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var initializationValue = field.DataType.DefaultValue;
 
-                var typeField = typeDeclaration.Members
+                var fieldDeclaration = typeDeclaration.Members
                     .SingleOrDefault(member =>
                         member.Is<FieldDeclaration>(f =>
                             f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) as FieldDeclaration;
-                if (typeField != null)
+                if (fieldDeclaration != null)
                 {
-                    var fieldInitializer = typeField.Variables.Single().Initializer;
+                    var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
                     if (fieldInitializer != Expression.Null)
                     {
                         initializationValue = (Value)Transform(fieldInitializer, context);
                     }
                 }
 
-                context.Scope.CurrentBlock.Add(new Assignment
+                if (initializationValue != null)
                 {
-                    AssignTo = new RecordFieldAccess
+                    context.Scope.CurrentBlock.Add(new Assignment
                     {
-                        Instance = result.RecordInstanceReference,
-                        FieldName = field.Name
-                    },
-                    Expression = initializationValue
-                });
+                        AssignTo = new RecordFieldAccess
+                        {
+                            Instance = result.RecordInstanceReference,
+                            FieldName = field.Name
+                        },
+                        Expression = initializationValue
+                    }); 
+                }
             }
 
             return result;
