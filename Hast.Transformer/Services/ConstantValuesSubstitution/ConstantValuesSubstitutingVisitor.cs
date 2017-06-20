@@ -190,7 +190,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         // Trying to find a place where the same member is references on the same ("this") instance.
                         var memberReferenceExpressionInConstructor = constructor
                         .FindFirstChildOfType<MemberReferenceExpression>(memberReference =>
-                            memberReference.FindMemberDeclaration(_typeDeclarationLookupTable).GetFullName() == memberFullName &&
+                            memberReference.FindMemberDeclaration(_typeDeclarationLookupTable, true).GetFullName() == memberFullName &&
                             memberReference.Target.Is<IdentifierExpression>(identifier => identifier.Identifier == "this"));
 
                         if (memberReferenceExpressionInConstructor == null) return false;
