@@ -484,21 +484,8 @@ namespace Hast.Common.Numerics.Unum
         }
 
         #endregion
-
-        public void IncreaseExponentByOne()
-        {
-            if (ExponentValueWithBias() < 1 << (ExponentSizeMax))
-            {
-                SetExponentBits(Exponent() + 1);
-            }
-            if (ExponentSize() < ExponentSizeMax)
-            {
-                SetExponentSizeBits(ExponentValueToExponentSize(ExponentValueWithBias()+1));
-                SetExponentBits(Exponent() + 1);
-            }
-           
-        }
-
+  
+        
         public uint[] FractionToUintArray()
         {
             var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - (int)FractionSize();
@@ -643,6 +630,7 @@ namespace Hast.Common.Numerics.Unum
                 return new Unum(left.NegativeInfinity, left._metadata);
             //if (left.IsZero()) return right;
             //if (right.IsZero()) return left;
+            
 
 
             var resultExponentSizeSize = left.ExponentSizeSize;
@@ -658,7 +646,9 @@ namespace Hast.Common.Numerics.Unum
             var resultExponentValue = 0;
             uint resultFractionSize = 0;
             uint resultExponentSize = 0;
+            
 
+            
 
             if (exponentValueDifference == 0) // Exponents are equal.
             {
@@ -750,6 +740,8 @@ namespace Hast.Common.Numerics.Unum
 
             }
 
+            // This is temporary, for imitation of float behaviour. Now the ubit works as a flag for rounded values.
+            if ((!left.IsExact()) || (!right.IsExact())) resultUbit = true;
 
 
             resultUnum.SetUnumBits(resultSignBit, resultExponent, scratchPad, resultUbit, resultExponentSize,
