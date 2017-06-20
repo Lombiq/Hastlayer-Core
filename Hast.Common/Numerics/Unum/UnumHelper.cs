@@ -36,7 +36,7 @@
         /// <param name="maximumSize">The maximum size allowed for the Unum.</param>
         /// <returns>Whether the number of bits required to store the Unum
         /// with the given configuration fits the desired maximum size.</returns>
-        public static bool ConfigurationFitsSize(ushort eSize, byte fSize, ushort maximumSize) =>
+        public static bool ConfigurationFitsSize(ushort eSize, ushort fSize, ushort maximumSize) =>
             ConfigurationRequiredMaximumBits(eSize, fSize) <= maximumSize;
 
         /// <summary>
@@ -45,7 +45,7 @@
         /// <param name="eSize">The maximum size of the exponent.</param>
         /// <param name="fSize">The maximum size of the fraction.</param>
         /// <returns>The maximum number of bits for the given configuration.</returns>
-        public static ushort ConfigurationRequiredMaximumBits(ushort eSize, byte fSize) =>
+        public static ushort ConfigurationRequiredMaximumBits(ushort eSize, ushort fSize) =>
             // Sign bit + exponent size + fraction size +
             // uncertainty bit + exponent size size + fraction size size.
             (ushort)(1 + eSize + fSize +
