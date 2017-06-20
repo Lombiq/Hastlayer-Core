@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
 
 namespace Hast.Common.Numerics.Unum
 {
-
-    // Signbit Exponent Fraction Ubit ExponentSize FractionSize
     public struct Unum // : IComparable, IFormattable, IConvertible, IComparable<Unum>, IEquatable<Unum>
     {
         private UnumMetadata _metadata { get; set; }
+
+        // Signbit Exponent Fraction Ubit ExponentSize FractionSize
+        public BitMask UnumBits { get; set; }
 
         #region Unum structure
 
@@ -19,12 +19,6 @@ namespace Hast.Common.Numerics.Unum
 
         public byte UnumTagSize => _metadata.UnumTagSize; // "utagsize"
         public ushort Size => _metadata.Size; // "maxubits"
-
-        #endregion
-
-        #region Unum blocks
-
-        public BitMask UnumBits { get; set; }
 
         #endregion
 
@@ -65,7 +59,6 @@ namespace Hast.Common.Numerics.Unum
         {
             _metadata = new UnumMetadata(exponentSizeSize, fractionSizeSize);
 
-
             UnumBits = new BitMask(_metadata.Size);
         }
 
@@ -73,160 +66,109 @@ namespace Hast.Common.Numerics.Unum
         {
             _metadata = metadata;
 
-
             UnumBits = new BitMask(_metadata.Size);
-
         }
 
         public Unum(BitMask wholeUnum, byte exponentSizeSize, byte fractionSizeSize)
         {
             _metadata = new UnumMetadata(exponentSizeSize, fractionSizeSize);
 
-
             UnumBits = wholeUnum;
-
         }
 
-        public Unum(BitMask wholeUnum, UnumMetadata metadata)
+        public Unum(UnumMetadata metadata, BitMask wholeUnum)
         {
             _metadata = metadata;
 
-
             UnumBits = wholeUnum;
-
         }
 
         // This doesn't work for all cases yet.
-        public Unum(UnumMetadata environment, float x)
+        public Unum(UnumMetadata metadata, float number)
         {
-            _metadata = environment;
-            //spec values
-            if (float.IsNaN(x))
+            _metadata = metadata;
+
+            // Handling special cases first.
+            if (float.IsNaN(number))
             {
                 UnumBits = _metadata.QuietNotANumber;
                 return;
             }
-
-            if (float.IsPositiveInfinity(x))
+            if (float.IsPositiveInfinity(number))
             {
                 UnumBits = _metadata.PositiveInfinity;
                 return;
             }
-
-            if (float.IsNegativeInfinity(x))
+            if (float.IsNegativeInfinity(number))
             {
                 UnumBits = _metadata.NegativeInfinity;
                 return;
             }
+            
 
             UnumBits = new BitMask(_metadata.Size);
+            var floatExponentBits = (BitConverter.ToUInt32(BitConverter.GetBytes(number), 0) << 1) >> 24;
 
-
-            var floatBits = BitConverter.ToUInt32(BitConverter.GetBytes(x), 0);
-            var resultSignBit = (floatBits > uint.MaxValue / 2);
-            var floatExponentBits = (BitConverter.ToUInt32(BitConverter.GetBytes(x), 0) << 1) >> 24;
-            var floatFractionBits = (BitConverter.ToUInt32(BitConverter.GetBytes(x), 0) << 9) >> 9;
-            uint resultFractionSize = 23;
-            var uncertain = false;
-            BitMask resultFraction;
-            uint floatFractionBitsSize = 23;
-
-
-
-            // These are the only Uncertain cases that we can safely handle without Ubounds.
+            // These are the only uncertain cases that we can safely handle without Ubounds.
             if (ExponentSizeMax < ExponentValueToExponentSize((int)floatExponentBits - 127))
             {
-                // The exponent is too big, so we express the number as the largest possible signed value, but uncertain.
-                // This means it's finite, but too big to express.
+                // The exponent is too big, so we express the number as the largest possible signed value,
+                // but the Unum is uncertain, meaning that it's finite, but too big to express.
                 if (floatExponentBits - 127 > 0)
-                {
                     UnumBits = IsPositive() ? LargestPositive : LargestNegative;
-
-                }
                 else // If the exponent is too small, we will handle it as a signed uncertain zero.
                 {
-                    if (IsPositive())
-                    {
-                        UnumBits = new BitMask(Size);
-                    }
-                    else
-                    {
-                        UnumBits = new BitMask(Size);
-                        Negate();
-                    }
-
-
+                    UnumBits = new BitMask(Size);
+                    if (!IsPositive()) Negate();
                 }
+
                 SetUncertainityBit(true);
+
                 return;
             }
 
 
-            if (floatFractionBits == 0)
-            {
-                resultFractionSize = 0;
+            var floatFractionBits = (BitConverter.ToUInt32(BitConverter.GetBytes(number), 0) << 9) >> 9;
+            uint resultFractionSize = 23;
+            uint floatFractionBitsSize = 23;
 
-            }
+            if (floatFractionBits == 0) resultFractionSize = 0;
             else
-            {
                 while (floatFractionBits % 2 == 0)
                 {
-
                     resultFractionSize -= 1;
                     floatFractionBits >>= 1;
                     floatFractionBitsSize = resultFractionSize;
-
                 }
 
-            }
 
-
+            var uncertainty = false;
 
             if (FractionSizeMax + 1 < resultFractionSize)
             {
-
-
-                //resultFractionSize -= resultFractionSize - result.FractionSizeMax;
-
-
                 resultFractionSize = ((uint)FractionSizeMax - 1);
-                uncertain = true;
+                uncertainty = true;
             }
-            else
-                if (resultFractionSize > 0) resultFractionSize = (resultFractionSize - 1);
+            else if (resultFractionSize > 0) resultFractionSize = (resultFractionSize - 1);
 
-
-
+            var resultFraction = uncertainty ?
+                new BitMask(new uint[] { floatFractionBits >> (int)floatFractionBitsSize - FractionSizeMax }, Size) :
+                new BitMask(new uint[] { floatFractionBits }, Size);
+            var resultExponent = ExponentValueToExponentBits((int)(floatExponentBits - 127), Size);
+            var floatBits = BitConverter.ToUInt32(BitConverter.GetBytes(number), 0);
+            var resultSignBit = (floatBits > uint.MaxValue / 2);
             var resultExponentSize = (ExponentValueToExponentSize((int)floatExponentBits - 127) - 1);
 
-            if (uncertain)
-            {
-                resultFraction = (new BitMask(
-                    new uint[] { floatFractionBits >> (int)floatFractionBitsSize - FractionSizeMax }, Size)); //there is the problem
 
-            }
-            else
-            {
-                resultFraction = (new BitMask(new uint[] { floatFractionBits }, Size));
-            }
-
-
-            var resultExponent = ExponentValueToExponentBits((int)(floatExponentBits - 127), Size);
-
-            SetUnumBits(resultSignBit, resultExponent, resultFraction, uncertain, resultExponentSize,
-                 resultFractionSize);
-
-
-
-
-
+            SetUnumBits(resultSignBit, resultExponent, resultFraction,
+                uncertainty, resultExponentSize, resultFractionSize);
         }
 
-        public Unum(UnumMetadata environment, uint x)
+        public Unum(UnumMetadata metadata, uint x)
         {
-
-            _metadata = environment;
+            _metadata = metadata;
             UnumBits = _metadata.EmptyBitMask;
+
             if (x == 0) return;
 
 
@@ -238,7 +180,6 @@ namespace Hast.Common.Numerics.Unum
             var bias = (1 << (int)(exponentSize - 1)) - 1;
             exponent += (uint)bias;
 
-
             BitMask.ShiftToRightEnd(UnumBits);
             var fractionSize = UnumBits.FindLeadingOne() - 1;
             if (fractionSize > 0) fractionSize -= 1;
@@ -247,11 +188,12 @@ namespace Hast.Common.Numerics.Unum
 
             SetUnumBits(false, exponent, UnumBits, false, exponentSize - 1, fractionSize);
         }
-        public Unum(UnumMetadata environment, uint[] input)
-        {
 
-            _metadata = environment;
+        public Unum(UnumMetadata metadata, uint[] input)
+        {
+            _metadata = metadata;
             UnumBits = _metadata.EmptyBitMask;
+
 
             // Copying input to UnumBits BitMask.
             for (var i = input.Length - 1; i > 0; i--)
@@ -259,6 +201,7 @@ namespace Hast.Common.Numerics.Unum
                 UnumBits += input[i];
                 UnumBits <<= 32;
             }
+
             UnumBits += input[0];
             if (UnumBits == _metadata.EmptyBitMask) return;
 
@@ -269,21 +212,22 @@ namespace Hast.Common.Numerics.Unum
             UnumBits >>= 1;
 
 
-            //Calcuating exponent value and size.  
+            // Calcuating Exponent value and size.  
             var exponentValue = UnumBits.FindLeadingOne() - 1;
             var exponentSize = 0;
             var j = 1;
+
             while (j < exponentValue)
             {
                 j <<= 1;
                 exponentSize++;
             }
-            if (exponentValue > (1 << (int)exponentSize - 1)) exponentSize++;
-            var bias = (1 << (int)(exponentSize - 1)) - 1;
+
+            if (exponentValue > (1 << exponentSize - 1)) exponentSize++;
+            var bias = (1 << (exponentSize - 1)) - 1;
             exponentValue += (uint)bias;
             var exponentMask = _metadata.EmptyBitMask + exponentValue;
-            if (exponentSize > 0) exponentSize -= 1; //Until now we needed the value, now we need the notation.
-
+            if (exponentSize > 0) exponentSize -= 1; // Until now we needed the value, now we need the notation.
 
 
             // Calculating Fraction.
@@ -296,23 +240,23 @@ namespace Hast.Common.Numerics.Unum
             SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize , fractionSize);
         }
 
-        public Unum(UnumMetadata environment, int x)
+        public Unum(UnumMetadata metadata, int x)
         {
-            if (x >= 0) this = new Unum(environment, (uint)x);
+            if (x >= 0) this = new Unum(metadata, (uint)x);
             else
             {
-                this = new Unum(environment, (uint)-x);
+                this = new Unum(metadata, (uint)-x);
                 Negate();
             }
-
         }
 
         // This doesn't work for all cases yet.
-        public Unum(UnumMetadata environment, double x)
+        public Unum(UnumMetadata metadata, double x)
         {
-            _metadata = environment;
+            _metadata = metadata;
             UnumBits = _metadata.EmptyBitMask;
-            //spec values
+
+            // Handling special cases first.
             if (double.IsNaN(x))
             {
                 UnumBits = QuietNotANumber;
@@ -332,12 +276,10 @@ namespace Hast.Common.Numerics.Unum
 
             var doubleBits = BitConverter.ToUInt64(BitConverter.GetBytes(x), 0);
             SetSignBit((doubleBits > ulong.MaxValue / 2));
-            var doubleExponentBits = (BitConverter.ToUInt64(BitConverter.GetBytes(x), 0) << 1) >> 53;
+
+
             var doubleFractionBits = (BitConverter.ToUInt64(BitConverter.GetBytes(x), 0) << 12) >> 12;
             uint resultFractionSize = 52;
-            var uncertain = false;
-
-
 
             if (doubleFractionBits == 0) resultFractionSize = 0;
             else
@@ -351,72 +293,63 @@ namespace Hast.Common.Numerics.Unum
             }
 
 
+            var uncertainty = false;
 
             if (FractionSizeMax < resultFractionSize - 1)
             {
                 SetFractionSizeBits((uint)(FractionSizeMax - 1));
-                uncertain = true;
+                uncertainty = true;
             }
             else SetFractionSizeBits(resultFractionSize - 1);
 
 
+            var doubleExponentBits = (BitConverter.ToUInt64(BitConverter.GetBytes(x), 0) << 1) >> 53;
 
-            // These are the only Uncertain cases that we can safely handle without Ubounds.
+            // These are the only uncertain cases that we can safely handle without Ubounds.
             if (ExponentSizeMax < ExponentValueToExponentSize((int)doubleExponentBits - 1023))
             {
-                // The exponent is too big, so we express the number as the largest possible signed value, but uncertain.
-                // This means it's finite, but too big to express.
+                // The exponent is too big, so we express the number as the largest possible signed value,
+                // but the Unum is uncertain, meaning that it's finite, but too big to express.
                 if (doubleExponentBits - 1023 > 0)
-                {
                     UnumBits = IsPositive() ? LargestPositive : LargestNegative;
-
-                }
                 else // If the exponent is too small, we will handle it as a signed uncertain zero.
                 {
-
                     UnumBits = _metadata.EmptyBitMask;
                     if (!IsPositive()) Negate();
-
                 }
 
                 SetUncertainityBit(true);
+
                 return;
             }
 
+
             var exponentSizeBits = ExponentValueToExponentSize((int)doubleExponentBits - 1023) - 1;
             SetExponentSizeBits(exponentSizeBits);
+
             var doubleFraction = new uint[2];
             doubleFraction[0] = (uint)((doubleFractionBits << 32) >> 32);
             doubleFraction[1] = (uint)((doubleFractionBits >> 32));
 
-            if (uncertain)
+            if (uncertainty)
             {
-                if (Size > 32) // This is necessary because Hastlayer enables only one size of BitMasks.
-                {
-
-                    var fBits = new BitMask(doubleFraction, Size) >> ((int)resultFractionSize - (int)FractionSize());
-                    SetFractionBits(fBits);
-
-                }
-                else
-                {   // The lower 32 bits wouldn't fit in anyway.
-                    SetFractionBits(new BitMask(new uint[] { doubleFraction[1] }, Size) >>
-                                           ((int)resultFractionSize - FractionSizeMax));
-                }
-
+                SetFractionBits(Size > 32 ?
+                    // This is necessary because Hastlayer enables only one size of BitMasks.
+                    new BitMask(doubleFraction, Size) >> ((int)resultFractionSize - (int)FractionSize()) :
+                    // The lower 32 bits wouldn't fit in anyway.
+                    new BitMask(new uint[] { doubleFraction[1] }, Size) >> ((int)resultFractionSize - FractionSizeMax));
 
                 SetUncertainityBit(true);
             }
             else
-            {   // This is necessary because Hastlayer enables only one size of BitMasks.
-                SetFractionBits(Size > 32
-                     ? new BitMask(doubleFraction, Size)
-                     : new BitMask(new uint[] { doubleFraction[1] }, Size)); // The lower 32 bits wouldn't fit in anyway.
-            }
+                SetFractionBits(Size > 32 ?
+                    // This is necessary because Hastlayer enables only one size of BitMasks.
+                    new BitMask(doubleFraction, Size) :
+                    // The lower 32 bits wouldn't fit in anyway.
+                    new BitMask(new uint[] { doubleFraction[1] }, Size));
 
 
             SetExponentBits(ExponentValueToExponentBits((int)(doubleExponentBits - 1023), Size));
-
         }
 
 
@@ -617,17 +550,17 @@ namespace Hast.Common.Numerics.Unum
 
 
             // Handling special values.
-            if (left.IsNan() || right.IsNan()) return new Unum(left.QuietNotANumber, left._metadata);
+            if (left.IsNan() || right.IsNan()) return new Unum(left._metadata, left.QuietNotANumber);
 
             if ((left.IsPositiveInfinity() && right.IsNegativeInfinity()) ||
                 (left.IsNegativeInfinity() && right.IsPositiveInfinity()))
-                return new Unum(left.QuietNotANumber, left._metadata);
+                return new Unum(left._metadata, left.QuietNotANumber);
 
             if (left.IsPositiveInfinity() || right.IsPositiveInfinity())
-                return new Unum(left.PositiveInfinity, left._metadata);
+                return new Unum(left._metadata, left.PositiveInfinity);
 
             if (left.IsNegativeInfinity() || right.IsNegativeInfinity())
-                return new Unum(left.NegativeInfinity, left._metadata);
+                return new Unum(left._metadata, left.NegativeInfinity);
             //if (left.IsZero()) return right;
             //if (right.IsZero()) return left;
             
