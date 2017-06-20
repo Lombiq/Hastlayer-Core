@@ -82,6 +82,15 @@ namespace Hast.Common.Numerics
             return mask;
         }
 
+        public static BitMask ShiftToRightEnd(BitMask input)
+        {
+            if (input == new BitMask(input.Size)) return input;
+
+            while (input.Segments[0] % 2 == 0) input >>= 1;
+
+            return input;
+        }
+
 
         public static bool operator ==(BitMask left, BitMask right)
         {
@@ -98,53 +107,25 @@ namespace Hast.Common.Numerics
 
         public static bool operator >(BitMask left, BitMask right)
         {
-
-
             for (int i = (int)left.SegmentCount - 1; i >= 0; i--)
-            
                 if (left.Segments[i] > right.Segments[i]) return true;
-            
 
             return false;
         }
 
-
-        public static bool operator <(BitMask left, BitMask right) 
+        public static bool operator <(BitMask left, BitMask right)
         {
-            
-
-            for (int i = (int)left.SegmentCount-1; i > 0; i--)
+            for (int i = (int)left.SegmentCount - 1; i > 0; i--)
                 if (left.Segments[i] < right.Segments[i]) return true;
 
             return false;
         }
 
-        public static bool operator >=(BitMask left, BitMask right)
-        {
+        public static bool operator >=(BitMask left, BitMask right) => !(left < right);
 
-            return !(left < right);
+        public static bool operator <=(BitMask left, BitMask right) => !(left > right);
 
-        }
-
-        public static bool operator <=(BitMask left, BitMask right)
-        {
-
-            return !(left > right);
-
-        }
-
-        public static bool operator !=(BitMask left, BitMask right)
-        {
-            if (!ReferenceEquals(left, right)) return false;
-            if (left == null && right == null) return false;
-            if (left == null || right == null) return true;
-            if (left.Size != right.Size) return true;
-
-            for (int i = 0; i < left.SegmentCount; i++)
-                if (left.Segments[i] != right.Segments[i]) return true;
-
-            return false;
-        }
+        public static bool operator !=(BitMask left, BitMask right) => !(left == right);
 
         public static BitMask operator +(BitMask left, uint right) => left + new BitMask(new uint[] { right }, left.Size);
 
@@ -247,6 +228,7 @@ namespace Hast.Common.Numerics
 
             return mask;
         }
+
         public static BitMask operator ^(BitMask left, BitMask right)
         {
             if (left.Size != right.Size) return new BitMask(left.Size);
@@ -261,12 +243,11 @@ namespace Hast.Common.Numerics
 
         public static BitMask operator ~(BitMask input)
         {
-
-            for (int i = 0; i < input.SegmentCount; i++)
-                input.Segments[i] = ~input.Segments[i];
+            for (int i = 0; i < input.SegmentCount; i++) input.Segments[i] = ~input.Segments[i];
 
             return input;
         }
+
         /// <summary>
         /// Bitshifting of a BitMask to the right by an integer. Shifts left if negative value is given.
         /// </summary>
@@ -278,13 +259,11 @@ namespace Hast.Common.Numerics
             if (right < 0) return left << -right;
 
             bool carryOld, carryNew;
-            var segmentMaskWithLeadingOne = 0x80000000; //1000 0000 0000 0000 0000 0000 0000 0000 
+            var segmentMaskWithLeadingOne = 0x80000000; // 1000 0000 0000 0000 0000 0000 0000 0000 
 
             for (int i = 0; i < right; i++)
             {
-
                 carryOld = false;
-
 
                 for (int j = (int)left.SegmentCount - 1; j >= 0; j--)
                 {
@@ -292,10 +271,9 @@ namespace Hast.Common.Numerics
                     left.Segments[j] = (left.Segments[j] >> 1);
                     if (carryOld) left.Segments[j] = left.Segments[j] | segmentMaskWithLeadingOne;
                     carryOld = carryNew;
-
-
                 }
             }
+
             return left;
         }
 
@@ -310,14 +288,12 @@ namespace Hast.Common.Numerics
             if (right < 0) return left >> -right;
 
             bool carryOld, carryNew;
-            var segmentMaskWithLeadingOne = 0x80000000; //1000 0000 0000 0000 0000 0000 0000 0000 
-            uint segmentMaskWithClosingOne = 1;          //0000 0000 0000 0000 0000 0000 0000 0001 
+            var segmentMaskWithLeadingOne = 0x80000000; // 1000 0000 0000 0000 0000 0000 0000 0000 
+            uint segmentMaskWithClosingOne = 1;         // 0000 0000 0000 0000 0000 0000 0000 0001 
 
             for (int i = 0; i < right; i++)
             {
-
                 carryOld = false;
-
 
                 for (int j = 0; j < left.SegmentCount; j++)
                 {
@@ -325,57 +301,38 @@ namespace Hast.Common.Numerics
                     left.Segments[j] = (left.Segments[j] << 1);
                     if (carryOld) left.Segments[j] = left.Segments[j] | segmentMaskWithClosingOne;
                     carryOld = carryNew;
-
-
                 }
             }
+
             return left;
-
-
-        }
-        
-        public static BitMask ShiftToRightEnd(BitMask input)
-        {
-            if (input == new BitMask(input.Size)) return input;
-            while(input.Segments[0] % 2 == 0)
-            {
-                input >>= 1;
-            }
-
-
-            return input;
-
         }
 
-        public uint FindLeadingOne() //returns 0 if input is all 0
+
+        /// <summary>
+        /// Finds the most significant 1-bit.
+        /// </summary>
+        /// <returns>Returns the position (not index!) of the most significant 1-bit
+        /// or zero if there is none.</returns>
+        public uint FindLeadingOne()
         {
             uint position = 0;
             uint temp;
+
             for (int i = (int)SegmentCount - 1; i >= 0; i--)
             {
                 temp = Segments[i];
-               while (temp != 0)
+                while (temp != 0)
                 {
                     temp = temp >> 1;
                     position++;
-                    if (temp == 0) return (uint)(i * 32 + position );
+                    if (temp == 0) return (uint)(i * 32 + position);
                 }
-
             }
+
             return 0;
-
-
         }
 
-
-
-        
-
-
-        public uint GetLowest32Bits()
-        {
-            return Segments[0];
-        }
+        public uint GetLowest32Bits() => Segments[0];
 
 
         public override bool Equals(object obj) => this == (BitMask)obj;
