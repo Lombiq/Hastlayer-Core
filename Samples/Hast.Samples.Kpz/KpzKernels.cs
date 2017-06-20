@@ -4,6 +4,7 @@ using Hast.Common.Models;
 using Hast.Transformer.SimpleMemory;
 using Hast.Layer;
 using Hast.Algorithms;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Kpz
 {
@@ -18,21 +19,31 @@ namespace Hast.Samples.Kpz
 
     public class KpzKernelsInterface
     {
+        private const uint UnrollFactor = 2;
+
         public virtual void DoIterations(SimpleMemory memory)
         {
             KpzKernels kernels = new KpzKernels();
+            var tasks = new Task<int>[UnrollFactor];
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
             kernels.InitializeParametersFromMemory(memory);
             //assume that GridWidth and GridHeight are 2^N
             var numberOfStepsInIteration = kernels.TestMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
 
-            for (int j = 0; j < kernels.NumberOfIterations; j++)
+            for (int j = 0; j < kernels.NumberOfIterations / UnrollFactor; j++)
             {
-                for (int i = 0; i < numberOfStepsInIteration; i++)
+
+                for (uint i = 0; i < UnrollFactor; i++)
                 {
-                    // We randomly choose a point on the grid. If there is a pyramid or hole, we randomly switch them.
-                    kernels.RandomlySwitchFourCells(kernels.TestMode);
+                    tasks[i] = Task.Factory.StartNew(
+                        indexObject =>
+                        {
+                            kernels.RandomlySwitchFourCells(kernels.TestMode);
+                            return 0;
+                        }, i);
                 }
+
+                Task.WhenAll(tasks).Wait();
             }
             kernels.CopyToSimpleMemoryFromRawGrid(memory);
         }
