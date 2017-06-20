@@ -57,7 +57,6 @@
     <Compile Include="Models\IHardwareRepresentation.cs" />
     <Compile Include="Numerics\BitMask.cs" />
     <Compile Include="Numerics\SimdOperations.cs" />
-    <Compile Include="Numerics\Unum\UnumConfiguration.cs" />
     <Compile Include="Numerics\Unum\UnumException.cs" />
     <Compile Include="Numerics\Unum\UnumHelper.cs" />
     <Compile Include="Numerics\Unum\UnumMetadata.cs" />
