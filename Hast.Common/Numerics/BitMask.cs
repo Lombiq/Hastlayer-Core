@@ -14,23 +14,20 @@ namespace Hast.Common.Numerics
             SegmentCount = (uint)segments.Length;
             Size = SegmentCount << 5;
             Segments = new uint[SegmentCount];
+
             Array.Copy(segments, Segments, SegmentCount);
         }
 
-        public BitMask(uint[] segments, uint size = 0)
+        public BitMask(uint[] segments, uint size)
         {
-            SegmentCount = (uint)segments.Length;
             Size = size;
-            if (size > SegmentCount << 5)
-            {
-
-                SegmentCount = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
-            }
+            SegmentCount = size > (uint)segments.Length << 5 ?
+                (size >> 5) + (size % 32 == 0 ? 0 : (uint)1) :
+                (uint)segments.Length;
             Segments = new uint[SegmentCount];
 
             Array.Copy(segments, Segments, segments.Length);
-            for (int i = segments.Length; i < SegmentCount; i++)
-                Segments[i] = 0;
+            for (int i = segments.Length; i < SegmentCount; i++) Segments[i] = 0;
         }
 
         public BitMask(uint size, bool allOne)
