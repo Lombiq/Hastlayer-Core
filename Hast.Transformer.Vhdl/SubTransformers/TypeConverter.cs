@@ -77,7 +77,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // actual type will be the BaseType of itself...).
                 if (type.GetFullName() == composedType.BaseType.GetFullName())
                 {
-                    type = composedType.BaseType;
+                    return ConvertAstType(composedType.BaseType, context);
                 }
                 else
                 {
