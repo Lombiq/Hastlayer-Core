@@ -242,7 +242,7 @@ namespace Hast.Common.Numerics.Unum
             BitMask.ShiftToRightEnd(UnumBits);
             var fractionSize = UnumBits.FindLeadingOne() - 1;
             if (fractionSize > 0) fractionSize -= 1;
-            if (exponent != _metadata.EmptyBitMask) BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
+            if (exponentValue != 0) BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
 
 
             SetUnumBits(false, exponent, UnumBits, false, exponentSize - 1, fractionSize);
