@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
+using Hast.Transformer.Helpers;
 using Microsoft.CSharp;
 using Microsoft.VisualBasic;
 
@@ -31,7 +32,7 @@ namespace Hast.Transformer
             {
                 GenerateInMemory = false,
                 TreatWarningsAsErrors = false,
-                OutputAssembly = "DynamicHastAssembly" + sourceCode.GetHashCode()
+                OutputAssembly = "DynamicHastAssembly" + Sha2456Helper.ComputeHash(sourceCode)
             };
 
             switch (language)

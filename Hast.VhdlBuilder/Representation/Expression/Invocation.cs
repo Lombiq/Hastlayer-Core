@@ -24,6 +24,13 @@ namespace Hast.VhdlBuilder.Representation.Expression
                 Parameters = new List<IVhdlElement> { { value } }
             };
 
+        public static Invocation ToReal(IVhdlElement value) =>
+            new Invocation
+            {
+                Target = "real".ToVhdlIdValue(),
+                Parameters = new List<IVhdlElement> { { value } }
+            };
+
         public static Invocation Resize(IVhdlElement value, int size) => InvokeSizingFunction("resize", value, size);
 
         public static Invocation ToSigned(IVhdlElement value, int size) => InvokeSizingFunction("to_signed", value, size);

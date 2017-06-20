@@ -17,8 +17,5 @@ namespace Hast.Transformer.Vhdl.Helpers
             record.Fields.AddRange(fields);
             return record;
         }
-
-        //public static Record CreateArrayHoldingRecord(ArrayTypeBase arrayType) =>
-        //    CreateNullableRecord()
     }
 }

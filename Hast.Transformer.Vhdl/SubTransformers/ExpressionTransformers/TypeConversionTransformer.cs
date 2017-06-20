@@ -176,6 +176,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 castInvocation.Target = "real".ToVhdlIdValue();
             }
+            else if (fromType == KnownDataTypes.Real &&KnownDataTypes.Integers.Contains(toType))
+            {
+                castInvocation.Target = "integer".ToVhdlIdValue();
+            }
             else if (KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType))
             {
                 // If the full scale of the uint wouldn't fit.

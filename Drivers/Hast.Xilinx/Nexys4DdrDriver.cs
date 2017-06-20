@@ -1,4 +1,5 @@
 ﻿using System;
+using Hast.Common.Models;
 using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
