@@ -282,6 +282,7 @@ namespace Hast.Common.Numerics.Unum
             var bias = (1 << (int)(exponentSize - 1)) - 1;
             exponentValue += (uint)bias;
             var exponentMask = _metadata.EmptyBitMask + exponentValue;
+            if (exponentSize > 0) exponentSize -= 1; //Until now we needed the value, now we need the notation.
 
 
 
@@ -289,10 +290,10 @@ namespace Hast.Common.Numerics.Unum
             BitMask.ShiftToRightEnd(UnumBits);
             var fractionSize = UnumBits.FindLeadingOne() - 1;
             if (fractionSize > 0) fractionSize -= 1;
-            BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
+            if (exponentValue >0) BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
 
 
-            SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize - 1, fractionSize);
+            SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize , fractionSize);
         }
 
         public Unum(UnumMetadata environment, int x)
@@ -662,8 +663,8 @@ namespace Hast.Common.Numerics.Unum
             if (exponentValueDifference == 0) // Exponents are equal.
             {
                 resultExponentValue = left.ExponentValueWithBias();
-                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - left.FractionSizeWithHiddenBit());
-                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - right.FractionSizeWithHiddenBit());
+                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (left.FractionSize()+1));
+                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (right.FractionSize()+1));
                 scratchPad = AddAlignedFractions(left.FractionWithHiddenBit() << biggerBitsMovedToLeft,
                     right.FractionWithHiddenBit() << smallerBitsMovedToLeft,
                     signBitsMatch);
@@ -688,8 +689,8 @@ namespace Hast.Common.Numerics.Unum
             {
                 resultSignBit = !left.IsPositive();
                 resultExponentValue = left.ExponentValueWithBias();
-                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - left.FractionSizeWithHiddenBit());
-                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - right.FractionSizeWithHiddenBit() -
+                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (left.FractionSize()+1));
+                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (right.FractionSize()+1) -
                                                 exponentValueDifference);
 
 
@@ -703,8 +704,8 @@ namespace Hast.Common.Numerics.Unum
             {
                 resultSignBit = !right.IsPositive();
                 resultExponentValue = right.ExponentValueWithBias();
-                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - right.FractionSizeWithHiddenBit());
-                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - left.FractionSizeWithHiddenBit() +
+                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (right.FractionSize()+1));
+                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (left.FractionSize()+1) +
                                                 exponentValueDifference);
 
 
@@ -717,7 +718,7 @@ namespace Hast.Common.Numerics.Unum
             var exponentChange = (int)scratchPad.FindLeadingOne() - (int)(resultUnum.FractionSizeMax + 1);
 
 
-            var resultExponent = left._metadata.EmptyBitMask +
+            var resultExponent = left._metadata.EmptyBitMask + 
                                  ExponentValueToExponentBits(resultExponentValue + exponentChange, left.Size);
             resultExponentSize = ExponentValueToExponentSize(resultExponentValue + exponentChange) - 1;
 
@@ -937,7 +938,7 @@ namespace Hast.Common.Numerics.Unum
             if ((x.ExponentValueWithBias() + (int)x.FractionSizeWithHiddenBit()) < 31) //The Unum fits into the range.
             {
                 result = (x.FractionWithHiddenBit() << x.ExponentValueWithBias() -
-                              ((int)x.FractionSizeWithHiddenBit() - 1)).GetLowest32Bits();
+                              (int)x.FractionSize() ).GetLowest32Bits();
 
             }
             else return (x.IsPositive()) ? int.MaxValue : int.MinValue; // The absolute value of the Unum is too large.
@@ -950,8 +951,9 @@ namespace Hast.Common.Numerics.Unum
 
         public static explicit operator uint(Unum x)
         {
+            
             var result = (x.FractionWithHiddenBit()
-                << x.ExponentValueWithBias() - ((int)x.FractionSizeWithHiddenBit() - 1)).GetLowest32Bits();
+                << x.ExponentValueWithBias() - ((int)x.FractionSize() )).GetLowest32Bits();
 
             return result;
         }
