@@ -758,7 +758,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // work if the newly created object is directly passed to a method for example.
                 var recordInstanceAssignmentTarget = parentAssignment.Left;
                 result.RecordInstanceIdentifier =
-                    recordInstanceAssignmentTarget is IdentifierExpression || recordInstanceAssignmentTarget is IndexerExpression ?
+                    recordInstanceAssignmentTarget is IdentifierExpression || 
+                    recordInstanceAssignmentTarget is IndexerExpression ||
+                    recordInstanceAssignmentTarget is MemberReferenceExpression?
                         recordInstanceAssignmentTarget :
                         recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
                 result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
