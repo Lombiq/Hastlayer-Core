@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 
-namespace Hast.Transformer.Services
+namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     public class AstExpressionEvaluator : IAstExpressionEvaluator
     {

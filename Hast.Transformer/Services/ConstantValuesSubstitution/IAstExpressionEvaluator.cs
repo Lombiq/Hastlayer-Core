@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
-namespace Hast.Transformer.Services
+namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     public interface IAstExpressionEvaluator : IDependency
     {
