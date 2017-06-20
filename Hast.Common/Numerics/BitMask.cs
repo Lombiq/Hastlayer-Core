@@ -39,7 +39,8 @@ namespace Hast.Common.Numerics
             Size = size;
             Segments = new uint[SegmentCount];
 
-            if (allOne) for (int i = 0; i < SegmentCount; i++) Segments[i] = uint.MaxValue;
+            if (!allOne) return;
+            for (int i = 0; i < SegmentCount; i++) Segments[i] = uint.MaxValue;
         }
 
         public BitMask(BitMask source)
@@ -280,7 +281,7 @@ namespace Hast.Common.Numerics
             if (right < 0) return left << -right;
 
             bool carryOld, carryNew;
-            uint segmentMaskWithLeadingOne = 0x80000000; //1000 0000 0000 0000 0000 0000 0000 0000 
+            var segmentMaskWithLeadingOne = 0x80000000; //1000 0000 0000 0000 0000 0000 0000 0000 
 
             for (int i = 0; i < right; i++)
             {
@@ -312,7 +313,7 @@ namespace Hast.Common.Numerics
             if (right < 0) return left >> -right;
 
             bool carryOld, carryNew;
-            uint segmentMaskWithLeadingOne = 0x80000000; //1000 0000 0000 0000 0000 0000 0000 0000 
+            var segmentMaskWithLeadingOne = 0x80000000; //1000 0000 0000 0000 0000 0000 0000 0000 
             uint segmentMaskWithClosingOne = 1;          //0000 0000 0000 0000 0000 0000 0000 0001 
 
             for (int i = 0; i < right; i++)
