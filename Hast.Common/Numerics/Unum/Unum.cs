@@ -352,27 +352,24 @@ namespace Hast.Common.Numerics.Unum
             SetExponentBits(ExponentValueToExponentBits((int)(doubleExponentBits - 1023), Size));
         }
 
-
-
         #endregion
 
-        #region Methods to set Unum parts
+        #region Methods to set the values of individual Unum structure elements
 
-        public void SetUnumBits(bool signBit, BitMask exponent, BitMask fraction, bool ubit, uint exponentSize,
-            uint fractionSize)
+        public void SetUnumBits(bool signBit, BitMask exponent, BitMask fraction,
+            bool uncertainityBit, uint exponentSize, uint fractionSize)
         {
             var wholeUnum = _metadata.EmptyBitMask;
 
             wholeUnum = FractionSizeMask & new BitMask(new uint[] { fractionSize }, Size);
             wholeUnum = wholeUnum | (new BitMask(new uint[] { exponentSize }, Size) << FractionSizeSize);
 
-            if (ubit) wholeUnum = wholeUnum | UncertaintyBitMask;
+            if (uncertainityBit) wholeUnum = wholeUnum | UncertaintyBitMask;
 
             wholeUnum = wholeUnum | (fraction << FractionSizeSize + ExponentSizeSize + 1);
             wholeUnum = wholeUnum | (exponent << (int)(FractionSizeSize + ExponentSizeSize + 1 + fractionSize + 1));
 
             if (signBit) wholeUnum = wholeUnum | SignBitMask;
-
 
             UnumBits = wholeUnum;
         }
@@ -380,54 +377,45 @@ namespace Hast.Common.Numerics.Unum
 
         public void SetSignBit(bool signBit)
         {
-
             UnumBits = signBit ? UnumBits | SignBitMask : UnumBits & (new BitMask(Size, true) ^ (SignBitMask));
         }
 
         public void SetUncertainityBit(bool uncertainityBit)
         {
-
             UnumBits = uncertainityBit ? UnumBits | UncertaintyBitMask : UnumBits & (~UncertaintyBitMask);
         }
 
         public void SetExponentBits(BitMask exponent)
         {
-
             UnumBits = (UnumBits & (new BitMask(Size, true) ^ ExponentMask())) |
                        (exponent << (int)(FractionSizeSize + ExponentSizeSize + 1 + FractionSize()));
         }
 
         public void SetFractionBits(BitMask fraction)
         {
-
             UnumBits = (UnumBits & (new BitMask(Size, true) ^ FractionMask())) | (fraction << FractionSizeSize + ExponentSizeSize + 1);
         }
 
         public void SetFractionSizeBits(uint fractionSize)
         {
-
             UnumBits = (UnumBits & (new BitMask(Size, true) ^ FractionSizeMask)) | new BitMask(new uint[] { fractionSize }, Size);
         }
 
         public void SetExponentSizeBits(uint exponentSize)
         {
-
             UnumBits = (UnumBits & (new BitMask(Size, true) ^ ExponentSizeMask) |
                        (new BitMask(new uint[] { exponentSize }, Size) << FractionSizeSize));
         }
 
-        #endregion
-  
+        #endregion  
         
         public uint[] FractionToUintArray()
         {
             var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - (int)FractionSize();
             var result = new uint[resultMask.SegmentCount];
 
-            for (var i = 0; i < resultMask.SegmentCount; i++)
-            {
-                result[i] = resultMask.Segments[i];
-            }
+            for (var i = 0; i < resultMask.SegmentCount; i++) result[i] = resultMask.Segments[i];
+
             return result;
         }
 
@@ -436,16 +424,9 @@ namespace Hast.Common.Numerics.Unum
             UnumBits ^= SignBitMask;
         }
 
-        public bool IsExact()
-        {
-            return (UnumBits & UncertaintyBitMask) == _metadata.EmptyBitMask;
-        }
+        public bool IsExact() => (UnumBits & UncertaintyBitMask) == _metadata.EmptyBitMask;
 
-        public bool IsPositive()
-        {
-            return (UnumBits & SignBitMask) == _metadata.EmptyBitMask;
-
-        }
+        public bool IsPositive() => (UnumBits & SignBitMask) == _metadata.EmptyBitMask;
 
         public bool IsZero()
         {
@@ -456,88 +437,52 @@ namespace Hast.Common.Numerics.Unum
 
         #region  Methods for Utag independent Masks and values
 
-        public uint ExponentSize() //esize 
-        {
-            //This limits the ExponentSizeSize to 32, which is so enormous that it shouldn't be a problem
-            return (((UnumBits & ExponentSizeMask) >> FractionSizeSize) + 1).GetLowest32Bits();
-        }
+        // This limits the ExponentSizeSize to 32, which is so enormous that it shouldn't be a problem.
+        public uint ExponentSize() => (((UnumBits & ExponentSizeMask) >> FractionSizeSize) + 1).GetLowest32Bits();
 
-        public uint FractionSize() //fsize
-        {
-            //This limits FractionSizeSize to 32 , which is so enormous that is shouldn't be a problem
-            return ((UnumBits & FractionSizeMask) + 1).GetLowest32Bits();
-        }
+        // This limits the FractionSizeSize to 32, which is so enormous that it shouldn't be a problem.
+        public uint FractionSize() => ((UnumBits & FractionSizeMask) + 1).GetLowest32Bits();
 
-        public BitMask FractionMask() //fracmask
+        public BitMask FractionMask()
         {
             var fractionMask = new BitMask(new uint[] { 1 }, Size);
             return ((fractionMask << (int)FractionSize()) - 1) << UnumTagSize;
         }
 
-        public BitMask ExponentMask() //expomask
+        public BitMask ExponentMask()
         {
-            BitMask exponentMask = new BitMask(new uint[] { 1 }, Size);
+            var exponentMask = new BitMask(new uint[] { 1 }, Size);
             return ((exponentMask << (int)ExponentSize()) - 1) << (int)(FractionSize() + UnumTagSize);
         }
 
         #endregion
 
-
         #region Methods for Utag dependent Masks and values
 
-        public BitMask Exponent() //expo
-        {
-            return (ExponentMask() & UnumBits) >> (int)(UnumTagSize + FractionSize());
-        }
+        public BitMask Exponent() => (ExponentMask() & UnumBits) >> (int)(UnumTagSize + FractionSize());
 
-        public BitMask Fraction() //frac
-        {
-            return (FractionMask() & UnumBits) >> (int)UnumTagSize;
-        }
+        public BitMask Fraction() => (FractionMask() & UnumBits) >> UnumTagSize;
 
-        public BitMask FractionWithHiddenBit()
-        {
-            return HiddenBitIsOne() ? BitMask.SetOne(Fraction(), FractionSize()) : Fraction();
-        }
+        public BitMask FractionWithHiddenBit() =>
+            HiddenBitIsOne() ? BitMask.SetOne(Fraction(), FractionSize()) : Fraction();
 
-        public uint FractionSizeWithHiddenBit()
-        {
-            return HiddenBitIsOne() ? FractionSize() + 1 : FractionSize();
-        }
+        public uint FractionSizeWithHiddenBit() => HiddenBitIsOne() ? FractionSize() + 1 : FractionSize();
 
-        public int Bias()
-        {
-            return (1 << (int)(ExponentSize() - 1)) - 1;
-        }
+        public int Bias() => (1 << (int)(ExponentSize() - 1)) - 1;
 
-        public bool HiddenBitIsOne()
-        {
-            return (Exponent().GetLowest32Bits() > 0);
-        }
+        public bool HiddenBitIsOne() => Exponent().GetLowest32Bits() > 0;
 
-        public int ExponentValueWithBias() //expovalue
+        public int ExponentValueWithBias()
         {
-
             var value = (int)Exponent().GetLowest32Bits() - Bias() + 1;
             return HiddenBitIsOne() ? value - 1 : value;
         }
 
-        public bool IsNan()
-        {
-            return (UnumBits == SignalingNotANumber || UnumBits == QuietNotANumber);
-        }
+        public bool IsNan() => UnumBits == SignalingNotANumber || UnumBits == QuietNotANumber;
 
-        public bool IsPositiveInfinity()
-        {
+        public bool IsPositiveInfinity() => UnumBits == PositiveInfinity;
 
-            return (UnumBits == PositiveInfinity);
-        }
-
-        public bool IsNegativeInfinity()
-        {
-
-            return (UnumBits == NegativeInfinity);
-        }
+        public bool IsNegativeInfinity() => UnumBits == NegativeInfinity;
 
         #endregion
 
