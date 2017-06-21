@@ -662,32 +662,17 @@ namespace Hast.Common.Numerics.Unum
 
         #region Operators
 
-        public static Unum operator +(Unum left, Unum right)
-        {
-            return AddExactUnums(left, right);
+        public static Unum operator +(Unum left, Unum right) => AddExactUnums(left, right);
 
+        public static Unum operator -(Unum x) => NegateExactUnum(x);
 
-        }
-
-        public static Unum operator -(Unum x)
-        {
-            return NegateExactUnum(x);
-
-        }
-
-
-        public static Unum operator -(Unum left, Unum right)
-        {
-            return SubtractExactUnums(left, right);
-
-        }
+        public static Unum operator -(Unum left, Unum right) => SubtractExactUnums(left, right);
 
         //public static Unum operator *(Unum left, Unum right)
         //{
         //    if (left.IsExact() && right.IsExact()) return MultiplyExactUnums(left, right);
 
         //    return new Unum();
-
         //}
 
         //public static Unum operator /(Unum left, Unum right)
@@ -695,24 +680,18 @@ namespace Hast.Common.Numerics.Unum
 
         //}
 
-        public static bool operator ==(Unum left, Unum right)
-        {
-            return AreEqualExactUnums(left, right);
-        }
+        public static bool operator ==(Unum left, Unum right) => AreEqualExactUnums(left, right);
 
-        public static bool operator !=(Unum left, Unum right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Unum left, Unum right) => !(left == right);
 
         //public static bool operator <(Unum left, Unum right)
         // {
         //     if (left.IsPositive() != right.IsPositive()) return left.IsPositive();
         //     if (left.ExponentValueWithBias() > right.ExponentValueWithBias()) return left.IsPositive();
         //     if (left.ExponentValueWithBias() < right.ExponentValueWithBias()) return right.IsPositive();
-        //    // if (left.FractionWithHiddenBit())
+        //     // if (left.FractionWithHiddenBit())
+        
         //     return false;
-
         // }
 
         //public static bool operator >(Unum left, Unum right)
@@ -732,60 +711,46 @@ namespace Hast.Common.Numerics.Unum
 
         //public static implicit operator Unum(short x)
         //{
+
         //}
 
         //public static implicit operator Unum(ushort x)
         //{
+
         //}
 
-        //Converting from an Unum to int results in information loss, so only allowing it explicitly(with a cast).
+        //Converting from an Unum to int results in information loss, so only allowing it explicitly (with a cast).
         public static explicit operator int(Unum x)
         {
-
             uint result;
-            if ((x.ExponentValueWithBias() + (int)x.FractionSizeWithHiddenBit()) < 31) //The Unum fits into the range.
-            {
-                result = (x.FractionWithHiddenBit() << x.ExponentValueWithBias() -
-                              (int)x.FractionSize()).GetLowest32Bits();
 
-            }
+            if ((x.ExponentValueWithBias() + (int)x.FractionSizeWithHiddenBit()) < 31) //The Unum fits into the range.
+                result = (x.FractionWithHiddenBit() << x.ExponentValueWithBias() - (int)x.FractionSize()).GetLowest32Bits();
             else return (x.IsPositive()) ? int.MaxValue : int.MinValue; // The absolute value of the Unum is too large.
 
-
-            if (!x.IsPositive()) return -(int)result;
-
-            return (int)result;
+            return x.IsPositive() ? (int)result : -(int)result;
         }
 
-        public static explicit operator uint(Unum x)
-        {
-
-            var result = (x.FractionWithHiddenBit()
-                << x.ExponentValueWithBias() - ((int)x.FractionSize())).GetLowest32Bits();
-
-            return result;
-        }
+        public static explicit operator uint(Unum x) =>
+            (x.FractionWithHiddenBit() << x.ExponentValueWithBias() - ((int)x.FractionSize())).GetLowest32Bits();
 
         // This is not well tested yet.
         public static explicit operator float(Unum x)
         {
+            // Handling special cases first.
             if (x.IsNan()) return float.NaN;
             if (x.IsNegativeInfinity()) return float.NegativeInfinity;
             if (x.IsPositiveInfinity()) return float.PositiveInfinity;
             if (x.ExponentValueWithBias() > 127) // Exponent is too big for float format.
-            {
                 return (x.IsPositive()) ? float.PositiveInfinity : float.NegativeInfinity;
-            }
             if (x.ExponentValueWithBias() < -126) return (x.IsPositive()) ? 0 : -0; // Exponent is too small for float format.
 
-
             var result = (x.Fraction() << 23 - ((int)x.FractionSize())).GetLowest32Bits();
-            result |= ((uint)(x.ExponentValueWithBias() + 127) << 23);
+            result |= (uint)(x.ExponentValueWithBias() + 127) << 23;
 
-
-
-            return (x.IsPositive()) ? BitConverter.ToSingle(BitConverter.GetBytes(result), 0)
-                : -BitConverter.ToSingle(BitConverter.GetBytes(result), 0);
+            return x.IsPositive() ?
+                BitConverter.ToSingle(BitConverter.GetBytes(result), 0) :
+                -BitConverter.ToSingle(BitConverter.GetBytes(result), 0);
         }
 
         #endregion
