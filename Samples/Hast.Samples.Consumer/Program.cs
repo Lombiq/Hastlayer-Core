@@ -124,7 +124,7 @@ namespace Hast.Samples.Consumer
                             {
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
                                 typeof(PrimeCalculator).Assembly,
-                                typeof(Common.Numerics.Unum.Unum).Assembly
+                                typeof(Lombiq.Unum.Unum).Assembly
                             },
                             configuration);
 
