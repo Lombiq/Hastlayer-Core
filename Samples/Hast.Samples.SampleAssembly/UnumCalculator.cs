@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.SimpleMemory;
-using Lombiq.Unum;
+using Hast.Common.Numerics.Unum;
+using Hast.Common.Numerics;
 
 namespace Hast.Samples.SampleAssembly
 {
