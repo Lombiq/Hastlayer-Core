@@ -185,13 +185,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     {
                         // Try to substitute this member reference's value with a value set in the corresponding
                         // constructor.
-                        var memberFullName = member.GetFullName();
 
                         // Trying to find a place where the same member is references on the same ("this") instance.
-                        var memberReferenceExpressionInConstructor = constructor
-                        .FindFirstChildOfType<MemberReferenceExpression>(memberReference =>
-                            memberReference.FindMemberDeclaration(_typeDeclarationLookupTable, true).GetFullName() == memberFullName &&
-                            memberReference.Target.Is<IdentifierExpression>(identifier => identifier.Identifier == "this"));
+                        var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
+                            .FindMemberReferenceInConstructor(constructor, member.GetFullName(), _typeDeclarationLookupTable);
 
                         if (memberReferenceExpressionInConstructor == null) return false;
 

@@ -18,6 +18,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         public static bool IsMethodInvocation(MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.Parent.Is<InvocationExpression>(invocation => invocation.Target == memberReferenceExpression);
 
+        public static MemberReferenceExpression FindMemberReferenceInConstructor(
+            MethodDeclaration constructorDeclaration,
+            string memberFullName,
+            ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
+            constructorDeclaration
+                .FindFirstChildOfType<MemberReferenceExpression>(m =>
+                    m.FindMemberDeclaration(typeDeclarationLookupTable, true).GetFullName() == memberFullName &&
+                    m.Target.Is<IdentifierExpression>(identifier => identifier.Identifier == "this"));
+
         public static ParameterDeclaration FindConstructorParameterForPassedExpression(
             ObjectCreateExpression objectCreateExpression,
             Expression passedExpression,

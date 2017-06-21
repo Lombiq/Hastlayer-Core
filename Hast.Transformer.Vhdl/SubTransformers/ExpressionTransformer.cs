@@ -750,7 +750,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var result = new RecordInitializationResult { Record = record };
 
-            var parentAssignment = expression.FindFirstParentOfType<AssignmentExpression>();
+            var parentAssignment = expression
+                .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
 
             if (parentAssignment != null)
             {
