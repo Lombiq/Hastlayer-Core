@@ -92,6 +92,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Right = partiallyTransformedExpression.RightTransformed
             };
 
+            var z = partiallyTransformedExpression.BinaryOperatorExpression.ToString().Contains("-2 * value");
             var expression = partiallyTransformedExpression.BinaryOperatorExpression;
 
             // Would need to decide between + and & or sll/srl and sra/sla
@@ -263,12 +264,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (firstNonParenthesizedExpressionParent is CastExpression)
             {
-                binaryElement = _typeConversionTransformer.ImplementTypeConversion(
+                var typeConversionResult = _typeConversionTransformer.ImplementTypeConversion(
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext),
                     resultType,
-                    binaryElement).Expression;
+                    binaryElement);
+
+                binaryElement = typeConversionResult.Expression;
+
+                // Most of the time due to the cast no resize is necessary, but sometimes it is.
+                shouldResizeResult = shouldResizeResult && !typeConversionResult.IsResized;
             }
-            else if (shouldResizeResult)
+
+            if (shouldResizeResult)
             {
                 binaryElement = new Invocation
                 {
