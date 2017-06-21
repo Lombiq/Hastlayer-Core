@@ -629,7 +629,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var indexExpression = indexerExpression.Arguments.Single();
                 return new ArrayElementAccess
                 {
-                    Array = targetVariableReference,
+                    ArrayReference = targetVariableReference,
                     IndexExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
                             _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), context.TransformationContext),
