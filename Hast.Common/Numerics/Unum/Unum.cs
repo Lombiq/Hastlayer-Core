@@ -242,10 +242,12 @@ namespace Hast.Common.Numerics.Unum
 
         public Unum(UnumMetadata metadata, int x)
         {
-            if (x >= 0) this = new Unum(metadata, (uint)x);
+            _metadata = metadata;
+
+            if (x >= 0) UnumBits = new Unum(metadata, (uint)x).UnumBits;
             else
             {
-                this = new Unum(metadata, (uint)-x);
+                UnumBits = new Unum(metadata, (uint)-x).UnumBits;
                 Negate();
             }
         }
