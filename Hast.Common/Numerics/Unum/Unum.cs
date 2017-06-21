@@ -4,7 +4,7 @@ namespace Hast.Common.Numerics.Unum
 {
     public struct Unum // : IComparable, IFormattable, IConvertible, IComparable<Unum>, IEquatable<Unum>
     {
-        private UnumMetadata _metadata { get; set; }
+        private readonly UnumMetadata _metadata;
 
         // Signbit Exponent Fraction Ubit ExponentSize FractionSize
         public BitMask UnumBits { get; set; }

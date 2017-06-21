@@ -3,41 +3,41 @@
     public class UnumMetadata
     {
         #region Unum structure
-        public byte ExponentSizeSize { get; private set; } // "esizesize"
-        public byte FractionSizeSize { get; private set; } // "fsizesize"
+        public byte ExponentSizeSize { get; } // "esizesize"
+        public byte FractionSizeSize { get; } // "fsizesize"
 
-        public byte ExponentSizeMax { get; private set; } // "esizemax"
-        public ushort FractionSizeMax { get; private set; } // "fsizemax"
+        public byte ExponentSizeMax { get; } // "esizemax"
+        public ushort FractionSizeMax { get; } // "fsizemax"
 
-        public byte UnumTagSize { get; private set; } // "utagsize"
-        public ushort Size { get; private set; } // "maxubits"
+        public byte UnumTagSize { get; } // "utagsize"
+        public ushort Size { get; } // "maxubits"
         #endregion
 
         #region Unum masks
-        public BitMask EmptyBitMask { get; private set; }
+        public BitMask EmptyBitMask { get; }
 
-        public BitMask UncertaintyBitMask { get; private set; } // "ubitmask"
-        public BitMask ExponentSizeMask { get; private set; } // "esizemask"
-        public BitMask FractionSizeMask { get; private set; } // "fsizemask"
-        public BitMask ExponentAndFractionSizeMask { get; private set; } // "efsizemask"
-        public BitMask UnumTagMask { get; private set; } // "utagmask"
-        public BitMask SignBitMask { get; private set; } // "signbigu", a unum in which all bits are zero except the sign bit;
+        public BitMask UncertaintyBitMask { get; } // "ubitmask"
+        public BitMask ExponentSizeMask { get; } // "esizemask"
+        public BitMask FractionSizeMask { get; } // "fsizemask"
+        public BitMask ExponentAndFractionSizeMask { get; } // "efsizemask"
+        public BitMask UnumTagMask { get; } // "utagmask"
+        public BitMask SignBitMask { get; } // "signbigu", a unum in which all bits are zero except the sign bit;
         #endregion
 
         #region Unum special values
-        public BitMask ULP { get; private set; } // Unit in the Last Place or Unit of Least Precision.
+        public BitMask ULP { get; } // Unit in the Last Place or Unit of Least Precision.
 
-        public BitMask PositiveInfinity { get; private set; } // "posinfu", the positive infinity for the given unum environment.
-        public BitMask NegativeInfinity { get; private set; } // "neginfu", the negative infinity for the given unum environment.
+        public BitMask PositiveInfinity { get; } // "posinfu", the positive infinity for the given unum environment.
+        public BitMask NegativeInfinity { get; } // "neginfu", the negative infinity for the given unum environment.
 
-        public BitMask QuietNotANumber { get; private set; } // "qNaNu"
-        public BitMask SignalingNotANumber { get; private set; } // "sNaNu"
+        public BitMask QuietNotANumber { get; } // "qNaNu"
+        public BitMask SignalingNotANumber { get; } // "sNaNu"
 
-        public BitMask LargestPositive { get; private set; } // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
-        public BitMask SmallestPositive { get; private set; } // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
+        public BitMask LargestPositive { get; } // "maxrealu", the largest magnitude positive real number. One ULP less than infinity.
+        public BitMask SmallestPositive { get; } // "smallsubnormalu", the smallest magnitude positive real number. One ULP more than 0.
 
-        public BitMask LargestNegative { get; private set; } // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
-        public BitMask MinRealU { get; private set; } // "minrealu", looks like to be exactly the same as "negbigu".
+        public BitMask LargestNegative { get; } // "negbigu", the largest maginude negative real number. One ULP more than negative infinity.
+        public BitMask MinRealU { get; } // "minrealu", looks like to be exactly the same as "negbigu".
 
         //private uint _smallNormal; // "smallnormalu"
         #endregion
@@ -57,6 +57,8 @@
 
             // Initializing masks.
             UncertaintyBitMask = new BitMask(Size);
+            var cc = UncertaintyBitMask.Size;
+            var ccc = cc + 1;
             BitMask.SetOne(UncertaintyBitMask, (uint)UnumTagSize - 1);
 
             FractionSizeMask = new BitMask(Size);
@@ -89,7 +91,7 @@
 
             LargestNegative = NegativeInfinity - ULP;
 
-            MinRealU = LargestPositive + ((uint)1 << Size - 1);
+            //MinRealU = LargestPositive + ((uint)1 << Size - 1);
 
             QuietNotANumber = PositiveInfinity + UncertaintyBitMask;
             SignalingNotANumber = NegativeInfinity + UncertaintyBitMask;
