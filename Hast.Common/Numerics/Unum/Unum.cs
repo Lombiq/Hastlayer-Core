@@ -430,12 +430,10 @@ namespace Hast.Common.Numerics.Unum
 
         public bool IsPositive() => (UnumBits & SignBitMask) == _metadata.EmptyBitMask;
 
-        public bool IsZero()
-        {
-            var zero = _metadata.EmptyBitMask;
-            return ((UnumBits & UncertaintyBitMask) == zero) && ((UnumBits & FractionMask()) == zero) &&
-                   ((UnumBits & ExponentMask()) == zero);
-        }
+        public bool IsZero() =>
+            (UnumBits & UncertaintyBitMask) == _metadata.EmptyBitMask &&
+            (UnumBits & FractionMask()) == _metadata.EmptyBitMask &&
+            (UnumBits & ExponentMask()) == _metadata.EmptyBitMask;
 
         #region  Methods for Utag independent Masks and values
 
@@ -474,11 +472,7 @@ namespace Hast.Common.Numerics.Unum
 
         public bool HiddenBitIsOne() => Exponent().GetLowest32Bits() > 0;
 
-        public int ExponentValueWithBias()
-        {
-            var value = (int)Exponent().GetLowest32Bits() - Bias() + 1;
-            return HiddenBitIsOne() ? value - 1 : value;
-        }
+        public int ExponentValueWithBias() => (int)Exponent().GetLowest32Bits() - Bias() + (HiddenBitIsOne() ? 0 : 1);
 
         public bool IsNan() => UnumBits == SignalingNotANumber || UnumBits == QuietNotANumber;
 
@@ -487,7 +481,6 @@ namespace Hast.Common.Numerics.Unum
         public bool IsNegativeInfinity() => UnumBits == NegativeInfinity;
 
         #endregion
-
 
         #region Operations for exact Unums
 
@@ -662,7 +655,6 @@ namespace Hast.Common.Numerics.Unum
 
         #endregion
 
-
         #region Helper methods for operations and conversions
 
         public static BitMask ExponentValueToExponentBits(int value, uint size)
@@ -721,8 +713,6 @@ namespace Hast.Common.Numerics.Unum
 
 
         #endregion
-
-
 
         #region Operators
 
@@ -853,19 +843,14 @@ namespace Hast.Common.Numerics.Unum
         }
 
         #endregion
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        #region Overrides
+        public override bool Equals(object obj) => base.Equals(obj);
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+        public override int GetHashCode() => base.GetHashCode();
+
+        public override string ToString() => base.ToString();
+
+        #endregion
     }
 }
