@@ -104,7 +104,7 @@ namespace Hast.Common.Numerics.Unum
                 UnumBits = _metadata.NegativeInfinity;
                 return;
             }
-            
+
 
             UnumBits = new BitMask(_metadata.Size);
             var floatExponentBits = (BitConverter.ToUInt32(BitConverter.GetBytes(number), 0) << 1) >> 24;
@@ -234,10 +234,10 @@ namespace Hast.Common.Numerics.Unum
             BitMask.ShiftToRightEnd(UnumBits);
             var fractionSize = UnumBits.FindLeadingOne() - 1;
             if (fractionSize > 0) fractionSize -= 1;
-            if (exponentValue >0) BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
+            if (exponentValue > 0) BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
 
 
-            SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize , fractionSize);
+            SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize, fractionSize);
         }
 
         public Unum(UnumMetadata metadata, int x)
@@ -500,9 +500,9 @@ namespace Hast.Common.Numerics.Unum
         {
             var scratchPad = left._metadata.EmptyBitMask; // It could be only FractionSizeMax +2 long if Hastlayer enabled it.
 
-
-            // Handling special values.
-            if (left.IsNan() || right.IsNan()) return new Unum(left._metadata, left.QuietNotANumber);
+            // Handling special cases first.
+            if (left.IsNan() || right.IsNan())
+                return new Unum(left._metadata, left.QuietNotANumber);
 
             if ((left.IsPositiveInfinity() && right.IsNegativeInfinity()) ||
                 (left.IsNegativeInfinity() && right.IsPositiveInfinity()))
@@ -513,121 +513,89 @@ namespace Hast.Common.Numerics.Unum
 
             if (left.IsNegativeInfinity() || right.IsNegativeInfinity())
                 return new Unum(left._metadata, left.NegativeInfinity);
-            //if (left.IsZero()) return right;
-            //if (right.IsZero()) return left;
-            
 
 
             var resultExponentSizeSize = left.ExponentSizeSize;
-            var resultFractionSizeSize = left.FractionSizeSize; 
+            var resultFractionSizeSize = left.FractionSizeSize;
             var resultUnum = new Unum(resultExponentSizeSize, resultFractionSizeSize);
 
             var exponentValueDifference = left.ExponentValueWithBias() - right.ExponentValueWithBias();
-            var signBitsMatch = (left.IsPositive() == right.IsPositive());
+            var signBitsMatch = left.IsPositive() == right.IsPositive();
             var resultSignBit = false;
-            var resultUbit = false;
             var biggerBitsMovedToLeft = 0;
             var smallerBitsMovedToLeft = 0;
             var resultExponentValue = 0;
-            uint resultFractionSize = 0;
-            uint resultExponentSize = 0;
-            
 
-            
 
             if (exponentValueDifference == 0) // Exponents are equal.
             {
                 resultExponentValue = left.ExponentValueWithBias();
-                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (left.FractionSize()+1));
-                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (right.FractionSize()+1));
-                scratchPad = AddAlignedFractions(left.FractionWithHiddenBit() << biggerBitsMovedToLeft,
+                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (left.FractionSize() + 1));
+                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (right.FractionSize() + 1));
+                scratchPad = AddAlignedFractions(
+                    left.FractionWithHiddenBit() << biggerBitsMovedToLeft,
                     right.FractionWithHiddenBit() << smallerBitsMovedToLeft,
                     signBitsMatch);
 
-
-
                 if (!signBitsMatch)
-                {
-                    if (left.FractionWithHiddenBit() >= right.FractionWithHiddenBit()) // Left Fraction is bigger.
-                    {
-                        resultSignBit = !left.IsPositive();
-
-                    }
-                    else // Right Fraction is bigger.
-                    {
-                        resultSignBit = !right.IsPositive();
-                    }
-                }
+                    resultSignBit = left.FractionWithHiddenBit() >= right.FractionWithHiddenBit() ?
+                        !left.IsPositive() : // Left Fraction is bigger.
+                        !right.IsPositive(); // Right Fraction is bigger.
 
             }
-            else if (exponentValueDifference >= 0) // Left exponent was bigger.
+            else if (exponentValueDifference > 0) // Left Exponent is bigger.
             {
                 resultSignBit = !left.IsPositive();
                 resultExponentValue = left.ExponentValueWithBias();
-                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (left.FractionSize()+1));
-                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (right.FractionSize()+1) -
-                                                exponentValueDifference);
-
+                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (left.FractionSize() + 1));
+                smallerBitsMovedToLeft = (int)
+                    (resultUnum.FractionSizeMax + 1 - (right.FractionSize() + 1) - exponentValueDifference);
 
                 scratchPad = left.FractionWithHiddenBit() << biggerBitsMovedToLeft;
-                scratchPad = AddAlignedFractions(scratchPad, right.FractionWithHiddenBit() << smallerBitsMovedToLeft,
-                    signBitsMatch);
-
-
+                scratchPad = AddAlignedFractions(scratchPad,
+                    right.FractionWithHiddenBit() << smallerBitsMovedToLeft, signBitsMatch);
             }
-            else // Right exponent was bigger.
+            else // Right Exponent is bigger.
             {
                 resultSignBit = !right.IsPositive();
                 resultExponentValue = right.ExponentValueWithBias();
-                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (right.FractionSize()+1));
-                smallerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (left.FractionSize()+1) +
-                                                exponentValueDifference);
-
+                biggerBitsMovedToLeft = (int)(resultUnum.FractionSizeMax + 1 - (right.FractionSize() + 1));
+                smallerBitsMovedToLeft = (int)
+                    (resultUnum.FractionSizeMax + 1 - (left.FractionSize() + 1) + exponentValueDifference);
 
                 scratchPad = right.FractionWithHiddenBit() << biggerBitsMovedToLeft;
-                scratchPad = AddAlignedFractions(scratchPad, left.FractionWithHiddenBit() << smallerBitsMovedToLeft,
-                    signBitsMatch);
-
+                scratchPad = AddAlignedFractions(scratchPad,
+                    left.FractionWithHiddenBit() << smallerBitsMovedToLeft, signBitsMatch);
             }
 
-            var exponentChange = (int)scratchPad.FindLeadingOne() - (int)(resultUnum.FractionSizeMax + 1);
 
+            var exponentChange = (int)scratchPad.FindLeadingOne() - (resultUnum.FractionSizeMax + 1);
+            var resultExponent = left._metadata.EmptyBitMask +
+                ExponentValueToExponentBits(resultExponentValue + exponentChange, left.Size);
+            uint resultExponentSize = ExponentValueToExponentSize(resultExponentValue + exponentChange) - 1;
 
-            var resultExponent = left._metadata.EmptyBitMask + 
-                                 ExponentValueToExponentBits(resultExponentValue + exponentChange, left.Size);
-            resultExponentSize = ExponentValueToExponentSize(resultExponentValue + exponentChange) - 1;
-
-
-
-
-
+            var resultUbit = false;
             if (smallerBitsMovedToLeft < 0) resultUbit = true; // There are lost digits.
             else BitMask.ShiftToRightEnd(scratchPad);
 
-
-
+            uint resultFractionSize = 0;
 
             if (scratchPad.FindLeadingOne() == 0)
             {
-                resultFractionSize = 0;
                 resultExponent = scratchPad; // 0
                 resultExponentSize = 0;
             }
             else resultFractionSize = scratchPad.FindLeadingOne() - 1;
-            
 
 
-
-            if (resultExponent.FindLeadingOne() != 0) // Erease hidden bit if there is one.
+            if (resultExponent.FindLeadingOne() != 0) // Erease hidden bit if it exists.
             {
                 BitMask.SetZero(scratchPad, scratchPad.FindLeadingOne() - 1);
-                resultFractionSize = (resultFractionSize == 0) ? 0 : resultFractionSize - 1;
-
+                resultFractionSize = resultFractionSize == 0 ? 0 : resultFractionSize - 1;
             }
 
-            // This is temporary, for imitation of float behaviour. Now the ubit works as a flag for rounded values.
+            // This is temporary, for the imitation of float behaviour. Now the ubit works as a flag for rounded values.
             if ((!left.IsExact()) || (!right.IsExact())) resultUbit = true;
-
 
             resultUnum.SetUnumBits(resultSignBit, resultExponent, scratchPad, resultUbit, resultExponentSize,
                 resultFractionSize);
@@ -635,15 +603,7 @@ namespace Hast.Common.Numerics.Unum
             return resultUnum;
         }
 
-
-
-
-
-        public static Unum SubtractExactUnums(Unum left, Unum right)
-        {
-            return AddExactUnums(left, NegateExactUnum(right));
-        }
-
+        public static Unum SubtractExactUnums(Unum left, Unum right) => AddExactUnums(left, NegateExactUnum(right));
 
         public static Unum NegateExactUnum(Unum input)
         {
@@ -651,18 +611,8 @@ namespace Hast.Common.Numerics.Unum
             return input;
         }
 
-
-        //public static Unum MultiplyExactUnums(Unum left, Unum right)
-        //{
-        //    return new Unum();
-        //}
-
-
-        public static bool AreEqualExactUnums(Unum left, Unum right)
-        {
-            if (left.IsZero() && right.IsZero()) return true;
-            return (left.UnumBits == right.UnumBits);
-        }
+        public static bool AreEqualExactUnums(Unum left, Unum right) =>
+            left.IsZero() && right.IsZero() ? true : left.UnumBits == right.UnumBits;
 
 
         #endregion
@@ -675,8 +625,7 @@ namespace Hast.Common.Numerics.Unum
             {
                 var exponent = new BitMask(new uint[] { (uint)value }, size);
                 var exponentSize = ExponentValueToExponentSize(value);
-                var bias = (1 << (int)(exponentSize - 1)) - 1;
-                exponent += (uint)bias;
+                exponent += (uint)(1 << (int)(exponentSize - 1)) - 1; // Applying bias.
 
                 return exponent;
             }
@@ -684,45 +633,30 @@ namespace Hast.Common.Numerics.Unum
             {
                 var exponent = new BitMask(new uint[] { (uint)-value }, size);
                 var exponentSize = ExponentValueToExponentSize(value);
-                var Bias = (1 << (int)(exponentSize - 1)) - 1;
-                exponent += (uint)Bias;
+                exponent += (uint)(1 << (int)(exponentSize - 1)) - 1; // Applying bias.
                 exponent -= (uint)(-2 * value);
 
                 return exponent;
             }
         }
 
-
         public static uint ExponentValueToExponentSize(int value)
         {
             uint size = 1;
-            if (value > 0)
-            {
-                while (value > 1 << (int)(size - 1)) size++;
-            }
-            else
-            {
-                while (-value >= 1 << (int)(size - 1)) size++;
-            }
+
+            if (value > 0) while (value > 1 << (int)(size - 1)) size++;
+            else while(-value >= 1 << (int)(size - 1)) size++;
+
             return size;
         }
 
-
-
-
-
-        public static BitMask AddAlignedFractions(BitMask left, BitMask right, bool SignBitsMatch)
+        public static BitMask AddAlignedFractions(BitMask left, BitMask right, bool signBitsMatch)
         {
-            if (SignBitsMatch) left += right;
-            else
-            {
-                if (left > right) left -= right;
-                else left = right - left;
-            }
+            if (signBitsMatch) left += right;
+            else left = left > right ? left - right : right - left;
+
             return left;
         }
-
-
 
         #endregion
 
@@ -812,11 +746,11 @@ namespace Hast.Common.Numerics.Unum
             if ((x.ExponentValueWithBias() + (int)x.FractionSizeWithHiddenBit()) < 31) //The Unum fits into the range.
             {
                 result = (x.FractionWithHiddenBit() << x.ExponentValueWithBias() -
-                              (int)x.FractionSize() ).GetLowest32Bits();
+                              (int)x.FractionSize()).GetLowest32Bits();
 
             }
             else return (x.IsPositive()) ? int.MaxValue : int.MinValue; // The absolute value of the Unum is too large.
-          
+
 
             if (!x.IsPositive()) return -(int)result;
 
@@ -825,9 +759,9 @@ namespace Hast.Common.Numerics.Unum
 
         public static explicit operator uint(Unum x)
         {
-            
+
             var result = (x.FractionWithHiddenBit()
-                << x.ExponentValueWithBias() - ((int)x.FractionSize() )).GetLowest32Bits();
+                << x.ExponentValueWithBias() - ((int)x.FractionSize())).GetLowest32Bits();
 
             return result;
         }

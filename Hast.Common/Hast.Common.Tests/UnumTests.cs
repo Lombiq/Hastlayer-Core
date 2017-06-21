@@ -352,7 +352,7 @@ namespace Hast.Common.Tests
         }
 
         [Test]
-        public void AdditionIsCorrectForInts()
+        public void AdditionIsCorrectForIntegers()
         {
             var res = new Unum(_metaData_3_5, 0);
             var res2 = new Unum(_metaData_3_5, 0);
