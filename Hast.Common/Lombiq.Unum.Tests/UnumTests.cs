@@ -1,12 +1,10 @@
 ﻿using NUnit.Framework;
 
-
 namespace Lombiq.Unum.Tests
 {
     [TestFixture]
     public class UnumTests
     {
-        
         private UnumMetadata _metaData_3_4;
         private UnumMetadata _metaData_3_5;
         private UnumMetadata _metaData_4_8;
@@ -14,7 +12,6 @@ namespace Lombiq.Unum.Tests
         [SetUp]
         public void Init()
         {
-           
             _metaData_3_4 = new UnumMetadata(3, 4);
             _metaData_3_5 = new UnumMetadata(3, 5);
             _metaData_4_8 = new UnumMetadata(4, 8);
@@ -32,7 +29,7 @@ namespace Lombiq.Unum.Tests
 
             var minValue = new uint[8];
             for (int i = 0; i < 8; i++) minValue[i] = uint.MaxValue;
-           
+
             var maxUnum = new Unum(_metaData_4_8, maxValue);
             var minUnum = new Unum(_metaData_4_8, minValue);  // This is negative.
             var unum500000 = new Unum(_metaData_4_8, new uint[] { 500000 }); //0xC7A1250C9 
@@ -88,14 +85,13 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(unumOne.FractionToUintArray(), new uint[] { 1, 0, 0, 0, 0, 0, 0, 0, 0 });
             Assert.AreEqual(unum500000.FractionToUintArray(), new uint[] { 500000, 0, 0, 0, 0, 0, 0, 0, 0 });
             Assert.AreEqual(unumBig.FractionToUintArray(), new uint[] { 594967295, 0, 0, 0, 0, 0, 0, 0, 0 });
-            Assert.AreEqual(maxUnum.FractionToUintArray(), new uint[] { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x7FFFFFFF, 0 });
+            Assert.AreEqual(maxUnum.FractionToUintArray(), new uint[]
+                { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x7FFFFFFF, 0 });
         }
-        
+
         //[Test]
         //public void UnumIsCorrectlyConstructedFromFloat()
         //{
-
         //    var first = new Unum(_metaData_3_4, (float)30.0);
         //    var second = new Unum(_metaData_3_4, (float)9999999999999);
         //    var third = new Unum(_metaData_3_4, (float)1.5);
@@ -158,7 +154,7 @@ namespace Lombiq.Unum.Tests
             var unumThousand = new Unum(_metaData_3_4, (uint)1000);
             var unum6000 = new Unum(_metaData_3_4, (uint)6000);
             var unum5000 = new Unum(_metaData_3_4, (uint)5000);
-     
+
             var bitmask0 = new BitMask(new uint[] { 0 }, _metaData_3_4.Size);
             var bitmask1 = new BitMask(new uint[] { 0x100 }, _metaData_3_4.Size);
             var bitmask30 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
@@ -173,10 +169,10 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(unum6000.UnumBits, bitmask6000);
             Assert.AreEqual(unum5000.UnumBits, bitmask5000);
         }
+
         //[Test]
         //public void UnumIsCorrectlyConstructedFromDouble()
         //{
-
         //    var first = new Unum(_metaData_3_4, (double)30.0);
         //    var second = new Unum(_metaData_3_4, (double)9999999999999);
 
@@ -187,14 +183,12 @@ namespace Lombiq.Unum.Tests
 
         //    Assert.AreEqual(first.UnumBits, bitmask_1);
         //    Assert.AreEqual(second.UnumBits, bitmask_2);
-
         //}
 
 
         //[Test]
         //public void UnumIsCorrectlyConstructedFromLong()
         //{
-
         //    var first = new Unum(_metaData_3_4, (long)30);
         //    var second = new Unum(_metaData_3_4, (long)9999999999999);
 
@@ -205,7 +199,6 @@ namespace Lombiq.Unum.Tests
 
         //    Assert.AreEqual(first.UnumBits, bitmask_1);
         //    Assert.AreEqual(second.UnumBits, bitmask_2);
-
         //}
 
         [Test]
@@ -216,7 +209,7 @@ namespace Lombiq.Unum.Tests
             var unum_3_2_uncertain = new Unum(bitmask_3_2_uncertain, 3, 2);
             Assert.AreEqual(unum_3_2_uncertain.IsExact(), false);
 
-            var bitmask_3_2_certain = new BitMask(19,false);
+            var bitmask_3_2_certain = new BitMask(19, false);
             var unum_3_2_certain = new Unum(bitmask_3_2_certain, 3, 2);
             Assert.AreEqual(unum_3_2_certain.IsExact(), true);
 
@@ -239,7 +232,6 @@ namespace Lombiq.Unum.Tests
             var bitmask_3_4_allOne = new BitMask(33, true);
             var unum_3_4_allOne = new Unum(bitmask_3_4_allOne, 3, 4);
             Assert.AreEqual(unum_3_4_allOne.FractionSize(), 16);
-
         }
 
         [Test]
@@ -298,9 +290,8 @@ namespace Lombiq.Unum.Tests
             var unum1 = new Unum(bitmask1, 3, 4);
             Assert.AreEqual(unum1.ExponentValueWithBias(), -8);
 
-            var unumZero = new Unum(_metaData_3_4,0);
+            var unumZero = new Unum(_metaData_3_4, 0);
             Assert.AreEqual(unumZero.ExponentValueWithBias(), 1);
-
         }
 
         [Test]
@@ -309,9 +300,11 @@ namespace Lombiq.Unum.Tests
             var bitmask1 = new BitMask(new uint[] { 0xE40 }, 33);
             var bitmask2 = new BitMask(new uint[] { 0x3F22 }, 33);
             var bitmask3 = new BitMask(new uint[] { 0x7E012B }, 33);
+
             var unum1 = new Unum(bitmask1, 3, 4);
             var unum2 = new Unum(bitmask2, 3, 4);
             var unum3 = new Unum(bitmask3, 3, 4);
+
             Assert.AreEqual(new BitMask(new uint[] { 0x1E01 }, 33), unum3.FractionWithHiddenBit());
             Assert.AreEqual(new BitMask(new uint[] { 0xF }, 33), unum2.FractionWithHiddenBit());
             Assert.AreEqual(new BitMask(new uint[] { 2 }, 33), unum1.FractionWithHiddenBit());
@@ -342,13 +335,11 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(unumOne.UnumBits, unumZeroPlusOne.UnumBits);
             Assert.AreEqual(unum1.UnumBits, unumZeroPlusUnum1.UnumBits);
 
-
             // Case of inexact result ,second example from The End or Error, p. 117.
             var bitmask4 = new BitMask(new uint[] { 0x18F400CF }, 33); // 1000.0078125
             var unum1000 = new Unum(_metaData_3_4, 1000);
             var unum6 = Unum.AddExactUnums(unum1000, unum1); // 1/256
             Assert.AreEqual(unum6.UnumBits, bitmask4);
-
 
             var unum5000 = new Unum(_metaData_3_4, 5000);
             var unum6000 = new Unum(_metaData_3_4, 6000);
@@ -359,8 +350,6 @@ namespace Lombiq.Unum.Tests
             //var resF = (double)res;
             //Assert.AreEqual(resF, (30.401 - 30.300));// The result is correct, but the precision is too poor to show that.
 
-
-
             var unumNegativeThirty = new Unum(_metaData_3_4, -30);
             var unumThirty = new Unum(_metaData_3_4, 30);
             Assert.AreEqual(Unum.AddExactUnums(unumThirty, unumNegativeThirty).UnumBits, unumZero.UnumBits);
@@ -368,14 +357,13 @@ namespace Lombiq.Unum.Tests
 
         [Test]
         public void AdditionIsCorrectForIntegers()
-
         {
             var result = new Unum(_metaData_3_5, 0);
             var count = 100;
-            
+
             for (int i = 1; i <= count; i++) result += new Unum(_metaData_3_5, i * 1000);
             for (int i = 1; i <= count; i++) result -= new Unum(_metaData_3_5, i * 1000);
-           
+
             Assert.AreEqual(result.UnumBits, new Unum(_metaData_3_5, 0).UnumBits);
         }
 
@@ -412,7 +400,6 @@ namespace Lombiq.Unum.Tests
         //    res3 -= res1;
         //    Assert.AreEqual((float)res3, 0.5F);
         //}
-
 
         [Test]
         public void SubtractExactUnumsIsCorrect()
@@ -470,7 +457,7 @@ namespace Lombiq.Unum.Tests
             var bitmaskMinus30 = new BitMask(new uint[] { 0x3F22, 1 }, 33);
             var bitmask6000 = new BitMask(new uint[] { 0x1B7747 }, 33);
             var bitmask5000 = new BitMask(new uint[] { 0x367148 }, 33);
-          
+
             Assert.AreEqual(unumOne.UnumBits, new BitMask(new uint[] { 0x100 }, 33));
             Assert.AreEqual(unumTwo.UnumBits, new BitMask(new uint[] { 0x200 }, 33));
             Assert.AreEqual(unumZero.UnumBits, bitmask0);
@@ -550,9 +537,8 @@ namespace Lombiq.Unum.Tests
 
         //    Assert.AreEqual(first.UnumBits, bitmask_1);
         //    Assert.AreEqual(second.UnumBits, bitmask_2);
-
-
         //}
+
         [Test]
         public void UnumToFloatIsCorrect()
         {
@@ -603,8 +589,6 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(negativeThousand, (double)-1000);
             Assert.AreEqual(tooBig, (double)9999891824640); // Some information is lost due to limited size of Unum.
             Assert.AreEqual(tooBigNegative, (double)-9999891824640); // Some information is lost due to limited size of Unum.
-
-
         }
 
     }
