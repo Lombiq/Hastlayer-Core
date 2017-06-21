@@ -419,6 +419,12 @@ namespace Hast.Common.Numerics.Unum
             var result = new uint[resultMask.SegmentCount];
 
             for (var i = 0; i < resultMask.SegmentCount; i++) result[i] = resultMask.Segments[i];
+            if (!IsPositive()) result[resultMask.SegmentCount - 1] |= 0x80000000;
+            else
+            {
+                result[resultMask.SegmentCount - 1] <<= 1;
+                result[resultMask.SegmentCount - 1] >>= 1;
+            } 
 
             return result;
         }
