@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hast.Common.Numerics
+namespace Lombiq.Unum
 {
     public struct BitMask
     {

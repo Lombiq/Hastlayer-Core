@@ -1,8 +1,7 @@
-﻿using Hast.Common.Numerics;
+﻿using System;
 using NUnit.Framework;
-using System;
 
-namespace Hast.Common.Tests
+namespace Lombiq.Unum.Tests
 {
     [TestFixture]
     public class BitMaskTests
@@ -12,13 +11,13 @@ namespace Hast.Common.Tests
         {
             var sizesAndSegmentCounts = new Tuple<BitMask, uint>[]
             {
-                Tuple.Create(new BitMask(0), (uint)0),
-                Tuple.Create(new BitMask(31), (uint)1),
-                Tuple.Create(new BitMask(32), (uint)1),
-                Tuple.Create(new BitMask(33), (uint)2),
-                Tuple.Create(new BitMask(1023), (uint)32),
-                Tuple.Create(new BitMask(1024), (uint)32),
-                Tuple.Create(new BitMask(1025), (uint)33)
+                Tuple.Create(new BitMask(0, false), (uint)0),
+                Tuple.Create(new BitMask(31, false), (uint)1),
+                Tuple.Create(new BitMask(32, false), (uint)1),
+                Tuple.Create(new BitMask(33, false), (uint)2),
+                Tuple.Create(new BitMask(1023, false), (uint)32),
+                Tuple.Create(new BitMask(1024, false), (uint)32),
+                Tuple.Create(new BitMask(1025, false), (uint)33)
             };
 
             foreach (var item in sizesAndSegmentCounts) Assert.AreEqual(item.Item2, item.Item1.SegmentCount, $"Size: {item.Item1.Size}");
@@ -44,7 +43,7 @@ namespace Hast.Common.Tests
         public void BitMaskSetOneIsCorrect()
         {
             Assert.AreEqual(1, BitMask.SetOne(new BitMask(new uint[] { 0 }), 0).Segments[0]);
-            Assert.AreEqual(Math.Pow(2, 5), BitMask.SetOne(new BitMask(32), 5).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 5), BitMask.SetOne(new BitMask(32, false), 5).Segments[0]);
             Assert.AreEqual(0xFFFF, BitMask.SetOne(new BitMask(new uint[] { 0xFFFF }), 5).Segments[0]);
             Assert.AreEqual(0xFFFF + Math.Pow(2, 30), BitMask.SetOne(new BitMask(new uint[] { 0xFFFF }), 30).Segments[0]);
             Assert.AreEqual(Math.Pow(2, 31), BitMask.SetOne(new BitMask(new uint[] { 0 }), 31).Segments[0]);

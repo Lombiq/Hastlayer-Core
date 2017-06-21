@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hast.Common.Numerics.Unum
+namespace Lombiq.Unum
 {
     public class UnumException : Exception
     {

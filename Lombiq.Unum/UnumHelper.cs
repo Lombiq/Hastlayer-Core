@@ -1,4 +1,4 @@
-﻿namespace Hast.Common.Numerics.Unum
+﻿namespace Lombiq.Unum
 {
     public static class UnumHelper
     {

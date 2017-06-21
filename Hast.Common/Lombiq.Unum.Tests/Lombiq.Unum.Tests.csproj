@@ -7,8 +7,8 @@
     <ProjectGuid>{E77C13E5-DA6A-4A9D-9601-B17BDBFE50BD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Common.Tests</RootNamespace>
-    <AssemblyName>Hast.Common.Tests</AssemblyName>
+    <RootNamespace>Lombiq.Unum.Tests</RootNamespace>
+    <AssemblyName>Lombiq.Unum.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -54,6 +54,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lombiq.Unum\Lombiq.Unum.csproj">
+      <Project>{6cfe69a4-04a3-4427-818c-c0832d197a62}</Project>
+      <Name>Lombiq.Unum</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Common.csproj">
       <Project>{6EE5898A-E450-4A1D-80AF-AD27A8BD5E69}</Project>
       <Name>Hast.Common</Name>

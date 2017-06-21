@@ -1,8 +1,6 @@
-﻿using Hast.Common.Numerics;
-using Hast.Common.Numerics.Unum;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
-namespace Hast.Common.Tests
+namespace Lombiq.Unum.Tests
 {
     [TestFixture]
     public class UnumEnvironmentTests
