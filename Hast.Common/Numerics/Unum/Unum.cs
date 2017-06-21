@@ -2,7 +2,7 @@
 
 namespace Hast.Common.Numerics.Unum
 {
-    public struct Unum // : IComparable, IFormattable, IConvertible, IComparable<Unum>, IEquatable<Unum>
+    public struct Unum
     {
         private readonly UnumMetadata _metadata;
 
@@ -409,8 +409,10 @@ namespace Hast.Common.Numerics.Unum
                        (new BitMask(new uint[] { exponentSize }, Size) << FractionSizeSize));
         }
 
-        #endregion  
-        
+        #endregion
+
+        #region Binary data extraction
+
         public uint[] FractionToUintArray()
         {
             var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - (int)FractionSize();
@@ -421,10 +423,18 @@ namespace Hast.Common.Numerics.Unum
             return result;
         }
 
+        #endregion
+
+        #region Binary data manipulation
+
         public void Negate()
         {
             UnumBits ^= SignBitMask;
         }
+
+        #endregion
+
+        #region Unum numeric states
 
         public bool IsExact() => (UnumBits & UncertaintyBitMask) == _metadata.EmptyBitMask;
 
@@ -434,6 +444,8 @@ namespace Hast.Common.Numerics.Unum
             (UnumBits & UncertaintyBitMask) == _metadata.EmptyBitMask &&
             (UnumBits & FractionMask()) == _metadata.EmptyBitMask &&
             (UnumBits & ExponentMask()) == _metadata.EmptyBitMask;
+
+        #endregion
 
         #region  Methods for Utag independent Masks and values
 
