@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Numerics;
 using Hast.Common.Configuration;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
@@ -31,7 +32,18 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            var result = new UnumCalculator().AddToUnum(5);
+            var resultUintArray = new UnumCalculator().CalculateSumOfPowersofTwo(250);
+            var resultBytes = new byte[resultUintArray.Length * 4];
+
+            Buffer.BlockCopy(resultUintArray, 0, resultBytes, 0, resultUintArray.Length * 4);
+            var resultBigInteger = new BigInteger(resultBytes);
+
+            Console.WriteLine(resultBigInteger.ToString());
+
+
+
+
+
 
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
