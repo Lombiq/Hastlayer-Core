@@ -367,16 +367,16 @@ namespace Lombiq.Unum.Tests
         }
 
         [Test]
-        public void AdditionIsCorrectForInts()
+        public void AdditionIsCorrectForIntegers()
 
         {
-            var res = new Unum(_metaData_3_5, 0);
-            var end = 50000;
+            var result = new Unum(_metaData_3_5, 0);
+            var count = 100;
             
-            for (int i = 1; i <= end; i++) res += new Unum(_metaData_3_5, i);
-            for (int i = 1; i <= end; i++) res -= new Unum(_metaData_3_5, i);
+            for (int i = 1; i <= count; i++) result += new Unum(_metaData_3_5, i * 1000);
+            for (int i = 1; i <= count; i++) result -= new Unum(_metaData_3_5, i * 1000);
            
-            Assert.AreEqual(res.UnumBits, new Unum(_metaData_3_5, 0).UnumBits);
+            Assert.AreEqual(result.UnumBits, new Unum(_metaData_3_5, 0).UnumBits);
         }
 
         //[Test]
