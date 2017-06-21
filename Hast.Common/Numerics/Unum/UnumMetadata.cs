@@ -57,8 +57,6 @@
 
             // Initializing masks.
             UncertaintyBitMask = new BitMask(Size);
-            var cc = UncertaintyBitMask.Size;
-            var ccc = cc + 1;
             BitMask.SetOne(UncertaintyBitMask, (uint)UnumTagSize - 1);
 
             FractionSizeMask = new BitMask(Size);
