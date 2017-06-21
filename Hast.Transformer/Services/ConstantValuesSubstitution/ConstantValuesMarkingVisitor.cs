@@ -69,10 +69,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (primitiveExpressionParent.Is<AssignmentExpression>(out assignmentExpression))
             {
-                _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
-                    assignmentExpression.Left,
-                    primitiveExpression,
-                    primitiveExpressionParent.FindFirstParentBlockStatement());
+                // Indexed assignments with a constant index could also be handled eventually, but not really needed
+                // now.
+                if (!(assignmentExpression.Left is IndexerExpression))
+                {
+                    _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
+                        assignmentExpression.Left,
+                        primitiveExpression,
+                        primitiveExpressionParent.FindFirstParentBlockStatement()); 
+                }
             }
             else if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression) &&
                 arrayCreateExpression.Arguments.Single() == primitiveExpression)

@@ -129,11 +129,13 @@
     <Compile Include="Services\InstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\IObjectVariableTypesConverter.cs" />
+    <Compile Include="Services\IOperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\IOperatorsToMethodsConverter.cs" />
     <Compile Include="Services\ISyntaxTreeCleaner.cs" />
     <Compile Include="Services\NoForPatternStatementTransform.cs" />
     <Compile Include="Services\ObjectVariableTypesConverter.cs" />
     <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
+    <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\OperatorsToMethodsConverter.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryDeviceManifestExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />

@@ -29,5 +29,13 @@ namespace ICSharpCode.NRefactory.CSharp
 
             return null;
         }
+
+        public static void CopyAnnotationsTo(this IAnnotatable annotable, IAnnotatable toNode)
+        {
+            foreach (var annotation in annotable.Annotations)
+            {
+                toNode.AddAnnotation(annotation);
+            }
+        }
     }
 }

@@ -23,12 +23,23 @@ namespace ICSharpCode.NRefactory.CSharp
             ITypeDeclarationLookupTable typeDeclarationLookupTable,
             bool findLeftmostMemberIfRecursive = false)
         {
-            if (findLeftmostMemberIfRecursive && memberReferenceExpression.Target is MemberReferenceExpression)
-            {
-                return ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(typeDeclarationLookupTable);
-            }
+            TypeDeclaration type;
 
-            var type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable);
+            if (memberReferenceExpression.Target is MemberReferenceExpression)
+            {
+                if (findLeftmostMemberIfRecursive)
+                {
+                    return ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(typeDeclarationLookupTable, true); 
+                }
+                else
+                {
+                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
+                }
+            }
+            else
+            {
+                type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable); 
+            }
 
             if (type == null) return null;
 
