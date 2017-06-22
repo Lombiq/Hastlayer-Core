@@ -7,11 +7,39 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     public static class MemberReferenceExpressionExtensions
     {
+        /// <summary>
+        /// Find the referenced member's declaration.
+        /// </summary>
+        /// <param name="typeDeclarationLookupTable">
+        /// The <see cref="ITypeDeclarationLookupTable"/> instance corresponding to the current scope.
+        /// </param>
+        /// <param name="findLeftmostMemberIfRecursive">
+        /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if 
+        /// set to <c>true</c> the member corresponding to the leftmost member (<c>this.Property1</c> in this case) will
+        /// be looked up.
+        /// </param>
         public static EntityDeclaration FindMemberDeclaration(
             this MemberReferenceExpression memberReferenceExpression, 
-            ITypeDeclarationLookupTable typeDeclarationLookupTable)
+            ITypeDeclarationLookupTable typeDeclarationLookupTable,
+            bool findLeftmostMemberIfRecursive = false)
         {
-            var type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable);
+            TypeDeclaration type;
+
+            if (memberReferenceExpression.Target is MemberReferenceExpression)
+            {
+                if (findLeftmostMemberIfRecursive)
+                {
+                    return ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(typeDeclarationLookupTable, true); 
+                }
+                else
+                {
+                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
+                }
+            }
+            else
+            {
+                type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable); 
+            }
 
             if (type == null) return null;
 

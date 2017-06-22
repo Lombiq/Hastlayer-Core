@@ -68,6 +68,16 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parentAssignment.Left.GetFullName()] =
                     constructorDeclarationClone;
+
+                // Also pass the object initialization data to the "this" reference. So if methods are called from the
+                // constructor (or other objects created) then there the scope of the ctor will be accessible too.
+                var thisReference = constructorDeclaration
+                    .FindFirstChildOfType<IdentifierExpression>(identifier => identifier.Identifier == "this");
+                if (thisReference != null)
+                {
+                    _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[thisReference.GetFullName()] =
+                        constructorDeclarationClone;
+                }
             }
         }
     }

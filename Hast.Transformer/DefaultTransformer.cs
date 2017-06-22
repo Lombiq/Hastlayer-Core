@@ -36,6 +36,7 @@ namespace Hast.Transformer
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
         private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
         private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
+        private readonly IOperatorAssignmentsToSimpleAssignmentsConverter _operatorAssignmentsToSimpleAssignmentsConverter;
 
 
         public DefaultTransformer(
@@ -53,7 +54,8 @@ namespace Hast.Transformer
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
             IConstantValuesSubstitutor constantValuesSubstitutor,
-            IOperatorsToMethodsConverter operatorsToMethodsConverter)
+            IOperatorsToMethodsConverter operatorsToMethodsConverter,
+            IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -70,6 +72,7 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
             _constantValuesSubstitutor = constantValuesSubstitutor;
             _operatorsToMethodsConverter = operatorsToMethodsConverter;
+            _operatorAssignmentsToSimpleAssignmentsConverter = operatorAssignmentsToSimpleAssignmentsConverter;
         }
 
 
@@ -179,6 +182,7 @@ namespace Hast.Transformer
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
+            _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree);
 
             // If the conversions removed something let's clean them up here.

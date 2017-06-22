@@ -128,8 +128,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             Func<DataType, int> getSize = dataType => ((SizedDataType)dataType).Size;
 
-            var fromSize = fromType is SizedDataType ? getSize(fromType) : 0;
-            var toSize = toType is SizedDataType ? getSize(toType) : 0;
+            var fromSize = fromType.GetSize();
+            var toSize = toType.GetSize();
 
             var castInvocation = new Invocation();
             castInvocation.Parameters.Add(expression);
@@ -142,6 +142,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 castInvocation.Target = "resize".ToVhdlIdValue();
                 castInvocation.Parameters
                     .Add(size.ToVhdlValue(KnownDataTypes.UnrangedInt));
+                result.IsResized = true;
             };
 
             Action resizeToToSizeIfNeeded = () =>
@@ -235,6 +236,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         {
             public IVhdlElement Expression { get; set; }
             public bool IsLossy { get; set; }
+            public bool IsResized { get; set; }
         }
     }
 }

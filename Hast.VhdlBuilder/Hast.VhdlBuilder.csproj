@@ -71,7 +71,9 @@
     <Compile Include="Representation\Declaration\Signal.cs" />
     <Compile Include="Representation\Declaration\Variable.cs" />
     <Compile Include="Representation\Declaration\UnconstrainedArrayInstantiation.cs" />
+    <Compile Include="Representation\Expression\ArrayAccessBase.cs" />
     <Compile Include="Representation\Expression\ArrayElementAccess.cs" />
+    <Compile Include="Representation\Expression\ArraySlice.cs" />
     <Compile Include="Representation\Expression\Assignment.cs" />
     <Compile Include="ProcessUtility.cs" />
     <Compile Include="Representation\Declaration\Architecture.cs" />

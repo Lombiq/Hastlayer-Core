@@ -94,6 +94,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var expression = partiallyTransformedExpression.BinaryOperatorExpression;
 
+            var leftTypeReference = expression.Left.GetActualTypeReference();
+            var rightTypeReference = expression.Right.GetActualTypeReference();
+
+            // At this point if non-primitive types are checked for equality it could mean that they are custom 
+            // types either without the equality operator defined or they are custom value types and a
+            // ReferenceEquals() is attempted on them which is wrong.
+            if ((leftTypeReference != null && !leftTypeReference.IsPrimitive || 
+                    rightTypeReference != null && !rightTypeReference.IsPrimitive) &&
+                !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))
+            {
+                throw new InvalidOperationException(
+                    "Unsupported operator in the following binary operator expression: " + expression.ToString() +
+                    ". This could mean that you attempted to use an operator on custom types either without the operator being defined for the type or they are custom value types and you mistakenly tried to use ReferenceEquals() on them.");
+            }
+
             // Would need to decide between + and & or sll/srl and sra/sla
             // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
             // The commented out cases with unsupported operators are here so adding them later is easier.
@@ -202,8 +217,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 };
             }
 
-            var leftTypeReference = expression.Left.GetActualTypeReference();
-            var rightTypeReference = expression.Right.GetActualTypeReference();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
             var shouldResizeResult =
                 (
@@ -263,12 +276,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (firstNonParenthesizedExpressionParent is CastExpression)
             {
-                binaryElement = _typeConversionTransformer.ImplementTypeConversion(
+                var typeConversionResult = _typeConversionTransformer.ImplementTypeConversion(
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext),
                     resultType,
-                    binaryElement).Expression;
+                    binaryElement);
+
+                binaryElement = typeConversionResult.Expression;
+
+                // Most of the time due to the cast no resize is necessary, but sometimes it is.
+                shouldResizeResult = shouldResizeResult && !typeConversionResult.IsResized;
             }
-            else if (shouldResizeResult)
+
+            if (shouldResizeResult)
             {
                 binaryElement = new Invocation
                 {

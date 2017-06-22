@@ -13,6 +13,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Testing;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard.Logging;
 
@@ -505,13 +506,40 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 switch (unary.Operator)
                 {
                     case UnaryOperatorType.Minus:
+                        // Casting if the result type is not what the parent expects.
+                        var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
+                        if (parentTypeInformation != null && parentTypeInformation.ExpectedType != parentTypeInformation.InferredType)
+                        {
+                            var fromType = _typeConverter
+                                .ConvertTypeReference(parentTypeInformation.ExpectedType, context.TransformationContext);
+                            var toType = _typeConverter
+                                .ConvertTypeReference(parentTypeInformation.InferredType, context.TransformationContext);
+
+                            if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
+                            {
+                                return _typeConversionTransformer.ImplementTypeConversion(
+                                    fromType,
+                                    toType,
+                                    new Binary
+                                    {
+                                        Left = "0".ToVhdlValue(KnownDataTypes.UnrangedInt),
+                                        Operator = BinaryOperator.Subtract,
+                                        Right = transformedExpression
+                                    })
+                                    .Expression; 
+                            }
+                        }
+
                         return new Unary
                         {
                             Operator = UnaryOperator.Negation,
                             Expression = transformedExpression
                         };
                     case UnaryOperatorType.Not:
-                        // In VHDL there is no boolean negation operator, just the not() function.
+                    case UnaryOperatorType.BitNot:
+                        // In VHDL there is no boolean negation operator, just the not() function. This will bitwise
+                        // negate the value, so for bools it will work as the .NET NOT operator, for other types as a 
+                        // bitwise NOT.
                         return new Invocation
                         {
                             Target = "not".ToVhdlValue(KnownDataTypes.Identifier),
@@ -626,7 +654,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var indexExpression = indexerExpression.Arguments.Single();
                 return new ArrayElementAccess
                 {
-                    Array = targetVariableReference,
+                    ArrayReference = targetVariableReference,
                     IndexExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
                             _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), context.TransformationContext),
@@ -750,7 +778,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var result = new RecordInitializationResult { Record = record };
 
-            var parentAssignment = expression.FindFirstParentOfType<AssignmentExpression>();
+            var parentAssignment = expression
+                .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
 
             if (parentAssignment != null)
             {
@@ -758,7 +787,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // work if the newly created object is directly passed to a method for example.
                 var recordInstanceAssignmentTarget = parentAssignment.Left;
                 result.RecordInstanceIdentifier =
-                    recordInstanceAssignmentTarget is IdentifierExpression || recordInstanceAssignmentTarget is IndexerExpression ?
+                    recordInstanceAssignmentTarget is IdentifierExpression ||
+                    recordInstanceAssignmentTarget is IndexerExpression ||
+                    recordInstanceAssignmentTarget is MemberReferenceExpression ?
                         recordInstanceAssignmentTarget :
                         recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
                 result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
@@ -782,28 +813,31 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var initializationValue = field.DataType.DefaultValue;
 
-                var typeField = typeDeclaration.Members
+                var fieldDeclaration = typeDeclaration.Members
                     .SingleOrDefault(member =>
                         member.Is<FieldDeclaration>(f =>
                             f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters())) as FieldDeclaration;
-                if (typeField != null)
+                if (fieldDeclaration != null)
                 {
-                    var fieldInitializer = typeField.Variables.Single().Initializer;
+                    var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
                     if (fieldInitializer != Expression.Null)
                     {
                         initializationValue = (Value)Transform(fieldInitializer, context);
                     }
                 }
 
-                context.Scope.CurrentBlock.Add(new Assignment
+                if (initializationValue != null)
                 {
-                    AssignTo = new RecordFieldAccess
+                    context.Scope.CurrentBlock.Add(new Assignment
                     {
-                        Instance = result.RecordInstanceReference,
-                        FieldName = field.Name
-                    },
-                    Expression = initializationValue
-                });
+                        AssignTo = new RecordFieldAccess
+                        {
+                            Instance = result.RecordInstanceReference,
+                            FieldName = field.Name
+                        },
+                        Expression = initializationValue
+                    });
+                }
             }
 
             return result;

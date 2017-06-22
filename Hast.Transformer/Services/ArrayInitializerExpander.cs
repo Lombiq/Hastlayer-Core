@@ -45,20 +45,35 @@ namespace Hast.Transformer.Services
                 arrayCreateExpression.Arguments.Clear();
                 arrayCreateExpression.Arguments.Add(sizeArgument);
 
-                var parentAssignment = arrayCreateExpression.FindFirstParentOfType<AssignmentExpression>();
+                var parentAssignment = arrayCreateExpression
+                    .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == arrayCreateExpression);
 
                 // The array wasn't assigned to a variable or anything but rather directly passed to a method or
                 // constructor. Thus first need to add a variable first to allow uniform processing later.
                 if (parentAssignment == null)
                 {
-                    var temporaryVariableName = Sha2456Helper.ComputeHash(arrayCreateExpression.GetFullName());
-                    parentAssignment = new AssignmentExpression(
-                        new IdentifierExpression(temporaryVariableName),
-                        arrayCreateExpression.Clone());
+                    var variableName = "array" + Sha2456Helper.ComputeHash(arrayCreateExpression.GetFullName());
+                    var parentStatement = arrayCreateExpression.FindFirstParentOfType<Statement>();
+                    var typeInformation = arrayCreateExpression.Annotation<TypeInformation>();
 
-                    AstInsertionHelper.InsertStatementBefore(
-                        arrayCreateExpression.FindFirstParentOfType<Statement>(),
-                        new ExpressionStatement(parentAssignment));
+                    var declarationType = new ComposedType { BaseType = arrayCreateExpression.Type.Clone() };
+                    declarationType.ArraySpecifiers.Add(
+                        new ArraySpecifier(((ArrayType)arrayCreateExpression.GetActualTypeReference()).Dimensions.Count));
+                    var variableDeclaration = new VariableDeclarationStatement(declarationType, variableName);
+                    variableDeclaration.AddAnnotation(typeInformation);
+                    AstInsertionHelper.InsertStatementBefore(parentStatement, variableDeclaration);
+
+                    var variableIdentifier = new IdentifierExpression(variableName);
+                    variableIdentifier.AddAnnotation(typeInformation);
+
+                    var newArrayCreateExpression = (ArrayCreateExpression)arrayCreateExpression.Clone();
+                    arrayCreateExpression.CopyAnnotationsTo(newArrayCreateExpression);
+                    parentAssignment = new AssignmentExpression(variableIdentifier, newArrayCreateExpression);
+
+                    AstInsertionHelper.InsertStatementBefore(parentStatement, new ExpressionStatement(parentAssignment));
+
+                    arrayCreateExpression.ReplaceWith(variableIdentifier.Clone());
+                    arrayCreateExpression = newArrayCreateExpression;
                 }
 
                 for (int i = initializerElements.Length - 1; i >= 0; i--)

@@ -265,7 +265,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // If the parameter is an array access then the actual variable type should be the array
                         // element's type, or if the array element is a record, then its fields' type (in the latter
                         // case the next block will be also run to determine the record field's type).
-                        if (localVariableDataType is ArrayType && 
+                        if (localVariableDataType is ArrayType &&
                             (parameter is ArrayElementAccess || parameter is RecordFieldAccess))
                         {
                             localVariableDataType = ((ArrayType)localVariableDataType).ElementType;
@@ -283,9 +283,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             if (fieldAccess != null)
                             {
                                 // A member of and object was passed to a method, i.e. Method(object.Property).
-                                localVariableDataType = ((Record)localVariableDataType).Fields
-                                    .Single(member => member.Name == fieldAccess.FieldName)
-                                    .DataType;
+
+                                // This is a recursivel fields access, i.e. instance.Field1.Field1.
+                                localVariableDataType = _declarableTypeCreator
+                                    .CreateDeclarableType(targetParameter, targetParameter.Type, context.TransformationContext);
                             }
 
                             // Else the whole object was passed, i.e. Method(object). Nothing else to do.

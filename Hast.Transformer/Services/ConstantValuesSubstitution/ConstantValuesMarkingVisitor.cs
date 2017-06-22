@@ -69,10 +69,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (primitiveExpressionParent.Is<AssignmentExpression>(out assignmentExpression))
             {
-                _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
-                    assignmentExpression.Left,
-                    primitiveExpression,
-                    primitiveExpressionParent.FindFirstParentBlockStatement());
+                // Indexed assignments with a constant index could also be handled eventually, but not really needed
+                // now.
+                if (!(assignmentExpression.Left is IndexerExpression))
+                {
+                    _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
+                        assignmentExpression.Left,
+                        primitiveExpression,
+                        primitiveExpressionParent.FindFirstParentBlockStatement()); 
+                }
             }
             else if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression) &&
                 arrayCreateExpression.Arguments.Single() == primitiveExpression)
@@ -143,6 +148,18 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 ProcessParent(
                     node, 
                     assignment => processParent(assignment.Left), 
+                    memberReference =>
+                    {
+                        var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
+                            .FindMemberReferenceInConstructor(constructorDeclaration, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
+
+                        if (memberReferenceExpressionInConstructor != null &&
+                            _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
+                                .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorDeclaration))
+                        {
+                            processParent(memberReference);
+                        }
+                    },
                     processParent, 
                     processParent, 
                     processParent,
@@ -166,7 +183,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         }
 
 
-        private void PassLengthOfArrayHolderToParent(AstNode arrayHolder, int arrayLength) =>
+        private void PassLengthOfArrayHolderToParent(AstNode arrayHolder, int arrayLength)
+        {
+            Action<AstNode> processParent = parent => _arraySizeHolder.SetSize(parent, arrayLength);
+
             ProcessParent(
                 arrayHolder,
                 assignmentExpression =>
@@ -179,15 +199,18 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     }
                     _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
                 },
-                parameter => _arraySizeHolder.SetSize(parameter, arrayLength),
-                parameter => _arraySizeHolder.SetSize(parameter, arrayLength),
-                variableInitializer => _arraySizeHolder.SetSize(variableInitializer, arrayLength),
+                processParent,
+                processParent,
+                processParent,
+                processParent,
                 returnStatement => _arraySizeHolder.SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength));
+        }
 
 
         private void ProcessParent(
             AstNode node,
             Action<AssignmentExpression> assignmentHandler,
+            Action<MemberReferenceExpression> memberReferenceHandler,
             Action<ParameterDeclaration> invocationParameterHandler,
             Action<ParameterDeclaration> objectCreationParameterHandler,
             Action<VariableInitializer> variableInitializerHandler,
@@ -204,6 +227,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 assignmentHandler(assignmentExpression);
                 updateHiddenlyUpdatedNodesUpdated(assignmentExpression.Left);
+            }
+            else if (parent is MemberReferenceExpression)
+            {
+                memberReferenceHandler((MemberReferenceExpression)parent);
+                updateHiddenlyUpdatedNodesUpdated(parent);
             }
             else if (parent is InvocationExpression)
             {
