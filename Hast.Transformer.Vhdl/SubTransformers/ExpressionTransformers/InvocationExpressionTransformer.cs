@@ -281,7 +281,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 {
                                     AssignTo = new ArrayElementAccess
                                     {
-                                        Array = arrayReference,
+                                        ArrayReference = arrayReference,
                                         IndexExpression = index.ToVhdlValue(KnownDataTypes.UnrangedInt)
                                     },
                                     Expression = resultReference
@@ -304,7 +304,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Support for Array.Copy().
             if (_arrayCopyToMethodNames.Contains(targetMethodName))
             {
-                IVhdlElement assignmentExpression = null;
+                IDataObject sourceArrayReference = null;
+                var targetArrayLength = context.TransformationContext.ArraySizeHolder
+                    .GetSizeOrThrow(expression.Arguments.Skip(1).First()).Length;
+                var sourceArrayLength = 0;
 
                 PrimitiveExpression lengthExpression;
                 if (expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(out lengthExpression))
@@ -312,16 +315,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     if (lengthExpression.Value.ToString() == "0")
                     {
                         // If the whole array is copied then it can be transformed into a simple assignment.
-                        assignmentExpression = transformedParameters.First(); 
+                        sourceArrayReference = (IDataObject)transformedParameters.First();
+                        sourceArrayLength = context.TransformationContext.ArraySizeHolder
+                            .GetSizeOrThrow(expression.Arguments.First()).Length;
                     }
                     else
                     {
+                        sourceArrayLength = Convert.ToInt32(lengthExpression.Value);
+
                         // Otherwise slicing the array.
-                        assignmentExpression = new UnconstrainedArrayInstantiation
+                        sourceArrayReference = new ArraySlice
                         {
                             ArrayReference = (IDataObject)transformedParameters.First(),
-                            RangeFrom = 0,
-                            RangeTo = Convert.ToInt32(lengthExpression.Value) - 1
+                            IndexFrom = 0,
+                            IndexTo = sourceArrayLength - 1
                         };
                     }
                 }
@@ -331,10 +338,31 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         "Array.Copy() is only supported if the second argument can be determined compile-time.");
                 }
 
+                var targetArrayReference = (IDataObject)transformedParameters.Skip(1).First();
+
+                if (targetArrayLength > sourceArrayLength)
+                {
+                    targetArrayReference = new ArraySlice
+                    {
+                        ArrayReference = targetArrayReference,
+                        IndexFrom = 0,
+                        IndexTo = sourceArrayLength - 1
+                    };
+                }
+                else if (sourceArrayLength > targetArrayLength)
+                {
+                    sourceArrayReference = new ArraySlice
+                    {
+                        ArrayReference = sourceArrayReference,
+                        IndexFrom = 0,
+                        IndexTo = targetArrayLength - 1
+                    };
+                }
+
                 return new Assignment
                 {
-                    AssignTo = (IDataObject)transformedParameters.Skip(1).First(),
-                    Expression = assignmentExpression
+                    AssignTo = targetArrayReference,
+                    Expression = sourceArrayReference
                 };
             }
 

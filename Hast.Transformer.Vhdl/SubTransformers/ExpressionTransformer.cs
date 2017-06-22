@@ -13,6 +13,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Testing;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard.Logging;
 
@@ -505,6 +506,30 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 switch (unary.Operator)
                 {
                     case UnaryOperatorType.Minus:
+                        // Casting if the result type is not what the parent expects.
+                        var parentTypeInformation = unary.Parent.Annotation<TypeInformation>();
+                        if (parentTypeInformation != null && parentTypeInformation.ExpectedType != parentTypeInformation.InferredType)
+                        {
+                            var fromType = _typeConverter
+                                .ConvertTypeReference(parentTypeInformation.ExpectedType, context.TransformationContext);
+                            var toType = _typeConverter
+                                .ConvertTypeReference(parentTypeInformation.InferredType, context.TransformationContext);
+
+                            if (KnownDataTypes.Integers.Contains(fromType) && KnownDataTypes.Integers.Contains(toType))
+                            {
+                                return _typeConversionTransformer.ImplementTypeConversion(
+                                    fromType,
+                                    toType,
+                                    new Binary
+                                    {
+                                        Left = "0".ToVhdlValue(KnownDataTypes.UnrangedInt),
+                                        Operator = BinaryOperator.Subtract,
+                                        Right = transformedExpression
+                                    })
+                                    .Expression; 
+                            }
+                        }
+
                         return new Unary
                         {
                             Operator = UnaryOperator.Negation,
@@ -629,7 +654,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var indexExpression = indexerExpression.Arguments.Single();
                 return new ArrayElementAccess
                 {
-                    Array = targetVariableReference,
+                    ArrayReference = targetVariableReference,
                     IndexExpression = _typeConversionTransformer
                         .ImplementTypeConversion(
                             _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), context.TransformationContext),
@@ -762,9 +787,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // work if the newly created object is directly passed to a method for example.
                 var recordInstanceAssignmentTarget = parentAssignment.Left;
                 result.RecordInstanceIdentifier =
-                    recordInstanceAssignmentTarget is IdentifierExpression || 
+                    recordInstanceAssignmentTarget is IdentifierExpression ||
                     recordInstanceAssignmentTarget is IndexerExpression ||
-                    recordInstanceAssignmentTarget is MemberReferenceExpression?
+                    recordInstanceAssignmentTarget is MemberReferenceExpression ?
                         recordInstanceAssignmentTarget :
                         recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
                 result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
@@ -811,7 +836,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             FieldName = field.Name
                         },
                         Expression = initializationValue
-                    }); 
+                    });
                 }
             }
 

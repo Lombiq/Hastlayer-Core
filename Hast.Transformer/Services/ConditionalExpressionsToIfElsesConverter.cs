@@ -34,7 +34,18 @@ namespace Hast.Transformer.Services
                     !(assignment.Parent is ExpressionStatement))
                 {
                     var variableName = "conditional" + Sha2456Helper.ComputeHash(conditionalExpression.ToString());
-                    var variableTypeReference = conditionalExpression.GetActualTypeReference();
+
+                    var typeInformation = conditionalExpression.Annotation<TypeInformation>();
+                    if (typeInformation == null)
+                    {
+                        // If a conditional expression is inside a cast then a TypeInformation annotation will be only
+                        // on the cast.
+                        typeInformation = conditionalExpression
+                            .FindFirstParentOfType<CastExpression>()
+                            .Annotation<TypeInformation>();
+                    }
+
+                    var variableTypeReference = typeInformation.InferredType;
 
                     // First creating a variable for the result.
                     var variableDeclaration = 
@@ -48,7 +59,10 @@ namespace Hast.Transformer.Services
                     variableIdentifier.AddAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference });
                     var newConditionalExpression = (ConditionalExpression)conditionalExpression.Clone();
                     assignment = new AssignmentExpression(variableIdentifier, newConditionalExpression);
-                    assignment.AddAnnotation(conditionalExpression.Annotation<TypeInformation>());
+
+
+                    assignment.AddAnnotation(typeInformation);
+
                     AstInsertionHelper.InsertStatementAfter(variableDeclaration, new ExpressionStatement(assignment));
 
                     // And finally swapping out the original expression with the variable reference.
