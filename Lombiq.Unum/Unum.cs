@@ -521,8 +521,10 @@ namespace Lombiq.Unum
                 return new Unum(left._metadata, left.NegativeInfinity);
 
 
-            var resultExponentSizeSize = left.ExponentSizeSize;
-            var resultFractionSizeSize = left.FractionSizeSize;
+            // Using the metadata properties directly for now, as custom properties like left.ExponentSizeSize are not
+            // yet supported.
+            var resultExponentSizeSize = left._metadata.ExponentSizeSize;
+            var resultFractionSizeSize = left._metadata.FractionSizeSize;
             var resultUnum = new Unum(resultExponentSizeSize, resultFractionSizeSize);
 
             var exponentValueDifference = left.ExponentValueWithBias() - right.ExponentValueWithBias();
