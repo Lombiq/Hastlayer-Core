@@ -57,10 +57,10 @@
 
             // Initializing masks.
             UncertaintyBitMask = new BitMask(Size);
-            BitMask.SetOne(UncertaintyBitMask, (uint)UnumTagSize - 1);
+            UncertaintyBitMask =BitMask.SetOne(UncertaintyBitMask, (uint)UnumTagSize - 1);
 
             FractionSizeMask = new BitMask(Size);
-            BitMask.SetOne(FractionSizeMask, FractionSizeSize);
+            FractionSizeMask = BitMask.SetOne(FractionSizeMask, FractionSizeSize);
             FractionSizeMask--;
 
             ExponentSizeMask = (UncertaintyBitMask - 1) - FractionSizeMask;
@@ -68,20 +68,20 @@
             UnumTagMask = UncertaintyBitMask | ExponentAndFractionSizeMask;
 
             SignBitMask = new BitMask(Size);
-            BitMask.SetOne(SignBitMask, (uint)Size - 1);
+            SignBitMask = BitMask.SetOne(SignBitMask, (uint)Size - 1);
 
             // Initializing metadata.
             EmptyBitMask = new BitMask(Size);
             ULP = new BitMask(Size);
-            BitMask.SetOne(ULP, UnumTagSize);
+            ULP = BitMask.SetOne(ULP, UnumTagSize);
 
             PositiveInfinity = new BitMask(Size);
-            BitMask.SetOne(PositiveInfinity, (uint)Size - 1);
+            PositiveInfinity = BitMask.SetOne(PositiveInfinity, (uint)Size - 1);
             PositiveInfinity -= 1;
             PositiveInfinity -= UncertaintyBitMask;
 
             NegativeInfinity = new BitMask(Size);
-            BitMask.SetOne(NegativeInfinity, (uint)Size - 1);
+            NegativeInfinity = BitMask.SetOne(NegativeInfinity, (uint)Size - 1);
             NegativeInfinity += PositiveInfinity;
 
             LargestPositive = PositiveInfinity - ULP;
