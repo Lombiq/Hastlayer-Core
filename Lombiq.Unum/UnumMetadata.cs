@@ -96,5 +96,8 @@
 
             //_smallNormal = _exponentAndFractionSizeMask + 1 << _size - 1 - _exponentSizeMax;
         }
+
+        public static UnumMetadata FromConfiguration(byte eSize, ushort fSize) =>
+            new UnumMetadata(UnumHelper.SegmentSizeToSegmentSizeSize(eSize), UnumHelper.SegmentSizeToSegmentSizeSize(fSize));
     }
 }
