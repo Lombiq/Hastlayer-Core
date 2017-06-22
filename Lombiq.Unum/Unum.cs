@@ -164,15 +164,15 @@ namespace Lombiq.Unum
         //        uncertainty, resultExponentSize, resultFractionSize);
         //}
 
-        public Unum(UnumMetadata metadata, uint x)
+        public Unum(UnumMetadata metadata, uint value)
         {
             _metadata = metadata;
             UnumBits = _metadata.EmptyBitMask;
 
-            if (x == 0) return;
+            if (value == 0) return;
 
 
-            UnumBits += x; // The Fraction will be stored here.
+            UnumBits += value; // The Fraction will be stored here.
             var exponentValue = UnumBits.FindLeadingOne() - 1;
             var exponent = new BitMask(new uint[] { exponentValue }, Size);
             var exponentSize = exponent.FindLeadingOne();
@@ -240,14 +240,14 @@ namespace Lombiq.Unum
             UnumBits = SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize, fractionSize);
         }
 
-        public Unum(UnumMetadata metadata, int x)
+        public Unum(UnumMetadata metadata, int value)
         {
             _metadata = metadata;
 
-            if (x >= 0) UnumBits = new Unum(metadata, (uint)x).UnumBits;
+            if (value >= 0) UnumBits = new Unum(metadata, (uint)value).UnumBits;
             else
             {
-                UnumBits = new Unum(metadata, (uint)-x).UnumBits;
+                UnumBits = new Unum(metadata, (uint)-value).UnumBits;
                 UnumBits = Negate().UnumBits;
             }
         }
