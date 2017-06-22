@@ -86,6 +86,11 @@ namespace ICSharpCode.NRefactory.CSharp
 
             if (node is VariableInitializer)
             {
+                if (node.Parent is FieldDeclaration)
+                {
+                    return node.FindFirstParentEntityDeclaration().GetFullName();
+                }
+
                 return CreateParentEntityBasedName(node, ((VariableInitializer)node).Name);
             }
 
