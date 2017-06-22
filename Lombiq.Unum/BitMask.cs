@@ -84,7 +84,7 @@ namespace Lombiq.Unum
 
         public static BitMask ShiftToRightEnd(BitMask input)
         {
-            if (input == new BitMask(input.Size)) return input;
+            if (input.FindLeadingOne() == 0) return input;
 
             while (input.Segments[0] % 2 == 0) input >>= 1;
 
