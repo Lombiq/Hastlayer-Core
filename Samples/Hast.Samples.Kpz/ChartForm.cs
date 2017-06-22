@@ -224,7 +224,7 @@ namespace Hast.Samples.Kpz
             if (comboTarget.SelectedIndex > 0)
             {
                 nudTableWidth.Value = nudTableHeight.Value = 8;
-                nudIterations.Value = 1;
+                nudIterations.Value = 100000;
             }
         }
 

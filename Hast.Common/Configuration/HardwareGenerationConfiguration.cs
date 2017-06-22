@@ -40,7 +40,7 @@ namespace Hast.Common.Configuration
         /// Gets or sets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
         /// will happen. Defaults to <c>true</c>.
         /// </summary>
-        public bool EnableCaching { get; set; } = true;
+        public bool EnableCaching { get; set; } = false;
 
         private static IHardwareGenerationConfiguration _default;
         public static IHardwareGenerationConfiguration Default

@@ -33,7 +33,7 @@ namespace Hast.Samples.Kpz
             configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernels");
             configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = 
                 Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug;
-            configuration.EnableCaching = false;
+            configuration.EnableCaching = true;
 
             LogItFunction("Generating hardware...");
             var hardwareRepresentation = await hastlayer.GenerateHardware( new[] {
