@@ -52,6 +52,13 @@ namespace Hast.Transformer.Vhdl.Tests
                     TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.BreakStatements()),
                     typeof(NotSupportedException));
             });
+
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.CustomValueTypeReferenceEquals()),
+                    typeof(InvalidOperationException));
+            });
         }
 
         [Test]
