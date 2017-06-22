@@ -17,37 +17,22 @@ namespace Hast.Samples.SampleAssembly
         {
             var number = memory.ReadUInt32(CalculateSumOfPowersofTwo_InputUInt32Index);
 
-            //// Some basic BitMask play until we have a proper sample.
-            //var b = new BitMask(5, true);
-            //var z = b.SegmentCount;
-            //var b2 = new BitMask(b);
-            //var c = new BitMask(5, true);
-            //var d = new BitMask(b.Segments);
-            //var size = b.Size;
-            //var e = new BitMask(size, false);
-
-            //var x = b | c;
-
-            //var result = x.Size;
-
-            //This is a draft of what will happen here.
             var environment = new UnumMetadata(4, 8);
+
             var a = new Unum(environment, 1);
-            var sign = a.IsPositive();
             var b = new Unum(environment, 0);
+
             for (var i = 1; i <= number; i++)
             {
                 b += a;
                 a += a;
             }
-            var result = b;
+
             var resultArray = b.FractionToUintArray();
             for (var i = 0; i < 9; i++)
             {
                 memory.WriteUInt32(CalculateSumOfPowersofTwo_OutputUInt32Index + i, resultArray[i]);
             }
-            
-
         }
     }
 
