@@ -322,7 +322,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                 invocationBlock.Add(createParameterAssignment(ParameterFlowDirection.Out));
-                if (targetParameter.IsOutFlowing())
+                if (targetParameter.IsOutFlowing(context.TransformationContext.TypeDeclarationLookupTable))
                 {
                     var assignment = createParameterAssignment(ParameterFlowDirection.In);
                     if (assignment != null) outParameterBackAssignments.Add(assignment);

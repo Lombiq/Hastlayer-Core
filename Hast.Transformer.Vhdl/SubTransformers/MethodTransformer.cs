@@ -146,7 +146,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // If the parameter can be modified inside and those changes should be passed back then we need to write
                 // the local variables back to parameters.
-                if (parameter.IsOutFlowing())
+                if (parameter.IsOutFlowing(context.TypeDeclarationLookupTable))
                 {
                     if (isFirstOutFlowingParameter)
                     {
