@@ -92,7 +92,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Right = partiallyTransformedExpression.RightTransformed
             };
 
-            var z = partiallyTransformedExpression.BinaryOperatorExpression.ToString().Contains("-2 * value");
             var expression = partiallyTransformedExpression.BinaryOperatorExpression;
 
             // Would need to decide between + and & or sll/srl and sra/sla
