@@ -94,7 +94,6 @@ namespace Lombiq.Unum
 
         public static bool operator ==(BitMask left, BitMask right)
         {
-            if (ReferenceEquals(left, right)) return true;
             if (left == null && right == null) return true;
             if (left == null || right == null) return false;
             if (left.Size != right.Size) return false;
