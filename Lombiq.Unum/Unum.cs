@@ -234,7 +234,7 @@ namespace Lombiq.Unum
             UnumBits = BitMask.ShiftToRightEnd(UnumBits);
             var fractionSize = UnumBits.FindLeadingOne() - 1;
             if (fractionSize > 0) fractionSize -= 1;
-            if (exponentValue > 0) BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
+            if (exponentValue > 0) UnumBits = BitMask.SetZero(UnumBits, UnumBits.FindLeadingOne() - 1);
 
 
             UnumBits = SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize, fractionSize);
