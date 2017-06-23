@@ -32,22 +32,22 @@ namespace Hast.Samples.Consumer
             Console.WriteLine($"Bits required for a 3;4 environment: {environment.Size}.");
 
             environment = new UnumMetadata(4, 8);
-            Console.WriteLine($"Bits required for a 4;8 environment: {environment.Size}.");
+            Console.WriteLine($"\nBits required for a 4;8 environment: {environment.Size}.\n");
 
-            var unum = new Unum(environment, (uint)1);
-            var sum = new Unum(environment, (uint)0);
+            var unum = new Unum(environment, 1);
+            var sum = new Unum(environment, 0);
             BigInteger representation;
             var resultBytes = new byte[unum.UnumBits.SegmentCount * 4];
-            var interestingResults = new int[] { 64, 128, 200, 255 };
+            var interestingResults = new int[] { 64, 100, 128, 200, 250, 255 };
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i <= 255; i++)
             {
                 sum += unum;
                 unum += unum;
 
-                if (true)//(interestingResults.Contains(i))
+                if (interestingResults.Contains(i))
                 {
-                    Buffer.BlockCopy(sum.UnumBits.Segments, 0, resultBytes, 0, resultBytes.Length);
+                    Buffer.BlockCopy(sum.FractionToUintArray(), 0, resultBytes, 0, resultBytes.Length);
                     representation = new BigInteger(resultBytes);
 
                     Console.WriteLine($"Sum of the first {i} powers of 2: {representation.ToString()}.");
