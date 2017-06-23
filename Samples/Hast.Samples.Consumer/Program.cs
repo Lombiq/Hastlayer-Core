@@ -38,7 +38,7 @@ namespace Hast.Samples.Consumer
             var sum = new Unum(environment, 0);
             BigInteger representation;
             var resultBytes = new byte[unum.UnumBits.SegmentCount * 4];
-            var interestingResults = new int[] { 64, 100, 128, 200, 250, 255 };
+            var interestingResults = new int[] { 8, 64, 100, 128, 200, 250, 255 };
 
             for (int i = 1; i <= 255; i++)
             {
@@ -50,7 +50,7 @@ namespace Hast.Samples.Consumer
                     Buffer.BlockCopy(sum.FractionToUintArray(), 0, resultBytes, 0, resultBytes.Length);
                     representation = new BigInteger(resultBytes);
 
-                    Console.WriteLine($"Sum of the first {i} powers of 2: {representation.ToString()}.");
+                    Console.WriteLine($"Sum of the first {i.ToString().PadLeft(3, ' ')} powers of 2: {representation.ToString()}.");
                 }
             }
 
