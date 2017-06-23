@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Numerics;
 using Hast.Common.Configuration;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
@@ -23,7 +24,7 @@ namespace Hast.Samples.Consumer
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one.
         /// </summary>
-        public static Sample SampleToRun = Sample.PrimeCalculator;
+        public static Sample SampleToRun = Sample.UnumCalculator;
     }
 
 
@@ -31,6 +32,19 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
+            var resultUintArray = new UnumCalculator().CalculateSumOfPowersofTwo(250);
+            var resultBytes = new byte[resultUintArray.Length * 4];
+
+            Buffer.BlockCopy(resultUintArray, 0, resultBytes, 0, resultUintArray.Length * 4);
+            var resultBigInteger = new BigInteger(resultBytes);
+
+            Console.WriteLine(resultBigInteger.ToString());
+
+
+
+
+
+
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
             Task.Run(async () =>
@@ -93,6 +107,9 @@ namespace Hast.Samples.Consumer
                             case Sample.SimdCalculator:
                                 SimdCalculatorSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.UnumCalculator:
+                                UnumCalculatorSampleRunner.Configure(configuration);
+                                break;
                             default:
                                 break;
                         }
@@ -106,7 +123,8 @@ namespace Hast.Samples.Consumer
                             new[]
                             {
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
-                                typeof(PrimeCalculator).Assembly
+                                typeof(PrimeCalculator).Assembly,
+                                typeof(Lombiq.Unum.Unum).Assembly
                             },
                             configuration);
 
@@ -143,6 +161,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.SimdCalculator:
                                 await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.UnumCalculator:
+                                await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             default:
                                 break;

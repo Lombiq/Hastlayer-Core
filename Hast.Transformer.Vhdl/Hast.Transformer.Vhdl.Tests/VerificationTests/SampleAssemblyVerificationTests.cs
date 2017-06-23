@@ -27,6 +27,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         {
             await _host.Run<ITransformer>(async transformer =>
             {
+                // Not adding the Unum sample yet since first Unum and the corresponding types need to be moved to their
+                // own assembly.
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
                     new[] { typeof(PrimeCalculator).Assembly, typeof(KpzKernelsInterface).Assembly },
@@ -58,6 +60,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             {
                                 MaxRecursionDepth = 5
                             });
+
+                        //configuration.AddHardwareEntryPointType<UnumCalculator>();
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
 
