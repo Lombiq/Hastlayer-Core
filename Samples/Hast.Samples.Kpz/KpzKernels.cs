@@ -7,15 +7,6 @@ using Hast.Algorithms;
 
 namespace Hast.Samples.Kpz
 {
-
-    /*
-    public static class KpzNodeExtensions
-    {
-        public static int width(this KpzNode[,] grid) { return grid.GetLength(0);}
-        public static int height(this KpzNode[,] grid) { return grid.GetLength(1); }
-    }
-    */
-
     public class KpzKernelsInterface
     {
         public virtual void DoIterations(SimpleMemory memory)
