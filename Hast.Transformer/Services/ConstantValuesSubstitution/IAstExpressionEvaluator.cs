@@ -12,5 +12,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
     {
         dynamic EvaluateBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression);
         dynamic EvaluateCastExpression(CastExpression castExpression);
+        dynamic EvaluateUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression);
     }
 }

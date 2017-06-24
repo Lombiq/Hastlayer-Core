@@ -153,6 +153,19 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             SubstituteValueHolderInExpressionIfInSuitableAssignment(invocationExpression);
         }
 
+        public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
+        {
+            base.VisitUnaryOperatorExpression(unaryOperatorExpression);
+
+            if (!(unaryOperatorExpression.Expression is PrimitiveExpression)) return;
+
+            PrimitiveExpression valueExpression;
+            if (_constantValuesTable.RetrieveAndDeleteConstantValue(unaryOperatorExpression, out valueExpression))
+            {
+                unaryOperatorExpression.ReplaceWith(valueExpression.Clone());
+            }
+        }
+
 
         private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
@@ -160,6 +173,19 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // statement then it can't be safely substituted (due to e.g. loop variables).
             if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
                 ConstantValueSubstitutionHelper.IsInWhile(expression))
+            {
+                return;
+            }
+
+            // If the value holder is inside a unary operator that can mutate its state then it can't be substituted.
+            var mutatingUnaryOperators = new[]
+            {
+                UnaryOperatorType.Decrement,
+                UnaryOperatorType.Increment,
+                UnaryOperatorType.PostDecrement,
+                UnaryOperatorType.PostIncrement
+            };
+            if (expression.Parent.Is<UnaryOperatorExpression>(unary => mutatingUnaryOperators.Contains(unary.Operator)))
             {
                 return;
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -114,6 +115,17 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsNonConstant(assignment.Left, parentBlock);
                     }
                 }
+            }
+            else if (primitiveExpressionParent is UnaryOperatorExpression)
+            {
+                // This is a unary expression where the target expression was already substituted with a const value.
+                // So we can also substitute the whole expression too.
+                var newExpression = new PrimitiveExpression(
+                    _astExpressionEvaluator.EvaluateUnaryOperatorExpression((UnaryOperatorExpression)primitiveExpressionParent));
+                newExpression.AddAnnotation(primitiveExpressionParent.Annotation<TypeInformation>());
+
+                _constantValuesSubstitutingAstProcessor.ConstantValuesTable
+                    .MarkAsPotentiallyConstant(primitiveExpressionParent, newExpression, primitiveExpressionParent.Parent);
             }
 
             // ObjectCreateExpression, ReturnStatement, InvocationExpression are handled in GlobalValueHoldersHandlingVisitor.
