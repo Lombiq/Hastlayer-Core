@@ -286,6 +286,7 @@ namespace Lombiq.Unum
         {
             if (right < 0) return left >> -right;
 
+            var result = new BitMask(left);
             bool carryOld, carryNew;
             var segmentMaskWithLeadingOne = 0x80000000; // 1000 0000 0000 0000 0000 0000 0000 0000 
             uint segmentMaskWithClosingOne = 1;         // 0000 0000 0000 0000 0000 0000 0000 0001 
@@ -294,16 +295,16 @@ namespace Lombiq.Unum
             {
                 carryOld = false;
 
-                for (int j = 0; j < left.SegmentCount; j++)
+                for (int j = 0; j < result.SegmentCount; j++)
                 {
-                    carryNew = ((left.Segments[j] & segmentMaskWithLeadingOne) == segmentMaskWithLeadingOne);
-                    left.Segments[j] = (left.Segments[j] << 1);
-                    if (carryOld) left.Segments[j] = left.Segments[j] | segmentMaskWithClosingOne;
+                    carryNew = ((result.Segments[j] & segmentMaskWithLeadingOne) == segmentMaskWithLeadingOne);
+                    result.Segments[j] = (result.Segments[j] << 1);
+                    if (carryOld) result.Segments[j] = result.Segments[j] | segmentMaskWithClosingOne;
                     carryOld = carryNew;
                 }
             }
 
-            return left;
+            return result;
         }
 
 

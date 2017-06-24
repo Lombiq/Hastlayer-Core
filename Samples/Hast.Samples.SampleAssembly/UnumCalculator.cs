@@ -10,44 +10,79 @@ namespace Hast.Samples.SampleAssembly
 {
     public class UnumCalculator
     {
-        public const int CalculateSumOfPowersofTwo_InputUInt32Index = 0;
-        public const int CalculateSumOfPowersofTwo_OutputUInt32Index = 0;
+        public const int AddToUnum_InputUInt32Index = 0;
+        public const int AddToUnum_OutputUInt32Index = 0;
 
-        public virtual void CalculateSumOfPowersofTwo(SimpleMemory memory)
+        public virtual void AddToUnum(SimpleMemory memory)
         {
-            var number = memory.ReadUInt32(CalculateSumOfPowersofTwo_InputUInt32Index);
+            var environment = new UnumMetadata(4, 3);
 
-            var environment = new UnumEnvironment(4, 8);
+            var input = memory.ReadUInt32(AddToUnum_InputUInt32Index);
 
-            var a = new Unum(environment, 1);
-            var b = new Unum(environment, 0);
+            var a = new Unum(environment, input);
 
-            for (var i = 1; i <= number; i++)
+            // a.FractionSize() works, running the body of Fraction() here works as well, but calling the method yields
+            // incorrect results:
+            //var fractionMaskTest = new BitMask(new uint[] { 1 }, 33);
+            //for (int i = 0; i < fractionMaskTest.Segments.Length; i++)
+            //{
+            //    memory.WriteUInt32(AddToUnum_OutputUInt32Index + i + offset, fractionMaskTest.Segments[i]);
+            //}
+
+            //offset += fractionMaskTest.Segments.Length;
+
+            //var fractionMaskTestResult = fractionMaskTest << 3;
+            //for (int i = 0; i < fractionMaskTestResult.Segments.Length; i++)
+            //{
+            //    memory.WriteUInt32(AddToUnum_OutputUInt32Index + i + offset, fractionMaskTestResult.Segments[i]);
+            //}
+
+
+            var offset = 1;
+
+
+            // 7, 0
+            //var fraction = a.Fraction();
+            //for (int i = 0; i < fraction.Segments.Length; i++)
+            //{
+            //    memory.WriteUInt32(AddToUnum_OutputUInt32Index + i + offset, fraction.Segments[i]);
+            //}
+
+            //offset += fraction.Segments.Length;
+            // Should be: 1792, 0
+            var fractionMask = a.FractionMask();
+            for (int i = 0; i < fractionMask.Segments.Length; i++)
             {
-                b += a;
-                a += a;
+                memory.WriteUInt32(AddToUnum_OutputUInt32Index + i + offset, fractionMask.Segments[i]);
             }
 
-            var resultArray = b.FractionToUintArray();
-            for (var i = 0; i < 9; i++)
-            {
-                memory.WriteUInt32(CalculateSumOfPowersofTwo_OutputUInt32Index + i, resultArray[i]);
-            }
+            memory.WriteUInt32(0, (uint)a);
+
+            //var b = new Unum(environment, (uint)5);
+            //var result = a + b;
+
+            //// 7, 0
+            //for (int i = 0; i < result.UnumBits.Segments.Length; i++)
+            //{
+            //    memory.WriteUInt32(AddToUnum_OutputUInt32Index + i + 1, result.UnumBits.Segments[i]);
+            //}
+
+            //memory.WriteUInt32(AddToUnum_OutputUInt32Index, (uint)result);
         }
     }
 
 
     public static class UnumCalculatorExtensions
     {
-        public static uint[] CalculateSumOfPowersofTwo(this UnumCalculator unumCalculator, uint number)
+        public static uint[] AddToUnum(this UnumCalculator unumCalculator, uint number)
         {
-            var memory = new SimpleMemory(9);
-            memory.WriteUInt32(UnumCalculator.CalculateSumOfPowersofTwo_InputUInt32Index, number);
-            unumCalculator.CalculateSumOfPowersofTwo(memory);
-            var resultArray = new uint[9];
-            for (var i = 0; i < 9; i++)
+            var memory = new SimpleMemory(100);
+            memory.WriteUInt32(UnumCalculator.AddToUnum_InputUInt32Index, number);
+            unumCalculator.AddToUnum(memory);
+            var resultArray = new uint[100];
+            for (var i = 0; i < 100; i++)
             {
-                resultArray[i] = memory.ReadUInt32(UnumCalculator.CalculateSumOfPowersofTwo_OutputUInt32Index + i);
+                resultArray[i] = memory.ReadUInt32(UnumCalculator.AddToUnum_OutputUInt32Index + i);
             }
             return resultArray;
         }
