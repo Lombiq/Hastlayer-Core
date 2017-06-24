@@ -17,7 +17,7 @@ namespace Hast.Samples.SampleAssembly
         {
             var number = memory.ReadUInt32(CalculateSumOfPowersofTwo_InputUInt32Index);
 
-            var environment = new UnumMetadata(4, 8);
+            var environment = new UnumEnvironment(4, 8);
 
             var a = new Unum(environment, 1);
             var b = new Unum(environment, 0);

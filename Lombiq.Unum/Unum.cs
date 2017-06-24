@@ -4,50 +4,50 @@ namespace Lombiq.Unum
 {
     public struct Unum
     {
-        private readonly UnumMetadata _metadata;
+        private readonly UnumEnvironment _environment;
 
         // Signbit Exponent Fraction Ubit ExponentSize FractionSize
         public BitMask UnumBits { get; set; }
 
         #region Unum structure
 
-        public byte ExponentSizeSize => _metadata.ExponentSizeSize; // "esizesize"
-        public byte FractionSizeSize => _metadata.FractionSizeSize; // "fsizesize"
+        public byte ExponentSizeSize => _environment.ExponentSizeSize; // "esizesize"
+        public byte FractionSizeSize => _environment.FractionSizeSize; // "fsizesize"
 
-        public byte ExponentSizeMax => _metadata.ExponentSizeMax; // "esizemax"
-        public ushort FractionSizeMax => _metadata.FractionSizeMax; // "fsizemax"
+        public byte ExponentSizeMax => _environment.ExponentSizeMax; // "esizemax"
+        public ushort FractionSizeMax => _environment.FractionSizeMax; // "fsizemax"
 
-        public byte UnumTagSize => _metadata.UnumTagSize; // "utagsize"
-        public ushort Size => _metadata.Size; // "maxubits"
+        public byte UnumTagSize => _environment.UnumTagSize; // "utagsize"
+        public ushort Size => _environment.Size; // "maxubits"
 
         #endregion
 
         #region Unum masks
 
-        public BitMask UncertaintyBitMask => _metadata.UncertaintyBitMask; // "ubitmask"
-        public BitMask ExponentSizeMask => _metadata.ExponentSizeMask; // "esizemask"
-        public BitMask FractionSizeMask => _metadata.FractionSizeMask; // "fsizemask"
-        public BitMask ExponentAndFractionSizeMask => _metadata.ExponentAndFractionSizeMask; // "efsizemask"
-        public BitMask UnumTagMask => _metadata.UnumTagMask; // "utagmask"
-        public BitMask SignBitMask => _metadata.SignBitMask; // "signbigu"
+        public BitMask UncertaintyBitMask => _environment.UncertaintyBitMask; // "ubitmask"
+        public BitMask ExponentSizeMask => _environment.ExponentSizeMask; // "esizemask"
+        public BitMask FractionSizeMask => _environment.FractionSizeMask; // "fsizemask"
+        public BitMask ExponentAndFractionSizeMask => _environment.ExponentAndFractionSizeMask; // "efsizemask"
+        public BitMask UnumTagMask => _environment.UnumTagMask; // "utagmask"
+        public BitMask SignBitMask => _environment.SignBitMask; // "signbigu"
 
         #endregion
 
-        #region Unum metadata
+        #region Unum environment
 
-        public BitMask ULP => _metadata.ULP; // Unit in the Last Place or Unit of Least Precision.
+        public BitMask ULP => _environment.ULP; // Unit in the Last Place or Unit of Least Precision.
 
-        public BitMask PositiveInfinity => _metadata.PositiveInfinity; // "posinfu"
-        public BitMask NegativeInfinity => _metadata.NegativeInfinity; // "neginfu"
+        public BitMask PositiveInfinity => _environment.PositiveInfinity; // "posinfu"
+        public BitMask NegativeInfinity => _environment.NegativeInfinity; // "neginfu"
 
-        public BitMask QuietNotANumber => _metadata.QuietNotANumber; // "qNaNu"
-        public BitMask SignalingNotANumber => _metadata.SignalingNotANumber; // "sNaNu"
+        public BitMask QuietNotANumber => _environment.QuietNotANumber; // "qNaNu"
+        public BitMask SignalingNotANumber => _environment.SignalingNotANumber; // "sNaNu"
 
-        public BitMask LargestPositive => _metadata.LargestPositive; // "maxrealu"
-        public BitMask SmallestPositive => _metadata.SmallestPositive; // "smallsubnormalu"
+        public BitMask LargestPositive => _environment.LargestPositive; // "maxrealu"
+        public BitMask SmallestPositive => _environment.SmallestPositive; // "smallsubnormalu"
 
-        public BitMask LargestNegative => _metadata.LargestNegative; // "negbigu"
-        public BitMask MinRealU => _metadata.MinRealU; // "minrealu"
+        public BitMask LargestNegative => _environment.LargestNegative; // "negbigu"
+        public BitMask MinRealU => _environment.MinRealU; // "minrealu"
 
         //private uint _smallNormal; // "smallnormalu"
 
@@ -57,56 +57,56 @@ namespace Lombiq.Unum
 
         public Unum(byte exponentSizeSize, byte fractionSizeSize)
         {
-            _metadata = new UnumMetadata(exponentSizeSize, fractionSizeSize);
+            _environment = new UnumEnvironment(exponentSizeSize, fractionSizeSize);
 
-            UnumBits = new BitMask(_metadata.Size);
+            UnumBits = new BitMask(_environment.Size);
         }
 
-        public Unum(UnumMetadata metadata)
+        public Unum(UnumEnvironment environment)
         {
-            _metadata = metadata;
+            _environment = environment;
 
-            UnumBits = new BitMask(_metadata.Size);
+            UnumBits = new BitMask(_environment.Size);
         }
 
         public Unum(BitMask wholeUnum, byte exponentSizeSize, byte fractionSizeSize)
         {
-            _metadata = new UnumMetadata(exponentSizeSize, fractionSizeSize);
+            _environment = new UnumEnvironment(exponentSizeSize, fractionSizeSize);
 
             UnumBits = wholeUnum;
         }
 
-        public Unum(UnumMetadata metadata, BitMask wholeUnum)
+        public Unum(UnumEnvironment environment, BitMask wholeUnum)
         {
-            _metadata = metadata;
+            _environment = environment;
 
             UnumBits = wholeUnum;
         }
 
         // This doesn't work for all cases yet.
-        //public Unum(UnumMetadata metadata, float number)
+        //public Unum(UnumEnvironment environment, float number)
         //{
-        //    _metadata = metadata;
+        //    _environment = environment;
 
         //    // Handling special cases first.
         //    if (float.IsNaN(number))
         //    {
-        //        UnumBits = _metadata.QuietNotANumber;
+        //        UnumBits = _environment.QuietNotANumber;
         //        return;
         //    }
         //    if (float.IsPositiveInfinity(number))
         //    {
-        //        UnumBits = _metadata.PositiveInfinity;
+        //        UnumBits = _environment.PositiveInfinity;
         //        return;
         //    }
         //    if (float.IsNegativeInfinity(number))
         //    {
-        //        UnumBits = _metadata.NegativeInfinity;
+        //        UnumBits = _environment.NegativeInfinity;
         //        return;
         //    }
 
 
-        //    UnumBits = new BitMask(_metadata.Size);
+        //    UnumBits = new BitMask(_environment.Size);
         //    var floatExponentBits = (BitConverter.ToUInt32(BitConverter.GetBytes(number), 0) << 1) >> 24;
 
         //    // These are the only uncertain cases that we can safely handle without Ubounds.
@@ -164,10 +164,10 @@ namespace Lombiq.Unum
         //        uncertainty, resultExponentSize, resultFractionSize);
         //}
 
-        public Unum(UnumMetadata metadata, uint value)
+        public Unum(UnumEnvironment environment, uint value)
         {
-            _metadata = metadata;
-            UnumBits = _metadata.EmptyBitMask;
+            _environment = environment;
+            UnumBits = _environment.EmptyBitMask;
 
             if (value == 0) return;
 
@@ -189,10 +189,10 @@ namespace Lombiq.Unum
             UnumBits = SetUnumBits(false, exponent, UnumBits, false, exponentSize - 1, fractionSize);
         }
 
-        public Unum(UnumMetadata metadata, uint[] input)
+        public Unum(UnumEnvironment environment, uint[] input)
         {
-            _metadata = metadata;
-            UnumBits = _metadata.EmptyBitMask;
+            _environment = environment;
+            UnumBits = _environment.EmptyBitMask;
 
 
             // Copying input to UnumBits BitMask.
@@ -203,7 +203,7 @@ namespace Lombiq.Unum
             }
 
             UnumBits += input[0];
-            if (UnumBits == _metadata.EmptyBitMask) return;
+            if (UnumBits == _environment.EmptyBitMask) return;
 
 
             // Handling Signbit.
@@ -226,7 +226,7 @@ namespace Lombiq.Unum
             if (exponentValue > (1 << exponentSize - 1)) exponentSize++;
             var bias = (1 << (exponentSize - 1)) - 1;
             exponentValue += (uint)bias;
-            var exponentMask = _metadata.EmptyBitMask + exponentValue;
+            var exponentMask = _environment.EmptyBitMask + exponentValue;
             if (exponentSize > 0) exponentSize -= 1; // Until now we needed the value, now we need the notation.
 
 
@@ -240,23 +240,23 @@ namespace Lombiq.Unum
             UnumBits = SetUnumBits(signBit, exponentMask, UnumBits, false, (uint)exponentSize, fractionSize);
         }
 
-        public Unum(UnumMetadata metadata, int value)
+        public Unum(UnumEnvironment environment, int value)
         {
-            _metadata = metadata;
+            _environment = environment;
 
-            if (value >= 0) UnumBits = new Unum(metadata, (uint)value).UnumBits;
+            if (value >= 0) UnumBits = new Unum(environment, (uint)value).UnumBits;
             else
             {
-                UnumBits = new Unum(metadata, (uint)-value).UnumBits;
+                UnumBits = new Unum(environment, (uint)-value).UnumBits;
                 UnumBits = Negate().UnumBits;
             }
         }
 
         // This doesn't work for all cases yet.
-        //public Unum(UnumMetadata metadata, double x)
+        //public Unum(UnumEnvironment environment, double x)
         //{
-        //    _metadata = metadata;
-        //    UnumBits = _metadata.EmptyBitMask;
+        //    _environment = environment;
+        //    UnumBits = _environment.EmptyBitMask;
 
         //    // Handling special cases first.
         //    if (double.IsNaN(x))
@@ -316,7 +316,7 @@ namespace Lombiq.Unum
         //            UnumBits = IsPositive() ? LargestPositive : LargestNegative;
         //        else // If the exponent is too small, we will handle it as a signed uncertain zero.
         //        {
-        //            UnumBits = _metadata.EmptyBitMask;
+        //            UnumBits = _environment.EmptyBitMask;
         //            if (!IsPositive()) Negate();
         //        }
 
@@ -361,7 +361,7 @@ namespace Lombiq.Unum
         public BitMask SetUnumBits(bool signBit, BitMask exponent, BitMask fraction,
             bool uncertainityBit, uint exponentSize, uint fractionSize)
         {
-            var wholeUnum = _metadata.EmptyBitMask;
+            var wholeUnum = _environment.EmptyBitMask;
 
             wholeUnum = FractionSizeMask & new BitMask(new uint[] { fractionSize }, Size);
             wholeUnum = wholeUnum | (new BitMask(new uint[] { exponentSize }, Size) << FractionSizeSize);
@@ -443,14 +443,14 @@ namespace Lombiq.Unum
 
         #region Unum numeric states
 
-        public bool IsExact() => (UnumBits & UncertaintyBitMask) == _metadata.EmptyBitMask;
+        public bool IsExact() => (UnumBits & UncertaintyBitMask) == _environment.EmptyBitMask;
 
-        public bool IsPositive() => (UnumBits & SignBitMask) == _metadata.EmptyBitMask;
+        public bool IsPositive() => (UnumBits & SignBitMask) == _environment.EmptyBitMask;
 
         public bool IsZero() =>
-            (UnumBits & UncertaintyBitMask) == _metadata.EmptyBitMask &&
-            (UnumBits & FractionMask()) == _metadata.EmptyBitMask &&
-            (UnumBits & ExponentMask()) == _metadata.EmptyBitMask;
+            (UnumBits & UncertaintyBitMask) == _environment.EmptyBitMask &&
+            (UnumBits & FractionMask()) == _environment.EmptyBitMask &&
+            (UnumBits & ExponentMask()) == _environment.EmptyBitMask;
 
         #endregion
 
@@ -505,27 +505,27 @@ namespace Lombiq.Unum
 
         public static Unum AddExactUnums(Unum left, Unum right)
         {
-            var scratchPad = left._metadata.EmptyBitMask; // It could be only FractionSizeMax +2 long if Hastlayer enabled it.
+            var scratchPad = left._environment.EmptyBitMask; // It could be only FractionSizeMax +2 long if Hastlayer enabled it.
 
             // Handling special cases first.
             if (left.IsNan() || right.IsNan())
-                return new Unum(left._metadata, left.QuietNotANumber);
+                return new Unum(left._environment, left.QuietNotANumber);
 
             if ((left.IsPositiveInfinity() && right.IsNegativeInfinity()) ||
                 (left.IsNegativeInfinity() && right.IsPositiveInfinity()))
-                return new Unum(left._metadata, left.QuietNotANumber);
+                return new Unum(left._environment, left.QuietNotANumber);
 
             if (left.IsPositiveInfinity() || right.IsPositiveInfinity())
-                return new Unum(left._metadata, left.PositiveInfinity);
+                return new Unum(left._environment, left.PositiveInfinity);
 
             if (left.IsNegativeInfinity() || right.IsNegativeInfinity())
-                return new Unum(left._metadata, left.NegativeInfinity);
+                return new Unum(left._environment, left.NegativeInfinity);
 
 
-            // Using the metadata properties directly for now, as custom properties like left.ExponentSizeSize are not
+            // Using the environment properties directly for now, as custom properties like left.ExponentSizeSize are not
             // yet supported.
-            var resultExponentSizeSize = left._metadata.ExponentSizeSize;
-            var resultFractionSizeSize = left._metadata.FractionSizeSize;
+            var resultExponentSizeSize = left._environment.ExponentSizeSize;
+            var resultFractionSizeSize = left._environment.FractionSizeSize;
             var resultUnum = new Unum(resultExponentSizeSize, resultFractionSizeSize);
 
             var exponentValueDifference = left.ExponentValueWithBias() - right.ExponentValueWithBias();
@@ -579,7 +579,7 @@ namespace Lombiq.Unum
 
 
             var exponentChange = (int)scratchPad.FindLeadingOne() - (resultUnum.FractionSizeMax + 1);
-            var resultExponent = left._metadata.EmptyBitMask +
+            var resultExponent = left._environment.EmptyBitMask +
                 ExponentValueToExponentBits(resultExponentValue + exponentChange, left.Size);
             uint resultExponentSize = ExponentValueToExponentSize(resultExponentValue + exponentChange) - 1;
 

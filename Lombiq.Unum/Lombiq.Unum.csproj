@@ -46,7 +46,7 @@
     <Compile Include="UnumConfiguration.cs" />
     <Compile Include="UnumException.cs" />
     <Compile Include="UnumHelper.cs" />
-    <Compile Include="UnumMetadata.cs" />
+    <Compile Include="UnumEnvironment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

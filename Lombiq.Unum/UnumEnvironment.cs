@@ -1,6 +1,6 @@
 ﻿namespace Lombiq.Unum
 {
-    public class UnumMetadata
+    public class UnumEnvironment
     {
         #region Unum structure
         public byte ExponentSizeSize { get; } // "esizesize"
@@ -43,7 +43,7 @@
         #endregion
 
 
-        public UnumMetadata(byte exponentSizeSize, byte fractionSizeSize)
+        public UnumEnvironment(byte exponentSizeSize, byte fractionSizeSize)
         {
             // Initializing structure.
             ExponentSizeSize = exponentSizeSize;
@@ -70,7 +70,7 @@
             SignBitMask = new BitMask(Size);
             SignBitMask = BitMask.SetOne(SignBitMask, (uint)Size - 1);
 
-            // Initializing metadata.
+            // Initializing environment.
             EmptyBitMask = new BitMask(Size);
             ULP = new BitMask(Size);
             ULP = BitMask.SetOne(ULP, UnumTagSize);
@@ -97,7 +97,7 @@
             //_smallNormal = _exponentAndFractionSizeMask + 1 << _size - 1 - _exponentSizeMax;
         }
 
-        public static UnumMetadata FromConfiguration(byte eSize, ushort fSize) =>
-            new UnumMetadata(UnumHelper.SegmentSizeToSegmentSizeSize(eSize), UnumHelper.SegmentSizeToSegmentSizeSize(fSize));
+        public static UnumEnvironment FromConfiguration(byte eSize, ushort fSize) =>
+            new UnumEnvironment(UnumHelper.SegmentSizeToSegmentSizeSize(eSize), UnumHelper.SegmentSizeToSegmentSizeSize(fSize));
     }
 }
