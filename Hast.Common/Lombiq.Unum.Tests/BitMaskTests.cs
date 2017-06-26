@@ -1,5 +1,5 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System;
 
 namespace Lombiq.Unum.Tests
 {
@@ -11,13 +11,13 @@ namespace Lombiq.Unum.Tests
         {
             var sizesAndSegmentCounts = new Tuple<BitMask, uint>[]
             {
-                Tuple.Create(new BitMask(0, false), (uint)0),
-                Tuple.Create(new BitMask(31, false), (uint)1),
-                Tuple.Create(new BitMask(32, false), (uint)1),
-                Tuple.Create(new BitMask(33, false), (uint)2),
-                Tuple.Create(new BitMask(1023, false), (uint)32),
-                Tuple.Create(new BitMask(1024, false), (uint)32),
-                Tuple.Create(new BitMask(1025, false), (uint)33)
+                Tuple.Create(new BitMask(0), (uint)0),
+                Tuple.Create(new BitMask(31), (uint)1),
+                Tuple.Create(new BitMask(32), (uint)1),
+                Tuple.Create(new BitMask(33), (uint)2),
+                Tuple.Create(new BitMask(1023), (uint)32),
+                Tuple.Create(new BitMask(1024), (uint)32),
+                Tuple.Create(new BitMask(1025), (uint)33)
             };
 
             foreach (var item in sizesAndSegmentCounts) Assert.AreEqual(item.Item2, item.Item1.SegmentCount, $"Size: {item.Item1.Size}");
@@ -42,21 +42,21 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void BitMaskSetOneIsCorrect()
         {
-            Assert.AreEqual(1, BitMask.SetOne(new BitMask(new uint[] { 0 }), 0).Segments[0]);
-            Assert.AreEqual(Math.Pow(2, 5), BitMask.SetOne(new BitMask(32, false), 5).Segments[0]);
-            Assert.AreEqual(0xFFFF, BitMask.SetOne(new BitMask(new uint[] { 0xFFFF }), 5).Segments[0]);
-            Assert.AreEqual(0xFFFF + Math.Pow(2, 30), BitMask.SetOne(new BitMask(new uint[] { 0xFFFF }), 30).Segments[0]);
-            Assert.AreEqual(Math.Pow(2, 31), BitMask.SetOne(new BitMask(new uint[] { 0 }), 31).Segments[0]);
-            Assert.AreEqual(Math.Pow(2, 32) - 1, BitMask.SetOne(new BitMask(new uint[] { 0xFFFFFFFE }), 0).Segments[0]);
-            Assert.AreEqual(Math.Pow(2, 32) - 1, BitMask.SetOne(new BitMask(new uint[] { 0x7FFFFFFF }), 31).Segments[0]);
-            Assert.AreEqual(new BitMask(new uint[] { 0, 0, 0xFFFF }), BitMask.SetOne(new BitMask(new uint[] { 0, 0, 0xFFFF }), 79));
-            Assert.AreEqual(new BitMask(new uint[] { 0, 0, 0x1FFFF }), BitMask.SetOne(new BitMask(new uint[] { 0, 0, 0xFFFF }), 80));
+            //Assert.AreEqual(1, new BitMask(new uint[] { 0 }).SetOne(0).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 5), new BitMask(32).SetOne(5).Segments[0]);
+            Assert.AreEqual(0xFFFF, new BitMask(new uint[] { 0xFFFF }).SetOne(5).Segments[0]);
+            Assert.AreEqual(0xFFFF + Math.Pow(2, 30), new BitMask(new uint[] { 0xFFFF }).SetOne(30).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 31), new BitMask(new uint[] { 0 }).SetOne(31).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 32) - 1, new BitMask(new uint[] { 0xFFFFFFFE }).SetOne(0).Segments[0]);
+            Assert.AreEqual(Math.Pow(2, 32) - 1, new BitMask(new uint[] { 0x7FFFFFFF }).SetOne(31).Segments[0]);
+            Assert.AreEqual(new BitMask(new uint[] { 0, 0, 0xFFFF }), new BitMask(new uint[] { 0, 0, 0xFFFF }).SetOne(79));
+            Assert.AreEqual(new BitMask(new uint[] { 0, 0, 0x1FFFF }), new BitMask(new uint[] { 0, 0, 0xFFFF }).SetOne(80));
         }
         [Test]
         public void BitMaskSeZeroIsCorrect()
         {
-            Assert.AreEqual(0, BitMask.SetZero(new BitMask(new uint[] { 1 }), 0).Segments[0]);
-            Assert.AreEqual(0x7FFF, BitMask.SetZero(new BitMask(new uint[] { 0xFFFF }), 15).Segments[0]);
+            Assert.AreEqual(0, new BitMask(new uint[] { 1 }).SetZero(0).Segments[0]);
+            Assert.AreEqual(0x7FFF, new BitMask(new uint[] { 0xFFFF }).SetZero(15).Segments[0]);
 
         }
 
@@ -65,7 +65,7 @@ namespace Lombiq.Unum.Tests
         {
             var masks = new BitMask[]
             {
-                new BitMask(), new BitMask(new uint[] { 0x42, 0x42 }), new BitMask(new uint[] { 0x88, 0x88, 0x88 })
+                new BitMask(new uint[] { 0x42, 0x42 }), new BitMask(new uint[] { 0x88, 0x88, 0x88 })
             };
 
             foreach (var mask in masks) Assert.AreEqual(mask, new BitMask(mask));
@@ -124,15 +124,15 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(new BitMask(new uint[] { 0x80000000 }),
                             new BitMask(new uint[] { 1 }) << 31);
             Assert.AreEqual(new BitMask(new uint[] { 0x00000000, 0x80000000 }),
-                           new BitMask(new uint[] { 1, 0 }) << 63);
+                            new BitMask(new uint[] { 1, 0 }) << 63);
             Assert.AreEqual(new BitMask(new uint[] { 0 }),
                             new BitMask(new uint[] { 0x00000001 }) << 32);
             Assert.AreEqual(new BitMask(new uint[] { 0x80000000, 0x00000000 }),
                             new BitMask(new uint[] { 0x00800000, 0x00000000 }) << 8);
             Assert.AreEqual(new BitMask(new uint[] { 1 }),
                             new BitMask(new uint[] { 0x80000000 }) << -31);
-            Assert.AreEqual(new BitMask(new uint[] { 1, 0 } ) << 63,
-                new BitMask(new uint[] { 0x00000000, 0x80000000 }) );
+            Assert.AreEqual(new BitMask(new uint[] { 1, 0 }) << 63,
+                            new BitMask(new uint[] { 0x00000000, 0x80000000 }));
 
         }
 
@@ -146,7 +146,7 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(new BitMask(new uint[] { 1, 0 }),
                             new BitMask(new uint[] { 0x00000000, 0x80000000 }) >> 63);
             Assert.AreEqual(new BitMask(new uint[] { 0x10000010, 0x00000000 }),
-                new BitMask(new uint[] { 0x00000100, 0x00000001 }) >> 4);
+                            new BitMask(new uint[] { 0x00000100, 0x00000001 }) >> 4);
             Assert.AreEqual(new BitMask(new uint[] { 0 }),
                             new BitMask(new uint[] { 0x80000000 }) >> 32);
             Assert.AreEqual(new BitMask(new uint[] { 0x80000000 }),
@@ -158,10 +158,10 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void FindLeadingOneIsCorrect()
         {
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000000, 0x00000000 }).FindLeadingOne(), 0);
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000001, 0x00000000 }).FindLeadingOne(), 1);
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000002, 0x00000000 }).FindLeadingOne(), 2);
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000002, 0x00000001 }).FindLeadingOne(), 33);
+            Assert.AreEqual(0, new BitMask(new uint[] { 0x00000000, 0x00000000 }).FindLeadingOne());
+            Assert.AreEqual(1, new BitMask(new uint[] { 0x00000001, 0x00000000 }).FindLeadingOne());
+            Assert.AreEqual(2, new BitMask(new uint[] { 0x00000002, 0x00000000 }).FindLeadingOne());
+            Assert.AreEqual(33, new BitMask(new uint[] { 0x00000002, 0x00000001 }).FindLeadingOne());
         }
     }
 }

@@ -1,104 +1,124 @@
 ﻿using System;
+using System.Collections.Immutable;
 
 namespace Lombiq.Unum
 {
     public struct BitMask
     {
-        public uint Size { get; }
-        public uint SegmentCount { get; }
-        public uint[] Segments { get; }
+        public ushort Size { get; }
+        public ushort SegmentCount { get; }
+        public ImmutableArray<uint> Segments { get; }
 
 
         public BitMask(uint[] segments)
         {
-            SegmentCount = (uint)segments.Length;
-            Size = SegmentCount << 5;
-            Segments = new uint[SegmentCount];
-
-            Array.Copy(segments, Segments, SegmentCount);
+            SegmentCount = (ushort)segments.Length;
+            Size = (ushort)(SegmentCount << 5);
+            Segments = ImmutableArray.CreateRange(segments);
         }
 
-        public BitMask(uint[] segments, uint size)
+        public BitMask(uint[] segments, ushort size)
         {
             Size = size;
-            SegmentCount = size > (uint)segments.Length << 5 ?
-                (size >> 5) + (size % 32 == 0 ? 0 : (uint)1) :
-                (uint)segments.Length;
-            Segments = new uint[SegmentCount];
+            SegmentCount = size > (ushort)(segments.Length << 5) ?
+                (ushort)((size >> 5) + (size % 32 == 0 ? 0 : 1)) :
+                (ushort)segments.Length;
 
-            Array.Copy(segments, Segments, segments.Length);
-            for (int i = segments.Length; i < SegmentCount; i++) Segments[i] = 0;
+            if (SegmentCount > segments.Length)
+            {
+                /* Creating a new, temporary array once that will be used to initialize the ImmutableArray,
+                 * so the "extension" items (i.e. the 0-value items on top of the original segments) aren't added
+                 * using ImmutableArray.Add, which would instantiate a new array for each addition. */
+                var extendedSegments = new uint[SegmentCount];
+                Array.Copy(segments, extendedSegments, segments.Length);
+                Segments = ImmutableArray.CreateRange(extendedSegments);
+            }
+            else Segments = ImmutableArray.CreateRange(segments);
         }
 
-        public BitMask(uint size, bool allOne = false)
+        public BitMask(ImmutableArray<uint> segments, ushort size)
         {
-            SegmentCount = (size >> 5) + (size % 32 == 0 ? 0 : (uint)1);
             Size = size;
-            Segments = new uint[SegmentCount];
+            SegmentCount = size > (ushort)(segments.Length << 5) ?
+                (ushort)((size >> 5) + (size % 32 == 0 ? 0 : 1)) :
+                (ushort)segments.Length;
 
-            if (!allOne) return;
-            for (int i = 0; i < SegmentCount; i++) Segments[i] = uint.MaxValue;
+            if (SegmentCount > segments.Length)
+            {
+                /* Creating a new, temporary array once that will be used to initialize the ImmutableArray,
+                 * so the "extension" items (i.e. the 0-value items on top of the original segments) aren't added
+                 * using ImmutableArray.Add, which would instantiate a new array for each addition. */
+                var extendedSegments = new uint[SegmentCount];
+                segments.CopyTo(extendedSegments);
+                Segments = ImmutableArray.CreateRange(extendedSegments);
+            }
+            else Segments = ImmutableArray.CreateRange(segments);
+        }
+
+        public BitMask(ushort size, bool allOne = false)
+        {
+            SegmentCount = (ushort)((size >> 5) + (size % 32 == 0 ? 0 : 1));
+            Size = size;
+
+            // Creating a temporary array, so the items aren't added using ImmutableArray.Add,
+            // because that instantiates a new array for each execution.
+            var segments = new uint[SegmentCount];
+            for (ushort i = 0; i < SegmentCount; i++) segments[i] = allOne ? uint.MaxValue : 0;
+            Segments = ImmutableArray.CreateRange(segments);
         }
 
         public BitMask(BitMask source)
         {
             Size = source.Size;
             SegmentCount = source.SegmentCount;
-            Segments = new uint[SegmentCount];
-
-            // Nullcheck on Arrays is not supported yet in Hastlayer, but source.Segments
-            // can only be null if source.Size is zero, so it's safe to check that instead.
-            if (source.Size > 0) Array.Copy(source.Segments, Segments, SegmentCount);
+            Segments = source.SegmentCount > 0 ?
+                ImmutableArray.CreateRange(source.Segments) :
+                ImmutableArray.Create<uint>();
         }
 
 
-        public static BitMask SetOne(BitMask mask, uint index)
+        public BitMask SetOne(ushort index)
         {
-            if (index > mask.Size) return mask;
+            if (index > Size) return new BitMask(this);
 
-            // Integer conversion doesn't matter, because we only care about the bits,
-            // not the actual value represented, but it's needed for the bit shift to work.
             var bitPosition = index % 32;
             var segmentPosition = index >> 5;
 
-            if ((mask.Segments[segmentPosition] >> (int)bitPosition) % 2 == 0)
-                mask.Segments[segmentPosition] += (uint)1 << (int)bitPosition;
+            if ((Segments[segmentPosition] >> bitPosition) % 2 == 0)
+                return new BitMask(Segments.SetItem(segmentPosition, Segments[segmentPosition] | (uint)(1 << bitPosition)), Size);
+
+            return new BitMask(this);
+        }
+
+        public BitMask SetZero(ushort index)
+        {
+            var mask = new BitMask(this);
+            if (index > Size) return mask;
+
+            var bitPosition = index % 32;
+            var segmentPosition = index >> 5;
+
+            if ((mask.Segments[segmentPosition] >> bitPosition) % 2 == 1)
+                return new BitMask(Segments.SetItem(segmentPosition, mask.Segments[segmentPosition] & ~((uint)1 << bitPosition)), Size);
 
             return mask;
         }
 
-        public static BitMask SetZero(BitMask mask, uint index)
+        public BitMask ShiftToRightEnd()
         {
-            if (index > mask.Size) return mask;
+            var leadingOnePosition = FindLeadingOne();
+            var mask = new BitMask(this);
+            if (leadingOnePosition == 0) return mask;
 
-            // Integer conversion doesn't matter, because we only care about the bits,
-            // not the actual value represented, but it's needed for the bit shift to work.
-            var bitPosition = index % 32;
-            var segmentPosition = index >> 5;
-
-            if ((mask.Segments[segmentPosition] >> (int)bitPosition) % 2 == 1)
-                mask.Segments[segmentPosition] &= ~((uint)1 << (int)bitPosition);
-
-            return mask;
-        }
-
-        public static BitMask ShiftToRightEnd(BitMask input)
-        {
-            if (input.FindLeadingOne() == 0) return input;
-
-            while (input.Segments[0] % 2 == 0) input >>= 1;
-
-            return input;
+            return mask >> leadingOnePosition;
         }
 
 
         public static bool operator ==(BitMask left, BitMask right)
         {
-            if (left == null && right == null) return true;
-            if (left == null || right == null) return false;
-            if (left.Size != right.Size) return false;
+            if (left.SegmentCount != right.SegmentCount) return false;
 
-            for (int i = 0; i < left.SegmentCount; i++)
+            for (ushort i = 0; i < left.SegmentCount; i++)
                 if (left.Segments[i] != right.Segments[i]) return false;
 
             return true;
@@ -106,16 +126,16 @@ namespace Lombiq.Unum
 
         public static bool operator >(BitMask left, BitMask right)
         {
-            for (int i = (int)left.SegmentCount - 1; i >= 0; i--)
-                if (left.Segments[i] > right.Segments[i]) return true;
+            for (ushort i = 1; i <= left.SegmentCount; i++)
+                if (left.Segments[left.SegmentCount - i] > right.Segments[left.SegmentCount - i]) return true;
 
             return false;
         }
 
         public static bool operator <(BitMask left, BitMask right)
         {
-            for (int i = (int)left.SegmentCount - 1; i > 0; i--)
-                if (left.Segments[i] < right.Segments[i]) return true;
+            for (ushort i = 1; i <= left.SegmentCount; i++)
+                if (left.Segments[left.SegmentCount - i] < right.Segments[left.SegmentCount - i]) return true;
 
             return false;
         }
@@ -135,34 +155,34 @@ namespace Lombiq.Unum
         /// </summary>
         /// <param name="left">Left operand BitMask.</param>
         /// <param name="right">Right operand BitMask.</param>
-        /// <returns>The sum of the masks with respect to the size of the left operand.</returns>
+        /// <returns>The sum of the masks with respect to the size of the bigger operand.</returns>
         public static BitMask operator +(BitMask left, BitMask right)
         {
             if (left.SegmentCount == 0 || right.SegmentCount == 0) return left;
-
-            var mask = new BitMask(left.Size);
             bool carry = false, leftBit, rightBit;
-            int buffer, segment = 0, position = 0;
+            byte buffer;
+            ushort segmentPosition = 0, position = 0;
+            var segments = new uint[left.SegmentCount];
 
-            for (int i = 0; i < mask.Size; i++)
+            for (ushort i = 0; i < (left.Size > right.Size ? left.Size : right.Size); i++)
             {
-                leftBit = (left.Segments[segment] >> position) % 2 == 1;
-                rightBit = i >= right.Size ? false : (right.Segments[segment] >> position) % 2 == 1;
+                leftBit = (left.Segments[segmentPosition] >> position) % 2 == 1;
+                rightBit = i >= right.Size ? false : (right.Segments[segmentPosition] >> position) % 2 == 1;
 
-                buffer = (leftBit ? 1 : 0) + (rightBit ? 1 : 0) + (carry ? 1 : 0);
+                buffer = (byte)((leftBit ? 1 : 0) + (rightBit ? 1 : 0) + (carry ? 1 : 0));
 
-                if (buffer % 2 == 1) mask.Segments[segment] += (uint)(1 << position);
+                if (buffer % 2 == 1) segments[segmentPosition] += (uint)(1 << position);
                 carry = buffer >> 1 == 1;
 
                 position++;
                 if (position >> 5 == 1)
                 {
                     position = 0;
-                    segment++;
+                    segmentPosition++;
                 }
             }
 
-            return mask;
+            return new BitMask(segments);
         }
 
         /// <summary>
@@ -170,34 +190,35 @@ namespace Lombiq.Unum
         /// </summary>
         /// <param name="left">Left operand BitMask.</param>
         /// <param name="right">Right operand BitMask.</param>
-        /// <returns>The difference between the masks with respect to the size of the left operand.</returns>
+        /// <returns>The difference between the masks with respect to the size of the bigger operand.</returns>
         public static BitMask operator -(BitMask left, BitMask right)
         {
             if (left.SegmentCount == 0 || right.SegmentCount == 0) return left;
 
-            var mask = new BitMask(left.Size);
             bool carry = false, leftBit, rightBit;
-            int buffer, segment = 0, position = 0;
+            byte buffer;
+            ushort segmentPosition = 0, position = 0;
+            var segments = new uint[left.SegmentCount];
 
-            for (int i = 0; i < mask.Size; i++)
+            for (ushort i = 0; i < (left.Size > right.Size ? left.Size : right.Size); i++)
             {
-                leftBit = (left.Segments[segment] >> position) % 2 == 1;
-                rightBit = i >= right.Size ? false : (right.Segments[segment] >> position) % 2 == 1;
+                leftBit = (left.Segments[segmentPosition] >> position) % 2 == 1;
+                rightBit = i >= right.Size ? false : (right.Segments[segmentPosition] >> position) % 2 == 1;
 
-                buffer = 2 + (leftBit ? 1 : 0) - (rightBit ? 1 : 0) - (carry ? 1 : 0);
+                buffer = (byte)(2 + (leftBit ? 1 : 0) - (rightBit ? 1 : 0) - (carry ? 1 : 0));
 
-                if (buffer % 2 == 1) mask.Segments[segment] += (uint)(1 << position);
+                if (buffer % 2 == 1) segments[segmentPosition] += (uint)(1 << position);
                 carry = buffer >> 1 == 0;
 
                 position++;
                 if (position >> 5 == 1)
                 {
                     position = 0;
-                    segment++;
+                    segmentPosition++;
                 }
             }
 
-            return mask;
+            return new BitMask(segments);
         }
 
         public static BitMask operator ++(BitMask mask) => mask + 1;
@@ -208,43 +229,46 @@ namespace Lombiq.Unum
         {
             if (left.Size != right.Size) return new BitMask(left.Size);
 
-            var mask = new BitMask(left);
+            var segments = new uint[left.SegmentCount];
 
-            for (int i = 0; i < mask.SegmentCount; i++)
-                mask.Segments[i] = left.Segments[i] | right.Segments[i];
+            for (ushort i = 0; i < segments.Length; i++)
+                segments[i] = left.Segments[i] | right.Segments[i];
 
-            return mask;
+            return new BitMask(segments);
         }
 
         public static BitMask operator &(BitMask left, BitMask right)
         {
             if (left.Size != right.Size) return new BitMask(left.Size);
 
-            var mask = new BitMask(left);
+            var segments = new uint[left.SegmentCount];
 
-            for (int i = 0; i < mask.SegmentCount; i++)
-                mask.Segments[i] = left.Segments[i] & right.Segments[i];
+            for (ushort i = 0; i < segments.Length; i++)
+                segments[i] = left.Segments[i] & right.Segments[i];
 
-            return mask;
+            return new BitMask(segments);
         }
 
         public static BitMask operator ^(BitMask left, BitMask right)
         {
             if (left.Size != right.Size) return new BitMask(left.Size);
 
-            var mask = new BitMask(left);
+            var segments = new uint[left.SegmentCount];
 
-            for (int i = 0; i < mask.SegmentCount; i++)
-                mask.Segments[i] = left.Segments[i] ^ right.Segments[i];
+            for (ushort i = 0; i < segments.Length; i++)
+                segments[i] = left.Segments[i] ^ right.Segments[i];
 
-            return mask;
+            return new BitMask(segments);
         }
 
         public static BitMask operator ~(BitMask input)
         {
-            for (int i = 0; i < input.SegmentCount; i++) input.Segments[i] = ~input.Segments[i];
+            var segments = new uint[input.SegmentCount];
 
-            return input;
+            for (ushort i = 0; i < segments.Length; i++)
+                segments[i] = ~input.Segments[i];
+
+            return new BitMask(segments);
         }
 
         /// <summary>
@@ -256,24 +280,29 @@ namespace Lombiq.Unum
         public static BitMask operator >>(BitMask left, int right)
         {
             if (right < 0) return left << -right;
+            //if (right > left.Size) return new BitMask(left.Size);
 
             bool carryOld, carryNew;
-            var segmentMaskWithLeadingOne = 0x80000000; // 1000 0000 0000 0000 0000 0000 0000 0000 
+            var segmentMaskWithLeadingOne = 0x80000000; // 1000 0000 0000 0000 0000 0000 0000 0000
+            var segments = new uint[left.SegmentCount];
+            left.Segments.CopyTo(segments);
+            ushort currentIndex;
 
-            for (int i = 0; i < right; i++)
+            for (ushort i = 0; i < right; i++)
             {
                 carryOld = false;
 
-                for (int j = (int)left.SegmentCount - 1; j >= 0; j--)
+                for (ushort j = 1; j <= segments.Length; j++)
                 {
-                    carryNew = left.Segments[j] % 2 == 1;
-                    left.Segments[j] = (left.Segments[j] >> 1);
-                    if (carryOld) left.Segments[j] = left.Segments[j] | segmentMaskWithLeadingOne;
+                    currentIndex = (ushort)(segments.Length - j);
+                    carryNew = segments[currentIndex] % 2 == 1;
+                    segments[currentIndex] >>= 1;
+                    if (carryOld) segments[currentIndex] |= segmentMaskWithLeadingOne;
                     carryOld = carryNew;
                 }
             }
 
-            return left;
+            return new BitMask(segments);
         }
 
         /// <summary>
@@ -285,25 +314,28 @@ namespace Lombiq.Unum
         public static BitMask operator <<(BitMask left, int right)
         {
             if (right < 0) return left >> -right;
+            //if (right > left.Size) return new BitMask(left.Size);
 
             bool carryOld, carryNew;
-            var segmentMaskWithLeadingOne = 0x80000000; // 1000 0000 0000 0000 0000 0000 0000 0000 
-            uint segmentMaskWithClosingOne = 1;         // 0000 0000 0000 0000 0000 0000 0000 0001 
+            var segmentMaskWithLeadingOne = 0x80000000; // 1000 0000 0000 0000 0000 0000 0000 0000
+            uint segmentMaskWithClosingOne = 1;         // 0000 0000 0000 0000 0000 0000 0000 0001
+            var segments = new uint[left.SegmentCount];
+            left.Segments.CopyTo(segments);
 
-            for (int i = 0; i < right; i++)
+            for (ushort i = 0; i < right; i++)
             {
                 carryOld = false;
 
-                for (int j = 0; j < left.SegmentCount; j++)
+                for (ushort j = 0; j < segments.Length; j++)
                 {
-                    carryNew = ((left.Segments[j] & segmentMaskWithLeadingOne) == segmentMaskWithLeadingOne);
-                    left.Segments[j] = (left.Segments[j] << 1);
-                    if (carryOld) left.Segments[j] = left.Segments[j] | segmentMaskWithClosingOne;
+                    carryNew = ((segments[j] & segmentMaskWithLeadingOne) == segmentMaskWithLeadingOne);
+                    segments[j] <<= 1;
+                    if (carryOld) segments[j] |= segmentMaskWithClosingOne;
                     carryOld = carryNew;
                 }
             }
 
-            return left;
+            return new BitMask(segments);
         }
 
 
@@ -312,19 +344,20 @@ namespace Lombiq.Unum
         /// </summary>
         /// <returns>Returns the position (not index!) of the most significant 1-bit
         /// or zero if there is none.</returns>
-        public uint FindLeadingOne()
+        public ushort FindLeadingOne()
         {
-            uint position = 0;
-            uint temp;
+            ushort position = 0;
+            uint currentSegment;
 
-            for (int i = (int)SegmentCount - 1; i >= 0; i--)
+            // ushort can't be checked against with ">= 0", because that's always true.
+            for (ushort i = 1; i <= SegmentCount; i++)
             {
-                temp = Segments[i];
-                while (temp != 0)
+                currentSegment = Segments[SegmentCount - i];
+                while (currentSegment != 0)
                 {
-                    temp = temp >> 1;
+                    currentSegment >>= 1;
                     position++;
-                    if (temp == 0) return (uint)(i * 32 + position);
+                    if (currentSegment == 0) return (ushort)((SegmentCount - i) * 32 + position);
                 }
             }
 
