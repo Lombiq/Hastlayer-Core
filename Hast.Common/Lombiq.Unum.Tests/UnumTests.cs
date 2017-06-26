@@ -439,12 +439,12 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void SetUnumBitsIsCorrect()
         {
-            var unum = new Unum(_environment_2_3);
-            var exponent = new BitMask(new uint[] { 2 }, unum.Size);
-            var fraction = new BitMask(new uint[] { 4 }, unum.Size);
-            var wholeUnumBitMask = new BitMask(new uint[] { 0x811F }, unum.Size); // zeros 1000 0001 0001 1111
+            var unum = new Unum(_environment_3_4);
+            var exponent = new BitMask(new uint[] { 4 }, unum.Size);
+            var fraction = new BitMask(new uint[] { 8 }, unum.Size);
+            var wholeUnumBitMask = new BitMask(new uint[] { 0x0400087F, 1 }, unum.Size); // 1 0000 0100 0000 0000 0000 1000 0111 1111
 
-            Assert.AreEqual(wholeUnumBitMask, unum.SetUnumBits(true, exponent, fraction, false, 2, 3));
+            Assert.AreEqual(wholeUnumBitMask, unum.SetUnumBits(true, exponent, fraction, false, _environment_3_4.ExponentSizeMax, _environment_3_4.FractionSizeMax));
         }
 
         //[Test]

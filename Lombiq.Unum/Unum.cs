@@ -363,8 +363,8 @@ namespace Lombiq.Unum
         public BitMask SetUnumBits(bool signBit, BitMask exponent, BitMask fraction,
             bool uncertainityBit, byte exponentSize, ushort fractionSize)
         {
-            var wholeUnum = new BitMask(Size) + fractionSize;
-            wholeUnum += new BitMask(new uint[] { exponentSize }, Size) << FractionSizeSize;
+            var wholeUnum = new BitMask(new uint[] { (uint)exponentSize - 1 }, Size) << FractionSizeSize;
+            wholeUnum += (uint)fractionSize - 1;
 
             if (uncertainityBit) wholeUnum += UncertaintyBitMask;
 
