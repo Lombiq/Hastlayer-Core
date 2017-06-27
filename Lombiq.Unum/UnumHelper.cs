@@ -13,7 +13,7 @@
             if (segmentSize == 0) return 0;
 
             byte mostSignificantOneBitPosition = 15;
-            while (mostSignificantOneBitPosition > 0 && (segmentSize >> mostSignificantOneBitPosition) == 0) mostSignificantOneBitPosition--;
+            while (mostSignificantOneBitPosition >= 0 && (segmentSize >> mostSignificantOneBitPosition) == 0) mostSignificantOneBitPosition--;
 
             return ++mostSignificantOneBitPosition;
         }

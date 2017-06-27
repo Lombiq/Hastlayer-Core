@@ -63,7 +63,14 @@ namespace Lombiq.Unum
             // Creating a temporary array, so the items aren't added using ImmutableArray.Add,
             // because that instantiates a new array for each execution.
             var segments = new uint[SegmentCount];
-            for (ushort i = 0; i < SegmentCount; i++) segments[i] = allOne ? uint.MaxValue : 0;
+
+            // Setting the value of all, but the last segment.
+            for (ushort i = 0; i < SegmentCount - 1; i++) segments[i] = allOne ? uint.MaxValue : 0;
+
+            // The last segment is special in a way that it might not be necessary to have all 1 bits.
+            if (SegmentCount > 0)
+                segments[SegmentCount - 1] = allOne ? Size >> 5 == 0 ? uint.MaxValue : (uint)(1 << (Size >> 5)) - 1 : 0; // no ragrets
+
             Segments = ImmutableArray.CreateRange(segments);
         }
 
