@@ -4,15 +4,18 @@ using Hast.Transformer.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// An algorithm that doesn't do anything useful but showcases what kind of algorithms are best suited to
-    /// accelerate with Hastlayer.
+    /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer.
     /// </summary>
-    public class HastlayerOptimizedAlgorithm
+    /// <remarks>
+    /// This is the same code as in Hast.Samples.Demo (https://github.com/Lombiq/Hastlayer-Demo) but also added here for
+    /// convenience.
+    /// </remarks>
+    public class ParallelAlgorithm
     {
         public const int Run_InputUInt32Index = 0;
         public const int Run_OutputUInt32Index = 0;
 
-        public const int MaxDegreeOfParallelism = 200;
+        public const int MaxDegreeOfParallelism = 280;
 
 
         public virtual void Run(SimpleMemory memory)
@@ -33,7 +36,7 @@ namespace Hast.Samples.SampleAssembly
                         {
                             if (even)
                             {
-                                result += index; 
+                                result += index;
                             }
                             else
                             {
@@ -61,14 +64,14 @@ namespace Hast.Samples.SampleAssembly
     }
 
 
-    public static class HastlayerOptimizedAlgorithmExtensions
+    public static class ParallelAlgorithmExtensions
     {
-        public static uint Run(this HastlayerOptimizedAlgorithm algorithm, uint input)
+        public static uint Run(this ParallelAlgorithm algorithm, uint input)
         {
             var memory = new SimpleMemory(1);
-            memory.WriteUInt32(HastlayerOptimizedAlgorithm.Run_InputUInt32Index, input);
+            memory.WriteUInt32(ParallelAlgorithm.Run_InputUInt32Index, input);
             algorithm.Run(memory);
-            return memory.ReadUInt32(HastlayerOptimizedAlgorithm.Run_OutputUInt32Index);
+            return memory.ReadUInt32(ParallelAlgorithm.Run_OutputUInt32Index);
         }
     }
 }

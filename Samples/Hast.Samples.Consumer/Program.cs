@@ -72,8 +72,8 @@ namespace Hast.Samples.Consumer
                             case Sample.GenomeMatcher:
                                 GenomeMatcherSampleRunner.Configure(configuration);
                                 break;
-                            case Sample.HastlayerOptimizedAlgorithm:
-                                HastlayerOptimizedAlgorithmSampleRunner.Configure(configuration);
+                            case Sample.ParallelAlgorithm:
+                                ParallelAlgorithmSampleRunner.Configure(configuration);
                                 break;
                             case Sample.ImageProcessingAlgorithms:
                                 ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
@@ -123,8 +123,8 @@ namespace Hast.Samples.Consumer
                             case Sample.GenomeMatcher:
                                 await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
-                            case Sample.HastlayerOptimizedAlgorithm:
-                                await HastlayerOptimizedAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            case Sample.ParallelAlgorithm:
+                                await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.ImageProcessingAlgorithms:
                                 await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
