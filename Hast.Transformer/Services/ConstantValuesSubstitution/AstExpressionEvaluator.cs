@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 
-namespace Hast.Transformer.Services
+namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     public class AstExpressionEvaluator : IAstExpressionEvaluator
     {
@@ -73,7 +73,7 @@ namespace Hast.Transformer.Services
                 default:
                     throw new NotImplementedException(
                         "Evaluating binary operator expressions with the operator " + binaryOperatorExpression.Operator + 
-                        " is not supported.");
+                        " is not supported. Affected expression: " + binaryOperatorExpression.ToString());
             }
         }
 
@@ -120,7 +120,53 @@ namespace Hast.Transformer.Services
                 case "System.UInt64":
                     return (ulong)value;
                 default:
-                    throw new NotSupportedException("Evaluating casting to " + toType.FullName + " is not supported.");
+                    throw new NotSupportedException(
+                        "Evaluating casting to " + toType.FullName + " is not supported. Affected expression: " + 
+                        castExpression.ToString());
+            }
+        }
+
+        public dynamic EvaluateUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
+        {
+            if (!(unaryOperatorExpression.Expression is PrimitiveExpression))
+            {
+                throw new NotSupportedException(
+                    "Evaluating only unary expressions that target a primitive expression are supported. The targeted expression was: " +
+                    unaryOperatorExpression.Expression.ToString() + ".");
+            }
+
+            dynamic value = ((PrimitiveExpression)unaryOperatorExpression.Expression).Value;
+
+            switch (unaryOperatorExpression.Operator)
+            {
+                //case UnaryOperatorType.Any:
+                //    break;
+                case UnaryOperatorType.Not:
+                    return !value;
+                case UnaryOperatorType.BitNot:
+                    return ~value;
+                case UnaryOperatorType.Minus:
+                    return -value;
+                case UnaryOperatorType.Plus:
+                    return +value;
+                case UnaryOperatorType.Increment:
+                    return ++value;
+                case UnaryOperatorType.Decrement:
+                    return --value;
+                case UnaryOperatorType.PostIncrement:
+                    return value++;
+                case UnaryOperatorType.PostDecrement:
+                    return value--;
+                //case UnaryOperatorType.Dereference:
+                //    break;
+                //case UnaryOperatorType.AddressOf:
+                //    break;
+                //case UnaryOperatorType.Await:
+                //    break;
+                default:
+                    throw new NotSupportedException(
+                        "Evaluating unary operator expressions with the operator " + unaryOperatorExpression.Operator + 
+                        " is not supported. Affected expression: " + unaryOperatorExpression.ToString());
             }
         }
     }

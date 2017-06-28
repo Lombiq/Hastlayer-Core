@@ -9,6 +9,7 @@ using Hast.Common.Models;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
+using Hast.Transformer.Services.ConstantValuesSubstitution;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.Ast.Transforms;
@@ -35,6 +36,7 @@ namespace Hast.Transformer
         private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
         private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
         private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
+        private readonly IOperatorAssignmentsToSimpleAssignmentsConverter _operatorAssignmentsToSimpleAssignmentsConverter;
 
 
         public DefaultTransformer(
@@ -52,7 +54,8 @@ namespace Hast.Transformer
             IConstructorsToMethodsConverter constructorsToMethodsConverter,
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
             IConstantValuesSubstitutor constantValuesSubstitutor,
-            IOperatorsToMethodsConverter operatorsToMethodsConverter)
+            IOperatorsToMethodsConverter operatorsToMethodsConverter,
+            IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -69,6 +72,7 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
             _constantValuesSubstitutor = constantValuesSubstitutor;
             _operatorsToMethodsConverter = operatorsToMethodsConverter;
+            _operatorAssignmentsToSimpleAssignmentsConverter = operatorAssignmentsToSimpleAssignmentsConverter;
         }
 
 
@@ -94,7 +98,10 @@ namespace Hast.Transformer
             transformationId +=
                 string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
                 string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
-                _jsonConverter.Serialize(configuration.CustomConfiguration);
+                _jsonConverter.Serialize(configuration.CustomConfiguration) +
+                // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a 
+                // Hastlayer update.
+                GetType().Assembly.FullName;
 
 
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
@@ -175,6 +182,7 @@ namespace Hast.Transformer
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
+            _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree);
 
             // If the conversions removed something let's clean them up here.

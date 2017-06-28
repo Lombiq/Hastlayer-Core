@@ -7,7 +7,7 @@ using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
-namespace Hast.Transformer.Services
+namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     /// <summary>
     /// Substitutes variables, fields, etc. with constants if they can only ever have a compile-time defined value.

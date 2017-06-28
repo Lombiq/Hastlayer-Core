@@ -7,11 +7,39 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     public static class MemberReferenceExpressionExtensions
     {
+        /// <summary>
+        /// Find the referenced member's declaration.
+        /// </summary>
+        /// <param name="typeDeclarationLookupTable">
+        /// The <see cref="ITypeDeclarationLookupTable"/> instance corresponding to the current scope.
+        /// </param>
+        /// <param name="findLeftmostMemberIfRecursive">
+        /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if 
+        /// set to <c>true</c> the member corresponding to the leftmost member (<c>this.Property1</c> in this case) will
+        /// be looked up.
+        /// </param>
         public static EntityDeclaration FindMemberDeclaration(
             this MemberReferenceExpression memberReferenceExpression, 
-            ITypeDeclarationLookupTable typeDeclarationLookupTable)
+            ITypeDeclarationLookupTable typeDeclarationLookupTable,
+            bool findLeftmostMemberIfRecursive = false)
         {
-            var type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable);
+            TypeDeclaration type;
+
+            if (memberReferenceExpression.Target is MemberReferenceExpression)
+            {
+                if (findLeftmostMemberIfRecursive)
+                {
+                    return ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(typeDeclarationLookupTable, true); 
+                }
+                else
+                {
+                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
+                }
+            }
+            else
+            {
+                type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable); 
+            }
 
             if (type == null) return null;
 
@@ -73,31 +101,45 @@ namespace ICSharpCode.NRefactory.CSharp
             this MemberReferenceExpression memberReferenceExpression, 
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            if (memberReferenceExpression.Target is TypeReferenceExpression)
+            var target = memberReferenceExpression.Target;
+
+            if (target is TypeReferenceExpression)
             {
                 // The member is in a different class.
-                return typeDeclarationLookupTable.Lookup((TypeReferenceExpression)memberReferenceExpression.Target);
+                return typeDeclarationLookupTable.Lookup((TypeReferenceExpression)target);
             }
-            else if (memberReferenceExpression.Target is BaseReferenceExpression)
+            else if (target is BaseReferenceExpression)
             {
                 // The member is in the base class (because of single class inheritance in C#, there can be only one base class).
                 return memberReferenceExpression.FindFirstParentTypeDeclaration().BaseTypes
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
-            else if (memberReferenceExpression.Target is IdentifierExpression)
+            else if (target is IdentifierExpression)
             {
-                return typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeReference().FullName);
+                return typeDeclarationLookupTable.Lookup(target.GetActualTypeReference().FullName);
             }
-            else if (memberReferenceExpression.Target is MemberReferenceExpression)
+            else if (target is MemberReferenceExpression)
             {
-                return ((MemberReferenceExpression)memberReferenceExpression.Target).FindTargetTypeDeclaration(typeDeclarationLookupTable);
+                return ((MemberReferenceExpression)target).FindTargetTypeDeclaration(typeDeclarationLookupTable);
+            }
+            else if (target is ObjectCreateExpression)
+            {
+                // The member is referenced in an object initializer.
+                return typeDeclarationLookupTable.Lookup(((ObjectCreateExpression)target).Type);
             }
             else
             {
                 // The member is within this class.
                 return memberReferenceExpression.FindFirstParentTypeDeclaration();
             }
+        }
+
+        public static string GetMemberFullName(this MemberReferenceExpression memberReferenceExpression)
+        {
+            var memberDefinition = memberReferenceExpression.Annotation<IMemberDefinition>();
+            if (memberDefinition != null) return memberDefinition.FullName;
+            return null;
         }
 
         /// <summary>

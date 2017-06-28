@@ -107,8 +107,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 binaryOperations.Add(new PartiallyTransformedBinaryOperatorExpression
                 {
                     BinaryOperatorExpression = binaryOperatorExpression,
-                    LeftTransformed = new ArrayElementAccess { Array = vector1, IndexExpression = indexValue },
-                    RightTransformed = new ArrayElementAccess { Array = vector2, IndexExpression = indexValue }
+                    LeftTransformed = new ArrayElementAccess { ArrayReference = vector1, IndexExpression = indexValue },
+                    RightTransformed = new ArrayElementAccess { ArrayReference = vector2, IndexExpression = indexValue }
                 });
             }
 

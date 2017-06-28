@@ -45,6 +45,8 @@ namespace Hast.VhdlBuilder.Representation.Expression
                     Invocation.ToSigned(value, size)).ToVhdl(vhdlGenerationOptions);
             }
 
+            if (DataType == KnownDataTypes.Real) return Invocation.ToReal(new Raw(content)).ToVhdl(vhdlGenerationOptions);
+
             if (DataType.TypeCategory == DataTypeCategory.Scalar ||
                 DataType.TypeCategory == DataTypeCategory.Unit) return content;
 

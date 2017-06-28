@@ -40,6 +40,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
             var rightTypeReference = binaryOperatorExpression.Right.GetActualTypeReference();
 
+            // If this some null check then no need for any type conversion.
+            if (binaryOperatorExpression.Left is NullReferenceExpression || binaryOperatorExpression.Right is NullReferenceExpression)
+            {
+                return variableReference;
+            }
+
             // We won't get a type reference if the expression is a PrimitiveExpression (a constant). In this case we'll
             // assume that the type of the two sides is the same.
             if (binaryOperatorExpression.Left is PrimitiveExpression || binaryOperatorExpression.Right is PrimitiveExpression)
@@ -122,8 +128,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             Func<DataType, int> getSize = dataType => ((SizedDataType)dataType).Size;
 
-            var fromSize = fromType is SizedDataType ? getSize(fromType) : 0;
-            var toSize = toType is SizedDataType ? getSize(toType) : 0;
+            var fromSize = fromType.GetSize();
+            var toSize = toType.GetSize();
 
             var castInvocation = new Invocation();
             castInvocation.Parameters.Add(expression);
@@ -136,6 +142,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 castInvocation.Target = "resize".ToVhdlIdValue();
                 castInvocation.Parameters
                     .Add(size.ToVhdlValue(KnownDataTypes.UnrangedInt));
+                result.IsResized = true;
             };
 
             Action resizeToToSizeIfNeeded = () =>
@@ -169,6 +176,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.Real)
             {
                 castInvocation.Target = "real".ToVhdlIdValue();
+            }
+            else if (fromType == KnownDataTypes.Real &&KnownDataTypes.Integers.Contains(toType))
+            {
+                castInvocation.Target = "integer".ToVhdlIdValue();
             }
             else if (KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType))
             {
@@ -225,6 +236,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         {
             public IVhdlElement Expression { get; set; }
             public bool IsLossy { get; set; }
+            public bool IsResized { get; set; }
         }
     }
 }

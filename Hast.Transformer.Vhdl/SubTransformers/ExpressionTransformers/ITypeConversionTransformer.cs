@@ -11,6 +11,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         IVhdlElement Expression { get; }
         bool IsLossy { get; }
+        bool IsResized { get; }
     }
 
 

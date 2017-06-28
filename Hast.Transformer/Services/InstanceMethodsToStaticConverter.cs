@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ICSharpCode.Decompiler.Ast;
+using ICSharpCode.Decompiler.ILAst;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
@@ -52,8 +53,7 @@ namespace Hast.Transformer.Services
 
                 // Adding a "@this" parameter and using that instead of the "this" reference.
                 var thisParameter = new ParameterDeclaration(parentAstType, "this");
-                thisParameter.AddAnnotation(parentTypeDefinition);
-                thisParameter.AddAnnotation(new ParameterDefinition(parentTypeDefinition));
+                thisParameter.AddAnnotation(new ParameterDefinition("this", ParameterAttributes.None, parentTypeDefinition));
                 if (!methodDeclaration.Parameters.Any())
                 {
                     methodDeclaration.Parameters.Add(thisParameter);
@@ -92,6 +92,7 @@ namespace Hast.Transformer.Services
                     }
 
                     thisIdentifierExpression.AddAnnotation(typeInformation);
+                    thisIdentifierExpression.AddAnnotation(new ILVariable { Name = "this", Type = typeInformation.ExpectedType });
                     thisReferenceExpression.ReplaceWith(thisIdentifierExpression);
                 }
             }

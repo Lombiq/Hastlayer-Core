@@ -15,6 +15,19 @@ namespace Hast.TestInputs.Various
             var arrayLength = arrayHolder.Array.Length;
         }
 
+        public void PassArrayFromMethod()
+        {
+            var array = ArrayProducingMethod(5);
+        }
+
+
+        private int[] ArrayProducingMethod(int arrayLength)
+        {
+            var array = new int[arrayLength];
+            array[3] = 10;
+            return array;
+        }
+
 
         private class ArrayHolder
         {

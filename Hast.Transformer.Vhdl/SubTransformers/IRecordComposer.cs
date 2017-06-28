@@ -11,6 +11,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public interface IRecordComposer : IDependency
     {
         bool IsSupportedRecordMember(AstNode node);
-        Record CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
+        NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
     }
 }

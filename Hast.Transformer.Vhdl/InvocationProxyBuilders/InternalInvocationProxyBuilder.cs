@@ -317,7 +317,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 {
                                     AssignTo = new ArrayElementAccess
                                     {
-                                        Array = targetAvailableIndicatorVariableReference,
+                                        ArrayReference = targetAvailableIndicatorVariableReference,
                                         IndexExpression = c.ToVhdlValue(KnownDataTypes.UnrangedInt)
                                     },
                                     Expression = BinaryChainBuilder.BuildBinaryChain(selectorConditions, BinaryOperator.And)
@@ -418,7 +418,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         {
                                             AssignTo = new ArrayElementAccess
                                             {
-                                                Array = targetAvailableIndicatorVariableReference,
+                                                ArrayReference = targetAvailableIndicatorVariableReference,
                                                 IndexExpression = targetIndex.ToVhdlValue(KnownDataTypes.UnrangedInt)
                                             },
                                             Expression = Value.False

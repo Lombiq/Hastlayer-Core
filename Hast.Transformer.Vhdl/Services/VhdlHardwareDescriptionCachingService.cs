@@ -42,6 +42,9 @@ namespace Hast.Transformer.Vhdl.Services
             return _appDataFolder.Combine(
                 "Hastlayer", 
                 "VhdlHardwareDescriptionCacheFiles", 
+                // These could be SHA256 hashes too, as all hashes were the result is persisted. However that way the
+                // path would be too long... And here it doesn't really matter because caches are local to the machine
+                // any way (and on the same machine GetHashCode() will give the same result for the same input).
                 transformationContext.SyntaxTree.ToString().GetHashCode().ToString() + "-" + transformationContext.Id.GetHashCode());
         }
     }
