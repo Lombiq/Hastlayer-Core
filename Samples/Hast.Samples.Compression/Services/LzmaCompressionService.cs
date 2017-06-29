@@ -24,11 +24,11 @@ namespace Hast.Samples.Compression.Services
                 var dictionary = 1 << 23;
                 var posStateBits = 2;
                 int litContextBits = 3; // for normal files
-                                        // UInt32 litContextBits = 0; // for 32-bit data
+                                        // uint litContextBits = 0; // for 32-bit data
                 int litPosBits = 0;
-                // UInt32 litPosBits = 2; // for 32-bit data
+                // uint litPosBits = 2; // for 32-bit data
                 int algorithm = 2;
-                int numFastBytes = 128;
+                int numFastbytes = 128;
                 var stdInMode = false;
                 bool eos = stdInMode;
 
@@ -39,7 +39,7 @@ namespace Hast.Samples.Compression.Services
                     CoderPropertyId.LitContextBits,
                     CoderPropertyId.LitPosBits,
                     CoderPropertyId.Algorithm,
-                    CoderPropertyId.NumFastBytes,
+                    CoderPropertyId.NumFastbytes,
                     CoderPropertyId.MatchFinder,
                     CoderPropertyId.EndMarker
                 };
@@ -50,7 +50,7 @@ namespace Hast.Samples.Compression.Services
                     (int)(litContextBits),
                     (int)(litPosBits),
                     (int)(algorithm),
-                    (int)(numFastBytes),
+                    (int)(numFastbytes),
                     mf,
                     eos
                 };

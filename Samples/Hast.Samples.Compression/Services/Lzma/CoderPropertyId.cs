@@ -40,7 +40,7 @@ namespace Hast.Samples.Compression.Services.Lzma
         /// <summary>
         /// Specifies number of fast bytes for LZ*.
         /// </summary>
-        NumFastBytes,
+        NumFastbytes,
         /// <summary>
         /// Specifies match finder. LZMA: "BT2", "BT4" or "BT4B".
         /// </summary>

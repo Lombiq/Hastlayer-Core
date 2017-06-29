@@ -2,13 +2,13 @@ using System;
 
 namespace Hast.Samples.Compression.Services.Lzma
 {
-	class RangeEncoder
+	internal class RangeEncoder
 	{
 		public const uint kTopValue = (1 << 24);
 
 		System.IO.Stream Stream;
 
-		public UInt64 Low;
+		public ulong Low;
 		public uint Range;
 		uint _cacheSize;
 		byte _cache;
