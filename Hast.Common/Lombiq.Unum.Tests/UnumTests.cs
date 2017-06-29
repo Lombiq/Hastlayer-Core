@@ -77,7 +77,7 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(maxUnum.UnumBits, bitmaskMaxValue);
         }
 
-        //[Test]
+        [Test]
         public void FractionToUintArrayIsCorrect()
         {
             var maxValue = new uint[8];
@@ -324,7 +324,7 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(new BitMask(new uint[] { 0x1E01 }, 33), unum3.FractionWithHiddenBit());
         }
 
-        //[Test]
+        [Test]
         public void AddExactUnumsIsCorrect()
         {
             // First example from The End of Error p. 117.
@@ -369,7 +369,7 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(Unum.AddExactUnums(unumThirty, unumNegativeThirty).UnumBits, unumZero.UnumBits);
         }
 
-        //[Test]
+        [Test]
         public void AdditionIsCorrectForIntegers()
         {
             var result = new Unum(_environment_3_5, 0);
@@ -415,7 +415,7 @@ namespace Lombiq.Unum.Tests
         //    Assert.AreEqual((float)res3, 0.5F);
         //}
 
-        //[Test]
+        [Test]
         public void SubtractExactUnumsIsCorrect()
         {
             var bitmask1 = new BitMask(new uint[] { 0x7E012B }, 33); // 30.00390625
@@ -450,7 +450,7 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(wholeUnumBitMask, unum.SetUnumBits(true, exponent, fraction, false, 1, 0));
         }
 
-        //[Test]
+        [Test]
         public void IntToUnumIsCorrect()
         {
             var unumTwo = new Unum(_environment_3_4, 2);
@@ -482,7 +482,7 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(unumNegativeThousand.UnumBits, bitmaskMinus1000);
         }
 
-        //[Test]
+        [Test]
         public void UnumToUintIsCorrect()
         {
             var unumTwo = new Unum(_environment_3_4, 2);
@@ -508,7 +508,7 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(number6000, 6000);
         }
 
-        //[Test]
+        [Test]
         public void UnumToIntIsCorrect()
         {
             var unumOne = new Unum(_environment_3_4, 1);
@@ -552,7 +552,7 @@ namespace Lombiq.Unum.Tests
         //    Assert.AreEqual(second.UnumBits, bitmask_2);
         //}
 
-        //[Test]
+        [Test]
         public void UnumToFloatIsCorrect()
         {
             var unumThirty = new Unum(_environment_3_4, 30);
