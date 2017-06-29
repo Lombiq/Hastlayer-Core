@@ -102,16 +102,15 @@ namespace Lombiq.Unum
 
         public BitMask SetZero(ushort index)
         {
-            var mask = new BitMask(this);
-            if (index > Size) return mask;
+            if (index > Size) return new BitMask(this);
 
             var bitPosition = index % 32;
             var segmentPosition = index >> 5;
 
-            if ((mask.Segments[segmentPosition] >> bitPosition) % 2 == 1)
-                return new BitMask(Segments.SetItem(segmentPosition, mask.Segments[segmentPosition] & ~((uint)1 << bitPosition)), Size);
+            if ((Segments[segmentPosition] >> bitPosition) % 2 == 1)
+                return new BitMask(Segments.SetItem(segmentPosition, Segments[segmentPosition] & ~((uint)1 << bitPosition)), Size);
 
-            return mask;
+            return new BitMask(this);
         }
 
         public BitMask ShiftToRightEnd()
