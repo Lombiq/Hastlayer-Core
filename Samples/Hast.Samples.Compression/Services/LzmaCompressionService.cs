@@ -32,16 +32,16 @@ namespace Hast.Samples.Compression.Services
                 var stdInMode = false;
                 bool eos = stdInMode;
 
-                CoderPropID[] propIDs =
+                CoderPropertyId[] propIDs =
                 {
-                    CoderPropID.DictionarySize,
-                    CoderPropID.PosStateBits,
-                    CoderPropID.LitContextBits,
-                    CoderPropID.LitPosBits,
-                    CoderPropID.Algorithm,
-                    CoderPropID.NumFastBytes,
-                    CoderPropID.MatchFinder,
-                    CoderPropID.EndMarker
+                    CoderPropertyId.DictionarySize,
+                    CoderPropertyId.PosStateBits,
+                    CoderPropertyId.LitContextBits,
+                    CoderPropertyId.LitPosBits,
+                    CoderPropertyId.Algorithm,
+                    CoderPropertyId.NumFastBytes,
+                    CoderPropertyId.MatchFinder,
+                    CoderPropertyId.EndMarker
                 };
                 object[] properties =
                 {

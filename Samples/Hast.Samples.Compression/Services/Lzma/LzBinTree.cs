@@ -4,7 +4,7 @@ using System;
 
 namespace Hast.Samples.Compression.Services.Lzma
 {
-	public class BinTree : InWindow
+	public class BinTree : LzInWindow
 	{
 		UInt32 _cyclicBufferPos;
 		UInt32 _cyclicBufferSize = 0;

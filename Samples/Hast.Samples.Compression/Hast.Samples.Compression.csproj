@@ -49,30 +49,15 @@
     <Compile Include="Services\LzmaCompressionService.cs" />
     <Compile Include="Services\Lzma\BitTreeEncoder.cs" />
     <Compile Include="Services\Lzma\CRC.cs" />
-    <Compile Include="Services\Lzma\Enums.cs" />
+    <Compile Include="Services\Lzma\CoderPropertyId.cs" />
+    <Compile Include="Services\Lzma\Exceptions\LzmaInvalidParamException.cs" />
+    <Compile Include="Services\Lzma\Exceptions\LzmaDataErrorException.cs" />
     <Compile Include="Services\Lzma\LzBinTree.cs" />
     <Compile Include="Services\Lzma\LzInWindow.cs" />
     <Compile Include="Services\Lzma\RangeEncoder.cs" />
     <Compile Include="Services\Lzma\LzmaBase.cs" />
     <Compile Include="Services\Lzma\LzmaEncoder.cs" />
     <Compile Include="Services\Lzma\BitEncoder.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Common\CommandLineParser.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Common\CRC.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Common\InBuffer.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Common\OutBuffer.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LzmaAlone\LzmaAlone.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LzmaAlone\LzmaBench.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LZMA\LzmaBase.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LZMA\LzmaDecoder.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LZMA\LzmaEncoder.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LZ\IMatchFinder.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LZ\LzBinTree.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LZ\LzInWindow.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\LZ\LzOutWindow.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\RangeCoder\RangeCoder.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\RangeCoder\RangeCoderBit.cs" />
-    <Compile Include="Services\SevenZip.Lzma\Compress\RangeCoder\RangeCoderBitTree.cs" />
-    <Compile Include="Services\SevenZip.Lzma\ICoder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

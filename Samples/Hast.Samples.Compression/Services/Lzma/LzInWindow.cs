@@ -1,10 +1,8 @@
-// LzInWindow.cs
-
 using System;
 
 namespace Hast.Samples.Compression.Services.Lzma
 {
-	public class InWindow
+	public class LzInWindow
 	{
 		public Byte[] _bufferBase = null; // pointer to buffer with data
 		System.IO.Stream _stream;
