@@ -62,11 +62,12 @@ namespace Lombiq.Unum
             UnumBits = new BitMask(_environment.Size);
         }
 
-        public Unum(UnumEnvironment environment, BitMask wholeUnum)
+        public Unum(UnumEnvironment environment, BitMask bits)
         {
             _environment = environment;
 
-            UnumBits = wholeUnum;
+            // To be sure that UnumBits has the same size as the environment. Excess bits will be truncated.
+            UnumBits = new BitMask(bits.Segments, _environment.Size);
         }
 
         // This doesn't work for all cases yet.
