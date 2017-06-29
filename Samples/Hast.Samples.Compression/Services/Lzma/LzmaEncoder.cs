@@ -1324,7 +1324,7 @@ namespace Hast.Samples.Compression.Services.Lzma
                 for (posSlot = 0; posSlot < _distTableSize; posSlot++)
                     _posSlotPrices[st + posSlot] = encoder.GetPrice(posSlot);
                 for (posSlot = Base.kEndPosModelIndex; posSlot < _distTableSize; posSlot++)
-                    _posSlotPrices[st + posSlot] += ((((posSlot >> 1) - 1) - Base.kNumAlignBits) << BitEncoder.kNumBitPriceShiftBits);
+                    _posSlotPrices[st + posSlot] += ((((posSlot >> 1) - 1) - Base.kNumAlignBits) << RangeEncoderConstants.KNumBitPriceShiftBits);
 
                 uint st2 = lenToPosState * Base.kNumFullDistances;
                 uint i;
@@ -1338,8 +1338,8 @@ namespace Hast.Samples.Compression.Services.Lzma
 
         void FillAlignPrices()
         {
-            for (uint i = 0; i < Base.kAlignTableSize; i++)
-                _alignPrices[i] = _posAlignEncoder.ReverseGetPrice(i);
+            for (uint i = 0; i < Base.kAlignTableSize; i++) _alignPrices[i] = _posAlignEncoder.ReverseGetPrice(i);
+
             _alignPriceCount = 0;
         }
 

@@ -1,70 +1,69 @@
-using System;
-
 namespace Hast.Samples.Compression.Services.Lzma
 {
-	struct BitEncoder
-	{
-		public const int kNumBitModelTotalBits = 11;
-		public const uint kBitModelTotal = (1 << kNumBitModelTotalBits);
-		const int kNumMoveBits = 5;
-		const int kNumMoveReducingBits = 2;
-		public const int kNumBitPriceShiftBits = 6;
+    struct BitEncoder
+    {
+        private const int KNumMoveBits = 5;
+        private const int KNumMoveReducingBits = 2;
+        private static uint[] ProbPrices = new uint[RangeEncoderConstants.KBitModelTotal >> KNumMoveReducingBits];
 
-		uint Prob;
 
-		public void Init() { Prob = kBitModelTotal >> 1; }
+        private uint _prob;
+        
 
-		public void UpdateModel(uint symbol)
-		{
-			if (symbol == 0)
-				Prob += (kBitModelTotal - Prob) >> kNumMoveBits;
-			else
-				Prob -= (Prob) >> kNumMoveBits;
-		}
+        static BitEncoder()
+        {
+            const int kNumBits = (RangeEncoderConstants.KNumBitModelTotalBits - KNumMoveReducingBits);
+            for (int i = kNumBits - 1; i >= 0; i--)
+            {
+                var start = (uint)1 << (kNumBits - i - 1);
+                var end = (uint)1 << (kNumBits - i);
+                for (var j = start; j < end; j++)
+                {
+                    ProbPrices[j] = ((uint)i << RangeEncoderConstants.KNumBitPriceShiftBits) +
+                        (((end - j) << RangeEncoderConstants.KNumBitPriceShiftBits) >> (kNumBits - i - 1));
+                }
+            }
+        }
 
-		public void Encode(RangeEncoder encoder, uint symbol)
-		{
-			// encoder.EncodeBit(Prob, kNumBitModelTotalBits, symbol);
-			// UpdateModel(symbol);
-			uint newBound = (encoder.Range >> kNumBitModelTotalBits) * Prob;
-			if (symbol == 0)
-			{
-				encoder.Range = newBound;
-				Prob += (kBitModelTotal - Prob) >> kNumMoveBits;
-			}
-			else
-			{
-				encoder.Low += newBound;
-				encoder.Range -= newBound;
-				Prob -= (Prob) >> kNumMoveBits;
-			}
-			if (encoder.Range < RangeEncoder.kTopValue)
-			{
-				encoder.Range <<= 8;
-				encoder.ShiftLow();
-			}
-		}
 
-		private static uint[] ProbPrices = new uint[kBitModelTotal >> kNumMoveReducingBits];
+        public void Init() => _prob = RangeEncoderConstants.KBitModelTotal >> 1;
 
-		static BitEncoder()
-		{
-			const int kNumBits = (kNumBitModelTotalBits - kNumMoveReducingBits);
-			for (int i = kNumBits - 1; i >= 0; i--)
-			{
-				uint start = (uint)1 << (kNumBits - i - 1);
-				uint end = (uint)1 << (kNumBits - i);
-				for (uint j = start; j < end; j++)
-					ProbPrices[j] = ((uint)i << kNumBitPriceShiftBits) +
-						(((end - j) << kNumBitPriceShiftBits) >> (kNumBits - i - 1));
-			}
-		}
+        public void UpdateModel(uint symbol)
+        {
+            if (symbol == 0) _prob += (RangeEncoderConstants.KBitModelTotal - _prob) >> KNumMoveBits;
+            else _prob -= (_prob) >> KNumMoveBits;
+        }
 
-		public uint GetPrice(uint symbol)
-		{
-			return ProbPrices[(((Prob - symbol) ^ ((-(int)symbol))) & (kBitModelTotal - 1)) >> kNumMoveReducingBits];
-		}
-	  public uint GetPrice0() { return ProbPrices[Prob >> kNumMoveReducingBits]; }
-		public uint GetPrice1() { return ProbPrices[(kBitModelTotal - Prob) >> kNumMoveReducingBits]; }
-	}
+        public void Encode(RangeEncoder encoder, uint symbol)
+        {
+            var newBound = (encoder.Range >> RangeEncoderConstants.KNumBitModelTotalBits) * _prob;
+
+            if (symbol == 0)
+            {
+                encoder.Range = newBound;
+                _prob += (RangeEncoderConstants.KBitModelTotal - _prob) >> KNumMoveBits;
+            }
+            else
+            {
+                encoder.Low += newBound;
+                encoder.Range -= newBound;
+                _prob -= (_prob) >> KNumMoveBits;
+            }
+
+            if (encoder.Range < RangeEncoderConstants.KTopValue)
+            {
+                encoder.Range <<= 8;
+                encoder.ShiftLow();
+            }
+        }
+
+        public uint GetPrice(uint symbol) =>
+            ProbPrices[(((_prob - symbol) ^ ((-(int)symbol))) & (RangeEncoderConstants.KBitModelTotal - 1)) >> KNumMoveReducingBits];
+
+        public uint GetPrice0() =>
+            ProbPrices[_prob >> KNumMoveReducingBits];
+
+        public uint GetPrice1() =>
+            ProbPrices[(RangeEncoderConstants.KBitModelTotal - _prob) >> KNumMoveReducingBits];
+    }
 }

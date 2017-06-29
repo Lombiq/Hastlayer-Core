@@ -58,6 +58,7 @@
     <Compile Include="Services\Lzma\LzmaBase.cs" />
     <Compile Include="Services\Lzma\LzmaEncoder.cs" />
     <Compile Include="Services\Lzma\BitEncoder.cs" />
+    <Compile Include="Services\Lzma\RangeEncoderConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
