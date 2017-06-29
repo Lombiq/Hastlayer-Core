@@ -55,25 +55,11 @@ namespace Lombiq.Unum
 
         #region Unum constructors
 
-        public Unum(byte exponentSizeSize, byte fractionSizeSize)
-        {
-            _environment = new UnumEnvironment(exponentSizeSize, fractionSizeSize);
-
-            UnumBits = new BitMask(_environment.Size);
-        }
-
         public Unum(UnumEnvironment environment)
         {
             _environment = environment;
 
             UnumBits = new BitMask(_environment.Size);
-        }
-
-        public Unum(BitMask wholeUnum, byte exponentSizeSize, byte fractionSizeSize)
-        {
-            _environment = new UnumEnvironment(exponentSizeSize, fractionSizeSize);
-
-            UnumBits = wholeUnum;
         }
 
         public Unum(UnumEnvironment environment, BitMask wholeUnum)
@@ -522,9 +508,7 @@ namespace Lombiq.Unum
 
             // Using the environment properties directly for now, as custom properties like left.ExponentSizeSize are not
             // yet supported.
-            var resultExponentSizeSize = left._environment.ExponentSizeSize;
-            var resultFractionSizeSize = left._environment.FractionSizeSize;
-            var resultUnum = new Unum(resultExponentSizeSize, resultFractionSizeSize);
+            var resultUnum = new Unum(left._environment);
 
             var exponentValueDifference = left.ExponentValueWithBias() - right.ExponentValueWithBias();
             var signBitsMatch = left.IsPositive() == right.IsPositive();
@@ -574,7 +558,7 @@ namespace Lombiq.Unum
             }
 
 
-            var exponentChange = (int)scratchPad.FindLeadingOne() - (resultUnum.FractionSizeMax + 1);
+            var exponentChange = scratchPad.FindLeadingOne() - (resultUnum.FractionSizeMax + 1);
             var resultExponent = new BitMask(left._environment.Size) +
                 ExponentValueToExponentBits(resultExponentValue + exponentChange, (byte)left.Size);
             var resultExponentSize = (byte)(ExponentValueToExponentSize(resultExponentValue + exponentChange) - 1);

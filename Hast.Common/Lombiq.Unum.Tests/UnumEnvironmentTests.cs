@@ -5,6 +5,8 @@ namespace Lombiq.Unum.Tests
     [TestFixture]
     public class UnumEnvironmentTests
     {
+        private UnumEnvironment _environment_3_2;
+        private UnumEnvironment _environment_3_4;
         private Unum _unum_3_2;
         private Unum _unum_3_4;
 
@@ -12,8 +14,10 @@ namespace Lombiq.Unum.Tests
         [SetUp]
         public void Init()
         {
-            _unum_3_2 = new Unum(3, 2);
-            _unum_3_4 = new Unum(3, 4);
+            _environment_3_2 = new UnumEnvironment(3, 2);
+            _environment_3_4 = new UnumEnvironment(3, 4);
+            _unum_3_2 = new Unum(_environment_3_2);
+            _unum_3_4 = new Unum(_environment_3_4);
         }
 
         [TestFixtureTearDown]
