@@ -1,5 +1,5 @@
 ﻿using Hast.Layer;
-using SevenZip;
+using Hast.Samples.Compression.Services.Lzma;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
@@ -54,7 +54,7 @@ namespace Hast.Samples.Compression.Services
                     mf,
                     eos
                 };
-                var encoder = new SevenZip.Compression.LZMA.Encoder();
+                var encoder = new LzmaEncoder();
                 encoder.SetCoderProperties(propIDs, properties);
                 encoder.WriteCoderProperties(outputFileStream);
 
@@ -66,7 +66,7 @@ namespace Hast.Samples.Compression.Services
                 for (int i = 0; i < 8; i++)
                     outputFileStream.WriteByte((byte)(fileSize >> (8 * i)));
 
-                encoder.Code(inputFileStream, outputFileStream, -1, -1, null);
+                encoder.Code(inputFileStream, outputFileStream, -1, -1);
             }
         }
     }

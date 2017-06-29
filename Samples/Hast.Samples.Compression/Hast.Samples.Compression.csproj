@@ -47,6 +47,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LzmaCompressionService.cs" />
+    <Compile Include="Services\Lzma\BitTreeEncoder.cs" />
+    <Compile Include="Services\Lzma\CRC.cs" />
+    <Compile Include="Services\Lzma\Enums.cs" />
+    <Compile Include="Services\Lzma\LzBinTree.cs" />
+    <Compile Include="Services\Lzma\LzInWindow.cs" />
+    <Compile Include="Services\Lzma\RangeEncoder.cs" />
+    <Compile Include="Services\Lzma\LzmaBase.cs" />
+    <Compile Include="Services\Lzma\LzmaEncoder.cs" />
+    <Compile Include="Services\Lzma\BitEncoder.cs" />
     <Compile Include="Services\SevenZip.Lzma\Common\CommandLineParser.cs" />
     <Compile Include="Services\SevenZip.Lzma\Common\CRC.cs" />
     <Compile Include="Services\SevenZip.Lzma\Common\InBuffer.cs" />
