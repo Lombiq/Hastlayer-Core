@@ -236,7 +236,7 @@ namespace Lombiq.Unum
 
         public static BitMask operator |(BitMask left, BitMask right)
         {
-            if (left.Size != right.Size) return new BitMask(left.Size);
+            if (left.SegmentCount != right.SegmentCount) return new BitMask(left.Size);
 
             var segments = new uint[left.SegmentCount];
 
@@ -248,7 +248,7 @@ namespace Lombiq.Unum
 
         public static BitMask operator &(BitMask left, BitMask right)
         {
-            if (left.Size != right.Size) return new BitMask(left.Size);
+            if (left.SegmentCount != right.SegmentCount) return new BitMask(left.Size);
 
             var segments = new uint[left.SegmentCount];
 
@@ -260,7 +260,7 @@ namespace Lombiq.Unum
 
         public static BitMask operator ^(BitMask left, BitMask right)
         {
-            if (left.Size != right.Size) return new BitMask(left.Size);
+            if (left.SegmentCount != right.SegmentCount) return new BitMask(left.Size);
 
             var segments = new uint[left.SegmentCount];
 
