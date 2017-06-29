@@ -57,19 +57,22 @@ namespace Lombiq.Unum
 
         public BitMask(ushort size, bool allOne = false)
         {
-            SegmentCount = (ushort)((size >> 5) + (size % 32 == 0 ? 0 : 1));
+            var partialSegment = size % 32;
+            SegmentCount = (ushort)((size >> 5) + (partialSegment == 0 ? 0 : 1));
             Size = size;
 
             // Creating a temporary array, so the items aren't added using ImmutableArray.Add,
             // because that instantiates a new array for each execution.
             var segments = new uint[SegmentCount];
 
-            // Setting the value of all, but the last segment.
-            for (ushort i = 0; i < SegmentCount - 1; i++) segments[i] = allOne ? uint.MaxValue : 0;
-
-            // The last segment is special in a way that it might not be necessary to have all 1 bits.
-            if (SegmentCount > 0)
-                segments[SegmentCount - 1] = allOne ? Size >> 5 == 0 ? uint.MaxValue : (uint)(1 << (Size >> 5)) - 1 : 0; // no ragrets
+            if (allOne)
+            {
+                ushort i = 0;
+                for (; i < SegmentCount - 1; i++) segments[i] = uint.MaxValue;
+                
+                // The last segment is special in a way that it might not be necessary to have all 1 bits.
+                segments[i] = partialSegment > 0 ? (uint)(1 << partialSegment) - 1 : uint.MaxValue;
+            }
 
             Segments = ImmutableArray.CreateRange(segments);
         }
