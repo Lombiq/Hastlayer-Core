@@ -37,6 +37,7 @@ namespace Hast.Transformer
         private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
         private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
         private readonly IOperatorAssignmentsToSimpleAssignmentsConverter _operatorAssignmentsToSimpleAssignmentsConverter;
+        private readonly ICustomPropertiesToMethodsConverter _customPropertiesToMethodsConverter;
 
 
         public DefaultTransformer(
@@ -55,7 +56,8 @@ namespace Hast.Transformer
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
             IConstantValuesSubstitutor constantValuesSubstitutor,
             IOperatorsToMethodsConverter operatorsToMethodsConverter,
-            IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter)
+            IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter,
+            ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -73,6 +75,7 @@ namespace Hast.Transformer
             _constantValuesSubstitutor = constantValuesSubstitutor;
             _operatorsToMethodsConverter = operatorsToMethodsConverter;
             _operatorAssignmentsToSimpleAssignmentsConverter = operatorAssignmentsToSimpleAssignmentsConverter;
+            _customPropertiesToMethodsConverter = customPropertiesToMethodsConverter;
         }
 
 
@@ -179,6 +182,7 @@ namespace Hast.Transformer
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
             _operatorsToMethodsConverter.ConvertOperatorsToMethods(syntaxTree);
+            _customPropertiesToMethodsConverter.ConvertCustomPropertiesToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);

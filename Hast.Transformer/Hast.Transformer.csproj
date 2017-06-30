@@ -116,6 +116,7 @@
     <Compile Include="Services\ConstantValuesSubstitution\GlobalValueHoldersHandlingVisitor.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\ObjectHoldersToSubstitutedConstructorsMappingVisitor.cs" />
     <Compile Include="Services\ConstructorsToMethodsConverter.cs" />
+    <Compile Include="Services\CustomPropertiesToMethodsConverter.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IArrayInitializerExpander.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IAstExpressionEvaluator.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Services\IConditionalExpressionsToIfElsesConverter.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IConstantValuesSubstitutor.cs" />
     <Compile Include="Services\IConstructorsToMethodsConverter.cs" />
+    <Compile Include="Services\ICustomPropertiesToMethodsConverter.cs" />
     <Compile Include="Services\IGeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IInstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\IInvocationInstanceCountAdjuster.cs" />
