@@ -1,32 +1,33 @@
-using System;
-
 namespace Hast.Samples.Compression.Services.Lzma
 {
-	struct BitTreeEncoder
+    internal struct BitTreeEncoder
 	{
-		BitEncoder[] Models;
-		int NumBitLevels;
+		private BitEncoder[] _models;
+		private int _numBitLevels;
+
 
 		public BitTreeEncoder(int numBitLevels)
 		{
-			NumBitLevels = numBitLevels;
-			Models = new BitEncoder[1 << numBitLevels];
+			_numBitLevels = numBitLevels;
+			_models = new BitEncoder[1 << numBitLevels];
 		}
+
 
 		public void Init()
 		{
-			for (uint i = 1; i < (1 << NumBitLevels); i++)
-				Models[i].Init();
+			for (var i = 1; i < (1 << _numBitLevels); i++)
+				_models[i].Init();
 		}
 
 		public void Encode(RangeEncoder rangeEncoder, uint symbol)
 		{
 			uint m = 1;
-			for (int bitIndex = NumBitLevels; bitIndex > 0; )
+            var bitIndex = _numBitLevels;
+            while (bitIndex > 0)
 			{
 				bitIndex--;
 				uint bit = (symbol >> bitIndex) & 1;
-				Models[m].Encode(rangeEncoder, bit);
+				_models[m].Encode(rangeEncoder, bit);
 				m = (m << 1) | bit;
 			}
 		}
@@ -34,10 +35,10 @@ namespace Hast.Samples.Compression.Services.Lzma
 		public void ReverseEncode(RangeEncoder rangeEncoder, uint symbol)
 		{
 			uint m = 1;
-			for (uint i = 0; i < NumBitLevels; i++)
+			for (var i = 0; i < _numBitLevels; i++)
 			{
-				uint bit = symbol & 1;
-				Models[m].Encode(rangeEncoder, bit);
+				var bit = symbol & 1;
+				_models[m].Encode(rangeEncoder, bit);
 				m = (m << 1) | bit;
 				symbol >>= 1;
 			}
@@ -47,13 +48,15 @@ namespace Hast.Samples.Compression.Services.Lzma
 		{
 			uint price = 0;
 			uint m = 1;
-			for (int bitIndex = NumBitLevels; bitIndex > 0; )
-			{
-				bitIndex--;
-				uint bit = (symbol >> bitIndex) & 1;
-				price += Models[m].GetPrice(bit);
+            var bitIndex = _numBitLevels;
+            while (bitIndex > 0)
+            {
+                bitIndex--;
+				var bit = (symbol >> bitIndex) & 1;
+				price += _models[m].GetPrice(bit);
 				m = (m << 1) + bit;
 			}
+
 			return price;
 		}
 
@@ -61,38 +64,47 @@ namespace Hast.Samples.Compression.Services.Lzma
 		{
 			uint price = 0;
 			uint m = 1;
-			for (int i = NumBitLevels; i > 0; i--)
+			for (var i = _numBitLevels; i > 0; i--)
 			{
-				uint bit = symbol & 1;
+				var bit = symbol & 1;
 				symbol >>= 1;
-				price += Models[m].GetPrice(bit);
+				price += _models[m].GetPrice(bit);
 				m = (m << 1) | bit;
 			}
+
 			return price;
 		}
 
-		public static uint ReverseGetPrice(BitEncoder[] Models, uint startIndex,
-			int NumBitLevels, uint symbol)
+		public static uint ReverseGetPrice(
+            BitEncoder[] Models, 
+            uint startIndex, 
+            int numBitLevels, 
+            uint symbol)
 		{
 			uint price = 0;
 			uint m = 1;
-			for (int i = NumBitLevels; i > 0; i--)
+			for (var i = numBitLevels; i > 0; i--)
 			{
 				uint bit = symbol & 1;
 				symbol >>= 1;
 				price += Models[startIndex + m].GetPrice(bit);
 				m = (m << 1) | bit;
 			}
+
 			return price;
 		}
 
-		public static void ReverseEncode(BitEncoder[] Models, uint startIndex,
-			RangeEncoder rangeEncoder, int NumBitLevels, uint symbol)
+		public static void ReverseEncode(
+            BitEncoder[] Models, 
+            uint startIndex,
+			RangeEncoder rangeEncoder, 
+            int numBitLevels, 
+            uint symbol)
 		{
 			uint m = 1;
-			for (int i = 0; i < NumBitLevels; i++)
+			for (var i = 0; i < numBitLevels; i++)
 			{
-				uint bit = symbol & 1;
+				var bit = symbol & 1;
 				Models[startIndex + m].Encode(rangeEncoder, bit);
 				m = (m << 1) | bit;
 				symbol >>= 1;

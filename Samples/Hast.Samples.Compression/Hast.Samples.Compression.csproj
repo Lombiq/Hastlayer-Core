@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Lzma\EncoderState.cs" />
     <Compile Include="Services\LzmaCompressionService.cs" />
     <Compile Include="Services\Lzma\BitTreeEncoder.cs" />
     <Compile Include="Services\Lzma\CRC.cs" />
@@ -55,10 +56,10 @@
     <Compile Include="Services\Lzma\LzBinTree.cs" />
     <Compile Include="Services\Lzma\LzInWindow.cs" />
     <Compile Include="Services\Lzma\RangeEncoder.cs" />
-    <Compile Include="Services\Lzma\LzmaBase.cs" />
+    <Compile Include="Services\Lzma\Constants\BaseConstants.cs" />
     <Compile Include="Services\Lzma\LzmaEncoder.cs" />
     <Compile Include="Services\Lzma\BitEncoder.cs" />
-    <Compile Include="Services\Lzma\RangeEncoderConstants.cs" />
+    <Compile Include="Services\Lzma\Constants\RangeEncoderConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

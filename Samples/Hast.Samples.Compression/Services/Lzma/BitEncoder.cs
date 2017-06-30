@@ -1,10 +1,12 @@
+using Hast.Samples.Compression.Services.Lzma.Constants;
+
 namespace Hast.Samples.Compression.Services.Lzma
 {
-    struct BitEncoder
+    internal struct BitEncoder
     {
-        private const int KNumMoveBits = 5;
-        private const int KNumMoveReducingBits = 2;
-        private static uint[] ProbPrices = new uint[RangeEncoderConstants.KBitModelTotal >> KNumMoveReducingBits];
+        private const int NumMoveBits = 5;
+        private const int NumMoveReducingBits = 2;
+        private static uint[] ProbPrices = new uint[RangeEncoderConstants.BitModelTotal >> NumMoveReducingBits];
 
 
         private uint _prob;
@@ -12,45 +14,45 @@ namespace Hast.Samples.Compression.Services.Lzma
 
         static BitEncoder()
         {
-            const int kNumBits = (RangeEncoderConstants.KNumBitModelTotalBits - KNumMoveReducingBits);
+            const int kNumBits = (RangeEncoderConstants.NumBitModelTotalBits - NumMoveReducingBits);
             for (int i = kNumBits - 1; i >= 0; i--)
             {
                 var start = (uint)1 << (kNumBits - i - 1);
                 var end = (uint)1 << (kNumBits - i);
                 for (var j = start; j < end; j++)
                 {
-                    ProbPrices[j] = ((uint)i << RangeEncoderConstants.KNumBitPriceShiftBits) +
-                        (((end - j) << RangeEncoderConstants.KNumBitPriceShiftBits) >> (kNumBits - i - 1));
+                    ProbPrices[j] = ((uint)i << RangeEncoderConstants.NumBitPriceShiftBits) +
+                        (((end - j) << RangeEncoderConstants.NumBitPriceShiftBits) >> (kNumBits - i - 1));
                 }
             }
         }
 
 
-        public void Init() => _prob = RangeEncoderConstants.KBitModelTotal >> 1;
+        public void Init() => _prob = RangeEncoderConstants.BitModelTotal >> 1;
 
         public void UpdateModel(uint symbol)
         {
-            if (symbol == 0) _prob += (RangeEncoderConstants.KBitModelTotal - _prob) >> KNumMoveBits;
-            else _prob -= (_prob) >> KNumMoveBits;
+            if (symbol == 0) _prob += (RangeEncoderConstants.BitModelTotal - _prob) >> NumMoveBits;
+            else _prob -= (_prob) >> NumMoveBits;
         }
 
         public void Encode(RangeEncoder encoder, uint symbol)
         {
-            var newBound = (encoder.Range >> RangeEncoderConstants.KNumBitModelTotalBits) * _prob;
+            var newBound = (encoder.Range >> RangeEncoderConstants.NumBitModelTotalBits) * _prob;
 
             if (symbol == 0)
             {
                 encoder.Range = newBound;
-                _prob += (RangeEncoderConstants.KBitModelTotal - _prob) >> KNumMoveBits;
+                _prob += (RangeEncoderConstants.BitModelTotal - _prob) >> NumMoveBits;
             }
             else
             {
                 encoder.Low += newBound;
                 encoder.Range -= newBound;
-                _prob -= (_prob) >> KNumMoveBits;
+                _prob -= (_prob) >> NumMoveBits;
             }
 
-            if (encoder.Range < RangeEncoderConstants.KTopValue)
+            if (encoder.Range < RangeEncoderConstants.TopValue)
             {
                 encoder.Range <<= 8;
                 encoder.ShiftLow();
@@ -58,12 +60,12 @@ namespace Hast.Samples.Compression.Services.Lzma
         }
 
         public uint GetPrice(uint symbol) =>
-            ProbPrices[(((_prob - symbol) ^ ((-(int)symbol))) & (RangeEncoderConstants.KBitModelTotal - 1)) >> KNumMoveReducingBits];
+            ProbPrices[(((_prob - symbol) ^ ((-(int)symbol))) & (RangeEncoderConstants.BitModelTotal - 1)) >> NumMoveReducingBits];
 
         public uint GetPrice0() =>
-            ProbPrices[_prob >> KNumMoveReducingBits];
+            ProbPrices[_prob >> NumMoveReducingBits];
 
         public uint GetPrice1() =>
-            ProbPrices[(RangeEncoderConstants.KBitModelTotal - _prob) >> KNumMoveReducingBits];
+            ProbPrices[(RangeEncoderConstants.BitModelTotal - _prob) >> NumMoveReducingBits];
     }
 }

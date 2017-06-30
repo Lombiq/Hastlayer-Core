@@ -4,6 +4,7 @@ namespace Hast.Samples.Compression.Services.Lzma
 	{
 		public static readonly uint[] Table;
 
+
         private uint _value = 0xFFFFFFFF;
 
 

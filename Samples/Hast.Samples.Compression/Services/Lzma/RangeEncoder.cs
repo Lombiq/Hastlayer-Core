@@ -1,3 +1,4 @@
+using Hast.Samples.Compression.Services.Lzma.Constants;
 using System.IO;
 
 namespace Hast.Samples.Compression.Services.Lzma
@@ -47,7 +48,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             Low += start * (Range /= total);
             Range *= size;
 
-            while (Range < RangeEncoderConstants.KTopValue)
+            while (Range < RangeEncoderConstants.TopValue)
             {
                 Range <<= 8;
                 ShiftLow();
@@ -79,7 +80,7 @@ namespace Hast.Samples.Compression.Services.Lzma
                 Range >>= 1;
                 if (((v >> i) & 1) == 1)
                     Low += Range;
-                if (Range < RangeEncoderConstants.KTopValue)
+                if (Range < RangeEncoderConstants.TopValue)
                 {
                     Range <<= 8;
                     ShiftLow();
@@ -97,7 +98,7 @@ namespace Hast.Samples.Compression.Services.Lzma
                 Range -= newBound;
             }
 
-            while (Range < RangeEncoderConstants.KTopValue)
+            while (Range < RangeEncoderConstants.TopValue)
             {
                 Range <<= 8;
                 ShiftLow();

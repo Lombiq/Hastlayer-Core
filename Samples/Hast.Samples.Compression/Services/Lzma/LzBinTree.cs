@@ -1,367 +1,391 @@
 // LzBinTree.cs
 
 using System;
+using System.IO;
 
 namespace Hast.Samples.Compression.Services.Lzma
 {
-	public class BinTree : LzInWindow
-	{
-		uint _cyclicBufferPos;
-		uint _cyclicBufferSize = 0;
-		uint _matchMaxLen;
+    public class BinTree : LzInWindow
+    {
+        private const uint Hash2Size = 1 << 10;
+        private const uint Hash3Size = 1 << 16;
+        private const uint BT2HashSize = 1 << 16;
+        private const uint StartMaxLen = 1;
+        private const uint Hash3Offset = Hash2Size;
+        private const uint EmptyHashValue = 0;
+        private const uint MaxValForNormalize = ((uint)1 << 31) - 1;
 
-		uint[] _son;
-		uint[] _hash;
 
-		uint _cutValue = 0xFF;
-		uint _hashMask;
-		uint _hashSizeSum = 0;
+        private uint _cyclicBufferPos;
+        private uint _cyclicBufferSize = 0;
+        private uint _matchMaxLen;
+        private uint[] _son;
+        private uint[] _hash;
+        private uint _cutValue = 0xFF;
+        private uint _hashMask;
+        private uint _hashSizeSum = 0;
+        private bool _hashArray = true;
+        private uint _kNumHashDirectbytes = 0;
+        private uint _kMinMatchCheck = 4;
+        private uint _kFixHashSize = Hash2Size + Hash3Size;
 
-		bool HASH_ARRAY = true;
 
-		const uint kHash2Size = 1 << 10;
-		const uint kHash3Size = 1 << 16;
-		const uint kBT2HashSize = 1 << 16;
-		const uint kStartMaxLen = 1;
-		const uint kHash3Offset = kHash2Size;
-		const uint kEmptyHashValue = 0;
-		const uint kMaxValForNormalize = ((uint)1 << 31) - 1;
-	
-		uint kNumHashDirectbytes = 0;
-		uint kMinMatchCheck = 4;
-		uint kFixHashSize = kHash2Size + kHash3Size;
-		
-		public void SetType(int numHashbytes)
-		{
-			HASH_ARRAY = (numHashbytes > 2);
-			if (HASH_ARRAY)
-			{
-				kNumHashDirectbytes = 0;
-				kMinMatchCheck = 4;
-				kFixHashSize = kHash2Size + kHash3Size;
-			}
-			else
-			{
-				kNumHashDirectbytes = 2;
-				kMinMatchCheck = 2 + 1;
-				kFixHashSize = 0;
-			}
-		}
+        public void SetType(int numHashbytes)
+        {
+            _hashArray = (numHashbytes > 2);
+            if (_hashArray)
+            {
+                _kNumHashDirectbytes = 0;
+                _kMinMatchCheck = 4;
+                _kFixHashSize = Hash2Size + Hash3Size;
+            }
+            else
+            {
+                _kNumHashDirectbytes = 2;
+                _kMinMatchCheck = 2 + 1;
+                _kFixHashSize = 0;
+            }
+        }
 
-		public new void SetStream(System.IO.Stream stream) { base.SetStream(stream); }
-		public new void ReleaseStream() { base.ReleaseStream(); }
-		
-		public new void Init()
-		{
-			base.Init();
-			for (uint i = 0; i < _hashSizeSum; i++)
-				_hash[i] = kEmptyHashValue;
-			_cyclicBufferPos = 0;
-			ReduceOffsets(-1);
-		}
+        public new void SetStream(Stream stream) =>
+            base.SetStream(stream);
 
-		public new void MovePos()
-		{
-			if (++_cyclicBufferPos >= _cyclicBufferSize)
-				_cyclicBufferPos = 0;
-			base.MovePos();
-			if (_pos == kMaxValForNormalize)
-				Normalize();
-		}
+        public new void ReleaseStream() =>
+            base.ReleaseStream();
 
-		public new byte GetIndexbyte(int index) { return base.GetIndexbyte(index); }
+        public new void Init()
+        {
+            base.Init();
+            for (var i = 0; i < _hashSizeSum; i++)
+                _hash[i] = EmptyHashValue;
+            _cyclicBufferPos = 0;
+            ReduceOffsets(-1);
+        }
 
-		public new uint GetMatchLen(int index, uint distance, uint limit)
-		{ return base.GetMatchLen(index, distance, limit); }
+        public new void MovePos()
+        {
+            if (++_cyclicBufferPos >= _cyclicBufferSize)
+                _cyclicBufferPos = 0;
+            base.MovePos();
+            if (_pos == MaxValForNormalize)
+                Normalize();
+        }
 
-		public new uint GetNumAvailablebytes() { return base.GetNumAvailablebytes(); }
+        public new byte GetIndexbyte(int index) =>
+            base.GetIndexbyte(index);
 
-		public void Create(uint historySize, uint keepAddBufferBefore,
-				uint matchMaxLen, uint keepAddBufferAfter)
-		{
-			if (historySize > kMaxValForNormalize - 256)
-				throw new Exception();
-			_cutValue = 16 + (matchMaxLen >> 1);
-				
-			uint windowReservSize = (historySize + keepAddBufferBefore +
-					matchMaxLen + keepAddBufferAfter) / 2 + 256;
+        public new uint GetMatchLen(int index, uint distance, uint limit) =>
+            base.GetMatchLen(index, distance, limit);
 
-			base.Create(historySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
+        public new uint GetNumAvailablebytes() =>
+            base.GetNumAvailablebytes();
 
-			_matchMaxLen = matchMaxLen;
+        public void Create(
+            uint historySize,
+            uint keepAddBufferBefore,
+            uint matchMaxLen,
+            uint keepAddBufferAfter)
+        {
+            if (historySize > MaxValForNormalize - 256) throw new Exception();
 
-			uint cyclicBufferSize = historySize + 1;
-			if (_cyclicBufferSize != cyclicBufferSize)
-				_son = new uint[(_cyclicBufferSize = cyclicBufferSize) * 2];
+            _cutValue = 16 + (matchMaxLen >> 1);
 
-			uint hs = kBT2HashSize;
+            var windowReservSize = (historySize + keepAddBufferBefore + matchMaxLen + keepAddBufferAfter) / 2 + 256;
 
-			if (HASH_ARRAY)
-			{
-				hs = historySize - 1;
-				hs |= (hs >> 1);
-				hs |= (hs >> 2);
-				hs |= (hs >> 4);
-				hs |= (hs >> 8);
-				hs >>= 1;
-				hs |= 0xFFFF;
-				if (hs > (1 << 24))
-					hs >>= 1;
-				_hashMask = hs;
-				hs++;
-				hs += kFixHashSize;
-			}
-			if (hs != _hashSizeSum)
-				_hash = new uint[_hashSizeSum = hs];
-		}
+            Create(historySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
 
-		public uint GetMatches(uint[] distances)
-		{
-			uint lenLimit;
-			if (_pos + _matchMaxLen <= _streamPos)
-				lenLimit = _matchMaxLen;
-			else
-			{
-				lenLimit = _streamPos - _pos;
-				if (lenLimit < kMinMatchCheck)
-				{
-					MovePos();
-					return 0;
-				}
-			}
+            _matchMaxLen = matchMaxLen;
 
-			uint offset = 0;
-			uint matchMinPos = (_pos > _cyclicBufferSize) ? (_pos - _cyclicBufferSize) : 0;
-			uint cur = _bufferOffset + _pos;
-			uint maxLen = kStartMaxLen; // to avoid items for len < hashSize;
-			uint hashValue, hash2Value = 0, hash3Value = 0;
+            var cyclicBufferSize = historySize + 1;
+            if (_cyclicBufferSize != cyclicBufferSize)
+                _son = new uint[(_cyclicBufferSize = cyclicBufferSize) * 2];
 
-			if (HASH_ARRAY)
-			{
-				uint temp = CRC.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
-				hash2Value = temp & (kHash2Size - 1);
-				temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
-				hash3Value = temp & (kHash3Size - 1);
-				hashValue = (temp ^ (CRC.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
-			}
-			else
-				hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
+            var hs = BT2HashSize;
 
-			uint curMatch = _hash[kFixHashSize + hashValue];
-			if (HASH_ARRAY)
-			{
-				uint curMatch2 = _hash[hash2Value];
-				uint curMatch3 = _hash[kHash3Offset + hash3Value];
-				_hash[hash2Value] = _pos;
-				_hash[kHash3Offset + hash3Value] = _pos;
-				if (curMatch2 > matchMinPos)
-					if (_bufferBase[_bufferOffset + curMatch2] == _bufferBase[cur])
-					{
-						distances[offset++] = maxLen = 2;
-						distances[offset++] = _pos - curMatch2 - 1;
-					}
-				if (curMatch3 > matchMinPos)
-					if (_bufferBase[_bufferOffset + curMatch3] == _bufferBase[cur])
-					{
-						if (curMatch3 == curMatch2)
-							offset -= 2;
-						distances[offset++] = maxLen = 3;
-						distances[offset++] = _pos - curMatch3 - 1;
-						curMatch2 = curMatch3;
-					}
-				if (offset != 0 && curMatch2 == curMatch)
-				{
-					offset -= 2;
-					maxLen = kStartMaxLen;
-				}
-			}
+            if (_hashArray)
+            {
+                hs = historySize - 1;
+                hs |= (hs >> 1);
+                hs |= (hs >> 2);
+                hs |= (hs >> 4);
+                hs |= (hs >> 8);
+                hs >>= 1;
+                hs |= 0xFFFF;
+                if (hs > (1 << 24))
+                    hs >>= 1;
+                _hashMask = hs;
+                hs++;
+                hs += _kFixHashSize;
+            }
 
-			_hash[kFixHashSize + hashValue] = _pos;
+            if (hs != _hashSizeSum)
+                _hash = new uint[_hashSizeSum = hs];
+        }
 
-			uint ptr0 = (_cyclicBufferPos << 1) + 1;
-			uint ptr1 = (_cyclicBufferPos << 1);
+        public uint GetMatches(uint[] distances)
+        {
+            uint lenLimit;
+            if (_pos + _matchMaxLen <= _streamPos)
+                lenLimit = _matchMaxLen;
+            else
+            {
+                lenLimit = _streamPos - _pos;
+                if (lenLimit < _kMinMatchCheck)
+                {
+                    MovePos();
 
-			uint len0, len1;
-			len0 = len1 = kNumHashDirectbytes;
-			
-			if (kNumHashDirectbytes != 0)
-			{
-				if (curMatch > matchMinPos)
-				{
-					if (_bufferBase[_bufferOffset + curMatch + kNumHashDirectbytes] !=
-							_bufferBase[cur + kNumHashDirectbytes])
-					{
-						distances[offset++] = maxLen = kNumHashDirectbytes;
-						distances[offset++] = _pos - curMatch - 1;
-					}
-				}
-			}
-			
-			uint count = _cutValue;
-			
-			while(true)
-			{
-				if(curMatch <= matchMinPos || count-- == 0)
-				{
-					_son[ptr0] = _son[ptr1] = kEmptyHashValue;
-					break;
-				}
-				uint delta = _pos - curMatch;
-				uint cyclicPos = ((delta <= _cyclicBufferPos) ?
-							(_cyclicBufferPos - delta) :
-							(_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
+                    return 0;
+                }
+            }
 
-				uint pby1 = _bufferOffset + curMatch;
-				uint len = Math.Min(len0, len1);
-				if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
-				{
-					while(++len != lenLimit)
-						if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
-							break;
-					if (maxLen < len)
-					{
-						distances[offset++] = maxLen = len;
-						distances[offset++] = delta - 1;
-						if (len == lenLimit)
-						{
-							_son[ptr1] = _son[cyclicPos];
-							_son[ptr0] = _son[cyclicPos + 1];
-							break;
-						}
-					}
-				}
-				if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
-				{
-					_son[ptr1] = curMatch;
-					ptr1 = cyclicPos + 1;
-					curMatch = _son[ptr1];
-					len1 = len;
-				}
-				else
-				{
-					_son[ptr0] = curMatch;
-					ptr0 = cyclicPos;
-					curMatch = _son[ptr0];
-					len0 = len;
-				}
-			}
-			MovePos();
-			return offset;
-		}
+            uint offset = 0;
+            var matchMinPos = (_pos > _cyclicBufferSize) ? (_pos - _cyclicBufferSize) : 0;
+            var cur = _bufferOffset + _pos;
+            var maxLen = StartMaxLen; // to avoid items for len < hashSize;
+            uint hashValue, hash2Value = 0, hash3Value = 0;
 
-		public void Skip(uint num)
-		{
-			do
-			{
-				uint lenLimit;
-				if (_pos + _matchMaxLen <= _streamPos)
-					lenLimit = _matchMaxLen;
-				else
-				{
-					lenLimit = _streamPos - _pos;
-					if (lenLimit < kMinMatchCheck)
-					{
-						MovePos();
-						continue;
-					}
-				}
+            if (_hashArray)
+            {
+                uint temp = CRC.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
+                hash2Value = temp & (Hash2Size - 1);
+                temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
+                hash3Value = temp & (Hash3Size - 1);
+                hashValue = (temp ^ (CRC.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
+            }
+            else
+                hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
 
-				uint matchMinPos = (_pos > _cyclicBufferSize) ? (_pos - _cyclicBufferSize) : 0;
-				uint cur = _bufferOffset + _pos;
+            var curMatch = _hash[_kFixHashSize + hashValue];
 
-				uint hashValue;
+            if (_hashArray)
+            {
+                uint curMatch2 = _hash[hash2Value];
+                uint curMatch3 = _hash[Hash3Offset + hash3Value];
+                _hash[hash2Value] = _pos;
+                _hash[Hash3Offset + hash3Value] = _pos;
+                if (curMatch2 > matchMinPos)
+                    if (_bufferBase[_bufferOffset + curMatch2] == _bufferBase[cur])
+                    {
+                        distances[offset++] = maxLen = 2;
+                        distances[offset++] = _pos - curMatch2 - 1;
+                    }
+                if (curMatch3 > matchMinPos)
+                    if (_bufferBase[_bufferOffset + curMatch3] == _bufferBase[cur])
+                    {
+                        if (curMatch3 == curMatch2)
+                            offset -= 2;
+                        distances[offset++] = maxLen = 3;
+                        distances[offset++] = _pos - curMatch3 - 1;
+                        curMatch2 = curMatch3;
+                    }
+                if (offset != 0 && curMatch2 == curMatch)
+                {
+                    offset -= 2;
+                    maxLen = StartMaxLen;
+                }
+            }
 
-				if (HASH_ARRAY)
-				{
-					uint temp = CRC.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
-					uint hash2Value = temp & (kHash2Size - 1);
-					_hash[hash2Value] = _pos;
-					temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
-					uint hash3Value = temp & (kHash3Size - 1);
-					_hash[kHash3Offset + hash3Value] = _pos;
-					hashValue = (temp ^ (CRC.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
-				}
-				else
-					hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
+            _hash[_kFixHashSize + hashValue] = _pos;
 
-				uint curMatch = _hash[kFixHashSize + hashValue];
-				_hash[kFixHashSize + hashValue] = _pos;
+            var ptr0 = (_cyclicBufferPos << 1) + 1;
+            var ptr1 = (_cyclicBufferPos << 1);
 
-				uint ptr0 = (_cyclicBufferPos << 1) + 1;
-				uint ptr1 = (_cyclicBufferPos << 1);
+            uint len0, len1;
+            len0 = len1 = _kNumHashDirectbytes;
 
-				uint len0, len1;
-				len0 = len1 = kNumHashDirectbytes;
+            if (_kNumHashDirectbytes != 0)
+            {
+                if (curMatch > matchMinPos)
+                {
+                    if (_bufferBase[_bufferOffset + curMatch + _kNumHashDirectbytes] !=
+                            _bufferBase[cur + _kNumHashDirectbytes])
+                    {
+                        distances[offset++] = maxLen = _kNumHashDirectbytes;
+                        distances[offset++] = _pos - curMatch - 1;
+                    }
+                }
+            }
 
-				uint count = _cutValue;
-				while (true)
-				{
-					if (curMatch <= matchMinPos || count-- == 0)
-					{
-						_son[ptr0] = _son[ptr1] = kEmptyHashValue;
-						break;
-					}
+            var count = _cutValue;
 
-					uint delta = _pos - curMatch;
-					uint cyclicPos = ((delta <= _cyclicBufferPos) ?
-								(_cyclicBufferPos - delta) :
-								(_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
+            while (true)
+            {
+                if (curMatch <= matchMinPos || count-- == 0)
+                {
+                    _son[ptr0] = _son[ptr1] = EmptyHashValue;
+                    break;
+                }
+                var delta = _pos - curMatch;
+                var cyclicPos = ((delta <= _cyclicBufferPos) ? 
+                    (_cyclicBufferPos - delta) :
+                    (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
 
-					uint pby1 = _bufferOffset + curMatch;
-					uint len = Math.Min(len0, len1);
-					if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
-					{
-						while (++len != lenLimit)
-							if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
-								break;
-						if (len == lenLimit)
-						{
-							_son[ptr1] = _son[cyclicPos];
-							_son[ptr0] = _son[cyclicPos + 1];
-							break;
-						}
-					}
-					if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
-					{
-						_son[ptr1] = curMatch;
-						ptr1 = cyclicPos + 1;
-						curMatch = _son[ptr1];
-						len1 = len;
-					}
-					else
-					{
-						_son[ptr0] = curMatch;
-						ptr0 = cyclicPos;
-						curMatch = _son[ptr0];
-						len0 = len;
-					}
-				}
-				MovePos();
-			}
-			while (--num != 0);
-		}
+                var pby1 = _bufferOffset + curMatch;
+                var len = Math.Min(len0, len1);
+                if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
+                {
+                    while (++len != lenLimit)
+                    {
+                        if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
+                            break;
+                    }
 
-		void NormalizeLinks(uint[] items, uint numItems, uint subValue)
-		{
-			for (uint i = 0; i < numItems; i++)
-			{
-				uint value = items[i];
-				if (value <= subValue)
-					value = kEmptyHashValue;
-				else
-					value -= subValue;
-				items[i] = value;
-			}
-		}
+                    if (maxLen < len)
+                    {
+                        distances[offset++] = maxLen = len;
+                        distances[offset++] = delta - 1;
+                        if (len == lenLimit)
+                        {
+                            _son[ptr1] = _son[cyclicPos];
+                            _son[ptr0] = _son[cyclicPos + 1];
 
-		void Normalize()
-		{
-			uint subValue = _pos - _cyclicBufferSize;
-			NormalizeLinks(_son, _cyclicBufferSize * 2, subValue);
-			NormalizeLinks(_hash, _hashSizeSum, subValue);
-			ReduceOffsets((int)subValue);
-		}
+                            break;
+                        }
+                    }
+                }
 
-		public void SetCutValue(uint cutValue) { _cutValue = cutValue; }
-	}
+                if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
+                {
+                    _son[ptr1] = curMatch;
+                    ptr1 = cyclicPos + 1;
+                    curMatch = _son[ptr1];
+                    len1 = len;
+                }
+                else
+                {
+                    _son[ptr0] = curMatch;
+                    ptr0 = cyclicPos;
+                    curMatch = _son[ptr0];
+                    len0 = len;
+                }
+            }
+
+            MovePos();
+
+            return offset;
+        }
+
+        public void Skip(uint num)
+        {
+            do
+            {
+                uint lenLimit;
+                if (_pos + _matchMaxLen <= _streamPos)
+                    lenLimit = _matchMaxLen;
+                else
+                {
+                    lenLimit = _streamPos - _pos;
+                    if (lenLimit < _kMinMatchCheck)
+                    {
+                        MovePos();
+                        continue;
+                    }
+                }
+
+                var matchMinPos = (_pos > _cyclicBufferSize) ? (_pos - _cyclicBufferSize) : 0;
+                var cur = _bufferOffset + _pos;
+
+                uint hashValue;
+
+                if (_hashArray)
+                {
+                    var temp = CRC.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
+                    var hash2Value = temp & (Hash2Size - 1);
+                    _hash[hash2Value] = _pos;
+                    temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
+                    var hash3Value = temp & (Hash3Size - 1);
+                    _hash[Hash3Offset + hash3Value] = _pos;
+                    hashValue = (temp ^ (CRC.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
+                }
+                else
+                    hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
+
+                var curMatch = _hash[_kFixHashSize + hashValue];
+                _hash[_kFixHashSize + hashValue] = _pos;
+
+                var ptr0 = (_cyclicBufferPos << 1) + 1;
+                var ptr1 = (_cyclicBufferPos << 1);
+
+                uint len0, len1;
+                len0 = len1 = _kNumHashDirectbytes;
+
+                var count = _cutValue;
+                while (true)
+                {
+                    if (curMatch <= matchMinPos || count-- == 0)
+                    {
+                        _son[ptr0] = _son[ptr1] = EmptyHashValue;
+
+                        break;
+                    }
+
+                    var delta = _pos - curMatch;
+                    var cyclicPos = ((delta <= _cyclicBufferPos) ?
+                        (_cyclicBufferPos - delta) :
+                        (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
+
+                    var pby1 = _bufferOffset + curMatch;
+                    var len = Math.Min(len0, len1);
+                    if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
+                    {
+                        while (++len != lenLimit)
+                        {
+                            if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
+                                break;
+                        }
+
+                        if (len == lenLimit)
+                        {
+                            _son[ptr1] = _son[cyclicPos];
+                            _son[ptr0] = _son[cyclicPos + 1];
+                            break;
+                        }
+                    }
+
+                    if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
+                    {
+                        _son[ptr1] = curMatch;
+                        ptr1 = cyclicPos + 1;
+                        curMatch = _son[ptr1];
+                        len1 = len;
+                    }
+                    else
+                    {
+                        _son[ptr0] = curMatch;
+                        ptr0 = cyclicPos;
+                        curMatch = _son[ptr0];
+                        len0 = len;
+                    }
+                }
+
+                MovePos();
+            }
+            while (--num != 0);
+        }
+        
+        public void SetCutValue(uint cutValue) =>
+            _cutValue = cutValue;
+
+
+        private void NormalizeLinks(uint[] items, uint numItems, uint subValue)
+        {
+            for (uint i = 0; i < numItems; i++)
+            {
+                var value = items[i];
+                if (value <= subValue) value = EmptyHashValue;
+                else value -= subValue;
+                items[i] = value;
+            }
+        }
+
+        private void Normalize()
+        {
+            uint subValue = _pos - _cyclicBufferSize;
+
+            NormalizeLinks(_son, _cyclicBufferSize * 2, subValue);
+            NormalizeLinks(_hash, _hashSizeSum, subValue);
+
+            ReduceOffsets((int)subValue);
+        }
+    }
 }
