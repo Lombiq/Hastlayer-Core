@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="GenomeMatcher.cs" />
-    <Compile Include="HastlayerOptimizedAlgorithm.cs" />
+    <Compile Include="ParallelAlgorithm.cs" />
     <Compile Include="ImageContrastModifier.cs" />
     <Compile Include="ImageFilter.cs" />
     <Compile Include="MonteCarloAlgorithm.cs" />

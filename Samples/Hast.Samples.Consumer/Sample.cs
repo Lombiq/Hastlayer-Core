@@ -3,7 +3,7 @@
     internal enum Sample
     {
         GenomeMatcher,
-        HastlayerOptimizedAlgorithm,
+        ParallelAlgorithm,
         ImageProcessingAlgorithms,
         MonteCarloAlgorithm,
         ObjectOrientedShowcase,

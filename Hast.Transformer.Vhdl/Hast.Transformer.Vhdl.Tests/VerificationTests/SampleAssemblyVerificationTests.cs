@@ -39,9 +39,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
-                        configuration.AddHardwareEntryPointType<HastlayerOptimizedAlgorithm>();
+                        configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<HastlayerOptimizedAlgorithm>(p => p.Run(null), 0)
+                            new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
                             {
                                 MaxDegreeOfParallelism = 5 // Using a smaller degree because we don't need excess repetition.
                             });
