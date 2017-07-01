@@ -37,8 +37,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (!(assignmentExpression.Left is IdentifierExpression)) return;
 
-            if (ConstantValueSubstitutionHelper.IsInWhile(assignmentExpression) ||
-                ConstantValueSubstitutionHelper.IsInIfElse(assignmentExpression))
+            if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
             {
                 _constantValuesTable.MarkAsNonConstant(
                     assignmentExpression.Left,
@@ -277,8 +276,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // We need to keep track of the last assignment in the root scope of the method. If after that there is
                 // another assignment in an if-else or while then that makes the value holder's constant value unusable.
 
-                if (ConstantValueSubstitutionHelper.IsInWhile(assignmentExpression) ||
-                    ConstantValueSubstitutionHelper.IsInIfElse(assignmentExpression))
+                if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
                 {
                     ConstantValuesTable.MarkAsNonConstant(assignmentExpression.Left, _constructor);
                 }

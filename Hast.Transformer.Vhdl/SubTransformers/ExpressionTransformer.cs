@@ -526,7 +526,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                         Operator = BinaryOperator.Subtract,
                                         Right = transformedExpression
                                     })
-                                    .Expression; 
+                                    .Expression;
                             }
                         }
 
@@ -679,29 +679,33 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var initiailizationResult = InitializeRecord(expression, objectCreateExpression.Type, context);
 
                 // Running the constructor, which needs to be done before intializers.
-                var constructor = context.TransformationContext.TypeDeclarationLookupTable
-                    .Lookup(objectCreateExpression.Type)
-                    .Members
-                    .SingleOrDefault(member => member.GetFullName() == objectCreateExpression.GetFullName()) as MethodDeclaration;
-                if (constructor != null)
+                var constructorFullName = objectCreateExpression.GetConstructorFullName();
+                if (!string.IsNullOrEmpty(constructorFullName))
                 {
-                    scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
-
-                    var constructorInvocation = new InvocationExpression(
-                        new MemberReferenceExpression(
-                            new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
-                            constructor.Name),
-                        // Passing ctor parameters, and an object reference as the first one (since all methods were
-                        // converted to static with the first parameter being @this).
-                        new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
-                            .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
-
-                    foreach (var annotation in expression.Annotations)
+                    var constructor = context.TransformationContext.TypeDeclarationLookupTable
+                        .Lookup(objectCreateExpression.Type)
+                        .Members
+                        .SingleOrDefault(member => member.GetFullName() == constructorFullName) as MethodDeclaration;
+                    if (constructor != null)
                     {
-                        constructorInvocation.AddAnnotation(annotation);
-                    }
+                        scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
 
-                    Transform(constructorInvocation, context);
+                        var constructorInvocation = new InvocationExpression(
+                            new MemberReferenceExpression(
+                                new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
+                                constructor.Name),
+                            // Passing ctor parameters, and an object reference as the first one (since all methods were
+                            // converted to static with the first parameter being @this).
+                            new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
+                                .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
+
+                        foreach (var annotation in expression.Annotations)
+                        {
+                            constructorInvocation.AddAnnotation(annotation);
+                        }
+
+                        Transform(constructorInvocation, context);
+                    }
                 }
 
                 if (objectCreateExpression.Initializer.Elements.Any())
@@ -711,7 +715,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         var namedInitializerExpression = initializerElement as NamedExpression;
                         if (namedInitializerExpression == null)
                         {
-                            throw new NotSupportedException("Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs).");
+                            throw new NotSupportedException(
+                                "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs).");
                         }
 
                         context.Scope.CurrentBlock.Add(new Assignment
@@ -727,9 +732,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 // There is no need for object creation per se, nothing should be on the right side of an assignment.
-                return initiailizationResult.ShouldReturnReference ?
-                    (IVhdlElement)initiailizationResult.RecordInstanceReference :
-                    Empty.Instance;
+                return Empty.Instance;
             }
             else if (expression is DefaultValueExpression)
             {
@@ -742,8 +745,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     AssignTo = NullableRecord.CreateIsNullFieldAccess(initiailizationResult.RecordInstanceReference),
                     Expression = Value.True
                 });
-
-                if (initiailizationResult.ShouldReturnReference) return initiailizationResult.RecordInstanceReference;
 
                 // There is no need for struct instantiation per se if the value was originally passed assigned to a
                 // variable/field/property, nothing should be on the right side of an assignment.
@@ -781,33 +782,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var parentAssignment = expression
                 .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
 
-            if (parentAssignment != null)
-            {
-                // This will only work if the newly created object is assigned to a variable or something else. It won't
-                // work if the newly created object is directly passed to a method for example.
-                var recordInstanceAssignmentTarget = parentAssignment.Left;
-                result.RecordInstanceIdentifier =
-                    recordInstanceAssignmentTarget is IdentifierExpression ||
-                    recordInstanceAssignmentTarget is IndexerExpression ||
-                    recordInstanceAssignmentTarget is MemberReferenceExpression ?
-                        recordInstanceAssignmentTarget :
-                        recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
-                result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
-            }
-            else
-            {
-                result.ShouldReturnReference = true;
-                result.RecordInstanceReference = context.Scope.StateMachine
-                    .CreateVariableWithNextUnusedIndexedName("instance", record)
-                    .ToReference();
-                var variableNameSegments = result.RecordInstanceReference.Name
-                    .TrimExtendedVhdlIdDelimiters()
-                    .Split(new[] { '.' });
-                var identifier = variableNameSegments[variableNameSegments.Length - 2] +
-                    "." +
-                    variableNameSegments[variableNameSegments.Length - 1];
-                result.RecordInstanceIdentifier = new IdentifierExpression(identifier);
-            }
+            // This will only work if the newly created object is assigned to a variable or something else. It won't
+            // work if the newly created object is directly passed to a method for example. However
+            // DirectlyAccessedNewObjectVariablesCreator takes care of that.
+            var recordInstanceAssignmentTarget = parentAssignment.Left;
+            result.RecordInstanceIdentifier =
+                recordInstanceAssignmentTarget is IdentifierExpression ||
+                recordInstanceAssignmentTarget is IndexerExpression ||
+                recordInstanceAssignmentTarget is MemberReferenceExpression ?
+                    recordInstanceAssignmentTarget :
+                    recordInstanceAssignmentTarget.FindFirstParentOfType<IdentifierExpression>();
+            result.RecordInstanceReference = (IDataObject)Transform(result.RecordInstanceIdentifier, context);
 
             foreach (var field in record.Fields)
             {
@@ -846,7 +831,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private class RecordInitializationResult
         {
-            public bool ShouldReturnReference { get; set; }
             public NullableRecord Record { get; set; }
             public IDataObject RecordInstanceReference { get; set; }
             public Expression RecordInstanceIdentifier { get; set; }

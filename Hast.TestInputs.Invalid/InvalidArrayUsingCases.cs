@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 
 namespace Hast.TestInputs.Invalid
 {
@@ -25,6 +26,12 @@ namespace Hast.TestInputs.Invalid
             var array1 = new int[5];
             var array2 = new int[5];
             Array.Copy(array1, array2, input);
+        }
+        
+        public void UnsupportedImmutableArrayCreateRangeUsage()
+        {
+            var immutableArray1 = ImmutableArray.CreateRange(new[] { 1 });
+            var immutableArray2 = ImmutableArray.CreateRange(immutableArray1, item => item);
         }
 
 
