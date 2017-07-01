@@ -38,6 +38,7 @@ namespace Hast.Transformer
         private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
         private readonly IOperatorAssignmentsToSimpleAssignmentsConverter _operatorAssignmentsToSimpleAssignmentsConverter;
         private readonly ICustomPropertiesToMethodsConverter _customPropertiesToMethodsConverter;
+        private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
 
 
         public DefaultTransformer(
@@ -57,7 +58,8 @@ namespace Hast.Transformer
             IConstantValuesSubstitutor constantValuesSubstitutor,
             IOperatorsToMethodsConverter operatorsToMethodsConverter,
             IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter,
-            ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter)
+            ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
+            IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -76,6 +78,7 @@ namespace Hast.Transformer
             _operatorsToMethodsConverter = operatorsToMethodsConverter;
             _operatorAssignmentsToSimpleAssignmentsConverter = operatorAssignmentsToSimpleAssignmentsConverter;
             _customPropertiesToMethodsConverter = customPropertiesToMethodsConverter;
+            _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
         }
 
 
@@ -178,6 +181,7 @@ namespace Hast.Transformer
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             // Conversions making the syntax tree easier to process.
+            _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
