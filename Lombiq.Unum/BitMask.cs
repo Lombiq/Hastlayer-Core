@@ -343,7 +343,7 @@ namespace Lombiq.Unum
 
         #endregion
 
-        #region Helper methods
+        #region Helper functions
 
         /// <summary>
         /// Finds the most significant 1-bit.
@@ -369,6 +369,8 @@ namespace Lombiq.Unum
 
             return 0;
         }
+
+        public uint this[int i] => Segments[i];
 
         public uint GetLowest32Bits() => Segments[0];
 
