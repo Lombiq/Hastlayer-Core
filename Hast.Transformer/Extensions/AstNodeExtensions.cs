@@ -20,6 +20,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 return memberReferenceExpression.Target.GetFullName() + "." + memberReferenceExpression.MemberName;
             }
 
+            if (node is ObjectCreateExpression)
+            {
+                return CreateNameForUnnamedNode(node);
+            }
+
             var memberDefinition = node.Annotation<IMemberDefinition>();
             if (memberDefinition != null) return memberDefinition.FullName;
 
@@ -94,14 +99,7 @@ namespace ICSharpCode.NRefactory.CSharp
                 return CreateParentEntityBasedName(node, ((VariableInitializer)node).Name);
             }
 
-            // The node doesn't really have a name so give it one that is suitably unique.
-            // This should contain one or more ILRange objects which maybe correspond to the node's location in the 
-            // original IL.
-            var ilRanges = node.Annotation<List<ILRange>>();
-            if (ilRanges == null) ilRanges = node.Parent.Annotation<List<ILRange>>(); // Maybe the parent has one.
-            return CreateParentEntityBasedName(
-                node, 
-                node.ToString() + (ilRanges != null && ilRanges.Any() ? ilRanges.First().ToString() : string.Empty));
+            return CreateNameForUnnamedNode(node);
         }
 
         /// <summary>
@@ -188,6 +186,9 @@ namespace ICSharpCode.NRefactory.CSharp
         public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node) =>
             node.FindFirstParentOfType<EntityDeclaration>();
 
+        public static Statement FindFirstParentStatement(this AstNode node) =>
+            node.FindFirstParentOfType<Statement>();
+
         public static BlockStatement FindFirstParentBlockStatement(this AstNode node) =>
             node.FindFirstParentOfType<BlockStatement>();
 
@@ -268,5 +269,17 @@ namespace ICSharpCode.NRefactory.CSharp
 
         private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
+
+        private static string CreateNameForUnnamedNode(AstNode node)
+        {
+            // The node doesn't really have a name so give it one that is suitably unique.
+            // This should contain one or more ILRange objects which maybe correspond to the node's location in the 
+            // original IL.
+            var ilRanges = node.Annotation<List<ILRange>>();
+            if (ilRanges == null) ilRanges = node.Parent.Annotation<List<ILRange>>(); // Maybe the parent has one.
+            return CreateParentEntityBasedName(
+                node,
+                node.ToString() + (ilRanges != null && ilRanges.Any() ? ilRanges.First().ToString() : string.Empty));
+        }
     }
 }

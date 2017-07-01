@@ -37,8 +37,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (!(assignmentExpression.Left is IdentifierExpression)) return;
 
-            if (ConstantValueSubstitutionHelper.IsInWhile(assignmentExpression) ||
-                ConstantValueSubstitutionHelper.IsInIfElse(assignmentExpression))
+            if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
             {
                 _constantValuesTable.MarkAsNonConstant(
                     assignmentExpression.Left,
@@ -153,6 +152,19 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             SubstituteValueHolderInExpressionIfInSuitableAssignment(invocationExpression);
         }
 
+        public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
+        {
+            base.VisitUnaryOperatorExpression(unaryOperatorExpression);
+
+            if (!(unaryOperatorExpression.Expression is PrimitiveExpression)) return;
+
+            PrimitiveExpression valueExpression;
+            if (_constantValuesTable.RetrieveAndDeleteConstantValue(unaryOperatorExpression, out valueExpression))
+            {
+                unaryOperatorExpression.ReplaceWith(valueExpression.Clone());
+            }
+        }
+
 
         private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
@@ -160,6 +172,19 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // statement then it can't be safely substituted (due to e.g. loop variables).
             if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
                 ConstantValueSubstitutionHelper.IsInWhile(expression))
+            {
+                return;
+            }
+
+            // If the value holder is inside a unary operator that can mutate its state then it can't be substituted.
+            var mutatingUnaryOperators = new[]
+            {
+                UnaryOperatorType.Decrement,
+                UnaryOperatorType.Increment,
+                UnaryOperatorType.PostDecrement,
+                UnaryOperatorType.PostIncrement
+            };
+            if (expression.Parent.Is<UnaryOperatorExpression>(unary => mutatingUnaryOperators.Contains(unary.Operator)))
             {
                 return;
             }
@@ -251,8 +276,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // We need to keep track of the last assignment in the root scope of the method. If after that there is
                 // another assignment in an if-else or while then that makes the value holder's constant value unusable.
 
-                if (ConstantValueSubstitutionHelper.IsInWhile(assignmentExpression) ||
-                    ConstantValueSubstitutionHelper.IsInIfElse(assignmentExpression))
+                if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
                 {
                     ConstantValuesTable.MarkAsNonConstant(assignmentExpression.Left, _constructor);
                 }

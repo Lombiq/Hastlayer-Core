@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sample.cs" />
     <Compile Include="SampleRunners\GenomeMatcherSampleRunner.cs" />
-    <Compile Include="SampleRunners\HastlayerOptimizedAlgorithmSampleRunner.cs" />
+    <Compile Include="SampleRunners\ParallelAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\MonteCarloAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ObjectOrientedShowcaseSampleRunner.cs" />

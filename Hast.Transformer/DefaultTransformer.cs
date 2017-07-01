@@ -37,6 +37,9 @@ namespace Hast.Transformer
         private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
         private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
         private readonly IOperatorAssignmentsToSimpleAssignmentsConverter _operatorAssignmentsToSimpleAssignmentsConverter;
+        private readonly ICustomPropertiesToMethodsConverter _customPropertiesToMethodsConverter;
+        private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
+        private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
 
 
         public DefaultTransformer(
@@ -55,7 +58,10 @@ namespace Hast.Transformer
             IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
             IConstantValuesSubstitutor constantValuesSubstitutor,
             IOperatorsToMethodsConverter operatorsToMethodsConverter,
-            IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter)
+            IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter,
+            ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
+            IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
+            IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -73,6 +79,9 @@ namespace Hast.Transformer
             _constantValuesSubstitutor = constantValuesSubstitutor;
             _operatorsToMethodsConverter = operatorsToMethodsConverter;
             _operatorAssignmentsToSimpleAssignmentsConverter = operatorAssignmentsToSimpleAssignmentsConverter;
+            _customPropertiesToMethodsConverter = customPropertiesToMethodsConverter;
+            _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
+            _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
         }
 
 
@@ -175,14 +184,17 @@ namespace Hast.Transformer
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             // Conversions making the syntax tree easier to process.
+            _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
             _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
             _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
             _operatorsToMethodsConverter.ConvertOperatorsToMethods(syntaxTree);
+            _customPropertiesToMethodsConverter.ConvertCustomPropertiesToMethods(syntaxTree);
             _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
+            _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree);
 
             // If the conversions removed something let's clean them up here.

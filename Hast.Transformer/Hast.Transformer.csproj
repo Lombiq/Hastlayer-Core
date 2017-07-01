@@ -68,6 +68,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -87,13 +91,16 @@
     <Compile Include="Extensions\EntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\HardwareEntryPointMemberEntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
+    <Compile Include="Extensions\ObjectCreateExpressionExtensions.cs" />
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
     <Compile Include="Extensions\TransformationContextExtensions.cs" />
     <Compile Include="Extensions\InvocationInstanceCountTransformerConfigurationExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
+    <Compile Include="Helpers\VariableHelper.cs" />
     <Compile Include="Helpers\AstInsertionHelper.cs" />
+    <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\ConstantValueSubstitutionHelper.cs" />
     <Compile Include="Helpers\MethodDeclarationFactory.cs" />
     <Compile Include="Helpers\Sha2456Helper.cs" />
@@ -116,6 +123,8 @@
     <Compile Include="Services\ConstantValuesSubstitution\GlobalValueHoldersHandlingVisitor.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\ObjectHoldersToSubstitutedConstructorsMappingVisitor.cs" />
     <Compile Include="Services\ConstructorsToMethodsConverter.cs" />
+    <Compile Include="Services\CustomPropertiesToMethodsConverter.cs" />
+    <Compile Include="Services\DirectlyAccessedNewObjectVariablesCreator.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IArrayInitializerExpander.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IAstExpressionEvaluator.cs" />
@@ -123,9 +132,13 @@
     <Compile Include="Services\IConditionalExpressionsToIfElsesConverter.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IConstantValuesSubstitutor.cs" />
     <Compile Include="Services\IConstructorsToMethodsConverter.cs" />
+    <Compile Include="Services\ICustomPropertiesToMethodsConverter.cs" />
+    <Compile Include="Services\IDirectlyAccessedNewObjectVariablesCreator.cs" />
     <Compile Include="Services\IGeneratedTaskArraysInliner.cs" />
+    <Compile Include="Services\IImmutableArraysToStandardArraysConverter.cs" />
     <Compile Include="Services\IInstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\IInvocationInstanceCountAdjuster.cs" />
+    <Compile Include="Services\ImmutableArraysToStandardArraysConverter.cs" />
     <Compile Include="Services\InstanceMethodsToStaticConverter.cs" />
     <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
     <Compile Include="Services\IObjectVariableTypesConverter.cs" />
