@@ -15,6 +15,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         public static bool IsInIfElse(AstNode node) => node.IsIn<IfElseStatement>();
 
+        public static bool IsInWhileOrIfElse(AstNode node) => IsInWhile(node) || IsInIfElse(node);
+
         public static bool IsMethodInvocation(MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.Parent.Is<InvocationExpression>(invocation => invocation.Target == memberReferenceExpression);
 
