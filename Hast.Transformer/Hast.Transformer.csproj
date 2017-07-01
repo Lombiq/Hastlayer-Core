@@ -91,6 +91,7 @@
     <Compile Include="Extensions\EntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\HardwareEntryPointMemberEntityDeclarationExtensions.cs" />
     <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
+    <Compile Include="Extensions\ObjectCreateExpressionExtensions.cs" />
     <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Services\ConstantValuesSubstitution\ObjectHoldersToSubstitutedConstructorsMappingVisitor.cs" />
     <Compile Include="Services\ConstructorsToMethodsConverter.cs" />
     <Compile Include="Services\CustomPropertiesToMethodsConverter.cs" />
+    <Compile Include="Services\DirectlyAccessedNewObjectVariablesCreator.cs" />
     <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IArrayInitializerExpander.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\IAstExpressionEvaluator.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Services\ConstantValuesSubstitution\IConstantValuesSubstitutor.cs" />
     <Compile Include="Services\IConstructorsToMethodsConverter.cs" />
     <Compile Include="Services\ICustomPropertiesToMethodsConverter.cs" />
+    <Compile Include="Services\IDirectlyAccessedNewObjectVariablesCreator.cs" />
     <Compile Include="Services\IGeneratedTaskArraysInliner.cs" />
     <Compile Include="Services\IImmutableArraysToStandardArraysConverter.cs" />
     <Compile Include="Services\IInstanceMethodsToStaticConverter.cs" />

@@ -39,6 +39,7 @@ namespace Hast.Transformer
         private readonly IOperatorAssignmentsToSimpleAssignmentsConverter _operatorAssignmentsToSimpleAssignmentsConverter;
         private readonly ICustomPropertiesToMethodsConverter _customPropertiesToMethodsConverter;
         private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
+        private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
 
 
         public DefaultTransformer(
@@ -59,7 +60,8 @@ namespace Hast.Transformer
             IOperatorsToMethodsConverter operatorsToMethodsConverter,
             IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter,
             ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
-            IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter)
+            IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
+            IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -79,6 +81,7 @@ namespace Hast.Transformer
             _operatorAssignmentsToSimpleAssignmentsConverter = operatorAssignmentsToSimpleAssignmentsConverter;
             _customPropertiesToMethodsConverter = customPropertiesToMethodsConverter;
             _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
+            _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
         }
 
 
@@ -191,6 +194,7 @@ namespace Hast.Transformer
             _arrayInitializerExpander.ExpandArrayInitializers(syntaxTree);
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
+            _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree);
 
             // If the conversions removed something let's clean them up here.

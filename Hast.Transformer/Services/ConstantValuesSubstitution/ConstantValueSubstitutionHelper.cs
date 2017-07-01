@@ -54,7 +54,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (methodReference == null) return null;
 
-            var targetFullName = callExpression.GetFullName();
+            var targetFullName = methodReference.FullName;
 
             var targetType = typeDeclarationLookupTable.Lookup(methodReference.DeclaringType.FullName);
 
