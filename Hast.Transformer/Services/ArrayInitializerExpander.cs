@@ -91,7 +91,7 @@ namespace Hast.Transformer.Services
                         ));
 
                     AstInsertionHelper.InsertStatementAfter(
-                        arrayCreateExpression.FindFirstParentOfType<Statement>(), 
+                        arrayCreateExpression.FindFirstParentStatement(), 
                         elementAssignmentStatement);
                 }
             }

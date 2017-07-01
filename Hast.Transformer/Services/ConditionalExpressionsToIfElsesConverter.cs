@@ -51,7 +51,7 @@ namespace Hast.Transformer.Services
                     var variableDeclaration = 
                         new VariableDeclarationStatement(AstBuilder.ConvertType(variableTypeReference), variableName);
                     AstInsertionHelper.InsertStatementBefore(
-                        conditionalExpression.FindFirstParentOfType<Statement>(),
+                        conditionalExpression.FindFirstParentStatement(),
                         variableDeclaration);
 
                     // Then moving the conditational expression so its result is assigned to the variable.

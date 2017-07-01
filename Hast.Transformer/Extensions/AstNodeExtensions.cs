@@ -188,6 +188,9 @@ namespace ICSharpCode.NRefactory.CSharp
         public static EntityDeclaration FindFirstParentEntityDeclaration(this AstNode node) =>
             node.FindFirstParentOfType<EntityDeclaration>();
 
+        public static Statement FindFirstParentStatement(this AstNode node) =>
+            node.FindFirstParentOfType<Statement>();
+
         public static BlockStatement FindFirstParentBlockStatement(this AstNode node) =>
             node.FindFirstParentOfType<BlockStatement>();
 
