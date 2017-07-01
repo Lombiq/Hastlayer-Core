@@ -67,7 +67,7 @@ namespace Lombiq.Unum
             _environment = environment;
 
             // To be sure that UnumBits has the same size as the environment. Excess bits will be truncated.
-            UnumBits = new BitMask(bits.Segments, _environment.Size);
+            UnumBits = BitMask.FromImmutableArray(bits.Segments, _environment.Size);
         }
 
         // This doesn't work for all cases yet.

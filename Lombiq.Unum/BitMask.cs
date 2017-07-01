@@ -10,17 +10,14 @@ namespace Lombiq.Unum
         public ImmutableArray<uint> Segments { get; }
 
 
-        public BitMask(uint[] segments)
-        {
-            SegmentCount = (ushort)segments.Length;
-            Size = (ushort)(SegmentCount << 5);
-            Segments = ImmutableArray.CreateRange(segments);
-        }
+        #region Constructors
 
-        public BitMask(uint[] segments, ushort size)
+        public BitMask(uint[] segments, ushort size = 0)
         {
-            Size = size;
-            SegmentCount = size > (ushort)(segments.Length << 5) ?
+            var segmentBits = (ushort)(segments.Length << 5);
+
+            Size = size < segmentBits ? segmentBits : size;
+            SegmentCount = size > segmentBits ?
                 (ushort)((size >> 5) + (size % 32 == 0 ? 0 : 1)) :
                 (ushort)segments.Length;
 
@@ -31,25 +28,6 @@ namespace Lombiq.Unum
                  * using ImmutableArray.Add, which would instantiate a new array for each addition. */
                 var extendedSegments = new uint[SegmentCount];
                 Array.Copy(segments, extendedSegments, segments.Length);
-                Segments = ImmutableArray.CreateRange(extendedSegments);
-            }
-            else Segments = ImmutableArray.CreateRange(segments);
-        }
-
-        public BitMask(ImmutableArray<uint> segments, ushort size)
-        {
-            Size = size;
-            SegmentCount = size > (ushort)(segments.Length << 5) ?
-                (ushort)((size >> 5) + (size % 32 == 0 ? 0 : 1)) :
-                (ushort)segments.Length;
-
-            if (SegmentCount > segments.Length)
-            {
-                /* Creating a new, temporary array once that will be used to initialize the ImmutableArray,
-                 * so the "extension" items (i.e. the 0-value items on top of the original segments) aren't added
-                 * using ImmutableArray.Add, which would instantiate a new array for each addition. */
-                var extendedSegments = new uint[SegmentCount];
-                segments.CopyTo(extendedSegments);
                 Segments = ImmutableArray.CreateRange(extendedSegments);
             }
             else Segments = ImmutableArray.CreateRange(segments);
@@ -81,11 +59,24 @@ namespace Lombiq.Unum
         {
             Size = source.Size;
             SegmentCount = source.SegmentCount;
-            Segments = source.SegmentCount > 0 ?
-                ImmutableArray.CreateRange(source.Segments) :
-                ImmutableArray.Create<uint>();
+            Segments = source.Segments;
         }
 
+        #endregion
+
+        #region Static factories
+
+        public static BitMask FromImmutableArray(ImmutableArray<uint> segments, ushort size = 0)
+        {
+            var intermediarySegments = new uint[segments.Length];
+            segments.CopyTo(intermediarySegments);
+
+            return new BitMask(intermediarySegments, size);
+        }
+
+        #endregion
+
+        #region BitMask manipulation functions
 
         public BitMask SetOne(ushort index)
         {
@@ -95,7 +86,7 @@ namespace Lombiq.Unum
             var segmentPosition = index >> 5;
 
             if ((Segments[segmentPosition] >> bitPosition) % 2 == 0)
-                return new BitMask(Segments.SetItem(segmentPosition, Segments[segmentPosition] | (uint)(1 << bitPosition)), Size);
+                return FromImmutableArray(Segments.SetItem(segmentPosition, Segments[segmentPosition] | (uint)(1 << bitPosition)), Size);
 
             return new BitMask(this);
         }
@@ -108,7 +99,7 @@ namespace Lombiq.Unum
             var segmentPosition = index >> 5;
 
             if ((Segments[segmentPosition] >> bitPosition) % 2 == 1)
-                return new BitMask(Segments.SetItem(segmentPosition, Segments[segmentPosition] & ~((uint)1 << bitPosition)), Size);
+                return FromImmutableArray(Segments.SetItem(segmentPosition, Segments[segmentPosition] & ~((uint)1 << bitPosition)), Size);
 
             return new BitMask(this);
         }
@@ -122,6 +113,9 @@ namespace Lombiq.Unum
             return mask >> leadingOnePosition;
         }
 
+        #endregion
+
+        #region Operators
 
         public static bool operator ==(BitMask left, BitMask right)
         {
@@ -347,6 +341,9 @@ namespace Lombiq.Unum
             return new BitMask(segments);
         }
 
+        #endregion
+
+        #region Helper methods
 
         /// <summary>
         /// Finds the most significant 1-bit.
@@ -375,6 +372,9 @@ namespace Lombiq.Unum
 
         public uint GetLowest32Bits() => Segments[0];
 
+        #endregion
+
+        #region Overrides
 
         public override bool Equals(object obj) => this == (BitMask)obj;
 
@@ -387,5 +387,7 @@ namespace Lombiq.Unum
         }
 
         public override string ToString() => string.Join(", ", Segments);
+
+        #endregion
     }
 }
