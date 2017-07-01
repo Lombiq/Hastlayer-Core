@@ -49,7 +49,7 @@ namespace Hast.Transformer.Services
                     .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == arrayCreateExpression);
 
                 // The array wasn't assigned to a variable or anything but rather directly passed to a method or
-                // constructor. Thus first need to add a variable first to allow uniform processing later.
+                // constructor. Thus first we need to add a variable to allow uniform processing later.
                 if (parentAssignment == null)
                 {
                     var variableName = "array" + Sha2456Helper.ComputeHash(arrayCreateExpression.GetFullName());
