@@ -248,7 +248,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                     // Assign local variables to/from the intermediary parameter signal.
+                    // If the parameter is of direction In then the parameter element should contain an IDataObject.
+                    var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameter;
                     var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameter : parameterSignalReference;
+
+                    var y = parameterSignalReference.ToVhdl(VhdlGenerationOptions.Debug).Contains("BitMask::op_Addition(BitMask,UInt32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0");
                     // Only trying casting if the parameter is not a constant or something other than an IDataObject.
                     if (parameter is IDataObject)
                     {
@@ -292,18 +296,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             // Else the whole object was passed, i.e. Method(object). Nothing else to do.
                         }
 
+                        IAssignmentTypeConversionResult conversionResult;
                         if (flowDirection == ParameterFlowDirection.Out)
                         {
-                            assignmentExpression = _typeConversionTransformer
-                                .ImplementTypeConversion(localVariableDataType, parameterSignalType, parameter)
-                                .Expression;
+                            conversionResult = _typeConversionTransformer
+                                .ImplementTypeConversionForAssignment(localVariableDataType, parameterSignalType, parameter, assignTo);
                         }
                         else
                         {
-                            assignmentExpression = _typeConversionTransformer
-                                .ImplementTypeConversion(parameterSignalType, localVariableDataType, parameterSignalReference)
-                                .Expression;
+                            conversionResult = _typeConversionTransformer
+                                .ImplementTypeConversionForAssignment(parameterSignalType, localVariableDataType, parameterSignalReference, assignTo);
                         }
+
+                        assignTo = conversionResult.ConvertedToDataObject;
+                        assignmentExpression = conversionResult.ConvertedFromExpression;
                     }
 
                     // In this case the parameter is e.g. a primitive value, no need to assign to it.
@@ -314,8 +320,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     return new Assignment
                     {
-                        // If the parameter is of direction In then the parameter element should contain an IDataObject.
-                        AssignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameter,
+                        AssignTo = assignTo,
                         Expression = assignmentExpression
                     };
                 };

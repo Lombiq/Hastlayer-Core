@@ -95,6 +95,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                     if (rightTransformed == Empty.Instance) return Empty.Instance;
 
+                    // _typeConversionTransformer.ImplementTypeConversionForAssignment() could be used here, but that
+                    // also needs the data types of both operands.
+
                     return new Assignment
                     {
                         AssignTo = (IDataObject)leftTransformed,
@@ -526,7 +529,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                         Operator = BinaryOperator.Subtract,
                                         Right = transformedExpression
                                     })
-                                    .Expression;
+                                    .ConvertedFromExpression;
                             }
                         }
 
@@ -627,7 +630,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
                 }
 
-                return typeConversionResult.Expression;
+                return typeConversionResult.ConvertedFromExpression;
             }
             else if (expression is ArrayCreateExpression)
             {
@@ -660,7 +663,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             _typeConverter.ConvertTypeReference(indexExpression.GetActualTypeReference(), context.TransformationContext),
                             KnownDataTypes.UnrangedInt,
                             Transform(indexExpression, context))
-                        .Expression
+                        .ConvertedFromExpression
                 };
             }
             else if (expression is ParenthesizedExpression)
