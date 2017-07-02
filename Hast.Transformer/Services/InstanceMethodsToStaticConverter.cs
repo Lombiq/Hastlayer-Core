@@ -52,8 +52,8 @@ namespace Hast.Transformer.Services
                 methodDeclaration.Modifiers = methodDeclaration.Modifiers | Modifiers.Static;
 
                 // Adding a "@this" parameter and using that instead of the "this" reference.
-                var thisParameter = new ParameterDeclaration(parentAstType, "this");
-                thisParameter.AddAnnotation(new ParameterDefinition("this", ParameterAttributes.None, parentTypeDefinition));
+                var thisParameter = new ParameterDeclaration(parentAstType, "this")
+                    .WithAnnotation(new ParameterDefinition("this", ParameterAttributes.None, parentTypeDefinition));
                 if (!methodDeclaration.Parameters.Any())
                 {
                     methodDeclaration.Parameters.Add(thisParameter);

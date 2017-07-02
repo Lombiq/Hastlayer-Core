@@ -18,7 +18,7 @@ namespace Hast.Transformer.Helpers
             var int32TypeReference = new TypeReference(
                 "System",
                 "Int32",
-                node.FindFirstParentTypeDeclaration().Annotation<TypeDefinition>().Module,
+                node.FindFirstParentEntityDeclaration().Annotation<IMemberDefinition>().DeclaringType.Module,
                 new AssemblyNameReference(
                     int32Assembly.ShortName(),
                     new Version(int32Assembly.FullName.Split(',')[1].Substring(9))));

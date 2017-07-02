@@ -30,10 +30,9 @@ namespace Hast.Transformer.Services
                 var int32TypeInformation = TypeHelper.CreateInt32TypeInformation(arrayCreateExpression);
 
                 // Setting the size argument, e.g. new int[] will be turned into new int[5].
-                var sizeArgument = new PrimitiveExpression(initializerElements.Length);
-                sizeArgument.AddAnnotation(int32TypeInformation);
                 arrayCreateExpression.Arguments.Clear();
-                arrayCreateExpression.Arguments.Add(sizeArgument);
+                arrayCreateExpression.Arguments.Add(
+                    new PrimitiveExpression(initializerElements.Length).WithAnnotation(int32TypeInformation));
 
                 var parentAssignment = arrayCreateExpression
                     .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == arrayCreateExpression);
@@ -62,15 +61,12 @@ namespace Hast.Transformer.Services
 
                 for (int i = initializerElements.Length - 1; i >= 0; i--)
                 {
-                    var indexArgument = new PrimitiveExpression(i);
-                    indexArgument.AddAnnotation(int32TypeInformation);
-
                     var elementAssignmentStatement = new ExpressionStatement(new AssignmentExpression(
                         left: new IndexerExpression(
                             target: parentAssignment
                                 .Left // This should be the IdentifierExpression that the array was assigned to.
                                 .Clone(),
-                            arguments: indexArgument),
+                            arguments: new PrimitiveExpression(i).WithAnnotation(int32TypeInformation)),
                         right: initializerElements[i]
                         ));
 
