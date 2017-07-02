@@ -370,7 +370,8 @@ namespace Lombiq.Unum
             return 0;
         }
 
-        public uint this[int i] => Segments[i];
+        // Array indexer is not supported by Hastlayer yet.
+        //public uint this[int i] => Segments[i];
 
         public uint GetLowest32Bits() => Segments[0];
 
