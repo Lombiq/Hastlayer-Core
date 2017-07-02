@@ -33,14 +33,11 @@ namespace Hast.Transformer.Helpers
             var parentStatement = valueHolder.FindFirstParentStatement();
             var typeInformation = valueHolder.Annotation<TypeInformation>();
 
-            var variableDeclaration = new VariableDeclarationStatement(type.Clone(), variableName);
-            variableDeclaration.AddAnnotation(typeInformation);
-            AstInsertionHelper.InsertStatementBefore(parentStatement, variableDeclaration);
+            AstInsertionHelper.InsertStatementBefore(
+                parentStatement, 
+                new VariableDeclarationStatement(type.Clone(), variableName).WithAnnotation(typeInformation));
 
-            var variableIdentifier = new IdentifierExpression(variableName);
-            variableIdentifier.AddAnnotation(typeInformation);
-
-            return variableIdentifier;
+            return new IdentifierExpression(variableName).WithAnnotation(typeInformation);
         }
     }
 }

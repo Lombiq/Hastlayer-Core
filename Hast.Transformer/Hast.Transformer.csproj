@@ -101,6 +101,7 @@
     <Compile Include="Helpers\VariableHelper.cs" />
     <Compile Include="Helpers\AstInsertionHelper.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Models\ArraySize.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\ConstantValueSubstitutionHelper.cs" />
     <Compile Include="Helpers\MethodDeclarationFactory.cs" />
     <Compile Include="Helpers\Sha2456Helper.cs" />
