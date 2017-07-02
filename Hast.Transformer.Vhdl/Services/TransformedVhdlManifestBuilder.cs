@@ -300,10 +300,11 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         case ClassType.Class:
                         case ClassType.Struct:
-                            // Records need to be created only for those types that are neither display classes, neither
-                            // hardware entry point types.
+                            // Records need to be created only for those types that are neither display classes, nor
+                            // hardware entry point types or static types 
                             if (!typeDeclaration.GetFullName().IsDisplayClassName() && 
-                                !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()))
+                                !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
+                                !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))
                             {
                                 memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext)); 
                             }
