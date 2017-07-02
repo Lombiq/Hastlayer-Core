@@ -252,7 +252,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameter;
                     var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameter : parameterSignalReference;
 
-                    var y = parameterSignalReference.ToVhdl(VhdlGenerationOptions.Debug).Contains("BitMask::op_Addition(BitMask,UInt32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0");
                     // Only trying casting if the parameter is not a constant or something other than an IDataObject.
                     if (parameter is IDataObject)
                     {
