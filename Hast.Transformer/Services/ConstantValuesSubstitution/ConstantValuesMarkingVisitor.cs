@@ -186,6 +186,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     var member = ((MemberReferenceExpression)node).FindMemberDeclaration(_typeDeclarationLookupTable);
                     if (member == null) return;
                     existingSize = _arraySizeHolder.GetSize(member);
+                    if (existingSize != null) _arraySizeHolder.SetSize(node, existingSize.Length);
                 }
 
                 if (existingSize == null) return;
