@@ -170,8 +170,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitArrayCreateExpression(arrayCreateExpression);
 
             var lengthArgument = arrayCreateExpression.Arguments.Single();
-            var parent = arrayCreateExpression.Parent;
-            var existingSize = _arraySizeHolder.GetSize((parent as AssignmentExpression)?.Left ?? AstNode.Null);
+            var parentAssignment = arrayCreateExpression.Parent as AssignmentExpression;
+            var existingSize = parentAssignment != null ?
+                _arraySizeHolder.GetSize(parentAssignment.Left) :
+                null;
 
             if (lengthArgument is PrimitiveExpression || existingSize == null) return;
 
@@ -179,7 +181,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // array size defined then just substitute the array length too.
             lengthArgument.ReplaceWith(
                 new PrimitiveExpression(existingSize.Length)
-                .WithAnnotation(TypeHelper.CreateInt32TypeInformation(parent)));
+                .WithAnnotation(TypeHelper.CreateInt32TypeInformation(parentAssignment)));
         }
 
 
