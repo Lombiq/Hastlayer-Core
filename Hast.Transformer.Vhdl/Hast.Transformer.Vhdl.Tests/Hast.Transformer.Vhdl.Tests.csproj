@@ -139,6 +139,10 @@
       <Project>{3E852853-2D19-49BB-B6C9-39B01D6E9785}</Project>
       <Name>Lombiq.OrchardAppHost</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Lombiq.Unum\Lombiq.Unum.csproj">
+      <Project>{6CFE69A4-04A3-4427-818C-C0832D197A62}</Project>
+      <Name>Lombiq.Unum</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Orchard\src\Orchard.Tests\Orchard.Framework.Tests.csproj">
       <Project>{abc826d4-2fa1-4f2f-87de-e6095f653810}</Project>
       <Name>Orchard.Framework.Tests</Name>

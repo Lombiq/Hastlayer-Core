@@ -4,6 +4,7 @@ using Hast.Common.Configuration;
 using Hast.Communication;
 using Hast.Samples.SampleAssembly;
 using Lombiq.OrchardAppHost;
+using Lombiq.Unum;
 using NUnit.Framework;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
@@ -26,11 +27,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         {
             await _host.Run<ITransformer>(async transformer =>
             {
-                // Not adding the Unum sample yet since first Unum and the corresponding types need to be moved to their
-                // own assembly.
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly/*, typeof(Common.Numerics.Unum.Unum).Assembly*/ },
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly },
                     configuration =>
                     {
                         // Only testing well-tested samples.
@@ -60,7 +59,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                                 MaxRecursionDepth = 5
                             });
 
-                        //configuration.AddHardwareEntryPointType<UnumCalculator>();
+                        configuration.AddHardwareEntryPointType<UnumCalculator>();
+                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                            UnumCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
+                            UnumCalculatorExtensions.ManuallySizedArrays);
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
                     });
