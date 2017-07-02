@@ -114,15 +114,62 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     "The affected expression: " + binaryOperatorExpression.ToString() +
                     " in member " + binaryOperatorExpression.FindFirstParentOfType<EntityDeclaration>().GetFullName() + ".");
             }
-            return typeConversionResult.Expression;
+            return typeConversionResult.ConvertedFromExpression;
         }
 
-        public ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression)
+        public IAssignmentTypeConversionResult ImplementTypeConversionForAssignment(
+            DataType fromType,
+            DataType toType,
+            IVhdlElement fromExpression,
+            IDataObject toDataObject)
         {
-            var result = new TypeConversionResult { Expression = expression };
+            var subResult = ImplementTypeConversion(fromType, toType, fromExpression);
+
+            var result = new AssignmentTypeConversionResult
+            {
+                ConvertedFromExpression = subResult.ConvertedFromExpression,
+                ConvertedToDataObject = toDataObject,
+                IsLossy = subResult.IsLossy,
+                IsResized = subResult.IsResized
+            };
+
+            // If both types are arrays then if the array size is different slicing is needed.
+            var fromArray = fromType as UnconstrainedArrayInstantiation;
+            var toArray = toType as UnconstrainedArrayInstantiation;
+            if (fromArray != null && toArray != null && fromArray.RangeTo < toArray.RangeTo)
+            {
+                result.ConvertedToDataObject = new ArraySlice
+                {
+                    ArrayReference = toDataObject,
+                    IndexFrom = 0,
+                    IndexTo = fromArray.RangeTo
+                };
+                result.IsResized = true;
+            }
+
+            return result;
+        }
+
+        public ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement fromExpression)
+        {
+            var result = new TypeConversionResult { ConvertedFromExpression = fromExpression };
 
             if (fromType == toType)
             {
+                // If both types are arrays then if the array size is different slicing is needed.
+                var fromArray = fromType as UnconstrainedArrayInstantiation;
+                var toArray = toType as UnconstrainedArrayInstantiation;
+                if (fromArray != null && toArray != null && fromArray.RangeTo > toArray.RangeTo)
+                {
+                    result.ConvertedFromExpression = new ArraySlice
+                    {
+                        ArrayReference = (IDataObject)fromExpression,
+                        IndexFrom = 0,
+                        IndexTo = toArray.RangeTo
+                    };
+                    result.IsResized = true;
+                }
+
                 return result;
             }
 
@@ -132,7 +179,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var toSize = toType.GetSize();
 
             var castInvocation = new Invocation();
-            castInvocation.Parameters.Add(expression);
+            castInvocation.Parameters.Add(fromExpression);
 
             Action<int> convertInvocationToResizeAndAddSizeParameter = size =>
             {
@@ -227,16 +274,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
 
-            result.Expression = castInvocation;
+            result.ConvertedFromExpression = castInvocation;
             return result;
         }
 
 
         private class TypeConversionResult : ITypeConversionResult
         {
-            public IVhdlElement Expression { get; set; }
+            public IVhdlElement ConvertedFromExpression { get; set; }
             public bool IsLossy { get; set; }
             public bool IsResized { get; set; }
+        }
+
+        private class AssignmentTypeConversionResult : TypeConversionResult, IAssignmentTypeConversionResult
+        {
+            public IDataObject ConvertedToDataObject { get; set; }
         }
     }
 }

@@ -288,7 +288,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     resultType,
                     binaryElement);
 
-                binaryElement = typeConversionResult.Expression;
+                binaryElement = typeConversionResult.ConvertedFromExpression;
 
                 // Most of the time due to the cast no resize is necessary, but sometimes it is.
                 shouldResizeResult = shouldResizeResult && !typeConversionResult.IsResized;
