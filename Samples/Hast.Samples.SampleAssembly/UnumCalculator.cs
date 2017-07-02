@@ -30,7 +30,7 @@ namespace Hast.Samples.SampleAssembly
             }
 
             var resultArray = b.FractionToUintArray();
-            for (var i = 0; i < 9; i++)
+            for (var i = 0; i < resultArray.Length; i++)
             {
                 memory.WriteUInt32(CalculateSumOfPowersofTwo_OutputUInt32Index + i, resultArray[i]);
             }
