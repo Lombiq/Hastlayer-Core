@@ -30,7 +30,6 @@ namespace Hast.Samples.Consumer.SampleRunners
                     "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_BitwiseOr(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
                     "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_ExclusiveOr(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
                     "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_BitwiseAnd(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
-                    //"System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray()",
                     "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32).array",
                     "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32).array",
                     "System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray().array"
