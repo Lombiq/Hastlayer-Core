@@ -507,8 +507,6 @@ namespace Lombiq.Unum
                 return new Unum(left._environment, left.NegativeInfinity);
 
 
-            // Using the environment properties directly for now, as custom properties like left.ExponentSizeSize are not
-            // yet supported.
             var resultUnum = new Unum(left._environment);
 
             var exponentValueDifference = left.ExponentValueWithBias() - right.ExponentValueWithBias();
