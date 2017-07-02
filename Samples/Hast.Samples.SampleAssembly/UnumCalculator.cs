@@ -17,7 +17,7 @@ namespace Hast.Samples.SampleAssembly
         {
             var number = memory.ReadUInt32(CalculateSumOfPowersofTwo_InputUInt32Index);
 
-            var environment = new UnumEnvironment(4, 8);
+            var environment = EnvironmentFactory();
 
             var a = new Unum(environment, 1);
             var b = new Unum(environment, 0);
@@ -34,6 +34,9 @@ namespace Hast.Samples.SampleAssembly
                 memory.WriteUInt32(CalculateSumOfPowersofTwo_OutputUInt32Index + i, resultArray[i]);
             }
         }
+
+        // Needed so UnumCalculatorSampleRunner can retrieve BitMask.SegmentCount.
+        public static UnumEnvironment EnvironmentFactory() => new UnumEnvironment(4, 8);
     }
 
 
