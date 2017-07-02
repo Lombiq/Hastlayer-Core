@@ -59,24 +59,18 @@ namespace Hast.Transformer.Services
                 var invocationTypeReference = invocationExpression.GetActualTypeReference();
 
                 Func<MemberReferenceExpression> createArrayLengthExpression = () =>
-                {
-                    var arrayLengthExpression = new MemberReferenceExpression(memberReference.Target.Clone(), "Length");
-                    arrayLengthExpression.AddAnnotation(TypeHelper.CreateInt32TypeInformation(invocationExpression));
-                    return arrayLengthExpression;
-                };
+                    new MemberReferenceExpression(memberReference.Target.Clone(), "Length")
+                        .WithAnnotation(TypeHelper.CreateInt32TypeInformation(invocationExpression));
 
                 Func<Expression, MemberReferenceExpression, InvocationExpression> createArrayCopyExpression =
                     (destinationValueHolder, arrayLengthExpression) =>
-                    {
-                        var copyInvocation = new InvocationExpression(
-                            new MemberReferenceExpression(new TypeReferenceExpression(new SimpleType("System.Array")), "Copy"),
-                            memberReference.Target.Clone(),
-                            destinationValueHolder.Clone(),
-                            arrayLengthExpression.Clone());
-                        // Just faking the name for InvocationExpressionTransformer.
-                        copyInvocation.AddAnnotation(new DummyArrayCopyMemberDefinition());
-                        return copyInvocation;
-                    };
+                    // Just faking the name for InvocationExpressionTransformer.
+                    new InvocationExpression(
+                        new MemberReferenceExpression(new TypeReferenceExpression(new SimpleType("System.Array")), "Copy"),
+                        memberReference.Target.Clone(),
+                        destinationValueHolder.Clone(),
+                        arrayLengthExpression.Clone())
+                    .WithAnnotation(new DummyArrayCopyMemberDefinition());
 
                 if (!IsImmutableArrayName(invocationTypeReference?.FullName) || memberReference == null)
                 {
@@ -152,8 +146,8 @@ namespace Hast.Transformer.Services
                         {
                             Type = memberReference.TypeArguments.Single().Clone(),
                         };
-                        var sizeExpression = new PrimitiveExpression(0);
-                        sizeExpression.AddAnnotation(TypeHelper.CreateInt32TypeInformation(invocationExpression));
+                        var sizeExpression = new PrimitiveExpression(0)
+                            .WithAnnotation(TypeHelper.CreateInt32TypeInformation(invocationExpression));
                         arrayCreate.Arguments.Add(sizeExpression);
                         arrayCreate.AddAnnotation(arrayTypeInformation);
                         invocationExpression.ReplaceWith(arrayCreate);

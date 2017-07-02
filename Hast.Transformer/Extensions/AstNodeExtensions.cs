@@ -266,6 +266,12 @@ namespace ICSharpCode.NRefactory.CSharp
             return parent;
         }
 
+        public static T WithAnnotation<T>(this T node, object annotation) where T : AstNode
+        {
+            node.AddAnnotation(annotation);
+            return node;
+        }
+
 
         private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;

@@ -58,7 +58,9 @@ namespace Hast.Transformer.Services
                     var variableIdentifier = new IdentifierExpression(variableName);
                     variableIdentifier.AddAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference });
                     var newConditionalExpression = (ConditionalExpression)conditionalExpression.Clone();
-                    assignment = new AssignmentExpression(variableIdentifier, newConditionalExpression);
+                    assignment = new AssignmentExpression(
+                        new IdentifierExpression(variableName).WithAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference }), 
+                        newConditionalExpression);
 
 
                     assignment.AddAnnotation(typeInformation);
