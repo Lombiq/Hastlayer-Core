@@ -158,9 +158,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     constructorDeclaration;
 
                 ProcessParent(
-                    node, 
-                    assignment => processParent(assignment.Left), 
-                    memberReference =>
+                    node: node,
+                    assignmentHandler: assignment => processParent(assignment.Left),
+                    memberReferenceHandler: memberReference =>
                     {
                         var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
                             .FindMemberReferenceInConstructor(constructorDeclaration, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
@@ -172,10 +172,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                             processParent(memberReference);
                         }
                     },
-                    processParent, 
-                    processParent, 
-                    processParent,
-                    returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()));
+                    invocationParameterHandler: processParent,
+                    objectCreationParameterHandler: processParent,
+                    variableInitializerHandler: processParent,
+                    returnStatementHandler: returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()));
             }
             else
             {
@@ -186,6 +186,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     var member = ((MemberReferenceExpression)node).FindMemberDeclaration(_typeDeclarationLookupTable);
                     if (member == null) return;
                     existingSize = _arraySizeHolder.GetSize(member);
+                    if (existingSize != null) _arraySizeHolder.SetSize(node, existingSize.Length);
                 }
 
                 if (existingSize == null) return;
@@ -200,8 +201,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             Action<AstNode> processParent = parent => _arraySizeHolder.SetSize(parent, arrayLength);
 
             ProcessParent(
-                arrayHolder,
-                assignmentExpression =>
+                node: arrayHolder,
+                assignmentHandler: assignmentExpression =>
                 {
                     if (assignmentExpression.Left is MemberReferenceExpression)
                     {
@@ -211,11 +212,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     }
                     _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
                 },
-                processParent,
-                processParent,
-                processParent,
-                processParent,
-                returnStatement => _arraySizeHolder.SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength));
+                memberReferenceHandler: parent => { }, // This would set a size for array.Length.
+                invocationParameterHandler: processParent,
+                objectCreationParameterHandler: processParent,
+                variableInitializerHandler: processParent,
+                returnStatementHandler: returnStatement => _arraySizeHolder.SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength));
         }
 
 
