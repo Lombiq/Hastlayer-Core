@@ -165,6 +165,23 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
         }
 
+        public override void VisitArrayCreateExpression(ArrayCreateExpression arrayCreateExpression)
+        {
+            base.VisitArrayCreateExpression(arrayCreateExpression);
+
+            var lengthArgument = arrayCreateExpression.Arguments.Single();
+            var parent = arrayCreateExpression.Parent;
+            var existingSize = _arraySizeHolder.GetSize((parent as AssignmentExpression)?.Left ?? AstNode.Null);
+
+            if (lengthArgument is PrimitiveExpression || existingSize == null) return;
+
+            // If the array creation doesn't have a static length but the value holder the array is assigned to has the
+            // array size defined then just substitute the array length too.
+            lengthArgument.ReplaceWith(
+                new PrimitiveExpression(existingSize.Length)
+                .WithAnnotation(TypeHelper.CreateInt32TypeInformation(parent)));
+        }
+
 
         private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
@@ -205,7 +222,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         return true;
                     }
                     else if (member.IsReadOnlyMember())
-
                     {
                         // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the
                         // first member that has a corresponding ctor.
