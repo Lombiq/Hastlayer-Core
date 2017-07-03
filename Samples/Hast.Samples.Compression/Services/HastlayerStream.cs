@@ -10,18 +10,12 @@ namespace Hast.Samples.Compression.Services
     public class HastlayerStream
     {
         private readonly byte[] _bytes;
-        private readonly Stream _stream;
         private bool _overflow;
         private long _position;
 
 
-        public long Position
-        {
-            set { _position = value; }
-            get { return _stream != null ? _stream.Position : _position; }
-        }
-
-        public long Length => _stream != null ? _stream.Length : _bytes.Length;
+        public long Position => _position;
+        public long Length => _bytes.Length;
 
 
         public HastlayerStream(byte[] bytes)
@@ -29,21 +23,9 @@ namespace Hast.Samples.Compression.Services
             _bytes = bytes;
         }
 
-        public HastlayerStream(Stream stream)
-        {
-            _stream = stream;
-        }
-
 
         public void Write(byte[] buffer, int offset, int count)
         {
-            if (_stream != null)
-            {
-                _stream.Write(buffer, offset, count);
-
-                return;
-            }
-
             if (_overflow) return;
 
             for (int i = offset; i < count; i++)
@@ -63,13 +45,6 @@ namespace Hast.Samples.Compression.Services
 
         public void WriteByte(byte byteToWrite)
         {
-            if (_stream != null)
-            {
-                _stream.WriteByte(byteToWrite);
-
-                return;
-            }
-
             if (_overflow) return;
 
             _bytes[_position] = byteToWrite;
@@ -86,8 +61,6 @@ namespace Hast.Samples.Compression.Services
 
         public int Read(byte[] buffer, int offset, int count)
         {
-            if (_stream != null) return _stream.Read(buffer, offset, count);
-
             var bytesRead = 0;
             if (_overflow) return bytesRead;
 
@@ -109,15 +82,9 @@ namespace Hast.Samples.Compression.Services
             return bytesRead;
         }
 
-        public void Close()
-        {
-            if (_stream != null) _stream.Close();
-        }
+        public void Close() { }
 
-        public void Flush()
-        {
-            if (_stream != null) _stream.Flush();
-        }
+        public void Flush() { }
 
         public byte[] GetBytes() => _bytes;
     }
