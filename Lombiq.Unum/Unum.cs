@@ -164,13 +164,13 @@ namespace Lombiq.Unum
             var exponent = new BitMask(new uint[] { exponentValue }, Size);
             var exponentSize = exponent.FindLeadingOne();
             if (exponentValue > (1 << exponentSize - 1)) exponentSize++;
-            var bias = (1 << (_environment.ExponentSizeMax - 1)) - 1;
+            var bias = (1 << exponentSize - 1) - 1;
             exponent += (uint)bias;
 
             UnumBits = UnumBits.ShiftToRightEnd();
             var unumBitsLeadingOne = UnumBits.FindLeadingOne();
             var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
-            if (fractionSize > 0) fractionSize -= 1;
+            if (fractionSize > 0) fractionSize--;
             if (exponentValue != 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.FindLeadingOne() - 1));
 
 
@@ -215,14 +215,14 @@ namespace Lombiq.Unum
             var bias = (1 << (exponentSize - 1)) - 1;
             exponentValue += (uint)bias;
             var exponentMask = new BitMask(_environment.Size) + exponentValue;
-            if (exponentSize > 0) exponentSize -= 1; // Until now we needed the value, now we need the notation.
+            if (exponentSize > 0) exponentSize--; // Until now we needed the value, now we need the notation.
 
 
             // Calculating Fraction.
             UnumBits = UnumBits.ShiftToRightEnd();
             var unumBitsLeadingOne = UnumBits.FindLeadingOne();
             var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
-            if (fractionSize > 0) fractionSize -= 1;
+            if (fractionSize > 0) fractionSize--;
             if (exponentValue > 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.FindLeadingOne() - 1));
 
 
@@ -402,7 +402,7 @@ namespace Lombiq.Unum
 
         public uint[] FractionToUintArray()
         {
-            var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - (int)FractionSize();
+            var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - FractionSize();
             var result = new uint[resultMask.SegmentCount];
 
             for (var i = 0; i < resultMask.SegmentCount; i++) result[i] = resultMask.Segments[i];
