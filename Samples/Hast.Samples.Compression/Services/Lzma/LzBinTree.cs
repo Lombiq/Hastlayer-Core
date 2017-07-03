@@ -47,7 +47,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             }
         }
 
-        public new void SetStream(Stream stream) =>
+        public new void SetStream(HastlayerStream stream) =>
             base.SetStream(stream);
 
         public new void ReleaseStream() =>

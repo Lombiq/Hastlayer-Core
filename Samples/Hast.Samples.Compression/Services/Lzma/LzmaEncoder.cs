@@ -1,6 +1,7 @@
 using Hast.Samples.Compression.Services.Lzma.Constants;
 using Hast.Samples.Compression.Services.Lzma.Exceptions;
 using System;
+using System.IO;
 
 namespace Hast.Samples.Compression.Services.Lzma
 {
@@ -20,6 +21,7 @@ namespace Hast.Samples.Compression.Services.Lzma
         private const uint NumLenSpecSymbols = BaseConstants.NumLowLenSymbols + BaseConstants.NumMidLenSymbols;
         private const uint NumOpts = 1 << 12;
         private static string[] MatchFinderIds = { "BT2", "BT4" };
+        private const int PropSize = 5;
 
 
         private CoderState _state = new CoderState();
@@ -62,20 +64,18 @@ namespace Hast.Samples.Compression.Services.Lzma
         private uint _numFastbytesPrev = 0xFFFFFFFF;
         private long nowPos64;
         private bool _finished;
-        private System.IO.Stream _inStream;
+        private HastlayerStream _inStream;
         private EMatchFinderType _matchFinderType = EMatchFinderType.BT4;
         private bool _writeEndMark = false;
         private bool _needReleaseMFStream;
-        private const int kPropSize = 5;
-        private byte[] properties = new byte[kPropSize];
+        private byte[] properties = new byte[PropSize];
         private uint[] tempPrices = new uint[BaseConstants.NumFullDistances];
         private uint _matchPriceCount;
         private uint _trainSize = 0;
         private uint[] reps = new uint[BaseConstants.NumRepDistances];
         private uint[] repLens = new uint[BaseConstants.NumRepDistances];
 
-
-
+        
         static LzmaEncoder()
         {
             const byte kFastSlots = 22;
@@ -268,21 +268,22 @@ namespace Hast.Samples.Compression.Services.Lzma
             }
         }
 
-        public void Code(System.IO.Stream inStream, System.IO.Stream outStream,
-            long inSize, long outSize)
+        public void Code(HastlayerStream inStream, HastlayerStream outStream)
         {
             _needReleaseMFStream = false;
+
             try
             {
-                SetStreams(inStream, outStream, inSize, outSize);
+                SetStreams(inStream, outStream);
                 while (true)
                 {
                     long processedInSize;
                     long processedOutSize;
                     bool finished;
+
                     CodeOneBlock(out processedInSize, out processedOutSize, out finished);
-                    if (finished)
-                        return;
+
+                    if (finished) return;
                 }
             }
             finally
@@ -290,7 +291,7 @@ namespace Hast.Samples.Compression.Services.Lzma
                 ReleaseStreams();
             }
         }
-        
+
         public void SetCoderProperties(CoderPropertyId[] propIDs, object[] properties)
         {
             for (uint i = 0; i < properties.Length; i++)
@@ -400,13 +401,13 @@ namespace Hast.Samples.Compression.Services.Lzma
         {
             _trainSize = trainSize;
         }
-        
-        public void WriteCoderProperties(System.IO.Stream outStream)
+
+        public void WriteCoderProperties(HastlayerStream outStream)
         {
             properties[0] = (byte)((_posStateBits * 5 + _numLiteralPosStateBits) * 9 + _numLiteralContextBits);
             for (int i = 0; i < 4; i++)
                 properties[1 + i] = (byte)((_dictionarySize >> (8 * i)) & 0xFF);
-            outStream.Write(properties, 0, kPropSize);
+            outStream.Write(properties, 0, PropSize);
         }
 
 
@@ -435,7 +436,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             for (uint i = 0; i < BaseConstants.NumRepDistances; i++)
                 _repDistances[i] = 0;
         }
-        
+
         private void Create()
         {
             if (_matchFinder == null)
@@ -455,7 +456,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             _dictionarySizePrev = _dictionarySize;
             _numFastbytesPrev = _numFastbytes;
         }
-        
+
         private void SetWriteEndMarkerMode(bool writeEndMarker)
         {
             _writeEndMark = writeEndMarker;
@@ -510,7 +511,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             }
             _additionalOffset++;
         }
-        
+
         private void MovePos(uint num)
         {
             if (num > 0)
@@ -599,7 +600,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             _optimumCurrentIndex = _optimum[0].PosPrev;
             return _optimumCurrentIndex;
         }
-        
+
         private uint GetOptimum(uint position, out uint backRes)
         {
             if (_optimumEndIndex != _optimumCurrentIndex)
@@ -1133,7 +1134,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             }
         }
 
-        private void SetOutStream(System.IO.Stream outStream) { _rangeEncoder.SetStream(outStream); }
+        private void SetOutStream(HastlayerStream outStream) { _rangeEncoder.SetStream(outStream); }
         private void ReleaseOutStream() { _rangeEncoder.ReleaseStream(); }
 
         private void ReleaseStreams()
@@ -1142,8 +1143,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             ReleaseOutStream();
         }
 
-        private void SetStreams(System.IO.Stream inStream, System.IO.Stream outStream,
-                long inSize, long outSize)
+        private void SetStreams(HastlayerStream inStream, HastlayerStream outStream)
         {
             _inStream = inStream;
             _finished = false;
@@ -1164,7 +1164,7 @@ namespace Hast.Samples.Compression.Services.Lzma
 
             nowPos64 = 0;
         }
-        
+
         private void FillDistancesPrices()
         {
             for (uint i = BaseConstants.StartPosModelIndex; i < BaseConstants.NumFullDistances; i++)
@@ -1203,7 +1203,7 @@ namespace Hast.Samples.Compression.Services.Lzma
 
             _alignPriceCount = 0;
         }
-        
+
         private static int FindMatchFinder(string s)
         {
             for (int m = 0; m < MatchFinderIds.Length; m++)

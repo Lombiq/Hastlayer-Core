@@ -5,7 +5,7 @@ namespace Hast.Samples.Compression.Services.Lzma
 {
     internal class RangeEncoder
     {
-        private Stream _stream;
+        private HastlayerStream _stream;
         private uint _cacheSize;
         private byte _cache;
         private long _startPosition;
@@ -15,7 +15,7 @@ namespace Hast.Samples.Compression.Services.Lzma
         public uint Range { get; set; }
 
 
-        public void SetStream(Stream stream) =>
+        public void SetStream(HastlayerStream stream) =>
             _stream = stream;
 
         public void ReleaseStream() =>
