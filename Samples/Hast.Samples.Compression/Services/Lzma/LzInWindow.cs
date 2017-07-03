@@ -4,7 +4,7 @@ namespace Hast.Samples.Compression.Services.Lzma
 {
     public class LzInWindow
     {
-        private HastlayerStream _stream;
+        private SimpleMemoryStream _stream;
         private uint _posLimit; // offset (from _buffer) of first byte when new block reading must be done
         private bool _streamEndWasReached; // if (true) then _streamPos shows real end of stream
         private uint _keepSizeBefore; // how many BYTEs must be kept in buffer before _pos
@@ -81,7 +81,7 @@ namespace Hast.Samples.Compression.Services.Lzma
 			_pointerToLastSafePosition = _blockSize - keepSizeAfter;
 		}
 
-		public void SetStream(HastlayerStream stream) => 
+		public void SetStream(SimpleMemoryStream stream) => 
             _stream = stream;
 
 		public void ReleaseStream() =>

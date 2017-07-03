@@ -82,7 +82,7 @@ namespace Hast.Transformer.SimpleMemory
 
         public void WriteUInt32(int cellIndex, uint number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 
-        public uint ReadUInt32(int cellIndex) =>BitConverter.ToUInt32(Read4Bytes(cellIndex), 0);
+        public uint ReadUInt32(int cellIndex) => BitConverter.ToUInt32(Read4Bytes(cellIndex), 0);
 
         public void WriteInt32(int cellIndex, int number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 

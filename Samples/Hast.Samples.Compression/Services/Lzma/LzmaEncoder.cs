@@ -64,7 +64,7 @@ namespace Hast.Samples.Compression.Services.Lzma
         private uint _numFastbytesPrev = 0xFFFFFFFF;
         private long nowPos64;
         private bool _finished;
-        private HastlayerStream _inStream;
+        private SimpleMemoryStream _inStream;
         private EMatchFinderType _matchFinderType = EMatchFinderType.BT4;
         private bool _writeEndMark = false;
         private bool _needReleaseMFStream;
@@ -268,7 +268,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             }
         }
 
-        public void Code(HastlayerStream inStream, HastlayerStream outStream)
+        public void Code(SimpleMemoryStream inStream, SimpleMemoryStream outStream)
         {
             _needReleaseMFStream = false;
 
@@ -402,7 +402,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             _trainSize = trainSize;
         }
 
-        public void WriteCoderProperties(HastlayerStream outStream)
+        public void WriteCoderProperties(SimpleMemoryStream outStream)
         {
             properties[0] = (byte)((_posStateBits * 5 + _numLiteralPosStateBits) * 9 + _numLiteralContextBits);
             for (int i = 0; i < 4; i++)
@@ -1134,7 +1134,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             }
         }
 
-        private void SetOutStream(HastlayerStream outStream) { _rangeEncoder.SetStream(outStream); }
+        private void SetOutStream(SimpleMemoryStream outStream) { _rangeEncoder.SetStream(outStream); }
         private void ReleaseOutStream() { _rangeEncoder.ReleaseStream(); }
 
         private void ReleaseStreams()
@@ -1143,7 +1143,7 @@ namespace Hast.Samples.Compression.Services.Lzma
             ReleaseOutStream();
         }
 
-        private void SetStreams(HastlayerStream inStream, HastlayerStream outStream)
+        private void SetStreams(SimpleMemoryStream inStream, SimpleMemoryStream outStream)
         {
             _inStream = inStream;
             _finished = false;

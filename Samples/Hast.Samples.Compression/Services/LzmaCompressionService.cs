@@ -1,5 +1,6 @@
 ﻿using Hast.Layer;
 using Hast.Samples.Compression.Services.Lzma;
+using Hast.Transformer.SimpleMemory;
 using System;
 using System.IO;
 using System.IO.Compression;
@@ -29,13 +30,20 @@ namespace Hast.Samples.Compression.Services
             outputFilePath = string.IsNullOrEmpty(outputFilePath) ? inputFile.Name + ".lzma" : outputFilePath;
             if (File.Exists(outputFilePath)) File.Delete(outputFilePath);
 
-            //using (var inputFileStream = inputFile.OpenRead())
-            var inputFileStream = new HastlayerStream(File.ReadAllBytes(inputFilePath));
-            //using (var outputFileStream = File.Create(outputFilePath))
-            var outputFileStream = new HastlayerStream(new byte[inputFileStream.Length]);
+            var inputFileBytes = File.ReadAllBytes(inputFilePath);
+            var inputFileSize = inputFileBytes.Length;
+            var inputFileCellCount = inputFileSize / 4 + (inputFileSize % 4 == 0 ? 0 : 1);
+            var outputFileSize = inputFileSize + 13;
+            var outputFileCellCount = outputFileSize / 4 + (outputFileSize % 4 == 0 ? 0 : 1);
+            var memorySize = inputFileCellCount + outputFileCellCount;
+            var simpleMemory = new SimpleMemory(memorySize);
+            var inputStream = new SimpleMemoryStream(simpleMemory, 0, inputFileCellCount);
+            inputStream.Write(inputFileBytes, 0, inputFileSize);
+            inputStream.Reset();
+            var outputStream = new SimpleMemoryStream(simpleMemory, inputFileCellCount, outputFileCellCount);
+
+            CoderPropertyId[] propIDs =
             {
-                CoderPropertyId[] propIDs =
-                {
                     CoderPropertyId.DictionarySize,
                     CoderPropertyId.PosStateBits,
                     CoderPropertyId.LitContextBits,
@@ -45,8 +53,8 @@ namespace Hast.Samples.Compression.Services
                     CoderPropertyId.MatchFinder,
                     CoderPropertyId.EndMarker
                 };
-                object[] properties =
-                {
+            object[] properties =
+            {
                     DictionarySize,
                     PositionStateBits,
                     LiteralContextBits,
@@ -57,24 +65,26 @@ namespace Hast.Samples.Compression.Services
                     Eos
                 };
 
-                var encoder = new LzmaEncoder();
-                encoder.SetCoderProperties(propIDs, properties);
-                encoder.WriteCoderProperties(outputFileStream);
+            var encoder = new LzmaEncoder();
+            encoder.SetCoderProperties(propIDs, properties);
+            encoder.WriteCoderProperties(outputStream);
 
-                var fileSize = Eos || StdInMode ? -1 : inputFileStream.Length;
+            var fileSize = Eos || StdInMode ? -1 : inputStream.Length;
 
-                for (int i = 0; i < 8; i++)
-                {
-                    outputFileStream.WriteByte((byte)(fileSize >> (8 * i)));
-                }
-
-                encoder.Code(inputFileStream, outputFileStream);
-
-                var fileBytes = new byte[outputFileStream.Position];
-
-                Array.Copy(outputFileStream.GetBytes(), fileBytes, outputFileStream.Position);
-                File.WriteAllBytes(outputFilePath, fileBytes);
+            for (int i = 0; i < 8; i++)
+            {
+                outputStream.WriteByte((byte)(fileSize >> (8 * i)));
             }
+
+            encoder.Code(inputStream, outputStream);
+
+            outputFileSize = (int)outputStream.Position + 1;
+            var fileBytes = new byte[outputFileSize];
+            outputStream.Reset();
+            outputStream.Read(fileBytes, 0, outputFileSize);
+
+            //Array.Copy(outputFileStream.GetBytes(), fileBytes, outputFileStream.Position);
+            File.WriteAllBytes(outputFilePath, fileBytes);
         }
     }
 }
