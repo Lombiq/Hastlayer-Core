@@ -31,9 +31,26 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             base.VisitAssignmentExpression(assignmentExpression);
 
+            // Assignments should be handled here because those should only take effect "after this line" ("after this" 
+            // works because the visitor visits nodes in topological order and thus possible substitutions will come 
+            // after this method).
+            // Indexed assignments with a constant index could also be handled eventually, but not really needed
+            // now.
+            if (assignmentExpression.Right is PrimitiveExpression && !(assignmentExpression.Left is IndexerExpression))
+            {
+                // There won't be a parent block for attributes for example.
+                var parentBlock = assignmentExpression.FindFirstParentBlockStatement();
+                if (parentBlock != null)
+                {
+                    _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
+                        assignmentExpression.Left,
+                        (PrimitiveExpression)assignmentExpression.Right,
+                        parentBlock); 
+                }
+            }
+
             // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect
-            // anything in the outer scope after this ("after this" works because the visitor visits nodes in
-            // topological order). Neither if this is assigning a non-constant value.
+            // anything in the outer scope after this. Neither if this is assigning a non-constant value.
 
             if (!(assignmentExpression.Left is IdentifierExpression)) return;
 
