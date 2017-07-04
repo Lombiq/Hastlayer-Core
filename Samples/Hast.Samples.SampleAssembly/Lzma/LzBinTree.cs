@@ -84,7 +84,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             uint matchMaxLen,
             uint keepAddBufferAfter)
         {
-            if (historySize > MaxValForNormalize - 256) throw new Exception();
+            // Should throw an Exception when it becomes supported.
+            //if (historySize > MaxValForNormalize - 256) throw new Exception();
 
             _cutValue = 16 + (matchMaxLen >> 1);
 

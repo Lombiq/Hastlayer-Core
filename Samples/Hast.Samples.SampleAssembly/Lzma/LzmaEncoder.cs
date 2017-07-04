@@ -1,8 +1,6 @@
 using Hast.Samples.SampleAssembly.Models;
 using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
-using Hast.Samples.SampleAssembly.Services.Lzma.Exceptions;
 using System;
-using System.IO;
 
 namespace Hast.Samples.SampleAssembly.Services.Lzma
 {
@@ -76,7 +74,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         private uint[] reps = new uint[BaseConstants.NumRepDistances];
         private uint[] repLens = new uint[BaseConstants.NumRepDistances];
 
-        
+
         static LzmaEncoder()
         {
             const byte kFastSlots = 22;
@@ -273,23 +271,16 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         {
             _needReleaseMFStream = false;
 
-            try
+            SetStreams(inStream, outStream);
+            while (true)
             {
-                SetStreams(inStream, outStream);
-                while (true)
-                {
-                    long processedInSize;
-                    long processedOutSize;
-                    bool finished;
+                long processedInSize;
+                long processedOutSize;
+                bool finished;
 
-                    CodeOneBlock(out processedInSize, out processedOutSize, out finished);
+                CodeOneBlock(out processedInSize, out processedOutSize, out finished);
 
-                    if (finished) return;
-                }
-            }
-            finally
-            {
-                ReleaseStreams();
+                if (finished) return;
             }
         }
 
@@ -302,16 +293,19 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 {
                     case CoderPropertyId.NumFastbytes:
                         {
-                            if (!(prop is int))
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (!(prop is int))
+                            //    throw new LzmaInvalidParamException();
                             int numFastbytes = (int)prop;
-                            if (numFastbytes < 5 || numFastbytes > BaseConstants.MatchMaxLen)
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (numFastbytes < 5 || numFastbytes > BaseConstants.MatchMaxLen)
+                            //    throw new LzmaInvalidParamException();
                             _numFastbytes = (uint)numFastbytes;
                             break;
                         }
                     case CoderPropertyId.Algorithm:
                         {
+                            // Commented out in the original LZMA SDK too.
                             /*
                             if (!(prop is int))
                                 throw new InvalidParamException();
@@ -323,12 +317,14 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                         }
                     case CoderPropertyId.MatchFinder:
                         {
-                            if (!(prop is String))
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (!(prop is String))
+                            //    throw new LzmaInvalidParamException();
                             EMatchFinderType matchFinderIndexPrev = _matchFinderType;
                             int m = FindMatchFinder(((string)prop).ToUpper());
-                            if (m < 0)
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (m < 0)
+                            //    throw new LzmaInvalidParamException();
                             _matchFinderType = (EMatchFinderType)m;
                             if (_matchFinder != null && matchFinderIndexPrev != _matchFinderType)
                             {
@@ -340,12 +336,14 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                     case CoderPropertyId.DictionarySize:
                         {
                             const int kDicLogSizeMaxCompress = 30;
-                            if (!(prop is int))
-                                throw new LzmaInvalidParamException(); ;
+                            // Should throw an Exception when it becomes supported.
+                            //if (!(prop is int))
+                            //    throw new LzmaInvalidParamException(); ;
                             int dictionarySize = (int)prop;
-                            if (dictionarySize < (uint)(1 << BaseConstants.DicLogSizeMin) ||
-                                dictionarySize > (uint)(1 << kDicLogSizeMaxCompress))
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (dictionarySize < (uint)(1 << BaseConstants.DicLogSizeMin) ||
+                            //    dictionarySize > (uint)(1 << kDicLogSizeMaxCompress))
+                            //    throw new LzmaInvalidParamException();
                             _dictionarySize = (uint)dictionarySize;
                             int dicLogSize;
                             for (dicLogSize = 0; dicLogSize < (uint)kDicLogSizeMaxCompress; dicLogSize++)
@@ -356,44 +354,53 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                         }
                     case CoderPropertyId.PosStateBits:
                         {
-                            if (!(prop is int))
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (!(prop is int))
+                            //    throw new LzmaInvalidParamException();
                             int v = (int)prop;
-                            if (v < 0 || v > (uint)BaseConstants.NumPosStatesBitsEncodingMax)
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (v < 0 || v > (uint)BaseConstants.NumPosStatesBitsEncodingMax)
+                            //    throw new LzmaInvalidParamException();
                             _posStateBits = (int)v;
                             _posStateMask = (((uint)1) << (int)_posStateBits) - 1;
                             break;
                         }
                     case CoderPropertyId.LitPosBits:
                         {
-                            if (!(prop is int))
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (!(prop is int))
+                            //    throw new LzmaInvalidParamException();
                             int v = (int)prop;
-                            if (v < 0 || v > (uint)BaseConstants.NumLitPosStatesBitsEncodingMax)
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (v < 0 || v > (uint)BaseConstants.NumLitPosStatesBitsEncodingMax)
+                            //    throw new LzmaInvalidParamException();
                             _numLiteralPosStateBits = (int)v;
                             break;
                         }
                     case CoderPropertyId.LitContextBits:
                         {
-                            if (!(prop is int))
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (!(prop is int))
+                            //    throw new LzmaInvalidParamException();
                             int v = (int)prop;
-                            if (v < 0 || v > (uint)BaseConstants.NumLitContextBitsMax)
-                                throw new LzmaInvalidParamException(); ;
+                            // Should throw an Exception when it becomes supported.
+                            //if (v < 0 || v > (uint)BaseConstants.NumLitContextBitsMax)
+                            //    throw new LzmaInvalidParamException(); ;
                             _numLiteralContextBits = (int)v;
                             break;
                         }
                     case CoderPropertyId.EndMarker:
                         {
-                            if (!(prop is Boolean))
-                                throw new LzmaInvalidParamException();
+                            // Should throw an Exception when it becomes supported.
+                            //if (!(prop is Boolean))
+                            //    throw new LzmaInvalidParamException();
                             SetWriteEndMarkerMode((Boolean)prop);
                             break;
                         }
                     default:
-                        throw new LzmaInvalidParamException();
+                        // Should throw an Exception when it becomes supported.
+                        //throw new LzmaInvalidParamException();
+                        break;
                 }
             }
         }
