@@ -41,35 +41,34 @@ namespace Hast.Samples.SampleAssembly.Models
 
         public void Write(byte[] buffer, int offset, int count)
         {
-            if (_overflow) return;
-
-            _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
-            for (var i = offset; i < offset + count && !_overflow; i++)
+            if (!_overflow)
             {
-                _4bytesBuffer[_byteIndexInCell] = buffer[i];
+                _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
+                for (var i = offset; i < offset + count && !_overflow; i++)
+                {
+                    _4bytesBuffer[_byteIndexInCell] = buffer[i];
 
-                if (_byteIndexInCell == 3) _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
+                    if (_byteIndexInCell == 3) _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
 
-                IncreasePosition();
+                    IncreasePosition();
 
-                if (_byteIndexInCell == 0 && !_overflow) _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
+                    if (_byteIndexInCell == 0 && !_overflow) _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
+                }
+
+                if (_byteIndexInCell != 0) _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
             }
-
-            if (_byteIndexInCell != 0) _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
         }
 
         public void WriteByte(byte byteToWrite)
         {
-            if (_overflow)
+            if (!_overflow)
             {
-                return;
+                _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
+                _4bytesBuffer[_byteIndexInCell] = byteToWrite;
+                _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
+
+                IncreasePosition();
             }
-
-            _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
-            _4bytesBuffer[_byteIndexInCell] = byteToWrite;
-            _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
-
-            IncreasePosition();
         }
 
         public int Read(byte[] buffer, int offset, int count)

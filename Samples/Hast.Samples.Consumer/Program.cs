@@ -32,22 +32,50 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            const string UncompressedTextFilePath = "Uncompressed.txt";
-            const string CompressedTextFilePath = "Compressed.txt.lzma";
+            //const string UncompressedTextFilePath = "Uncompressed.txt";
+            //const string CompressedTextFilePath = "Compressed.txt.lzma";
 
-            if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
+            //if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
 
-            var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
+            //var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
 
-            var outputFileBytes = new LzmaCompressor().CompressBytes(inputFileBytes);
+            //var outputFileBytes = new LzmaCompressor().CompressBytes(inputFileBytes);
 
-            File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
+            //File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
 
 
-            //// Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
-            //// inside a console app.
+            
+
+            Task.Run(async () =>
+            {
+                var configuration = new HardwareGenerationConfiguration();
+                LzmaCompressorSampleRunner.Configure(configuration);
+                configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
+
+                using (var hastlayer = Xilinx.HastlayerFactory.Create())
+                {
+                    var hardwareRepresentation = await hastlayer.GenerateHardware(
+                        new[]
+                        {
+                            typeof(LzmaCompressor).Assembly
+                        },
+                        configuration);
+
+
+                    if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
+                    {
+                        Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
+                    }
+                }
+            }).Wait();
+
+
+
+
+            // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
+            // inside a console app.
             //Task.Run(async () =>
-            //    {
+            //{
             //        /*
             //         * On a high level these are the steps to use Hastlayer:
             //         * 1. Create the Hastlayer shell.
@@ -167,7 +195,7 @@ namespace Hast.Samples.Consumer
             //                    break;
             //            }
             //        }
-            //    }).Wait();
+                //}).Wait();
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();

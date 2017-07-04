@@ -35,33 +35,40 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 			_bufferOffset -= offset;
 		}
 
-		public virtual void ReadBlock()
+		public void ReadBlock()
 		{
-			if (_streamEndWasReached) return;
+            if (!_streamEndWasReached)
+            {
+                var run = true;
 
-			while (true)
-			{
-				var size = (int)((0 - _bufferOffset) + _blockSize - _streamPos);
-				if (size == 0) return;
+                while (run)
+                {
+                    var size = (int)((0 - _bufferOffset) + _blockSize - _streamPos);
+                    if (size != 0)
+                    {
 
-				var numReadbytes = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPos), size);
-				if (numReadbytes == 0)
-				{
-					_posLimit = _streamPos;
-					var pointerToPostion = _bufferOffset + _posLimit;
-					if (pointerToPostion > _pointerToLastSafePosition)
-						_posLimit = _pointerToLastSafePosition - _bufferOffset;
+                        var numReadbytes = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPos), size);
+                        if (numReadbytes == 0)
+                        {
+                            _posLimit = _streamPos;
+                            var pointerToPostion = _bufferOffset + _posLimit;
+                            if (pointerToPostion > _pointerToLastSafePosition)
+                                _posLimit = _pointerToLastSafePosition - _bufferOffset;
 
-					_streamEndWasReached = true;
+                            _streamEndWasReached = true;
 
-					return;
-				}
+                            run = false;
+                        }
+                        else
+                        {
+                            _streamPos += (uint)numReadbytes;
 
-				_streamPos += (uint)numReadbytes;
-
-				if (_streamPos >= _pos + _keepSizeAfter)
-					_posLimit = _streamPos - _keepSizeAfter;
-			}
+                            if (_streamPos >= _pos + _keepSizeAfter)
+                                _posLimit = _streamPos - _keepSizeAfter;
+                        }
+                    }
+                }
+            }
 		}
 
 		public void Create(uint keepSizeBefore, uint keepSizeAfter, uint keepSizeReserv)

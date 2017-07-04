@@ -14,6 +14,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
         static BitEncoder()
         {
+            ProbPrices = 
             const int kNumBits = (RangeEncoderConstants.NumBitModelTotalBits - NumMoveReducingBits);
             for (int i = kNumBits - 1; i >= 0; i--)
             {
