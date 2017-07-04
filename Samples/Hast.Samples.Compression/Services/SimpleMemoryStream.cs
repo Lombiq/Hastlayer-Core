@@ -44,7 +44,7 @@ namespace Hast.Samples.Compression.Services
             if (_overflow) return;
 
             _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
-            for (var i = 0; i < count && !_overflow; i++)
+            for (var i = offset; i < offset + count && !_overflow; i++)
             {
                 _4bytesBuffer[_byteIndexInCell] = buffer[i];
 
@@ -78,7 +78,7 @@ namespace Hast.Samples.Compression.Services
             if (_overflow) return bytesRead;
 
             _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
-            for (var i = offset; i < count && !_overflow; i++)
+            for (var i = offset; i < offset + count && !_overflow; i++)
             {
                 buffer[i] = _4bytesBuffer[_byteIndexInCell];
 
