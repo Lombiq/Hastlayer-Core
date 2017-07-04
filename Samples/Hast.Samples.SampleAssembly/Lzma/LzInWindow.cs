@@ -44,9 +44,9 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 while (run)
                 {
                     var size = (int)((0 - _bufferOffset) + _blockSize - _streamPos);
-                    if (size != 0)
+                    if (size == 0) run = false;
+                    else
                     {
-
                         var numReadbytes = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPos), size);
                         if (numReadbytes == 0)
                         {
