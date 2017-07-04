@@ -1,6 +1,6 @@
 namespace Hast.Samples.SampleAssembly.Services.Lzma
 {
-    internal struct BitTreeEncoder
+    internal class BitTreeEncoder
 	{
 		private BitEncoder[] _models;
 		private int _numBitLevels;

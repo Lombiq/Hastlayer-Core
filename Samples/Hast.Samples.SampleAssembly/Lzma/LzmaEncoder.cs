@@ -1274,7 +1274,10 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                     uint numStates = (uint)1 << (_numPrevBits + _numPosBits);
                     _coders = new Encoder2[numStates];
                     for (uint i = 0; i < numStates; i++)
+                    {
+                        _coders[i] = new Encoder2();
                         _coders[i].Create();
+                    }
                 }
             }
 
@@ -1286,10 +1289,12 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             }
 
             public Encoder2 GetSubCoder(uint pos, byte prevbyte)
-            { return _coders[((pos & _posMask) << _numPrevBits) + (uint)(prevbyte >> (8 - _numPrevBits))]; }
+            {
+                return _coders[((pos & _posMask) << _numPrevBits) + (uint)(prevbyte >> (8 - _numPrevBits))];
+            }
 
 
-            public struct Encoder2
+            public class Encoder2
             {
                 private BitEncoder[] _encoders;
 

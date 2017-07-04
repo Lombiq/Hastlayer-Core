@@ -32,16 +32,16 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            const string UncompressedTextFilePath = "Uncompressed.txt";
-            const string CompressedTextFilePath = "Compressed.txt.lzma";
+            //const string UncompressedTextFilePath = "Uncompressed.txt";
+            //const string CompressedTextFilePath = "Compressed.txt.lzma";
 
-            if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
+            //if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
 
-            var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
+            //var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
 
-            var outputFileBytes = new LzmaCompressor().CompressBytes(inputFileBytes);
+            //var outputFileBytes = new LzmaCompressor().CompressBytes(inputFileBytes);
 
-            File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
+            //File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
 
 
 
