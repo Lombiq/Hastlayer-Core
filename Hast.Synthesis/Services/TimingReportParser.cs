@@ -101,7 +101,10 @@ namespace Hast.Synthesis.Services
                     }
                     var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value);
 
-                    var dpd = decimal.Parse(csvReader.GetField<string>("DPD"), NumberStyles.AllowDecimalPoint);
+                    var dpd = decimal.Parse(
+                        csvReader.GetField<string>("DPD").Replace(',', '.'), // Taking care of decimal commas.
+                        NumberStyles.Any, 
+                        CultureInfo.InvariantCulture);
 
                     if (binaryOperator.HasValue)
                     {
