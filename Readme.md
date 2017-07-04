@@ -15,7 +15,7 @@ Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard
 
 ## Writing Hastlayer-compatible .NET code
 
-Take a look at the sample projects in the Sample solution folder. Those are there to give you a general idea how Hastlayer-compatible code looks like, and they're thoroughly documented. The `PrimeCalculator` is a good starting point with a basic sample algorithm.
+Take a look at the sample projects in the Sample solution folder. Those are there to give you a general idea how Hastlayer-compatible code looks like, and they're thoroughly documented. If some language construct is not present in the samples then it is probably not supported. The `PrimeCalculator` is a good starting point with a basic sample algorithm.
 
 Some general constraints you have to keep in mind:
 
@@ -25,7 +25,7 @@ Some general constraints you have to keep in mind:
 - The most important language constructs like `if` and `else` statements, `while` and `for` loops, type casting, binary operations (e.g. arithmetic, in/equality operators...), conditional expressions (ternary operator) on allowed types are supported.
 - Algorithms can use a fixed-size (determined at runtime) memory space modeled as a `byte` array in the class `SimpleMemory`. For inputs that should be passed to hardware implementations and outputs that should be sent back this memory space is to be used. For internal method arguments (i.e. for data that isn't coming from the host computer or should be sent back) normal method arguments can be used. Note that there shouldn't be concurrent access to a `SimpleMemory` instance, it's **not** thread-safe (neither in software nor on hardware)!
 - Single-dimensional arrays having their size possible to determine compile-time are supported. So apart from instantiating arrays with their sizes specified as constants you can also use variables, fields, properties for array sizes, as well as expressions (and a combination of these), just in the end the size of the array needs to be resolvable at compile-time. To a limited degree `Array.Copy()` is also supported: only the `Copy(Array sourceArray, Array destinationArray, int length)` override and only with a constant `length`. Furthermore, `ImmutableArray` is also supported to a limited degree by converting objects of that type to standard arrays in the background.
-- Using objects created of custom classes and structs are supported. Using these objects as usual (e.g. passing them as method arguments, storing them in arrays) is also supported. However hardware entry point types can only contain methods. Also, be careful not to mix reference types (like arrays) into structs' members (fields and properties), keep structs purely value types (this is a good practice any way).
+- Using objects created of custom classes and structs are supported. Using these objects as usual (e.g. passing them as method arguments, storing them in arrays) is also supported. However hardware entry point types can only contain methods. Static members apart from methods are not supported (so e.g. while you can't use static fields, you can have static methods). Also, be careful not to mix reference types (like arrays) into structs' members (fields and properties), keep structs purely value types (this is a good practice any way).
 - Task-based parallelism is with TPL is supported to a limited degree. Lambda expression are supported to an extent needed to use tasks (see the `ParallelAlgorithm` sample).
 - Operation-level, SIMD-like parallelism is supported, see the `SimdCalculator` sample.
 - Recursion is supported but recursive code is not really something for Hastlayer. Nevertheless if a method call is recursive, even if indirectly, you need to manually configure the recursion depths (see the `RecursiveAlgorithms` sample).
@@ -46,6 +46,14 @@ So to write fast code with Hastlayer you need implement massively parallel algor
 - Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `short` instead of `int` if its range is enough).
 - Memory access with `SimpleMemory` is relatively slow, so keep memory access to the minimum (use local variables and objects as temporary storage instead).
 
+In the ideal case your algorithm will do the following (can happen repeatedly of course):
+
+1. Produces all the data necessary for parallel execution.
+2. Feeds this data to multiple parallel `Task`s as their inputs and starts these `Task`s.
+3. Waits for the `Task`s to finish and takes their results.
+
+The `ParallelAlgorithm` sample does exactly this.
+
 
 ## Troubleshooting
 
@@ -65,3 +73,4 @@ Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability
 
 - From a user's (i.e. using developer's) perspective Hastlayer should be as simple as possible. To achieve this e.g. use generally good default configurations so in the majority of cases there is no configuration needed.
 - Software that was written previously, without knowing about Hastlayer should be usable if it can live within the constraints of transformable code. E.g. users should never be forced to use custom attributes or other Hastlayer-specific elements in their code if the same effect can be achieved with runtime configuration (think about how members to be processed are configured: when running Hastlayer, not with attributes).
+- If some code uses unsupported constructs it should be made apparent with exceptions. The hardware implementation silently failing (or working unexpectedly) should be avoided.
