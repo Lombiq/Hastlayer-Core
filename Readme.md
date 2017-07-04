@@ -46,6 +46,14 @@ So to write fast code with Hastlayer you need implement massively parallel algor
 - Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `short` instead of `int` if its range is enough).
 - Memory access with `SimpleMemory` is relatively slow, so keep memory access to the minimum (use local variables and objects as temporary storage instead).
 
+In the ideal case your algorithm will do the following (can happen repeatedly of course):
+
+1. Produces all the data necessary for parallel execution.
+2. Feeds this data to multiple parallel `Task`s as their inputs and starts these `Task`s.
+3. Waits for the `Task`s to finish and takes their results.
+
+The `ParallelAlgorithm` sample does exactly this.
+
 
 ## Troubleshooting
 
@@ -65,3 +73,4 @@ Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability
 
 - From a user's (i.e. using developer's) perspective Hastlayer should be as simple as possible. To achieve this e.g. use generally good default configurations so in the majority of cases there is no configuration needed.
 - Software that was written previously, without knowing about Hastlayer should be usable if it can live within the constraints of transformable code. E.g. users should never be forced to use custom attributes or other Hastlayer-specific elements in their code if the same effect can be achieved with runtime configuration (think about how members to be processed are configured: when running Hastlayer, not with attributes).
+- If some code uses unsupported constructs it should be made apparent with exceptions. The hardware implementation silently failing (or working unexpectedly) should be avoided.
