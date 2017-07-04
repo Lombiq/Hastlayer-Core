@@ -4,27 +4,33 @@ namespace Hast.Samples.Compression.Services
 {
     public class SimpleMemoryStream
     {
-        private bool _overflow;
-        private SimpleMemory _simpleMemory;
-        private int _startCellIndex;
-        private int _cellCount;
-        private int _cellIndex;
-        private int _endCellIndex;
+        private readonly SimpleMemory _simpleMemory;
+        private readonly int _startCellIndex;
+        private readonly int _endCellIndex;
+        private readonly int _cellCount;
+        private readonly long _byteCount;
         private byte[] _4bytesBuffer;
+        private bool _overflow;
+        private int _cellIndex;
         private byte _byteIndexInCell;
+        private byte _lastByteIndexInCell;
 
 
         public long Position => (_cellIndex - _startCellIndex) * 4 + _byteIndexInCell;
-        public long Length => _cellCount * 4;
+        public long Length => _byteCount;
         public bool Overflow => _overflow;
         public int CellCount => _cellCount;
 
 
-        public SimpleMemoryStream(SimpleMemory simpleMemory, int startCellIndex, int cellCount)
+        public SimpleMemoryStream(SimpleMemory simpleMemory, int startCellIndex, long byteCount)
         {
             _simpleMemory = simpleMemory;
             _startCellIndex = startCellIndex;
-            _cellCount = cellCount;
+            _byteCount = byteCount;
+            var byteCountModulo4 = (byte)(byteCount % 4);
+            _lastByteIndexInCell = (byte)(byteCountModulo4 < 0 ? 3 : (byteCountModulo4 - 1));
+            _cellCount = (int)(byteCount / 4) + (byteCountModulo4 != 0 ? 1 : 0);
+
             _cellIndex = startCellIndex;
             _endCellIndex = _cellIndex + _cellCount - 1;
 
@@ -41,16 +47,12 @@ namespace Hast.Samples.Compression.Services
             for (var i = 0; i < count && !_overflow; i++)
             {
                 _4bytesBuffer[_byteIndexInCell] = buffer[i];
-                _byteIndexInCell++;
 
-                if (_byteIndexInCell >= 4)
-                {
-                    _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
+                if (_byteIndexInCell == 3) _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
 
-                    IncreasePosition();
+                IncreasePosition();
 
-                    if (!_overflow) _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
-                }
+                if (_byteIndexInCell == 0 && !_overflow) _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
             }
 
             if (_byteIndexInCell != 0) _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
@@ -58,18 +60,16 @@ namespace Hast.Samples.Compression.Services
 
         public void WriteByte(byte byteToWrite)
         {
-            if (_overflow) return;
+            if (_overflow)
+            {
+                return;
+            }
 
             _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
             _4bytesBuffer[_byteIndexInCell] = byteToWrite;
             _simpleMemory.Write4Bytes(_cellIndex, _4bytesBuffer);
 
-            _byteIndexInCell++;
-
-            if (_byteIndexInCell >= 4)
-            {
-                IncreasePosition();
-            }
+            IncreasePosition();
         }
 
         public int Read(byte[] buffer, int offset, int count)
@@ -83,14 +83,10 @@ namespace Hast.Samples.Compression.Services
                 buffer[i] = _4bytesBuffer[_byteIndexInCell];
 
                 bytesRead++;
-                _byteIndexInCell++;
 
-                if (_byteIndexInCell >= 4)
-                {
-                    IncreasePosition();
+                IncreasePosition();
 
-                    if (!_overflow) _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
-                }
+                if (_byteIndexInCell == 0 && !_overflow) _4bytesBuffer = _simpleMemory.Read4Bytes(_cellIndex);
             }
 
             return bytesRead;
@@ -100,7 +96,7 @@ namespace Hast.Samples.Compression.Services
 
         public void Flush() { }
 
-        public void Reset()
+        public void ResetPosition()
         {
             _cellIndex = _startCellIndex;
             _byteIndexInCell = 0;
@@ -110,9 +106,19 @@ namespace Hast.Samples.Compression.Services
 
         private void IncreasePosition()
         {
-            _byteIndexInCell = 0;
-            _cellIndex++;
-            if (_cellIndex > _endCellIndex)
+            if (_byteIndexInCell == 3)
+            {
+                _byteIndexInCell = 0;
+                _cellIndex++;
+            }
+            else
+            {
+                _byteIndexInCell++;
+            }
+
+            if (_cellIndex > _endCellIndex ||
+                _cellIndex == _endCellIndex &&
+                _byteIndexInCell > _lastByteIndexInCell)
             {
                 _overflow = true;
             }

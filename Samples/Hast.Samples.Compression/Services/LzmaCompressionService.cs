@@ -1,10 +1,7 @@
 ﻿using Hast.Layer;
 using Hast.Samples.Compression.Services.Lzma;
 using Hast.Transformer.SimpleMemory;
-using System;
 using System.IO;
-using System.IO.Compression;
-using System.Threading.Tasks;
 
 namespace Hast.Samples.Compression.Services
 {
@@ -33,14 +30,14 @@ namespace Hast.Samples.Compression.Services
             var inputFileBytes = File.ReadAllBytes(inputFilePath);
             var inputFileSize = inputFileBytes.Length;
             var inputFileCellCount = inputFileSize / 4 + (inputFileSize % 4 == 0 ? 0 : 1);
-            var outputFileSize = inputFileSize + 13;
+            var outputFileSize = inputFileSize + 23;
             var outputFileCellCount = outputFileSize / 4 + (outputFileSize % 4 == 0 ? 0 : 1);
             var memorySize = inputFileCellCount + outputFileCellCount;
             var simpleMemory = new SimpleMemory(memorySize);
-            var inputStream = new SimpleMemoryStream(simpleMemory, 0, inputFileCellCount);
+            var inputStream = new SimpleMemoryStream(simpleMemory, 0, inputFileSize);
             inputStream.Write(inputFileBytes, 0, inputFileSize);
-            inputStream.Reset();
-            var outputStream = new SimpleMemoryStream(simpleMemory, inputFileCellCount, outputFileCellCount);
+            inputStream.ResetPosition();
+            var outputStream = new SimpleMemoryStream(simpleMemory, inputFileCellCount, outputFileSize);
 
             CoderPropertyId[] propIDs =
             {
@@ -69,21 +66,21 @@ namespace Hast.Samples.Compression.Services
             encoder.SetCoderProperties(propIDs, properties);
             encoder.WriteCoderProperties(outputStream);
 
-            var fileSize = Eos || StdInMode ? -1 : inputStream.Length;
+            var fileSize = Eos || StdInMode ? -1 : inputFileSize;
 
             for (int i = 0; i < 8; i++)
             {
-                outputStream.WriteByte((byte)(fileSize >> (8 * i)));
+                var b = (byte)((long)fileSize >> (8 * i));
+                outputStream.WriteByte(b);
             }
 
             encoder.Code(inputStream, outputStream);
 
-            outputFileSize = (int)outputStream.Position + 1;
+            outputFileSize = (int)outputStream.Position;
             var fileBytes = new byte[outputFileSize];
-            outputStream.Reset();
+            outputStream.ResetPosition();
             outputStream.Read(fileBytes, 0, outputFileSize);
-
-            //Array.Copy(outputFileStream.GetBytes(), fileBytes, outputFileStream.Position);
+            
             File.WriteAllBytes(outputFilePath, fileBytes);
         }
     }

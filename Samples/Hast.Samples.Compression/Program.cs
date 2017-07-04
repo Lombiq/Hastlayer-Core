@@ -5,8 +5,8 @@ namespace Hast.Samples.Compression
 {
     class Program
     {
-        public const string InputFilePath = @"TestFiles\SmallTextFile.txt";
-        public const string OutputFilePath = @"TestFiles\SmallTextFile-compressed.txt.lzma";
+        public const string InputFilePath = @"TestFiles\LargeTextFile.txt";
+        public const string OutputFilePath = @"TestFiles\LargeTextFile-compressed.txt.lzma";
 
 
         static void Main(string[] args)
