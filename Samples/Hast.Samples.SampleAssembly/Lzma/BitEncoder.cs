@@ -2,34 +2,26 @@ using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
 
 namespace Hast.Samples.SampleAssembly.Services.Lzma
 {
-    internal struct BitEncoder
+    internal class BitEncoder
     {
         private const int NumMoveBits = 5;
-        private const int NumMoveReducingBits = 2;
-        private static uint[] ProbPrices = new uint[RangeEncoderConstants.BitModelTotal >> NumMoveReducingBits];
+        public const int NumMoveReducingBits = 2;
+        private uint[] ProbPrices;
 
 
         private uint _prob;
-        
 
-        static BitEncoder()
+
+        public BitEncoder()
         {
-            ProbPrices = 
-            const int kNumBits = (RangeEncoderConstants.NumBitModelTotalBits - NumMoveReducingBits);
-            for (int i = kNumBits - 1; i >= 0; i--)
-            {
-                var start = (uint)1 << (kNumBits - i - 1);
-                var end = (uint)1 << (kNumBits - i);
-                for (var j = start; j < end; j++)
-                {
-                    ProbPrices[j] = ((uint)i << RangeEncoderConstants.NumBitPriceShiftBits) +
-                        (((end - j) << RangeEncoderConstants.NumBitPriceShiftBits) >> (kNumBits - i - 1));
-                }
-            }
         }
 
 
-        public void Init() => _prob = RangeEncoderConstants.BitModelTotal >> 1;
+        public void Init(uint[] probPrices)
+        {
+            ProbPrices = probPrices;
+            _prob = RangeEncoderConstants.BitModelTotal >> 1;
+        }
 
         public void UpdateModel(uint symbol)
         {

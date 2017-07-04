@@ -486,6 +486,19 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         {
             BaseInit();
             _rangeEncoder.Init();
+            
+            var probPrices = new uint[RangeEncoderConstants.BitModelTotal >> BitEncoder.NumMoveReducingBits];
+            const int kNumBits = (RangeEncoderConstants.NumBitModelTotalBits - BitEncoder.NumMoveReducingBits);
+            for (int k = kNumBits - 1; k >= 0; k--)
+            {
+                var start = (uint)1 << (kNumBits - k - 1);
+                var end = (uint)1 << (kNumBits - k);
+                for (var j = start; j < end; j++)
+                {
+                    probPrices[j] = ((uint)k << RangeEncoderConstants.NumBitPriceShiftBits) +
+                        (((end - j) << RangeEncoderConstants.NumBitPriceShiftBits) >> (kNumBits - k - 1));
+                }
+            }
 
             uint i;
             for (i = 0; i < BaseConstants.NumStates; i++)
@@ -493,24 +506,33 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 for (uint j = 0; j <= _posStateMask; j++)
                 {
                     uint complexState = (i << BaseConstants.NumPosStatesBitsMax) + j;
-                    _isMatch[complexState].Init();
-                    _isRep0Long[complexState].Init();
+                    _isMatch[complexState] = new BitEncoder();
+                    _isMatch[complexState].Init(probPrices);
+                    _isRep0Long[complexState] = new BitEncoder();
+                    _isRep0Long[complexState].Init(probPrices);
                 }
-                _isRep[i].Init();
-                _isRepG0[i].Init();
-                _isRepG1[i].Init();
-                _isRepG2[i].Init();
+                _isRep[i] = new BitEncoder();
+                _isRep[i].Init(probPrices);
+                _isRepG0[i] = new BitEncoder();
+                _isRepG0[i].Init(probPrices);
+                _isRepG1[i] = new BitEncoder();
+                _isRepG1[i].Init(probPrices);
+                _isRepG2[i] = new BitEncoder();
+                _isRepG2[i].Init(probPrices);
             }
-            _literalEncoder.Init();
+            _literalEncoder.Init(probPrices);
             for (i = 0; i < BaseConstants.NumLenToPosStates; i++)
-                _posSlotEncoder[i].Init();
+                _posSlotEncoder[i].Init(probPrices);
             for (i = 0; i < BaseConstants.NumFullDistances - BaseConstants.EndPosModelIndex; i++)
-                _posEncoders[i].Init();
+            {
+                _posEncoders[i] = new BitEncoder();
+                _posEncoders[i].Init(probPrices);
+            }
 
-            _lenEncoder.Init((uint)1 << _posStateBits);
-            _repMatchLenEncoder.Init((uint)1 << _posStateBits);
+            _lenEncoder.Init((uint)1 << _posStateBits, probPrices);
+            _repMatchLenEncoder.Init((uint)1 << _posStateBits, probPrices);
 
-            _posAlignEncoder.Init();
+            _posAlignEncoder.Init(probPrices);
 
             _longestMatchWasFound = false;
             _optimumEndIndex = 0;
@@ -1256,11 +1278,11 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 }
             }
 
-            public void Init()
+            public void Init(uint[] probPrices)
             {
                 uint numStates = (uint)1 << (_numPrevBits + _numPosBits);
                 for (uint i = 0; i < numStates; i++)
-                    _coders[i].Init();
+                    _coders[i].Init(probPrices);
             }
 
             public Encoder2 GetSubCoder(uint pos, byte prevbyte)
@@ -1274,7 +1296,14 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
                 public void Create() { _encoders = new BitEncoder[0x300]; }
 
-                public void Init() { for (int i = 0; i < 0x300; i++) _encoders[i].Init(); }
+                public void Init(uint[] probPrices)
+                {
+                    for (int i = 0; i < 0x300; i++)
+                    {
+                        _encoders[i] = new BitEncoder();
+                        _encoders[i].Init(probPrices);
+                    }
+                }
 
                 public void Encode(RangeEncoder rangeEncoder, byte symbol)
                 {
@@ -1356,16 +1385,16 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             }
 
 
-            public void Init(uint numPosStates)
+            public void Init(uint numPosStates, uint[] probPrices)
             {
-                _choice.Init();
-                _choice2.Init();
+                _choice.Init(probPrices);
+                _choice2.Init(probPrices);
                 for (uint posState = 0; posState < numPosStates; posState++)
                 {
-                    _lowCoder[posState].Init();
-                    _midCoder[posState].Init();
+                    _lowCoder[posState].Init(probPrices);
+                    _midCoder[posState].Init(probPrices);
                 }
-                _highCoder.Init();
+                _highCoder.Init(probPrices);
             }
 
             public void Encode(RangeEncoder rangeEncoder, uint symbol, uint posState)

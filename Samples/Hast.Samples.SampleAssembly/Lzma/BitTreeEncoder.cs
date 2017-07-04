@@ -13,10 +13,13 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 		}
 
 
-		public void Init()
+		public void Init(uint[] probPrices)
 		{
-			for (var i = 1; i < (1 << _numBitLevels); i++)
-				_models[i].Init();
+            for (var i = 1; i < (1 << _numBitLevels); i++)
+            {
+                _models[i] = new BitEncoder();
+                _models[i].Init(probPrices);
+            }
 		}
 
 		public void Encode(RangeEncoder rangeEncoder, uint symbol)

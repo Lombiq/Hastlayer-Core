@@ -24,7 +24,7 @@ namespace Hast.Samples.Consumer
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one.
         /// </summary>
-        public static Sample SampleToRun = Sample.LzmaCompressor;
+        public static Sample SampleToRun = Sample.PrimeCalculator;
     }
 
 
@@ -32,24 +32,25 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            //const string UncompressedTextFilePath = "Uncompressed.txt";
-            //const string CompressedTextFilePath = "Compressed.txt.lzma";
+            const string UncompressedTextFilePath = "Uncompressed.txt";
+            const string CompressedTextFilePath = "Compressed.txt.lzma";
 
-            //if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
+            if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
 
-            //var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
+            var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
 
-            //var outputFileBytes = new LzmaCompressor().CompressBytes(inputFileBytes);
+            var outputFileBytes = new LzmaCompressor().CompressBytes(inputFileBytes);
 
-            //File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
+            File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
 
 
-            
+
 
             Task.Run(async () =>
             {
                 var configuration = new HardwareGenerationConfiguration();
                 LzmaCompressorSampleRunner.Configure(configuration);
+                //PrimeCalculatorSampleRunner.Configure(configuration);
                 configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
 
                 using (var hastlayer = Xilinx.HastlayerFactory.Create())
@@ -58,6 +59,7 @@ namespace Hast.Samples.Consumer
                         new[]
                         {
                             typeof(LzmaCompressor).Assembly
+                            //typeof(PrimeCalculator).Assembly
                         },
                         configuration);
 
@@ -72,27 +74,27 @@ namespace Hast.Samples.Consumer
 
 
 
-            // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
+            // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from
             // inside a console app.
             //Task.Run(async () =>
             //{
-            //        /*
-            //         * On a high level these are the steps to use Hastlayer:
-            //         * 1. Create the Hastlayer shell.
-            //         * 2. Configure hardware generation and generate FPGA hardware representation of the given .NET code.
-            //         * 3. Generate proxies for hardware-transformed types and use these proxies to utilize hardware
-            //         *    implementations. (You can see this inside the SampleRunners.)
-            //         */
+            //     /*
+            //      * On a high level these are the steps to use Hastlayer:
+            //      * 1. Create the Hastlayer shell.
+            //      * 2. Configure hardware generation and generate FPGA hardware representation of the given .NET code.
+            //      * 3. Generate proxies for hardware-transformed types and use these proxies to utilize hardware
+            //      *    implementations. (You can see this inside the SampleRunners.)
+            //      */
 
-            //        // Inititializing a Hastlayer shell for Xilinx FPGA boards. Since this is non-trivial to create you
-            //        // can cache this shell object while the program runs and re-use it continuously. No need to wrap
-            //        // it into a using() like here, just make sure to Dispose() it before the program terminates.
-            //        using (var hastlayer = Xilinx.HastlayerFactory.Create())
-            //        {
-            //            // Hooking into an event of Hastlayer so some execution information can be made visible on the
-            //            // console.
-            //            hastlayer.ExecutedOnHardware += (sender, e) =>
-            //                {
+            //     // Inititializing a Hastlayer shell for Xilinx FPGA boards. Since this is non-trivial to create you
+            //     // can cache this shell object while the program runs and re-use it continuously. No need to wrap
+            //     // it into a using() like here, just make sure to Dispose() it before the program terminates.
+            //     using (var hastlayer = Xilinx.HastlayerFactory.Create())
+            //    {
+            //         // Hooking into an event of Hastlayer so some execution information can be made visible on the
+            //         // console.
+            //         hastlayer.ExecutedOnHardware += (sender, e) =>
+            //             {
             //                    Console.WriteLine(
             //                        "Executing " +
             //                        e.MemberFullName +
@@ -104,98 +106,98 @@ namespace Hast.Samples.Consumer
             //                };
 
 
-            //            var configuration = new HardwareGenerationConfiguration();
+            //        var configuration = new HardwareGenerationConfiguration();
 
 
-            //            // Letting the configuration of samples run.
-            //            switch (Configuration.SampleToRun)
-            //            {
-            //                case Sample.GenomeMatcher:
-            //                    GenomeMatcherSampleRunner.Configure(configuration);
-            //                    break;
-            //                case Sample.ParallelAlgorithm:
-            //                    ParallelAlgorithmSampleRunner.Configure(configuration);
-            //                    break;
-            //                case Sample.ImageProcessingAlgorithms:
-            //                    ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
-            //                    break;
-            //                case Sample.MonteCarloAlgorithm:
-            //                    MonteCarloAlgorithmSampleRunner.Configure(configuration);
-            //                    break;
-            //                case Sample.ObjectOrientedShowcase:
-            //                    ObjectOrientedShowcaseSampleRunner.Configure(configuration);
-            //                    break;
-            //                case Sample.PrimeCalculator:
-            //                    PrimeCalculatorSampleRunner.Configure(configuration);
-            //                    break;
-            //                case Sample.RecursiveAlgorithms:
-            //                    RecursiveAlgorithmsSampleRunner.Configure(configuration);
-            //                    break;
-            //                case Sample.SimdCalculator:
-            //                    SimdCalculatorSampleRunner.Configure(configuration);
-            //                    break;
-            //                case Sample.LzmaCompressor:
-            //                    LzmaCompressorSampleRunner.Configure(configuration);
-            //                    break;
-            //                default:
-            //                    break;
-            //            }
-
-            //            // The generated VHDL code will contain debug-level information, though it will be a bit slower
-            //            // to create.
-            //            configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
-
-            //            // Generating hardware from the sample assembly with the given configuration.
-            //            var hardwareRepresentation = await hastlayer.GenerateHardware(
-            //                new[]
-            //                {
-            //                    // Selecting any type from the sample assembly here just to get its Assembly object.
-            //                    typeof(LzmaCompressor).Assembly
-            //                },
-            //                configuration);
-
-
-            //            if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
-            //            {
-            //                Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
-            //            }
-
-
-            //            // Running samples.
-            //            switch (Configuration.SampleToRun)
-            //            {
-            //                case Sample.GenomeMatcher:
-            //                    await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                case Sample.ParallelAlgorithm:
-            //                    await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                case Sample.ImageProcessingAlgorithms:
-            //                    await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                case Sample.MonteCarloAlgorithm:
-            //                    await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                case Sample.ObjectOrientedShowcase:
-            //                    await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                case Sample.PrimeCalculator:
-            //                    await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                case Sample.RecursiveAlgorithms:
-            //                    await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                case Sample.SimdCalculator:
-            //                    await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                case Sample.LzmaCompressor:
-            //                    await LzmaCompressorSampleRunner.Run(hastlayer, hardwareRepresentation);
-            //                    break;
-            //                default:
-            //                    break;
-            //            }
+            //         // Letting the configuration of samples run.
+            //         switch (Configuration.SampleToRun)
+            //        {
+            //            case Sample.GenomeMatcher:
+            //                GenomeMatcherSampleRunner.Configure(configuration);
+            //                break;
+            //            case Sample.ParallelAlgorithm:
+            //                ParallelAlgorithmSampleRunner.Configure(configuration);
+            //                break;
+            //            case Sample.ImageProcessingAlgorithms:
+            //                ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
+            //                break;
+            //            case Sample.MonteCarloAlgorithm:
+            //                MonteCarloAlgorithmSampleRunner.Configure(configuration);
+            //                break;
+            //            case Sample.ObjectOrientedShowcase:
+            //                ObjectOrientedShowcaseSampleRunner.Configure(configuration);
+            //                break;
+            //            case Sample.PrimeCalculator:
+            //                PrimeCalculatorSampleRunner.Configure(configuration);
+            //                break;
+            //            case Sample.RecursiveAlgorithms:
+            //                RecursiveAlgorithmsSampleRunner.Configure(configuration);
+            //                break;
+            //            case Sample.SimdCalculator:
+            //                SimdCalculatorSampleRunner.Configure(configuration);
+            //                break;
+            //            case Sample.LzmaCompressor:
+            //                LzmaCompressorSampleRunner.Configure(configuration);
+            //                break;
+            //            default:
+            //                break;
             //        }
-                //}).Wait();
+
+            //         // The generated VHDL code will contain debug-level information, though it will be a bit slower
+            //         // to create.
+            //         configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
+
+            //         // Generating hardware from the sample assembly with the given configuration.
+            //         var hardwareRepresentation = await hastlayer.GenerateHardware(
+            //             new[]
+            //             {
+            //                     // Selecting any type from the sample assembly here just to get its Assembly object.
+            //                     typeof(PrimeCalculator).Assembly
+            //                },
+            //             configuration);
+
+
+            //        if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
+            //        {
+            //            Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
+            //        }
+
+
+            //         // Running samples.
+            //         switch (Configuration.SampleToRun)
+            //        {
+            //            case Sample.GenomeMatcher:
+            //                await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            case Sample.ParallelAlgorithm:
+            //                await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            case Sample.ImageProcessingAlgorithms:
+            //                await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            case Sample.MonteCarloAlgorithm:
+            //                await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            case Sample.ObjectOrientedShowcase:
+            //                await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            case Sample.PrimeCalculator:
+            //                await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            case Sample.RecursiveAlgorithms:
+            //                await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            case Sample.SimdCalculator:
+            //                await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            case Sample.LzmaCompressor:
+            //                await LzmaCompressorSampleRunner.Run(hastlayer, hardwareRepresentation);
+            //                break;
+            //            default:
+            //                break;
+            //        }
+            //    }
+            //}).Wait();
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
