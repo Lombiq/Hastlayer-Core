@@ -23,7 +23,7 @@ namespace Hast.Samples.Consumer
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one.
         /// </summary>
-        public static Sample SampleToRun = Sample.PrimeCalculator;
+        public static Sample SampleToRun = Sample.LzmaCompressor;
     }
 
 
@@ -93,6 +93,9 @@ namespace Hast.Samples.Consumer
                             case Sample.SimdCalculator:
                                 SimdCalculatorSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.LzmaCompressor:
+                                LzmaCompressorSampleRunner.Configure(configuration);
+                                break;
                             default:
                                 break;
                         }
@@ -106,7 +109,7 @@ namespace Hast.Samples.Consumer
                             new[]
                             {
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
-                                typeof(PrimeCalculator).Assembly
+                                typeof(LzmaCompressor).Assembly
                             },
                             configuration);
 
@@ -143,6 +146,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.SimdCalculator:
                                 await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.LzmaCompressor:
+                                await LzmaCompressorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             default:
                                 break;
