@@ -13186,7 +13186,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_11\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_10\.
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.7\ := resize(signed(\Unum::.ctor(UnumEnvironment,UInt32).0.this\.\_environment\.\ExponentSizeMax\ - to_unsigned(1, 8)), 32);
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.7\ := resize(signed(\Unum::.ctor(UnumEnvironment,UInt32).0.num2\ - to_unsigned(1, 16)), 32);
                         \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.8\ := resize(shift_left(to_signed(1, 32), to_integer((\Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.7\))), 32);
                         \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.9\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.8\ - to_signed(1, 32);
                         \Unum::.ctor(UnumEnvironment,UInt32).0.right\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.9\;
