@@ -63,24 +63,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 primitiveExpression = newExpression;
             }
 
-            AssignmentExpression assignmentExpression;
             ArrayCreateExpression arrayCreateExpression;
             BinaryOperatorExpression binaryOperatorExpression;
 
+            // Assignments shouldn't be handled here, see ConstantValuesSubstitutingVisitor.
 
-            if (primitiveExpressionParent.Is<AssignmentExpression>(out assignmentExpression))
-            {
-                // Indexed assignments with a constant index could also be handled eventually, but not really needed
-                // now.
-                if (!(assignmentExpression.Left is IndexerExpression))
-                {
-                    _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
-                        assignmentExpression.Left,
-                        primitiveExpression,
-                        primitiveExpressionParent.FindFirstParentBlockStatement()); 
-                }
-            }
-            else if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression) &&
+            if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression) &&
                 arrayCreateExpression.Arguments.Single() == primitiveExpression)
             {
                 PassLengthOfArrayHolderToParent(arrayCreateExpression, Convert.ToInt32(primitiveExpression.Value));
@@ -108,12 +96,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         binaryOperatorExpression,
                         newExpression,
                         parentBlock);
-
-                    AssignmentExpression assignment;
-                    if (binaryOperatorExpression.Parent.Is<AssignmentExpression>(out assignment))
-                    {
-                        _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsNonConstant(assignment.Left, parentBlock);
-                    }
                 }
             }
             else if (primitiveExpressionParent is UnaryOperatorExpression)

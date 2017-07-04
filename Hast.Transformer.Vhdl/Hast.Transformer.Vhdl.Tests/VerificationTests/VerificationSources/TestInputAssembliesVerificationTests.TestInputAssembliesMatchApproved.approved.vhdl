@@ -484,6 +484,42 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage().0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 declarations start
+    -- State machine states:
+    type \ObjectUsingCases::VoidReturn(Int32).0._States\ is (
+        \ObjectUsingCases::VoidReturn(Int32).0._State_0\, 
+        \ObjectUsingCases::VoidReturn(Int32).0._State_1\, 
+        \ObjectUsingCases::VoidReturn(Int32).0._State_2\, 
+        \ObjectUsingCases::VoidReturn(Int32).0._State_3\);
+    -- Signals:
+    Signal \ObjectUsingCases::VoidReturn(Int32).0._Finished\: boolean := false;
+    Signal \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).myClass.parameter.Out.0\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+    Signal \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Started.0\: boolean := false;
+    Signal \ObjectUsingCases::VoidReturn(Int32).0._Started\: boolean := false;
+    Signal \ObjectUsingCases::VoidReturn(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).myClass.parameter.In.0\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+    Signal \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Finished.0\: boolean := false;
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass).0 declarations start
+    -- State machine states:
+    type \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._States\ is (
+        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_0\, 
+        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_1\, 
+        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\, 
+        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_3\, 
+        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\, 
+        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\, 
+        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\);
+    -- Signals:
+    Signal \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Finished\: boolean := false;
+    Signal \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass.parameter.Out\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+    Signal \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Started\: boolean := false;
+    Signal \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass.parameter.In\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass).0 declarations end
+
+
     -- System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven().0 declarations start
     -- State machine states:
     type \ParallelCases/Calculator::IsEven().0._States\ is (
@@ -720,6 +756,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
@@ -739,6 +776,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
@@ -2359,6 +2397,166 @@ begin
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage().0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 state machine start
+    \ObjectUsingCases::VoidReturn(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ObjectUsingCases::VoidReturn(Int32).0._State\: \ObjectUsingCases::VoidReturn(Int32).0._States\ := \ObjectUsingCases::VoidReturn(Int32).0._State_0\;
+        Variable \ObjectUsingCases::VoidReturn(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectUsingCases::VoidReturn(Int32).0.myClass\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ObjectUsingCases::VoidReturn(Int32).0._Finished\ <= false;
+                \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Started.0\ <= false;
+                \ObjectUsingCases::VoidReturn(Int32).0._State\ := \ObjectUsingCases::VoidReturn(Int32).0._State_0\;
+                \ObjectUsingCases::VoidReturn(Int32).0.input\ := to_signed(0, 32);
+            else 
+                case \ObjectUsingCases::VoidReturn(Int32).0._State\ is 
+                    when \ObjectUsingCases::VoidReturn(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ObjectUsingCases::VoidReturn(Int32).0._Started\ = true) then 
+                            \ObjectUsingCases::VoidReturn(Int32).0._State\ := \ObjectUsingCases::VoidReturn(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidReturn(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ObjectUsingCases::VoidReturn(Int32).0._Started\ = true) then 
+                            \ObjectUsingCases::VoidReturn(Int32).0._Finished\ <= true;
+                        else 
+                            \ObjectUsingCases::VoidReturn(Int32).0._Finished\ <= false;
+                            \ObjectUsingCases::VoidReturn(Int32).0._State\ := \ObjectUsingCases::VoidReturn(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidReturn(Int32).0._State_2\ => 
+                        \ObjectUsingCases::VoidReturn(Int32).0.input\ := \ObjectUsingCases::VoidReturn(Int32).0.input.parameter.In\;
+                        -- Initializing record fields to their defaults.
+                        \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\IsNull\ := false;
+                        \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\MyProperty\ := to_signed(0, 32);
+                        \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\MyProperty\ := \ObjectUsingCases::VoidReturn(Int32).0.input\;
+                        -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass)
+                        \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).myClass.parameter.Out.0\ <= \ObjectUsingCases::VoidReturn(Int32).0.myClass\;
+                        \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Started.0\ <= true;
+                        \ObjectUsingCases::VoidReturn(Int32).0._State\ := \ObjectUsingCases::VoidReturn(Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidReturn(Int32).0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass)
+                        if (\ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Started.0\ = \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Finished.0\) then 
+                            \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Started.0\ <= false;
+                            \ObjectUsingCases::VoidReturn(Int32).0.myClass\ := \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).myClass.parameter.In.0\;
+                            \ObjectUsingCases::VoidReturn(Int32).0._State\ := \ObjectUsingCases::VoidReturn(Int32).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass).0 state machine start
+    \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._StateMachine\: process (\Clock\) 
+        Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\: \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._States\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_0\;
+        Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\: \Hast.TestInputs.Various.ObjectUsingCases/MyClass\;
+        Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag\: boolean := false;
+        Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag2\: boolean := false;
+        Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.0\: boolean := false;
+        Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.2\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Finished\ <= false;
+                \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_0\;
+                \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag\ := false;
+                \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag2\ := false;
+                \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.0\ := false;
+                \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.2\ := false;
+            else 
+                case \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ is 
+                    when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Started\ = true) then 
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Started\ = true) then 
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Finished\ <= true;
+                        else 
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Finished\ <= false;
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass.parameter.Out\ <= \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\ => 
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass.parameter.In\;
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.0\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ < to_signed(10, 32);
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.0\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\ and ends in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\.
+                        --     * Execution after either branch will continue in the following state: \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_3\.
+
+                        if (\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag\) then 
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_3\ => 
+                        -- State after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\.
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ := to_signed(5, 32);
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\ => 
+                        -- True branch of the if-else started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\.
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\ := resize(\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ * to_signed(10, 32), 32);
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\;
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.2\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ = to_signed(10, 32);
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag2\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\ and ends in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\.
+                        --     * Execution after either branch will continue in the following state: \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\.
+
+                        if (\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag2\) then 
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\ => 
+                        -- State after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\.
+                        -- Going to the state after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\.
+                        if (\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ = \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\) then 
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\ => 
+                        -- True branch of the if-else started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\.
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\.
+                        if (\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ = \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\) then 
+                            \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass).0 state machine end
+
+
     -- System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven().0 state machine start
     \ParallelCases/Calculator::IsEven().0._StateMachine\: process (\Clock\) 
         Variable \ParallelCases/Calculator::IsEven().0._State\: \ParallelCases/Calculator::IsEven().0._States\ := \ParallelCases/Calculator::IsEven().0._State_0\;
@@ -3178,6 +3376,7 @@ begin
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
             else 
@@ -3304,13 +3503,20 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 17 => 
+                            if (\Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 18 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 18 => 
+                        when 19 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\) then 
@@ -3850,6 +4056,15 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2::.ctor(System.UInt32) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass) start
+    -- Signal connections for System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32).0 (#0):
+    \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Started\ <= \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Started.0\;
+    \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass.parameter.In\ <= \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).myClass.parameter.Out.0\;
+    \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Finished.0\ <= \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._Finished\;
+    \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).myClass.parameter.In.0\ <= \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven() start
     -- Signal connections for System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(System.UInt32).0 (#0):
     \ParallelCases/Calculator::IsEven().0._Started\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Started.0\;
@@ -4013,6 +4228,13 @@ begin
     \ObjectUsingCases::NullUsage().0._Started\ <= \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\;
     \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\ <= \ObjectUsingCases::NullUsage().0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ObjectUsingCases::VoidReturn(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\ <= \ObjectUsingCases::VoidReturn(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidReturn(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ParallelCases::WhenAllWhenAnyAwaitedTasks(System.UInt32) start
