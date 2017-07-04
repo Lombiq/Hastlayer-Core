@@ -7,7 +7,8 @@
 namespace Hast.Transformer.SimpleMemory
 {
     /// <summary>
-    /// Represents a simplified memory model available on the FPGA for transformed algorithms.
+    /// Represents a simplified memory model available on the FPGA for transformed algorithms. WARNING: SimpleMemory is
+    /// NOT thread-safe, there shouldn't be any concurrent access to it.
     /// </summary>
     /// <remarks>
     /// All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.

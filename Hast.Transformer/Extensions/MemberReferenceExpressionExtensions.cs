@@ -115,7 +115,7 @@ namespace ICSharpCode.NRefactory.CSharp
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
-            else if (target is IdentifierExpression)
+            else if (target is IdentifierExpression || target is IndexerExpression)
             {
                 return typeDeclarationLookupTable.Lookup(target.GetActualTypeReference().FullName);
             }

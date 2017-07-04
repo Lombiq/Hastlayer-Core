@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -34,7 +35,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 assignment.Left.GetActualTypeReference()?.FullName == objectCreateExpression.Type.GetFullName(),
                 out parentAssignment))
             {
-                var constructorName = objectCreateExpression.GetFullName();
+                var constructorName = objectCreateExpression.GetConstructorFullName();
+
+                if (string.IsNullOrEmpty(constructorName)) return;
 
                 var constructorDeclaration =
                     _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable

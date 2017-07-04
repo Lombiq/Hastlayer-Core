@@ -25,13 +25,17 @@ namespace Hast.Samples.SampleAssembly
             };
 
             // Array elements can be accessed and modified as usual.
+            numberContainers1[0].NumberPlusFive = inputNumber + 10;
             numberContainers1[1].IncreaseNumber(5);
 
 
-            // Note that array dimensions need to be defined compile-time.
+            // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used
+            // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a 
+            // variable then its value should be computable from all other values at compile-time).
             var numberContainers2 = new NumberContainer[1];
             var numberContainer = new NumberContainer();
             numberContainer.Number = 5;
+            numberContainer.Number = numberContainer.NumberPlusFive;
             if (!numberContainer.WasIncreased)
             {
                 numberContainer.IncreaseNumber(5);
@@ -65,17 +69,19 @@ namespace Hast.Samples.SampleAssembly
     // Although this is a public class it could also be an inner class and/or a non-public one too.
     public class NumberContainer
     {
+        // Auto-properties (also read-only ones) and custom properties can be used.
+
         // You can initialize properties C# 6-style too.
         public uint Number { get; set; } = 99;
 
         // Fields can be used too.
         public bool WasIncreased;
 
-
-        public uint IncreaseNumber(uint increaseBy)
+        // Fancy custom properties that can do everything a method can.
+        public uint NumberPlusFive
         {
-            WasIncreased = true;
-            return (Number += increaseBy);
+            get { return Number + 5; }
+            set { Number = value - 5; }
         }
 
 
@@ -87,6 +93,14 @@ namespace Hast.Samples.SampleAssembly
         public NumberContainer(uint number)
         {
             Number = number;
+        }
+
+
+        // Instance methods can be added as usual.
+        public uint IncreaseNumber(uint increaseBy)
+        {
+            WasIncreased = true;
+            return (Number += increaseBy);
         }
     }
 

@@ -17,7 +17,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var ooShowcase = await hastlayer
                 .GenerateProxy(hardwareRepresentation, new ObjectOrientedShowcase());
-            var sum = ooShowcase.Run(93); // 268
+            var sum = ooShowcase.Run(93); // 293
         }
     }
 }

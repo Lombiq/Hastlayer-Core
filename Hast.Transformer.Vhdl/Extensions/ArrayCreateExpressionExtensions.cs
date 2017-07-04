@@ -15,7 +15,9 @@ namespace ICSharpCode.NRefactory.CSharp
                 if (!(lengthArgument is PrimitiveExpression))
                 {
                     throw new NotSupportedException(
-                        "Only arrays with statically defined dimension length are supported. Consider adding the dimension sizes directly into the array initialization or use a const field.");
+                        "Only arrays with statically defined dimension length are supported. Consider adding the dimension sizes directly into the array initialization or use a const field. The dynamically sized array creation was: " +
+                        expression.ToString() + " (in the following member: " + 
+                        expression.FindFirstParentEntityDeclaration().GetFullName() + ").");
                 }
 
                 return int.Parse(((PrimitiveExpression)lengthArgument).Value.ToString()); 
