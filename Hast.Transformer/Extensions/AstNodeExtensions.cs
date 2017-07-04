@@ -14,13 +14,6 @@ namespace ICSharpCode.NRefactory.CSharp
         /// </summary>
         public static string GetFullName(this AstNode node)
         {
-            if (node.ToString() == "")
-            {
-
-            }
-            try
-            {
-
             if (node is MemberReferenceExpression)
             {
                 var memberReferenceExpression = (MemberReferenceExpression)node;
@@ -109,12 +102,6 @@ namespace ICSharpCode.NRefactory.CSharp
             return CreateParentEntityBasedName(
                 node, 
                 node.ToString() + (ilRanges != null && ilRanges.Any() ? ilRanges.First().ToString() : string.Empty));
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
         }
 
         /// <summary>
