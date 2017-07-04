@@ -37,8 +37,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (!(assignmentExpression.Left is IdentifierExpression)) return;
 
-            if (ConstantValueSubstitutionHelper.IsInWhile(assignmentExpression) ||
-                ConstantValueSubstitutionHelper.IsInIfElse(assignmentExpression))
+            if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
             {
                 _constantValuesTable.MarkAsNonConstant(
                     assignmentExpression.Left,
@@ -166,6 +165,25 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
         }
 
+        public override void VisitArrayCreateExpression(ArrayCreateExpression arrayCreateExpression)
+        {
+            base.VisitArrayCreateExpression(arrayCreateExpression);
+
+            var lengthArgument = arrayCreateExpression.Arguments.Single();
+            var parentAssignment = arrayCreateExpression.Parent as AssignmentExpression;
+            var existingSize = parentAssignment != null ?
+                _arraySizeHolder.GetSize(parentAssignment.Left) :
+                null;
+
+            if (lengthArgument is PrimitiveExpression || existingSize == null) return;
+
+            // If the array creation doesn't have a static length but the value holder the array is assigned to has the
+            // array size defined then just substitute the array length too.
+            lengthArgument.ReplaceWith(
+                new PrimitiveExpression(existingSize.Length)
+                .WithAnnotation(TypeHelper.CreateInt32TypeInformation(parentAssignment)));
+        }
+
 
         private void SubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
@@ -206,7 +224,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         return true;
                     }
                     else if (member.IsReadOnlyMember())
-
                     {
                         // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the
                         // first member that has a corresponding ctor.
@@ -277,8 +294,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // We need to keep track of the last assignment in the root scope of the method. If after that there is
                 // another assignment in an if-else or while then that makes the value holder's constant value unusable.
 
-                if (ConstantValueSubstitutionHelper.IsInWhile(assignmentExpression) ||
-                    ConstantValueSubstitutionHelper.IsInIfElse(assignmentExpression))
+                if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
                 {
                     ConstantValuesTable.MarkAsNonConstant(assignmentExpression.Left, _constructor);
                 }

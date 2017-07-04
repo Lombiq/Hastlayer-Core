@@ -208,8 +208,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             IVhdlElement binaryElement = binary;
 
+            var isShift = false;
             if (expression.Operator == BinaryOperatorType.ShiftLeft || expression.Operator == BinaryOperatorType.ShiftRight)
             {
+                isShift = true;
                 binaryElement = new Invocation
                 {
                     Target = (expression.Operator == BinaryOperatorType.ShiftLeft ? "shift_left" : "shift_right").ToVhdlIdValue(),
@@ -274,14 +276,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     );
             }
 
-            if (firstNonParenthesizedExpressionParent is CastExpression)
+            // Shifts also need type conversion if the right operator doesn't have the same type as the left one.
+            if (firstNonParenthesizedExpressionParent is CastExpression || isShift)
             {
+                var fromType = isShift ?
+                    leftType :
+                    _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
+
                 var typeConversionResult = _typeConversionTransformer.ImplementTypeConversion(
-                    _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext),
+                    fromType,
                     resultType,
                     binaryElement);
 
-                binaryElement = typeConversionResult.Expression;
+                binaryElement = typeConversionResult.ConvertedFromExpression;
 
                 // Most of the time due to the cast no resize is necessary, but sometimes it is.
                 shouldResizeResult = shouldResizeResult && !typeConversionResult.IsResized;

@@ -9,9 +9,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
     public interface ITypeConversionResult
     {
-        IVhdlElement Expression { get; }
+        IVhdlElement ConvertedFromExpression { get; }
         bool IsLossy { get; }
         bool IsResized { get; }
+    }
+
+    public interface IAssignmentTypeConversionResult : ITypeConversionResult
+    {
+        IDataObject ConvertedToDataObject { get; }
     }
 
 
@@ -27,6 +32,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             bool isLeft, 
             IVhdlTransformationContext context);
 
-        ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement expression);
+        IAssignmentTypeConversionResult ImplementTypeConversionForAssignment(
+            DataType fromType, 
+            DataType toType, 
+            IVhdlElement fromExpression, 
+            IDataObject toDataObject);
+
+        ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement fromExpression);
     }
 }

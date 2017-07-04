@@ -27,6 +27,17 @@ namespace Hast.Common.Configuration
         /// </summary>
         public bool UseSimpleMemory { get; set; } = true;
 
+        /// <summary>
+        /// The lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer 
+        /// can figure out what the compile-time size of an array is most of the time. Should this fail you can use 
+        /// this to specify array lengths.
+        /// 
+        /// Key should be the full name of the array (<see cref="IHardwareGenerationConfiguration.HardwareEntryPointMemberFullNames"/>)
+        /// and value should be the length. If you get exceptions due to arrays missing their sizes the exception will
+        /// indicate the full array name too.
+        /// </summary>
+        public IDictionary<string, int> ArrayLengths { get; set; } = new Dictionary<string, int>();
+
 
         public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration)
         {
@@ -48,6 +59,14 @@ namespace Hast.Common.Configuration
             var newConfiguration = new MemberInvocationInstanceCountConfiguration(simpleMemberName);
             AddMemberInvocationInstanceCountConfiguration(newConfiguration);
             return newConfiguration;
+        }
+
+        public void AddLengthForMultipleArrays(int length, params string[] arrayNames)
+        {
+            for (int i = 0; i < arrayNames.Length; i++)
+            {
+                ArrayLengths.Add(arrayNames[i], length);
+            }
         }
     }
 

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Configuration;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
@@ -30,9 +31,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         }
 
 
-        public IArraySizeHolder SubstituteConstantValues(SyntaxTree syntaxTree)
+        public IArraySizeHolder SubstituteConstantValues(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
-            var arraySizeHolder = new ArraySizeHolder();
+            var preConfiguredArrayLengths = configuration
+                .TransformerConfiguration()
+                .ArrayLengths
+                .ToDictionary(kvp => kvp.Key, kvp => (IArraySize)new ArraySize { Length = kvp.Value });
+            var arraySizeHolder = new ArraySizeHolder(preConfiguredArrayLengths);
 
             new ConstantValuesSubstitutingAstProcessor(
                 new ConstantValuesTable(),

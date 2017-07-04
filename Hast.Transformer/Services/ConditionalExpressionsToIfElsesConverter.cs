@@ -51,14 +51,16 @@ namespace Hast.Transformer.Services
                     var variableDeclaration = 
                         new VariableDeclarationStatement(AstBuilder.ConvertType(variableTypeReference), variableName);
                     AstInsertionHelper.InsertStatementBefore(
-                        conditionalExpression.FindFirstParentOfType<Statement>(),
+                        conditionalExpression.FindFirstParentStatement(),
                         variableDeclaration);
 
                     // Then moving the conditational expression so its result is assigned to the variable.
                     var variableIdentifier = new IdentifierExpression(variableName);
                     variableIdentifier.AddAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference });
                     var newConditionalExpression = (ConditionalExpression)conditionalExpression.Clone();
-                    assignment = new AssignmentExpression(variableIdentifier, newConditionalExpression);
+                    assignment = new AssignmentExpression(
+                        new IdentifierExpression(variableName).WithAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference }), 
+                        newConditionalExpression);
 
 
                     assignment.AddAnnotation(typeInformation);
