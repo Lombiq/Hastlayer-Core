@@ -35,7 +35,7 @@ namespace Hast.Samples.SampleAssembly
         public const int LzmaCompressor_EosIndex = 12;
         
 
-        public void Compress(SimpleMemory memory)
+        public virtual void Compress(SimpleMemory memory)
         {
             int inputStartCellIndex = memory.ReadInt32(LzmaCompressor_InputStartCellIndex);
             int inputByteCount = memory.ReadInt32(LzmaCompressor_InputByteCountIndex);
@@ -90,6 +90,8 @@ namespace Hast.Samples.SampleAssembly
             }
 
             encoder.Code(inputStream, outputStream);
+
+            memory.WriteInt32(LzmaCompressor_OutputByteCountIndex, (int)outputStream.Position);
         }
     }
 
@@ -104,16 +106,18 @@ namespace Hast.Samples.SampleAssembly
 
             var inputSize = inputBytes.Length;
             var inputCellCount = inputSize / 4 + (inputSize % 4 == 0 ? 0 : 1);
+            var inputStartCell = InitCellCount;
             var outputSize = LzmaInitCellCount + inputSize + OutputExtraBytes;
             var outputCellCount = outputSize / 4 + (outputSize % 4 == 0 ? 0 : 1);
+            var outputStartCell = InitCellCount + inputCellCount;
             
             var memorySize = InitCellCount + inputCellCount + outputCellCount;
             var simpleMemory = new SimpleMemory(memorySize);
 
-            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_InputStartCellIndex, LzmaCompressorDefaultParameters.LiteralContextBits);
-            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_InputByteCountIndex, LzmaCompressorDefaultParameters.LiteralContextBits);
-            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_OutputStartCellIndex, LzmaCompressorDefaultParameters.LiteralContextBits);
-            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_OutputByteCountIndex, LzmaCompressorDefaultParameters.LiteralContextBits);
+            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_InputStartCellIndex, inputStartCell);
+            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_InputByteCountIndex, inputSize);
+            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_OutputStartCellIndex, outputStartCell);
+            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_OutputByteCountIndex, outputSize);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_LiteralContextBitsIndex, LzmaCompressorDefaultParameters.LiteralContextBits);
             simpleMemory.WriteBoolean(LzmaCompressor.LzmaCompressor_MatchFinderIsBt4Index, LzmaCompressorDefaultParameters.MatchFinderIsBt4);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_DictionarySizeIndex, LzmaCompressorDefaultParameters.DictionarySize);
@@ -124,13 +128,13 @@ namespace Hast.Samples.SampleAssembly
             simpleMemory.WriteBoolean(LzmaCompressor.LzmaCompressor_StdInModeIndex, LzmaCompressorDefaultParameters.StdInMode);
             simpleMemory.WriteBoolean(LzmaCompressor.LzmaCompressor_EosIndex, LzmaCompressorDefaultParameters.Eos);
 
-            var initInputStream = new SimpleMemoryStream(simpleMemory, 0, inputSize);
-            initInputStream.Write(inputBytes, 0, inputSize);
+            var inputStream = new SimpleMemoryStream(simpleMemory, inputStartCell, inputSize);
+            inputStream.Write(inputBytes, 0, inputSize);
 
             lzmaCompressor.Compress(simpleMemory);
 
-            var outputStream = new SimpleMemoryStream(simpleMemory, inputCellCount, outputSize);
-            outputSize = (int)outputStream.Position;
+            var outputStream = new SimpleMemoryStream(simpleMemory, outputStartCell, outputSize);
+            outputSize = simpleMemory.ReadInt32(LzmaCompressor.LzmaCompressor_OutputByteCountIndex);
             var outputBytes = new byte[outputSize];
             outputStream.Read(outputBytes, 0, outputSize);
 
