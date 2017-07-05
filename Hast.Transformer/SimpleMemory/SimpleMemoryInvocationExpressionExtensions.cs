@@ -1,4 +1,6 @@
-﻿namespace ICSharpCode.NRefactory.CSharp
+﻿using Mono.Cecil;
+
+namespace ICSharpCode.NRefactory.CSharp
 {
     public static class SimpleMemoryInvocationExpressionExtensions
     {
@@ -7,12 +9,8 @@
         /// </summary>
         public static bool IsSimpleMemoryInvocation(this InvocationExpression expression)
         {
-            var targetMemberReference = expression.Target as MemberReferenceExpression;
-
-            return
-                targetMemberReference != null &&
-                targetMemberReference.Target.Is<IdentifierExpression>(identifier =>
-                    identifier.Identifier == expression.FindFirstParentOfType<MethodDeclaration>().GetSimpleMemoryParameterName());
+            var methodReference = expression.Annotation<MethodReference>();
+            return methodReference != null && methodReference.DeclaringType.IsSimpleMemory();
         }
     }
 }
