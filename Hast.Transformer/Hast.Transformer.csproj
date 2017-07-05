@@ -98,6 +98,7 @@
     <Compile Include="Extensions\TransformationContextExtensions.cs" />
     <Compile Include="Extensions\InvocationInstanceCountTransformerConfigurationExtensions.cs" />
     <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
+    <Compile Include="Extensions\TypeReferenceExtensions.cs" />
     <Compile Include="Helpers\VariableHelper.cs" />
     <Compile Include="Helpers\AstInsertionHelper.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />

@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         }
 
         [Test]
-        public async Task SampleAssembliesMatchApproved()
+        public async Task BasicSamplesMatchApproved()
         {
             await _host.Run<ITransformer>(async transformer =>
             {
