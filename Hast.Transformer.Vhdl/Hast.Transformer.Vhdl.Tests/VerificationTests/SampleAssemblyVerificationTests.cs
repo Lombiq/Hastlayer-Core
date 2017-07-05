@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(KpzKernelsInterface).Assembly },
+                    new[] { typeof(PrimeCalculator).Assembly },
                     configuration =>
                     {
                         // Only testing well-tested samples.
@@ -60,7 +60,22 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             });
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
+                    });
 
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
+        public async Task KpzSampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(KpzKernelsInterface).Assembly },
+                    configuration =>
+                    {
                         configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
                     });
 
