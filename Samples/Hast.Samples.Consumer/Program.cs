@@ -32,7 +32,7 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            //const string UncompressedTextFilePath = "Uncompressed.txt";
+            //const string UncompressedTextFilePath = "LongTextFile.txt";
             //const string CompressedTextFilePath = "Compressed.txt.lzma";
 
             //if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
@@ -50,7 +50,7 @@ namespace Hast.Samples.Consumer
             {
                 var configuration = new HardwareGenerationConfiguration();
                 LzmaCompressorSampleRunner.Configure(configuration);
-                //PrimeCalculatorSampleRunner.Configure(configuration);
+                //ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
                 configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
 
                 using (var hastlayer = Xilinx.HastlayerFactory.Create())
@@ -59,7 +59,7 @@ namespace Hast.Samples.Consumer
                         new[]
                         {
                             typeof(LzmaCompressor).Assembly
-                            //typeof(PrimeCalculator).Assembly
+                            //typeof(ImageFilter).Assembly
                         },
                         configuration);
 
