@@ -26,6 +26,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         private uint _kNumHashDirectbytes = 0;
         private uint _kMinMatchCheck = 4;
         private uint _kFixHashSize = Hash2Size + Hash3Size;
+        private CRC _crc;
 
 
         public void SetType(int numHashbytes)
@@ -54,6 +55,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         public new void Init()
         {
             base.Init();
+            _crc = new CRC();
             for (var i = 0; i < _hashSizeSum; i++)
                 _hash[i] = EmptyHashValue;
             _cyclicBufferPos = 0;
@@ -145,11 +147,11 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
             if (_hashArray)
             {
-                uint temp = CRC.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
+                uint temp = _crc.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
                 hash2Value = temp & (Hash2Size - 1);
                 temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
                 hash3Value = temp & (Hash3Size - 1);
-                hashValue = (temp ^ (CRC.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
+                hashValue = (temp ^ (_crc.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
             }
             else
                 hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
@@ -288,13 +290,13 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
                 if (_hashArray)
                 {
-                    var temp = CRC.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
+                    var temp = _crc.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
                     var hash2Value = temp & (Hash2Size - 1);
                     _hash[hash2Value] = _pos;
                     temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
                     var hash3Value = temp & (Hash3Size - 1);
                     _hash[Hash3Offset + hash3Value] = _pos;
-                    hashValue = (temp ^ (CRC.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
+                    hashValue = (temp ^ (_crc.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
                 }
                 else
                     hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
