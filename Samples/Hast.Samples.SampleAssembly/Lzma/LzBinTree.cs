@@ -1,4 +1,5 @@
 using Hast.Samples.SampleAssembly.Models;
+using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
 using System;
 
 namespace Hast.Samples.SampleAssembly.Services.Lzma
@@ -55,6 +56,10 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         public new void Init()
         {
             base.Init();
+
+            _hash = new uint[BaseConstants.MaxHashSize];
+            _son = new uint[(BaseConstants.MaxDictionarySize + 1) * 2];
+
             _crc = new CRC();
             for (var i = 0; i < _hashSizeSum; i++)
                 _hash[i] = EmptyHashValue;
@@ -81,7 +86,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             base.GetNumAvailablebytes();
 
         public void Create(
-            uint historySize,
+            uint dictionarySize,
             uint keepAddBufferBefore,
             uint matchMaxLen,
             uint keepAddBufferAfter)
@@ -91,36 +96,32 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
             _cutValue = 16 + (matchMaxLen >> 1);
 
-            var windowReservSize = (historySize + keepAddBufferBefore + matchMaxLen + keepAddBufferAfter) / 2 + 256;
+            var windowReservSize = (dictionarySize + keepAddBufferBefore + matchMaxLen + keepAddBufferAfter) / 2 + 256;
 
-            Create(historySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
+            Create(dictionarySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
 
             _matchMaxLen = matchMaxLen;
 
-            var cyclicBufferSize = historySize + 1;
-            if (_cyclicBufferSize != cyclicBufferSize)
-                _son = new uint[(_cyclicBufferSize = cyclicBufferSize) * 2];
+            // Dictionary size can be maximum 128 bytes!
+            _cyclicBufferSize = dictionarySize + 1;
 
-            var hs = BT2HashSize;
+            _hashSizeSum = BT2HashSize;
 
             if (_hashArray)
             {
-                hs = historySize - 1;
-                hs |= (hs >> 1);
-                hs |= (hs >> 2);
-                hs |= (hs >> 4);
-                hs |= (hs >> 8);
-                hs >>= 1;
-                hs |= 0xFFFF;
-                if (hs > (1 << 24))
-                    hs >>= 1;
-                _hashMask = hs;
-                hs++;
-                hs += _kFixHashSize;
+                _hashSizeSum = dictionarySize - 1;
+                _hashSizeSum |= (_hashSizeSum >> 1);
+                _hashSizeSum |= (_hashSizeSum >> 2);
+                _hashSizeSum |= (_hashSizeSum >> 4);
+                _hashSizeSum |= (_hashSizeSum >> 8);
+                _hashSizeSum >>= 1;
+                _hashSizeSum |= 0xFFFF;
+                if (_hashSizeSum > (1 << 24))
+                    _hashSizeSum >>= 1;
+                _hashMask = _hashSizeSum;
+                _hashSizeSum++;
+                _hashSizeSum += _kFixHashSize;
             }
-
-            if (hs != _hashSizeSum)
-                _hash = new uint[_hashSizeSum = hs];
         }
 
         public uint GetMatches(uint[] distances)
@@ -217,7 +218,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                     break;
                 }
                 var delta = _pos - curMatch;
-                var cyclicPos = ((delta <= _cyclicBufferPos) ? 
+                var cyclicPos = ((delta <= _cyclicBufferPos) ?
                     (_cyclicBufferPos - delta) :
                     (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
 
@@ -363,19 +364,30 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             }
             while (--num != 0);
         }
-        
+
         public void SetCutValue(uint cutValue) =>
             _cutValue = cutValue;
 
 
-        private void NormalizeLinks(uint[] items, uint numItems, uint subValue)
+        private void NormalizeSon(uint subValue)
         {
-            for (uint i = 0; i < numItems; i++)
+            for (uint i = 0; i < _cyclicBufferSize * 2; i++)
             {
-                var value = items[i];
+                var value = _son[i];
                 if (value <= subValue) value = EmptyHashValue;
                 else value -= subValue;
-                items[i] = value;
+                _son[i] = value;
+            }
+        }
+
+        private void NormalizeHash(uint subValue)
+        {
+            for (uint i = 0; i < _hashSizeSum; i++)
+            {
+                var value = _hash[i];
+                if (value <= subValue) value = EmptyHashValue;
+                else value -= subValue;
+                _hash[i] = value;
             }
         }
 
@@ -383,8 +395,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         {
             uint subValue = _pos - _cyclicBufferSize;
 
-            NormalizeLinks(_son, _cyclicBufferSize * 2, subValue);
-            NormalizeLinks(_hash, _hashSizeSum, subValue);
+            NormalizeSon(subValue);
+            NormalizeHash(subValue);
 
             ReduceOffsets((int)subValue);
         }

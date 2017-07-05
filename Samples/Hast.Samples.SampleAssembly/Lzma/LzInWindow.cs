@@ -1,4 +1,5 @@
 using Hast.Samples.SampleAssembly.Models;
+using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
 
 namespace Hast.Samples.SampleAssembly.Services.Lzma
 {
@@ -80,9 +81,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
 			if (_bufferBase == null || _blockSize != blockSize)
 			{
-				Free();
+				//Free();
 				_blockSize = blockSize;
-				_bufferBase = new byte[_blockSize];
 			}
 
 			_pointerToLastSafePosition = _blockSize - keepSizeAfter;
@@ -95,8 +95,10 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             _stream = null;
 
 		public void Init()
-		{
-			_bufferOffset = 0;
+        {
+            _bufferBase = new byte[BaseConstants.MaxBlockLength];
+
+            _bufferOffset = 0;
 			_pos = 0;
 			_streamPos = 0;
 			_streamEndWasReached = false;
@@ -151,7 +153,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         }
 
 
-        private void Free() =>
-            _bufferBase = null;
+        // TEMP: Possibly unnecessary.
+        //private void Free() =>
+        //    _bufferBase = null;
     }
 }

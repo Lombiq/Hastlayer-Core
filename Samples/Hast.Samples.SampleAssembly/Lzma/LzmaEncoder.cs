@@ -17,14 +17,13 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         private const int DefaultDictionaryLogSize = 22;
         private const uint NumFastbytesDefault = 0x20;
         private const uint NumLenSpecSymbols = BaseConstants.NumLowLenSymbols + BaseConstants.NumMidLenSymbols;
-        private const uint NumOpts = 1 << 12;
         private const int PropSize = 5;
 
 
         private CoderState _state = new CoderState();
         private byte _previousbyte;
         private uint[] _repDistances = new uint[BaseConstants.NumRepDistances];
-        private Optimal[] _optimum = new Optimal[NumOpts];
+        private Optimal[] _optimum = new Optimal[BaseConstants.OptimumNumber];
         private BinTree _matchFinder = null;
         private RangeEncoder _rangeEncoder = new RangeEncoder();
         private BitEncoder[] _isMatch = new BitEncoder[BaseConstants.NumStates << BaseConstants.NumPosStatesBitsMax];
@@ -39,7 +38,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         private LenPriceTableEncoder _lenEncoder = new LenPriceTableEncoder();
         private LenPriceTableEncoder _repMatchLenEncoder = new LenPriceTableEncoder();
         private LiteralEncoder _literalEncoder = new LiteralEncoder();
-        private uint[] _matchDistances = new uint[BaseConstants.MatchMaxLen * 2 + 2];
+        private uint[] _matchDistances = new uint[BaseConstants.MaxMatchLength * 2 + 2];
         private uint _numFastbytes = NumFastbytesDefault;
         private uint _longestMatchLength;
         private uint _numDistancePairs;
@@ -87,7 +86,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                     _fastPos[c] = slotFast;
             }
 
-            for (int i = 0; i < NumOpts; i++)
+            for (int i = 0; i < BaseConstants.OptimumNumber; i++)
                 _optimum[i] = new Optimal();
             for (int i = 0; i < BaseConstants.NumLenToPosStates; i++)
                 _posSlotEncoder[i] = new BitTreeEncoder(BaseConstants.NumPosSlotBits);
@@ -197,7 +196,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                                         _state.UpdateShortRep();
                                     else
                                     {
-                                        _repMatchLenEncoder.Encode(_rangeEncoder, len - BaseConstants.MatchMinLen, posState);
+                                        _repMatchLenEncoder.Encode(_rangeEncoder, len - BaseConstants.MinMatchLength, posState);
                                         _state.UpdateRep();
                                     }
                                     uint distance = _repDistances[pos];
@@ -212,7 +211,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                                 {
                                     _isRep[_state.Index].Encode(_rangeEncoder, 0);
                                     _state.UpdateMatch();
-                                    _lenEncoder.Encode(_rangeEncoder, len - BaseConstants.MatchMinLen, posState);
+                                    _lenEncoder.Encode(_rangeEncoder, len - BaseConstants.MinMatchLength, posState);
                                     pos -= BaseConstants.NumRepDistances;
                                     uint posSlot = GetPosSlot(pos);
                                     uint lenToPosState = BaseConstants.GetLenToPosState(len);
@@ -462,11 +461,10 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 _matchFinder = bt;
             }
             _literalEncoder.Create(_numLiteralPosStateBits, _numLiteralContextBits);
-
-            // TEMP: PREDICATUM
+            
             if (_dictionarySize != _dictionarySizePrev || _numFastbytesPrev != _numFastbytes)
             {
-                _matchFinder.Create(_dictionarySize, NumOpts, _numFastbytes, BaseConstants.MatchMaxLen + 1);
+                _matchFinder.Create(_dictionarySize, BaseConstants.OptimumNumber, _numFastbytes, BaseConstants.MaxMatchLength + 1);
                 _dictionarySizePrev = _dictionarySize;
                 _numFastbytesPrev = _numFastbytes;
             }
@@ -544,7 +542,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 lenRes = _matchDistances[numDistancePairs - 2];
                 if (lenRes == _numFastbytes)
                     lenRes += _matchFinder.GetMatchLen((int)lenRes - 1, _matchDistances[numDistancePairs - 1],
-                        BaseConstants.MatchMaxLen - lenRes);
+                        BaseConstants.MaxMatchLength - lenRes);
             }
             _additionalOffset++;
         }
@@ -588,7 +586,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
         private uint GetRepPrice(uint repIndex, uint len, CoderState state, uint posState)
         {
-            uint price = _repMatchLenEncoder.GetPrice(len - BaseConstants.MatchMinLen, posState);
+            uint price = _repMatchLenEncoder.GetPrice(len - BaseConstants.MinMatchLength, posState);
             return price + GetPureRepPrice(repIndex, state, posState);
         }
 
@@ -601,7 +599,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             else
                 price = _posSlotPrices[(lenToPosState << BaseConstants.NumPosSlotBits) + GetPosSlot2(pos)] +
                     _alignPrices[pos & BaseConstants.AlignMask];
-            return price + _lenEncoder.GetPrice(len - BaseConstants.MatchMinLen, posState);
+            return price + _lenEncoder.GetPrice(len - BaseConstants.MinMatchLength, posState);
         }
 
         private uint Backward(out uint backRes, uint cur)
@@ -667,15 +665,15 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 backRes = 0xFFFFFFFF;
                 return 1;
             }
-            if (numAvailablebytes > BaseConstants.MatchMaxLen)
-                numAvailablebytes = BaseConstants.MatchMaxLen;
+            if (numAvailablebytes > BaseConstants.MaxMatchLength)
+                numAvailablebytes = BaseConstants.MaxMatchLength;
 
             uint repMaxIndex = 0;
             uint i;
             for (i = 0; i < BaseConstants.NumRepDistances; i++)
             {
                 reps[i] = _repDistances[i];
-                repLens[i] = _matchFinder.GetMatchLen(0 - 1, reps[i], BaseConstants.MatchMaxLen);
+                repLens[i] = _matchFinder.GetMatchLen(0 - 1, reps[i], BaseConstants.MaxMatchLength);
                 if (repLens[i] > repLens[repMaxIndex])
                     repMaxIndex = i;
             }
@@ -939,7 +937,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 }
 
                 uint numAvailablebytesFull = _matchFinder.GetNumAvailablebytes() + 1;
-                numAvailablebytesFull = Math.Min(NumOpts - 1 - cur, numAvailablebytesFull);
+                numAvailablebytesFull = Math.Min(BaseConstants.OptimumNumber - 1 - cur, numAvailablebytesFull);
                 numAvailablebytes = numAvailablebytesFull;
 
                 if (numAvailablebytes < 2)
@@ -1143,8 +1141,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 _isMatch[(_state.Index << BaseConstants.NumPosStatesBitsMax) + posState].Encode(_rangeEncoder, 1);
                 _isRep[_state.Index].Encode(_rangeEncoder, 0);
                 _state.UpdateMatch();
-                uint len = BaseConstants.MatchMinLen;
-                _lenEncoder.Encode(_rangeEncoder, len - BaseConstants.MatchMinLen, posState);
+                uint len = BaseConstants.MinMatchLength;
+                _lenEncoder.Encode(_rangeEncoder, len - BaseConstants.MinMatchLength, posState);
                 uint posSlot = (1 << BaseConstants.NumPosSlotBits) - 1;
                 uint lenToPosState = BaseConstants.GetLenToPosState(len);
                 _posSlotEncoder[lenToPosState].Encode(_rangeEncoder, posSlot);
@@ -1195,9 +1193,9 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 FillAlignPrices();
             }
 
-            _lenEncoder.SetTableSize(_numFastbytes + 1 - BaseConstants.MatchMinLen);
+            _lenEncoder.SetTableSize(_numFastbytes + 1 - BaseConstants.MinMatchLength);
             _lenEncoder.UpdateTables((uint)1 << _posStateBits);
-            _repMatchLenEncoder.SetTableSize(_numFastbytes + 1 - BaseConstants.MatchMinLen);
+            _repMatchLenEncoder.SetTableSize(_numFastbytes + 1 - BaseConstants.MinMatchLength);
             _repMatchLenEncoder.UpdateTables((uint)1 << _posStateBits);
 
             nowPos64 = 0;
@@ -1245,6 +1243,12 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
         private class LiteralEncoder
         {
+            // Literal position bits can be 2 for 32-bit data and 0 for other cases.
+            // Literal context bits can be 0 for 32-bit data and 3 for other cases.
+            // Either case the sum of these bits are maximum 3 so we need a static array for 1 << 3 coders.
+            private const byte MaxNumberOfCoders = 1 << 3;
+
+
             private Encoder2[] _coders;
             private int _numPrevBits;
             private int _numPosBits;
@@ -1253,13 +1257,14 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
             public void Create(int numPosBits, int numPrevBits)
             {
+                _coders = new Encoder2[MaxNumberOfCoders];
+
                 if (_coders == null || _numPrevBits != numPrevBits || _numPosBits != numPosBits)
                 {
                     _numPosBits = numPosBits;
                     _posMask = ((uint)1 << numPosBits) - 1;
                     _numPrevBits = numPrevBits;
                     uint numStates = (uint)1 << (_numPrevBits + _numPosBits);
-                    _coders = new Encoder2[numStates];
                     for (uint i = 0; i < numStates; i++)
                     {
                         _coders[i] = new Encoder2();
@@ -1360,25 +1365,32 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
         private class LenEncoder
         {
-            private BitEncoder _choice = new BitEncoder();
-            private BitEncoder _choice2 = new BitEncoder();
-            private BitTreeEncoder[] _lowCoder = new BitTreeEncoder[BaseConstants.NumPosStatesEncodingMax];
-            private BitTreeEncoder[] _midCoder = new BitTreeEncoder[BaseConstants.NumPosStatesEncodingMax];
-            private BitTreeEncoder _highCoder = new BitTreeEncoder(BaseConstants.NumHighLenBits);
+            private BitEncoder _choice;
+            private BitEncoder _choice2;
+            private BitTreeEncoder[] _lowCoder;
+            private BitTreeEncoder[] _midCoder;
+            private BitTreeEncoder _highCoder;
 
 
             public LenEncoder()
             {
-                for (uint posState = 0; posState < BaseConstants.NumPosStatesEncodingMax; posState++)
-                {
-                    _lowCoder[posState] = new BitTreeEncoder(BaseConstants.NumLowLenBits);
-                    _midCoder[posState] = new BitTreeEncoder(BaseConstants.NumMidLenBits);
-                }
+                _choice = new BitEncoder();
+                _choice2 = new BitEncoder();
             }
 
 
             public void Init(uint numPosStates, uint[] probPrices)
             {
+                _lowCoder = new BitTreeEncoder[BaseConstants.NumPosStatesEncodingMax];
+                _midCoder = new BitTreeEncoder[BaseConstants.NumPosStatesEncodingMax];
+                _highCoder = new BitTreeEncoder(BaseConstants.NumHighLenBits);
+
+                for (uint posState = 0; posState < BaseConstants.NumPosStatesEncodingMax; posState++)
+                {
+                    _lowCoder[posState] = new BitTreeEncoder(BaseConstants.NumLowLenBits);
+                    _midCoder[posState] = new BitTreeEncoder(BaseConstants.NumMidLenBits);
+                }
+
                 _choice.Init(probPrices);
                 _choice2.Init(probPrices);
                 for (uint posState = 0; posState < numPosStates; posState++)

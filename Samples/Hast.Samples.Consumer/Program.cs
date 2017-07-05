@@ -32,44 +32,44 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            const string UncompressedTextFilePath = "LongTextFile.txt";
-            const string CompressedTextFilePath = "Compressed.txt.lzma";
+            //const string UncompressedTextFilePath = "LongTextFile.txt";
+            //const string CompressedTextFilePath = "Compressed.txt.lzma";
 
-            if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
+            //if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
 
-            var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
+            //var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
 
-            var outputFileBytes = new LzmaCompressor().CompressBytes(inputFileBytes);
+            //var outputFileBytes = new LzmaCompressor().CompressBytes(inputFileBytes);
 
-            File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
-
-
+            //File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
 
 
-            //Task.Run(async () =>
-            //{
-            //    var configuration = new HardwareGenerationConfiguration();
-            //    LzmaCompressorSampleRunner.Configure(configuration);
-            //    //ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
-            //    configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
-
-            //    using (var hastlayer = Xilinx.HastlayerFactory.Create())
-            //    {
-            //        var hardwareRepresentation = await hastlayer.GenerateHardware(
-            //            new[]
-            //            {
-            //                typeof(LzmaCompressor).Assembly
-            //                //typeof(ImageFilter).Assembly
-            //            },
-            //            configuration);
 
 
-            //        if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
-            //        {
-            //            Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
-            //        }
-            //    }
-            //}).Wait();
+            Task.Run(async () =>
+            {
+                var configuration = new HardwareGenerationConfiguration();
+                LzmaCompressorSampleRunner.Configure(configuration);
+                //ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
+                configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
+
+                using (var hastlayer = Xilinx.HastlayerFactory.Create())
+                {
+                    var hardwareRepresentation = await hastlayer.GenerateHardware(
+                        new[]
+                        {
+                            typeof(LzmaCompressor).Assembly
+                            //typeof(ImageFilter).Assembly
+                        },
+                        configuration);
+
+
+                    if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
+                    {
+                        Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
+                    }
+                }
+            }).Wait();
 
 
 

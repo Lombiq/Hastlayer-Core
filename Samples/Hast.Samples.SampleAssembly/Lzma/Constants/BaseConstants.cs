@@ -8,7 +8,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma.Constants
         public const int DicLogSizeMin = 0;
         public const int NumLenToPosStatesBits = 2; // it's for speed optimization
         public const uint NumLenToPosStates = 1 << NumLenToPosStatesBits;
-        public const uint MatchMinLen = 2;
+        public const uint MinMatchLength = 2;
         public const int NumAlignBits = 4;
         public const uint AlignTableSize = 1 << NumAlignBits;
         public const uint AlignMask = (AlignTableSize - 1);
@@ -28,12 +28,20 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma.Constants
         public const uint NumLowLenSymbols = 1 << NumLowLenBits;
         public const uint NumMidLenSymbols = 1 << NumMidLenBits;
         public const uint NumLenSymbols = NumLowLenSymbols + NumMidLenSymbols + (1 << NumHighLenBits);
-        public const uint MatchMaxLen = MatchMinLen + NumLenSymbols - 1;
-        
+        public const uint MaxMatchLength = MinMatchLength + NumLenSymbols - 1;
 
-		public static uint GetLenToPosState(uint len)
+        public const uint OptimumNumber = 1 << 12;
+
+        public const uint MaxDictionarySize = 1 << 7;
+        public const uint MaxHashSize = (1 << 17) + (1 << 10);
+        public const uint MaxNumberOfFastBytes = 1 << 7;
+        private const uint MaxBlockLengthHelper = MaxDictionarySize + OptimumNumber + MaxNumberOfFastBytes + MaxMatchLength + 1;
+        public const uint MaxBlockLength = MaxBlockLengthHelper + (MaxBlockLengthHelper / 2 + 256);
+
+
+        public static uint GetLenToPosState(uint len)
 		{
-			len -= MatchMinLen;
+			len -= MinMatchLength;
 
 			if (len < NumLenToPosStates) return len;
 
