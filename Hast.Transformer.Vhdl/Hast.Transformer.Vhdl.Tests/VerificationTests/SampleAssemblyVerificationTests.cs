@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly },
+                    new[] { typeof(PrimeCalculator).Assembly },
                     configuration =>
                     {
                         // Only testing well-tested samples.
@@ -59,12 +59,27 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                                 MaxRecursionDepth = 5
                             });
 
+                        configuration.AddHardwareEntryPointType<SimdCalculator>();
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
+        public async Task UnumSampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly },
+                    configuration =>
+                    {
                         configuration.AddHardwareEntryPointType<UnumCalculator>();
                         configuration.TransformerConfiguration().AddLengthForMultipleArrays(
                             UnumCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
                             UnumCalculatorExtensions.ManuallySizedArrays);
-
-                        configuration.AddHardwareEntryPointType<SimdCalculator>();
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
