@@ -14,6 +14,8 @@ namespace Hast.Samples.SampleAssembly
         public virtual void Run(SimpleMemory memory)
         {
             var inputNumber = memory.ReadUInt32(Run_InputUInt32Index);
+            // Or:
+            inputNumber = new MemoryContainer(memory).GetInput();
 
             // Arrays can be initialized as usual, as well as objects.
             var numberContainers1 = new[]
@@ -95,13 +97,29 @@ namespace Hast.Samples.SampleAssembly
             Number = number;
         }
 
-
+        
         // Instance methods can be added as usual.
         public uint IncreaseNumber(uint increaseBy)
         {
             WasIncreased = true;
             return (Number += increaseBy);
         }
+    }
+
+
+    public class MemoryContainer
+    {
+        // The SimpleMemory object can be passed around as usual.
+        private readonly SimpleMemory _memory;
+
+
+        public MemoryContainer(SimpleMemory memory)
+        {
+            _memory = memory;
+        }
+
+
+        public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.Run_InputUInt32Index);
     }
 
 
