@@ -42,7 +42,7 @@ namespace Hast.Samples.SampleAssembly
             int outputStartCellIndex = memory.ReadInt32(LzmaCompressor_OutputStartCellIndex);
             int outputByteCount = memory.ReadInt32(LzmaCompressor_OutputByteCountIndex);
             int literalContextBits = memory.ReadInt32(LzmaCompressor_LiteralContextBitsIndex);
-            string matchFinder = memory.ReadBoolean(LzmaCompressor_MatchFinderIsBt4Index) ? "bt4" : "bt2";
+            bool matchFinder = memory.ReadBoolean(LzmaCompressor_MatchFinderIsBt4Index);
             int dictionarySize = memory.ReadInt32(LzmaCompressor_DictionarySizeIndex);
             int positionStateBits = memory.ReadInt32(LzmaCompressor_PositionStateBitsIndex);
             int literalPositionBits = memory.ReadInt32(LzmaCompressor_LiteralPositionBitsIndex);

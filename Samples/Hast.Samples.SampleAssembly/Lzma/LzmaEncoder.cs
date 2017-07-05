@@ -14,12 +14,10 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
     public class LzmaEncoder
     {
         private const uint IfinityPrice = 0xFFFFFFF;
-        private static byte[] GFastPos = new byte[1 << 11];
         private const int DefaultDictionaryLogSize = 22;
         private const uint NumFastbytesDefault = 0x20;
         private const uint NumLenSpecSymbols = BaseConstants.NumLowLenSymbols + BaseConstants.NumMidLenSymbols;
         private const uint NumOpts = 1 << 12;
-        private static string[] MatchFinderIds = { "BT2", "BT4" };
         private const int PropSize = 5;
 
 
@@ -73,25 +71,22 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         private uint _trainSize = 0;
         private uint[] reps = new uint[BaseConstants.NumRepDistances];
         private uint[] repLens = new uint[BaseConstants.NumRepDistances];
-
-
-        static LzmaEncoder()
-        {
-            const byte kFastSlots = 22;
-            int c = 2;
-            GFastPos[0] = 0;
-            GFastPos[1] = 1;
-            for (byte slotFast = 2; slotFast < kFastSlots; slotFast++)
-            {
-                uint k = ((uint)1 << ((slotFast >> 1) - 1));
-                for (uint j = 0; j < k; j++, c++)
-                    GFastPos[c] = slotFast;
-            }
-        }
+        private byte[] _fastPos = new byte[1 << 11];
 
 
         public LzmaEncoder()
         {
+            const byte kFastSlots = 22;
+            int c = 2;
+            _fastPos[0] = 0;
+            _fastPos[1] = 1;
+            for (byte slotFast = 2; slotFast < kFastSlots; slotFast++)
+            {
+                uint k = ((uint)1 << ((slotFast >> 1) - 1));
+                for (uint j = 0; j < k; j++, c++)
+                    _fastPos[c] = slotFast;
+            }
+
             for (int i = 0; i < NumOpts; i++)
                 _optimum[i] = new Optimal();
             for (int i = 0; i < BaseConstants.NumLenToPosStates; i++)
@@ -330,13 +325,13 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                             // Should throw an Exception when it becomes supported.
                             //if (!(prop is String))
                             //    throw new LzmaInvalidParamException();
-                            EMatchFinderType matchFinderIndexPrev = _matchFinderType;
-                            int m = FindMatchFinder(((string)prop).ToUpper());
+                            var previousMatchFinder = _matchFinderType;
+                            var newMatchFinder = ((bool)prop) ? EMatchFinderType.BT4 : EMatchFinderType.BT2;
                             // Should throw an Exception when it becomes supported.
                             //if (m < 0)
                             //    throw new LzmaInvalidParamException();
-                            _matchFinderType = (EMatchFinderType)m;
-                            if (_matchFinder != null && matchFinderIndexPrev != _matchFinderType)
+                            _matchFinderType = newMatchFinder;
+                            if (_matchFinder != null && previousMatchFinder != _matchFinderType)
                             {
                                 _dictionarySizePrev = 0xFFFFFFFF;
                                 _matchFinder = null;
@@ -429,22 +424,22 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         }
 
 
-        private static uint GetPosSlot(uint pos)
+        private uint GetPosSlot(uint pos)
         {
             if (pos < (1 << 11))
-                return GFastPos[pos];
+                return _fastPos[pos];
             if (pos < (1 << 21))
-                return (uint)(GFastPos[pos >> 10] + 20);
-            return (uint)(GFastPos[pos >> 20] + 40);
+                return (uint)(_fastPos[pos >> 10] + 20);
+            return (uint)(_fastPos[pos >> 20] + 40);
         }
 
-        private static uint GetPosSlot2(uint pos)
+        private uint GetPosSlot2(uint pos)
         {
             if (pos < (1 << 17))
-                return (uint)(GFastPos[pos >> 6] + 12);
+                return (uint)(_fastPos[pos >> 6] + 12);
             if (pos < (1 << 27))
-                return (uint)(GFastPos[pos >> 16] + 32);
-            return (uint)(GFastPos[pos >> 26] + 52);
+                return (uint)(_fastPos[pos >> 16] + 32);
+            return (uint)(_fastPos[pos >> 26] + 52);
         }
 
         private void BaseInit()
@@ -1245,14 +1240,6 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             for (uint i = 0; i < BaseConstants.AlignTableSize; i++) _alignPrices[i] = _posAlignEncoder.ReverseGetPrice(i);
 
             _alignPriceCount = 0;
-        }
-
-        private static int FindMatchFinder(string s)
-        {
-            for (int m = 0; m < MatchFinderIds.Length; m++)
-                if (s == MatchFinderIds[m])
-                    return m;
-            return -1;
         }
 
 
