@@ -45,9 +45,23 @@ namespace Hast.Transformer.Vhdl.Models
             return MemberIdTable.LookupMemberId(memberFullName);
         }
 
-        public async Task Save(Stream stream)
+        public Task WriteSource(Stream stream)
         {
-            if (VhdlSource == null) throw new InvalidOperationException("There is no VHDL source to save.");
+            ThroIfVhdlSourceEmpty();
+
+            using (var streamWriter = new StreamWriter(stream))
+            {
+                // WriteAsync would throw a "The stream is currently in use by a previous operation on the stream." for
+                // FileStreams, even though supposedly there's no operation on the stream.
+                streamWriter.Write(VhdlSource);
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public async Task Serialize(Stream stream)
+        {
+            ThroIfVhdlSourceEmpty();
 
             using (var writer = new StreamWriter(stream))
             {
@@ -59,7 +73,13 @@ namespace Hast.Transformer.Vhdl.Models
         }
 
 
-        public static async Task<VhdlHardwareDescription> Load(Stream stream)
+        private void ThroIfVhdlSourceEmpty()
+        {
+            if (string.IsNullOrEmpty(VhdlSource)) throw new InvalidOperationException("There is no VHDL source set.");
+        }
+
+
+        public static async Task<VhdlHardwareDescription> Deserialize(Stream stream)
         {
             using (var reader = new StreamReader(stream))
             {

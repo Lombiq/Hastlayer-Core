@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
+using Hast.Common.Models;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Configuration;
@@ -99,7 +100,7 @@ namespace Hast.Samples.Consumer
 
                         // The generated VHDL code will contain debug-level information, though it will be a bit slower
                         // to create.
-                        configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
+                        //configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
 
                         // Generating hardware from the sample assembly with the given configuration.
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
@@ -113,7 +114,7 @@ namespace Hast.Samples.Consumer
 
                         if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
                         {
-                            Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
+                            await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
                         }
 
 

@@ -24,7 +24,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             using (var fileStream = _appDataFolder.OpenFile(filePath))
             {
-                return await VhdlHardwareDescription.Load(fileStream);
+                return await VhdlHardwareDescription.Deserialize(fileStream);
             }
         }
 
@@ -32,7 +32,7 @@ namespace Hast.Transformer.Vhdl.Services
         {
             using (var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(transformationContext)))
             {
-                await hardwareDescription.Save(fileStream);
+                await hardwareDescription.Serialize(fileStream);
             }
         }
 
