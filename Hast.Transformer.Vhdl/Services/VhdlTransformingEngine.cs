@@ -4,6 +4,7 @@ using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Configuration;
 using Hast.Transformer.Vhdl.Events;
 using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -37,8 +38,11 @@ namespace Hast.Transformer.Vhdl.Services
             var transformedVhdlManifest = await _transformedVhdlManifestBuilder.BuildManifest(transformationContext);
             _vhdlTransformationEventHandler.TransformedVhdlManifestBuilt(transformedVhdlManifest);
 
-            var vhdlSource = transformedVhdlManifest.Manifest.TopModule
-                .ToVhdl(transformationContext.HardwareGenerationConfiguration.VhdlTransformerConfiguration().VhdlGenerationOptions);
+            var vhdlGenerationOptions =
+                transformationContext.HardwareGenerationConfiguration.VhdlTransformerConfiguration().VhdlGenerationMode == VhdlGenerationMode.Debug ?
+                VhdlGenerationOptions.Debug :
+                new VhdlGenerationOptions();
+            var vhdlSource = transformedVhdlManifest.Manifest.TopModule.ToVhdl(vhdlGenerationOptions);
             var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest);
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)

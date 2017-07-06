@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 assemblies, 
                 configuration =>
                 {
-                    configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
+                    configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
                     configurationModifier?.Invoke(configuration);
                 });
         }
