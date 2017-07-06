@@ -177,12 +177,12 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void ShiftToRightEndIsCorrect()
         {
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000000, 0x00000000 }), new BitMask(new uint[] { 0x00000000, 0x00000000 }).ShiftToRightEnd());
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000001, 0x00000000 }).ShiftToRightEnd(), new BitMask(new uint[] { 0x00000001, 0x00000000 }).ShiftToRightEnd());
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000001, 0x00000000 }).ShiftToRightEnd(), new BitMask(new uint[] { 0x00000002, 0x00000000 }).ShiftToRightEnd());
-            Assert.AreEqual(new BitMask(new uint[] { 0x00000001, 0x00000000 }).ShiftToRightEnd(), new BitMask(new uint[] { 0x00000000, 0x00000001 }).ShiftToRightEnd());
-            Assert.AreEqual(new BitMask(new uint[] { 0x00001001, 0x00000000 }).ShiftToRightEnd(), new BitMask(new uint[] { 0x10010000, 0x00000000 }).ShiftToRightEnd());
-            Assert.AreEqual(new BitMask(new uint[] { 0x00001001, 0x00000000 }).ShiftToRightEnd(), new BitMask(new uint[] { 0x00000000, 0x10010000 }).ShiftToRightEnd());
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000000, 0x00000000 }), new BitMask(new uint[] { 0x00000000, 0x00000000 }).ShiftOutLeastSignificantZeros());
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000001, 0x00000000 }).ShiftOutLeastSignificantZeros(), new BitMask(new uint[] { 0x00000001, 0x00000000 }).ShiftOutLeastSignificantZeros());
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000001, 0x00000000 }).ShiftOutLeastSignificantZeros(), new BitMask(new uint[] { 0x00000002, 0x00000000 }).ShiftOutLeastSignificantZeros());
+            Assert.AreEqual(new BitMask(new uint[] { 0x00000001, 0x00000000 }).ShiftOutLeastSignificantZeros(), new BitMask(new uint[] { 0x00000000, 0x00000001 }).ShiftOutLeastSignificantZeros());
+            Assert.AreEqual(new BitMask(new uint[] { 0x00001001, 0x00000000 }).ShiftOutLeastSignificantZeros(), new BitMask(new uint[] { 0x10010000, 0x00000000 }).ShiftOutLeastSignificantZeros());
+            Assert.AreEqual(new BitMask(new uint[] { 0x00001001, 0x00000000 }).ShiftOutLeastSignificantZeros(), new BitMask(new uint[] { 0x00000000, 0x10010000 }).ShiftOutLeastSignificantZeros());
         }
     }
 }

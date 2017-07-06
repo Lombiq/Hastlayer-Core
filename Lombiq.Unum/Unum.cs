@@ -227,7 +227,7 @@ namespace Lombiq.Unum
 
 
             // Calculating Fraction.
-            UnumBits = UnumBits.ShiftToRightEnd();
+            UnumBits = UnumBits.ShiftOutLeastSignificantZeros();
             var unumBitsLeadingOne = UnumBits.GetMostSignificantOnePosition();
             var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
             if (fractionSize > 0) fractionSize -= 1;
@@ -572,7 +572,7 @@ namespace Lombiq.Unum
 
             var resultUbit = false;
             if (smallerBitsMovedToLeft < 0) resultUbit = true; // There are lost digits.
-            else scratchPad = scratchPad.ShiftToRightEnd();
+            else scratchPad = scratchPad.ShiftOutLeastSignificantZeros();
 
             ushort resultFractionSize = 0;
 

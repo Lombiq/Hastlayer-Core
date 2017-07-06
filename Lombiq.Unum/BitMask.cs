@@ -104,7 +104,7 @@ namespace Lombiq.Unum
             return new BitMask(this);
         }
 
-        public BitMask ShiftToRightEnd()
+        public BitMask ShiftOutLeastSignificantZeros()
         {
             var leastSignificantOnePosition = GetLeastSignificantOnePosition();
             var mask = new BitMask(this);
