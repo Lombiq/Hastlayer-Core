@@ -106,11 +106,11 @@ namespace Lombiq.Unum
 
         public BitMask ShiftToRightEnd()
         {
-            var leadingOnePosition = FindLeadingOne();
+            var closingOnePosition = FindLeastSignificantOne();
             var mask = new BitMask(this);
-            if (leadingOnePosition == 0) return mask;
+            if (closingOnePosition == 0) return mask;
 
-            return mask >> leadingOnePosition;
+            return mask >> closingOnePosition-1;
         }
 
         #endregion
@@ -350,7 +350,7 @@ namespace Lombiq.Unum
         /// </summary>
         /// <returns>Returns the position (not index!) of the most significant 1-bit
         /// or zero if there is none.</returns>
-        public ushort FindLeadingOne()
+        public ushort FindMostSignificantOne()
         {
             ushort position = 0;
             uint currentSegment;
@@ -364,6 +364,35 @@ namespace Lombiq.Unum
                     currentSegment >>= 1;
                     position++;
                     if (currentSegment == 0) return (ushort)((SegmentCount - i) * 32 + position);
+                }
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Finds the least significant 1-bit.
+        /// </summary>
+        /// <returns>Returns the position (not index!) of the least significant 1-bit
+        /// or zero if there is none.</returns>
+        public ushort FindLeastSignificantOne()
+        {
+            ushort position = 1;
+            uint currentSegment;
+          
+
+            for (ushort i = 0; i < SegmentCount; i++)
+            {
+                currentSegment = Segments[i];
+                if (currentSegment == 0) position += 32;
+                else
+                {
+                   while (currentSegment % 2 == 0)
+                    {
+                        position++;
+                        currentSegment >>= 1;
+                    }
+                    if (currentSegment % 2 == 1) return position;
                 }
             }
 

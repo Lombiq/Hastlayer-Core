@@ -160,18 +160,19 @@ namespace Lombiq.Unum
 
 
             UnumBits += value; // The Fraction will be stored here.
-            var exponentValue = (uint)UnumBits.FindLeadingOne() - 1;
+            var exponentValue = (uint)UnumBits.FindMostSignificantOne() - 1;
             var exponent = new BitMask(new uint[] { exponentValue }, Size);
-            var exponentSize = exponent.FindLeadingOne();
-            if (exponentValue > (1 << exponentSize - 1)) exponentSize++;
+            var exponentSize = exponent.FindMostSignificantOne();
+            if (exponentValue > 1 << exponentSize - 1) exponentSize++;
             var bias = (1 << exponentSize - 1) - 1;
             exponent += (uint)bias;
+           
 
             UnumBits = UnumBits.ShiftToRightEnd();
-            var unumBitsLeadingOne = UnumBits.FindLeadingOne();
+            var unumBitsLeadingOne = UnumBits.FindMostSignificantOne();
             var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
-            if (fractionSize > 0) fractionSize--;
-            if (exponentValue != 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.FindLeadingOne() - 1));
+            if (fractionSize > 0) fractionSize -= 1;
+            if (exponent.FindMostSignificantOne() != 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.FindMostSignificantOne() - 1));
 
 
             UnumBits = SetUnumBits(false, exponent, UnumBits, false, (byte)exponentSize, fractionSize);
@@ -201,7 +202,7 @@ namespace Lombiq.Unum
 
 
             // Calcuating Exponent value and size.  
-            var exponentValue = (uint)(UnumBits.FindLeadingOne() - 1);
+            var exponentValue = (uint)(UnumBits.FindMostSignificantOne() - 1);
             var exponentSize = 0;
             var j = 1;
 
@@ -215,15 +216,15 @@ namespace Lombiq.Unum
             var bias = (1 << (exponentSize - 1)) - 1;
             exponentValue += (uint)bias;
             var exponentMask = new BitMask(_environment.Size) + exponentValue;
-            if (exponentSize > 0) exponentSize--; // Until now we needed the value, now we need the notation.
+            if (exponentSize > 0) exponentSize -= 1; // Until now we needed the value, now we need the notation.
 
 
             // Calculating Fraction.
             UnumBits = UnumBits.ShiftToRightEnd();
-            var unumBitsLeadingOne = UnumBits.FindLeadingOne();
+            var unumBitsLeadingOne = UnumBits.FindMostSignificantOne();
             var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
-            if (fractionSize > 0) fractionSize--;
-            if (exponentValue > 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.FindLeadingOne() - 1));
+            if (fractionSize > 0) fractionSize -= 1;
+            if (exponentValue > 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.FindMostSignificantOne() - 1));
 
 
             UnumBits = SetUnumBits(signBit, exponentMask, UnumBits, false, (byte)exponentSize, fractionSize);
@@ -402,7 +403,7 @@ namespace Lombiq.Unum
 
         public uint[] FractionToUintArray()
         {
-            var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - FractionSize();
+            var resultMask = FractionWithHiddenBit() << ExponentValueWithBias() - (int)FractionSize();
             var result = new uint[resultMask.SegmentCount];
 
             for (var i = 0; i < resultMask.SegmentCount; i++) result[i] = resultMask.Segments[i];
@@ -557,7 +558,7 @@ namespace Lombiq.Unum
             }
 
 
-            var exponentChange = scratchPad.FindLeadingOne() - (resultUnum.FractionSizeMax + 1);
+            var exponentChange = scratchPad.FindMostSignificantOne() - (resultUnum.FractionSizeMax + 1);
             var resultExponent = new BitMask(left._environment.Size) +
                 ExponentValueToExponentBits(resultExponentValue + exponentChange, (byte)left.Size);
             var resultExponentSize = (byte)(ExponentValueToExponentSize(resultExponentValue + exponentChange) - 1);
@@ -568,17 +569,17 @@ namespace Lombiq.Unum
 
             ushort resultFractionSize = 0;
 
-            if (scratchPad.FindLeadingOne() == 0)
+            if (scratchPad.FindMostSignificantOne() == 0)
             {
                 resultExponent = scratchPad; // 0
                 resultExponentSize = 0;
             }
-            else resultFractionSize = (ushort)(scratchPad.FindLeadingOne() - 1);
+            else resultFractionSize = (ushort)(scratchPad.FindMostSignificantOne() - 1);
 
 
-            if (resultExponent.FindLeadingOne() != 0) // Erease hidden bit if it exists.
+            if (resultExponent.FindMostSignificantOne() != 0) // Erease hidden bit if it exists.
             {
-                scratchPad = scratchPad.SetZero((ushort)(scratchPad.FindLeadingOne() - 1));
+                scratchPad = scratchPad.SetZero((ushort)(scratchPad.FindMostSignificantOne() - 1));
                 resultFractionSize = (ushort)(resultFractionSize == 0 ? 0 : resultFractionSize - 1);
             }
 
