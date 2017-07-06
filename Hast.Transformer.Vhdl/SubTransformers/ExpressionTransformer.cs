@@ -15,6 +15,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using Hast.VhdlBuilder.Testing;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 using Orchard.Logging;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -80,6 +81,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 Func<Expression, Expression, IVhdlElement> transformSimpleAssignmentExpression = (left, right) =>
                 {
+                    if (left.GetActualTypeReference().IsSimpleMemory()) return Empty.Instance;
+
                     var leftTransformed = Transform(left, context);
                     if (leftTransformed == Empty.Instance) return Empty.Instance;
 
@@ -379,11 +382,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // directly.
                 if (context.TransformationContext.UseSimpleMemory())
                 {
-                    arguments = arguments.Where(argument =>
-                        {
-                            var actualTypeReference = argument.GetActualTypeReference();
-                            return actualTypeReference == null || !actualTypeReference.FullName.EndsWith("SimpleMemory");
-                        });
+                    arguments = arguments.Where(argument => !argument.GetActualTypeReference().IsSimpleMemory());
                 }
 
                 foreach (var argument in arguments)
