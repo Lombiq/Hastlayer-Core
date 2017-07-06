@@ -16,6 +16,7 @@ using Hast.Transformer.Vhdl.Verifiers;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 using Orchard.Services;
 
 namespace Hast.Transformer.Vhdl.Services
@@ -300,6 +301,12 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         case ClassType.Class:
                         case ClassType.Struct:
+                            if (typeDeclaration.BaseTypes.Any(baseType => !baseType.Annotation<TypeDefinition>().IsInterface))
+                            {
+                                throw new NotSupportedException(
+                                    "Class inheritance is not supported. Affected class: " + node.GetFullName() + ".");
+                            }
+
                             // Records need to be created only for those types that are neither display classes, nor
                             // hardware entry point types or static types 
                             if (!typeDeclaration.GetFullName().IsDisplayClassName() && 

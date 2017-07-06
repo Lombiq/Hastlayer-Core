@@ -30,6 +30,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IBinaryOperatorExpressionTransformer _binaryOperatorExpressionTransformer;
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
         private readonly IRecordComposer _recordComposer;
+        private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
         public ILogger Logger { get; set; }
 
@@ -42,7 +43,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IDeviceDriver deviceDriver,
             IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
             IStateMachineInvocationBuilder stateMachineInvocationBuilder,
-            IRecordComposer recordComposer)
+            IRecordComposer recordComposer,
+            IDeclarableTypeCreator declarableTypeCreator)
         {
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
@@ -52,6 +54,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
             _recordComposer = recordComposer;
+            _declarableTypeCreator = declarableTypeCreator;
 
             Logger = NullLogger.Instance;
         }
@@ -158,7 +161,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    InvocationExpression invocationExpression;
+                    InvocationExpression invocationExpression = null;
+
+                    Func<IEnumerable<TransformedInvocationParameter>> transformFromSecondArgument = () =>
+                        invocationExpression.Arguments.Skip(1).Select(argument =>
+                            new TransformedInvocationParameter
+                            {
+                                Reference = Transform(argument, context),
+                                DataType = _declarableTypeCreator
+                                    .CreateDeclarableType(argument, argument.GetActualTypeReference(), context.TransformationContext)
+                            });
 
                     // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
                     // be like following: <>c__DisplayClass9_ = new PrimeCalculator.<>c__DisplayClass9_0();
@@ -191,18 +203,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                 scope.TaskFactoryVariableNames.Contains(identifier.Identifier))),
                         out invocationExpression))
                     {
-                        var taskStartArguments = invocationExpression.Arguments;
-
                         // The first argument is always for the Func that referes to the method on the DisplayClass
                         // generated for the lambda expression originally passed to the Task factory.
-                        var funcVariablename = ((IdentifierExpression)taskStartArguments.First()).Identifier;
+                        var funcVariablename = ((IdentifierExpression)invocationExpression.Arguments.First()).Identifier;
                         var targetMethod = scope.FuncVariableNameToDisplayClassMethodMappings[funcVariablename];
 
                         // We only need to care about he invocation here. Since this is a Task start there will be
                         // some form of await later.
                         _stateMachineInvocationBuilder.BuildInvocation(
                             targetMethod,
-                            taskStartArguments.Skip(1).Select(argument => Transform(argument, context)),
+                            transformFromSecondArgument(),
                             getMaxDegreeOfParallelism(targetMethod),
                             context);
 
@@ -221,9 +231,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             objectCreate.Type.GetFullName().Contains("Func")),
                         out invocationExpression))
                     {
-                        var arguments = invocationExpression.Arguments;
-
-                        var funcCreateExpression = (ObjectCreateExpression)arguments.First();
+                        var funcCreateExpression = (ObjectCreateExpression)invocationExpression.Arguments.First();
 
                         if (funcCreateExpression.Arguments.Single() is PrimitiveExpression)
                         {
@@ -245,7 +253,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // some form of await later.
                         _stateMachineInvocationBuilder.BuildInvocation(
                             targetMethod,
-                            arguments.Skip(1).Select(argument => Transform(argument, context)),
+                            transformFromSecondArgument(),
                             getMaxDegreeOfParallelism(targetMethod),
                             context);
 
@@ -374,7 +382,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (expression is InvocationExpression)
             {
                 var invocationExpression = (InvocationExpression)expression;
-                var transformedParameters = new List<IVhdlElement>();
+                var transformedParameters = new List<ITransformedInvocationParameter>();
 
                 IEnumerable<Expression> arguments = invocationExpression.Arguments;
 
@@ -387,7 +395,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 foreach (var argument in arguments)
                 {
-                    transformedParameters.Add(Transform(argument, context));
+                    transformedParameters.Add(new TransformedInvocationParameter
+                    {
+                        Reference = Transform(argument, context),
+                        DataType = _declarableTypeCreator.CreateDeclarableType(argument, argument.GetActualTypeReference(), context.TransformationContext)
+                    });
                 }
 
                 return _invocationExpressionTransformer
@@ -692,6 +704,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
 
+                        // The easiest is to fake an invocation.
                         var constructorInvocation = new InvocationExpression(
                             new MemberReferenceExpression(
                                 new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
@@ -701,12 +714,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
                                 .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
 
-                        foreach (var annotation in expression.Annotations)
-                        {
-                            constructorInvocation.AddAnnotation(annotation);
-                        }
+                        expression.CopyAnnotationsTo(constructorInvocation);
+
+                        // Temporarily replace the object creation to make the fake InvocationExpression realistic.
+                        expression.ReplaceWith(constructorInvocation);
 
                         Transform(constructorInvocation, context);
+
+                        constructorInvocation.ReplaceWith(expression);
                     }
                 }
 

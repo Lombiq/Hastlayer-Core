@@ -884,7 +884,6 @@ begin
     -- System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::Interface1Method2().0 state machine start
     \ComplexTypeHierarchy::Interface1Method2().0._StateMachine\: process (\Clock\) 
         Variable \ComplexTypeHierarchy::Interface1Method2().0._State\: \ComplexTypeHierarchy::Interface1Method2().0._States\ := \ComplexTypeHierarchy::Interface1Method2().0._State_0\;
-        Variable \ComplexTypeHierarchy::Interface1Method2().0.num\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -893,7 +892,6 @@ begin
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= false;
                 \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_0\;
-                \ComplexTypeHierarchy::Interface1Method2().0.num\ := to_signed(0, 32);
             else 
                 case \ComplexTypeHierarchy::Interface1Method2().0._State\ is 
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_0\ => 
@@ -914,7 +912,6 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_2\ => 
-                        \ComplexTypeHierarchy::Interface1Method2().0.num\ := to_signed(5, 32);
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_3\;

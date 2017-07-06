@@ -270,7 +270,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (castInvocation.Target == null)
             {
-                throw new NotSupportedException("Casting from " + fromType.Name + " to " + toType.Name + " is not supported.");
+                throw new NotSupportedException(
+                    "Casting from " + fromType.Name + " to " + toType.Name + 
+                    " is not supported. Transformed expression to be cast: " + fromExpression.ToVhdl());
             }
 
 

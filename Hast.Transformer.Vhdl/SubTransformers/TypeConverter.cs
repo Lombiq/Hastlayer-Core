@@ -56,11 +56,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return ConvertPrimitive(KnownTypeCode.UInt32);
                 case "System.UInt64":
                     return ConvertPrimitive(KnownTypeCode.UInt64);
+                case "System.Void":
+                    return ConvertPrimitive(KnownTypeCode.Void);
             }
 
             if (typeReference.IsArray)
             {
                 return CreateArrayType(ConvertTypeReference(typeReference.GetElementType(), context));
+            }
+
+            if (IsTaskTypeReference(typeReference))
+            {
+                if (typeReference is GenericInstanceType)
+                {
+                    return ConvertTypeReference(((GenericInstanceType)typeReference).GenericArguments.Single(), context); 
+                }
+
+                return SpecialTypes.Task;
             }
 
             return ConvertTypeDefinition(typeReference as TypeDefinition, typeReference.FullName, context);
@@ -224,7 +236,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private DataType ConvertSimple(SimpleType type, IVhdlTransformationContext context)
         {
-            if (type.Identifier == nameof(System.Threading.Tasks.Task))
+            if (type.Identifier == nameof(System.Threading.Tasks.Task) && IsTaskTypeReference(type.GetActualTypeReference()))
             {
                 // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
                 if (type.TypeArguments.Count == 1)
@@ -270,5 +282,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 ElementType = elementType,
                 Name = ArrayHelper.CreateArrayTypeName(elementType.Name)
             };
+
+        private static bool IsTaskTypeReference(TypeReference typeReference) =>
+            typeReference.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
     }
 }

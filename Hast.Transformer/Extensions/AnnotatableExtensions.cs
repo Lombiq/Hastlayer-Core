@@ -27,6 +27,12 @@ namespace ICSharpCode.NRefactory.CSharp
             var propertyReference = annotable.Annotation<PropertyReference>();
             if (propertyReference != null) return propertyReference.PropertyType;
 
+            var methodReference = annotable.Annotation<MethodReference>();
+            if (methodReference != null) return methodReference.ReturnType;
+
+            var parameterReference = annotable.Annotation<ParameterReference>();
+            if (parameterReference != null) return parameterReference.ParameterType;
+
             return null;
         }
 
