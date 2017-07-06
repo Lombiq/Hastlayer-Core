@@ -117,7 +117,7 @@ namespace Hast.Layer
             {
                 return await
                     (await GetHost())
-                    .RunGet(scope => Task.Run<T>(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject, configuration)));
+                    .RunGet(scope => Task.Run(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject, configuration)));
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
