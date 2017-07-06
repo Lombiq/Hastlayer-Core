@@ -161,38 +161,40 @@ namespace Lombiq.Unum
             // Putting the actual value in a BitMask.
             var exponent = new BitMask(new uint[] { value }, Size);
 
-            // Getting the number of bits required to represent the actual value.
-            var exponentSize = (ushort)(exponent.GetMostSignificantOnePosition() - 1);
+            // The Value of the exponent is one less than the number of digits in the integer.
+            var exponentValue = new BitMask(new uint[] { (uint)(exponent.GetMostSignificantOnePosition() - 1) }, Size);
+
+            // Getting the number of bits needed to represent the exponenValue.
+            var exponentSize = (ushort)(exponentValue.GetMostSignificantOnePosition());
 
             // If the actual value is not a power of 2, then one more bit is needed
             // to represent the biased value.
-            if ((exponentSize & exponentSize - 1) > 0) exponentSize++;
+            if ((exponentValue & exponentValue - 1).GetLowest32Bits() != 0) exponentSize++;
 
-            exponent = new BitMask(new uint[] { exponentSize }, Size);
+
 
             // Calculating the bias from the number of bits.
             var bias = exponentSize == 0 ? 0 : (1 << exponentSize - 1) - 1;
 
             // Applying the bias.
-            exponent += (uint)bias;
+            exponent = exponentValue + (uint)bias;
 
-
+            // Putting the actual value in a BitMask.
             var fraction = new BitMask(new uint[] { value }, Size);
+            
+            // Getting rid of the Zeroes after the Least Significant One.
             fraction = fraction.ShiftOutLeastSignificantZeros();
 
-            if (exponent.GetLowest32Bits() > 0)
-                fraction = fraction.SetZero((ushort)(fraction.GetMostSignificantOnePosition() - 1));
-
+            // Getting the number of bits needed to represent the Fraction.
             var fractionSize = fraction.GetMostSignificantOnePosition();
-
             
-            // For integers, the fraction size is just one less than the exponent,
-            // because the MSB is stored in the hidden bit.
-            //var fractionSize = (ushort)(exponentSize - 1);
-
-            // For integers, the representation of the fraction is the same
-            // as the actual value without its MSB.
-            //var fraction = new BitMask(new uint[] { value - (uint)(1 << fractionSize) }, Size);
+            // Clearing out the hidden bit if there is one, and adjusting the fractionSize accordingly.
+            if (exponent.GetLowest32Bits() > 0)
+            {
+                fraction = fraction.SetZero((ushort)(fraction.GetMostSignificantOnePosition() - 1));
+                fractionSize--;
+            }
+            
 
             UnumBits = SetUnumBits(false, exponent, fraction,
                 false, (byte)(exponentSize > 0 ? exponentSize - 1 : 0), (ushort)(fractionSize > 0 ? fractionSize - 1 : 0));
@@ -377,7 +379,7 @@ namespace Lombiq.Unum
             if (uncertainityBit) wholeUnum += UncertaintyBitMask;
 
             wholeUnum += fraction << UnumTagSize;
-            wholeUnum += exponent << (UnumTagSize + FractionSizeMax);
+            wholeUnum += exponent << (UnumTagSize + fractionSize + 1);
 
             if (signBit) wholeUnum += SignBitMask;
 
