@@ -140,27 +140,23 @@ namespace Hast.Layer
         {
             if (_host != null) return _host;
 
-            var settings = new AppHostSettings
-            {
-                ImportedExtensions = new[]
+            var importedExtensions = new[]
                 {
                     typeof(Hastlayer).Assembly,
                     typeof(IProxyGenerator).Assembly,
                     typeof(IHardwareImplementationComposer).Assembly,
                     typeof(ITransformer).Assembly
-                }.Union(_configuration.Extensions),
+                }.Union(_configuration.Extensions);
+
+            var settings = new AppHostSettings
+            {
+                ImportedExtensions = importedExtensions,
                 DefaultShellFeatureStates = new[]
                 {
                     new DefaultShellFeatureState
                     {
                         ShellName = ShellName,
-                        EnabledFeatures = new[]
-                        {
-                            "Hast.Layer",
-                            "Hast.Communication",
-                            "Hast.Synthesis",
-                            "Hast.Transformer"
-                        }.Union(_configuration.Extensions.Select(extension => extension.ShortName()))
+                        EnabledFeatures = importedExtensions.Select(extension => extension.ShortName())
                     }
                 }
             };
