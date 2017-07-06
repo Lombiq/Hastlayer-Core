@@ -158,24 +158,31 @@ namespace Lombiq.Unum
 
             if (value == 0) return;
 
+            // Putting the actual value in a BitMask.
+            var exponent = new BitMask(new uint[] { value }, Size);
 
-            UnumBits += value; // The Fraction will be stored here.
-            var exponentValue = (uint)UnumBits.GetMostSignificantOnePosition() - 1;
-            var exponent = new BitMask(new uint[] { exponentValue }, Size);
+            // Getting the number of bits required to represent the actual value.
             var exponentSize = exponent.GetMostSignificantOnePosition();
-            if (exponentValue > 1 << exponentSize - 1) exponentSize++;
+
+            // Calculating the bias from the number of bits.
             var bias = (1 << exponentSize - 1) - 1;
+
+            // Applying the bias.
             exponent += (uint)bias;
-           
 
-            UnumBits = UnumBits.ShiftToRightEnd();
-            var unumBitsLeadingOne = UnumBits.GetMostSignificantOnePosition();
-            var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
-            if (fractionSize > 0) fractionSize -= 1;
-            if (exponent.GetMostSignificantOnePosition() != 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.GetMostSignificantOnePosition() - 1));
+            // If the actual value is not a power of 2, then one more bit is needed
+            // to represent the biased value.
+            if ((value & value - 1) > 0) exponentSize++;
 
+            // For integers, the fraction size is just one less than the exponent,
+            // because the LSB is stored in the hidden bit.
+            var fractionSize = (ushort)(exponentSize - 1);
 
-            UnumBits = SetUnumBits(false, exponent, UnumBits, false, (byte)exponentSize, fractionSize);
+            // For integers, the representation of the fraction is the same
+            // as the actual value without its MSB.
+            var fraction = new BitMask(new uint[] { value - (uint)(1 << fractionSize) }, Size);
+
+            UnumBits = SetUnumBits(false, exponent, fraction, false, (byte)exponentSize, fractionSize);
         }
 
         public Unum(UnumEnvironment environment, uint[] input)
