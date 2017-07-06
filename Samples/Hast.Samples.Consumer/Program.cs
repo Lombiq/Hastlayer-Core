@@ -5,7 +5,6 @@ using Hast.Common.Models;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Configuration;
-using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Samples.Consumer
 {
