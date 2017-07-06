@@ -11,6 +11,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public string Text { get; set; }
 
+        /// <summary>
+        /// If set to <c>true</c>, the comment won't be ommitted even if this is configured in 
+        /// <see cref="IVhdlGenerationOptions"/>.
+        /// </summary>
+        public bool CantBeOmitted { get; set; }
+
 
         public LineComment(string text)
         {
@@ -20,8 +26,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            // There are no block comments in VHDL so if the code is not formatted there can't be any comments.
-            if (!vhdlGenerationOptions.FormatCode || vhdlGenerationOptions.OmitComments) return string.Empty;
+            // There are no block comments in VHDL prior to VHDL 2008 so if the code is not formatted there can't be 
+            // any comments.
+            if (!vhdlGenerationOptions.FormatCode || (vhdlGenerationOptions.OmitComments && !CantBeOmitted))
+            {
+                return string.Empty;
+            }
 
             return "-- " + Text + vhdlGenerationOptions.NewLineIfShouldFormat();
         }

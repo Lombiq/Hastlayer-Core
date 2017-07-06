@@ -15,6 +15,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public List<string> Lines { get; set; }
 
+        /// <summary>
+        /// If set to <c>true</c>, the comment won't be ommitted even if this is configured in 
+        /// <see cref="IVhdlGenerationOptions"/>.
+        /// </summary>
+        public bool CantBeOmitted { get; set; }
+
 
         /// <summary>
         /// Creates a new <see cref="BlockComment"/> object, initialized with a string that contains a newline character-
@@ -38,7 +44,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            if (vhdlGenerationOptions.OmitComments) return string.Empty;
+            if (vhdlGenerationOptions.OmitComments && !CantBeOmitted) return string.Empty;
 
             var stringBuilder = new StringBuilder(Lines.Count);
 
