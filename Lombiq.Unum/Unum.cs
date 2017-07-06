@@ -162,27 +162,40 @@ namespace Lombiq.Unum
             var exponent = new BitMask(new uint[] { value }, Size);
 
             // Getting the number of bits required to represent the actual value.
-            var exponentSize = exponent.GetMostSignificantOnePosition();
+            var exponentSize = (ushort)(exponent.GetMostSignificantOnePosition() - 1);
+
+            // If the actual value is not a power of 2, then one more bit is needed
+            // to represent the biased value.
+            if ((exponentSize & exponentSize - 1) > 0) exponentSize++;
+
+            exponent = new BitMask(new uint[] { exponentSize }, Size);
 
             // Calculating the bias from the number of bits.
-            var bias = (1 << exponentSize - 1) - 1;
+            var bias = exponentSize == 0 ? 0 : (1 << exponentSize - 1) - 1;
 
             // Applying the bias.
             exponent += (uint)bias;
 
-            // If the actual value is not a power of 2, then one more bit is needed
-            // to represent the biased value.
-            if ((value & value - 1) > 0) exponentSize++;
 
+            var fraction = new BitMask(new uint[] { value }, Size);
+            fraction = fraction.ShiftOutLeastSignificantZeros();
+
+            if (exponent.GetLowest32Bits() > 0)
+                fraction = fraction.SetZero((ushort)(fraction.GetMostSignificantOnePosition() - 1));
+
+            var fractionSize = fraction.GetMostSignificantOnePosition();
+
+            
             // For integers, the fraction size is just one less than the exponent,
-            // because the LSB is stored in the hidden bit.
-            var fractionSize = (ushort)(exponentSize - 1);
+            // because the MSB is stored in the hidden bit.
+            //var fractionSize = (ushort)(exponentSize - 1);
 
             // For integers, the representation of the fraction is the same
             // as the actual value without its MSB.
-            var fraction = new BitMask(new uint[] { value - (uint)(1 << fractionSize) }, Size);
+            //var fraction = new BitMask(new uint[] { value - (uint)(1 << fractionSize) }, Size);
 
-            UnumBits = SetUnumBits(false, exponent, fraction, false, (byte)exponentSize, fractionSize);
+            UnumBits = SetUnumBits(false, exponent, fraction,
+                false, (byte)(exponentSize > 0 ? exponentSize - 1 : 0), (ushort)(fractionSize > 0 ? fractionSize - 1 : 0));
         }
 
         public Unum(UnumEnvironment environment, uint[] input)
