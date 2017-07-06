@@ -127,7 +127,7 @@ namespace Hast.Transformer.Vhdl.Tests
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
             var typeLookup = BuildTypeLookup();
 
-            typeLookup.Count.ShouldBe(8, "Not the number of types remained in the syntax tree than there are used.");
+            typeLookup.Count.ShouldBe(7, "Not the number of types remained in the syntax tree than there are used.");
             typeLookup.ShouldNotContainKey(typeof(UnusedDeclarations).Name, "Classes with unreferenced members weren't removed from the syntax tree.");
             typeLookup[typeof(ComplexTypeHierarchy).Name].Members.ShouldNotContain(
                 member => member.Name == "UnusedMethod" || member.Name == "NonVirtualNonInterfaceMehod",
@@ -172,7 +172,7 @@ namespace Hast.Transformer.Vhdl.Tests
             await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
-            typeLookup.Count.ShouldBe(6, "Not the number of types remained in the syntax tree than there are used.");
+            typeLookup.Count.ShouldBe(5, "Not the number of types remained in the syntax tree than there are used.");
             typeLookup[typeof(RootClass).Name].Members.Count.ShouldBe(1);
             typeLookup[typeof(RootClass).Name].Members.Single().Name.ShouldBe("VirtualMethod");
             typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count.ShouldBe(7);

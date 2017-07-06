@@ -66,7 +66,8 @@ namespace Hast.Transformer.Services
                             target: parentAssignment
                                 .Left // This should be the IdentifierExpression that the array was assigned to.
                                 .Clone(),
-                            arguments: new PrimitiveExpression(i).WithAnnotation(int32TypeInformation)),
+                            arguments: new PrimitiveExpression(i).WithAnnotation(int32TypeInformation))
+                            .WithAnnotation(initializerElements[i].Annotation<TypeInformation>()),
                         right: initializerElements[i]
                         ));
 
