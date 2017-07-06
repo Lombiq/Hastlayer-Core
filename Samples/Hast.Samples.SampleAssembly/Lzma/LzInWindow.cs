@@ -120,8 +120,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 			}
 		}
 
-		public byte GetIndexbyte(int index) => 
-            _bufferBase[_bufferOffset + _pos + index];
+        public byte GetIndexbyte(int index) =>
+            _bufferBase[_bufferOffset + _pos + (uint)index];
 
 		// index + limit have not to exceed _keepSizeAfter;
 		public uint GetMatchLen(int index, uint distance, uint limit)

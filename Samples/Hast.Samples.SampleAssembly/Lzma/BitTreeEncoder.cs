@@ -9,12 +9,14 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 		public BitTreeEncoder(int numBitLevels)
 		{
 			_numBitLevels = numBitLevels;
-			_models = new BitEncoder[1 << numBitLevels];
 		}
 
 
 		public void Init(uint[] probPrices)
-		{
+        {
+            //_models = new BitEncoder[1 << _numBitLevels];
+            _models = new BitEncoder[1 << 8];
+
             for (var i = 1; i < (1 << _numBitLevels); i++)
             {
                 _models[i] = new BitEncoder();

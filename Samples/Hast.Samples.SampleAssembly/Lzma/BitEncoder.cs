@@ -52,13 +52,24 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             }
         }
 
-        public uint GetPrice(uint symbol) =>
-            ProbPrices[(((_prob - symbol) ^ ((-(int)symbol))) & (RangeEncoderConstants.BitModelTotal - 1)) >> NumMoveReducingBits];
+        public uint GetPrice(uint symbol)
+        {
+            var a = _prob - symbol;
+            var b = -1 * ((int)symbol);
+            var c = RangeEncoderConstants.BitModelTotal - 1;
+            var d = (a ^ b) & c;
+            var e = (int)(d >> NumMoveReducingBits);
+
+            return ProbPrices[e];
+        }
 
         public uint GetPrice0() =>
             ProbPrices[_prob >> NumMoveReducingBits];
 
-        public uint GetPrice1() =>
-            ProbPrices[(RangeEncoderConstants.BitModelTotal - _prob) >> NumMoveReducingBits];
+        public uint GetPrice1()
+        {
+            var i = (int)(RangeEncoderConstants.BitModelTotal - _prob);
+            return ProbPrices[i >> NumMoveReducingBits];
+        }
     }
 }
