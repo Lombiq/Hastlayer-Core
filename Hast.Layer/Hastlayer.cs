@@ -40,7 +40,8 @@ namespace Hast.Layer
         /// </summary>
         /// <remarks>
         /// Point of this factory is that it returns an interface type instead of the implementation and can throw
-        /// exceptions.</remarks>
+        /// exceptions.
+        /// </remarks>
         /// <param name="configuration">Configuration for Hastalyer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create(IHastlayerConfiguration configuration)

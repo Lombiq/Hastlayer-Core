@@ -51,6 +51,7 @@ namespace Hast.Samples.SampleAssembly
                     i);
             }
 
+            // Task.WhenAny() can be used too.
             Task.WhenAll(tasks).Wait();
 
             uint output = 0;

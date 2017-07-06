@@ -55,7 +55,9 @@ namespace Hast.Transformer.Vhdl.Verifiers
                             ((AssignmentExpression)memberReferenceExpression.Parent.Parent).Left == memberReferenceExpression.Parent);
                         if (isAssignedTo)
                         {
-                            throw new NotSupportedException("It's not supported to modify the content of a variable coming from the parent scope in a lambda expression. Pass arguments instead.");
+                            throw new NotSupportedException(
+                                "It's not supported to modify the content of a variable coming from the parent scope in a lambda expression. " +
+                                "Pass arguments instead. Affected method: " + method.ToString());
                         }
                     };
 
