@@ -4,7 +4,7 @@ using System;
 
 namespace Hast.Samples.SampleAssembly.Services.Lzma
 {
-    public class BinTree : LzInWindow
+    public class BinTree
     {
         private const uint Hash2Size = 1 << 10;
         private const uint Hash3Size = 1 << 16;
@@ -29,6 +29,22 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         private uint _kFixHashSize = Hash2Size + Hash3Size;
         private CRC _crc;
 
+        #region LzInWindow fields
+
+        private SimpleMemoryStream _stream;
+        private uint _posLimit; // offset (from _buffer) of first byte when new block reading must be done
+        private bool _streamEndWasReached; // if (true) then _streamPos shows real end of stream
+        private uint _keepSizeBefore; // how many BYTEs must be kept in buffer before _pos
+        private uint _keepSizeAfter; // how many BYTEs must be kept buffer after _pos
+        private uint _pointerToLastSafePosition;
+
+        private byte[] _bufferBase = null; // pointer to buffer with data
+        private uint _blockSize; // Size of Allocated memory block
+        private uint _pos; // offset (from _buffer) of curent byte
+        private uint _streamPos; // offset (from _buffer) of first not read byte from Stream
+        private uint _bufferOffset;
+
+        #endregion
 
         public void SetType(int numHashbytes)
         {
@@ -46,16 +62,16 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                 _kFixHashSize = 0;
             }
         }
+        
+        public void SetStream(SimpleMemoryStream stream) =>
+            _stream = stream;
 
-        public new void SetStream(SimpleMemoryStream stream) =>
-            base.SetStream(stream);
+        public void ReleaseStream() =>
+            _stream = null;
 
-        public new void ReleaseStream() =>
-            base.ReleaseStream();
-
-        public new void Init()
+        public void Init()
         {
-            base.Init();
+            InitLzInWindow();
 
             _hash = new uint[BaseConstants.MaxHashSize];
             _son = new uint[(BaseConstants.MaxDictionarySize + 1) * 2];
@@ -64,26 +80,41 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             for (var i = 0; i < _hashSizeSum; i++)
                 _hash[i] = EmptyHashValue;
             _cyclicBufferPos = 0;
-            ReduceOffsets(-1);
+            ReduceOffsetsLzInWindow(-1);
         }
 
-        public new void MovePos()
+        public void MovePos()
         {
             if (++_cyclicBufferPos >= _cyclicBufferSize)
                 _cyclicBufferPos = 0;
-            base.MovePos();
+            MovePosLzInWindow();
             if (_pos == MaxValForNormalize)
                 Normalize();
         }
 
-        public new byte GetIndexbyte(int index) =>
-            base.GetIndexbyte(index);
+        public byte GetIndexbyte(int index) =>
+            _bufferBase[_bufferOffset + _pos + (uint)index];
 
-        public new uint GetMatchLen(int index, uint distance, uint limit) =>
-            base.GetMatchLen(index, distance, limit);
+        // index + limit have not to exceed _keepSizeAfter;
+        public uint GetMatchLen(int index, uint distance, uint limit)
+        {
+            if (_streamEndWasReached)
+            {
+                if ((_pos + index) + limit > _streamPos)
+                    limit = _streamPos - (uint)(_pos + index);
+            }
 
-        public new uint GetNumAvailablebytes() =>
-            base.GetNumAvailablebytes();
+            distance++;
+            // byte *pby = _buffer + (size_t)_pos + index;
+            uint pby = _bufferOffset + _pos + (uint)index;
+
+            uint i;
+            for (i = 0; i < limit && _bufferBase[pby + i] == _bufferBase[pby + i - distance]; i++) ;
+            return i;
+        }
+
+        public uint GetNumAvailablebytes() =>
+            _streamPos - _pos;
 
         public void Create(
             uint dictionarySize,
@@ -98,7 +129,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
             var windowReservSize = (dictionarySize + keepAddBufferBefore + matchMaxLen + keepAddBufferAfter) / 2 + 256;
 
-            Create(dictionarySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
+            CreateLzInWindow(dictionarySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
 
             _matchMaxLen = matchMaxLen;
 
@@ -398,7 +429,113 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             NormalizeSon(subValue);
             NormalizeHash(subValue);
 
-            ReduceOffsets((int)subValue);
+            ReduceOffsetsLzInWindow((int)subValue);
         }
+
+        #region LzInWindow Methods
+
+        private void CreateLzInWindow(uint keepSizeBefore, uint keepSizeAfter, uint keepSizeReserv)
+        {
+            _keepSizeBefore = keepSizeBefore;
+            _keepSizeAfter = keepSizeAfter;
+
+            var blockSize = keepSizeBefore + keepSizeAfter + keepSizeReserv;
+
+            if (_bufferBase == null || _blockSize != blockSize)
+            {
+                //Free();
+                _blockSize = blockSize;
+            }
+
+            _pointerToLastSafePosition = _blockSize - keepSizeAfter;
+        }
+
+        private void InitLzInWindow()
+        {
+            _bufferBase = new byte[BaseConstants.MaxBlockLength];
+
+            _bufferOffset = 0;
+            _pos = 0;
+            _streamPos = 0;
+            _streamEndWasReached = false;
+
+            ReadBlockLzInWindow();
+        }
+
+        private void ReadBlockLzInWindow()
+        {
+            if (!_streamEndWasReached)
+            {
+                var run = true;
+
+                while (run)
+                {
+                    var size = (int)((0 - _bufferOffset) + _blockSize - _streamPos);
+                    if (size == 0) run = false;
+                    else
+                    {
+                        var numReadbytes = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPos), size);
+                        if (numReadbytes == 0)
+                        {
+                            _posLimit = _streamPos;
+                            var pointerToPostion = _bufferOffset + _posLimit;
+                            if (pointerToPostion > _pointerToLastSafePosition)
+                                _posLimit = _pointerToLastSafePosition - _bufferOffset;
+
+                            _streamEndWasReached = true;
+
+                            run = false;
+                        }
+                        else
+                        {
+                            _streamPos += (uint)numReadbytes;
+
+                            if (_streamPos >= _pos + _keepSizeAfter)
+                                _posLimit = _streamPos - _keepSizeAfter;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ReduceOffsetsLzInWindow(int subValue)
+        {
+            _bufferOffset += (uint)subValue;
+            _posLimit -= (uint)subValue;
+            _pos -= (uint)subValue;
+            _streamPos -= (uint)subValue;
+        }
+
+        private void MovePosLzInWindow()
+        {
+            _pos++;
+            if (_pos > _posLimit)
+            {
+                var pointerToPostion = _bufferOffset + _pos;
+
+                if (pointerToPostion > _pointerToLastSafePosition)
+                    MoveBlockLzInWindow();
+
+                ReadBlockLzInWindow();
+            }
+        }
+
+        private void MoveBlockLzInWindow()
+        {
+            var offset = _bufferOffset + _pos - _keepSizeBefore;
+            // we need one additional byte, since MovePos moves on 1 byte.
+
+            if (offset > 0) offset--;
+
+            var numbytes = _bufferOffset + _streamPos - offset;
+
+            // check negative offset ????
+            for (uint i = 0; i < numbytes; i++)
+                _bufferBase[i] = _bufferBase[offset + i];
+
+            _bufferOffset -= offset;
+        }
+
+        #endregion
     }
 }

@@ -54,7 +54,6 @@
     <Compile Include="Lzma\Exceptions\LzmaDataErrorException.cs" />
     <Compile Include="Lzma\Exceptions\LzmaInvalidParamException.cs" />
     <Compile Include="Lzma\LzBinTree.cs" />
-    <Compile Include="Lzma\LzInWindow.cs" />
     <Compile Include="Lzma\LzmaEncoder.cs" />
     <Compile Include="Lzma\RangeEncoder.cs" />
     <Compile Include="ParallelAlgorithm.cs" />
