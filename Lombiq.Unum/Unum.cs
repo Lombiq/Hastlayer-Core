@@ -158,20 +158,19 @@ namespace Lombiq.Unum
 
             if (value == 0) return;
 
+
             // Putting the actual value in a BitMask.
             var exponent = new BitMask(new uint[] { value }, Size);
 
-            // The Value of the exponent is one less than the number of digits in the integer.
+            // The value of the exponent is one less than the number of binary digits in the integer.
             var exponentValue = new BitMask(new uint[] { (uint)(exponent.GetMostSignificantOnePosition() - 1) }, Size);
 
-            // Getting the number of bits needed to represent the exponenValue.
-            var exponentSize = (ushort)(exponentValue.GetMostSignificantOnePosition());
+            // Calculating the number of bits needed to represent the value of the exponent.
+            var exponentSize = exponentValue.GetMostSignificantOnePosition();
 
-            // If the actual value is not a power of 2, then one more bit is needed
-            // to represent the biased value.
+            // If the value of the exponent is not a power of 2,
+            // then one more bit is needed to represent the biased value.
             if ((exponentValue & exponentValue - 1).GetLowest32Bits() != 0) exponentSize++;
-
-
 
             // Calculating the bias from the number of bits.
             var bias = exponentSize == 0 ? 0 : (1 << exponentSize - 1) - 1;
@@ -179,25 +178,28 @@ namespace Lombiq.Unum
             // Applying the bias.
             exponent = exponentValue + (uint)bias;
 
+
             // Putting the actual value in a BitMask.
             var fraction = new BitMask(new uint[] { value }, Size);
             
-            // Getting rid of the Zeroes after the Least Significant One.
+            // Shifting out the zeroes after the Least Significant One.
             fraction = fraction.ShiftOutLeastSignificantZeros();
 
-            // Getting the number of bits needed to represent the Fraction.
+            // Calculating the number of bits needed to represent the fraction.
             var fractionSize = fraction.GetMostSignificantOnePosition();
             
-            // Clearing out the hidden bit if there is one, and adjusting the fractionSize accordingly.
+            /* If there's a hidden bit and it's one,
+             * then the most significant 1-bit of the fraction is stored there,
+             * so we're removing it from the fraction and decreasing fraction size accordingly. */
             if (exponent.GetLowest32Bits() > 0)
             {
-                fraction = fraction.SetZero((ushort)(fraction.GetMostSignificantOnePosition() - 1));
                 fractionSize--;
+                fraction = fraction.SetZero(fractionSize);
             }
             
 
             UnumBits = SetUnumBits(false, exponent, fraction,
-                false, (byte)(exponentSize > 0 ? exponentSize - 1 : 0), (ushort)(fractionSize > 0 ? fractionSize - 1 : 0));
+                false, (byte)(exponentSize > 0 ? --exponentSize : 0), (ushort)(fractionSize > 0 ? --fractionSize : 0));
         }
 
         public Unum(UnumEnvironment environment, uint[] input)
