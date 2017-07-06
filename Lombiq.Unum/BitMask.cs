@@ -47,7 +47,7 @@ namespace Lombiq.Unum
             {
                 ushort i = 0;
                 for (; i < SegmentCount - 1; i++) segments[i] = uint.MaxValue;
-                
+
                 // The last segment is special in a way that it might not be necessary to have all 1 bits.
                 segments[i] = partialSegment > 0 ? (uint)(1 << partialSegment) - 1 : uint.MaxValue;
             }
@@ -106,11 +106,11 @@ namespace Lombiq.Unum
 
         public BitMask ShiftToRightEnd()
         {
-            var closingOnePosition = FindLeastSignificantOne();
+            var leastSignificantOnePosition = GetLeastSignificantOnePosition();
             var mask = new BitMask(this);
-            if (closingOnePosition == 0) return mask;
+            if (leastSignificantOnePosition == 0) return mask;
 
-            return mask >> closingOnePosition-1;
+            return mask >> leastSignificantOnePosition - 1;
         }
 
         #endregion
@@ -350,7 +350,7 @@ namespace Lombiq.Unum
         /// </summary>
         /// <returns>Returns the position (not index!) of the most significant 1-bit
         /// or zero if there is none.</returns>
-        public ushort FindMostSignificantOne()
+        public ushort GetMostSignificantOnePosition()
         {
             ushort position = 0;
             uint currentSegment;
@@ -375,11 +375,10 @@ namespace Lombiq.Unum
         /// </summary>
         /// <returns>Returns the position (not index!) of the least significant 1-bit
         /// or zero if there is none.</returns>
-        public ushort FindLeastSignificantOne()
+        public ushort GetLeastSignificantOnePosition()
         {
             ushort position = 1;
             uint currentSegment;
-          
 
             for (ushort i = 0; i < SegmentCount; i++)
             {
@@ -387,7 +386,7 @@ namespace Lombiq.Unum
                 if (currentSegment == 0) position += 32;
                 else
                 {
-                   while (currentSegment % 2 == 0)
+                    while (currentSegment % 2 == 0)
                     {
                         position++;
                         currentSegment >>= 1;

@@ -160,19 +160,19 @@ namespace Lombiq.Unum
 
 
             UnumBits += value; // The Fraction will be stored here.
-            var exponentValue = (uint)UnumBits.FindMostSignificantOne() - 1;
+            var exponentValue = (uint)UnumBits.GetMostSignificantOnePosition() - 1;
             var exponent = new BitMask(new uint[] { exponentValue }, Size);
-            var exponentSize = exponent.FindMostSignificantOne();
+            var exponentSize = exponent.GetMostSignificantOnePosition();
             if (exponentValue > 1 << exponentSize - 1) exponentSize++;
             var bias = (1 << exponentSize - 1) - 1;
             exponent += (uint)bias;
            
 
             UnumBits = UnumBits.ShiftToRightEnd();
-            var unumBitsLeadingOne = UnumBits.FindMostSignificantOne();
+            var unumBitsLeadingOne = UnumBits.GetMostSignificantOnePosition();
             var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
             if (fractionSize > 0) fractionSize -= 1;
-            if (exponent.FindMostSignificantOne() != 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.FindMostSignificantOne() - 1));
+            if (exponent.GetMostSignificantOnePosition() != 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.GetMostSignificantOnePosition() - 1));
 
 
             UnumBits = SetUnumBits(false, exponent, UnumBits, false, (byte)exponentSize, fractionSize);
@@ -202,7 +202,7 @@ namespace Lombiq.Unum
 
 
             // Calcuating Exponent value and size.  
-            var exponentValue = (uint)(UnumBits.FindMostSignificantOne() - 1);
+            var exponentValue = (uint)(UnumBits.GetMostSignificantOnePosition() - 1);
             var exponentSize = 0;
             var j = 1;
 
@@ -221,10 +221,10 @@ namespace Lombiq.Unum
 
             // Calculating Fraction.
             UnumBits = UnumBits.ShiftToRightEnd();
-            var unumBitsLeadingOne = UnumBits.FindMostSignificantOne();
+            var unumBitsLeadingOne = UnumBits.GetMostSignificantOnePosition();
             var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
             if (fractionSize > 0) fractionSize -= 1;
-            if (exponentValue > 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.FindMostSignificantOne() - 1));
+            if (exponentValue > 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.GetMostSignificantOnePosition() - 1));
 
 
             UnumBits = SetUnumBits(signBit, exponentMask, UnumBits, false, (byte)exponentSize, fractionSize);
@@ -558,7 +558,7 @@ namespace Lombiq.Unum
             }
 
 
-            var exponentChange = scratchPad.FindMostSignificantOne() - (resultUnum.FractionSizeMax + 1);
+            var exponentChange = scratchPad.GetMostSignificantOnePosition() - (resultUnum.FractionSizeMax + 1);
             var resultExponent = new BitMask(left._environment.Size) +
                 ExponentValueToExponentBits(resultExponentValue + exponentChange, (byte)left.Size);
             var resultExponentSize = (byte)(ExponentValueToExponentSize(resultExponentValue + exponentChange) - 1);
@@ -569,17 +569,17 @@ namespace Lombiq.Unum
 
             ushort resultFractionSize = 0;
 
-            if (scratchPad.FindMostSignificantOne() == 0)
+            if (scratchPad.GetMostSignificantOnePosition() == 0)
             {
                 resultExponent = scratchPad; // 0
                 resultExponentSize = 0;
             }
-            else resultFractionSize = (ushort)(scratchPad.FindMostSignificantOne() - 1);
+            else resultFractionSize = (ushort)(scratchPad.GetMostSignificantOnePosition() - 1);
 
 
-            if (resultExponent.FindMostSignificantOne() != 0) // Erease hidden bit if it exists.
+            if (resultExponent.GetMostSignificantOnePosition() != 0) // Erease hidden bit if it exists.
             {
-                scratchPad = scratchPad.SetZero((ushort)(scratchPad.FindMostSignificantOne() - 1));
+                scratchPad = scratchPad.SetZero((ushort)(scratchPad.GetMostSignificantOnePosition() - 1));
                 resultFractionSize = (ushort)(resultFractionSize == 0 ? 0 : resultFractionSize - 1);
             }
 
