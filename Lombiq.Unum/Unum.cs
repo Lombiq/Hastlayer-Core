@@ -170,25 +170,25 @@ namespace Lombiq.Unum
 
             // If the value of the exponent is not a power of 2,
             // then one more bit is needed to represent the biased value.
-            if ((exponentValue & exponentValue - 1).GetLowest32Bits() != 0) exponentSize++;
+            if ((exponentValue & exponentValue - 1).GetLowest32Bits() > 0) exponentSize++;
 
-            // Calculating the bias from the number of bits.
+            // Calculating the bias from the number of bits representing the exponent.
             var bias = exponentSize == 0 ? 0 : (1 << exponentSize - 1) - 1;
 
-            // Applying the bias.
+            // Applying the bias to the exponent.
             exponent = exponentValue + (uint)bias;
 
 
             // Putting the actual value in a BitMask.
             var fraction = new BitMask(new uint[] { value }, Size);
             
-            // Shifting out the zeroes after the Least Significant One.
+            // Shifting out the zeroes after the least significant 1-bit.
             fraction = fraction.ShiftOutLeastSignificantZeros();
 
             // Calculating the number of bits needed to represent the fraction.
             var fractionSize = fraction.GetMostSignificantOnePosition();
             
-            /* If there's a hidden bit and it's one,
+            /* If there's a hidden bit and it's 1,
              * then the most significant 1-bit of the fraction is stored there,
              * so we're removing it from the fraction and decreasing fraction size accordingly. */
             if (exponent.GetLowest32Bits() > 0)
