@@ -31,7 +31,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public IBuildInvocationResult BuildInvocation(
             MethodDeclaration targetDeclaration,
-            IEnumerable<IVhdlElement> parameters,
+            IEnumerable<ITransformedInvocationParameter> transformedParameters,
             int instanceCount,
             ISubTransformerContext context)
         {
@@ -70,7 +70,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var buildInvocationBlockResult = BuildInvocationBlock(
                     targetDeclaration,
                     targetMethodName,
-                    parameters,
+                    transformedParameters,
                     context,
                     0);
 
@@ -105,7 +105,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var buildInvocationBlockResult = BuildInvocationBlock(
                         targetDeclaration,
                         targetMethodName,
-                        parameters,
+                        transformedParameters,
                         context,
                         i);
 
@@ -164,7 +164,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private BuildInvocationBlockResult BuildInvocationBlock(
             MethodDeclaration targetDeclaration,
             string targetMethodName,
-            IEnumerable<IVhdlElement> parameters,
+            IEnumerable<ITransformedInvocationParameter> transformedParameters,
             ISubTransformerContext context,
             int index)
         {
@@ -216,8 +216,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 .GetEnumerator();
             methodParametersEnumerator.MoveNext();
 
-            foreach (var parameter in parameters)
+            foreach (var parameter in transformedParameters)
             {
+                var parameterReference = parameter.Reference;
+
                 // Managing signals for parameter passing.
                 var targetParameter = methodParametersEnumerator.Current;
                 var parameterSignalType = _declarableTypeCreator
@@ -249,62 +251,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     // Assign local variables to/from the intermediary parameter signal.
                     // If the parameter is of direction In then the parameter element should contain an IDataObject.
-                    var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameter;
-                    var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameter : parameterSignalReference;
+                    var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
+                    var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
 
                     // Only trying casting if the parameter is not a constant or something other than an IDataObject.
-                    if (parameter is IDataObject)
+                    if (parameterReference is IDataObject)
                     {
-                        // Note: the below logic covers the most frequent cases to determine the passed local variable's
-                        // data type. However it won't work with arbitrarily deep object graphs, e.g. array inside
-                        // object inside array. For this a more generic, iterative implementation could be developed 
-                        // that would search until the leaf of the object tree is found (the data type can't be passed 
-                        // in the data object references themselves, since at that level (e.g. on the level of a variable
-                        // reference) only the reference's name is known, the data type not necessarily.
-
-                        var localVariableDataType = stateMachine.LocalVariables
-                            .Single(variable => variable.Name == ((IDataObject)parameter).Name).DataType;
-
-                        // If the parameter is an array access then the actual variable type should be the array
-                        // element's type, or if the array element is a record, then its fields' type (in the latter
-                        // case the next block will be also run to determine the record field's type).
-                        if (localVariableDataType is ArrayType &&
-                            (parameter is ArrayElementAccess || parameter is RecordFieldAccess))
-                        {
-                            localVariableDataType = ((ArrayType)localVariableDataType).ElementType;
-                        }
-
-                        if (localVariableDataType is UnconstrainedArrayInstantiation &&
-                            (parameter is ArrayElementAccess || parameter is RecordFieldAccess))
-                        {
-                            localVariableDataType = ((UnconstrainedArrayInstantiation)localVariableDataType).ElementType;
-                        }
-
-                        if (localVariableDataType is Record)
-                        {
-                            var fieldAccess = parameter as RecordFieldAccess;
-                            if (fieldAccess != null)
-                            {
-                                // A member of and object was passed to a method, i.e. Method(object.Property).
-
-                                // This is a recursivel fields access, i.e. instance.Field1.Field1.
-                                localVariableDataType = _declarableTypeCreator
-                                    .CreateDeclarableType(targetParameter, targetParameter.Type, context.TransformationContext);
-                            }
-
-                            // Else the whole object was passed, i.e. Method(object). Nothing else to do.
-                        }
-
                         IAssignmentTypeConversionResult conversionResult;
                         if (flowDirection == ParameterFlowDirection.Out)
                         {
                             conversionResult = _typeConversionTransformer
-                                .ImplementTypeConversionForAssignment(localVariableDataType, parameterSignalType, parameter, assignTo);
+                                .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo);
                         }
                         else
                         {
                             conversionResult = _typeConversionTransformer
-                                .ImplementTypeConversionForAssignment(parameterSignalType, localVariableDataType, parameterSignalReference, assignTo);
+                                .ImplementTypeConversionForAssignment(parameterSignalType, parameter.DataType, parameterSignalReference, assignTo);
                         }
 
                         assignTo = conversionResult.ConvertedToDataObject;
@@ -312,7 +274,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
 
                     // In this case the parameter is e.g. a primitive value, no need to assign to it.
-                    if (flowDirection == ParameterFlowDirection.In && !(parameter is IDataObject))
+                    if (flowDirection == ParameterFlowDirection.In && !(parameterReference is IDataObject))
                     {
                         return null;
                     }

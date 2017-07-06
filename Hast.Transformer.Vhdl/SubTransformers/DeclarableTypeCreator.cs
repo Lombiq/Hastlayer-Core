@@ -8,6 +8,7 @@ using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -22,17 +23,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public DataType CreateDeclarableType(AstNode valueHolder, AstType type, IVhdlTransformationContext context)
+        public DataType CreateDeclarableType(AstNode valueHolder, TypeReference typeReference, IVhdlTransformationContext context)
         {
-            if (type.IsArray())
+            if (typeReference.IsArray)
             {
                 return ArrayHelper.CreateArrayInstantiation(
-                    _typeConverter.ConvertAstType(((ComposedType)type).BaseType, context),
+                    _typeConverter.ConvertTypeReference(((Mono.Cecil.ArrayType)typeReference).ElementType, context),
                     context.ArraySizeHolder.GetSizeOrThrow(valueHolder).Length);
             }
             else
             {
-                return _typeConverter.ConvertAstType(type, context);
+                return _typeConverter.ConvertTypeReference(typeReference, context);
             }
         }
     }
