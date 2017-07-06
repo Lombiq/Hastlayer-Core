@@ -3,7 +3,8 @@
     /// <summary>
     /// A type demonstrating a "complex" type hierarchy with base classes and interfaces.
     /// </summary>
-    public class ComplexTypeHierarchy : BaseClass, IInterface1, IInterface2
+    // Class inheritance is not yet supported.
+    public class ComplexTypeHierarchy : /*BaseClass,*/ IInterface1, IInterface2
     {
         // Explicit interface implementation.
         void IInterface1.Interface1Method1()
@@ -14,7 +15,9 @@
         // Implicit interface implementation.
         public void Interface1Method2()
         {
-            var x = BaseClassMethod1(4);
+            //var x = BaseClassMethod1(4);
+            //var y = x + 4;
+            //var z = x + y;
 
             if (true)
             {

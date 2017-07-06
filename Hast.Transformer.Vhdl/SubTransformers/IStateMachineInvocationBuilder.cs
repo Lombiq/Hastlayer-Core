@@ -11,7 +11,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         IBuildInvocationResult BuildInvocation(
             MethodDeclaration targetDeclaration,
-            IEnumerable<IVhdlElement> parameters,
+            IEnumerable<ITransformedInvocationParameter> transformedParameters,
             int instanceCount,
             ISubTransformerContext context);
 
