@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
+using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
@@ -10,7 +11,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         IVhdlElement TransformInvocationExpression(
             InvocationExpression expression,
-            IEnumerable<IVhdlElement> transformedParameters,
+            IEnumerable<ITransformedInvocationParameter> transformedParameters,
             ISubTransformerContext context);
     }
 }

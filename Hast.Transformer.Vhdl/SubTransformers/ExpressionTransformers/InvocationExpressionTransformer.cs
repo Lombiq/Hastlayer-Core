@@ -43,7 +43,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public IVhdlElement TransformInvocationExpression(
             InvocationExpression expression,
-            IEnumerable<IVhdlElement> transformedParameters,
+            IEnumerable<ITransformedInvocationParameter> transformedParameters,
             ISubTransformerContext context)
         {
             var targetMemberReference = expression.Target as MemberReferenceExpression;
@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         private IVhdlElement TransformSimpleMemoryInvocation(
             InvocationExpression expression,
-            IEnumerable<IVhdlElement> transformedParameters,
+            IEnumerable<ITransformedInvocationParameter> transformedParameters,
             MemberReferenceExpression targetMemberReference,
             ISubTransformerContext context)
         {
@@ -107,7 +107,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
                 // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
                 // CellIndex is conventionally the first invocation parameter. 
-                Expression = Invocation.Resize(invocationParameters[0], SimpleMemoryTypes.CellIndexInternalSignalDataType.Size)
+                Expression = Invocation.Resize(invocationParameters[0].Reference, SimpleMemoryTypes.CellIndexInternalSignalDataType.Size)
             });
 
             var enablePortReference = isWrite ?
@@ -161,7 +161,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     AssignTo = stateMachine.CreateSimpleMemoryDataOutSignalReference(),
                     // The data to write is conventionally the second parameter.
-                    Expression = implementSimpleMemoryTypeConversion(invocationParameters[1], false)
+                    Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
                 });
             }
 
@@ -223,7 +223,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         private IVhdlElement TransformMemberInvocation(
             InvocationExpression expression,
-            IEnumerable<IVhdlElement> transformedParameters,
+            IEnumerable<ITransformedInvocationParameter> transformedParameters,
             MemberReferenceExpression targetMemberReference,
             ISubTransformerContext context)
         {
@@ -233,7 +233,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // This is a Task.FromResult() method call.
             if (targetMethodName.IsTaskFromResultMethodName())
             {
-                return transformedParameters.Single();
+                return transformedParameters.Single().Reference;
             }
 
             // This is a Task.Wait() call so needs special care.
@@ -297,8 +297,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Handling special operations here.
             if (_specialOperationInvocationTransformer.IsSpecialOperationInvocation(expression))
             {
-                return _specialOperationInvocationTransformer
-                    .TransformSpecialOperationInvocation(expression, transformedParameters, context);
+                return _specialOperationInvocationTransformer.TransformSpecialOperationInvocation(
+                    expression, 
+                    transformedParameters.Select(transformedParameter => transformedParameter.Reference), 
+                    context);
             }
 
             // Support for Array.Copy().
@@ -315,7 +317,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     if (lengthExpression.Value.ToString() == "0")
                     {
                         // If the whole array is copied then it can be transformed into a simple assignment.
-                        sourceArrayReference = (IDataObject)transformedParameters.First();
+                        sourceArrayReference = (IDataObject)transformedParameters.First().Reference;
                         sourceArrayLength = context.TransformationContext.ArraySizeHolder
                             .GetSizeOrThrow(expression.Arguments.First()).Length;
                     }
@@ -326,7 +328,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         // Otherwise slicing the array.
                         sourceArrayReference = new ArraySlice
                         {
-                            ArrayReference = (IDataObject)transformedParameters.First(),
+                            ArrayReference = (IDataObject)transformedParameters.First().Reference,
                             IndexFrom = 0,
                             IndexTo = sourceArrayLength - 1
                         };
@@ -338,7 +340,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         "Array.Copy() is only supported if the second argument can be determined compile-time.");
                 }
 
-                var targetArrayReference = (IDataObject)transformedParameters.Skip(1).First();
+                var targetArrayReference = (IDataObject)transformedParameters.Skip(1).First().Reference;
 
                 if (targetArrayLength > sourceArrayLength)
                 {
