@@ -580,11 +580,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var castExpression = (CastExpression)expression;
 
-                var fromTypeReference = castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference();
-                var fromType = _typeConverter.ConvertTypeReference(fromTypeReference, context.TransformationContext);
-                var toType = _typeConverter.ConvertAstType(castExpression.Type, context.TransformationContext);
-
                 var innerExpressionResult = Transform(castExpression.Expression, context);
+
+                // To avoid double-casting of binary expression results BinaryOperatorExpressionTransformer also checks
+                // if the parent is a cast. So then no need to cast again.
+                if (castExpression.Expression is BinaryOperatorExpression || 
+                    castExpression.Expression.Is<ParenthesizedExpression>(parenthesized => parenthesized.Expression is BinaryOperatorExpression))
+                {
+                    return innerExpressionResult;
+                }
+
+                var fromTypeReference = castExpression.Expression.GetActualTypeReference() ?? castExpression.GetActualTypeReference();
+                var fromType = _declarableTypeCreator
+                    .CreateDeclarableType(castExpression.Expression, fromTypeReference, context.TransformationContext);
+                var toType = _declarableTypeCreator
+                    .CreateDeclarableType(castExpression, castExpression.Type, context.TransformationContext);
 
                 // If the inner expression produced a data object then let's check the size of that: if it's the same
                 // size as the target type of the cast then no need to cast again.
@@ -593,25 +603,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (resultDataObject == null && resultParentesized != null)
                 {
                     resultDataObject = resultParentesized.Target as IDataObject;
-                }
-
-                if (resultDataObject != null)
-                {
-                    var resultDataObjectDeclaration = stateMachine
-                        .GetAllDataObjects()
-                        .SingleOrDefault(dataObject => dataObject.Name == resultDataObject.Name);
-
-                    if (resultDataObjectDeclaration != null)
-                    {
-                        if (resultDataObjectDeclaration.DataType is Record)
-                        {
-                            fromType = ((Record)resultDataObjectDeclaration.DataType)
-                                .Fields
-                                .Single(field => field.Name == ((RecordFieldAccess)resultDataObject).FieldName)
-                                .DataType;
-                        }
-                        else fromType = resultDataObjectDeclaration.DataType;
-                    }
                 }
 
                 var typeConversionResult = _typeConversionTransformer
