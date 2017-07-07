@@ -15,5 +15,5 @@ Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard
 
 ## Table of contents
 
-- [Docs/WorkingWithHastlayer.md](Working with Hastlayer)
-- [Docs/DevelopingHastlayer.md](Developing Hastlayer)
+- [Working with Hastlayer](Docs/WorkingWithHastlayer.md)
+- [Developing Hastlayer](Docs/DevelopingHastlayer.md)
