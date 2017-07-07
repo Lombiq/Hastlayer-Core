@@ -31,9 +31,13 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void UnumIsCorrectlyConstructedFromUintArray()
         {
-            var Unum0 = new Unum(_environment_4_8, new uint[] { 0 });
+            var Unum0 = new Unum(_environment_4_8, new uint[] { 0 }); 
             Assert.AreEqual(Unum0.IsZero(), true);
-            
+
+            var UnumMinus1 = new Unum(_environment_4_8, new uint[] { 1 }, true);
+            var bitMaskMinus1 = new BitMask(new uint[] { 0x2000, 0, 0, 0, 0, 0, 0, 0, 0x20000000 }, _environment_4_8.Size); 
+            Assert.AreEqual(UnumMinus1.UnumBits, bitMaskMinus1 );
+
             var unum10 = new Unum(_environment_2_2, new uint[] { 10 });
             var bitMask10 = new BitMask(new uint[] { 0x329 }, _environment_2_2.Size);
             Assert.AreEqual(unum10.UnumBits, bitMask10);
@@ -48,11 +52,12 @@ namespace Lombiq.Unum.Tests
 
             var minValue = new uint[8];
             for (int i = 0; i < 8; i++) minValue[i] = uint.MaxValue;
-            var unumMin = new Unum(_environment_4_8, minValue);  // This is negative.
+            minValue[7] >>= 1;
+            var unumMin = new Unum(_environment_4_8, minValue, true);  // This is negative.
             var bitMaskMinValue = new BitMask(new uint[]
             {
                 0xFFFFE8FD , 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                0xFFFFFFFF , 0xFFFFFFFF,  0x800FEFFF
+                0xFFFFFFFF , 0xFFFFFFFF,  0x200FEFFF
 
             }, _environment_4_8.Size);
             Assert.AreEqual(unumMin.UnumBits, bitMaskMinValue);
