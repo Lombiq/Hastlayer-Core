@@ -156,7 +156,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // AssignmentExpression.
                     var assignment = (AssignmentExpression)ifElse.TrueStatement.Children.Single().Children.Single();
 
-                    // Drilling into the expression to find out which DisplayClass method the Func referes to.
+                    // Drilling into the expression to find out which DisplayClass method the Func refers to.
                     var funcCreateExpression = (ObjectCreateExpression)((AssignmentExpression)assignment.Right).Right;
                     var displayClassMemberReference = TaskParallelizationHelper
                         .GetTargetDisplayClassMemberFromFuncCreation(funcCreateExpression);
