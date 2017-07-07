@@ -22,7 +22,6 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration =>
                     {
                         configuration.TransformerConfiguration().UseSimpleMemory = false;
-                        configuration.AddHardwareEntryPointType<LoopCases>();
 
                         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(p => p.WhenAllWhenAnyAwaitedTasks(0), 0)
