@@ -33,6 +33,11 @@ namespace ICSharpCode.NRefactory.CSharp
             var parameterReference = annotable.Annotation<ParameterReference>();
             if (parameterReference != null) return parameterReference.ParameterType;
 
+            if (annotable is IndexerExpression)
+            {
+                return ((IndexerExpression)annotable).Target.GetActualTypeReference()?.GetElementType();
+            }
+
             return null;
         }
 
