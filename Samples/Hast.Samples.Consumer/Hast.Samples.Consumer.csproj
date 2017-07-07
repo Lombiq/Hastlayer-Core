@@ -59,10 +59,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Drivers\Hast.Xilinx\Hast.Xilinx.csproj">
-      <Project>{02be2213-f0e5-4107-bea4-ae396525a644}</Project>
-      <Name>Hast.Xilinx</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>

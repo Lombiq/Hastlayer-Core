@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Configuration;
@@ -47,7 +48,7 @@ namespace Hast.Samples.Consumer
                     // Inititializing a Hastlayer shell for Xilinx FPGA boards. Since this is non-trivial to create you
                     // can cache this shell object while the program runs and re-use it continuously. No need to wrap
                     // it into a using() like here, just make sure to Dispose() it before the program terminates.
-                    using (var hastlayer = Xilinx.HastlayerFactory.Create())
+                    using (var hastlayer = Hastlayer.Create())
                     {
                         // Hooking into an event of Hastlayer so some execution information can be made visible on the
                         // console.

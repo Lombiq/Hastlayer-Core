@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -35,6 +36,9 @@ namespace Hast.Layer
         {
             _configuration = configuration;
         }
+
+
+        public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
 
         /// <summary>
         /// Instantiates a new <see cref="IHastlayer"/> implementation.
@@ -154,6 +158,37 @@ namespace Hast.Layer
                     typeof(ITransformer).Assembly
                 }.Union(_configuration.Extensions);
 
+            var driversPath = Path.GetDirectoryName(GetType().Assembly.Location);
+            var currentDirectory = Path.GetFileName(driversPath);
+            if (currentDirectory.Equals("Debug", StringComparison.OrdinalIgnoreCase) ||
+                currentDirectory.Equals("Release", StringComparison.OrdinalIgnoreCase))
+            {
+                driversPath = Path.GetDirectoryName(driversPath);
+            }
+            currentDirectory = Path.GetFileName(driversPath);
+            if (currentDirectory.Equals("bin", StringComparison.OrdinalIgnoreCase))
+            {
+                driversPath = Path.GetDirectoryName(driversPath);
+            }
+
+            driversPath = Path.GetDirectoryName(driversPath); // Now we're at the level above the current project's folder.
+
+            var driversFound = false;
+            while (driversPath != null && !driversFound)
+            {
+                var driversSubFolder = Path.Combine(driversPath, "Drivers");
+                if (Directory.Exists(driversSubFolder))
+                {
+                    driversPath = driversSubFolder;
+                    driversFound = true;
+                }
+                else
+                {
+                    driversPath = Path.GetDirectoryName(driversPath); 
+                }
+            }
+
+
             var settings = new AppHostSettings
             {
                 ImportedExtensions = importedExtensions,
@@ -164,13 +199,26 @@ namespace Hast.Layer
                         ShellName = ShellName,
                         EnabledFeatures = importedExtensions.Select(extension => extension.ShortName())
                     }
-                }
+                },
+                ModuleFolderPaths = new[] { driversPath, @"E:\Projects\Munka\Lombiq\Hastlayer\Hastlayer" }
             };
 
             _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
 
-            await _host.Run<IHardwareExecutionEventProxy>(proxy => Task.Run(() => 
+            await _host.Run<IHardwareExecutionEventProxy>(proxy => Task.Run(() =>
                 proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs))));
+
+            // Enable all loaded features. This is needed so extensions just added to the solution, but not referenced
+            // anywhere in the current app can contribute dependencies.
+            await (await GetHost())
+                .Run<Orchard.Environment.Features.IFeatureManager>(
+                    (featureManager) =>
+                    {
+                        featureManager.EnableFeatures(featureManager.GetAvailableFeatures().Select(feature => feature.Id), true);
+
+                        return Task.CompletedTask;
+                    }, ShellName, false);
+
 
             return _host;
         }
