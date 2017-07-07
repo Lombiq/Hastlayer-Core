@@ -113,6 +113,13 @@ namespace Lombiq.Unum
             return mask >> leastSignificantOnePosition - 1;
         }
 
+        public BitMask SetSegment(int index, uint segment)
+        {
+            if (index >= SegmentCount) return new BitMask(this);
+
+            return FromImmutableArray(Segments.SetItem(index, segment));
+        }
+
         #endregion
 
         #region Operators
