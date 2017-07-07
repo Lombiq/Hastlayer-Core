@@ -10,20 +10,26 @@ using Mono.Cecil;
 
 namespace Hast.Transformer.Helpers
 {
-    internal static class TypeHelper
+    public static class TypeHelper
     {
-        public static TypeInformation CreateInt32TypeInformation(AstNode node)
+        public static TypeInformation CreateInt32TypeInformation()
+        {
+            var int32TypeReference = CreatePrimitiveTypeReference("Int32");
+            return new TypeInformation(int32TypeReference, int32TypeReference);
+        }
+
+        public static TypeReference CreatePrimitiveTypeReference(string typeName)
         {
             var int32Assembly = typeof(int).Assembly;
             var int32TypeReference = new TypeReference(
                 "System",
-                "Int32",
-                node.FindFirstParentEntityDeclaration().Annotation<IMemberDefinition>().DeclaringType.Module,
+                typeName,
+                ModuleDefinition.CreateModule("System", new ModuleParameters()),
                 new AssemblyNameReference(
                     int32Assembly.ShortName(),
                     new Version(int32Assembly.FullName.Split(',')[1].Substring(9))));
             int32TypeReference.IsValueType = true;
-            return new TypeInformation(int32TypeReference, int32TypeReference);
+            return int32TypeReference;
         }
     }
 }

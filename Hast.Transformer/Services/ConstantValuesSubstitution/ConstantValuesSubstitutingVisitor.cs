@@ -198,7 +198,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // array size defined then just substitute the array length too.
             lengthArgument.ReplaceWith(
                 new PrimitiveExpression(existingSize.Length)
-                .WithAnnotation(TypeHelper.CreateInt32TypeInformation(parentAssignment)));
+                .WithAnnotation(TypeHelper.CreateInt32TypeInformation()));
         }
 
 
