@@ -45,7 +45,7 @@ namespace Hast.Samples.Consumer
                      *    implementations. (You can see this inside the SampleRunners.)
                      */
 
-                    // Inititializing a Hastlayer shell for Xilinx FPGA boards. Since this is non-trivial to create you
+                    // Initializing a Hastlayer shell for Xilinx FPGA boards. Since this is non-trivial to create you
                     // can cache this shell object while the program runs and re-use it continuously. No need to wrap
                     // it into a using() like here, just make sure to Dispose() it before the program terminates.
                     using (var hastlayer = Hastlayer.Create())

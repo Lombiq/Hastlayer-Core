@@ -47,7 +47,7 @@ namespace Hast.Layer
         /// Point of this factory is that it returns an interface type instead of the implementation and can throw
         /// exceptions.
         /// </remarks>
-        /// <param name="configuration">Configuration for Hastalyer.</param>
+        /// <param name="configuration">Configuration for Hastlayer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
         public static IHastlayer Create(IHastlayerConfiguration configuration)
         {
@@ -80,7 +80,7 @@ namespace Hast.Layer
              * Steps to be implemented:
              * - Transform into hardware description through ITransformer.
              * - Save hardware description for re-use (cache file, stream supplied from the outside).
-             * - Synthesize hardware through vendor-specific toolchain and load it onto FPGA, together with the necessary 
+             * - Synthesize hardware through vendor-specific tool chain and load it onto FPGA, together with the necessary 
              *   communication implementation (currently partially implemented with a member table). The implementation
              *   should be cached by the vendor tools.
              */
