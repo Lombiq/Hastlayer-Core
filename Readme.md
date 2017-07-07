@@ -13,6 +13,11 @@ Created by [Lombiq Technologies](https://lombiq.com/).
 Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard Application Host](https://github.com/Lombiq/Orchard-Application-Host) to utilize [Orchard](http://orchardproject.net/) as the application framework.
 
 
+## Notes on Hastlayer's documentation
+
+These text files should only serve as a starting point. On how to use Hastlayer the samples are the best source. The public API of Hastlayer is also documented inline as code comments, so make sure to check those out too if something's not clear.
+
+
 ## Table of contents
 
 - [Working with Hastlayer](Docs/WorkingWithHastlayer.md)
