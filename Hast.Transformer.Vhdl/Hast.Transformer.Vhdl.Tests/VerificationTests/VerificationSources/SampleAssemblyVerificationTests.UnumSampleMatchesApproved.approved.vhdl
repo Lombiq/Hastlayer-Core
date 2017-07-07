@@ -890,8 +890,7 @@ architecture Imp of Hast_IP is
         \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\, 
         \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\, 
         \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\, 
-        \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\, 
-        \Unum::.ctor(UnumEnvironment,UInt32).0._State_36\);
+        \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\);
     -- Signals:
     Signal \Unum::.ctor(UnumEnvironment,UInt32).0._Finished\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32).0.this.parameter.Out\: \Lombiq.Unum.Unum\;
@@ -2664,7 +2663,7 @@ begin
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_2\.
                         \BitMask::.ctor(UInt32[],UInt16).0.this\.\Size\ := \BitMask::.ctor(UInt32[],UInt16).0.conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018\;
                         \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.1\ := \BitMask::.ctor(UInt32[],UInt16).0.size\ mod to_unsigned(32, 16);
-                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.2\ := \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.1\ = 0;
+                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.2\ := \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.1\ = to_unsigned(0, 16);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\ and ends in state \BitMask::.ctor(UInt32[],UInt16).0._State_7\.
@@ -2845,7 +2844,7 @@ begin
                         \BitMask::.ctor(UInt16,Boolean).0.allOne\ := \BitMask::.ctor(UInt16,Boolean).0.allOne.parameter.In\;
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ := resize(signed(\BitMask::.ctor(UInt16,Boolean).0.size\ mod to_unsigned(32, 16)), 32);
                         \BitMask::.ctor(UInt16,Boolean).0.num\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\);
-                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.1\ := \BitMask::.ctor(UInt16,Boolean).0.num\ = 0;
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.1\ := \BitMask::.ctor(UInt16,Boolean).0.num\ = to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::.ctor(UInt16,Boolean).0._State_4\ and ends in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
@@ -4282,7 +4281,7 @@ begin
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_2\ => 
                         \BitMask::op_Addition(BitMask,BitMask).0.left\ := \BitMask::op_Addition(BitMask,BitMask).0.left.parameter.In\;
                         \BitMask::op_Addition(BitMask,BitMask).0.right\ := \BitMask::op_Addition(BitMask,BitMask).0.right.parameter.In\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_Addition(BitMask,BitMask).0.left\.\SegmentCount\ = 0;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_Addition(BitMask,BitMask).0.left\.\SegmentCount\ = to_unsigned(0, 16);
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\ := \BitMask::op_Addition(BitMask,BitMask).0.right\.\SegmentCount\ = to_unsigned(0, 16);
                         \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.0\ or \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.1\;
                         \BitMask::op_Addition(BitMask,BitMask).0.flag\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.2\;
@@ -4692,7 +4691,7 @@ begin
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_2\ => 
                         \BitMask::op_Subtraction(BitMask,BitMask).0.left\ := \BitMask::op_Subtraction(BitMask,BitMask).0.left.parameter.In\;
                         \BitMask::op_Subtraction(BitMask,BitMask).0.right\ := \BitMask::op_Subtraction(BitMask,BitMask).0.right.parameter.In\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_Subtraction(BitMask,BitMask).0.left\.\SegmentCount\ = 0;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_Subtraction(BitMask,BitMask).0.left\.\SegmentCount\ = to_unsigned(0, 16);
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.1\ := \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\SegmentCount\ = to_unsigned(0, 16);
                         \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.0\ or \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.1\;
                         \BitMask::op_Subtraction(BitMask,BitMask).0.flag\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.2\;
@@ -6528,17 +6527,15 @@ begin
         Variable \Unum::.ctor(UnumEnvironment,UInt32).0.return.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::.ctor(UnumEnvironment,UInt32).0.return.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.8\: boolean := false;
-        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.return.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.return.13\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.return.12\: \Lombiq.Unum.BitMask\;
         Variable \Unum::.ctor(UnumEnvironment,UInt32).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.11\: boolean := false;
-        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.10\: boolean := false;
+        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::.ctor(UnumEnvironment,UInt32).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.13\: boolean := false;
-        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.14\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.return.14\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.12\: boolean := false;
+        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Unum::.ctor(UnumEnvironment,UInt32).0.return.13\: \Lombiq.Unum.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6594,15 +6591,13 @@ begin
                 \Unum::.ctor(UnumEnvironment,UInt32).0.return.10\ := to_unsigned(0, 16);
                 \Unum::.ctor(UnumEnvironment,UInt32).0.return.11\ := to_unsigned(0, 32);
                 \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.8\ := false;
-                \Unum::.ctor(UnumEnvironment,UInt32).0.return.12\ := to_unsigned(0, 16);
                 \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.9\ := to_unsigned(0, 16);
-                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.10\ := to_unsigned(0, 16);
                 \Unum::.ctor(UnumEnvironment,UInt32).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\ := to_unsigned(0, 16);
-                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.11\ := false;
-                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.12\ := to_unsigned(0, 16);
+                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.10\ := false;
+                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.11\ := to_unsigned(0, 16);
                 \Unum::.ctor(UnumEnvironment,UInt32).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\ := to_unsigned(0, 16);
-                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.13\ := false;
-                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.14\ := to_unsigned(0, 16);
+                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.12\ := false;
+                \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.13\ := to_unsigned(0, 16);
             else 
                 case \Unum::.ctor(UnumEnvironment,UInt32).0._State\ is 
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_0\ => 
@@ -6652,7 +6647,7 @@ begin
                             \Unum::.ctor(UnumEnvironment,UInt32).0.flag\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.0\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_5\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_36\.
+                            --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_5\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\.
                             --     * Execution after either branch will continue in the following state: \Unum::.ctor(UnumEnvironment,UInt32).0._State_4\.
 
                             if (not(\Unum::.ctor(UnumEnvironment,UInt32).0.flag\)) then 
@@ -6810,7 +6805,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_15\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_14\.
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.4\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num\ = 0;
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.4\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num\ = to_unsigned(0, 16);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_18\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_18\.
@@ -6937,7 +6932,7 @@ begin
                             \Unum::.ctor(UnumEnvironment,UInt32).0.flag3\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.8\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_27\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\.
+                            --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_27\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_28\.
                             --     * Execution after either branch will continue in the following state: \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\.
 
                             if (\Unum::.ctor(UnumEnvironment,UInt32).0.flag3\) then 
@@ -6950,87 +6945,75 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_25\.
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.11\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num\ > to_unsigned(0, 16);
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.10\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num\ > to_unsigned(0, 16);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\.
-                        --     * The false branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\.
-                        --     * Execution after either branch will continue in the following state: \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\.
+                        --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\.
+                        --     * The false branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\.
+                        --     * Execution after either branch will continue in the following state: \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\.
 
-                        if (\Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.11\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\;
+                        if (\Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.10\) then 
+                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\;
                         else 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\;
+                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_27\ => 
                         -- True branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_25\.
-                        -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32).0.fraction\;
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= true;
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.9\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num2\ - to_unsigned(1, 16);
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.num2\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.9\;
+                        -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetZero(System.UInt16)
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32).0.fraction\;
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16).index.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32).0.num2\;
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16)._Started.0\ <= true;
                         \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_28\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_28\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
-                        if (\Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.return.12\ := \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.9\ := \Unum::.ctor(UnumEnvironment,UInt32).0.return.12\ - to_unsigned(1, 16);
-                            -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetZero(System.UInt16)
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32).0.fraction\;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16).index.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.9\;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16)._Started.0\ <= true;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetZero(System.UInt16)
                         if (\Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16)._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16)._Finished.0\) then 
                             \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16)._Started.0\ <= false;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.return.13\ := \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16).return.0\;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.fraction\ := \Unum::.ctor(UnumEnvironment,UInt32).0.return.13\;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.10\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num2\ - to_unsigned(1, 16);
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.num2\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.10\;
+                            \Unum::.ctor(UnumEnvironment,UInt32).0.return.12\ := \Unum::.ctor(UnumEnvironment,UInt32).0.BitMask::SetZero(UInt16).return.0\;
+                            \Unum::.ctor(UnumEnvironment,UInt32).0.fraction\ := \Unum::.ctor(UnumEnvironment,UInt32).0.return.12\;
                             -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_25\.
-                            if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\) then 
+                            if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_28\) then 
                                 \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\ => 
+                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\.
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.13\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num2\ > to_unsigned(0, 16);
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.12\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num2\ > to_unsigned(0, 16);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\.
-                        --     * The false branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\.
-                        --     * Execution after either branch will continue in the following state: \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\.
+                        --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\.
+                        --     * The false branch starts in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\ and ends in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\.
+                        --     * Execution after either branch will continue in the following state: \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\.
 
-                        if (\Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.13\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\;
+                        if (\Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.12\) then 
+                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\;
                         else 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\;
+                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\ => 
+                        -- True branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\.
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.11\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num\ - to_unsigned(1, 16);
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.11\;
+                        -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\.
+                        if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\) then 
+                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\ => 
-                        -- True branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\.
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.12\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num\ - to_unsigned(1, 16);
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.12\;
-                        -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\.
-                        if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\ => 
                         -- False branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\.
                         \Unum::.ctor(UnumEnvironment,UInt32).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\ := to_unsigned(0, 16);
                         -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_26\.
-                        if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\;
+                        if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_31\) then 
+                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\ => 
-                        -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\.
+                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\ => 
+                        -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\.
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
                         \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32).0.this\;
                         \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= False;
@@ -7040,33 +7023,33 @@ begin
                         \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= resize((\Unum::.ctor(UnumEnvironment,UInt32).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\), 8);
                         \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\;
                         \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= true;
-                        \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_36\;
+                        \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\ => 
+                        -- True branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\.
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.13\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num2\ - to_unsigned(1, 16);
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.13\;
+                        -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\.
+                        if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\) then 
+                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\ => 
-                        -- True branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\.
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.14\ := \Unum::.ctor(UnumEnvironment,UInt32).0.num2\ - to_unsigned(1, 16);
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\ := \Unum::.ctor(UnumEnvironment,UInt32).0.binaryOperationResult.14\;
-                        -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\.
+                        -- False branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\.
+                        \Unum::.ctor(UnumEnvironment,UInt32).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\ := to_unsigned(0, 16);
+                        -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_29\.
                         if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_34\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\;
+                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_32\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\ => 
-                        -- False branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\.
-                        \Unum::.ctor(UnumEnvironment,UInt32).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\ := to_unsigned(0, 16);
-                        -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_30\.
-                        if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_33\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::.ctor(UnumEnvironment,UInt32).0._State_36\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
                         if (\Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\) then 
                             \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.return.14\ := \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\;
-                            \Unum::.ctor(UnumEnvironment,UInt32).0.this\.\UnumBits\ := \Unum::.ctor(UnumEnvironment,UInt32).0.return.14\;
+                            \Unum::.ctor(UnumEnvironment,UInt32).0.return.13\ := \Unum::.ctor(UnumEnvironment,UInt32).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\;
+                            \Unum::.ctor(UnumEnvironment,UInt32).0.this\.\UnumBits\ := \Unum::.ctor(UnumEnvironment,UInt32).0.return.13\;
                             -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32).0._State_3\.
-                            if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_36\) then 
+                            if (\Unum::.ctor(UnumEnvironment,UInt32).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32).0._State_35\) then 
                                 \Unum::.ctor(UnumEnvironment,UInt32).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32).0._State_4\;
                             end if;
                         end if;
@@ -10885,7 +10868,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.65\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16).return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.bitMask\ := \Unum::AddExactUnums(Unum,Unum).0.return.65\;
-                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.38\ := \Unum::AddExactUnums(Unum,Unum).0.num5\ = 0;
+                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.38\ := \Unum::AddExactUnums(Unum,Unum).0.num5\ = to_unsigned(0, 16);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_130\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_130\.
