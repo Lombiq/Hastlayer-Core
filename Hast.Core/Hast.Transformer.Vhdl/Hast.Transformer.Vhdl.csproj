@@ -86,7 +86,6 @@
     <Compile Include="ArchitectureComponents\ConfigurableComponent.cs" />
     <Compile Include="ArchitectureComponents\InvocationHelper.cs" />
     <Compile Include="ArchitectureComponents\IArchitectureComponent.cs" />
-    <Compile Include="Configuration\VhdlTransformerConfiguration.cs" />
     <Compile Include="Constants\SpecialTypes.cs" />
     <Compile Include="Events\IVhdlTransformationEventHandler.cs" />
     <Compile Include="Extensions\ArrayCreateExpressionExtensions.cs" />
@@ -191,6 +190,10 @@
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj">
+      <Project>{0d13986f-fa33-4898-a0de-c173764663f0}</Project>
+      <Name>Hast.Transformer.Vhdl.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>

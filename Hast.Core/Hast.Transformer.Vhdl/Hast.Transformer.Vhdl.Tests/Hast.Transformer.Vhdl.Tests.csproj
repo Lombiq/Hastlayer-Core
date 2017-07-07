@@ -111,6 +111,10 @@
       <Project>{71b55241-a31c-43f5-9b46-40b53099df56}</Project>
       <Name>Hast.Communication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj">
+      <Project>{0D13986F-FA33-4898-A0DE-C173764663F0}</Project>
+      <Name>Hast.Transformer.Vhdl.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554F7-5565-4D82-8AAB-CDCD745CA822}</Project>
       <Name>Hast.Synthesis</Name>

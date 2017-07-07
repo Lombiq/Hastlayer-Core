@@ -188,6 +188,7 @@ namespace Hast.Layer
                 }
             }
 
+            var abstractionsPath = Path.Combine(Path.GetDirectoryName(corePath), "Hast.Abstractions");
 
             var settings = new AppHostSettings
             {
@@ -200,7 +201,7 @@ namespace Hast.Layer
                         EnabledFeatures = importedExtensions.Select(extension => extension.ShortName())
                     }
                 },
-                ModuleFolderPaths = new[] { corePath }
+                ModuleFolderPaths = new[] { corePath, abstractionsPath }
             };
 
             _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);

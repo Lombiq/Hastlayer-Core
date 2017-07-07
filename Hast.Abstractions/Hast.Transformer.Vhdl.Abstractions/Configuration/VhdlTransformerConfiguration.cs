@@ -1,6 +1,6 @@
 ﻿using Hast.Common.Configuration;
 
-namespace Hast.Transformer.Vhdl.Configuration
+namespace Hast.Transformer.Vhdl.Abstractions.Configuration
 {
     public enum VhdlGenerationMode
     {

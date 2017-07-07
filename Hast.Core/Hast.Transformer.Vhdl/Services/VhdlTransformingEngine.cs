@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Hast.Common.Models;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Configuration;
+using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Hast.Transformer.Vhdl.Events;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;

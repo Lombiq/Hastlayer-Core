@@ -1,1 +1,1 @@
-﻿
+﻿Dependencies: Hast.Transformer.Vhdl.Abstractions

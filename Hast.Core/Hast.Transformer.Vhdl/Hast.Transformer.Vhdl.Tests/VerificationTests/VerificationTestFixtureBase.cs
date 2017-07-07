@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
-using Hast.Transformer.Vhdl.Configuration;
+using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 

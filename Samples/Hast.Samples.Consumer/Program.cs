@@ -5,8 +5,8 @@ using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
-using Hast.Transformer.Vhdl.Configuration;
 using System.Linq;
+using Hast.Transformer.Vhdl.Abstractions.Configuration;
 
 namespace Hast.Samples.Consumer
 {
