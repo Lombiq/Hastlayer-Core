@@ -205,17 +205,8 @@ namespace Lombiq.Unum
         public Unum(UnumEnvironment environment, uint[] input)
         {
             _environment = environment;
-            UnumBits = new BitMask(environment.Size);
+            UnumBits = new BitMask(input, environment.Size);
 
-
-            // Copying input to UnumBits BitMask.
-            for (var i = input.Length - 1; i > 0; i--)
-            {
-                UnumBits += input[i];
-                UnumBits <<= 32;
-            }
-
-            UnumBits += input[0];
             if (UnumBits == _environment.EmptyBitMask) return;
 
 
