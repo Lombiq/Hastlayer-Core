@@ -203,7 +203,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                 scope.TaskFactoryVariableNames.Contains(identifier.Identifier))),
                         out invocationExpression))
                     {
-                        // The first argument is always for the Func that referes to the method on the DisplayClass
+                        // The first argument is always for the Func that refers to the method on the DisplayClass
                         // generated for the lambda expression originally passed to the Task factory.
                         var funcVariablename = ((IdentifierExpression)invocationExpression.Arguments.First()).Identifier;
                         var targetMethod = scope.FuncVariableNameToDisplayClassMethodMappings[funcVariablename];
@@ -668,7 +668,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var initiailizationResult = InitializeRecord(expression, objectCreateExpression.Type, context);
 
-                // Running the constructor, which needs to be done before intializers.
+                // Running the constructor, which needs to be done before initializers.
                 var constructorFullName = objectCreateExpression.GetConstructorFullName();
                 if (!string.IsNullOrEmpty(constructorFullName))
                 {
