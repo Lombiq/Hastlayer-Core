@@ -123,98 +123,102 @@ namespace Lombiq.Unum.Tests
         //    var fourth = new Unum(_metaData_3_5, 0.75F);
 
 
-        //    var bitmask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
-        //    var bitmask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
-        //    var bitmask_5 = new BitMask(new uint[] { 0x1A21 }, _metaData_3_5.Size);
-        //    var bitmask_3 = new BitMask(new uint[] { 0x660 }, _metaData_3_4.Size);
-        //    var bitmask_4 = new BitMask(new uint[] { 0xA40 }, _metaData_3_5.Size);
+        //    var bitMask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
+        //    var bitMask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
+        //    var bitMask_5 = new BitMask(new uint[] { 0x1A21 }, _metaData_3_5.Size);
+        //    var bitMask_3 = new BitMask(new uint[] { 0x660 }, _metaData_3_4.Size);
+        //    var bitMask_4 = new BitMask(new uint[] { 0xA40 }, _metaData_3_5.Size);
 
-        //    Assert.AreEqual(first.UnumBits, bitmask_1);
-        //    Assert.AreEqual(second.UnumBits, bitmask_2);
-        //    Assert.AreEqual(five.UnumBits, bitmask_5);
-        //    Assert.AreEqual(fourth.UnumBits, bitmask_4);
-        //    Assert.AreEqual(third.UnumBits, bitmask_3);
+        //    Assert.AreEqual(first.UnumBits, bitMask_1);
+        //    Assert.AreEqual(second.UnumBits, bitMask_2);
+        //    Assert.AreEqual(five.UnumBits, bitMask_5);
+        //    Assert.AreEqual(fourth.UnumBits, bitMask_4);
+        //    Assert.AreEqual(third.UnumBits, bitMask_3);
 
         //}
 
         [Test]
         public void UnumIsCorrectlyConstructedFromInt()
         {
-            var unumZero = new Unum(_environment_3_4, 0);
-            var unumOne = new Unum(_environment_3_4, 1);
-            var unumThirty = new Unum(_environment_3_4, 30);
+            var unum0 = new Unum(_environment_3_4, 0);
+            var bitMask0 = new BitMask(new uint[] { 0 }, _environment_3_4.Size);
+            Assert.AreEqual(unum0.UnumBits, bitMask0);
+
+            var unum1 = new Unum(_environment_3_4, 1);
+            var bitMask1 = new BitMask(new uint[] { 0x100 }, _environment_3_4.Size);
+            Assert.AreEqual(unum1.UnumBits, bitMask1);
+
+            var unum30 = new Unum(_environment_3_4, 30);
+            var bitMask30 = new BitMask(new uint[] { 0x3F22 }, _environment_3_4.Size);
+            Assert.AreEqual(unum30.UnumBits, bitMask30);
+            
             var unumThousand = new Unum(_environment_3_4, 1000);
-            var unumNegativeThirty = new Unum(_environment_3_4, -30);
-            var unumNegativeThousand = new Unum(_environment_3_4, -1000);
-            var unum6000 = new Unum(_environment_3_4, 6000);
+            var bitMask1000 = new BitMask(new uint[] { 0x63D45 }, _environment_3_4.Size);
+            Assert.AreEqual(unumThousand.UnumBits, bitMask1000);
+            
             var unum5000 = new Unum(_environment_3_4, 5000);
+            var bitMask5000 = new BitMask(new uint[] { 0x367148 }, _environment_3_4.Size);
+            Assert.AreEqual(unum5000.UnumBits, bitMask5000);
 
-            var bitmask0 = new BitMask(new uint[] { 0 }, _environment_3_4.Size);
-            var bitmask30 = new BitMask(new uint[] { 0x3F22 }, _environment_3_4.Size);
-            var bitmask1000 = new BitMask(new uint[] { 0x63D45 }, _environment_3_4.Size);
-            var bitmaskMinus1000 = new BitMask(new uint[] { 0x63D45, 1 }, _environment_3_4.Size);
-            var bitmaskMinus30 = new BitMask(new uint[] { 0x3F22, 1 }, _environment_3_4.Size);
-            var bitmask6000 = new BitMask(new uint[] { 0x1B7747 }, _environment_3_4.Size);
-            var bitmask5000 = new BitMask(new uint[] { 0x367148 }, _environment_3_4.Size);
-            var bitmask1 = new BitMask(new uint[] { 0x100 }, _environment_3_4.Size);
-
-            Assert.AreEqual(unumZero.UnumBits, bitmask0);
-            Assert.AreEqual(unumThirty.UnumBits, bitmask30);
-            Assert.AreEqual(unumThousand.UnumBits, bitmask1000);
-            Assert.AreEqual(unumNegativeThirty.UnumBits, bitmaskMinus30);
-            Assert.AreEqual(unum6000.UnumBits, bitmask6000);
-            Assert.AreEqual(unum5000.UnumBits, bitmask5000);
-            Assert.AreEqual(unumNegativeThousand.UnumBits, bitmaskMinus1000);
-            Assert.AreNotEqual(unumOne.IsZero(), true);
-            Assert.AreEqual(unumOne.UnumBits, bitmask1);
+            var unum6000 = new Unum(_environment_3_4, 6000);
+            var bitMask6000 = new BitMask(new uint[] { 0x1B7747 }, _environment_3_4.Size);
+            Assert.AreEqual(unum6000.UnumBits, bitMask6000);
+            
+            var unumNegative30 = new Unum(_environment_3_4, -30);
+            var bitMaskMinus30 = new BitMask(new uint[] { 0x3F22, 1 }, _environment_3_4.Size);
+            Assert.AreEqual(unumNegative30.UnumBits, bitMaskMinus30);
+            
+            var unumNegative1000 = new Unum(_environment_3_4, -1000);
+            var bitMaskMinus1000 = new BitMask(new uint[] { 0x63D45, 1 }, _environment_3_4.Size);
+            Assert.AreEqual(unumNegative1000.UnumBits, bitMaskMinus1000);
         }
 
         [Test]
         public void UnumIsCorrectlyConstructedFromUInt()
         {
             var unum0 = new Unum(_environment_3_4, (uint)0);
-            var bitmask0 = new BitMask(new uint[] { 0 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask0, unum0.UnumBits);
+            var bitMask0 = new BitMask(new uint[] { 0 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask0, unum0.UnumBits);
 
             var unum1 = new Unum(_environment_3_4, (uint)1);
-            var bitmask1 = new BitMask(new uint[] { 0x100 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask1, unum1.UnumBits);
+            var bitMask1 = new BitMask(new uint[] { 0x100 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask1, unum1.UnumBits);
 
             var unum2 = new Unum(_environment_3_4, (uint)2);
-            var bitmask2 = new BitMask(new uint[] { 0x200 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask2, unum2.UnumBits);
+            var bitMask2 = new BitMask(new uint[] { 0x200 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask2, unum2.UnumBits);
 
             var unum4 = new Unum(_environment_3_4, (uint)4);
-            var bitmask4 = new BitMask(new uint[] { 0x610 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask4, unum4.UnumBits);
+            var bitMask4 = new BitMask(new uint[] { 0x610 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask4, unum4.UnumBits);
 
             var unum8 = new Unum(_environment_3_4, (uint)8);
-            var bitmask8 = new BitMask(new uint[] { 0xC20 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask8, unum8.UnumBits);
+            var bitMask8 = new BitMask(new uint[] { 0xC20 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask8, unum8.UnumBits);
 
             var unum10 = new Unum(_environment_2_2, (uint)10);
-            var bitmask10 = new BitMask(new uint[] { 0x329 }, _environment_2_2.Size);
-            Assert.AreEqual(bitmask10, unum10.UnumBits);
+            var bitMask10 = new BitMask(new uint[] { 0x329 }, _environment_2_2.Size);
+            Assert.AreEqual(bitMask10, unum10.UnumBits);
 
             var unum13 = new Unum(_environment_3_4, (uint)13);
-            var bitmask13 = new BitMask(new uint[] { 0x3522 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask13, unum13.UnumBits);
+            var bitMask13 = new BitMask(new uint[] { 0x3522 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask13, unum13.UnumBits);
 
             var unum30 = new Unum(_environment_3_4, (uint)30);
-            var bitmask30 = new BitMask(new uint[] { 0x3F22 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask30, unum30.UnumBits);
+            var bitMask30 = new BitMask(new uint[] { 0x3F22 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask30, unum30.UnumBits);
 
             var unum1000 = new Unum(_environment_3_4, (uint)1000);
-            var bitmask1000 = new BitMask(new uint[] { 0x63D45 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask1000, unum1000.UnumBits);
+            var bitMask1000 = new BitMask(new uint[] { 0x63D45 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask1000, unum1000.UnumBits);
 
             var unum5000 = new Unum(_environment_3_4, (uint)5000);
-            var bitmask5000 = new BitMask(new uint[] { 0x367148 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask5000, unum5000.UnumBits);
+            var bitMask5000 = new BitMask(new uint[] { 0x367148 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask5000, unum5000.UnumBits);
 
             var unum6000 = new Unum(_environment_3_4, (uint)6000);
-            var bitmask6000 = new BitMask(new uint[] { 0x1B7747 }, _environment_3_4.Size);
-            Assert.AreEqual(bitmask6000, unum6000.UnumBits);
+            var bitMask6000 = new BitMask(new uint[] { 0x1B7747 }, _environment_3_4.Size);
+            Assert.AreEqual(bitMask6000, unum6000.UnumBits);
         }
 
         //[Test]
@@ -224,12 +228,12 @@ namespace Lombiq.Unum.Tests
         //    var second = new Unum(_metaData_3_4, (double)9999999999999);
 
 
-        //    var bitmask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
-        //    var bitmask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
+        //    var bitMask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
+        //    var bitMask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
 
 
-        //    Assert.AreEqual(first.UnumBits, bitmask_1);
-        //    Assert.AreEqual(second.UnumBits, bitmask_2);
+        //    Assert.AreEqual(first.UnumBits, bitMask_1);
+        //    Assert.AreEqual(second.UnumBits, bitMask_2);
         //}
 
 
@@ -240,60 +244,60 @@ namespace Lombiq.Unum.Tests
         //    var second = new Unum(_metaData_3_4, (long)9999999999999);
 
 
-        //    var bitmask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
-        //    var bitmask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
+        //    var bitMask_1 = new BitMask(new uint[] { 0x3F22 }, _metaData_3_4.Size);
+        //    var bitMask_2 = new BitMask(new uint[] { 0x6A2309EF }, _metaData_3_4.Size);
 
 
-        //    Assert.AreEqual(first.UnumBits, bitmask_1);
-        //    Assert.AreEqual(second.UnumBits, bitmask_2);
+        //    Assert.AreEqual(first.UnumBits, bitMask_1);
+        //    Assert.AreEqual(second.UnumBits, bitMask_2);
         //}
 
         [Test]
         public void IsExactIsCorrect()
         {
             // 0  0000 0000  0000  1 000 00
-            var bitmask_3_2_uncertain = new BitMask(new uint[] { 0x20 }, 19);
-            var unum_3_2_uncertain = new Unum(_environment_3_2, bitmask_3_2_uncertain);
+            var bitMask_3_2_uncertain = new BitMask(new uint[] { 0x20 }, 19);
+            var unum_3_2_uncertain = new Unum(_environment_3_2, bitMask_3_2_uncertain);
             Assert.AreEqual(false, unum_3_2_uncertain.IsExact());
 
-            var bitmask_3_2_certain = new BitMask(19, false);
-            var unum_3_2_certain = new Unum(_environment_3_2, bitmask_3_2_certain);
+            var bitMask_3_2_certain = new BitMask(19, false);
+            var unum_3_2_certain = new Unum(_environment_3_2, bitMask_3_2_certain);
             Assert.AreEqual(true, unum_3_2_certain.IsExact());
 
-            var bitmask_3_4_uncertain = new BitMask(new uint[] { 0x80, 0 }, 33);
-            var unum_3_4_uncertain = new Unum(_environment_3_4, bitmask_3_4_uncertain);
+            var bitMask_3_4_uncertain = new BitMask(new uint[] { 0x80, 0 }, 33);
+            var unum_3_4_uncertain = new Unum(_environment_3_4, bitMask_3_4_uncertain);
             Assert.AreEqual(false, unum_3_4_uncertain.IsExact());
 
-            var bitmask_3_4_certain = new BitMask(33, false);
-            var unum_3_4_certain = new Unum(_environment_3_4, bitmask_3_4_certain);
+            var bitMask_3_4_certain = new BitMask(33, false);
+            var unum_3_4_certain = new Unum(_environment_3_4, bitMask_3_4_certain);
             Assert.AreEqual(true, unum_3_4_certain.IsExact());
         }
 
         [Test]
         public void FractionSizeIsCorrect()
         {
-            var bitmask_3_2_allOne = new BitMask(19, true);
-            var unum_3_2_allOne = new Unum(_environment_3_2, bitmask_3_2_allOne);
+            var bitMask_3_2_allOne = new BitMask(19, true);
+            var unum_3_2_allOne = new Unum(_environment_3_2, bitMask_3_2_allOne);
             Assert.AreEqual(4, unum_3_2_allOne.FractionSize());
 
-            var bitmask_3_4_allOne = new BitMask(33, true);
-            var unum_3_4_allOne = new Unum(_environment_3_4, bitmask_3_4_allOne);
+            var bitMask_3_4_allOne = new BitMask(33, true);
+            var unum_3_4_allOne = new Unum(_environment_3_4, bitMask_3_4_allOne);
             Assert.AreEqual(16, unum_3_4_allOne.FractionSize());
         }
 
         [Test]
         public void ExponentSizeIsCorrect()
         {
-            var bitmask_3_2_allOne = new BitMask(19, true);
-            var unum_3_2_allOne = new Unum(_environment_3_2, bitmask_3_2_allOne);
+            var bitMask_3_2_allOne = new BitMask(19, true);
+            var unum_3_2_allOne = new Unum(_environment_3_2, bitMask_3_2_allOne);
             Assert.AreEqual(8, unum_3_2_allOne.ExponentSize());
 
-            var bitmask_3_4_allOne = new BitMask(33, true);
-            var unum_3_4_allOne = new Unum(_environment_3_4, bitmask_3_4_allOne);
+            var bitMask_3_4_allOne = new BitMask(33, true);
+            var unum_3_4_allOne = new Unum(_environment_3_4, bitMask_3_4_allOne);
             Assert.AreEqual(8, unum_3_4_allOne.ExponentSize());
 
-            var bitmask_4_3_allOne = new BitMask(33, true);
-            var unum_4_3_allOne = new Unum(_environment_4_3, bitmask_4_3_allOne);
+            var bitMask_4_3_allOne = new BitMask(33, true);
+            var unum_4_3_allOne = new Unum(_environment_4_3, bitMask_4_3_allOne);
             Assert.AreEqual(16, unum_4_3_allOne.ExponentSize());
         }
 
@@ -301,39 +305,39 @@ namespace Lombiq.Unum.Tests
         public void FractionMaskIsCorrect()
         {
             // 0  0000 0000  1111  0000 00
-            var bitmask_3_2_allOne = new BitMask(19, true);
-            var unum_3_2_allOne = new Unum(_environment_3_2, bitmask_3_2_allOne);
-            var bitmask_3_2_FractionMask = new BitMask(new uint[] { 0x3C0 }, 19);
-            Assert.AreEqual(bitmask_3_2_FractionMask, unum_3_2_allOne.FractionMask());
+            var bitMask_3_2_allOne = new BitMask(19, true);
+            var unum_3_2_allOne = new Unum(_environment_3_2, bitMask_3_2_allOne);
+            var bitMask_3_2_FractionMask = new BitMask(new uint[] { 0x3C0 }, 19);
+            Assert.AreEqual(bitMask_3_2_FractionMask, unum_3_2_allOne.FractionMask());
 
             // 0  0000 0000  1111 1111 1111 1111  0000 0000
-            var bitmask_3_4_allOne = new BitMask(33, true);
-            var unum_3_4_allOne = new Unum(_environment_3_4, bitmask_3_4_allOne);
-            var bitmask_3_4_FractionMask = new BitMask(new uint[] { 0xFFFF00 }, 33);
-            Assert.AreEqual(bitmask_3_4_FractionMask, unum_3_4_allOne.FractionMask());
+            var bitMask_3_4_allOne = new BitMask(33, true);
+            var unum_3_4_allOne = new Unum(_environment_3_4, bitMask_3_4_allOne);
+            var bitMask_3_4_FractionMask = new BitMask(new uint[] { 0xFFFF00 }, 33);
+            Assert.AreEqual(bitMask_3_4_FractionMask, unum_3_4_allOne.FractionMask());
         }
 
         [Test]
         public void ExponentMaskIsCorrect()
         {
             // 0  1111 1111  0000  0 000 00
-            var bitmask_3_2_allOne = new BitMask(19, true);
-            var unum_3_2_allOne = new Unum(_environment_3_2, bitmask_3_2_allOne);
-            var bitmask_3_2_ExponentMask = new BitMask(new uint[] { 0x3FC00 }, 19);
-            Assert.AreEqual(bitmask_3_2_ExponentMask, unum_3_2_allOne.ExponentMask());
+            var bitMask_3_2_allOne = new BitMask(19, true);
+            var unum_3_2_allOne = new Unum(_environment_3_2, bitMask_3_2_allOne);
+            var bitMask_3_2_ExponentMask = new BitMask(new uint[] { 0x3FC00 }, 19);
+            Assert.AreEqual(bitMask_3_2_ExponentMask, unum_3_2_allOne.ExponentMask());
 
             // 0  1111 1111  0000 0000 0000 0000  0 000 0000
-            var bitmask_3_4_allOne = new BitMask(33, true);
-            var unum_3_4_allOne = new Unum(_environment_3_4, bitmask_3_4_allOne);
-            var bitmask_3_4_ExponentMask = new BitMask(new uint[] { 0xFF000000 }, 33);
-            Assert.AreEqual(bitmask_3_4_ExponentMask, unum_3_4_allOne.ExponentMask());
+            var bitMask_3_4_allOne = new BitMask(33, true);
+            var unum_3_4_allOne = new Unum(_environment_3_4, bitMask_3_4_allOne);
+            var bitMask_3_4_ExponentMask = new BitMask(new uint[] { 0xFF000000 }, 33);
+            Assert.AreEqual(bitMask_3_4_ExponentMask, unum_3_4_allOne.ExponentMask());
         }
 
         [Test]
         public void ExponentValueWithBiasIsCorrect()
         {
-            var bitmask1 = new BitMask(new uint[] { 0xE40 }, 33);
-            var unum1 = new Unum(_environment_3_4, bitmask1);
+            var bitMask1 = new BitMask(new uint[] { 0xE40 }, 33);
+            var unum1 = new Unum(_environment_3_4, bitMask1);
             Assert.AreEqual(unum1.ExponentValueWithBias(), -8);
 
             var unumZero = new Unum(_environment_3_4, 0);
@@ -343,13 +347,13 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void FractionWithHiddenBitIsCorrect()
         {
-            var bitmask1 = new BitMask(new uint[] { 0xE40 }, 33);
-            var bitmask2 = new BitMask(new uint[] { 0x3F22 }, 33);
-            var bitmask3 = new BitMask(new uint[] { 0x7E012B }, 33);
+            var bitMask1 = new BitMask(new uint[] { 0xE40 }, 33);
+            var bitMask2 = new BitMask(new uint[] { 0x3F22 }, 33);
+            var bitMask3 = new BitMask(new uint[] { 0x7E012B }, 33);
 
-            var unum1 = new Unum(_environment_3_4, bitmask1);
-            var unum2 = new Unum(_environment_3_4, bitmask2);
-            var unum3 = new Unum(_environment_3_4, bitmask3);
+            var unum1 = new Unum(_environment_3_4, bitMask1);
+            var unum2 = new Unum(_environment_3_4, bitMask2);
+            var unum3 = new Unum(_environment_3_4, bitMask3);
 
             Assert.AreEqual(new BitMask(new uint[] { 2 }, 33), unum1.FractionWithHiddenBit());
             Assert.AreEqual(new BitMask(new uint[] { 0xF }, 33), unum2.FractionWithHiddenBit());
@@ -360,13 +364,13 @@ namespace Lombiq.Unum.Tests
         public void AddExactUnumsIsCorrect()
         {
             // First example from The End of Error p. 117.
-            var bitmask1 = new BitMask(new uint[] { 0xE40 }, 33);
-            var bitmask2 = new BitMask(new uint[] { 0x3F22 }, 33);
-            var unum1 = new Unum(_environment_3_4, bitmask1);
-            var unum2 = new Unum(_environment_3_4, bitmask2);
-            var bitmaskSum = new BitMask(new uint[] { 0x7E012B }, 33);
+            var bitMask1 = new BitMask(new uint[] { 0xE40 }, 33);
+            var bitMask2 = new BitMask(new uint[] { 0x3F22 }, 33);
+            var unum1 = new Unum(_environment_3_4, bitMask1);
+            var unum2 = new Unum(_environment_3_4, bitMask2);
+            var bitMaskSum = new BitMask(new uint[] { 0x7E012B }, 33);
             var unumSum1 = Unum.AddExactUnums(unum1, unum2);
-            Assert.AreEqual(unumSum1.UnumBits, bitmaskSum);
+            Assert.AreEqual(unumSum1.UnumBits, bitMaskSum);
 
             // Addition should be commutative.
             var unumSum2 = Unum.AddExactUnums(unum2, unum1);
@@ -382,10 +386,10 @@ namespace Lombiq.Unum.Tests
             Assert.AreEqual(unum1.UnumBits, unumZeroPlusUnum1.UnumBits);
 
             // Case of inexact result, second example from The End or Error, p. 117.
-            var bitmask4 = new BitMask(new uint[] { 0x18F400CF }, 33); // 1000.0078125
+            var bitMask4 = new BitMask(new uint[] { 0x18F400CF }, 33); // 1000.0078125
             var unum1000 = new Unum(_environment_3_4, 1000);
             var unum6 = Unum.AddExactUnums(unum1000, unum1); // 1/256
-            Assert.AreEqual(unum6.UnumBits, bitmask4);
+            Assert.AreEqual(unum6.UnumBits, bitMask4);
 
             var unum5000 = new Unum(_environment_3_4, 5000);
             var unum6000 = new Unum(_environment_3_4, 6000);
@@ -450,14 +454,14 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void SubtractExactUnumsIsCorrect()
         {
-            var bitmask1 = new BitMask(new uint[] { 0x7E012B }, 33); // 30.00390625
-            var bitmask2 = new BitMask(new uint[] { 0xE40 }, 33);    // 0.00390625
-            var bitmask3 = new BitMask(new uint[] { 0x3F22 }, 33);   // 30
+            var bitMask1 = new BitMask(new uint[] { 0x7E012B }, 33); // 30.00390625
+            var bitMask2 = new BitMask(new uint[] { 0xE40 }, 33);    // 0.00390625
+            var bitMask3 = new BitMask(new uint[] { 0x3F22 }, 33);   // 30
 
-            var unum1 = new Unum(_environment_3_4, bitmask1);
-            var unum2 = new Unum(_environment_3_4, bitmask2);
+            var unum1 = new Unum(_environment_3_4, bitMask1);
+            var unum2 = new Unum(_environment_3_4, bitMask2);
             var unum3 = Unum.SubtractExactUnums(unum1, unum2);
-            Assert.AreEqual(unum3.UnumBits, bitmask3);
+            Assert.AreEqual(unum3.UnumBits, bitMask3);
 
             var unum5000 = new Unum(_environment_3_4, 5000);
             var unum6000 = new Unum(_environment_3_4, 6000);
@@ -496,23 +500,23 @@ namespace Lombiq.Unum.Tests
             var unum6000 = new Unum(_environment_3_4, 6000);
             var unum5000 = new Unum(_environment_3_4, 5000);
 
-            var bitmask0 = new BitMask(new uint[] { 0 }, 33);
-            var bitmask30 = new BitMask(new uint[] { 0x3F22 }, 33);
-            var bitmask1000 = new BitMask(new uint[] { 0x63D45 }, 33);
-            var bitmaskMinus1000 = new BitMask(new uint[] { 0x63D45, 1 }, 33);
-            var bitmaskMinus30 = new BitMask(new uint[] { 0x3F22, 1 }, 33);
-            var bitmask6000 = new BitMask(new uint[] { 0x1B7747 }, 33);
-            var bitmask5000 = new BitMask(new uint[] { 0x367148 }, 33);
+            var bitMask0 = new BitMask(new uint[] { 0 }, 33);
+            var bitMask30 = new BitMask(new uint[] { 0x3F22 }, 33);
+            var bitMask1000 = new BitMask(new uint[] { 0x63D45 }, 33);
+            var bitMaskMinus1000 = new BitMask(new uint[] { 0x63D45, 1 }, 33);
+            var bitMaskMinus30 = new BitMask(new uint[] { 0x3F22, 1 }, 33);
+            var bitMask6000 = new BitMask(new uint[] { 0x1B7747 }, 33);
+            var bitMask5000 = new BitMask(new uint[] { 0x367148 }, 33);
 
             Assert.AreEqual(unumOne.UnumBits, new BitMask(new uint[] { 0x100 }, 33));
             Assert.AreEqual(unumTwo.UnumBits, new BitMask(new uint[] { 0x200 }, 33));
-            Assert.AreEqual(unumZero.UnumBits, bitmask0);
-            Assert.AreEqual(unumThirty.UnumBits, bitmask30);
-            Assert.AreEqual(unumThousand.UnumBits, bitmask1000);
-            Assert.AreEqual(unumNegativeThirty.UnumBits, bitmaskMinus30);
-            Assert.AreEqual(unum6000.UnumBits, bitmask6000);
-            Assert.AreEqual(unum5000.UnumBits, bitmask5000);
-            Assert.AreEqual(unumNegativeThousand.UnumBits, bitmaskMinus1000);
+            Assert.AreEqual(unumZero.UnumBits, bitMask0);
+            Assert.AreEqual(unumThirty.UnumBits, bitMask30);
+            Assert.AreEqual(unumThousand.UnumBits, bitMask1000);
+            Assert.AreEqual(unumNegativeThirty.UnumBits, bitMaskMinus30);
+            Assert.AreEqual(unum6000.UnumBits, bitMask6000);
+            Assert.AreEqual(unum5000.UnumBits, bitMask5000);
+            Assert.AreEqual(unumNegativeThousand.UnumBits, bitMaskMinus1000);
         }
 
         [Test]
@@ -577,12 +581,12 @@ namespace Lombiq.Unum.Tests
         //    var second = new Unum(_metaData_3_4, (float)9999999999999);
 
 
-        //    var bitmask_1 = new BitMask(new uint[] { 0x3F22 }, 33);
-        //    var bitmask_2 = new BitMask(new uint[] { 0x6A2309EF }, 33);
+        //    var bitMask_1 = new BitMask(new uint[] { 0x3F22 }, 33);
+        //    var bitMask_2 = new BitMask(new uint[] { 0x6A2309EF }, 33);
 
 
-        //    Assert.AreEqual(first.UnumBits, bitmask_1);
-        //    Assert.AreEqual(second.UnumBits, bitmask_2);
+        //    Assert.AreEqual(first.UnumBits, bitMask_1);
+        //    Assert.AreEqual(second.UnumBits, bitMask_2);
         //}
 
         [Test]
