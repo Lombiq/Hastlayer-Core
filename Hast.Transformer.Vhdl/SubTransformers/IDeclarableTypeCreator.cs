@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
@@ -26,11 +27,27 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             this IDeclarableTypeCreator declarableTypeCreator,
             AstNode valueHolder,
             AstType type,
-            IVhdlTransformationContext context) =>
-            declarableTypeCreator.CreateDeclarableType(
-                valueHolder, 
-                type.GetActualTypeReference() ?? 
-                (type.Parent is VariableDeclarationStatement ? ((VariableDeclarationStatement)type.Parent).Variables.First() : type.Parent).GetActualTypeReference(), 
-                context);
+            IVhdlTransformationContext context)
+        {
+            var typeReference = type.GetActualTypeReference();
+
+            if (typeReference == null)
+            {
+                if (type.Parent is VariableDeclarationStatement)
+                {
+                    typeReference = ((VariableDeclarationStatement)type.Parent).Variables.First().GetActualTypeReference();
+                }
+                else if (type is PrimitiveType)
+                {
+                    typeReference = TypeHelper.CreatePrimitiveTypeReference(((PrimitiveType)type).KnownTypeCode.ToString());
+                }
+                else
+                {
+                    typeReference = type.Parent.GetActualTypeReference();
+                }
+            }
+
+            return declarableTypeCreator.CreateDeclarableType(valueHolder, typeReference, context);
+        }
     }
 }
