@@ -68,7 +68,7 @@ namespace Hast.Samples.Consumer
                         var devices = await hastlayer.GetSupportedDevices();
                         // Let's just use the first one that is available. However you might want to use a specific
                         // device, not just any first one.
-                        var configuration = new HardwareGenerationConfiguration(devices.First().TechnicalName);
+                        var configuration = new HardwareGenerationConfiguration(devices.First().Name);
 
 
                         // Letting the configuration of samples run.

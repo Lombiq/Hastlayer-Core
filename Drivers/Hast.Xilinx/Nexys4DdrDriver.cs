@@ -211,7 +211,7 @@ mod	signed8	signed8	sync	synth	20,480	-0,136
 
             DeviceManifest = new DeviceManifest
             {
-                TechnicalName = "Nexys4 DDR",
+                Name = "Nexys4 DDR",
                 ClockFrequencyHz = 100000000, // 100 Mhz
                 SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
                 AvailableMemoryBytes = 115343360 // 110MB

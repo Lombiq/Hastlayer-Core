@@ -20,7 +20,7 @@ namespace Hast.Synthesis.Services
         public IEnumerable<IDeviceManifest> GetSupporteDevices() => _drivers.Select(driver => driver.DeviceManifest);
 
         public IDeviceDriver GetDriver(string deviceName) =>
-            _drivers.FirstOrDefault(driver => driver.DeviceManifest.TechnicalName == deviceName);
+            _drivers.FirstOrDefault(driver => driver.DeviceManifest.Name == deviceName);
 
     }
 }
