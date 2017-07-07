@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -278,6 +279,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         whileStartStateIndexNameGenerator(vhdlGenerationOptions) +
                         "."));
                 var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
+                GetOrCreateAfterWhileStateIndexStack(context).Push(afterWhileStateIndex);
 
                 // Having a condition even in the current state's body: if the loop doesn't need to run at all we'll
                 // spare one cycle by directly jumping to the state after the loop.
@@ -320,6 +322,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.Add(CreateConditionalStateChange(repeatedStateIndex, context));
                 }
                 currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
+
+                GetOrCreateAfterWhileStateIndexStack(context).Pop();
             }
             else if (statement is ThrowStatement)
             {
@@ -393,6 +397,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return;
                 }
 
+                var afterWhileStack = GetOrCreateAfterWhileStateIndexStack(context);
+                if (afterWhileStack.Any())
+                {
+                    currentBlock.Add(new LineComment("Exiting the while loop with a break statement."));
+                    currentBlock.Add(stateMachine.CreateStateChange(afterWhileStack.Peek()));
+
+                    return;
+                }
+
                 throw new NotSupportedException("Break statements outside of switch statements are not supported.");
             }
             else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported.");
@@ -419,6 +432,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 },
                 True = stateMachine.CreateStateChange(destinationStateIndex)
             };
+        }
+
+
+        // Keeping track of the index of the state after while statements, so this can be used to break out of the loop.
+        private static Stack<int> GetOrCreateAfterWhileStateIndexStack(ISubTransformerContext context)
+        {
+            var key = "Hast.Transformer.Vhdl.AfterWhileStateIndexStack";
+
+            dynamic stack;
+            if (context.Scope.CustomProperties.TryGetValue(key, out stack)) return stack;
+
+            return context.Scope.CustomProperties[key] = new Stack<int>();
         }
     }
 }

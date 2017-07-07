@@ -468,6 +468,42 @@ architecture Imp of Hast_IP is
     -- System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.LoopCases::BreakInLoop(System.Int32).0 declarations start
+    -- State machine states:
+    type \LoopCases::BreakInLoop(Int32).0._States\ is (
+        \LoopCases::BreakInLoop(Int32).0._State_0\, 
+        \LoopCases::BreakInLoop(Int32).0._State_1\, 
+        \LoopCases::BreakInLoop(Int32).0._State_2\, 
+        \LoopCases::BreakInLoop(Int32).0._State_3\, 
+        \LoopCases::BreakInLoop(Int32).0._State_4\, 
+        \LoopCases::BreakInLoop(Int32).0._State_5\, 
+        \LoopCases::BreakInLoop(Int32).0._State_6\);
+    -- Signals:
+    Signal \LoopCases::BreakInLoop(Int32).0._Finished\: boolean := false;
+    Signal \LoopCases::BreakInLoop(Int32).0._Started\: boolean := false;
+    Signal \LoopCases::BreakInLoop(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.LoopCases::BreakInLoop(System.Int32).0 declarations end
+
+
+    -- System.Void Hast.TestInputs.Various.LoopCases::BreakInLoopInLoop(System.Int32).0 declarations start
+    -- State machine states:
+    type \LoopCases::BreakInLoopInLoop(Int32).0._States\ is (
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_0\, 
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_1\, 
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_2\, 
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_3\, 
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_4\, 
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_5\, 
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_6\, 
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_7\, 
+        \LoopCases::BreakInLoopInLoop(Int32).0._State_8\);
+    -- Signals:
+    Signal \LoopCases::BreakInLoopInLoop(Int32).0._Finished\: boolean := false;
+    Signal \LoopCases::BreakInLoopInLoop(Int32).0._Started\: boolean := false;
+    Signal \LoopCases::BreakInLoopInLoop(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.LoopCases::BreakInLoopInLoop(System.Int32).0 declarations end
+
+
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage().0 declarations start
     -- State machine states:
     type \ObjectUsingCases::NullUsage().0._States\ is (
@@ -755,6 +791,8 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
@@ -775,6 +813,8 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
@@ -2292,6 +2332,265 @@ begin
     -- System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Various.LoopCases::BreakInLoop(System.Int32).0 state machine start
+    \LoopCases::BreakInLoop(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \LoopCases::BreakInLoop(Int32).0._State\: \LoopCases::BreakInLoop(Int32).0._States\ := \LoopCases::BreakInLoop(Int32).0._State_0\;
+        Variable \LoopCases::BreakInLoop(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoop(Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoop(Int32).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoop(Int32).0.flag\: boolean := false;
+        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\: boolean := false;
+        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\: boolean := false;
+        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\: boolean := false;
+        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \LoopCases::BreakInLoop(Int32).0._Finished\ <= false;
+                \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_0\;
+                \LoopCases::BreakInLoop(Int32).0.input\ := to_signed(0, 32);
+                \LoopCases::BreakInLoop(Int32).0.num\ := to_signed(0, 32);
+                \LoopCases::BreakInLoop(Int32).0.i\ := to_signed(0, 32);
+                \LoopCases::BreakInLoop(Int32).0.flag\ := false;
+                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\ := false;
+                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\ := false;
+                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\ := false;
+                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
+            else 
+                case \LoopCases::BreakInLoop(Int32).0._State\ is 
+                    when \LoopCases::BreakInLoop(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\LoopCases::BreakInLoop(Int32).0._Started\ = true) then 
+                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoop(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\LoopCases::BreakInLoop(Int32).0._Started\ = true) then 
+                            \LoopCases::BreakInLoop(Int32).0._Finished\ <= true;
+                        else 
+                            \LoopCases::BreakInLoop(Int32).0._Finished\ <= false;
+                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoop(Int32).0._State_2\ => 
+                        \LoopCases::BreakInLoop(Int32).0.input\ := \LoopCases::BreakInLoop(Int32).0.input.parameter.In\;
+                        \LoopCases::BreakInLoop(Int32).0.num\ := \LoopCases::BreakInLoop(Int32).0.input\;
+                        \LoopCases::BreakInLoop(Int32).0.i\ := to_signed(0, 32);
+                        -- Starting a while loop.
+                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\ := \LoopCases::BreakInLoop(Int32).0.i\ < \LoopCases::BreakInLoop(Int32).0.input\;
+                        if (\LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\) then 
+                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_3\;
+                        else 
+                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoop(Int32).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoop(Int32).0._State_2\.
+                        -- The while loop's condition:
+                        \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\ := \LoopCases::BreakInLoop(Int32).0.i\ < \LoopCases::BreakInLoop(Int32).0.input\;
+                        if (\LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\) then 
+                            \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\ := \LoopCases::BreakInLoop(Int32).0.num\ + \LoopCases::BreakInLoop(Int32).0.i\;
+                            \LoopCases::BreakInLoop(Int32).0.num\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\;
+                            \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\ := \LoopCases::BreakInLoop(Int32).0.num\ > to_signed(10, 32);
+                            \LoopCases::BreakInLoop(Int32).0.flag\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \LoopCases::BreakInLoop(Int32).0._State_6\ and ends in state \LoopCases::BreakInLoop(Int32).0._State_6\.
+                            --     * Execution after either branch will continue in the following state: \LoopCases::BreakInLoop(Int32).0._State_5\.
+
+                            if (\LoopCases::BreakInLoop(Int32).0.flag\) then 
+                                \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_6\;
+                            else 
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_5\;
+                            end if;
+                        else 
+                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoop(Int32).0._State_4\ => 
+                        -- State after the while loop which was started in state \LoopCases::BreakInLoop(Int32).0._State_2\.
+                        \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoop(Int32).0._State_5\ => 
+                        -- State after the if-else which was started in state \LoopCases::BreakInLoop(Int32).0._State_3\.
+                        \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.4\ := \LoopCases::BreakInLoop(Int32).0.i\ + to_signed(1, 32);
+                        \LoopCases::BreakInLoop(Int32).0.i\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.4\;
+                        -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoop(Int32).0._State_2\ if the loop wasn't exited with a state change.
+                        if (\LoopCases::BreakInLoop(Int32).0._State\ = \LoopCases::BreakInLoop(Int32).0._State_5\) then 
+                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoop(Int32).0._State_6\ => 
+                        -- True branch of the if-else started in state \LoopCases::BreakInLoop(Int32).0._State_3\.
+                        -- Exiting the while loop with a break statement.
+                        \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_4\;
+                        -- Going to the state after the if-else which was started in state \LoopCases::BreakInLoop(Int32).0._State_3\.
+                        if (\LoopCases::BreakInLoop(Int32).0._State\ = \LoopCases::BreakInLoop(Int32).0._State_6\) then 
+                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.LoopCases::BreakInLoop(System.Int32).0 state machine end
+
+
+    -- System.Void Hast.TestInputs.Various.LoopCases::BreakInLoopInLoop(System.Int32).0 state machine start
+    \LoopCases::BreakInLoopInLoop(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0._State\: \LoopCases::BreakInLoopInLoop(Int32).0._States\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_0\;
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.j\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.flag\: boolean := false;
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\: boolean := false;
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\: boolean := false;
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\: boolean := false;
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\: boolean := false;
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\: boolean := false;
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \LoopCases::BreakInLoopInLoop(Int32).0._Finished\ <= false;
+                \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_0\;
+                \LoopCases::BreakInLoopInLoop(Int32).0.input\ := to_signed(0, 32);
+                \LoopCases::BreakInLoopInLoop(Int32).0.num\ := to_signed(0, 32);
+                \LoopCases::BreakInLoopInLoop(Int32).0.i\ := to_signed(0, 32);
+                \LoopCases::BreakInLoopInLoop(Int32).0.j\ := to_signed(0, 32);
+                \LoopCases::BreakInLoopInLoop(Int32).0.flag\ := false;
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\ := false;
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\ := false;
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\ := false;
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\ := false;
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\ := false;
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\ := to_signed(0, 32);
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\ := to_signed(0, 32);
+            else 
+                case \LoopCases::BreakInLoopInLoop(Int32).0._State\ is 
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0._Started\ = true) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0._Started\ = true) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._Finished\ <= true;
+                        else 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._Finished\ <= false;
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_2\ => 
+                        \LoopCases::BreakInLoopInLoop(Int32).0.input\ := \LoopCases::BreakInLoopInLoop(Int32).0.input.parameter.In\;
+                        \LoopCases::BreakInLoopInLoop(Int32).0.num\ := \LoopCases::BreakInLoopInLoop(Int32).0.input\;
+                        \LoopCases::BreakInLoopInLoop(Int32).0.i\ := to_signed(0, 32);
+                        -- Starting a while loop.
+                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ < \LoopCases::BreakInLoopInLoop(Int32).0.input\;
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_3\;
+                        else 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\.
+                        -- The while loop's condition:
+                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ < \LoopCases::BreakInLoopInLoop(Int32).0.input\;
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0.j\ := to_signed(0, 32);
+                            -- Starting a while loop.
+                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                            \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ < \LoopCases::BreakInLoopInLoop(Int32).0.i\;
+                            if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\) then 
+                                \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_5\;
+                            else 
+                                \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_6\;
+                            end if;
+                        else 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_4\ => 
+                        -- State after the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\.
+                        \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_5\ => 
+                        -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\.
+                        -- The while loop's condition:
+                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ < \LoopCases::BreakInLoopInLoop(Int32).0.i\;
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\ := \LoopCases::BreakInLoopInLoop(Int32).0.num\ + \LoopCases::BreakInLoopInLoop(Int32).0.i\;
+                            \LoopCases::BreakInLoopInLoop(Int32).0.num\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\;
+                            \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\ := \LoopCases::BreakInLoopInLoop(Int32).0.num\ > to_signed(10, 32);
+                            \LoopCases::BreakInLoopInLoop(Int32).0.flag\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \LoopCases::BreakInLoopInLoop(Int32).0._State_8\ and ends in state \LoopCases::BreakInLoopInLoop(Int32).0._State_8\.
+                            --     * Execution after either branch will continue in the following state: \LoopCases::BreakInLoopInLoop(Int32).0._State_7\.
+
+                            if (\LoopCases::BreakInLoopInLoop(Int32).0.flag\) then 
+                                \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_8\;
+                            else 
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_7\;
+                            end if;
+                        else 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_6\ => 
+                        -- State after the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\.
+                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ + to_signed(1, 32);
+                        \LoopCases::BreakInLoopInLoop(Int32).0.i\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\;
+                        -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\ if the loop wasn't exited with a state change.
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0._State\ = \LoopCases::BreakInLoopInLoop(Int32).0._State_6\) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_7\ => 
+                        -- State after the if-else which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
+                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ + to_signed(1, 32);
+                        \LoopCases::BreakInLoopInLoop(Int32).0.j\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\;
+                        -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\ if the loop wasn't exited with a state change.
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0._State\ = \LoopCases::BreakInLoopInLoop(Int32).0._State_7\) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_8\ => 
+                        -- True branch of the if-else started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
+                        -- Exiting the while loop with a break statement.
+                        \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_6\;
+                        -- Going to the state after the if-else which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0._State\ = \LoopCases::BreakInLoopInLoop(Int32).0._State_8\) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.LoopCases::BreakInLoopInLoop(System.Int32).0 state machine end
+
+
     -- System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage().0 state machine start
     \ObjectUsingCases::NullUsage().0._StateMachine\: process (\Clock\) 
         Variable \ObjectUsingCases::NullUsage().0._State\: \ObjectUsingCases::NullUsage().0._States\ := \ObjectUsingCases::NullUsage().0._State_0\;
@@ -3372,6 +3671,8 @@ begin
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantValuedVariables(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToMethod(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
@@ -3493,27 +3794,41 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 16 => 
+                            if (\Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 17 => 
+                            if (\Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 18 => 
                             if (\Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ = \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ObjectUsingCases::NullUsage()._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 17 => 
+                        when 19 => 
                             if (\Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 18 => 
+                        when 20 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 19 => 
+                        when 21 => 
                             if (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\) then 
@@ -4218,6 +4533,20 @@ begin
     \ConstantsUsingCases::ConstantPassingToObject().0._Started\ <= \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Started.0\;
     \Hast::ExternalInvocationProxy().ConstantsUsingCases::ConstantPassingToObject()._Finished.0\ <= \ConstantsUsingCases::ConstantPassingToObject().0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ConstantsUsingCases::ConstantPassingToObject() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.LoopCases::BreakInLoop(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \LoopCases::BreakInLoop(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().LoopCases::BreakInLoop(Int32)._Finished.0\ <= \LoopCases::BreakInLoop(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.LoopCases::BreakInLoop(System.Int32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.LoopCases::BreakInLoopInLoop(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \LoopCases::BreakInLoopInLoop(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().LoopCases::BreakInLoopInLoop(Int32)._Finished.0\ <= \LoopCases::BreakInLoopInLoop(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.LoopCases::BreakInLoopInLoop(System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ObjectUsingCases::NullUsage() start
