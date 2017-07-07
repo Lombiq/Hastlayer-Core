@@ -10,6 +10,7 @@ namespace Hast.Synthesis.Services
 {
     public interface IDeviceDriverSelector : IDependency
     {
+        IEnumerable<IDeviceManifest> GetSupporteDevices();
         IDeviceDriver GetDriver(string deviceName);
     }
 }

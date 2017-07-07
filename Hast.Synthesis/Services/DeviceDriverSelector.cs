@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Models;
 
 namespace Hast.Synthesis.Services
 {
@@ -16,8 +17,10 @@ namespace Hast.Synthesis.Services
             _drivers = drivers;
         }
 
+        public IEnumerable<IDeviceManifest> GetSupporteDevices() => _drivers.Select(driver => driver.DeviceManifest);
 
         public IDeviceDriver GetDriver(string deviceName) =>
             _drivers.FirstOrDefault(driver => driver.DeviceManifest.TechnicalName == deviceName);
+
     }
 }

@@ -9,6 +9,7 @@ using Hast.Communication;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis;
+using Hast.Synthesis.Services;
 using Hast.Transformer;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
@@ -52,6 +53,11 @@ namespace Hast.Layer
             return new Hastlayer(configuration);
         }
 
+
+        public async Task<IEnumerable<IDeviceManifest>> GetSupportedDevices()
+        {
+            return await (await GetHost()).RunGet(scope => Task.FromResult(scope.Resolve<IDeviceDriverSelector>().GetSupporteDevices()));
+        }
 
         public async Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
         {

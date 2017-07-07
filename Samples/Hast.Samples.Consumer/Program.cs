@@ -5,6 +5,7 @@ using Hast.Common.Models;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Configuration;
+using System.Linq;
 
 namespace Hast.Samples.Consumer
 {
@@ -64,7 +65,10 @@ namespace Hast.Samples.Consumer
 
 
                         // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
-                        var configuration = new HardwareGenerationConfiguration("Nexys4 DDR");
+                        var devices = await hastlayer.GetSupportedDevices();
+                        // Let's just use the first one that is available. However you might want to use a specific
+                        // device, not just any first one.
+                        var configuration = new HardwareGenerationConfiguration(devices.First().TechnicalName);
 
 
                         // Letting the configuration of samples run.
