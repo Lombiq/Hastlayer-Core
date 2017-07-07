@@ -99,6 +99,7 @@
     <Compile Include="IProxyGenerator.cs" />
     <Compile Include="MemberSuitabilityChecker.cs" />
     <Compile Include="MemberInvocationHandlerFactory.cs" />
+    <Compile Include="Models\IHardwareExecutionContext.cs" />
     <Compile Include="Models\IPooledDevice.cs" />
     <Compile Include="Models\IReservedDevice.cs" />
     <Compile Include="Models\IDevice.cs" />

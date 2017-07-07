@@ -21,7 +21,6 @@ namespace Hast.Communication.Services
     {
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
-        private readonly IDeviceDriver _deviceDriver;
         private readonly IEnumerable<ISerialPortConfigurator> _serialPortConfigurators;
 
         public override string ChannelName
@@ -36,19 +35,17 @@ namespace Hast.Communication.Services
         public SerialPortCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
-            IDeviceDriver deviceDriver,
             IEnumerable<ISerialPortConfigurator> serialPortConfigurators)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
-            _deviceDriver = deviceDriver;
             _serialPortConfigurators = serialPortConfigurators;
-
-            Logger = NullLogger.Instance;
         }
 
 
-        public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
+        public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory,
+            int memberId,
+            IHardwareExecutionContext executionContext)
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
                 {
@@ -145,7 +142,7 @@ namespace Hast.Communication.Services
                                     {
                                         var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                                        SetHardwareExecutionTime(context, _deviceDriver, executionTimeClockCycles);
+                                        SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
                                         communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount;
                                         serialPort.Write(CommunicationConstants.Serial.Signals.Ready);

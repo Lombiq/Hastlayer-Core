@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.Tests
             IEnumerable<Assembly> assemblies,
             Action<HardwareGenerationConfiguration> configurationModifier = null)
         {
-            var configuration = new HardwareGenerationConfiguration { EnableCaching = false };
+            var configuration = new HardwareGenerationConfiguration("Nexys4 DDR") { EnableCaching = false };
             configurationModifier?.Invoke(configuration);
             return (VhdlHardwareDescription)await transformer.Transform(assemblies, configuration);
         }

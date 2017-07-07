@@ -11,6 +11,7 @@ using Hast.Common.Models;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
+using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Synthesis;
 using Hast.Transformer.SimpleMemory;
@@ -142,7 +143,10 @@ namespace Hast.Communication
                                 invocationContext.ExecutionInformation = await workContext
                                     .Resolve<ICommunicationServiceSelector>()
                                     .GetCommunicationService(communicationChannelName)
-                                    .Execute(memory, memberId);
+                                    .Execute(
+                                        memory, 
+                                        memberId, 
+                                        new HardwareExecutionContext { ProxyGenerationConfiguration = configuration, HardwareRepresentation = hardwareRepresentation });
 
                                 if (configuration.ValidateHardwareResults)
                                 {
@@ -214,6 +218,12 @@ namespace Hast.Communication
             public string MemberFullName { get; set; }
             public IHardwareRepresentation HardwareRepresentation { get; set; }
             public IHardwareExecutionInformation ExecutionInformation { get; set; }
+        }
+
+        private class HardwareExecutionContext : IHardwareExecutionContext
+        {
+            public IProxyGenerationConfiguration ProxyGenerationConfiguration { get; set; }
+            public IHardwareRepresentation HardwareRepresentation { get; set; }
         }
     }
 }

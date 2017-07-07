@@ -191,7 +191,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private static HardwareGenerationConfiguration CreateConfig()
         {
-            var configuration = new HardwareGenerationConfiguration();
+            var configuration = new HardwareGenerationConfiguration("Nexys4 DDR");
             configuration.TransformerConfiguration().UseSimpleMemory = false;
             return configuration;
         }

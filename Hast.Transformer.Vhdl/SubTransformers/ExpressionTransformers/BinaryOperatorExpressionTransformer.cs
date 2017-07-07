@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Hast.Synthesis;
+using Hast.Synthesis.Services;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -15,17 +15,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
     public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTransformer
     {
-        private readonly IDeviceDriver _deviceDriver;
+        private readonly IDeviceDriverSelector _deviceDriverSelector;
         private readonly ITypeConverter _typeConverter;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
         public BinaryOperatorExpressionTransformer(
-            IDeviceDriver deviceDriver,
+            IDeviceDriverSelector deviceDriverSelector,
             ITypeConverter typeConverter,
             ITypeConversionTransformer typeConversionTransformer)
         {
-            _deviceDriver = deviceDriver;
+            _deviceDriverSelector = deviceDriverSelector;
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
         }
@@ -315,10 +315,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
             if (maxOperandSize == 0) maxOperandSize = resultTypeSize;
+
+            var deviceDriver = _deviceDriverSelector.GetDriver(context);
             decimal clockCyclesNeededForOperation;
-            var clockCyclesNeededForSignedOperation = _deviceDriver
+            var clockCyclesNeededForSignedOperation = deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
-            var clockCyclesNeededForUnsignedOperation = _deviceDriver
+            var clockCyclesNeededForUnsignedOperation = deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
             if (leftType != null && rightType != null && leftType.Name == rightType.Name)
             {

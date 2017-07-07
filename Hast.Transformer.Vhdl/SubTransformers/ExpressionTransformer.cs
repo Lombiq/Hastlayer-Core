@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hast.Common.Configuration;
-using Hast.Synthesis;
+using Hast.Synthesis.Services;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConversionTransformer _typeConversionTransformer;
         private readonly IInvocationExpressionTransformer _invocationExpressionTransformer;
         private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
-        private readonly IDeviceDriver _deviceDriver;
+        private readonly IDeviceDriverSelector _deviceDriverSelector;
         private readonly IBinaryOperatorExpressionTransformer _binaryOperatorExpressionTransformer;
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
         private readonly IRecordComposer _recordComposer;
@@ -40,7 +40,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             ITypeConversionTransformer typeConversionTransformer,
             IInvocationExpressionTransformer invocationExpressionTransformer,
             IArrayCreateExpressionTransformer arrayCreateExpressionTransformer,
-            IDeviceDriver deviceDriver,
+            IDeviceDriverSelector deviceDriverSelector,
             IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
             IStateMachineInvocationBuilder stateMachineInvocationBuilder,
             IRecordComposer recordComposer,
@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConversionTransformer = typeConversionTransformer;
             _invocationExpressionTransformer = invocationExpressionTransformer;
             _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
-            _deviceDriver = deviceDriver;
+            _deviceDriverSelector = deviceDriverSelector;
             _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
             _recordComposer = recordComposer;
@@ -493,7 +493,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var expressionSize = _typeConverter
                     .ConvertTypeReference(unary.Expression.GetActualTypeReference(), context.TransformationContext)
                     .GetSize();
-                var clockCyclesNeededForOperation = _deviceDriver.GetClockCyclesNeededForUnaryOperation(unary, expressionSize, false);
+                var clockCyclesNeededForOperation = _deviceDriverSelector
+                    .GetDriver(context)
+                    .GetClockCyclesNeededForUnaryOperation(unary, expressionSize, false);
 
                 stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);
                 scope.CurrentBlock.RequiredClockCycles += clockCyclesNeededForOperation;

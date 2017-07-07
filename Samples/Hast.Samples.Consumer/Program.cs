@@ -63,7 +63,8 @@ namespace Hast.Samples.Consumer
                             };
 
 
-                        var configuration = new HardwareGenerationConfiguration();
+                        // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
+                        var configuration = new HardwareGenerationConfiguration("Nexys4 DDR");
 
 
                         // Letting the configuration of samples run.

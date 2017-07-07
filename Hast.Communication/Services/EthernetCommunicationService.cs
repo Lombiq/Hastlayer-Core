@@ -21,7 +21,6 @@ namespace Hast.Communication.Services
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
-        private readonly IDeviceDriver _deviceDriver;
         private readonly IFpgaIpEndpointFinder _fpgaIpEndpointFinder;
 
 
@@ -37,17 +36,17 @@ namespace Hast.Communication.Services
         public EthernetCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
-            IDeviceDriver deviceDriver,
             IFpgaIpEndpointFinder fpgaIpEndpointFinder)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
-            _deviceDriver = deviceDriver;
             _fpgaIpEndpointFinder = fpgaIpEndpointFinder;
         }
 
 
-        public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory, int memberId)
+        public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory,
+            int memberId,
+            IHardwareExecutionContext executionContext)
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
                 {
@@ -116,7 +115,7 @@ namespace Hast.Communication.Services
 
                             var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                            SetHardwareExecutionTime(context, _deviceDriver, executionTimeClockCycles);
+                            SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
                             // Read the bytes representing the length of the simple memory.
                             var outputByteCountBytes = await GetBytesFromStream(stream, 4);

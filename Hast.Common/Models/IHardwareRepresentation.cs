@@ -24,7 +24,7 @@ namespace Hast.Common.Models
         IHardwareImplementation HardwareImplementation { get; }
 
         /// <summary>
-        /// Describes the capabilities, like available memory, of the connected hardware device.
+        /// Describes the capabilities, like available memory, of the hardware device the representation wa created for.
         /// </summary>
         IDeviceManifest DeviceManifest { get; }
     }

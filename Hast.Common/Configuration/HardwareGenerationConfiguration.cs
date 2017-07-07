@@ -42,18 +42,23 @@ namespace Hast.Common.Configuration
         /// </summary>
         public bool EnableCaching { get; set; } = true;
 
-        private static IHardwareGenerationConfiguration _default;
-        public static IHardwareGenerationConfiguration Default
-        {
-            get
-            {
-                if (_default == null)
-                {
-                    _default = new HardwareGenerationConfiguration();
-                }
+        /// <summary>
+        /// Gets the name of the FPGA device (board) to transform for. Device-specific configurations are determined
+        /// by device drivers.
+        /// </summary>
+        public string DeviceName { get; }
 
-                return _default;
-            }
+
+        /// <summary>
+        /// Constructs a new <see cref="HardwareGenerationConfiguration"/> object.
+        /// </summary>
+        /// <param name="deviceName">
+        /// The name of the FPGA device (board) to transform for. Device-specific configurations are determined by 
+        /// device drivers. You can fetch the list of supported devices via
+        /// </param>
+        public HardwareGenerationConfiguration(string deviceName)
+        {
+            DeviceName = deviceName;
         }
     }
 }
