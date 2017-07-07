@@ -1348,7 +1348,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             {
                 _coders = new Encoder2[MaxNumberOfCoders];
 
-                if (_coders == null || _numPrevBits != numPrevBits || _numPosBits != numPosBits)
+                if (_numPrevBits != numPrevBits || _numPosBits != numPosBits)
                 {
                     _numPosBits = numPosBits;
                     _posMask = ((uint)1 << numPosBits) - 1;

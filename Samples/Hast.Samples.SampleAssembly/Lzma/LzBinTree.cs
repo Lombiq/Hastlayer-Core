@@ -244,7 +244,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
             var run = true;
             while (run)
             {
-                if (curMatch <= matchMinPos || count-- == 0)
+                if (curMatch <= matchMinPos || count == 0)
                 {
                     _son[ptr0] = _son[ptr1] = EmptyHashValue;
                     run = false;
@@ -299,6 +299,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                         }
                     }
                 }
+
+                count--;
             }
 
             MovePos();
@@ -357,7 +359,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                     var run = true;
                     while (run)
                     {
-                        if (curMatch <= matchMinPos || count-- == 0)
+                        if (curMatch <= matchMinPos || count == 0)
                         {
                             _son[ptr0] = _son[ptr1] = EmptyHashValue;
 
@@ -410,6 +412,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                         }
                     }
 
+                    count--;
+
                     MovePos();
                 }
             }
@@ -461,11 +465,8 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
             var blockSize = keepSizeBefore + keepSizeAfter + keepSizeReserv;
 
-            if (_bufferBase == null || _blockSize != blockSize)
-            {
-                //Free();
-                _blockSize = blockSize;
-            }
+            // Suppose that the _bufferBase has already been initialized (not null).
+            _blockSize = blockSize;
 
             _pointerToLastSafePosition = _blockSize - keepSizeAfter;
         }
