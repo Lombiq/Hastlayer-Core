@@ -241,55 +241,63 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
 
             var count = _cutValue;
 
-            while (true)
+            var run = true;
+            while (run)
             {
                 if (curMatch <= matchMinPos || count-- == 0)
                 {
                     _son[ptr0] = _son[ptr1] = EmptyHashValue;
-                    break;
-                }
-                var delta = _pos - curMatch;
-                var cyclicPos = ((delta <= _cyclicBufferPos) ?
-                    (_cyclicBufferPos - delta) :
-                    (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
-
-                var pby1 = _bufferOffset + curMatch;
-                var len = Math.Min(len0, len1);
-                if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
-                {
-                    while (++len != lenLimit)
-                    {
-                        if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
-                            break;
-                    }
-
-                    if (maxLen < len)
-                    {
-                        distances[offset++] = maxLen = len;
-                        distances[offset++] = delta - 1;
-                        if (len == lenLimit)
-                        {
-                            _son[ptr1] = _son[cyclicPos];
-                            _son[ptr0] = _son[cyclicPos + 1];
-
-                            break;
-                        }
-                    }
-                }
-
-                if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
-                {
-                    _son[ptr1] = curMatch;
-                    ptr1 = cyclicPos + 1;
-                    curMatch = _son[ptr1];
-                    len1 = len;
+                    run = false;
                 }
                 else
                 {
-                    _son[ptr0] = curMatch;
-                    ptr0 = cyclicPos;
-                    curMatch = _son[ptr0];
-                    len0 = len;
+                    var delta = _pos - curMatch;
+                    var cyclicPos = ((delta <= _cyclicBufferPos) ?
+                        (_cyclicBufferPos - delta) :
+                        (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
+
+                    var pby1 = _bufferOffset + curMatch;
+                    var len = Math.Min(len0, len1);
+                    if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
+                    {
+                        var run2 = true;
+                        while (run2 && ++len != lenLimit)
+                        {
+                            if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
+                                run2 = false;
+                        }
+
+                        if (maxLen < len)
+                        {
+                            distances[offset++] = maxLen = len;
+                            distances[offset++] = delta - 1;
+                            if (len == lenLimit)
+                            {
+                                _son[ptr1] = _son[cyclicPos];
+                                _son[ptr0] = _son[cyclicPos + 1];
+
+                                run = false;
+                            }
+                        }
+                    }
+
+                    if (run)
+                    {
+                        if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
+                        {
+                            _son[ptr1] = curMatch;
+                            ptr1 = cyclicPos + 1;
+                            curMatch = _son[ptr1];
+                            len1 = len;
+                        }
+                        else
+                        {
+                            _son[ptr0] = curMatch;
+                            ptr0 = cyclicPos;
+                            curMatch = _son[ptr0];
+                            len0 = len;
+                        }
+                    }
                 }
             }
 
@@ -302,6 +310,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
         {
             do
             {
+                var continueLoop = false;
                 uint lenLimit;
                 if (_pos + _matchMaxLen <= _streamPos)
                     lenLimit = _matchMaxLen;
@@ -311,87 +320,98 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                     if (lenLimit < _kMinMatchCheck)
                     {
                         MovePos();
-                        continue;
+                        continueLoop = true;
                     }
                 }
 
-                var matchMinPos = (_pos > _cyclicBufferSize) ? (_pos - _cyclicBufferSize) : 0;
-                var cur = _bufferOffset + _pos;
-
-                uint hashValue;
-
-                if (_hashArray)
+                if (!continueLoop)
                 {
-                    var temp = _crc.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
-                    var hash2Value = temp & (Hash2Size - 1);
-                    _hash[hash2Value] = _pos;
-                    temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
-                    var hash3Value = temp & (Hash3Size - 1);
-                    _hash[Hash3Offset + hash3Value] = _pos;
-                    hashValue = (temp ^ (_crc.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
-                }
-                else
-                    hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
+                    var matchMinPos = (_pos > _cyclicBufferSize) ? (_pos - _cyclicBufferSize) : 0;
+                    var cur = _bufferOffset + _pos;
 
-                var curMatch = _hash[_kFixHashSize + hashValue];
-                _hash[_kFixHashSize + hashValue] = _pos;
+                    uint hashValue;
 
-                var ptr0 = (_cyclicBufferPos << 1) + 1;
-                var ptr1 = (_cyclicBufferPos << 1);
-
-                uint len0, len1;
-                len0 = len1 = _kNumHashDirectbytes;
-
-                var count = _cutValue;
-                while (true)
-                {
-                    if (curMatch <= matchMinPos || count-- == 0)
+                    if (_hashArray)
                     {
-                        _son[ptr0] = _son[ptr1] = EmptyHashValue;
-
-                        break;
-                    }
-
-                    var delta = _pos - curMatch;
-                    var cyclicPos = ((delta <= _cyclicBufferPos) ?
-                        (_cyclicBufferPos - delta) :
-                        (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
-
-                    var pby1 = _bufferOffset + curMatch;
-                    var len = Math.Min(len0, len1);
-                    if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
-                    {
-                        while (++len != lenLimit)
-                        {
-                            if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
-                                break;
-                        }
-
-                        if (len == lenLimit)
-                        {
-                            _son[ptr1] = _son[cyclicPos];
-                            _son[ptr0] = _son[cyclicPos + 1];
-                            break;
-                        }
-                    }
-
-                    if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
-                    {
-                        _son[ptr1] = curMatch;
-                        ptr1 = cyclicPos + 1;
-                        curMatch = _son[ptr1];
-                        len1 = len;
+                        var temp = _crc.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
+                        var hash2Value = temp & (Hash2Size - 1);
+                        _hash[hash2Value] = _pos;
+                        temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
+                        var hash3Value = temp & (Hash3Size - 1);
+                        _hash[Hash3Offset + hash3Value] = _pos;
+                        hashValue = (temp ^ (_crc.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
                     }
                     else
-                    {
-                        _son[ptr0] = curMatch;
-                        ptr0 = cyclicPos;
-                        curMatch = _son[ptr0];
-                        len0 = len;
-                    }
-                }
+                        hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
 
-                MovePos();
+                    var curMatch = _hash[_kFixHashSize + hashValue];
+                    _hash[_kFixHashSize + hashValue] = _pos;
+
+                    var ptr0 = (_cyclicBufferPos << 1) + 1;
+                    var ptr1 = (_cyclicBufferPos << 1);
+
+                    uint len0, len1;
+                    len0 = len1 = _kNumHashDirectbytes;
+
+                    var count = _cutValue;
+                    var run = true;
+                    while (run)
+                    {
+                        if (curMatch <= matchMinPos || count-- == 0)
+                        {
+                            _son[ptr0] = _son[ptr1] = EmptyHashValue;
+
+                            run = false;
+                        }
+                        else
+                        {
+                            var delta = _pos - curMatch;
+                            var cyclicPos = ((delta <= _cyclicBufferPos) ?
+                                (_cyclicBufferPos - delta) :
+                                (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
+
+                            var pby1 = _bufferOffset + curMatch;
+                            var len = Math.Min(len0, len1);
+                            if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
+                            {
+                                var run2 = true;
+                                while (run2 && ++len != lenLimit)
+                                {
+                                    if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
+                                        run2 = false;
+                                }
+
+                                if (len == lenLimit)
+                                {
+                                    _son[ptr1] = _son[cyclicPos];
+                                    _son[ptr0] = _son[cyclicPos + 1];
+
+                                    run = false;
+                                }
+                            }
+
+                            if (run)
+                            {
+                                if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
+                                {
+                                    _son[ptr1] = curMatch;
+                                    ptr1 = cyclicPos + 1;
+                                    curMatch = _son[ptr1];
+                                    len1 = len;
+                                }
+                                else
+                                {
+                                    _son[ptr0] = curMatch;
+                                    ptr0 = cyclicPos;
+                                    curMatch = _son[ptr0];
+                                    len0 = len;
+                                }
+                            }
+                        }
+                    }
+
+                    MovePos();
+                }
             }
             while (--num != 0);
         }
