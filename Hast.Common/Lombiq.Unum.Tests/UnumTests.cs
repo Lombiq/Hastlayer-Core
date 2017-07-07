@@ -31,50 +31,62 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void UnumIsCorrectlyConstructedFromUintArray()
         {
-            var maxValue = new uint[8];
-            for (int i = 0; i < 8; i++) maxValue[i] = uint.MaxValue;
-            maxValue[7] >>= 1;
+            var Unum0 = new Unum(_environment_4_8, new uint[] { 0 });
+
+            Assert.AreEqual(Unum0.IsZero(), true);
+
+            
+            var unum10 = new Unum(_environment_2_2, new uint[] { 10 });
+            var bitMask10 = new BitMask(new uint[] { 0x329, 0, 0, 0, 0, 0, 0, 0, 0 }, _environment_2_2.Size);
+
+            Assert.AreEqual(unum10.UnumBits, bitMask10);
+
+
+            var unum500000 = new Unum(_environment_4_8, new uint[] { 500000 }); // 0xC7A1250C9 
+            var bitMask500000 = new BitMask(new uint[] { 0xC7A1250C }, _environment_4_8.Size);
+
+            Assert.AreEqual(unum500000.UnumBits, bitMask500000);
+
+
+            var unumBig = new Unum(_environment_4_8, new uint[] { 594967295 });
+            var bitMaskBig = new BitMask(new uint[] { 0xCF5FE51C, 0xF06E }, _environment_4_8.Size);
+
+            Assert.AreEqual(unumBig.UnumBits, bitMaskBig);
+
 
             var minValue = new uint[8];
             for (int i = 0; i < 8; i++) minValue[i] = uint.MaxValue;
-
-            var maxUnum = new Unum(_environment_4_8, maxValue);
             var minUnum = new Unum(_environment_4_8, minValue);  // This is negative.
-            var unum500000 = new Unum(_environment_4_8, new uint[] { 500000 }); // 0xC7A1250C9 
-            var unum10 = new Unum(_environment_2_2, new uint[] { 10 });
-            var unumBig = new Unum(_environment_4_8, new uint[] { 594967295 });
-            var zero = new Unum(_environment_4_8, new uint[] { 0 });
 
-            var bitmask500000 = new BitMask(new uint[] { 0xC7A1250C }, _environment_4_8.Size);
-            var bitmaskBig = new BitMask(new uint[] { 0xCF5FE51C, 0xF06E }, _environment_4_8.Size);
-            var bitmask10 = new BitMask(new uint[] { 0x329, 0, 0, 0, 0, 0, 0, 0, 0 }, _environment_2_2.Size);
-
-            var bitmaskMaxValue = new BitMask(new uint[]
-            {
-                0xFFFFE8FD , 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                0xFFFFFFFF , 0xFFFFFFFF,  0xFEFFF
-
-            }, _environment_4_8.Size);
-
-            var bitmaskMinValue = new BitMask(new uint[]
+            var bitMaskMinValue = new BitMask(new uint[]
             {
                 0xFFFFE8FD , 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
                 0xFFFFFFFF , 0xFFFFFFFF,  0x800FEFFF
 
             }, _environment_4_8.Size);
 
-            Assert.AreEqual(unum500000.UnumBits, bitmask500000);
-            //  Assert.AreEqual(unum10.UnumBits, bitmask10);
+            Assert.AreEqual(minUnum.UnumBits, bitMaskMinValue);
 
-            Assert.AreEqual(unum10.UnumBits, bitmask10);
+
+            var maxValue = new uint[8];
+            for (int i = 0; i < 8; i++) maxValue[i] = uint.MaxValue;
+            maxValue[7] >>= 1;
+
+            var bitMaskMaxValue = new BitMask(new uint[]
+            {
+                0xFFFFE8FD , 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                0xFFFFFFFF , 0xFFFFFFFF,  0xFEFFF
+
+            }, _environment_4_8.Size);
+
+            var maxUnum = new Unum(_environment_4_8, maxValue);
+
             Assert.AreEqual(maxUnum.IsPositive(), true);
             Assert.AreEqual(maxUnum.Size, _environment_4_8.Size);
             Assert.AreEqual(maxUnum.FractionSizeWithHiddenBit(), 255);
             Assert.AreEqual(maxUnum.ExponentValueWithBias(), 254);
             Assert.AreEqual(maxUnum.FractionWithHiddenBit(), new BitMask(maxValue, _environment_4_8.Size));
-            Assert.AreEqual(zero.IsZero(), true);
-            Assert.AreEqual(maxUnum.UnumBits, bitmaskMaxValue);
-            Assert.AreEqual(maxUnum.UnumBits, bitmaskMaxValue);
+            Assert.AreEqual(maxUnum.UnumBits, bitMaskMaxValue);
         }
 
         [Test]
