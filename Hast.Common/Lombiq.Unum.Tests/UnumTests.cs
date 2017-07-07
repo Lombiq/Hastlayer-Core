@@ -37,7 +37,7 @@ namespace Lombiq.Unum.Tests
 
             
             var unum10 = new Unum(_environment_2_2, new uint[] { 10 });
-            var bitMask10 = new BitMask(new uint[] { 0x329, 0, 0, 0, 0, 0, 0, 0, 0 }, _environment_2_2.Size);
+            var bitMask10 = new BitMask(new uint[] { 0x329 }, _environment_2_2.Size);
 
             Assert.AreEqual(unum10.UnumBits, bitMask10);
 
