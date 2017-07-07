@@ -60,7 +60,7 @@ namespace Hast.Transformer.Services
 
                 Func<MemberReferenceExpression> createArrayLengthExpression = () =>
                     new MemberReferenceExpression(memberReference.Target.Clone(), "Length")
-                        .WithAnnotation(TypeHelper.CreateInt32TypeInformation(invocationExpression));
+                        .WithAnnotation(TypeHelper.CreateInt32TypeInformation());
 
                 Func<Expression, MemberReferenceExpression, InvocationExpression> createArrayCopyExpression =
                     (destinationValueHolder, arrayLengthExpression) =>
@@ -147,7 +147,7 @@ namespace Hast.Transformer.Services
                             Type = memberReference.TypeArguments.Single().Clone(),
                         };
                         var sizeExpression = new PrimitiveExpression(0)
-                            .WithAnnotation(TypeHelper.CreateInt32TypeInformation(invocationExpression));
+                            .WithAnnotation(TypeHelper.CreateInt32TypeInformation());
                         arrayCreate.Arguments.Add(sizeExpression);
                         arrayCreate.AddAnnotation(arrayTypeInformation);
                         invocationExpression.ReplaceWith(arrayCreate);

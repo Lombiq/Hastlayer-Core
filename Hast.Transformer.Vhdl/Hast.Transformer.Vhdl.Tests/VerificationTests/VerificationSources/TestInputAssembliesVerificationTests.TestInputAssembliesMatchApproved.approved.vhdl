@@ -1812,7 +1812,7 @@ begin
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this.parameter.In\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size.parameter.In\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\ mod to_unsigned(32, 32);
-                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ = 0;
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ = to_unsigned(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\ and ends in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
