@@ -280,71 +280,54 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var primitive = (PrimitiveExpression)expression;
 
                 var typeReference = expression.GetActualTypeReference();
-                if (typeReference != null)
-                {
-                    var type = _typeConverter.ConvertTypeReference(typeReference, context.TransformationContext);
-                    var valueString = primitive.Value.ToString();
-                    // Replacing decimal comma to decimal dot.
-                    if (type.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
 
-                    // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
-                    // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
-                    if (type == KnownDataTypes.Real && !valueString.Contains('.'))
+                if (typeReference == null)
+                {
+                    typeReference = Transformer.Helpers.TypeHelper.CreatePrimitiveTypeReference(primitive.Value.GetType().Name);
+                }
+
+                var type = _typeConverter.ConvertTypeReference(typeReference, context.TransformationContext);
+                var valueString = primitive.Value.ToString();
+                // Replacing decimal comma to decimal dot.
+                if (type.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
+
+                // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
+                // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
+                if (type == KnownDataTypes.Real && !valueString.Contains('.'))
+                {
+                    valueString += ".0";
+                }
+
+                // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648 
+                // to +2147483647). Thus if the literal is larger than an integer we need to use the binary notation 
+                // without these functions.
+                if (type.Name == KnownDataTypes.Int8.Name || type.Name == KnownDataTypes.UInt8.Name)
+                {
+                    var binaryLiteral = string.Empty;
+
+                    if (type.Name == KnownDataTypes.Int8.Name)
                     {
-                        valueString += ".0";
+                        var value = Convert.ToInt64(valueString);
+                        if (value < -2147483648 || value > 2147483647) binaryLiteral = Convert.ToString(value, 2);
+                    }
+                    else
+                    {
+                        var value = Convert.ToUInt64(valueString);
+                        if (value > 2147483647) binaryLiteral = Convert.ToString((long)value, 2);
                     }
 
-                    // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648 
-                    // to +2147483647). Thus if the literal is larger than an integer we need to use the binary notation 
-                    // without these functions.
-                    if (type.Name == KnownDataTypes.Int8.Name || type.Name == KnownDataTypes.UInt8.Name)
+                    if (!string.IsNullOrEmpty(binaryLiteral))
                     {
-                        var binaryLiteral = string.Empty;
+                        scope.CurrentBlock.Add(new LineComment(
+                            "Since the integer literal " + valueString +
+                            " was out of the VHDL integer range it was substituted with a binary literal (" +
+                            binaryLiteral + ")."));
 
-                        if (type.Name == KnownDataTypes.Int8.Name)
-                        {
-                            var value = Convert.ToInt64(valueString);
-                            if (value < -2147483648 || value > 2147483647) binaryLiteral = Convert.ToString(value, 2);
-                        }
-                        else
-                        {
-                            var value = Convert.ToUInt64(valueString);
-                            if (value > 2147483647) binaryLiteral = Convert.ToString((long)value, 2);
-                        }
-
-                        if (!string.IsNullOrEmpty(binaryLiteral))
-                        {
-                            scope.CurrentBlock.Add(new LineComment(
-                                "Since the integer literal " + valueString +
-                                " was out of the VHDL integer range it was substituted with a binary literal (" +
-                                binaryLiteral + ")."));
-
-                            return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = type.GetSize() });
-                        }
+                        return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = type.GetSize() });
                     }
-
-                    return valueString.ToVhdlValue(type);
-                }
-                else if (primitive.Parent is BinaryOperatorExpression)
-                {
-                    var reference = new DataObjectReference
-                    {
-                        DataObjectKind = DataObjectKind.Constant,
-                        Name = primitive.Value.ToString()
-                    };
-
-                    return implementTypeConversionForBinaryExpressionParent(reference);
-                }
-                else if (primitive.Parent is CastExpression)
-                {
-                    return primitive.Value
-                        .ToString()
-                        .ToVhdlValue(_typeConverter.ConvertAstType(((CastExpression)primitive.Parent).Type, context.TransformationContext));
                 }
 
-                throw new InvalidOperationException(
-                    "The type of the following primitive expression couldn't be determined: " +
-                    expression.ToString());
+                return valueString.ToVhdlValue(type);
             }
             else if (expression is BinaryOperatorExpression)
             {
