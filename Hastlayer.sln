@@ -5,9 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Console", "Hast.Console\Hast.Console.csproj", "{2A58C055-84A1-4B42-9549-1B3EDA597F3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Transformer", "Hast.Transformer\Hast.Transformer.csproj", "{55FFEC87-B87B-4BB6-B50D-26560C8F815A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Transformer", "Hast.Core\Hast.Transformer\Hast.Transformer.csproj", "{55FFEC87-B87B-4BB6-B50D-26560C8F815A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.VhdlBuilder", "Hast.VhdlBuilder\Hast.VhdlBuilder.csproj", "{131E80D3-29BD-496C-BE31-45A329AE3E67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.VhdlBuilder", "Hast.Core\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj", "{131E80D3-29BD-496C-BE31-45A329AE3E67}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E8043A55-810D-4760-8390-D0C936EFBD5A}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,23 +32,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Common", "Hast.Common\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Communication", "Hast.Communication\Hast.Communication.csproj", "{71B55241-A31C-43F5-9B46-40B53099DF56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Synthesis", "Hast.Synthesis\Hast.Synthesis.csproj", "{040554F7-5565-4D82-8AAB-CDCD745CA822}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Synthesis", "Hast.Core\Hast.Synthesis\Hast.Synthesis.csproj", "{040554F7-5565-4D82-8AAB-CDCD745CA822}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drivers", "Drivers", "{51A02816-8D25-480F-9D28-EC7D05DC3F63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Xilinx", "Drivers\Hast.Xilinx\Hast.Xilinx.csproj", "{02BE2213-F0E5-4107-BEA4-AE396525A644}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Xilinx", "Hast.Core\Hast.Xilinx\Hast.Xilinx.csproj", "{02BE2213-F0E5-4107-BEA4-AE396525A644}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{701D5B71-9A6F-47A4-A3C2-3714AF8B4115}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Transformer.Vhdl", "Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj", "{25810814-29C8-4B60-BC96-04B72F70E6B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Transformer.Vhdl", "Hast.Core\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj", "{25810814-29C8-4B60-BC96-04B72F70E6B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Transformer.Vhdl.Tests", "Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.Tests\Hast.Transformer.Vhdl.Tests.csproj", "{5B56676E-75E4-4D10-9DB4-AC446BD597CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Transformer.Vhdl.Tests", "Hast.Core\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.Tests\Hast.Transformer.Vhdl.Tests.csproj", "{5B56676E-75E4-4D10-9DB4-AC446BD597CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.Framework.Tests", "Orchard\src\Orchard.Tests\Orchard.Framework.Tests.csproj", "{ABC826D4-2FA1-4F2F-87DE-E6095F653810}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.Core", "Orchard\src\Orchard.Web\Core\Orchard.Core.csproj", "{9916839C-39FC-4CEB-A5AF-89CA7E87119F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Transformer.Tests", "Hast.Transformer\Hast.Transformer.Tests\Hast.Transformer.Tests.csproj", "{DA432B51-28D1-4D5E-9A3A-59127C809C5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Transformer.Tests", "Hast.Core\Hast.Transformer\Hast.Transformer.Tests\Hast.Transformer.Tests.csproj", "{DA432B51-28D1-4D5E-9A3A-59127C809C5D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Samples.Demo", "Samples\Hast.Samples.Demo\Hast.Samples.Demo.csproj", "{CBAC105A-E50F-4202-A647-CFD674E6C0F8}"
 EndProject
@@ -56,13 +56,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestInputAssemblies", "Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClassStructureExamples", "ClassStructureExamples", "{AACAF8B3-24DC-488D-AF5D-AD035747ECEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.ClassStructure1", "Hast.TestInputs.ClassStructure1\Hast.TestInputs.ClassStructure1.csproj", "{76651174-9A95-4711-9891-5173F95E7277}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.ClassStructure1", "Hast.Core\Hast.TestInputs.ClassStructure1\Hast.TestInputs.ClassStructure1.csproj", "{76651174-9A95-4711-9891-5173F95E7277}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.ClassStructure2", "Hast.TestInputs.ClassStructure2\Hast.TestInputs.ClassStructure2.csproj", "{F2D3C071-F051-414F-BAAB-DC750E61C3C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.ClassStructure2", "Hast.Core\Hast.TestInputs.ClassStructure2\Hast.TestInputs.ClassStructure2.csproj", "{F2D3C071-F051-414F-BAAB-DC750E61C3C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Various", "Hast.TestInputs.Various\Hast.TestInputs.Various.csproj", "{7D8AE520-75D5-4BFC-B617-7FEEA7B1983C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Various", "Hast.Core\Hast.TestInputs.Various\Hast.TestInputs.Various.csproj", "{7D8AE520-75D5-4BFC-B617-7FEEA7B1983C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Invalid", "Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj", "{BB94F93A-F607-4A19-8127-7C8D333F8131}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Invalid", "Hast.Core\Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj", "{BB94F93A-F607-4A19-8127-7C8D333F8131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -158,33 +158,33 @@ namespace Hast.Layer
                     typeof(ITransformer).Assembly
                 }.Union(_configuration.Extensions);
 
-            var driversPath = Path.GetDirectoryName(GetType().Assembly.Location);
-            var currentDirectory = Path.GetFileName(driversPath);
+            var corePath = Path.GetDirectoryName(GetType().Assembly.Location);
+            var currentDirectory = Path.GetFileName(corePath);
             if (currentDirectory.Equals("Debug", StringComparison.OrdinalIgnoreCase) ||
                 currentDirectory.Equals("Release", StringComparison.OrdinalIgnoreCase))
             {
-                driversPath = Path.GetDirectoryName(driversPath);
+                corePath = Path.GetDirectoryName(corePath);
             }
-            currentDirectory = Path.GetFileName(driversPath);
+            currentDirectory = Path.GetFileName(corePath);
             if (currentDirectory.Equals("bin", StringComparison.OrdinalIgnoreCase))
             {
-                driversPath = Path.GetDirectoryName(driversPath);
+                corePath = Path.GetDirectoryName(corePath);
             }
 
-            driversPath = Path.GetDirectoryName(driversPath); // Now we're at the level above the current project's folder.
+            corePath = Path.GetDirectoryName(corePath); // Now we're at the level above the current project's folder.
 
-            var driversFound = false;
-            while (driversPath != null && !driversFound)
+            var coreFound = false;
+            while (corePath != null && !coreFound)
             {
-                var driversSubFolder = Path.Combine(driversPath, "Drivers");
+                var driversSubFolder = Path.Combine(corePath, "Hast.Core");
                 if (Directory.Exists(driversSubFolder))
                 {
-                    driversPath = driversSubFolder;
-                    driversFound = true;
+                    corePath = driversSubFolder;
+                    coreFound = true;
                 }
                 else
                 {
-                    driversPath = Path.GetDirectoryName(driversPath); 
+                    corePath = Path.GetDirectoryName(corePath); 
                 }
             }
 
@@ -200,7 +200,7 @@ namespace Hast.Layer
                         EnabledFeatures = importedExtensions.Select(extension => extension.ShortName())
                     }
                 },
-                ModuleFolderPaths = new[] { driversPath, @"E:\Projects\Munka\Lombiq\Hastlayer\Hastlayer" }
+                ModuleFolderPaths = new[] { corePath }
             };
 
             _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);

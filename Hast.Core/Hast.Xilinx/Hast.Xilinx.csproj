@@ -95,11 +95,11 @@
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj">
+    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
       <Name>Hast.Synthesis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj">
+    <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj">
       <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
       <Name>Hast.Transformer.Vhdl</Name>
     </ProjectReference>

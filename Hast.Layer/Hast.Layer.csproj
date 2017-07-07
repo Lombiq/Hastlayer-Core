@@ -61,11 +61,11 @@
       <Project>{71b55241-a31c-43f5-9b46-40b53099df56}</Project>
       <Name>Hast.Communication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
+    <ProjectReference Include="..\Hast.Core\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
       <Name>Hast.Synthesis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj">
+    <ProjectReference Include="..\Hast.Core\Hast.Transformer\Hast.Transformer.csproj">
       <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
       <Name>Hast.Transformer</Name>
     </ProjectReference>

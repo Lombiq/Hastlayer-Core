@@ -167,15 +167,15 @@
     <Compile Include="Configuration\TransformerConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hast.Common\Hast.Common.csproj">
+    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj">
+    <ProjectReference Include="..\..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj">
       <Project>{3e852853-2d19-49bb-b6c9-39b01d6e9785}</Project>
       <Name>Lombiq.OrchardAppHost</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj">
+    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
       <Name>Orchard.Framework</Name>
     </ProjectReference>
