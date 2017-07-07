@@ -27,7 +27,7 @@ namespace Hast.Transformer.Services
                 var initializerElements = arrayCreateExpression.Initializer.Elements.ToArray();
                 arrayCreateExpression.Initializer.Elements.Clear();
 
-                var int32TypeInformation = TypeHelper.CreateInt32TypeInformation(arrayCreateExpression);
+                var int32TypeInformation = TypeHelper.CreateInt32TypeInformation();
 
                 // Setting the size argument, e.g. new int[] will be turned into new int[5].
                 arrayCreateExpression.Arguments.Clear();
