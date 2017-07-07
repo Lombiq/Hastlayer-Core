@@ -154,61 +154,17 @@ namespace Lombiq.Unum
         public Unum(UnumEnvironment environment, uint value)
         {
             _environment = environment;
-            UnumBits = new BitMask(environment.Size);
 
-            if (value == 0) return;
-
-
-            // Putting the actual value in a BitMask.
-            var exponent = new BitMask(new uint[] { value }, Size);
-
-            // The value of the exponent is one less than the number of binary digits in the integer.
-            var exponentValue = new BitMask(new uint[] { (uint)(exponent.GetMostSignificantOnePosition() - 1) }, Size);
-
-            // Calculating the number of bits needed to represent the value of the exponent.
-            var exponentSize = exponentValue.GetMostSignificantOnePosition();
-
-            // If the value of the exponent is not a power of 2,
-            // then one more bit is needed to represent the biased value.
-            if ((exponentValue & exponentValue - 1).GetLowest32Bits() > 0) exponentSize++;
-
-            // Calculating the bias from the number of bits representing the exponent.
-            var bias = exponentSize == 0 ? 0 : (1 << exponentSize - 1) - 1;
-
-            // Applying the bias to the exponent.
-            exponent = exponentValue + (uint)bias;
-
-
-            // Putting the actual value in a BitMask.
-            var fraction = new BitMask(new uint[] { value }, Size);
-            
-            // Shifting out the zeroes after the least significant 1-bit.
-            fraction = fraction.ShiftOutLeastSignificantZeros();
-
-            // Calculating the number of bits needed to represent the fraction.
-            var fractionSize = fraction.GetMostSignificantOnePosition();
-            
-            /* If there's a hidden bit and it's 1,
-             * then the most significant 1-bit of the fraction is stored there,
-             * so we're removing it from the fraction and decreasing fraction size accordingly. */
-            if (exponent.GetLowest32Bits() > 0)
-            {
-                fractionSize--;
-                fraction = fraction.SetZero(fractionSize);
-            }
-            
-
-            UnumBits = SetUnumBits(false, exponent, fraction,
-                false, (byte)(exponentSize > 0 ? --exponentSize : 0), (ushort)(fractionSize > 0 ? --fractionSize : 0));
+            UnumBits = new Unum(environment, new uint[] { value }).UnumBits;
         }
 
         /// <summary>
         /// Creates a Unum initialized with a value that is defined by the bits in a uint array.
-        /// The MSB of the whole uint array (which is the MSB of the last segment) is the sign bit.
         /// </summary>
         /// <param name="environment">The Unum environment.</param>
-        /// <param name="value">The uint array which defines the Unum's value as a signed integer.</param>
-        public Unum(UnumEnvironment environment, uint[] value)
+        /// <param name="value">The uint array which defines the Unum's value as an integer.</param>
+        /// <param name="negative">Defines whether the number is positive or not.</param>
+        public Unum(UnumEnvironment environment, uint[] value, bool negative = false)
         {
             _environment = environment;
             UnumBits = new BitMask(value, environment.Size);
@@ -218,11 +174,6 @@ namespace Lombiq.Unum
 
             // Putting the actual value in a BitMask.
             var exponent = new BitMask(value, Size);
-
-            // Extracting the sign bit and setting it to zero.
-            var signBit = (value[value.Length - 1] > uint.MaxValue / 2);
-            exponent <<= 1;
-            exponent >>= 1;
 
             // The value of the exponent is one less than the number of binary digits in the integer.
             var exponentValue = new BitMask(new uint[] { (uint)(exponent.GetMostSignificantOnePosition() - 1) }, Size);
@@ -260,7 +211,7 @@ namespace Lombiq.Unum
             }
 
 
-            UnumBits = SetUnumBits(false, exponent, fraction,
+            UnumBits = SetUnumBits(negative, exponent, fraction,
                 false, (byte)(exponentSize > 0 ? --exponentSize : 0), (ushort)(fractionSize > 0 ? --fractionSize : 0));
         }
 
@@ -268,12 +219,9 @@ namespace Lombiq.Unum
         {
             _environment = environment;
 
-            if (value >= 0) UnumBits = new Unum(environment, (uint)value).UnumBits;
-            else
-            {
-                UnumBits = new Unum(environment, (uint)-value).UnumBits;
-                UnumBits = Negate().UnumBits;
-            }
+            UnumBits = value >= 0 ?
+                new Unum(environment, new uint[] { (uint)value }).UnumBits :
+                new Unum(environment, new uint[] { (uint)-value }, true).UnumBits;
         }
 
         // This doesn't work for all cases yet.
