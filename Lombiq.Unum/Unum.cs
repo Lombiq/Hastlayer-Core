@@ -202,47 +202,66 @@ namespace Lombiq.Unum
                 false, (byte)(exponentSize > 0 ? --exponentSize : 0), (ushort)(fractionSize > 0 ? --fractionSize : 0));
         }
 
-        public Unum(UnumEnvironment environment, uint[] input)
+        /// <summary>
+        /// Creates a Unum initialized with a value that is defined by the bits in a uint array.
+        /// The MSB of the whole uint array (which is the MSB of the last segment) is the sign bit.
+        /// </summary>
+        /// <param name="environment">The Unum environment.</param>
+        /// <param name="value">The uint array which defines the Unum's value as a signed integer.</param>
+        public Unum(UnumEnvironment environment, uint[] value)
         {
             _environment = environment;
-            UnumBits = new BitMask(input, environment.Size);
+            UnumBits = new BitMask(value, environment.Size);
 
             if (UnumBits == _environment.EmptyBitMask) return;
 
 
-            // Handling Signbit.
-            var signBit = (input[input.Length - 1] > uint.MaxValue / 2);
-            UnumBits <<= 1;
-            UnumBits >>= 1;
+            // Putting the actual value in a BitMask.
+            var exponent = new BitMask(value, Size);
+
+            // Extracting the sign bit and setting it to zero.
+            var signBit = (value[value.Length - 1] > uint.MaxValue / 2);
+            exponent <<= 1;
+            exponent >>= 1;
+
+            // The value of the exponent is one less than the number of binary digits in the integer.
+            var exponentValue = new BitMask(new uint[] { (uint)(exponent.GetMostSignificantOnePosition() - 1) }, Size);
+
+            // Calculating the number of bits needed to represent the value of the exponent.
+            var exponentSize = exponentValue.GetMostSignificantOnePosition();
+
+            // If the value of the exponent is not a power of 2,
+            // then one more bit is needed to represent the biased value.
+            if ((exponentValue.GetLowest32Bits() & exponentValue.GetLowest32Bits() - 1) > 0) exponentSize++;
+
+            // Calculating the bias from the number of bits representing the exponent.
+            var bias = exponentSize == 0 ? 0 : (1 << exponentSize - 1) - 1;
+
+            // Applying the bias to the exponent.
+            exponent = exponentValue + (uint)bias;
 
 
-            // Calcuating Exponent value and size.  
-            var exponentValue = (uint)(UnumBits.GetMostSignificantOnePosition() - 1);
-            var exponentSize = 0;
-            var j = 1;
+            // Putting the actual value in a BitMask.
+            var fraction = new BitMask(value, Size);
 
-            while (j < exponentValue)
+            // Shifting out the zeroes after the least significant 1-bit.
+            fraction = fraction.ShiftOutLeastSignificantZeros();
+
+            // Calculating the number of bits needed to represent the fraction.
+            var fractionSize = fraction.GetMostSignificantOnePosition();
+
+            /* If there's a hidden bit and it's 1,
+             * then the most significant 1-bit of the fraction is stored there,
+             * so we're removing it from the fraction and decreasing fraction size accordingly. */
+            if (exponent.GetLowest32Bits() > 0)
             {
-                j <<= 1;
-                exponentSize++;
+                fractionSize--;
+                fraction = fraction.SetZero(fractionSize);
             }
 
-            if (exponentValue > (1 << exponentSize - 1)) exponentSize++;
-            var bias = (1 << (exponentSize - 1)) - 1;
-            exponentValue += (uint)bias;
-            var exponentMask = new BitMask(_environment.Size) + exponentValue;
-            if (exponentSize > 0) exponentSize -= 1; // Until now we needed the value, now we need the notation.
 
-
-            // Calculating Fraction.
-            UnumBits = UnumBits.ShiftOutLeastSignificantZeros();
-            var unumBitsLeadingOne = UnumBits.GetMostSignificantOnePosition();
-            var fractionSize = (ushort)(unumBitsLeadingOne > 0 ? unumBitsLeadingOne - 1 : 0);
-            if (fractionSize > 0) fractionSize -= 1;
-            if (exponentValue > 0) UnumBits = UnumBits.SetZero((ushort)(UnumBits.GetMostSignificantOnePosition() - 1));
-
-
-            UnumBits = SetUnumBits(signBit, exponentMask, UnumBits, false, (byte)exponentSize, fractionSize);
+            UnumBits = SetUnumBits(false, exponent, fraction,
+                false, (byte)(exponentSize > 0 ? --exponentSize : 0), (ushort)(fractionSize > 0 ? --fractionSize : 0));
         }
 
         public Unum(UnumEnvironment environment, int value)
