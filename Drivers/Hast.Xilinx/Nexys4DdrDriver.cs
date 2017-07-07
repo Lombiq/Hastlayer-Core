@@ -9,6 +9,8 @@ namespace Hast.Xilinx
 {
     public class Nexys4DdrDriver : IDeviceDriver
     {
+        public const string DeviceName = "Nexys4 DDR";
+
         private readonly ITimingReportParser _timingReportParser;
 
         private ITimingReport _timingReport;
@@ -211,7 +213,7 @@ mod	signed8	signed8	sync	synth	20,480	-0,136
 
             DeviceManifest = new DeviceManifest
             {
-                Name = "Nexys4 DDR",
+                Name = DeviceName,
                 ClockFrequencyHz = 100000000, // 100 Mhz
                 SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
                 AvailableMemoryBytes = 115343360 // 110MB

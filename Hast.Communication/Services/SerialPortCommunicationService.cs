@@ -49,7 +49,7 @@ namespace Hast.Communication.Services
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
                 {
-                    var portNames = await GetFpgaPortNames();
+                    var portNames = await GetFpgaPortNames(executionContext);
                     return portNames.Select(portName => new Device { Identifier = portName });
                 });
 
@@ -61,7 +61,7 @@ namespace Hast.Communication.Services
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
                 // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 
-                using (var serialPort = CreateSerialPort())
+                using (var serialPort = CreateSerialPort(executionContext))
                 {
                     serialPort.PortName = device.Identifier;
 
@@ -220,7 +220,7 @@ namespace Hast.Communication.Services
         /// Detects serial-connected compatible FPGA boards.
         /// </summary>
         /// <returns>The serial port name where the FPGA board is connected to.</returns>
-        private async Task<IEnumerable<string>> GetFpgaPortNames()
+        private async Task<IEnumerable<string>> GetFpgaPortNames(IHardwareExecutionContext executionContext)
         {
             // Get all available serial ports in the system.
             var ports = SerialPort.GetPortNames();
@@ -238,7 +238,7 @@ namespace Hast.Communication.Services
             {
                 serialPortPingingTasks[i] = Task.Factory.StartNew(portNameObject =>
                     {
-                        using (var serialPort = CreateSerialPort())
+                        using (var serialPort = CreateSerialPort(executionContext))
                         {
                             var taskCompletionSource = new TaskCompletionSource<bool>();
 
@@ -276,7 +276,7 @@ namespace Hast.Communication.Services
             return fpgaPortNames;
         }
 
-        private SerialPort CreateSerialPort()
+        private SerialPort CreateSerialPort(IHardwareExecutionContext executionContext)
         {
             var serialPort = new SerialPort();
 
@@ -285,7 +285,7 @@ namespace Hast.Communication.Services
             serialPort.StopBits = CommunicationConstants.Serial.DefaultStopBits;
             serialPort.WriteTimeout = CommunicationConstants.Serial.DefaultWriteTimeoutMilliseconds;
 
-            _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort));
+            _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort, executionContext));
 
             return serialPort;
         }
