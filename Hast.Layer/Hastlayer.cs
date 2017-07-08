@@ -79,15 +79,6 @@ namespace Hast.Layer
                     "The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
             }
 
-            /*
-             * Steps to be implemented:
-             * - Transform into hardware description through ITransformer.
-             * - Save hardware description for re-use (cache file, stream supplied from the outside).
-             * - Synthesize hardware through vendor-specific tool chain and load it onto FPGA, together with the necessary 
-             *   communication implementation (currently partially implemented with a member table). The implementation
-             *   should be cached by the vendor tools.
-             */
-
             try
             {
                 HardwareRepresentation hardwareRepresentation = null;
