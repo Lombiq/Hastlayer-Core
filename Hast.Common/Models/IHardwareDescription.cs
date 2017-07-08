@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Hast.Common.Models
 {
@@ -28,5 +30,27 @@ namespace Hast.Common.Models
         /// of their - type - arguments) of the method to look up the ID for.</param>
         /// <returns>The numerical ID of the method that identifies the call target in the hardware implementation.</returns>
         int LookupMemberId(string methodFullName);
+
+        /// <summary>
+        /// Writes out the hardware description's source code to the given <see cref="Stream"/>.
+        /// </summary>
+        /// <param name="stream">A <see cref="Stream"/> to write the source code to.</param>
+        Task WriteSource(Stream stream);
+    }
+
+
+    public static class HardwareDescriptionExtensions
+    {
+        /// <summary>
+        /// Writes out the hardware description's source code to a file under the given path.
+        /// </summary>
+        /// <param name="filePath">The full path where the file should be written to.</param>
+        public static Task WriteSource(this IHardwareDescription hardwareDescription, string filePath)
+        {
+            using (var fileStream = File.Create(filePath))
+            {
+                return hardwareDescription.WriteSource(fileStream);
+            }
+        }
     }
 }

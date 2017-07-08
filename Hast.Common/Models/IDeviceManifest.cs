@@ -10,7 +10,7 @@ namespace Hast.Common.Models
         /// <summary>
         /// Gets the technical name that identifies the device.
         /// </summary>
-        string TechnicalName { get; }
+        string Name { get; }
 
         /// <summary>
         /// Gets the clock frequency of the board in Hz.
