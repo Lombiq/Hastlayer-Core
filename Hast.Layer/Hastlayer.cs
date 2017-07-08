@@ -63,7 +63,9 @@ namespace Hast.Layer
             return await (await GetHost()).RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
         }
 
-        public async Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
+        public async Task<IHardwareRepresentation> GenerateHardware(
+            IEnumerable<Assembly> assemblies, 
+            IHardwareGenerationConfiguration configuration)
         {
             Argument.ThrowIfNull(assemblies, nameof(assemblies));
             if (!assemblies.Any())
@@ -73,7 +75,8 @@ namespace Hast.Layer
 
             if (assemblies.Count() != assemblies.Distinct().Count())
             {
-                throw new ArgumentException("The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
+                throw new ArgumentException(
+                    "The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
             }
 
             /*
@@ -120,17 +123,23 @@ namespace Hast.Layer
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                var message = "An error happened during generating the Hastlayer hardware representation for the following assemblies: " + string.Join(", ", assemblies.Select(assembly => assembly.FullName));
+                var message =
+                    "An error happened during generating the Hastlayer hardware representation for the following assemblies: " + 
+                    string.Join(", ", assemblies.Select(assembly => assembly.FullName));
                 await GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
             }
         }
 
-        public async Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject, IProxyGenerationConfiguration configuration) where T : class
+        public async Task<T> GenerateProxy<T>(
+            IHardwareRepresentation hardwareRepresentation, 
+            T hardwareObject, 
+            IProxyGenerationConfiguration configuration) where T : class
         {
             if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
             {
-                throw new InvalidOperationException("The supplied type is not part of any assembly that this hardware representation was generated from.");
+                throw new InvalidOperationException(
+                    "The supplied type is not part of any assembly that this hardware representation was generated from.");
             }
 
             try
@@ -141,7 +150,9 @@ namespace Hast.Layer
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                var message = "An error happened during generating the Hastlayer proxy for an object of the following type: " + hardwareObject.GetType().FullName;
+                var message = 
+                    "An error happened during generating the Hastlayer proxy for an object of the following type: " + 
+                    hardwareObject.GetType().FullName;
                 await GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
             }
@@ -182,7 +193,8 @@ namespace Hast.Layer
                 abstractionsPath = Path.GetDirectoryName(abstractionsPath);
             }
 
-            abstractionsPath = Path.GetDirectoryName(abstractionsPath); // Now we're at the level above the current project's folder.
+            // Now we're at the level above the current project's folder.
+            abstractionsPath = Path.GetDirectoryName(abstractionsPath);
 
             var coreFound = false;
             while (abstractionsPath != null && !coreFound)
