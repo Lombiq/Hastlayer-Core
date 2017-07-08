@@ -168,37 +168,38 @@ namespace Hast.Layer
                     typeof(ITransformer).Assembly
                 }.Union(_configuration.Extensions);
 
-            var corePath = Path.GetDirectoryName(GetType().Assembly.Location);
-            var currentDirectory = Path.GetFileName(corePath);
+            // Since Hast.Core either exists or not we need to start by probing for the Hast.Abstractions folder.
+            var abstractionsPath = Path.GetDirectoryName(GetType().Assembly.Location);
+            var currentDirectory = Path.GetFileName(abstractionsPath);
             if (currentDirectory.Equals("Debug", StringComparison.OrdinalIgnoreCase) ||
                 currentDirectory.Equals("Release", StringComparison.OrdinalIgnoreCase))
             {
-                corePath = Path.GetDirectoryName(corePath);
+                abstractionsPath = Path.GetDirectoryName(abstractionsPath);
             }
-            currentDirectory = Path.GetFileName(corePath);
+            currentDirectory = Path.GetFileName(abstractionsPath);
             if (currentDirectory.Equals("bin", StringComparison.OrdinalIgnoreCase))
             {
-                corePath = Path.GetDirectoryName(corePath);
+                abstractionsPath = Path.GetDirectoryName(abstractionsPath);
             }
 
-            corePath = Path.GetDirectoryName(corePath); // Now we're at the level above the current project's folder.
+            abstractionsPath = Path.GetDirectoryName(abstractionsPath); // Now we're at the level above the current project's folder.
 
             var coreFound = false;
-            while (corePath != null && !coreFound)
+            while (abstractionsPath != null && !coreFound)
             {
-                var driversSubFolder = Path.Combine(corePath, "Hast.Core");
+                var driversSubFolder = Path.Combine(abstractionsPath, "Hast.Abstractions");
                 if (Directory.Exists(driversSubFolder))
                 {
-                    corePath = driversSubFolder;
+                    abstractionsPath = driversSubFolder;
                     coreFound = true;
                 }
                 else
                 {
-                    corePath = Path.GetDirectoryName(corePath); 
+                    abstractionsPath = Path.GetDirectoryName(abstractionsPath); 
                 }
             }
 
-            var abstractionsPath = Path.Combine(Path.GetDirectoryName(corePath), "Hast.Abstractions");
+            var corePath = Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core");
 
             var settings = new AppHostSettings
             {
@@ -211,7 +212,7 @@ namespace Hast.Layer
                         EnabledFeatures = importedExtensions.Select(extension => extension.ShortName())
                     }
                 },
-                ModuleFolderPaths = new[] { corePath, abstractionsPath }
+                ModuleFolderPaths = new[] { abstractionsPath, corePath }
             };
 
             _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);

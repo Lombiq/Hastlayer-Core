@@ -18,6 +18,8 @@ The Hastlayer solutions come in two "flavors" with corresponding branches:
 
 Generally the *client* branch should be only merged to, but never from, the *dev* branch.
 
+There are separate solution files for the two flavors that only differ in whether they include *Hast.Core*. Should the solution change then make the changes in the dev solution file, copy it over the client one and remove the *Hast.Core* solution folder. If you switch between the two solutions while on the *dev* branch then temporarily rename or remove the *Hast.Core* folder so projects from there won't be loaded as extensions (they will be even without them being added to the solution).
+
 To allow the same code in the samples and elsewhere to support both scenarios Orchard's dynamic module loading needs to be utilized. For this to work *Hast.Core* projects should adhere to the following:
 
 - Their projects need to be located in a subfolder of *Hast.Core*.
