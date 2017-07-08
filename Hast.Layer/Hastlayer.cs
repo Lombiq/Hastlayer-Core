@@ -26,7 +26,7 @@ namespace Hast.Layer
     {
         private const string ShellName = ShellSettings.DefaultName;
 
-        private readonly IHastlayerConfiguration _configuration;
+        private IHastlayerConfiguration _configuration;
         private IOrchardAppHost _host;
 
         public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
@@ -56,7 +56,7 @@ namespace Hast.Layer
             Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
             var hastlayer = new Hastlayer(configuration);
-            // It's easier to eagerly load the host than to lazily create it, becuase the latter would also need 
+            // It's easier to eagerly load the host than to lazily create it, because the latter would also need 
             // synchronization to allow concurrent access to this type's instance methods.
             await hastlayer.LoadHost();
             return hastlayer;
@@ -67,7 +67,7 @@ namespace Hast.Layer
             _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
 
         public async Task<IHardwareRepresentation> GenerateHardware(
-            IEnumerable<Assembly> assemblies, 
+            IEnumerable<Assembly> assemblies,
             IHardwareGenerationConfiguration configuration)
         {
             Argument.ThrowIfNull(assemblies, nameof(assemblies));
@@ -118,7 +118,7 @@ namespace Hast.Layer
             catch (Exception ex) when (!ex.IsFatal())
             {
                 var message =
-                    "An error happened during generating the Hastlayer hardware representation for the following assemblies: " + 
+                    "An error happened during generating the Hastlayer hardware representation for the following assemblies: " +
                     string.Join(", ", assemblies.Select(assembly => assembly.FullName));
                 await _host.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
@@ -126,8 +126,8 @@ namespace Hast.Layer
         }
 
         public async Task<T> GenerateProxy<T>(
-            IHardwareRepresentation hardwareRepresentation, 
-            T hardwareObject, 
+            IHardwareRepresentation hardwareRepresentation,
+            T hardwareObject,
             IProxyGenerationConfiguration configuration) where T : class
         {
             if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
@@ -144,8 +144,8 @@ namespace Hast.Layer
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                var message = 
-                    "An error happened during generating the Hastlayer proxy for an object of the following type: " + 
+                var message =
+                    "An error happened during generating the Hastlayer proxy for an object of the following type: " +
                     hardwareObject.GetType().FullName;
                 await _host.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
@@ -163,13 +163,7 @@ namespace Hast.Layer
 
         private async Task LoadHost()
         {
-            var importedExtensions = new[]
-                {
-                    typeof(Hastlayer).Assembly,
-                    typeof(IProxyGenerator).Assembly,
-                    typeof(IHardwareImplementationComposer).Assembly,
-                    typeof(ITransformer).Assembly
-                }.Union(_configuration.Extensions);
+            var moduleFolderPaths = new List<string>();
 
             // Since Hast.Core either exists or not we need to start by probing for the Hast.Abstractions folder.
             var abstractionsPath = Path.GetDirectoryName(GetType().Assembly.Location);
@@ -199,11 +193,29 @@ namespace Hast.Layer
                 }
                 else
                 {
-                    abstractionsPath = Path.GetDirectoryName(abstractionsPath); 
+                    abstractionsPath = Path.GetDirectoryName(abstractionsPath);
                 }
             }
 
-            var corePath = Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core");
+            moduleFolderPaths.Add(abstractionsPath);
+
+            if (_configuration.Flavor == HastlayerFlavor.Developer)
+            {
+                var corePath = Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core");
+                if (Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
+                else
+                {
+                    _configuration = new HastlayerConfiguration(_configuration) { Flavor = HastlayerFlavor.Client };
+                }
+            }
+
+            var importedExtensions = new[]
+            {
+                typeof(Hastlayer).Assembly,
+                typeof(IProxyGenerator).Assembly,
+                typeof(IHardwareImplementationComposer).Assembly,
+                typeof(ITransformer).Assembly
+            }.Union(_configuration.Extensions);
 
             var settings = new AppHostSettings
             {
@@ -216,7 +228,7 @@ namespace Hast.Layer
                         EnabledFeatures = importedExtensions.Select(extension => extension.ShortName())
                     }
                 },
-                ModuleFolderPaths = new[] { abstractionsPath, corePath }
+                ModuleFolderPaths = moduleFolderPaths
             };
 
 

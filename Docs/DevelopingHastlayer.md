@@ -9,16 +9,11 @@
 - If some code uses unsupported constructs it should be made apparent with exceptions. The hardware implementation silently failing (or working unexpectedly) should be avoided. Exceptions should include contextual information (e.g. the full expression or method of the problematic source) and offer hints on possible solutions.
 
 
-## Flavors of the Hastlayer solution
-
-The Hastlayer solutions come in two "flavors" with corresponding branches:
-
-- Developer (*dev* branch): This is used by developers of Hastlayer itself. It includes the full source code.
-- Client (*client* branch): Used by end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service.
+## Maintaining the flavors of the Hastlayer solution
 
 Generally the *client* branch should be only merged to, but never from, the *dev* branch.
 
-There are separate solution files for the two flavors that only differ in whether they include *Hast.Core*. Should the solution change then make the changes in the dev solution file, copy it over the client one and remove the *Hast.Core* solution folder. If you switch between the two solutions while on the *dev* branch then temporarily rename or remove the *Hast.Core* folder so projects from there won't be loaded as extensions (they will be even without them being added to the solution).
+There are separate solution files for the two flavors that only differ in whether they include *Hast.Core*. Should the solution change then make the changes in the dev solution file, copy it over the client one and remove the *Hast.Core* solution folder. If you switch between the two solutions while on the *dev* branch then temporarily configure the Hastlayer shell used for the Client flavor (see `IHastlayerConfiguration`).
 
 To allow the same code in the samples and elsewhere to support both scenarios Orchard's dynamic module loading needs to be utilized. For this to work *Hast.Core* projects should adhere to the following:
 

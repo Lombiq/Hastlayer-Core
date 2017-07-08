@@ -414,7 +414,9 @@ architecture Imp of Hast_IP is
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\);
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\);
     -- Signals:
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\: boolean := false;
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\: boolean := false;
@@ -432,7 +434,9 @@ architecture Imp of Hast_IP is
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\);
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\);
     -- Signals:
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\: boolean := false;
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\: boolean := false;
@@ -450,7 +454,9 @@ architecture Imp of Hast_IP is
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\);
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\);
     -- Signals:
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\: boolean := false;
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\: boolean := false;
@@ -468,7 +474,9 @@ architecture Imp of Hast_IP is
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_3\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_4\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_5\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\);
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_7\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_8\);
     -- Signals:
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._Finished\: boolean := false;
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.return\: boolean := false;
@@ -486,7 +494,9 @@ architecture Imp of Hast_IP is
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_3\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_4\, 
         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_5\, 
-        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\);
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_7\, 
+        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_8\);
     -- Signals:
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._Finished\: boolean := false;
     Signal \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.return\: boolean := false;
@@ -614,7 +624,9 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\, 
         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\, 
         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\, 
-        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\);
+        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\, 
+        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\, 
+        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\);
     -- Signals:
     Signal \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\: boolean := false;
@@ -1354,7 +1366,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_2\.
                         -- The while loop's condition:
@@ -1375,7 +1387,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_2\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.return\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\;
@@ -1390,7 +1402,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_5\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.4\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num\;
@@ -1399,7 +1411,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_6\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.5\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\ - \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num\;
@@ -1408,7 +1420,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_7\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -1487,7 +1499,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\.
                         -- The while loop's condition:
@@ -1508,7 +1520,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.return\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\;
@@ -1523,7 +1535,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\;
@@ -1532,7 +1544,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ - \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\;
@@ -1541,7 +1553,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -1620,7 +1632,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\.
                         -- The while loop's condition:
@@ -1641,7 +1653,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.return\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\;
@@ -1656,7 +1668,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\;
@@ -1665,7 +1677,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ - \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\;
@@ -1674,7 +1686,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -1753,7 +1765,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_2\.
                         -- The while loop's condition:
@@ -1774,7 +1786,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_2\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.return\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\;
@@ -1789,7 +1801,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.4\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num\;
@@ -1798,7 +1810,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_6\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.binaryOperationResult.5\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num2\ - \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.num\;
@@ -1807,7 +1819,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_7\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -1886,7 +1898,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_2\.
                         -- The while loop's condition:
@@ -1907,7 +1919,7 @@ begin
                         else 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_2\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.return\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\;
@@ -1922,7 +1934,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.4\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num\;
@@ -1931,7 +1943,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_6\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_3\.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.binaryOperationResult.5\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num2\ - \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.num\;
@@ -1940,7 +1952,7 @@ begin
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ = \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_7\) then 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -2050,7 +2062,7 @@ begin
                                 \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_4\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
@@ -2081,7 +2093,7 @@ begin
                         else 
                             \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_3\.
                         \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_6\;
@@ -2116,7 +2128,7 @@ begin
                                 \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_8\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_6\.
                         -- The while loop's condition:
@@ -2129,7 +2141,7 @@ begin
                         else 
                             \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_8\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_6\.
                         -- Begin SimpleMemory write.
@@ -2313,7 +2325,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor()
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Finished.0\) then 
@@ -2344,7 +2356,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Finished.0\) then 
@@ -2406,7 +2418,7 @@ begin
                                 \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
                         -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.array2\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
@@ -2419,7 +2431,7 @@ begin
                         else 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
                         -- True branch of the if-else started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
@@ -2450,7 +2462,7 @@ begin
                         else 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
                         -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[])
@@ -2478,7 +2490,7 @@ begin
                                 \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Finished.0\) then 
@@ -2563,7 +2575,7 @@ begin
                         else 
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\.
                         -- The while loop's condition:
@@ -2576,7 +2588,7 @@ begin
                         else 
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\ => 
                         -- State after the while loop which was started in state \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\.
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.return\ <= \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\;
@@ -2723,7 +2735,7 @@ begin
                         \NumberContainer::IncreaseNumber(UInt32).0.this\.\Number\ := \NumberContainer::IncreaseNumber(UInt32).0.binaryOperationResult.0\;
                         \NumberContainer::IncreaseNumber(UInt32).0.return\ <= \NumberContainer::IncreaseNumber(UInt32).0.this\.\Number\;
                         \NumberContainer::IncreaseNumber(UInt32).0._State\ := \NumberContainer::IncreaseNumber(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -2770,7 +2782,7 @@ begin
                         \NumberContainer::get_NumberPlusFive().0.binaryOperationResult.0\ := \NumberContainer::get_NumberPlusFive().0.this\.\Number\ + to_unsigned(5, 32);
                         \NumberContainer::get_NumberPlusFive().0.return\ <= \NumberContainer::get_NumberPlusFive().0.binaryOperationResult.0\;
                         \NumberContainer::get_NumberPlusFive().0._State\ := \NumberContainer::get_NumberPlusFive().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -2819,7 +2831,7 @@ begin
                         \NumberContainer::set_NumberPlusFive(UInt32).0.binaryOperationResult.0\ := \NumberContainer::set_NumberPlusFive(UInt32).0.value\ - to_unsigned(5, 32);
                         \NumberContainer::set_NumberPlusFive(UInt32).0.this\.\Number\ := \NumberContainer::set_NumberPlusFive(UInt32).0.binaryOperationResult.0\;
                         \NumberContainer::set_NumberPlusFive(UInt32).0._State\ := \NumberContainer::set_NumberPlusFive(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -2942,6 +2954,7 @@ begin
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -2961,6 +2974,7 @@ begin
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
             else 
@@ -2996,30 +3010,17 @@ begin
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
                         -- The while loop's condition:
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2\;
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ = to_unsigned(0, 32);
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
-                            --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\.
-
-                            if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\) then 
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
-                            end if;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\ := True;
@@ -3027,22 +3028,48 @@ begin
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\.
+                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ (have to wait 7 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\;
+                        -- Clock cycles needed to complete this state (approximation): 7
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ => 
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ = to_unsigned(0, 32);
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\.
+                        --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\.
+
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\ => 
+                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ + to_unsigned(1, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\) then 
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\ => 
+                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\ := False;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
+                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -3065,6 +3092,7 @@ begin
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -3084,6 +3112,7 @@ begin
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := to_unsigned(0, 32);
             else 
@@ -3119,30 +3148,17 @@ begin
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
                         -- The while loop's condition:
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2\;
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ = to_unsigned(0, 32);
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
-                            --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\.
-
-                            if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\) then 
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
-                            end if;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\ := True;
@@ -3150,22 +3166,48 @@ begin
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\.
+                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ (have to wait 7 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\;
+                        -- Clock cycles needed to complete this state (approximation): 7
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ => 
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ = to_unsigned(0, 32);
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\.
+                        --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\.
+
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\ => 
+                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ + to_unsigned(1, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\) then 
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\ => 
+                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\ := False;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
+                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -3188,6 +3230,7 @@ begin
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -3207,6 +3250,7 @@ begin
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := to_unsigned(0, 32);
             else 
@@ -3242,30 +3286,17 @@ begin
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
                         -- The while loop's condition:
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2\;
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ = to_unsigned(0, 32);
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
-                            --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\.
-
-                            if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\) then 
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
-                            end if;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\ := True;
@@ -3273,22 +3304,48 @@ begin
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\.
+                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ (have to wait 7 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\;
+                        -- Clock cycles needed to complete this state (approximation): 7
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ => 
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ = to_unsigned(0, 32);
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\.
+                        --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\.
+
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\ => 
+                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ + to_unsigned(1, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\) then 
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\ => 
+                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\ := False;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
+                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -3311,6 +3368,7 @@ begin
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.2\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.4\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -3330,6 +3388,7 @@ begin
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.1\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.2\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.4\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.5\ := to_unsigned(0, 32);
             else 
@@ -3365,30 +3424,17 @@ begin
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_3\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_2\.
                         -- The while loop's condition:
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.num2\;
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.2\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.num3\;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.3\ = to_unsigned(0, 32);
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.4\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\.
-                            --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_5\.
-
-                            if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.flag\) then 
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_5\;
-                            end if;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_5\;
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.result\ := True;
@@ -3396,22 +3442,48 @@ begin
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_5\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_3\.
+                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.3\ (have to wait 7 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.num3\;
+                        -- Clock cycles needed to complete this state (approximation): 7
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\ => 
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.3\ = to_unsigned(0, 32);
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.4\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_8\.
+                        --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_7\.
+
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.flag\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_8\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_7\ => 
+                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.5\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.num3\ + to_unsigned(1, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_5\) then 
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_7\) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_8\ => 
+                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.result\ := False;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.result\;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_3\.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_5\;
+                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_6\.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_8\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -3434,6 +3506,7 @@ begin
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.2\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.4\: boolean := false;
         Variable \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -3453,6 +3526,7 @@ begin
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.1\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.2\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.4\ := false;
                 \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.5\ := to_unsigned(0, 32);
             else 
@@ -3488,30 +3562,17 @@ begin
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_3\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_2\.
                         -- The while loop's condition:
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.num2\;
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.2\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.num3\;
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.3\ = to_unsigned(0, 32);
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.4\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\.
-                            --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_5\.
-
-                            if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.flag\) then 
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_5\;
-                            end if;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_5\;
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_2\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.result\ := True;
@@ -3519,22 +3580,48 @@ begin
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_5\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_3\.
+                        -- Waiting for the result to appear in \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.3\ (have to wait 7 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\;
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.num\ mod \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.num3\;
+                        -- Clock cycles needed to complete this state (approximation): 7
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\ => 
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.3\ = to_unsigned(0, 32);
+                        \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.4\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_8\.
+                        --     * Execution after either branch will continue in the following state: \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_7\.
+
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.flag\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_8\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_7\ => 
+                        -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.5\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.num3\ + to_unsigned(1, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_5\) then 
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_7\) then 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_8\ => 
+                        -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.result\ := False;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.result\;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_3\.
-                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\) then 
-                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_5\;
+                        -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_6\.
+                        if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ = \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_8\) then 
+                            \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -3752,7 +3839,7 @@ begin
                                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_4\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
@@ -3766,7 +3853,7 @@ begin
                         else 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_3\.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_1\;
@@ -3784,7 +3871,7 @@ begin
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= true;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
                         if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\) then 
@@ -3809,7 +3896,7 @@ begin
                                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_4\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -3936,7 +4023,7 @@ begin
                                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
@@ -3954,7 +4041,7 @@ begin
                         else 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_3\.
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_1\;
@@ -3973,7 +4060,7 @@ begin
                         else 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_7\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\.
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\;
@@ -4012,7 +4099,7 @@ begin
                                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_6\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32)
                         if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.3\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.3\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.4\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.4\ and \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\) then 
@@ -4042,7 +4129,7 @@ begin
                                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_10\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\.
                         -- The while loop's condition:
@@ -4058,7 +4145,7 @@ begin
                         else 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\.
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(30, 32);
@@ -4067,7 +4154,7 @@ begin
                         if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\) then 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_12\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -4080,7 +4167,7 @@ begin
                                 \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_10\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -4100,6 +4187,7 @@ begin
         Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\: boolean := false;
         Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\: boolean := false;
         Variable \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -4118,6 +4206,7 @@ begin
                 \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.1\ := false;
                 \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ := false;
                 \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\ := false;
                 \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
             else 
@@ -4152,30 +4241,17 @@ begin
                         else 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\.
                         -- The while loop's condition:
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num\;
                         if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\) then 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ mod \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ = to_unsigned(0, 32);
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\ and ends in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
-                            --     * Execution after either branch will continue in the following state: \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\.
-
-                            if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\) then 
-                                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\;
-                            end if;
+                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\;
                         else 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\.
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\ := True;
@@ -4183,22 +4259,48 @@ begin
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\ => 
-                        -- State after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\.
+                        -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ (have to wait 7 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\;
+                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ mod \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\;
+                        -- Clock cycles needed to complete this state (approximation): 7
+                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\ => 
+                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ = to_unsigned(0, 32);
+                        \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\ and ends in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\.
+                        --     * Execution after either branch will continue in the following state: \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\.
+
+                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\) then 
+                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\ => 
+                        -- State after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.5\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ + to_unsigned(1, 32);
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ = \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\) then 
+                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ = \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\) then 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\ => 
-                        -- True branch of the if-else started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\.
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\ => 
+                        -- True branch of the if-else started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\ := False;
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\;
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\.
-                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ = \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\) then 
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\;
+                        -- Going to the state after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
+                        if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ = \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\) then 
+                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -4479,7 +4581,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -4501,7 +4603,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.result\;
@@ -4522,7 +4624,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -4532,7 +4634,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_10\;
@@ -4555,7 +4657,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -4642,7 +4744,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -4664,7 +4766,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.result\;
@@ -4685,7 +4787,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -4695,7 +4797,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_10\;
@@ -4718,7 +4820,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -4805,7 +4907,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -4827,7 +4929,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.result\;
@@ -4848,7 +4950,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -4858,7 +4960,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_10\;
@@ -4881,7 +4983,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -4968,7 +5070,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -4990,7 +5092,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.result\;
@@ -5011,7 +5113,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -5021,7 +5123,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_10\;
@@ -5044,7 +5146,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -5131,7 +5233,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -5153,7 +5255,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.result\;
@@ -5174,7 +5276,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -5184,7 +5286,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_10\;
@@ -5207,7 +5309,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -5294,7 +5396,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -5316,7 +5418,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.result\;
@@ -5337,7 +5439,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
@@ -5347,7 +5449,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_9\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_10\;
@@ -5370,7 +5472,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -5449,7 +5551,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -5469,7 +5571,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.result\;
@@ -5490,7 +5592,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -5503,7 +5605,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -5582,7 +5684,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -5602,7 +5704,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.result\;
@@ -5623,7 +5725,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -5636,7 +5738,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -5715,7 +5817,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -5735,7 +5837,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.result\;
@@ -5756,7 +5858,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -5769,7 +5871,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -5848,7 +5950,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -5868,7 +5970,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.result\;
@@ -5889,7 +5991,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -5902,7 +6004,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -5981,7 +6083,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -6001,7 +6103,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.result\;
@@ -6022,7 +6124,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -6035,7 +6137,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -6114,7 +6216,7 @@ begin
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.0\);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_4\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -6134,7 +6236,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.result\;
@@ -6155,7 +6257,7 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_8\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
@@ -6168,7 +6270,7 @@ begin
                                 \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -6605,7 +6707,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\ => 
                         -- Repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_3\.
                         -- The while loop's condition:
@@ -6626,7 +6728,7 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_5\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_3\.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_1\;
@@ -6645,7 +6747,7 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ := to_signed(0, 32);
@@ -6657,7 +6759,7 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_8\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
@@ -6672,7 +6774,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_6\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\.
                         -- The while loop's condition:
@@ -6688,7 +6790,7 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.4
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\.
                         case \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation\ is 
@@ -6821,7 +6923,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\;
                         end case;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_11\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
@@ -6836,7 +6938,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_9\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\ => 
                         -- State after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ := to_signed(0, 32);
@@ -6848,28 +6950,28 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.13\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.14\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.15\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.16\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.17\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.18\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.19\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.20\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.21\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.22\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.23\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.24\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.25\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.26\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.27\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.28\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.29\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.30\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.31\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.32\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.33\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.34\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.35\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.36\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.40\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.41\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.42\);
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.43\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.44\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.45\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.46\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.47\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.48\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.49\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.50\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.51\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.52\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.53\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.54\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.55\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.56\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.57\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.58\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.59\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.60\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.61\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.62\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.63\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.64\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.65\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.66\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\);
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.95\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.96\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\);
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\);
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
@@ -6892,7 +6994,7 @@ begin
                         else 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.138\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ + to_signed(30, 32);
@@ -6901,7 +7003,7 @@ begin
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_19\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -6914,7 +7016,7 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
