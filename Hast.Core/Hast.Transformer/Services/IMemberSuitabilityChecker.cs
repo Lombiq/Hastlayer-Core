@@ -2,7 +2,7 @@
 using ICSharpCode.NRefactory.CSharp;
 using Orchard;
 
-namespace Hast.Transformer
+namespace Hast.Transformer.Services
 {
     public interface IMemberSuitabilityChecker : IDependency
     {

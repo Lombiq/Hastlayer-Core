@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Models;
+using Hast.Transformer.Services;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.Verifiers

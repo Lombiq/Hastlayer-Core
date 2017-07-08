@@ -2,10 +2,11 @@
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
 
-namespace Hast.Communication
+namespace Hast.Transformer.Services
 {
-    // The implementation is here because it depends on the Communication component and its proxy generator on what can 
-    // be used as hardware entry point members.
+    // This should rather be in Hast.Communication because it depends on the Communication component and its proxy 
+    // generator on what can be used as hardware entry point members. However to have this there a lot of AST extensions
+    // would need to be opened for Clients, and even in the Client flavor ILSpy NuGets would need to be installed.
     public class MemberSuitabilityChecker : IMemberSuitabilityChecker
     {
         public bool IsSuitableHardwareEntryPointMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)
