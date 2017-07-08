@@ -14,18 +14,44 @@ using Hast.Transformer.Services;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using ICSharpCode.NRefactory.CSharp;
+using System.Linq;
+using Autofac.Core;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
     public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBase
     {
+        protected virtual bool UseStubMemberSuitabilityChecker { get; set; } = true;
+
+
         protected VhdlTransformingTestFixtureBase()
         {
             _requiredExtension.AddRange(new[] { typeof(DefaultTransformer).Assembly, typeof(MemberIdTable).Assembly });
 
             _shellRegistrationBuilder = builder =>
             {
-                builder.RegisterInstance(new StubMemberSuitabilityChecker()).As<IMemberSuitabilityChecker>();
+                if (UseStubMemberSuitabilityChecker)
+                {
+                    // We need to override MemberSuitabilityChecker in Hast.Transformer. Since that registration happens
+                    // after this one we need to use this hackish way over circumventing that.
+                    builder.RegisterCallback(componentRegistry =>
+                    {
+                        var memberSuitabilityCheckerRegistration = componentRegistry
+                            .Registrations
+                            .Where(registration => registration
+                                .Services
+                                .Any(service => service is TypedService && ((TypedService)service).ServiceType == typeof(IMemberSuitabilityChecker)))
+                            .SingleOrDefault();
+
+                        if (memberSuitabilityCheckerRegistration == null) return;
+
+                        memberSuitabilityCheckerRegistration.Activating += (sender, activatingEventArgs) =>
+                        {
+                            activatingEventArgs.Instance = new StubMemberSuitabilityChecker();
+                        };
+                    }); 
+                }
+
                 builder.RegisterInstance(new StubDeviceDriverSelector()).As<IDeviceDriverSelector>();
             };
         }
@@ -46,14 +72,14 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             public bool IsSuitableHardwareEntryPointMember(
                 EntityDeclaration member,
-                ITypeDeclarationLookupTable typeDeclarationLookupTable) => 
+                ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
                 (member.HasModifier(Modifiers.Public) && member.FindFirstParentTypeDeclaration().HasModifier(Modifiers.Public)) ||
                 member.Modifiers == Modifiers.None;
         }
 
         private class StubDeviceDriverSelector : IDeviceDriverSelector
         {
-            public IDeviceDriver GetDriver(string deviceName) =>new StubDeviceDriver();
+            public IDeviceDriver GetDriver(string deviceName) => new StubDeviceDriver();
 
             public IEnumerable<IDeviceManifest> GetSupporteDevices()
             {

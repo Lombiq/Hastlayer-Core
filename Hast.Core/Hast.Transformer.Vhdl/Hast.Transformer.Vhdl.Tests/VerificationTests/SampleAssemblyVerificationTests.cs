@@ -13,15 +13,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
     [TestFixture]
     public class SampleAssemblyVerificationTests : VerificationTestFixtureBase
     {
-        public SampleAssemblyVerificationTests()
-        {
-            var baseRegistrationBuilder = _shellRegistrationBuilder;
-            _shellRegistrationBuilder = builder =>
-            {
-                baseRegistrationBuilder(builder);
-                builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
-            };
-        }
+        protected override bool UseStubMemberSuitabilityChecker => false;
+
 
         [Test]
         public async Task BasicSamplesMatchApproved()
