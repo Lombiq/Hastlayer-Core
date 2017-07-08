@@ -3,23 +3,56 @@ namespace Lombiq.Unum
     public class UnumConfiguration
     {
         /// <summary>
-        /// The number of bits describing the maximum amount of bits describing of the exponent in the Unum.
-        /// ExponentSizeMax = 2 to the power of ExponentSizeSize;
+        /// The number of bits in the exponent.
         /// </summary>
-        /// <example>
-        /// Example 1: ExponentSizeSize = 0 --> Number of bits of ESize = 0 --> Exponent size = 1.
-        /// Example 2: ExponentSizeSize = 3 --> Number of bits of ESize is in [0-3] --> Exponent size is in [1, 8].
-        /// </example>
-        public byte ExponentSizeSize { get; set; }
+        public readonly byte ExponentSize;
 
         /// <summary>
-        /// The number of bits describing the maximum amount of bits describing of the fraction in the Unum.
-        /// FractionSizeMax = 2 to the power of FractionSizeSize;
+        /// The number of bits in the fraction.
         /// </summary>
-        /// <example>
-        /// Example 1: FractionSizeSize = 0 --> Number of bits of FSize = 0 --> Fraction size = 1.
-        /// Example 2: FractionSizeSize = 4 --> Number of bits of FSize is in [0-4] --> Fraction size is in [1, 16].
-        /// </example>
-        public byte FractionSizeSize { get; set; }
+        public readonly byte FractionSize;
+
+
+        public UnumConfiguration(IeeeConfiguration configuration)
+        {
+            switch (configuration)
+            {
+                case IeeeConfiguration.HalfPrecision:
+                    ExponentSize = 5;
+                    FractionSize = 10;
+                    break;
+                case IeeeConfiguration.SinglePrecision:
+                    ExponentSize = 8;
+                    FractionSize = 23;
+                    break;
+                case IeeeConfiguration.DoublePrecision:
+                    ExponentSize = 11;
+                    FractionSize = 52;
+                    break;
+                case IeeeConfiguration.ExtendedPrecision:
+                    ExponentSize = 15;
+                    FractionSize = 64;
+                    break;
+                case IeeeConfiguration.QuadPrecision:
+                    ExponentSize = 15;
+                    FractionSize = 112;
+                    break;
+            }
+        }
+
+        public UnumConfiguration(byte exponentSize, byte fractionSize)
+        {
+            ExponentSize = exponentSize;
+            FractionSize = fractionSize;
+        }
+    }
+
+    public enum IeeeConfiguration
+    {
+        HalfPrecision,     // 16-bit.
+        SinglePrecision,   // 32-bit.
+        DoublePrecision,   // 64-bit.
+        ExtendedPrecision, // 80-bit (Intel x87).
+        QuadPrecision      // 128-bit.
     }
 }
