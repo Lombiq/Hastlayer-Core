@@ -103,9 +103,14 @@ namespace Hast.Transformer.Vhdl.Tests
                     }
                 }
 
-                public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) => 0;
+                public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned)
+                {
+                    if (expression.Operator == BinaryOperatorType.Modulus) return 7M;
 
-                public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) => 0;
+                    return 0.1M;
+                }
+
+                public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) => 0.1M;
             }
         }
     }
