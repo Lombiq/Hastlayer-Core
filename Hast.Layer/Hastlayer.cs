@@ -154,7 +154,8 @@ namespace Hast.Layer
                 {
                     typeof(Hastlayer).Assembly,
                     typeof(IProxyGenerator).Assembly,
-                    typeof(IHardwareImplementationComposer).Assembly
+                    typeof(IHardwareImplementationComposer).Assembly,
+                    typeof(ITransformer).Assembly
                 }.Union(_configuration.Extensions);
 
             var corePath = Path.GetDirectoryName(GetType().Assembly.Location);

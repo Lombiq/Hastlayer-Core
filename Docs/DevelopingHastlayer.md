@@ -22,6 +22,6 @@ To allow the same code in the samples and elsewhere to support both scenarios Or
 - They should include a *Module.txt* file (can be empty or can contain the usual Orchard configuration like `Dependencies`).
 - Both the Debug and Release build output directories should be set just to *bin\\*.
 
-If a Hast.Core projects needs to have types accessible in the Client flavor then create a corresponding `Abstractions` project. Such projects should follow the same rules listed above as *Hast.Core* projects with the only difference being that they should be located in a subfolder of *Hast.Abstractions*.
+If a Hast.Core projects needs to have types accessible in the Client flavor then create a corresponding `Abstractions` project. Such projects should follow the same rules listed above as *Hast.Core* projects with the only difference being that they should be located in a subfolder of *Hast.Abstractions*. Exceptions are projects that are directly added as imported extensions in `Hast.Layer`: Those can be just normal projects (like `Hast.Transformer.Abstractions`).
 
 Note that if either kinds of projects reference another project that should be treated in the same way, with a manifest file and build output directories set (see e.g. `Hast.VhdlBuilder`).
