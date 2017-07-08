@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -106,7 +106,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="bottomLeftValue">Bottom left value in matrix.</param>
         /// <param name="bottomMiddleValue">Bottom middle value in matrix.</param>
         /// <param name="bottomRightValue">Bottom right value in matrix.</param>
-        /// <param name="factor">The value to devide the summed matrix values with.</param>
+        /// <param name="factor">The value to divide the summed matrix values with.</param>
         /// <param name="offset">Offset value added to the result.</param>
         /// <returns>Returns the value of the filtered pixel in matrix.</returns>
         private ushort CalculatePixelValue(
@@ -221,7 +221,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="bottomLeft">Bottom left value.</param>
         /// <param name="bottomMiddle">Bottom middle value.</param>
         /// <param name="bottomRight">Bottom right value.</param>
-        /// <param name="factor">The value to devide the summed matrix values with.</param>
+        /// <param name="factor">The value to divide the summed matrix values with.</param>
         /// <param name="offset">Offset value added to the result.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
         private static SimpleMemory CreateSimpleMemory(

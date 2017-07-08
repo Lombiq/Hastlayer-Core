@@ -11,9 +11,9 @@ using Hast.Common.Models;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
+using Hast.Communication.Models;
 using Hast.Communication.Services;
-using Hast.Synthesis;
-using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
 
 namespace Hast.Communication
@@ -89,14 +89,14 @@ namespace Hast.Communication
                             }
 
                             var communicationChannelName = configuration.CommunicationChannelName;
-                            var deviceDriver = workContext.Resolve<IDeviceDriver>();
+                            var deviceManifest = hardwareRepresentation.DeviceManifest;
 
                             if (string.IsNullOrEmpty(communicationChannelName))
                             {
-                                communicationChannelName = deviceDriver.DeviceManifest.DefaultCommunicationChannelName;
+                                communicationChannelName = deviceManifest.DefaultCommunicationChannelName;
                             }
 
-                            if (!deviceDriver.DeviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))
+                            if (!deviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))
                             {
                                 throw new NotSupportedException(
                                     "The configured communication channel \"" + communicationChannelName +
@@ -107,12 +107,12 @@ namespace Hast.Communication
                             if (memory != null)
                             {
                                 var memoryByteCount = memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
-                                if (memoryByteCount > deviceDriver.DeviceManifest.AvailableMemoryBytes)
+                                if (memoryByteCount > deviceManifest.AvailableMemoryBytes)
                                 {
                                     throw new InvalidOperationException(
                                         "The input is too large to fit into the device's memory: the input is " +
                                         memoryByteCount + " bytes, the available memory is " +
-                                        deviceDriver.DeviceManifest.AvailableMemoryBytes + " bytes.");
+                                        deviceManifest.AvailableMemoryBytes + " bytes.");
                                 }
 
                                 SimpleMemory softMemory = null;
@@ -142,7 +142,10 @@ namespace Hast.Communication
                                 invocationContext.ExecutionInformation = await workContext
                                     .Resolve<ICommunicationServiceSelector>()
                                     .GetCommunicationService(communicationChannelName)
-                                    .Execute(memory, memberId);
+                                    .Execute(
+                                        memory, 
+                                        memberId, 
+                                        new HardwareExecutionContext { ProxyGenerationConfiguration = configuration, HardwareRepresentation = hardwareRepresentation });
 
                                 if (configuration.ValidateHardwareResults)
                                 {
@@ -214,6 +217,12 @@ namespace Hast.Communication
             public string MemberFullName { get; set; }
             public IHardwareRepresentation HardwareRepresentation { get; set; }
             public IHardwareExecutionInformation ExecutionInformation { get; set; }
+        }
+
+        private class HardwareExecutionContext : IHardwareExecutionContext
+        {
+            public IProxyGenerationConfiguration ProxyGenerationConfiguration { get; set; }
+            public IHardwareRepresentation HardwareRepresentation { get; set; }
         }
     }
 }
