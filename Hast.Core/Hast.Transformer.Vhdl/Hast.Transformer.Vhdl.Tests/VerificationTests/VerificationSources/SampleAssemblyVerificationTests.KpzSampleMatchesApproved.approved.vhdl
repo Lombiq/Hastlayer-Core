@@ -520,7 +520,7 @@ begin
                         else 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\ => 
                         -- True branch of the if-else started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\ := to_signed(1, 32);
@@ -554,7 +554,7 @@ begin
                         else 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\ => 
                         -- State after the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\.
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
@@ -575,7 +575,7 @@ begin
                         else 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\ => 
                         -- State after the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\.
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ + to_signed(1, 32);
@@ -584,7 +584,7 @@ begin
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\) then 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean)
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\) then 
@@ -597,7 +597,7 @@ begin
                                 \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Finished.0\) then 
@@ -683,7 +683,7 @@ begin
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_6\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -768,7 +768,7 @@ begin
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(65, 32), 32);
@@ -786,7 +786,7 @@ begin
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\ => 
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(66, 32), 32);
@@ -803,7 +803,7 @@ begin
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\ => 
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(67, 32), 32);
@@ -821,7 +821,7 @@ begin
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\ => 
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(68, 32), 32);
@@ -840,7 +840,7 @@ begin
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\ => 
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(69, 32), 32);
@@ -924,7 +924,7 @@ begin
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom1().0.num2\ xor \KpzKernels::GetNextRandom1().0.num\;
                         \KpzKernels::GetNextRandom1().0.return\ <= \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\;
                         \KpzKernels::GetNextRandom1().0._State\ := \KpzKernels::GetNextRandom1().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,5
                 end case;
             end if;
         end if;
@@ -992,7 +992,7 @@ begin
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom2().0.num2\ xor \KpzKernels::GetNextRandom2().0.num\;
                         \KpzKernels::GetNextRandom2().0.return\ <= \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\;
                         \KpzKernels::GetNextRandom2().0._State\ := \KpzKernels::GetNextRandom2().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,5
                 end case;
             end if;
         end if;
@@ -1048,7 +1048,7 @@ begin
                         \KpzKernels::getIndexFromXY(Int32,Int32).0.binaryOperationResult.1\ := \KpzKernels::getIndexFromXY(Int32,Int32).0.x\ + \KpzKernels::getIndexFromXY(Int32,Int32).0.binaryOperationResult.0\;
                         \KpzKernels::getIndexFromXY(Int32,Int32).0.return\ <= \KpzKernels::getIndexFromXY(Int32,Int32).0.binaryOperationResult.1\;
                         \KpzKernels::getIndexFromXY(Int32,Int32).0._State\ := \KpzKernels::getIndexFromXY(Int32,Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                 end case;
             end if;
         end if;
@@ -1101,7 +1101,7 @@ begin
                         \KpzKernels::getGridDx(Int32).0.binaryOperationResult.1\ := \KpzKernels::getGridDx(Int32).0.binaryOperationResult.0\ > to_unsigned(0, 32);
                         \KpzKernels::getGridDx(Int32).0.return\ <= \KpzKernels::getGridDx(Int32).0.binaryOperationResult.1\;
                         \KpzKernels::getGridDx(Int32).0._State\ := \KpzKernels::getGridDx(Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                 end case;
             end if;
         end if;
@@ -1154,7 +1154,7 @@ begin
                         \KpzKernels::getGridDy(Int32).0.binaryOperationResult.1\ := \KpzKernels::getGridDy(Int32).0.binaryOperationResult.0\ > to_unsigned(0, 32);
                         \KpzKernels::getGridDy(Int32).0.return\ <= \KpzKernels::getGridDy(Int32).0.binaryOperationResult.1\;
                         \KpzKernels::getGridDy(Int32).0._State\ := \KpzKernels::getGridDy(Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                 end case;
             end if;
         end if;
@@ -1226,7 +1226,7 @@ begin
                         \KpzKernels::setGridDx(Int32,Boolean).0.binaryOperationResult.1\ := \KpzKernels::setGridDx(Int32,Boolean).0.binaryOperationResult.0\ or \KpzKernels::setGridDx(Int32,Boolean).0.conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e\;
                         \KpzKernels::setGridDx(Int32,Boolean).0.this\.\gridRaw\(to_integer(\KpzKernels::setGridDx(Int32,Boolean).0.index\)) := \KpzKernels::setGridDx(Int32,Boolean).0.binaryOperationResult.1\;
                         \KpzKernels::setGridDx(Int32,Boolean).0._State\ := \KpzKernels::setGridDx(Int32,Boolean).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                     when \KpzKernels::setGridDx(Int32,Boolean).0._State_4\ => 
                         -- True branch of the if-else started in state \KpzKernels::setGridDx(Int32,Boolean).0._State_2\.
                         \KpzKernels::setGridDx(Int32,Boolean).0.conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e\ := to_unsigned(1, 32);
@@ -1314,7 +1314,7 @@ begin
                         \KpzKernels::setGridDy(Int32,Boolean).0.binaryOperationResult.1\ := \KpzKernels::setGridDy(Int32,Boolean).0.binaryOperationResult.0\ or \KpzKernels::setGridDy(Int32,Boolean).0.conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae\;
                         \KpzKernels::setGridDy(Int32,Boolean).0.this\.\gridRaw\(to_integer(\KpzKernels::setGridDy(Int32,Boolean).0.index\)) := \KpzKernels::setGridDy(Int32,Boolean).0.binaryOperationResult.1\;
                         \KpzKernels::setGridDy(Int32,Boolean).0._State\ := \KpzKernels::setGridDy(Int32,Boolean).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                     when \KpzKernels::setGridDy(Int32,Boolean).0._State_4\ => 
                         -- True branch of the if-else started in state \KpzKernels::setGridDy(Int32,Boolean).0._State_2\.
                         \KpzKernels::setGridDy(Int32,Boolean).0.conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae\ := to_unsigned(2, 32);
@@ -1405,7 +1405,7 @@ begin
                         else 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_2\.
                         -- The while loop's condition:
@@ -1423,7 +1423,7 @@ begin
                         else 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_4\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_2\.
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_1\;
@@ -1444,7 +1444,7 @@ begin
                         else 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,3
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\.
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ + to_signed(1, 32);
@@ -1453,7 +1453,7 @@ begin
                         if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ = \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\) then 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_7\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
@@ -1466,7 +1466,7 @@ begin
                                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                 end case;
             end if;
         end if;
@@ -1542,7 +1542,7 @@ begin
                         else 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_2\.
                         -- The while loop's condition:
@@ -1560,7 +1560,7 @@ begin
                         else 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_4\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_2\.
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_1\;
@@ -1580,7 +1580,7 @@ begin
                         else 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,3
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\.
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ + to_signed(1, 32);
@@ -1589,7 +1589,7 @@ begin
                         if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ = \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\) then 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_7\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
@@ -1604,7 +1604,7 @@ begin
                                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                 end case;
             end if;
         end if;
@@ -1799,7 +1799,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,3
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Finished.0\) then 
@@ -1838,7 +1838,7 @@ begin
                                 \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,4
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
@@ -1855,7 +1855,7 @@ begin
                         else 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\ => 
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ + to_signed(1, 32);
@@ -1864,7 +1864,7 @@ begin
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\ => 
                         -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ := to_signed(0, 32);
@@ -1886,7 +1886,7 @@ begin
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,4
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\ => 
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ + to_signed(1, 32);
@@ -1895,7 +1895,7 @@ begin
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\ => 
                         -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := to_signed(0, 32);
@@ -1913,7 +1913,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\;
@@ -1938,7 +1938,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_16\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
@@ -1949,7 +1949,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_17\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_18\;
@@ -1977,7 +1977,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,5
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_20\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
@@ -2012,7 +2012,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,2
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_24\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
@@ -2023,7 +2023,7 @@ begin
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_25\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_26\;
@@ -2059,7 +2059,7 @@ begin
                                 \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,5
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_28\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_1\;
@@ -2071,7 +2071,7 @@ begin
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_30\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
@@ -2097,7 +2097,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_32\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
@@ -2123,7 +2123,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_34\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32)._Finished.0\) then 
@@ -2149,7 +2149,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0,1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_36\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32)._Finished.0\) then 
