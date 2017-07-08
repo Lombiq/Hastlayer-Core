@@ -7,6 +7,7 @@ using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Transformer.Abstractions.Configuration;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
