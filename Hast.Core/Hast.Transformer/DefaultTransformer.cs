@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
+using Hast.Transformer.Abstractions;
+using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Common.Configuration;
 
-namespace Hast.Common.Configuration
+namespace Hast.Transformer.Abstractions.Configuration
 {
     public class TransformerConfiguration
     {

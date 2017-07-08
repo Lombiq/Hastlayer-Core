@@ -1,5 +1,4 @@
 ﻿
-using Hast.Transformer.SimpleMemory;
 using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp

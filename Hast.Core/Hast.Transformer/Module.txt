@@ -1,0 +1,1 @@
+﻿Dependencies: Hast.Transformer.Abstractions

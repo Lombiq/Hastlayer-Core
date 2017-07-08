@@ -3,6 +3,7 @@ using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Transformer.Abstractions.Configuration;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -37,7 +38,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // You can also launch hardware-executed method calls in parallel. If there are multiple boards
             // connected then all of them will be utilized. If the whole device pool is utilized calls will
             // wait for their turn.
-            // Uncomment if you have mulitple boards connected.
+            // Uncomment if you have multiple boards connected.
             //var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
             //for (uint i = 100; i < 110; i++)
             //{
@@ -50,7 +51,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // In-algorithm parallelization:
             // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism 
             // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see 
-            // comments in the method). Thus the communication roundtrip will be slower for ParallelizedArePrimeNumbers.
+            // comments in the method). Thus the communication round-trip will be slower for ParallelizedArePrimeNumbers.
             // Because of this since PrimeCalculator.MaxDegreeOfParallelism is 30 we use 30 numbers here.
             // All of these numbers except for 9999 are primes.
             var numbers = new uint[]

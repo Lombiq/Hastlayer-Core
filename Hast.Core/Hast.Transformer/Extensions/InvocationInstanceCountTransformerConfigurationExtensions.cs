@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Abstractions.Configuration;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
@@ -22,7 +23,7 @@ namespace Hast.Common.Configuration
                 return configuration.GetMaxInvocationInstanceCountConfigurationForMember(simpleName);
             }
 
-            // If this is a DisplayClass member then it was generated from a lamdbda expression. So need to handle it
+            // If this is a DisplayClass member then it was generated from a lambda expression. So need to handle it
             // with the special "MemberNamePrefix.LambdaExpression.[Index]" pattern.
 
             var indexedNameHolder = entity.Annotation<LambdaExpressionIndexedNameHolder>();

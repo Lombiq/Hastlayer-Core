@@ -8,6 +8,7 @@ using Hast.Common.Models;
 using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
+using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
@@ -19,7 +20,7 @@ namespace Hast.Transformer.Vhdl.Tests
     {
         protected VhdlTransformingTestFixtureBase()
         {
-            _requiredExtension.AddRange(new[] { typeof(ITransformer).Assembly, typeof(MemberIdTable).Assembly });
+            _requiredExtension.AddRange(new[] { typeof(DefaultTransformer).Assembly, typeof(MemberIdTable).Assembly });
 
             _shellRegistrationBuilder = builder =>
             {

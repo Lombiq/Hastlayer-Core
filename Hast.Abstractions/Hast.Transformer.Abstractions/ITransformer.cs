@@ -5,7 +5,7 @@ using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Orchard;
 
-namespace Hast.Transformer
+namespace Hast.Transformer.Abstractions
 {
     /// <summary>
     /// Service for transforming a .NET assembly into hardware description.

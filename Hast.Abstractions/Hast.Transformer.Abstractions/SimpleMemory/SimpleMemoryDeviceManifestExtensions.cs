@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Models;
 
-namespace Hast.Transformer.SimpleMemory
+namespace Hast.Transformer.Abstractions.SimpleMemory
 {
     public static class SimpleMemoryDeviceManifestExtensions
     {

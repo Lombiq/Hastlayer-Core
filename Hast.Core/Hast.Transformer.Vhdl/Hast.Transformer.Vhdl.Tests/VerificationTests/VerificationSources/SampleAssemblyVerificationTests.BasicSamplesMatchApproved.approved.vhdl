@@ -161,7 +161,7 @@ architecture Imp of Hast_IP is
     -- System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).4 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \ParallelAlgorithm::Run(SimpleMemory).0._States\ is (
         \ParallelAlgorithm::Run(SimpleMemory).0._State_0\, 
@@ -201,10 +201,10 @@ architecture Imp of Hast_IP is
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \ObjectOrientedShowcase::Run(SimpleMemory).0._States\ is (
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\, 
@@ -276,7 +276,7 @@ architecture Imp of Hast_IP is
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.In.0\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Finished.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
     -- System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]).0 declarations start
@@ -371,7 +371,7 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \MemoryContainer::.ctor(SimpleMemory).0._States\ is (
         \MemoryContainer::.ctor(SimpleMemory).0._State_0\, 
@@ -382,7 +382,7 @@ architecture Imp of Hast_IP is
     Signal \MemoryContainer::.ctor(SimpleMemory).0.this.parameter.Out\: \Hast.Samples.SampleAssembly.MemoryContainer\;
     Signal \MemoryContainer::.ctor(SimpleMemory).0._Started\: boolean := false;
     Signal \MemoryContainer::.ctor(SimpleMemory).0.this.parameter.In\: \Hast.Samples.SampleAssembly.MemoryContainer\;
-    -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
     -- System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput().0 declarations start
@@ -495,7 +495,7 @@ architecture Imp of Hast_IP is
     -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).4 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ is (
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\, 
@@ -515,10 +515,10 @@ architecture Imp of Hast_IP is
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\: boolean := false;
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._States\ is (
         \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_0\, 
@@ -530,10 +530,10 @@ architecture Imp of Hast_IP is
     Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._Started\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\: boolean := false;
-    -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._States\ is (
         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_0\, 
@@ -556,10 +556,10 @@ architecture Imp of Hast_IP is
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Started\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\: boolean := false;
     Signal \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\: boolean := false;
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._States\ is (
         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_0\, 
@@ -602,7 +602,7 @@ architecture Imp of Hast_IP is
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.2\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.3\: boolean := false;
     Signal \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.4\: boolean := false;
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
     -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).0 declarations start
@@ -623,7 +623,7 @@ architecture Imp of Hast_IP is
     -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._States\ is (
         \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_0\, 
@@ -644,10 +644,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._Started\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._States\ is (
         \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_0\, 
@@ -668,10 +668,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._Started\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_0\, 
@@ -699,10 +699,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_0\, 
@@ -730,10 +730,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_0\, 
@@ -761,10 +761,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_0\, 
@@ -792,10 +792,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_0\, 
@@ -823,10 +823,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_0\, 
@@ -854,10 +854,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_0\, 
@@ -882,10 +882,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_0\, 
@@ -910,10 +910,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_0\, 
@@ -938,10 +938,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_0\, 
@@ -966,10 +966,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_0\, 
@@ -994,10 +994,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5 declarations start
     -- State machine states:
     type \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._States\ is (
         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_0\, 
@@ -1022,10 +1022,10 @@ architecture Imp of Hast_IP is
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.number.parameter.In\: signed(15 downto 0) := to_signed(0, 16);
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\: boolean := false;
     Signal \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5 declarations end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \SimdCalculator::AddVectors(SimpleMemory).0._States\ is (
         \SimdCalculator::AddVectors(SimpleMemory).0._State_0\, 
@@ -1038,10 +1038,10 @@ architecture Imp of Hast_IP is
     Signal \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\: boolean := false;
     Signal \SimdCalculator::AddVectors(SimpleMemory).0._Started\: boolean := false;
     Signal \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\: boolean := false;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \SimdCalculator::SubtractVectors(SimpleMemory).0._States\ is (
         \SimdCalculator::SubtractVectors(SimpleMemory).0._State_0\, 
@@ -1054,10 +1054,10 @@ architecture Imp of Hast_IP is
     Signal \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\: boolean := false;
     Signal \SimdCalculator::SubtractVectors(SimpleMemory).0._Started\: boolean := false;
     Signal \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\: boolean := false;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \SimdCalculator::MultiplyVectors(SimpleMemory).0._States\ is (
         \SimdCalculator::MultiplyVectors(SimpleMemory).0._State_0\, 
@@ -1070,10 +1070,10 @@ architecture Imp of Hast_IP is
     Signal \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\: boolean := false;
     Signal \SimdCalculator::MultiplyVectors(SimpleMemory).0._Started\: boolean := false;
     Signal \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\: boolean := false;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
     type \SimdCalculator::DivideVectors(SimpleMemory).0._States\ is (
         \SimdCalculator::DivideVectors(SimpleMemory).0._State_0\, 
@@ -1086,10 +1086,10 @@ architecture Imp of Hast_IP is
     Signal \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\: boolean := false;
     Signal \SimdCalculator::DivideVectors(SimpleMemory).0._Started\: boolean := false;
     Signal \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\: boolean := false;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations start
     -- State machine states:
     type \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._States\ is (
         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_0\, 
@@ -1240,7 +1240,7 @@ architecture Imp of Hast_IP is
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\: signed(31 downto 0) := to_signed(0, 32);
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._Started\: boolean := false;
     Signal \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation.parameter.In\: \Hast.Samples.SampleAssembly.SimdOperation\;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 declarations end
 
 
     -- System.Void Hast::ExternalInvocationProxy() declarations start
@@ -1948,7 +1948,7 @@ begin
     -- System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32).4 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \ParallelAlgorithm::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \ParallelAlgorithm::Run(SimpleMemory).0._State\: \ParallelAlgorithm::Run(SimpleMemory).0._States\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_0\;
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.array\: \unsigned_Array\(0 to 279) := (others => to_unsigned(0, 32));
@@ -2150,10 +2150,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \ObjectOrientedShowcase::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0._State\: \ObjectOrientedShowcase::Run(SimpleMemory).0._States\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -2163,7 +2163,7 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.flag\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.objectcb7e66b59b67ded5af10a36a715f885ec1a6d4bc88b3f76d5fecd07a00e4d335\: \Hast.Samples.SampleAssembly.MemoryContainer\;
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\: \Hast.Samples.SampleAssembly.MemoryContainer\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -2242,21 +2242,21 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\);
                             -- Initializing record fields to their defaults.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.objectcb7e66b59b67ded5af10a36a715f885ec1a6d4bc88b3f76d5fecd07a00e4d335\.\IsNull\ := false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\.\IsNull\ := false;
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.SimpleMemory.SimpleMemory)
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.objectcb7e66b59b67ded5af10a36a715f885ec1a6d4bc88b3f76d5fecd07a00e4d335\;
+                            -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_4\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.SimpleMemory.SimpleMemory)
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.objectcb7e66b59b67ded5af10a36a715f885ec1a6d4bc88b3f76d5fecd07a00e4d335\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.objectcb7e66b59b67ded5af10a36a715f885ec1a6d4bc88b3f76d5fecd07a00e4d335\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\;
                         end if;
@@ -2266,7 +2266,7 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().return.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.objectcb7e66b59b67ded5af10a36a715f885ec1a6d4bc88b3f76d5fecd07a00e4d335\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\;
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\IsNull\ := false;
@@ -2504,7 +2504,7 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
     -- System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]).0 state machine start
@@ -2827,7 +2827,7 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \MemoryContainer::.ctor(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \MemoryContainer::.ctor(SimpleMemory).0._State\: \MemoryContainer::.ctor(SimpleMemory).0._States\ := \MemoryContainer::.ctor(SimpleMemory).0._State_0\;
         Variable \MemoryContainer::.ctor(SimpleMemory).0.this\: \Hast.Samples.SampleAssembly.MemoryContainer\;
@@ -2866,7 +2866,7 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
     -- System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput().0 state machine start
@@ -3544,7 +3544,7 @@ begin
     -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32).4 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -3625,10 +3625,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_0\;
     begin 
@@ -3658,12 +3658,12 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory)
+                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= true;
                         \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory)
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\) then 
                             \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
                             \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_1\;
@@ -3673,10 +3673,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\: \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._States\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -3814,10 +3814,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\: \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._States\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -4085,7 +4085,7 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
     -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).0 state machine start
@@ -4208,7 +4208,7 @@ begin
     -- System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State\: \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._States\ := \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_0\;
         Variable \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -4271,14 +4271,14 @@ begin
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\), 16);
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State\ := \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_5\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.return.0\ := \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -4301,10 +4301,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State\: \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._States\ := \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_0\;
         Variable \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -4367,14 +4367,14 @@ begin
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\), 16);
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State\ := \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_5\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.return.0\ := \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
@@ -4397,10 +4397,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._States\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -4518,13 +4518,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ - to_signed(2, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -4538,13 +4538,13 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -4560,10 +4560,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._States\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -4681,13 +4681,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ - to_signed(2, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -4701,13 +4701,13 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -4723,10 +4723,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._States\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -4844,13 +4844,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ - to_signed(2, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -4864,13 +4864,13 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -4886,10 +4886,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._States\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -5007,13 +5007,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ - to_signed(2, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -5027,13 +5027,13 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -5049,10 +5049,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._States\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -5170,13 +5170,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.number\ - to_signed(2, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -5190,13 +5190,13 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.binaryOperationResult.5\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -5212,10 +5212,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._States\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -5333,13 +5333,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.number\ - to_signed(2, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.4\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -5353,13 +5353,13 @@ begin
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.binaryOperationResult.5\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
@@ -5375,10 +5375,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\: \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._States\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -5486,13 +5486,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\ - to_signed(1, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
@@ -5508,10 +5508,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\: \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._States\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -5619,13 +5619,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\ - to_signed(1, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
@@ -5641,10 +5641,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\: \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._States\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -5752,13 +5752,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\ - to_signed(1, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
@@ -5774,10 +5774,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\: \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._States\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -5885,13 +5885,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\ - to_signed(1, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
@@ -5907,10 +5907,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State\: \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._States\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -6018,13 +6018,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.number\ - to_signed(1, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
@@ -6040,10 +6040,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5 state machine start
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5 state machine start
     \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._StateMachine\: process (\Clock\) 
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State\: \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._States\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_0\;
         Variable \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.number\: signed(15 downto 0) := to_signed(0, 16);
@@ -6151,13 +6151,13 @@ begin
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_4\.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.number\ - to_signed(1, 16);
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.binaryOperationResult.2\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._State_8\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16)
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
@@ -6173,10 +6173,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \SimdCalculator::AddVectors(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \SimdCalculator::AddVectors(SimpleMemory).0._State\: \SimdCalculator::AddVectors(SimpleMemory).0._States\ := \SimdCalculator::AddVectors(SimpleMemory).0._State_0\;
     begin 
@@ -6206,13 +6206,13 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::AddVectors(SimpleMemory).0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
+                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Add\;
                         \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
                         \SimdCalculator::AddVectors(SimpleMemory).0._State\ := \SimdCalculator::AddVectors(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::AddVectors(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         if (\SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ = \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\) then 
                             \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= false;
                             \SimdCalculator::AddVectors(SimpleMemory).0._State\ := \SimdCalculator::AddVectors(SimpleMemory).0._State_1\;
@@ -6222,10 +6222,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \SimdCalculator::SubtractVectors(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \SimdCalculator::SubtractVectors(SimpleMemory).0._State\: \SimdCalculator::SubtractVectors(SimpleMemory).0._States\ := \SimdCalculator::SubtractVectors(SimpleMemory).0._State_0\;
     begin 
@@ -6255,13 +6255,13 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::SubtractVectors(SimpleMemory).0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
+                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Subtract\;
                         \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
                         \SimdCalculator::SubtractVectors(SimpleMemory).0._State\ := \SimdCalculator::SubtractVectors(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::SubtractVectors(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         if (\SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ = \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\) then 
                             \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= false;
                             \SimdCalculator::SubtractVectors(SimpleMemory).0._State\ := \SimdCalculator::SubtractVectors(SimpleMemory).0._State_1\;
@@ -6271,10 +6271,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \SimdCalculator::MultiplyVectors(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \SimdCalculator::MultiplyVectors(SimpleMemory).0._State\: \SimdCalculator::MultiplyVectors(SimpleMemory).0._States\ := \SimdCalculator::MultiplyVectors(SimpleMemory).0._State_0\;
     begin 
@@ -6304,13 +6304,13 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::MultiplyVectors(SimpleMemory).0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
+                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Multiply\;
                         \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
                         \SimdCalculator::MultiplyVectors(SimpleMemory).0._State\ := \SimdCalculator::MultiplyVectors(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::MultiplyVectors(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         if (\SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ = \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\) then 
                             \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= false;
                             \SimdCalculator::MultiplyVectors(SimpleMemory).0._State\ := \SimdCalculator::MultiplyVectors(SimpleMemory).0._State_1\;
@@ -6320,10 +6320,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \SimdCalculator::DivideVectors(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \SimdCalculator::DivideVectors(SimpleMemory).0._State\: \SimdCalculator::DivideVectors(SimpleMemory).0._States\ := \SimdCalculator::DivideVectors(SimpleMemory).0._State_0\;
     begin 
@@ -6353,13 +6353,13 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::DivideVectors(SimpleMemory).0._State_2\ => 
-                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
+                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Divide\;
                         \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
                         \SimdCalculator::DivideVectors(SimpleMemory).0._State\ := \SimdCalculator::DivideVectors(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::DivideVectors(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         if (\SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ = \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\) then 
                             \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= false;
                             \SimdCalculator::DivideVectors(SimpleMemory).0._State\ := \SimdCalculator::DivideVectors(SimpleMemory).0._State_1\;
@@ -6369,10 +6369,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 state machine start
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 state machine start
     \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._StateMachine\: process (\Clock\) 
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\: \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._States\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_0\;
         Variable \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation\: \Hast.Samples.SampleAssembly.SimdOperation\;
@@ -6919,7 +6919,7 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation).0 state machine end
 
 
     -- System.Void Hast::ExternalInvocationProxy() start
@@ -7046,27 +7046,27 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32) start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._Started\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.0\;
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.indexObject.parameter.In\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.0\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.0\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._Finished\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.0\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.return\;
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#1):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#1):
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Started\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.1\;
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject.parameter.In\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.1\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.1\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._Finished\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.1\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.return\;
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#2):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#2):
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Started\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.2\;
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject.parameter.In\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.2\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.2\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._Finished\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.2\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.return\;
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#3):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#3):
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Started\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.3\;
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.indexObject.parameter.In\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.3\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.3\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3._Finished\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.3\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).3.return\;
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#4):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#4):
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Started\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.4\;
     \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.indexObject.parameter.In\ <= \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).indexObject.parameter.Out.4\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.4\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Finished\;
@@ -7074,17 +7074,17 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.SimpleMemory.SimpleMemory) start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \MemoryContainer::.ctor(SimpleMemory).0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\;
     \MemoryContainer::.ctor(SimpleMemory).0.this.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\;
     \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\ <= \MemoryContainer::.ctor(SimpleMemory).0._Finished\;
     \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\ <= \MemoryContainer::.ctor(SimpleMemory).0.this.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput() start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \MemoryContainer::GetInput().0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\;
     \MemoryContainer::GetInput().0.this.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\;
     \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Finished.0\ <= \MemoryContainer::GetInput().0._Finished\;
@@ -7094,7 +7094,7 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor() start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \NumberContainer::.ctor().0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\;
     \NumberContainer::.ctor().0.this.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.Out.0\;
     \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Finished.0\ <= \NumberContainer::.ctor().0._Finished\;
@@ -7103,7 +7103,7 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor(System.UInt32) start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \NumberContainer::.ctor(UInt32).0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\;
     \NumberContainer::.ctor(UInt32).0.this.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).this.parameter.Out.0\;
     \NumberContainer::.ctor(UInt32).0.number.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).number.parameter.Out.0\;
@@ -7113,7 +7113,7 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32) start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \NumberContainer::set_NumberPlusFive(UInt32).0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\;
     \NumberContainer::set_NumberPlusFive(UInt32).0.this.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32).this.parameter.Out.0\;
     \NumberContainer::set_NumberPlusFive(UInt32).0.value.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32).value.parameter.Out.0\;
@@ -7123,7 +7123,7 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32) start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \NumberContainer::IncreaseNumber(UInt32).0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\;
     \NumberContainer::IncreaseNumber(UInt32).0.this.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\;
     \NumberContainer::IncreaseNumber(UInt32).0.increaseBy.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\;
@@ -7134,7 +7134,7 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::get_NumberPlusFive() start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \NumberContainer::get_NumberPlusFive().0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\;
     \NumberContainer::get_NumberPlusFive().0.this.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().this.parameter.Out.0\;
     \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Finished.0\ <= \NumberContainer::get_NumberPlusFive().0._Finished\;
@@ -7144,7 +7144,7 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]) start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Started\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\;
     \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers.parameter.In\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.Out.0\;
     \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Finished.0\ <= \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._Finished\;
@@ -7171,7 +7171,7 @@ begin
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\) then 
@@ -7200,7 +7200,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\) then 
@@ -7234,7 +7234,7 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
@@ -7252,7 +7252,7 @@ begin
                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\) then 
@@ -7308,31 +7308,31 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32) start
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#0):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.0\;
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.0\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.0\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._Finished\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.0\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\;
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#1):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#1):
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.1\;
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.1\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.1\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._Finished\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.1\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\;
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#2):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#2):
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\;
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.2\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.2\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._Finished\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.2\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\;
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#3):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#3):
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.3\;
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.3\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3._Finished\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).return.3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).3.return\;
-    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory).0 (#4):
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#4):
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._Started\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.4\;
     \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4.numberObject.parameter.In\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).numberObject.parameter.Out.4\;
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Finished.4\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).4._Finished\;
@@ -7340,7 +7340,7 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16) start
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16) start
     \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(5 downto 0) := (others => false);
         Variable \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.runningIndex.0\: integer range 0 to 5 := 0;
@@ -7392,7 +7392,7 @@ begin
                 \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).targetAvailableIndicator\(4) := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._Started\ = true and \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4._Started\ = false;
                 \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).targetAvailableIndicator\(5) := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5._Started\ = false;
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\) then 
@@ -7492,7 +7492,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\) then 
@@ -7585,7 +7585,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\) then 
@@ -7678,7 +7678,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\) then 
@@ -7771,7 +7771,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\) then 
@@ -7864,7 +7864,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\) then 
@@ -7957,7 +7957,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\) then 
@@ -8052,10 +8052,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16) end
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16) start
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16) start
     \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(5 downto 0) := (others => false);
         Variable \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.runningIndex.0\: integer range 0 to 5 := 0;
@@ -8107,7 +8107,7 @@ begin
                 \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).targetAvailableIndicator\(4) := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._Started\ = true and \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4._Started\ = false;
                 \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).targetAvailableIndicator\(5) := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5._Started\ = false;
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\) then 
@@ -8207,7 +8207,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).0
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).0
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\) then 
@@ -8300,7 +8300,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).1
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).1
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\) then 
@@ -8393,7 +8393,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).2
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).2
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\) then 
@@ -8486,7 +8486,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).3
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).3
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\) then 
@@ -8579,7 +8579,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).4
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).4
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\) then 
@@ -8672,7 +8672,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16).5
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16).5
                 case \Hast::InternalInvocationProxy().RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\) then 
@@ -8767,10 +8767,10 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int16) end
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation) start
     \Hast::InternalInvocationProxy().SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).SimdCalculator::AddVectors(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).SimdCalculator::AddVectors(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
@@ -8798,7 +8798,7 @@ begin
                 \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).SimdCalculator::AddVectors(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\) then 
@@ -8826,7 +8826,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).SimdCalculator::SubtractVectors(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\) then 
@@ -8854,7 +8854,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).SimdCalculator::MultiplyVectors(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\) then 
@@ -8882,7 +8882,7 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.SimpleMemory.SimpleMemory).0
+                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
                 case \Hast::InternalInvocationProxy().SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).SimdCalculator::DivideVectors(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\) then 
@@ -8912,84 +8912,84 @@ begin
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ParallelAlgorithm::Run(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Finished.0\ <= \ParallelAlgorithm::Run(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ObjectOrientedShowcase::Run(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Finished.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Finished.0\ <= \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Finished.0\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Finished.0\ <= \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Finished.0\ <= \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Finished.0\ <= \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.RecursiveAlgorithms::CalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \SimdCalculator::AddVectors(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Finished.0\ <= \SimdCalculator::AddVectors(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::AddVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \SimdCalculator::SubtractVectors(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Finished.0\ <= \SimdCalculator::SubtractVectors(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::SubtractVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \SimdCalculator::MultiplyVectors(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Finished.0\ <= \SimdCalculator::MultiplyVectors(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::MultiplyVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.SimpleMemory.SimpleMemory) start
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \SimdCalculator::DivideVectors(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\;
     \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Finished.0\ <= \SimdCalculator::DivideVectors(SimpleMemory).0._Finished\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.SimdCalculator::DivideVectors(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start

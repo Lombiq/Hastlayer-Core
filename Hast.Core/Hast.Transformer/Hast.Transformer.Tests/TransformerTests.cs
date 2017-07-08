@@ -8,6 +8,8 @@ using Hast.Communication;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure1.ComplexTypes;
 using Hast.TestInputs.ClassStructure2;
+using Hast.Transformer.Abstractions;
+using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using ICSharpCode.NRefactory.CSharp;

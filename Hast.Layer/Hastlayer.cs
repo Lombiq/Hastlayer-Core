@@ -11,7 +11,7 @@ using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis;
 using Hast.Synthesis.Services;
-using Hast.Transformer;
+using Hast.Transformer.Abstractions;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
 using Orchard.Environment.Configuration;
@@ -154,8 +154,7 @@ namespace Hast.Layer
                 {
                     typeof(Hastlayer).Assembly,
                     typeof(IProxyGenerator).Assembly,
-                    typeof(IHardwareImplementationComposer).Assembly,
-                    typeof(ITransformer).Assembly
+                    typeof(IHardwareImplementationComposer).Assembly
                 }.Union(_configuration.Extensions);
 
             var corePath = Path.GetDirectoryName(GetType().Assembly.Location);

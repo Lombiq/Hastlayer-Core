@@ -12,7 +12,7 @@ using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Synthesis;
-using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
 
 namespace Hast.Communication.Services

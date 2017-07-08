@@ -1,4 +1,5 @@
 ﻿using Hast.Common.Configuration;
+using Hast.Transformer.Abstractions.Configuration;
 
 namespace Hast.Transformer.Models
 {

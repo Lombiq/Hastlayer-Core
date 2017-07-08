@@ -1,5 +1,5 @@
 ﻿using System;
-using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -59,7 +59,7 @@ namespace Hast.Samples.SampleAssembly
                 // Pick points randomly from the sampled region.
                 x = checked((int)(Multiplier + randomX * 3 * Multiplier / 100));
               
-                // The constant can't be specified properly inline as (since it can't be specied as a short, see:
+                // The constant can't be specified properly inline as (since it can't be specified as a short, see:
                 // http://stackoverflow.com/questions/8670511/how-to-specify-a-short-int-constant-without-casting)
                 // it would cause an underflow and be casted to an ulong.
                 short minusThree = -3;
@@ -86,8 +86,8 @@ namespace Hast.Samples.SampleAssembly
                     varz += (z * z) / Multiplier;
                 }
 
-                // Devide the values with the multiplier to return to the original numbers in every 1000th iteration. 
-                // This way we can avoid owerflows at the final computations, but we still get more precise values.
+                // Divide the values with the multiplier to return to the original numbers in every 1000th iteration. 
+                // This way we can avoid overflows at the final computations, but we still get more precise values.
                 if (i % 1000 == 0 || i == iterationsCount)
                 {
                     sumsw = checked(sumsw + sw / Multiplier);

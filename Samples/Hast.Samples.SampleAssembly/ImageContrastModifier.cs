@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -73,7 +73,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image that we modify.</param>
         /// <param name="contrast">The value of the intensity to calculate the new pixel values.</param>
-        /// <returns>Returns an image with changed contast values.</returns>
+        /// <returns>Returns an image with changed contrast values.</returns>
         public static Bitmap ChangeImageContrast(this ImageContrastModifier imageContrast, Bitmap image, int contrast)
         {
             var memory = CreateSimpleMemory(
@@ -88,7 +88,7 @@ namespace Hast.Samples.SampleAssembly
         /// Creates a <see cref="SimpleMemory"/> instance that stores the image.
         /// </summary>
         /// <param name="image">The image to process.</param>
-        /// <param name="contrastValue">The contast difference value.</param>
+        /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
         private static SimpleMemory CreateSimpleMemory(Bitmap image, int contrastValue)
         {

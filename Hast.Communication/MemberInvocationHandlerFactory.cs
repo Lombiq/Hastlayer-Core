@@ -14,7 +14,7 @@ using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Synthesis;
-using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
 
 namespace Hast.Communication
