@@ -1648,7 +1648,7 @@ begin
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
                         \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,2
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                 end case;
             end if;
         end if;
@@ -1893,14 +1893,14 @@ begin
                         else 
                             \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := shift_right(\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\, to_integer(to_signed(5, 32)));
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ + \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,2
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_6\ => 
                         -- True branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(0, 32);
@@ -1999,7 +1999,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,2
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(153, 32);
@@ -2084,7 +2084,7 @@ begin
                             \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num3\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.binaryOperationResult.0\;
                             \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_1\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -2353,7 +2353,7 @@ begin
                         \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.binaryOperationResult.0\ := to_signed(298, 32) - \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2\;
                         \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.return\ <= \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.binaryOperationResult.0\;
                         \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -2419,7 +2419,7 @@ begin
                         else 
                             \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoop(Int32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoop(Int32).0._State_2\.
                         -- The while loop's condition:
@@ -2443,7 +2443,7 @@ begin
                         else 
                             \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,3
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \LoopCases::BreakInLoop(Int32).0._State_4\ => 
                         -- State after the while loop which was started in state \LoopCases::BreakInLoop(Int32).0._State_2\.
                         \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_1\;
@@ -2456,7 +2456,7 @@ begin
                         if (\LoopCases::BreakInLoop(Int32).0._State\ = \LoopCases::BreakInLoop(Int32).0._State_5\) then 
                             \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoop(Int32).0._State_6\ => 
                         -- True branch of the if-else started in state \LoopCases::BreakInLoop(Int32).0._State_3\.
                         -- Exiting the while loop with a break statement.
@@ -2539,7 +2539,7 @@ begin
                         else 
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\.
                         -- The while loop's condition:
@@ -2557,7 +2557,7 @@ begin
                         else 
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,2
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_4\ => 
                         -- State after the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\.
                         \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_1\;
@@ -2585,7 +2585,7 @@ begin
                         else 
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,3
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_6\ => 
                         -- State after the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\.
                         \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ + to_signed(1, 32);
@@ -2594,7 +2594,7 @@ begin
                         if (\LoopCases::BreakInLoopInLoop(Int32).0._State\ = \LoopCases::BreakInLoopInLoop(Int32).0._State_6\) then 
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_7\ => 
                         -- State after the if-else which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
                         \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ + to_signed(1, 32);
@@ -2603,7 +2603,7 @@ begin
                         if (\LoopCases::BreakInLoopInLoop(Int32).0._State\ = \LoopCases::BreakInLoopInLoop(Int32).0._State_7\) then 
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_8\ => 
                         -- True branch of the if-else started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
                         -- Exiting the while loop with a break statement.
@@ -2675,7 +2675,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectUsingCases::NullUsage().0._State_3\ => 
                         -- State after the if-else which was started in state \ObjectUsingCases::NullUsage().0._State_2\.
                         \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := true;
@@ -2692,7 +2692,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ObjectUsingCases::NullUsage().0._State\ := \ObjectUsingCases::NullUsage().0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectUsingCases::NullUsage().0._State_4\ => 
                         -- True branch of the if-else started in state \ObjectUsingCases::NullUsage().0._State_2\.
                         -- Initializing record fields to their defaults.
@@ -2836,7 +2836,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_3\ => 
                         -- State after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\.
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ := to_signed(5, 32);
@@ -2859,7 +2859,7 @@ begin
                             -- There was no false branch, so going directly to the state after the if-else.
                             \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,2
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\ => 
                         -- State after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\.
                         -- Going to the state after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\.
@@ -2939,7 +2939,7 @@ begin
                         \ParallelCases/Calculator::IsEven().0.binaryOperationResult.1\ := \ParallelCases/Calculator::IsEven().0.binaryOperationResult.0\ = to_unsigned(0, 32);
                         \ParallelCases/Calculator::IsEven().0.return\ <= \ParallelCases/Calculator::IsEven().0.binaryOperationResult.1\;
                         \ParallelCases/Calculator::IsEven().0._State\ := \ParallelCases/Calculator::IsEven().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -3004,7 +3004,7 @@ begin
                         \ParallelCases/Calculator::IsEven().1.binaryOperationResult.1\ := \ParallelCases/Calculator::IsEven().1.binaryOperationResult.0\ = to_unsigned(0, 32);
                         \ParallelCases/Calculator::IsEven().1.return\ <= \ParallelCases/Calculator::IsEven().1.binaryOperationResult.1\;
                         \ParallelCases/Calculator::IsEven().1._State\ := \ParallelCases/Calculator::IsEven().1._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -3069,7 +3069,7 @@ begin
                         \ParallelCases/Calculator::IsEven().2.binaryOperationResult.1\ := \ParallelCases/Calculator::IsEven().2.binaryOperationResult.0\ = to_unsigned(0, 32);
                         \ParallelCases/Calculator::IsEven().2.return\ <= \ParallelCases/Calculator::IsEven().2.binaryOperationResult.1\;
                         \ParallelCases/Calculator::IsEven().2._State\ := \ParallelCases/Calculator::IsEven().2._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -3124,7 +3124,7 @@ begin
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.0\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_3\ => 
                         -- Waiting for the result to appear in \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.1\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -3140,7 +3140,7 @@ begin
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.2\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.1\ = to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.return\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.2\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -3195,7 +3195,7 @@ begin
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.0\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_3\ => 
                         -- Waiting for the result to appear in \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.1\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -3211,7 +3211,7 @@ begin
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.2\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.1\ = to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.return\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.2\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -3266,7 +3266,7 @@ begin
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.0\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_3\ => 
                         -- Waiting for the result to appear in \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.1\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
@@ -3282,7 +3282,7 @@ begin
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.2\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.1\ = to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.return\ <= \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.2\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                 end case;
             end if;
         end if;
@@ -3342,7 +3342,7 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
                         if (\ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Started.0\ = \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Finished.0\) then 
@@ -3412,7 +3412,7 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
                         if (\ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven()._Started.0\ = \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven()._Finished.0\) then 
@@ -3482,7 +3482,7 @@ begin
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
                         if (\ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven()._Started.0\ = \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven()._Finished.0\) then 
@@ -3575,7 +3575,7 @@ begin
                         else 
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_2\.
                         -- The while loop's condition:
@@ -3600,7 +3600,7 @@ begin
                         else 
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,2
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_2\.
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_5\;
@@ -3713,7 +3713,7 @@ begin
                         else 
                             \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,1
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases::ObjectUsingTasks(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelCases::ObjectUsingTasks(UInt32).0._State_2\.
                         -- The while loop's condition:
@@ -3738,7 +3738,7 @@ begin
                         else 
                             \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0,2
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelCases::ObjectUsingTasks(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \ParallelCases::ObjectUsingTasks(UInt32).0._State_2\.
                         \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_5\;
