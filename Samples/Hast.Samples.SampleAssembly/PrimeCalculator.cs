@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -41,7 +41,7 @@ namespace Hast.Samples.SampleAssembly
             IsPrimeNumber(memory);
 
             // For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized
-            // hardware entry ponit method async with Task.FromResult(). In .NET <4.6 Task.FromResult(true) can be used 
+            // hardware entry point method async with Task.FromResult(). In .NET <4.6 Task.FromResult(true) can be used 
             // too.
             return Task.CompletedTask;
         }

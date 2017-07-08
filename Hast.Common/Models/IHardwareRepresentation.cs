@@ -19,12 +19,12 @@ namespace Hast.Common.Models
         IHardwareDescription HardwareDescription { get; }
 
         /// <summary>
-        /// Represents a handle to the hardware implementation synthesized through the FPGA vendor toolchain.
+        /// Represents a handle to the hardware implementation synthesized through the FPGA vendor tool-chain.
         /// </summary>
         IHardwareImplementation HardwareImplementation { get; }
 
         /// <summary>
-        /// Describes the capabilities, like available memory, of the connected hardware device.
+        /// Describes the capabilities, like available memory, of the hardware device the representation was created for.
         /// </summary>
         IDeviceManifest DeviceManifest { get; }
     }

@@ -2,10 +2,12 @@
 using System.Threading.Tasks;
 using System.Numerics;
 using Hast.Common.Configuration;
+using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
-using Hast.Transformer.Vhdl.Configuration;
-using Hast.VhdlBuilder.Representation;
+using System.Linq;
+using Hast.Transformer.Vhdl.Abstractions.Configuration;
 
 namespace Hast.Samples.Consumer
 {
@@ -22,7 +24,9 @@ namespace Hast.Samples.Consumer
         public static string VhdlOutputFilePath = @"Hast_IP.vhd";
 
         /// <summary>
-        /// Which sample algorithm to transform and run? Choose one.
+        /// Which sample algorithm to transform and run? Choose one. Currently the following samples are not up-to-date
+        /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
+        /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
         public static Sample SampleToRun = Sample.UnumCalculator;
     }
@@ -57,10 +61,10 @@ namespace Hast.Samples.Consumer
                      *    implementations. (You can see this inside the SampleRunners.)
                      */
 
-                    // Initializing a Hastlayer shell for Xilinx FPGA boards. Since this is non-trivial to create you
-                    // can cache this shell object while the program runs and re-use it continuously. No need to wrap
-                    // it into a using() like here, just make sure to Dispose() it before the program terminates.
-                    using (var hastlayer = Xilinx.HastlayerFactory.Create())
+                    // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object 
+                    // while the program runs and re-use it continuously. No need to always wrap it into a using() like 
+                    // here, just make sure to Dispose() it before the program terminates.
+                    using (var hastlayer = await Hastlayer.Create())
                     {
                         // Hooking into an event of Hastlayer so some execution information can be made visible on the
                         // console.
@@ -77,7 +81,11 @@ namespace Hast.Samples.Consumer
                             };
 
 
-                        var configuration = new HardwareGenerationConfiguration();
+                        // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
+                        var devices = await hastlayer.GetSupportedDevices();
+                        // Let's just use the first one that is available. However you might want to use a specific
+                        // device, not just any first one.
+                        var configuration = new HardwareGenerationConfiguration(devices.First().Name);
 
 
                         // Letting the configuration of samples run.
@@ -114,9 +122,9 @@ namespace Hast.Samples.Consumer
                                 break;
                         }
 
-                        // The generated VHDL code will contain debug-level information, though it will be a bit slower
+                        // The generated VHDL code will contain debug-level information, though it will be a slower
                         // to create.
-                        configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = VhdlGenerationOptions.Debug;
+                        configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
 
                         // Generating hardware from the sample assembly with the given configuration.
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
@@ -131,7 +139,7 @@ namespace Hast.Samples.Consumer
 
                         if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
                         {
-                            Helpers.HardwareRepresentationHelper.WriteVhdlToFile(hardwareRepresentation);
+                            await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
                         }
 
 

@@ -56,18 +56,18 @@
     <Compile Include="UnumCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
+      <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
+      <Name>Hast.Transformer.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6EE5898A-E450-4A1D-80AF-AD27A8BD5E69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj">
-      <Project>{55ffec87-b87b-4bb6-b50d-26560c8f815a}</Project>
-      <Name>Hast.Transformer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Lombiq.Unum\Lombiq.Unum.csproj">
       <Project>{6cfe69a4-04a3-4427-818c-c0832d197a62}</Project>
       <Name>Lombiq.Unum</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
