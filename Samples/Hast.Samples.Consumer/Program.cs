@@ -52,17 +52,17 @@ namespace Hast.Samples.Consumer
                     {
                         // Hooking into an event of Hastlayer so some execution information can be made visible on the
                         // console.
-                        //hastlayer.ExecutedOnHardware += (sender, e) =>
-                        //    {
-                        //        Console.WriteLine(
-                        //            "Executing " +
-                        //            e.MemberFullName +
-                        //            " on hardware took " +
-                        //            e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                        //            "ms (net) " +
-                        //            e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                        //            " milliseconds (all together)");
-                        //    };
+                        hastlayer.ExecutedOnHardware += (sender, e) =>
+                            {
+                                Console.WriteLine(
+                                    "Executing " +
+                                    e.MemberFullName +
+                                    " on hardware took " +
+                                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                                    "ms (net) " +
+                                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                                    " milliseconds (all together)");
+                            };
 
 
                         // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
