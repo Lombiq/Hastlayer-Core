@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Autofac;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Communication;
@@ -38,7 +39,7 @@ namespace Hast.Layer
         }
 
 
-        public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
+        public static Task<IHastlayer> Create() => Create(HastlayerConfiguration.Default);
 
         /// <summary>
         /// Instantiates a new <see cref="IHastlayer"/> implementation.
@@ -49,19 +50,21 @@ namespace Hast.Layer
         /// </remarks>
         /// <param name="configuration">Configuration for Hastlayer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
-        public static IHastlayer Create(IHastlayerConfiguration configuration)
+        public static async Task<IHastlayer> Create(IHastlayerConfiguration configuration)
         {
             Argument.ThrowIfNull(configuration, nameof(configuration));
             Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
-            return new Hastlayer(configuration);
+            var hastlayer = new Hastlayer(configuration);
+            // It's easier to eagerly load the host than to lazily create it, becuase the latter would also need 
+            // synchronization to allow concurrent access to this type's instance methods.
+            await hastlayer.LoadHost();
+            return hastlayer;
         }
 
 
-        public async Task<IEnumerable<IDeviceManifest>> GetSupportedDevices()
-        {
-            return await (await GetHost()).RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
-        }
+        public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
+            _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
 
         public async Task<IHardwareRepresentation> GenerateHardware(
             IEnumerable<Assembly> assemblies, 
@@ -83,7 +86,7 @@ namespace Hast.Layer
             {
                 HardwareRepresentation hardwareRepresentation = null;
 
-                await (await GetHost())
+                await _host
                     .Run<ITransformer, IHardwareImplementationComposer, IDeviceManifestSelector>(
                         async (transformer, hardwareImplementationComposer, deviceManifestSelector) =>
                         {
@@ -117,7 +120,7 @@ namespace Hast.Layer
                 var message =
                     "An error happened during generating the Hastlayer hardware representation for the following assemblies: " + 
                     string.Join(", ", assemblies.Select(assembly => assembly.FullName));
-                await GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
+                await _host.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
             }
         }
@@ -136,7 +139,7 @@ namespace Hast.Layer
             try
             {
                 return await
-                    (await GetHost())
+                    _host
                     .RunGet(scope => Task.Run(() => scope.Resolve<IProxyGenerator>().CreateCommunicationProxy(hardwareRepresentation, hardwareObject, configuration)));
             }
             catch (Exception ex) when (!ex.IsFatal())
@@ -144,7 +147,7 @@ namespace Hast.Layer
                 var message = 
                     "An error happened during generating the Hastlayer proxy for an object of the following type: " + 
                     hardwareObject.GetType().FullName;
-                await GetHost().Result.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
+                await _host.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
             }
         }
@@ -158,10 +161,8 @@ namespace Hast.Layer
         }
 
 
-        private async Task<IOrchardAppHost> GetHost()
+        private async Task LoadHost()
         {
-            if (_host != null) return _host;
-
             var importedExtensions = new[]
                 {
                     typeof(Hastlayer).Assembly,
@@ -218,14 +219,23 @@ namespace Hast.Layer
                 ModuleFolderPaths = new[] { abstractionsPath, corePath }
             };
 
-            _host = await OrchardAppHostFactory.StartTransientHost(settings, null, null);
 
-            await _host.Run<IHardwareExecutionEventProxy>(proxy => Task.Run(() =>
+            var registrations = new AppHostRegistrations
+            {
+                HostRegistrations = builder => builder
+                    .RegisterType<HardwareExecutionEventHandlerHolder>()
+                    .As<IHardwareExecutionEventHandlerHolder>()
+                    .SingleInstance()
+            };
+
+            _host = await OrchardAppHostFactory.StartTransientHost(settings, registrations, null);
+
+            await _host.Run<IHardwareExecutionEventHandlerHolder>(proxy => Task.Run(() =>
                 proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs))));
 
             // Enable all loaded features. This is needed so extensions just added to the solution, but not referenced
             // anywhere in the current app can contribute dependencies.
-            await (await GetHost())
+            await _host
                 .Run<Orchard.Environment.Features.IFeatureManager>(
                     (featureManager) =>
                     {
@@ -233,9 +243,6 @@ namespace Hast.Layer
 
                         return Task.CompletedTask;
                     }, ShellName, false);
-
-
-            return _host;
         }
     }
 }

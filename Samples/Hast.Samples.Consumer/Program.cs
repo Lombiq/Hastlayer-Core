@@ -48,21 +48,21 @@ namespace Hast.Samples.Consumer
                     // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object 
                     // while the program runs and re-use it continuously. No need to always wrap it into a using() like 
                     // here, just make sure to Dispose() it before the program terminates.
-                    using (var hastlayer = Hastlayer.Create())
+                    using (var hastlayer = await Hastlayer.Create())
                     {
                         // Hooking into an event of Hastlayer so some execution information can be made visible on the
                         // console.
-                        hastlayer.ExecutedOnHardware += (sender, e) =>
-                            {
-                                Console.WriteLine(
-                                    "Executing " +
-                                    e.MemberFullName +
-                                    " on hardware took " +
-                                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                                    "ms (net) " +
-                                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                                    " milliseconds (all together)");
-                            };
+                        //hastlayer.ExecutedOnHardware += (sender, e) =>
+                        //    {
+                        //        Console.WriteLine(
+                        //            "Executing " +
+                        //            e.MemberFullName +
+                        //            " on hardware took " +
+                        //            e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                        //            "ms (net) " +
+                        //            e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                        //            " milliseconds (all together)");
+                        //    };
 
 
                         // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
