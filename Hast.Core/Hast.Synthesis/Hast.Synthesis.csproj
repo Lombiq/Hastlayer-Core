@@ -87,7 +87,7 @@
     <Compile Include="Services\TimingReportParser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
