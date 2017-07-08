@@ -114,7 +114,9 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             {
                 var stateWhen = new CaseWhen { Expression = this.CreateStateName(i).ToVhdlIdValue() };
                 stateWhen.Add(_states[i].Body);
-                stateWhen.Add(new LineComment("Clock cycles needed to complete this state (approximation): " + _states[i].RequiredClockCycles));
+                stateWhen.Add(new LineComment(
+                    "Clock cycles needed to complete this state (approximation): " + 
+                    _states[i].RequiredClockCycles.ToString(System.Globalization.CultureInfo.InvariantCulture)));
                 stateCase.Whens.Add(stateWhen);
             }
 
