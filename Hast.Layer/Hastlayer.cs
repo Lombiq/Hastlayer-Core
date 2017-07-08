@@ -56,7 +56,7 @@ namespace Hast.Layer
             Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
             var hastlayer = new Hastlayer(configuration);
-            // It's easier to eagerly load the host than to lazily create it, becuase the latter would also need 
+            // It's easier to eagerly load the host than to lazily create it, because the latter would also need 
             // synchronization to allow concurrent access to this type's instance methods.
             await hastlayer.LoadHost();
             return hastlayer;
