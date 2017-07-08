@@ -11,10 +11,12 @@
 
 ## Flavors of the Hastlayer solution
 
-The Hastlayer solution comes in two "flavors" with corresponding branches:
+The Hastlayer solutions come in two "flavors" with corresponding branches:
 
 - Developer (*dev* branch): This is used by developers of Hastlayer itself. It includes the full source code.
 - Client (*client* branch): Used by end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service.
+
+Generally the *client* branch should be only merged to, but never from, the *dev* branch.
 
 To allow the same code in the samples and elsewhere to support both scenarios Orchard's dynamic module loading needs to be utilized. For this to work *Hast.Core* projects should adhere to the following:
 
