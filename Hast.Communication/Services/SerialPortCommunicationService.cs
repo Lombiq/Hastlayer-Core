@@ -11,7 +11,6 @@ using Hast.Communication.Constants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
-using Hast.Synthesis;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
 
@@ -57,7 +56,7 @@ namespace Hast.Communication.Services
             {
                 var context = BeginExecution();
 
-                // Initializing some serial port connection settings (may be different whith some FPGA boards).
+                // Initializing some serial port connection settings (may be different with some FPGA boards).
                 // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
                 // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 

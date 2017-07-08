@@ -13,7 +13,6 @@ using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
-using Hast.Synthesis;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
 
@@ -90,14 +89,14 @@ namespace Hast.Communication
                             }
 
                             var communicationChannelName = configuration.CommunicationChannelName;
-                            var deviceDriver = workContext.Resolve<IDeviceDriver>();
+                            var deviceManifest = hardwareRepresentation.DeviceManifest;
 
                             if (string.IsNullOrEmpty(communicationChannelName))
                             {
-                                communicationChannelName = deviceDriver.DeviceManifest.DefaultCommunicationChannelName;
+                                communicationChannelName = deviceManifest.DefaultCommunicationChannelName;
                             }
 
-                            if (!deviceDriver.DeviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))
+                            if (!deviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))
                             {
                                 throw new NotSupportedException(
                                     "The configured communication channel \"" + communicationChannelName +
@@ -108,12 +107,12 @@ namespace Hast.Communication
                             if (memory != null)
                             {
                                 var memoryByteCount = memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
-                                if (memoryByteCount > deviceDriver.DeviceManifest.AvailableMemoryBytes)
+                                if (memoryByteCount > deviceManifest.AvailableMemoryBytes)
                                 {
                                     throw new InvalidOperationException(
                                         "The input is too large to fit into the device's memory: the input is " +
                                         memoryByteCount + " bytes, the available memory is " +
-                                        deviceDriver.DeviceManifest.AvailableMemoryBytes + " bytes.");
+                                        deviceManifest.AvailableMemoryBytes + " bytes.");
                                 }
 
                                 SimpleMemory softMemory = null;

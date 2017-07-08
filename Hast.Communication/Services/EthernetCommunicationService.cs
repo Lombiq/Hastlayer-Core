@@ -6,7 +6,6 @@ using Hast.Common.Models;
 using Hast.Communication.Constants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Models;
-using Hast.Synthesis;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
 
