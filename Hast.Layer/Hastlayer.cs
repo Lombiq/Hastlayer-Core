@@ -10,7 +10,7 @@ using Hast.Communication;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis;
-using Hast.Synthesis.Services;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
@@ -60,7 +60,7 @@ namespace Hast.Layer
 
         public async Task<IEnumerable<IDeviceManifest>> GetSupportedDevices()
         {
-            return await (await GetHost()).RunGet(scope => Task.FromResult(scope.Resolve<IDeviceDriverSelector>().GetSupporteDevices()));
+            return await (await GetHost()).RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
         }
 
         public async Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
@@ -90,19 +90,29 @@ namespace Hast.Layer
                 HardwareRepresentation hardwareRepresentation = null;
 
                 await (await GetHost())
-                    .Run<ITransformer, IHardwareImplementationComposer, IDeviceDriver>(
-                        async (transformer, hardwareImplementationComposer, deviceDriver) =>
+                    .Run<ITransformer, IHardwareImplementationComposer, IDeviceManifestSelector>(
+                        async (transformer, hardwareImplementationComposer, deviceManifestSelector) =>
                         {
                             var hardwareDescription = await transformer.Transform(assemblies, configuration);
 
                             var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
+
+                            var deviceManifest = deviceManifestSelector
+                                .GetSupporteDevices()
+                                .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
+
+                            if (deviceManifest == null)
+                            {
+                                throw new HastlayerException(
+                                    "There is no supported device with the name " + configuration.DeviceName + ".");
+                            }
 
                             hardwareRepresentation = new HardwareRepresentation
                             {
                                 SoftAssemblies = assemblies,
                                 HardwareDescription = hardwareDescription,
                                 HardwareImplementation = hardwareImplementation,
-                                DeviceManifest = deviceDriver.DeviceManifest
+                                DeviceManifest = deviceManifest
                             };
                         }, ShellName, false);
 

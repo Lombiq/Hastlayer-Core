@@ -95,6 +95,10 @@
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj">
+      <Project>{1D1EC796-DFF6-4EC7-B749-62B89D1DEA92}</Project>
+      <Name>Hast.Synthesis.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
       <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
       <Name>Hast.Synthesis</Name>

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Hast.Common.Models;
 using Orchard;
 
-namespace Hast.Synthesis.Services
+namespace Hast.Synthesis.Abstractions
 {
-    public interface IDeviceDriverSelector : IDependency
+    public interface IDeviceManifestSelector : IDependency
     {
-        IDeviceDriver GetDriver(string deviceName);
+        IEnumerable<IDeviceManifest> GetSupporteDevices();
     }
 }

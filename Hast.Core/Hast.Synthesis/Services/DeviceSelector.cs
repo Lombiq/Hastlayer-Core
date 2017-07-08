@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Models;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Synthesis.Services
 {
-    public class DeviceDriverSelector : IDeviceDriverSelector
+    // IDeviceManifestSelector is a separate service so it's not necessary to share IDeviceDriver with clients.
+    public class DeviceSelector : IDeviceManifestSelector, IDeviceDriverSelector
     {
         private readonly IEnumerable<IDeviceDriver> _drivers;
 
 
-        public DeviceDriverSelector(IEnumerable<IDeviceDriver> drivers)
+        public DeviceSelector(IEnumerable<IDeviceDriver> drivers)
         {
             _drivers = drivers;
         }

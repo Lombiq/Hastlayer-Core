@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Hast.Common.Models;
 using Hast.Synthesis;
+using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Models;
 
 namespace Hast.Xilinx

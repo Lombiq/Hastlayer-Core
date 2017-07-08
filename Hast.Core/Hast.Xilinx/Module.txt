@@ -1,1 +1,1 @@
-﻿Dependencies: Hast.Transformer.Vhdl
+﻿Dependencies: Hast.Transformer.Vhdl, Hast.Synthesis.Abstractions

@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Common;
 using Hast.Common.Models;
-using Hast.Synthesis.Models;
 using Orchard;
 
-namespace Hast.Synthesis
+namespace Hast.Synthesis.Abstractions
 {
     public interface IHardwareImplementationComposer : IDependency
     {
