@@ -8,6 +8,7 @@ using Hast.Common.Configuration;
 using Hast.Common.Models;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
+using Hast.Transformer.Abstractions.Extensions;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
@@ -227,17 +228,7 @@ namespace Hast.Transformer
 
         public Task<IHardwareDescription> Transform(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
         {
-            foreach (var assembly in assemblies)
-            {
-                if (string.IsNullOrEmpty(assembly.Location))
-                {
-                    throw new ArgumentException(
-                        "No assembly used for hardware generation can be an in-memory one, but the assembly named \"" + 
-                        assembly.FullName + 
-                        "\" is.");
-                }
-            }
-
+            assemblies.ThrowArgumentExceptionIfAnyInMemory();
             return Transform(assemblies.Select(assembly => assembly.Location), configuration);
         }
 

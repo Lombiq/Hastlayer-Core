@@ -210,12 +210,19 @@ namespace Hast.Layer
             }
 
             var importedExtensions = new[]
+                {
+                    typeof(Hastlayer).Assembly,
+                    typeof(IProxyGenerator).Assembly,
+                    typeof(IHardwareImplementationComposer).Assembly,
+                    typeof(ITransformer).Assembly
+                }
+                .Union(_configuration.Extensions)
+                .ToList();
+
+            if (_configuration.Flavor == HastlayerFlavor.Client)
             {
-                typeof(Hastlayer).Assembly,
-                typeof(IProxyGenerator).Assembly,
-                typeof(IHardwareImplementationComposer).Assembly,
-                typeof(ITransformer).Assembly
-            }.Union(_configuration.Extensions);
+                importedExtensions.Add(typeof(Remote.Client.RemoteTransformerClient).Assembly);
+            }
 
             var settings = new AppHostSettings
             {
