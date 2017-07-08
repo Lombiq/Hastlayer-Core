@@ -1,5 +1,6 @@
 ﻿using System.IO.Ports;
 using Hast.Common.Extensibility.Pipeline;
+using Hast.Communication.Models;
 
 namespace Hast.Communication.Extensibility.Pipeline
 {
@@ -8,6 +9,6 @@ namespace Hast.Communication.Extensibility.Pipeline
     /// </summary>
     public interface ISerialPortConfigurator : IPipelineStep
     {
-        void ConfigureSerialPort(SerialPort serialPort);
+        void ConfigureSerialPort(SerialPort serialPort, IHardwareExecutionContext hardwareExecutionContext);
     }
 }
