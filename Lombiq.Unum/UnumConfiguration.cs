@@ -13,37 +13,30 @@ namespace Lombiq.Unum
         public readonly byte FractionSize;
 
 
-        public UnumConfiguration(IeeeConfiguration configuration)
-        {
-            switch (configuration)
-            {
-                case IeeeConfiguration.HalfPrecision:
-                    ExponentSize = 5;
-                    FractionSize = 10;
-                    break;
-                case IeeeConfiguration.SinglePrecision:
-                    ExponentSize = 8;
-                    FractionSize = 23;
-                    break;
-                case IeeeConfiguration.DoublePrecision:
-                    ExponentSize = 11;
-                    FractionSize = 52;
-                    break;
-                case IeeeConfiguration.ExtendedPrecision:
-                    ExponentSize = 15;
-                    FractionSize = 64;
-                    break;
-                case IeeeConfiguration.QuadPrecision:
-                    ExponentSize = 15;
-                    FractionSize = 112;
-                    break;
-            }
-        }
-
         public UnumConfiguration(byte exponentSize, byte fractionSize)
         {
             ExponentSize = exponentSize;
             FractionSize = fractionSize;
+        }
+
+
+        public static UnumConfiguration FromIeeeConfiguration(IeeeConfiguration configuration)
+        {
+            switch (configuration)
+            {
+                case IeeeConfiguration.HalfPrecision:
+                    return new UnumConfiguration(5, 10);
+                case IeeeConfiguration.SinglePrecision:
+                    return new UnumConfiguration(8, 23);
+                case IeeeConfiguration.DoublePrecision:
+                    return new UnumConfiguration(11, 52);
+                case IeeeConfiguration.ExtendedPrecision:
+                    return new UnumConfiguration(15, 64);
+                case IeeeConfiguration.QuadPrecision:
+                    return new UnumConfiguration(15, 112);
+                default:
+                    return new UnumConfiguration(0, 0);
+            }
         }
     }
 

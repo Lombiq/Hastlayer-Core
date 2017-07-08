@@ -89,7 +89,42 @@
             //_smallNormal = _exponentAndFractionSizeMask + 1 << _size - 1 - _exponentSizeMax;
         }
 
-        public static UnumEnvironment FromConfiguration(byte eSize, ushort fSize) =>
+
+        public static UnumEnvironment FromConfigurationValues(byte eSize, ushort fSize) =>
             new UnumEnvironment(UnumHelper.SegmentSizeToSegmentSizeSize(eSize), UnumHelper.SegmentSizeToSegmentSizeSize(fSize));
+
+        public static UnumEnvironment FromConfiguration(UnumConfiguration configuration) =>
+            FromConfigurationValues(configuration.ExponentSize, configuration.FractionSize);
+
+        public static UnumEnvironment FromStandardEnvironment(StandardEnvironment environment)
+        {
+            switch (environment)
+            {
+                case StandardEnvironment.Warlpiri:
+                    return new UnumEnvironment(0, 0);
+                case StandardEnvironment.HalfPrecisionLike:
+                    return FromConfiguration(UnumConfiguration.FromIeeeConfiguration(IeeeConfiguration.HalfPrecision));
+                case StandardEnvironment.SinglePrecisionLike:
+                    return FromConfiguration(UnumConfiguration.FromIeeeConfiguration(IeeeConfiguration.SinglePrecision));
+                case StandardEnvironment.DoublePrecisionLike:
+                    return FromConfiguration(UnumConfiguration.FromIeeeConfiguration(IeeeConfiguration.DoublePrecision));
+                case StandardEnvironment.ExtendedPrecisionLike:
+                    return FromConfiguration(UnumConfiguration.FromIeeeConfiguration(IeeeConfiguration.ExtendedPrecision));
+                case StandardEnvironment.QuadPrecisionLike:
+                    return FromConfiguration(UnumConfiguration.FromIeeeConfiguration(IeeeConfiguration.QuadPrecision));
+                default:
+                    return FromConfiguration(UnumConfiguration.FromIeeeConfiguration(IeeeConfiguration.SinglePrecision));
+            }
+        }
+    }
+
+    public enum StandardEnvironment
+    {
+        Warlpiri,              // 4-bit.
+        HalfPrecisionLike,     // 33-bit.
+        SinglePrecisionLike,   // 50-bit.
+        DoublePrecisionLike,   // 92-bit.
+        ExtendedPrecisionLike, // 92-bit.
+        QuadPrecisionLike      // 157-bit.
     }
 }
