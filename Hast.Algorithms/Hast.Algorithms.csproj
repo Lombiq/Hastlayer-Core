@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="MWC64X.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

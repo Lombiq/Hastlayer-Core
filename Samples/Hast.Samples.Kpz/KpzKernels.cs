@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
 using Hast.Common.Models;
-using Hast.Transformer.SimpleMemory;
 using Hast.Layer;
 using Hast.Algorithms;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.Kpz
 {

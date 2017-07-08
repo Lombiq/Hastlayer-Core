@@ -1,9 +1,11 @@
 ﻿using Hast.Common.Configuration;
 using Hast.Layer;
-using Hast.Transformer.Vhdl.Configuration;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Hast.Common.Models;
+using System.Linq;
 
 namespace Hast.Samples.Kpz
 {
@@ -20,7 +22,7 @@ namespace Hast.Samples.Kpz
             _verifyOutput = verifyOutput;
 
             LogItFunction("Creating Hastlayer Factory...");
-            var hastlayer = Xilinx.HastlayerFactory.Create();
+            var hastlayer = await Hastlayer.Create();
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {
                 LogItFunction("Hastlayer timer: " +
@@ -29,10 +31,9 @@ namespace Hast.Samples.Kpz
                 );
             };
 
-            var configuration = new HardwareGenerationConfiguration();
+            var configuration = new HardwareGenerationConfiguration((await hastlayer.GetSupportedDevices()).First().Name);
             configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernels");
-            configuration.VhdlTransformerConfiguration().VhdlGenerationOptions = 
-                Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug;
+            configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
             configuration.EnableCaching = false;
 
             LogItFunction("Generating hardware...");
@@ -40,10 +41,8 @@ namespace Hast.Samples.Kpz
                 typeof(KpzKernelsInterface).Assembly,
              //   typeof(Hast.Algorithms.MWC64X).Assembly
             }, configuration);
-            File.WriteAllText(
-                VhdlOutputFilePath,
-                ((Transformer.Vhdl.Models.VhdlHardwareDescription)hardwareRepresentation.HardwareDescription).VhdlSource
-                );
+
+            await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);
 
             LogItFunction("Generating proxy...");
             if (kpzTarget == KpzTarget.Fpga)

@@ -164,10 +164,10 @@
       <Name>Orchard.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz\Hast.Samples.Kpz.csproj">
-    <ProjectReference Include="..\..\..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
       <Project>{0dd555f3-b472-422b-8cfb-63cb494cbb5a}</Project>
       <Name>Hast.Samples.Kpz</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
       <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
       <Name>Hast.Samples.SampleAssembly</Name>
     </ProjectReference>
