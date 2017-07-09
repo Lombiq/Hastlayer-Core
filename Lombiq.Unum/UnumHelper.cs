@@ -10,12 +10,14 @@
         /// <returns>The maximum size of the Unum segment size.</returns>
         public static byte SegmentSizeToSegmentSizeSize(ushort segmentSize)
         {
-            if (segmentSize == 0) return 0;
+            if (segmentSize == 0 || segmentSize == 1) return 0;
 
-            byte mostSignificantOneBitPosition = 15;
-            while (mostSignificantOneBitPosition >= 0 && (segmentSize >> mostSignificantOneBitPosition) == 0) mostSignificantOneBitPosition--;
+            segmentSize--;
 
-            return ++mostSignificantOneBitPosition;
+            byte position = 15; // Position of the most significant 1-bit.
+            while ((segmentSize >> position) == 0) { position--; }
+
+            return ++position;
         }
 
         /// <summary>
