@@ -5,6 +5,7 @@ namespace Lombiq.Unum.Tests
     [TestFixture]
     public class UnumEnvironmentTests
     {
+        private UnumEnvironment _warlpiriEnvironment;
         private UnumEnvironment _environment_3_2;
         private UnumEnvironment _environment_3_4;
         private Unum _unum_3_2;
@@ -14,6 +15,7 @@ namespace Lombiq.Unum.Tests
         [SetUp]
         public void Init()
         {
+            _warlpiriEnvironment = UnumEnvironment.FromStandardEnvironment(StandardEnvironment.Warlpiri);
             _environment_3_2 = new UnumEnvironment(3, 2);
             _environment_3_4 = new UnumEnvironment(3, 4);
             _unum_3_2 = new Unum(_environment_3_2);
@@ -23,6 +25,33 @@ namespace Lombiq.Unum.Tests
         [TestFixtureTearDown]
         public void Clean() { }
 
+
+        [Test]
+        public void WarlpiriUnumEnvironmentIsCorrect()
+        {
+            Assert.AreEqual(new BitMask(4), _warlpiriEnvironment.EmptyBitMask);
+            Assert.AreEqual(_warlpiriEnvironment.EmptyBitMask, _warlpiriEnvironment.ExponentSizeMask);
+            Assert.AreEqual(1, _warlpiriEnvironment.ExponentSizeMax);
+            Assert.AreEqual(0, _warlpiriEnvironment.ExponentSizeSize);
+            Assert.AreEqual(_warlpiriEnvironment.EmptyBitMask, _warlpiriEnvironment.FractionSizeMask);
+            Assert.AreEqual(1, _warlpiriEnvironment.FractionSizeMax);
+            Assert.AreEqual(0, _warlpiriEnvironment.FractionSizeSize);
+            Assert.AreEqual(_warlpiriEnvironment.EmptyBitMask, _warlpiriEnvironment.ExponentAndFractionSizeMask);
+            Assert.AreEqual(4, _warlpiriEnvironment.Size);
+
+            Assert.AreEqual(12, _warlpiriEnvironment.LargestNegative.GetLowest32Bits()); // 1100
+            Assert.AreEqual(4, _warlpiriEnvironment.LargestPositive.GetLowest32Bits()); // 0100
+            Assert.AreEqual(14, _warlpiriEnvironment.NegativeInfinity.GetLowest32Bits()); // 1110
+            Assert.AreEqual(6, _warlpiriEnvironment.PositiveInfinity.GetLowest32Bits()); // 0110
+            Assert.AreEqual(7, _warlpiriEnvironment.QuietNotANumber.GetLowest32Bits()); // 0111
+            Assert.AreEqual(15, _warlpiriEnvironment.SignalingNotANumber.GetLowest32Bits()); // 1111
+            Assert.AreEqual(8, _warlpiriEnvironment.SignBitMask.GetLowest32Bits()); // 1000
+            Assert.AreEqual(2, _warlpiriEnvironment.SmallestPositive.GetLowest32Bits()); // 0010
+            Assert.AreEqual(2, _warlpiriEnvironment.ULP.GetLowest32Bits()); // 0010
+            Assert.AreEqual(1, _warlpiriEnvironment.UncertaintyBitMask.GetLowest32Bits()); // 0001
+            Assert.AreEqual(1, _warlpiriEnvironment.UnumTagMask.GetLowest32Bits()); // 0001
+            Assert.AreEqual(1, _warlpiriEnvironment.UnumTagSize);
+        }
 
         [Test]
         public void UnumExponentSizeSizeIsCorrect()

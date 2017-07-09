@@ -5,6 +5,7 @@ namespace Lombiq.Unum.Tests
     [TestFixture]
     public class UnumTests
     {
+        private UnumEnvironment _warlpiriEnvironment;
         private UnumEnvironment _environment_2_2;
         private UnumEnvironment _environment_2_3;
         private UnumEnvironment _environment_3_2;
@@ -16,6 +17,7 @@ namespace Lombiq.Unum.Tests
         [SetUp]
         public void Init()
         {
+            _warlpiriEnvironment = UnumEnvironment.FromStandardEnvironment(StandardEnvironment.Warlpiri);
             _environment_2_2 = new UnumEnvironment(2, 2);
             _environment_2_3 = new UnumEnvironment(2, 3);
             _environment_3_2 = new UnumEnvironment(3, 2);
@@ -28,15 +30,68 @@ namespace Lombiq.Unum.Tests
         [TestFixtureTearDown]
         public void Clean() { }
 
+
+        [Test]
+        public void WarlpiriUnumValuesAndCalculationsAreCorrect()
+        {
+            var unumNegative2 = new Unum(_warlpiriEnvironment, -2);
+            Assert.AreEqual(-2, (int)unumNegative2);
+
+            var unumNegative1 = new Unum(_warlpiriEnvironment, -1);
+            Assert.AreEqual(-1, (int)unumNegative1);
+
+            var unumNegative0 = new Unum(_warlpiriEnvironment, new BitMask(new uint[] { 8 }, _warlpiriEnvironment.Size));
+            Assert.AreEqual(0, (int)unumNegative0);
+
+            var unum0 = new Unum(_warlpiriEnvironment, 0);
+            Assert.AreEqual(0, (int)unum0);
+
+            var unum1 = new Unum(_warlpiriEnvironment, 1);
+            Assert.AreEqual(1, (int)unum1);
+
+            var unum2 = new Unum(_warlpiriEnvironment, 2);
+            Assert.AreEqual(2, (int)unum2);
+
+            Assert.AreEqual(unumNegative0, unumNegative2 + unum2);
+
+            Assert.AreEqual(unumNegative0, unumNegative1 + unum1);
+
+            Assert.AreEqual(unum0, unum2 - unum2);
+
+            Assert.AreEqual(unum0, unum1 - unum1);
+
+            Assert.AreEqual(unum2, unum1 + unum1);
+
+            //Assert.AreEqual(unumNegative2, unumNegative1 + unumNegative1);
+
+            Assert.AreEqual(unumNegative1, unumNegative2 + unum1);
+
+            Assert.AreEqual(unum1, unum2 + unumNegative1);
+
+            Assert.AreEqual(unumNegative0, unumNegative1 - unumNegative1);
+
+            Assert.AreEqual(unumNegative0, unumNegative2 - unumNegative2);
+
+            Assert.AreEqual(unum1, unumNegative1 - unumNegative2);
+
+            Assert.AreEqual(unum1, unum0 - unumNegative1);
+
+            Assert.AreEqual(unum1, unumNegative0 - unumNegative1);
+
+            Assert.AreEqual(unum2, unum0 - unumNegative2);
+
+            Assert.AreEqual(unum2, unumNegative0 - unumNegative2);
+        }
+
         [Test]
         public void UnumIsCorrectlyConstructedFromUintArray()
         {
-            var Unum0 = new Unum(_environment_4_8, new uint[] { 0 }); 
-            Assert.AreEqual(Unum0.IsZero(), true);
+            var unum0 = new Unum(_environment_4_8, new uint[] { 0 }); 
+            Assert.AreEqual(unum0.IsZero(), true);
 
-            var UnumMinus1 = new Unum(_environment_4_8, new uint[] { 1 }, true);
+            var unumMinus1 = new Unum(_environment_4_8, new uint[] { 1 }, true);
             var bitMaskMinus1 = new BitMask(new uint[] { 0x2000, 0, 0, 0, 0, 0, 0, 0, 0x20000000 }, _environment_4_8.Size); 
-            Assert.AreEqual(UnumMinus1.UnumBits, bitMaskMinus1 );
+            Assert.AreEqual(unumMinus1.UnumBits, bitMaskMinus1 );
 
             var unum10 = new Unum(_environment_2_2, new uint[] { 10 });
             var bitMask10 = new BitMask(new uint[] { 0x329 }, _environment_2_2.Size);
