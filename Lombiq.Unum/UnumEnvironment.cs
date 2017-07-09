@@ -116,6 +116,8 @@
                     return FromConfiguration(UnumConfiguration.FromIeeeConfiguration(IeeeConfiguration.SinglePrecision));
             }
         }
+
+        public static UnumEnvironment GetDefaultEnvironment() => FromStandardEnvironment(StandardEnvironment.SinglePrecisionLike);
     }
 
     public enum StandardEnvironment
