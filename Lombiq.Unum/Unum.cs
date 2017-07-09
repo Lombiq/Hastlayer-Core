@@ -510,8 +510,10 @@ namespace Lombiq.Unum
                     right.FractionWithHiddenBit() << smallerBitsMovedToLeft,
                     signBitsMatch);
 
+
                 if (!signBitsMatch)
-                {   // If the value of the Hidden Bits match we just compare the fractions,
+                {
+                    // If the value of the Hidden Bits match we just compare the fractions,
                     // and get the Sign of the bigger one.
                     if (left.HiddenBitIsOne() == right.HiddenBitIsOne())
                     {
@@ -523,6 +525,7 @@ namespace Lombiq.Unum
                     // Otherwise we get the Sign of the number that has a Hidden Bit set.
                     else resultSignBit = left.HiddenBitIsOne() ? !left.IsPositive() : !right.IsPositive();
                 }
+                else resultSignBit = !left.IsPositive();
 
             }
             else if (exponentValueDifference > 0) // Left Exponent is bigger.

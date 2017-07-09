@@ -62,7 +62,7 @@ namespace Lombiq.Unum.Tests
 
             Assert.AreEqual(unum2, unum1 + unum1);
 
-            //Assert.AreEqual(unumNegative2, unumNegative1 + unumNegative1);
+            Assert.AreEqual(unumNegative2, unumNegative1 + unumNegative1);
 
             Assert.AreEqual(unumNegative1, unumNegative2 + unum1);
 
@@ -86,12 +86,12 @@ namespace Lombiq.Unum.Tests
         [Test]
         public void UnumIsCorrectlyConstructedFromUintArray()
         {
-            var unum0 = new Unum(_environment_4_8, new uint[] { 0 }); 
+            var unum0 = new Unum(_environment_4_8, new uint[] { 0 });
             Assert.AreEqual(unum0.IsZero(), true);
 
             var unumMinus1 = new Unum(_environment_4_8, new uint[] { 1 }, true);
-            var bitMaskMinus1 = new BitMask(new uint[] { 0x2000, 0, 0, 0, 0, 0, 0, 0, 0x20000000 }, _environment_4_8.Size); 
-            Assert.AreEqual(unumMinus1.UnumBits, bitMaskMinus1 );
+            var bitMaskMinus1 = new BitMask(new uint[] { 0x2000, 0, 0, 0, 0, 0, 0, 0, 0x20000000 }, _environment_4_8.Size);
+            Assert.AreEqual(unumMinus1.UnumBits, bitMaskMinus1);
 
             var unum10 = new Unum(_environment_2_2, new uint[] { 10 });
             var bitMask10 = new BitMask(new uint[] { 0x329 }, _environment_2_2.Size);
@@ -202,11 +202,11 @@ namespace Lombiq.Unum.Tests
             var unum30 = new Unum(_environment_3_4, 30);
             var bitMask30 = new BitMask(new uint[] { 0x3F22 }, _environment_3_4.Size);
             Assert.AreEqual(unum30.UnumBits, bitMask30);
-            
+
             var unum1000 = new Unum(_environment_3_4, 1000);
             var bitMask1000 = new BitMask(new uint[] { 0x63D45 }, _environment_3_4.Size);
             Assert.AreEqual(unum1000.UnumBits, bitMask1000);
-            
+
             var unum5000 = new Unum(_environment_3_4, 5000);
             var bitMask5000 = new BitMask(new uint[] { 0x367148 }, _environment_3_4.Size);
             Assert.AreEqual(unum5000.UnumBits, bitMask5000);
@@ -214,11 +214,11 @@ namespace Lombiq.Unum.Tests
             var unum6000 = new Unum(_environment_3_4, 6000);
             var bitMask6000 = new BitMask(new uint[] { 0x1B7747 }, _environment_3_4.Size);
             Assert.AreEqual(unum6000.UnumBits, bitMask6000);
-            
+
             var unumNegative30 = new Unum(_environment_3_4, -30);
             var bitMaskMinus30 = new BitMask(new uint[] { 0x3F22, 1 }, _environment_3_4.Size);
             Assert.AreEqual(unumNegative30.UnumBits, bitMaskMinus30);
-            
+
             var unumNegative1000 = new Unum(_environment_3_4, -1000);
             var bitMaskMinus1000 = new BitMask(new uint[] { 0x63D45, 1 }, _environment_3_4.Size);
             Assert.AreEqual(unumNegative1000.UnumBits, bitMaskMinus1000);
@@ -533,7 +533,7 @@ namespace Lombiq.Unum.Tests
             var exponent = new BitMask(new uint[] { 28 }, unum.Size);
             var fraction = new BitMask(new uint[] { 4153 }, unum.Size);
             // 1 11100 1000000111001 0 100 1100
-            var wholeUnumBitMask = new BitMask(new uint[] { 0x390394C, 1 }, unum.Size); 
+            var wholeUnumBitMask = new BitMask(new uint[] { 0x390394C, 1 }, unum.Size);
 
             Assert.AreEqual(wholeUnumBitMask, unum.SetUnumBits(true, exponent, fraction, false, 4, 12)); // -12345
         }
