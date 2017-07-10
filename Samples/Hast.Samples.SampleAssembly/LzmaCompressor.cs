@@ -80,7 +80,7 @@ namespace Hast.Samples.SampleAssembly
                 outputStream.WriteByte(b);
             }
 
-            encoder.Code(inputStream, outputStream);
+            encoder.Encode(inputStream, outputStream);
 
             memory.WriteInt32(LzmaCompressor_OutputByteCountIndex, (int)outputStream.Position);
         }

@@ -37,12 +37,6 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
             for (var i = 0; i < 5; i++) ShiftLow();
         }
 
-        public void FlushStream() =>
-            _stream.Flush();
-
-        public void CloseStream() =>
-            _stream.Close();
-
         public void Encode(uint start, uint size, uint total)
         {
             Low += start * (Range /= total);
@@ -51,6 +45,7 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
             while (Range < RangeEncoderConstants.TopValue)
             {
                 Range <<= 8;
+
                 ShiftLow();
             }
         }
@@ -66,6 +61,7 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
                     temp = 0xFF;
                 }
                 while (--_cacheSize != 0);
+
                 _cache = (byte)(((uint)Low) >> 24);
             }
 
@@ -73,9 +69,9 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
             Low = ((uint)Low) << 8;
         }
 
-        public void EncodeDirectBits(uint v, int numTotalBits)
+        public void EncodeDirectBits(uint v, int totalBits)
         {
-            for (var i = numTotalBits - 1; i >= 0; i--)
+            for (var i = totalBits - 1; i >= 0; i--)
             {
                 Range >>= 1;
                 if (((v >> i) & 1) == 1)
@@ -88,9 +84,9 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
             }
         }
 
-        public void EncodeBit(uint size0, int numTotalBits, uint symbol)
+        public void EncodeBit(uint size0, int totalBits, uint symbol)
         {
-            var newBound = (Range >> numTotalBits) * size0;
+            var newBound = (Range >> totalBits) * size0;
             if (symbol == 0) Range = newBound;
             else
             {

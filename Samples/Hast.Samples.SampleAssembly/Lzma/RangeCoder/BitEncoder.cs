@@ -4,45 +4,36 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
 {
     internal class BitEncoder
     {
-        private const int NumMoveBits = 5;
-        public const int NumMoveReducingBits = 2;
-        private uint[] ProbPrices;
+        private const int MoveBits = 5;
 
 
-        private uint _prob;
+        private uint[] _probabilityPrices;
+        private uint _probability;
 
 
-        public BitEncoder()
+        public void Init(uint[] probabilityPrices)
         {
-        }
-
-
-        public void Init(uint[] probPrices)
-        {
-            ProbPrices = probPrices;
-            _prob = RangeEncoderConstants.BitModelTotal >> 1;
+            _probabilityPrices = probabilityPrices;
+            _probability = RangeEncoderConstants.BitModelTotal >> 1;
         }
 
         public void UpdateModel(uint symbol)
         {
-            if (symbol == 0) _prob += (RangeEncoderConstants.BitModelTotal - _prob) >> NumMoveBits;
-            else _prob -= (_prob) >> NumMoveBits;
+            if (symbol == 0) _probability += (RangeEncoderConstants.BitModelTotal - _probability) >> MoveBits;
+            else _probability -= (_probability) >> MoveBits;
         }
 
         public void Encode(RangeEncoder encoder, uint symbol)
         {
-            var newBound = (encoder.Range >> RangeEncoderConstants.NumBitModelTotalBits) * _prob;
+            var newBound = (encoder.Range >> RangeEncoderConstants.BitModelTotalBits) * _probability;
 
-            if (symbol == 0)
-            {
-                encoder.Range = newBound;
-                _prob += (RangeEncoderConstants.BitModelTotal - _prob) >> NumMoveBits;
-            }
+            UpdateModel(symbol);
+
+            if (symbol == 0) encoder.Range = newBound;
             else
             {
                 encoder.Low += newBound;
                 encoder.Range -= newBound;
-                _prob -= (_prob) >> NumMoveBits;
             }
 
             if (encoder.Range < RangeEncoderConstants.TopValue)
@@ -52,24 +43,16 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
             }
         }
 
-        public uint GetPrice(uint symbol)
-        {
-            var a = _prob - symbol;
-            var b = -1 * ((int)symbol);
-            var c = RangeEncoderConstants.BitModelTotal - 1;
-            var d = (a ^ b) & c;
-            var e = (int)(d >> NumMoveReducingBits);
-
-            return ProbPrices[e];
-        }
+        public uint GetPrice(uint symbol) =>
+            _probabilityPrices[(int)((((_probability - symbol) ^ (-1 * ((int)symbol))) &
+                (RangeEncoderConstants.BitModelTotal - 1)) >>
+                RangeEncoderConstants.MoveReducingBits)];
 
         public uint GetPrice0() =>
-            ProbPrices[_prob >> NumMoveReducingBits];
+            _probabilityPrices[_probability >> RangeEncoderConstants.MoveReducingBits];
 
-        public uint GetPrice1()
-        {
-            var i = (int)(RangeEncoderConstants.BitModelTotal - _prob);
-            return ProbPrices[i >> NumMoveReducingBits];
-        }
+        public uint GetPrice1() =>
+            _probabilityPrices[(int)(RangeEncoderConstants.BitModelTotal - _probability) >> 
+                RangeEncoderConstants.MoveReducingBits];
     }
 }

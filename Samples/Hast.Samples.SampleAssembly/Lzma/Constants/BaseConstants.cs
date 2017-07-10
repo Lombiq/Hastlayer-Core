@@ -2,36 +2,33 @@ namespace Hast.Samples.SampleAssembly.Lzma.Constants
 {
 	internal static class BaseConstants
 	{
-		public const uint NumRepDistances = 4;
-		public const uint NumStates = 12;
-        public const int NumPosSlotBits = 6;
-        public const int DicLogSizeMin = 0;
-        public const int NumLenToPosStatesBits = 2; // it's for speed optimization
-        public const uint NumLenToPosStates = 1 << NumLenToPosStatesBits;
+		public const uint RepDistances = 4;
+		public const uint States = 12;
+        public const int PositionSlotBits = 6;
+        public const int LengthToPositionStatesBits = 2;
+        public const uint LengthToPositionStates = 1 << LengthToPositionStatesBits;
         public const uint MinMatchLength = 2;
-        public const int NumAlignBits = 4;
-        public const uint AlignTableSize = 1 << NumAlignBits;
+        public const int AlignBits = 4;
+        public const uint AlignTableSize = 1 << AlignBits;
         public const uint AlignMask = (AlignTableSize - 1);
-        public const uint StartPosModelIndex = 4;
-        public const uint EndPosModelIndex = 14;
-        public const uint NumPosModels = EndPosModelIndex - StartPosModelIndex;
-        public const uint NumFullDistances = 1 << ((int)EndPosModelIndex / 2);
-        public const uint NumLitPosStatesBitsEncodingMax = 4;
-        public const uint NumLitContextBitsMax = 8;
-        public const int NumPosStatesBitsMax = 4;
-        public const uint NumPosStatesMax = (1 << NumPosStatesBitsMax);
-        public const int NumPosStatesBitsEncodingMax = 4;
-        public const uint NumPosStatesEncodingMax = (1 << NumPosStatesBitsEncodingMax);
-        public const int NumLowLenBits = 3;
-        public const int NumMidLenBits = 3;
-        public const int NumHighLenBits = 8;
-        public const uint NumLowLenSymbols = 1 << NumLowLenBits;
-        public const uint NumMidLenSymbols = 1 << NumMidLenBits;
-        public const uint NumLenSymbols = NumLowLenSymbols + NumMidLenSymbols + (1 << NumHighLenBits);
-        public const uint MaxMatchLength = MinMatchLength + NumLenSymbols - 1;
-
+        public const uint StartPositionModelIndex = 4;
+        public const uint EndPositionModelIndex = 14;
+        public const uint PositionModels = EndPositionModelIndex - StartPositionModelIndex;
+        public const uint FullDistances = 1 << ((int)EndPositionModelIndex / 2);
+        public const uint MaxLiteralPositionStatesBitsEncoding = 4;
+        public const uint MaxLiteralContextBits = 8;
+        public const int MaxPositionStatesBits = 4;
+        public const uint MaxPositionStates = (1 << MaxPositionStatesBits);
+        public const int MaxPositionStatesEncodingBits = 4;
+        public const uint MaxPositionStatesEncoding = (1 << MaxPositionStatesEncodingBits);
+        public const int LowLengthBits = 3;
+        public const int MidLengthBits = 3;
+        public const int HighLengthBits = 8;
+        public const uint LowLengthSymbols = 1 << LowLengthBits;
+        public const uint MidLengthSymbols = 1 << MidLengthBits;
+        public const uint LenSymbols = LowLengthSymbols + MidLengthSymbols + (1 << HighLengthBits);
+        public const uint MaxMatchLength = MinMatchLength + LenSymbols - 1;
         public const uint OptimumNumber = 1 << 12;
-
         public const uint MaxDictionarySize = 1 << 7;
         public const uint MaxHashSize = (1 << 17) + (1 << 10);
         public const uint MaxNumberOfFastBytes = 1 << 7;
@@ -39,13 +36,11 @@ namespace Hast.Samples.SampleAssembly.Lzma.Constants
         public const uint MaxBlockLength = MaxBlockLengthHelper + (MaxBlockLengthHelper / 2 + 256);
 
 
-        public static uint GetLenToPosState(uint len)
+        public static uint GetLengthToPositionState(uint length)
 		{
-			len -= MinMatchLength;
+			length -= MinMatchLength;
 
-			if (len < NumLenToPosStates) return len;
-
-			return NumLenToPosStates - 1;
+			return length < LengthToPositionStates ? length : LengthToPositionStates - 1;
         }
     }
 }
