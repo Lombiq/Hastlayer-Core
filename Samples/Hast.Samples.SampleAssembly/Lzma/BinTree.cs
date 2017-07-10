@@ -39,7 +39,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint _keepSizeAfter; // how many BYTEs must be kept buffer after _pos
         private uint _pointerToLastSafePosition;
 
-        private byte[] _bufferBase = null; // pointer to buffer with data
+        private byte[] _bufferBase; // pointer to buffer with data
         private uint _blockSize; // Size of Allocated memory block
         private uint _pos; // offset (from _buffer) of curent byte
         private uint _streamPos; // offset (from _buffer) of first not read byte from Stream
@@ -47,7 +47,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
         #endregion
 
-        public void SetType(int numHashbytes)
+        public void SetType(uint numHashbytes)
         {
             _hashArray = (numHashbytes > 2);
             if (_hashArray)

@@ -59,7 +59,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private long nowPos64;
         private bool _finished;
         private SimpleMemoryStream _inStream;
-        private MatchFinder _matchFinderType = MatchFinder.BT4;
+        private uint _numberOfMatchFinderHashBytes = 4;
         private bool _writeEndMark = false;
         private bool _needReleaseMFStream;
         private byte[] properties = new byte[PropSize];
@@ -293,14 +293,10 @@ namespace Hast.Samples.SampleAssembly.Lzma
         public void SetCoderProperties(EncoderProperties properties)
         {
             _numberOfFastBytes = properties.NumberOfFastBytes;
-
-            var previousMatchFinder = _matchFinderType;
-            _matchFinderType = properties.MatchFinder;
-            if (_matchFinder != null && previousMatchFinder != _matchFinderType)
-            {
-                _dictionarySizePrev = 0xFFFFFFFF;
-                _matchFinder = null;
-            }
+            
+            _numberOfMatchFinderHashBytes = properties.NumberOfMatchFinderHashBytes;
+            _dictionarySizePrev = 0xFFFFFFFF;
+            _matchFinder = null;
 
             // Should throw an Exception when it becomes supported.
             // if (dictionarySize < (uint)(1 << BaseConstants.DicLogSizeMin) ||
@@ -382,15 +378,10 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
         private void Create()
         {
-            if (_matchFinder == null)
-            {
-                BinTree bt = new BinTree();
-                int numHashbytes = 4;
-                if (_matchFinderType == MatchFinder.BT2)
-                    numHashbytes = 2;
-                bt.SetType(numHashbytes);
-                _matchFinder = bt;
-            }
+            var binTree = new BinTree();
+            binTree.SetType(_numberOfMatchFinderHashBytes);
+            _matchFinder = binTree;
+
             _literalEncoder.Create(_literalPositionBits, _literalContextBits);
 
             if (_dictionarySize != _dictionarySizePrev || _numFastbytesPrev != _numberOfFastBytes)
@@ -1367,7 +1358,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                                 // Break.
                                 run = false;
                             }
-                            
+
                             i--;
                         }
                     }

@@ -8,7 +8,7 @@ namespace Hast.Samples.SampleAssembly
     public static class LzmaCompressorDefaultParameters
     {
         public const int LiteralContextBits = 3; // Set 0 for 32-bit data.
-        public const bool MatchFinderIsBt4 = true;
+        public const uint NumberOfMatchFinderHashBytes = 4; // Accepted values are 2 and 4.
         public const uint DictionarySize = 1 << 7;
         public const int PositionStateBits = 2;
         public const int LiteralPositionBits = 0; // Set 2 for 32-bit data.
@@ -26,7 +26,7 @@ namespace Hast.Samples.SampleAssembly
         public const int LzmaCompressor_OutputStartCellIndex = 2;
         public const int LzmaCompressor_OutputByteCountIndex = 3;
         public const int LzmaCompressor_LiteralContextBitsIndex = 4;
-        public const int LzmaCompressor_MatchFinderIsBt4Index = 5;
+        public const int LzmaCompressor_NumberOfMatchFinderHashBytesIndex = 5;
         public const int LzmaCompressor_DictionarySizeIndex = 6;
         public const int LzmaCompressor_PositionStateBitsIndex = 7;
         public const int LzmaCompressor_LiteralPositionBitsIndex = 8;
@@ -43,7 +43,7 @@ namespace Hast.Samples.SampleAssembly
             int outputStartCellIndex = memory.ReadInt32(LzmaCompressor_OutputStartCellIndex);
             int outputByteCount = memory.ReadInt32(LzmaCompressor_OutputByteCountIndex);
             int literalContextBits = memory.ReadInt32(LzmaCompressor_LiteralContextBitsIndex);
-            int matchFinderId = memory.ReadInt32(LzmaCompressor_MatchFinderIsBt4Index);
+            uint numberOfMatchFinderHashBytes = memory.ReadUInt32(LzmaCompressor_NumberOfMatchFinderHashBytesIndex);
             uint dictionarySize = memory.ReadUInt32(LzmaCompressor_DictionarySizeIndex);
             int positionStateBits = memory.ReadInt32(LzmaCompressor_PositionStateBitsIndex);
             int literalPositionBits = memory.ReadInt32(LzmaCompressor_LiteralPositionBitsIndex);
@@ -52,21 +52,10 @@ namespace Hast.Samples.SampleAssembly
             bool stdInMode = memory.ReadBoolean(LzmaCompressor_StdInModeIndex);
             bool writeEndMarker = memory.ReadBoolean(LzmaCompressor_WriteEndMarkerIndex);
 
-            MatchFinder matchFinder;
-            switch (matchFinderId)
-            {
-                case 0: matchFinder = MatchFinder.BT2;
-                    break;
-                case 1: matchFinder = MatchFinder.BT4;
-                    break;
-                default: matchFinder = MatchFinder.BT4;
-                    break;
-            }
-
             var properties = new EncoderProperties
             {
                 LiteralContextBits = literalContextBits,
-                MatchFinder = matchFinder,
+                NumberOfMatchFinderHashBytes = numberOfMatchFinderHashBytes,
                 DictionarySize = dictionarySize,
                 PositionStateBits = positionStateBits,
                 LiteralPositionBits = literalPositionBits,
@@ -121,7 +110,7 @@ namespace Hast.Samples.SampleAssembly
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_OutputStartCellIndex, outputStartCell);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_OutputByteCountIndex, outputSize);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_LiteralContextBitsIndex, LzmaCompressorDefaultParameters.LiteralContextBits);
-            simpleMemory.WriteBoolean(LzmaCompressor.LzmaCompressor_MatchFinderIsBt4Index, LzmaCompressorDefaultParameters.MatchFinderIsBt4);
+            simpleMemory.WriteUInt32(LzmaCompressor.LzmaCompressor_NumberOfMatchFinderHashBytesIndex, LzmaCompressorDefaultParameters.NumberOfMatchFinderHashBytes);
             simpleMemory.WriteUInt32(LzmaCompressor.LzmaCompressor_DictionarySizeIndex, LzmaCompressorDefaultParameters.DictionarySize);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_PositionStateBitsIndex, LzmaCompressorDefaultParameters.PositionStateBits);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_LiteralPositionBitsIndex, LzmaCompressorDefaultParameters.LiteralPositionBits);
