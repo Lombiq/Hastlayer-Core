@@ -8,7 +8,9 @@ using Hast.Transformer.Vhdl.Abstractions.Configuration;
 
 namespace Hast.Samples.Consumer
 {
-    // In this simple console application we generate hardware from some sample algorithms.
+    // In this simple console application we generate hardware from some sample algorithms. Note that the project also
+    // references other projects (and the sample assembly as well), so check out those too on hints which Hastlayer
+    // projects to reference from your own projects.
 
     // Configure the whole sample project here:
     internal static class Configuration
@@ -45,10 +47,15 @@ namespace Hast.Samples.Consumer
                      *    implementations. (You can see this inside the SampleRunners.)
                      */
 
+                    // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need
+                    // the Client flavor: This will let you connect to a remote Hastlayer service to run the software
+                    // to hardware transformation.
+                    var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
+
                     // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object 
                     // while the program runs and re-use it continuously. No need to always wrap it into a using() like 
                     // here, just make sure to Dispose() it before the program terminates.
-                    using (var hastlayer = await Hastlayer.Create())
+                    using (var hastlayer = await Hastlayer.Create(hastlayerConfiguration))
                     {
                         // Hooking into an event of Hastlayer so some execution information can be made visible on the
                         // console.
@@ -71,8 +78,13 @@ namespace Hast.Samples.Consumer
                         // device, not just any first one.
                         var configuration = new HardwareGenerationConfiguration(devices.First().Name);
 
+                        // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
+                        // here after uncommenting the code:
+                        configuration.RemoteClientConfiguration().AppId = "TestApp";
+                        configuration.RemoteClientConfiguration().AppSecret = "appsecret";
 
-                        // Letting the configuration of samples run.
+
+                        // Letting the configuration of samples run. Check out those methods too!
                         switch (Configuration.SampleToRun)
                         {
                             case Sample.GenomeMatcher:

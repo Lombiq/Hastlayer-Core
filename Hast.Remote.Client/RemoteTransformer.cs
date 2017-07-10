@@ -15,8 +15,7 @@ namespace Hast.Remote.Client
     {
         public async Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
-            var apiClient = ApiClientFactory
-                .CreateApiClient(new HastlayerRemoteClientConfiguration { AppId = "TestApp", AppSecret = "appsecret" });
+            var apiClient = ApiClientFactory.CreateApiClient(configuration.RemoteClientConfiguration());
 
             var assemblyContainers = assemblyPaths
                 .Select(path => new AssemblyContainer { FileContent = File.ReadAllBytes(path) });

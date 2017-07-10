@@ -17,7 +17,7 @@ namespace Hast.Layer
         /// <summary>
         /// The usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Developer"/>.
         /// </summary>
-        public HastlayerFlavor Flavor { get; set; } = HastlayerFlavor.Client;
+        public HastlayerFlavor Flavor { get; set; } = HastlayerFlavor.Developer;
 
 
         public HastlayerConfiguration()

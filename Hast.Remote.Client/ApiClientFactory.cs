@@ -5,13 +5,14 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Remote.Bridge.Models;
+using Hast.Remote.Configuration;
 using RestEase;
 
 namespace Hast.Remote.Client
 {
     public static class ApiClientFactory
     {
-        public static IHastlayerApi CreateApiClient(HastlayerRemoteClientConfiguration configuration)
+        public static IHastlayerApi CreateApiClient(RemoteClientConfiguration configuration)
         {
             var api = RestClient.For<IHastlayerApi>(configuration.EndpointBaseUri);
 
