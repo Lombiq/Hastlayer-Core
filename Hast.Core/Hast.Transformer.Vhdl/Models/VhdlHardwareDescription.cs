@@ -16,8 +16,7 @@ namespace Hast.Transformer.Vhdl.Models
         [JsonProperty]
         public string VhdlSource { get; private set; }
         [JsonProperty]
-        public MemberIdTable MemberIdTable { get; private set; }
-        public IEnumerable<string> HardwareMembers { get { return MemberIdTable.Values.Select(mapping => mapping.MemberName); } }
+        public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; private set; }
 
         /// <summary>
         /// The VHDL manifest (syntax tree) of the implemented hardware. WARNING: this property is only filled if the
@@ -35,15 +34,10 @@ namespace Hast.Transformer.Vhdl.Models
         public VhdlHardwareDescription(string vhdlSource, ITransformedVhdlManifest transformedVhdlManifest)
         {
             VhdlSource = vhdlSource;
-            MemberIdTable = transformedVhdlManifest.MemberIdTable;
+            HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings;
             VhdlManifestIfFresh = transformedVhdlManifest.Manifest;
         }
 
-
-        public int LookupMemberId(string memberFullName)
-        {
-            return MemberIdTable.LookupMemberId(memberFullName);
-        }
 
         public Task WriteSource(Stream stream)
         {
@@ -90,18 +84,12 @@ namespace Hast.Transformer.Vhdl.Models
         }
 
 
-        private static JsonSerializerSettings GetJsonSerializerSettings()
-        {
-            var settings = new JsonSerializerSettings
+        private static JsonSerializerSettings GetJsonSerializerSettings() =>
+            new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new PrivateSetterContractResolver(),
             };
-
-            settings.Converters.Add(new MemberIdTable.MemberIdTableJsonConverter());
-
-            return settings;
-        }
     }
 }

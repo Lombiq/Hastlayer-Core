@@ -67,9 +67,9 @@ namespace Hast.Communication
 
                             if (!invocationContext.HardwareExecutionIsCancelled)
                             {
-                                var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
-                                var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
-                                if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
+                                var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareEntryPointNamesToMemberIdMappings;
+                                var memberNameAlternates = new HashSet<string>(hardwareMembers.Keys.SelectMany(member => member.GetMemberNameAlternates()));
+                                if (!hardwareMembers.ContainsKey(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                                 {
                                     invocationContext.HardwareExecutionIsCancelled = true;
                                 }
@@ -137,7 +137,10 @@ namespace Hast.Communication
                                     }
                                 }
 
-                                var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
+                                // At this point we checked that the hardware entry point does have a mapping.
+                                var memberId = hardwareRepresentation
+                                    .HardwareDescription
+                                    .HardwareEntryPointNamesToMemberIdMappings[memberFullName];
                                 invocationContext.ExecutionInformation = await workContext
                                     .Resolve<ICommunicationServiceSelector>()
                                     .GetCommunicationService(communicationChannelName)
