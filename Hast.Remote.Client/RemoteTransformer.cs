@@ -14,6 +14,10 @@ namespace Hast.Remote.Client
     {
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
+            //var devices = await ApiClientFactory
+            //    .CreateApiClient(new HastlayerRemoteClientConfiguration { AppId = "TestApp", AppSecret = "appsecret" })
+            //    .GetSupportedDevices();
+
             throw new NotImplementedException();
         }
     }

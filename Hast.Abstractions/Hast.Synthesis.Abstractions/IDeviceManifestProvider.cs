@@ -8,8 +8,8 @@ using Orchard;
 
 namespace Hast.Synthesis.Abstractions
 {
-    public interface IDeviceManifestSelector : IDependency
+    public interface IDeviceManifestProvider : IDependency
     {
-        IEnumerable<IDeviceManifest> GetSupporteDevices();
+        IDeviceManifest DeviceManifest { get; }
     }
 }

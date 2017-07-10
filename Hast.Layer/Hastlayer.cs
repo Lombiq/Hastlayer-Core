@@ -11,6 +11,7 @@ using Hast.Layer.Models;
 using Hast.Synthesis;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
+using Hast.Xilinx.Abstractions;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
 using Orchard.Environment.Configuration;
@@ -62,7 +63,7 @@ namespace Hast.Layer
 
 
         public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
-            _host.RunGet(scope => scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices());
+            _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
 
         public async Task<IHardwareRepresentation> GenerateHardware(
             IEnumerable<Assembly> assemblies,
@@ -92,8 +93,8 @@ namespace Hast.Layer
 
                             var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
 
-                            var deviceManifest = (await deviceManifestSelector
-                                .GetSupporteDevices())
+                            var deviceManifest = deviceManifestSelector
+                                .GetSupporteDevices()
                                 .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
 
                             if (deviceManifest == null)
@@ -212,7 +213,8 @@ namespace Hast.Layer
                     typeof(Hastlayer).Assembly,
                     typeof(IProxyGenerator).Assembly,
                     typeof(IHardwareImplementationComposer).Assembly,
-                    typeof(ITransformer).Assembly
+                    typeof(ITransformer).Assembly,
+                    typeof(Nexys4DdrManifestProvider).Assembly
                 }
                 .Union(_configuration.Extensions)
                 .ToList();

@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceManifest.cs" />
+    <Compile Include="DeviceManifestSelector.cs" />
+    <Compile Include="IDeviceManifestProvider.cs" />
     <Compile Include="IDeviceManifestSelector.cs" />
     <Compile Include="IHardwareImplementationComposer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

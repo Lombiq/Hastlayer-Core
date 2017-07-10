@@ -8,14 +8,15 @@ using RestEase;
 
 namespace Hast.Remote.Client
 {
-    internal static class ApiClientFactory
+    public static class ApiClientFactory
     {
-        public static IHastlayerApi CreateApiClient(Uri baseUri)
+        public static IHastlayerApi CreateApiClient(HastlayerRemoteClientConfiguration configuration)
         {
-            var api = RestClient.For<IHastlayerApi>(baseUri);
+            var api = RestClient.For<IHastlayerApi>(configuration.EndpointBaseUri);
 
-            var value = Convert.ToBase64String(Encoding.ASCII.GetBytes("username:password1234"));
-            api.Authorization = new AuthenticationHeaderValue("Basic", value);
+            api.Authorization = new AuthenticationHeaderValue(
+                "Basic",
+                Convert.ToBase64String(Encoding.ASCII.GetBytes(configuration.AppId + ":" + configuration.AppSecret)));
 
             return api;
         }
@@ -25,6 +26,9 @@ namespace Hast.Remote.Client
         {
             [Header("Authorization")]
             AuthenticationHeaderValue Authorization { get; set; }
+
+            //[Get("SupportedDevices")]
+            //Task<IEnumerable<DeviceManifest>> GetSupportedDevices();
         }
     }
 }

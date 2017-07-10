@@ -16,6 +16,7 @@ using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
 using Autofac.Core;
 using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Transformer.Vhdl.Tests
 {

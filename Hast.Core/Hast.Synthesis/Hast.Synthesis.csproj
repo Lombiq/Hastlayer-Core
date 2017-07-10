@@ -77,11 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDeviceDriver.cs" />
-    <Compile Include="Models\DeviceManifest.cs" />
     <Compile Include="Models\HardwareImplementation.cs" />
     <Compile Include="Models\ITimingReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DeviceSelector.cs" />
+    <Compile Include="Services\DeviceDriverSelector.cs" />
     <Compile Include="Services\IDeviceDriverSelector.cs" />
     <Compile Include="Services\ITimingReportParser.cs" />
     <Compile Include="Services\TimingReportParser.cs" />

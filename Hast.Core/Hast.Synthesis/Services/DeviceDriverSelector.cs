@@ -8,19 +8,16 @@ using Hast.Synthesis.Abstractions;
 
 namespace Hast.Synthesis.Services
 {
-    // IDeviceManifestSelector is a separate service so it's not necessary to share IDeviceDriver with clients.
-    public class DeviceSelector : IDeviceManifestSelector, IDeviceDriverSelector
+    public class DeviceDriverSelector : IDeviceDriverSelector
     {
         private readonly IEnumerable<IDeviceDriver> _drivers;
 
 
-        public DeviceSelector(IEnumerable<IDeviceDriver> drivers)
+        public DeviceDriverSelector(IEnumerable<IDeviceDriver> drivers)
         {
             _drivers = drivers;
         }
 
-        public Task<IEnumerable<IDeviceManifest>> GetSupporteDevices() => 
-            Task.FromResult(_drivers.Select(driver => driver.DeviceManifest));
 
         public IDeviceDriver GetDriver(string deviceName) =>
             _drivers.FirstOrDefault(driver => driver.DeviceManifest.Name == deviceName);

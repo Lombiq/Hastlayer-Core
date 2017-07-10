@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Layer;
 
-namespace Hast.Synthesis.Models
+namespace Hast.Synthesis.Abstractions
 {
     public class DeviceManifest : IDeviceManifest
     {
