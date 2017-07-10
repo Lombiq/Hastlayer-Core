@@ -119,8 +119,8 @@ namespace Hast.Transformer
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
             // see: https://github.com/icsharpcode/ILSpy/issues/686. But we can't run that directly since that would
             // also transform some low-level constructs that are useful to have as simple as possible (e.g. it's OK if
-            // we only have while statements in the AST, not for statements mixed in). So we need to remove the unuseful
-            // pipeline steps and run them by hand.
+            // we only have while statements in the AST, not for statements mixed in). So we need to remove the not 
+            // useful pipeline steps and run them by hand.
             var syntaxTree = astBuilder.SyntaxTree;
 
             IEnumerable<IAstTransform> pipeline = TransformationPipeline.CreatePipeline(decompiledContext);
@@ -150,7 +150,7 @@ namespace Hast.Transformer
                 // more complicated.
                 .Without("DeclareVariables")
 
-                // Removes empty ctors or ctors that can be subsctituted with field initializers.
+                // Removes empty ctors or ctors that can be substituted with field initializers.
                 //.Without("ConvertConstructorCallIntoInitializer")
 
                 // Converts decimal const fields to more readable variants, e.g. this:
@@ -224,12 +224,6 @@ namespace Hast.Transformer
             _eventHandler.SyntaxTreeBuilt(context);
 
             return _engine.Transform(context);
-        }
-
-        public Task<IHardwareDescription> Transform(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration)
-        {
-            assemblies.ThrowArgumentExceptionIfAnyInMemory();
-            return Transform(assemblies.Select(assembly => assembly.Location), configuration);
         }
 
 
