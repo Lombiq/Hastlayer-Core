@@ -1,4 +1,4 @@
-namespace Hast.Samples.SampleAssembly.Services.Lzma.Constants
+namespace Hast.Samples.SampleAssembly.Lzma.Constants
 {
 	internal static class BaseConstants
 	{

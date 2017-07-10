@@ -1,6 +1,6 @@
-using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
+using Hast.Samples.SampleAssembly.Lzma.Constants;
 
-namespace Hast.Samples.SampleAssembly.Services.Lzma.RangeCoder
+namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
 {
     internal class BitEncoder
     {

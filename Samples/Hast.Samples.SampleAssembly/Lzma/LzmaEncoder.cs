@@ -1,9 +1,10 @@
 using Hast.Samples.SampleAssembly.Models;
-using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
-using Hast.Samples.SampleAssembly.Services.Lzma.RangeCoder;
+using Hast.Samples.SampleAssembly.Lzma.Constants;
+using Hast.Samples.SampleAssembly.Lzma.RangeCoder;
 using System;
+using Hast.Samples.SampleAssembly.Lzma.Helpers;
 
-namespace Hast.Samples.SampleAssembly.Services.Lzma
+namespace Hast.Samples.SampleAssembly.Lzma
 {
     internal enum EMatchFinderType
     {
@@ -998,7 +999,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                                                 }
 
                                                 uint numAvailablebytesFull = _matchFinder.GetNumAvailablebytes() + 1;
-                                                numAvailablebytesFull = Math.Min(BaseConstants.OptimumNumber - 1 - cur, numAvailablebytesFull);
+                                                numAvailablebytesFull = LzmaHelpers.GetMinValue(BaseConstants.OptimumNumber - 1 - cur, numAvailablebytesFull);
                                                 numAvailablebytes = numAvailablebytesFull;
 
                                                 var continueLoop = numAvailablebytes < 2;
@@ -1010,7 +1011,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                                                     if (!nextIsChar && matchbyte != currentbyte)
                                                     {
                                                         // try Literal + rep0
-                                                        uint t = Math.Min(numAvailablebytesFull - 1, _numFastbytes);
+                                                        uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1, _numFastbytes);
                                                         uint lenTest2 = _matchFinder.GetMatchLen(0, reps[0], t);
                                                         if (lenTest2 >= 2)
                                                         {
@@ -1076,7 +1077,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                                                             // if (_maxMode)
                                                             if (lenTest < numAvailablebytesFull)
                                                             {
-                                                                uint t = Math.Min(numAvailablebytesFull - 1 - lenTest, _numFastbytes);
+                                                                uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1 - lenTest, _numFastbytes);
                                                                 uint lenTest2 = _matchFinder.GetMatchLen((int)lenTest, reps[repIndex], t);
                                                                 if (lenTest2 >= 2)
                                                                 {
@@ -1156,7 +1157,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                                                                 {
                                                                     if (lenTest < numAvailablebytesFull)
                                                                     {
-                                                                        uint t = Math.Min(numAvailablebytesFull - 1 - lenTest, _numFastbytes);
+                                                                        uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1 - lenTest, _numFastbytes);
                                                                         uint lenTest2 = _matchFinder.GetMatchLen((int)lenTest, curBack, t);
                                                                         if (lenTest2 >= 2)
                                                                         {

@@ -1,8 +1,9 @@
 using Hast.Samples.SampleAssembly.Models;
-using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
+using Hast.Samples.SampleAssembly.Lzma.Constants;
+using Hast.Samples.SampleAssembly.Lzma.Helpers;
 using System;
 
-namespace Hast.Samples.SampleAssembly.Services.Lzma
+namespace Hast.Samples.SampleAssembly.Lzma
 {
     // Part of the LZ compressor.
     public class BinTree
@@ -258,7 +259,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                         (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
 
                     var pby1 = _bufferOffset + curMatch;
-                    var len = Math.Min(len0, len1);
+                    var len = LzmaHelpers.GetMinValue(len0, len1);
                     if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
                     {
                         var run2 = true;
@@ -374,7 +375,7 @@ namespace Hast.Samples.SampleAssembly.Services.Lzma
                                 (_cyclicBufferPos - delta + _cyclicBufferSize)) << 1;
 
                             var pby1 = _bufferOffset + curMatch;
-                            var len = Math.Min(len0, len1);
+                            var len = LzmaHelpers.GetMinValue(len0, len1);
                             if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
                             {
                                 var run2 = true;

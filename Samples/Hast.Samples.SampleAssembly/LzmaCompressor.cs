@@ -1,5 +1,5 @@
 ﻿using Hast.Samples.SampleAssembly.Models;
-using Hast.Samples.SampleAssembly.Services.Lzma;
+using Hast.Samples.SampleAssembly.Lzma;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly

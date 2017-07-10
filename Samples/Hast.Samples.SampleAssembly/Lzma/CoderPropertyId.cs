@@ -1,4 +1,4 @@
-namespace Hast.Samples.SampleAssembly.Services.Lzma
+namespace Hast.Samples.SampleAssembly.Lzma
 {
     /// <summary>
     /// Provides the fields that represent properties idenitifiers for compressing.
