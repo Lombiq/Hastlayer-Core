@@ -45,6 +45,7 @@
     <Compile Include="GenomeMatcher.cs" />
     <Compile Include="LzmaCompressor.cs" />
     <Compile Include="Lzma\Helpers\LzmaHelpers.cs" />
+    <Compile Include="Lzma\Models\EncoderProperties.cs" />
     <Compile Include="Lzma\RangeCoder\BitEncoder.cs" />
     <Compile Include="Lzma\RangeCoder\BitTreeEncoder.cs" />
     <Compile Include="Lzma\CoderPropertyId.cs" />

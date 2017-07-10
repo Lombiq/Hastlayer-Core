@@ -1,7 +1,6 @@
 using Hast.Samples.SampleAssembly.Models;
 using Hast.Samples.SampleAssembly.Lzma.Constants;
 using Hast.Samples.SampleAssembly.Lzma.Helpers;
-using System;
 
 namespace Hast.Samples.SampleAssembly.Lzma
 {

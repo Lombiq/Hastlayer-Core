@@ -1,20 +1,21 @@
 ﻿using Hast.Samples.SampleAssembly.Models;
 using Hast.Samples.SampleAssembly.Lzma;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Samples.SampleAssembly.Lzma.Models;
 
 namespace Hast.Samples.SampleAssembly
 {
     public static class LzmaCompressorDefaultParameters
     {
-        public const int LiteralContextBits = 3; // Set it to 0 for 32-bit data.
+        public const int LiteralContextBits = 3; // Set 0 for 32-bit data.
         public const bool MatchFinderIsBt4 = true;
-        public const int DictionarySize = 1 << 7;
+        public const uint DictionarySize = 1 << 7;
         public const int PositionStateBits = 2;
-        public const int LiteralPositionBits = 0; // Set it to 2 for 32-bit data.
+        public const int LiteralPositionBits = 0; // Set 2 for 32-bit data.
         public const int Algorithm = 2;
-        public const int NumberOfFastBytes = 128;
+        public const uint NumberOfFastBytes = 1 << 7;
         public const bool StdInMode = false;
-        public const bool Eos = false;
+        public const bool WriteEndMarker = false;
     }
 
 
@@ -32,7 +33,7 @@ namespace Hast.Samples.SampleAssembly
         public const int LzmaCompressor_AlgorithmIndex = 9;
         public const int LzmaCompressor_NumberOfFastBytesIndex = 10;
         public const int LzmaCompressor_StdInModeIndex = 11;
-        public const int LzmaCompressor_EosIndex = 12;
+        public const int LzmaCompressor_WriteEndMarkerIndex = 12;
         
 
         public virtual void Compress(SimpleMemory memory)
@@ -42,46 +43,47 @@ namespace Hast.Samples.SampleAssembly
             int outputStartCellIndex = memory.ReadInt32(LzmaCompressor_OutputStartCellIndex);
             int outputByteCount = memory.ReadInt32(LzmaCompressor_OutputByteCountIndex);
             int literalContextBits = memory.ReadInt32(LzmaCompressor_LiteralContextBitsIndex);
-            bool matchFinder = memory.ReadBoolean(LzmaCompressor_MatchFinderIsBt4Index);
-            int dictionarySize = memory.ReadInt32(LzmaCompressor_DictionarySizeIndex);
+            int matchFinderId = memory.ReadInt32(LzmaCompressor_MatchFinderIsBt4Index);
+            uint dictionarySize = memory.ReadUInt32(LzmaCompressor_DictionarySizeIndex);
             int positionStateBits = memory.ReadInt32(LzmaCompressor_PositionStateBitsIndex);
             int literalPositionBits = memory.ReadInt32(LzmaCompressor_LiteralPositionBitsIndex);
             int algorithm = memory.ReadInt32(LzmaCompressor_AlgorithmIndex);
-            int numberOfFastBytes = memory.ReadInt32(LzmaCompressor_NumberOfFastBytesIndex);
+            uint numberOfFastBytes = memory.ReadUInt32(LzmaCompressor_NumberOfFastBytesIndex);
             bool stdInMode = memory.ReadBoolean(LzmaCompressor_StdInModeIndex);
-            bool eos = memory.ReadBoolean(LzmaCompressor_EosIndex);
+            bool writeEndMarker = memory.ReadBoolean(LzmaCompressor_WriteEndMarkerIndex);
+
+            MatchFinder matchFinder;
+            switch (matchFinderId)
+            {
+                case 0: matchFinder = MatchFinder.BT2;
+                    break;
+                case 1: matchFinder = MatchFinder.BT4;
+                    break;
+                default: matchFinder = MatchFinder.BT4;
+                    break;
+            }
+
+            var properties = new EncoderProperties
+            {
+                LiteralContextBits = literalContextBits,
+                MatchFinder = matchFinder,
+                DictionarySize = dictionarySize,
+                PositionStateBits = positionStateBits,
+                LiteralPositionBits = literalPositionBits,
+                Algorithm = algorithm,
+                NumberOfFastBytes = numberOfFastBytes,
+                WriteEndMarker = writeEndMarker
+            };
 
             var inputStream = new SimpleMemoryStream(memory, inputStartCellIndex, inputByteCount);
             var outputStream = new SimpleMemoryStream(memory, outputStartCellIndex, outputByteCount);
 
-            CoderPropertyId[] propIDs =
-            {
-                CoderPropertyId.DictionarySize,
-                CoderPropertyId.PosStateBits,
-                CoderPropertyId.LitContextBits,
-                CoderPropertyId.LitPosBits,
-                CoderPropertyId.Algorithm,
-                CoderPropertyId.NumFastbytes,
-                CoderPropertyId.MatchFinder,
-                CoderPropertyId.EndMarker
-            };
-            object[] properties =
-            {
-                dictionarySize,
-                positionStateBits,
-                literalContextBits,
-                literalPositionBits,
-                algorithm,
-                numberOfFastBytes,
-                matchFinder,
-                eos
-            };
-
             var encoder = new LzmaEncoder();
-            encoder.SetCoderProperties(propIDs, properties);
+            encoder.SetCoderProperties(properties);
             encoder.WriteCoderProperties(outputStream);
 
-            var fileSize = eos || stdInMode ? -1 : inputByteCount;
+            // TODO: Find out what happens if the value is -1.
+            var fileSize = writeEndMarker || stdInMode ? -1 : inputByteCount;
 
             for (int i = 0; i < 8; i++)
             {
@@ -120,13 +122,13 @@ namespace Hast.Samples.SampleAssembly
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_OutputByteCountIndex, outputSize);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_LiteralContextBitsIndex, LzmaCompressorDefaultParameters.LiteralContextBits);
             simpleMemory.WriteBoolean(LzmaCompressor.LzmaCompressor_MatchFinderIsBt4Index, LzmaCompressorDefaultParameters.MatchFinderIsBt4);
-            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_DictionarySizeIndex, LzmaCompressorDefaultParameters.DictionarySize);
+            simpleMemory.WriteUInt32(LzmaCompressor.LzmaCompressor_DictionarySizeIndex, LzmaCompressorDefaultParameters.DictionarySize);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_PositionStateBitsIndex, LzmaCompressorDefaultParameters.PositionStateBits);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_LiteralPositionBitsIndex, LzmaCompressorDefaultParameters.LiteralPositionBits);
             simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_AlgorithmIndex, LzmaCompressorDefaultParameters.Algorithm);
-            simpleMemory.WriteInt32(LzmaCompressor.LzmaCompressor_NumberOfFastBytesIndex, LzmaCompressorDefaultParameters.NumberOfFastBytes);
+            simpleMemory.WriteUInt32(LzmaCompressor.LzmaCompressor_NumberOfFastBytesIndex, LzmaCompressorDefaultParameters.NumberOfFastBytes);
             simpleMemory.WriteBoolean(LzmaCompressor.LzmaCompressor_StdInModeIndex, LzmaCompressorDefaultParameters.StdInMode);
-            simpleMemory.WriteBoolean(LzmaCompressor.LzmaCompressor_EosIndex, LzmaCompressorDefaultParameters.Eos);
+            simpleMemory.WriteBoolean(LzmaCompressor.LzmaCompressor_WriteEndMarkerIndex, LzmaCompressorDefaultParameters.WriteEndMarker);
 
             var inputStream = new SimpleMemoryStream(simpleMemory, inputStartCell, inputSize);
             inputStream.Write(inputBytes, 0, inputSize);

@@ -1,16 +1,12 @@
-using Hast.Samples.SampleAssembly.Models;
 using Hast.Samples.SampleAssembly.Lzma.Constants;
-using Hast.Samples.SampleAssembly.Lzma.RangeCoder;
-using System;
 using Hast.Samples.SampleAssembly.Lzma.Helpers;
+using Hast.Samples.SampleAssembly.Lzma.Models;
+using Hast.Samples.SampleAssembly.Lzma.RangeCoder;
+using Hast.Samples.SampleAssembly.Models;
+//using System;
 
 namespace Hast.Samples.SampleAssembly.Lzma
 {
-    internal enum EMatchFinderType
-    {
-        BT2,
-        BT4,
-    };
 
 
     public class LzmaEncoder
@@ -41,7 +37,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private LenPriceTableEncoder _repMatchLenEncoder = new LenPriceTableEncoder();
         private LiteralEncoder _literalEncoder = new LiteralEncoder();
         private uint[] _matchDistances = new uint[BaseConstants.MaxMatchLength * 2 + 2];
-        private uint _numFastbytes = NumFastbytesDefault;
+        private uint _numberOfFastBytes = NumFastbytesDefault;
         private uint _longestMatchLength;
         private uint _numDistancePairs;
         private uint _additionalOffset;
@@ -52,18 +48,18 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint[] _distancesPrices = new uint[BaseConstants.NumFullDistances << BaseConstants.NumLenToPosStatesBits];
         private uint[] _alignPrices = new uint[BaseConstants.AlignTableSize];
         private uint _alignPriceCount;
-        private uint _distTableSize = (DefaultDictionaryLogSize * 2);
+        private uint _distanceTableSize = (DefaultDictionaryLogSize * 2);
         private int _posStateBits = 2;
         private uint _posStateMask = (4 - 1);
-        private int _numLiteralPosStateBits = 0;
-        private int _numLiteralContextBits = 3;
+        private int _literalPositionBits = 0;
+        private int _literalContextBits = 3;
         private uint _dictionarySize = (1 << DefaultDictionaryLogSize);
         private uint _dictionarySizePrev = 0xFFFFFFFF;
         private uint _numFastbytesPrev = 0xFFFFFFFF;
         private long nowPos64;
         private bool _finished;
         private SimpleMemoryStream _inStream;
-        private EMatchFinderType _matchFinderType = EMatchFinderType.BT4;
+        private MatchFinder _matchFinderType = MatchFinder.BT4;
         private bool _writeEndMark = false;
         private bool _needReleaseMFStream;
         private byte[] properties = new byte[PropSize];
@@ -294,125 +290,54 @@ namespace Hast.Samples.SampleAssembly.Lzma
             }
         }
 
-        public void SetCoderProperties(CoderPropertyId[] propIDs, object[] properties)
+        public void SetCoderProperties(EncoderProperties properties)
         {
-            for (uint i = 0; i < properties.Length; i++)
+            _numberOfFastBytes = properties.NumberOfFastBytes;
+
+            var previousMatchFinder = _matchFinderType;
+            _matchFinderType = properties.MatchFinder;
+            if (_matchFinder != null && previousMatchFinder != _matchFinderType)
             {
-                object prop = properties[i];
-                switch (propIDs[i])
-                {
-                    case CoderPropertyId.NumFastbytes:
-                        {
-                            // Should throw an Exception when it becomes supported.
-                            //if (!(prop is int))
-                            //    throw new LzmaInvalidParamException();
-                            int numFastbytes = (int)prop;
-                            // Should throw an Exception when it becomes supported.
-                            //if (numFastbytes < 5 || numFastbytes > BaseConstants.MatchMaxLen)
-                            //    throw new LzmaInvalidParamException();
-                            _numFastbytes = (uint)numFastbytes;
-                            break;
-                        }
-                    case CoderPropertyId.Algorithm:
-                        {
-                            // Commented out in the original LZMA SDK too.
-                            /*
-                            if (!(prop is int))
-                                throw new InvalidParamException();
-                            int maximize = (int)prop;
-                            _fastMode = (maximize == 0);
-                            _maxMode = (maximize >= 2);
-                            */
-                            break;
-                        }
-                    case CoderPropertyId.MatchFinder:
-                        {
-                            // Should throw an Exception when it becomes supported.
-                            //if (!(prop is String))
-                            //    throw new LzmaInvalidParamException();
-                            var previousMatchFinder = _matchFinderType;
-                            var newMatchFinder = ((bool)prop) ? EMatchFinderType.BT4 : EMatchFinderType.BT2;
-                            // Should throw an Exception when it becomes supported.
-                            //if (m < 0)
-                            //    throw new LzmaInvalidParamException();
-                            _matchFinderType = newMatchFinder;
-                            if (_matchFinder != null && previousMatchFinder != _matchFinderType)
-                            {
-                                _dictionarySizePrev = 0xFFFFFFFF;
-                                _matchFinder = null;
-                            }
-                            break;
-                        }
-                    case CoderPropertyId.DictionarySize:
-                        {
-                            const int kDicLogSizeMaxCompress = 30;
-                            // Should throw an Exception when it becomes supported.
-                            //if (!(prop is int))
-                            //    throw new LzmaInvalidParamException(); ;
-                            int dictionarySize = (int)prop;
-                            // Should throw an Exception when it becomes supported.
-                            //if (dictionarySize < (uint)(1 << BaseConstants.DicLogSizeMin) ||
-                            //    dictionarySize > (uint)(1 << kDicLogSizeMaxCompress))
-                            //    throw new LzmaInvalidParamException();
-                            _dictionarySize = (uint)dictionarySize;
-                            int dicLogSize;
-                            for (dicLogSize = 0; dicLogSize < (uint)kDicLogSizeMaxCompress; dicLogSize++)
-                                if (dictionarySize <= ((uint)(1) << dicLogSize))
-                                    break;
-                            _distTableSize = (uint)dicLogSize * 2;
-                            break;
-                        }
-                    case CoderPropertyId.PosStateBits:
-                        {
-                            // Should throw an Exception when it becomes supported.
-                            //if (!(prop is int))
-                            //    throw new LzmaInvalidParamException();
-                            int v = (int)prop;
-                            // Should throw an Exception when it becomes supported.
-                            //if (v < 0 || v > (uint)BaseConstants.NumPosStatesBitsEncodingMax)
-                            //    throw new LzmaInvalidParamException();
-                            _posStateBits = (int)v;
-                            _posStateMask = (((uint)1) << (int)_posStateBits) - 1;
-                            break;
-                        }
-                    case CoderPropertyId.LitPosBits:
-                        {
-                            // Should throw an Exception when it becomes supported.
-                            //if (!(prop is int))
-                            //    throw new LzmaInvalidParamException();
-                            int v = (int)prop;
-                            // Should throw an Exception when it becomes supported.
-                            //if (v < 0 || v > (uint)BaseConstants.NumLitPosStatesBitsEncodingMax)
-                            //    throw new LzmaInvalidParamException();
-                            _numLiteralPosStateBits = (int)v;
-                            break;
-                        }
-                    case CoderPropertyId.LitContextBits:
-                        {
-                            // Should throw an Exception when it becomes supported.
-                            //if (!(prop is int))
-                            //    throw new LzmaInvalidParamException();
-                            int v = (int)prop;
-                            // Should throw an Exception when it becomes supported.
-                            //if (v < 0 || v > (uint)BaseConstants.NumLitContextBitsMax)
-                            //    throw new LzmaInvalidParamException(); ;
-                            _numLiteralContextBits = (int)v;
-                            break;
-                        }
-                    case CoderPropertyId.EndMarker:
-                        {
-                            // Should throw an Exception when it becomes supported.
-                            //if (!(prop is Boolean))
-                            //    throw new LzmaInvalidParamException();
-                            SetWriteEndMarkerMode((Boolean)prop);
-                            break;
-                        }
-                    default:
-                        // Should throw an Exception when it becomes supported.
-                        //throw new LzmaInvalidParamException();
-                        break;
-                }
+                _dictionarySizePrev = 0xFFFFFFFF;
+                _matchFinder = null;
             }
+
+            // Should throw an Exception when it becomes supported.
+            // if (dictionarySize < (uint)(1 << BaseConstants.DicLogSizeMin) ||
+            //     dictionarySize > (uint)(1 << kDicLogSizeMaxCompress))
+
+            const int DictionaryLogSizeMaxCompress = 30;
+            _dictionarySize = properties.DictionarySize;
+            int dictionaryLogSize;
+            for (dictionaryLogSize = 0; dictionaryLogSize < (uint)DictionaryLogSizeMaxCompress; dictionaryLogSize++)
+                if (_dictionarySize <= ((uint)(1) << dictionaryLogSize))
+                    break;
+            _distanceTableSize = (uint)dictionaryLogSize * 2;
+
+            // Should throw an Exception when it becomes supported.
+            // if (params.PositionStateBits < 0 || params.PositionStateBits > (uint)BaseConstants.NumPosStatesBitsEncodingMax)
+            _posStateBits = properties.PositionStateBits;
+            _posStateMask = (((uint)1) << _posStateBits) - 1;
+
+            // Should throw an Exception when it becomes supported.
+            // if (parameters.LiteralPositionBits < 0 || 
+            //     parameters.LiteralPositionBits > (uint)BaseConstants.NumLitPosStatesBitsEncodingMax)
+            _literalPositionBits = properties.LiteralPositionBits;
+
+            // Should throw an Exception when it becomes supported.
+            // if (parameters.LiteralContextBits < 0 || parameters.LiteralContextBits > (uint)BaseConstants.NumLitContextBitsMax)
+            //     throw new LzmaInvalidParamException(); ;
+            _literalContextBits = properties.LiteralContextBits;
+
+            SetWriteEndMarkerMode(properties.WriteEndMarker);
+
+            // Algorithm parameter is not yet processed. The related code lines are commented out
+            // in the original LZMA SDK too:
+            /*
+            int maximize = (int)prop;
+            _fastMode = (maximize == 0);
+            _maxMode = (maximize >= 2);
+            */
         }
 
         public void SetTrainSize(uint trainSize)
@@ -422,7 +347,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
         public void WriteCoderProperties(SimpleMemoryStream outStream)
         {
-            properties[0] = (byte)((_posStateBits * 5 + _numLiteralPosStateBits) * 9 + _numLiteralContextBits);
+            properties[0] = (byte)((_posStateBits * 5 + _literalPositionBits) * 9 + _literalContextBits);
             for (int i = 0; i < 4; i++)
                 properties[1 + i] = (byte)((_dictionarySize >> (8 * i)) & 0xFF);
             outStream.Write(properties, 0, PropSize);
@@ -461,18 +386,18 @@ namespace Hast.Samples.SampleAssembly.Lzma
             {
                 BinTree bt = new BinTree();
                 int numHashbytes = 4;
-                if (_matchFinderType == EMatchFinderType.BT2)
+                if (_matchFinderType == MatchFinder.BT2)
                     numHashbytes = 2;
                 bt.SetType(numHashbytes);
                 _matchFinder = bt;
             }
-            _literalEncoder.Create(_numLiteralPosStateBits, _numLiteralContextBits);
+            _literalEncoder.Create(_literalPositionBits, _literalContextBits);
 
-            if (_dictionarySize != _dictionarySizePrev || _numFastbytesPrev != _numFastbytes)
+            if (_dictionarySize != _dictionarySizePrev || _numFastbytesPrev != _numberOfFastBytes)
             {
-                _matchFinder.Create(_dictionarySize, BaseConstants.OptimumNumber, _numFastbytes, BaseConstants.MaxMatchLength + 1);
+                _matchFinder.Create(_dictionarySize, BaseConstants.OptimumNumber, _numberOfFastBytes, BaseConstants.MaxMatchLength + 1);
                 _dictionarySizePrev = _dictionarySize;
-                _numFastbytesPrev = _numFastbytes;
+                _numFastbytesPrev = _numberOfFastBytes;
             }
         }
 
@@ -546,7 +471,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
             if (numDistancePairs > 0)
             {
                 lenRes = _matchDistances[numDistancePairs - 2];
-                if (lenRes == _numFastbytes)
+                if (lenRes == _numberOfFastBytes)
                     lenRes += _matchFinder.GetMatchLen((int)lenRes - 1, _matchDistances[numDistancePairs - 1],
                         BaseConstants.MaxMatchLength - lenRes);
             }
@@ -702,7 +627,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                         if (repLens[i] > repLens[repMaxIndex])
                             repMaxIndex = i;
                     }
-                    if (repLens[repMaxIndex] >= _numFastbytes)
+                    if (repLens[repMaxIndex] >= _numberOfFastBytes)
                     {
                         returnValues.OutValue = repMaxIndex;
                         returnValues.ReturnValue = repLens[repMaxIndex];
@@ -712,7 +637,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                     }
                     else
                     {
-                        if (lenMain >= _numFastbytes)
+                        if (lenMain >= _numberOfFastBytes)
                         {
                             returnValues.OutValue = _matchDistances[numDistancePairs - 1] + BaseConstants.NumRepDistances;
                             MovePos(lenMain - 1);
@@ -856,7 +781,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                                             var result = ReadMatchDistances();
                                             newLen = result.ReturnValue;
                                             numDistancePairs = result.OutValue;
-                                            if (newLen >= _numFastbytes)
+                                            if (newLen >= _numberOfFastBytes)
                                             {
                                                 _numDistancePairs = numDistancePairs;
                                                 _longestMatchLength = newLen;
@@ -1006,12 +931,12 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
                                                 if (!continueLoop)
                                                 {
-                                                    if (numAvailablebytes > _numFastbytes)
-                                                        numAvailablebytes = _numFastbytes;
+                                                    if (numAvailablebytes > _numberOfFastBytes)
+                                                        numAvailablebytes = _numberOfFastBytes;
                                                     if (!nextIsChar && matchbyte != currentbyte)
                                                     {
                                                         // try Literal + rep0
-                                                        uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1, _numFastbytes);
+                                                        uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1, _numberOfFastBytes);
                                                         uint lenTest2 = _matchFinder.GetMatchLen(0, reps[0], t);
                                                         if (lenTest2 >= 2)
                                                         {
@@ -1077,7 +1002,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                                                             // if (_maxMode)
                                                             if (lenTest < numAvailablebytesFull)
                                                             {
-                                                                uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1 - lenTest, _numFastbytes);
+                                                                uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1 - lenTest, _numberOfFastBytes);
                                                                 uint lenTest2 = _matchFinder.GetMatchLen((int)lenTest, reps[repIndex], t);
                                                                 if (lenTest2 >= 2)
                                                                 {
@@ -1157,7 +1082,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                                                                 {
                                                                     if (lenTest < numAvailablebytesFull)
                                                                     {
-                                                                        uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1 - lenTest, _numFastbytes);
+                                                                        uint t = LzmaHelpers.GetMinValue(numAvailablebytesFull - 1 - lenTest, _numberOfFastBytes);
                                                                         uint lenTest2 = _matchFinder.GetMatchLen((int)lenTest, curBack, t);
                                                                         if (lenTest2 >= 2)
                                                                         {
@@ -1284,9 +1209,9 @@ namespace Hast.Samples.SampleAssembly.Lzma
                 FillAlignPrices();
             }
 
-            _lenEncoder.SetTableSize(_numFastbytes + 1 - BaseConstants.MinMatchLength);
+            _lenEncoder.SetTableSize(_numberOfFastBytes + 1 - BaseConstants.MinMatchLength);
             _lenEncoder.UpdateTables((uint)1 << _posStateBits);
-            _repMatchLenEncoder.SetTableSize(_numFastbytes + 1 - BaseConstants.MinMatchLength);
+            _repMatchLenEncoder.SetTableSize(_numberOfFastBytes + 1 - BaseConstants.MinMatchLength);
             _repMatchLenEncoder.UpdateTables((uint)1 << _posStateBits);
 
             nowPos64 = 0;
@@ -1309,9 +1234,9 @@ namespace Hast.Samples.SampleAssembly.Lzma
                 BitTreeEncoder encoder = _posSlotEncoder[lenToPosState];
 
                 uint st = (lenToPosState << BaseConstants.NumPosSlotBits);
-                for (posSlot = 0; posSlot < _distTableSize; posSlot++)
+                for (posSlot = 0; posSlot < _distanceTableSize; posSlot++)
                     _posSlotPrices[st + posSlot] = encoder.GetPrice(posSlot);
-                for (posSlot = BaseConstants.EndPosModelIndex; posSlot < _distTableSize; posSlot++)
+                for (posSlot = BaseConstants.EndPosModelIndex; posSlot < _distanceTableSize; posSlot++)
                     _posSlotPrices[st + posSlot] += ((((posSlot >> 1) - 1) - BaseConstants.NumAlignBits) << RangeEncoderConstants.NumBitPriceShiftBits);
 
                 uint st2 = lenToPosState * BaseConstants.NumFullDistances;
