@@ -38,7 +38,8 @@ namespace Hast.Common.Configuration
 
         /// <summary>
         /// Gets or sets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
-        /// will happen. Defaults to <c>true</c>.
+        /// will happen. Defaults to <c>true</c>. Note that this will have an affect only on client-side caching when
+        /// using the Client flavor.
         /// </summary>
         public bool EnableCaching { get; set; } = true;
 
