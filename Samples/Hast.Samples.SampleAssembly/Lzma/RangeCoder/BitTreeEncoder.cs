@@ -1,4 +1,4 @@
-namespace Hast.Samples.SampleAssembly.Services.Lzma
+namespace Hast.Samples.SampleAssembly.Services.Lzma.RangeCoder
 {
     internal class BitTreeEncoder
 	{

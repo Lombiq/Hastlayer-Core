@@ -1,5 +1,6 @@
 using Hast.Samples.SampleAssembly.Models;
 using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
+using Hast.Samples.SampleAssembly.Services.Lzma.RangeCoder;
 using System;
 
 namespace Hast.Samples.SampleAssembly.Services.Lzma

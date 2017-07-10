@@ -44,8 +44,8 @@
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="GenomeMatcher.cs" />
     <Compile Include="LzmaCompressor.cs" />
-    <Compile Include="Lzma\BitEncoder.cs" />
-    <Compile Include="Lzma\BitTreeEncoder.cs" />
+    <Compile Include="Lzma\RangeCoder\BitEncoder.cs" />
+    <Compile Include="Lzma\RangeCoder\BitTreeEncoder.cs" />
     <Compile Include="Lzma\CoderPropertyId.cs" />
     <Compile Include="Lzma\Constants\BaseConstants.cs" />
     <Compile Include="Lzma\Constants\RangeEncoderConstants.cs" />
@@ -53,9 +53,9 @@
     <Compile Include="Lzma\EncoderState.cs" />
     <Compile Include="Lzma\Exceptions\LzmaDataErrorException.cs" />
     <Compile Include="Lzma\Exceptions\LzmaInvalidParamException.cs" />
-    <Compile Include="Lzma\LzBinTree.cs" />
+    <Compile Include="Lzma\BinTree.cs" />
     <Compile Include="Lzma\LzmaEncoder.cs" />
-    <Compile Include="Lzma\RangeEncoder.cs" />
+    <Compile Include="Lzma\RangeCoder\RangeEncoder.cs" />
     <Compile Include="ParallelAlgorithm.cs" />
     <Compile Include="ImageContrastModifier.cs" />
     <Compile Include="ImageFilter.cs" />

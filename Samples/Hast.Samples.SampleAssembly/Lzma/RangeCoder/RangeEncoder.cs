@@ -1,7 +1,7 @@
 using Hast.Samples.SampleAssembly.Models;
 using Hast.Samples.SampleAssembly.Services.Lzma.Constants;
 
-namespace Hast.Samples.SampleAssembly.Services.Lzma
+namespace Hast.Samples.SampleAssembly.Services.Lzma.RangeCoder
 {
     internal class RangeEncoder
     {

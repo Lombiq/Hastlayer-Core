@@ -62,6 +62,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public IVhdlElement Transform(Expression expression, ISubTransformerContext context)
         {
+            try
+            {
+
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
 
@@ -747,6 +750,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     "Expressions of type " +
                     expression.GetType() + " are not supported. The expression was: " +
                     expression.ToString());
+            }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 

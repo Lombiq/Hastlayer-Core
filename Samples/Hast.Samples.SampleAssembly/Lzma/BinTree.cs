@@ -4,6 +4,7 @@ using System;
 
 namespace Hast.Samples.SampleAssembly.Services.Lzma
 {
+    // Part of the LZ compressor.
     public class BinTree
     {
         private const uint Hash2Size = 1 << 10;
