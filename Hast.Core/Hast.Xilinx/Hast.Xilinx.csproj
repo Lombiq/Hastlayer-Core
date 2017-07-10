@@ -74,7 +74,6 @@
   <ItemGroup>
     <Compile Include="Nexys4DdrDriver.cs" />
     <Compile Include="SerialPortConfigurator.cs" />
-    <Compile Include="VivadoHardwareImplementationComposer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

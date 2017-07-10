@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DeviceManifest.cs" />
     <Compile Include="DeviceManifestSelector.cs" />
+    <Compile Include="NullHardwareImplementationComposer.cs" />
     <Compile Include="IDeviceManifestProvider.cs" />
     <Compile Include="IDeviceManifestSelector.cs" />
     <Compile Include="IHardwareImplementationComposer.cs" />
