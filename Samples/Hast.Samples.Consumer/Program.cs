@@ -27,7 +27,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
         /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.PrimeCalculator;
+        public static Sample SampleToRun = Sample.LzmaCompressor;
     }
 
 
@@ -86,6 +86,9 @@ namespace Hast.Samples.Consumer
                             case Sample.ImageProcessingAlgorithms:
                                 ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.LzmaCompressor:
+                                LzmaCompressorSampleRunner.Configure(configuration);
+                                break;
                             case Sample.MonteCarloAlgorithm:
                                 MonteCarloAlgorithmSampleRunner.Configure(configuration);
                                 break;
@@ -124,6 +127,8 @@ namespace Hast.Samples.Consumer
                             await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
                         }
 
+                        // Temporary return to only test transformation.
+                        return;
 
                         // Running samples.
                         switch (Configuration.SampleToRun)
@@ -136,6 +141,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.ImageProcessingAlgorithms:
                                 await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.LzmaCompressor:
+                                await LzmaCompressorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.MonteCarloAlgorithm:
                                 await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
