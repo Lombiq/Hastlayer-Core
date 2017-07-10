@@ -18,6 +18,7 @@ Some general constraints you have to keep in mind:
 - Task-based parallelism is with TPL is supported to a limited degree. Lambda expression are supported to an extent needed to use tasks (see the `ParallelAlgorithm` sample).
 - Operation-level, SIMD-like parallelism is supported, see the `SimdCalculator` sample.
 - Recursion is supported but recursive code is not really something for Hastlayer. Nevertheless if a method call is recursive, even if indirectly, you need to manually configure the recursion depths (see the `RecursiveAlgorithms` sample).
+- Exceptions are not supported and `throw` statements will be handled as a no-op (they won't do anything). The latter is so you can keep throwing exceptions on invalid arguments from methods and utilize them when the code is executed in the standard way; however you need to take special care on not to actually have invalid arguments on hardware.
 - Note that you can write unsupported code in a member of a type that will be transformed if that member won't be accessed on the hardware (since unused code is removed from transformation). So e.g. you can implement `ToString()`.
 
 
