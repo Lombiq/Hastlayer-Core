@@ -6,9 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Layer;
-using Hast.Remote.Bridge.Models.Api;
+using Hast.Remote.Bridge.Models;
 using Hast.Transformer.Abstractions;
-using Hast.Transformer.Abstractions.Extensions;
 
 namespace Hast.Remote.Client
 {
@@ -16,9 +15,12 @@ namespace Hast.Remote.Client
     {
         public async Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
+            var apiClient = ApiClientFactory
+                .CreateApiClient(new HastlayerRemoteClientConfiguration { AppId = "TestApp", AppSecret = "appsecret" });
+
             var assemblyContainers = assemblyPaths
                 .Select(path => new AssemblyContainer { FileContent = File.ReadAllBytes(path) });
-            var apiConfiguration = new Bridge.Models.Api.HardwareGenerationConfiguration
+            var apiConfiguration = new Bridge.Models.HardwareGenerationConfiguration
             {
                 CustomConfiguration = configuration.CustomConfiguration,
                 DeviceName = configuration.DeviceName,
@@ -26,21 +28,49 @@ namespace Hast.Remote.Client
                 HardwareEntryPointMemberNamePrefixes = configuration.HardwareEntryPointMemberNamePrefixes
             };
 
-            var transformationTicket = await ApiClientFactory
-                .CreateApiClient(new HastlayerRemoteClientConfiguration { AppId = "TestApp", AppSecret = "appsecret" })
-                .TransformAssmblies(new TransformationRequest
+            var transformationTicket = await apiClient
+                .RequestTransformation(new TransformationRequest
                 {
                     Assemblies = assemblyContainers,
                     Configuration = apiConfiguration
                 });
 
-            var transformationResult = new TransformationResult();
 
-            if (transformationResult.Errors.Any())
+            TransformationResult transformationResult = null;
+            const int maxResultAttemptCount = 10;
+            var waitAttemptIndex = 0;
+            var waitMilliseconds = 333;
+            while (transformationResult == null && waitAttemptIndex < maxResultAttemptCount)
             {
-                throw new InvalidOperationException(
-                    "Transforming the following assemblies failed: " + string.Join(", ", assemblyPaths) +
-                    ". The following error(s) happened: " + string.Join(Environment.NewLine, transformationResult.Errors));
+                await Task.Delay(waitMilliseconds);
+                var transformationResultResponse = await apiClient.GetTransformationResult(transformationTicket.Token);
+
+                if (transformationResultResponse.ResponseMessage.IsSuccessStatusCode)
+                {
+                    transformationResult = transformationResultResponse.GetContent();
+                }
+                else if (transformationResultResponse.ResponseMessage.StatusCode != System.Net.HttpStatusCode.NotFound)
+                {
+                    transformationResultResponse.ResponseMessage.EnsureSuccessStatusCode();
+                }
+
+                if (++waitAttemptIndex % 10 == 0) waitMilliseconds *= 2;
+            }
+
+            var exceptionMessageBase =
+                "Transforming the following assemblies failed: " + string.Join(", ", assemblyPaths) + ". ";
+            if (transformationResult == null)
+            {
+                throw new Exception(
+                    exceptionMessageBase + "The remote Hastlayer service didn't produce a result in a timely manner. " +
+                    "This could indicate a problem with the service or that the assemblies contained exceptionally complex code.");
+            }
+
+            if (transformationResult.Errors?.Any() == true)
+            {
+                throw new Exception(
+                     exceptionMessageBase + "The following error(s) happened: " + 
+                     string.Join(Environment.NewLine, transformationResult.Errors));
             }
 
             return new RemoteHardwareDescription

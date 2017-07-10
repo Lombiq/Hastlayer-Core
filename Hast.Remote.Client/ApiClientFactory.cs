@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Hast.Remote.Bridge.Models.Api;
+using Hast.Remote.Bridge.Models;
 using RestEase;
 
 namespace Hast.Remote.Client
@@ -28,8 +28,11 @@ namespace Hast.Remote.Client
             [Header("Authorization")]
             AuthenticationHeaderValue Authorization { get; set; }
 
-            [Post("AssembliesToTransform")]
-            Task<TransformationTicket> TransformAssmblies([Body] TransformationRequest transformationRequest);
+            [Post("TransformationRequests")]
+            Task<TransformationTicket> RequestTransformation([Body] TransformationRequest transformationRequest);
+
+            [Get("TransformationResults"), AllowAnyStatusCode]
+            Task<Response<TransformationResult>> GetTransformationResult([Query] string transformationToken);
         }
     }
 }
