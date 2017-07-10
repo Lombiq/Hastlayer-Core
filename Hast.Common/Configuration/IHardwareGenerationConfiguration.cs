@@ -42,6 +42,12 @@ namespace Hast.Common.Configuration
         /// Gets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching will happen.
         /// </summary>
         bool EnableCaching { get; }
+
+        /// <summary>
+        /// Gets the name of the FPGA device (board) to transform for. Device-specific configurations are determined
+        /// by device drivers.
+        /// </summary>
+        string DeviceName { get; }
     }
 
 

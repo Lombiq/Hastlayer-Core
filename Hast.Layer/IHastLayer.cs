@@ -16,6 +16,12 @@ namespace Hast.Layer
         event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 
         /// <summary>
+        /// Gets those devices which have their support drivers loaded.
+        /// </summary>
+        /// <returns>Those devices which have their support drivers loaded.</returns>
+        Task<IEnumerable<IDeviceManifest>> GetSupportedDevices();
+
+        /// <summary>
         /// Generates and implements a hardware representation of the given assemblies.
         /// </summary>
         /// <param name="assemblies">The assemblies that should be implemented as hardware.</param>
