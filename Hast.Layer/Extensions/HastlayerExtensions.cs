@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Hast.Layer
 {
@@ -14,9 +17,25 @@ namespace Hast.Layer
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
-        public static Task<T> GenerateProxy<T>(this IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, T hardwareObject) where T : class
-        {
-            return hastlayer.GenerateProxy(hardwareRepresentation, hardwareObject, ProxyGenerationConfiguration.Default);
-        }
+        public static Task<T> GenerateProxy<T>(
+            this IHastlayer hastlayer, 
+            IHardwareRepresentation hardwareRepresentation, 
+            T hardwareObject) where T : class =>
+            hastlayer.GenerateProxy(hardwareRepresentation, hardwareObject, ProxyGenerationConfiguration.Default);
+
+        /// <summary>
+        /// Generates and implements a hardware representation of the given assemblies.
+        /// </summary>
+        /// <param name="assemblies">The assemblies that should be implemented as hardware.</param>
+        /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
+        /// <returns>The representation of the assemblies implemented as hardware.</returns>
+        /// <exception cref="HastlayerException">
+        /// Thrown if any lower-level exception or other error happens during hardware generation.
+        /// </exception>
+        public static Task<IHardwareRepresentation> GenerateHardware(
+            this IHastlayer hastlayer,
+            IEnumerable<Assembly> assemblies,
+            IHardwareGenerationConfiguration configuration) =>
+            hastlayer.GenerateHardware(assemblies.Select(assembly => assembly.Location), configuration);
     }
 }

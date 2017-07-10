@@ -66,16 +66,16 @@ namespace Hast.Layer
             _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
 
         public async Task<IHardwareRepresentation> GenerateHardware(
-            IEnumerable<Assembly> assemblies,
+            IEnumerable<string> assembliesPaths,
             IHardwareGenerationConfiguration configuration)
         {
-            Argument.ThrowIfNull(assemblies, nameof(assemblies));
-            if (!assemblies.Any())
+            Argument.ThrowIfNull(assembliesPaths, nameof(assembliesPaths));
+            if (!assembliesPaths.Any())
             {
                 throw new ArgumentException("No assemblies were specified.");
             }
 
-            if (assemblies.Count() != assemblies.Distinct().Count())
+            if (assembliesPaths.Count() != assembliesPaths.Distinct().Count())
             {
                 throw new ArgumentException(
                     "The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
@@ -89,7 +89,7 @@ namespace Hast.Layer
                     .Run<ITransformer, IHardwareImplementationComposer, IDeviceManifestSelector>(
                         async (transformer, hardwareImplementationComposer, deviceManifestSelector) =>
                         {
-                            var hardwareDescription = await transformer.Transform(assemblies, configuration);
+                            var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
 
                             var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
 
@@ -105,7 +105,7 @@ namespace Hast.Layer
 
                             hardwareRepresentation = new HardwareRepresentation
                             {
-                                SoftAssemblies = assemblies,
+                                SoftAssemblyPaths = assembliesPaths,
                                 HardwareDescription = hardwareDescription,
                                 HardwareImplementation = hardwareImplementation,
                                 DeviceManifest = deviceManifest
@@ -118,7 +118,7 @@ namespace Hast.Layer
             {
                 var message =
                     "An error happened during generating the Hastlayer hardware representation for the following assemblies: " +
-                    string.Join(", ", assemblies.Select(assembly => assembly.FullName));
+                    string.Join(", ", assembliesPaths);
                 await _host.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
             }
@@ -129,7 +129,7 @@ namespace Hast.Layer
             T hardwareObject,
             IProxyGenerationConfiguration configuration) where T : class
         {
-            if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
+            if (!hardwareRepresentation.SoftAssemblyPaths.Contains(hardwareObject.GetType().Assembly.Location))
             {
                 throw new InvalidOperationException(
                     "The supplied type is not part of any assembly that this hardware representation was generated from.");

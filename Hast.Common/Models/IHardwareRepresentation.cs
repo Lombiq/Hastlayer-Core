@@ -9,9 +9,9 @@ namespace Hast.Layer
     public interface IHardwareRepresentation
     {
         /// <summary>
-        /// The original assemblies this hardware assembly was generated from.
+        /// The original assemblies' paths this hardware assembly was generated from.
         /// </summary>
-        IEnumerable<Assembly> SoftAssemblies { get; }
+        IEnumerable<string> SoftAssemblyPaths { get; }
 
         /// <summary>
         /// Describes the hardware created from a transformed assembly.

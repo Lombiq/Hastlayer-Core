@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Layer.Extensibility.Events;
+using System.Linq;
 
 namespace Hast.Layer
 {
@@ -22,13 +23,15 @@ namespace Hast.Layer
         /// <summary>
         /// Generates and implements a hardware representation of the given assemblies.
         /// </summary>
-        /// <param name="assemblies">The assemblies that should be implemented as hardware.</param>
+        /// <param name="assemblyPaths">The assemblies' paths that should be implemented as hardware.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
         /// <returns>The representation of the assemblies implemented as hardware.</returns>
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during hardware generation.
         /// </exception>
-        Task<IHardwareRepresentation> GenerateHardware(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration);
+        Task<IHardwareRepresentation> GenerateHardware(
+            IEnumerable<string> assemblyPaths, 
+            IHardwareGenerationConfiguration configuration);
 
         /// <summary>
         /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation.
@@ -41,6 +44,9 @@ namespace Hast.Layer
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
-        Task<T> GenerateProxy<T>(IHardwareRepresentation hardwareRepresentation, T hardwareObject, IProxyGenerationConfiguration configuration) where T : class;
+        Task<T> GenerateProxy<T>(
+            IHardwareRepresentation hardwareRepresentation, 
+            T hardwareObject, 
+            IProxyGenerationConfiguration configuration) where T : class;
     }
 }
