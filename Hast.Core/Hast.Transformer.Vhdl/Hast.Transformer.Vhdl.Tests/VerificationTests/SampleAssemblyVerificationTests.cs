@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Autofac;
 using Hast.Common.Configuration;
+using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;

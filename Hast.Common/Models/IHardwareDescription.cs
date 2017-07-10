@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Hast.Common.Models
+namespace Hast.Layer
 {
     /// <summary>
     /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented 

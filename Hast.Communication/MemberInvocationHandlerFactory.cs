@@ -4,15 +4,14 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
-using Hast.Common.Configuration;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
-using Hast.Common.Models;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
 

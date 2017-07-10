@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Hast.Common.Configuration;
-using Hast.Common.Models;
 using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
@@ -16,6 +15,7 @@ using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
 using Autofac.Core;
+using Hast.Layer;
 
 namespace Hast.Transformer.Vhdl.Tests
 {

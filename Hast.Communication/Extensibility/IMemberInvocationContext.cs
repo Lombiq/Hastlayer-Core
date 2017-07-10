@@ -1,5 +1,5 @@
 ﻿using Castle.DynamicProxy;
-using Hast.Common.Models;
+using Hast.Layer;
 
 namespace Hast.Communication.Extensibility
 {

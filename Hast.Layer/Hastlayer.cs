@@ -5,8 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
-using Hast.Common.Configuration;
-using Hast.Common.Models;
 using Hast.Communication;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
@@ -64,7 +62,7 @@ namespace Hast.Layer
 
 
         public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
-            _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
+            _host.RunGet(scope => scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices());
 
         public async Task<IHardwareRepresentation> GenerateHardware(
             IEnumerable<Assembly> assemblies,
@@ -94,8 +92,8 @@ namespace Hast.Layer
 
                             var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
 
-                            var deviceManifest = deviceManifestSelector
-                                .GetSupporteDevices()
+                            var deviceManifest = (await deviceManifestSelector
+                                .GetSupporteDevices())
                                 .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
 
                             if (deviceManifest == null)
@@ -221,7 +219,7 @@ namespace Hast.Layer
 
             if (_configuration.Flavor == HastlayerFlavor.Client)
             {
-                importedExtensions.Add(typeof(Remote.Client.RemoteTransformerClient).Assembly);
+                importedExtensions.Add(typeof(Remote.Client.RemoteTransformer).Assembly);
             }
 
             var settings = new AppHostSettings

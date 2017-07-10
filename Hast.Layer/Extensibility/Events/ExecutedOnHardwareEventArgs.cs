@@ -1,5 +1,4 @@
 ﻿using System;
-using Hast.Common.Models;
 
 namespace Hast.Layer.Extensibility.Events
 {

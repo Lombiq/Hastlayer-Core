@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestEase, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\RestEase.1.4.1\lib\net45\RestEase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,10 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RemoteTransformerClient.cs" />
+    <Compile Include="ApiClientFactory.cs" />
+    <Compile Include="RemoteDeviceManifestSelector.cs" />
+    <Compile Include="RemoteTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj">
+      <Project>{1D1EC796-DFF6-4EC7-B749-62B89D1DEA92}</Project>
+      <Name>Hast.Synthesis.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
       <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
       <Name>Hast.Transformer.Abstractions</Name>
@@ -58,6 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

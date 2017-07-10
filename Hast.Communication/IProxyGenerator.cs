@@ -1,5 +1,4 @@
-﻿using Hast.Common.Configuration;
-using Hast.Common.Models;
+﻿using Hast.Layer;
 using Orchard;
 
 namespace Hast.Communication

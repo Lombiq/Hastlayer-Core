@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hast.Common.Models
+namespace Hast.Layer
 {
     /// <summary>
     /// Describes the capabilities of the connected hardware device.

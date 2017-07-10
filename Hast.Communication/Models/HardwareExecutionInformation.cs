@@ -1,5 +1,5 @@
 ﻿using System;
-using Hast.Common.Models;
+using Hast.Layer;
 
 namespace Hast.Communication.Models
 {

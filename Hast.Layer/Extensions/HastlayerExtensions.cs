@@ -1,6 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Hast.Common.Configuration;
-using Hast.Common.Models;
 
 namespace Hast.Layer
 {

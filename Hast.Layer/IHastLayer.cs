@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Common.Configuration;
-using Hast.Common.Models;
 using Hast.Layer.Extensibility.Events;
 
 namespace Hast.Layer

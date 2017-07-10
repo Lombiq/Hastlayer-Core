@@ -1,6 +1,5 @@
 ﻿using System;
-using Hast.Common.Configuration;
-using Hast.Common.Models;
+using Hast.Layer;
 
 namespace Hast.Communication
 {

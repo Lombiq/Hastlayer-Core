@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Hast.Common.Configuration;
-using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;

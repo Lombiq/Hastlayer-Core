@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Hast.Common.Configuration
+namespace Hast.Layer
 {
     public interface IHardwareGenerationConfiguration
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Hast.Common.Configuration;
+using Hast.Layer;
 
 namespace Hast.Transformer.Abstractions.Configuration
 {
@@ -68,15 +68,6 @@ namespace Hast.Transformer.Abstractions.Configuration
             {
                 ArrayLengths.Add(arrayNames[i], length);
             }
-        }
-    }
-
-
-    public static class HardwareGenerationConfigurationTransformerExtensions
-    {
-        public static TransformerConfiguration TransformerConfiguration(this IHardwareGenerationConfiguration hardwareConfiguration)
-        {
-            return hardwareConfiguration.GetOrAddCustomConfiguration<TransformerConfiguration>("Hast.Transformer.Configuration");
         }
     }
 }

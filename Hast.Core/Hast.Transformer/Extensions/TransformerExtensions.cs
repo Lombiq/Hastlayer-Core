@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
-using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Helpers;
 using Microsoft.CSharp;

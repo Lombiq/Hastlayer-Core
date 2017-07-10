@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Hast.Common.Models;
 
 namespace Hast.Layer.Models
 {

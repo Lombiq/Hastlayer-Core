@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Synthesis;
 using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Models;

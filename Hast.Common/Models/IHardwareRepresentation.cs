@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Hast.Common.Models
+namespace Hast.Layer
 {
     /// <summary>
     /// Represents the hardware that was generated from .NET assemblies.
