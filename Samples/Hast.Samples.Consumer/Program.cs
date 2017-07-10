@@ -105,8 +105,8 @@ namespace Hast.Samples.Consumer
                                 break;
                         }
 
-                        // The generated VHDL code will contain debug-level information, though it will be a slower
-                        // to create.
+                        // The generated VHDL code will contain debug-level information, though it will be slower to
+                        // create.
                         configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
 
                         // Generating hardware from the sample assembly with the given configuration.
