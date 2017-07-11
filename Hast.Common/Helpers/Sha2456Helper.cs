@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Helpers
+namespace Hast.Common.Helpers
 {
     public static class Sha2456Helper
     {

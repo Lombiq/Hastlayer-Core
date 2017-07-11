@@ -87,7 +87,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drivers", "Drivers", "{B88E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Remote.Worker", "Hast.Core\Hast.Remote.Worker\Hast.Remote.Worker.csproj", "{A9D91F5C-4BE0-4693-8E73-04BD96B044CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Remote.Worker.Console", "Hast.Console\Hast.Remote.Worker.Console\Hast.Remote.Worker.Console.csproj", "{1F634A84-040D-42A0-B12A-8F9CD0038189}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Remote.Worker.Console", "Hast.Core\Hast.Remote.Worker.Console\Hast.Remote.Worker.Console.csproj", "{1F634A84-040D-42A0-B12A-8F9CD0038189}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

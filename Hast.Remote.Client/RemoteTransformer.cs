@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Transformer.Abstractions;
@@ -18,7 +19,12 @@ namespace Hast.Remote.Client
             var apiClient = ApiClientFactory.CreateApiClient(configuration.RemoteClientConfiguration());
 
             var assemblyContainers = assemblyPaths
-                .Select(path => new AssemblyContainer { FileContent = File.ReadAllBytes(path) });
+                .Select(path => new AssemblyContainer
+                {
+                    Id = Sha2456Helper.ComputeHash(path),
+                    FileContent = File.ReadAllBytes(path)
+                });
+
             var apiConfiguration = new Bridge.Models.HardwareGenerationConfiguration
             {
                 CustomConfiguration = configuration.CustomConfiguration,
