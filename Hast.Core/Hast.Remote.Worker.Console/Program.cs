@@ -20,7 +20,6 @@ namespace Hast.Remote.Worker.Console
             {
                 var settings = new AppHostSettings
                 {
-                    // A random App_Data folder so the setup sample can run from a fresh state.
                     ImportedExtensions = new[] { typeof(Program).Assembly, typeof(ITransformationWorker).Assembly },
                     DefaultShellFeatureStates = new[]
                     {
