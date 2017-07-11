@@ -92,10 +92,10 @@ namespace Hast.Remote.Worker
                                 }
                                 catch (StorageException ex)
                                 {
-                                    // If the lease was already acquired we get this exception, nothing to do.
-                                    if (((ex.InnerException as WebException)?
-                                            .Response as HttpWebResponse)?
-                                                .StatusCode == HttpStatusCode.Conflict)
+                                    // If the lease was already acquired or some other Task deleted even finished it
+                                    // then we get these exceptions, nothing to do.
+                                    if (HasHttpStatus(ex, HttpStatusCode.Conflict) ||
+                                        HasHttpStatus(ex, HttpStatusCode.NotFound))
                                     {
                                         return;
                                     }
@@ -167,10 +167,9 @@ namespace Hast.Remote.Worker
                                             };
 
                                             using (var memoryStream = new MemoryStream())
-                                            using (var streamReader = new StreamReader(memoryStream))
                                             {
                                                 await hardwareDescription.WriteSource(memoryStream);
-                                                result.HardwareDescription.Source = await streamReader.ReadToEndAsync();
+                                                result.HardwareDescription.Source = Encoding.UTF8.GetString(memoryStream.ToArray());
                                             }
                                         }
                                         catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
@@ -204,7 +203,17 @@ namespace Hast.Remote.Worker
                                 // Repeatedly renewing the lease until the processing completes.
                                 while (!processingTask.IsCompleted)
                                 {
-                                    await blob.RenewLeaseAsync(accessCondition);
+                                    try
+                                    {
+                                        await blob.RenewLeaseAsync(accessCondition);
+                                    }
+                                    catch (StorageException ex)
+                                    {
+                                        // If in the meantime the Task finished and removed the blob then nothing to do.
+                                        if (HasHttpStatus(ex, HttpStatusCode.NotFound)) return;
+
+                                        throw;
+                                    }
                                     await Task.WhenAny(processingTask, Task.Delay(leaseTimeSpan));
                                 }
 
@@ -250,5 +259,9 @@ namespace Hast.Remote.Worker
             _hastlayer = null;
             _transformationTasks.Clear();
         }
+
+
+        private static bool HasHttpStatus(StorageException exception, HttpStatusCode statusCode) =>
+            ((exception.InnerException as WebException)?.Response as HttpWebResponse)?.StatusCode == statusCode;
     }
 }
