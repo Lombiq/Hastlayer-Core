@@ -67,7 +67,7 @@ namespace Hast.Remote.Worker
                         .ListBlobs("jobs/")
                         .Where(blob => !blob.StorageUri.PrimaryUri.ToString().Contains("$$$ORCHARD$$$.$$$"))
                         .Cast<CloudBlockBlob>()
-                        .Where(blob => blob.Properties.LeaseStatus == LeaseStatus.Unlocked);
+                        .Where(blob => blob.Properties.LeaseStatus == LeaseStatus.Unlocked && blob.Properties.Length != 0);
 
                     foreach (var jobBlob in jobBlobs)
                     {
@@ -214,7 +214,10 @@ namespace Hast.Remote.Worker
 
                                         throw;
                                     }
-                                    await Task.WhenAny(processingTask, Task.Delay(leaseTimeSpan));
+
+                                    // Task.Delay() waits for 1 second less so the lease is renewed for sure before it
+                                    // expires.
+                                    await Task.WhenAny(processingTask, Task.Delay(leaseTimeSpan - TimeSpan.FromSeconds(1)));
                                 }
 
                                 // This is so if there was an exception in the Task that will be thrown with its original
