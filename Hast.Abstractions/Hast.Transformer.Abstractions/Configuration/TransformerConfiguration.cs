@@ -19,7 +19,18 @@ namespace Hast.Transformer.Abstractions.Configuration
             // Since _memberInvocationInstanceCountConfigurations is a ConcurrentDictionary the order of its items is 
             // not necessarily the same on all machines or during all executions. Thus we need sorting so the 
             // transformation ID is deterministic (see DefaultTransformer in Hast.Transformer).
-            get { return _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix); }
+            // Also, ToArray() and the setter are needed for JSON de/serialization when doing remote transformation. 
+            get { return _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray(); }
+
+            private set
+            {
+                _memberInvocationInstanceCountConfigurations.Clear();
+
+                foreach (var configuration in value)
+                {
+                    AddMemberInvocationInstanceCountConfiguration(configuration);
+                }
+            }
         }
 
         /// <summary>

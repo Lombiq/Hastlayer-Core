@@ -98,7 +98,6 @@
     <Compile Include="Helpers\RecordHelper.cs" />
     <Compile Include="Helpers\TaskParallelizationHelper.cs" />
     <Compile Include="Helpers\TopologicalSortHelper.cs" />
-    <Compile Include="JsonNet.PrivateSettersContractResolvers\PrivateSettersContractResolvers.cs" />
     <Compile Include="Models\IPartiallyTransformedBinaryOperatorExpression.cs" />
     <Compile Include="Models\ITransformedInvocationParameter.cs" />
     <Compile Include="Models\ITransformedVhdlManifest.cs" />

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Hast.Common.ContractResolvers;
 using Hast.Layer;
 using Hast.VhdlBuilder.Representation.Declaration;
-using JsonNet.PrivateSettersContractResolvers;
 using Newtonsoft.Json;
 
 namespace Hast.Transformer.Vhdl.Models

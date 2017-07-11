@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.ContractResolvers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace System.Collections.Generic
@@ -20,7 +23,7 @@ namespace System.Collections.Generic
                 // this point, so need to handle them specifically.
                 if (config is JObject)
                 {
-                    return ((JObject)config).ToObject<T>();
+                    return ((JObject)config).ToObject<T>(new JsonSerializer { ContractResolver = new PrivateSetterContractResolver() });
                 }
 
                 return (T)config;
