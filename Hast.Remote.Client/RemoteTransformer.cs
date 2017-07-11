@@ -42,7 +42,7 @@ namespace Hast.Remote.Client
 
 
             TransformationResult transformationResult = null;
-            const int maxResultAttemptCount = 10;
+            const int maxResultAttemptCount = 100;
             var waitAttemptIndex = 0;
             var waitMilliseconds = 333;
             while (transformationResult == null && waitAttemptIndex < maxResultAttemptCount)
