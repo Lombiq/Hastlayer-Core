@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Autofac;
-using Hast.Common.Configuration;
 using Hast.Layer;
+using Hast.Samples.Kpz;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
-using Hast.Transformer.Services;
 using Lombiq.OrchardAppHost;
 using NUnit.Framework;
 
@@ -55,6 +54,23 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             });
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
+        public async Task KpzSampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(KpzKernelsInterface).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
