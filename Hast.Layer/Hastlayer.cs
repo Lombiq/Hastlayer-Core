@@ -196,12 +196,20 @@ namespace Hast.Layer
                 }
             }
 
-            moduleFolderPaths.Add(abstractionsPath);
+            // There won't be an Abstractions folder, nor a Core one when the app is being run from a deployment folder
+            // (as opposed to a solution).
+            if (!string.IsNullOrEmpty(abstractionsPath))
+            {
+                moduleFolderPaths.Add(abstractionsPath); 
+            }
 
             if (_configuration.Flavor == HastlayerFlavor.Developer)
             {
-                var corePath = Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core");
-                if (Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
+                var corePath = !string.IsNullOrEmpty(abstractionsPath) ?
+                    Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core") :
+                    null;
+
+                if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
                 else
                 {
                     _configuration = new HastlayerConfiguration(_configuration) { Flavor = HastlayerFlavor.Client };
