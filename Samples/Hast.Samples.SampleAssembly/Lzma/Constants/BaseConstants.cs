@@ -2,11 +2,11 @@ namespace Hast.Samples.SampleAssembly.Lzma.Constants
 {
 	internal static class BaseConstants
 	{
-		public const uint RepDistances = 4;
+		public const uint RepeatDistances = 4;
 		public const uint States = 12;
-        public const int PositionSlotBits = 6;
-        public const int LengthToPositionStatesBits = 2;
-        public const uint LengthToPositionStates = 1 << LengthToPositionStatesBits;
+        public const int SlotPositionBits = 6;
+        public const int LengthToStatesPositionBits = 2;
+        public const uint LengthToPositionStates = 1 << LengthToStatesPositionBits;
         public const uint MinMatchLength = 2;
         public const int AlignBits = 4;
         public const uint AlignTableSize = 1 << AlignBits;
@@ -36,7 +36,7 @@ namespace Hast.Samples.SampleAssembly.Lzma.Constants
         public const uint MaxBlockLength = MaxBlockLengthHelper + (MaxBlockLengthHelper / 2 + 256);
 
 
-        public static uint GetLengthToPositionState(uint length)
+        public static uint GetLengthToStatePosition(uint length)
 		{
 			length -= MinMatchLength;
 

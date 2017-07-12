@@ -20,7 +20,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint _maxMatchLength;
         private uint[] _son;
         private uint[] _hash;
-        private uint _cutValue = 0xFF;
+        private uint _count = 0xFF;
         private uint _hashMask;
         private uint _hashSizeSum = 0;
         private bool _hashArray = true;
@@ -29,7 +29,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint _fixHashSize = Hash2Size + Hash3Size;
         private CRC _crc;
 
-        #region LZ InWindow fields
+        #region LZ Input Window fields
 
         private SimpleMemoryStream _stream;
         private uint _positionLimit; // Offset (from _buffer) of first byte when new block reading must be done.
@@ -70,7 +70,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
         public void Init()
         {
-            InitLzInWindow();
+            InitLzInputWindow();
 
             _hash = new uint[BaseConstants.MaxHashSize];
             _son = new uint[(BaseConstants.MaxDictionarySize + 1) * 2];
@@ -81,58 +81,57 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
             _cyclicBufferPosition = 0;
 
-            ReduceOffsetsLzInWindow(-1);
+            ReduceOffsetsLzInputWindow(-1);
         }
 
         public void MovePosition()
         {
             if (++_cyclicBufferPosition >= _cyclicBufferSize) _cyclicBufferPosition = 0;
 
-            MovePosLzInWindow();
+            MovePositionLzInputWindow();
 
             if (_position == MaxValueForNormalize) Normalize();
         }
 
-        public byte GetIndexbyte(int index) =>
+        public byte GetIndexByte(int index) =>
             _bufferBase[_bufferOffset + _position + (uint)index];
 
-        public uint GetMatchLen(int index, uint distance, uint limit)
+        public uint GetMatchLength(int index, uint distance, uint limit)
         {
             // index + limit have not to exceed _keepSizeAfter.
             if (_streamEndWasReached)
             {
-                if ((_position + index) + limit > _streamPosition)
-                    limit = _streamPosition - (uint)(_position + index);
+                if ((_position + index) + limit > _streamPosition) limit = _streamPosition - (uint)(_position + index);
             }
 
             distance++;
-            // byte *pby = _buffer + (size_t)_pos + index;
-            uint pby = _bufferOffset + _position + (uint)index;
+
+            var pby = _bufferOffset + _position + (uint)index;
 
             uint i;
             for (i = 0; i < limit && _bufferBase[pby + i] == _bufferBase[pby + i - distance]; i++) ;
             return i;
         }
 
-        public uint GetNumAvailablebytes() =>
+        public uint GetAvailableBytesCount() =>
             _streamPosition - _position;
 
         public void Create(
             uint dictionarySize,
             uint keepAddBufferBefore,
-            uint matchMaxLen,
+            uint maxMatchLength,
             uint keepAddBufferAfter)
         {
             // Should throw an Exception when it becomes supported.
             // if (historySize > MaxValueForNormalize - 256)
 
-            _cutValue = 16 + (matchMaxLen >> 1);
+            _count = 16 + (maxMatchLength >> 1);
 
-            var windowReservSize = (dictionarySize + keepAddBufferBefore + matchMaxLen + keepAddBufferAfter) / 2 + 256;
+            var windowReservSize = (dictionarySize + keepAddBufferBefore + maxMatchLength + keepAddBufferAfter) / 2 + 256;
 
-            CreateLzInWindow(dictionarySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
+            CreateLzInputWindow(dictionarySize + keepAddBufferBefore, maxMatchLength + keepAddBufferAfter, windowReservSize);
 
-            _maxMatchLength = matchMaxLen;
+            _maxMatchLength = maxMatchLength;
 
             // Dictionary size can be maximum 128 bytes.
             _cyclicBufferSize = dictionarySize + 1;
@@ -147,8 +146,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                 _hashSizeSum |= (_hashSizeSum >> 8);
                 _hashSizeSum >>= 1;
                 _hashSizeSum |= 0xFFFF;
-                if (_hashSizeSum > (1 << 24))
-                    _hashSizeSum >>= 1;
+                if (_hashSizeSum > (1 << 24)) _hashSizeSum >>= 1;
                 _hashMask = _hashSizeSum;
                 _hashSizeSum++;
                 _hashSizeSum += _fixHashSize;
@@ -171,9 +169,9 @@ namespace Hast.Samples.SampleAssembly.Lzma
             }
 
             uint offset = 0;
-            var matchMinPos = (_position > _cyclicBufferSize) ? (_position - _cyclicBufferSize) : 0;
+            var minMatchPosition = (_position > _cyclicBufferSize) ? (_position - _cyclicBufferSize) : 0;
             var current = _bufferOffset + _position;
-            var maxLength = MaxStartLength; // to avoid items for len < hashSize;
+            var maxLength = MaxStartLength; // To avoid items for length < hashSize.
             uint hashValue, hash2Value = 0, hash3Value = 0;
 
             if (_hashArray)
@@ -186,30 +184,37 @@ namespace Hast.Samples.SampleAssembly.Lzma
             }
             else hashValue = _bufferBase[current] ^ ((uint)(_bufferBase[current + 1]) << 8);
 
-            var curMatch = _hash[_fixHashSize + hashValue];
+            var currentMatch = _hash[_fixHashSize + hashValue];
 
             if (_hashArray)
             {
-                uint currentMatch2 = _hash[hash2Value];
-                uint curentMatch3 = _hash[Hash3Offset + hash3Value];
+                var currentMatch2 = _hash[hash2Value];
+                var currentMatch3 = _hash[Hash3Offset + hash3Value];
                 _hash[hash2Value] = _position;
                 _hash[Hash3Offset + hash3Value] = _position;
-                if (currentMatch2 > matchMinPos)
+
+                if (currentMatch2 > minMatchPosition)
+                {
                     if (_bufferBase[_bufferOffset + currentMatch2] == _bufferBase[current])
                     {
                         distances[offset++] = maxLength = 2;
                         distances[offset++] = _position - currentMatch2 - 1;
                     }
-                if (curentMatch3 > matchMinPos)
-                    if (_bufferBase[_bufferOffset + curentMatch3] == _bufferBase[current])
+                }
+
+                if (currentMatch3 > minMatchPosition)
+                {
+                    if (_bufferBase[_bufferOffset + currentMatch3] == _bufferBase[current])
                     {
-                        if (curentMatch3 == currentMatch2)
+                        if (currentMatch3 == currentMatch2)
                             offset -= 2;
                         distances[offset++] = maxLength = 3;
-                        distances[offset++] = _position - curentMatch3 - 1;
-                        currentMatch2 = curentMatch3;
+                        distances[offset++] = _position - currentMatch3 - 1;
+                        currentMatch2 = currentMatch3;
                     }
-                if (offset != 0 && currentMatch2 == curMatch)
+                }
+
+                if (offset != 0 && currentMatch2 == currentMatch)
                 {
                     offset -= 2;
                     maxLength = MaxStartLength;
@@ -220,49 +225,47 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
             var pointer0 = (_cyclicBufferPosition << 1) + 1;
             var pointer1 = (_cyclicBufferPosition << 1);
-
             uint length0, length1;
             length0 = length1 = _hashDirectBytes;
 
             if (_hashDirectBytes != 0)
             {
-                if (curMatch > matchMinPos)
+                if (currentMatch > minMatchPosition)
                 {
-                    if (_bufferBase[_bufferOffset + curMatch + _hashDirectBytes] !=
+                    if (_bufferBase[_bufferOffset + currentMatch + _hashDirectBytes] !=
                             _bufferBase[current + _hashDirectBytes])
                     {
                         distances[offset++] = maxLength = _hashDirectBytes;
-                        distances[offset++] = _position - curMatch - 1;
+                        distances[offset++] = _position - currentMatch - 1;
                     }
                 }
             }
 
-            var count = _cutValue;
+            var count = _count;
 
             var run = true;
             while (run)
             {
-                if (curMatch <= matchMinPos || count == 0)
+                if (currentMatch <= minMatchPosition || count == 0)
                 {
                     _son[pointer0] = _son[pointer1] = EmptyHashValue;
                     run = false;
                 }
                 else
                 {
-                    var delta = _position - curMatch;
-                    var cyclicPos = ((delta <= _cyclicBufferPosition) ?
+                    var delta = _position - currentMatch;
+                    var cyclicPosition = ((delta <= _cyclicBufferPosition) ?
                         (_cyclicBufferPosition - delta) :
                         (_cyclicBufferPosition - delta + _cyclicBufferSize)) << 1;
 
-                    var pby1 = _bufferOffset + curMatch;
+                    var pby1 = _bufferOffset + currentMatch;
                     var len = LzmaHelpers.GetMinValue(length0, length1);
                     if (_bufferBase[pby1 + len] == _bufferBase[current + len])
                     {
                         var run2 = true;
                         while (run2 && ++len != lenLimit)
                         {
-                            if (_bufferBase[pby1 + len] != _bufferBase[current + len])
-                                run2 = false;
+                            if (_bufferBase[pby1 + len] != _bufferBase[current + len]) run2 = false;
                         }
 
                         if (maxLength < len)
@@ -271,8 +274,8 @@ namespace Hast.Samples.SampleAssembly.Lzma
                             distances[offset++] = delta - 1;
                             if (len == lenLimit)
                             {
-                                _son[pointer1] = _son[cyclicPos];
-                                _son[pointer0] = _son[cyclicPos + 1];
+                                _son[pointer1] = _son[cyclicPosition];
+                                _son[pointer0] = _son[cyclicPosition + 1];
 
                                 run = false;
                             }
@@ -283,16 +286,16 @@ namespace Hast.Samples.SampleAssembly.Lzma
                     {
                         if (_bufferBase[pby1 + len] < _bufferBase[current + len])
                         {
-                            _son[pointer1] = curMatch;
-                            pointer1 = cyclicPos + 1;
-                            curMatch = _son[pointer1];
+                            _son[pointer1] = currentMatch;
+                            pointer1 = cyclicPosition + 1;
+                            currentMatch = _son[pointer1];
                             length1 = len;
                         }
                         else
                         {
-                            _son[pointer0] = curMatch;
-                            pointer0 = cyclicPos;
-                            curMatch = _son[pointer0];
+                            _son[pointer0] = currentMatch;
+                            pointer0 = cyclicPosition;
+                            currentMatch = _son[pointer0];
                             length0 = len;
                         }
                     }
@@ -306,44 +309,44 @@ namespace Hast.Samples.SampleAssembly.Lzma
             return offset;
         }
 
-        public void Skip(uint num)
+        public void Skip(uint skipCount)
         {
             do
             {
                 var continueLoop = false;
                 uint lenLimit;
-                if (_position + _maxMatchLength <= _streamPosition)
-                    lenLimit = _maxMatchLength;
+                if (_position + _maxMatchLength <= _streamPosition) lenLimit = _maxMatchLength;
                 else
                 {
                     lenLimit = _streamPosition - _position;
                     if (lenLimit < _minMatchCheck)
                     {
                         MovePosition();
+
                         continueLoop = true;
                     }
                 }
 
                 if (!continueLoop)
                 {
-                    var matchMinPos = (_position > _cyclicBufferSize) ? (_position - _cyclicBufferSize) : 0;
-                    var cur = _bufferOffset + _position;
+                    var minMatchPosition = (_position > _cyclicBufferSize) ? (_position - _cyclicBufferSize) : 0;
+                    var current = _bufferOffset + _position;
 
                     uint hashValue;
 
                     if (_hashArray)
                     {
-                        var temp = _crc.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
+                        var temp = _crc.Table[_bufferBase[current]] ^ _bufferBase[current + 1];
                         var hash2Value = temp & (Hash2Size - 1);
                         _hash[hash2Value] = _position;
-                        temp ^= ((uint)(_bufferBase[cur + 2]) << 8);
+                        temp ^= ((uint)(_bufferBase[current + 2]) << 8);
                         var hash3Value = temp & (Hash3Size - 1);
                         _hash[Hash3Offset + hash3Value] = _position;
-                        hashValue = (temp ^ (_crc.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
+                        hashValue = (temp ^ (_crc.Table[_bufferBase[current + 3]] << 5)) & _hashMask;
                     }
-                    else hashValue = _bufferBase[cur] ^ ((uint)(_bufferBase[cur + 1]) << 8);
+                    else hashValue = _bufferBase[current] ^ ((uint)(_bufferBase[current + 1]) << 8);
 
-                    var curMatch = _hash[_fixHashSize + hashValue];
+                    var currentMatch = _hash[_fixHashSize + hashValue];
                     _hash[_fixHashSize + hashValue] = _position;
 
                     var ptr0 = (_cyclicBufferPosition << 1) + 1;
@@ -352,11 +355,11 @@ namespace Hast.Samples.SampleAssembly.Lzma
                     uint len0, len1;
                     len0 = len1 = _hashDirectBytes;
 
-                    var count = _cutValue;
+                    var count = _count;
                     var run = true;
                     while (run)
                     {
-                        if (curMatch <= matchMinPos || count == 0)
+                        if (currentMatch <= minMatchPosition || count == 0)
                         {
                             _son[ptr0] = _son[ptr1] = EmptyHashValue;
 
@@ -364,26 +367,25 @@ namespace Hast.Samples.SampleAssembly.Lzma
                         }
                         else
                         {
-                            var delta = _position - curMatch;
-                            var cyclicPos = ((delta <= _cyclicBufferPosition) ?
+                            var delta = _position - currentMatch;
+                            var cyclicPosition = ((delta <= _cyclicBufferPosition) ?
                                 (_cyclicBufferPosition - delta) :
                                 (_cyclicBufferPosition - delta + _cyclicBufferSize)) << 1;
 
-                            var pby1 = _bufferOffset + curMatch;
+                            var pby1 = _bufferOffset + currentMatch;
                             var len = LzmaHelpers.GetMinValue(len0, len1);
-                            if (_bufferBase[pby1 + len] == _bufferBase[cur + len])
+                            if (_bufferBase[pby1 + len] == _bufferBase[current + len])
                             {
                                 var run2 = true;
                                 while (run2 && ++len != lenLimit)
                                 {
-                                    if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
-                                        run2 = false;
+                                    if (_bufferBase[pby1 + len] != _bufferBase[current + len]) run2 = false;
                                 }
 
                                 if (len == lenLimit)
                                 {
-                                    _son[ptr1] = _son[cyclicPos];
-                                    _son[ptr0] = _son[cyclicPos + 1];
+                                    _son[ptr1] = _son[cyclicPosition];
+                                    _son[ptr0] = _son[cyclicPosition + 1];
 
                                     run = false;
                                 }
@@ -391,18 +393,18 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
                             if (run)
                             {
-                                if (_bufferBase[pby1 + len] < _bufferBase[cur + len])
+                                if (_bufferBase[pby1 + len] < _bufferBase[current + len])
                                 {
-                                    _son[ptr1] = curMatch;
-                                    ptr1 = cyclicPos + 1;
-                                    curMatch = _son[ptr1];
+                                    _son[ptr1] = currentMatch;
+                                    ptr1 = cyclicPosition + 1;
+                                    currentMatch = _son[ptr1];
                                     len1 = len;
                                 }
                                 else
                                 {
-                                    _son[ptr0] = curMatch;
-                                    ptr0 = cyclicPos;
-                                    curMatch = _son[ptr0];
+                                    _son[ptr0] = currentMatch;
+                                    ptr0 = cyclicPosition;
+                                    currentMatch = _son[ptr0];
                                     len0 = len;
                                 }
                             }
@@ -414,11 +416,11 @@ namespace Hast.Samples.SampleAssembly.Lzma
                     MovePosition();
                 }
             }
-            while (--num != 0);
+            while (--skipCount != 0);
         }
 
         public void SetCutValue(uint cutValue) =>
-            _cutValue = cutValue;
+            _count = cutValue;
 
 
         private void NormalizeSon(uint subValue)
@@ -437,25 +439,27 @@ namespace Hast.Samples.SampleAssembly.Lzma
             for (uint i = 0; i < _hashSizeSum; i++)
             {
                 var value = _hash[i];
+
                 if (value <= subValue) value = EmptyHashValue;
                 else value -= subValue;
+
                 _hash[i] = value;
             }
         }
 
         private void Normalize()
         {
-            uint subValue = _position - _cyclicBufferSize;
+            var subValue = _position - _cyclicBufferSize;
 
             NormalizeSon(subValue);
             NormalizeHash(subValue);
 
-            ReduceOffsetsLzInWindow((int)subValue);
+            ReduceOffsetsLzInputWindow((int)subValue);
         }
 
-        #region LzInWindow Methods
+        #region LZ Input Window Methods
 
-        private void CreateLzInWindow(uint keepSizeBefore, uint keepSizeAfter, uint keepSizeReserv)
+        private void CreateLzInputWindow(uint keepSizeBefore, uint keepSizeAfter, uint keepSizeReserv)
         {
             _keepSizeBefore = keepSizeBefore;
             _keepSizeAfter = keepSizeAfter;
@@ -468,7 +472,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
             _pointerToLastSafePosition = _blockSize - keepSizeAfter;
         }
 
-        private void InitLzInWindow()
+        private void InitLzInputWindow()
         {
             _bufferBase = new byte[BaseConstants.MaxBlockLength];
 
@@ -477,10 +481,10 @@ namespace Hast.Samples.SampleAssembly.Lzma
             _streamPosition = 0;
             _streamEndWasReached = false;
 
-            ReadBlockLzInWindow();
+            ReadBlockLzInputWindow();
         }
 
-        private void ReadBlockLzInWindow()
+        private void ReadBlockLzInputWindow()
         {
             if (!_streamEndWasReached)
             {
@@ -492,8 +496,8 @@ namespace Hast.Samples.SampleAssembly.Lzma
                     if (size == 0) run = false;
                     else
                     {
-                        var numReadbytes = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPosition), size);
-                        if (numReadbytes == 0)
+                        var bytesRead = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPosition), size);
+                        if (bytesRead == 0)
                         {
                             _positionLimit = _streamPosition;
                             var pointerToPostion = _bufferOffset + _positionLimit;
@@ -506,7 +510,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                         }
                         else
                         {
-                            _streamPosition += (uint)numReadbytes;
+                            _streamPosition += (uint)bytesRead;
 
                             if (_streamPosition >= _position + _keepSizeAfter)
                                 _positionLimit = _streamPosition - _keepSizeAfter;
@@ -516,7 +520,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
             }
         }
 
-        private void ReduceOffsetsLzInWindow(int subValue)
+        private void ReduceOffsetsLzInputWindow(int subValue)
         {
             _bufferOffset += (uint)subValue;
             _positionLimit -= (uint)subValue;
@@ -524,32 +528,29 @@ namespace Hast.Samples.SampleAssembly.Lzma
             _streamPosition -= (uint)subValue;
         }
 
-        private void MovePosLzInWindow()
+        private void MovePositionLzInputWindow()
         {
             _position++;
             if (_position > _positionLimit)
             {
                 var pointerToPostion = _bufferOffset + _position;
 
-                if (pointerToPostion > _pointerToLastSafePosition)
-                    MoveBlockLzInWindow();
+                if (pointerToPostion > _pointerToLastSafePosition) MoveBlockLzInputWindow();
 
-                ReadBlockLzInWindow();
+                ReadBlockLzInputWindow();
             }
         }
 
-        private void MoveBlockLzInWindow()
+        private void MoveBlockLzInputWindow()
         {
             var offset = _bufferOffset + _position - _keepSizeBefore;
-            // we need one additional byte, since MovePos moves on 1 byte.
-
+            
+            // We need one additional byte, since MovePosition moves on 1 byte.
             if (offset > 0) offset--;
 
-            var numbytes = _bufferOffset + _streamPosition - offset;
-
-            // check negative offset ????
-            for (uint i = 0; i < numbytes; i++)
-                _bufferBase[i] = _bufferBase[offset + i];
+            var bytesCount = _bufferOffset + _streamPosition - offset;
+            
+            for (uint i = 0; i < bytesCount; i++) _bufferBase[i] = _bufferBase[offset + i];
 
             _bufferOffset -= offset;
         }

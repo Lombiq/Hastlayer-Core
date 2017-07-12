@@ -74,11 +74,13 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
             for (var i = totalBits - 1; i >= 0; i--)
             {
                 Range >>= 1;
-                if (((v >> i) & 1) == 1)
-                    Low += Range;
+
+                if (((v >> i) & 1) == 1) Low += Range;
+
                 if (Range < RangeEncoderConstants.TopValue)
                 {
                     Range <<= 8;
+
                     ShiftLow();
                 }
             }
@@ -97,6 +99,7 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
             while (Range < RangeEncoderConstants.TopValue)
             {
                 Range <<= 8;
+
                 ShiftLow();
             }
         }

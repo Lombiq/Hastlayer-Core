@@ -27,6 +27,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
             var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
+            //var primeCalculator = new PrimeCalculator();
 
             var isPrime = primeCalculator.IsPrimeNumber(15);
             var isPrime2 = primeCalculator.IsPrimeNumber(13);
