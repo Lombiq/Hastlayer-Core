@@ -60,5 +60,26 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
             });
         }
+
+        // Needs to be uncommented once Unum is re-added to the solution.
+        //[Test]
+        //public async Task UnumSampleMatchesApproved()
+        //{
+        //    await _host.Run<ITransformer>(async transformer =>
+        //    {
+        //        var hardwareDescription = await TransformAssembliesToVhdl(
+        //            transformer,
+        //            new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly },
+        //            configuration =>
+        //            {
+        //                configuration.AddHardwareEntryPointType<UnumCalculator>();
+        //                configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+        //                    UnumCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
+        //                    UnumCalculatorExtensions.ManuallySizedArrays);
+        //            });
+
+        //        hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+        //    });
+        //}
     }
 }
