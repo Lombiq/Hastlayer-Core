@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Hast.Common.Configuration;
-using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 
@@ -29,7 +27,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         }
 
 
-        // Checking if the hardware result is correct by running it agains the software implementation. Note that this
+        // Checking if the hardware result is correct by running it against the software implementation. Note that this
         // can be also done by Hastlayer automatically on the SimpleMemory level by setting 
         // ProxyGenerationConfiguration.ValidateHardwareResults to true when calling GenerateProxy().
         private static int[] ThrowIfNotCorrect(SimdCalculator proxied, Func<SimdCalculator, int[]> operation)

@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceManifest.cs" />
+    <Compile Include="DeviceManifestSelector.cs" />
+    <Compile Include="NullHardwareImplementationComposer.cs" />
+    <Compile Include="IDeviceManifestProvider.cs" />
     <Compile Include="IDeviceManifestSelector.cs" />
     <Compile Include="IHardwareImplementationComposer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +57,9 @@
       <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
       <Name>Orchard.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

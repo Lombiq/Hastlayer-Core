@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Hast.Common.Configuration;
+using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
 using Hast.Transformer.Abstractions;
@@ -25,8 +26,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
 
                 hardwareDescription.Language.ShouldBe("VHDL");
-                hardwareDescription.HardwareMembers.Count().ShouldBe(14);
-                hardwareDescription.MemberIdTable.Values.Count().ShouldBe(14);
+                hardwareDescription.HardwareEntryPointNamesToMemberIdMappings.Count.ShouldBe(14);
                 hardwareDescription.VhdlSource.ShouldNotBeNullOrEmpty();
                 hardwareDescription.VhdlManifestIfFresh.ShouldNotBeNull(); // Since caching is off.
             });

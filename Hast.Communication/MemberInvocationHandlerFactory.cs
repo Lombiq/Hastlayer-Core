@@ -4,15 +4,14 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
-using Hast.Common.Configuration;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
-using Hast.Common.Models;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
 
@@ -68,9 +67,9 @@ namespace Hast.Communication
 
                             if (!invocationContext.HardwareExecutionIsCancelled)
                             {
-                                var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareMembers;
-                                var memberNameAlternates = new HashSet<string>(hardwareMembers.SelectMany(member => member.GetMemberNameAlternates()));
-                                if (!hardwareMembers.Contains(memberFullName) && !memberNameAlternates.Contains(memberFullName))
+                                var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareEntryPointNamesToMemberIdMappings;
+                                var memberNameAlternates = new HashSet<string>(hardwareMembers.Keys.SelectMany(member => member.GetMemberNameAlternates()));
+                                if (!hardwareMembers.ContainsKey(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                                 {
                                     invocationContext.HardwareExecutionIsCancelled = true;
                                 }
@@ -138,7 +137,10 @@ namespace Hast.Communication
                                     }
                                 }
 
-                                var memberId = hardwareRepresentation.HardwareDescription.LookupMemberId(memberFullName);
+                                // At this point we checked that the hardware entry point does have a mapping.
+                                var memberId = hardwareRepresentation
+                                    .HardwareDescription
+                                    .HardwareEntryPointNamesToMemberIdMappings[memberFullName];
                                 invocationContext.ExecutionInformation = await workContext
                                     .Resolve<ICommunicationServiceSelector>()
                                     .GetCommunicationService(communicationChannelName)

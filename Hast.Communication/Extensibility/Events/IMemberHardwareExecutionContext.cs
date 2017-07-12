@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+﻿using Hast.Layer;
 
 namespace Hast.Communication.Extensibility.Events
 {

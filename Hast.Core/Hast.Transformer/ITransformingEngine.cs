@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Transformer.Models;
 using Orchard;
 

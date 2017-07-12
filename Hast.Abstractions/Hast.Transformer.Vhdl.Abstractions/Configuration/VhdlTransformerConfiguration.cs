@@ -1,6 +1,4 @@
-﻿using Hast.Common.Configuration;
-
-namespace Hast.Transformer.Vhdl.Abstractions.Configuration
+﻿namespace Hast.Transformer.Vhdl.Abstractions.Configuration
 {
     public enum VhdlGenerationMode
     {
@@ -24,14 +22,5 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
     public class VhdlTransformerConfiguration
     {
         public VhdlGenerationMode VhdlGenerationMode { get; set; } = VhdlGenerationMode.Compact;
-    }
-
-
-    public static class HardwareGenerationConfigurationTransformerExtensions
-    {
-        public static VhdlTransformerConfiguration VhdlTransformerConfiguration(this IHardwareGenerationConfiguration hardwareConfiguration)
-        {
-            return hardwareConfiguration.GetOrAddCustomConfiguration<VhdlTransformerConfiguration>("Hast.Transformer.Vhdl.Configuration");
-        }
     }
 }

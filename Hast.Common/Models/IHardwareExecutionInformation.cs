@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hast.Common.Models
+namespace Hast.Layer
 {
     /// <summary>
     /// Carries debug and runtime information about a hardware execution.

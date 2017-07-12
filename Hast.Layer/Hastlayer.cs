@@ -5,14 +5,13 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
-using Hast.Common.Configuration;
-using Hast.Common.Models;
 using Hast.Communication;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
+using Hast.Xilinx.Abstractions;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
 using Orchard.Environment.Configuration;
@@ -67,16 +66,16 @@ namespace Hast.Layer
             _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
 
         public async Task<IHardwareRepresentation> GenerateHardware(
-            IEnumerable<Assembly> assemblies,
+            IEnumerable<string> assembliesPaths,
             IHardwareGenerationConfiguration configuration)
         {
-            Argument.ThrowIfNull(assemblies, nameof(assemblies));
-            if (!assemblies.Any())
+            Argument.ThrowIfNull(assembliesPaths, nameof(assembliesPaths));
+            if (!assembliesPaths.Any())
             {
                 throw new ArgumentException("No assemblies were specified.");
             }
 
-            if (assemblies.Count() != assemblies.Distinct().Count())
+            if (assembliesPaths.Count() != assembliesPaths.Distinct().Count())
             {
                 throw new ArgumentException(
                     "The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
@@ -90,7 +89,7 @@ namespace Hast.Layer
                     .Run<ITransformer, IHardwareImplementationComposer, IDeviceManifestSelector>(
                         async (transformer, hardwareImplementationComposer, deviceManifestSelector) =>
                         {
-                            var hardwareDescription = await transformer.Transform(assemblies, configuration);
+                            var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
 
                             var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
 
@@ -106,7 +105,7 @@ namespace Hast.Layer
 
                             hardwareRepresentation = new HardwareRepresentation
                             {
-                                SoftAssemblies = assemblies,
+                                SoftAssemblyPaths = assembliesPaths,
                                 HardwareDescription = hardwareDescription,
                                 HardwareImplementation = hardwareImplementation,
                                 DeviceManifest = deviceManifest
@@ -119,7 +118,7 @@ namespace Hast.Layer
             {
                 var message =
                     "An error happened during generating the Hastlayer hardware representation for the following assemblies: " +
-                    string.Join(", ", assemblies.Select(assembly => assembly.FullName));
+                    string.Join(", ", assembliesPaths);
                 await _host.Run<ILoggerService>(logger => Task.Run(() => logger.Error(ex, message)));
                 throw new HastlayerException(message, ex);
             }
@@ -130,7 +129,7 @@ namespace Hast.Layer
             T hardwareObject,
             IProxyGenerationConfiguration configuration) where T : class
         {
-            if (!hardwareRepresentation.SoftAssemblies.Contains(hardwareObject.GetType().Assembly))
+            if (!hardwareRepresentation.SoftAssemblyPaths.Contains(hardwareObject.GetType().Assembly.Location))
             {
                 throw new InvalidOperationException(
                     "The supplied type is not part of any assembly that this hardware representation was generated from.");
@@ -185,10 +184,10 @@ namespace Hast.Layer
             var coreFound = false;
             while (abstractionsPath != null && !coreFound)
             {
-                var driversSubFolder = Path.Combine(abstractionsPath, "Hast.Abstractions");
-                if (Directory.Exists(driversSubFolder))
+                var abstractionsSubFolder = Path.Combine(abstractionsPath, "Hast.Abstractions");
+                if (Directory.Exists(abstractionsSubFolder))
                 {
-                    abstractionsPath = driversSubFolder;
+                    abstractionsPath = abstractionsSubFolder;
                     coreFound = true;
                 }
                 else
@@ -197,12 +196,20 @@ namespace Hast.Layer
                 }
             }
 
-            moduleFolderPaths.Add(abstractionsPath);
+            // There won't be an Abstractions folder, nor a Core one when the app is being run from a deployment folder
+            // (as opposed to a solution).
+            if (!string.IsNullOrEmpty(abstractionsPath))
+            {
+                moduleFolderPaths.Add(abstractionsPath); 
+            }
 
             if (_configuration.Flavor == HastlayerFlavor.Developer)
             {
-                var corePath = Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core");
-                if (Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
+                var corePath = !string.IsNullOrEmpty(abstractionsPath) ?
+                    Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core") :
+                    null;
+
+                if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
                 else
                 {
                     _configuration = new HastlayerConfiguration(_configuration) { Flavor = HastlayerFlavor.Client };
@@ -210,15 +217,26 @@ namespace Hast.Layer
             }
 
             var importedExtensions = new[]
+                {
+                    typeof(Hastlayer).Assembly,
+                    typeof(IProxyGenerator).Assembly,
+                    typeof(IHardwareImplementationComposer).Assembly,
+                    typeof(ITransformer).Assembly,
+                    typeof(Nexys4DdrManifestProvider).Assembly
+                }
+                .Union(_configuration.Extensions)
+                .ToList();
+
+            if (_configuration.Flavor == HastlayerFlavor.Client)
             {
-                typeof(Hastlayer).Assembly,
-                typeof(IProxyGenerator).Assembly,
-                typeof(IHardwareImplementationComposer).Assembly,
-                typeof(ITransformer).Assembly
-            }.Union(_configuration.Extensions);
+                importedExtensions.Add(typeof(Remote.Client.RemoteTransformer).Assembly);
+            }
 
             var settings = new AppHostSettings
             {
+                // Setting a custom path so if the parent app is also an AppHost app then with the default settings
+                // those won't clash.
+                AppDataFolderPath = "~/Hastlayer/App_Data",
                 ImportedExtensions = importedExtensions,
                 DefaultShellFeatureStates = new[]
                 {

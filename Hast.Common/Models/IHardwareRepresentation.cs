@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Hast.Common.Models
+namespace Hast.Layer
 {
     /// <summary>
     /// Represents the hardware that was generated from .NET assemblies.
@@ -9,9 +9,9 @@ namespace Hast.Common.Models
     public interface IHardwareRepresentation
     {
         /// <summary>
-        /// The original assemblies this hardware assembly was generated from.
+        /// The original assemblies' paths this hardware assembly was generated from.
         /// </summary>
-        IEnumerable<Assembly> SoftAssemblies { get; }
+        IEnumerable<string> SoftAssemblyPaths { get; }
 
         /// <summary>
         /// Describes the hardware created from a transformed assembly.

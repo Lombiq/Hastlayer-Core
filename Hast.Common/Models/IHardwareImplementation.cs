@@ -1,4 +1,4 @@
-﻿namespace Hast.Common.Models
+﻿namespace Hast.Layer
 {
     /// <summary>
     /// Represents a handle to the hardware implementation synthesized through the FPGA vendor tool-chain.

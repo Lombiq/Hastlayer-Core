@@ -1,16 +1,15 @@
 ﻿using System;
-using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
+using Hast.Xilinx.Abstractions;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Xilinx
 {
-    public class Nexys4DdrDriver : IDeviceDriver
+    public class Nexys4DdrDriver : Nexys4DdrManifestProvider, IDeviceDriver
     {
-        public const string DeviceName = "Nexys4 DDR";
-
         private readonly ITimingReportParser _timingReportParser;
 
         private ITimingReport _timingReport;
@@ -204,20 +203,10 @@ mod	signed8	signed8	sync	synth	20,480	-0,136
             }
         }
 
-        public IDeviceManifest DeviceManifest { get; private set; }
-
 
         public Nexys4DdrDriver(ITimingReportParser timingReportParser)
         {
             _timingReportParser = timingReportParser;
-
-            DeviceManifest = new DeviceManifest
-            {
-                Name = DeviceName,
-                ClockFrequencyHz = 100000000, // 100 Mhz
-                SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
-                AvailableMemoryBytes = 115343360 // 110MB
-            };
         }
 
 

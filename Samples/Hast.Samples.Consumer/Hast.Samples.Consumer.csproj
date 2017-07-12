@@ -76,6 +76,10 @@
       <Project>{0d13986f-fa33-4898-a0de-c173764663f0}</Project>
       <Name>Hast.Transformer.Vhdl.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Remote.Client\Hast.Remote.Client.csproj">
+      <Project>{86d47be0-994e-48ba-b68c-1f0bcab67f02}</Project>
+      <Name>Hast.Remote.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
       <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
       <Name>Hast.Samples.SampleAssembly</Name>

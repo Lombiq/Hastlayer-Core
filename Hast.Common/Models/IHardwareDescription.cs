@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Hast.Common.Models
+namespace Hast.Layer
 {
     /// <summary>
     /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented 
@@ -16,20 +17,11 @@ namespace Hast.Common.Models
         string Language { get; }
 
         /// <summary>
-        /// Gets a collection of the full name of those members (including the full namespace of the parent type(s) as 
-        /// well as their return type and the types of their - type - arguments) that are accessible as hardware 
-        /// implementation.
+        /// Gets a collection of the full name (including the full namespace of the parent type(s) as well as their 
+        /// return type and the types of their - type - arguments of hardware entry members (that are accessible as 
+        /// hardware implementation from the host) and their corresponding numerical IDs on the hardware.
         /// </summary>
-        IEnumerable<string> HardwareMembers { get; }
-
-        /// <summary>
-        /// Looks up the numerical ID of the given method so the call can be identified in the hardware implementation.
-        /// </summary>
-        /// <param name="methodFullName">
-        /// The full name (including the full namespace of the parent type(s) as well as their return type and the types 
-        /// of their - type - arguments) of the method to look up the ID for.</param>
-        /// <returns>The numerical ID of the method that identifies the call target in the hardware implementation.</returns>
-        int LookupMemberId(string methodFullName);
+        IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }
 
         /// <summary>
         /// Writes out the hardware description's source code to the given <see cref="Stream"/>.
@@ -52,5 +44,22 @@ namespace Hast.Common.Models
                 return hardwareDescription.WriteSource(fileStream);
             }
         }
+
+        /// <summary>
+        /// Looks up the numerical ID of the given hardware entry point member so the call can be identified in the 
+        /// hardware implementation.
+        /// </summary>
+        /// <param name="memberFullName">
+        /// The full name (including the full namespace of the parent type(s) as well as their return type and the types 
+        /// of their - type - arguments) of the member to look up the ID for.</param>
+        /// <returns>The numerical ID of the member that identifies the call target in the hardware implementation.</returns>
+        //public static int LookupMemberId(this IHardwareDescription hardwareDescription, string memberFullName)
+        //{
+        //    int id;
+        //    if (hardwareDescription.HardwareEntryPointNamesToMemberIdMappings.TryGetValue(memberFullName, out id)) return id;
+        //    throw new InvalidOperationException(
+        //        "No member ID mapping found for the following member: " + memberFullName +
+        //        ". Did you try to call a method from the host);
+        //}
     }
 }

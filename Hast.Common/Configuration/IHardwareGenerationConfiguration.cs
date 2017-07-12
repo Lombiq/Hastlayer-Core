@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Hast.Common.Configuration
+namespace Hast.Layer
 {
     public interface IHardwareGenerationConfiguration
     {
@@ -61,17 +61,8 @@ namespace Hast.Common.Configuration
         /// <see cref="IHardwareGenerationConfiguration"/> instance.</param>
         /// <returns>The existing or newly created configuration object.</returns>
         public static T GetOrAddCustomConfiguration<T>(this IHardwareGenerationConfiguration hardwareConfiguration, string key)
-            where T : new()
-        {
-            object config;
-
-            if (hardwareConfiguration.CustomConfiguration.TryGetValue(key, out config))
-            {
-                return (T)config;
-            }
-
-            return (T)(hardwareConfiguration.CustomConfiguration[key] = new T());
-        }
+            where T : new() =>
+            hardwareConfiguration.CustomConfiguration.GetOrAddCustomConfiguration<T>(key);
 
         /// <summary>
         /// Adds a public method that will be accessible from the host computer as hardware implementation.

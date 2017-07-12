@@ -105,7 +105,6 @@
     <Compile Include="Models\ArraySize.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\ConstantValueSubstitutionHelper.cs" />
     <Compile Include="Helpers\MethodDeclarationFactory.cs" />
-    <Compile Include="Helpers\Sha2456Helper.cs" />
     <Compile Include="Services\IMemberSuitabilityChecker.cs" />
     <Compile Include="Models\ArraySizeHolder.cs" />
     <Compile Include="Models\DeclarationReferenceMetadata.cs" />

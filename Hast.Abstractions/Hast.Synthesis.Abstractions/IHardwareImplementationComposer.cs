@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Common;
-using Hast.Common.Models;
+using Hast.Layer;
 using Orchard;
 
 namespace Hast.Synthesis.Abstractions

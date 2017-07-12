@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Common.Configuration;
-using Hast.Common.Models;
+using Hast.Layer;
+using Hast.Transformer.Abstractions.Extensions;
 using Orchard;
 
 namespace Hast.Transformer.Abstractions
@@ -19,13 +20,18 @@ namespace Hast.Transformer.Abstractions
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
         /// <returns>The hardware description created from the assemblies.</returns>
         Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration);
+    }
 
-        /// <summary>
-        /// Transforms the given assembly to hardware description.
-        /// </summary>
-        /// <param name="assemblies">The assemblies to transform.</param>
-        /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
-        /// <returns>The hardware description created from the assemblies.</returns>
-        Task<IHardwareDescription> Transform(IEnumerable<Assembly> assemblies, IHardwareGenerationConfiguration configuration);
+
+    public static class TransformerExtensions
+    {
+        public static Task<IHardwareDescription> Transform(
+            this ITransformer transformer, 
+            IEnumerable<Assembly> assemblies, 
+            IHardwareGenerationConfiguration configuration)
+        {
+            assemblies.ThrowArgumentExceptionIfAnyInMemory();
+            return transformer.Transform(assemblies.Select(assembly => assembly.Location), configuration);
+        }
     }
 }
