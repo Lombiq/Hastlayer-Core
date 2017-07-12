@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Hast.Remote.Worker.Configuration;
+using Lombiq.OrchardAppHost;
+using Lombiq.OrchardAppHost.Configuration;
+using Orchard.Environment.Configuration;
+using Orchard.Exceptions;
+using Orchard.Logging;
 
 namespace Hast.Remote.Worker.Daemon
 {
@@ -14,6 +22,8 @@ namespace Hast.Remote.Worker.Daemon
         public const string DisplayName = "Hastlayer Remote Worker Daemon";
 
         private readonly EventLog _eventLog;
+        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private Task _workerTask;
 
 
         public Service()
@@ -37,11 +47,72 @@ namespace Hast.Remote.Worker.Daemon
                 EventLog.CreateEventSource(new EventSourceCreationData(_eventLog.Source, _eventLog.Log));
             }
 
+            RunStartTasks();
+        }
+
+        protected override void OnStop() => RunStopTasks();
+
+
+        private void RunStartTasks()
+        {
+            _workerTask = Task.Run(async () =>
+            {
+                var settings = new AppHostSettings
+                {
+                    ImportedExtensions = new[] { typeof(Program).Assembly, typeof(ITransformationWorker).Assembly },
+                    DefaultShellFeatureStates = new[]
+                    {
+                            new DefaultShellFeatureState
+                            {
+                                EnabledFeatures = new[]
+                                {
+                                    typeof(ITransformationWorker).Assembly.ShortName()
+                                }
+                            }
+                    }
+                };
+
+                using (var host = await OrchardAppHostFactory.StartTransientHost(settings, null, null))
+                {
+                    try
+                    {
+                        await host.Run<IAppConfigurationAccessor, ITransformationWorker>((configurationAccessor, worker) =>
+                        {
+                            var configuration = new TransformationWorkerConfiguration
+                            {
+                                StorageConnectionString = configurationAccessor
+                                    .GetConfiguration(ConfigurationKeys.StorageConnectionStringKey)
+                            };
+
+                            return worker.Work(configuration, _cancellationTokenSource.Token);
+                        });
+                    }
+                    catch (Exception ex) when (!ex.IsFatal())
+                    {
+                        await host.Run<ILoggerService>(logger =>
+                        {
+                            logger.Error(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
+
+                            // Not exactly the nicest way to restart the worker, and increases memory usage with each
+                            // restart. But such restarts should be extremely rare, this should be just a last resort.
+                            _workerTask = null;
+                            RunStopTasks();
+                            RunStartTasks();
+
+                            return Task.CompletedTask;
+                        });
+                    }
+                }
+            });
+
             _eventLog.WriteEntry(DisplayName + " started.");
         }
 
-        protected override void OnStop()
+        private void RunStopTasks()
         {
+            _cancellationTokenSource.Cancel();
+            _workerTask?.Wait();
+
             _eventLog.WriteEntry(DisplayName + " stopped.");
         }
     }

@@ -184,10 +184,10 @@ namespace Hast.Layer
             var coreFound = false;
             while (abstractionsPath != null && !coreFound)
             {
-                var driversSubFolder = Path.Combine(abstractionsPath, "Hast.Abstractions");
-                if (Directory.Exists(driversSubFolder))
+                var abstractionsSubFolder = Path.Combine(abstractionsPath, "Hast.Abstractions");
+                if (Directory.Exists(abstractionsSubFolder))
                 {
-                    abstractionsPath = driversSubFolder;
+                    abstractionsPath = abstractionsSubFolder;
                     coreFound = true;
                 }
                 else
@@ -226,6 +226,9 @@ namespace Hast.Layer
 
             var settings = new AppHostSettings
             {
+                // Setting a custom path so if the parent app is also an AppHost app then with the default settings
+                // those won't clash.
+                AppDataFolderPath = "~/HastlayerApp_Data",
                 ImportedExtensions = importedExtensions,
                 DefaultShellFeatureStates = new[]
                 {

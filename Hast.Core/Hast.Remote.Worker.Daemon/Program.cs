@@ -29,9 +29,9 @@ namespace Hast.Remote.Worker.Daemon
             // Started from the SCM
             else
             {
-                ServiceBase[] servicestorun;
-                servicestorun = new ServiceBase[] { new Service() };
-                ServiceBase.Run(servicestorun);
+                ServiceBase[] servicesToRun;
+                servicesToRun = new ServiceBase[] { new Service() };
+                ServiceBase.Run(servicesToRun);
             }
         }
     }
