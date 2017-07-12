@@ -28,6 +28,7 @@ namespace Hast.Remote.Worker
         private IHastlayer _hastlayer;
         private CloudBlobContainer _container;
         private ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
+        private int _restartCount = 0;
 
         public ILogger Logger { get; set; }
 
@@ -241,6 +242,7 @@ namespace Hast.Remote.Worker
                     // Waiting a bit between cycles not to have access Blob Storage usage due to polling (otherwise it's
                     // not an issue, this loop barely uses any CPU).
                     await Task.Delay(500);
+                    _restartCount = 0;
                 }
             }
             catch (OperationCanceledException)
@@ -250,9 +252,20 @@ namespace Hast.Remote.Worker
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                Logger.Error(ex, "Transformation worker crashed with an unhandled exception. Restarting.");
-                Dispose();
-                await Work(configuration, cancellationToken);
+                if (_restartCount >= 10)
+                {
+                    Logger.Error(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
+                    Dispose();
+                    _restartCount++;
+                    await Work(configuration, cancellationToken);
+                }
+                else
+                {
+                    Logger.Fatal(
+                        ex,
+                        "Transformation Worker crashed with an unhandled exception and was restarted " +
+                        _restartCount + " times. It won't be restarted again.");
+                }
             }
         }
 

@@ -24,6 +24,7 @@ namespace Hast.Remote.Worker.Daemon
         private readonly EventLog _eventLog;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private Task _workerTask;
+        private int _restartCount = 0;
 
 
         public Service()
@@ -84,6 +85,9 @@ namespace Hast.Remote.Worker.Daemon
                                     .GetConfiguration(ConfigurationKeys.StorageConnectionStringKey)
                             };
 
+                            // Only counting startup crashes.
+                            _restartCount = 0;
+
                             return worker.Work(configuration, _cancellationTokenSource.Token);
                         });
                     }
@@ -93,11 +97,23 @@ namespace Hast.Remote.Worker.Daemon
                         {
                             logger.Error(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
 
-                            // Not exactly the nicest way to restart the worker, and increases memory usage with each
-                            // restart. But such restarts should be extremely rare, this should be just a last resort.
-                            _workerTask = null;
-                            RunStopTasks();
-                            RunStartTasks();
+                            if (_restartCount >= 10)
+                            {
+                                _restartCount++;
+
+                                // Not exactly the nicest way to restart the worker, and increases memory usage with each
+                                // restart. But such restarts should be extremely rare, this should be just a last resort.
+                                _workerTask = null;
+                                RunStopTasks();
+                                RunStartTasks(); 
+                            }
+                            else
+                            {
+                                logger.Fatal(
+                                    ex, 
+                                    DisplayName + " crashed with an unhandled exception and was restarted " + 
+                                    _restartCount + " times. It won't be restarted again.");
+                            }
 
                             return Task.CompletedTask;
                         });
