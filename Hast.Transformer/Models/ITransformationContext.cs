@@ -1,4 +1,5 @@
 ﻿using Hast.Common.Configuration;
+using Hast.Layer;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Models
@@ -27,5 +28,10 @@ namespace Hast.Transformer.Models
         /// Table to look up type declarations in the syntax tree.
         /// </summary>
         ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
+
+        /// <summary>
+        /// Container for the sizes of statically sized arrays. 
+        /// </summary>
+        IArraySizeHolder ArraySizeHolder { get; }
     }
 }

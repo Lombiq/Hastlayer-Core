@@ -7,9 +7,11 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Entity : INamedElement, IDeclarableElement
     {
+        private const string SafeNameCharacterSet = "a-z0-9_";
+
         private string _name;
 
         /// <summary>
@@ -21,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             get { return _name; }
             set
             {
-                if (!Regex.IsMatch(value, "^[a-z0-9]*$", RegexOptions.IgnoreCase))
+                if (!Regex.IsMatch(value, "^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase))
                 {
                     throw new ArgumentException("VHDL Entity names can only contain alphanumerical characters.");
                 }
@@ -30,33 +32,29 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
         }
 
-        public List<Generic> Generics { get; set; }
-        public List<Port> Ports { get; set; }
-        public List<IVhdlElement> Declarations { get; set; }
+        public List<Generic> Generics { get; set; } = new List<Generic>();
+        public List<Port> Ports { get; set; } = new List<Port>();
+        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
 
 
-        public Entity()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            Generics = new List<Generic>();
-            Declarations = new List<IVhdlElement>();
-            Ports = new List<Port>();
-        }
+            var name = vhdlGenerationOptions.ShortenName(Name);
+            return Terminated.Terminate(
+                "entity " + name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    ((Generics != null && Generics.Any() ? Generics.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : string.Empty) +
+                    
+                    "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                        (Ports
+                            // The last port shouldn't be terminated by a semicolon...
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions), string.Empty) +
+                            vhdlGenerationOptions.NewLineIfShouldFormat())
+                        .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    Terminated.Terminate(")", vhdlGenerationOptions) +
 
-
-        public string ToVhdl()
-        {
-            return
-                "entity " +
-                Name +
-                " is " +
-                (Generics != null && Generics.Any() ? Generics.ToVhdl() : string.Empty) +
-                "port(" +
-                string.Join("; ", Ports.Select(parameter => parameter.ToVhdl())) +
-                ");" +
-                Declarations.ToVhdl() +
-                "end " +
-                Name +
-                ";";
+                    Declarations.ToVhdl(vhdlGenerationOptions))
+                    .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end " + name, vhdlGenerationOptions);
         }
 
 
@@ -65,39 +63,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         /// <param name="name">The unsafe name to convert.</param>
         /// <returns>The cleaned name.</returns>
-        public static string ToSafeEntityName(string name)
-        {
-            return Regex.Replace(name, "[^a-z0-9]", "I", RegexOptions.IgnoreCase);
-        }
-    }
-
-
-    public enum PortMode
-    {
-        In,
-        Out,
-        Buffer,
-        InOut
-    }
-
-
-    public class Port : TypedDataObjectBase
-    {
-        public PortMode Mode { get; set; }
-
-        public Port()
-        {
-            DataObjectKind = DataObjectKind.Signal;
-        }
-
-        public override string ToVhdl()
-        {
-            return
-                Name +
-                ": " +
-                Mode +
-                " " +
-                DataType.ToVhdl();
-        }
+        public static string ToSafeEntityName(string name) =>
+            Regex.Replace(name, "[^" + SafeNameCharacterSet + "]", "_", RegexOptions.IgnoreCase);
     }
 }

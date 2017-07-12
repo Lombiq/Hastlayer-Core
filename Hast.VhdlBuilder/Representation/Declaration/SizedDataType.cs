@@ -3,14 +3,33 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class SizedDataType : DataType
     {
         public int Size { get; set; }
         public IVhdlElement SizeExpression { get; set; }
 
 
-        public override string ToVhdl()
+        public SizedDataType(DataType baseType)
+            : base(baseType)
+        {
+        }
+
+        public SizedDataType(SizedDataType previous)
+            : base(previous)
+        {
+            Size = previous.Size;
+            SizeExpression = previous.SizeExpression;
+        }
+
+        public SizedDataType()
+        {
+        }
+
+
+        public override DataType ToReference() => this;
+
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (Size == 0 && SizeExpression == null) return Name;
 
@@ -22,8 +41,22 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 Name +
                 "(" +
-                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl()) +
+                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl(vhdlGenerationOptions)) +
                 " downto 0)";
         }
+
+        public override bool Equals(object obj)
+        {
+            var otherType = obj as SizedDataType;
+            if (otherType == null) return false;
+            return base.Equals(obj) && 
+                (SizeExpression == null ? Size == otherType.Size : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
+        }
+    }
+
+
+    public static class SizedDataTypeExtensions
+    {
+        public static int GetSize(this DataType type) => type is SizedDataType ? ((SizedDataType)type).Size : 0;
     }
 }

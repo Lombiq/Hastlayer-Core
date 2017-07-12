@@ -5,27 +5,17 @@ using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class While : IBlockElement
     {
         public IVhdlElement Condition { get; set; }
-        public List<IVhdlElement> Body { get; set; }
+        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
 
-        public While()
-        {
-            Body = new List<IVhdlElement>();
-        }
-
-
-        public string ToVhdl()
-        {
-            return
-                "while " +
-                Condition.ToVhdl() +
-                " loop " +
-                Body.ToVhdl() +
-                "end loop;";
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Terminated.Terminate(
+                "while " + Condition.ToVhdl(vhdlGenerationOptions) + " loop " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end loop", vhdlGenerationOptions);
     }
 }

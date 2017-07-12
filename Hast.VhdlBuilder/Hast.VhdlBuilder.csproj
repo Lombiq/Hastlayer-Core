@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hast.VhdlBuilder</RootNamespace>
     <AssemblyName>Hast.VhdlBuilder</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,12 +25,16 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,9 +44,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Representation\Declaration\Array.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="JsonSerializerSettingsPopulator.cs" />
+    <Compile Include="Representation\Declaration\Alias.cs" />
+    <Compile Include="Representation\Declaration\ArrayType.cs" />
+    <Compile Include="Representation\Declaration\ArrayTypeBase.cs" />
+    <Compile Include="Representation\Declaration\BitVector.cs" />
+    <Compile Include="Representation\Declaration\BlockComment.cs" />
+    <Compile Include="Representation\Declaration\IReferenceableDeclaration.cs" />
+    <Compile Include="Representation\Declaration\LineComment.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
+    <Compile Include="Representation\Declaration\UnOmittableLineComment.cs" />
+    <Compile Include="Representation\Empty.cs" />
     <Compile Include="Representation\Declaration\Generic.cs" />
+    <Compile Include="Representation\Declaration\GeneratedComment.cs" />
+    <Compile Include="Representation\Declaration\LogicalBlock.cs" />
+    <Compile Include="Representation\Declaration\Port.cs" />
     <Compile Include="Representation\Declaration\StdLogicVector.cs" />
     <Compile Include="Representation\Declaration\TypedDataObjectBase.cs" />
     <Compile Include="Representation\Declaration\IBlockElement.cs" />
@@ -53,6 +71,10 @@
     <Compile Include="Representation\Declaration\ITypedDataObject.cs" />
     <Compile Include="Representation\Declaration\Signal.cs" />
     <Compile Include="Representation\Declaration\Variable.cs" />
+    <Compile Include="Representation\Declaration\UnconstrainedArrayInstantiation.cs" />
+    <Compile Include="Representation\Expression\ArrayAccessBase.cs" />
+    <Compile Include="Representation\Expression\ArrayElementAccess.cs" />
+    <Compile Include="Representation\Expression\ArraySlice.cs" />
     <Compile Include="Representation\Expression\Assignment.cs" />
     <Compile Include="ProcessUtility.cs" />
     <Compile Include="Representation\Declaration\Architecture.cs" />
@@ -61,17 +83,27 @@
     <Compile Include="Representation\Declaration\Component.cs" />
     <Compile Include="Representation\Declaration\ComponentInstance.cs" />
     <Compile Include="Representation\Declaration\KnownDataTypes.cs" />
-    <Compile Include="Representation\Declaration\ElementCollection.cs" />
     <Compile Include="Representation\Declaration\Function.cs" />
     <Compile Include="Representation\Declaration\IDataObject.cs" />
     <Compile Include="Representation\Declaration\Identifier.cs" />
     <Compile Include="Representation\Declaration\ISubProgram.cs" />
     <Compile Include="Representation\Declaration\Module.cs" />
     <Compile Include="Representation\Declaration\Entity.cs" />
+    <Compile Include="Representation\Expression\Character.cs" />
+    <Compile Include="Representation\Expression\ConditionalSignalAssignment.cs" />
     <Compile Include="Representation\Expression\DataObjectReference.cs" />
-    <Compile Include="Representation\Expression\Invokation.cs" />
+    <Compile Include="Representation\Expression\DataTypeReference.cs" />
+    <Compile Include="Representation\Expression\If.cs" />
+    <Compile Include="Representation\Expression\IdentifierValue.cs" />
+    <Compile Include="Representation\Expression\Invocation.cs" />
     <Compile Include="Representation\Expression\IfElse.cs" />
+    <Compile Include="Representation\Expression\BinaryOperator.cs" />
+    <Compile Include="Representation\Expression\Null.cs" />
+    <Compile Include="Representation\Expression\Parenthesized.cs" />
+    <Compile Include="Representation\Expression\RecordFieldAccess.cs" />
     <Compile Include="Representation\Expression\Return.cs" />
+    <Compile Include="Representation\Expression\Unary.cs" />
+    <Compile Include="Representation\Expression\UnaryOperator.cs" />
     <Compile Include="Representation\Expression\While.cs" />
     <Compile Include="Representation\IVhdlElement.cs" />
     <Compile Include="Representation\Declaration\Library.cs" />
@@ -91,11 +123,18 @@
     <Compile Include="Representation\Declaration\TypedDataObject.cs" />
     <Compile Include="Extensions\VhdlElementEnumerableExtensions.cs" />
     <Compile Include="Representation\Declaration\VhdlManifest.cs" />
+    <Compile Include="Representation\VhdlGenerationOptions.cs" />
+    <Compile Include="Testing\VhdlStructureAssertionFailedException.cs" />
+    <Compile Include="Testing\VhdlElementEnumerableExtensions.cs" />
+    <Compile Include="Testing\VhdlElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Module.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

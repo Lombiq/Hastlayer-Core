@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Hast.Common.Models;
+using System.Threading.Tasks;
+using Hast.Common.ContractResolvers;
+using Hast.Layer;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Newtonsoft.Json;
 
@@ -10,63 +12,84 @@ namespace Hast.Transformer.Vhdl.Models
 {
     public class VhdlHardwareDescription : IHardwareDescription
     {
-        private VhdlManifest _manifest;
-        private MemberIdTable _memberIdTable;
-
         public string Language { get { return "VHDL"; } }
-        public VhdlManifest Manifest { get { return _manifest; } }
-        public MemberIdTable MemberIdTable { get { return _memberIdTable; } }
-        public IEnumerable<string> HardwareMembers { get { return _memberIdTable.Values.Select(mapping => mapping.MemberName); } }
+        [JsonProperty]
+        public string VhdlSource { get; private set; }
+        [JsonProperty]
+        public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; private set; }
+
+        /// <summary>
+        /// The VHDL manifest (syntax tree) of the implemented hardware. WARNING: this property is only filled if the
+        /// manifest was freshly built, it will be <c>null</c> if the result comes from cache! (In both cases
+        /// <see cref="VhdlSource"/> will contain the VHDL source code.)
+        /// </summary>
+        [JsonIgnore]
+        public VhdlManifest VhdlManifestIfFresh { get; private set; }
 
 
         public VhdlHardwareDescription()
         {
         }
 
-        public VhdlHardwareDescription(VhdlManifest manifest, MemberIdTable memberIdTable)
+        public VhdlHardwareDescription(string vhdlSource, ITransformedVhdlManifest transformedVhdlManifest)
         {
-            _manifest = manifest;
-            _memberIdTable = memberIdTable;
+            VhdlSource = vhdlSource;
+            HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings;
+            VhdlManifestIfFresh = transformedVhdlManifest.Manifest;
         }
 
 
-        public int LookupMemberId(string memberFullName)
+        public Task WriteSource(Stream stream)
         {
-            return _memberIdTable.LookupMemberId(memberFullName);
+            ThroIfVhdlSourceEmpty();
+
+            using (var streamWriter = new StreamWriter(stream))
+            {
+                // WriteAsync would throw a "The stream is currently in use by a previous operation on the stream." for
+                // FileStreams, even though supposedly there's no operation on the stream.
+                streamWriter.Write(VhdlSource);
+            }
+
+            return Task.CompletedTask;
         }
 
-        public async void Save(Stream stream)
+        public async Task Serialize(Stream stream)
         {
-            if (_manifest == null) throw new InvalidOperationException("There is no manifest to save");
+            ThroIfVhdlSourceEmpty();
 
             using (var writer = new StreamWriter(stream))
             {
-                var storage = new Storage
-                {
-                    Manifest = _manifest,
-                    MemberIdTable = _memberIdTable,
-                };
-
-                await writer.WriteAsync(JsonConvert.SerializeObject(storage, Formatting.None, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+                await writer.WriteAsync(JsonConvert.SerializeObject(
+                    this, 
+                    Formatting.None,
+                    GetJsonSerializerSettings()));
             }
         }
 
-        public async void Load(Stream stream)
+
+        private void ThroIfVhdlSourceEmpty()
+        {
+            if (string.IsNullOrEmpty(VhdlSource)) throw new InvalidOperationException("There is no VHDL source set.");
+        }
+
+
+        public static async Task<VhdlHardwareDescription> Deserialize(Stream stream)
         {
             using (var reader = new StreamReader(stream))
             {
-                var storage = JsonConvert.DeserializeObject<Storage>(await reader.ReadToEndAsync(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
-                
-                _manifest = storage.Manifest;
-                _memberIdTable = storage.MemberIdTable;
+                return JsonConvert.DeserializeObject<VhdlHardwareDescription>(
+                        await reader.ReadToEndAsync(),
+                        GetJsonSerializerSettings());
             }
         }
 
 
-        public class Storage
-        {
-            public VhdlManifest Manifest { get; set; }
-            public MemberIdTable MemberIdTable { get; set; }
-        }
+        private static JsonSerializerSettings GetJsonSerializerSettings() =>
+            new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new PrivateSetterContractResolver(),
+            };
     }
 }

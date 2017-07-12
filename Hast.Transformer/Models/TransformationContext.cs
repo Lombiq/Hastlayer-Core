@@ -1,4 +1,5 @@
 ﻿using Hast.Common.Configuration;
+using Hast.Layer;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Models
@@ -9,6 +10,7 @@ namespace Hast.Transformer.Models
         public SyntaxTree SyntaxTree { get; set; }
         public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
         public ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; set; }
+        public IArraySizeHolder ArraySizeHolder { get; set; }
 
 
         public TransformationContext(ITransformationContext previousContext) : this()
@@ -17,6 +19,7 @@ namespace Hast.Transformer.Models
             SyntaxTree = previousContext.SyntaxTree;
             HardwareGenerationConfiguration = previousContext.HardwareGenerationConfiguration;
             TypeDeclarationLookupTable = previousContext.TypeDeclarationLookupTable;
+            ArraySizeHolder = previousContext.ArraySizeHolder;
         }
 
         public TransformationContext()

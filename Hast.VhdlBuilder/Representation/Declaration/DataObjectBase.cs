@@ -3,10 +3,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public abstract class DataObjectBase : IDataObject
     {
-        public DataObjectKind DataObjectKind { get; set; }
-        public string Name { get; set; }
+        public virtual DataObjectKind DataObjectKind { get; set; }
+        public virtual string Name { get; set; }
 
 
-        public abstract string ToVhdl();
+        public abstract IDataObject ToReference();
+        public abstract string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions);
     }
 }

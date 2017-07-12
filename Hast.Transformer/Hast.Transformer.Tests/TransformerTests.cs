@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Hast.Common.Configuration;
-using Hast.Common.Models;
-using Hast.Communication;
-using Hast.Tests.TestAssembly1;
-using Hast.Tests.TestAssembly1.ComplexTypes;
-using Hast.Tests.TestAssembly2;
+using Hast.Layer;
+using Hast.TestInputs.ClassStructure1;
+using Hast.TestInputs.ClassStructure1.ComplexTypes;
+using Hast.TestInputs.ClassStructure2;
+using Hast.Transformer.Abstractions;
+using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
+using Hast.Transformer.Services;
 using ICSharpCode.NRefactory.CSharp;
 using Moq;
 using NUnit.Framework;
 using Orchard.Services;
 using Orchard.Tests.Utility;
+using Shouldly;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -48,7 +49,8 @@ namespace Hast.Transformer.Vhdl.Tests
                 .Setup(engine => engine.Transform(It.IsAny<ITransformationContext>()))
                 .Returns<ITransformationContext>(context =>
                     {
-                        // Sending out the context through a field is not a nice solutions but there doesn't seem to be a better one.
+                        // Sending out the context through a field is not a nice solutions but there doesn't seem to be 
+                        // a better one.
                         _producedContext = context;
                         return Task.FromResult<IHardwareDescription>(null);
                     })
@@ -74,113 +76,123 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             var configuration = CreateConfig();
 
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, configuration);
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
 
             _transformingEngineMock.Verify(engine => engine.Transform(It.Is<ITransformationContext>(context => context != null)));
-            Assert.IsNotNullOrEmpty(_producedContext.Id, "The ID for the transformation context was not properly set.");
-            Assert.NotNull(_producedContext.SyntaxTree, "No syntax tree tree was set for the transformation context.");
-            Assert.AreEqual(configuration, _producedContext.HardwareGenerationConfiguration, "The input hardware generation configuration was not properly passed on to the transformation context.");
-            Assert.NotNull(_producedContext.TypeDeclarationLookupTable, "No type declaration lookup table was set for the transformation context.");
+
+            _producedContext.Id.ShouldNotBeNullOrEmpty();
+            _producedContext.SyntaxTree.ShouldNotBeNull();
+            configuration.ShouldBe(_producedContext.HardwareGenerationConfiguration, "The input hardware generation configuration was not properly passed on to the transformation context.");
+            _producedContext.TypeDeclarationLookupTable.ShouldNotBeNull();
         }
 
         [Test]
         public async Task DifferentConfigurationsResultInDifferentIds()
         {
             var config = CreateConfig();
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             var firstId = _producedContext.Id;
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, config);
-            Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
+            firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
 
-            config.TransformerConfiguration().MaxDegreeOfParallelism = 5;
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
+            config.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                new MemberInvocationInstanceCountConfiguration("Hast.TestInputs.ClassStructure1.RootClass.VirtualMethod")
+                {
+                    MaxDegreeOfParallelism = 5
+                });
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
-            config.TransformerConfiguration().MaxDegreeOfParallelism = 15;
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
-            Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
+            config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Single().MaxDegreeOfParallelism = 15;
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
-            config.PublicHardwareMembers = new[] { "aaa" };
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
+            config.HardwareEntryPointMemberFullNames = new[] { "aaa" };
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
-            config.PublicHardwareMembers = new[] { "bbb" };
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
-            Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
+            config.HardwareEntryPointMemberFullNames = new[] { "bbb" };
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
 
-            config.PublicHardwareMemberPrefixes = new[] { "aaa" };
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
+            config.HardwareEntryPointMemberNamePrefixes = new[] { "aaa" };
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
-            config.PublicHardwareMemberPrefixes = new[] { "bbb" };
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly }, config);
-            Assert.AreNotEqual(firstId, _producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
+            config.HardwareEntryPointMemberNamePrefixes = new[] { "bbb" };
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
 
         [Test]
         public async Task UnusedDeclarationsArentInTheSyntaxTree()
         {
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
             var typeLookup = BuildTypeLookup();
 
-            Assert.AreEqual(typeLookup.Count, 8, "Not the number of types remained in the syntax tree than there are used.");
-            Assert.IsFalse(typeLookup.ContainsKey(typeof(UnusedDeclarations).Name), "Classes with unreferenced members weren't removed from the syntax tree.");
-            Assert.IsFalse(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Any(member => member.Name == "UnusedMethod" || member.Name == "NonVirtualNonInterfaceMehod"), "Unreferenced members of classes weren't removed from the syntax tree.");
+            typeLookup.Count.ShouldBe(7, "Not the number of types remained in the syntax tree than there are used.");
+            typeLookup.ShouldNotContainKey(typeof(UnusedDeclarations).Name, "Classes with unreferenced members weren't removed from the syntax tree.");
+            typeLookup[typeof(ComplexTypeHierarchy).Name].Members.ShouldNotContain(
+                member => member.Name == "UnusedMethod" || member.Name == "NonVirtualNonInterfaceMehod",
+                "Unreferenced members of classes weren't removed from the syntax tree.");
         }
 
         [Test]
         public async Task IncludedMembersAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
-            configuration.PublicHardwareMembers = new[]
+            configuration.HardwareEntryPointMemberFullNames = new[]
             {
-                "System.Boolean Hast.Tests.TestAssembly1.ComplexAlgorithm::IsPrimeNumber(System.UInt32)",
-                "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Hast.Tests.TestAssembly1.ComplexTypes.IInterface1.Interface1Method1()"
+                "System.Void " + typeof(RootClass).FullName + "::" + nameof(RootClass.VirtualMethod) + "(System.Int32)",
+                "System.Void " + typeof(ComplexTypeHierarchy).FullName + "::" + typeof(IInterface1).FullName + "." + nameof(IInterface1.Interface1Method1) + "()"
             };
 
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, configuration);
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
-            Assert.AreEqual(typeLookup.Count, 3, "Not the number of types remained in the syntax tree than there are used.");
-            Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Count, 1);
-            Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Single().Name, "IsPrimeNumber");
-            Assert.AreEqual(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count, 3);
-            Assert.That(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
-                .SequenceEqual(new[] { "Interface1Method1", "PrivateMethod", "StaticMethod" }));
-            Assert.AreEqual(typeLookup[typeof(IInterface1).Name].Members.Count, 1);
-            Assert.That(typeLookup[typeof(IInterface1).Name].Members.Select(member => member.Name)
-                .SequenceEqual(new[] { "Interface1Method1" }));
+            typeLookup.Count.ShouldBe(3, "Not the number of types remained in the syntax tree than there are used.");
+            typeLookup[typeof(RootClass).Name].Members.Count.ShouldBe(1);
+            typeLookup[typeof(RootClass).Name].Members.Single().Name.ShouldBe("VirtualMethod");
+            typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count.ShouldBe(3);
+            typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
+                .SequenceEqual(new[] { "Interface1Method1", "PrivateMethod", "StaticMethod" })
+                .ShouldBeTrue();
+            typeLookup[typeof(IInterface1).Name].Members.Count.ShouldBe(1);
+            typeLookup[typeof(IInterface1).Name].Members.Select(member => member.Name)
+                .SequenceEqual(new[] { "Interface1Method1" })
+                .ShouldBeTrue();
         }
 
         [Test]
         public async Task IncludedMembersPrefixedAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
-            configuration.PublicHardwareMemberPrefixes = new[]
+            configuration.HardwareEntryPointMemberNamePrefixes = new[]
             {
-                "Hast.Tests.TestAssembly1.ComplexAlgorithm.IsPrimeNumber",
-                "Hast.Tests.TestAssembly1.ComplexTypes"
+                typeof(RootClass).FullName + "." + nameof(RootClass.VirtualMethod),
+                typeof(ComplexTypeHierarchy).Namespace
             };
-
-            await _transformer.Transform(new[] { typeof(ComplexAlgorithm).Assembly, typeof(StaticReference).Assembly }, configuration);
+            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
-            Assert.AreEqual(typeLookup.Count, 6, "Not the number of types remained in the syntax tree than there are used.");
-            Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Count, 1);
-            Assert.AreEqual(typeLookup[typeof(ComplexAlgorithm).Name].Members.Single().Name, "IsPrimeNumber");
-            Assert.AreEqual(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count, 7);
-            Assert.That(typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
-                .SequenceEqual(new[] { "Interface1Method1", "Interface1Method2", "Interface2Method1", "BaseInterfaceMethod1", "BaseInterfaceMethod2", "PrivateMethod", "StaticMethod" }));
+            typeLookup.Count.ShouldBe(5, "Not the number of types remained in the syntax tree than there are used.");
+            typeLookup[typeof(RootClass).Name].Members.Count.ShouldBe(1);
+            typeLookup[typeof(RootClass).Name].Members.Single().Name.ShouldBe("VirtualMethod");
+            typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count.ShouldBe(7);
+            typeLookup[typeof(ComplexTypeHierarchy).Name].Members
+                .Select(member => member.Name)
+                .SequenceEqual(new[] { "Interface1Method1", "Interface1Method2", "Interface2Method1", "BaseInterfaceMethod1", "BaseInterfaceMethod2", "PrivateMethod", "StaticMethod" })
+                .ShouldBeTrue();
         }
 
 
         private Dictionary<string, TypeDeclaration> BuildTypeLookup()
         {
-            return _producedContext.SyntaxTree.GetTypes(true).ToDictionary(type => type.Name);
+            return _producedContext.SyntaxTree.GetAllTypeDeclarations().ToDictionary(type => type.Name);
         }
 
 
         private static HardwareGenerationConfiguration CreateConfig()
         {
-            var configuration = new HardwareGenerationConfiguration();
+            var configuration = new HardwareGenerationConfiguration("Nexys4 DDR");
             configuration.TransformerConfiguration().UseSimpleMemory = false;
             return configuration;
         }

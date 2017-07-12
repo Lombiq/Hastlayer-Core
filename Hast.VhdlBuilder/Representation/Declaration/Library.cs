@@ -4,36 +4,24 @@ using System.Text;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Library : INamedElement
     {
         public string Name { get; set; }
-        public List<string> Uses { get; set; }
+        public List<string> Uses { get; set; } = new List<string>();
 
 
-        public Library()
-        {
-            Uses = new List<string>();
-        }
-
-
-        public string ToVhdl()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (string.IsNullOrEmpty(Name)) return string.Empty;
 
             var builder = new StringBuilder();
 
-            builder
-                .Append("library ")
-                .Append(Name)
-                .Append(";");
+            builder.Append(Terminated.Terminate("library " + Name, vhdlGenerationOptions));
 
             foreach (var use in Uses)
             {
-                builder
-                    .Append("use ")
-                    .Append(use)
-                    .Append(";");
+                builder.Append(Terminated.Terminate("use " + use, vhdlGenerationOptions));
             }
 
             return builder.ToString();

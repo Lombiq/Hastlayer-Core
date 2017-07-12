@@ -1,15 +1,19 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
     public static class SimpleMemoryMethodDeclarationExtensions
     {
-        public static string GetSimpleMemoryParameterName(this MethodDeclaration methodDeclaration)
+        public static string GetSimpleMemoryParameterName(this MethodDeclaration method)
         {
-            var parameter = methodDeclaration.Parameters.SingleOrDefault(p => p.IsSimpleMemoryParameter());
+            var parameter = method.Parameters.SingleOrDefault(p => p.IsSimpleMemoryParameter());
             if (parameter == null) return null;
             return parameter.Name;
         }
+
+        public static IEnumerable<ParameterDeclaration> GetNonSimpleMemoryParameters(this MethodDeclaration method) =>
+            method.Parameters.Where(p => !p.IsSimpleMemoryParameter());
     }
 }
 

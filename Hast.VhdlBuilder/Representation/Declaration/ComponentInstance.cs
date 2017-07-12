@@ -1,32 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class ComponentInstance : IVhdlElement
     {
         public Component Component { get; set; }
         public string Label { get; set; }
-        public List<PortMapping> PortMappings { get; set; }
+        public List<PortMapping> PortMappings { get; set; } = new List<PortMapping>();
 
 
-        public ComponentInstance()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            PortMappings = new List<PortMapping>();
-        }
+            return Terminated.Terminate(
+                Label + " : " + vhdlGenerationOptions.ShortenName(Component.Name) + vhdlGenerationOptions.NewLineIfShouldFormat() +
 
+                    "port map (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                        PortMappings
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions))
+                            .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    Terminated.Terminate(")", vhdlGenerationOptions) +
 
-        public string ToVhdl()
-        {
-            return
-                Label +
-                " : " +
-                Component.Name +
-                " port map (" +
-                string.Join(", ", PortMappings.Select(mapping => mapping.ToVhdl())) +
-                ");";
+                ")", vhdlGenerationOptions);
         }
     }
 
@@ -37,9 +34,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string To { get; set; }
 
 
-        public string ToVhdl()
-        {
-            return From + " => " + To;
-        }
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            vhdlGenerationOptions.ShortenName(From) + " => " + vhdlGenerationOptions.ShortenName(To);
     }
 }

@@ -4,7 +4,7 @@ namespace ICSharpCode.NRefactory.CSharp
 {
     public static class AstTypeExtensions
     {
-        public static bool TypeEquals(this AstType astType, AstType other, Func<AstType, TypeDeclaration> lookupDeclaration)
+        public static bool AstTypeEquals(this AstType astType, AstType other, Func<AstType, TypeDeclaration> lookupDeclaration)
         {
             if (astType is PrimitiveType && other is PrimitiveType)
             {
@@ -12,12 +12,18 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else if (astType is ComposedType && other is ComposedType)
             {
-                return ((ComposedType)astType).BaseType.TypeEquals(((ComposedType)other).BaseType, lookupDeclaration);
+                return ((ComposedType)astType).BaseType.AstTypeEquals(((ComposedType)other).BaseType, lookupDeclaration);
             }
             else
             {
                 return lookupDeclaration(astType) == lookupDeclaration(other);
             }
+        }
+
+        public static bool IsArray(this AstType type)
+        {
+            var composedType = type as ComposedType;
+            return composedType != null && composedType.ArraySpecifiers.Count != 0;
         }
     }
 }

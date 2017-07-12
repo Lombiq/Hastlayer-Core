@@ -1,31 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Component : INamedElement
     {
         public string Name { get; set; }
-        public List<Port> Ports { get; set; }
+        public List<Port> Ports { get; set; } = new List<Port>();
 
 
-        public Component()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            Ports = new List<Port>();
-        }
+            var name = vhdlGenerationOptions.ShortenName(Name);
+            return Terminated.Terminate(
+                "component " + name + vhdlGenerationOptions.NewLineIfShouldFormat() +
 
+                    "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                        Ports
+                            .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions))
+                            .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    Terminated.Terminate(")", vhdlGenerationOptions) +
 
-        public string ToVhdl()
-        {
-            return
-                "component " +
-                Name +
-                " port(" +
-                string.Join(", ", Ports.Select(parameter => parameter.ToVhdl())) +
-                ");" +
-                "end component;";
+                "end " + name, vhdlGenerationOptions);
         }
     }
 }

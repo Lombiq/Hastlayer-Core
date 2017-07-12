@@ -1,33 +1,37 @@
 ﻿using System;
+using System.Linq;
+using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Helpers;
+using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using Mono.Cecil;
-using Orchard;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public interface ITypeConverter : IDependency
-    {
-        DataType ConvertTypeReference(TypeReference typeReference);
-        DataType Convert(AstType type);
-        DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable);
-    }
-
-
     public class TypeConverter : ITypeConverter
     {
-        public DataType ConvertTypeReference(TypeReference typeReference)
-        {
-            if (!typeReference.IsPrimitive)
-            {
-                throw new ArgumentException("Only primitive types are supported.");
-            }
+        private readonly IRecordComposer _recordComposer;
 
+
+        public TypeConverter(IRecordComposer recordComposer)
+        {
+            _recordComposer = recordComposer;
+        }
+
+
+        public DataType ConvertTypeReference(
+            TypeReference typeReference, 
+            IVhdlTransformationContext context)
+        {
             switch (typeReference.FullName)
             {
                 case "System.Boolean":
                     return ConvertPrimitive(KnownTypeCode.Boolean);
+                case "System.Byte":
+                    return ConvertPrimitive(KnownTypeCode.Byte);
                 case "System.Char":
                     return ConvertPrimitive(KnownTypeCode.Char);
                 case "System.Decimal":
@@ -40,6 +44,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return ConvertPrimitive(KnownTypeCode.Int32);
                 case "System.Int64":
                     return ConvertPrimitive(KnownTypeCode.Int64);
+                case "System.Object":
+                    return ConvertPrimitive(KnownTypeCode.Object);
+                case "System.SByte":
+                    return ConvertPrimitive(KnownTypeCode.SByte);
                 case "System.String":
                     return ConvertPrimitive(KnownTypeCode.String);
                 case "System.UInt16":
@@ -48,23 +56,57 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return ConvertPrimitive(KnownTypeCode.UInt32);
                 case "System.UInt64":
                     return ConvertPrimitive(KnownTypeCode.UInt64);
+                case "System.Void":
+                    return ConvertPrimitive(KnownTypeCode.Void);
             }
 
-            throw new NotSupportedException("The type " + typeReference.FullName + " is not supported for transforming.");
+            if (typeReference.IsArray)
+            {
+                return CreateArrayType(ConvertTypeReference(typeReference.GetElementType(), context));
+            }
+
+            if (IsTaskTypeReference(typeReference))
+            {
+                if (typeReference is GenericInstanceType)
+                {
+                    return ConvertTypeReference(((GenericInstanceType)typeReference).GenericArguments.Single(), context); 
+                }
+
+                return SpecialTypes.Task;
+            }
+
+            return ConvertTypeDefinition(typeReference as TypeDefinition, typeReference.FullName, context);
         }
 
-        public DataType Convert(AstType type)
+        public DataType ConvertAstType(AstType type, IVhdlTransformationContext context)
         {
-            if (type is PrimitiveType) return ConvertPrimitive((type as PrimitiveType).KnownTypeCode);
-            else if (type is ComposedType) return ConvertComposed((ComposedType)type);
-            //else if (type is SimpleType) return ConvertSimple((SimpleType)type); // Would be a composite object.
+            if (type is PrimitiveType) return ConvertPrimitive(((PrimitiveType)type).KnownTypeCode);
+            else if (type is ComposedType)
+            {
+                var composedType = (ComposedType)type;
 
-            throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
+                // For inner classes (member types) the BaseType will contain the actual type (in a strange way the 
+                // actual type will be the BaseType of itself...).
+                if (type.GetFullName() == composedType.BaseType.GetFullName())
+                {
+                    return ConvertAstType(composedType.BaseType, context);
+                }
+                else
+                {
+                    return ConvertComposed(composedType, context); 
+                }
+            }
+            else if (type is SimpleType) return ConvertSimple((SimpleType)type, context);
+
+            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), context);
         }
 
-        public DataType ConvertAndDeclare(AstType type, IDeclarableElement declarable)
+        public DataType ConvertAndDeclareAstType(
+            AstType type, 
+            IDeclarableElement declarable,
+            IVhdlTransformationContext context)
         {
-            var vhdlType = Convert(type);
+            var vhdlType = ConvertAstType(type, context);
 
             if (vhdlType.TypeCategory == DataTypeCategory.Array || vhdlType.TypeCategory == DataTypeCategory.Composite)
             {
@@ -86,7 +128,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Boolean:
                     return KnownDataTypes.Boolean;
                 case KnownTypeCode.Byte:
-                    break;
+                    return KnownDataTypes.UInt8;
                 case KnownTypeCode.Char:
                     return KnownDataTypes.Character;
                 case KnownTypeCode.DBNull:
@@ -126,10 +168,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Int16:
                     return KnownDataTypes.Int16;
                 case KnownTypeCode.Int32:
-                    // The lower barrier for VHDL integers is one shorter...
                     return KnownDataTypes.Int32;
                 case KnownTypeCode.Int64:
-                    break;
+                    return KnownDataTypes.Int64;
                 case KnownTypeCode.IntPtr:
                     break;
                 case KnownTypeCode.MulticastDelegate:
@@ -139,9 +180,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.NullableOfT:
                     break;
                 case KnownTypeCode.Object:
-                    break;
+                    return KnownDataTypes.StdLogicVector32;
                 case KnownTypeCode.SByte:
-                    break;
+                    return KnownDataTypes.Int8;
                 case KnownTypeCode.Single:
                     break;
                 case KnownTypeCode.String:
@@ -153,11 +194,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Type:
                     break;
                 case KnownTypeCode.UInt16:
-                    return KnownDataTypes.Natural;
+                    return KnownDataTypes.UInt16;
                 case KnownTypeCode.UInt32:
-                    return KnownDataTypes.Natural;
+                    return KnownDataTypes.UInt32;
                 case KnownTypeCode.UInt64:
-                    break;
+                    return KnownDataTypes.UInt64;
                 case KnownTypeCode.UIntPtr:
                     break;
                 case KnownTypeCode.ValueType:
@@ -169,20 +210,80 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             throw new NotSupportedException("The type " + typeCode.ToString() + " is not supported for transforming.");
         }
 
-        private DataType ConvertComposed(ComposedType type)
+        private DataType ConvertComposed(ComposedType type, IVhdlTransformationContext context)
         {
-            if (type.ArraySpecifiers.Count != 0)
+            if (type.IsArray())
             {
-                var storedType = Convert(type.BaseType);
-                return new Hast.VhdlBuilder.Representation.Declaration.Array { StoredType = storedType, Name = storedType.Name + "_array" };
+                return CreateArrayType(ConvertAstType(type.BaseType, context));
+            }
+
+            // If the type is used in an array initialization and is a non-primitive type then the actual type will be 
+            // the only child.
+            if (type.Children.SingleOrDefault() is SimpleType)
+            {
+                return ConvertSimple((SimpleType)type.Children.SingleOrDefault(), context);
+            }
+
+            // If the type is used in an array initialization and is a primitive type then the actual type will be the
+            // BaseType.
+            if (type.BaseType is PrimitiveType)
+            {
+                return ConvertPrimitive(((PrimitiveType)type.BaseType).KnownTypeCode);
             }
 
             throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
         }
 
-        private DataType ConvertSimple(SimpleType type)
+        private DataType ConvertSimple(SimpleType type, IVhdlTransformationContext context)
         {
-            throw new NotImplementedException();
+            if (type.Identifier == nameof(System.Threading.Tasks.Task) && IsTaskTypeReference(type.GetActualTypeReference()))
+            {
+                // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
+                if (type.TypeArguments.Count == 1)
+                {
+                    return ConvertAstType(type.TypeArguments.Single(), context);
+                }
+
+                return SpecialTypes.Task;
+            }
+
+            return ConvertTypeDefinition(type.Annotation<TypeDefinition>(), type.GetFullName(), context);
         }
+
+        private DataType ConvertTypeDefinition(TypeDefinition typeDefinition, string typeFullName, IVhdlTransformationContext context)
+        {
+            if (typeDefinition == null)
+            {
+                typeDefinition = context.TypeDeclarationLookupTable.Lookup(typeFullName)?.Annotation<TypeDefinition>();
+            }
+
+            if (typeDefinition == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeFullName);
+
+            if (typeDefinition.IsEnum)
+            {
+                return new VhdlBuilder.Representation.Declaration.Enum { Name = typeDefinition.FullName.ToExtendedVhdlId() };
+            }
+
+            if (typeDefinition.IsClass)
+            {
+                return _recordComposer.CreateRecordFromType(
+                    context.TypeDeclarationLookupTable.Lookup(typeDefinition.FullName), 
+                    context);
+            }
+
+            throw new NotSupportedException(
+                "The type " + typeDefinition.FullName + " is not supported for transforming.");
+        }
+
+
+        private static DataType CreateArrayType(DataType elementType) =>
+            new VhdlBuilder.Representation.Declaration.ArrayType
+            {
+                ElementType = elementType,
+                Name = ArrayHelper.CreateArrayTypeName(elementType.Name)
+            };
+
+        private static bool IsTaskTypeReference(TypeReference typeReference) =>
+            typeReference.FullName.StartsWith(typeof(System.Threading.Tasks.Task).FullName);
     }
 }

@@ -15,54 +15,33 @@ namespace Hast.VhdlBuilder
             {
                 Mode = PortMode.In,
                 Name = clockSignalName,
-                DataType = new DataType { Name = "std_logic" }
+                DataType = KnownDataTypes.StdLogic
             };
 
             module.Entity.Ports.Add(clockPort);
 
-            foreach (var process in module.Architecture.Body.Where(element => element is Process).Select(element => element as Process))
+            // Also looking on level down, so detecting processes even if they're in an inline block.
+            var processes = 
+                module.Architecture.Body.Where(element => element is Process)
+                .Union(module.Architecture.Body
+                    .Where(element => !(element is Process) && element is IBlockElement)
+                    .Cast<InlineBlock>()
+                    .SelectMany(block => block.Body.Where(element => element is Process)))
+                .Cast<Process>();
+
+            foreach (var process in processes)
             {
-                process.SesitivityList.Add(clockPort);
-                var invokation = new Invokation { Target = "rising_edge".ToVhdlIdValue() };
-                invokation.Parameters.Add(clockSignalName.ToVhdlIdValue());
+                process.SensitivityList.Add(clockPort);
+                var invocation = new Invocation { Target = "rising_edge".ToVhdlIdValue() };
+                invocation.Parameters.Add(clockSignalName.ToVhdlSignalReference());
                 var wrappingIf = new IfElse
                 {
-                    Condition = invokation,
-                    True = new ElementCollection { Elements = new List<IVhdlElement>(process.Body) } // Needs to copy the list.
+                    Condition = invocation,
+                    True = new InlineBlock { Body = new List<IVhdlElement>(process.Body) } // Needs to copy the list.
                 };
                 process.Body.Clear();
-                process.Body.Add(wrappingIf);
+                process.Add(wrappingIf);
             }
         }
-
-        //public static void AddAsyncResetToProcesses(Module module, string resetSignalName)
-        //{
-        //    var resetPort = new Port
-        //    {
-        //        Mode = PortMode.In,
-        //        Name = resetSignalName,
-        //        DataType = new DataType { Name = "std_logic" }
-        //    };
-
-        //    module.Entity.Ports.Add(resetPort);
-
-        //    foreach (var process in module.Architecture.Body.Where(element => element is Process).Select(element => element as Process))
-        //    {
-        //        process.SesitivityList.Add(resetPort);
-        //        process.Body.Insert(0, new Raw("if " + resetSignalName.ToVhdlId() + " /= '1' then "));
-        //        process.Body.Add(new Raw("end if;"));
-        //    }
-
-        //    var resetProcess = new Process { Name = "Reset" };
-        //    resetProcess.SesitivityList.Add(resetPort);
-        //    resetProcess.Body.Add(new Raw(
-        //        "if " + resetSignalName.ToVhdlId() + " = '1' then " +
-        //        string.Concat(
-        //            module.Architecture.Declarations
-        //                .Where(declaration => declaration is IDataObject && ((IDataObject)declaration).ObjectType == ObjectType.Signal)
-        //                .Select(declaration => ((IDataObject)declaration).Name.ToVhdlId() + " <= " + ) +
-        //        "end if;"));
-        //    module.Architecture.Body.Add(resetProcess);
-        //}
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Variable : TypedDataObject
     {
         public bool Shared { get; set; }
@@ -14,9 +14,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
 
-        public override string ToVhdl()
-        {
-            return (Shared ? "shared " : string.Empty) + base.ToVhdl();
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            (Shared ? "shared " : string.Empty) + base.ToVhdl(vhdlGenerationOptions);
     }
 }

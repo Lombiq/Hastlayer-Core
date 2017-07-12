@@ -2,18 +2,16 @@
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Return : IVhdlElement
     {
         public IVhdlElement Expression { get; set; }
 
 
-        public string ToVhdl()
-        {
-            return
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            Terminated.Terminate(
                 "return" +
-                (Expression != null ? Expression.ToVhdl() : string.Empty) +
-                ";";
-        }
+                (Expression != null ? Expression.ToVhdl(vhdlGenerationOptions) : string.Empty),
+                vhdlGenerationOptions);
     }
 }

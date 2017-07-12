@@ -5,39 +5,29 @@ using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Procedure : ISubProgram
     {
         public string Name { get; set; }
-        public List<ProcedureParameter> Parameters { get; set; }
-        public List<IVhdlElement> Declarations { get; set; }
-        public List<IVhdlElement> Body { get; set; }
+        public List<ProcedureParameter> Parameters { get; set; } = new List<ProcedureParameter>();
+        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
 
-        public Procedure()
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            Parameters = new List<ProcedureParameter>();
-            Declarations = new List<IVhdlElement>();
-            Body = new List<IVhdlElement>();
-        }
-
-
-        public string ToVhdl()
-        {
-            return
-                "procedure " +
-                Name +
-                (Parameters.Count > 0 ? " (" : " ") +
-                // Out params at the end
-                string.Join("; ", Parameters.OrderBy(parameter => parameter.ParameterType).Select(parameter => parameter.ToVhdl())) +
+            var name = vhdlGenerationOptions.ShortenName(Name);
+            return Terminated.Terminate(
+                "procedure " + name +
+                (Parameters.Count > 0 ? " (" : " ") + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                // Out params at the end.
+                Parameters.OrderBy(parameter => parameter.ParameterType).ToVhdl(vhdlGenerationOptions, "; ", string.Empty) +
                 (Parameters.Count > 0 ? ")" : string.Empty)  +
-                " is " +
-                Declarations.ToVhdl() + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
-                "begin " +
-                Body.ToVhdl() +
-                " end procedure " +
-                Name +
-                ";";
+                " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
+                "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
+                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end procedure " + name, vhdlGenerationOptions);
         }
     }
 
@@ -50,21 +40,18 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     }
 
 
-    [DebuggerDisplay("{ToVhdl()}")]
+    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class ProcedureParameter : TypedDataObjectBase
     {
         public ProcedureParameterType ParameterType { get; set; }
 
 
-        public override string ToVhdl()
-        {
-            return
-                (DataObjectKind.ToString() ?? string.Empty) +
-                Name +
-                ": " +
-                ParameterType +
-                " " +
-                DataType.ToVhdl();
-        }
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+            (DataObjectKind.ToString() ?? string.Empty) +
+            vhdlGenerationOptions.ShortenName(Name) +
+            ": " +
+            ParameterType +
+            " " +
+            DataType.ToVhdl(vhdlGenerationOptions);
     }
 }
