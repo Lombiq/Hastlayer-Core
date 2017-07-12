@@ -78,7 +78,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
-    <None Include="Readme2.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
