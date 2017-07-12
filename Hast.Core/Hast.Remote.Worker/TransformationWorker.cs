@@ -237,6 +237,10 @@ namespace Hast.Remote.Worker
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
+
+                    // Waiting a bit between cycles not to have access Blob Storage usage due to polling (otherwise it's
+                    // not an issue, this loop barely uses any CPU).
+                    await Task.Delay(500);
                 }
             }
             catch (OperationCanceledException)
