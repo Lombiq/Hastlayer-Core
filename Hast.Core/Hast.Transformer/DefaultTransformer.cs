@@ -18,6 +18,7 @@ using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.Decompiler.Ast.Transforms;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
+using Orchard.FileSystems.AppData;
 using Orchard.Services;
 
 namespace Hast.Transformer
@@ -43,6 +44,7 @@ namespace Hast.Transformer
         private readonly ICustomPropertiesToMethodsConverter _customPropertiesToMethodsConverter;
         private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
         private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
+        private readonly IAppDataFolder _appDataFolder;
 
 
         public DefaultTransformer(
@@ -64,7 +66,8 @@ namespace Hast.Transformer
             IOperatorAssignmentsToSimpleAssignmentsConverter operatorAssignmentsToSimpleAssignmentsConverter,
             ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
             IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
-            IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator)
+            IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
+            IAppDataFolder appDataFolder)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -85,12 +88,25 @@ namespace Hast.Transformer
             _customPropertiesToMethodsConverter = customPropertiesToMethodsConverter;
             _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
             _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
+            _appDataFolder = appDataFolder;
         }
 
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
-            var firstAssembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPaths.First()));
+            // When executed as a Windows service not all Hastlayer assemblies references from transformed assemblies
+            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. So helping Cecil found
+            // it here.
+            var resolver = new AssemblyResolver();
+            resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
+            resolver.AddSearchDirectory(_appDataFolder.MapPath("Dependencies"));
+            resolver.AddSearchDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            var parameters = new ReaderParameters
+            {
+                AssemblyResolver = resolver,
+            };
+
+            var firstAssembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPaths.First()), parameters);
             var transformationId = firstAssembly.FullName;
             var decompiledContext = new DecompilerContext(firstAssembly.MainModule);
 
@@ -102,7 +118,7 @@ namespace Hast.Transformer
 
             foreach (var assemblyPath in assemblyPaths.Skip(1))
             {
-                var assembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPath));
+                var assembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPath), parameters);
                 transformationId += "-" + assembly.FullName;
                 astBuilder.AddAssembly(assembly);
             }
@@ -252,6 +268,50 @@ namespace Hast.Transformer
                         }
                     }
                 }
+            }
+        }
+
+
+        public class AssemblyResolver : DefaultAssemblyResolver
+        {
+            public override AssemblyDefinition Resolve(AssemblyNameReference name)
+            {
+                try
+                {
+                    return base.Resolve(name);
+                }
+                catch { }
+                return null;
+            }
+
+            public override AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
+            {
+                try
+                {
+                    return base.Resolve(name, parameters);
+                }
+                catch { }
+                return null;
+            }
+
+            public override AssemblyDefinition Resolve(string fullName)
+            {
+                try
+                {
+                    return base.Resolve(fullName);
+                }
+                catch { }
+                return null;
+            }
+
+            public override AssemblyDefinition Resolve(string fullName, ReaderParameters parameters)
+            {
+                try
+                {
+                    return base.Resolve(fullName, parameters);
+                }
+                catch { }
+                return null;
             }
         }
     }
