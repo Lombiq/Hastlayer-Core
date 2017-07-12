@@ -238,8 +238,6 @@ namespace Hast.Remote.Worker
 
                     cancellationToken.ThrowIfCancellationRequested();
                 }
-
-                //var hardwareImplementation = await _hastlayer.GenerateHardware();
             }
             catch (OperationCanceledException)
             {
