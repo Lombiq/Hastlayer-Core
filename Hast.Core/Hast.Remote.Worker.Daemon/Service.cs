@@ -59,7 +59,7 @@ namespace Hast.Remote.Worker.Daemon
             {
                 var settings = new AppHostSettings
                 {
-                    ImportedExtensions = new[] { typeof(Program).Assembly, typeof(ITransformationWorker).Assembly },
+                    ImportedExtensions = new[] { typeof(ITransformationWorker).Assembly },
                     DefaultShellFeatureStates = new[]
                     {
                             new DefaultShellFeatureState
