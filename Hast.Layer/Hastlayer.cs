@@ -228,7 +228,7 @@ namespace Hast.Layer
             {
                 // Setting a custom path so if the parent app is also an AppHost app then with the default settings
                 // those won't clash.
-                AppDataFolderPath = "~/HastlayerApp_Data",
+                AppDataFolderPath = "~/Hastlayer/App_Data",
                 ImportedExtensions = importedExtensions,
                 DefaultShellFeatureStates = new[]
                 {
