@@ -4,11 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Common.Configuration;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
-using Hast.Transformer.Abstractions.Configuration;
-using Hast.Transformer.Abstractions.Extensions;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
@@ -199,8 +196,10 @@ namespace Hast.Transformer
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
 
+            File.WriteAllText("source-orig.cs", syntaxTree.ToString());
             // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
+            File.WriteAllText("source.cs", syntaxTree.ToString());
 
             // Conversions making the syntax tree easier to process.
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);

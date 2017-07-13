@@ -1,10 +1,8 @@
 ﻿using System.Linq;
-using Hast.Common.Configuration;
 using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
@@ -137,6 +135,17 @@ namespace Hast.Transformer.Services
                 }
             }
 
+            public override void VisitDefaultValueExpression(DefaultValueExpression defaultValueExpression)
+            {
+                base.VisitDefaultValueExpression(defaultValueExpression);
+
+                var defaultedType = _typeDeclarationLookupTable.Lookup(defaultValueExpression.Type);
+
+                if (defaultedType == null) return;
+
+                defaultedType.AddReference(defaultValueExpression);
+            }
+
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
@@ -216,7 +225,9 @@ namespace Hast.Transformer.Services
 
                 var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
 
-                if (typeDeclaration.Members.Count == unreferencedMembers.Count())
+                // Removing the type if it's empty but leaving if it was references as a type (which is with an 
+                // object create expression or a default value expression).
+                if (typeDeclaration.Members.Count == unreferencedMembers.Count() && !typeDeclaration.IsReferenced())
                 {
                     typeDeclaration.Remove();
                 }

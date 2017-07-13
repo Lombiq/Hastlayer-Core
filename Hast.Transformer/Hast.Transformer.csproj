@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Extensions\AnnotatableExtensions.cs" />
     <Compile Include="Extensions\AstNodeExtensions.cs" />
     <Compile Include="Extensions\AstTypeExtensions.cs" />

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration

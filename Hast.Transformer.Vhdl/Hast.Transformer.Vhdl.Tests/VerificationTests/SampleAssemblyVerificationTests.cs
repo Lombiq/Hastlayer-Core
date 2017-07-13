@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Autofac;
 using Hast.Layer;
 using Hast.Samples.Kpz;
 using Hast.Samples.SampleAssembly;

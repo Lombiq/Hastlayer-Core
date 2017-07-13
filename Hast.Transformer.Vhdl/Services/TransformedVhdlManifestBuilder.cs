@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hast.Common.Extensions;
 using Hast.Common.Helpers;
-using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;

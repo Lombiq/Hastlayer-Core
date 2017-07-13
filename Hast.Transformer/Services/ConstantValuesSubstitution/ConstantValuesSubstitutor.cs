@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Common.Configuration;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.Configuration;
-using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
-using Orchard.Validation;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {

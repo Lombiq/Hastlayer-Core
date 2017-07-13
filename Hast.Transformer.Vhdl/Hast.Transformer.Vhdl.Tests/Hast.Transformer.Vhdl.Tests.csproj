@@ -181,6 +181,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="IntegrationTestingServices\FilteredAutoMockSource.cs" />
     <Compile Include="IntegrationTestingServices\IntegrationTestFixtureBase.cs" />
     <Compile Include="BasicHardwareStructureTests.cs" />
