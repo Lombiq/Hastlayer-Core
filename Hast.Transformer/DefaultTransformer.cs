@@ -196,8 +196,10 @@ namespace Hast.Transformer
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
 
+            File.WriteAllText("source-orig.cs", syntaxTree.ToString());
             // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
+            File.WriteAllText("source.cs", syntaxTree.ToString());
 
             // Conversions making the syntax tree easier to process.
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);

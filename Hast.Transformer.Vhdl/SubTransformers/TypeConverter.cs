@@ -265,9 +265,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (typeDefinition.IsClass)
             {
-                return _recordComposer.CreateRecordFromType(
-                    context.TypeDeclarationLookupTable.Lookup(typeDefinition.FullName), 
-                    context);
+                var typeDeclaration = context.TypeDeclarationLookupTable.Lookup(typeDefinition.FullName);
+
+                if (typeDeclaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(typeDefinition.FullName);
+
+                return _recordComposer.CreateRecordFromType(typeDeclaration, context);
             }
 
             throw new NotSupportedException(
