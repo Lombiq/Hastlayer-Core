@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Configuration;
+using Hast.Synthesis.Services;
+using Hast.Transformer;
+using Hast.Transformer.Vhdl.Services;
+using Hast.Xilinx;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Orchard;
@@ -48,7 +52,18 @@ namespace Hast.Remote.Worker
             {
                 if (_hastlayer == null)
                 {
-                    _hastlayer = await Hastlayer.Create(new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer });
+                    var hastlayerConfiguration = new HastlayerConfiguration
+                    {
+                        Flavor = HastlayerFlavor.Developer,
+                        Extensions = new[]
+                        {
+                            typeof(DefaultTransformer).Assembly,
+                            typeof(VhdlTransformingEngine).Assembly,
+                            typeof(Nexys4DdrDriver).Assembly,
+                            typeof(TimingReportParser).Assembly
+                        }
+                    };
+                    _hastlayer = await Hastlayer.Create(hastlayerConfiguration);
 
                     cancellationToken.ThrowIfCancellationRequested();
 
