@@ -48,7 +48,7 @@ namespace Hast.Remote.Worker
             {
                 if (_hastlayer == null)
                 {
-                    _hastlayer = await Hastlayer.Create();
+                    _hastlayer = await Hastlayer.Create(new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer });
 
                     cancellationToken.ThrowIfCancellationRequested();
 
