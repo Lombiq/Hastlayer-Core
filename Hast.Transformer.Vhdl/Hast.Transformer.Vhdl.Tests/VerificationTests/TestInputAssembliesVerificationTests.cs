@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Hast.Common.Configuration;
 using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Hast.Common.Configuration;
 using Hast.Layer;
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Abstractions;
-using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Vhdl.Models;
 using Lombiq.OrchardAppHost;
 using NUnit.Framework;

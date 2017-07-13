@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;

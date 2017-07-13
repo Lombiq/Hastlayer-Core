@@ -1,10 +1,8 @@
 ﻿using System.Linq;
-using Hast.Common.Configuration;
 using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
