@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using System.Linq;
 
 namespace Hast.Transformer.Vhdl.Models
 {

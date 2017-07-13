@@ -16,7 +16,6 @@ using Hast.Transformer.Vhdl.Services;
 using Hast.Xilinx;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using Orchard;
 using Orchard.Exceptions;
 using Orchard.FileSystems.AppData;
 using Orchard.Logging;

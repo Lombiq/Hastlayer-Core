@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
-using Hast.Common.Configuration;
+using Autofac.Core;
+using Hast.Layer;
 using Hast.Synthesis;
-using Hast.Synthesis.Models;
+using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
@@ -13,10 +15,6 @@ using Hast.Transformer.Services;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using ICSharpCode.NRefactory.CSharp;
-using System.Linq;
-using Autofac.Core;
-using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
