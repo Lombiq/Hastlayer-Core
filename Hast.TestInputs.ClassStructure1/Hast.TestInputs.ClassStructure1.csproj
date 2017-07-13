@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ComplexTypes\BaseClass.cs" />
     <Compile Include="ComplexTypes\ComplexTypeHierarchy.cs" />
     <Compile Include="ComplexTypes\IBaseInterface.cs" />
