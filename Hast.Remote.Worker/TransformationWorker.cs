@@ -28,19 +28,22 @@ namespace Hast.Remote.Worker
     {
         private readonly IJsonConverter _jsonConverter;
         private readonly IAppDataFolder _appDataFolder;
+        private readonly IClock _clock;
 
         private IHastlayer _hastlayer;
         private CloudBlobContainer _container;
         private ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
         private int _restartCount = 0;
+        private System.Timers.Timer _oldResultBlobsCleanerTimer;
 
         public ILogger Logger { get; set; }
 
 
-        public TransformationWorker(IJsonConverter jsonConverter, IAppDataFolder appDataFolder)
+        public TransformationWorker(IJsonConverter jsonConverter, IAppDataFolder appDataFolder, IClock clock)
         {
             _jsonConverter = jsonConverter;
             _appDataFolder = appDataFolder;
+            _clock = clock;
 
             Logger = NullLogger.Instance;
         }
@@ -73,6 +76,31 @@ namespace Hast.Remote.Worker
                         .GetContainerReference("transformation");
 
                     await _container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Off, null, null);
+
+                    _oldResultBlobsCleanerTimer = new System.Timers.Timer(TimeSpan.FromHours(3).TotalMilliseconds);
+                    _oldResultBlobsCleanerTimer.Elapsed += async (sender, e) =>
+                    {
+                        try
+                        {
+                            // Removing those result blobs that weren't deleted somehow (like the client exited while
+                            // waiting for the result to appear, thus never requesting it hence it never getting deleted).
+                            var oldResultBlobs = _container
+                                .ListBlobs("results/")
+                                .Cast<CloudBlockBlob>()
+                                .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));
+
+                            foreach (var blob in oldResultBlobs)
+                            {
+                                await blob.DeleteAsync();
+                            }
+                        }
+                        catch (Exception ex) when (!ex.IsFatal())
+                        {
+                            // If an exception escapes here it'll take down the whole process, so need to handle them.
+                            Logger.Error(ex, "Error during cleaning up old result blobs.");
+                        }
+                    };
+                    _oldResultBlobsCleanerTimer.Enabled = true;
                 }
 
                 cancellationToken.ThrowIfCancellationRequested();
@@ -290,6 +318,8 @@ namespace Hast.Remote.Worker
 
             _hastlayer.Dispose();
             _hastlayer = null;
+            _oldResultBlobsCleanerTimer.Stop();
+            _oldResultBlobsCleanerTimer.Dispose();
             _transformationTasks.Clear();
         }
 
