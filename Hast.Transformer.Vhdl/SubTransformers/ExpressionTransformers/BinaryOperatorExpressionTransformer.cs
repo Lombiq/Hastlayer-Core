@@ -100,8 +100,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // At this point if non-primitive types are checked for equality it could mean that they are custom 
             // types either without the equality operator defined or they are custom value types and a
             // ReferenceEquals() is attempted on them which is wrong.
-            if ((leftTypeReference != null && !leftTypeReference.IsPrimitive || 
-                    rightTypeReference != null && !rightTypeReference.IsPrimitive) &&
+            if ((leftTypeReference != null && 
+                        !leftTypeReference.IsPrimitive && 
+                        (leftTypeReference as TypeDefinition)?.IsEnum != true || 
+                    rightTypeReference != null && 
+                        !rightTypeReference.IsPrimitive && 
+                        (rightTypeReference as TypeDefinition)?.IsEnum != true)
+                &&
                 !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))
             {
                 throw new InvalidOperationException(
