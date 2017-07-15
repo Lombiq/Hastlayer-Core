@@ -27,19 +27,19 @@ architecture Imp of Hast_IP is
     -- * The InternalInvocationProxy processes dispatch invocations between state machines.
 
     -- Custom inter-dependent type declarations start
-    type \signed_Array\ is array (integer range <>) of signed(31 downto 0);
-    type \unsigned_Array\ is array (integer range <>) of unsigned(31 downto 0);
+    type \signed32_Array\ is array (integer range <>) of signed(31 downto 0);
+    type \unsigned32_Array\ is array (integer range <>) of unsigned(31 downto 0);
     type \boolean_Array\ is array (integer range <>) of boolean;
     type \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\ is record 
         \IsNull\: boolean;
-        \Array\: \signed_Array\(0 to 4);
+        \Array\: \signed32_Array\(0 to 4);
     end record;
     type \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\ is record 
         \IsNull\: boolean;
         \ArrayLength\: unsigned(31 downto 0);
         \ArrayLengthCopy\: unsigned(31 downto 0);
         \NonSubstitutableArrayLengthCopy\: unsigned(31 downto 0);
-        \Array\: \unsigned_Array\(0 to 4);
+        \Array\: \unsigned32_Array\(0 to 4);
     end record;
     type \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder2\ is record 
         \IsNull\: boolean;
@@ -234,10 +234,10 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Finished\: boolean := false;
     Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.Out\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
-    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.Out\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.Out\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._Started\: boolean := false;
     Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.In\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
-    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.In\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.In\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder::.ctor(System.Int32[]).0 declarations end
 
 
@@ -251,11 +251,11 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \ArrayUsingCases::PassArrayToConstructor().0._Finished\: boolean := false;
     Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.Out.0\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
-    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.Out.0\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.Out.0\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\: boolean := false;
     Signal \ArrayUsingCases::PassArrayToConstructor().0._Started\: boolean := false;
     Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.In.0\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
-    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.In.0\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.In.0\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     Signal \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Finished.0\: boolean := false;
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 declarations end
 
@@ -273,7 +273,7 @@ architecture Imp of Hast_IP is
     Signal \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Started.0\: boolean := false;
     Signal \ArrayUsingCases::PassArrayFromMethod().0._Started\: boolean := false;
     Signal \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Finished.0\: boolean := false;
-    Signal \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).return.0\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).return.0\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod().0 declarations end
 
 
@@ -285,7 +285,7 @@ architecture Imp of Hast_IP is
         \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_2\);
     -- Signals:
     Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0._Finished\: boolean := false;
-    Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0.return\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+    Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0.return\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0._Started\: boolean := false;
     Signal \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32).0 declarations end
@@ -314,10 +314,10 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Finished\: boolean := false;
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.Out\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.Out\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.Out\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._Started\: boolean := false;
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.In\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.In\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.In\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
     -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[]).0 declarations end
 
 
@@ -348,13 +348,13 @@ architecture Imp of Hast_IP is
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.this.parameter.Out\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.previous.parameter.Out\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.Out.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\: boolean := false;
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0._Started\: boolean := false;
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.this.parameter.In\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.previous.parameter.In\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
     Signal \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Finished.0\: boolean := false;
     -- System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1).0 declarations end
 
@@ -430,7 +430,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \ConstantsUsingCases::ConstantPassingToObject().0._Finished\: boolean := false;
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.Out.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\: boolean := false;
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.Out.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).size.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -443,7 +443,7 @@ architecture Imp of Hast_IP is
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\: boolean := false;
     Signal \ConstantsUsingCases::ConstantPassingToObject().0._Started\: boolean := false;
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+    Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Finished.0\: boolean := false;
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
     Signal \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\: boolean := false;
@@ -1406,7 +1406,7 @@ begin
     \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._StateMachine\: process (\Clock\) 
         Variable \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State\: \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._States\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_0\;
         Variable \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
-        Variable \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1453,7 +1453,7 @@ begin
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayToConstructor().0 state machine start
     \ArrayUsingCases::PassArrayToConstructor().0._StateMachine\: process (\Clock\) 
         Variable \ArrayUsingCases::PassArrayToConstructor().0._State\: \ArrayUsingCases::PassArrayToConstructor().0._States\ := \ArrayUsingCases::PassArrayToConstructor().0._State_0\;
-        Variable \ArrayUsingCases::PassArrayToConstructor().0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \ArrayUsingCases::PassArrayToConstructor().0.array\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
         Variable \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\: \Hast.TestInputs.Various.ArrayUsingCases/ArrayHolder\;
         Variable \ArrayUsingCases::PassArrayToConstructor().0.num\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -1517,8 +1517,8 @@ begin
     -- System.Void Hast.TestInputs.Various.ArrayUsingCases::PassArrayFromMethod().0 state machine start
     \ArrayUsingCases::PassArrayFromMethod().0._StateMachine\: process (\Clock\) 
         Variable \ArrayUsingCases::PassArrayFromMethod().0._State\: \ArrayUsingCases::PassArrayFromMethod().0._States\ := \ArrayUsingCases::PassArrayFromMethod().0._State_0\;
-        Variable \ArrayUsingCases::PassArrayFromMethod().0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
-        Variable \ArrayUsingCases::PassArrayFromMethod().0.return.0\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \ArrayUsingCases::PassArrayFromMethod().0.array\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \ArrayUsingCases::PassArrayFromMethod().0.return.0\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1574,7 +1574,7 @@ begin
     \ArrayUsingCases::ArrayProducingMethod(Int32).0._StateMachine\: process (\Clock\) 
         Variable \ArrayUsingCases::ArrayProducingMethod(Int32).0._State\: \ArrayUsingCases::ArrayProducingMethod(Int32).0._States\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_0\;
         Variable \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1677,7 +1677,7 @@ begin
     \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._StateMachine\: process (\Clock\) 
         Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\: \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._States\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_0\;
         Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+        Variable \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1949,7 +1949,7 @@ begin
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\: \signed_Array\(0 to 36) := (others => to_signed(0, 32));
+        Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\: \signed32_Array\(0 to 36) := (others => to_signed(0, 32));
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\: boolean := false;
         Variable \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\: signed(31 downto 0) := to_signed(0, 32);
@@ -2113,9 +2113,9 @@ begin
     \ConstantsUsingCases::ConstantPassingToObject().0._StateMachine\: process (\Clock\) 
         Variable \ConstantsUsingCases::ConstantPassingToObject().0._State\: \ConstantsUsingCases::ConstantPassingToObject().0._States\ := \ConstantsUsingCases::ConstantPassingToObject().0._State_0\;
         Variable \ConstantsUsingCases::ConstantPassingToObject().0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \ConstantsUsingCases::ConstantPassingToObject().0.array\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.array\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
         Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\: \Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1\;
-        Variable \ConstantsUsingCases::ConstantPassingToObject().0.array2\: \unsigned_Array\(0 to 4) := (others => to_unsigned(0, 32));
+        Variable \ConstantsUsingCases::ConstantPassingToObject().0.array2\: \unsigned32_Array\(0 to 4) := (others => to_unsigned(0, 32));
         Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayLength\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases::ConstantPassingToObject().0.arrayLengthCopy\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases::ConstantPassingToObject().0.nonSubstitutableArrayLengthCopy\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -3787,7 +3787,7 @@ begin
     \UnaryCases::IncrementDecrement(Int32).0._StateMachine\: process (\Clock\) 
         Variable \UnaryCases::IncrementDecrement(Int32).0._State\: \UnaryCases::IncrementDecrement(Int32).0._States\ := \UnaryCases::IncrementDecrement(Int32).0._State_0\;
         Variable \UnaryCases::IncrementDecrement(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnaryCases::IncrementDecrement(Int32).0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \UnaryCases::IncrementDecrement(Int32).0.array\: \signed32_Array\(0 to 4) := (others => to_signed(0, 32));
         Variable \UnaryCases::IncrementDecrement(Int32).0.flag\: boolean := false;
         Variable \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.0\: boolean := false;
         Variable \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
