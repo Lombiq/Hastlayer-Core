@@ -247,8 +247,7 @@ namespace Hast.Transformer.Services
 
             private static TypeInformation CreateArrayTypeInformationFromImmutableArrayReference(TypeReference typeReference)
             {
-                var arrayType = CreateArrayTypeFromImmutableArrayReference(typeReference);
-                return new TypeInformation(arrayType, arrayType);
+                return CreateArrayTypeFromImmutableArrayReference(typeReference).ToTypeInformation();
             }
 
             private static AstType GetClonedElementTypeFromImmutableArrayAstType(AstType astType) =>

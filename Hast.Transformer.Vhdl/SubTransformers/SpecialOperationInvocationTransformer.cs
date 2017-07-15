@@ -10,6 +10,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -86,8 +87,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // The result type of each artificial BinaryOperatorExpression should be the same as the SIMD method call's
             // return array type's element type.
-            var resultElemenetType = expression.Annotation<TypeInformation>().ExpectedType.GetElementType();
-            var resultElementTypeInformation = new TypeInformation(resultElemenetType, resultElemenetType);
+            var resultElementTypeInformation = expression
+                .Annotation<TypeInformation>()
+                .ExpectedType
+                .GetElementType()
+                .ToTypeInformation();
 
             for (int i = 0; i < maxDegreeOfParallelism; i++)
             {

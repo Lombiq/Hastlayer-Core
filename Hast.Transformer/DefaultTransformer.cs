@@ -42,6 +42,7 @@ namespace Hast.Transformer
         private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
         private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
         private readonly IAppDataFolder _appDataFolder;
+        private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
 
 
         public DefaultTransformer(
@@ -64,7 +65,8 @@ namespace Hast.Transformer
             ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
             IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
             IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
-            IAppDataFolder appDataFolder)
+            IAppDataFolder appDataFolder,
+            IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -86,6 +88,7 @@ namespace Hast.Transformer
             _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
             _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
             _appDataFolder = appDataFolder;
+            _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
         }
 
 
@@ -211,6 +214,7 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
+            _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.

@@ -484,8 +484,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is UnaryOperatorExpression)
             {
-                // The increment/decrement unary operators are compiled into binary operators (e.g. i++ will be
-                // i = i + 1) so we don't have to care about those.
+                // Increment/decrement unary operators that are in their own statements are compiled into binary operators 
+                // (e.g. i++ will be i = i + 1) so we don't have to care about those.
 
                 var unary = expression as UnaryOperatorExpression;
 
