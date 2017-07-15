@@ -336,7 +336,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 else
                 {
                     throw new NotSupportedException(
-                        "Array.Copy() is only supported if the second argument can be determined compile-time.");
+                        "Array.Copy() is only supported if the second argument can be determined compile-time."
+                        .AddParentEntityName(expression));
                 }
 
                 var targetArrayReference = (IDataObject)transformedParameters.Skip(1).First().Reference;
@@ -395,7 +396,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 throw new InvalidOperationException(
                     "The invoked method " +
                     targetMethodName +
-                    " can't be found and thus can't be transformed. Did you forget to add an assembly to the list of the assemblies to generate hardware from?");
+                    " can't be found and thus can't be transformed. Did you forget to add an assembly to the list of the assemblies to generate hardware from?"
+                    .AddParentEntityName(expression));
             }
 
             var methodDeclaration = (MethodDeclaration)targetDeclaration;

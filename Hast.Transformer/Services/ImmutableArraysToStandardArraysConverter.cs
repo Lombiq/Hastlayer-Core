@@ -94,7 +94,7 @@ namespace Hast.Transformer.Services
                         {
                             throw new NotSupportedException(
                                 "Only the ImmutableArray.CreateRange() overload with a single argument is supported. The supplied expression was: " +
-                                invocationExpression.ToString());
+                                invocationExpression.ToString().AddParentEntityName(memberReference));
                         }
 
                         invocationExpression.ReplaceWith(invocationExpression.Arguments.Single().Clone());
@@ -154,7 +154,7 @@ namespace Hast.Transformer.Services
                         throw new NotSupportedException(
                             "The member \"" + memberReference.MemberName +
                             "\" is not supported on ImmutableArray. The supplied expression was: " +
-                            invocationExpression.ToString());
+                            invocationExpression.ToString().AddParentEntityName(memberReference));
                     }
                 }
             }

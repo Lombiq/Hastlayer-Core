@@ -36,14 +36,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // arrays, see: http://vhdl.renerta.com/mobile/source/vhd00006.htm "Synthesis tools do generally not 
                 // support multidimensional arrays. The only exceptions to this are two-dimensional "vectors of 
                 // vectors". Some synthesis tools allow two-dimensional arrays."
-                throw new NotSupportedException("Only single-dimensional arrays are supported.");
+                throw new NotSupportedException(
+                    "Only single-dimensional arrays are supported.".AddParentEntityName(expression));
             }
 
             var length = expression.GetStaticLength();
 
             if (length < 1)
             {
-                throw new InvalidOperationException("An array should have a length greater than 1.");
+                throw new InvalidOperationException(
+                    "An array should have a length greater than 1.".AddParentEntityName(expression));
             }
 
             var elementType = _typeConverter.ConvertAstType(

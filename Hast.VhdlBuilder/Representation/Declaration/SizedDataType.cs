@@ -35,7 +35,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
             if (Size != 0 && SizeExpression != null)
             {
-                throw new InvalidOperationException("VHDL sized data types should have their size specified either as an integer value or as an expression, but not both.");
+                throw new InvalidOperationException(
+                    "VHDL sized data types should have their size specified either as an integer value or as an expression, but not both.");
             }
 
             return

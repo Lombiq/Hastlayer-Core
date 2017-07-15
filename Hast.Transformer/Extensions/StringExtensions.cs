@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using ICSharpCode.NRefactory.CSharp;
 
 namespace System
 {
@@ -97,5 +98,12 @@ namespace System
         /// Determines whether the string looks like the name of a constructor.
         /// </summary>
         public static bool IsConstructorName(this string name) => name.Contains(".ctor");
+
+        public static string AddParentEntityName(this string exceptionMessage, AstNode node)
+        {
+            var parentEntity = node.FindFirstParentEntityDeclaration();
+            if (parentEntity == null) return exceptionMessage;
+            return exceptionMessage + " Parent entity where the affected code is: " + node.GetFullName();
+        }
     }
 }
