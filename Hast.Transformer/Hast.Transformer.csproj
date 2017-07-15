@@ -106,6 +106,7 @@
     <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="Services\EmbeddedAssignmentExpressionsExpander.cs" />
     <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
+    <Compile Include="Services\IUnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="Services\MemberSuitabilityChecker.cs" />
     <Compile Include="Models\ArraySize.cs" />
     <Compile Include="Services\ConstantValuesSubstitution\ConstantValueSubstitutionHelper.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
     <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />
     <Compile Include="Services\OperatorsToMethodsConverter.cs" />
+    <Compile Include="Services\UnaryIncrementsDecrementsConverter.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />

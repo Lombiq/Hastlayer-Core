@@ -43,6 +43,11 @@ namespace ICSharpCode.NRefactory.CSharp
                 return ((AssignmentExpression)annotable).Left.GetActualTypeReference();
             }
 
+            if (annotable is UnaryOperatorExpression)
+            {
+                return ((UnaryOperatorExpression)annotable).Expression.GetActualTypeReference();
+            }
+
             return null;
         }
 

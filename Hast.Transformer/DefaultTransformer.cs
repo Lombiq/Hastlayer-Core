@@ -43,6 +43,7 @@ namespace Hast.Transformer
         private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
         private readonly IAppDataFolder _appDataFolder;
         private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
+        private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
 
 
         public DefaultTransformer(
@@ -66,7 +67,8 @@ namespace Hast.Transformer
             IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
             IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
             IAppDataFolder appDataFolder,
-            IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander)
+            IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
+            IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -89,6 +91,7 @@ namespace Hast.Transformer
             _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
             _appDataFolder = appDataFolder;
             _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
+            _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
         }
 
 
@@ -214,6 +217,7 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
+            _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
 

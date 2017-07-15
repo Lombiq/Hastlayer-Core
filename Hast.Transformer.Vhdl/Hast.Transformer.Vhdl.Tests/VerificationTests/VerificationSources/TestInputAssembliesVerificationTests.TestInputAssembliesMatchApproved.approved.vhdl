@@ -786,6 +786,21 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Various.ParallelCases::ObjectUsingTasks(System.UInt32).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32).0 declarations start
+    -- State machine states:
+    type \UnaryCases::IncrementDecrement(Int32).0._States\ is (
+        \UnaryCases::IncrementDecrement(Int32).0._State_0\, 
+        \UnaryCases::IncrementDecrement(Int32).0._State_1\, 
+        \UnaryCases::IncrementDecrement(Int32).0._State_2\, 
+        \UnaryCases::IncrementDecrement(Int32).0._State_3\, 
+        \UnaryCases::IncrementDecrement(Int32).0._State_4\);
+    -- Signals:
+    Signal \UnaryCases::IncrementDecrement(Int32).0._Finished\: boolean := false;
+    Signal \UnaryCases::IncrementDecrement(Int32).0._Started\: boolean := false;
+    Signal \UnaryCases::IncrementDecrement(Int32).0.input.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32).0 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -811,6 +826,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().RootClass::VirtualMethod(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1()._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ComplexTypeHierarchy::Interface1Method2()._Finished.0\: boolean := false;
@@ -833,6 +849,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
 
@@ -3766,6 +3783,87 @@ begin
     -- System.Void Hast.TestInputs.Various.ParallelCases::ObjectUsingTasks(System.UInt32).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32).0 state machine start
+    \UnaryCases::IncrementDecrement(Int32).0._StateMachine\: process (\Clock\) 
+        Variable \UnaryCases::IncrementDecrement(Int32).0._State\: \UnaryCases::IncrementDecrement(Int32).0._States\ := \UnaryCases::IncrementDecrement(Int32).0._State_0\;
+        Variable \UnaryCases::IncrementDecrement(Int32).0.input\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnaryCases::IncrementDecrement(Int32).0.array\: \signed_Array\(0 to 4) := (others => to_signed(0, 32));
+        Variable \UnaryCases::IncrementDecrement(Int32).0.flag\: boolean := false;
+        Variable \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.0\: boolean := false;
+        Variable \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \UnaryCases::IncrementDecrement(Int32).0._Finished\ <= false;
+                \UnaryCases::IncrementDecrement(Int32).0._State\ := \UnaryCases::IncrementDecrement(Int32).0._State_0\;
+                \UnaryCases::IncrementDecrement(Int32).0.input\ := to_signed(0, 32);
+                \UnaryCases::IncrementDecrement(Int32).0.array\ := (others => to_signed(0, 32));
+                \UnaryCases::IncrementDecrement(Int32).0.flag\ := false;
+                \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.0\ := false;
+                \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
+            else 
+                case \UnaryCases::IncrementDecrement(Int32).0._State\ is 
+                    when \UnaryCases::IncrementDecrement(Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\UnaryCases::IncrementDecrement(Int32).0._Started\ = true) then 
+                            \UnaryCases::IncrementDecrement(Int32).0._State\ := \UnaryCases::IncrementDecrement(Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnaryCases::IncrementDecrement(Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\UnaryCases::IncrementDecrement(Int32).0._Started\ = true) then 
+                            \UnaryCases::IncrementDecrement(Int32).0._Finished\ <= true;
+                        else 
+                            \UnaryCases::IncrementDecrement(Int32).0._Finished\ <= false;
+                            \UnaryCases::IncrementDecrement(Int32).0._State\ := \UnaryCases::IncrementDecrement(Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnaryCases::IncrementDecrement(Int32).0._State_2\ => 
+                        \UnaryCases::IncrementDecrement(Int32).0.input\ := \UnaryCases::IncrementDecrement(Int32).0.input.parameter.In\;
+                        \UnaryCases::IncrementDecrement(Int32).0.array\ := (others => to_signed(0, 32));
+                        \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.0\ := \UnaryCases::IncrementDecrement(Int32).0.input\ < to_signed(10, 32);
+                        \UnaryCases::IncrementDecrement(Int32).0.flag\ := \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.0\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \UnaryCases::IncrementDecrement(Int32).0._State_4\ and ends in state \UnaryCases::IncrementDecrement(Int32).0._State_4\.
+                        --     * Execution after either branch will continue in the following state: \UnaryCases::IncrementDecrement(Int32).0._State_3\.
+
+                        if (\UnaryCases::IncrementDecrement(Int32).0.flag\) then 
+                            \UnaryCases::IncrementDecrement(Int32).0._State\ := \UnaryCases::IncrementDecrement(Int32).0._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \UnaryCases::IncrementDecrement(Int32).0._State\ := \UnaryCases::IncrementDecrement(Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \UnaryCases::IncrementDecrement(Int32).0._State_3\ => 
+                        -- State after the if-else which was started in state \UnaryCases::IncrementDecrement(Int32).0._State_2\.
+                        \UnaryCases::IncrementDecrement(Int32).0._State\ := \UnaryCases::IncrementDecrement(Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnaryCases::IncrementDecrement(Int32).0._State_4\ => 
+                        -- True branch of the if-else started in state \UnaryCases::IncrementDecrement(Int32).0._State_2\.
+                        \UnaryCases::IncrementDecrement(Int32).0.array\(to_integer(\UnaryCases::IncrementDecrement(Int32).0.input\)) := to_signed(3, 32);
+                        \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.1\ := \UnaryCases::IncrementDecrement(Int32).0.input\ + to_signed(1, 32);
+                        \UnaryCases::IncrementDecrement(Int32).0.input\ := \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.1\;
+                        \UnaryCases::IncrementDecrement(Int32).0.array\(to_integer(\UnaryCases::IncrementDecrement(Int32).0.input\)) := to_signed(3, 32);
+                        \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.2\ := \UnaryCases::IncrementDecrement(Int32).0.input\ - to_signed(1, 32);
+                        \UnaryCases::IncrementDecrement(Int32).0.input\ := \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.2\;
+                        -- Going to the state after the if-else which was started in state \UnaryCases::IncrementDecrement(Int32).0._State_2\.
+                        if (\UnaryCases::IncrementDecrement(Int32).0._State\ = \UnaryCases::IncrementDecrement(Int32).0._State_4\) then 
+                            \UnaryCases::IncrementDecrement(Int32).0._State\ := \UnaryCases::IncrementDecrement(Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32).0 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -3796,6 +3894,7 @@ begin
                 \Hast::ExternalInvocationProxy().ObjectUsingCases::VoidReturn(Int32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
                     -- Starting the state machine corresponding to the given member ID.
@@ -3952,6 +4051,13 @@ begin
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ = \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 22 => 
+                            if (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ = \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when others => 
@@ -4694,5 +4800,12 @@ begin
     \ParallelCases::ObjectUsingTasks(UInt32).0._Started\ <= \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Started.0\;
     \Hast::ExternalInvocationProxy().ParallelCases::ObjectUsingTasks(UInt32)._Finished.0\ <= \ParallelCases::ObjectUsingTasks(UInt32).0._Finished\;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.ParallelCases::ObjectUsingTasks(System.UInt32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \UnaryCases::IncrementDecrement(Int32).0._Started\ <= \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Started.0\;
+    \Hast::ExternalInvocationProxy().UnaryCases::IncrementDecrement(Int32)._Finished.0\ <= \UnaryCases::IncrementDecrement(Int32).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Various.UnaryCases::IncrementDecrement(System.Int32) end
 
 end Imp;

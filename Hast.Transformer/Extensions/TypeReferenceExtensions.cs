@@ -9,6 +9,6 @@ namespace Mono.Cecil
             typeReference != null && typeReference.FullName == typeof(SimpleMemory).FullName;
 
         public static TypeInformation ToTypeInformation(this TypeReference typeReference) =>
-            new TypeInformation(typeReference, typeReference);
+            typeReference == null ? null : new TypeInformation(typeReference, typeReference);
     }
 }
