@@ -18,8 +18,10 @@ namespace Hast.Transformer.Services
     ///     ...
     /// 
     /// ...will be converted into:
-    /// skipCount = skipCount - 1u;
-    /// if (skipCount <= 0u)
+    /// uint assignment;
+    /// assignment = skipCount - 1u;
+    /// skipCount = assignment;
+    /// if (assignment <= 0u)
     /// {
     ///     ...
     /// </example>

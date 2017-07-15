@@ -34,7 +34,8 @@ namespace Hast.Transformer.Services
                 }
 
                 // Saving the right side of the assignment to a variable and then using that instead of the original
-                // embedded assignment.
+                // embedded assignment. Not using the left side directly later because that can be any complex value
+                // access, keeping it simple.
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
                     "assignment", 
                     assignmentExpression, 
