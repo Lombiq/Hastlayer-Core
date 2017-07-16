@@ -193,6 +193,7 @@ namespace Hast.Remote.Worker
                                                 new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName)
                                                 {
                                                     CustomConfiguration = job.Configuration.CustomConfiguration,
+                                                    EnableCaching = true,
                                                     HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
                                                     HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes
                                                 });
