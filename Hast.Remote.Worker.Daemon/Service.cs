@@ -94,7 +94,7 @@ namespace Hast.Remote.Worker.Daemon
                         {
                             logger.Error(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
 
-                            if (_restartCount >= 10)
+                            if (_restartCount < 10)
                             {
                                 _restartCount++;
 

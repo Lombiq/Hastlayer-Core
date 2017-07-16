@@ -166,7 +166,7 @@ namespace Hast.Remote.Worker
                                         {
                                             cancellationToken.ThrowIfCancellationRequested();
 
-                                            var path = _appDataFolder.Combine(jobFolder, assembly.Id);
+                                            var path = _appDataFolder.Combine(jobFolder, assembly.Name + ".dll");
 
                                             assemblyPaths.Add(_appDataFolder.MapPath(path));
 
@@ -217,7 +217,19 @@ namespace Hast.Remote.Worker
                                         }
                                         catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
                                         {
-                                            result.Errors = new[] { ex.ToString() };
+                                            // We don't want to show the stack trace to the user, just exception message,
+                                            // so building one by iterating all the nested exceptions.
+
+                                            var currentException = ex;
+                                            var message = string.Empty;
+
+                                            while (currentException != null)
+                                            {
+                                                message += currentException.Message + Environment.NewLine;
+                                                currentException = currentException.InnerException;
+                                            }
+
+                                            result.Errors = new[] { message };
                                         }
 
                                         cancellationToken.ThrowIfCancellationRequested();
@@ -235,6 +247,11 @@ namespace Hast.Remote.Worker
                                             accessCondition,
                                             new BlobRequestOptions(),
                                             new OperationContext());
+
+                                        foreach (var assemblyPath in assemblyPaths)
+                                        {
+                                            _appDataFolder.DeleteFile(assemblyPath);
+                                        }
                                     }
                                     catch
                                     {
@@ -294,11 +311,16 @@ namespace Hast.Remote.Worker
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                if (_restartCount >= 10)
+                if (_restartCount < 100)
                 {
                     Logger.Error(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
+
                     Dispose();
                     _restartCount++;
+
+                    // Waiting a bit for transient errors to go away.
+                    await Task.Delay(10000);
+
                     await Work(configuration, cancellationToken);
                 }
                 else
