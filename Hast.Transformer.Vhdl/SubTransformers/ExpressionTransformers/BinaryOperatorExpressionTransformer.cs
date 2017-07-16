@@ -285,7 +285,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Shifts also need type conversion if the right operator doesn't have the same type as the left one.
             if (firstNonParenthesizedExpressionParent is CastExpression || isShift)
             {
-                var fromType = isShift ?
+                var fromType = isShift && !(firstNonParenthesizedExpressionParent is CastExpression)?
                     leftType :
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
 
