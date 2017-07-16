@@ -28,7 +28,14 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             return configurationBuilder
                 .SubFolder(System.IO.Path.Combine("VerificationSources"))
                 .WithFileExtension("vhdl")
-                .WithScrubber(source => Regex.Replace(source, @"-- Date and time:([0-9\-\s\:]*UTC)", "-- (Date and time removed for approval testing.)"));
+                .WithScrubber(source =>
+                {
+                    source = Regex.Replace(source, @"-- Date and time:([0-9\-\s\:]*UTC)", "-- (Date and time removed for approval testing.)");
+                    //-- Hast_IP ID: 70cda87fd8c73cdac2fd935ada6170a7e241daf53cba13e3dfe7c48c4e67e4ac
+                    source = Regex.Replace(source, @"-- Hast_IP ID: ([0-9a-z]*)", "-- (Hast_IP ID removed for approval testing.)");
+
+                    return source;
+                });
         }
     }
 }
