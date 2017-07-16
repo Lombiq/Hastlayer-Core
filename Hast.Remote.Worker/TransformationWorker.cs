@@ -247,6 +247,11 @@ namespace Hast.Remote.Worker
                                             accessCondition,
                                             new BlobRequestOptions(),
                                             new OperationContext());
+
+                                        foreach (var assemblyPath in assemblyPaths)
+                                        {
+                                            _appDataFolder.DeleteFile(assemblyPath);
+                                        }
                                     }
                                     catch
                                     {
