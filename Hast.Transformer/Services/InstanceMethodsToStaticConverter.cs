@@ -84,11 +84,10 @@ namespace Hast.Transformer.Services
 
                     if (typeInformation == null)
                     {
-                        var parentTypeDefinition = thisReferenceExpression
+                        typeInformation = thisReferenceExpression
                             .FindFirstParentTypeDeclaration()
-                            .Annotation<TypeDefinition>();
-
-                        typeInformation = new TypeInformation(parentTypeDefinition, parentTypeDefinition); 
+                            .Annotation<TypeDefinition>()
+                            .ToTypeInformation();
                     }
 
                     thisIdentifierExpression.AddAnnotation(typeInformation);

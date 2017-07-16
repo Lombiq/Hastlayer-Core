@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Extensibility.Events;
@@ -42,6 +43,9 @@ namespace Hast.Transformer
         private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
         private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
         private readonly IAppDataFolder _appDataFolder;
+        private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
+        private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
+        private readonly ITransformationContextCacheService _transformationContextCacheService;
 
 
         public DefaultTransformer(
@@ -64,7 +68,10 @@ namespace Hast.Transformer
             ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
             IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
             IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
-            IAppDataFolder appDataFolder)
+            IAppDataFolder appDataFolder,
+            IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
+            IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter,
+            ITransformationContextCacheService transformationContextCacheService)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -86,25 +93,34 @@ namespace Hast.Transformer
             _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
             _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
             _appDataFolder = appDataFolder;
+            _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
+            _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
+            _transformationContextCacheService = transformationContextCacheService;
         }
 
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             // When executed as a Windows service not all Hastlayer assemblies references from transformed assemblies
-            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. So helping Cecil found
-            // it here.
+            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote 
+            // transformation needs multiple assemblies those will need to be loaded like this too.
+            // So helping Cecil find them here.
             var resolver = new AssemblyResolver();
+
             resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
             resolver.AddSearchDirectory(_appDataFolder.MapPath("Dependencies"));
             resolver.AddSearchDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            foreach (var assemblyPath in assemblyPaths.Select(path => Path.GetDirectoryName(path)).Distinct())
+            {
+                resolver.AddSearchDirectory(assemblyPath);
+            }
             var parameters = new ReaderParameters
             {
                 AssemblyResolver = resolver,
             };
 
             var firstAssembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPaths.First()), parameters);
-            var transformationId = firstAssembly.FullName;
+            var rawTransformationId = firstAssembly.FullName;
             var decompiledContext = new DecompilerContext(firstAssembly.MainModule);
 
             var decompilerSettings = decompiledContext.Settings;
@@ -116,11 +132,11 @@ namespace Hast.Transformer
             foreach (var assemblyPath in assemblyPaths.Skip(1))
             {
                 var assembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPath), parameters);
-                transformationId += "-" + assembly.FullName;
+                rawTransformationId += "-" + assembly.FullName;
                 astBuilder.AddAssembly(assembly);
             }
 
-            transformationId +=
+            rawTransformationId +=
                 string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
                 string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
                 _jsonConverter.Serialize(configuration.CustomConfiguration) +
@@ -128,13 +144,26 @@ namespace Hast.Transformer
                 // Hastlayer update.
                 GetType().Assembly.FullName;
 
+            var transformationId = Sha2456Helper.ComputeHash(rawTransformationId);
+
+            var syntaxTree = astBuilder.SyntaxTree;
+            SyntaxTree unprocessedSyntaxTree = null;
+
+            if (configuration.EnableCaching)
+            {
+                var cachedTransformationContext = _transformationContextCacheService
+                    .GetTransformationContext(syntaxTree, transformationId);
+
+                if (cachedTransformationContext != null) return _engine.Transform(cachedTransformationContext);
+
+                unprocessedSyntaxTree = (SyntaxTree)syntaxTree.Clone();
+            }
 
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
             // see: https://github.com/icsharpcode/ILSpy/issues/686. But we can't run that directly since that would
             // also transform some low-level constructs that are useful to have as simple as possible (e.g. it's OK if
             // we only have while statements in the AST, not for statements mixed in). So we need to remove the not 
             // useful pipeline steps and run them by hand.
-            var syntaxTree = astBuilder.SyntaxTree;
 
             IEnumerable<IAstTransform> pipeline = TransformationPipeline.CreatePipeline(decompiledContext);
             // We allow the commented out pipeline steps. Must revisit after ILSpy update.
@@ -211,6 +240,8 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
+            _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
+            _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.
@@ -235,6 +266,11 @@ namespace Hast.Transformer
             };
 
             _eventHandler.SyntaxTreeBuilt(context);
+
+            if (configuration.EnableCaching)
+            {
+                _transformationContextCacheService.SetTransformationContext(context, unprocessedSyntaxTree); 
+            }
 
             return _engine.Transform(context);
         }

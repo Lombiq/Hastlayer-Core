@@ -484,8 +484,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is UnaryOperatorExpression)
             {
-                // The increment/decrement unary operators are compiled into binary operators (e.g. i++ will be
-                // i = i + 1) so we don't have to care about those.
+                // Increment/decrement unary operators that are in their own statements are compiled into binary operators 
+                // (e.g. i++ will be i = i + 1) so we don't have to care about those.
 
                 var unary = expression as UnaryOperatorExpression;
 
@@ -561,7 +561,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         goto default;
                     default:
                         throw new NotSupportedException(
-                            "Transformation of the unary operation " + unary.Operator + " is not supported.");
+                            "Transformation of the unary operation " + unary.Operator + " is not supported."
+                            .AddParentEntityName(unary));
                 }
             }
             else if (expression is TypeReferenceExpression)
@@ -569,12 +570,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var type = ((TypeReferenceExpression)expression).Type;
                 var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
 
-                if (declaration == null)
-                {
-                    throw new InvalidOperationException(
-                        "No matching type for \"" + ((SimpleType)type).Identifier +
-                        "\" found in the syntax tree. This can mean that the type's assembly was not added to the syntax tree.");
-                }
+                if (declaration == null) ExceptionHelper.ThrowDeclarationNotFoundException(((SimpleType)type).Identifier);
 
                 return declaration.GetFullName().ToVhdlValue(KnownDataTypes.Identifier);
             }
@@ -633,12 +629,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     throw new InvalidOperationException(
                         "The target of the indexer expression " + expression.ToString() +
-                        " couldn't be transformed to a data object reference.");
+                        " couldn't be transformed to a data object reference.".AddParentEntityName(expression));
                 }
 
                 if (indexerExpression.Arguments.Count != 1)
                 {
-                    throw new NotSupportedException("Accessing elements of only single-dimensional arrays are supported.");
+                    throw new NotSupportedException(
+                        "Accessing elements of only single-dimensional arrays are supported.".AddParentEntityName(expression));
                 }
 
                 var indexExpression = indexerExpression.Arguments.Single();
@@ -709,7 +706,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         if (namedInitializerExpression == null)
                         {
                             throw new NotSupportedException(
-                                "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs).");
+                                "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs)."
+                                .AddParentEntityName(objectCreateExpression));
                         }
 
                         context.Scope.CurrentBlock.Add(new Assignment
@@ -748,7 +746,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 throw new NotSupportedException(
                     "Expressions of type " +
                     expression.GetType() + " are not supported. The expression was: " +
-                    expression.ToString());
+                    expression.ToString().AddParentEntityName(expression));
             }
         }
 

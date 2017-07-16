@@ -3,7 +3,7 @@
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
     /// <summary>
-    /// Instatiation of an unconstrained VHDL array.
+    /// Instantiation of an unconstrained VHDL array.
     /// </summary>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class UnconstrainedArrayInstantiation : ArrayTypeBase

@@ -118,7 +118,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 default:
                     throw new NotSupportedException(
                         "Evaluating casting to " + toType.FullName + " is not supported. Affected expression: " + 
-                        castExpression.ToString());
+                        castExpression.ToString().AddParentEntityName(castExpression));
             }
         }
 
@@ -162,7 +162,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 default:
                     throw new NotSupportedException(
                         "Evaluating unary operator expressions with the operator " + unaryOperatorExpression.Operator + 
-                        " is not supported. Affected expression: " + unaryOperatorExpression.ToString());
+                        " is not supported. Affected expression: " + unaryOperatorExpression.ToString()
+                        .AddParentEntityName(unaryOperatorExpression));
             }
         }
     }

@@ -100,13 +100,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // At this point if non-primitive types are checked for equality it could mean that they are custom 
             // types either without the equality operator defined or they are custom value types and a
             // ReferenceEquals() is attempted on them which is wrong.
-            if ((leftTypeReference != null && !leftTypeReference.IsPrimitive || 
-                    rightTypeReference != null && !rightTypeReference.IsPrimitive) &&
+            if ((leftTypeReference != null && 
+                        !leftTypeReference.IsPrimitive && 
+                        (leftTypeReference as TypeDefinition)?.IsEnum != true || 
+                    rightTypeReference != null && 
+                        !rightTypeReference.IsPrimitive && 
+                        (rightTypeReference as TypeDefinition)?.IsEnum != true)
+                &&
                 !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))
             {
                 throw new InvalidOperationException(
                     "Unsupported operator in the following binary operator expression: " + expression.ToString() +
-                    ". This could mean that you attempted to use an operator on custom types either without the operator being defined for the type or they are custom value types and you mistakenly tried to use ReferenceEquals() on them.");
+                    ". This could mean that you attempted to use an operator on custom types either without the operator being defined for the type or they are custom value types and you mistakenly tried to use ReferenceEquals() on them."
+                    .AddParentEntityName(expression));
             }
 
             // Would need to decide between + and & or sll/srl and sra/sla
@@ -279,7 +285,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Shifts also need type conversion if the right operator doesn't have the same type as the left one.
             if (firstNonParenthesizedExpressionParent is CastExpression || isShift)
             {
-                var fromType = isShift ?
+                var fromType = isShift && !(firstNonParenthesizedExpressionParent is CastExpression)?
                     leftType :
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
 

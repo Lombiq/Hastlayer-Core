@@ -5,6 +5,7 @@ using System.Reflection;
 using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SimpleMemory;
 using Hast.VhdlBuilder.Extensions;
@@ -81,7 +82,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var invocationParameters = transformedParameters.ToList();
 
             var operationPropertyKey = isWrite ? lastWriteFinishedKey : lastReadFinishedKey;
-            if (customProperties.ContainsKey(operationPropertyKey) && 
+            if (customProperties.ContainsKey(operationPropertyKey) &&
                 customProperties[operationPropertyKey] == currentBlock.StateMachineStateIndex)
             {
                 var operationNoun = isWrite ? "write" : "read";
@@ -118,50 +119,108 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Expression = Value.True
             });
 
+            var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes");
 
             Func<IVhdlElement, bool, IVhdlElement> implementSimpleMemoryTypeConversion =
                 (variableToConvert, directionIsLogicVectorToType) =>
                 {
-                    // If the memory operations was Read/Write4Bytes then no need to do any conversions.
-                    if (targetMemberReference.MemberName.EndsWith("4Bytes"))
-                    {
-                        return variableToConvert;
-                    }
-
                     string dataConversionInvocationTarget = null;
-                    var memoryType = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
+                    var operation = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
 
                     // Using the built-in conversion functions to handle known data types.
-                    if (memoryType == "UInt32" ||
-                    memoryType == "Int32" ||
-                    memoryType == "Boolean" ||
-                    memoryType == "Char")
+                    if (operation == "UInt32" ||
+                        operation == "Int32" ||
+                        operation == "Boolean" ||
+                        operation == "Char")
                     {
                         if (directionIsLogicVectorToType)
                         {
-                            dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + memoryType;
+                            dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operation;
                         }
                         else
                         {
-                            dataConversionInvocationTarget = "Convert" + memoryType + "ToStdLogicVector";
+                            dataConversionInvocationTarget = "Convert" + operation + "ToStdLogicVector";
                         }
+
+                        return new Invocation
+                        {
+                            Target = dataConversionInvocationTarget.ToVhdlIdValue(),
+                            Parameters = new List<IVhdlElement> { { variableToConvert } }
+                        };
+                    }
+                    else if (is4BytesOperation)
+                    {
+                        Func<int, int, Invocation> createSlice = (indexFrom, indexTo) =>
+                            new Invocation
+                            {
+                                Target = "unsigned".ToVhdlIdValue(),
+                                Parameters = new List<IVhdlElement>
+                                { {
+                                        new ArraySlice
+                                        {
+                                            ArrayReference = (IDataObject)variableToConvert,
+                                            IndexFrom = indexFrom,
+                                            IndexTo = indexTo
+                                        }
+                                } }
+                            };
+
+                        return new Value
+                        {
+                            DataType = ArrayHelper.CreateArrayInstantiation(KnownDataTypes.UInt8, 4),
+                            EvaluatedContent = new InlineBlock(
+                                createSlice(0, 7), createSlice(8, 15), createSlice(16, 23), createSlice(24, 31))
+                        };
                     }
 
-                    return new Invocation
-                    {
-                        Target = dataConversionInvocationTarget.ToVhdlIdValue(),
-                        Parameters = new List<IVhdlElement> { { variableToConvert } }
-                    };
+                    throw new InvalidOperationException("Invalid SimpleMemory operation: " + operation + ".");
                 };
 
             if (isWrite)
             {
-                currentBlock.Add(new Assignment
+                var dataOutReference = stateMachine.CreateSimpleMemoryDataOutSignalReference();
+                if (is4BytesOperation)
                 {
-                    AssignTo = stateMachine.CreateSimpleMemoryDataOutSignalReference(),
-                    // The data to write is conventionally the second parameter.
-                    Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
-                });
+                    var arrayReference = (IDataObject)invocationParameters[1].Reference;
+
+                    Action<int, int, int> addSlice = (indexFrom, indexTo, elementIndex) =>
+                        currentBlock.Add(new Assignment
+                        {
+                            AssignTo = new ArraySlice
+                            {
+                                ArrayReference = dataOutReference,
+                                IndexFrom = indexFrom,
+                                IndexTo = indexTo
+                            },
+                            // The data to write is conventionally the second parameter.
+                            Expression = new Invocation
+                            {
+                                Target = "std_logic_vector".ToVhdlIdValue(),
+                                Parameters = new List<IVhdlElement>
+                                { {
+                                    new ArrayElementAccess
+                                    {
+                                        ArrayReference = arrayReference,
+                                        IndexExpression = elementIndex.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                    }
+                                } }
+                            }
+                        });
+
+                    addSlice(0, 7, 0);
+                    addSlice(8, 15, 1);
+                    addSlice(16, 23, 2);
+                    addSlice(24, 31, 3);
+                }
+                else
+                {
+                    currentBlock.Add(new Assignment
+                    {
+                        AssignTo = dataOutReference,
+                        // The data to write is conventionally the second parameter.
+                        Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
+                    });
+                }
             }
 
             // The memory operation should be initialized in this state, then finished in another one.
@@ -248,7 +307,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     invocation.Target.Is<MemberReferenceExpression>(member =>
                         member.Target.Is<TypeReferenceExpression>(type =>
                             _typeConverter.ConvertAstType(
-                                type.Type, 
+                                type.Type,
                                 context.TransformationContext) == SpecialTypes.Task),
                         out memberReference)))
                 {
@@ -297,8 +356,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (_specialOperationInvocationTransformer.IsSpecialOperationInvocation(expression))
             {
                 return _specialOperationInvocationTransformer.TransformSpecialOperationInvocation(
-                    expression, 
-                    transformedParameters.Select(transformedParameter => transformedParameter.Reference), 
+                    expression,
+                    transformedParameters.Select(transformedParameter => transformedParameter.Reference),
                     context);
             }
 
@@ -336,7 +395,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 else
                 {
                     throw new NotSupportedException(
-                        "Array.Copy() is only supported if the second argument can be determined compile-time.");
+                        "Array.Copy() is only supported if the second argument can be determined compile-time."
+                        .AddParentEntityName(expression));
                 }
 
                 var targetArrayReference = (IDataObject)transformedParameters.Skip(1).First().Reference;
@@ -395,7 +455,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 throw new InvalidOperationException(
                     "The invoked method " +
                     targetMethodName +
-                    " can't be found and thus can't be transformed. Did you forget to add an assembly to the list of the assemblies to generate hardware from?");
+                    " can't be found and thus can't be transformed. Did you forget to add an assembly to the list of the assemblies to generate hardware from?"
+                    .AddParentEntityName(expression));
             }
 
             var methodDeclaration = (MethodDeclaration)targetDeclaration;
