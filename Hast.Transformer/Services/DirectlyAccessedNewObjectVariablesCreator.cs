@@ -28,8 +28,8 @@ namespace Hast.Transformer.Services
                 var variableIdentifier = VariableHelper
                     .DeclareAndReferenceVariable("object", objectCreateExpression, objectCreateExpression.Type);
 
-                var assignment = new AssignmentExpression(variableIdentifier, objectCreateExpression.Clone());
-                assignment.AddAnnotation(objectCreateExpression.Annotation<TypeInformation>());
+                var assignment = new AssignmentExpression(variableIdentifier, objectCreateExpression.Clone())
+                    .WithAnnotation(objectCreateExpression.Annotation<TypeInformation>());
 
                 AstInsertionHelper.InsertStatementBefore(
                     objectCreateExpression.FindFirstParentStatement(), 

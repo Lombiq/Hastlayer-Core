@@ -42,6 +42,8 @@ namespace Hast.Transformer
         private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
         private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
         private readonly IAppDataFolder _appDataFolder;
+        private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
+        private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
 
 
         public DefaultTransformer(
@@ -64,7 +66,9 @@ namespace Hast.Transformer
             ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
             IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
             IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
-            IAppDataFolder appDataFolder)
+            IAppDataFolder appDataFolder,
+            IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
+            IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -86,6 +90,8 @@ namespace Hast.Transformer
             _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
             _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
             _appDataFolder = appDataFolder;
+            _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
+            _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
         }
 
 
@@ -196,10 +202,8 @@ namespace Hast.Transformer
 
             _autoPropertyInitializationFixer.FixAutoPropertyInitializations(syntaxTree);
 
-            File.WriteAllText("source-orig.cs", syntaxTree.ToString());
             // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
-            File.WriteAllText("source.cs", syntaxTree.ToString());
 
             // Conversions making the syntax tree easier to process.
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree);
@@ -213,6 +217,8 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
+            _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
+            _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.

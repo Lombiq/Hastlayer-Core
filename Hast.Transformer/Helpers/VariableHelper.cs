@@ -15,7 +15,7 @@ namespace Hast.Transformer.Helpers
         {
             var declarationType = new ComposedType { BaseType = arrayElementAstType.Clone() };
             declarationType.ArraySpecifiers.Add(
-                new ArraySpecifier(((Mono.Cecil.ArrayType)arrayType).Dimensions.Count));
+                new ArraySpecifier(((ArrayType)arrayType).Dimensions.Count));
 
             return DeclareAndReferenceVariable("array", valueHolder, declarationType);
         }
@@ -27,7 +27,7 @@ namespace Hast.Transformer.Helpers
         {
             var variableName = variableNamePrefix + Sha2456Helper.ComputeHash(valueHolder.GetFullName());
             var parentStatement = valueHolder.FindFirstParentStatement();
-            var typeInformation = valueHolder.Annotation<TypeInformation>();
+            var typeInformation = valueHolder.GetTypeInformationOrCreateFromActualTypeReference();
 
             var variableDeclaration = new VariableDeclarationStatement(type.Clone(), variableName)
                 .WithAnnotation(typeInformation);

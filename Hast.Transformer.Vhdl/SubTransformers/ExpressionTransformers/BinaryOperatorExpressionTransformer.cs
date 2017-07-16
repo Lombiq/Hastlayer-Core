@@ -111,7 +111,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 throw new InvalidOperationException(
                     "Unsupported operator in the following binary operator expression: " + expression.ToString() +
-                    ". This could mean that you attempted to use an operator on custom types either without the operator being defined for the type or they are custom value types and you mistakenly tried to use ReferenceEquals() on them.");
+                    ". This could mean that you attempted to use an operator on custom types either without the operator being defined for the type or they are custom value types and you mistakenly tried to use ReferenceEquals() on them."
+                    .AddParentEntityName(expression));
             }
 
             // Would need to decide between + and & or sll/srl and sra/sla
@@ -284,7 +285,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Shifts also need type conversion if the right operator doesn't have the same type as the left one.
             if (firstNonParenthesizedExpressionParent is CastExpression || isShift)
             {
-                var fromType = isShift ?
+                var fromType = isShift && !(firstNonParenthesizedExpressionParent is CastExpression)?
                     leftType :
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
 

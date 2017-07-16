@@ -77,8 +77,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (leftType == null || rightType == null)
             {
                 throw new InvalidOperationException(
-                    "The type of the operands of the following expression could't be determined: " +
-                    binaryOperatorExpression.ToString());
+                    "The type of the operands of the following expression couldn't be determined: " +
+                    binaryOperatorExpression.ToString().AddParentEntityName(binaryOperatorExpression));
             }
 
             if (leftType == rightType) return variableReference;

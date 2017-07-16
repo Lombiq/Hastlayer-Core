@@ -38,6 +38,16 @@ namespace ICSharpCode.NRefactory.CSharp
                 return ((IndexerExpression)annotable).Target.GetActualTypeReference()?.GetElementType();
             }
 
+            if (annotable is AssignmentExpression)
+            {
+                return ((AssignmentExpression)annotable).Left.GetActualTypeReference();
+            }
+
+            if (annotable is UnaryOperatorExpression)
+            {
+                return ((UnaryOperatorExpression)annotable).Expression.GetActualTypeReference();
+            }
+
             return null;
         }
 
@@ -47,6 +57,13 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 toNode.AddAnnotation(annotation);
             }
+        }
+
+        public static TypeInformation GetTypeInformationOrCreateFromActualTypeReference(this IAnnotatable annotable)
+        {
+            var typeInformation = annotable.Annotation<TypeInformation>();
+            if (typeInformation == null) typeInformation = annotable.GetActualTypeReference().ToTypeInformation();
+            return typeInformation;
         }
     }
 }
