@@ -406,9 +406,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return;
                 }
 
-                throw new NotSupportedException("Break statements outside of switch statements are not supported.");
+                throw new NotSupportedException(
+                    "Break statements outside of switch statements and loops are not supported.".AddParentEntityName(statement));
             }
-            else throw new NotSupportedException("Statements of type " + statement.GetType() + " are not supported.");
+            else throw new NotSupportedException(
+                "Statements of type " + statement.GetType() + " are not supported.".AddParentEntityName(statement));
         }
 
         /// <summary>

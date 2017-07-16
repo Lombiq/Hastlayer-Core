@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
-using Hast.Common.Configuration;
 using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure1.ComplexTypes;

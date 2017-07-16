@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Models;
+﻿using Hast.Synthesis.Abstractions;
 using ICSharpCode.NRefactory.CSharp;
-using Orchard;
 
 namespace Hast.Synthesis
 {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
+using Mono.Cecil;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -103,14 +102,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // This is a unary expression where the target expression was already substituted with a const value.
                 // So we can also substitute the whole expression too.
                 var newExpression = new PrimitiveExpression(
-                    _astExpressionEvaluator.EvaluateUnaryOperatorExpression((UnaryOperatorExpression)primitiveExpressionParent));
-                var typeInformation = primitiveExpressionParent.Annotation<TypeInformation>();
-                if (typeInformation == null)
-                {
-                    var typeReference = primitiveExpression.GetActualTypeReference();
-                    typeInformation = new TypeInformation(typeReference, typeReference);
-                }
-                newExpression.AddAnnotation(typeInformation);
+                    _astExpressionEvaluator.EvaluateUnaryOperatorExpression((UnaryOperatorExpression)primitiveExpressionParent))
+                    .WithAnnotation(primitiveExpressionParent.GetTypeInformationOrCreateFromActualTypeReference());
 
                 _constantValuesSubstitutingAstProcessor.ConstantValuesTable
                     .MarkAsPotentiallyConstant(primitiveExpressionParent, newExpression, primitiveExpressionParent.Parent);

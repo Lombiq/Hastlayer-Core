@@ -1,11 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Autofac;
-using Hast.Common.Configuration;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
-using Hast.Transformer.Services;
 using Lombiq.OrchardAppHost;
 using Lombiq.Unum;
 using NUnit.Framework;

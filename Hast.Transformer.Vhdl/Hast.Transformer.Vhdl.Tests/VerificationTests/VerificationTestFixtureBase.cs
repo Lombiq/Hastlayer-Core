@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Common.Configuration;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Hast.Transformer.Vhdl.Models;
-using Hast.VhdlBuilder.Representation;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {

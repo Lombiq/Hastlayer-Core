@@ -1,5 +1,4 @@
-﻿using Hast.Transformer;
-using Hast.Transformer.Models;
+﻿using Hast.Transformer.Models;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services

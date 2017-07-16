@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Hast.Remote.Worker.Configuration;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
-using Orchard.Logging;
 
 namespace Hast.Remote.Worker.Console
 {

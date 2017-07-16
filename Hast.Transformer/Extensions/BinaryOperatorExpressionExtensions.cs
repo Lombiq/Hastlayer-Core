@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mono.Cecil;
+﻿using Mono.Cecil;
 
 namespace ICSharpCode.NRefactory.CSharp
 {
@@ -11,12 +6,10 @@ namespace ICSharpCode.NRefactory.CSharp
     {
         public static TypeReference GetResultTypeReference(this BinaryOperatorExpression expression)
         {
-            var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
-
             var resultTypeReference = expression.GetActualTypeReference(true);
             if (resultTypeReference == null)
             {
-                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference();
+                resultTypeReference = expression.FindFirstNonParenthesizedExpressionParent().GetActualTypeReference();
             }
 
             return resultTypeReference;

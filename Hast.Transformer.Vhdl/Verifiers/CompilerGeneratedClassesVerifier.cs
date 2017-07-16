@@ -57,7 +57,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
                         {
                             throw new NotSupportedException(
                                 "It's not supported to modify the content of a variable coming from the parent scope in a lambda expression. " +
-                                "Pass arguments instead. Affected method: " + method.ToString());
+                                "Pass arguments instead. Affected method: " + Environment.NewLine + method.ToString());
                         }
                     };
 

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
@@ -39,14 +36,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // arrays, see: http://vhdl.renerta.com/mobile/source/vhd00006.htm "Synthesis tools do generally not 
                 // support multidimensional arrays. The only exceptions to this are two-dimensional "vectors of 
                 // vectors". Some synthesis tools allow two-dimensional arrays."
-                throw new NotSupportedException("Only single-dimensional arrays are supported.");
+                throw new NotSupportedException(
+                    "Only single-dimensional arrays are supported.".AddParentEntityName(expression));
             }
 
             var length = expression.GetStaticLength();
 
             if (length < 1)
             {
-                throw new InvalidOperationException("An array should have a length greater than 1.");
+                throw new InvalidOperationException(
+                    "An array should have a length greater than 1.".AddParentEntityName(expression));
             }
 
             var elementType = _typeConverter.ConvertAstType(

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
@@ -32,8 +28,8 @@ namespace Hast.Transformer.Services
                 var variableIdentifier = VariableHelper
                     .DeclareAndReferenceVariable("object", objectCreateExpression, objectCreateExpression.Type);
 
-                var assignment = new AssignmentExpression(variableIdentifier, objectCreateExpression.Clone());
-                assignment.AddAnnotation(objectCreateExpression.Annotation<TypeInformation>());
+                var assignment = new AssignmentExpression(variableIdentifier, objectCreateExpression.Clone())
+                    .WithAnnotation(objectCreateExpression.Annotation<TypeInformation>());
 
                 AstInsertionHelper.InsertStatementBefore(
                     objectCreateExpression.FindFirstParentStatement(), 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services
@@ -63,7 +59,8 @@ namespace Hast.Transformer.Services
                     default:
                         throw new NotSupportedException(
                             "Converting assignments with the operator " + assignmentExpression.Operator.ToString() +
-                            " is not supported. The assignment expression was: " + assignmentExpression.ToString());
+                            " is not supported. The assignment expression was: " + assignmentExpression.ToString()
+                            .AddParentEntityName(assignmentExpression));
                 }
 
                 var binary = new BinaryOperatorExpression(

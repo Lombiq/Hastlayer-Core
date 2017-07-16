@@ -51,13 +51,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var elementType = _typeConverter
                     .ConvertAstType(arrayCreateExpression.GetElementType(), _context);
+                var typeName = ArrayHelper.CreateArrayTypeName(elementType);
 
-                if (_arrayDeclarations.ContainsKey(elementType.Name)) return;
+                if (_arrayDeclarations.ContainsKey(typeName)) return;
 
-                _arrayDeclarations[elementType.Name] = new ArrayType
+                _arrayDeclarations[typeName] = new ArrayType
                 {
                     ElementType = elementType,
-                    Name = ArrayHelper.CreateArrayTypeName(elementType.Name)
+                    Name = typeName
                 };
             }
         }

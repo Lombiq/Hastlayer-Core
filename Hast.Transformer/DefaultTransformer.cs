@@ -4,11 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Common.Configuration;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
-using Hast.Transformer.Abstractions.Configuration;
-using Hast.Transformer.Abstractions.Extensions;
 using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
@@ -45,6 +42,8 @@ namespace Hast.Transformer
         private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
         private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
         private readonly IAppDataFolder _appDataFolder;
+        private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
+        private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
 
 
         public DefaultTransformer(
@@ -67,7 +66,9 @@ namespace Hast.Transformer
             ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
             IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
             IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
-            IAppDataFolder appDataFolder)
+            IAppDataFolder appDataFolder,
+            IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
+            IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -89,6 +90,8 @@ namespace Hast.Transformer
             _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
             _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
             _appDataFolder = appDataFolder;
+            _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
+            _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
         }
 
 
@@ -214,6 +217,8 @@ namespace Hast.Transformer
             _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
             _operatorAssignmentsToSimpleAssignmentsConverter.ConvertOperatorAssignmentExpressionsToSimpleAssignments(syntaxTree);
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
+            _unaryIncrementsDecrementsConverter.ConvertUnaryIncrementsDecrements(syntaxTree);
+            _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
             var arraySizeHolder = _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, configuration);
 
             // If the conversions removed something let's clean them up here.
