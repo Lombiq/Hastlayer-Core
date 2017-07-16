@@ -166,7 +166,7 @@ namespace Hast.Remote.Worker
                                         {
                                             cancellationToken.ThrowIfCancellationRequested();
 
-                                            var path = _appDataFolder.Combine(jobFolder, assembly.Id);
+                                            var path = _appDataFolder.Combine(jobFolder, assembly.Name + ".dll");
 
                                             assemblyPaths.Add(_appDataFolder.MapPath(path));
 

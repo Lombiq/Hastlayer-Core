@@ -99,12 +99,18 @@ namespace Hast.Transformer
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             // When executed as a Windows service not all Hastlayer assemblies references from transformed assemblies
-            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. So helping Cecil found
-            // it here.
+            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote 
+            // transformation needs multiple assemblies those will need to be loaded like this too.
+            // So helping Cecil find them here.
             var resolver = new AssemblyResolver();
+
             resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
             resolver.AddSearchDirectory(_appDataFolder.MapPath("Dependencies"));
             resolver.AddSearchDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            foreach (var assemblyPath in assemblyPaths.Select(path => Path.GetDirectoryName(path)).Distinct())
+            {
+                resolver.AddSearchDirectory(assemblyPath);
+            }
             var parameters = new ReaderParameters
             {
                 AssemblyResolver = resolver,
