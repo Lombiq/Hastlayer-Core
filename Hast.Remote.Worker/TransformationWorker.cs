@@ -162,79 +162,105 @@ namespace Hast.Remote.Worker
                                         var jobFolder = _appDataFolder.Combine("Hastlayer", "RemoteWorker", job.Token);
 
                                         var assemblyPaths = new List<string>();
-                                        foreach (var assembly in job.Assemblies)
-                                        {
-                                            cancellationToken.ThrowIfCancellationRequested();
 
-                                            var path = _appDataFolder.Combine(jobFolder, assembly.Id);
-
-                                            assemblyPaths.Add(_appDataFolder.MapPath(path));
-
-                                            using (var memoryStream = new MemoryStream(assembly.FileContent))
-                                            using (var fileStream = _appDataFolder.CreateFile(path))
-                                            {
-                                                await memoryStream.CopyToAsync(fileStream);
-                                            }
-                                        }
-
-                                        cancellationToken.ThrowIfCancellationRequested();
-
-                                        var result = new TransformationJobResult
-                                        {
-                                            Token = job.Token,
-                                            UserId = job.UserId
-                                        };
-
-                                        IHardwareRepresentation hardwareRepresentation;
                                         try
                                         {
-                                            hardwareRepresentation = await _hastlayer.GenerateHardware(
-                                                assemblyPaths,
-                                                new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName)
+                                            foreach (var assembly in job.Assemblies)
+                                            {
+                                                cancellationToken.ThrowIfCancellationRequested();
+
+                                                var path = _appDataFolder.Combine(jobFolder, assembly.Name + ".dll");
+
+                                                assemblyPaths.Add(_appDataFolder.MapPath(path));
+
+                                                using (var memoryStream = new MemoryStream(assembly.FileContent))
+                                                using (var fileStream = _appDataFolder.CreateFile(path))
                                                 {
-                                                    CustomConfiguration = job.Configuration.CustomConfiguration,
-                                                    HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
-                                                    HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes
-                                                });
+                                                    await memoryStream.CopyToAsync(fileStream);
+                                                }
+                                            }
 
                                             cancellationToken.ThrowIfCancellationRequested();
 
-                                            var hardwareDescription = hardwareRepresentation.HardwareDescription;
-
-                                            result.HardwareDescription = new HardwareDescription
+                                            var result = new TransformationJobResult
                                             {
-                                                HardwareEntryPointNamesToMemberIdMappings = hardwareDescription
-                                                    .HardwareEntryPointNamesToMemberIdMappings
-                                                    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
-                                                Language = hardwareDescription.Language,
+                                                Token = job.Token,
+                                                UserId = job.UserId
                                             };
 
-                                            using (var memoryStream = new MemoryStream())
+                                            IHardwareRepresentation hardwareRepresentation;
+                                            try
                                             {
-                                                await hardwareDescription.WriteSource(memoryStream);
-                                                result.HardwareDescription.Source = Encoding.UTF8.GetString(memoryStream.ToArray());
+                                                hardwareRepresentation = await _hastlayer.GenerateHardware(
+                                                    assemblyPaths,
+                                                    new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName)
+                                                    {
+                                                        CustomConfiguration = job.Configuration.CustomConfiguration,
+                                                        EnableCaching = true,
+                                                        HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
+                                                        HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes
+                                                    });
+
+                                                cancellationToken.ThrowIfCancellationRequested();
+
+                                                var hardwareDescription = hardwareRepresentation.HardwareDescription;
+
+                                                result.HardwareDescription = new HardwareDescription
+                                                {
+                                                    HardwareEntryPointNamesToMemberIdMappings = hardwareDescription
+                                                        .HardwareEntryPointNamesToMemberIdMappings
+                                                        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
+                                                    Language = hardwareDescription.Language,
+                                                };
+
+                                                using (var memoryStream = new MemoryStream())
+                                                {
+                                                    await hardwareDescription.WriteSource(memoryStream);
+                                                    result.HardwareDescription.Source = Encoding.UTF8.GetString(memoryStream.ToArray());
+                                                }
                                             }
+                                            catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
+                                            {
+                                                // We don't want to show the stack trace to the user, just exception 
+                                                // message, so building one by iterating all the nested exceptions.
+
+                                                var currentException = ex;
+                                                var message = string.Empty;
+
+                                                while (currentException != null)
+                                                {
+                                                    message += currentException.Message + Environment.NewLine;
+                                                    currentException = currentException.InnerException;
+                                                }
+
+                                                result.Errors = new[] { message };
+                                            }
+
+                                            cancellationToken.ThrowIfCancellationRequested();
+
+                                            var resultBlob = _container.GetBlockBlobReference("results/" + job.Token);
+
+                                            using (var blobStream = await resultBlob.OpenWriteAsync(cancellationToken))
+                                            using (var streamWriter = new StreamWriter(blobStream))
+                                            {
+                                                await streamWriter.WriteAsync(_jsonConverter.Serialize(result));
+                                            }
+
+                                            await blob.DeleteAsync(
+                                                DeleteSnapshotsOption.None,
+                                                accessCondition,
+                                                new BlobRequestOptions(),
+                                                new OperationContext());
                                         }
-                                        catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
+                                        finally
                                         {
-                                            result.Errors = new[] { ex.ToString() };
+                                            foreach (var assemblyPath in assemblyPaths)
+                                            {
+                                                _appDataFolder.DeleteFile(assemblyPath);
+                                            }
+
+                                            _appDataFolder.DeleteFile(jobFolder);
                                         }
-
-                                        cancellationToken.ThrowIfCancellationRequested();
-
-                                        var resultBlob = _container.GetBlockBlobReference("results/" + job.Token);
-
-                                        using (var blobStream = await resultBlob.OpenWriteAsync(cancellationToken))
-                                        using (var streamWriter = new StreamWriter(blobStream))
-                                        {
-                                            await streamWriter.WriteAsync(_jsonConverter.Serialize(result));
-                                        }
-
-                                        await blob.DeleteAsync(
-                                            DeleteSnapshotsOption.None,
-                                            accessCondition,
-                                            new BlobRequestOptions(),
-                                            new OperationContext());
                                     }
                                     catch
                                     {
@@ -281,8 +307,8 @@ namespace Hast.Remote.Worker
 
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    // Waiting a bit between cycles not to have access Blob Storage usage due to polling (otherwise it's
-                    // not an issue, this loop barely uses any CPU).
+                    // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise 
+                    // it's not an issue, this loop barely uses any CPU).
                     await Task.Delay(500);
                     _restartCount = 0;
                 }
@@ -294,11 +320,16 @@ namespace Hast.Remote.Worker
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                if (_restartCount >= 10)
+                if (_restartCount < 100)
                 {
                     Logger.Error(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
+
                     Dispose();
                     _restartCount++;
+
+                    // Waiting a bit for transient errors to go away.
+                    await Task.Delay(10000);
+
                     await Work(configuration, cancellationToken);
                 }
                 else
