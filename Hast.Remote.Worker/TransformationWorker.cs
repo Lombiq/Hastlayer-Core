@@ -294,7 +294,7 @@ namespace Hast.Remote.Worker
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                if (_restartCount >= 10)
+                if (_restartCount < 10)
                 {
                     Logger.Error(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
                     Dispose();
