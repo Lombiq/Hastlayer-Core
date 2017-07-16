@@ -217,7 +217,19 @@ namespace Hast.Remote.Worker
                                         }
                                         catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
                                         {
-                                            result.Errors = new[] { ex.ToString() };
+                                            // We don't want to show the stack trace to the user, just exception message,
+                                            // so building one by iterating all the nested exceptions.
+
+                                            var currentException = ex;
+                                            var message = string.Empty;
+
+                                            while (currentException != null)
+                                            {
+                                                message += currentException.Message + Environment.NewLine;
+                                                currentException = currentException.InnerException;
+                                            }
+
+                                            result.Errors = new[] { message };
                                         }
 
                                         cancellationToken.ThrowIfCancellationRequested();
