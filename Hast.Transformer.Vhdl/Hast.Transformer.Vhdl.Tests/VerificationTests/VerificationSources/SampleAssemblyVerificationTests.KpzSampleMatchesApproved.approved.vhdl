@@ -36,10 +36,10 @@ architecture Imp of Hast_IP is
     -- * The InternalInvocationProxy processes dispatch invocations between state machines.
 
     -- Custom inter-dependent type declarations start
-    type \unsigned_Array\ is array (integer range <>) of unsigned(31 downto 0);
+    type \unsigned32_Array\ is array (integer range <>) of unsigned(31 downto 0);
     type \Hast.Samples.Kpz.KpzKernels\ is record 
         \IsNull\: boolean;
-        \gridRaw\: \unsigned_Array\(0 to 63);
+        \gridRaw\: \unsigned32_Array\(0 to 63);
         \integerProbabilityP\: unsigned(31 downto 0);
         \integerProbabilityQ\: unsigned(31 downto 0);
         \TestMode\: boolean;
