@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Extensibility.Events;
@@ -235,7 +236,7 @@ namespace Hast.Transformer
 
             var context = new TransformationContext
             {
-                Id = transformationId,
+                Id = Sha2456Helper.ComputeHash(transformationId),
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
