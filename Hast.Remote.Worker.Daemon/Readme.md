@@ -7,12 +7,25 @@ Windows service to run the Hastlayer Worker.
 
 ## Installation on the server
 
-1. If the service is already running then stop it first.
-2. Build the project in Release mode and copy the service exe and its dependencies (basically the whole Release bin folder) onto the server in a desired location (e.g. *C:\HastlayerRemoteWorkerDaemon*). If you just update the Worker then you may copy the last modified files only.
-3. Configure the service in the *Hast.Remote.Worker.Daemon.exe.config* file (for documentation on these take a look at the `ConfigurationKeys` class). If you're updating the service then make sure not to overwrite the config file to keep the settings or re-add them.
-4. If you're updating the service but there was no Hastlayer version number change since the last deployment despite transformation logic changing (i.e. you do a rolling update) then also make sure to remove any cache files Hastlayer may have created. These are under *[Daemon installation directory]\Hastlayer\App_Data\Hastlayer*.
-5. If you're installing the service the first time then run the exe as administrator. This will install the service (running it again uninstalls it). Verify that the installation was successful by checking Services.
-6. (Re-)start the service. The service is set to automatic start, i.e. it will start with Windows but after installation however it should be manually started from Services.
+First build the project in Release mode. Then according to your case:
+
+### If this is the first installation
+1. Copy the service exe and its dependencies (basically the whole Release bin folder) onto the server in a desired location (e.g. *C:\HastlayerRemoteWorkerDaemon*).
+2. Configure the service in the *Hast.Remote.Worker.Daemon.exe.config* file (for documentation on these take a look at the `ConfigurationKeys` class).
+3.  Run the service exe as administrator. This will install the service (running it again uninstalls it). Verify that the installation was successful by checking Services.
+4. Start the service. The service is set to automatic start, i.e. it will start with Windows but after installation however it should be manually started from Services.
+5. Check the logs for any issues.
+
+### If you're updating the service
+To minimize downtime and have the ability to roll back to the previously installed version of the service do the following:
+
+1. Copy the service exe and its dependencies (basically the whole Release bin folder) onto the server in a desired temporary location (e.g. *C:\HastlayerRemoteWorkerDaemonTemp*).
+2. Configure the service in the *Hast.Remote.Worker.Daemon.exe.config* file (for documentation on these take a look at the `ConfigurationKeys` class). You can copy the configuration file of the running service over too, if the configuration format hasn't changed.
+3. Stop the running service.
+4. Rename the folder of the running service (eg. *HastlayerRemoteWorkerDaemonOld*), then name the temporary folder of the new instance to its original name (eg. *HastlayerRemoteWorkerDaemon*).
+5. Restart the service.
+6. Check the logs for any issues.
+7. If everything is alright, remove the old service instance's folder.
 
 
 ## Logging
