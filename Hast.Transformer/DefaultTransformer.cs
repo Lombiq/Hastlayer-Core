@@ -159,6 +159,14 @@ namespace Hast.Transformer
                 unprocessedSyntaxTree = (SyntaxTree)syntaxTree.Clone();
             }
 
+            // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
+            // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
+            var saveSyntaxTree = false;
+            if (saveSyntaxTree)
+            {
+                File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
+            }
+
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
             // see: https://github.com/icsharpcode/ILSpy/issues/686. But we can't run that directly since that would
             // also transform some low-level constructs that are useful to have as simple as possible (e.g. it's OK if
@@ -246,6 +254,11 @@ namespace Hast.Transformer
 
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
+
+            if (saveSyntaxTree)
+            {
+                File.WriteAllText("ProcessedSyntaxTree.cs", syntaxTree.ToString()); 
+            }
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
