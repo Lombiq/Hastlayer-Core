@@ -11,7 +11,7 @@ First build the project in Release mode. Then according to your case:
 
 ### If this is the first installation
 1. Copy the service exe and its dependencies (basically the whole Release bin folder) onto the server in a desired location (e.g. *C:\HastlayerRemoteWorkerDaemon*).
-2. Configure the service in the *Hast.Remote.Worker.Daemon.exe.config* file (for documentation on these take a look at the `ConfigurationKeys` class).
+2. Configure the service in the *Hast.Remote.Worker.Daemon.exe.config* file (for documentation on these take a look at the `ConfigurationKeys` class) and the Application Insights instrumentation key in *ApplicationInsights.config*.
 3.  Run the service exe as administrator. This will install the service (running it again uninstalls it). Verify that the installation was successful by checking Services.
 4. Start the service. The service is set to automatic start, i.e. it will start with Windows but after installation however it should be manually started from Services.
 5. Check the logs for any issues.
@@ -20,7 +20,7 @@ First build the project in Release mode. Then according to your case:
 To minimize downtime and have the ability to roll back to the previously installed version of the service do the following:
 
 1. Copy the service exe and its dependencies (basically the whole Release bin folder) onto the server in a desired temporary location (e.g. *C:\HastlayerRemoteWorkerDaemonTemp*).
-2. Configure the service in the *Hast.Remote.Worker.Daemon.exe.config* file (for documentation on these take a look at the `ConfigurationKeys` class). You can copy the configuration file of the running service over too, if the configuration format hasn't changed.
+2. Configure the service in the *Hast.Remote.Worker.Daemon.exe.config* file (for documentation on these take a look at the `ConfigurationKeys` class) and the Application Insights instrumentation key in *ApplicationInsights.config*. You can copy the configuration files of the running service over too, if the configuration formats haven't changed.
 3. Stop the running service.
 4. Rename the folder of the running service (eg. *HastlayerRemoteWorkerDaemonOld*), then name the temporary folder of the new instance to its original name (eg. *HastlayerRemoteWorkerDaemon*).
 5. Restart the service.
