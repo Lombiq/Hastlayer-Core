@@ -57,6 +57,8 @@ namespace Hast.Remote.Worker
                     var hastlayerConfiguration = new HastlayerConfiguration
                     {
                         Flavor = HastlayerFlavor.Developer,
+                        // These extensions need to be added explicitly because when deployed as a flat folder of
+                        // binaries they won't be automatically found under the Hast.Core and Hast.Abstractions folders.
                         Extensions = new[]
                         {
                             typeof(DefaultTransformer).Assembly,
