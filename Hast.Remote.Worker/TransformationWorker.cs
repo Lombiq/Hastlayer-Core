@@ -228,6 +228,13 @@ namespace Hast.Remote.Worker
                                                         .HardwareEntryPointNamesToMemberIdMappings
                                                         .ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
                                                     Language = hardwareDescription.Language,
+                                                    Warnings = hardwareDescription.Warnings
+                                                        .Select(warning => new TransformationWarning
+                                                        {
+                                                            Code = warning.Code,
+                                                            Message = warning.Message
+                                                        })
+                                                        .ToList()
                                                 };
 
                                                 using (var memoryStream = new MemoryStream())
