@@ -32,8 +32,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IRecordComposer _recordComposer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
-        public ILogger Logger { get; set; }
-
 
         public ExpressionTransformer(
             ITypeConverter typeConverter,
@@ -55,8 +53,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
             _recordComposer = recordComposer;
             _declarableTypeCreator = declarableTypeCreator;
-
-            Logger = NullLogger.Instance;
         }
 
 
@@ -74,7 +70,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         binaryExpression,
                         reference,
                         binaryExpression.Left == expression,
-                        context.TransformationContext);
+                        context);
             };
 
 
@@ -607,7 +603,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .ImplementTypeConversion(fromType, toType, innerExpressionResult);
                 if (typeConversionResult.IsLossy)
                 {
-                    Logger.Warning(
+                    scope.Warnings.AddWarning(
+                        "LossyCast",
                         "A cast from " + fromType.ToVhdl() + " to " + toType.ToVhdl() +
                         " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");

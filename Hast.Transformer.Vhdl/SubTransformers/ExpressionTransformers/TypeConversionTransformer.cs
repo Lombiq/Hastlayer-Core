@@ -14,27 +14,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
-        public ILogger Logger { get; set; }
-
 
         public TypeConversionTransformer(ITypeConverter typeConverter)
         {
             _typeConverter = typeConverter;
-
-            Logger = NullLogger.Instance;
         }
 
 
         public IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
-            bool isLeft, 
-            IVhdlTransformationContext context)
+            bool isLeft,
+            ISubTransformerContext context)
         {
             // If the type of an operand can't be determined the best guess is the expression's type.
             var expressionTypeReference = binaryOperatorExpression.GetActualTypeReference();
             var expressionType = expressionTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(expressionTypeReference, context) : 
+                _typeConverter.ConvertTypeReference(expressionTypeReference, context.TransformationContext) : 
                 null;
 
             var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
@@ -67,11 +63,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             var leftType = leftTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(leftTypeReference, context) : 
+                _typeConverter.ConvertTypeReference(leftTypeReference, context.TransformationContext) : 
                 expressionType;
 
             var rightType = rightTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(rightTypeReference, context) : 
+                _typeConverter.ConvertTypeReference(rightTypeReference, context.TransformationContext) : 
                 expressionType;
 
             if (leftType == null || rightType == null)
@@ -107,7 +103,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var typeConversionResult = ImplementTypeConversion(fromType, toType, variableReference);
             if (typeConversionResult.IsLossy)
             {
-                Logger.Warning(
+                context.Scope.Warnings.AddWarning(
+                    "LossyBinaryExpressionCast",
                     "Converting from " + fromType.Name +
                     " to " + toType.Name +
                     " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding. " +

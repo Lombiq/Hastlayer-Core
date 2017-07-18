@@ -96,6 +96,7 @@
     <Compile Include="Extensions\DeviceDriverSelectorExtensions.cs" />
     <Compile Include="Extensions\ParameterDeclarationExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TransformationWarningEnumerableExtensions.cs" />
     <Compile Include="Helpers\BinaryChainBuilder.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\RecordHelper.cs" />

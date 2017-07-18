@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hast.Common.Extensions;
 using Hast.Common.Helpers;
+using Hast.Layer;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
@@ -134,10 +135,15 @@ namespace Hast.Transformer.Vhdl.Services
 
             // Doing transformations
             var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
+            var warnings = new List<ITransformationWarning>();
             var potentiallyInvokingArchitectureComponents = transformerResults
                 .SelectMany(result =>
                     result.ArchitectureComponentResults
-                        .Select(componentResult => componentResult.ArchitectureComponent)
+                        .Select(componentResult =>
+                        {
+                            warnings.AddRange(componentResult.Warnings);
+                            return componentResult.ArchitectureComponent;
+                        })
                         .Cast<IArchitectureComponent>())
                 .ToList();
             var architectureComponentResults = transformerResults.SelectMany(transformerResult => transformerResult.ArchitectureComponentResults);
@@ -248,7 +254,8 @@ namespace Hast.Transformer.Vhdl.Services
             return new TransformedVhdlManifest
             {
                 Manifest = new VhdlManifest { TopModule = module },
-                MemberIdTable = memberIdTable
+                MemberIdTable = memberIdTable,
+                Warnings = warnings
             };
         }
 
