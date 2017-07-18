@@ -175,7 +175,7 @@ namespace Hast.Remote.Worker
                                                 .Deserialize<TransformationJob>(await streamReader.ReadToEndAsync());
                                         }
 
-                                        telemetry.UserId = job.UserId;
+                                        telemetry.AppId = job.AppId;
                                         var jobFolder = _appDataFolder.Combine("Hastlayer", "RemoteWorker", job.Token);
 
                                         var assemblyPaths = new List<string>();
@@ -202,7 +202,7 @@ namespace Hast.Remote.Worker
                                             var result = new TransformationJobResult
                                             {
                                                 Token = job.Token,
-                                                UserId = job.UserId
+                                                AppId = job.AppId
                                             };
 
                                             IHardwareRepresentation hardwareRepresentation;
@@ -382,7 +382,7 @@ namespace Hast.Remote.Worker
         private class TransformationTelemetry : ITransformationTelemetry
         {
             public string JobName { get; set; }
-            public int UserId { get; set; }
+            public int AppId { get; set; }
             public DateTime StartTimeUtc { get; set; }
             public DateTime FinishTimeUtc { get; set; }
             public bool IsSuccess { get; set; }

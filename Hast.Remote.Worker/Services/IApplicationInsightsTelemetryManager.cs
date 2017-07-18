@@ -10,7 +10,7 @@ namespace Hast.Remote.Worker.Services
     public interface ITransformationTelemetry
     {
         string JobName { get; }
-        int UserId { get; }
+        int AppId { get; }
         DateTime StartTimeUtc { get; }
         DateTime FinishTimeUtc { get;}
         bool IsSuccess { get; }

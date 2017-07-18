@@ -56,7 +56,7 @@ namespace Hast.Remote.Worker.Services
                 Url = new Uri(telemetry.JobName, UriKind.Relative)
             };
 
-            requestTelemetry.Context.User.AccountId = telemetry.UserId.ToString();
+            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString();
 
             new TelemetryClient(TelemetryConfiguration.Active).TrackRequest(requestTelemetry);
         }
