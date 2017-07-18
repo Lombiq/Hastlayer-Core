@@ -8,8 +8,12 @@ using log4net.Layout;
 using log4net.Repository.Hierarchy;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector;
 using Microsoft.ApplicationInsights.Log4NetAppender;
+using Microsoft.ApplicationInsights.WindowsServer;
+using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 using Microsoft.Diagnostics.Tracing;
 
 namespace Hast.Remote.Worker.Services
@@ -40,9 +44,13 @@ namespace Hast.Remote.Worker.Services
 
             hierarchyRoot.AddAppender(aiAppender);
 
-            // This is a hack to use something from the Microsoft.Diagnostics.Tracing.EventSource assembly and thus
-            // get it included in the output directory and be loaded. This is needed for AI.
-            _wasSetup = typeof(EventAttribute).Assembly.FullName != null;
+            // This is a hack to use something from the referenced assemblies and thus get them included in the output 
+            // directory and be loaded. These are needed for AI.
+            _wasSetup = 
+                typeof(DependencyTrackingTelemetryModule).Assembly.FullName != null &&
+                typeof(EventAttribute).Assembly.FullName != null &&
+                typeof(PerformanceCollectorModule).Assembly.FullName != null &&
+                typeof(ServerTelemetryChannel).Assembly.FullName != null;
         }
 
         public void TrackTransformation(ITransformationTelemetry telemetry)
