@@ -19,8 +19,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IExpressionTransformer _expressionTransformer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
-        public ILogger Logger { get; set; }
-
 
         public StatementTransformer(
             ITypeConverter typeConverter, 
@@ -30,8 +28,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConverter = typeConverter;
             _expressionTransformer = expressionTransformer;
             _declarableTypeCreator = declarableTypeCreator;
-
-            Logger = NullLogger.Instance;
         }
 
 
@@ -327,7 +323,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (statement is ThrowStatement)
             {
-                Logger.Warning("The exception throw statement \"{0}\" was omitted during transformation to be able to transform the code. However this can cause issues for certain algorithms; if it is an issue for this one then this code can't be transformed.", statement.ToString());
+                context.Scope.Warnings.AddWarning(
+                    "ThrowStatementOmitted",
+                    "The exception throw statement \"" + statement.ToString() +
+                    "\" was omitted during transformation to be able to transform the code. However this can cause issues for certain algorithms; if it is an issue for this one then this code can't be transformed.");
+
                 currentBlock.Add(new LineComment("A throw statement was here, which was omitted during transformation."));
             }
             else if (statement is SwitchStatement)
