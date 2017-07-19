@@ -103,7 +103,7 @@ namespace System
         {
             var parentEntity = node.FindFirstParentEntityDeclaration();
             if (parentEntity == null) return exceptionMessage;
-            return exceptionMessage + " Parent entity where the affected code is: " + node.GetFullName();
+            return exceptionMessage + " Parent entity where the affected code is: " + parentEntity.GetFullName();
         }
     }
 }
