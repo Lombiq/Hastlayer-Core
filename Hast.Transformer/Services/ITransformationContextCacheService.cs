@@ -11,7 +11,7 @@ namespace Hast.Transformer.Services
 {
     public interface ITransformationContextCacheService : IDependency
     {
-        ITransformationContext GetTransformationContext(SyntaxTree unprocessedSyntaxTree, string transformationId);
-        void SetTransformationContext(ITransformationContext transformationContext, SyntaxTree unprocessedSyntaxTree);
+        ITransformationContext GetTransformationContext(IEnumerable<string> assemblyPaths, string transformationId);
+        void SetTransformationContext(ITransformationContext transformationContext, IEnumerable<string> assemblyPaths);
     }
 }

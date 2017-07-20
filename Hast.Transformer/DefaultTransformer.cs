@@ -119,21 +119,17 @@ namespace Hast.Transformer
                 AssemblyResolver = resolver,
             };
 
-            var firstAssembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPaths.First()), parameters);
-            var rawTransformationId = firstAssembly.FullName;
-            var decompiledContext = new DecompilerContext(firstAssembly.MainModule);
+            // Need to use assembly names instead of paths for the ID, because paths can change (as in the random ones
+            // with Remote Worker). Just file names wouldn't be enough because two assemblies can have the same simple
+            // name while their full names being different.
+            var rawTransformationId = string.Empty;
+            var assemblies = new List<AssemblyDefinition>();
 
-            var decompilerSettings = decompiledContext.Settings;
-            decompilerSettings.AnonymousMethods = false;
-
-            var astBuilder = new AstBuilder(decompiledContext);
-            astBuilder.AddAssembly(firstAssembly);
-
-            foreach (var assemblyPath in assemblyPaths.Skip(1))
+            foreach (var assemblyPath in assemblyPaths)
             {
                 var assembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPath), parameters);
                 rawTransformationId += "-" + assembly.FullName;
-                astBuilder.AddAssembly(assembly);
+                assemblies.Add(assembly);
             }
 
             rawTransformationId +=
@@ -146,18 +142,29 @@ namespace Hast.Transformer
 
             var transformationId = Sha2456Helper.ComputeHash(rawTransformationId);
 
-            var syntaxTree = astBuilder.SyntaxTree;
-            SyntaxTree unprocessedSyntaxTree = null;
-
             if (configuration.EnableCaching)
             {
                 var cachedTransformationContext = _transformationContextCacheService
-                    .GetTransformationContext(syntaxTree, transformationId);
+                    .GetTransformationContext(assemblyPaths, transformationId);
 
                 if (cachedTransformationContext != null) return _engine.Transform(cachedTransformationContext);
-
-                unprocessedSyntaxTree = (SyntaxTree)syntaxTree.Clone();
             }
+
+            var firstAssembly = assemblies.First();
+            var decompiledContext = new DecompilerContext(firstAssembly.MainModule);
+
+            var decompilerSettings = decompiledContext.Settings;
+            decompilerSettings.AnonymousMethods = false;
+
+            var astBuilder = new AstBuilder(decompiledContext);
+            astBuilder.AddAssembly(firstAssembly);
+
+            foreach (var assembly in assemblies.Skip(1))
+            {
+                astBuilder.AddAssembly(assembly);
+            }
+
+            var syntaxTree = astBuilder.SyntaxTree;
 
             // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
             // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
@@ -282,7 +289,7 @@ namespace Hast.Transformer
 
             if (configuration.EnableCaching)
             {
-                _transformationContextCacheService.SetTransformationContext(context, unprocessedSyntaxTree); 
+                _transformationContextCacheService.SetTransformationContext(context, assemblyPaths); 
             }
 
             return _engine.Transform(context);
