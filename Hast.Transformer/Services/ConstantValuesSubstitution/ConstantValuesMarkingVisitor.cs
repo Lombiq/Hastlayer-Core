@@ -29,6 +29,19 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         }
 
 
+        public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
+        {
+            base.VisitAssignmentExpression(assignmentExpression);
+
+            if (assignmentExpression.Left.GetActualTypeReference()?.IsArray == true &&
+                assignmentExpression.Right.Is<InvocationExpression>(invocation => 
+                    invocation.IsSimpleMemoryInvocation() && 
+                    invocation.Target.Is<MemberReferenceExpression>(memberReference => memberReference.MemberName == "Read4Bytes")))
+            {
+                _arraySizeHolder.SetSize(assignmentExpression.Left, 4);
+            }
+        }
+
         public override void VisitPrimitiveExpression(PrimitiveExpression primitiveExpression)
         {
             base.VisitPrimitiveExpression(primitiveExpression);
