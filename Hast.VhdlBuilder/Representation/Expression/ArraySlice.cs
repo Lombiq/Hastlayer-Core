@@ -11,8 +11,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public int IndexFrom { get; set; }
         public int IndexTo { get; set; }
 
+        public bool IsDownTo { get; set; }
+
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            ArrayReference.ToVhdl(vhdlGenerationOptions) + "(" + IndexFrom + " to " + IndexTo + ")";
+            ArrayReference.ToVhdl(vhdlGenerationOptions) + 
+            "(" + IndexFrom + " " + (IsDownTo ? "down" : string.Empty) + "to " + IndexTo + ")";
     }
 }

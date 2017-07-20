@@ -159,6 +159,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                         new ArraySlice
                                         {
                                             ArrayReference = (IDataObject)variableToConvert,
+                                            IsDownTo = true,
                                             IndexFrom = indexFrom,
                                             IndexTo = indexTo
                                         }
@@ -169,7 +170,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         {
                             DataType = ArrayHelper.CreateArrayInstantiation(KnownDataTypes.UInt8, 4),
                             EvaluatedContent = new InlineBlock(
-                                createSlice(0, 7), createSlice(8, 15), createSlice(16, 23), createSlice(24, 31))
+                                createSlice(31, 24), createSlice(23, 16), createSlice(15, 8), createSlice(7, 0))
                         };
                     }
 
@@ -183,14 +184,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     var arrayReference = (IDataObject)invocationParameters[1].Reference;
 
-                    Action<int, int, int> addSlice = (indexFrom, indexTo, elementIndex) =>
+                    Action<int> addSlice = elementIndex =>
                         currentBlock.Add(new Assignment
                         {
                             AssignTo = new ArraySlice
                             {
                                 ArrayReference = dataOutReference,
-                                IndexFrom = indexFrom,
-                                IndexTo = indexTo
+                                IsDownTo = true,
+                                IndexFrom = 31 - elementIndex * 8,
+                                IndexTo = 24 - elementIndex * 8
                             },
                             // The data to write is conventionally the second parameter.
                             Expression = new Invocation
@@ -207,10 +209,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             }
                         });
 
-                    addSlice(0, 7, 0);
-                    addSlice(8, 15, 1);
-                    addSlice(16, 23, 2);
-                    addSlice(24, 31, 3);
+                    // Arrays smaller than 4 elements can be written with Write4Bytes(), so need to take care of them.
+                    var arrayLength = 
+                        context.TransformationContext.ArraySizeHolder.GetSizeOrThrow(expression.Arguments.Skip(1).First())
+                        .Length;
+                    for (int i = 0; i < arrayLength; i++)
+                    {
+                        addSlice(i);
+                    }
                 }
                 else
                 {
