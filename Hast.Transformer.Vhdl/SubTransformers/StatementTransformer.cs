@@ -277,17 +277,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var afterWhileStateIndex = stateMachine.AddState(afterWhileState);
                 GetOrCreateAfterWhileStateIndexStack(context).Push(afterWhileStateIndex);
 
-                // Having a condition even in the current state's body: if the loop doesn't need to run at all we'll
-                // spare one cycle by directly jumping to the state after the loop.
                 currentBlock.Add(new LineComment("Starting a while loop."));
-                currentBlock.Add(new LineComment(
-                    "The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):"));
-                currentBlock.Add(new IfElse
-                {
-                    Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
-                    True = stateMachine.CreateStateChange(repeatedStateIndex),
-                    Else = stateMachine.CreateStateChange(afterWhileStateIndex)
-                });
+                currentBlock.Add(stateMachine.CreateStateChange(repeatedStateIndex));
 
                 var whileStateInnerBody = new InlineBlock();
 
