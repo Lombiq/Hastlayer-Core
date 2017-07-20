@@ -19,8 +19,11 @@ namespace Hast.Transformer.Services
             {
                 base.VisitObjectCreateExpression(objectCreateExpression);
 
+                var typeName = objectCreateExpression.Type.GetFullName();
                 if (objectCreateExpression.Parent is AssignmentExpression ||
-                    objectCreateExpression.Type.GetFullName().IsDisplayClassName())
+                    typeName.IsDisplayClassName()||
+                    // Omitting Funcs for now, as those are used in parallel code with Tasks and handled separately.
+                    typeName == "System.Func`2")
                 {
                     return;
                 }
