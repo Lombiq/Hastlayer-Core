@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ICSharpCode.NRefactory.CSharp;
+using Orchard.Validation;
 
 namespace Hast.Transformer.Models
 {
@@ -30,6 +31,8 @@ namespace Hast.Transformer.Models
 
         public void SetSize(AstNode arrayHolder, int length)
         {
+            Argument.ThrowIfNull(arrayHolder, nameof(arrayHolder));
+
             var holderName = arrayHolder.GetFullNameWithUnifiedPropertyName();
 
             IArraySize existingSize;

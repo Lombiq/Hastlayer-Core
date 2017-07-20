@@ -34,8 +34,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitAssignmentExpression(assignmentExpression);
 
             if (assignmentExpression.Left.GetActualTypeReference()?.IsArray == true &&
-                assignmentExpression.Right.Is<InvocationExpression>(invocation => 
-                    invocation.IsSimpleMemoryInvocation() && 
+                assignmentExpression.Right.Is<InvocationExpression>(invocation =>
+                    invocation.IsSimpleMemoryInvocation() &&
                     invocation.Target.Is<MemberReferenceExpression>(memberReference => memberReference.MemberName == "Read4Bytes")))
             {
                 _arraySizeHolder.SetSize(assignmentExpression.Left, 4);
@@ -169,7 +169,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     invocationParameterHandler: processParent,
                     objectCreationParameterHandler: processParent,
                     variableInitializerHandler: processParent,
-                    returnStatementHandler: returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()));
+                    returnStatementHandler: returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()),
+                    namedExpressionHandler: processParent);
             }
             else
             {
@@ -210,7 +211,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 invocationParameterHandler: processParent,
                 objectCreationParameterHandler: processParent,
                 variableInitializerHandler: processParent,
-                returnStatementHandler: returnStatement => _arraySizeHolder.SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength));
+                returnStatementHandler: returnStatement => _arraySizeHolder
+                    .SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength),
+                namedExpressionHandler: processParent);
         }
 
 
@@ -221,7 +224,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             Action<ParameterDeclaration> invocationParameterHandler,
             Action<ParameterDeclaration> objectCreationParameterHandler,
             Action<VariableInitializer> variableInitializerHandler,
-            Action<ReturnStatement> returnStatementHandler)
+            Action<ReturnStatement> returnStatementHandler,
+            Action<NamedExpression> namedExpressionHandler)
         {
             var parent = node.Parent;
 
@@ -271,6 +275,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             else if (parent is ReturnStatement)
             {
                 returnStatementHandler((ReturnStatement)parent);
+                updateHiddenlyUpdatedNodesUpdated(parent);
+            }
+            else if (parent is NamedExpression)
+            {
+                // NamedExpressions are used in object initializers, e.g. new MyClass { Property = true }.
+                namedExpressionHandler((NamedExpression)parent);
                 updateHiddenlyUpdatedNodesUpdated(parent);
             }
         }
