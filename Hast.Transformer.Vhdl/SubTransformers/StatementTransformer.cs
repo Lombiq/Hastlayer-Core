@@ -263,12 +263,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 Func<IVhdlGenerationOptions, string> whileStartStateIndexNameGenerator = vhdlGenerationOptions =>
                     vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(whileStartStateIndex));
 
-                var repeatedState = new InlineBlock(
+                var repeatedStateStart = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "Repeated state of the while loop which was started in state " +
                         whileStartStateIndexNameGenerator(vhdlGenerationOptions) +
                         "."));
-                var repeatedStateIndex = stateMachine.AddState(repeatedState);
+                var repeatedStateStartIndex = stateMachine.AddState(repeatedStateStart);
                 var afterWhileState = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "State after the while loop which was started in state " +
@@ -278,15 +278,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 GetOrCreateAfterWhileStateIndexStack(context).Push(afterWhileStateIndex);
 
                 currentBlock.Add(new LineComment("Starting a while loop."));
-                currentBlock.Add(stateMachine.CreateStateChange(repeatedStateIndex));
+                currentBlock.Add(stateMachine.CreateStateChange(repeatedStateStartIndex));
 
                 var whileStateInnerBody = new InlineBlock();
 
-                currentBlock.ChangeBlockToDifferentState(repeatedState, repeatedStateIndex);
-                repeatedState.Add(new LineComment("The while loop's condition:"));
-                repeatedState.Add(new IfElse
+                currentBlock.ChangeBlockToDifferentState(repeatedStateStart, repeatedStateStartIndex);
+                repeatedStateStart.Add(new LineComment("The while loop's condition:"));
+                var conditionResultReference = _expressionTransformer.Transform(whileStatement.Condition, context);
+                currentBlock.Add(new IfElse
                 {
-                    Condition = _expressionTransformer.Transform(whileStatement.Condition, context),
+                    Condition = conditionResultReference,
                     True = whileStateInnerBody,
                     Else = stateMachine.CreateStateChange(afterWhileStateIndex)
                 });
@@ -306,7 +307,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             whileStartStateIndexNameGenerator(vhdlGenerationOptions) +
                             " if the loop wasn't exited with a state change."));
 
-                    currentBlock.Add(CreateConditionalStateChange(repeatedStateIndex, context));
+                    currentBlock.Add(CreateConditionalStateChange(repeatedStateStartIndex, context));
                 }
                 currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
 
