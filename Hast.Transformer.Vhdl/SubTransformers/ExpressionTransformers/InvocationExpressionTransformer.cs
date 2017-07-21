@@ -170,7 +170,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         {
                             DataType = ArrayHelper.CreateArrayInstantiation(KnownDataTypes.UInt8, 4),
                             EvaluatedContent = new InlineBlock(
-                                createSlice(31, 24), createSlice(23, 16), createSlice(15, 8), createSlice(7, 0))
+                                createSlice(7, 0), createSlice(15, 8), createSlice(23, 16), createSlice(31, 24))
                         };
                     }
 
@@ -191,8 +191,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             {
                                 ArrayReference = dataOutReference,
                                 IsDownTo = true,
-                                IndexFrom = 31 - elementIndex * 8,
-                                IndexTo = 24 - elementIndex * 8
+                                IndexFrom = (elementIndex + 1) * 8 - 1,
+                                IndexTo = elementIndex * 8
                             },
                             // The data to write is conventionally the second parameter.
                             Expression = new Invocation
