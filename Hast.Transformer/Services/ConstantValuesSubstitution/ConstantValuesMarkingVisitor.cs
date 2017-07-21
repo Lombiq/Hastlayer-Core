@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
@@ -33,10 +34,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             base.VisitAssignmentExpression(assignmentExpression);
 
-            if (assignmentExpression.Left.GetActualTypeReference()?.IsArray == true &&
-                assignmentExpression.Right.Is<InvocationExpression>(invocation =>
-                    invocation.IsSimpleMemoryInvocation() &&
-                    invocation.Target.Is<MemberReferenceExpression>(memberReference => memberReference.MemberName == "Read4Bytes")))
+            if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression))
             {
                 _arraySizeHolder.SetSize(assignmentExpression.Left, 4);
             }

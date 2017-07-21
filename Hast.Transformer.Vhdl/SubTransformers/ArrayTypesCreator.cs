@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -45,12 +47,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
 
+            public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
+            {
+                base.VisitAssignmentExpression(assignmentExpression);
+
+                if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression))
+                {
+                    CreateArrayDeclarationIfNew(AstBuilder.ConvertType(assignmentExpression.GetActualTypeReference().GetElementType()));
+                }
+            }
+
             public override void VisitArrayCreateExpression(ArrayCreateExpression arrayCreateExpression)
             {
                 base.VisitArrayCreateExpression(arrayCreateExpression);
 
-                var elementType = _typeConverter
-                    .ConvertAstType(arrayCreateExpression.GetElementType(), _context);
+                CreateArrayDeclarationIfNew(arrayCreateExpression.GetElementType());
+            }
+
+
+            private void CreateArrayDeclarationIfNew(AstType elementAstType)
+            {
+                var elementType = _typeConverter.ConvertAstType(elementAstType, _context);
+
                 var typeName = ArrayHelper.CreateArrayTypeName(elementType);
 
                 if (_arrayDeclarations.ContainsKey(typeName)) return;
