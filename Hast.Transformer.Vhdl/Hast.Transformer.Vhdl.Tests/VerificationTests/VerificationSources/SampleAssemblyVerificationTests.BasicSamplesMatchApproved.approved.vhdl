@@ -46,6 +46,14 @@ architecture Imp of Hast_IP is
 
     -- Custom inter-dependent type declarations start
     type \unsigned32_Array\ is array (integer range <>) of unsigned(31 downto 0);
+    type \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\ is record 
+        \IsNull\: boolean;
+        \R\: unsigned(7 downto 0);
+        \G\: unsigned(7 downto 0);
+        \B\: unsigned(7 downto 0);
+    end record;
+    type \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput_Array\ is array (integer range <>) of \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+    type \unsigned8_Array\ is array (integer range <>) of unsigned(7 downto 0);
     type \Hast.Samples.SampleAssembly.NumberContainer\ is record 
         \IsNull\: boolean;
         \WasIncreased\: boolean;
@@ -54,6 +62,11 @@ architecture Imp of Hast_IP is
     type \Hast.Samples.SampleAssembly.NumberContainer_Array\ is array (integer range <>) of \Hast.Samples.SampleAssembly.NumberContainer\;
     type \boolean_Array\ is array (integer range <>) of boolean;
     type \signed32_Array\ is array (integer range <>) of signed(31 downto 0);
+    type \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\ is record 
+        \IsNull\: boolean;
+        \PixelBytes\: \unsigned8_Array\(0 to 3);
+        \ContrastValue\: signed(31 downto 0);
+    end record;
     type \Hast.Samples.SampleAssembly.MemoryContainer\ is record 
         \IsNull\: boolean;
     end record;
@@ -202,6 +215,201 @@ architecture Imp of Hast_IP is
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+
+
+    -- System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
+    -- State machine states:
+    type \ImageContrastModifier::ChangeContrast(SimpleMemory).0._States\ is (
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_0\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_1\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_2\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_3\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_4\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_5\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_6\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_8\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_13\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\, 
+        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\);
+    -- Signals:
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Finished\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.1\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.2\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Started\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.In.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.In.1\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.In.2\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.0\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.1\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.2\: boolean := false;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.1\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+    Signal \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.2\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+    -- System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+
+
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).0 declarations start
+    -- State machine states:
+    type \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._States\ is (
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_0\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_1\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\);
+    -- Signals:
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Finished\: boolean := false;
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Started\: boolean := false;
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).0 declarations end
+
+
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).1 declarations start
+    -- State machine states:
+    type \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._States\ is (
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_0\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_1\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\);
+    -- Signals:
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Finished\: boolean := false;
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Started\: boolean := false;
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).1 declarations end
+
+
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).2 declarations start
+    -- State machine states:
+    type \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._States\ is (
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_0\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_1\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\, 
+        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\);
+    -- Signals:
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Finished\: boolean := false;
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Started\: boolean := false;
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).2 declarations end
+
+
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).0 declarations start
+    -- State machine states:
+    type \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._States\ is (
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_0\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_1\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_2\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_3\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_4\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_5\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_6\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_7\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_8\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_9\);
+    -- Signals:
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Finished\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject.parameter.Out\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Started\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject.parameter.In\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).0 declarations end
+
+
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).1 declarations start
+    -- State machine states:
+    type \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._States\ is (
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_0\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_1\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_2\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_3\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_4\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_5\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_6\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_7\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_8\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_9\);
+    -- Signals:
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Finished\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject.parameter.Out\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Started\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject.parameter.In\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).1 declarations end
+
+
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).2 declarations start
+    -- State machine states:
+    type \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._States\ is (
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_0\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_1\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_2\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_3\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_4\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_5\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_6\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_7\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_8\, 
+        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_9\);
+    -- Signals:
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Finished\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject.parameter.Out\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Started\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject.parameter.In\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\: boolean := false;
+    Signal \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).2 declarations end
 
 
     -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
@@ -1259,6 +1467,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\: boolean := false;
@@ -1271,6 +1480,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Finished.0\: boolean := false;
@@ -2107,6 +2317,1188 @@ begin
         end if;
     end process;
     -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+
+
+    -- System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0._StateMachine\: process (\Clock\) 
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\: \ImageContrastModifier::ChangeContrast(SimpleMemory).0._States\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_0\;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag2\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput_Array\(0 to 2);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\: \unsigned8_Array\(0 to 3) := (others => to_unsigned(0, 8));
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.1\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.2\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\: boolean := false;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\: \unsigned8_Array\(0 to 2) := (others => to_unsigned(0, 8));
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Finished\ <= false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ <= false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\ <= false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\ <= false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_0\;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := to_unsigned(0, 16);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := to_unsigned(0, 16);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag2\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\ := (others => to_unsigned(0, 8));
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.0\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.1\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ := 0;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := false;
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\ := (others => to_unsigned(0, 8));
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\ := to_signed(0, 32);
+            else 
+                case \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ is 
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._Started\ = true) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._Started\ = true) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Finished\ <= true;
+                        else 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Finished\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_2\ => 
+                        -- Begin SimpleMemory read.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_3\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := resize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\), 16);
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_4\ => 
+                        -- Begin SimpleMemory read.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_5\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\ := \DataIn\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := resize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\), 16);
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_6\ => 
+                        -- Begin SimpleMemory read.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\ := \DataIn\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := ConvertStdLogicVectorToInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.0\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ > to_signed(100, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.0\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\.
+                            --     * The false branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\.
+                            --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_8\.
+
+                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag\) then 
+                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\;
+                            else 
+                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_8\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ := to_signed(100, 32) + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ / to_signed(100, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := resize(signed(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ * \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\), 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ := (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ / to_signed(3, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := to_signed(100, 32);
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.1\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ < to_signed(-100, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag2\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.1\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\.
+
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag2\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := to_signed(-100, 32);
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_13\ => 
+                        -- Waiting for the result to appear in \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ (have to wait 7 clock cycles in this state).
+                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        else 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                        end if;
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ mod to_signed(3, 32);
+                        -- Clock cycles needed to complete this state (approximation): 7
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\ => 
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ /= to_signed(0, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\.
+
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ := to_signed(0, 32);
+                        -- Starting a while loop.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ + to_signed(1, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\;
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\.
+                        -- The while loop's condition:
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ < \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\;
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ := to_signed(0, 32);
+                            -- Starting a while loop.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
+                        else 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_18\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\.
+                        -- The while loop's condition:
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ < to_signed(3, 32);
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(3, 32), 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ + to_signed(3, 32);
+                            -- Begin SimpleMemory read.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\;
+                        else 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\ := \DataIn\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\ := (unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(7 downto 0)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(15 downto 8)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(23 downto 16)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(31 downto 24)));
+                            -- Initializing record fields to their defaults.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\IsNull\ := false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\PixelBytes\ := (others => to_unsigned(0, 8));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\ContrastValue\ := to_signed(0, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
+                            -- Starting state machine invocation for the following method: Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)
+                            case \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ is 
+                                when 0 => 
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.0\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ <= true;
+                                when 1 => 
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.1\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\ <= true;
+                                when 2 => 
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.2\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\ <= true;
+                            end case;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ + 1;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ + to_signed(1, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\;
+                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\ if the loop wasn't exited with a state change.
+                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\) then 
+                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.1\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.2\ and \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.0\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ := 0;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.0\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.0\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.1\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.1\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.2\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.2\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(0) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.0\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(1) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.1\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(2) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.2\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ := to_signed(0, 32);
+                            -- Starting a while loop.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\ => 
+                        -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
+                        -- The while loop's condition:
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ < to_signed(3, 32);
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\ := (others => to_unsigned(0, 8));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(to_integer(to_signed(0, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\R\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(to_integer(to_signed(1, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\G\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(to_integer(to_signed(2, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\B\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(3, 32), 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ + to_signed(3, 32);
+                            -- Begin SimpleMemory write.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(7 downto 0) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(0));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(15 downto 8) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(1));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(23 downto 16) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(2));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\;
+                        else 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\ => 
+                        -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ + to_signed(1, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\;
+                        -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ if the loop wasn't exited with a state change.
+                        if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\) then 
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ + to_signed(1, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\;
+                            -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ if the loop wasn't exited with a state change.
+                            if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\) then 
+                                \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+
+
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).0 state machine start
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._StateMachine\: process (\Clock\) 
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\: \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._States\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_0\;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag2\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Finished\ <= false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\ <= to_unsigned(0, 8);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_0\;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\ := to_unsigned(0, 8);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag2\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.5\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.6\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\ := false;
+            else 
+                case \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ is 
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Started\ = true) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Started\ = true) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Finished\ <= true;
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Finished\ <= false;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\ => 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel.parameter.In\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue.parameter.In\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ := resize(resize(signed(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\), 32) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ / to_signed(255, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ - to_signed(500, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.3\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ * \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue\, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.3\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ / to_signed(1000, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.5\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ + to_signed(500, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.5\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.6\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ * to_signed(255, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.6\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ / to_signed(1000, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ < to_signed(0, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\.
+
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\;
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.9
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ > to_signed(255, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\.
+
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag2\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := to_signed(255, 32);
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).0 state machine end
+
+
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).1 state machine start
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._StateMachine\: process (\Clock\) 
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\: \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._States\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_0\;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag2\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Finished\ <= false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\ <= to_unsigned(0, 8);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_0\;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\ := to_unsigned(0, 8);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag2\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.3\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.5\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.6\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\ := false;
+            else 
+                case \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ is 
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Started\ = true) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Started\ = true) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Finished\ <= true;
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Finished\ <= false;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\ => 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel.parameter.In\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue.parameter.In\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ := resize(resize(signed(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\), 32) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ / to_signed(255, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ - to_signed(500, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.3\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ * \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue\, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.3\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ / to_signed(1000, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.5\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ + to_signed(500, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.5\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.6\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ * to_signed(255, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.6\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ / to_signed(1000, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ < to_signed(0, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\.
+
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\;
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.9
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ > to_signed(255, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\.
+
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag2\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := to_signed(255, 32);
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).1 state machine end
+
+
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).2 state machine start
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._StateMachine\: process (\Clock\) 
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\: \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._States\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_0\;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag2\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\: boolean := false;
+        Variable \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Finished\ <= false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\ <= to_unsigned(0, 8);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_0\;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\ := to_unsigned(0, 8);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag2\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.3\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.5\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.6\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\ := to_signed(0, 32);
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\ := false;
+                \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\ := false;
+            else 
+                case \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ is 
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Started\ = true) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Started\ = true) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Finished\ <= true;
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Finished\ <= false;
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\ => 
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel.parameter.In\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue.parameter.In\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ := resize(resize(signed(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\), 32) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ / to_signed(255, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ - to_signed(500, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.3\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ * \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue\, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.3\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ / to_signed(1000, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.5\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ + to_signed(500, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.5\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.6\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ * to_signed(255, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.6\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ / to_signed(1000, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\;
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ < to_signed(0, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\.
+                        --     * The false branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\.
+
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\;
+                        else 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.9
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\ => 
+                        -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ > to_signed(255, 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\.
+                        --     * Execution after either branch will continue in the following state: \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\.
+
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag2\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\ => 
+                        -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\.
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\ => 
+                        -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\.
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := to_signed(255, 32);
+                        -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\.
+                        if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\) then 
+                            \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32).2 state machine end
+
+
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).0 state machine start
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._StateMachine\: process (\Clock\) 
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_0\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Finished\ <= false;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= to_signed(0, 32);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_0\;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.0\ := to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.1\ := to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\ := to_unsigned(0, 8);
+            else 
+                case \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ is 
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Started\ = true) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Started\ = true) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Finished\ <= true;
+                        else 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Finished\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject.parameter.Out\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_2\ => 
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject.parameter.In\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject\;
+                        -- Initializing record fields to their defaults.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := to_unsigned(0, 8);
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.0\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.0\;
+                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_4\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_5\ => 
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(1, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.1\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.1\;
+                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_7\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_8\ => 
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).0 state machine end
+
+
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).1 state machine start
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._StateMachine\: process (\Clock\) 
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_0\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Finished\ <= false;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= to_signed(0, 32);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_0\;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.0\ := to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.1\ := to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\ := to_unsigned(0, 8);
+            else 
+                case \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ is 
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Started\ = true) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Started\ = true) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Finished\ <= true;
+                        else 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Finished\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject.parameter.Out\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_2\ => 
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject.parameter.In\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject\;
+                        -- Initializing record fields to their defaults.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := to_unsigned(0, 8);
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.0\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.0\;
+                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_4\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_5\ => 
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(1, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.1\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.1\;
+                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_7\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_8\ => 
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).1 state machine end
+
+
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).2 state machine start
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._StateMachine\: process (\Clock\) 
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\: \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._States\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_0\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Finished\ <= false;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= to_signed(0, 32);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_0\;
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.0\ := to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.1\ := to_unsigned(0, 8);
+                \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\ := to_unsigned(0, 8);
+            else 
+                case \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ is 
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Started\ = true) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Started\ = true) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Finished\ <= true;
+                        else 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Finished\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject.parameter.Out\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_2\ => 
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject.parameter.In\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject\;
+                        -- Initializing record fields to their defaults.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := to_unsigned(0, 8);
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(0, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.0\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.0\;
+                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_4\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_5\ => 
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(1, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.1\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\G\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.1\;
+                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_7\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_8\ => 
+                        -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\PixelBytes\(to_integer(to_signed(2, 32)));
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\.\ContrastValue\;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= true;
+                        \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
+                        if (\ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\;
+                            \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).2 state machine end
 
 
     -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
@@ -6849,6 +8241,7 @@ begin
                 -- Synchronous reset
                 \FinishedInternal\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ <= false;
@@ -6872,76 +8265,83 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 1 => 
+                            if (\Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 2 => 
                             if (\Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 2 => 
+                        when 3 => 
                             if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 3 => 
+                        when 4 => 
                             if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 4 => 
+                        when 5 => 
                             if (\Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 5 => 
+                        when 6 => 
                             if (\Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 6 => 
+                        when 7 => 
                             if (\Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 7 => 
+                        when 8 => 
                             if (\Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().RecursiveAlgorithms::CalculateFactorial(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 8 => 
+                        when 9 => 
                             if (\Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::AddVectors(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 9 => 
+                        when 10 => 
                             if (\Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::SubtractVectors(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 10 => 
+                        when 11 => 
                             if (\Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::MultiplyVectors(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
-                        when 11 => 
+                        when 12 => 
                             if (\Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\ = false) then 
                                 \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().SimdCalculator::DivideVectors(SimpleMemory)._Finished.0\) then 
@@ -6990,6 +8390,50 @@ begin
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Finished.4\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4._Finished\;
     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).return.4\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).4.return\;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput) start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Started\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject.parameter.In\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.0\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._Finished\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.In.0\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject.parameter.Out\;
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#1):
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Started\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject.parameter.In\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.1\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.1\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._Finished\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.1\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.In.1\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject.parameter.Out\;
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#2):
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Started\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject.parameter.In\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.2\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Finished.2\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._Finished\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).return.2\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return\;
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.In.2\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject.parameter.Out\;
+    -- System.Void Hast::InternalInvocationProxy().Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32) start
+    -- Signal connections for Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).0 (#0):
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Started\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\;
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel.parameter.In\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\;
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue.parameter.In\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._Finished\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\;
+    -- Signal connections for Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).1 (#1):
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Started\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\;
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel.parameter.In\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\;
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue.parameter.In\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._Finished\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\;
+    -- Signal connections for Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput).2 (#2):
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Started\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\;
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel.parameter.In\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\;
+    \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue.parameter.In\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).contrastValue.parameter.Out.0\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._Finished\;
+    \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\ <= \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
@@ -8840,6 +10284,13 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Started.0\;
+    \Hast::ExternalInvocationProxy().ImageContrastModifier::ChangeContrast(SimpleMemory)._Finished.0\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
     \ObjectOrientedShowcase::Run(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\;
@@ -8911,10 +10362,10 @@ begin
 
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start
-    \CellIndex\ <= to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MemoryContainer::GetInput().0.SimpleMemory.CellIndex\) when \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ else to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\) when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MemoryContainer::GetInput().0.SimpleMemory.DataOut\ when \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ else \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else "00000000000000000000000000000000";
-    \ReadEnable\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\;
-    \WriteEnable\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\;
+    \CellIndex\ <= to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\) when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MemoryContainer::GetInput().0.SimpleMemory.CellIndex\) when \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ else to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\) when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else 0;
+    \DataOut\ <= \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\ when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MemoryContainer::GetInput().0.SimpleMemory.DataOut\ when \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ else \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else "00000000000000000000000000000000";
+    \ReadEnable\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\;
+    \WriteEnable\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).4.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).5.SimpleMemory.WriteEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;
