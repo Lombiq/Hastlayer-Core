@@ -221,7 +221,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 castInvocation.Target = "real".ToVhdlIdValue();
             }
-            else if (fromType == KnownDataTypes.Real &&KnownDataTypes.Integers.Contains(toType))
+            else if (fromType == KnownDataTypes.Real && KnownDataTypes.Integers.Contains(toType))
             {
                 castInvocation.Target = "integer".ToVhdlIdValue();
             }
