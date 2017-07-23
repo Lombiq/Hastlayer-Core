@@ -41,21 +41,21 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
                             {
-                                MaxDegreeOfParallelism = 5
+                                MaxDegreeOfParallelism = 3
                             });
 
                         configuration.AddHardwareEntryPointType<PrimeCalculator>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(null), 0)
                             {
-                                MaxDegreeOfParallelism = 5
+                                MaxDegreeOfParallelism = 3
                             });
 
                         configuration.AddHardwareEntryPointType<RecursiveAlgorithms>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")
                             {
-                                MaxRecursionDepth = 5
+                                MaxRecursionDepth = 3
                             });
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
