@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hast.Synthesis.Services;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
 
@@ -183,6 +185,34 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
             var resultTypeReference = expression.GetResultTypeReference();
+            var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
+
+            // Is the result type smaller than it should be? It seems that (u)short * (u)short which results in an int 
+            // in .NET can be (u)short in the AST, if it's adjacent to another binary operation (maybe just division).
+            // The same is with (s)byte. This is wrong and we need to work around that.
+            Predicate<TypeReference> isAnyShort = typeReference =>
+                typeReference.FullName == typeof(ushort).FullName || typeReference.FullName == typeof(short).FullName;
+            Predicate<TypeReference> isAnyByte = typeReference =>
+                typeReference.FullName == typeof(byte).FullName || typeReference.FullName == typeof(sbyte).FullName;
+            var needsForcedIntCast =
+                isMultiplication &&
+                (isAnyShort(resultTypeReference) && (isAnyShort(leftTypeReference) || isAnyShort(rightTypeReference))) ||
+                (isAnyByte(resultTypeReference) && (isAnyByte(leftTypeReference) || isAnyByte(rightTypeReference)));
+            var forcedIntCastIsSigned = false;
+            if (needsForcedIntCast)
+            {
+                forcedIntCastIsSigned = 
+                    new[] { typeof(short).FullName, typeof(sbyte).FullName }.Contains(resultTypeReference.FullName);
+                var intTypeInformation = forcedIntCastIsSigned ? 
+                    TypeHelper.CreateInt32TypeInformation() :
+                    TypeHelper.CreateUInt32TypeInformation();
+
+                // Not nice, but the node needs to be modified too so anything else will see the same type as well.
+                expression.RemoveAnnotations<TypeInformation>();
+                expression.AddAnnotation(intTypeInformation);
+
+                resultTypeReference = intTypeInformation.ExpectedType;
+            }
 
             TypeReference preCastTypeReference = null;
             // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
@@ -225,7 +255,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 };
             }
 
-            var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
             var shouldResizeResult =
                 (
                     // If the type of the result is the same as the type of the binary expression but the expression is a
@@ -298,6 +327,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 // Most of the time due to the cast no resize is necessary, but sometimes it is.
                 shouldResizeResult = shouldResizeResult && !typeConversionResult.IsResized;
+            }
+            else if (needsForcedIntCast)
+            {
+                binaryElement = new Invocation
+                {
+                    Target = (forcedIntCastIsSigned ? "signed" : "unsigned").ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement> { { binaryElement } }
+                };
             }
 
             if (shouldResizeResult)

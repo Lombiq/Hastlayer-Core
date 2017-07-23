@@ -1624,7 +1624,7 @@ begin
         Variable \CastingCases::NumberCasting(Int16,Int16).0.b\: signed(15 downto 0) := to_signed(0, 16);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.num\: signed(15 downto 0) := to_signed(0, 16);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -1636,7 +1636,7 @@ begin
                 \CastingCases::NumberCasting(Int16,Int16).0.b\ := to_signed(0, 16);
                 \CastingCases::NumberCasting(Int16,Int16).0.num\ := to_signed(0, 16);
                 \CastingCases::NumberCasting(Int16,Int16).0.num2\ := to_signed(0, 32);
-                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
                 case \CastingCases::NumberCasting(Int16,Int16).0._State\ is 
@@ -1660,7 +1660,7 @@ begin
                     when \CastingCases::NumberCasting(Int16,Int16).0._State_2\ => 
                         \CastingCases::NumberCasting(Int16,Int16).0.a\ := \CastingCases::NumberCasting(Int16,Int16).0.a.parameter.In\;
                         \CastingCases::NumberCasting(Int16,Int16).0.b\ := \CastingCases::NumberCasting(Int16,Int16).0.b.parameter.In\;
-                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 16);
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := resize(signed(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\), 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num\ := \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\;
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
