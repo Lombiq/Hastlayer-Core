@@ -1845,7 +1845,7 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag\: boolean := false;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag2\: boolean := false;
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput_Array\(0 to 2);
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput_Array\(0 to 24);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\: boolean := false;
@@ -1873,14 +1873,14 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0);
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\: integer range 0 to 2 := 0;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.1\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.2\: \Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\: boolean := false;
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\: \unsigned8_Array\(0 to 2) := (others => to_unsigned(0, 8));
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\: \unsigned8_Array\(0 to 2) := (others => to_unsigned(0, 8));
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
@@ -1929,7 +1929,7 @@ begin
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ := 0;
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := false;
-                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\ := (others => to_unsigned(0, 8));
+                \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\ := (others => to_unsigned(0, 8));
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 32);
                 \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := to_signed(0, 32);
@@ -2024,7 +2024,7 @@ begin
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\;
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := resize(signed(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ * \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ := (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\);
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ / to_signed(3, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ / to_signed(25, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\;
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.5
@@ -2076,7 +2076,7 @@ begin
                         else 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ mod to_signed(3, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ mod to_signed(25, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\ => 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ /= to_signed(0, 32);
@@ -2127,9 +2127,9 @@ begin
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\ => 
                         -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\.
                         -- The while loop's condition:
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ < to_signed(3, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ < to_signed(25, 32);
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\) then 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(3, 32), 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ + to_signed(3, 32);
                             -- Begin SimpleMemory read.
@@ -2152,21 +2152,21 @@ begin
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\ := (unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(7 downto 0)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(15 downto 8)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(23 downto 16)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(31 downto 24)));
                             -- Initializing record fields to their defaults.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\IsNull\ := false;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\PixelBytes\ := (others => to_unsigned(0, 8));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\ContrastValue\ := to_signed(0, 32);
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\IsNull\ := false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\PixelBytes\ := (others => to_unsigned(0, 8));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\ContrastValue\ := to_signed(0, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
                             -- Starting state machine invocation for the following method: Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)
                             case \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ is 
                                 when 0 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.0\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.0\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.0\ <= true;
                                 when 1 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.1\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.1\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.1\ <= true;
                                 when 2 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.2\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object4a7d616813a1c5305093bf93ba997da96d023b53e70b20bfe6b473acf62c0d7d\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).inputObject.parameter.Out.2\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\ <= true;
                             end case;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ + 1;
@@ -2199,21 +2199,21 @@ begin
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\ => 
                         -- Repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
                         -- The while loop's condition:
-                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ < to_signed(3, 32);
+                        \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ < to_signed(25, 32);
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\) then 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\ := (others => to_unsigned(0, 8));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(to_integer(to_signed(0, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\R\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(to_integer(to_signed(1, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\G\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(to_integer(to_signed(2, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\B\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(3, 32), 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\ := (others => to_unsigned(0, 8));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(to_integer(to_signed(0, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\R\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(to_integer(to_signed(1, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\G\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(to_integer(to_signed(2, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\B\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ + to_signed(3, 32);
                             -- Begin SimpleMemory write.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\, 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(7 downto 0) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(0));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(15 downto 8) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(1));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(23 downto 16) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array865fe5e301ba9ccc4a36b6db5af95f841f4d6089081fd7cc77df07654e2261ac\(2));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(7 downto 0) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(0));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(15 downto 8) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(1));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\(23 downto 16) <= std_logic_vector(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(2));
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_25\;
                         else 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\;
