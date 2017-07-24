@@ -579,7 +579,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // To avoid double-casting of binary expression results BinaryOperatorExpressionTransformer also checks
                 // if the parent is a cast. So then no need to cast again.
-                if (castExpression.Expression is BinaryOperatorExpression || 
+                if (castExpression.Expression is BinaryOperatorExpression ||
                     castExpression.Expression.Is<ParenthesizedExpression>(parenthesized => parenthesized.Expression is BinaryOperatorExpression))
                 {
                     return innerExpressionResult;
@@ -796,7 +796,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
                     if (fieldInitializer != Expression.Null)
                     {
-                        initializationValue = (Value)Transform(fieldInitializer, context);
+                        initializationValue = Transform(fieldInitializer, context) as Value;
                     }
                 }
 
