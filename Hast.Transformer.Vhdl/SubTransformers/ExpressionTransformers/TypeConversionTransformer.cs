@@ -189,17 +189,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 result.IsResized = true;
             };
 
-            Action resizeToToSizeIfNeeded = () =>
-            {
-                // The from type should be resized to fit into the to type.
-                if (fromSize != toSize)
-                {
-                    var resizeInvocation = new Invocation();
-                    resizeInvocation.Parameters.Add(castInvocation);
-                    castInvocation = resizeInvocation;
-                    convertInvocationToResizeAndAddSizeParameter(toSize);
-                }
-            };
 
             // Trying supported cast scenarios:
 
@@ -230,14 +219,33 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // If the full scale of the uint wouldn't fit.
                 result.IsLossy = fromSize > toSize / 2;
 
+                // Resize needs to happen before signed() otherwise casting an unsigned to signed can result in data 
+                // loss due to the range change. 
+                if (fromSize != toSize)
+                {
+                    convertInvocationToResizeAndAddSizeParameter(toSize);
+
+                    var newCastInvocation = new Invocation();
+                    newCastInvocation.Parameters.Add(castInvocation);
+                    castInvocation = newCastInvocation;
+                }
+
                 castInvocation.Target = "signed".ToVhdlIdValue();
-                resizeToToSizeIfNeeded();
             }
             else if (KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
             {
                 result.IsLossy = true;
+
                 castInvocation.Target = "unsigned".ToVhdlIdValue();
-                resizeToToSizeIfNeeded();
+
+                if (fromSize != toSize)
+                {
+                    var resizeInvocation = new Invocation();
+                    resizeInvocation.Parameters.Add(castInvocation);
+                    castInvocation = resizeInvocation;
+
+                    convertInvocationToResizeAndAddSizeParameter(toSize);
+                }
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.UnrangedInt)
             {

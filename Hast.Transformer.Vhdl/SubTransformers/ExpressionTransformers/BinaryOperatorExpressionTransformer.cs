@@ -194,16 +194,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 typeReference.FullName == typeof(ushort).FullName || typeReference.FullName == typeof(short).FullName;
             Predicate<TypeReference> isAnyByte = typeReference =>
                 typeReference.FullName == typeof(byte).FullName || typeReference.FullName == typeof(sbyte).FullName;
-            var needsForcedIntCast =
+            var resultNeedsForcedIntCast =
                 isMultiplication &&
                 (isAnyShort(resultTypeReference) && (isAnyShort(leftTypeReference) || isAnyShort(rightTypeReference))) ||
                 (isAnyByte(resultTypeReference) && (isAnyByte(leftTypeReference) || isAnyByte(rightTypeReference)));
-            var forcedIntCastIsSigned = false;
-            if (needsForcedIntCast)
+            var forcedResultIntCastIsSigned = false;
+            if (resultNeedsForcedIntCast)
             {
-                forcedIntCastIsSigned = 
+                forcedResultIntCastIsSigned = 
                     new[] { typeof(short).FullName, typeof(sbyte).FullName }.Contains(resultTypeReference.FullName);
-                var intTypeInformation = forcedIntCastIsSigned ? 
+                var intTypeInformation = forcedResultIntCastIsSigned ? 
                     TypeHelper.CreateInt32TypeInformation() :
                     TypeHelper.CreateUInt32TypeInformation();
 
@@ -327,14 +327,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 // Most of the time due to the cast no resize is necessary, but sometimes it is.
                 shouldResizeResult = shouldResizeResult && !typeConversionResult.IsResized;
-            }
-            else if (needsForcedIntCast)
-            {
-                binaryElement = new Invocation
-                {
-                    Target = (forcedIntCastIsSigned ? "signed" : "unsigned").ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement> { { binaryElement } }
-                };
+                resultNeedsForcedIntCast = false;
             }
 
             if (shouldResizeResult)
@@ -347,6 +340,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             { binaryElement },
                             { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
                         }
+                };
+            }
+
+            if (resultNeedsForcedIntCast)
+            {
+                // This needs to be after resize() because otherwise casting an unsigned to signed can result in data
+                // loss due to the range change. 
+                binaryElement = new Invocation
+                {
+                    Target = (forcedResultIntCastIsSigned ? "signed" : "unsigned").ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement> { { binaryElement } }
                 };
             }
 

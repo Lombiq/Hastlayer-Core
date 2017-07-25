@@ -2310,7 +2310,7 @@ begin
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel.parameter.In\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue.parameter.In\;
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ := resize(resize(signed(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\), 32) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ := resize(signed(resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ / to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ - to_signed(500, 32);
@@ -2452,7 +2452,7 @@ begin
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel.parameter.In\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue.parameter.In\;
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ := resize(resize(signed(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\), 32) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ := resize(signed(resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ / to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ - to_signed(500, 32);
@@ -2594,7 +2594,7 @@ begin
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel.parameter.In\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue.parameter.In\;
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ := resize(resize(signed(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\), 32) * to_signed(1000, 32), 32);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ := resize(signed(resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ / to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ - to_signed(500, 32);
