@@ -15,7 +15,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            ArrayReference.ToVhdl(vhdlGenerationOptions) + 
-            "(" + IndexFrom + " " + (IsDownTo ? "down" : string.Empty) + "to " + IndexTo + ")";
+            new VectorSlice
+            {
+                IndexFrom = IndexFrom,
+                IndexTo = IndexTo,
+                IsDownTo = IsDownTo,
+                Vector = ArrayReference
+            }.ToVhdl(vhdlGenerationOptions);
     }
 }
