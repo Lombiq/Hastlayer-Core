@@ -200,6 +200,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
                 // dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
 
+                var resizeInvocation =  new Invocation
+                {
+                    Parameters = new List<IVhdlElement>
+                        {
+                            { parameter },
+                            { toSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
+                        }
+                };
+
                 // The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost]
                 // bit positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along 
                 // with the rightmost part.") when casting to a smaller type: "If the source type is larger than the 
@@ -208,26 +217,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // casting down.
                 if (fromSize < toSize)
                 {
-                    return new Invocation
-                    {
-                        Target = "resize".ToVhdlIdValue(),
-                        Parameters = new List<IVhdlElement>
-                        {
-                            { parameter },
-                            { toSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
-                        }
-                    };
+                    resizeInvocation.Target = "resize".ToVhdlIdValue();
                 }
                 else
                 {
-                    return new VectorSlice
-                    {
-                        Vector = parameter,
-                        IndexFrom = toSize - 1,
-                        IndexTo = 0,
-                        IsDownTo = true
-                    };
+                    resizeInvocation.Target = "Truncate".ToVhdlIdValue();
                 }
+
+                return resizeInvocation;
             };
 
 

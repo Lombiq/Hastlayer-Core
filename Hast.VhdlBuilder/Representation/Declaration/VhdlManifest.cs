@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
-    public class VhdlManifest
+    public class VhdlManifest : IVhdlElement
     {
-        public Module TopModule { get; set; }
-        public List<Module> Modules { get; set; } = new List<Module>();
+        public List<IVhdlElement> Modules { get; set; } = new List<IVhdlElement>();
+
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => Modules.ToVhdl(vhdlGenerationOptions);
     }
 }

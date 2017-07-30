@@ -42,7 +42,7 @@ namespace Hast.Transformer.Vhdl.Services
                 transformationContext.HardwareGenerationConfiguration.VhdlTransformerConfiguration().VhdlGenerationMode == VhdlGenerationMode.Debug ?
                 VhdlGenerationOptions.Debug :
                 new VhdlGenerationOptions();
-            var vhdlSource = transformedVhdlManifest.Manifest.TopModule.ToVhdl(vhdlGenerationOptions);
+            var vhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions);
             var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest);
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)

@@ -1,8 +1,34 @@
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+package TypeConversion is
+	function Truncate(input: unsigned; size: natural) return unsigned;
+	function Truncate(input: signed; size: natural) return signed;
+end TypeConversion;
+		
+package body TypeConversion is
+
+	function Truncate(input: unsigned; size: natural) return unsigned is
+	begin
+		return input(size - 1 downto 0);
+	end Truncate;
+	
+	function Truncate(input: signed; size: natural) return signed is
+	begin
+		return input(size - 1 downto 0);
+	end Truncate;
+
+end TypeConversion;
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 library Hast;
 use Hast.SimpleMemory.all;
+library work;
+use work.TypeConversion.all;
 
 entity Hast_IP is 
     port(
@@ -1966,7 +1992,7 @@ begin
                             -- SimpleMemory read finished.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := resize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\), 16);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := Truncate(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\), 16);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_4\;
                         end if;
@@ -1983,7 +2009,7 @@ begin
                             -- SimpleMemory read finished.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := resize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\), 16);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := Truncate(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\), 16);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_6\;
                         end if;
@@ -2341,7 +2367,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\ <= Truncate(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ => 
@@ -2483,7 +2509,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\ <= Truncate(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ => 
@@ -2625,7 +2651,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\ <= Truncate(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ => 
@@ -4850,7 +4876,7 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\), 16);
+                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := Truncate(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\), 16);
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
@@ -4946,7 +4972,7 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\), 16);
+                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := Truncate(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\), 16);
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
@@ -5750,7 +5776,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.3\ := resize(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\, 64)))), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.3\ := Truncate(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\, 64)))), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.result\ := (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.3\);
                             -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                             if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\) then 
@@ -5883,7 +5909,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.3\ := resize(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\, 64)))), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.3\ := Truncate(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\, 64)))), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.result\ := (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.3\);
                             -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                             if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\) then 
@@ -6016,7 +6042,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.3\ := resize(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\, 64)))), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.3\ := Truncate(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\, 64)))), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.result\ := (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.3\);
                             -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                             if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\) then 
@@ -6149,7 +6175,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.3\ := resize(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\, 64)))), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.3\ := Truncate(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\, 64)))), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.result\ := (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.3\);
                             -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                             if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\) then 

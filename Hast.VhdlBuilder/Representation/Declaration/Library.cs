@@ -21,7 +21,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
             foreach (var use in Uses)
             {
-                builder.Append(Terminated.Terminate("use " + use, vhdlGenerationOptions));
+                builder.Append(Terminated.Terminate("use " + Name + "." + use, vhdlGenerationOptions));
             }
 
             return builder.ToString();
