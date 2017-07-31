@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -29,8 +30,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         {
             // If the type of an operand can't be determined the best guess is the expression's type.
             var expressionTypeReference = binaryOperatorExpression.GetActualTypeReference();
-            var expressionType = expressionTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(expressionTypeReference, context.TransformationContext) : 
+            var expressionType = expressionTypeReference != null ?
+                _typeConverter.ConvertTypeReference(expressionTypeReference, context.TransformationContext) :
                 null;
 
             var leftTypeReference = binaryOperatorExpression.Left.GetActualTypeReference();
@@ -62,12 +63,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 leftTypeReference = expressionTypeReference;
             }
 
-            var leftType = leftTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(leftTypeReference, context.TransformationContext) : 
+            var leftType = leftTypeReference != null ?
+                _typeConverter.ConvertTypeReference(leftTypeReference, context.TransformationContext) :
                 expressionType;
 
-            var rightType = rightTypeReference != null ? 
-                _typeConverter.ConvertTypeReference(rightTypeReference, context.TransformationContext) : 
+            var rightType = rightTypeReference != null ?
+                _typeConverter.ConvertTypeReference(rightTypeReference, context.TransformationContext) :
                 expressionType;
 
             if (leftType == null || rightType == null)
@@ -149,7 +150,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement fromExpression)
         {
-            var result = new TypeConversionResult { ConvertedFromExpression = fromExpression };
+            var result = new TypeConversionResult();
 
             if (fromType == toType)
             {
@@ -166,6 +167,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     };
                     result.IsResized = true;
                 }
+                else
+                {
+                    result.ConvertedFromExpression = fromExpression;
+                }
 
                 return result;
             }
@@ -175,18 +180,51 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var fromSize = fromType.GetSize();
             var toSize = toType.GetSize();
 
-            var castInvocation = new Invocation();
-            castInvocation.Parameters.Add(fromExpression);
 
-            Action<int> convertInvocationToResizeAndAddSizeParameter = size =>
+
+            Func<string, IVhdlElement, Invocation> createCastInvocation = (target, expression) =>
+                new Invocation
+                {
+                    Target = target.ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement> { { expression } }
+                };
+
+            Func<string, Invocation> createCastInvocationForFromExpression = target => 
+                createCastInvocation(target, fromExpression);
+
+            Func<IVhdlElement, IVhdlElement> createResizeExpression = parameter =>
             {
-                // Resize is supposed to work with little endian numbers: "When truncating, the sign bit is retained
+                result.IsResized = true;
+
+                // Resize() is supposed to work with little endian numbers: "When truncating, the sign bit is retained
                 // along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
                 // dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
-                castInvocation.Target = "resize".ToVhdlIdValue();
-                castInvocation.Parameters
-                    .Add(size.ToVhdlValue(KnownDataTypes.UnrangedInt));
-                result.IsResized = true;
+
+                var resizeInvocation =  new Invocation
+                {
+                    Parameters = new List<IVhdlElement>
+                        {
+                            { parameter },
+                            { toSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
+                        }
+                };
+
+                // The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost]
+                // bit positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along 
+                // with the rightmost part.") when casting to a smaller type: "If the source type is larger than the 
+                // destination type, then the source value is truncated by discarding its “extra” most significant bits.
+                // The result is then treated as a value of the destination type." Thus we need to simply truncate when
+                // casting down.
+                if (fromSize < toSize)
+                {
+                    resizeInvocation.Target = "resize".ToVhdlIdValue();
+                }
+                else
+                {
+                    resizeInvocation.Target = "Truncate".ToVhdlIdValue();
+                }
+
+                return resizeInvocation;
             };
 
 
@@ -195,7 +233,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if ((KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType)) ||
                 KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
             {
-                if (fromSize == toSize) return result;
+                if (fromSize == toSize)
+                {
+                    result.ConvertedFromExpression = fromExpression;
+                    return result;
+                }
 
                 // Casting to a smaller type, so we need to cut off bits. Casting to a bigger type is not lossy but
                 // still needs resize.
@@ -204,84 +246,86 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     result.IsLossy = true;
                 }
 
-                convertInvocationToResizeAndAddSizeParameter(toSize);
+                result.ConvertedFromExpression = createResizeExpression(fromExpression);
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.Real)
             {
-                castInvocation.Target = "real".ToVhdlIdValue();
+                result.ConvertedFromExpression = createCastInvocationForFromExpression("real");
             }
             else if (fromType == KnownDataTypes.Real && KnownDataTypes.Integers.Contains(toType))
             {
-                castInvocation.Target = "integer".ToVhdlIdValue();
+                result.ConvertedFromExpression = createCastInvocationForFromExpression("integer");
             }
             else if (KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType))
             {
                 // If the full scale of the uint wouldn't fit.
                 result.IsLossy = fromSize > toSize / 2;
 
-                // Resize needs to happen before signed() otherwise casting an unsigned to signed can result in data 
+                var expression = fromExpression;
+
+                // Resizing needs to happen before signed() otherwise casting an unsigned to signed can result in data 
                 // loss due to the range change. 
                 if (fromSize != toSize)
                 {
-                    convertInvocationToResizeAndAddSizeParameter(toSize);
-
-                    var newCastInvocation = new Invocation();
-                    newCastInvocation.Parameters.Add(castInvocation);
-                    castInvocation = newCastInvocation;
+                    expression = createResizeExpression(fromExpression);
                 }
 
-                castInvocation.Target = "signed".ToVhdlIdValue();
+                result.ConvertedFromExpression = createCastInvocation("signed", expression);
             }
             else if (KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
             {
                 result.IsLossy = true;
 
-                castInvocation.Target = "unsigned".ToVhdlIdValue();
-
-                if (fromSize != toSize)
+                if (fromSize >= toSize)
                 {
-                    var resizeInvocation = new Invocation();
-                    resizeInvocation.Parameters.Add(castInvocation);
-                    castInvocation = resizeInvocation;
+                    result.ConvertedFromExpression = createCastInvocationForFromExpression("unsigned");
 
-                    convertInvocationToResizeAndAddSizeParameter(toSize);
+                    if (fromSize != toSize)
+                    {
+                        result.ConvertedFromExpression = createResizeExpression(result.ConvertedFromExpression);
+                    }
+                }
+                else
+                {
+                    var expandInvocation = createCastInvocationForFromExpression("ToUnsignedAndExpand");
+                    expandInvocation.Parameters.Add(toSize.ToVhdlValue(KnownDataTypes.UnrangedInt));
+                    result.ConvertedFromExpression = expandInvocation;
                 }
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.UnrangedInt)
             {
                 result.IsLossy = true;
-                castInvocation.Target = "to_integer".ToVhdlIdValue();
+                result.ConvertedFromExpression = createCastInvocationForFromExpression("to_integer");
             }
 
             if (fromType == KnownDataTypes.StdLogicVector32)
             {
                 if (KnownDataTypes.SignedIntegers.Contains(toType))
                 {
-                    castInvocation.Target = "signed".ToVhdlIdValue();
+                    result.ConvertedFromExpression = createCastInvocationForFromExpression("signed");
                 }
                 else if (KnownDataTypes.UnsignedIntegers.Contains(toType))
                 {
-                    castInvocation.Target = "unsigned".ToVhdlIdValue();
+                    result.ConvertedFromExpression = createCastInvocationForFromExpression("unsigned");
                 }
 
                 result.IsLossy = toSize > 32;
             }
             if (toType == KnownDataTypes.StdLogicVector32)
             {
-                castInvocation.Target = "std_logic_vector".ToVhdlIdValue();
+                result.ConvertedFromExpression = createCastInvocationForFromExpression("std_logic_vector");
                 result.IsLossy = fromSize > 32;
             }
 
 
-            if (castInvocation.Target == null)
+            if (result.ConvertedFromExpression == null)
             {
                 throw new NotSupportedException(
-                    "Casting from " + fromType.Name + " to " + toType.Name + 
+                    "Casting from " + fromType.Name + " to " + toType.Name +
                     " is not supported. Transformed expression to be cast: " + fromExpression.ToVhdl());
             }
 
 
-            result.ConvertedFromExpression = castInvocation;
             return result;
         }
 

@@ -1,8 +1,199 @@
+-- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware framework so they can be more easily updated.
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-library Hast;
-use Hast.SimpleMemory.all;
+
+package TypeConversion is
+	function Truncate(input: unsigned; size: natural) return unsigned;
+	function Truncate(input: signed; size: natural) return signed;
+	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned;
+end TypeConversion;
+		
+package body TypeConversion is
+
+	function Truncate(input: unsigned; size: natural) return unsigned is
+	begin
+		return input(size - 1 downto 0);
+	end Truncate;
+
+	function Truncate(input: signed; size: natural) return signed is
+	begin
+		return input(size - 1 downto 0);
+	end Truncate;
+
+	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned is
+		variable result: unsigned(size - 1 downto 0);
+	begin
+		if (input >= 0) then
+			return resize(unsigned(input), size);
+		else 
+			result := (others => '1');
+			result(input'LENGTH - 1 downto 0) := unsigned(input);
+			return result;
+		end if;
+	end ToUnsignedAndExpand;
+
+end TypeConversion;
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+		
+package SimpleMemory is
+	-- Data conversion functions:
+	function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector;
+	function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned;
+		
+	function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector;
+	function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean;
+		
+	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector;
+	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed;
+		
+	function ConvertCharToStdLogicVector(input: character) return std_logic_vector;
+	function ConvertStdLogicVectorToChar(input : std_logic_vector) return character;
+end SimpleMemory;
+		
+package body SimpleMemory is
+
+	function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector is
+	begin
+		return std_logic_vector(input);
+	end ConvertUInt32ToStdLogicVector;
+	
+	function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned is
+	begin
+		return unsigned(input);
+	end ConvertStdLogicVectorToUInt32;
+	
+	function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector is 
+	begin
+		case input is
+			when true => return X"FFFFFFFF";
+			when false => return X"00000000";
+			when others => return X"00000000";
+		end case;
+	end ConvertBooleanToStdLogicVector;
+
+	function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean is 
+	begin
+		-- In .NET a false is all zeros while a true is at least one 1 bit (or more), so using the same logic here.
+		return not(input = X"00000000");
+	end ConvertStdLogicVectorToBoolean;
+
+	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector is
+	begin
+		return std_logic_vector(input);
+	end ConvertInt32ToStdLogicVector;
+
+	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed is
+	begin
+		return signed(input);
+	end ConvertStdLogicVectorToInt32;
+
+	function ConvertCharToStdLogicVector(input: character) return std_logic_vector is
+		variable characterIndex : integer;
+	begin
+		case input is
+			when '0' => characterIndex :=  0;
+			when '1' => characterIndex :=  1;
+			when '2' => characterIndex :=  2;
+			when '3' => characterIndex :=  3;
+			when '4' => characterIndex :=  4;
+			when '5' => characterIndex :=  5;
+			when '6' => characterIndex :=  6;
+			when '7' => characterIndex :=  7;
+			when '8' => characterIndex :=  8;
+			when '9' => characterIndex :=  9;
+			when 'A' => characterIndex := 10;
+			when 'B' => characterIndex := 11;
+			when 'C' => characterIndex := 12;
+			when 'D' => characterIndex := 13;
+			when 'E' => characterIndex := 14;
+			when 'F' => characterIndex := 15;
+			when 'G' => characterIndex := 16;
+			when 'H' => characterIndex := 17;
+			when 'I' => characterIndex := 18;
+			when 'J' => characterIndex := 19;
+			when 'K' => characterIndex := 20;
+			when 'L' => characterIndex := 21;
+			when 'M' => characterIndex := 22;
+			when 'N' => characterIndex := 23;
+			when 'O' => characterIndex := 24;
+			when 'P' => characterIndex := 25;
+			when 'Q' => characterIndex := 26;
+			when 'R' => characterIndex := 27;
+			when 'S' => characterIndex := 28;
+			when 'T' => characterIndex := 29;
+			when 'U' => characterIndex := 30;
+			when 'V' => characterIndex := 31;
+			when 'W' => characterIndex := 32;
+			when 'X' => characterIndex := 33;
+			when 'Y' => characterIndex := 34;
+			when 'Z' => characterIndex := 35;
+			when others => characterIndex := 0;
+		end case;
+			
+		return std_logic_vector(to_signed(characterIndex, 32));
+	end ConvertCharToStdLogicVector;
+
+	function ConvertStdLogicVectorToChar(input : std_logic_vector) return character is
+		variable characterIndex     : integer;
+	begin
+		characterIndex := to_integer(unsigned(input));
+		
+		case characterIndex is
+			when  0 => return '0';
+			when  1 => return '1';
+			when  2 => return '2';
+			when  3 => return '3';
+			when  4 => return '4';
+			when  5 => return '5';
+			when  6 => return '6';
+			when  7 => return '7';
+			when  8 => return '8';
+			when  9 => return '9';
+			when 10 => return 'A';
+			when 11 => return 'B';
+			when 12 => return 'C';
+			when 13 => return 'D';
+			when 14 => return 'E';
+			when 15 => return 'F';
+			when 16 => return 'G';
+			when 17 => return 'H';
+			when 18 => return 'I';
+			when 19 => return 'J';
+			when 20 => return 'K';
+			when 21 => return 'L';
+			when 22 => return 'M';
+			when 23 => return 'N';
+			when 24 => return 'O';
+			when 25 => return 'P';
+			when 26 => return 'Q';
+			when 27 => return 'R';
+			when 28 => return 'S';
+			when 29 => return 'T';
+			when 30 => return 'U';
+			when 31 => return 'V';
+			when 32 => return 'W';
+			when 33 => return 'X';
+			when 34 => return 'Y';
+			when 35 => return 'Z';
+			when others => return '?';
+		end case;
+	end ConvertStdLogicVectorToChar;
+
+end SimpleMemory;
+-- Hast_IP, logic generated from the input .NET assemblies starts here.
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library work;
+use work.TypeConversion.all;
+library work;
+use work.SimpleMemory.all;
 
 entity Hast_IP is 
     port(
@@ -635,18 +826,21 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_2\, 
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\, 
         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\);
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_11\, 
+        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_12\);
     -- Signals:
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0);
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\: boolean := false;
     -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -1966,7 +2160,7 @@ begin
                             -- SimpleMemory read finished.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := resize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\), 16);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := Truncate(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\), 16);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_4\;
                         end if;
@@ -1983,7 +2177,7 @@ begin
                             -- SimpleMemory read finished.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := resize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\), 16);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := Truncate(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\), 16);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_6\;
                         end if;
@@ -2341,7 +2535,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\ <= Truncate(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ => 
@@ -2483,7 +2677,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\ <= Truncate(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ => 
@@ -2625,7 +2819,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
-                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\ <= resize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\), 8);
+                        \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\ <= Truncate(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ => 
@@ -4172,9 +4366,8 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num\: signed(15 downto 0) := to_signed(0, 16);
         Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4183,11 +4376,8 @@ begin
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= false;
                 \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\ := false;
+                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num\ := to_signed(0, 16);
             else 
                 case \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ is 
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\ => 
@@ -4219,26 +4409,79 @@ begin
                             -- SimpleMemory read finished.
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\);
-                            -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= true;
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num\ := Truncate(ConvertStdLogicVectorToInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\), 16);
+                            -- Begin SimpleMemory write.
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(resize((Truncate(unsigned(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num\), 8)), 32)));
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\) then 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= false;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\;
-                            -- Begin SimpleMemory write.
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return.0\);
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\ => 
+                        -- Begin SimpleMemory write.
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(resize((Truncate(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num\, 8)), 32));
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\ => 
+                        -- Begin SimpleMemory write.
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(ToUnsignedAndExpand(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num\, 32));
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\ => 
+                        -- Begin SimpleMemory write.
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(3, 32), 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(resize(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num\, 32));
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_10\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_11\ => 
+                        -- Begin SimpleMemory write.
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4, 32), 32);
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(resize((unsigned(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num\)), 32)));
+                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_12\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -4850,7 +5093,7 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\), 16);
+                            \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := Truncate(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\), 16);
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
@@ -4946,7 +5189,7 @@ begin
                             -- SimpleMemory read finished.
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := resize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\), 16);
+                            \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := Truncate(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\), 16);
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
@@ -5089,7 +5332,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.result\ := resize(unsigned(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.result\ := ToUnsignedAndExpand(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\;
@@ -5252,7 +5495,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.result\ := resize(unsigned(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.result\ := ToUnsignedAndExpand(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\;
@@ -5415,7 +5658,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.result\ := resize(unsigned(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.result\ := ToUnsignedAndExpand(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\;
@@ -5578,7 +5821,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.result\ := resize(unsigned(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.result\ := ToUnsignedAndExpand(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\;
@@ -5750,7 +5993,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.3\ := resize(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\, 64)))), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.3\ := Truncate(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return.0\, 64)))), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.result\ := (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.3\);
                             -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                             if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_8\) then 
@@ -5883,7 +6126,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.3\ := resize(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\, 64)))), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.3\ := Truncate(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return.0\, 64)))), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.result\ := (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.3\);
                             -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                             if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_8\) then 
@@ -6016,7 +6259,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.3\ := resize(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\, 64)))), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.3\ := Truncate(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return.0\, 64)))), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.result\ := (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.3\);
                             -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                             if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_8\) then 
@@ -6149,7 +6392,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.3\ := resize(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\, 64)))), 32);
+                            \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.3\ := Truncate(unsigned(resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\, 64) * signed((resize(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return.0\, 64)))), 32);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.result\ := (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.3\);
                             -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                             if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_8\) then 
@@ -7151,87 +7394,6 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[]) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32) start
-    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32)\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-            else 
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
-                case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\) then 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningIndex.0\ := 0;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= true;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number.parameter.In\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ := AfterFinished;
-                                    \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= true;
-                                    \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= false;
-                                    \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::IsPrimeNumber(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
-                case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\) then 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningIndex.0\ := 0;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= true;
-                            \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number.parameter.In\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ := AfterFinished;
-                                    \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= true;
-                                    \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= false;
-                                    \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberInternal(UInt32).PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-            end if;
-        end if;
-    end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32) end
-
-
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
     \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -7307,6 +7469,15 @@ begin
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32) start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
+    \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Started\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\;
+    \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number.parameter.In\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\;
+    \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Finished.0\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._Finished\;
+    \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).return.0\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32) start

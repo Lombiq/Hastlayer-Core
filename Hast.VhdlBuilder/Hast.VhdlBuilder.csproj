@@ -107,6 +107,7 @@
     <Compile Include="Representation\Expression\Return.cs" />
     <Compile Include="Representation\Expression\Unary.cs" />
     <Compile Include="Representation\Expression\UnaryOperator.cs" />
+    <Compile Include="Representation\Expression\VectorSlice.cs" />
     <Compile Include="Representation\Expression\While.cs" />
     <Compile Include="Representation\IVhdlElement.cs" />
     <Compile Include="Representation\Declaration\Library.cs" />
