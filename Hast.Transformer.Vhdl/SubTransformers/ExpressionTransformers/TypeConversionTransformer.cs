@@ -276,11 +276,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 result.IsLossy = true;
 
-                result.ConvertedFromExpression = createCastInvocationForFromExpression("unsigned");
-
-                if (fromSize != toSize)
+                if (fromSize >= toSize)
                 {
-                    result.ConvertedFromExpression = createResizeExpression(result.ConvertedFromExpression);
+                    result.ConvertedFromExpression = createCastInvocationForFromExpression("unsigned");
+
+                    if (fromSize != toSize)
+                    {
+                        result.ConvertedFromExpression = createResizeExpression(result.ConvertedFromExpression);
+                    }
+                }
+                else
+                {
+                    var expandInvocation = createCastInvocationForFromExpression("ToUnsignedAndExpand");
+                    expandInvocation.Parameters.Add(toSize.ToVhdlValue(KnownDataTypes.UnrangedInt));
+                    result.ConvertedFromExpression = expandInvocation;
                 }
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.UnrangedInt)
