@@ -1,8 +1,215 @@
+-- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware framework so they can be more easily updated.
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-library Hast;
-use Hast.SimpleMemory.all;
+
+package TypeConversion is
+	function SmartResize(input: unsigned; size: natural) return unsigned;
+	function SmartResize(input: signed; size: natural) return signed;
+	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned;
+end TypeConversion;
+		
+package body TypeConversion is
+
+	-- The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost] bit 
+	-- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
+	-- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
+	-- then the source value is truncated by discarding its “extra” most significant bits. The result is then 
+	-- treated as a value of the destination type." Thus we need to simply truncate when casting down.
+	function SmartResize(input: unsigned; size: natural) return unsigned is
+	begin
+		if (size < input'LENGTH) then
+			return input(size - 1 downto 0);
+		else
+			-- Resize() is supposed to work with little endian numbers: "When truncating, the sign bit is retained
+            -- along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
+            -- dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
+			return resize(input, size);
+		end if;
+	end SmartResize;
+
+	function SmartResize(input: signed; size: natural) return signed is
+	begin
+		if (size < input'LENGTH) then
+			return input(size - 1 downto 0);
+		else
+			return resize(input, size);
+		end if;
+	end SmartResize;
+
+	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned is
+		variable result: unsigned(size - 1 downto 0);
+	begin
+		if (input >= 0) then
+			return resize(unsigned(input), size);
+		else 
+			result := (others => '1');
+			result(input'LENGTH - 1 downto 0) := unsigned(input);
+			return result;
+		end if;
+	end ToUnsignedAndExpand;
+
+end TypeConversion;
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+		
+package SimpleMemory is
+	-- Data conversion functions:
+	function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector;
+	function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned;
+		
+	function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector;
+	function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean;
+		
+	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector;
+	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed;
+		
+	function ConvertCharToStdLogicVector(input: character) return std_logic_vector;
+	function ConvertStdLogicVectorToChar(input : std_logic_vector) return character;
+end SimpleMemory;
+		
+package body SimpleMemory is
+
+	function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector is
+	begin
+		return std_logic_vector(input);
+	end ConvertUInt32ToStdLogicVector;
+	
+	function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned is
+	begin
+		return unsigned(input);
+	end ConvertStdLogicVectorToUInt32;
+	
+	function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector is 
+	begin
+		case input is
+			when true => return X"FFFFFFFF";
+			when false => return X"00000000";
+			when others => return X"00000000";
+		end case;
+	end ConvertBooleanToStdLogicVector;
+
+	function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean is 
+	begin
+		-- In .NET a false is all zeros while a true is at least one 1 bit (or more), so using the same logic here.
+		return not(input = X"00000000");
+	end ConvertStdLogicVectorToBoolean;
+
+	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector is
+	begin
+		return std_logic_vector(input);
+	end ConvertInt32ToStdLogicVector;
+
+	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed is
+	begin
+		return signed(input);
+	end ConvertStdLogicVectorToInt32;
+
+	function ConvertCharToStdLogicVector(input: character) return std_logic_vector is
+		variable characterIndex : integer;
+	begin
+		case input is
+			when '0' => characterIndex :=  0;
+			when '1' => characterIndex :=  1;
+			when '2' => characterIndex :=  2;
+			when '3' => characterIndex :=  3;
+			when '4' => characterIndex :=  4;
+			when '5' => characterIndex :=  5;
+			when '6' => characterIndex :=  6;
+			when '7' => characterIndex :=  7;
+			when '8' => characterIndex :=  8;
+			when '9' => characterIndex :=  9;
+			when 'A' => characterIndex := 10;
+			when 'B' => characterIndex := 11;
+			when 'C' => characterIndex := 12;
+			when 'D' => characterIndex := 13;
+			when 'E' => characterIndex := 14;
+			when 'F' => characterIndex := 15;
+			when 'G' => characterIndex := 16;
+			when 'H' => characterIndex := 17;
+			when 'I' => characterIndex := 18;
+			when 'J' => characterIndex := 19;
+			when 'K' => characterIndex := 20;
+			when 'L' => characterIndex := 21;
+			when 'M' => characterIndex := 22;
+			when 'N' => characterIndex := 23;
+			when 'O' => characterIndex := 24;
+			when 'P' => characterIndex := 25;
+			when 'Q' => characterIndex := 26;
+			when 'R' => characterIndex := 27;
+			when 'S' => characterIndex := 28;
+			when 'T' => characterIndex := 29;
+			when 'U' => characterIndex := 30;
+			when 'V' => characterIndex := 31;
+			when 'W' => characterIndex := 32;
+			when 'X' => characterIndex := 33;
+			when 'Y' => characterIndex := 34;
+			when 'Z' => characterIndex := 35;
+			when others => characterIndex := 0;
+		end case;
+			
+		return std_logic_vector(to_signed(characterIndex, 32));
+	end ConvertCharToStdLogicVector;
+
+	function ConvertStdLogicVectorToChar(input : std_logic_vector) return character is
+		variable characterIndex     : integer;
+	begin
+		characterIndex := to_integer(unsigned(input));
+		
+		case characterIndex is
+			when  0 => return '0';
+			when  1 => return '1';
+			when  2 => return '2';
+			when  3 => return '3';
+			when  4 => return '4';
+			when  5 => return '5';
+			when  6 => return '6';
+			when  7 => return '7';
+			when  8 => return '8';
+			when  9 => return '9';
+			when 10 => return 'A';
+			when 11 => return 'B';
+			when 12 => return 'C';
+			when 13 => return 'D';
+			when 14 => return 'E';
+			when 15 => return 'F';
+			when 16 => return 'G';
+			when 17 => return 'H';
+			when 18 => return 'I';
+			when 19 => return 'J';
+			when 20 => return 'K';
+			when 21 => return 'L';
+			when 22 => return 'M';
+			when 23 => return 'N';
+			when 24 => return 'O';
+			when 25 => return 'P';
+			when 26 => return 'Q';
+			when 27 => return 'R';
+			when 28 => return 'S';
+			when 29 => return 'T';
+			when 30 => return 'U';
+			when 31 => return 'V';
+			when 32 => return 'W';
+			when 33 => return 'X';
+			when 34 => return 'Y';
+			when 35 => return 'Z';
+			when others => return '?';
+		end case;
+	end ConvertStdLogicVectorToChar;
+
+end SimpleMemory;
+-- Hast_IP, logic generated from the input .NET assemblies starts here.
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library work;
+use work.TypeConversion.all;
+library work;
+use work.SimpleMemory.all;
 
 entity Hast_IP is 
     port(
@@ -777,9 +984,7 @@ architecture Imp of Hast_IP is
         \BitMask::GetLeastSignificantOnePosition().0._State_12\, 
         \BitMask::GetLeastSignificantOnePosition().0._State_13\, 
         \BitMask::GetLeastSignificantOnePosition().0._State_14\, 
-        \BitMask::GetLeastSignificantOnePosition().0._State_15\, 
-        \BitMask::GetLeastSignificantOnePosition().0._State_16\, 
-        \BitMask::GetLeastSignificantOnePosition().0._State_17\);
+        \BitMask::GetLeastSignificantOnePosition().0._State_15\);
     -- Signals:
     Signal \BitMask::GetLeastSignificantOnePosition().0._Finished\: boolean := false;
     Signal \BitMask::GetLeastSignificantOnePosition().0.return\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -2276,14 +2481,12 @@ begin
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.0\: \Lombiq.Unum.UnumEnvironment\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.1\: \Lombiq.Unum.Unum\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.2\: \Lombiq.Unum.Unum\;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\: \unsigned32_Array\(0 to 8) := (others => to_unsigned(0, 32));
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.4\: boolean := false;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2303,12 +2506,10 @@ begin
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := to_signed(0, 32);
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\ := (others => to_unsigned(0, 32));
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.4\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
+                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := false;
+                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
             else 
                 case \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ is 
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_0\ => 
@@ -2388,20 +2589,14 @@ begin
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.environment\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).environment.parameter.In.0\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := to_signed(1, 32);
                             -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\ := resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 64) <= signed((resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num\, 64)));
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\;
-                            else 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\;
-                            end if;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\.
                         -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\ := resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 64) <= signed((resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num\, 64)));
-                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\) then 
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 64) <= signed((SmartResize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num\, 64)));
+                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- Starting state machine invocation for the following method: Lombiq.Unum.Unum Lombiq.Unum.Unum::op_Addition(Lombiq.Unum.Unum,Lombiq.Unum.Unum)
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).left.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).right.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\;
@@ -2445,8 +2640,8 @@ begin
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= false;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).return.0\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.2\;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ + to_signed(1, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\;
                             -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
                             if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\) then 
                                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\;
@@ -2461,20 +2656,14 @@ begin
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := to_signed(0, 32);
                             -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ < to_signed(9, 32);
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
-                            else 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\;
-                            end if;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\ => 
                         -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\.
                         -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.4\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ < to_signed(9, 32);
-                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.4\) then 
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ < to_signed(9, 32);
+                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\) then 
                             -- Begin SimpleMemory write.
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\, 32);
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -2493,8 +2682,8 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.5\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.5\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ + to_signed(1, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\;
                             -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\ if the loop wasn't exited with a state change.
                             if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\) then 
                                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
@@ -2736,7 +2925,7 @@ begin
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_11\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_8\.
                         \BitMask::.ctor(UInt32[],UInt16).0.this\.\SegmentCount\ := \BitMask::.ctor(UInt32[],UInt16).0.conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac\;
-                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\ := resize(signed(\BitMask::.ctor(UInt32[],UInt16).0.this\.\SegmentCount\), 32) > to_signed(9, 32);
+                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\ := signed(SmartResize(\BitMask::.ctor(UInt32[],UInt16).0.this\.\SegmentCount\, 32)) > to_signed(9, 32);
                         \BitMask::.ctor(UInt32[],UInt16).0.flag\ := \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -2752,8 +2941,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \BitMask::.ctor(UInt32[],UInt16).0._State_12\ => 
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_8\.
-                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.4\ := resize(signed(shift_right(\BitMask::.ctor(UInt32[],UInt16).0.size\, to_integer(to_signed(5, 32)))), 32);
-                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.5\ := resize(unsigned(\BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.4\ + \BitMask::.ctor(UInt32[],UInt16).0.conditional93d0384e1e256fd728e80c772ac32f7836cc8471edbcd4a0afb4c8bc9bb86ec2\), 16);
+                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.4\ := signed(SmartResize(shift_right(\BitMask::.ctor(UInt32[],UInt16).0.size\, to_integer(to_signed(5, 32))), 32));
+                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.5\ := SmartResize(unsigned(\BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.4\ + \BitMask::.ctor(UInt32[],UInt16).0.conditional93d0384e1e256fd728e80c772ac32f7836cc8471edbcd4a0afb4c8bc9bb86ec2\), 16);
                         \BitMask::.ctor(UInt32[],UInt16).0.conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac\ := (\BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.5\);
                         -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_8\.
                         if (\BitMask::.ctor(UInt32[],UInt16).0._State\ = \BitMask::.ctor(UInt32[],UInt16).0._State_12\) then 
@@ -2865,7 +3054,7 @@ begin
                         else 
                             \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ := resize(signed(\BitMask::.ctor(UInt16,Boolean).0.size\ mod to_unsigned(32, 16)), 32);
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\ := signed(SmartResize(\BitMask::.ctor(UInt16,Boolean).0.size\ mod to_unsigned(32, 16), 32));
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::.ctor(UInt16,Boolean).0._State_4\ => 
                         \BitMask::.ctor(UInt16,Boolean).0.num\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\);
@@ -2884,8 +3073,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \BitMask::.ctor(UInt16,Boolean).0._State_5\ => 
                         -- State after the if-else which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_4\.
-                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ := resize(signed(shift_right(\BitMask::.ctor(UInt16,Boolean).0.size\, to_integer(to_signed(5, 32)))), 32);
-                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.3\ := resize(unsigned(\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ + \BitMask::.ctor(UInt16,Boolean).0.conditional48feffe0202fc0c0df2cb980716aa7461c00997856cf3b8aeb212a7a22e7f468\), 16);
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\BitMask::.ctor(UInt16,Boolean).0.size\, to_integer(to_signed(5, 32))), 32));
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.3\ := SmartResize(unsigned(\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.2\ + \BitMask::.ctor(UInt16,Boolean).0.conditional48feffe0202fc0c0df2cb980716aa7461c00997856cf3b8aeb212a7a22e7f468\), 16);
                         \BitMask::.ctor(UInt16,Boolean).0.this\.\SegmentCount\ := (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.3\);
                         \BitMask::.ctor(UInt16,Boolean).0.this\.\Size\ := \BitMask::.ctor(UInt16,Boolean).0.size\;
                         \BitMask::.ctor(UInt16,Boolean).0.array\ := (others => to_unsigned(0, 32));
@@ -3167,11 +3356,11 @@ begin
                         else 
                             \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := resize(signed(\BitMask::SetOne(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::SetOne(UInt16).0.index\ mod to_unsigned(32, 16), 32));
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::SetOne(UInt16).0._State_8\ => 
                         \BitMask::SetOne(UInt16).0.num\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.1\);
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := resize(signed(shift_right(\BitMask::SetOne(UInt16).0.index\, to_integer(to_signed(5, 32)))), 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\BitMask::SetOne(UInt16).0.index\, to_integer(to_signed(5, 32))), 32));
                         \BitMask::SetOne(UInt16).0.index2\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.2\;
                         \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ := shift_right(\BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)), to_integer(unsigned(\BitMask::SetOne(UInt16).0.num\)));
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_9\;
@@ -3396,11 +3585,11 @@ begin
                         else 
                             \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := resize(signed(\BitMask::SetZero(UInt16).0.index\ mod to_unsigned(32, 16)), 32);
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::SetZero(UInt16).0.index\ mod to_unsigned(32, 16), 32));
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::SetZero(UInt16).0._State_8\ => 
                         \BitMask::SetZero(UInt16).0.num\ := (\BitMask::SetZero(UInt16).0.binaryOperationResult.1\);
-                        \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := resize(signed(shift_right(\BitMask::SetZero(UInt16).0.index\, to_integer(to_signed(5, 32)))), 32);
+                        \BitMask::SetZero(UInt16).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\BitMask::SetZero(UInt16).0.index\, to_integer(to_signed(5, 32))), 32));
                         \BitMask::SetZero(UInt16).0.index2\ := \BitMask::SetZero(UInt16).0.binaryOperationResult.2\;
                         \BitMask::SetZero(UInt16).0.binaryOperationResult.3\ := shift_right(\BitMask::SetZero(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetZero(UInt16).0.index2\)), to_integer(unsigned(\BitMask::SetZero(UInt16).0.num\)));
                         \BitMask::SetZero(UInt16).0._State\ := \BitMask::SetZero(UInt16).0._State_9\;
@@ -3605,7 +3794,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::ShiftOutLeastSignificantZeros().0._State_7\ => 
                         -- False branch of the if-else started in state \BitMask::ShiftOutLeastSignificantZeros().0._State_4\.
-                        \BitMask::ShiftOutLeastSignificantZeros().0.binaryOperationResult.1\ := resize(signed(\BitMask::ShiftOutLeastSignificantZeros().0.leastSignificantOnePosition\ - to_unsigned(1, 16)), 32);
+                        \BitMask::ShiftOutLeastSignificantZeros().0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::ShiftOutLeastSignificantZeros().0.leastSignificantOnePosition\ - to_unsigned(1, 16), 32));
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32)
                         \BitMask::ShiftOutLeastSignificantZeros().0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \BitMask::ShiftOutLeastSignificantZeros().0.bitMask\;
                         \BitMask::ShiftOutLeastSignificantZeros().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\BitMask::ShiftOutLeastSignificantZeros().0.binaryOperationResult.1\);
@@ -3643,8 +3832,7 @@ begin
         Variable \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
         Variable \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
         Variable \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.2\: boolean := false;
-        Variable \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.3\: boolean := false;
-        Variable \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3659,8 +3847,7 @@ begin
                 \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.0\ := false;
                 \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\ := false;
                 \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.2\ := false;
-                \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.3\ := false;
-                \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.4\ := to_unsigned(0, 16);
+                \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.3\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_Equality(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_Equality(BitMask,BitMask).0._State_0\ => 
@@ -3714,21 +3901,15 @@ begin
                         -- False branch of the if-else started in state \BitMask::op_Equality(BitMask,BitMask).0._State_2\.
                         \BitMask::op_Equality(BitMask,BitMask).0.num\ := to_unsigned(0, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\ := \BitMask::op_Equality(BitMask,BitMask).0.num\ < \BitMask::op_Equality(BitMask,BitMask).0.left\.\SegmentCount\;
-                        if (\BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\) then 
-                            \BitMask::op_Equality(BitMask,BitMask).0._State\ := \BitMask::op_Equality(BitMask,BitMask).0._State_6\;
-                        else 
-                            \BitMask::op_Equality(BitMask,BitMask).0._State\ := \BitMask::op_Equality(BitMask,BitMask).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::op_Equality(BitMask,BitMask).0._State\ := \BitMask::op_Equality(BitMask,BitMask).0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Equality(BitMask,BitMask).0._State_6\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_Equality(BitMask,BitMask).0._State_5\.
                         -- The while loop's condition:
-                        \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_Equality(BitMask,BitMask).0.num\ < \BitMask::op_Equality(BitMask,BitMask).0.left\.\SegmentCount\;
-                        if (\BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.2\) then 
-                            \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_Equality(BitMask,BitMask).0.left\.\Segments\(to_integer(resize(signed(\BitMask::op_Equality(BitMask,BitMask).0.num\), 32))) /= \BitMask::op_Equality(BitMask,BitMask).0.right\.\Segments\(to_integer(resize(signed(\BitMask::op_Equality(BitMask,BitMask).0.num\), 32)));
-                            \BitMask::op_Equality(BitMask,BitMask).0.flag2\ := \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.3\;
+                        \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\ := \BitMask::op_Equality(BitMask,BitMask).0.num\ < \BitMask::op_Equality(BitMask,BitMask).0.left\.\SegmentCount\;
+                        if (\BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\) then 
+                            \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_Equality(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Equality(BitMask,BitMask).0.num\, 32)))) /= \BitMask::op_Equality(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Equality(BitMask,BitMask).0.num\, 32))));
+                            \BitMask::op_Equality(BitMask,BitMask).0.flag2\ := \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.2\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \BitMask::op_Equality(BitMask,BitMask).0._State_9\ and ends in state \BitMask::op_Equality(BitMask,BitMask).0._State_9\.
@@ -3754,8 +3935,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Equality(BitMask,BitMask).0._State_8\ => 
                         -- State after the if-else which was started in state \BitMask::op_Equality(BitMask,BitMask).0._State_6\.
-                        \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_Equality(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
-                        \BitMask::op_Equality(BitMask,BitMask).0.num\ := \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.4\;
+                        \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_Equality(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
+                        \BitMask::op_Equality(BitMask,BitMask).0.num\ := \BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.3\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_Equality(BitMask,BitMask).0._State_5\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_Equality(BitMask,BitMask).0._State\ = \BitMask::op_Equality(BitMask,BitMask).0._State_8\) then 
                             \BitMask::op_Equality(BitMask,BitMask).0._State\ := \BitMask::op_Equality(BitMask,BitMask).0._State_6\;
@@ -3787,11 +3968,10 @@ begin
         Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.flag\: boolean := false;
         Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.result\: boolean := false;
         Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
-        Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
+        Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\: boolean := false;
-        Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\: boolean := false;
+        Variable \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3803,11 +3983,10 @@ begin
                 \BitMask::op_GreaterThan(BitMask,BitMask).0.flag\ := false;
                 \BitMask::op_GreaterThan(BitMask,BitMask).0.result\ := false;
                 \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.0\ := false;
-                \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\ := false;
+                \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\ := false;
-                \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\ := false;
+                \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_GreaterThan(BitMask,BitMask).0._State_0\ => 
@@ -3832,23 +4011,17 @@ begin
                         \BitMask::op_GreaterThan(BitMask,BitMask).0.right\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.right.parameter.In\;
                         \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ := to_unsigned(1, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ <= \BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\;
-                        if (\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.0\) then 
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\;
-                        else 
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_2\.
                         -- The while loop's condition:
-                        \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ <= \BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\;
-                        if (\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\) then 
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\ := resize(signed(\BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_GreaterThan(BitMask,BitMask).0.num\), 32);
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\ := resize(signed(\BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_GreaterThan(BitMask,BitMask).0.num\), 32);
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\Segments\(to_integer((\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\))) > \BitMask::op_GreaterThan(BitMask,BitMask).0.right\.\Segments\(to_integer((\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\)));
-                            \BitMask::op_GreaterThan(BitMask,BitMask).0.flag\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\;
+                        \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ <= \BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\;
+                        if (\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.0\) then 
+                            \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_GreaterThan(BitMask,BitMask).0.num\, 32));
+                            \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\ := signed(SmartResize(\BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_GreaterThan(BitMask,BitMask).0.num\, 32));
+                            \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.left\.\Segments\(to_integer((\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.1\))) > \BitMask::op_GreaterThan(BitMask,BitMask).0.right\.\Segments\(to_integer((\BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.2\)));
+                            \BitMask::op_GreaterThan(BitMask,BitMask).0.flag\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.3\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\ and ends in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_6\.
@@ -3872,8 +4045,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\ => 
                         -- State after the if-else which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\.
-                        \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.5\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
-                        \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.5\;
+                        \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
+                        \BitMask::op_GreaterThan(BitMask,BitMask).0.num\ := \BitMask::op_GreaterThan(BitMask,BitMask).0.binaryOperationResult.4\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_GreaterThan(BitMask,BitMask).0._State_2\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_GreaterThan(BitMask,BitMask).0._State\ = \BitMask::op_GreaterThan(BitMask,BitMask).0._State_5\) then 
                             \BitMask::op_GreaterThan(BitMask,BitMask).0._State\ := \BitMask::op_GreaterThan(BitMask,BitMask).0._State_3\;
@@ -3905,11 +4078,10 @@ begin
         Variable \BitMask::op_LessThan(BitMask,BitMask).0.flag\: boolean := false;
         Variable \BitMask::op_LessThan(BitMask,BitMask).0.result\: boolean := false;
         Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
-        Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
+        Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\: boolean := false;
-        Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\: boolean := false;
+        Variable \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3921,11 +4093,10 @@ begin
                 \BitMask::op_LessThan(BitMask,BitMask).0.flag\ := false;
                 \BitMask::op_LessThan(BitMask,BitMask).0.result\ := false;
                 \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\ := false;
-                \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\ := false;
+                \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\ := false;
-                \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\ := false;
+                \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_LessThan(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_LessThan(BitMask,BitMask).0._State_0\ => 
@@ -3950,23 +4121,17 @@ begin
                         \BitMask::op_LessThan(BitMask,BitMask).0.right\ := \BitMask::op_LessThan(BitMask,BitMask).0.right.parameter.In\;
                         \BitMask::op_LessThan(BitMask,BitMask).0.num\ := to_unsigned(1, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_LessThan(BitMask,BitMask).0.num\ <= \BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\;
-                        if (\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\) then 
-                            \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_3\;
-                        else 
-                            \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_LessThan(BitMask,BitMask).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_2\.
                         -- The while loop's condition:
-                        \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\ := \BitMask::op_LessThan(BitMask,BitMask).0.num\ <= \BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\;
-                        if (\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\) then 
-                            \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\ := resize(signed(\BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_LessThan(BitMask,BitMask).0.num\), 32);
-                            \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\ := resize(signed(\BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_LessThan(BitMask,BitMask).0.num\), 32);
-                            \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_LessThan(BitMask,BitMask).0.left\.\Segments\(to_integer((\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\))) < \BitMask::op_LessThan(BitMask,BitMask).0.right\.\Segments\(to_integer((\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\)));
-                            \BitMask::op_LessThan(BitMask,BitMask).0.flag\ := \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\;
+                        \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\ := \BitMask::op_LessThan(BitMask,BitMask).0.num\ <= \BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\;
+                        if (\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\) then 
+                            \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_LessThan(BitMask,BitMask).0.num\, 32));
+                            \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\ := signed(SmartResize(\BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\ - \BitMask::op_LessThan(BitMask,BitMask).0.num\, 32));
+                            \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_LessThan(BitMask,BitMask).0.left\.\Segments\(to_integer((\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\))) < \BitMask::op_LessThan(BitMask,BitMask).0.right\.\Segments\(to_integer((\BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\)));
+                            \BitMask::op_LessThan(BitMask,BitMask).0.flag\ := \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.3\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \BitMask::op_LessThan(BitMask,BitMask).0._State_6\ and ends in state \BitMask::op_LessThan(BitMask,BitMask).0._State_6\.
@@ -3990,8 +4155,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_LessThan(BitMask,BitMask).0._State_5\ => 
                         -- State after the if-else which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_3\.
-                        \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.5\ := \BitMask::op_LessThan(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
-                        \BitMask::op_LessThan(BitMask,BitMask).0.num\ := \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.5\;
+                        \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_LessThan(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
+                        \BitMask::op_LessThan(BitMask,BitMask).0.num\ := \BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.4\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_LessThan(BitMask,BitMask).0._State_2\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_LessThan(BitMask,BitMask).0._State\ = \BitMask::op_LessThan(BitMask,BitMask).0._State_5\) then 
                             \BitMask::op_LessThan(BitMask,BitMask).0._State\ := \BitMask::op_LessThan(BitMask,BitMask).0._State_3\;
@@ -4268,34 +4433,33 @@ begin
         Variable \BitMask::op_Addition(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.3\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\: boolean := false;
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\: boolean := false;
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\: boolean := false;
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.conditionale434122820f41deb9aa7a0d1af32faf6cb55e904d124344b6c6dafef1d0a4000\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.conditionalab620eac6807dc6e4094d422af6311ede25245ae0b71988698e3f0d88867f131\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.conditional8b600d3c1f6fe3101e3ae23b08db358034ba82e520e35fd6640dd2e72d7ef7d5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\: boolean := false;
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\: boolean := false;
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.26\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4322,34 +4486,33 @@ begin
                 \BitMask::op_Addition(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\ := to_unsigned(0, 16);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.3\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\ := false;
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ := to_unsigned(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ := false;
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := to_unsigned(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := to_unsigned(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\ := false;
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ := false;
                 \BitMask::op_Addition(BitMask,BitMask).0.conditionale434122820f41deb9aa7a0d1af32faf6cb55e904d124344b6c6dafef1d0a4000\ := to_signed(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.conditionalab620eac6807dc6e4094d422af6311ede25245ae0b71988698e3f0d88867f131\ := to_signed(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.conditional8b600d3c1f6fe3101e3ae23b08db358034ba82e520e35fd6640dd2e72d7ef7d5\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 8);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ := to_unsigned(0, 8);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ := to_unsigned(0, 8);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\ := to_unsigned(0, 32);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ := to_unsigned(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\ := false;
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ := to_unsigned(0, 16);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ := to_signed(0, 32);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\ := to_unsigned(0, 16);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ := to_signed(0, 32);
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ := false;
+                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\ := to_unsigned(0, 16);
                 \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ := to_unsigned(0, 16);
-                \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.26\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_Addition(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_0\ => 
@@ -4424,14 +4587,8 @@ begin
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_6\ => 
                         -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\.
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\;
-                        if (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_9\;
-                        else 
-                            \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_10\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_7\ => 
                         -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_5\.
                         \BitMask::op_Addition(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\ := \BitMask::op_Addition(BitMask,BitMask).0.left\.\Size\;
@@ -4451,9 +4608,9 @@ begin
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_6\.
                         -- The while loop's condition:
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\;
-                        if (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\) then 
-                            \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ := resize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.left\.\Segments\(to_integer(resize(signed(\BitMask::op_Addition(BitMask,BitMask).0.num\), 32))), to_integer(resize(signed(\BitMask::op_Addition(BitMask,BitMask).0.num2\), 32))), 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\;
+                        if (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.4\) then 
+                            \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ := resize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))), to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)))), 32);
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_11\;
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_10\;
@@ -4475,7 +4632,7 @@ begin
                         \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_30\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_11\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_12\;
@@ -4483,17 +4640,17 @@ begin
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ mod to_unsigned(2, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.5\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_12\ => 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ = to_unsigned(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag3\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.right\.\Size\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ := resize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.right\.\Segments\(to_integer(resize(signed(\BitMask::op_Addition(BitMask,BitMask).0.num\), 32))), to_integer(resize(signed(\BitMask::op_Addition(BitMask,BitMask).0.num2\), 32))), 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.6\ = to_unsigned(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag3\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.7\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ < \BitMask::op_Addition(BitMask,BitMask).0.right\.\Size\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ := resize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))), to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)))), 32);
                         \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_13\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_14\;
@@ -4501,12 +4658,12 @@ begin
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ mod to_unsigned(2, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_14\ => 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ = to_unsigned(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.9\ and \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag4\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.10\ = to_unsigned(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.8\ and \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.11\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag4\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.12\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_16\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_16\.
@@ -4581,9 +4738,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_21\ => 
                         -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_18\.
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ := \BitMask::op_Addition(BitMask,BitMask).0.conditionale434122820f41deb9aa7a0d1af32faf6cb55e904d124344b6c6dafef1d0a4000\ + \BitMask::op_Addition(BitMask,BitMask).0.conditionalab620eac6807dc6e4094d422af6311ede25245ae0b71988698e3f0d88867f131\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := resize(unsigned(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ + \BitMask::op_Addition(BitMask,BitMask).0.conditional8b600d3c1f6fe3101e3ae23b08db358034ba82e520e35fd6640dd2e72d7ef7d5\), 8);
-                        \BitMask::op_Addition(BitMask,BitMask).0.b\ := (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ := \BitMask::op_Addition(BitMask,BitMask).0.conditionale434122820f41deb9aa7a0d1af32faf6cb55e904d124344b6c6dafef1d0a4000\ + \BitMask::op_Addition(BitMask,BitMask).0.conditionalab620eac6807dc6e4094d422af6311ede25245ae0b71988698e3f0d88867f131\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\ := SmartResize(unsigned(\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.13\ + \BitMask::op_Addition(BitMask,BitMask).0.conditional8b600d3c1f6fe3101e3ae23b08db358034ba82e520e35fd6640dd2e72d7ef7d5\), 8);
+                        \BitMask::op_Addition(BitMask,BitMask).0.b\ := (\BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.14\);
                         \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_22\ => 
@@ -4603,7 +4760,7 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_24\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(7, 32)) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_25\;
@@ -4611,11 +4768,11 @@ begin
                         else 
                             \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := \BitMask::op_Addition(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ := \BitMask::op_Addition(BitMask,BitMask).0.b\ mod to_unsigned(2, 8);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ := unsigned(resize(\BitMask::op_Addition(BitMask,BitMask).0.b\ mod to_unsigned(2, 8), 32));
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_25\ => 
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ = to_unsigned(1, 8);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag5\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.15\ = to_unsigned(1, 8);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag5\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.16\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_27\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_27\.
@@ -4630,14 +4787,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_26\ => 
                         -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_25\.
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ := resize(signed(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.b\, to_integer(to_signed(1, 32)))), 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ = to_signed(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ := \BitMask::op_Addition(BitMask,BitMask).0.num2\ + to_unsigned(1, 16);
-                        \BitMask::op_Addition(BitMask,BitMask).0.num2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ := resize(signed(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.num2\, to_integer(to_signed(5, 32)))), 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ = to_signed(1, 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.flag6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ := signed(SmartResize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.b\, to_integer(to_signed(1, 32))), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ = to_signed(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.20\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\ := \BitMask::op_Addition(BitMask,BitMask).0.num2\ + to_unsigned(1, 16);
+                        \BitMask::op_Addition(BitMask,BitMask).0.num2\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.21\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ := signed(SmartResize(shift_right(\BitMask::op_Addition(BitMask,BitMask).0.num2\, to_integer(to_signed(5, 32))), 32));
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.22\ = to_signed(1, 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.flag6\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.23\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Addition(BitMask,BitMask).0._State_29\ and ends in state \BitMask::op_Addition(BitMask,BitMask).0._State_29\.
@@ -4652,9 +4809,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.5
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_27\ => 
                         -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_25\.
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\ := resize(shift_left(to_unsigned(1, 32), to_integer(resize(signed(\BitMask::op_Addition(BitMask,BitMask).0.num2\), 32))), 32);
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\ := \BitMask::op_Addition(BitMask,BitMask).0.array\(to_integer(resize(signed(\BitMask::op_Addition(BitMask,BitMask).0.num\), 32))) + \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\;
-                        \BitMask::op_Addition(BitMask,BitMask).0.array\(to_integer(resize(signed(\BitMask::op_Addition(BitMask,BitMask).0.num\), 32))) := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.19\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\ := resize(shift_left(to_unsigned(1, 32), to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num2\, 32)))), 32);
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\ := \BitMask::op_Addition(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))) + \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.17\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Addition(BitMask,BitMask).0.num\, 32)))) := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.18\;
                         -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_25\.
                         if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_27\) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_26\;
@@ -4662,8 +4819,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_28\ => 
                         -- State after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.26\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ + to_unsigned(1, 16);
-                        \BitMask::op_Addition(BitMask,BitMask).0.num3\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.26\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ := \BitMask::op_Addition(BitMask,BitMask).0.num3\ + to_unsigned(1, 16);
+                        \BitMask::op_Addition(BitMask,BitMask).0.num3\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_6\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_28\) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_9\;
@@ -4672,8 +4829,8 @@ begin
                     when \BitMask::op_Addition(BitMask,BitMask).0._State_29\ => 
                         -- True branch of the if-else started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
                         \BitMask::op_Addition(BitMask,BitMask).0.num2\ := to_unsigned(0, 16);
-                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\ := \BitMask::op_Addition(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
-                        \BitMask::op_Addition(BitMask,BitMask).0.num\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.25\;
+                        \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\ := \BitMask::op_Addition(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
+                        \BitMask::op_Addition(BitMask,BitMask).0.num\ := \BitMask::op_Addition(BitMask,BitMask).0.binaryOperationResult.24\;
                         -- Going to the state after the if-else which was started in state \BitMask::op_Addition(BitMask,BitMask).0._State_26\.
                         if (\BitMask::op_Addition(BitMask,BitMask).0._State\ = \BitMask::op_Addition(BitMask,BitMask).0._State_29\) then 
                             \BitMask::op_Addition(BitMask,BitMask).0._State\ := \BitMask::op_Addition(BitMask,BitMask).0._State_28\;
@@ -4721,35 +4878,34 @@ begin
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.3\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditionale434122820f41deb9aa7a0d1af32faf6cb55e904d124344b6c6dafef1d0a4000\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditionalab620eac6807dc6e4094d422af6311ede25245ae0b71988698e3f0d88867f131\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.conditional8b600d3c1f6fe3101e3ae23b08db358034ba82e520e35fd6640dd2e72d7ef7d5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\: boolean := false;
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\: boolean := false;
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.27\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4776,35 +4932,34 @@ begin
                 \BitMask::op_Subtraction(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\ := to_unsigned(0, 16);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.3\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ := to_unsigned(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ := to_unsigned(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ := false;
                 \BitMask::op_Subtraction(BitMask,BitMask).0.conditionale434122820f41deb9aa7a0d1af32faf6cb55e904d124344b6c6dafef1d0a4000\ := to_signed(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.conditionalab620eac6807dc6e4094d422af6311ede25245ae0b71988698e3f0d88867f131\ := to_signed(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.conditional8b600d3c1f6fe3101e3ae23b08db358034ba82e520e35fd6640dd2e72d7ef7d5\ := to_signed(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := to_unsigned(0, 8);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := to_unsigned(0, 8);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ := to_unsigned(0, 8);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\ := to_unsigned(0, 32);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\ := to_unsigned(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ := to_unsigned(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ := false;
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := to_unsigned(0, 16);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := to_signed(0, 32);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ := to_signed(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ := to_unsigned(0, 16);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := to_signed(0, 32);
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := false;
+                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\ := to_unsigned(0, 16);
                 \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ := to_unsigned(0, 16);
-                \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.27\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_Subtraction(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_0\ => 
@@ -4879,14 +5034,8 @@ begin
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\.
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\;
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\) then 
-                            \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_9\;
-                        else 
-                            \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_10\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_7\ => 
                         -- True branch of the if-else started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_5\.
                         \BitMask::op_Subtraction(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\ := \BitMask::op_Subtraction(BitMask,BitMask).0.left\.\Size\;
@@ -4906,9 +5055,9 @@ begin
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\.
                         -- The while loop's condition:
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\;
-                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\) then 
-                            \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ := resize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.left\.\Segments\(to_integer(resize(signed(\BitMask::op_Subtraction(BitMask,BitMask).0.num\), 32))), to_integer(resize(signed(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\), 32))), 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904\;
+                        if (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.4\) then 
+                            \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ := resize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))), to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)))), 32);
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_11\;
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_10\;
@@ -4930,7 +5079,7 @@ begin
                         \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_30\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_11\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_12\;
@@ -4938,17 +5087,17 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ mod to_unsigned(2, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.5\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_12\ => 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ = to_unsigned(1, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Size\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ := resize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Segments\(to_integer(resize(signed(\BitMask::op_Subtraction(BitMask,BitMask).0.num\), 32))), to_integer(resize(signed(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\), 32))), 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.6\ = to_unsigned(1, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.7\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ < \BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Size\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ := resize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))), to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)))), 32);
                         \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_13\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_14\;
@@ -4956,12 +5105,12 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ mod to_unsigned(2, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_14\ => 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ = to_unsigned(1, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.9\ and \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag4\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.10\ = to_unsigned(1, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.8\ and \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.11\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag4\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.12\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_16\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_16\.
@@ -5036,10 +5185,10 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_21\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_18\.
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ := to_signed(2, 32) + \BitMask::op_Subtraction(BitMask,BitMask).0.conditionale434122820f41deb9aa7a0d1af32faf6cb55e904d124344b6c6dafef1d0a4000\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ - \BitMask::op_Subtraction(BitMask,BitMask).0.conditionalab620eac6807dc6e4094d422af6311ede25245ae0b71988698e3f0d88867f131\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := resize(unsigned(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ - \BitMask::op_Subtraction(BitMask,BitMask).0.conditional8b600d3c1f6fe3101e3ae23b08db358034ba82e520e35fd6640dd2e72d7ef7d5\), 8);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.b\ := (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ := to_signed(2, 32) + \BitMask::op_Subtraction(BitMask,BitMask).0.conditionale434122820f41deb9aa7a0d1af32faf6cb55e904d124344b6c6dafef1d0a4000\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.13\ - \BitMask::op_Subtraction(BitMask,BitMask).0.conditionalab620eac6807dc6e4094d422af6311ede25245ae0b71988698e3f0d88867f131\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\ := SmartResize(unsigned(\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.14\ - \BitMask::op_Subtraction(BitMask,BitMask).0.conditional8b600d3c1f6fe3101e3ae23b08db358034ba82e520e35fd6640dd2e72d7ef7d5\), 8);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.b\ := (\BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.15\);
                         \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_22\ => 
@@ -5059,7 +5208,7 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_24\ => 
-                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(7, 32)) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\;
@@ -5067,11 +5216,11 @@ begin
                         else 
                             \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := \BitMask::op_Subtraction(BitMask,BitMask).0.b\ mod to_unsigned(2, 8);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ := unsigned(resize(\BitMask::op_Subtraction(BitMask,BitMask).0.b\ mod to_unsigned(2, 8), 32));
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\ => 
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ = to_unsigned(1, 8);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag5\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.16\ = to_unsigned(1, 8);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag5\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.17\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_27\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_27\.
@@ -5086,14 +5235,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\.
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ := resize(signed(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.b\, to_integer(to_signed(1, 32)))), 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ = to_signed(0, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num2\ + to_unsigned(1, 16);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.num2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := resize(signed(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, to_integer(to_signed(5, 32)))), 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ = to_signed(1, 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ := signed(SmartResize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.b\, to_integer(to_signed(1, 32))), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ = to_signed(0, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.21\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num2\ + to_unsigned(1, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.num2\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.22\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ := signed(SmartResize(shift_right(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, to_integer(to_signed(5, 32))), 32));
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.23\ = to_signed(1, 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.flag6\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.24\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\ and ends in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\.
@@ -5108,9 +5257,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.5
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_27\ => 
                         -- True branch of the if-else started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\.
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\ := resize(shift_left(to_unsigned(1, 32), to_integer(resize(signed(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\), 32))), 32);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\ := \BitMask::op_Subtraction(BitMask,BitMask).0.array\(to_integer(resize(signed(\BitMask::op_Subtraction(BitMask,BitMask).0.num\), 32))) + \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\;
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.array\(to_integer(resize(signed(\BitMask::op_Subtraction(BitMask,BitMask).0.num\), 32))) := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.20\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\ := resize(shift_left(to_unsigned(1, 32), to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num2\, 32)))), 32);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\ := \BitMask::op_Subtraction(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))) + \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.18\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_Subtraction(BitMask,BitMask).0.num\, 32)))) := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.19\;
                         -- Going to the state after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_25\.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_27\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\;
@@ -5118,8 +5267,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\ => 
                         -- State after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\.
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.27\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ + to_unsigned(1, 16);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.27\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ + to_unsigned(1, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.num3\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_6\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_9\;
@@ -5128,8 +5277,8 @@ begin
                     when \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\ => 
                         -- True branch of the if-else started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\.
                         \BitMask::op_Subtraction(BitMask,BitMask).0.num2\ := to_unsigned(0, 16);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
-                        \BitMask::op_Subtraction(BitMask,BitMask).0.num\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.26\;
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\ := \BitMask::op_Subtraction(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
+                        \BitMask::op_Subtraction(BitMask,BitMask).0.num\ := \BitMask::op_Subtraction(BitMask,BitMask).0.binaryOperationResult.25\;
                         -- Going to the state after the if-else which was started in state \BitMask::op_Subtraction(BitMask,BitMask).0._State_26\.
                         if (\BitMask::op_Subtraction(BitMask,BitMask).0._State\ = \BitMask::op_Subtraction(BitMask,BitMask).0._State_29\) then 
                             \BitMask::op_Subtraction(BitMask,BitMask).0._State\ := \BitMask::op_Subtraction(BitMask,BitMask).0._State_28\;
@@ -5165,9 +5314,8 @@ begin
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
-        Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.2\: boolean := false;
-        Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5185,9 +5333,8 @@ begin
                 \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\ := to_unsigned(0, 16);
                 \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.0\ := false;
                 \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\ := false;
-                \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.2\ := false;
-                \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.3\ := to_unsigned(0, 32);
-                \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.4\ := to_unsigned(0, 16);
+                \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.3\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_BitwiseOr(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_0\ => 
@@ -5260,23 +5407,17 @@ begin
                         \BitMask::op_BitwiseOr(BitMask,BitMask).0.array\ := (others => to_unsigned(0, 32));
                         \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\ := to_unsigned(0, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\ := resize(signed(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\), 32) < to_signed(9, 32);
-                        if (\BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\) then 
-                            \BitMask::op_BitwiseOr(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_7\;
-                        else 
-                            \BitMask::op_BitwiseOr(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_8\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::op_BitwiseOr(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_6\.
                         -- The while loop's condition:
-                        \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.2\ := resize(signed(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\), 32) < to_signed(9, 32);
-                        if (\BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.2\) then 
-                            \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0.left\.\Segments\(to_integer(resize(signed(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\), 32))) or \BitMask::op_BitwiseOr(BitMask,BitMask).0.right\.\Segments\(to_integer(resize(signed(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\), 32)));
-                            \BitMask::op_BitwiseOr(BitMask,BitMask).0.array\(to_integer(resize(signed(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\), 32))) := \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.3\;
-                            \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
-                            \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.4\;
+                        \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\, 32)) < to_signed(9, 32);
+                        if (\BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\) then 
+                            \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\, 32)))) or \BitMask::op_BitwiseOr(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\, 32))));
+                            \BitMask::op_BitwiseOr(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\, 32)))) := \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.2\;
+                            \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
+                            \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.3\;
                         else 
                             \BitMask::op_BitwiseOr(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_8\;
                         end if;
@@ -5326,9 +5467,8 @@ begin
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
-        Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.2\: boolean := false;
-        Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5346,9 +5486,8 @@ begin
                 \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\ := to_unsigned(0, 16);
                 \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.0\ := false;
                 \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\ := false;
-                \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.2\ := false;
-                \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.3\ := to_unsigned(0, 32);
-                \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.4\ := to_unsigned(0, 16);
+                \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.3\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ is 
                     when \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_0\ => 
@@ -5421,23 +5560,17 @@ begin
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.array\ := (others => to_unsigned(0, 32));
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\ := to_unsigned(0, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\ := resize(signed(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\), 32) < to_signed(9, 32);
-                        if (\BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\) then 
-                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_7\;
-                        else 
-                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_8\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_6\.
                         -- The while loop's condition:
-                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.2\ := resize(signed(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\), 32) < to_signed(9, 32);
-                        if (\BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.2\) then 
-                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.left\.\Segments\(to_integer(resize(signed(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\), 32))) and \BitMask::op_BitwiseAnd(BitMask,BitMask).0.right\.\Segments\(to_integer(resize(signed(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\), 32)));
-                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0.array\(to_integer(resize(signed(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\), 32))) := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.3\;
-                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.4\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
-                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.4\;
+                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\, 32)) < to_signed(9, 32);
+                        if (\BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\) then 
+                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.2\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.left\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\, 32)))) and \BitMask::op_BitwiseAnd(BitMask,BitMask).0.right\.\Segments\(to_integer(signed(SmartResize(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\, 32))));
+                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0.array\(to_integer(signed(SmartResize(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\, 32)))) := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.2\;
+                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.3\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\ + to_unsigned(1, 16);
+                            \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.3\;
                         else 
                             \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_8\;
                         end if;
@@ -5495,16 +5628,14 @@ begin
         Variable \BitMask::op_RightShift(BitMask,Int32).0.return.0\: \Lombiq.Unum.BitMask\;
         Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.1\: boolean := false;
         Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\: boolean := false;
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\: boolean := false;
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\: boolean := false;
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.7\: boolean := false;
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\: boolean := false;
+        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5529,16 +5660,14 @@ begin
                 \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.0\ := false;
                 \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.1\ := false;
                 \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\ := false;
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\ := false;
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ := false;
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\ := to_unsigned(0, 16);
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\ := to_unsigned(0, 16);
+                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
                 \BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.7\ := false;
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 32);
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 32);
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 16);
-                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.11\ := to_unsigned(0, 16);
+                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\ := false;
+                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 16);
+                \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_RightShift(BitMask,Int32).0._State\ is 
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_0\ => 
@@ -5608,33 +5737,21 @@ begin
                         \BitMask::op_RightShift(BitMask,Int32).0.array\ := \BitMask::op_RightShift(BitMask,Int32).0.left\.\Segments\(0 to 8);
                         \BitMask::op_RightShift(BitMask,Int32).0.num2\ := to_unsigned(0, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.1\ := resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num2\), 32) < \BitMask::op_RightShift(BitMask,Int32).0.right\;
+                        \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::op_RightShift(BitMask,Int32).0._State_7\ => 
+                        -- Repeated state of the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_6\.
+                        -- The while loop's condition:
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num2\, 32)) < \BitMask::op_RightShift(BitMask,Int32).0.right\;
                         if (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.1\) then 
-                            \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_7\;
+                            \BitMask::op_RightShift(BitMask,Int32).0.flag2\ := False;
+                            \BitMask::op_RightShift(BitMask,Int32).0.num3\ := to_unsigned(1, 16);
+                            -- Starting a while loop.
+                            \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_9\;
                         else 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_RightShift(BitMask,Int32).0._State_7\ => 
-                        -- Repeated state of the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_6\.
-                        -- The while loop's condition:
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\ := resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num2\), 32) < \BitMask::op_RightShift(BitMask,Int32).0.right\;
-                        if (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\) then 
-                            \BitMask::op_RightShift(BitMask,Int32).0.flag2\ := False;
-                            \BitMask::op_RightShift(BitMask,Int32).0.num3\ := to_unsigned(1, 16);
-                            -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\ := resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num3\), 32) <= to_signed(9, 32);
-                            if (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\) then 
-                                \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_9\;
-                            else 
-                                \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_10\;
-                            end if;
-                        else 
-                            \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_8\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_8\ => 
                         -- State after the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_6\.
                         -- Initializing record fields to their defaults.
@@ -5653,10 +5770,10 @@ begin
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_7\.
                         -- The while loop's condition:
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ := resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num3\), 32) <= to_signed(9, 32);
-                        if (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\) then 
-                            \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\ := resize(unsigned(to_signed(9, 32) - resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num3\), 32)), 16);
-                            \BitMask::op_RightShift(BitMask,Int32).0.num4\ := (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\);
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\ := signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num3\, 32)) <= to_signed(9, 32);
+                        if (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\) then 
+                            \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\ := SmartResize(unsigned(to_signed(9, 32) - signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num3\, 32))), 16);
+                            \BitMask::op_RightShift(BitMask,Int32).0.num4\ := (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\);
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_11\;
                         else 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_10\;
@@ -5664,15 +5781,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_10\ => 
                         -- State after the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_7\.
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.11\ := \BitMask::op_RightShift(BitMask,Int32).0.num2\ + to_unsigned(1, 16);
-                        \BitMask::op_RightShift(BitMask,Int32).0.num2\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.11\;
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.9\ := \BitMask::op_RightShift(BitMask,Int32).0.num2\ + to_unsigned(1, 16);
+                        \BitMask::op_RightShift(BitMask,Int32).0.num2\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.9\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_6\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_RightShift(BitMask,Int32).0._State\ = \BitMask::op_RightShift(BitMask,Int32).0._State_10\) then 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_11\ => 
-                        -- Waiting for the result to appear in \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_12\;
@@ -5680,13 +5797,13 @@ begin
                         else 
                             \BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::op_RightShift(BitMask,Int32).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\ := \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num4\), 32))) mod to_unsigned(2, 32);
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ := \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num4\, 32)))) mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_12\ => 
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.7\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\ = to_unsigned(1, 32);
-                        \BitMask::op_RightShift(BitMask,Int32).0.flag3\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.7\;
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.8\ := shift_right(\BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num4\), 32))), to_integer(to_signed(1, 32)));
-                        \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num4\), 32))) := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.8\;
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.4\ = to_unsigned(1, 32);
+                        \BitMask::op_RightShift(BitMask,Int32).0.flag3\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.5\;
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\ := shift_right(\BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num4\, 32)))), to_integer(to_signed(1, 32)));
+                        \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num4\, 32)))) := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.6\;
                         \BitMask::op_RightShift(BitMask,Int32).0.flag4\ := \BitMask::op_RightShift(BitMask,Int32).0.flag2\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -5703,8 +5820,8 @@ begin
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_13\ => 
                         -- State after the if-else which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_12\.
                         \BitMask::op_RightShift(BitMask,Int32).0.flag2\ := \BitMask::op_RightShift(BitMask,Int32).0.flag3\;
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.10\ := \BitMask::op_RightShift(BitMask,Int32).0.num3\ + to_unsigned(1, 16);
-                        \BitMask::op_RightShift(BitMask,Int32).0.num3\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.10\;
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.8\ := \BitMask::op_RightShift(BitMask,Int32).0.num3\ + to_unsigned(1, 16);
+                        \BitMask::op_RightShift(BitMask,Int32).0.num3\ := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.8\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_7\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_RightShift(BitMask,Int32).0._State\ = \BitMask::op_RightShift(BitMask,Int32).0._State_13\) then 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_9\;
@@ -5712,8 +5829,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_14\ => 
                         -- True branch of the if-else started in state \BitMask::op_RightShift(BitMask,Int32).0._State_12\.
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.9\ := \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num4\), 32))) or \BitMask::op_RightShift(BitMask,Int32).0.num\;
-                        \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_RightShift(BitMask,Int32).0.num4\), 32))) := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.9\;
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.7\ := \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num4\, 32)))) or \BitMask::op_RightShift(BitMask,Int32).0.num\;
+                        \BitMask::op_RightShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num4\, 32)))) := \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.7\;
                         -- Going to the state after the if-else which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_12\.
                         if (\BitMask::op_RightShift(BitMask,Int32).0._State\ = \BitMask::op_RightShift(BitMask,Int32).0._State_14\) then 
                             \BitMask::op_RightShift(BitMask,Int32).0._State\ := \BitMask::op_RightShift(BitMask,Int32).0._State_13\;
@@ -5757,14 +5874,12 @@ begin
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.return.0\: \Lombiq.Unum.BitMask\;
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.1\: boolean := false;
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\: boolean := false;
-        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.3\: boolean := false;
+        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.4\: boolean := false;
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.6\: boolean := false;
-        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5789,14 +5904,12 @@ begin
                 \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.0\ := false;
                 \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.1\ := false;
                 \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\ := false;
-                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.3\ := false;
+                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.4\ := false;
                 \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
-                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.6\ := false;
-                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 32);
-                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 16);
-                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 16);
+                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 16);
+                \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 16);
             else 
                 case \BitMask::op_LeftShift(BitMask,Int32).0._State\ is 
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_0\ => 
@@ -5867,33 +5980,21 @@ begin
                         \BitMask::op_LeftShift(BitMask,Int32).0.array\ := \BitMask::op_LeftShift(BitMask,Int32).0.left\.\Segments\(0 to 8);
                         \BitMask::op_LeftShift(BitMask,Int32).0.num3\ := to_unsigned(0, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.1\ := resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num3\), 32) < \BitMask::op_LeftShift(BitMask,Int32).0.right\;
+                        \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \BitMask::op_LeftShift(BitMask,Int32).0._State_7\ => 
+                        -- Repeated state of the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_6\.
+                        -- The while loop's condition:
+                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num3\, 32)) < \BitMask::op_LeftShift(BitMask,Int32).0.right\;
                         if (\BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.1\) then 
-                            \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_7\;
+                            \BitMask::op_LeftShift(BitMask,Int32).0.flag2\ := False;
+                            \BitMask::op_LeftShift(BitMask,Int32).0.num4\ := to_unsigned(0, 16);
+                            -- Starting a while loop.
+                            \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_9\;
                         else 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::op_LeftShift(BitMask,Int32).0._State_7\ => 
-                        -- Repeated state of the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_6\.
-                        -- The while loop's condition:
-                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\ := resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num3\), 32) < \BitMask::op_LeftShift(BitMask,Int32).0.right\;
-                        if (\BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\) then 
-                            \BitMask::op_LeftShift(BitMask,Int32).0.flag2\ := False;
-                            \BitMask::op_LeftShift(BitMask,Int32).0.num4\ := to_unsigned(0, 16);
-                            -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.3\ := resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num4\), 32) < to_signed(9, 32);
-                            if (\BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.3\) then 
-                                \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_9\;
-                            else 
-                                \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_10\;
-                            end if;
-                        else 
-                            \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_8\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_8\ => 
                         -- State after the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_6\.
                         -- Initializing record fields to their defaults.
@@ -5912,13 +6013,13 @@ begin
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_7\.
                         -- The while loop's condition:
-                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.4\ := resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num4\), 32) < to_signed(9, 32);
-                        if (\BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.4\) then 
-                            \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.5\ := \BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num4\), 32))) and \BitMask::op_LeftShift(BitMask,Int32).0.num\;
-                            \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.6\ := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.5\ = \BitMask::op_LeftShift(BitMask,Int32).0.num\;
-                            \BitMask::op_LeftShift(BitMask,Int32).0.flag3\ := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.6\;
-                            \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.7\ := shift_left(\BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num4\), 32))), to_integer(to_signed(1, 32)));
-                            \BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num4\), 32))) := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.7\;
+                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\ := signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num4\, 32)) < to_signed(9, 32);
+                        if (\BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\) then 
+                            \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.3\ := \BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num4\, 32)))) and \BitMask::op_LeftShift(BitMask,Int32).0.num\;
+                            \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.4\ := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.3\ = \BitMask::op_LeftShift(BitMask,Int32).0.num\;
+                            \BitMask::op_LeftShift(BitMask,Int32).0.flag3\ := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.4\;
+                            \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.5\ := shift_left(\BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num4\, 32)))), to_integer(to_signed(1, 32)));
+                            \BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num4\, 32)))) := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.5\;
                             \BitMask::op_LeftShift(BitMask,Int32).0.flag4\ := \BitMask::op_LeftShift(BitMask,Int32).0.flag2\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -5937,8 +6038,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_10\ => 
                         -- State after the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_7\.
-                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.10\ := \BitMask::op_LeftShift(BitMask,Int32).0.num3\ + to_unsigned(1, 16);
-                        \BitMask::op_LeftShift(BitMask,Int32).0.num3\ := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.10\;
+                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.8\ := \BitMask::op_LeftShift(BitMask,Int32).0.num3\ + to_unsigned(1, 16);
+                        \BitMask::op_LeftShift(BitMask,Int32).0.num3\ := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.8\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_6\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_LeftShift(BitMask,Int32).0._State\ = \BitMask::op_LeftShift(BitMask,Int32).0._State_10\) then 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_7\;
@@ -5947,8 +6048,8 @@ begin
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_11\ => 
                         -- State after the if-else which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_9\.
                         \BitMask::op_LeftShift(BitMask,Int32).0.flag2\ := \BitMask::op_LeftShift(BitMask,Int32).0.flag3\;
-                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.9\ := \BitMask::op_LeftShift(BitMask,Int32).0.num4\ + to_unsigned(1, 16);
-                        \BitMask::op_LeftShift(BitMask,Int32).0.num4\ := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.9\;
+                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.7\ := \BitMask::op_LeftShift(BitMask,Int32).0.num4\ + to_unsigned(1, 16);
+                        \BitMask::op_LeftShift(BitMask,Int32).0.num4\ := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.7\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_7\ if the loop wasn't exited with a state change.
                         if (\BitMask::op_LeftShift(BitMask,Int32).0._State\ = \BitMask::op_LeftShift(BitMask,Int32).0._State_11\) then 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_9\;
@@ -5956,8 +6057,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_12\ => 
                         -- True branch of the if-else started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_9\.
-                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.8\ := \BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num4\), 32))) or \BitMask::op_LeftShift(BitMask,Int32).0.num2\;
-                        \BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(resize(signed(\BitMask::op_LeftShift(BitMask,Int32).0.num4\), 32))) := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.8\;
+                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.6\ := \BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num4\, 32)))) or \BitMask::op_LeftShift(BitMask,Int32).0.num2\;
+                        \BitMask::op_LeftShift(BitMask,Int32).0.array\(to_integer(signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num4\, 32)))) := \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.6\;
                         -- Going to the state after the if-else which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_9\.
                         if (\BitMask::op_LeftShift(BitMask,Int32).0._State\ = \BitMask::op_LeftShift(BitMask,Int32).0._State_12\) then 
                             \BitMask::op_LeftShift(BitMask,Int32).0._State\ := \BitMask::op_LeftShift(BitMask,Int32).0._State_11\;
@@ -5992,17 +6093,15 @@ begin
         Variable \BitMask::GetMostSignificantOnePosition().0.flag\: boolean := false;
         Variable \BitMask::GetMostSignificantOnePosition().0.result\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\: boolean := false;
-        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\: boolean := false;
-        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.3\: boolean := false;
-        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\: boolean := false;
-        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.2\: boolean := false;
+        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\: boolean := false;
         Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\: boolean := false;
+        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6016,17 +6115,15 @@ begin
                 \BitMask::GetMostSignificantOnePosition().0.flag\ := false;
                 \BitMask::GetMostSignificantOnePosition().0.result\ := to_unsigned(0, 16);
                 \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\ := false;
-                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\ := false;
-                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.3\ := false;
-                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\ := false;
-                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.2\ := false;
+                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\ := to_unsigned(0, 16);
+                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\ := false;
                 \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\ := to_unsigned(0, 16);
-                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\ := false;
+                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\ := to_unsigned(0, 32);
                 \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.8\ := to_unsigned(0, 16);
                 \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.9\ := to_unsigned(0, 16);
-                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.10\ := to_unsigned(0, 16);
-                \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.11\ := to_unsigned(0, 16);
             else 
                 case \BitMask::GetMostSignificantOnePosition().0._State\ is 
                     when \BitMask::GetMostSignificantOnePosition().0._State_0\ => 
@@ -6051,33 +6148,21 @@ begin
                         \BitMask::GetMostSignificantOnePosition().0.num\ := to_unsigned(0, 16);
                         \BitMask::GetMostSignificantOnePosition().0.num2\ := to_unsigned(1, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\ := \BitMask::GetMostSignificantOnePosition().0.num2\ <= \BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\;
-                        if (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\) then 
-                            \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_3\;
-                        else 
-                            \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::GetMostSignificantOnePosition().0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_2\.
                         -- The while loop's condition:
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\ := \BitMask::GetMostSignificantOnePosition().0.num2\ <= \BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\;
-                        if (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\) then 
-                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.2\ := resize(signed(\BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\ - \BitMask::GetMostSignificantOnePosition().0.num2\), 32);
-                            \BitMask::GetMostSignificantOnePosition().0.num3\ := \BitMask::GetMostSignificantOnePosition().0.this\.\Segments\(to_integer((\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.2\)));
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\ := \BitMask::GetMostSignificantOnePosition().0.num2\ <= \BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\;
+                        if (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\) then 
+                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\ - \BitMask::GetMostSignificantOnePosition().0.num2\, 32));
+                            \BitMask::GetMostSignificantOnePosition().0.num3\ := \BitMask::GetMostSignificantOnePosition().0.this\.\Segments\(to_integer((\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\)));
                             -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.3\ := \BitMask::GetMostSignificantOnePosition().0.num3\ > to_unsigned(0, 32);
-                            if (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.3\) then 
-                                \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_5\;
-                            else 
-                                \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_6\;
-                            end if;
+                            \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_5\;
                         else 
                             \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \BitMask::GetMostSignificantOnePosition().0._State_4\ => 
                         -- State after the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_2\.
                         \BitMask::GetMostSignificantOnePosition().0.result\ := to_unsigned(0, 16);
@@ -6087,14 +6172,14 @@ begin
                     when \BitMask::GetMostSignificantOnePosition().0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_3\.
                         -- The while loop's condition:
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\ := \BitMask::GetMostSignificantOnePosition().0.num3\ > to_unsigned(0, 32);
-                        if (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\) then 
-                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\ := shift_right(\BitMask::GetMostSignificantOnePosition().0.num3\, to_integer(to_signed(1, 32)));
-                            \BitMask::GetMostSignificantOnePosition().0.num3\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\;
-                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\ := \BitMask::GetMostSignificantOnePosition().0.num\ + to_unsigned(1, 16);
-                            \BitMask::GetMostSignificantOnePosition().0.num\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\;
-                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\ := \BitMask::GetMostSignificantOnePosition().0.num3\ = to_unsigned(0, 32);
-                            \BitMask::GetMostSignificantOnePosition().0.flag\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\;
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.2\ := \BitMask::GetMostSignificantOnePosition().0.num3\ > to_unsigned(0, 32);
+                        if (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.2\) then 
+                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.3\ := shift_right(\BitMask::GetMostSignificantOnePosition().0.num3\, to_integer(to_signed(1, 32)));
+                            \BitMask::GetMostSignificantOnePosition().0.num3\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.3\;
+                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\ := \BitMask::GetMostSignificantOnePosition().0.num\ + to_unsigned(1, 16);
+                            \BitMask::GetMostSignificantOnePosition().0.num\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\;
+                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\ := \BitMask::GetMostSignificantOnePosition().0.num3\ = to_unsigned(0, 32);
+                            \BitMask::GetMostSignificantOnePosition().0.flag\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.5\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \BitMask::GetMostSignificantOnePosition().0._State_8\ and ends in state \BitMask::GetMostSignificantOnePosition().0._State_8\.
@@ -6112,8 +6197,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \BitMask::GetMostSignificantOnePosition().0._State_6\ => 
                         -- State after the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_3\.
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.11\ := \BitMask::GetMostSignificantOnePosition().0.num2\ + to_unsigned(1, 16);
-                        \BitMask::GetMostSignificantOnePosition().0.num2\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.11\;
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.9\ := \BitMask::GetMostSignificantOnePosition().0.num2\ + to_unsigned(1, 16);
+                        \BitMask::GetMostSignificantOnePosition().0.num2\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.9\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_2\ if the loop wasn't exited with a state change.
                         if (\BitMask::GetMostSignificantOnePosition().0._State\ = \BitMask::GetMostSignificantOnePosition().0._State_6\) then 
                             \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_3\;
@@ -6128,10 +6213,10 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::GetMostSignificantOnePosition().0._State_8\ => 
                         -- True branch of the if-else started in state \BitMask::GetMostSignificantOnePosition().0._State_5\.
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.8\ := \BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\ - \BitMask::GetMostSignificantOnePosition().0.num2\;
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.9\ := resize(\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.8\ * to_unsigned(32, 16), 16);
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.10\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.9\ + \BitMask::GetMostSignificantOnePosition().0.num\;
-                        \BitMask::GetMostSignificantOnePosition().0.result\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.10\;
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\ := \BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\ - \BitMask::GetMostSignificantOnePosition().0.num2\;
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\ := unsigned(resize(\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\ * to_unsigned(32, 16), 32));
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.8\ := resize(\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\ + \BitMask::GetMostSignificantOnePosition().0.num\, 16);
+                        \BitMask::GetMostSignificantOnePosition().0.result\ := \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.8\;
                         \BitMask::GetMostSignificantOnePosition().0.return\ <= \BitMask::GetMostSignificantOnePosition().0.result\;
                         \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_1\;
                         -- Going to the state after the if-else which was started in state \BitMask::GetMostSignificantOnePosition().0._State_5\.
@@ -6158,20 +6243,16 @@ begin
         Variable \BitMask::GetLeastSignificantOnePosition().0.result\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.0\: boolean := false;
         Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.1\: boolean := false;
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.2\: boolean := false;
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.5\: boolean := false;
+        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\: boolean := false;
+        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\: boolean := false;
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.11\: boolean := false;
-        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\: boolean := false;
+        Variable \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6187,20 +6268,16 @@ begin
                 \BitMask::GetLeastSignificantOnePosition().0.result\ := to_unsigned(0, 16);
                 \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.0\ := false;
                 \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.1\ := false;
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.2\ := false;
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ := to_unsigned(0, 16);
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\ := to_unsigned(0, 32);
+                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.2\ := to_unsigned(0, 16);
+                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.5\ := false;
+                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\ := false;
+                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.5\ := to_unsigned(0, 16);
                 \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ := to_unsigned(0, 32);
                 \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ := to_signed(0, 32);
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ := false;
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\ := to_unsigned(0, 16);
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.9\ := to_unsigned(0, 32);
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.10\ := to_unsigned(0, 32);
-                \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.11\ := false;
-                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.12\ := to_unsigned(0, 16);
+                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\ := false;
+                \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.9\ := to_unsigned(0, 16);
             else 
                 case \BitMask::GetLeastSignificantOnePosition().0._State\ is 
                     when \BitMask::GetLeastSignificantOnePosition().0._State_0\ => 
@@ -6225,26 +6302,20 @@ begin
                         \BitMask::GetLeastSignificantOnePosition().0.num\ := to_unsigned(1, 16);
                         \BitMask::GetLeastSignificantOnePosition().0.num2\ := to_unsigned(0, 16);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.0\ := \BitMask::GetLeastSignificantOnePosition().0.num2\ < \BitMask::GetLeastSignificantOnePosition().0.this\.\SegmentCount\;
-                        if (\BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.0\) then 
-                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_3\;
-                        else 
-                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::GetLeastSignificantOnePosition().0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_2\.
                         -- The while loop's condition:
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.1\ := \BitMask::GetLeastSignificantOnePosition().0.num2\ < \BitMask::GetLeastSignificantOnePosition().0.this\.\SegmentCount\;
-                        if (\BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.1\) then 
-                            \BitMask::GetLeastSignificantOnePosition().0.num3\ := \BitMask::GetLeastSignificantOnePosition().0.this\.\Segments\(to_integer(resize(signed(\BitMask::GetLeastSignificantOnePosition().0.num2\), 32)));
-                            \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.2\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ = to_unsigned(0, 32);
-                            \BitMask::GetLeastSignificantOnePosition().0.flag\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.2\;
+                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.0\ := \BitMask::GetLeastSignificantOnePosition().0.num2\ < \BitMask::GetLeastSignificantOnePosition().0.this\.\SegmentCount\;
+                        if (\BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.0\) then 
+                            \BitMask::GetLeastSignificantOnePosition().0.num3\ := \BitMask::GetLeastSignificantOnePosition().0.this\.\Segments\(to_integer(signed(SmartResize(\BitMask::GetLeastSignificantOnePosition().0.num2\, 32))));
+                            \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.1\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ = to_unsigned(0, 32);
+                            \BitMask::GetLeastSignificantOnePosition().0.flag\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.1\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \BitMask::GetLeastSignificantOnePosition().0._State_6\ and ends in state \BitMask::GetLeastSignificantOnePosition().0._State_6\.
-                            --     * The false branch starts in state \BitMask::GetLeastSignificantOnePosition().0._State_7\ and ends in state \BitMask::GetLeastSignificantOnePosition().0._State_16\.
+                            --     * The false branch starts in state \BitMask::GetLeastSignificantOnePosition().0._State_7\ and ends in state \BitMask::GetLeastSignificantOnePosition().0._State_14\.
                             --     * Execution after either branch will continue in the following state: \BitMask::GetLeastSignificantOnePosition().0._State_5\.
 
                             if (\BitMask::GetLeastSignificantOnePosition().0.flag\) then 
@@ -6264,8 +6335,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::GetLeastSignificantOnePosition().0._State_5\ => 
                         -- State after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_3\.
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.12\ := \BitMask::GetLeastSignificantOnePosition().0.num2\ + to_unsigned(1, 16);
-                        \BitMask::GetLeastSignificantOnePosition().0.num2\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.12\;
+                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.9\ := \BitMask::GetLeastSignificantOnePosition().0.num2\ + to_unsigned(1, 16);
+                        \BitMask::GetLeastSignificantOnePosition().0.num2\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.9\;
                         -- Returning to the repeated state of the while loop which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_2\ if the loop wasn't exited with a state change.
                         if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_5\) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_3\;
@@ -6273,8 +6344,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \BitMask::GetLeastSignificantOnePosition().0._State_6\ => 
                         -- True branch of the if-else started in state \BitMask::GetLeastSignificantOnePosition().0._State_3\.
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ := \BitMask::GetLeastSignificantOnePosition().0.num\ + to_unsigned(32, 16);
-                        \BitMask::GetLeastSignificantOnePosition().0.num\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\;
+                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.2\ := \BitMask::GetLeastSignificantOnePosition().0.num\ + to_unsigned(32, 16);
+                        \BitMask::GetLeastSignificantOnePosition().0.num\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.2\;
                         -- Going to the state after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_3\.
                         if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_6\) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_5\;
@@ -6283,32 +6354,19 @@ begin
                     when \BitMask::GetLeastSignificantOnePosition().0._State_7\ => 
                         -- False branch of the if-else started in state \BitMask::GetLeastSignificantOnePosition().0._State_3\.
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_10\;
+                        \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::GetLeastSignificantOnePosition().0._State_8\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_7\.
                         -- The while loop's condition:
-                        \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_12\;
-                        if (\BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\) then 
-                            \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\ := \BitMask::GetLeastSignificantOnePosition().0.num\ + to_unsigned(1, 16);
-                            \BitMask::GetLeastSignificantOnePosition().0.num\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\;
-                            \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.9\ := shift_right(\BitMask::GetLeastSignificantOnePosition().0.num3\, to_integer(to_signed(1, 32)));
-                            \BitMask::GetLeastSignificantOnePosition().0.num3\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.9\;
-                            -- Returning to the repeated state of the while loop which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_7\ if the loop wasn't exited with a state change.
-                            if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_13\) then 
-                                \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_8\;
-                            end if;
-                        else 
-                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_9\;
-                        end if;
+                        \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::GetLeastSignificantOnePosition().0._State_9\ => 
                         -- State after the while loop which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_7\.
-                        \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_14\;
+                        \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::GetLeastSignificantOnePosition().0._State_10\ => 
-                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(7, 32)) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_11\;
@@ -6316,18 +6374,25 @@ begin
                         else 
                             \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ := \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ mod to_unsigned(2, 32);
+                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::GetLeastSignificantOnePosition().0._State_11\ => 
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.5\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\ = to_unsigned(0, 32);
-                        if (\BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.5\) then 
-                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_8\;
+                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.3\ = to_unsigned(0, 32);
+                        if (\BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.4\) then 
+                            \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.5\ := \BitMask::GetLeastSignificantOnePosition().0.num\ + to_unsigned(1, 16);
+                            \BitMask::GetLeastSignificantOnePosition().0.num\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.5\;
+                            \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.6\ := shift_right(\BitMask::GetLeastSignificantOnePosition().0.num3\, to_integer(to_signed(1, 32)));
+                            \BitMask::GetLeastSignificantOnePosition().0.num3\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.6\;
+                            -- Returning to the repeated state of the while loop which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_7\ if the loop wasn't exited with a state change.
+                            if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_11\) then 
+                                \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_8\;
+                            end if;
                         else 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \BitMask::GetLeastSignificantOnePosition().0._State_12\ => 
-                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.6\ (have to wait 7 clock cycles in this state).
+                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ (have to wait 7 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
                         if (\BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ >= to_signed(7, 32)) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_13\;
@@ -6335,52 +6400,38 @@ begin
                         else 
                             \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ := \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.6\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ mod to_unsigned(2, 32);
+                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ mod to_unsigned(2, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \BitMask::GetLeastSignificantOnePosition().0._State_13\ => 
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.6\ = to_unsigned(0, 32);
-                        -- Clock cycles needed to complete this state (approximation): 0.3
-                    when \BitMask::GetLeastSignificantOnePosition().0._State_14\ => 
-                        -- Waiting for the result to appear in \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.10\ (have to wait 7 clock cycles in this state).
-                        -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.2\ >= to_signed(7, 32)) then 
-                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_15\;
-                            \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.2\ := to_signed(0, 32);
-                        else 
-                            \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.2\ := \BitMask::GetLeastSignificantOnePosition().0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
-                        end if;
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.10\ := \BitMask::GetLeastSignificantOnePosition().0.num3\ mod to_unsigned(2, 32);
-                        -- Clock cycles needed to complete this state (approximation): 7
-                    when \BitMask::GetLeastSignificantOnePosition().0._State_15\ => 
-                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.11\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.10\ = to_unsigned(1, 32);
-                        \BitMask::GetLeastSignificantOnePosition().0.flag2\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.11\;
+                        \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.7\ = to_unsigned(1, 32);
+                        \BitMask::GetLeastSignificantOnePosition().0.flag2\ := \BitMask::GetLeastSignificantOnePosition().0.binaryOperationResult.8\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \BitMask::GetLeastSignificantOnePosition().0._State_17\ and ends in state \BitMask::GetLeastSignificantOnePosition().0._State_17\.
-                        --     * Execution after either branch will continue in the following state: \BitMask::GetLeastSignificantOnePosition().0._State_16\.
+                        --     * The true branch starts in state \BitMask::GetLeastSignificantOnePosition().0._State_15\ and ends in state \BitMask::GetLeastSignificantOnePosition().0._State_15\.
+                        --     * Execution after either branch will continue in the following state: \BitMask::GetLeastSignificantOnePosition().0._State_14\.
 
                         if (\BitMask::GetLeastSignificantOnePosition().0.flag2\) then 
-                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_17\;
+                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_15\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_16\;
+                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \BitMask::GetLeastSignificantOnePosition().0._State_16\ => 
-                        -- State after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_15\.
+                    when \BitMask::GetLeastSignificantOnePosition().0._State_14\ => 
+                        -- State after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_13\.
                         -- Going to the state after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_3\.
-                        if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_16\) then 
+                        if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_14\) then 
                             \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \BitMask::GetLeastSignificantOnePosition().0._State_17\ => 
-                        -- True branch of the if-else started in state \BitMask::GetLeastSignificantOnePosition().0._State_15\.
+                    when \BitMask::GetLeastSignificantOnePosition().0._State_15\ => 
+                        -- True branch of the if-else started in state \BitMask::GetLeastSignificantOnePosition().0._State_13\.
                         \BitMask::GetLeastSignificantOnePosition().0.result\ := \BitMask::GetLeastSignificantOnePosition().0.num\;
                         \BitMask::GetLeastSignificantOnePosition().0.return\ <= \BitMask::GetLeastSignificantOnePosition().0.result\;
                         \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_1\;
-                        -- Going to the state after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_15\.
-                        if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_17\) then 
-                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_16\;
+                        -- Going to the state after the if-else which was started in state \BitMask::GetLeastSignificantOnePosition().0._State_13\.
+                        if (\BitMask::GetLeastSignificantOnePosition().0._State\ = \BitMask::GetLeastSignificantOnePosition().0._State_15\) then 
+                            \BitMask::GetLeastSignificantOnePosition().0._State\ := \BitMask::GetLeastSignificantOnePosition().0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -6796,7 +6847,7 @@ begin
                         if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.return.2\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::GetMostSignificantOnePosition().return.0\;
-                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.0\ := resize(\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.return.2\ - to_unsigned(1, 16), 32);
+                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.0\ := SmartResize(\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.return.2\ - to_unsigned(1, 16), 32);
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.arraye795bd01e461b0dce534a453220c7f445988b9bd9f9fb443b451fcbaf1ac12a0\(to_integer(to_signed(0, 32))) := (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.0\);
                             -- Initializing record fields to their defaults.
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.left\.\IsNull\ := false;
@@ -6930,7 +6981,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_21\ => 
                         -- False branch of the if-else started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_17\.
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.6\ := resize(signed(\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.num\ - to_unsigned(1, 16)), 32);
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.6\ := signed(SmartResize(\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.num\ - to_unsigned(1, 16), 32));
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.7\ := resize(shift_left(to_signed(1, 32), to_integer((\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.6\))), 32);
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.8\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.7\ - to_signed(1, 32);
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.right\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.binaryOperationResult.8\;
@@ -7103,7 +7154,7 @@ begin
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.exponent\;
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.fraction\;
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= False;
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= resize((\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\), 8);
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= SmartResize((\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\), 8);
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\;
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= true;
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_37\;
@@ -7358,7 +7409,7 @@ begin
                         \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\;
                         \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\;
                         \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.array8756220799ceaafd5b50dac1ff26f31915dcc57cd912ca3e7d8bfd1b17d2f16e\ := (others => to_unsigned(0, 32));
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.array8756220799ceaafd5b50dac1ff26f31915dcc57cd912ca3e7d8bfd1b17d2f16e\(to_integer(to_signed(0, 32))) := resize(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\, 32);
+                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.array8756220799ceaafd5b50dac1ff26f31915dcc57cd912ca3e7d8bfd1b17d2f16e\(to_integer(to_signed(0, 32))) := SmartResize(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\, 32);
                         -- Initializing record fields to their defaults.
                         \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object3efd49a19499cd5d8cc4aa1d852393f30b746e0ccd1de8def3509997f3c7f683\.\IsNull\ := false;
                         \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object3efd49a19499cd5d8cc4aa1d852393f30b746e0ccd1de8def3509997f3c7f683\.\Size\ := to_unsigned(0, 16);
@@ -7404,7 +7455,7 @@ begin
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.1\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,System.UInt32)
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= resize(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\, 32);
+                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= SmartResize(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\, 32);
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= true;
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\;
                         end if;
@@ -7490,7 +7541,7 @@ begin
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.6\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.6\;
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ := to_unsigned(13, 16) + \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\ := resize(signed(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ + to_unsigned(1, 16)), 32);
+                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\ := signed(SmartResize(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ + to_unsigned(1, 16), 32));
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent\;
                             \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\);
@@ -7590,18 +7641,17 @@ begin
         Variable \Unum::FractionToUintArray().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::FractionToUintArray().0.return.3\: \Lombiq.Unum.BitMask\;
         Variable \Unum::FractionToUintArray().0.binaryOperationResult.1\: boolean := false;
-        Variable \Unum::FractionToUintArray().0.binaryOperationResult.2\: boolean := false;
-        Variable \Unum::FractionToUintArray().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Unum::FractionToUintArray().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::FractionToUintArray().0.return.4\: boolean := false;
+        Variable \Unum::FractionToUintArray().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::FractionToUintArray().0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::FractionToUintArray().0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::FractionToUintArray().0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Unum::FractionToUintArray().0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Unum::FractionToUintArray().0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::FractionToUintArray().0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::FractionToUintArray().0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::FractionToUintArray().0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Unum::FractionToUintArray().0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Unum::FractionToUintArray().0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::FractionToUintArray().0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::FractionToUintArray().0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::FractionToUintArray().0.binaryOperationResult.12\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Unum::FractionToUintArray().0.binaryOperationResult.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -7622,18 +7672,17 @@ begin
                 \Unum::FractionToUintArray().0.return.2\ := to_unsigned(0, 16);
                 \Unum::FractionToUintArray().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Unum::FractionToUintArray().0.binaryOperationResult.1\ := false;
-                \Unum::FractionToUintArray().0.binaryOperationResult.2\ := false;
-                \Unum::FractionToUintArray().0.binaryOperationResult.3\ := to_signed(0, 32);
+                \Unum::FractionToUintArray().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Unum::FractionToUintArray().0.return.4\ := false;
+                \Unum::FractionToUintArray().0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Unum::FractionToUintArray().0.binaryOperationResult.4\ := to_signed(0, 32);
-                \Unum::FractionToUintArray().0.binaryOperationResult.5\ := to_signed(0, 32);
-                \Unum::FractionToUintArray().0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \Unum::FractionToUintArray().0.binaryOperationResult.5\ := to_unsigned(0, 32);
+                \Unum::FractionToUintArray().0.binaryOperationResult.6\ := to_signed(0, 32);
                 \Unum::FractionToUintArray().0.binaryOperationResult.7\ := to_signed(0, 32);
-                \Unum::FractionToUintArray().0.binaryOperationResult.8\ := to_signed(0, 32);
-                \Unum::FractionToUintArray().0.binaryOperationResult.9\ := to_unsigned(0, 32);
+                \Unum::FractionToUintArray().0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \Unum::FractionToUintArray().0.binaryOperationResult.9\ := to_signed(0, 32);
                 \Unum::FractionToUintArray().0.binaryOperationResult.10\ := to_signed(0, 32);
-                \Unum::FractionToUintArray().0.binaryOperationResult.11\ := to_signed(0, 32);
-                \Unum::FractionToUintArray().0.binaryOperationResult.12\ := to_unsigned(0, 32);
+                \Unum::FractionToUintArray().0.binaryOperationResult.11\ := to_unsigned(0, 32);
             else 
                 case \Unum::FractionToUintArray().0._State\ is 
                     when \Unum::FractionToUintArray().0._State_0\ => 
@@ -7687,7 +7736,7 @@ begin
                         if (\Unum::FractionToUintArray().0.Unum::FractionSize()._Started.0\ = \Unum::FractionToUintArray().0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::FractionToUintArray().0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::FractionToUintArray().0.return.2\ := \Unum::FractionToUintArray().0.Unum::FractionSize().return.0\;
-                            \Unum::FractionToUintArray().0.binaryOperationResult.0\ := resize(\Unum::FractionToUintArray().0.return.1\ - resize(signed(\Unum::FractionToUintArray().0.return.2\), 32), 32);
+                            \Unum::FractionToUintArray().0.binaryOperationResult.0\ := resize(\Unum::FractionToUintArray().0.return.1\ - signed(SmartResize(\Unum::FractionToUintArray().0.return.2\, 32)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::FractionToUintArray().0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::FractionToUintArray().0.return.0\;
                             \Unum::FractionToUintArray().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Unum::FractionToUintArray().0.binaryOperationResult.0\;
@@ -7704,23 +7753,17 @@ begin
                             \Unum::FractionToUintArray().0.array\ := (others => to_unsigned(0, 32));
                             \Unum::FractionToUintArray().0.i\ := to_signed(0, 32);
                             -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \Unum::FractionToUintArray().0.binaryOperationResult.1\ := \Unum::FractionToUintArray().0.i\ < resize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\), 32);
-                            if (\Unum::FractionToUintArray().0.binaryOperationResult.1\) then 
-                                \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_7\;
-                            else 
-                                \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_8\;
-                            end if;
+                            \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_7\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::FractionToUintArray().0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \Unum::FractionToUintArray().0._State_6\.
                         -- The while loop's condition:
-                        \Unum::FractionToUintArray().0.binaryOperationResult.2\ := \Unum::FractionToUintArray().0.i\ < resize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\), 32);
-                        if (\Unum::FractionToUintArray().0.binaryOperationResult.2\) then 
+                        \Unum::FractionToUintArray().0.binaryOperationResult.1\ := \Unum::FractionToUintArray().0.i\ < signed(SmartResize(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\, 32));
+                        if (\Unum::FractionToUintArray().0.binaryOperationResult.1\) then 
                             \Unum::FractionToUintArray().0.array\(to_integer(\Unum::FractionToUintArray().0.i\)) := \Unum::FractionToUintArray().0.bitMask\.\Segments\(to_integer(\Unum::FractionToUintArray().0.i\));
-                            \Unum::FractionToUintArray().0.binaryOperationResult.3\ := \Unum::FractionToUintArray().0.i\ + to_signed(1, 32);
-                            \Unum::FractionToUintArray().0.i\ := \Unum::FractionToUintArray().0.binaryOperationResult.3\;
+                            \Unum::FractionToUintArray().0.binaryOperationResult.2\ := \Unum::FractionToUintArray().0.i\ + to_signed(1, 32);
+                            \Unum::FractionToUintArray().0.i\ := \Unum::FractionToUintArray().0.binaryOperationResult.2\;
                         else 
                             \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_8\;
                         end if;
@@ -7758,11 +7801,11 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::FractionToUintArray().0._State_11\ => 
                         -- True branch of the if-else started in state \Unum::FractionToUintArray().0._State_9\.
-                        \Unum::FractionToUintArray().0.binaryOperationResult.4\ := resize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16)), 32);
-                        \Unum::FractionToUintArray().0.binaryOperationResult.5\ := resize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16)), 32);
+                        \Unum::FractionToUintArray().0.binaryOperationResult.3\ := signed(SmartResize(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16), 32));
+                        \Unum::FractionToUintArray().0.binaryOperationResult.4\ := signed(SmartResize(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16), 32));
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Unum::FractionToUintArray().0.binaryOperationResult.6\ := \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.5\))) or "10000000000000000000000000000000";
-                        \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.4\))) := \Unum::FractionToUintArray().0.binaryOperationResult.6\;
+                        \Unum::FractionToUintArray().0.binaryOperationResult.5\ := \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.4\))) or "10000000000000000000000000000000";
+                        \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.3\))) := \Unum::FractionToUintArray().0.binaryOperationResult.5\;
                         -- Going to the state after the if-else which was started in state \Unum::FractionToUintArray().0._State_9\.
                         if (\Unum::FractionToUintArray().0._State\ = \Unum::FractionToUintArray().0._State_11\) then 
                             \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_10\;
@@ -7770,14 +7813,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \Unum::FractionToUintArray().0._State_12\ => 
                         -- False branch of the if-else started in state \Unum::FractionToUintArray().0._State_9\.
-                        \Unum::FractionToUintArray().0.binaryOperationResult.7\ := resize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16)), 32);
-                        \Unum::FractionToUintArray().0.binaryOperationResult.8\ := resize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16)), 32);
-                        \Unum::FractionToUintArray().0.binaryOperationResult.9\ := shift_left(\Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.8\))), to_integer(to_signed(1, 32)));
-                        \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.7\))) := \Unum::FractionToUintArray().0.binaryOperationResult.9\;
-                        \Unum::FractionToUintArray().0.binaryOperationResult.10\ := resize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16)), 32);
-                        \Unum::FractionToUintArray().0.binaryOperationResult.11\ := resize(signed(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16)), 32);
-                        \Unum::FractionToUintArray().0.binaryOperationResult.12\ := shift_right(\Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.11\))), to_integer(to_signed(1, 32)));
-                        \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.10\))) := \Unum::FractionToUintArray().0.binaryOperationResult.12\;
+                        \Unum::FractionToUintArray().0.binaryOperationResult.6\ := signed(SmartResize(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16), 32));
+                        \Unum::FractionToUintArray().0.binaryOperationResult.7\ := signed(SmartResize(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16), 32));
+                        \Unum::FractionToUintArray().0.binaryOperationResult.8\ := shift_left(\Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.7\))), to_integer(to_signed(1, 32)));
+                        \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.6\))) := \Unum::FractionToUintArray().0.binaryOperationResult.8\;
+                        \Unum::FractionToUintArray().0.binaryOperationResult.9\ := signed(SmartResize(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16), 32));
+                        \Unum::FractionToUintArray().0.binaryOperationResult.10\ := signed(SmartResize(\Unum::FractionToUintArray().0.bitMask\.\SegmentCount\ - to_unsigned(1, 16), 32));
+                        \Unum::FractionToUintArray().0.binaryOperationResult.11\ := shift_right(\Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.10\))), to_integer(to_signed(1, 32)));
+                        \Unum::FractionToUintArray().0.array\(to_integer((\Unum::FractionToUintArray().0.binaryOperationResult.9\))) := \Unum::FractionToUintArray().0.binaryOperationResult.11\;
                         -- Going to the state after the if-else which was started in state \Unum::FractionToUintArray().0._State_9\.
                         if (\Unum::FractionToUintArray().0._State\ = \Unum::FractionToUintArray().0._State_12\) then 
                             \Unum::FractionToUintArray().0._State\ := \Unum::FractionToUintArray().0._State_10\;
@@ -8060,7 +8103,7 @@ begin
                         if (\Unum::ExponentSize().0.BitMask::GetLowest32Bits()._Started.0\ = \Unum::ExponentSize().0.BitMask::GetLowest32Bits()._Finished.0\) then 
                             \Unum::ExponentSize().0.BitMask::GetLowest32Bits()._Started.0\ <= false;
                             \Unum::ExponentSize().0.return.4\ := \Unum::ExponentSize().0.BitMask::GetLowest32Bits().return.0\;
-                            \Unum::ExponentSize().0.return\ <= resize(\Unum::ExponentSize().0.return.4\, 8);
+                            \Unum::ExponentSize().0.return\ <= SmartResize(\Unum::ExponentSize().0.return.4\, 8);
                             \Unum::ExponentSize().0._State\ := \Unum::ExponentSize().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8158,7 +8201,7 @@ begin
                         if (\Unum::FractionSize().0.BitMask::GetLowest32Bits()._Started.0\ = \Unum::FractionSize().0.BitMask::GetLowest32Bits()._Finished.0\) then 
                             \Unum::FractionSize().0.BitMask::GetLowest32Bits()._Started.0\ <= false;
                             \Unum::FractionSize().0.return.3\ := \Unum::FractionSize().0.BitMask::GetLowest32Bits().return.0\;
-                            \Unum::FractionSize().0.return\ <= resize(\Unum::FractionSize().0.return.3\, 16);
+                            \Unum::FractionSize().0.return\ <= SmartResize(\Unum::FractionSize().0.return.3\, 16);
                             \Unum::FractionSize().0._State\ := \Unum::FractionSize().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8263,7 +8306,7 @@ begin
                             \Unum::FractionMask().0.return.1\ := \Unum::FractionMask().0.Unum::FractionSize().return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::FractionMask().0.left\;
-                            \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= resize(signed(\Unum::FractionMask().0.return.1\), 32);
+                            \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= signed(SmartResize(\Unum::FractionMask().0.return.1\, 32));
                             \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::FractionMask().0._State\ := \Unum::FractionMask().0._State_6\;
                         end if;
@@ -8411,7 +8454,7 @@ begin
                             \Unum::ExponentMask().0.return.1\ := \Unum::ExponentMask().0.Unum::ExponentSize().return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::ExponentMask().0.left\;
-                            \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= resize(signed(\Unum::ExponentMask().0.return.1\), 32);
+                            \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= signed(SmartResize(\Unum::ExponentMask().0.return.1\, 32));
                             \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::ExponentMask().0._State\ := \Unum::ExponentMask().0._State_6\;
                         end if;
@@ -8443,7 +8486,7 @@ begin
                         if (\Unum::ExponentMask().0.Unum::FractionSize()._Started.0\ = \Unum::ExponentMask().0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::ExponentMask().0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::ExponentMask().0.return.4\ := \Unum::ExponentMask().0.Unum::FractionSize().return.0\;
-                            \Unum::ExponentMask().0.binaryOperationResult.0\ := resize(signed(\Unum::ExponentMask().0.return.4\ + to_unsigned(13, 16)), 32);
+                            \Unum::ExponentMask().0.binaryOperationResult.0\ := signed(SmartResize(\Unum::ExponentMask().0.return.4\ + to_unsigned(13, 16), 32));
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::ExponentMask().0.return.3\;
                             \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Unum::ExponentMask().0.binaryOperationResult.0\);
@@ -8541,7 +8584,7 @@ begin
                         if (\Unum::Exponent().0.Unum::FractionSize()._Started.0\ = \Unum::Exponent().0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::Exponent().0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::Exponent().0.return.2\ := \Unum::Exponent().0.Unum::FractionSize().return.0\;
-                            \Unum::Exponent().0.binaryOperationResult.0\ := resize(signed(to_unsigned(13, 16) + \Unum::Exponent().0.return.2\), 32);
+                            \Unum::Exponent().0.binaryOperationResult.0\ := signed(SmartResize(to_unsigned(13, 16) + \Unum::Exponent().0.return.2\, 32));
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::Exponent().0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::Exponent().0.return.1\;
                             \Unum::Exponent().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\Unum::Exponent().0.binaryOperationResult.0\);
@@ -10154,7 +10197,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.20\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.10\ := \Unum::AddExactUnums(Unum,Unum).0.return.20\ + to_unsigned(1, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.11\ := resize(signed(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.9\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.10\), 32);
+                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.11\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.9\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.10\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.right2\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.11\);
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_56\;
@@ -10184,7 +10227,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.22\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.13\ := \Unum::AddExactUnums(Unum,Unum).0.return.22\ + to_unsigned(1, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.14\ := resize(signed(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.12\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.13\), 32);
+                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.14\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.12\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.13\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.num3\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.14\);
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
@@ -10598,7 +10641,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.42\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.18\ := \Unum::AddExactUnums(Unum,Unum).0.return.42\ + to_unsigned(1, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.19\ := resize(signed(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.17\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.18\), 32);
+                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.19\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.17\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.18\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.right2\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.19\);
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_102\;
@@ -10628,7 +10671,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.44\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.21\ := \Unum::AddExactUnums(Unum,Unum).0.return.44\ + to_unsigned(1, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.22\ := resize(signed(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.20\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.21\), 32);
+                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.22\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.20\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.21\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.23\ := resize((\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.22\) - \Unum::AddExactUnums(Unum,Unum).0.num\, 32);
                             \Unum::AddExactUnums(Unum,Unum).0.num3\ := \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.23\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
@@ -10751,7 +10794,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.53\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.25\ := \Unum::AddExactUnums(Unum,Unum).0.return.53\ + to_unsigned(1, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.26\ := resize(signed(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.24\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.25\), 32);
+                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.26\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.24\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.25\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.right2\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.26\);
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_116\;
@@ -10781,7 +10824,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.55\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.28\ := \Unum::AddExactUnums(Unum,Unum).0.return.55\ + to_unsigned(1, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.29\ := resize(signed(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.27\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.28\), 32);
+                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.29\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.27\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.28\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.30\ := resize((\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.29\) + \Unum::AddExactUnums(Unum,Unum).0.num\, 32);
                             \Unum::AddExactUnums(Unum,Unum).0.num3\ := \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.30\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
@@ -10872,7 +10915,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.62\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.31\ := \Unum::AddExactUnums(Unum,Unum).0.return.62\ + to_unsigned(1, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.32\ := resize(signed(\Unum::AddExactUnums(Unum,Unum).0.return.61\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.31\), 32);
+                            \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.32\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.return.61\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.31\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.num4\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.32\);
                             -- Initializing record fields to their defaults.
                             \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\.\IsNull\ := false;
@@ -10907,7 +10950,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.return.63\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size().return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::ExponentValueToExponentBits(System.Int32,System.Byte)
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,Byte).value.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.33\;
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,Byte).size.parameter.Out.0\ <= resize(\Unum::AddExactUnums(Unum,Unum).0.return.63\, 8);
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,Byte).size.parameter.Out.0\ <= SmartResize(\Unum::AddExactUnums(Unum,Unum).0.return.63\, 8);
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,Byte)._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_129\;
                         end if;
@@ -11307,7 +11350,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32[],System.UInt16)
                         \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\ <= \Unum::ExponentValueToExponentBits(Int32,Byte).0.bitMask\;
                         \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\(0 to 0) <= \Unum::ExponentValueToExponentBits(Int32,Byte).0.arrayb13ad85d0ff1fab74968cf9635ef50690e8d16091f4b3f34e92839feb21f4e4b\;
-                        \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= resize(\Unum::ExponentValueToExponentBits(Int32,Byte).0.size\, 16);
+                        \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= SmartResize(\Unum::ExponentValueToExponentBits(Int32,Byte).0.size\, 16);
                         \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= true;
                         \Unum::ExponentValueToExponentBits(Int32,Byte).0._State\ := \Unum::ExponentValueToExponentBits(Int32,Byte).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11351,7 +11394,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32[],System.UInt16)
                         \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\ <= \Unum::ExponentValueToExponentBits(Int32,Byte).0.bitMask2\;
                         \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\(0 to 0) <= \Unum::ExponentValueToExponentBits(Int32,Byte).0.array7a549cf35ad1845b7d5eda1814cfb58f101387923beef79cb543eb08d8bec093\;
-                        \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= resize(\Unum::ExponentValueToExponentBits(Int32,Byte).0.size\, 16);
+                        \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\ <= SmartResize(\Unum::ExponentValueToExponentBits(Int32,Byte).0.size\, 16);
                         \Unum::ExponentValueToExponentBits(Int32,Byte).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\ <= true;
                         \Unum::ExponentValueToExponentBits(Int32,Byte).0._State\ := \Unum::ExponentValueToExponentBits(Int32,Byte).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -12095,7 +12138,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_2\ => 
                         \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize.parameter.In\;
-                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\ := resize(unsigned(shift_left(to_signed(1, 32), to_integer(resize(signed(\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\), 32)))), 16);
+                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\ := SmartResize(unsigned(shift_left(to_signed(1, 32), to_integer(signed(SmartResize(\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\, 32))))), 16);
                         \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\ <= (\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\);
                         \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -12217,7 +12260,7 @@ begin
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Started.0\ <= false;
                             \UnumEnvironment::.ctor(Byte,Byte).0.return.0\ := \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).return.0\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeMax\ := resize(\UnumEnvironment::.ctor(Byte,Byte).0.return.0\, 8);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeMax\ := SmartResize(\UnumEnvironment::.ctor(Byte,Byte).0.return.0\, 8);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_4\;
                         end if;
@@ -12239,7 +12282,7 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.return.1\ := \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).return.0\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.this\.\FractionSizeMax\ := \UnumEnvironment::.ctor(Byte,Byte).0.return.1\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.this\.\UnumTagSize\ := to_unsigned(13, 8);
-                            \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.0\ := resize(to_unsigned(1, 8) + \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeMax\, 16);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.0\ := SmartResize(to_unsigned(1, 8) + \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeMax\, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.1\ := resize((\UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.0\) + \UnumEnvironment::.ctor(Byte,Byte).0.this\.\FractionSizeMax\, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.2\ := \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.1\ + to_unsigned(13, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\ := \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.2\;
@@ -12619,7 +12662,7 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= false;
                             \UnumEnvironment::.ctor(Byte,Byte).0.return.18\ := \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).return.0\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.this\.\LargestNegative\ := \UnumEnvironment::.ctor(Byte,Byte).0.return.18\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.6\ := resize(signed(\UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\ - to_unsigned(1, 16)), 32);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.6\ := signed(SmartResize(\UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\ - to_unsigned(1, 16), 32));
                             \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.7\ := resize(shift_left(to_unsigned(1, 32), to_integer((\UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.6\))), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,System.UInt32)
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\LargestPositive\;
