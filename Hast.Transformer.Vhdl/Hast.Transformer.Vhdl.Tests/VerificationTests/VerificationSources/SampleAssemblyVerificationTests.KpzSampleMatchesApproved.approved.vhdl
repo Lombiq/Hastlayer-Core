@@ -1,8 +1,215 @@
+-- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware framework so they can be more easily updated.
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-library Hast;
-use Hast.SimpleMemory.all;
+
+package TypeConversion is
+	function SmartResize(input: unsigned; size: natural) return unsigned;
+	function SmartResize(input: signed; size: natural) return signed;
+	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned;
+end TypeConversion;
+		
+package body TypeConversion is
+
+	-- The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost] bit 
+	-- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
+	-- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
+	-- then the source value is truncated by discarding its “extra” most significant bits. The result is then 
+	-- treated as a value of the destination type." Thus we need to simply truncate when casting down.
+	function SmartResize(input: unsigned; size: natural) return unsigned is
+	begin
+		if (size < input'LENGTH) then
+			return input(size - 1 downto 0);
+		else
+			-- Resize() is supposed to work with little endian numbers: "When truncating, the sign bit is retained
+            -- along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
+            -- dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
+			return resize(input, size);
+		end if;
+	end SmartResize;
+
+	function SmartResize(input: signed; size: natural) return signed is
+	begin
+		if (size < input'LENGTH) then
+			return input(size - 1 downto 0);
+		else
+			return resize(input, size);
+		end if;
+	end SmartResize;
+
+	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned is
+		variable result: unsigned(size - 1 downto 0);
+	begin
+		if (input >= 0) then
+			return resize(unsigned(input), size);
+		else 
+			result := (others => '1');
+			result(input'LENGTH - 1 downto 0) := unsigned(input);
+			return result;
+		end if;
+	end ToUnsignedAndExpand;
+
+end TypeConversion;
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+		
+package SimpleMemory is
+	-- Data conversion functions:
+	function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector;
+	function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned;
+		
+	function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector;
+	function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean;
+		
+	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector;
+	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed;
+		
+	function ConvertCharToStdLogicVector(input: character) return std_logic_vector;
+	function ConvertStdLogicVectorToChar(input : std_logic_vector) return character;
+end SimpleMemory;
+		
+package body SimpleMemory is
+
+	function ConvertUInt32ToStdLogicVector(input: unsigned(31 downto 0)) return std_logic_vector is
+	begin
+		return std_logic_vector(input);
+	end ConvertUInt32ToStdLogicVector;
+	
+	function ConvertStdLogicVectorToUInt32(input : std_logic_vector) return unsigned is
+	begin
+		return unsigned(input);
+	end ConvertStdLogicVectorToUInt32;
+	
+	function ConvertBooleanToStdLogicVector(input: boolean) return std_logic_vector is 
+	begin
+		case input is
+			when true => return X"FFFFFFFF";
+			when false => return X"00000000";
+			when others => return X"00000000";
+		end case;
+	end ConvertBooleanToStdLogicVector;
+
+	function ConvertStdLogicVectorToBoolean(input : std_logic_vector) return boolean is 
+	begin
+		-- In .NET a false is all zeros while a true is at least one 1 bit (or more), so using the same logic here.
+		return not(input = X"00000000");
+	end ConvertStdLogicVectorToBoolean;
+
+	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector is
+	begin
+		return std_logic_vector(input);
+	end ConvertInt32ToStdLogicVector;
+
+	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed is
+	begin
+		return signed(input);
+	end ConvertStdLogicVectorToInt32;
+
+	function ConvertCharToStdLogicVector(input: character) return std_logic_vector is
+		variable characterIndex : integer;
+	begin
+		case input is
+			when '0' => characterIndex :=  0;
+			when '1' => characterIndex :=  1;
+			when '2' => characterIndex :=  2;
+			when '3' => characterIndex :=  3;
+			when '4' => characterIndex :=  4;
+			when '5' => characterIndex :=  5;
+			when '6' => characterIndex :=  6;
+			when '7' => characterIndex :=  7;
+			when '8' => characterIndex :=  8;
+			when '9' => characterIndex :=  9;
+			when 'A' => characterIndex := 10;
+			when 'B' => characterIndex := 11;
+			when 'C' => characterIndex := 12;
+			when 'D' => characterIndex := 13;
+			when 'E' => characterIndex := 14;
+			when 'F' => characterIndex := 15;
+			when 'G' => characterIndex := 16;
+			when 'H' => characterIndex := 17;
+			when 'I' => characterIndex := 18;
+			when 'J' => characterIndex := 19;
+			when 'K' => characterIndex := 20;
+			when 'L' => characterIndex := 21;
+			when 'M' => characterIndex := 22;
+			when 'N' => characterIndex := 23;
+			when 'O' => characterIndex := 24;
+			when 'P' => characterIndex := 25;
+			when 'Q' => characterIndex := 26;
+			when 'R' => characterIndex := 27;
+			when 'S' => characterIndex := 28;
+			when 'T' => characterIndex := 29;
+			when 'U' => characterIndex := 30;
+			when 'V' => characterIndex := 31;
+			when 'W' => characterIndex := 32;
+			when 'X' => characterIndex := 33;
+			when 'Y' => characterIndex := 34;
+			when 'Z' => characterIndex := 35;
+			when others => characterIndex := 0;
+		end case;
+			
+		return std_logic_vector(to_signed(characterIndex, 32));
+	end ConvertCharToStdLogicVector;
+
+	function ConvertStdLogicVectorToChar(input : std_logic_vector) return character is
+		variable characterIndex     : integer;
+	begin
+		characterIndex := to_integer(unsigned(input));
+		
+		case characterIndex is
+			when  0 => return '0';
+			when  1 => return '1';
+			when  2 => return '2';
+			when  3 => return '3';
+			when  4 => return '4';
+			when  5 => return '5';
+			when  6 => return '6';
+			when  7 => return '7';
+			when  8 => return '8';
+			when  9 => return '9';
+			when 10 => return 'A';
+			when 11 => return 'B';
+			when 12 => return 'C';
+			when 13 => return 'D';
+			when 14 => return 'E';
+			when 15 => return 'F';
+			when 16 => return 'G';
+			when 17 => return 'H';
+			when 18 => return 'I';
+			when 19 => return 'J';
+			when 20 => return 'K';
+			when 21 => return 'L';
+			when 22 => return 'M';
+			when 23 => return 'N';
+			when 24 => return 'O';
+			when 25 => return 'P';
+			when 26 => return 'Q';
+			when 27 => return 'R';
+			when 28 => return 'S';
+			when 29 => return 'T';
+			when 30 => return 'U';
+			when 31 => return 'V';
+			when 32 => return 'W';
+			when 33 => return 'X';
+			when 34 => return 'Y';
+			when 35 => return 'Z';
+			when others => return '?';
+		end case;
+	end ConvertStdLogicVectorToChar;
+
+end SimpleMemory;
+-- Hast_IP, logic generated from the input .NET assemblies starts here.
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library work;
+use work.TypeConversion.all;
+library work;
+use work.SimpleMemory.all;
 
 entity Hast_IP is 
     port(
@@ -422,10 +629,8 @@ begin
         Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
-        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
-        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
-        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -442,10 +647,8 @@ begin
                 \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := to_signed(0, 32);
                 \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\ := false;
-                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\ := false;
-                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\ := false;
-                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
-                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
             else 
                 case \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ is 
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_0\ => 
@@ -513,14 +716,8 @@ begin
                         -- State after the if-else which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ := to_signed(0, 32);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\ := resize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\, 64) < signed((resize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\, 64)));
-                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\) then 
-                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\;
-                        else 
-                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\ => 
                         -- True branch of the if-else started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\ := to_signed(1, 32);
@@ -540,21 +737,15 @@ begin
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\.
                         -- The while loop's condition:
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\ := resize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\, 64) < signed((resize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\, 64)));
-                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\) then 
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\, 64) < signed((SmartResize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\, 64)));
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\) then 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := to_signed(0, 32);
                             -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ < \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\;
-                            if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\) then 
-                                \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\;
-                            else 
-                                \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\;
-                            end if;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\;
                         else 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\ => 
                         -- State after the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\.
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
@@ -565,8 +756,8 @@ begin
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\.
                         -- The while loop's condition:
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ < \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\;
-                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\) then 
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ < \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\;
+                        if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\) then 
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean)
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\;
@@ -578,8 +769,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\ => 
                         -- State after the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\.
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ + to_signed(1, 32);
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.5\;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ + to_signed(1, 32);
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\ if the loop wasn't exited with a state change.
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\) then 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\;
@@ -590,8 +781,8 @@ begin
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\) then 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ <= false;
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.In.0\;
-                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.4\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ + to_signed(1, 32);
-                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.4\;
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ + to_signed(1, 32);
+                            \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\ if the loop wasn't exited with a state change.
                             if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_12\) then 
                                 \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\;
@@ -764,7 +955,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := resize(shift_left(resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(to_signed(32, 32))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(to_signed(32, 32))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
                         end if;
@@ -781,7 +972,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64), 64);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\;
@@ -799,7 +990,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := resize(shift_left(resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(to_signed(32, 32))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(to_signed(32, 32))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\;
                         end if;
@@ -816,7 +1007,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or resize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64), 64);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState2\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\;
@@ -912,14 +1103,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::GetNextRandom1().0._State_2\ => 
                         \KpzKernels::GetNextRandom1().0.this\ := \KpzKernels::GetNextRandom1().0.this.parameter.In\;
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\ := resize(shift_right(\KpzKernels::GetNextRandom1().0.this\.\randomState1\, to_integer(to_signed(32, 32))), 32);
+                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom1().0.this\.\randomState1\, to_integer(to_signed(32, 32))), 32);
                         \KpzKernels::GetNextRandom1().0.num\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.0\);
                         -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\ := resize(\KpzKernels::GetNextRandom1().0.this\.\randomState1\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
+                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\ := SmartResize(\KpzKernels::GetNextRandom1().0.this\.\randomState1\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
                         \KpzKernels::GetNextRandom1().0.num2\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.1\);
                         -- Since the integer literal 18446744073709467675 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111101011100000011011).
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ := resize(resize(\KpzKernels::GetNextRandom1().0.num2\, 64) * "1111111111111111111111111111111111111111111111101011100000011011", 64);
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\ := resize(\KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ + resize(\KpzKernels::GetNextRandom1().0.num\, 64), 64);
+                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ := resize(SmartResize(\KpzKernels::GetNextRandom1().0.num2\, 64) * "1111111111111111111111111111111111111111111111101011100000011011", 64);
+                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\ := resize(\KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ + SmartResize(\KpzKernels::GetNextRandom1().0.num\, 64), 64);
                         \KpzKernels::GetNextRandom1().0.this\.\randomState1\ := \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\;
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom1().0.num2\ xor \KpzKernels::GetNextRandom1().0.num\;
                         \KpzKernels::GetNextRandom1().0.return\ <= \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\;
@@ -980,14 +1171,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::GetNextRandom2().0._State_2\ => 
                         \KpzKernels::GetNextRandom2().0.this\ := \KpzKernels::GetNextRandom2().0.this.parameter.In\;
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\ := resize(shift_right(\KpzKernels::GetNextRandom2().0.this\.\randomState2\, to_integer(to_signed(32, 32))), 32);
+                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom2().0.this\.\randomState2\, to_integer(to_signed(32, 32))), 32);
                         \KpzKernels::GetNextRandom2().0.num\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.0\);
                         -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\ := resize(\KpzKernels::GetNextRandom2().0.this\.\randomState2\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
+                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\ := SmartResize(\KpzKernels::GetNextRandom2().0.this\.\randomState2\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
                         \KpzKernels::GetNextRandom2().0.num2\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.1\);
                         -- Since the integer literal 18446744073709467675 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111101011100000011011).
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ := resize(resize(\KpzKernels::GetNextRandom2().0.num2\, 64) * "1111111111111111111111111111111111111111111111101011100000011011", 64);
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\ := resize(\KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ + resize(\KpzKernels::GetNextRandom2().0.num\, 64), 64);
+                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ := resize(SmartResize(\KpzKernels::GetNextRandom2().0.num2\, 64) * "1111111111111111111111111111111111111111111111101011100000011011", 64);
+                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\ := resize(\KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ + SmartResize(\KpzKernels::GetNextRandom2().0.num\, 64), 64);
                         \KpzKernels::GetNextRandom2().0.this\.\randomState2\ := \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\;
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom2().0.num2\ xor \KpzKernels::GetNextRandom2().0.num\;
                         \KpzKernels::GetNextRandom2().0.return\ <= \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\;
@@ -1347,12 +1538,10 @@ begin
         Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
-        Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
-        Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
+        Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1367,12 +1556,10 @@ begin
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\ := to_signed(0, 32);
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.1\ := false;
-                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ := false;
-                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\ := false;
+                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
-                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
             else 
                 case \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ is 
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_0\ => 
@@ -1398,32 +1585,20 @@ begin
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.In\;
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ := to_signed(0, 32);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_2\.
+                        -- The while loop's condition:
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.0\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ < to_signed(8, 32);
                         if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.0\) then 
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\;
+                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ := to_signed(0, 32);
+                            -- Starting a while loop.
+                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_5\;
                         else 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_2\.
-                        -- The while loop's condition:
-                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ < to_signed(8, 32);
-                        if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.1\) then 
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ := to_signed(0, 32);
-                            -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ < to_signed(8, 32);
-                            if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\) then 
-                                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_5\;
-                            else 
-                                \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\;
-                            end if;
-                        else 
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_4\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_2\.
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_1\;
@@ -1431,11 +1606,11 @@ begin
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
-                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ < to_signed(8, 32);
-                        if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\) then 
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\ := resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ * to_signed(8, 32), 32);
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\ + \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\;
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.5\;
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ < to_signed(8, 32);
+                        if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.1\) then 
+                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ := resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ * to_signed(8, 32), 32);
+                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ + \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\;
+                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\;
                             -- Begin SimpleMemory write.
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\, 32);
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -1447,8 +1622,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\.
-                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ + to_signed(1, 32);
-                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.7\;
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ + to_signed(1, 32);
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_2\ if the loop wasn't exited with a state change.
                         if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ = \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\) then 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\;
@@ -1459,8 +1634,8 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.6\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ + to_signed(1, 32);
-                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.6\;
+                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ + to_signed(1, 32);
+                            \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
                             if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ = \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_7\) then 
                                 \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_5\;
@@ -1483,13 +1658,11 @@ begin
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
-        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
-        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
+        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
-        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1504,12 +1677,10 @@ begin
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\ := to_signed(0, 32);
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.1\ := false;
-                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ := false;
-                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\ := false;
+                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
-                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 32);
             else 
                 case \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ is 
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_0\ => 
@@ -1535,32 +1706,20 @@ begin
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.In\;
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ := to_signed(0, 32);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_2\.
+                        -- The while loop's condition:
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.0\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ < to_signed(8, 32);
                         if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.0\) then 
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\;
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ := to_signed(0, 32);
+                            -- Starting a while loop.
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_5\;
                         else 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_2\.
-                        -- The while loop's condition:
-                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ < to_signed(8, 32);
-                        if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.1\) then 
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ := to_signed(0, 32);
-                            -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ < to_signed(8, 32);
-                            if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\) then 
-                                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_5\;
-                            else 
-                                \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\;
-                            end if;
-                        else 
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_4\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_2\.
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_1\;
@@ -1568,11 +1727,11 @@ begin
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
-                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ < to_signed(8, 32);
-                        if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\) then 
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ := resize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ * to_signed(8, 32), 32);
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ + \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\;
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\;
+                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ < to_signed(8, 32);
+                        if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.1\) then 
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ := resize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ * to_signed(8, 32), 32);
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ + \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\;
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\;
                             -- Begin SimpleMemory read.
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\, 32);
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -1583,8 +1742,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\.
-                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ + to_signed(1, 32);
-                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.7\;
+                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ + to_signed(1, 32);
+                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_2\ if the loop wasn't exited with a state change.
                         if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ = \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\) then 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\;
@@ -1597,8 +1756,8 @@ begin
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this\.\gridRaw\(to_integer(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\)) := ConvertStdLogicVectorToUInt32(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\);
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.6\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ + to_signed(1, 32);
-                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.6\;
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ + to_signed(1, 32);
+                            \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
                             if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ = \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_7\) then 
                                 \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_5\;
