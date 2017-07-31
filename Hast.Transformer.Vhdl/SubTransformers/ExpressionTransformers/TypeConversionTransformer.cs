@@ -196,35 +196,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 result.IsResized = true;
 
-                // Resize() is supposed to work with little endian numbers: "When truncating, the sign bit is retained
-                // along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
-                // dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
-
-                var resizeInvocation =  new Invocation
+                // There needs to be some decision logic on size in SmartResize() because sometimes the sizes in VHDL
+                // won't be the same as in .NET due to type handling.
+                return new Invocation
                 {
+                    Target = "SmartResize".ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>
                         {
                             { parameter },
                             { toSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
                         }
                 };
-
-                // The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost]
-                // bit positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along 
-                // with the rightmost part.") when casting to a smaller type: "If the source type is larger than the 
-                // destination type, then the source value is truncated by discarding its “extra” most significant bits.
-                // The result is then treated as a value of the destination type." Thus we need to simply truncate when
-                // casting down.
-                if (fromSize < toSize)
-                {
-                    resizeInvocation.Target = "resize".ToVhdlIdValue();
-                }
-                else
-                {
-                    resizeInvocation.Target = "Truncate".ToVhdlIdValue();
-                }
-
-                return resizeInvocation;
             };
 
 
