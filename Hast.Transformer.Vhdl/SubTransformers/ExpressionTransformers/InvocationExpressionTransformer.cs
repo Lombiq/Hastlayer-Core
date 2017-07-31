@@ -159,6 +159,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                         new ArraySlice
                                         {
                                             ArrayReference = (IDataObject)variableToConvert,
+                                            IsDownTo = true,
                                             IndexFrom = indexFrom,
                                             IndexTo = indexTo
                                         }
@@ -169,7 +170,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         {
                             DataType = ArrayHelper.CreateArrayInstantiation(KnownDataTypes.UInt8, 4),
                             EvaluatedContent = new InlineBlock(
-                                createSlice(0, 7), createSlice(8, 15), createSlice(16, 23), createSlice(24, 31))
+                                createSlice(7, 0), createSlice(15, 8), createSlice(23, 16), createSlice(31, 24))
                         };
                     }
 
@@ -183,14 +184,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     var arrayReference = (IDataObject)invocationParameters[1].Reference;
 
-                    Action<int, int, int> addSlice = (indexFrom, indexTo, elementIndex) =>
+                    Action<int> addSlice = elementIndex =>
                         currentBlock.Add(new Assignment
                         {
                             AssignTo = new ArraySlice
                             {
                                 ArrayReference = dataOutReference,
-                                IndexFrom = indexFrom,
-                                IndexTo = indexTo
+                                IsDownTo = true,
+                                IndexFrom = (elementIndex + 1) * 8 - 1,
+                                IndexTo = elementIndex * 8
                             },
                             // The data to write is conventionally the second parameter.
                             Expression = new Invocation
@@ -207,10 +209,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             }
                         });
 
-                    addSlice(0, 7, 0);
-                    addSlice(8, 15, 1);
-                    addSlice(16, 23, 2);
-                    addSlice(24, 31, 3);
+                    // Arrays smaller than 4 elements can be written with Write4Bytes(), so need to take care of them.
+                    var arrayLength = 
+                        context.TransformationContext.ArraySizeHolder.GetSizeOrThrow(expression.Arguments.Skip(1).First())
+                        .Length;
+                    for (int i = 0; i < arrayLength; i++)
+                    {
+                        addSlice(i);
+                    }
                 }
                 else
                 {
@@ -320,7 +326,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                         // This array originally stored the Task<T> objects but now is just for the results, so we have 
                         // to move the results to its elements.
-                        var targetMethod = context.Scope.TaskVariableNameToDisplayClassMethodMappings[taskArrayIdentifier];
+                        MethodDeclaration targetMethod;
+                        if (!context.Scope.TaskVariableNameToDisplayClassMethodMappings.TryGetValue(taskArrayIdentifier, out targetMethod))
+                        {
+                            throw new InvalidOperationException(
+                                "You declared a Task array with the name \"" + taskArrayIdentifier +
+                                "\" but didn't actually start any tasks. Temporarily remove/comment out the array if you'll only use it in the future."
+                                .AddParentEntityName(expression));
+                        }
                         var resultReferences = _stateMachineInvocationBuilder.BuildMultiInvocationWait(
                             targetMethod,
                             context.TransformationContext.GetTransformerConfiguration()

@@ -35,7 +35,7 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             await _host.Run<ITransformer>(async transformer =>
             {
-                var topModule = (await TransformClassStrutureExamplesToVhdl(transformer)).VhdlManifestIfFresh.TopModule;
+                var topModule = (Module)(await TransformClassStrutureExamplesToVhdl(transformer)).VhdlManifestIfFresh.Modules.Last();
 
                 var architecture = topModule.Architecture;
                 architecture.Name.ShouldNotBeNullOrEmpty();

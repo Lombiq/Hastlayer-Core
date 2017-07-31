@@ -1,6 +1,47 @@
+-- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware framework so they can be more easily updated.
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+package TypeConversion is
+	function Truncate(input: unsigned; size: natural) return unsigned;
+	function Truncate(input: signed; size: natural) return signed;
+	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned;
+end TypeConversion;
+		
+package body TypeConversion is
+
+	function Truncate(input: unsigned; size: natural) return unsigned is
+	begin
+		return input(size - 1 downto 0);
+	end Truncate;
+
+	function Truncate(input: signed; size: natural) return signed is
+	begin
+		return input(size - 1 downto 0);
+	end Truncate;
+
+	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned is
+		variable result: unsigned(size - 1 downto 0);
+	begin
+		if (input >= 0) then
+			return resize(unsigned(input), size);
+		else 
+			result := (others => '1');
+			result(input'LENGTH - 1 downto 0) := unsigned(input);
+			return result;
+		end if;
+	end ToUnsignedAndExpand;
+
+end TypeConversion;
+
+-- Hast_IP, logic generated from the input .NET assemblies starts here.
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library work;
+use work.TypeConversion.all;
 
 entity Hast_IP is 
     port(
@@ -1624,8 +1665,13 @@ begin
         Variable \CastingCases::NumberCasting(Int16,Int16).0.b\: signed(15 downto 0) := to_signed(0, 16);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.num\: signed(15 downto 0) := to_signed(0, 16);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.b2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.b3\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.num4\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1636,8 +1682,13 @@ begin
                 \CastingCases::NumberCasting(Int16,Int16).0.b\ := to_signed(0, 16);
                 \CastingCases::NumberCasting(Int16,Int16).0.num\ := to_signed(0, 16);
                 \CastingCases::NumberCasting(Int16,Int16).0.num2\ := to_signed(0, 32);
-                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := to_signed(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.b2\ := to_unsigned(0, 8);
+                \CastingCases::NumberCasting(Int16,Int16).0.b3\ := to_signed(0, 8);
+                \CastingCases::NumberCasting(Int16,Int16).0.num3\ := to_unsigned(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.num4\ := to_signed(0, 64);
+                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := to_signed(0, 64);
             else 
                 case \CastingCases::NumberCasting(Int16,Int16).0._State\ is 
                     when \CastingCases::NumberCasting(Int16,Int16).0._State_0\ => 
@@ -1660,12 +1711,17 @@ begin
                     when \CastingCases::NumberCasting(Int16,Int16).0._State_2\ => 
                         \CastingCases::NumberCasting(Int16,Int16).0.a\ := \CastingCases::NumberCasting(Int16,Int16).0.a.parameter.In\;
                         \CastingCases::NumberCasting(Int16,Int16).0.b\ := \CastingCases::NumberCasting(Int16,Int16).0.b.parameter.In\;
-                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 16);
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := signed(resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32));
                         \CastingCases::NumberCasting(Int16,Int16).0.num\ := \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\;
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
+                        \CastingCases::NumberCasting(Int16,Int16).0.b2\ := Truncate(unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\), 8);
+                        \CastingCases::NumberCasting(Int16,Int16).0.b3\ := Truncate(\CastingCases::NumberCasting(Int16,Int16).0.a\, 8);
+                        \CastingCases::NumberCasting(Int16,Int16).0.num3\ := unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\);
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := resize(signed(ToUnsignedAndExpand(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64) * unsigned((resize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64)))), 64);
+                        \CastingCases::NumberCasting(Int16,Int16).0.num4\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\);
                         \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                 end case;
             end if;
         end if;
@@ -2386,10 +2442,9 @@ begin
         Variable \LoopCases::BreakInLoop(Int32).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \LoopCases::BreakInLoop(Int32).0.flag\: boolean := false;
         Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\: boolean := false;
-        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\: boolean := false;
-        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\: boolean := false;
-        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\: boolean := false;
+        Variable \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2401,10 +2456,9 @@ begin
                 \LoopCases::BreakInLoop(Int32).0.i\ := to_signed(0, 32);
                 \LoopCases::BreakInLoop(Int32).0.flag\ := false;
                 \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\ := false;
-                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\ := false;
-                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\ := false;
-                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\ := false;
+                \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
             else 
                 case \LoopCases::BreakInLoop(Int32).0._State\ is 
                     when \LoopCases::BreakInLoop(Int32).0._State_0\ => 
@@ -2429,23 +2483,17 @@ begin
                         \LoopCases::BreakInLoop(Int32).0.num\ := \LoopCases::BreakInLoop(Int32).0.input\;
                         \LoopCases::BreakInLoop(Int32).0.i\ := to_signed(0, 32);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\ := \LoopCases::BreakInLoop(Int32).0.i\ < \LoopCases::BreakInLoop(Int32).0.input\;
-                        if (\LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\) then 
-                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_3\;
-                        else 
-                            \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \LoopCases::BreakInLoop(Int32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoop(Int32).0._State_2\.
                         -- The while loop's condition:
-                        \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\ := \LoopCases::BreakInLoop(Int32).0.i\ < \LoopCases::BreakInLoop(Int32).0.input\;
-                        if (\LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\) then 
-                            \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\ := \LoopCases::BreakInLoop(Int32).0.num\ + \LoopCases::BreakInLoop(Int32).0.i\;
-                            \LoopCases::BreakInLoop(Int32).0.num\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\;
-                            \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\ := \LoopCases::BreakInLoop(Int32).0.num\ > to_signed(10, 32);
-                            \LoopCases::BreakInLoop(Int32).0.flag\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\;
+                        \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\ := \LoopCases::BreakInLoop(Int32).0.i\ < \LoopCases::BreakInLoop(Int32).0.input\;
+                        if (\LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\) then 
+                            \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\ := \LoopCases::BreakInLoop(Int32).0.num\ + \LoopCases::BreakInLoop(Int32).0.i\;
+                            \LoopCases::BreakInLoop(Int32).0.num\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\;
+                            \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\ := \LoopCases::BreakInLoop(Int32).0.num\ > to_signed(10, 32);
+                            \LoopCases::BreakInLoop(Int32).0.flag\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \LoopCases::BreakInLoop(Int32).0._State_6\ and ends in state \LoopCases::BreakInLoop(Int32).0._State_6\.
@@ -2467,8 +2515,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \LoopCases::BreakInLoop(Int32).0._State_5\ => 
                         -- State after the if-else which was started in state \LoopCases::BreakInLoop(Int32).0._State_3\.
-                        \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.4\ := \LoopCases::BreakInLoop(Int32).0.i\ + to_signed(1, 32);
-                        \LoopCases::BreakInLoop(Int32).0.i\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.4\;
+                        \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\ := \LoopCases::BreakInLoop(Int32).0.i\ + to_signed(1, 32);
+                        \LoopCases::BreakInLoop(Int32).0.i\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\;
                         -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoop(Int32).0._State_2\ if the loop wasn't exited with a state change.
                         if (\LoopCases::BreakInLoop(Int32).0._State\ = \LoopCases::BreakInLoop(Int32).0._State_5\) then 
                             \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_3\;
@@ -2500,12 +2548,10 @@ begin
         Variable \LoopCases::BreakInLoopInLoop(Int32).0.flag\: boolean := false;
         Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\: boolean := false;
         Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\: boolean := false;
-        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\: boolean := false;
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\: boolean := false;
         Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\: boolean := false;
-        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2519,12 +2565,10 @@ begin
                 \LoopCases::BreakInLoopInLoop(Int32).0.flag\ := false;
                 \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\ := false;
                 \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\ := false;
-                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\ := false;
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\ := false;
                 \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\ := to_signed(0, 32);
-                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\ := false;
-                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\ := to_signed(0, 32);
-                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\ := to_signed(0, 32);
+                \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\ := to_signed(0, 32);
             else 
                 case \LoopCases::BreakInLoopInLoop(Int32).0._State\ is 
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_0\ => 
@@ -2549,32 +2593,20 @@ begin
                         \LoopCases::BreakInLoopInLoop(Int32).0.num\ := \LoopCases::BreakInLoopInLoop(Int32).0.input\;
                         \LoopCases::BreakInLoopInLoop(Int32).0.i\ := to_signed(0, 32);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
+                        \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\.
+                        -- The while loop's condition:
                         \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ < \LoopCases::BreakInLoopInLoop(Int32).0.input\;
                         if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\) then 
-                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_3\;
+                            \LoopCases::BreakInLoopInLoop(Int32).0.j\ := to_signed(0, 32);
+                            -- Starting a while loop.
+                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_5\;
                         else 
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \LoopCases::BreakInLoopInLoop(Int32).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\.
-                        -- The while loop's condition:
-                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ < \LoopCases::BreakInLoopInLoop(Int32).0.input\;
-                        if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\) then 
-                            \LoopCases::BreakInLoopInLoop(Int32).0.j\ := to_signed(0, 32);
-                            -- Starting a while loop.
-                            -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                            \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ < \LoopCases::BreakInLoopInLoop(Int32).0.i\;
-                            if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\) then 
-                                \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_5\;
-                            else 
-                                \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_6\;
-                            end if;
-                        else 
-                            \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_4\ => 
                         -- State after the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\.
                         \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_1\;
@@ -2582,12 +2614,12 @@ begin
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\.
                         -- The while loop's condition:
-                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ < \LoopCases::BreakInLoopInLoop(Int32).0.i\;
-                        if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\) then 
-                            \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\ := \LoopCases::BreakInLoopInLoop(Int32).0.num\ + \LoopCases::BreakInLoopInLoop(Int32).0.i\;
-                            \LoopCases::BreakInLoopInLoop(Int32).0.num\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\;
-                            \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\ := \LoopCases::BreakInLoopInLoop(Int32).0.num\ > to_signed(10, 32);
-                            \LoopCases::BreakInLoopInLoop(Int32).0.flag\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\;
+                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ < \LoopCases::BreakInLoopInLoop(Int32).0.i\;
+                        if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\) then 
+                            \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\ := \LoopCases::BreakInLoopInLoop(Int32).0.num\ + \LoopCases::BreakInLoopInLoop(Int32).0.i\;
+                            \LoopCases::BreakInLoopInLoop(Int32).0.num\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\;
+                            \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\ := \LoopCases::BreakInLoopInLoop(Int32).0.num\ > to_signed(10, 32);
+                            \LoopCases::BreakInLoopInLoop(Int32).0.flag\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \LoopCases::BreakInLoopInLoop(Int32).0._State_8\ and ends in state \LoopCases::BreakInLoopInLoop(Int32).0._State_8\.
@@ -2605,8 +2637,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_6\ => 
                         -- State after the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\.
-                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ + to_signed(1, 32);
-                        \LoopCases::BreakInLoopInLoop(Int32).0.i\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.7\;
+                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ + to_signed(1, 32);
+                        \LoopCases::BreakInLoopInLoop(Int32).0.i\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\ if the loop wasn't exited with a state change.
                         if (\LoopCases::BreakInLoopInLoop(Int32).0._State\ = \LoopCases::BreakInLoopInLoop(Int32).0._State_6\) then 
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_3\;
@@ -2614,8 +2646,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_7\ => 
                         -- State after the if-else which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
-                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ + to_signed(1, 32);
-                        \LoopCases::BreakInLoopInLoop(Int32).0.j\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.6\;
+                        \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ + to_signed(1, 32);
+                        \LoopCases::BreakInLoopInLoop(Int32).0.j\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\;
                         -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\ if the loop wasn't exited with a state change.
                         if (\LoopCases::BreakInLoopInLoop(Int32).0._State\ = \LoopCases::BreakInLoopInLoop(Int32).0._State_7\) then 
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_5\;
@@ -3525,9 +3557,8 @@ begin
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\: boolean := false;
-        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\: boolean := false;
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
-        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.0\: boolean := false;
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.1\: boolean := false;
         Variable \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.2\: boolean := false;
@@ -3551,9 +3582,8 @@ begin
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := to_unsigned(0, 32);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\ := to_signed(0, 32);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\ := false;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\ := false;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ := 0;
-                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.0\ := false;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.1\ := false;
                 \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.2\ := false;
@@ -3585,19 +3615,13 @@ begin
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\ := (others => false);
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := to_unsigned(0, 32);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ < to_unsigned(3, 32);
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\) then 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_3\;
-                        else 
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_2\.
                         -- The while loop's condition:
-                        \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ < to_unsigned(3, 32);
-                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\) then 
+                        \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ < to_unsigned(3, 32);
+                        if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\) then 
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\ := signed(\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\);
                             -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32)
                             case \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ is 
@@ -3612,8 +3636,8 @@ begin
                                     \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ <= true;
                             end case;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ + 1;
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.2\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ + to_unsigned(1, 32);
-                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.2\;
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ + to_unsigned(1, 32);
+                            \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\;
                         else 
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_4\;
                         end if;
@@ -3669,9 +3693,8 @@ begin
         Variable \ParallelCases::ObjectUsingTasks(UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases::ObjectUsingTasks(UInt32).0.arg_4B_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.0\: boolean := false;
-        Variable \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\: boolean := false;
         Variable \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).invocationIndex\: integer range 0 to 2 := 0;
-        Variable \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases::ObjectUsingTasks(UInt32).0.return.0\: boolean := false;
         Variable \ParallelCases::ObjectUsingTasks(UInt32).0.return.1\: boolean := false;
         Variable \ParallelCases::ObjectUsingTasks(UInt32).0.return.2\: boolean := false;
@@ -3692,9 +3715,8 @@ begin
                 \ParallelCases::ObjectUsingTasks(UInt32).0.num\ := to_unsigned(0, 32);
                 \ParallelCases::ObjectUsingTasks(UInt32).0.arg_4B_1\ := to_signed(0, 32);
                 \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.0\ := false;
-                \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\ := false;
                 \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).invocationIndex\ := 0;
-                \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ParallelCases::ObjectUsingTasks(UInt32).0.return.0\ := false;
                 \ParallelCases::ObjectUsingTasks(UInt32).0.return.1\ := false;
                 \ParallelCases::ObjectUsingTasks(UInt32).0.return.2\ := false;
@@ -3723,19 +3745,13 @@ begin
                         \ParallelCases::ObjectUsingTasks(UInt32).0.array\ := (others => false);
                         \ParallelCases::ObjectUsingTasks(UInt32).0.num\ := to_unsigned(0, 32);
                         -- Starting a while loop.
-                        -- The while loop's condition (also added here to be able to branch off early if the loop body shouldn't be executed at all):
-                        \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.0\ := \ParallelCases::ObjectUsingTasks(UInt32).0.num\ < to_unsigned(3, 32);
-                        if (\ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.0\) then 
-                            \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_3\;
-                        else 
-                            \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
+                        \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::ObjectUsingTasks(UInt32).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \ParallelCases::ObjectUsingTasks(UInt32).0._State_2\.
                         -- The while loop's condition:
-                        \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\ := \ParallelCases::ObjectUsingTasks(UInt32).0.num\ < to_unsigned(3, 32);
-                        if (\ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\) then 
+                        \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.0\ := \ParallelCases::ObjectUsingTasks(UInt32).0.num\ < to_unsigned(3, 32);
+                        if (\ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.0\) then 
                             \ParallelCases::ObjectUsingTasks(UInt32).0.arg_4B_1\ := signed(\ParallelCases::ObjectUsingTasks(UInt32).0.num\);
                             -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(System.UInt32)
                             case \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).invocationIndex\ is 
@@ -3750,8 +3766,8 @@ begin
                                     \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32)._Started.2\ <= true;
                             end case;
                             \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).invocationIndex\ := \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).invocationIndex\ + 1;
-                            \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.2\ := \ParallelCases::ObjectUsingTasks(UInt32).0.num\ + to_unsigned(1, 32);
-                            \ParallelCases::ObjectUsingTasks(UInt32).0.num\ := \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.2\;
+                            \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\ := \ParallelCases::ObjectUsingTasks(UInt32).0.num\ + to_unsigned(1, 32);
+                            \ParallelCases::ObjectUsingTasks(UInt32).0.num\ := \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\;
                         else 
                             \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_4\;
                         end if;

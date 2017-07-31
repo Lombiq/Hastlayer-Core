@@ -29,8 +29,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
-            bool isLeft, 
-            IVhdlTransformationContext context);
+            bool isLeft,
+            ISubTransformerContext contex);
 
         IAssignmentTypeConversionResult ImplementTypeConversionForAssignment(
             DataType fromType, 

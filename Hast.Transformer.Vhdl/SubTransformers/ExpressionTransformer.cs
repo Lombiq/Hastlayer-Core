@@ -32,8 +32,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IRecordComposer _recordComposer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
-        public ILogger Logger { get; set; }
-
 
         public ExpressionTransformer(
             ITypeConverter typeConverter,
@@ -55,8 +53,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
             _recordComposer = recordComposer;
             _declarableTypeCreator = declarableTypeCreator;
-
-            Logger = NullLogger.Instance;
         }
 
 
@@ -74,7 +70,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         binaryExpression,
                         reference,
                         binaryExpression.Left == expression,
-                        context.TransformationContext);
+                        context);
             };
 
 
@@ -222,11 +218,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return Empty.Instance;
                     }
                     // Handling shorthand Task starts like:
-                    // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool> (this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
+                    // array[i] = Task.Factory.StartNew<bool>(new Func<object, bool>(this.<ParallelizedArePrimeNumbers2>b__9_0), num3);
                     else if (assignment.Right.Is<InvocationExpression>(invocation =>
                         invocation.Target.Is<MemberReferenceExpression>(memberReference =>
                             memberReference.MemberName == "StartNew" &&
-                            memberReference.Target.GetFullName().Contains("System.Threading.Tasks.Task::Factory")) &&
+                            // Need unified property name because it can also be get_Factory().
+                            memberReference.Target.GetFullNameWithUnifiedPropertyName().Contains("System.Threading.Tasks.Task.Factory")) &&
                         invocation.Arguments.First().Is<ObjectCreateExpression>(objectCreate =>
                             objectCreate.Type.GetFullName().Contains("Func")),
                         out invocationExpression))
@@ -582,7 +579,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // To avoid double-casting of binary expression results BinaryOperatorExpressionTransformer also checks
                 // if the parent is a cast. So then no need to cast again.
-                if (castExpression.Expression is BinaryOperatorExpression || 
+                if (castExpression.Expression is BinaryOperatorExpression ||
                     castExpression.Expression.Is<ParenthesizedExpression>(parenthesized => parenthesized.Expression is BinaryOperatorExpression))
                 {
                     return innerExpressionResult;
@@ -607,7 +604,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .ImplementTypeConversion(fromType, toType, innerExpressionResult);
                 if (typeConversionResult.IsLossy)
                 {
-                    Logger.Warning(
+                    scope.Warnings.AddWarning(
+                        "LossyCast",
                         "A cast from " + fromType.ToVhdl() + " to " + toType.ToVhdl() +
                         " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
                         expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
@@ -798,7 +796,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var fieldInitializer = fieldDeclaration.Variables.Single().Initializer;
                     if (fieldInitializer != Expression.Null)
                     {
-                        initializationValue = (Value)Transform(fieldInitializer, context);
+                        initializationValue = Transform(fieldInitializer, context) as Value;
                     }
                 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
@@ -28,6 +29,16 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             _typeDeclarationLookupTable = constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable;
         }
 
+
+        public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
+        {
+            base.VisitAssignmentExpression(assignmentExpression);
+
+            if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression))
+            {
+                _arraySizeHolder.SetSize(assignmentExpression.Left, 4);
+            }
+        }
 
         public override void VisitPrimitiveExpression(PrimitiveExpression primitiveExpression)
         {
@@ -156,7 +167,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     invocationParameterHandler: processParent,
                     objectCreationParameterHandler: processParent,
                     variableInitializerHandler: processParent,
-                    returnStatementHandler: returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()));
+                    returnStatementHandler: returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()),
+                    namedExpressionHandler: processParent);
             }
             else
             {
@@ -197,7 +209,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 invocationParameterHandler: processParent,
                 objectCreationParameterHandler: processParent,
                 variableInitializerHandler: processParent,
-                returnStatementHandler: returnStatement => _arraySizeHolder.SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength));
+                returnStatementHandler: returnStatement => _arraySizeHolder
+                    .SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength),
+                namedExpressionHandler: processParent);
         }
 
 
@@ -208,7 +222,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             Action<ParameterDeclaration> invocationParameterHandler,
             Action<ParameterDeclaration> objectCreationParameterHandler,
             Action<VariableInitializer> variableInitializerHandler,
-            Action<ReturnStatement> returnStatementHandler)
+            Action<ReturnStatement> returnStatementHandler,
+            Action<NamedExpression> namedExpressionHandler)
         {
             var parent = node.Parent;
 
@@ -258,6 +273,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             else if (parent is ReturnStatement)
             {
                 returnStatementHandler((ReturnStatement)parent);
+                updateHiddenlyUpdatedNodesUpdated(parent);
+            }
+            else if (parent is NamedExpression)
+            {
+                // NamedExpressions are used in object initializers, e.g. new MyClass { Property = true }.
+                namedExpressionHandler((NamedExpression)parent);
                 updateHiddenlyUpdatedNodesUpdated(parent);
             }
         }

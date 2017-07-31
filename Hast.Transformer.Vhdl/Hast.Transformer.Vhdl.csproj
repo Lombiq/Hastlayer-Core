@@ -96,6 +96,7 @@
     <Compile Include="Extensions\DeviceDriverSelectorExtensions.cs" />
     <Compile Include="Extensions\ParameterDeclarationExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TransformationWarningEnumerableExtensions.cs" />
     <Compile Include="Helpers\BinaryChainBuilder.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\RecordHelper.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="Services\TransformedVhdlManifestBuilder.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryArchitectureComponentExtensions.cs" />
     <Compile Include="Constants\CommonPortNames.cs" />
-    <Compile Include="Constants\GeneratedCodeOverviewComment.cs" />
+    <Compile Include="Constants\LongGeneratedCodeComments.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryPortNames.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryTypes.cs" />
     <Compile Include="Extensions\VhdlTransformationContextExtensions.cs" />
@@ -187,6 +188,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
+    <EmbeddedResource Include="VhdlLibraries\TypeConversion.vhd" />
+    <EmbeddedResource Include="VhdlLibraries\SimpleMemory.vhd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj">

@@ -72,7 +72,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             DefaultValue = default(long).ToString().ToVhdlValue(_int64)
         };
 
-        public static SizedDataType[] SignedIntegers = new[] { Int16, Int32, Int64 };
+        public static SizedDataType[] SignedIntegers = new[] { Int8, Int16, Int32, Int64 };
 
 
         private static SizedDataType _uint8 = new SizedDataType(_int16) { Name = "unsigned", Size = 8 };

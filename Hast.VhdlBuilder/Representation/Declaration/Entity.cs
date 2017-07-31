@@ -15,8 +15,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private string _name;
 
         /// <summary>
-        /// Gets or sets the name of the VHDL Entity. Keep in mind that Entity names can't be extended identifiers thus they can only contain
-        /// alphanumerical characters.
+        /// Gets or sets the name of the VHDL Entity. Keep in mind that Entity names can't be extended identifiers thus 
+        /// they can only contain alphanumerical characters.
         /// </summary>
         public string Name
         {
@@ -42,7 +42,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             var name = vhdlGenerationOptions.ShortenName(Name);
             return Terminated.Terminate(
                 "entity " + name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    ((Generics != null && Generics.Any() ? Generics.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : string.Empty) +
+                    ((Generics != null && Generics.Any() ? 
+                        Generics.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : 
+                        string.Empty) +
                     
                     "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
                         (Ports

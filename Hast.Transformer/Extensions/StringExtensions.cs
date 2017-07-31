@@ -55,10 +55,12 @@ namespace System
         /// <example>
         /// Such a name is like:
         /// "System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers2>b__9_0(System.Object)"
+        /// or: 
+        /// "Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)"
         /// </example>
         public static bool IsInlineCompilerGeneratedMethodName(this string name) =>
             // A name where before the "<" there is nothing is invalid in standard C#, so this is a fairly safe bet.
-            Regex.IsMatch(name, "^[^/]+?::<.+>.+__", RegexOptions.Compiled);
+            Regex.IsMatch(name, "^.+?::<.+>.+__\\d_\\d\\(", RegexOptions.Compiled);
 
         /// <summary>
         /// Determines whether the string looks like the name of a compiler-generated field that backs an auto-property.
@@ -103,7 +105,7 @@ namespace System
         {
             var parentEntity = node.FindFirstParentEntityDeclaration();
             if (parentEntity == null) return exceptionMessage;
-            return exceptionMessage + " Parent entity where the affected code is: " + node.GetFullName();
+            return exceptionMessage + " Parent entity where the affected code is: " + parentEntity.GetFullName();
         }
     }
 }

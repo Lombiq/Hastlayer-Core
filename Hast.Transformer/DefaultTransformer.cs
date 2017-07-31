@@ -45,6 +45,7 @@ namespace Hast.Transformer
         private readonly IAppDataFolder _appDataFolder;
         private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
         private readonly IUnaryIncrementsDecrementsConverter _unaryIncrementsDecrementsConverter;
+        private readonly ITransformationContextCacheService _transformationContextCacheService;
 
 
         public DefaultTransformer(
@@ -69,7 +70,8 @@ namespace Hast.Transformer
             IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
             IAppDataFolder appDataFolder,
             IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
-            IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter)
+            IUnaryIncrementsDecrementsConverter unaryIncrementsDecrementsConverter,
+            ITransformationContextCacheService transformationContextCacheService)
         {
             _eventHandler = eventHandler;
             _jsonConverter = jsonConverter;
@@ -93,6 +95,7 @@ namespace Hast.Transformer
             _appDataFolder = appDataFolder;
             _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
             _unaryIncrementsDecrementsConverter = unaryIncrementsDecrementsConverter;
+            _transformationContextCacheService = transformationContextCacheService;
         }
 
 
@@ -116,8 +119,38 @@ namespace Hast.Transformer
                 AssemblyResolver = resolver,
             };
 
-            var firstAssembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPaths.First()), parameters);
-            var transformationId = firstAssembly.FullName;
+            // Need to use assembly names instead of paths for the ID, because paths can change (as in the random ones
+            // with Remote Worker). Just file names wouldn't be enough because two assemblies can have the same simple
+            // name while their full names being different.
+            var rawTransformationId = string.Empty;
+            var assemblies = new List<AssemblyDefinition>();
+
+            foreach (var assemblyPath in assemblyPaths)
+            {
+                var assembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPath), parameters);
+                rawTransformationId += "-" + assembly.FullName;
+                assemblies.Add(assembly);
+            }
+
+            rawTransformationId +=
+                string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
+                string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
+                _jsonConverter.Serialize(configuration.CustomConfiguration) +
+                // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a 
+                // Hastlayer update.
+                GetType().Assembly.FullName;
+
+            var transformationId = Sha2456Helper.ComputeHash(rawTransformationId);
+
+            if (configuration.EnableCaching)
+            {
+                var cachedTransformationContext = _transformationContextCacheService
+                    .GetTransformationContext(assemblyPaths, transformationId);
+
+                if (cachedTransformationContext != null) return _engine.Transform(cachedTransformationContext);
+            }
+
+            var firstAssembly = assemblies.First();
             var decompiledContext = new DecompilerContext(firstAssembly.MainModule);
 
             var decompilerSettings = decompiledContext.Settings;
@@ -126,28 +159,26 @@ namespace Hast.Transformer
             var astBuilder = new AstBuilder(decompiledContext);
             astBuilder.AddAssembly(firstAssembly);
 
-            foreach (var assemblyPath in assemblyPaths.Skip(1))
+            foreach (var assembly in assemblies.Skip(1))
             {
-                var assembly = AssemblyDefinition.ReadAssembly(Path.GetFullPath(assemblyPath), parameters);
-                transformationId += "-" + assembly.FullName;
                 astBuilder.AddAssembly(assembly);
             }
 
-            transformationId +=
-                string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
-                string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
-                _jsonConverter.Serialize(configuration.CustomConfiguration) +
-                // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a 
-                // Hastlayer update.
-                GetType().Assembly.FullName;
+            var syntaxTree = astBuilder.SyntaxTree;
 
+            // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
+            // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
+            var saveSyntaxTree = false;
+            if (saveSyntaxTree)
+            {
+                File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
+            }
 
             // astBuilder.RunTransformations() is needed for the syntax tree to be ready, 
             // see: https://github.com/icsharpcode/ILSpy/issues/686. But we can't run that directly since that would
             // also transform some low-level constructs that are useful to have as simple as possible (e.g. it's OK if
             // we only have while statements in the AST, not for statements mixed in). So we need to remove the not 
             // useful pipeline steps and run them by hand.
-            var syntaxTree = astBuilder.SyntaxTree;
 
             IEnumerable<IAstTransform> pipeline = TransformationPipeline.CreatePipeline(decompiledContext);
             // We allow the commented out pipeline steps. Must revisit after ILSpy update.
@@ -231,6 +262,11 @@ namespace Hast.Transformer
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
+            if (saveSyntaxTree)
+            {
+                File.WriteAllText("ProcessedSyntaxTree.cs", syntaxTree.ToString()); 
+            }
+
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
 
@@ -242,7 +278,7 @@ namespace Hast.Transformer
 
             var context = new TransformationContext
             {
-                Id = Sha2456Helper.ComputeHash(transformationId),
+                Id = transformationId,
                 HardwareGenerationConfiguration = configuration,
                 SyntaxTree = syntaxTree,
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
@@ -250,6 +286,11 @@ namespace Hast.Transformer
             };
 
             _eventHandler.SyntaxTreeBuilt(context);
+
+            if (configuration.EnableCaching)
+            {
+                _transformationContextCacheService.SetTransformationContext(context, assemblyPaths); 
+            }
 
             return _engine.Transform(context);
         }
