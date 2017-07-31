@@ -87,14 +87,6 @@ namespace Hast.Transformer.Vhdl.Services
                 Name = "ieee",
                 Uses = new List<string> { "std_logic_1164.all", "numeric_std.all" }
             });
-            if (useSimpleMemory)
-            {
-                hastIpModule.Libraries.Add(new Library
-                {
-                    Name = "Hast",
-                    Uses = new List<string> { "SimpleMemory.all" }
-                });
-            }
 
 
             // Creating the Hast_IP entity. Its name can't be an extended identifier.
@@ -259,6 +251,11 @@ namespace Hast.Transformer.Vhdl.Services
             manifest.Modules.Add(new BlockComment(LongGeneratedCodeComments.Libraries));
 
             ReadAndAddEmbeddedLibrary("TypeConversion", manifest, hastIpModule);
+
+            if (useSimpleMemory)
+            {
+                ReadAndAddEmbeddedLibrary("SimpleMemory", manifest, hastIpModule);
+            }
 
             manifest.Modules.Add(new LineComment("Hast_IP, logic generated from the input .NET assemblies starts here."));
             manifest.Modules.Add(hastIpModule);

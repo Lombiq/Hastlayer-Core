@@ -188,9 +188,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
-    <EmbeddedResource Include="VhdlLibraries\TypeConversion.vhd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="VhdlLibraries\TypeConversion.vhd" />
+    <EmbeddedResource Include="VhdlLibraries\SimpleMemory.vhd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj">
