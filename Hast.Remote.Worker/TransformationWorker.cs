@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Configuration;
+using Hast.Remote.Worker.Services;
 using Hast.Synthesis.Services;
 using Hast.Transformer;
 using Hast.Transformer.Vhdl.Services;
@@ -28,6 +29,7 @@ namespace Hast.Remote.Worker
         private readonly IJsonConverter _jsonConverter;
         private readonly IAppDataFolder _appDataFolder;
         private readonly IClock _clock;
+        private readonly IApplicationInsightsTelemetryManager _applicationInsightsTelemetryManager;
 
         private IHastlayer _hastlayer;
         private CloudBlobContainer _container;
@@ -38,11 +40,16 @@ namespace Hast.Remote.Worker
         public ILogger Logger { get; set; }
 
 
-        public TransformationWorker(IJsonConverter jsonConverter, IAppDataFolder appDataFolder, IClock clock)
+        public TransformationWorker(
+            IJsonConverter jsonConverter, 
+            IAppDataFolder appDataFolder, 
+            IClock clock, 
+            IApplicationInsightsTelemetryManager applicationInsightsTelemetryManager)
         {
             _jsonConverter = jsonConverter;
             _appDataFolder = appDataFolder;
             _clock = clock;
+            _applicationInsightsTelemetryManager = applicationInsightsTelemetryManager;
 
             Logger = NullLogger.Instance;
         }
@@ -57,6 +64,8 @@ namespace Hast.Remote.Worker
                     var hastlayerConfiguration = new HastlayerConfiguration
                     {
                         Flavor = HastlayerFlavor.Developer,
+                        // These extensions need to be added explicitly because when deployed as a flat folder of
+                        // binaries they won't be automatically found under the Hast.Core and Hast.Abstractions folders.
                         Extensions = new[]
                         {
                             typeof(DefaultTransformer).Assembly,
@@ -100,6 +109,8 @@ namespace Hast.Remote.Worker
                         }
                     };
                     _oldResultBlobsCleanerTimer.Enabled = true;
+
+                    _applicationInsightsTelemetryManager.Setup();
                 }
 
                 cancellationToken.ThrowIfCancellationRequested();
@@ -119,6 +130,11 @@ namespace Hast.Remote.Worker
                         _transformationTasks[jobBlob.Name] = Task.Factory.StartNew(async blobObject =>
                         {
                             var blob = (CloudBlockBlob)blobObject;
+                            var telemetry = new TransformationTelemetry
+                            {
+                                JobName = blob.Name,
+                                StartTimeUtc = _clock.UtcNow
+                            };
 
                             try
                             {
@@ -159,6 +175,7 @@ namespace Hast.Remote.Worker
                                                 .Deserialize<TransformationJob>(await streamReader.ReadToEndAsync());
                                         }
 
+                                        telemetry.AppId = job.AppId;
                                         var jobFolder = _appDataFolder.Combine("Hastlayer", "RemoteWorker", job.Token);
 
                                         var assemblyPaths = new List<string>();
@@ -185,7 +202,7 @@ namespace Hast.Remote.Worker
                                             var result = new TransformationJobResult
                                             {
                                                 Token = job.Token,
-                                                UserId = job.UserId
+                                                AppId = job.AppId
                                             };
 
                                             IHardwareRepresentation hardwareRepresentation;
@@ -211,6 +228,13 @@ namespace Hast.Remote.Worker
                                                         .HardwareEntryPointNamesToMemberIdMappings
                                                         .ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
                                                     Language = hardwareDescription.Language,
+                                                    Warnings = hardwareDescription.Warnings
+                                                        .Select(warning => new TransformationWarning
+                                                        {
+                                                            Code = warning.Code,
+                                                            Message = warning.Message
+                                                        })
+                                                        .ToList()
                                                 };
 
                                                 using (var memoryStream = new MemoryStream())
@@ -292,11 +316,15 @@ namespace Hast.Remote.Worker
                                 // This is so if there was an exception in the Task that will be thrown with its original
                                 // stack trace. Otherwise Task.WhenAny() isn't throwing exceptions from its arguments.
                                 await processingTask;
+                                telemetry.IsSuccess = true;
                             }
                             catch (Exception ex) when (!ex.IsFatal())
                             {
                                 Logger.Error(ex, "Processing the job blob {0} failed.", blob.Name);
                             }
+
+                            telemetry.FinishTimeUtc = _clock.UtcNow;
+                            _applicationInsightsTelemetryManager.TrackTransformation(telemetry);
                         }, jobBlob, cancellationToken)
                         .ContinueWith((task, blobNameObject) =>
                         {
@@ -356,5 +384,15 @@ namespace Hast.Remote.Worker
 
         private static bool HasHttpStatus(StorageException exception, HttpStatusCode statusCode) =>
             ((exception.InnerException as WebException)?.Response as HttpWebResponse)?.StatusCode == statusCode;
+
+
+        private class TransformationTelemetry : ITransformationTelemetry
+        {
+            public string JobName { get; set; }
+            public int AppId { get; set; }
+            public DateTime StartTimeUtc { get; set; }
+            public DateTime FinishTimeUtc { get; set; }
+            public bool IsSuccess { get; set; }
+        }
     }
 }

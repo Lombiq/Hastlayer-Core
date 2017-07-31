@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Hast.Layer;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -53,6 +54,11 @@ namespace Hast.Transformer.Vhdl.Models
         /// Keeps track of any other custom values for the scope.
         /// </summary>
         IDictionary<string, dynamic> CustomProperties { get; }
+
+        /// <summary>
+        /// Warnings issued during transformation.
+        /// </summary>
+        IList<ITransformationWarning> Warnings { get; }
     }
 
 
@@ -85,6 +91,7 @@ namespace Hast.Transformer.Vhdl.Models
         public ISet<string> TaskFactoryVariableNames { get; } = new HashSet<string>();
         public IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; } = new Dictionary<int, ISet<string>>();
         public IDictionary<string, dynamic> CustomProperties { get; } = new Dictionary<string, dynamic>();
+        public IList<ITransformationWarning> Warnings { get; set; } = new List<ITransformationWarning>();
     }
 
 

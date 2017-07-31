@@ -16,6 +16,8 @@ namespace Hast.Transformer.Vhdl.Models
         public string VhdlSource { get; private set; }
         [JsonProperty]
         public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; private set; }
+        [JsonProperty]
+        public IEnumerable<ITransformationWarning> Warnings { get; private set; }
 
         /// <summary>
         /// The VHDL manifest (syntax tree) of the implemented hardware. WARNING: this property is only filled if the
@@ -35,6 +37,7 @@ namespace Hast.Transformer.Vhdl.Models
             VhdlSource = vhdlSource;
             HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings;
             VhdlManifestIfFresh = transformedVhdlManifest.Manifest;
+            Warnings = transformedVhdlManifest.Warnings;
         }
 
 

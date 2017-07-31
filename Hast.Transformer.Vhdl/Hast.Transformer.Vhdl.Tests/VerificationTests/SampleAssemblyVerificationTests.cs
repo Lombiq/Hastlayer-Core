@@ -29,27 +29,34 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         var transformerConfiguration = configuration.TransformerConfiguration();
 
+                        configuration.AddHardwareEntryPointType<ImageContrastModifier>();
+                        transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
+                            new MemberInvocationInstanceCountConfigurationForMethod<ImageContrastModifier>(p => p.ChangeContrast(null), 0)
+                            {
+                                MaxDegreeOfParallelism = 3 // Using a smaller degree because we don't need excess repetition.
+                            });
+
                         configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
                         configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
                             {
-                                MaxDegreeOfParallelism = 5 // Using a smaller degree because we don't need excess repetition.
+                                MaxDegreeOfParallelism = 3
                             });
 
                         configuration.AddHardwareEntryPointType<PrimeCalculator>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(null), 0)
                             {
-                                MaxDegreeOfParallelism = 5
+                                MaxDegreeOfParallelism = 3
                             });
 
                         configuration.AddHardwareEntryPointType<RecursiveAlgorithms>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")
                             {
-                                MaxRecursionDepth = 5
+                                MaxRecursionDepth = 3
                             });
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();

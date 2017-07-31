@@ -9,17 +9,15 @@ namespace Hast.Transformer.Services
     {
         public void ConvertObjectVariableTypes(SyntaxTree syntaxTree)
         {
-            syntaxTree.AcceptVisitor(new DisplayClassMethodObjectParametersTypeConvertingVisitor());
+            syntaxTree.AcceptVisitor(new MethodObjectParametersTypeConvertingVisitor());
         }
 
 
-        private class DisplayClassMethodObjectParametersTypeConvertingVisitor : DepthFirstAstVisitor
+        private class MethodObjectParametersTypeConvertingVisitor : DepthFirstAstVisitor
         {
             public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
             {
                 base.VisitMethodDeclaration(methodDeclaration);
-
-                if (!methodDeclaration.GetFullName().IsDisplayClassMemberName()) return;
 
                 foreach (var objectParameter in methodDeclaration.Parameters
                     .Where(parameter => parameter.Type.Is<PrimitiveType>(type =>

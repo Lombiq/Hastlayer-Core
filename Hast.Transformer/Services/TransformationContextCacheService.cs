@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Caching;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Models;
@@ -14,13 +16,13 @@ namespace Hast.Transformer.Services
         private readonly MemoryCache _cache = MemoryCache.Default;
 
 
-        public ITransformationContext GetTransformationContext(SyntaxTree unprocessedSyntaxTree, string transformationId) =>
-            _cache.Get(GetCacheKey(unprocessedSyntaxTree, transformationId)) as ITransformationContext;
+        public ITransformationContext GetTransformationContext(IEnumerable<string> assemblyPaths, string transformationId) =>
+            _cache.Get(GetCacheKey(assemblyPaths, transformationId)) as ITransformationContext;
 
-        public void SetTransformationContext(ITransformationContext transformationContext, SyntaxTree unprocessedSyntaxTree)
+        public void SetTransformationContext(ITransformationContext transformationContext, IEnumerable<string> assemblyPaths)
         {
             _cache.Set(
-                GetCacheKey(unprocessedSyntaxTree, transformationContext.Id),
+                GetCacheKey(assemblyPaths, transformationContext.Id),
                 transformationContext,
                 new CacheItemPolicy
                 {
@@ -29,8 +31,20 @@ namespace Hast.Transformer.Services
         }
 
 
-        private static string GetCacheKey(SyntaxTree unprocessedSyntaxTree, string transformationId) =>
-             "Hast.Transformer.TransformationContextCache." +
-            unprocessedSyntaxTree.ToString().GetHashCode().ToString() + " - " + transformationId.GetHashCode();
+        private static string GetCacheKey(IEnumerable<string> assemblyPaths, string transformationId)
+        {
+            var fileHashes = string.Empty;
+
+            foreach (var path in assemblyPaths)
+            {
+                using (var stream = File.OpenRead(path))
+                using (var sha = new SHA256Managed())
+                {
+                    fileHashes += BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", string.Empty);;
+                }
+            }
+
+            return "Hast.Transformer.TransformationContextCache." + fileHashes + " - " + transformationId.GetHashCode();
+        }
     }
 }
