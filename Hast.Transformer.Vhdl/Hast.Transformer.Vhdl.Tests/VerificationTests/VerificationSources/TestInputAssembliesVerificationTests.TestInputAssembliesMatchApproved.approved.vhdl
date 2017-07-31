@@ -1665,8 +1665,13 @@ begin
         Variable \CastingCases::NumberCasting(Int16,Int16).0.b\: signed(15 downto 0) := to_signed(0, 16);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.num\: signed(15 downto 0) := to_signed(0, 16);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.b2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.b3\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.num4\: signed(63 downto 0) := to_signed(0, 64);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1677,8 +1682,13 @@ begin
                 \CastingCases::NumberCasting(Int16,Int16).0.b\ := to_signed(0, 16);
                 \CastingCases::NumberCasting(Int16,Int16).0.num\ := to_signed(0, 16);
                 \CastingCases::NumberCasting(Int16,Int16).0.num2\ := to_signed(0, 32);
+                \CastingCases::NumberCasting(Int16,Int16).0.b2\ := to_unsigned(0, 8);
+                \CastingCases::NumberCasting(Int16,Int16).0.b3\ := to_signed(0, 8);
+                \CastingCases::NumberCasting(Int16,Int16).0.num3\ := to_unsigned(0, 16);
+                \CastingCases::NumberCasting(Int16,Int16).0.num4\ := to_signed(0, 64);
                 \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := to_signed(0, 64);
             else 
                 case \CastingCases::NumberCasting(Int16,Int16).0._State\ is 
                     when \CastingCases::NumberCasting(Int16,Int16).0._State_0\ => 
@@ -1705,8 +1715,13 @@ begin
                         \CastingCases::NumberCasting(Int16,Int16).0.num\ := \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\;
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
+                        \CastingCases::NumberCasting(Int16,Int16).0.b2\ := Truncate(unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\), 8);
+                        \CastingCases::NumberCasting(Int16,Int16).0.b3\ := Truncate(\CastingCases::NumberCasting(Int16,Int16).0.a\, 8);
+                        \CastingCases::NumberCasting(Int16,Int16).0.num3\ := unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\);
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := resize(signed(ToUnsignedAndExpand(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64) * unsigned((resize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64)))), 64);
+                        \CastingCases::NumberCasting(Int16,Int16).0.num4\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\);
                         \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                 end case;
             end if;
         end if;
