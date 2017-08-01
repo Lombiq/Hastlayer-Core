@@ -16,7 +16,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public List<string> Lines { get; set; }
 
         /// <summary>
-        /// If set to <c>true</c>, the comment won't be ommitted even if this is configured in 
+        /// If set to <c>true</c>, the comment won't be omitted even if this is configured in 
         /// <see cref="IVhdlGenerationOptions"/>.
         /// </summary>
         public bool CantBeOmitted { get; set; }
