@@ -58,6 +58,7 @@
     <Compile Include="Representation\Declaration\IReferenceableDeclaration.cs" />
     <Compile Include="Representation\Declaration\LineComment.cs" />
     <Compile Include="Representation\Declaration\DataObjectBase.cs" />
+    <Compile Include="Representation\Declaration\UnOmittableBlockComment.cs" />
     <Compile Include="Representation\Declaration\UnOmittableLineComment.cs" />
     <Compile Include="Representation\Empty.cs" />
     <Compile Include="Representation\Declaration\Generic.cs" />
