@@ -5,22 +5,38 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 package TypeConversion is
-	function Truncate(input: unsigned; size: natural) return unsigned;
-	function Truncate(input: signed; size: natural) return signed;
+	function SmartResize(input: unsigned; size: natural) return unsigned;
+	function SmartResize(input: signed; size: natural) return signed;
 	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned;
 end TypeConversion;
 		
 package body TypeConversion is
 
-	function Truncate(input: unsigned; size: natural) return unsigned is
+	-- The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost] bit 
+	-- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
+	-- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
+	-- then the source value is truncated by discarding its “extra” most significant bits. The result is then 
+	-- treated as a value of the destination type." Thus we need to simply truncate when casting down.
+	function SmartResize(input: unsigned; size: natural) return unsigned is
 	begin
-		return input(size - 1 downto 0);
-	end Truncate;
+		if (size < input'LENGTH) then
+			return input(size - 1 downto 0);
+		else
+			-- Resize() is supposed to work with little endian numbers: "When truncating, the sign bit is retained
+            -- along with the rightmost part." for signed numbers and "When truncating, the leftmost bits are 
+            -- dropped." for unsigned ones. See: http://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl
+			return resize(input, size);
+		end if;
+	end SmartResize;
 
-	function Truncate(input: signed; size: natural) return signed is
+	function SmartResize(input: signed; size: natural) return signed is
 	begin
-		return input(size - 1 downto 0);
-	end Truncate;
+		if (size < input'LENGTH) then
+			return input(size - 1 downto 0);
+		else
+			return resize(input, size);
+		end if;
+	end SmartResize;
 
 	function ToUnsignedAndExpand(input: signed; size: natural) return unsigned is
 		variable result: unsigned(size - 1 downto 0);
@@ -1715,10 +1731,10 @@ begin
                         \CastingCases::NumberCasting(Int16,Int16).0.num\ := \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\;
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
-                        \CastingCases::NumberCasting(Int16,Int16).0.b2\ := Truncate(unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\), 8);
-                        \CastingCases::NumberCasting(Int16,Int16).0.b3\ := Truncate(\CastingCases::NumberCasting(Int16,Int16).0.a\, 8);
+                        \CastingCases::NumberCasting(Int16,Int16).0.b2\ := SmartResize(unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\), 8);
+                        \CastingCases::NumberCasting(Int16,Int16).0.b3\ := SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 8);
                         \CastingCases::NumberCasting(Int16,Int16).0.num3\ := unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\);
-                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := resize(signed(ToUnsignedAndExpand(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64) * unsigned((resize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64)))), 64);
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := resize(signed(ToUnsignedAndExpand(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64) * unsigned((SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64)))), 64);
                         \CastingCases::NumberCasting(Int16,Int16).0.num4\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\);
                         \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.3
