@@ -12,6 +12,18 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Target { get; set; }
         public List<IVhdlElement> Parameters { get; set; } = new List<IVhdlElement>();
 
+
+        public Invocation()
+        {
+        }
+
+        public Invocation(IVhdlElement target, params IVhdlElement[] parameters)
+        {
+            Target = target;
+            Parameters = parameters.ToList();
+        }
+
+
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Target.ToVhdl(vhdlGenerationOptions) +
             (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
@@ -33,17 +45,15 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public static Invocation Resize(IVhdlElement value, int size) => InvokeSizingFunction("resize", value, size);
 
+        public static Invocation SmartResize(IVhdlElement value, int size) => InvokeSizingFunction("SmartResize", value, size);
+
         public static Invocation ToSigned(IVhdlElement value, int size) => InvokeSizingFunction("to_signed", value, size);
 
         public static Invocation ToUnsigned(IVhdlElement value, int size) => InvokeSizingFunction("to_unsigned", value, size);
 
 
         private static Invocation InvokeSizingFunction(string functionName, IVhdlElement value, int size) =>
-            new Invocation
-            {
-                Target = functionName.ToVhdlIdValue(),
-                Parameters = new List<IVhdlElement> { { value }, { size.ToVhdlValue(KnownDataTypes.UnrangedInt) } }
-            };
+            new Invocation(functionName.ToVhdlIdValue(), value, size.ToVhdlValue(KnownDataTypes.UnrangedInt));
     }
 
 
