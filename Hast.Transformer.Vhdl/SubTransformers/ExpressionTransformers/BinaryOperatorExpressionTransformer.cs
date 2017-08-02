@@ -315,7 +315,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Parameters = new List<IVhdlElement>
                     {
                         binary.Left,
-                        Invocation.ToInteger(Invocation.SmartResize(binary.Right, leftTypeSize <= 32 ? 5 : 6))
+                        // The result will be like to_intger(unsigned(SmartResize(..))). The cast to unsigned is necessary
+                        // because in .NET the input of the shift is always treated as unsigned.5
+                        Invocation.ToInteger(new Invocation("unsigned", (Invocation.SmartResize(binary.Right, leftTypeSize <= 32 ? 5 : 6))))
                     }
                 };
             }
