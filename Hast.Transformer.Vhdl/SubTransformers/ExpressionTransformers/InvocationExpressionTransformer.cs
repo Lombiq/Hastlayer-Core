@@ -142,29 +142,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             dataConversionInvocationTarget = "Convert" + operation + "ToStdLogicVector";
                         }
 
-                        return new Invocation
-                        {
-                            Target = dataConversionInvocationTarget.ToVhdlIdValue(),
-                            Parameters = new List<IVhdlElement> { { variableToConvert } }
-                        };
+                        return new Invocation(dataConversionInvocationTarget, variableToConvert);
                     }
                     else if (is4BytesOperation)
                     {
                         Func<int, int, Invocation> createSlice = (indexFrom, indexTo) =>
-                            new Invocation
-                            {
-                                Target = "unsigned".ToVhdlIdValue(),
-                                Parameters = new List<IVhdlElement>
-                                { {
-                                        new ArraySlice
-                                        {
-                                            ArrayReference = (IDataObject)variableToConvert,
-                                            IsDownTo = true,
-                                            IndexFrom = indexFrom,
-                                            IndexTo = indexTo
-                                        }
-                                } }
-                            };
+                            new Invocation(
+                                "unsigned",
+                                new ArraySlice
+                                {
+                                    ArrayReference = (IDataObject)variableToConvert,
+                                    IsDownTo = true,
+                                    IndexFrom = indexFrom,
+                                    IndexTo = indexTo
+                                });
 
                         return new Value
                         {
@@ -195,18 +186,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 IndexTo = elementIndex * 8
                             },
                             // The data to write is conventionally the second parameter.
-                            Expression = new Invocation
-                            {
-                                Target = "std_logic_vector".ToVhdlIdValue(),
-                                Parameters = new List<IVhdlElement>
-                                { {
-                                    new ArrayElementAccess
-                                    {
-                                        ArrayReference = arrayReference,
-                                        IndexExpression = elementIndex.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                                    }
-                                } }
-                            }
+                            Expression = new Invocation(
+                                "std_logic_vector",
+                                new ArrayElementAccess
+                                {
+                                    ArrayReference = arrayReference,
+                                    IndexExpression = elementIndex.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                })
                         });
 
                     // Arrays smaller than 4 elements can be written with Write4Bytes(), so need to take care of them.

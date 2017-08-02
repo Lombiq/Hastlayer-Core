@@ -203,7 +203,15 @@ namespace Hast.Transformer.Services
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
-                ChangeTypeInformationIfImmutableArrayReferencingExpression(memberReferenceExpression);
+                var typeReference = ChangeTypeInformationIfImmutableArrayReferencingExpression(memberReferenceExpression);
+                if (typeReference != null)
+                {
+                    var methodReference = memberReferenceExpression.Annotation<MethodReference>();
+                    if (methodReference != null) methodReference.ReturnType = typeReference;
+
+                    var propertyReference = memberReferenceExpression.Annotation<PropertyReference>();
+                    if (propertyReference != null) propertyReference.PropertyType = typeReference;
+                }
             }
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
