@@ -13,7 +13,7 @@ package body TypeConversion is
 	-- The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost] bit 
 	-- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
 	-- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
-	-- then the source value is truncated by discarding its “extra” most significant bits. The result is then 
+	-- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
 	-- treated as a value of the destination type." Thus we need to simply truncate when casting down.
 	function SmartResize(input: unsigned; size: natural) return unsigned is
 	begin
