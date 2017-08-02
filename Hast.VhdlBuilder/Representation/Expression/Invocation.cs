@@ -23,25 +23,21 @@ namespace Hast.VhdlBuilder.Representation.Expression
             Parameters = parameters.ToList();
         }
 
+        public Invocation(string targetId, params IVhdlElement[] parameters)
+        {
+            Target = targetId.ToVhdlIdValue();
+            Parameters = parameters.ToList();
+        }
+
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Target.ToVhdl(vhdlGenerationOptions) +
             (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
 
 
-        public static Invocation ToInteger(IVhdlElement value) => 
-            new Invocation
-            {
-                Target = "to_integer".ToVhdlIdValue(),
-                Parameters = new List<IVhdlElement> { { value } }
-            };
+        public static Invocation ToInteger(IVhdlElement value) => new Invocation("to_integer", value);
 
-        public static Invocation ToReal(IVhdlElement value) =>
-            new Invocation
-            {
-                Target = "real".ToVhdlIdValue(),
-                Parameters = new List<IVhdlElement> { { value } }
-            };
+        public static Invocation ToReal(IVhdlElement value) => new Invocation("real", value);
 
         public static Invocation Resize(IVhdlElement value, int size) => InvokeSizingFunction("resize", value, size);
 

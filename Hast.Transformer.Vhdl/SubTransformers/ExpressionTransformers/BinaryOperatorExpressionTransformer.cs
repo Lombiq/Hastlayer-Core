@@ -345,10 +345,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     Target = "resize".ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>
-                        {
-                            { binaryElement },
-                            { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
-                        }
+                    {
+                        binaryElement,
+                        resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                    }
                 };
             }
 
@@ -356,11 +356,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 // This needs to be after resize() because otherwise casting an unsigned to signed can result in data
                 // loss due to the range change. 
-                binaryElement = new Invocation
-                {
-                    Target = (forcedResultIntCastIsSigned ? "signed" : "unsigned").ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement> { { binaryElement } }
-                };
+                binaryElement = new Invocation(forcedResultIntCastIsSigned ? "signed" : "unsigned", binaryElement);
             }
 
             var operationResultAssignment = new Assignment

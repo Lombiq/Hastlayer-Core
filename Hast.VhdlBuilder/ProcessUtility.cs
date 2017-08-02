@@ -32,11 +32,9 @@ namespace Hast.VhdlBuilder
             foreach (var process in processes)
             {
                 process.SensitivityList.Add(clockPort);
-                var invocation = new Invocation { Target = "rising_edge".ToVhdlIdValue() };
-                invocation.Parameters.Add(clockSignalName.ToVhdlSignalReference());
                 var wrappingIf = new IfElse
                 {
-                    Condition = invocation,
+                    Condition = new Invocation("rising_edge", clockSignalName.ToVhdlSignalReference()),
                     True = new InlineBlock { Body = new List<IVhdlElement>(process.Body) } // Needs to copy the list.
                 };
                 process.Body.Clear();
