@@ -17,7 +17,7 @@ package body TypeConversion is
 	-- The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost] bit 
 	-- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
 	-- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
-	-- then the source value is truncated by discarding its “extra” most significant bits. The result is then 
+	-- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
 	-- treated as a value of the destination type." Thus we need to simply truncate when casting down.
 	function SmartResize(input: unsigned; size: natural) return unsigned is
 	begin
@@ -1987,11 +1987,11 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
-                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := shift_right(\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\, to_integer(SmartResize(to_signed(5, 32), 5)));
+                        \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := shift_right(\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ + \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
+                        -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_6\ => 
                         -- True branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(0, 32);
