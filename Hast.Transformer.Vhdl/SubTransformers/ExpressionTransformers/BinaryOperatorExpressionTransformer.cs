@@ -299,6 +299,27 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     );
             }
 
+            var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
+            if (maxOperandSize == 0) maxOperandSize = resultTypeSize;
+
+            var deviceDriver = _deviceDriverSelector.GetDriver(context);
+            decimal clockCyclesNeededForOperation;
+            var clockCyclesNeededForSignedOperation = deviceDriver
+                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
+            var clockCyclesNeededForUnsignedOperation = deviceDriver
+                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
+            if (leftType != null && rightType != null && leftType.Name == rightType.Name)
+            {
+                clockCyclesNeededForOperation = leftType.Name == "signed" ?
+                    clockCyclesNeededForSignedOperation :
+                    clockCyclesNeededForUnsignedOperation;
+            }
+            else
+            {
+                // If the operands have different signs then let's take the slower version just to be safe.
+                clockCyclesNeededForOperation = Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation);
+            }
+
             var isShift = false;
             if (expression.Operator == BinaryOperatorType.ShiftLeft || expression.Operator == BinaryOperatorType.ShiftRight)
             {
@@ -309,15 +330,44 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // shifting out to the void) but 2, since only a shift by 1 happens (as 33 is 100001 in binary).
                 // See: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/left-shift-operator
                 // So we need to truncate.
+                // Furthermore right shifts will also do a bitwise AND with just 1s on the count, see:
+                // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/right-shift-operator
+
+                var countSize = leftTypeSize <= 32 ? 5 : 6;
+                IVhdlElement resize = Invocation.SmartResize(binary.Right, countSize);
+
+                if (expression.Operator == BinaryOperatorType.ShiftRight)
+                {
+                    resize = new Binary
+                    {
+                        Left = resize,
+                        Operator = BinaryOperator.And,
+                        Right =
+                            string.Join("", Enumerable.Repeat(1, countSize))
+                            .ToVhdlValue(new StdLogicVector { Size = countSize })
+                    };
+
+                    var bitwiseAndBinary = new BinaryOperatorExpression(
+                        expression.Left.Clone(), 
+                        BinaryOperatorType.BitwiseAnd, 
+                        expression.Right.Clone());
+
+                    clockCyclesNeededForOperation += Math.Max(
+                        deviceDriver.GetClockCyclesNeededForBinaryOperation(bitwiseAndBinary, maxOperandSize, true),
+                        deviceDriver.GetClockCyclesNeededForBinaryOperation(
+                            (BinaryOperatorExpression)bitwiseAndBinary.Clone(), maxOperandSize, false));
+                }
+
                 binaryElement = new Invocation
                 {
                     Target = (expression.Operator == BinaryOperatorType.ShiftLeft ? "shift_left" : "shift_right").ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>
                     {
                         binary.Left,
-                        // The result will be like to_intger(unsigned(SmartResize(..))). The cast to unsigned is necessary
-                        // because in .NET the input of the shift is always treated as unsigned.5
-                        Invocation.ToInteger(new Invocation("unsigned", (Invocation.SmartResize(binary.Right, leftTypeSize <= 32 ? 5 : 6))))
+                        // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is 
+                        // necessary because in .NET the input of the shift is always treated as unsigned. Right shifts
+                        // will also have a bitwise AND inside unsigned().
+                        Invocation.ToInteger(new Invocation("unsigned", resize))
                     }
                 };
             }
@@ -367,26 +417,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Expression = binaryElement
             };
 
-            var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
-            if (maxOperandSize == 0) maxOperandSize = resultTypeSize;
-
-            var deviceDriver = _deviceDriverSelector.GetDriver(context);
-            decimal clockCyclesNeededForOperation;
-            var clockCyclesNeededForSignedOperation = deviceDriver
-                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
-            var clockCyclesNeededForUnsignedOperation = deviceDriver
-                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
-            if (leftType != null && rightType != null && leftType.Name == rightType.Name)
-            {
-                clockCyclesNeededForOperation = leftType.Name == "signed" ?
-                    clockCyclesNeededForSignedOperation :
-                    clockCyclesNeededForUnsignedOperation;
-            }
-            else
-            {
-                // If the operands have different signs then let's take the slower version just to be safe.
-                clockCyclesNeededForOperation = Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation);
-            }
 
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
