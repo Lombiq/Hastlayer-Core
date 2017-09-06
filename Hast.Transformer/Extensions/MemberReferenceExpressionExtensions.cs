@@ -19,7 +19,7 @@ namespace ICSharpCode.NRefactory.CSharp
         /// be looked up.
         /// </param>
         public static EntityDeclaration FindMemberDeclaration(
-            this MemberReferenceExpression memberReferenceExpression, 
+            this MemberReferenceExpression memberReferenceExpression,
             ITypeDeclarationLookupTable typeDeclarationLookupTable,
             bool findLeftmostMemberIfRecursive = false)
         {
@@ -29,7 +29,7 @@ namespace ICSharpCode.NRefactory.CSharp
             {
                 if (findLeftmostMemberIfRecursive)
                 {
-                    return ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(typeDeclarationLookupTable, true); 
+                    return ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(typeDeclarationLookupTable, true);
                 }
                 else
                 {
@@ -38,7 +38,7 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else
             {
-                type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable); 
+                type = memberReferenceExpression.FindTargetTypeDeclaration(typeDeclarationLookupTable);
             }
 
             if (type == null) return null;
@@ -67,7 +67,7 @@ namespace ICSharpCode.NRefactory.CSharp
                     if (!fieldDefinition.FullName.IsBackingFieldName())
                     {
                         return type.Members
-                            .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName); 
+                            .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName);
                     }
                     else
                     {
@@ -98,7 +98,7 @@ namespace ICSharpCode.NRefactory.CSharp
         }
 
         public static TypeDeclaration FindTargetTypeDeclaration(
-            this MemberReferenceExpression memberReferenceExpression, 
+            this MemberReferenceExpression memberReferenceExpression,
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             var target = memberReferenceExpression.Target;
@@ -128,11 +128,17 @@ namespace ICSharpCode.NRefactory.CSharp
                 // The member is referenced in an object initializer.
                 return typeDeclarationLookupTable.Lookup(((ObjectCreateExpression)target).Type);
             }
-            else
+            else if (target is InvocationExpression)
             {
-                // The member is within this class.
-                return memberReferenceExpression.FindFirstParentTypeDeclaration();
+                var methodReference = memberReferenceExpression.Annotation<MethodReference>();
+                if (methodReference != null)
+                {
+                    return typeDeclarationLookupTable.Lookup(methodReference.DeclaringType.FullName);
+                }
             }
+
+            // The member is within this class.
+            return memberReferenceExpression.FindFirstParentTypeDeclaration();
         }
 
         public static string GetMemberFullName(this MemberReferenceExpression memberReferenceExpression)
