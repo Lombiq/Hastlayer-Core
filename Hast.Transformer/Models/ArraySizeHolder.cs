@@ -8,7 +8,6 @@ namespace Hast.Transformer.Models
     internal class ArraySizeHolder : IArraySizeHolder
     {
         private readonly Dictionary<string, IArraySize> _arraySizes = new Dictionary<string, IArraySize>();
-        private readonly Dictionary<string, IArraySize> _preConfiguredArraySizes;
 
 
         public ArraySizeHolder()
@@ -18,7 +17,6 @@ namespace Hast.Transformer.Models
         public ArraySizeHolder(Dictionary<string, IArraySize> preConfiguredArraySizes)
         {
             _arraySizes = new Dictionary<string, IArraySize>(preConfiguredArraySizes);
-            _preConfiguredArraySizes = new Dictionary<string, IArraySize>(preConfiguredArraySizes);
         }
 
 
@@ -40,13 +38,6 @@ namespace Hast.Transformer.Models
             {
                 if (existingSize.Length != length)
                 {
-                    if (_preConfiguredArraySizes.ContainsKey(holderName))
-                    {
-                        // If the size of the array was pre-configured then ignore the mismatch, the array will have the
-                        // configured size, no matter what.
-                        return;
-                    }
-
                     throw new NotSupportedException(
                         "Array sizes should be statically defined but the array stored in the array holder \"" +
                         holderName + "\" has multiple length assigned (previously it had a length of " + existingSize.Length +
