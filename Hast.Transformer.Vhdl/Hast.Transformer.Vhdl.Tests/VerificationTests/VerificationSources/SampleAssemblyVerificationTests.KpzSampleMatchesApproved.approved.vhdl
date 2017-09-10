@@ -18,7 +18,7 @@ package body TypeConversion is
 	-- The .NET behavior is different than that of resize() ("To create a larger vector, the new [leftmost] bit 
 	-- positions are filled with the sign bit(ARG'LEFT). When truncating, the sign bit is retained along with the 
 	-- rightmost part.") when casting to a smaller type: "If the source type is larger than the destination type, 
-	-- then the source value is truncated by discarding its “extra” most significant bits. The result is then 
+	-- then the source value is truncated by discarding its "extra" most significant bits. The result is then 
 	-- treated as a value of the destination type." Thus we need to simply truncate when casting down.
 	function SmartResize(input: unsigned; size: natural) return unsigned is
 	begin
@@ -959,7 +959,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(to_signed(32, 32))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
                         end if;
@@ -994,7 +994,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(to_signed(32, 32))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\;
                         end if;
@@ -1107,7 +1107,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::GetNextRandom1().0._State_2\ => 
                         \KpzKernels::GetNextRandom1().0.this\ := \KpzKernels::GetNextRandom1().0.this.parameter.In\;
-                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom1().0.this\.\randomState1\, to_integer(to_signed(32, 32))), 32);
+                        \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom1().0.this\.\randomState1\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                         \KpzKernels::GetNextRandom1().0.num\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.0\);
                         -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\ := SmartResize(\KpzKernels::GetNextRandom1().0.this\.\randomState1\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
@@ -1119,7 +1119,7 @@ begin
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom1().0.num2\ xor \KpzKernels::GetNextRandom1().0.num\;
                         \KpzKernels::GetNextRandom1().0.return\ <= \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\;
                         \KpzKernels::GetNextRandom1().0._State\ := \KpzKernels::GetNextRandom1().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5
+                        -- Clock cycles needed to complete this state (approximation): 0.6
                 end case;
             end if;
         end if;
@@ -1175,7 +1175,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::GetNextRandom2().0._State_2\ => 
                         \KpzKernels::GetNextRandom2().0.this\ := \KpzKernels::GetNextRandom2().0.this.parameter.In\;
-                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom2().0.this\.\randomState2\, to_integer(to_signed(32, 32))), 32);
+                        \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom2().0.this\.\randomState2\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                         \KpzKernels::GetNextRandom2().0.num\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.0\);
                         -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\ := SmartResize(\KpzKernels::GetNextRandom2().0.this\.\randomState2\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
@@ -1187,7 +1187,7 @@ begin
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom2().0.num2\ xor \KpzKernels::GetNextRandom2().0.num\;
                         \KpzKernels::GetNextRandom2().0.return\ <= \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\;
                         \KpzKernels::GetNextRandom2().0._State\ := \KpzKernels::GetNextRandom2().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.5
+                        -- Clock cycles needed to complete this state (approximation): 0.6
                 end case;
             end if;
         end if;
@@ -1952,7 +1952,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.0\ := signed(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\ and to_unsigned(7, 32));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.0\);
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.1\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\, to_integer(to_signed(16, 32)));
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.1\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.2\ := signed(\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.1\ and to_unsigned(7, 32));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.2\);
                             -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32)
@@ -1962,7 +1962,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\ <= true;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_4\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3
+                        -- Clock cycles needed to complete this state (approximation): 0.4
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32)
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32)._Finished.0\) then 
@@ -1985,7 +1985,7 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.2\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\ and to_unsigned(65535, 32);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.3\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\, to_integer(to_signed(16, 32)));
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ and to_unsigned(65535, 32);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ < to_signed(7, 32);
@@ -2001,7 +2001,7 @@ begin
                                 \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4
+                        -- Clock cycles needed to complete this state (approximation): 0.5
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
