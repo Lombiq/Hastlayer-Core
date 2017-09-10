@@ -102,11 +102,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // At this point if non-primitive types are checked for equality it could mean that they are custom 
             // types either without the equality operator defined or they are custom value types and a
             // ReferenceEquals() is attempted on them which is wrong.
-            if ((leftTypeReference != null && 
-                        !leftTypeReference.IsPrimitive && 
-                        (leftTypeReference as TypeDefinition)?.IsEnum != true || 
-                    rightTypeReference != null && 
-                        !rightTypeReference.IsPrimitive && 
+            if ((leftTypeReference != null &&
+                        !leftTypeReference.IsPrimitive &&
+                        (leftTypeReference as TypeDefinition)?.IsEnum != true ||
+                    rightTypeReference != null &&
+                        !rightTypeReference.IsPrimitive &&
                         (rightTypeReference as TypeDefinition)?.IsEnum != true)
                 &&
                 !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))
@@ -117,8 +117,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     .AddParentEntityName(expression));
             }
 
-            // Would need to decide between + and & or sll/srl and sra/sla
-            // See: http://www.csee.umbc.edu/portal/help/VHDL/operator.html
             // The commented out cases with unsupported operators are here so adding them later is easier.
             switch (expression.Operator)
             {
@@ -168,7 +166,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 //case BinaryOperatorType.NullCoalescing:
                 //    break;
                 // Left and right shift for numerical types is a function call in VHDL, so handled separately. See
-                // below.
+                // below. The sll/srl or sra/sla operators shouldn't be used, see: 
+                // https://www.nandland.com/vhdl/examples/example-shifts.html and https://stackoverflow.com/questions/9018087/shift-a-std-logic-vector-of-n-bit-to-right-or-left
                 case BinaryOperatorType.ShiftLeft:
                 case BinaryOperatorType.ShiftRight:
                     break;
@@ -201,9 +200,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var forcedResultIntCastIsSigned = false;
             if (resultNeedsForcedIntCast)
             {
-                forcedResultIntCastIsSigned = 
+                forcedResultIntCastIsSigned =
                     new[] { typeof(short).FullName, typeof(sbyte).FullName }.Contains(resultTypeReference.FullName);
-                var intTypeInformation = forcedResultIntCastIsSigned ? 
+                var intTypeInformation = forcedResultIntCastIsSigned ?
                     TypeHelper.CreateInt32TypeInformation() :
                     TypeHelper.CreateUInt32TypeInformation();
 
@@ -243,17 +242,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             IVhdlElement binaryElement = binary;
-
-            var isShift = false;
-            if (expression.Operator == BinaryOperatorType.ShiftLeft || expression.Operator == BinaryOperatorType.ShiftRight)
-            {
-                isShift = true;
-                binaryElement = new Invocation
-                {
-                    Target = (expression.Operator == BinaryOperatorType.ShiftLeft ? "shift_left" : "shift_right").ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement> { { binary.Left }, { Invocation.ToInteger(binary.Right) } }
-                };
-            }
 
             var shouldResizeResult =
                 (
@@ -311,10 +299,83 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     );
             }
 
+            var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
+            if (maxOperandSize == 0) maxOperandSize = resultTypeSize;
+
+            var deviceDriver = _deviceDriverSelector.GetDriver(context);
+            decimal clockCyclesNeededForOperation;
+            var clockCyclesNeededForSignedOperation = deviceDriver
+                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
+            var clockCyclesNeededForUnsignedOperation = deviceDriver
+                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
+            if (leftType != null && rightType != null && leftType.Name == rightType.Name)
+            {
+                clockCyclesNeededForOperation = leftType.Name == "signed" ?
+                    clockCyclesNeededForSignedOperation :
+                    clockCyclesNeededForUnsignedOperation;
+            }
+            else
+            {
+                // If the operands have different signs then let's take the slower version just to be safe.
+                clockCyclesNeededForOperation = Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation);
+            }
+
+            var isShift = false;
+            if (expression.Operator == BinaryOperatorType.ShiftLeft || expression.Operator == BinaryOperatorType.ShiftRight)
+            {
+                isShift = true;
+
+                // Contrary to what happens in VHDL binary shifting in .NET will only use the lower 5 bits (for 32b
+                // operands) or 6 bits (for 64b operands) of the shift count. So e.g. 1 << 33 won't produce 0 (by
+                // shifting out to the void) but 2, since only a shift by 1 happens (as 33 is 100001 in binary).
+                // See: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/left-shift-operator
+                // So we need to truncate.
+                // Furthermore right shifts will also do a bitwise AND with just 1s on the count, see:
+                // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/right-shift-operator
+
+                var countSize = leftTypeSize <= 32 ? 5 : 6;
+                IVhdlElement resize = Invocation.SmartResize(binary.Right, countSize);
+
+                if (expression.Operator == BinaryOperatorType.ShiftRight)
+                {
+                    resize = new Binary
+                    {
+                        Left = resize,
+                        Operator = BinaryOperator.And,
+                        Right =
+                            string.Join("", Enumerable.Repeat(1, countSize))
+                            .ToVhdlValue(new StdLogicVector { Size = countSize })
+                    };
+
+                    var bitwiseAndBinary = new BinaryOperatorExpression(
+                        expression.Left.Clone(), 
+                        BinaryOperatorType.BitwiseAnd, 
+                        expression.Right.Clone());
+
+                    clockCyclesNeededForOperation += Math.Max(
+                        deviceDriver.GetClockCyclesNeededForBinaryOperation(bitwiseAndBinary, maxOperandSize, true),
+                        deviceDriver.GetClockCyclesNeededForBinaryOperation(
+                            (BinaryOperatorExpression)bitwiseAndBinary.Clone(), maxOperandSize, false));
+                }
+
+                binaryElement = new Invocation
+                {
+                    Target = (expression.Operator == BinaryOperatorType.ShiftLeft ? "shift_left" : "shift_right").ToVhdlIdValue(),
+                    Parameters = new List<IVhdlElement>
+                    {
+                        binary.Left,
+                        // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is 
+                        // necessary because in .NET the input of the shift is always treated as unsigned. Right shifts
+                        // will also have a bitwise AND inside unsigned().
+                        Invocation.ToInteger(new Invocation("unsigned", resize))
+                    }
+                };
+            }
+
             // Shifts also need type conversion if the right operator doesn't have the same type as the left one.
             if (firstNonParenthesizedExpressionParent is CastExpression || isShift)
             {
-                var fromType = isShift && !(firstNonParenthesizedExpressionParent is CastExpression)?
+                var fromType = isShift && !(firstNonParenthesizedExpressionParent is CastExpression) ?
                     leftType :
                     _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
 
@@ -336,10 +397,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     Target = "resize".ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>
-                        {
-                            { binaryElement },
-                            { resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
-                        }
+                    {
+                        binaryElement,
+                        resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                    }
                 };
             }
 
@@ -347,11 +408,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 // This needs to be after resize() because otherwise casting an unsigned to signed can result in data
                 // loss due to the range change. 
-                binaryElement = new Invocation
-                {
-                    Target = (forcedResultIntCastIsSigned ? "signed" : "unsigned").ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement> { { binaryElement } }
-                };
+                binaryElement = new Invocation(forcedResultIntCastIsSigned ? "signed" : "unsigned", binaryElement);
             }
 
             var operationResultAssignment = new Assignment
@@ -360,26 +417,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Expression = binaryElement
             };
 
-            var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
-            if (maxOperandSize == 0) maxOperandSize = resultTypeSize;
-
-            var deviceDriver = _deviceDriverSelector.GetDriver(context);
-            decimal clockCyclesNeededForOperation;
-            var clockCyclesNeededForSignedOperation = deviceDriver
-                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
-            var clockCyclesNeededForUnsignedOperation = deviceDriver
-                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
-            if (leftType != null && rightType != null && leftType.Name == rightType.Name)
-            {
-                clockCyclesNeededForOperation = leftType.Name == "signed" ?
-                    clockCyclesNeededForSignedOperation :
-                    clockCyclesNeededForUnsignedOperation;
-            }
-            else
-            {
-                // If the operands have different signs then let's take the slower version just to be safe.
-                clockCyclesNeededForOperation = Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation);
-            }
 
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 

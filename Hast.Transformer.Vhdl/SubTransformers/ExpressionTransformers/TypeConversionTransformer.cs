@@ -181,16 +181,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var toSize = toType.GetSize();
 
 
-
-            Func<string, IVhdlElement, Invocation> createCastInvocation = (target, expression) =>
-                new Invocation
-                {
-                    Target = target.ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement> { { expression } }
-                };
-
-            Func<string, Invocation> createCastInvocationForFromExpression = target => 
-                createCastInvocation(target, fromExpression);
+            Func<string, Invocation> createCastInvocationForFromExpression = target =>
+                new Invocation(target, fromExpression);
 
             Func<IVhdlElement, IVhdlElement> createResizeExpression = parameter =>
             {
@@ -198,15 +190,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 // There needs to be some decision logic on size in SmartResize() because sometimes the sizes in VHDL
                 // won't be the same as in .NET due to type handling.
-                return new Invocation
-                {
-                    Target = "SmartResize".ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement>
-                        {
-                            { parameter },
-                            { toSize.ToVhdlValue(KnownDataTypes.UnrangedInt) }
-                        }
-                };
+                return Invocation.SmartResize(parameter, toSize);
             };
 
 
@@ -252,7 +236,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     expression = createResizeExpression(fromExpression);
                 }
 
-                result.ConvertedFromExpression = createCastInvocation("signed", expression);
+                result.ConvertedFromExpression = new Invocation("signed", expression);
             }
             else if (KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
             {

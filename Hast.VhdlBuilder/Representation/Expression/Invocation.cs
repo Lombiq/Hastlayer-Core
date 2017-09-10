@@ -12,26 +12,36 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Target { get; set; }
         public List<IVhdlElement> Parameters { get; set; } = new List<IVhdlElement>();
 
+
+        public Invocation()
+        {
+        }
+
+        public Invocation(IVhdlElement target, params IVhdlElement[] parameters)
+        {
+            Target = target;
+            Parameters = parameters.ToList();
+        }
+
+        public Invocation(string targetId, params IVhdlElement[] parameters)
+        {
+            Target = targetId.ToVhdlIdValue();
+            Parameters = parameters.ToList();
+        }
+
+
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Target.ToVhdl(vhdlGenerationOptions) +
             (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
 
 
-        public static Invocation ToInteger(IVhdlElement value) => 
-            new Invocation
-            {
-                Target = "to_integer".ToVhdlIdValue(),
-                Parameters = new List<IVhdlElement> { { value } }
-            };
+        public static Invocation ToInteger(IVhdlElement value) => new Invocation("to_integer", value);
 
-        public static Invocation ToReal(IVhdlElement value) =>
-            new Invocation
-            {
-                Target = "real".ToVhdlIdValue(),
-                Parameters = new List<IVhdlElement> { { value } }
-            };
+        public static Invocation ToReal(IVhdlElement value) => new Invocation("real", value);
 
         public static Invocation Resize(IVhdlElement value, int size) => InvokeSizingFunction("resize", value, size);
+
+        public static Invocation SmartResize(IVhdlElement value, int size) => InvokeSizingFunction("SmartResize", value, size);
 
         public static Invocation ToSigned(IVhdlElement value, int size) => InvokeSizingFunction("to_signed", value, size);
 
@@ -39,11 +49,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
 
         private static Invocation InvokeSizingFunction(string functionName, IVhdlElement value, int size) =>
-            new Invocation
-            {
-                Target = functionName.ToVhdlIdValue(),
-                Parameters = new List<IVhdlElement> { { value }, { size.ToVhdlValue(KnownDataTypes.UnrangedInt) } }
-            };
+            new Invocation(functionName.ToVhdlIdValue(), value, size.ToVhdlValue(KnownDataTypes.UnrangedInt));
     }
 
 

@@ -50,7 +50,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
             foreach (var line in Lines)
             {
-                stringBuilder.Append(new LineComment(line).ToVhdl(vhdlGenerationOptions));
+                stringBuilder.Append(new LineComment(line) { CantBeOmitted = true }.ToVhdl(vhdlGenerationOptions));
             }
 
             return stringBuilder.ToString();

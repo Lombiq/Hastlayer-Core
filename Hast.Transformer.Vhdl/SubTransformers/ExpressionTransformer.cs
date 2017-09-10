@@ -536,11 +536,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // In VHDL there is no boolean negation operator, just the not() function. This will bitwise
                         // negate the value, so for bools it will work as the .NET NOT operator, for other types as a 
                         // bitwise NOT.
-                        return new Invocation
-                        {
-                            Target = "not".ToVhdlValue(KnownDataTypes.Identifier),
-                            Parameters = new List<IVhdlElement> { transformedExpression }
-                        };
+                        return new Invocation("not", transformedExpression);
                     case UnaryOperatorType.Plus:
                         return new Unary
                         {
