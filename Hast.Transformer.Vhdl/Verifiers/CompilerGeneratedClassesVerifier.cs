@@ -38,12 +38,16 @@ namespace Hast.Transformer.Vhdl.Verifiers
                         if (fieldDefinition == null) return;
 
                         var field = fields.Values
-                            .Single(f => f.Annotation<FieldDefinition>().FullName == fieldDefinition.FullName);
+                            .SingleOrDefault(f => f.Annotation<FieldDefinition>().FullName == fieldDefinition.FullName);
+
+                        // The field won't be on the compiler-generated class if the member reference accesses a
+                        // user-defined type's field.
+                        if (field == null) return;
 
                         // Is the field assigned to? Because we don't support that currently, since with it being
                         // converted to a parameter we'd need to return its value and assign it to the caller's
-                        // variable. Maybe we'll allow this with static field support, but not for lambdas used
-                        // in parallelized expressions (since that would require concurrent access too).
+                        // variable. Maybe we'll allow this with static field support, but not for lambdas used in
+                        // parallelized expressions (since that would require concurrent access too).
                         var isAssignedTo =
                             // The field is directly assigned to.
                             (memberReferenceExpression.Parent is AssignmentExpression &&
