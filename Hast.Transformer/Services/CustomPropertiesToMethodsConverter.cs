@@ -94,14 +94,15 @@ namespace Hast.Transformer.Services
 
                     if (memberReferenceExpression.GetMemberFullName() != _unifiedPropertyName) return;
 
-                    // On property accesses there is a PropertyDefinition and MethodDefinition annotation. We need to
-                    // use the latter to convert the property access into a method call.
+                    // On property accesses there is a PropertyDefinition and MethodDefinition, sometimes MethodReference
+                    // annotation. We need to use the latter to convert the property access into a method call.
                     memberReferenceExpression.RemoveAnnotations<PropertyDefinition>();
-                    var methodDefinition = memberReferenceExpression.Annotation<MethodDefinition>();
-                    memberReferenceExpression.MemberName = methodDefinition.Name;
+                    var methodReference = memberReferenceExpression.Annotation<MethodReference>();
+                    memberReferenceExpression.MemberName = methodReference.Name;
                     var invocation = new InvocationExpression(memberReferenceExpression.Clone());
-                    invocation.AddAnnotation(methodDefinition);
-                    if (methodDefinition.IsSetter)
+                    invocation.AddAnnotation(methodReference);
+                    if (methodReference.IsDefinition && ((MethodDefinition)methodReference).IsSetter ||
+                        !methodReference.IsDefinition && methodReference.Name.StartsWith("set_"))
                     {
                         var parentAssignment = (AssignmentExpression)memberReferenceExpression.Parent;
                         invocation.Arguments.Add(parentAssignment.Right.Clone());
