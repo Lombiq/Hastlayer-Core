@@ -46,7 +46,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     foreach (var field in record.Fields)
                     {
-                        if (field.DataType is ArrayType || field.DataType is Record)
+                        if (field.DataType is ArrayTypeBase || field.DataType is Record)
                         {
                             component.DependentTypesTable.AddDependency(record, field.DataType.Name);
                             hasDependency = true;
