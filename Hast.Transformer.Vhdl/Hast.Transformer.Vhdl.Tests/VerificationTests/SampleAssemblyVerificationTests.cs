@@ -4,6 +4,7 @@ using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Lombiq.OrchardAppHost;
+using Lombiq.Unum;
 using NUnit.Framework;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
@@ -59,6 +60,26 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             });
 
                         configuration.AddHardwareEntryPointType<SimdCalculator>();
+                    });
+
+                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+            });
+        }
+
+        [Test]
+        public async Task UnumSampleMatchesApproved()
+        {
+            await _host.Run<ITransformer>(async transformer =>
+            {
+                var hardwareDescription = await TransformAssembliesToVhdl(
+                    transformer,
+                    new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly },
+                    configuration =>
+                    {
+                        configuration.AddHardwareEntryPointType<UnumCalculator>();
+                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                            UnumCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
+                            UnumCalculatorExtensions.ManuallySizedArrays);
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
