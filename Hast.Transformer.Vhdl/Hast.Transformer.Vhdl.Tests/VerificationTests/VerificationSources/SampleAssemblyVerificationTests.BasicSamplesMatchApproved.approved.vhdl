@@ -1476,12 +1476,52 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_2\ => 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.indexObject\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = this.input + num * 2u;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.0\ := resize(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num\ * to_unsigned(2, 32), 32);
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.1\ := \System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::input\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.0\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = true;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag\ := True;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 2;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.i\ := to_signed(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 9999999) {
+                        -- 	flag2 = flag;
+                        -- 	if (flag2) {
+                        -- 		num2 = num2 + num;
+                        -- 	}
+                        -- 	else {
+                        -- 		num2 = num2 - num;
+                        -- 	}
+                        -- 	flag = !flag;
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.2
@@ -1490,7 +1530,31 @@ begin
                         -- The while loop's condition:
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.i\ < to_signed(9999999, 32);
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.2\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	flag2 = flag;
+                            -- 	if (flag2) {
+                            -- 		num2 = num2 + num;
+                            -- 	}
+                            -- 	else {
+                            -- 		num2 = num2 - num;
+                            -- 	}
+                            -- 	flag = !flag;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag2 = flag;
+                            -- 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag2) {
+                            -- 	num2 = num2 + num;
+                            -- }
+                            -- else {
+                            -- 	num2 = num2 - num;
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_6\ and ends in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_6\.
@@ -1508,12 +1572,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.return\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_5\ => 
                         -- State after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = !flag;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.flag\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.5\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.i\ + to_signed(1, 32);
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.i\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_2\ if the loop wasn't exited with a state change.
@@ -1523,6 +1596,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 + num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + num;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.3\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.3\;
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
@@ -1532,6 +1613,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 - num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 - num;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.4\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\ - \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0.binaryOperationResult.4\;
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).0._State_3\.
@@ -1601,12 +1690,52 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\ => 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = this.input + num * 2u;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.0\ := resize(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\ * to_unsigned(2, 32), 32);
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.1\ := \System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::input\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.0\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = true;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\ := True;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 2;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ := to_signed(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 9999999) {
+                        -- 	flag2 = flag;
+                        -- 	if (flag2) {
+                        -- 		num2 = num2 + num;
+                        -- 	}
+                        -- 	else {
+                        -- 		num2 = num2 - num;
+                        -- 	}
+                        -- 	flag = !flag;
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.2
@@ -1615,7 +1744,31 @@ begin
                         -- The while loop's condition:
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ < to_signed(9999999, 32);
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.2\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	flag2 = flag;
+                            -- 	if (flag2) {
+                            -- 		num2 = num2 + num;
+                            -- 	}
+                            -- 	else {
+                            -- 		num2 = num2 - num;
+                            -- 	}
+                            -- 	flag = !flag;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag2 = flag;
+                            -- 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag2) {
+                            -- 	num2 = num2 + num;
+                            -- }
+                            -- else {
+                            -- 	num2 = num2 - num;
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\ and ends in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\.
@@ -1633,12 +1786,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.return\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_5\ => 
                         -- State after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = !flag;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.flag\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ + to_signed(1, 32);
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.i\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_2\ if the loop wasn't exited with a state change.
@@ -1648,6 +1810,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 + num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + num;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.3\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.3\;
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
@@ -1657,6 +1827,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 - num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 - num;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ - \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1.binaryOperationResult.4\;
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).1._State_3\.
@@ -1726,12 +1904,52 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\ => 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = this.input + num * 2u;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.0\ := resize(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\ * to_unsigned(2, 32), 32);
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.1\ := \System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::input\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.0\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = true;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\ := True;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 2;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ := to_signed(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 9999999) {
+                        -- 	flag2 = flag;
+                        -- 	if (flag2) {
+                        -- 		num2 = num2 + num;
+                        -- 	}
+                        -- 	else {
+                        -- 		num2 = num2 - num;
+                        -- 	}
+                        -- 	flag = !flag;
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.2
@@ -1740,7 +1958,31 @@ begin
                         -- The while loop's condition:
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ < to_signed(9999999, 32);
                         if (\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.2\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	flag2 = flag;
+                            -- 	if (flag2) {
+                            -- 		num2 = num2 + num;
+                            -- 	}
+                            -- 	else {
+                            -- 		num2 = num2 - num;
+                            -- 	}
+                            -- 	flag = !flag;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag2 = flag;
+                            -- 
                             \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag2) {
+                            -- 	num2 = num2 + num;
+                            -- }
+                            -- else {
+                            -- 	num2 = num2 - num;
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\ and ends in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\.
@@ -1758,12 +2000,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_4\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.return\ <= \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_5\ => 
                         -- State after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = !flag;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\ := not(\ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.flag\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ + to_signed(1, 32);
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.i\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_2\ if the loop wasn't exited with a state change.
@@ -1773,6 +2024,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_6\ => 
                         -- True branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 + num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + num;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.3\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ + \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.3\;
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
@@ -1782,6 +2041,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_7\ => 
                         -- False branch of the if-else started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = num2 - num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 - num;
+                        -- 
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ - \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num\;
                         \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.num2\ := \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2.binaryOperationResult.4\;
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).2._State_3\.
@@ -1863,6 +2130,36 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ParallelAlgorithm.<>c__DisplayClass3_0 <>c__DisplayClass3_;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task<uint>[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int arg_57_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- TaskFactory arg_52_0;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Func<object, uint> arg_52_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- <>c__DisplayClass3_ = new ParallelAlgorithm.<>c__DisplayClass3_0 ();
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- <>c__DisplayClass3_.input = memory.ReadUInt32 (0);
+                        -- 
                         -- Begin SimpleMemory read.
                         \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -1875,8 +2172,25 @@ begin
                             \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::input\ := ConvertStdLogicVectorToUInt32(\ParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array = new Task<uint>[280];
+                            -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = 0u;
+                            -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.num\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (num < 280u) {
+                            -- 	arg_57_1 = (int)num;
+                            -- 	arg_52_0 = Task.Factory;
+                            -- 	if (arg_52_1 = <>c__DisplayClass3_.<>9__0 == null) {
+                            -- 		arg_52_1 = <>c__DisplayClass3_.<>9__0 = new Func<object, uint> (<>c__DisplayClass3_.<Run>b__0);
+                            -- 	}
+                            -- 	array [arg_57_1] = arg_52_0.StartNew<uint> (arg_52_1, num);
+                            -- 	num = num + 1u;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_4\;
                         end if;
@@ -1886,7 +2200,32 @@ begin
                         -- The while loop's condition:
                         \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\ := \ParallelAlgorithm::Run(SimpleMemory).0.num\ < to_unsigned(280, 32);
                         if (\ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	arg_57_1 = (int)num;
+                            -- 	arg_52_0 = Task.Factory;
+                            -- 	if (arg_52_1 = <>c__DisplayClass3_.<>9__0 == null) {
+                            -- 		arg_52_1 = <>c__DisplayClass3_.<>9__0 = new Func<object, uint> (<>c__DisplayClass3_.<Run>b__0);
+                            -- 	}
+                            -- 	array [arg_57_1] = arg_52_0.StartNew<uint> (arg_52_1, num);
+                            -- 	num = num + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_57_1 = (int)num;
+                            -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.arg_57_1\ := signed(\ParallelAlgorithm::Run(SimpleMemory).0.num\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_52_0 = Task.Factory;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (arg_52_1 = <>c__DisplayClass3_.<>9__0 == null) {
+                            -- 	arg_52_1 = <>c__DisplayClass3_.<>9__0 = new Func<object, uint> (<>c__DisplayClass3_.<Run>b__0);
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [arg_57_1] = arg_52_0.StartNew<uint> (arg_52_1, num);
+                            -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(System.UInt32)
                             case \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\ is 
                                 when 0 => 
@@ -1900,6 +2239,9 @@ begin
                                     \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32)._Started.2\ <= true;
                             end case;
                             \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\ := \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm/<>c__DisplayClass3_0::<Run>b__0(UInt32).invocationIndex\ + 1;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num + 1u;
+                            -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\ := \ParallelAlgorithm::Run(SimpleMemory).0.num\ + to_unsigned(1, 32);
                             \ParallelAlgorithm::Run(SimpleMemory).0.num\ := \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.1\;
                         else 
@@ -1908,6 +2250,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task.WhenAll<uint> (array).Wait ();
+                        -- 
                         \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_6\ => 
@@ -1923,8 +2268,20 @@ begin
                             \ParallelAlgorithm::Run(SimpleMemory).0.array\(0) := \ParallelAlgorithm::Run(SimpleMemory).0.return.0\;
                             \ParallelAlgorithm::Run(SimpleMemory).0.array\(1) := \ParallelAlgorithm::Run(SimpleMemory).0.return.1\;
                             \ParallelAlgorithm::Run(SimpleMemory).0.array\(2) := \ParallelAlgorithm::Run(SimpleMemory).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = 0u;
+                            -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.num2\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = 0;
+                            -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.i\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (i < 280) {
+                            -- 	num2 = num2 + array [i].Result;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \ParallelAlgorithm::Run(SimpleMemory).0._State\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_7\;
                         end if;
@@ -1934,8 +2291,20 @@ begin
                         -- The while loop's condition:
                         \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\ := \ParallelAlgorithm::Run(SimpleMemory).0.i\ < to_signed(280, 32);
                         if (\ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num2 = num2 + array [i].Result;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = num2 + array [i].Result;
+                            -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.3\ := \ParallelAlgorithm::Run(SimpleMemory).0.num2\ + \ParallelAlgorithm::Run(SimpleMemory).0.array\(to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.i\));
                             \ParallelAlgorithm::Run(SimpleMemory).0.num2\ := \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = i + 1;
+                            -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.4\ := \ParallelAlgorithm::Run(SimpleMemory).0.i\ + to_signed(1, 32);
                             \ParallelAlgorithm::Run(SimpleMemory).0.i\ := \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.4\;
                         else 
@@ -1944,6 +2313,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_8\ => 
                         -- State after the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (0, num2);
+                        -- 
                         -- Begin SimpleMemory write.
                         \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -2083,6 +2455,48 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task<ImageContrastModifier.PixelProcessingTaskOutput>[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int j;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte[] pixelBytes;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int k;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (ushort)memory.ReadUInt32 (0);
+                        -- 
                         -- Begin SimpleMemory read.
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -2095,6 +2509,9 @@ begin
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\ := SmartResize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.0\), 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = (ushort)memory.ReadUInt32 (1);
+                            -- 
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_4\;
                         end if;
@@ -2112,6 +2529,9 @@ begin
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ := SmartResize(ConvertStdLogicVectorToUInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.1\), 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = memory.ReadInt32 (2);
+                            -- 
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_6\;
                         end if;
@@ -2129,8 +2549,22 @@ begin
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\ := \DataIn\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := ConvertStdLogicVectorToInt32(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.2\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = num3 > 100;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.0\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ > to_signed(100, 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	num3 = 100;
+                            -- }
+                            -- else {
+                            -- 	flag2 = num3 < -100;
+                            -- 	if (flag2) {
+                            -- 		num3 = -100;
+                            -- 	}
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\.
@@ -2146,18 +2580,41 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_8\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 100 + num3 * 1000 / 100;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ := to_signed(100, 32) + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.2\;
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.3\ / to_signed(100, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.4\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new Task<ImageContrastModifier.PixelProcessingTaskOutput>[25];
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = (int)(num2 * num);
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\ := resize(signed(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.num2\ * \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num\), 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ := (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.5\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = num4 / 25;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num4\ / to_signed(25, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.6\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag3 = num4 % 25 != 0;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.5
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num3 = 100;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 100;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := to_signed(100, 32);
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_9\) then 
@@ -2166,8 +2623,24 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\ => 
                         -- False branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	flag2 = num3 < -100;
+                        -- 	if (flag2) {
+                        -- 		num3 = -100;
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = num3 < -100;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.1\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ < to_signed(-100, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag2\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	num3 = -100;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\.
@@ -2189,6 +2662,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num3 = -100;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = -100;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\ := to_signed(-100, 32);
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_10\.
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ = \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_12\) then 
@@ -2209,6 +2690,11 @@ begin
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\ => 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.7\ /= to_signed(0, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.flag3\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.8\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag3) {
+                        -- 	num5 = num5 + 1;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\ and ends in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\.
@@ -2223,12 +2709,52 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < num5) {
+                        -- 	j = 0;
+                        -- 	while (j < 25) {
+                        -- 		pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
+                        -- 		ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
+                        -- 		object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
+                        -- 			PixelBytes = pixelBytes,
+                        -- 			ContrastValue = num3
+                        -- 		};
+                        -- 		array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
+                        -- 		j = j + 1;
+                        -- 	}
+                        -- 	Task.WhenAll<ImageContrastModifier.PixelProcessingTaskOutput> (array).Wait ();
+                        -- 	k = 0;
+                        -- 	while (k < 25) {
+                        -- 		byte[] array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0;
+                        -- 		array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 = new byte[3][] {
+                        -- 
+                        -- 		};
+                        -- 		array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [0] = array [k].Result.R;
+                        -- 		array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [1] = array [k].Result.G;
+                        -- 		array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [2] = array [k].Result.B;
+                        -- 		memory.Write4Bytes (i * 25 + k + 3, array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0);
+                        -- 		k = k + 1;
+                        -- 	}
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_16\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num5 = num5 + 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = num5 + 1;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ + to_signed(1, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.9\;
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_14\.
@@ -2241,7 +2767,51 @@ begin
                         -- The while loop's condition:
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ < \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num5\;
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.10\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	j = 0;
+                            -- 	while (j < 25) {
+                            -- 		pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
+                            -- 		ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
+                            -- 		object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
+                            -- 			PixelBytes = pixelBytes,
+                            -- 			ContrastValue = num3
+                            -- 		};
+                            -- 		array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
+                            -- 		j = j + 1;
+                            -- 	}
+                            -- 	Task.WhenAll<ImageContrastModifier.PixelProcessingTaskOutput> (array).Wait ();
+                            -- 	k = 0;
+                            -- 	while (k < 25) {
+                            -- 		byte[] array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0;
+                            -- 		array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 = new byte[3][] {
+                            -- 
+                            -- 		};
+                            -- 		array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [0] = array [k].Result.R;
+                            -- 		array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [1] = array [k].Result.G;
+                            -- 		array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [2] = array [k].Result.B;
+                            -- 		memory.Write4Bytes (i * 25 + k + 3, array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0);
+                            -- 		k = k + 1;
+                            -- 	}
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = 0;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (j < 25) {
+                            -- 	pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
+                            -- 	ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
+                            -- 	object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
+                            -- 		PixelBytes = pixelBytes,
+                            -- 		ContrastValue = num3
+                            -- 	};
+                            -- 	array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_19\;
                         else 
@@ -2257,6 +2827,21 @@ begin
                         -- The while loop's condition:
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ < to_signed(25, 32);
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.11\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
+                            -- 	ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
+                            -- 	object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
+                            -- 		PixelBytes = pixelBytes,
+                            -- 		ContrastValue = num3
+                            -- 	};
+                            -- 	array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- pixelBytes = memory.Read4Bytes (i * 25 + j + 3);
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.12\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.14\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.13\ + to_signed(3, 32);
@@ -2270,6 +2855,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_20\ => 
                         -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task.WhenAll<ImageContrastModifier.PixelProcessingTaskOutput> (array).Wait ();
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_21\ => 
@@ -2279,12 +2867,24 @@ begin
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\ := (unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(7 downto 0)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(15 downto 8)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(23 downto 16)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(31 downto 24)));
+                            -- The following section was transformed from the .NET statement below:
+                            -- ImageContrastModifier.PixelProcessingTaskInput object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7 = new ImageContrastModifier.PixelProcessingTaskInput {
+                            -- 	PixelBytes = pixelBytes,
+                            -- 	ContrastValue = num3
+                            -- };
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\IsNull\ := false;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\PixelBytes\ := (others => to_unsigned(0, 8));
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\ContrastValue\ := to_signed(0, 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [j] = Task.Factory.StartNew<ImageContrastModifier.PixelProcessingTaskOutput> (new Func<object, ImageContrastModifier.PixelProcessingTaskOutput> (this.<ChangeContrast>b__6_0), object01a61e9a6e1fe0bf53380b6fa9ed8114cc1530e5f927bb6d214043acaa767fc7);
+                            -- 
                             -- Starting state machine invocation for the following method: Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)
                             case \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ is 
                                 when 0 => 
@@ -2298,6 +2898,9 @@ begin
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput)._Started.2\ <= true;
                             end case;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).invocationIndex\ + 1;
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = j + 1;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ + to_signed(1, 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.j\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\;
                             -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_17\ if the loop wasn't exited with a state change.
@@ -2319,7 +2922,23 @@ begin
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(0) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.0\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(1) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.1\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(2) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- k = 0;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (k < 25) {
+                            -- 	byte[] array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0;
+                            -- 	array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 = new byte[3][] {
+                            -- 
+                            -- 	};
+                            -- 	array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [0] = array [k].Result.R;
+                            -- 	array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [1] = array [k].Result.G;
+                            -- 	array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [2] = array [k].Result.B;
+                            -- 	memory.Write4Bytes (i * 25 + k + 3, array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0);
+                            -- 	k = k + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_23\;
                         end if;
@@ -2329,10 +2948,43 @@ begin
                         -- The while loop's condition:
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ < to_signed(25, 32);
                         if (\ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	byte[] array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0;
+                            -- 	array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 = new byte[3][] {
+                            -- 
+                            -- 	};
+                            -- 	array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [0] = array [k].Result.R;
+                            -- 	array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [1] = array [k].Result.G;
+                            -- 	array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [2] = array [k].Result.B;
+                            -- 	memory.Write4Bytes (i * 25 + k + 3, array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0);
+                            -- 	k = k + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- byte[] array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 = new byte[3][] {
+                            -- 
+                            -- };
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\ := (others => to_unsigned(0, 8));
+                            -- The following section was transformed from the .NET statement below:
+                            -- array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [0] = array [k].Result.R;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(to_integer(to_signed(0, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\R\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [1] = array [k].Result.G;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(to_integer(to_signed(1, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\G\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0 [2] = array [k].Result.B;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0\(to_integer(to_signed(2, 32))) := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.array\(to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\)).\B\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.Write4Bytes (i * 25 + k + 3, array4df3dadd02b2760e0641eab0b6458951a2195891ca89da9edea346e7614cabb0);
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ := resize(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ * to_signed(25, 32), 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\ + \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.19\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.18\ + to_signed(3, 32);
@@ -2349,6 +3001,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_24\ => 
                         -- State after the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ + to_signed(1, 32);
                         \ImageContrastModifier::ChangeContrast(SimpleMemory).0.i\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.21\;
                         -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_15\ if the loop wasn't exited with a state change.
@@ -2361,6 +3016,9 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- k = k + 1;
+                            -- 
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ + to_signed(1, 32);
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.k\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.20\;
                             -- Returning to the repeated state of the while loop which was started in state \ImageContrastModifier::ChangeContrast(SimpleMemory).0._State_22\ if the loop wasn't exited with a state change.
@@ -2438,23 +3096,67 @@ begin
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel.parameter.In\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (int)pixel * 1000 / 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ := resize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.0\ / to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num - 500;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ - to_signed(500, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num * contrastValue;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.3\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ * \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.contrastValue\, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num / 1000;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ / to_signed(1000, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.4\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + 500;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.5\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ + to_signed(500, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.5\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num * 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.6\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ * to_signed(255, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.6\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num / 1000;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ / to_signed(1000, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num < 0;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ < to_signed(0, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.8\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	num = 0;
+                        -- }
+                        -- else {
+                        -- 	flag2 = num > 255;
+                        -- 	if (flag2) {
+                        -- 		num = 255;
+                        -- 	}
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\.
@@ -2469,11 +3171,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (byte)num;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_4\) then 
@@ -2482,8 +3195,24 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\ => 
                         -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	flag2 = num > 255;
+                        -- 	if (flag2) {
+                        -- 		num = 255;
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = num > 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ > to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.flag2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.binaryOperationResult.9\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	num = 255;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\.
@@ -2505,6 +3234,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 255;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).0.num\ := to_signed(255, 32);
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_5\.
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).0._State_7\) then 
@@ -2580,23 +3317,67 @@ begin
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel.parameter.In\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (int)pixel * 1000 / 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ := resize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.0\ / to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num - 500;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ - to_signed(500, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num * contrastValue;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.3\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ * \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.contrastValue\, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num / 1000;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ / to_signed(1000, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.4\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + 500;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.5\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ + to_signed(500, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.5\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num * 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.6\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ * to_signed(255, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.6\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num / 1000;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ / to_signed(1000, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num < 0;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ < to_signed(0, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.8\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	num = 0;
+                        -- }
+                        -- else {
+                        -- 	flag2 = num > 255;
+                        -- 	if (flag2) {
+                        -- 		num = 255;
+                        -- 	}
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\.
@@ -2611,11 +3392,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (byte)num;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_4\) then 
@@ -2624,8 +3416,24 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\ => 
                         -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	flag2 = num > 255;
+                        -- 	if (flag2) {
+                        -- 		num = 255;
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = num > 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ > to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.flag2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.binaryOperationResult.9\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	num = 255;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\.
@@ -2647,6 +3455,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 255;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).1.num\ := to_signed(255, 32);
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_5\.
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).1._State_7\) then 
@@ -2722,23 +3538,67 @@ begin
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\ => 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel.parameter.In\;
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (int)pixel * 1000 / 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ := resize(signed(SmartResize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.pixel\, 32)) * to_signed(1000, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.0\ / to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num - 500;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ - to_signed(500, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num * contrastValue;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.3\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ * \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.contrastValue\, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num / 1000;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ / to_signed(1000, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.4\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + 500;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.5\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ + to_signed(500, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.5\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num * 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.6\ := resize(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ * to_signed(255, 32), 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.6\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num / 1000;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ / to_signed(1000, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num < 0;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ < to_signed(0, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.8\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	num = 0;
+                        -- }
+                        -- else {
+                        -- 	flag2 = num > 255;
+                        -- 	if (flag2) {
+                        -- 		num = 255;
+                        -- 	}
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\.
@@ -2753,11 +3613,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_3\ => 
                         -- State after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (byte)num;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.return\ <= SmartResize(unsigned(\ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\), 8);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_4\) then 
@@ -2766,8 +3637,24 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\ => 
                         -- False branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	flag2 = num > 255;
+                        -- 	if (flag2) {
+                        -- 		num = 255;
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = num > 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ > to_signed(255, 32);
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.flag2\ := \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.binaryOperationResult.9\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	num = 255;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\ and ends in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\.
@@ -2789,6 +3676,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\ => 
                         -- True branch of the if-else started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 255;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 255;
+                        -- 
                         \ImageContrastModifier::ChangePixelValue(Byte,Int32).2.num\ := to_signed(255, 32);
                         -- Going to the state after the if-else which was started in state \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_5\.
                         if (\ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State\ = \ImageContrastModifier::ChangePixelValue(Byte,Int32).2._State_7\) then 
@@ -2846,7 +3741,23 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ImageContrastModifier.PixelProcessingTaskInput pixelProcessingTaskInput;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- pixelProcessingTaskInput = inputObject;
+                        -- 
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.pixelProcessingTaskInput\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.inputObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ImageContrastModifier.PixelProcessingTaskOutput objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a = new ImageContrastModifier.PixelProcessingTaskOutput {
+                        -- 	R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue),
+                        -- 	G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue),
+                        -- 	B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue)
+                        -- };
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\IsNull\ := false;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
@@ -2906,6 +3817,9 @@ begin
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
+                            -- 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.return\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).0._State_1\;
                         end if;
@@ -2961,7 +3875,23 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ImageContrastModifier.PixelProcessingTaskInput pixelProcessingTaskInput;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- pixelProcessingTaskInput = inputObject;
+                        -- 
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.pixelProcessingTaskInput\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.inputObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ImageContrastModifier.PixelProcessingTaskOutput objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a = new ImageContrastModifier.PixelProcessingTaskOutput {
+                        -- 	R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue),
+                        -- 	G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue),
+                        -- 	B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue)
+                        -- };
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\IsNull\ := false;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
@@ -3021,6 +3951,9 @@ begin
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
+                            -- 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.return\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).1._State_1\;
                         end if;
@@ -3076,7 +4009,23 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ImageContrastModifier.PixelProcessingTaskInput pixelProcessingTaskInput;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- pixelProcessingTaskInput = inputObject;
+                        -- 
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.pixelProcessingTaskInput\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.inputObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ImageContrastModifier.PixelProcessingTaskOutput objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a = new ImageContrastModifier.PixelProcessingTaskOutput {
+                        -- 	R = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [0], pixelProcessingTaskInput.ContrastValue),
+                        -- 	G = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [1], pixelProcessingTaskInput.ContrastValue),
+                        -- 	B = this.ChangePixelValue (pixelProcessingTaskInput.PixelBytes [2], pixelProcessingTaskInput.ContrastValue)
+                        -- };
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\IsNull\ := false;
                         \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\R\ := to_unsigned(0, 8);
@@ -3136,6 +4085,9 @@ begin
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\.\B\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a;
+                            -- 
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.return\ <= \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2.objecta2a4d6fd461551f6fd97266e3863ca498868fd4d49b46f09581d568ddf62376a\;
                             \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State\ := \ImageContrastModifier::<ChangeContrast>b__6_0(ImageContrastModifier/PixelProcessingTaskInput).2._State_1\;
                         end if;
@@ -3221,6 +4173,27 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- NumberContainer[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- NumberContainer[] array2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- NumberContainer numberContainer;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = memory.ReadUInt32 (0);
+                        -- 
                         -- Begin SimpleMemory read.
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -3233,6 +4206,12 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- MemoryContainer object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508 = new MemoryContainer (memory);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\.\IsNull\ := false;
                             -- Invoking the target's constructor.
@@ -3247,6 +4226,9 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = Hast.Samples.SampleAssembly.MemoryContainer.GetInput (object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508);
+                            -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= true;
@@ -3260,6 +4242,16 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.object29a6fc5705986afeb93844c5d0476ea3403f870b46cc8be7ca071f85ea3d7508\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array = new NumberContainer[4][] {
+                            -- 
+                            -- };
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [0] = new NumberContainer {
+                            -- 	Number = num
+                            -- };
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\WasIncreased\ := false;
@@ -3277,6 +4269,11 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [1] = new NumberContainer {
+                            -- 	Number = num + 4u
+                            -- };
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\WasIncreased\ := false;
@@ -3295,6 +4292,11 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ + to_unsigned(4, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [2] = new NumberContainer {
+                            -- 	Number = 24u
+                            -- };
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\WasIncreased\ := false;
@@ -3312,6 +4314,9 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\Number\ := to_unsigned(24, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [3] = new NumberContainer (9u);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))).\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))).\WasIncreased\ := false;
@@ -3329,6 +4334,9 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.Samples.SampleAssembly.NumberContainer.set_NumberPlusFive (array [0], num + 10u);
+                            -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ + to_unsigned(10, 32);
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32)
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32)));
@@ -3342,6 +4350,9 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [1], 5u);
+                            -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(5, 32);
@@ -3355,6 +4366,12 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.1\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array2 = new NumberContainer[1];
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- numberContainer = new NumberContainer ();
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\IsNull\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\ := false;
@@ -3371,7 +4388,13 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor().this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- numberContainer.Number = 5u;
+                            -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\ := to_unsigned(5, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- numberContainer.Number = Hast.Samples.SampleAssembly.NumberContainer.get_NumberPlusFive (numberContainer);
+                            -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::get_NumberPlusFive()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= true;
@@ -3385,7 +4408,15 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = !numberContainer.WasIncreased;
+                            -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.flag\ := not(\ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 5u);
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ and ends in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\.
@@ -3401,13 +4432,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
                         -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- array2 [0] = numberContainer;
+                        -- 
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.array2\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 4) {
+                        -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [i], array2 [0].Number);
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
                         -- True branch of the if-else started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 5u);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 5u);
+                        -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(5, 32);
@@ -3431,6 +4482,15 @@ begin
                         -- The while loop's condition:
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [i], array2 [0].Number);
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [i], array2 [0].Number);
+                            -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\;
                         else 
@@ -3439,6 +4499,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
                         -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (0, this.SumNumberCointainers (array));
+                        -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberCointainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).numberContainers.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[])._Started.0\ <= true;
@@ -3457,6 +4520,9 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.i\)) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = i + 1;
+                            -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ + to_signed(1, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.i\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\;
                             -- Returning to the repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ if the loop wasn't exited with a state change.
@@ -3537,8 +4603,26 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\ => 
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0u;
+                        -- 
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 4) {
+                        -- 	num = num + numberContainers [i].Number;
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3547,8 +4631,20 @@ begin
                         -- The while loop's condition:
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num = num + numberContainers [i].Number;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num + numberContainers [i].Number;
+                            -- 
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ + \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.numberContainers\(to_integer(\ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\)).\Number\;
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = i + 1;
+                            -- 
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.2\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ + to_signed(1, 32);
                             \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.i\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.binaryOperationResult.2\;
                         else 
@@ -3557,6 +4653,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_4\ => 
                         -- State after the while loop which was started in state \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num;
+                        -- 
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.return\ <= \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0.num\;
                         \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State\ := \ObjectOrientedShowcase::SumNumberCointainers(NumberContainer[]).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3600,6 +4699,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \NumberContainer::.ctor().0._State_2\ => 
                         \NumberContainer::.ctor().0.this\ := \NumberContainer::.ctor().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.Number = 99u;
+                        -- 
                         \NumberContainer::.ctor().0.this\.\Number\ := to_unsigned(99, 32);
                         \NumberContainer::.ctor().0._State\ := \NumberContainer::.ctor().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3646,7 +4748,13 @@ begin
                     when \NumberContainer::.ctor(UInt32).0._State_2\ => 
                         \NumberContainer::.ctor(UInt32).0.this\ := \NumberContainer::.ctor(UInt32).0.this.parameter.In\;
                         \NumberContainer::.ctor(UInt32).0.number\ := \NumberContainer::.ctor(UInt32).0.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.Number = 99u;
+                        -- 
                         \NumberContainer::.ctor(UInt32).0.this\.\Number\ := to_unsigned(99, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.Number = 9u;
+                        -- 
                         \NumberContainer::.ctor(UInt32).0.this\.\Number\ := to_unsigned(9, 32);
                         \NumberContainer::.ctor(UInt32).0._State\ := \NumberContainer::.ctor(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3696,7 +4804,13 @@ begin
                     when \NumberContainer::IncreaseNumber(UInt32).0._State_2\ => 
                         \NumberContainer::IncreaseNumber(UInt32).0.this\ := \NumberContainer::IncreaseNumber(UInt32).0.this.parameter.In\;
                         \NumberContainer::IncreaseNumber(UInt32).0.increaseBy\ := \NumberContainer::IncreaseNumber(UInt32).0.increaseBy.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.WasIncreased = true;
+                        -- 
                         \NumberContainer::IncreaseNumber(UInt32).0.this\.\WasIncreased\ := True;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this.Number = @this.Number + increaseBy;
+                        -- 
                         \NumberContainer::IncreaseNumber(UInt32).0.binaryOperationResult.0\ := \NumberContainer::IncreaseNumber(UInt32).0.this\.\Number\ + \NumberContainer::IncreaseNumber(UInt32).0.increaseBy\;
                         \NumberContainer::IncreaseNumber(UInt32).0.this\.\Number\ := \NumberContainer::IncreaseNumber(UInt32).0.binaryOperationResult.0\;
                         \NumberContainer::IncreaseNumber(UInt32).0.return\ <= \NumberContainer::IncreaseNumber(UInt32).0.this\.\Number\;
@@ -3745,6 +4859,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \NumberContainer::get_NumberPlusFive().0._State_2\ => 
                         \NumberContainer::get_NumberPlusFive().0.this\ := \NumberContainer::get_NumberPlusFive().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this.Number + 5u;
+                        -- 
                         \NumberContainer::get_NumberPlusFive().0.binaryOperationResult.0\ := \NumberContainer::get_NumberPlusFive().0.this\.\Number\ + to_unsigned(5, 32);
                         \NumberContainer::get_NumberPlusFive().0.return\ <= \NumberContainer::get_NumberPlusFive().0.binaryOperationResult.0\;
                         \NumberContainer::get_NumberPlusFive().0._State\ := \NumberContainer::get_NumberPlusFive().0._State_1\;
@@ -3794,6 +4911,9 @@ begin
                     when \NumberContainer::set_NumberPlusFive(UInt32).0._State_2\ => 
                         \NumberContainer::set_NumberPlusFive(UInt32).0.this\ := \NumberContainer::set_NumberPlusFive(UInt32).0.this.parameter.In\;
                         \NumberContainer::set_NumberPlusFive(UInt32).0.value\ := \NumberContainer::set_NumberPlusFive(UInt32).0.value.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.Number = value - 5u;
+                        -- 
                         \NumberContainer::set_NumberPlusFive(UInt32).0.binaryOperationResult.0\ := \NumberContainer::set_NumberPlusFive(UInt32).0.value\ - to_unsigned(5, 32);
                         \NumberContainer::set_NumberPlusFive(UInt32).0.this\.\Number\ := \NumberContainer::set_NumberPlusFive(UInt32).0.binaryOperationResult.0\;
                         \NumberContainer::set_NumberPlusFive(UInt32).0._State\ := \NumberContainer::set_NumberPlusFive(UInt32).0._State_1\;
@@ -3838,6 +4958,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \MemoryContainer::.ctor(SimpleMemory).0._State_2\ => 
                         \MemoryContainer::.ctor(SimpleMemory).0.this\ := \MemoryContainer::.ctor(SimpleMemory).0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this._memory = memory;
+                        -- 
                         \MemoryContainer::.ctor(SimpleMemory).0._State\ := \MemoryContainer::.ctor(SimpleMemory).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -3885,6 +5008,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \MemoryContainer::GetInput().0._State_2\ => 
                         \MemoryContainer::GetInput().0.this\ := \MemoryContainer::GetInput().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this._memory.ReadUInt32 (0);
+                        -- 
                         -- Begin SimpleMemory read.
                         \MemoryContainer::GetInput().0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ <= true;
@@ -3962,10 +5088,44 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = numberObject;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.numberObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num / 2u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num\ / to_unsigned(2, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 2u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ := to_unsigned(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num3 <= num2) {
+                        -- 	flag = num % num3 == 0u;
+                        -- 	if (flag) {
+                        -- 		result = false;
+                        -- 		return result;
+                        -- 	}
+                        -- 	num3 = num3 + 1u;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -3974,6 +5134,19 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num2\;
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	flag = num % num3 == 0u;
+                            -- 	if (flag) {
+                            -- 		result = false;
+                            -- 		return result;
+                            -- 	}
+                            -- 	num3 = num3 + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = num % num3 == 0u;
+                            -- 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_5\;
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\;
@@ -3981,7 +5154,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = true;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\ := True;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return true;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= True;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3999,6 +5178,12 @@ begin
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	result = false;
+                        -- 	return result;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\.
@@ -4013,6 +5198,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_7\ => 
                         -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = num3 + 1u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ + to_unsigned(1, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.binaryOperationResult.4\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_2\ if the loop wasn't exited with a state change.
@@ -4022,7 +5210,19 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_8\ => 
                         -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = false;
+                        -- 	return result;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = false;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\ := False;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0.result\;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_1\;
                         -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).0._State_6\.
@@ -4092,10 +5292,44 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = numberObject;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.numberObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num / 2u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num\ / to_unsigned(2, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 2u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ := to_unsigned(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num3 <= num2) {
+                        -- 	flag = num % num3 == 0u;
+                        -- 	if (flag) {
+                        -- 		result = false;
+                        -- 		return result;
+                        -- 	}
+                        -- 	num3 = num3 + 1u;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -4104,6 +5338,19 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num2\;
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	flag = num % num3 == 0u;
+                            -- 	if (flag) {
+                            -- 		result = false;
+                            -- 		return result;
+                            -- 	}
+                            -- 	num3 = num3 + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = num % num3 == 0u;
+                            -- 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_5\;
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\;
@@ -4111,7 +5358,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = true;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\ := True;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return true;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= True;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4129,6 +5382,12 @@ begin
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	result = false;
+                        -- 	return result;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\.
@@ -4143,6 +5402,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_7\ => 
                         -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = num3 + 1u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ + to_unsigned(1, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.binaryOperationResult.4\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_2\ if the loop wasn't exited with a state change.
@@ -4152,7 +5414,19 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_8\ => 
                         -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = false;
+                        -- 	return result;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = false;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\ := False;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1.result\;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_1\;
                         -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).1._State_6\.
@@ -4222,10 +5496,44 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = numberObject;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.numberObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num / 2u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num\ / to_unsigned(2, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 2u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ := to_unsigned(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num3 <= num2) {
+                        -- 	flag = num % num3 == 0u;
+                        -- 	if (flag) {
+                        -- 		result = false;
+                        -- 		return result;
+                        -- 	}
+                        -- 	num3 = num3 + 1u;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -4234,6 +5542,19 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num2\;
                         if (\PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	flag = num % num3 == 0u;
+                            -- 	if (flag) {
+                            -- 		result = false;
+                            -- 		return result;
+                            -- 	}
+                            -- 	num3 = num3 + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = num % num3 == 0u;
+                            -- 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_5\;
                         else 
                             \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\;
@@ -4241,7 +5562,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = true;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\ := True;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return true;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= True;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4259,6 +5586,12 @@ begin
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\ => 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.flag\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	result = false;
+                        -- 	return result;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\ and ends in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\.
@@ -4273,6 +5606,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_7\ => 
                         -- State after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = num3 + 1u;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ + to_unsigned(1, 32);
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.num3\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.binaryOperationResult.4\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_2\ if the loop wasn't exited with a state change.
@@ -4282,7 +5618,19 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_8\ => 
                         -- True branch of the if-else started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = false;
+                        -- 	return result;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = false;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\ := False;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.return\ <= \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2.result\;
                         \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State\ := \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_1\;
                         -- Going to the state after the if-else which was started in state \PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).2._State_6\.
@@ -4336,6 +5684,12 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint number;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- number = memory.ReadUInt32 (0);
+                        -- 
                         -- Begin SimpleMemory read.
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -4348,6 +5702,9 @@ begin
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteBoolean (0, this.IsPrimeNumberInternal (number));
+                            -- 
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\;
                             \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32)._Started.0\ <= true;
@@ -4411,6 +5768,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.IsPrimeNumber (memory);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= true;
                         \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_3\;
@@ -4419,6 +5779,9 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\) then 
                             \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return Task.CompletedTask;
+                            -- 
                             \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4481,6 +5844,18 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint number;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = memory.ReadUInt32 (0);
+                        -- 
                         -- Begin SimpleMemory read.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -4493,7 +5868,17 @@ begin
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = 0;
+                            -- 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while ((long)num2 < (long)((ulong)num)) {
+                            -- 	number = memory.ReadUInt32 (1 + num2);
+                            -- 	memory.WriteBoolean (1 + num2, this.IsPrimeNumberInternal (number));
+                            -- 	num2 = num2 + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_4\;
                         end if;
@@ -4503,6 +5888,16 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\, 64) < signed((SmartResize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num\, 64)));
                         if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	number = memory.ReadUInt32 (1 + num2);
+                            -- 	memory.WriteBoolean (1 + num2, this.IsPrimeNumberInternal (number));
+                            -- 	num2 = num2 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- number = memory.ReadUInt32 (1 + num2);
+                            -- 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\ := to_signed(1, 32) + \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\;
                             -- Begin SimpleMemory read.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\, 32);
@@ -4523,6 +5918,9 @@ begin
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteBoolean (1 + num2, this.IsPrimeNumberInternal (number));
+                            -- 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_signed(1, 32) + \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\;
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32)
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.PrimeCalculator::IsPrimeNumberInternal(UInt32).number.parameter.Out.0\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\;
@@ -4547,6 +5945,9 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = num2 + 1;
+                            -- 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(1, 32);
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\;
                             -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
@@ -4644,6 +6045,36 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task<bool>[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int arg_5D_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- TaskFactory arg_58_0;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Func<object, bool> arg_58_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int j;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = memory.ReadUInt32 (0);
+                        -- 
                         -- Begin SimpleMemory read.
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -4656,8 +6087,36 @@ begin
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array = new Task<bool>[30];
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\ := (others => false);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = 0;
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while ((long)num2 < (long)((ulong)num)) {
+                            -- 	i = 0;
+                            -- 	while (i < 30) {
+                            -- 		num3 = memory.ReadUInt32 (1 + num2 + i);
+                            -- 		arg_5D_1 = i;
+                            -- 		arg_58_0 = Task.Factory;
+                            -- 		if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
+                            -- 			arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
+                            -- 		}
+                            -- 		array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 		i = i + 1;
+                            -- 	}
+                            -- 	Task.WhenAll<bool> (array).Wait ();
+                            -- 	j = 0;
+                            -- 	while (j < 30) {
+                            -- 		memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 		j = j + 1;
+                            -- 	}
+                            -- 	num2 = num2 + 30;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\;
                         end if;
@@ -4667,7 +6126,44 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\, 64) < signed((SmartResize(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num\, 64)));
                         if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	i = 0;
+                            -- 	while (i < 30) {
+                            -- 		num3 = memory.ReadUInt32 (1 + num2 + i);
+                            -- 		arg_5D_1 = i;
+                            -- 		arg_58_0 = Task.Factory;
+                            -- 		if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
+                            -- 			arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
+                            -- 		}
+                            -- 		array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 		i = i + 1;
+                            -- 	}
+                            -- 	Task.WhenAll<bool> (array).Wait ();
+                            -- 	j = 0;
+                            -- 	while (j < 30) {
+                            -- 		memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 		j = j + 1;
+                            -- 	}
+                            -- 	num2 = num2 + 30;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = 0;
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (i < 30) {
+                            -- 	num3 = memory.ReadUInt32 (1 + num2 + i);
+                            -- 	arg_5D_1 = i;
+                            -- 	arg_58_0 = Task.Factory;
+                            -- 	if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
+                            -- 		arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
+                            -- 	}
+                            -- 	array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_6\;
                         else 
@@ -4683,6 +6179,21 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\ < to_signed(30, 32);
                         if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num3 = memory.ReadUInt32 (1 + num2 + i);
+                            -- 	arg_5D_1 = i;
+                            -- 	arg_58_0 = Task.Factory;
+                            -- 	if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
+                            -- 		arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
+                            -- 	}
+                            -- 	array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = memory.ReadUInt32 (1 + num2 + i);
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_signed(1, 32) + \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ + \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\;
                             -- Begin SimpleMemory read.
@@ -4695,6 +6206,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_7\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task.WhenAll<bool> (array).Wait ();
+                        -- 
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_8\ => 
@@ -4704,7 +6218,21 @@ begin
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num3\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.dataIn.1\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_5D_1 = i;
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.arg_5D_1\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_58_0 = Task.Factory;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (arg_58_1 = PrimeCalculator.<>c.<>9__9_0 == null) {
+                            -- 	arg_58_1 = PrimeCalculator.<>c.<>9__9_0 = new Func<object, bool> (PrimeCalculator.<>c.<>9.<ParallelizedArePrimeNumbers>b__9_0);
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [arg_5D_1] = arg_58_0.StartNew<bool> (arg_58_1, num3);
+                            -- 
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(System.UInt32)
                             case \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ is 
                                 when 0 => 
@@ -4718,6 +6246,9 @@ begin
                                     \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32)._Started.2\ <= true;
                             end case;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.PrimeCalculator/<>c::<ParallelizedArePrimeNumbers>b__9_0(UInt32).invocationIndex\ + 1;
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = i + 1;
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\ + to_signed(1, 32);
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.i\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\;
                             -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_4\ if the loop wasn't exited with a state change.
@@ -4739,7 +6270,16 @@ begin
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(0) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.0\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(1) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.1\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.array\(2) := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = 0;
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (j < 30) {
+                            -- 	memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_10\;
                         end if;
@@ -4749,6 +6289,15 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ < to_signed(30, 32);
                         if (\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteBoolean (1 + num2 + j, array [j].Result);
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := to_signed(1, 32) + \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\;
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.7\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ + \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\;
                             -- Begin SimpleMemory write.
@@ -4762,6 +6311,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_11\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + 30;
+                        -- 
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ + to_signed(30, 32);
                         \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.num2\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
@@ -4774,6 +6326,9 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = j + 1;
+                            -- 
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ + to_signed(1, 32);
                             \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.j\ := \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\;
                             -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0._State_9\ if the loop wasn't exited with a state change.
@@ -4842,9 +6397,37 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\ => 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = number / 2u;
+                        -- 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.number\ / to_unsigned(2, 32);
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 2u;
+                        -- 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ := to_unsigned(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num2 <= num) {
+                        -- 	flag = number % num2 == 0u;
+                        -- 	if (flag) {
+                        -- 		result = false;
+                        -- 		return result;
+                        -- 	}
+                        -- 	num2 = num2 + 1u;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -4853,6 +6436,19 @@ begin
                         -- The while loop's condition:
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num\;
                         if (\PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	flag = number % num2 == 0u;
+                            -- 	if (flag) {
+                            -- 		result = false;
+                            -- 		return result;
+                            -- 	}
+                            -- 	num2 = num2 + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number % num2 == 0u;
+                            -- 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_5\;
                         else 
                             \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\;
@@ -4860,7 +6456,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = true;
+                        -- 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\ := True;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return true;
+                        -- 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\ <= True;
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4878,6 +6480,12 @@ begin
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\ => 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.2\ = to_unsigned(0, 32);
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.flag\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	result = false;
+                        -- 	return result;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\ and ends in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\.
@@ -4892,6 +6500,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_7\ => 
                         -- State after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + 1u;
+                        -- 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ + to_unsigned(1, 32);
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.num2\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.binaryOperationResult.4\;
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_2\ if the loop wasn't exited with a state change.
@@ -4901,7 +6512,19 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_8\ => 
                         -- True branch of the if-else started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = false;
+                        -- 	return result;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = false;
+                        -- 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\ := False;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.return\ <= \PrimeCalculator::IsPrimeNumberInternal(UInt32).0.result\;
                         \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State\ := \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_1\;
                         -- Going to the state after the if-else which was started in state \PrimeCalculator::IsPrimeNumberInternal(UInt32).0._State_6\.
@@ -4955,6 +6578,12 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- short number;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, 1u);
+                        -- 
                         -- Begin SimpleMemory write.
                         \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -4966,6 +6595,9 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- number = (short)memory.ReadInt32 (0);
+                            -- 
                             -- Begin SimpleMemory read.
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -4979,6 +6611,9 @@ begin
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\ := SmartResize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.dataIn.0\), 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (0, this.RecursivelyCalculateFibonacchiSeries (memory, number));
+                            -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
@@ -5051,6 +6686,12 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- short number;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, 1u);
+                        -- 
                         -- Begin SimpleMemory write.
                         \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -5062,6 +6703,9 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- number = (short)memory.ReadInt32 (0);
+                            -- 
                             -- Begin SimpleMemory read.
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -5075,6 +6719,9 @@ begin
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\ := SmartResize(ConvertStdLogicVectorToInt32(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.dataIn.0\), 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (0, this.RecursivelyCalculateFactorial (memory, number));
+                            -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.number\;
                             \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16)._Started.0\ <= true;
@@ -5169,6 +6816,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_2\ => 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, memory.ReadUInt32 (1) + 1u);
+                        -- 
                         -- Begin SimpleMemory read.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ <= true;
@@ -5193,10 +6849,21 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number == 0 || number == 1;
+                            -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ = to_signed(0, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ = to_signed(1, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	result = (uint)number;
+                            -- }
+                            -- else {
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\.
@@ -5212,11 +6879,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.result\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (uint)number;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (uint)number;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.result\ := ToUnsignedAndExpand(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\) then 
@@ -5225,6 +6903,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\ - to_signed(2, 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\;
@@ -5332,6 +7018,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_2\ => 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, memory.ReadUInt32 (1) + 1u);
+                        -- 
                         -- Begin SimpleMemory read.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ <= true;
@@ -5356,10 +7051,21 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number == 0 || number == 1;
+                            -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ = to_signed(0, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ = to_signed(1, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	result = (uint)number;
+                            -- }
+                            -- else {
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\.
@@ -5375,11 +7081,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.result\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (uint)number;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (uint)number;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.result\ := ToUnsignedAndExpand(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\) then 
@@ -5388,6 +7105,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\ - to_signed(2, 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\;
@@ -5495,6 +7220,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_2\ => 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, memory.ReadUInt32 (1) + 1u);
+                        -- 
                         -- Begin SimpleMemory read.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ <= true;
@@ -5519,10 +7253,21 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number == 0 || number == 1;
+                            -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ = to_signed(0, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ = to_signed(1, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	result = (uint)number;
+                            -- }
+                            -- else {
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\.
@@ -5538,11 +7283,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.result\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (uint)number;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (uint)number;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.result\ := ToUnsignedAndExpand(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\) then 
@@ -5551,6 +7307,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\ - to_signed(2, 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\;
@@ -5658,6 +7422,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_2\ => 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, memory.ReadUInt32 (1) + 1u);
+                        -- 
                         -- Begin SimpleMemory read.
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ <= true;
@@ -5682,10 +7455,21 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number == 0 || number == 1;
+                            -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ = to_signed(0, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ = to_signed(1, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	result = (uint)number;
+                            -- }
+                            -- else {
+                            -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\.
@@ -5701,11 +7485,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.result\;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (uint)number;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (uint)number;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.result\ := ToUnsignedAndExpand(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\) then 
@@ -5714,6 +7509,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = this.RecursivelyCalculateFibonacchiSeries (memory, number - 2) + this.RecursivelyCalculateFibonacchiSeries (memory, number - 1);
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\ - to_signed(2, 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\;
@@ -5813,6 +7616,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_2\ => 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, memory.ReadUInt32 (1) + 1u);
+                        -- 
                         -- Begin SimpleMemory read.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ <= true;
@@ -5837,8 +7649,19 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number == 0;
+                            -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\ = to_signed(0, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	result = 1u;
+                            -- }
+                            -- else {
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_6\.
@@ -5854,11 +7677,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.result\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = 1u;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.result\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_6\) then 
@@ -5867,6 +7701,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.number\ - to_signed(1, 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.binaryOperationResult.2\;
@@ -5946,6 +7788,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_2\ => 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, memory.ReadUInt32 (1) + 1u);
+                        -- 
                         -- Begin SimpleMemory read.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ <= true;
@@ -5970,8 +7821,19 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number == 0;
+                            -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\ = to_signed(0, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	result = 1u;
+                            -- }
+                            -- else {
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_6\.
@@ -5987,11 +7849,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.result\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = 1u;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.result\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_6\) then 
@@ -6000,6 +7873,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.number\ - to_signed(1, 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.binaryOperationResult.2\;
@@ -6079,6 +7960,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_2\ => 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, memory.ReadUInt32 (1) + 1u);
+                        -- 
                         -- Begin SimpleMemory read.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ <= true;
@@ -6103,8 +7993,19 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number == 0;
+                            -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\ = to_signed(0, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	result = 1u;
+                            -- }
+                            -- else {
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_6\.
@@ -6120,11 +8021,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.result\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = 1u;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.result\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_6\) then 
@@ -6133,6 +8045,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.number\ - to_signed(1, 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.binaryOperationResult.2\;
@@ -6212,6 +8132,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_2\ => 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint result;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (1, memory.ReadUInt32 (1) + 1u);
+                        -- 
                         -- Begin SimpleMemory read.
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ <= true;
@@ -6236,8 +8165,19 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = number == 0;
+                            -- 
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\ = to_signed(0, 16);
                             \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.flag\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	result = 1u;
+                            -- }
+                            -- else {
+                            -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_6\.
@@ -6253,11 +8193,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.result\;
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_6\ => 
                         -- True branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = 1u;
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.result\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
                         if (\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State\ = \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_6\) then 
@@ -6266,6 +8217,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_7\ => 
                         -- False branch of the if-else started in state \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (uint)((long)number * (long)((ulong)this.RecursivelyCalculateFactorial (memory, number - 1)));
+                        -- 
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\ := \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.number\ - to_signed(1, 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFactorial(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
                         \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).number.parameter.Out.0\ <= \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.binaryOperationResult.2\;
@@ -6322,6 +8281,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::AddVectors(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.RunSimdOperation (memory, SimdOperation.Add);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Add\;
                         \SimdCalculator::AddVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
@@ -6371,6 +8333,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::SubtractVectors(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.RunSimdOperation (memory, SimdOperation.Subtract);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Subtract\;
                         \SimdCalculator::SubtractVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
@@ -6420,6 +8385,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::MultiplyVectors(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.RunSimdOperation (memory, SimdOperation.Multiply);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Multiply\;
                         \SimdCalculator::MultiplyVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
@@ -6469,6 +8437,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::DivideVectors(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.RunSimdOperation (memory, SimdOperation.Divide);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.SimdCalculator::RunSimdOperation(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,Hast.Samples.SampleAssembly.SimdOperation)
                         \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).operation.parameter.Out.0\ <= \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Divide\;
                         \SimdCalculator::DivideVectors(SimpleMemory).0.SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation)._Started.0\ <= true;
@@ -6691,6 +8662,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_2\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int j;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int k;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int l;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = memory.ReadInt32 (0);
+                        -- 
                         -- Begin SimpleMemory read.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= true;
@@ -6703,7 +8701,47 @@ begin
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\ := \DataIn\;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\ := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = 0;
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (i < num) {
+                            -- 	array = new int[30];
+                            -- 	array2 = new int[30];
+                            -- 	array3 = new int[30];
+                            -- 	j = 0;
+                            -- 	while (j < 30) {
+                            -- 		array [j] = memory.ReadInt32 (1 + i + j);
+                            -- 		j = j + 1;
+                            -- 	}
+                            -- 	k = 0;
+                            -- 	while (k < 30) {
+                            -- 		array2 [k] = memory.ReadInt32 (1 + i + k + num);
+                            -- 		k = k + 1;
+                            -- 	}
+                            -- 	switch (operation) {
+                            -- 	case SimdOperation.Add:
+                            -- 		array3 = SimdOperations.AddVectors (array, array2, 30);
+                            -- 		break;
+                            -- 	case SimdOperation.Subtract:
+                            -- 		array3 = SimdOperations.SubtractVectors (array, array2, 30);
+                            -- 		break;
+                            -- 	case SimdOperation.Multiply:
+                            -- 		array3 = SimdOperations.MultiplyVectors (array, array2, 30);
+                            -- 		break;
+                            -- 	case SimdOperation.Divide:
+                            -- 		array3 = SimdOperations.DivideVectors (array, array2, 30);
+                            -- 		break;
+                            -- 	}
+                            -- 	l = 0;
+                            -- 	while (l < 30) {
+                            -- 		memory.WriteInt32 (1 + i + l, array3 [l]);
+                            -- 		l = l + 1;
+                            -- 	}
+                            -- 	i = i + 30;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\;
                         end if;
@@ -6713,10 +8751,65 @@ begin
                         -- The while loop's condition:
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.0\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ < \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\;
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	array = new int[30];
+                            -- 	array2 = new int[30];
+                            -- 	array3 = new int[30];
+                            -- 	j = 0;
+                            -- 	while (j < 30) {
+                            -- 		array [j] = memory.ReadInt32 (1 + i + j);
+                            -- 		j = j + 1;
+                            -- 	}
+                            -- 	k = 0;
+                            -- 	while (k < 30) {
+                            -- 		array2 [k] = memory.ReadInt32 (1 + i + k + num);
+                            -- 		k = k + 1;
+                            -- 	}
+                            -- 	switch (operation) {
+                            -- 	case SimdOperation.Add:
+                            -- 		array3 = SimdOperations.AddVectors (array, array2, 30);
+                            -- 		break;
+                            -- 	case SimdOperation.Subtract:
+                            -- 		array3 = SimdOperations.SubtractVectors (array, array2, 30);
+                            -- 		break;
+                            -- 	case SimdOperation.Multiply:
+                            -- 		array3 = SimdOperations.MultiplyVectors (array, array2, 30);
+                            -- 		break;
+                            -- 	case SimdOperation.Divide:
+                            -- 		array3 = SimdOperations.DivideVectors (array, array2, 30);
+                            -- 		break;
+                            -- 	}
+                            -- 	l = 0;
+                            -- 	while (l < 30) {
+                            -- 		memory.WriteInt32 (1 + i + l, array3 [l]);
+                            -- 		l = l + 1;
+                            -- 	}
+                            -- 	i = i + 30;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array = new int[30];
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\ := (others => to_signed(0, 32));
+                            -- The following section was transformed from the .NET statement below:
+                            -- array2 = new int[30];
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\ := (others => to_signed(0, 32));
+                            -- The following section was transformed from the .NET statement below:
+                            -- array3 = new int[30];
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (others => to_signed(0, 32));
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = 0;
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (j < 30) {
+                            -- 	array [j] = memory.ReadInt32 (1 + i + j);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_6\;
                         else 
@@ -6732,6 +8825,15 @@ begin
                         -- The while loop's condition:
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.1\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ < to_signed(30, 32);
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	array [j] = memory.ReadInt32 (1 + i + j);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [j] = memory.ReadInt32 (1 + i + j);
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.2\ := to_signed(1, 32) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.3\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.2\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\;
                             -- Begin SimpleMemory read.
@@ -6744,7 +8846,16 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- k = 0;
+                        -- 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (k < 30) {
+                        -- 	array2 [k] = memory.ReadInt32 (1 + i + k + num);
+                        -- 	k = k + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6755,6 +8866,9 @@ begin
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\ := \DataIn\;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\)) := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.1\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = j + 1;
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.4\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ + to_signed(1, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.j\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.4\;
                             -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_4\ if the loop wasn't exited with a state change.
@@ -6768,6 +8882,15 @@ begin
                         -- The while loop's condition:
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.5\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ < to_signed(30, 32);
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.5\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	array2 [k] = memory.ReadInt32 (1 + i + k + num);
+                            -- 	k = k + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array2 [k] = memory.ReadInt32 (1 + i + k + num);
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.6\ := to_signed(1, 32) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.7\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.6\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.8\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.7\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.num\;
@@ -6781,8 +8904,27 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- switch (operation) {
+                        -- case SimdOperation.Add:
+                        -- 	array3 = SimdOperations.AddVectors (array, array2, 30);
+                        -- 	break;
+                        -- case SimdOperation.Subtract:
+                        -- 	array3 = SimdOperations.SubtractVectors (array, array2, 30);
+                        -- 	break;
+                        -- case SimdOperation.Multiply:
+                        -- 	array3 = SimdOperations.MultiplyVectors (array, array2, 30);
+                        -- 	break;
+                        -- case SimdOperation.Divide:
+                        -- 	array3 = SimdOperations.DivideVectors (array, array2, 30);
+                        -- 	break;
+                        -- }
+                        -- 
                         case \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.operation\ is 
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Add\ => 
+                                -- The following section was transformed from the .NET statement below:
+                                -- array3 = SimdOperations.AddVectors (array, array2, 30);
+                                -- 
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.10\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.11\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.12\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
@@ -6815,6 +8957,9 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Subtract\ => 
+                                -- The following section was transformed from the .NET statement below:
+                                -- array3 = SimdOperations.SubtractVectors (array, array2, 30);
+                                -- 
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.40\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.41\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.42\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
@@ -6847,6 +8992,9 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) - \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Multiply\ => 
+                                -- The following section was transformed from the .NET statement below:
+                                -- array3 = SimdOperations.MultiplyVectors (array, array2, 30);
+                                -- 
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0), 32);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1), 32);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2), 32);
@@ -6879,6 +9027,9 @@ begin
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\ <= resize(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(29) * \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(29), 32);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\;
                             when \Hast.Samples.SampleAssembly.SimdOperation Hast.Samples.SampleAssembly.SimdOperation::Divide\ => 
+                                -- The following section was transformed from the .NET statement below:
+                                -- array3 = SimdOperations.DivideVectors (array, array2, 30);
+                                -- 
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(0) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(0);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(1) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(1);
                                 \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\ <= \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array\(2) / \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(2);
@@ -6919,6 +9070,9 @@ begin
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ <= false;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\ := \DataIn\;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array2\(to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\)) := ConvertStdLogicVectorToInt32(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.dataIn.2\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- k = k + 1;
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ + to_signed(1, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.k\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.9\;
                             -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_7\ if the loop wasn't exited with a state change.
@@ -6929,12 +9083,24 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\ => 
                         -- State after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- l = 0;
+                        -- 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (l < 30) {
+                        -- 	memory.WriteInt32 (1 + i + l, array3 [l]);
+                        -- 	l = l + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_17\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.10\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.11\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.12\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.13\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.14\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.15\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.16\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.17\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.18\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.19\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.20\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.21\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.22\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.23\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.24\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.25\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.26\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.27\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.28\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.29\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.30\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.31\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.32\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.33\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.34\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.35\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.36\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.37\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.38\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.39\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- break;
+                        -- 
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_13\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
@@ -6942,6 +9108,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.40\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.41\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.42\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.43\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.44\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.45\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.46\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.47\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.48\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.49\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.50\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.51\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.52\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.53\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.54\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.55\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.56\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.57\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.58\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.59\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.60\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.61\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.62\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.63\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.64\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.65\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.66\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.67\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.68\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.69\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- break;
+                        -- 
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_14\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
@@ -6949,6 +9118,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.70\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.71\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.72\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.73\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.74\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.75\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.76\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.77\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.78\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.79\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.80\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.81\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.82\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.83\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.84\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.85\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.86\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.87\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.88\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.89\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.90\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.91\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.92\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.93\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.94\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.95\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.96\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.97\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.98\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.99\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- break;
+                        -- 
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_15\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
@@ -6956,6 +9128,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\ => 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.array3\ := (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.100\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.101\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.102\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.103\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.104\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.105\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.106\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.107\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.108\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.109\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.110\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.111\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.112\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.113\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.114\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.115\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.116\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.117\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.118\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.119\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.120\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.121\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.122\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.123\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.124\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.125\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.126\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.127\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.128\, \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.129\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- break;
+                        -- 
                         -- Going to the state after the case statement which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_10\.
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ = \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_16\) then 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\;
@@ -6966,6 +9141,15 @@ begin
                         -- The while loop's condition:
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ < to_signed(30, 32);
                         if (\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.130\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	memory.WriteInt32 (1 + i + l, array3 [l]);
+                            -- 	l = l + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteInt32 (1 + i + l, array3 [l]);
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\ := to_signed(1, 32) + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\;
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.132\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.131\ + \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\;
                             -- Begin SimpleMemory write.
@@ -6979,6 +9163,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_18\ => 
                         -- State after the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 30;
+                        -- 
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ + to_signed(30, 32);
                         \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.i\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.134\;
                         -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_3\ if the loop wasn't exited with a state change.
@@ -6991,6 +9178,9 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- l = l + 1;
+                            -- 
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ + to_signed(1, 32);
                             \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.l\ := \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.binaryOperationResult.133\;
                             -- Returning to the repeated state of the while loop which was started in state \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0._State_12\ if the loop wasn't exited with a state change.
