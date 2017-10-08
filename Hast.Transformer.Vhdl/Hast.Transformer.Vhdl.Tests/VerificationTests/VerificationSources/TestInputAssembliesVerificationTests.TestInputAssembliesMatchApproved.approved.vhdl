@@ -1016,6 +1016,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.PrivateMethod ();
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State\ := \ComplexTypeHierarchy::Hast.TestInputs.ClassStructure1.ComplexTypes.IInterface1.Interface1Method1().0._State_3\;
@@ -1065,6 +1068,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface1Method2().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.PrivateMethod ();
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_3\;
@@ -1073,6 +1079,9 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         if (\ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ = \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Finished.0\) then 
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- ComplexTypeHierarchy.StaticMethod ();
+                            -- 
                             -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                             \ComplexTypeHierarchy::Interface1Method2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
                             \ComplexTypeHierarchy::Interface1Method2().0._State\ := \ComplexTypeHierarchy::Interface1Method2().0._State_4\;
@@ -1122,6 +1131,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::Interface2Method1().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.BaseInterfaceMethod2 ();
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::BaseInterfaceMethod2()
                         \ComplexTypeHierarchy::Interface2Method1().0.ComplexTypeHierarchy::BaseInterfaceMethod2()._Started.0\ <= true;
                         \ComplexTypeHierarchy::Interface2Method1().0._State\ := \ComplexTypeHierarchy::Interface2Method1().0._State_3\;
@@ -1208,6 +1220,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ComplexTypeHierarchy.StaticMethod ();
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         \ComplexTypeHierarchy::BaseInterfaceMethod2().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State\ := \ComplexTypeHierarchy::BaseInterfaceMethod2().0._State_3\;
@@ -1256,6 +1271,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.PrivateMethod ();
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::PrivateMethod()
                         \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0.ComplexTypeHierarchy::PrivateMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State\ := \ComplexTypeHierarchy::NonVirtualNonInterfaceMehod().0._State_3\;
@@ -1304,6 +1322,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ComplexTypeHierarchy::PrivateMethod().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ComplexTypeHierarchy.StaticMethod ();
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.ComplexTypeHierarchy::StaticMethod()
                         \ComplexTypeHierarchy::PrivateMethod().0.ComplexTypeHierarchy::StaticMethod()._Started.0\ <= true;
                         \ComplexTypeHierarchy::PrivateMethod().0._State\ := \ComplexTypeHierarchy::PrivateMethod().0._State_3\;
@@ -1466,6 +1487,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \StaticReference::StaticClassUsingMethod().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- StaticClass.StaticMethod ();
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.ClassStructure1.ComplexTypes.StaticClass::StaticMethod()
                         \StaticReference::StaticClassUsingMethod().0.StaticClass::StaticMethod()._Started.0\ <= true;
                         \StaticReference::StaticClassUsingMethod().0._State\ := \StaticReference::StaticClassUsingMethod().0._State_3\;
@@ -1522,6 +1546,9 @@ begin
                     when \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_2\ => 
                         \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this.parameter.In\;
                         \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.Array = array;
+                        -- 
                         \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.this\.\Array\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0.array\;
                         \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State\ := \ArrayUsingCases/ArrayHolder::.ctor(Int32[]).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1568,7 +1595,22 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ArrayUsingCases::PassArrayToConstructor().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ArrayUsingCases.ArrayHolder arrayHolder;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new int[5];
+                        -- 
                         \ArrayUsingCases::PassArrayToConstructor().0.array\ := (others => to_signed(0, 32));
+                        -- The following section was transformed from the .NET statement below:
+                        -- arrayHolder = new ArrayUsingCases.ArrayHolder (array);
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\.\IsNull\ := false;
                         \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\.\Array\ := (others => to_signed(0, 32));
@@ -1585,6 +1627,9 @@ begin
                             \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[])._Started.0\ <= false;
                             \ArrayUsingCases::PassArrayToConstructor().0.arrayHolder\ := \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).this.parameter.In.0\;
                             \ArrayUsingCases::PassArrayToConstructor().0.array\ := \ArrayUsingCases::PassArrayToConstructor().0.ArrayUsingCases/ArrayHolder::.ctor(Int32[]).array.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = 5;
+                            -- 
                             \ArrayUsingCases::PassArrayToConstructor().0.num\ := to_signed(5, 32);
                             \ArrayUsingCases::PassArrayToConstructor().0._State\ := \ArrayUsingCases::PassArrayToConstructor().0._State_1\;
                         end if;
@@ -1631,6 +1676,12 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ArrayUsingCases::PassArrayFromMethod().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = this.ArrayProducingMethod (5);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Int32[] Hast.TestInputs.Various.ArrayUsingCases::ArrayProducingMethod(System.Int32)
                         \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32).arrayLength.parameter.Out.0\ <= to_signed(5, 32);
                         \ArrayUsingCases::PassArrayFromMethod().0.ArrayUsingCases::ArrayProducingMethod(Int32)._Started.0\ <= true;
@@ -1687,8 +1738,20 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_2\ => 
                         \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0.arrayLength.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new int[5];
+                        -- 
                         \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\ := (others => to_signed(0, 32));
+                        -- The following section was transformed from the .NET statement below:
+                        -- array [3] = 10;
+                        -- 
                         \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\(to_integer(to_signed(3, 32))) := to_signed(10, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- return array;
+                        -- 
                         \ArrayUsingCases::ArrayProducingMethod(Int32).0.return\ <= \ArrayUsingCases::ArrayProducingMethod(Int32).0.array\;
                         \ArrayUsingCases::ArrayProducingMethod(Int32).0._State\ := \ArrayUsingCases::ArrayProducingMethod(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1752,13 +1815,49 @@ begin
                     when \CastingCases::NumberCasting(Int16,Int16).0._State_2\ => 
                         \CastingCases::NumberCasting(Int16,Int16).0.a\ := \CastingCases::NumberCasting(Int16,Int16).0.a.parameter.In\;
                         \CastingCases::NumberCasting(Int16,Int16).0.b\ := \CastingCases::NumberCasting(Int16,Int16).0.b.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- short num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- sbyte b3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- long num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = a * b;
+                        -- 
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := signed(resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32));
                         \CastingCases::NumberCasting(Int16,Int16).0.num\ := \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (int)(a * b);
+                        -- 
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- b2 = (byte)a;
+                        -- 
                         \CastingCases::NumberCasting(Int16,Int16).0.b2\ := SmartResize(unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- b3 = (sbyte)a;
+                        -- 
                         \CastingCases::NumberCasting(Int16,Int16).0.b3\ := SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = (ushort)a;
+                        -- 
                         \CastingCases::NumberCasting(Int16,Int16).0.num3\ := unsigned(\CastingCases::NumberCasting(Int16,Int16).0.a\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = (long)((ulong)a * (ulong)((long)a));
+                        -- 
                         \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := resize(signed(ToUnsignedAndExpand(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64) * unsigned((SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64)))), 64);
                         \CastingCases::NumberCasting(Int16,Int16).0.num4\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\);
                         \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
@@ -1808,9 +1907,21 @@ begin
                     when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_2\ => 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this.parameter.In\;
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.array.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.ArrayLength = 5u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\ArrayLength\ := to_unsigned(5, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.ArrayLengthCopy = 160u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\ArrayLengthCopy\ := to_unsigned(160, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.NonSubstitutableArrayLengthCopy = 160u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(160, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.Array = new uint[5];
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0.this\.\Array\ := (others => to_unsigned(0, 32));
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1859,10 +1970,28 @@ begin
                     when \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_2\ => 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this.parameter.In\;
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.size.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2 = 5u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(5, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.ArrayLength = 5u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\ArrayLength\ := to_unsigned(5, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.ArrayLengthCopy = 160u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\ArrayLengthCopy\ := to_unsigned(160, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.NonSubstitutableArrayLengthCopy = 160u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\NonSubstitutableArrayLengthCopy\ := to_unsigned(160, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.Array = new uint[5];
+                        -- 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0.this\.\Array\ := (others => to_unsigned(0, 32));
                         \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1911,6 +2040,9 @@ begin
                     when \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0._State_2\ => 
                         \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.this\ := \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.this.parameter.In\;
                         \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.previous\ := \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.previous.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1.ArrayHolder1 (@this, previous.Array);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::.ctor(System.UInt32[])
                         \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.Out.0\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.this\;
                         \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.Out.0\ <= \ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).0.previous\.\Array\;
@@ -1981,6 +2113,17 @@ begin
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_2\ => 
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this.parameter.In\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (size % 32u == 0u) {
+                        -- 	conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2 = 0u;
+                        -- }
+                        -- else {
+                        -- 	conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2 = 5u;
+                        -- }
+                        -- 
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_3\ => 
@@ -2010,6 +2153,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_5\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.ArrayLength = size >> 5 + conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := shift_right(\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ + \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\;
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\;
@@ -2017,6 +2163,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_6\ => 
                         -- True branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2 = 0u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
                         if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_6\) then 
@@ -2025,6 +2179,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_7\ => 
                         -- False branch of the if-else started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2 = 5u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2 = 5u;
+                        -- 
                         \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0.conditional109a0d002e7b6a56b1572efc4bfd5a39a757d5e88ee9e1fdaf585033fba598d2\ := to_unsigned(5, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_4\.
                         if (\ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).0._State_7\) then 
@@ -2092,16 +2254,72 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\ => 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num6;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 4;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num\ := to_signed(4, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 36;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\ := to_signed(36, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 37;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num2\ := to_signed(37, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 148;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num3\ := to_signed(148, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = 148 + input;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\ := to_signed(148, 32) + \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\;
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num4\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new int[37];
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.array\ := (others => to_signed(0, 32));
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = 5;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := to_signed(5, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = input < 5;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.input\ < to_signed(5, 32);
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	num5 = 13;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\ and ends in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\.
@@ -2116,13 +2334,30 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_3\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = 153;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(153, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = false;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.flag2\ := False;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = 163;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num6\ := to_signed(163, 32);
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ := \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\ => 
                         -- True branch of the if-else started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num5 = 13;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = 13;
+                        -- 
                         \ConstantsUsingCases::ConstantValuedVariables(Int32).0.num5\ := to_signed(13, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_2\.
                         if (\ConstantsUsingCases::ConstantValuedVariables(Int32).0._State\ = \ConstantsUsingCases::ConstantValuedVariables(Int32).0._State_4\) then 
@@ -2181,8 +2416,26 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantPassingToMethod(Int32).0._State_2\ => 
                         \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input\ := \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 15;
+                        -- 
                         \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num\ := to_signed(15, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 145;
+                        -- 
                         \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.num2\ := to_signed(145, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = this.ConstantUsingMethod (145, input) + 298;
+                        -- 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.TestInputs.Various.ConstantsUsingCases::ConstantUsingMethod(System.Int32,System.Int32)
                         \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input1.parameter.Out.0\ <= to_signed(145, 32);
                         \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).input2.parameter.Out.0\ <= \ConstantsUsingCases::ConstantPassingToMethod(Int32).0.input\;
@@ -2262,8 +2515,59 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ConstantsUsingCases::ConstantPassingToObject().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ConstantsUsingCases.ArrayHolder1 arrayHolder;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint[] array2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint arrayLength;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint arrayLengthCopy;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint nonSubstitutableArrayLengthCopy;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ConstantsUsingCases.ArrayHolder1 arrayHolder2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ConstantsUsingCases.ArrayHolder1 previous;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ConstantsUsingCases.ArrayHolder1 arrayHolder3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ConstantsUsingCases.ArrayHolder1 arrayHolder4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ConstantsUsingCases.ArrayHolder1 arrayHolder5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ConstantsUsingCases.ArrayHolder2 arrayHolder6;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ConstantsUsingCases.ArrayHolder2 arrayHolder7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 5;
+                        -- 
                         \ConstantsUsingCases::ConstantPassingToObject().0.num\ := to_signed(5, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new uint[5];
+                        -- 
                         \ConstantsUsingCases::ConstantPassingToObject().0.array\ := (others => to_unsigned(0, 32));
+                        -- The following section was transformed from the .NET statement below:
+                        -- arrayHolder = new ConstantsUsingCases.ArrayHolder1 (array);
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\IsNull\ := false;
                         \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\ArrayLength\ := to_unsigned(0, 32);
@@ -2283,10 +2587,25 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\;
                             \ConstantsUsingCases::ConstantPassingToObject().0.array\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array2 = arrayHolder.Array;
+                            -- 
                             \ConstantsUsingCases::ConstantPassingToObject().0.array2\ := \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\Array\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- arrayLength = 5u;
+                            -- 
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayLength\ := to_unsigned(5, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- arrayLengthCopy = 160u;
+                            -- 
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayLengthCopy\ := to_unsigned(160, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- nonSubstitutableArrayLengthCopy = arrayHolder.NonSubstitutableArrayLengthCopy;
+                            -- 
                             \ConstantsUsingCases::ConstantPassingToObject().0.nonSubstitutableArrayLengthCopy\ := \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder\.\NonSubstitutableArrayLengthCopy\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- arrayHolder2 = new ConstantsUsingCases.ArrayHolder1 (array2);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\.\ArrayLength\ := to_unsigned(0, 32);
@@ -2307,6 +2626,9 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[])._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder2\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).this.parameter.In.0\;
                             \ConstantsUsingCases::ConstantPassingToObject().0.array2\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32[]).array.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- previous = new ConstantsUsingCases.ArrayHolder1 (5u);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\.\ArrayLength\ := to_unsigned(0, 32);
@@ -2326,6 +2648,9 @@ begin
                         if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\) then 
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- arrayHolder3 = new ConstantsUsingCases.ArrayHolder1 (5u);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\.\ArrayLength\ := to_unsigned(0, 32);
@@ -2345,6 +2670,9 @@ begin
                         if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\) then 
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder3\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- arrayHolder4 = new ConstantsUsingCases.ArrayHolder1 (5u);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\.\ArrayLength\ := to_unsigned(0, 32);
@@ -2364,6 +2692,9 @@ begin
                         if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Finished.0\) then 
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder4\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(UInt32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- arrayHolder5 = new ConstantsUsingCases.ArrayHolder1 (previous);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\.\ArrayLength\ := to_unsigned(0, 32);
@@ -2384,6 +2715,9 @@ begin
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder5\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).this.parameter.In.0\;
                             \ConstantsUsingCases::ConstantPassingToObject().0.previous\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder1::.ctor(ConstantsUsingCases/ArrayHolder1).previous.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- arrayHolder6 = new ConstantsUsingCases.ArrayHolder2 (5u);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\.\ArrayLength\ := to_unsigned(0, 32);
@@ -2400,6 +2734,9 @@ begin
                         if (\ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ = \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Finished.0\) then 
                             \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32)._Started.0\ <= false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder6\ := \ConstantsUsingCases::ConstantPassingToObject().0.ConstantsUsingCases/ArrayHolder2::.ctor(UInt32).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- arrayHolder7 = new ConstantsUsingCases.ArrayHolder2 (13u);
+                            -- 
                             -- Initializing record fields to their defaults.
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder7\.\IsNull\ := false;
                             \ConstantsUsingCases::ConstantPassingToObject().0.arrayHolder7\.\ArrayLength\ := to_unsigned(0, 32);
@@ -2464,6 +2801,9 @@ begin
                     when \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_2\ => 
                         \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input1\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input1.parameter.In\;
                         \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 298 - input2;
+                        -- 
                         \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.binaryOperationResult.0\ := to_signed(298, 32) - \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.input2\;
                         \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.return\ <= \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0.binaryOperationResult.0\;
                         \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State\ := \ConstantsUsingCases::ConstantUsingMethod(Int32,Int32).0._State_1\;
@@ -2521,8 +2861,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \LoopCases::BreakInLoop(Int32).0._State_2\ => 
                         \LoopCases::BreakInLoop(Int32).0.input\ := \LoopCases::BreakInLoop(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = input;
+                        -- 
                         \LoopCases::BreakInLoop(Int32).0.num\ := \LoopCases::BreakInLoop(Int32).0.input\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \LoopCases::BreakInLoop(Int32).0.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < input) {
+                        -- 	num = num + i;
+                        -- 	flag = num > 10;
+                        -- 	if (flag) {
+                        -- 		break;
+                        -- 	}
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2531,10 +2896,31 @@ begin
                         -- The while loop's condition:
                         \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\ := \LoopCases::BreakInLoop(Int32).0.i\ < \LoopCases::BreakInLoop(Int32).0.input\;
                         if (\LoopCases::BreakInLoop(Int32).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num = num + i;
+                            -- 	flag = num > 10;
+                            -- 	if (flag) {
+                            -- 		break;
+                            -- 	}
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num + i;
+                            -- 
                             \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\ := \LoopCases::BreakInLoop(Int32).0.num\ + \LoopCases::BreakInLoop(Int32).0.i\;
                             \LoopCases::BreakInLoop(Int32).0.num\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = num > 10;
+                            -- 
                             \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\ := \LoopCases::BreakInLoop(Int32).0.num\ > to_signed(10, 32);
                             \LoopCases::BreakInLoop(Int32).0.flag\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	break;
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \LoopCases::BreakInLoop(Int32).0._State_6\ and ends in state \LoopCases::BreakInLoop(Int32).0._State_6\.
@@ -2556,6 +2942,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \LoopCases::BreakInLoop(Int32).0._State_5\ => 
                         -- State after the if-else which was started in state \LoopCases::BreakInLoop(Int32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\ := \LoopCases::BreakInLoop(Int32).0.i\ + to_signed(1, 32);
                         \LoopCases::BreakInLoop(Int32).0.i\ := \LoopCases::BreakInLoop(Int32).0.binaryOperationResult.3\;
                         -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoop(Int32).0._State_2\ if the loop wasn't exited with a state change.
@@ -2565,6 +2954,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoop(Int32).0._State_6\ => 
                         -- True branch of the if-else started in state \LoopCases::BreakInLoop(Int32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	break;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- break;
+                        -- 
                         -- Exiting the while loop with a break statement.
                         \LoopCases::BreakInLoop(Int32).0._State\ := \LoopCases::BreakInLoop(Int32).0._State_4\;
                         -- Going to the state after the if-else which was started in state \LoopCases::BreakInLoop(Int32).0._State_3\.
@@ -2631,8 +3028,40 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_2\ => 
                         \LoopCases::BreakInLoopInLoop(Int32).0.input\ := \LoopCases::BreakInLoopInLoop(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int j;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = input;
+                        -- 
                         \LoopCases::BreakInLoopInLoop(Int32).0.num\ := \LoopCases::BreakInLoopInLoop(Int32).0.input\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \LoopCases::BreakInLoopInLoop(Int32).0.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < input) {
+                        -- 	j = 0;
+                        -- 	while (j < i) {
+                        -- 		num = num + i;
+                        -- 		flag = num > 10;
+                        -- 		if (flag) {
+                        -- 			break;
+                        -- 		}
+                        -- 		j = j + 1;
+                        -- 	}
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2641,7 +3070,34 @@ begin
                         -- The while loop's condition:
                         \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ < \LoopCases::BreakInLoopInLoop(Int32).0.input\;
                         if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	j = 0;
+                            -- 	while (j < i) {
+                            -- 		num = num + i;
+                            -- 		flag = num > 10;
+                            -- 		if (flag) {
+                            -- 			break;
+                            -- 		}
+                            -- 		j = j + 1;
+                            -- 	}
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = 0;
+                            -- 
                             \LoopCases::BreakInLoopInLoop(Int32).0.j\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (j < i) {
+                            -- 	num = num + i;
+                            -- 	flag = num > 10;
+                            -- 	if (flag) {
+                            -- 		break;
+                            -- 	}
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_5\;
                         else 
@@ -2657,10 +3113,31 @@ begin
                         -- The while loop's condition:
                         \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ < \LoopCases::BreakInLoopInLoop(Int32).0.i\;
                         if (\LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num = num + i;
+                            -- 	flag = num > 10;
+                            -- 	if (flag) {
+                            -- 		break;
+                            -- 	}
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num + i;
+                            -- 
                             \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\ := \LoopCases::BreakInLoopInLoop(Int32).0.num\ + \LoopCases::BreakInLoopInLoop(Int32).0.i\;
                             \LoopCases::BreakInLoopInLoop(Int32).0.num\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- flag = num > 10;
+                            -- 
                             \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\ := \LoopCases::BreakInLoopInLoop(Int32).0.num\ > to_signed(10, 32);
                             \LoopCases::BreakInLoopInLoop(Int32).0.flag\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	break;
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \LoopCases::BreakInLoopInLoop(Int32).0._State_8\ and ends in state \LoopCases::BreakInLoopInLoop(Int32).0._State_8\.
@@ -2678,6 +3155,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_6\ => 
                         -- State after the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\ := \LoopCases::BreakInLoopInLoop(Int32).0.i\ + to_signed(1, 32);
                         \LoopCases::BreakInLoopInLoop(Int32).0.i\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_2\ if the loop wasn't exited with a state change.
@@ -2687,6 +3167,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_7\ => 
                         -- State after the if-else which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- j = j + 1;
+                        -- 
                         \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\ := \LoopCases::BreakInLoopInLoop(Int32).0.j\ + to_signed(1, 32);
                         \LoopCases::BreakInLoopInLoop(Int32).0.j\ := \LoopCases::BreakInLoopInLoop(Int32).0.binaryOperationResult.4\;
                         -- Returning to the repeated state of the while loop which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_3\ if the loop wasn't exited with a state change.
@@ -2696,6 +3179,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \LoopCases::BreakInLoopInLoop(Int32).0._State_8\ => 
                         -- True branch of the if-else started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	break;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- break;
+                        -- 
                         -- Exiting the while loop with a break statement.
                         \LoopCases::BreakInLoopInLoop(Int32).0._State\ := \LoopCases::BreakInLoopInLoop(Int32).0._State_6\;
                         -- Going to the state after the if-else which was started in state \LoopCases::BreakInLoopInLoop(Int32).0._State_5\.
@@ -2748,12 +3239,34 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectUsingCases::NullUsage().0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ObjectUsingCases.MyClass myClass;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass = new ObjectUsingCases.MyClass {
+                        -- 	MyProperty = 5
+                        -- };
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := false;
                         \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(0, 32);
                         \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(5, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = myClass == null;
+                        -- 
                         \ObjectUsingCases::NullUsage().0.binaryOperationResult.0\ := \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ = true;
                         \ObjectUsingCases::NullUsage().0.flag\ := \ObjectUsingCases::NullUsage().0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	myClass = new ObjectUsingCases.MyClass ();
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ObjectUsingCases::NullUsage().0._State_4\ and ends in state \ObjectUsingCases::NullUsage().0._State_4\.
@@ -2768,9 +3281,20 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectUsingCases::NullUsage().0._State_3\ => 
                         -- State after the if-else which was started in state \ObjectUsingCases::NullUsage().0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass = null;
+                        -- 
                         \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := true;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = myClass != null;
+                        -- 
                         \ObjectUsingCases::NullUsage().0.binaryOperationResult.1\ := \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ /= true;
                         \ObjectUsingCases::NullUsage().0.flag2\ := \ObjectUsingCases::NullUsage().0.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	myClass.MyProperty = 10;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ObjectUsingCases::NullUsage().0._State_6\ and ends in state \ObjectUsingCases::NullUsage().0._State_6\.
@@ -2785,6 +3309,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectUsingCases::NullUsage().0._State_4\ => 
                         -- True branch of the if-else started in state \ObjectUsingCases::NullUsage().0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	myClass = new ObjectUsingCases.MyClass ();
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass = new ObjectUsingCases.MyClass ();
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := false;
                         \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(0, 32);
@@ -2799,6 +3331,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectUsingCases::NullUsage().0._State_6\ => 
                         -- True branch of the if-else started in state \ObjectUsingCases::NullUsage().0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	myClass.MyProperty = 10;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = 10;
+                        -- 
                         \ObjectUsingCases::NullUsage().0.myClass\.\MyProperty\ := to_signed(10, 32);
                         -- Going to the state after the if-else which was started in state \ObjectUsingCases::NullUsage().0._State_3\.
                         if (\ObjectUsingCases::NullUsage().0._State\ = \ObjectUsingCases::NullUsage().0._State_6\) then 
@@ -2846,10 +3386,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectUsingCases::VoidReturn(Int32).0._State_2\ => 
                         \ObjectUsingCases::VoidReturn(Int32).0.input\ := \ObjectUsingCases::VoidReturn(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ObjectUsingCases.MyClass myClass;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass = new ObjectUsingCases.MyClass {
+                        -- 	MyProperty = input
+                        -- };
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\IsNull\ := false;
                         \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\MyProperty\ := to_signed(0, 32);
                         \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\MyProperty\ := \ObjectUsingCases::VoidReturn(Int32).0.input\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- this.VoidMethod (myClass);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Various.ObjectUsingCases::VoidMethod(Hast.TestInputs.Various.ObjectUsingCases/MyClass)
                         \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).myClass.parameter.Out.0\ <= \ObjectUsingCases::VoidReturn(Int32).0.myClass\;
                         \ObjectUsingCases::VoidReturn(Int32).0.ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass)._Started.0\ <= true;
@@ -2913,8 +3464,26 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\ => 
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = myClass.MyProperty < 10;
+                        -- 
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.0\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ < to_signed(10, 32);
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	myClass.MyProperty = myClass.MyProperty * 10;
+                        -- 	flag2 = myClass.MyProperty == 10;
+                        -- 	if (flag2) {
+                        -- 		return;
+                        -- 	}
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\ and ends in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_5\.
@@ -2929,15 +3498,38 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_3\ => 
                         -- State after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = 5;
+                        -- 
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ := to_signed(5, 32);
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\ => 
                         -- True branch of the if-else started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	myClass.MyProperty = myClass.MyProperty * 10;
+                        -- 	flag2 = myClass.MyProperty == 10;
+                        -- 	if (flag2) {
+                        -- 		return;
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- myClass.MyProperty = myClass.MyProperty * 10;
+                        -- 
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\ := resize(\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ * to_signed(10, 32), 32);
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = myClass.MyProperty == 10;
+                        -- 
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.2\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ = to_signed(10, 32);
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.flag2\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	return;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\ and ends in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\.
@@ -2959,6 +3551,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\ => 
                         -- True branch of the if-else started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return;
+                        -- 
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_1\;
                         -- Going to the state after the if-else which was started in state \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_4\.
                         if (\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State\ = \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0._State_6\) then 
@@ -3012,6 +3612,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/Calculator::IsEven().0._State_2\ => 
                         \ParallelCases/Calculator::IsEven().0.this\ := \ParallelCases/Calculator::IsEven().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this.Number % 2u == 0u;
+                        -- 
                         \ParallelCases/Calculator::IsEven().0._State\ := \ParallelCases/Calculator::IsEven().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/Calculator::IsEven().0._State_3\ => 
@@ -3077,6 +3680,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/Calculator::IsEven().1._State_2\ => 
                         \ParallelCases/Calculator::IsEven().1.this\ := \ParallelCases/Calculator::IsEven().1.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this.Number % 2u == 0u;
+                        -- 
                         \ParallelCases/Calculator::IsEven().1._State\ := \ParallelCases/Calculator::IsEven().1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/Calculator::IsEven().1._State_3\ => 
@@ -3142,6 +3748,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/Calculator::IsEven().2._State_2\ => 
                         \ParallelCases/Calculator::IsEven().2.this\ := \ParallelCases/Calculator::IsEven().2.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this.Number % 2u == 0u;
+                        -- 
                         \ParallelCases/Calculator::IsEven().2._State\ := \ParallelCases/Calculator::IsEven().2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/Calculator::IsEven().2._State_3\ => 
@@ -3210,9 +3819,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_2\ => 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + this.input;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num % 2u == 0u;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).0._State_3\ => 
@@ -3281,9 +3902,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_2\ => 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + this.input;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num % 2u == 0u;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).1._State_3\ => 
@@ -3352,9 +3985,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_2\ => 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + this.input;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\;
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num % 2u == 0u;
+                        -- 
                         \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State\ := \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).2._State_3\ => 
@@ -3421,13 +4066,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0._State_2\ => 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.indexObject\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + this.input;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ParallelCases.Calculator objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f = new ParallelCases.Calculator {
+                        -- 	Number = num
+                        -- };
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.num\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return Hast.TestInputs.Various.ParallelCases/Calculator.IsEven (objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).0.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
@@ -3491,13 +4156,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1._State_2\ => 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.indexObject\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + this.input;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ParallelCases.Calculator objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f = new ParallelCases.Calculator {
+                        -- 	Number = num
+                        -- };
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.num\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return Hast.TestInputs.Various.ParallelCases/Calculator.IsEven (objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).1.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
@@ -3561,13 +4246,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2._State_2\ => 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.indexObject\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.indexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = indexObject;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.indexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = num + this.input;
+                        -- 
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.binaryOperationResult.0\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\ + \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ParallelCases.Calculator objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f = new ParallelCases.Calculator {
+                        -- 	Number = num
+                        -- };
+                        -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\IsNull\ := false;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := to_unsigned(0, 32);
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\.\Number\ := \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.num\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return Hast.TestInputs.Various.ParallelCases/Calculator.IsEven (objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/Calculator::IsEven()
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.objectdc3e2eea384e7e52700cea72b1c1cb21eb3ce1928d378edcac638af24735332f\;
                         \ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).2.ParallelCases/Calculator::IsEven()._Started.0\ <= true;
@@ -3652,9 +4357,50 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_2\ => 
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ParallelCases.<>c__DisplayClass0_0 <>c__DisplayClass0_;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task<bool>[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int arg_4B_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- TaskFactory arg_46_0;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Func<object, bool> arg_46_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- <>c__DisplayClass0_ = new ParallelCases.<>c__DisplayClass0_0 ();
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- <>c__DisplayClass0_.input = input;
+                        -- 
                         \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::input\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.input\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new Task<bool>[3];
+                        -- 
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\ := (others => false);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0u;
+                        -- 
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num < 3u) {
+                        -- 	arg_4B_1 = (int)num;
+                        -- 	arg_46_0 = Task.Factory;
+                        -- 	if (arg_46_1 = <>c__DisplayClass0_.<>9__0 == null) {
+                        -- 		arg_46_1 = <>c__DisplayClass0_.<>9__0 = new Func<object, bool> (<>c__DisplayClass0_.<WhenAllWhenAnyAwaitedTasks>b__0);
+                        -- 	}
+                        -- 	array [arg_4B_1] = arg_46_0.StartNew<bool> (arg_46_1, num);
+                        -- 	num = num + 1u;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3663,7 +4409,32 @@ begin
                         -- The while loop's condition:
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ < to_unsigned(3, 32);
                         if (\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	arg_4B_1 = (int)num;
+                            -- 	arg_46_0 = Task.Factory;
+                            -- 	if (arg_46_1 = <>c__DisplayClass0_.<>9__0 == null) {
+                            -- 		arg_46_1 = <>c__DisplayClass0_.<>9__0 = new Func<object, bool> (<>c__DisplayClass0_.<WhenAllWhenAnyAwaitedTasks>b__0);
+                            -- 	}
+                            -- 	array [arg_4B_1] = arg_46_0.StartNew<bool> (arg_46_1, num);
+                            -- 	num = num + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_4B_1 = (int)num;
+                            -- 
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.arg_4B_1\ := signed(\ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_46_0 = Task.Factory;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (arg_46_1 = <>c__DisplayClass0_.<>9__0 == null) {
+                            -- 	arg_46_1 = <>c__DisplayClass0_.<>9__0 = new Func<object, bool> (<>c__DisplayClass0_.<WhenAllWhenAnyAwaitedTasks>b__0);
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [arg_4B_1] = arg_46_0.StartNew<bool> (arg_46_1, num);
+                            -- 
                             -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(System.UInt32)
                             case \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ is 
                                 when 0 => 
@@ -3677,6 +4448,9 @@ begin
                                     \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32)._Started.2\ <= true;
                             end case;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.ParallelCases/<>c__DisplayClass0_0::<WhenAllWhenAnyAwaitedTasks>b__0(UInt32).invocationIndex\ + 1;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num + 1u;
+                            -- 
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ + to_unsigned(1, 32);
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.num\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.binaryOperationResult.1\;
                         else 
@@ -3685,6 +4459,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task.WhenAll<bool> (array).Wait ();
+                        -- 
                         \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_5\ => 
@@ -3700,6 +4477,9 @@ begin
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(0) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.0\;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(1) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.1\;
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.array\(2) := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- Task.WhenAny<bool> (array).Wait ();
+                            -- 
                             \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State\ := \ParallelCases::WhenAllWhenAnyAwaitedTasks(UInt32).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3782,9 +4562,50 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::ObjectUsingTasks(UInt32).0._State_2\ => 
                         \ParallelCases::ObjectUsingTasks(UInt32).0.input\ := \ParallelCases::ObjectUsingTasks(UInt32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ParallelCases.<>c__DisplayClass1_0 <>c__DisplayClass1_;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task<bool>[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int arg_4B_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- TaskFactory arg_46_0;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Func<object, bool> arg_46_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- <>c__DisplayClass1_ = new ParallelCases.<>c__DisplayClass1_0 ();
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- <>c__DisplayClass1_.input = input;
+                        -- 
                         \System.UInt32 Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::input\ := \ParallelCases::ObjectUsingTasks(UInt32).0.input\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new Task<bool>[3];
+                        -- 
                         \ParallelCases::ObjectUsingTasks(UInt32).0.array\ := (others => false);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0u;
+                        -- 
                         \ParallelCases::ObjectUsingTasks(UInt32).0.num\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num < 3u) {
+                        -- 	arg_4B_1 = (int)num;
+                        -- 	arg_46_0 = Task.Factory;
+                        -- 	if (arg_46_1 = <>c__DisplayClass1_.<>9__0 == null) {
+                        -- 		arg_46_1 = <>c__DisplayClass1_.<>9__0 = new Func<object, bool> (<>c__DisplayClass1_.<ObjectUsingTasks>b__0);
+                        -- 	}
+                        -- 	array [arg_4B_1] = arg_46_0.StartNew<bool> (arg_46_1, num);
+                        -- 	num = num + 1u;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3793,7 +4614,32 @@ begin
                         -- The while loop's condition:
                         \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.0\ := \ParallelCases::ObjectUsingTasks(UInt32).0.num\ < to_unsigned(3, 32);
                         if (\ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	arg_4B_1 = (int)num;
+                            -- 	arg_46_0 = Task.Factory;
+                            -- 	if (arg_46_1 = <>c__DisplayClass1_.<>9__0 == null) {
+                            -- 		arg_46_1 = <>c__DisplayClass1_.<>9__0 = new Func<object, bool> (<>c__DisplayClass1_.<ObjectUsingTasks>b__0);
+                            -- 	}
+                            -- 	array [arg_4B_1] = arg_46_0.StartNew<bool> (arg_46_1, num);
+                            -- 	num = num + 1u;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_4B_1 = (int)num;
+                            -- 
                             \ParallelCases::ObjectUsingTasks(UInt32).0.arg_4B_1\ := signed(\ParallelCases::ObjectUsingTasks(UInt32).0.num\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- arg_46_0 = Task.Factory;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (arg_46_1 = <>c__DisplayClass1_.<>9__0 == null) {
+                            -- 	arg_46_1 = <>c__DisplayClass1_.<>9__0 = new Func<object, bool> (<>c__DisplayClass1_.<ObjectUsingTasks>b__0);
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [arg_4B_1] = arg_46_0.StartNew<bool> (arg_46_1, num);
+                            -- 
                             -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Various.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(System.UInt32)
                             case \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).invocationIndex\ is 
                                 when 0 => 
@@ -3807,6 +4653,9 @@ begin
                                     \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32)._Started.2\ <= true;
                             end case;
                             \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).invocationIndex\ := \ParallelCases::ObjectUsingTasks(UInt32).0.ParallelCases/<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(UInt32).invocationIndex\ + 1;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = num + 1u;
+                            -- 
                             \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\ := \ParallelCases::ObjectUsingTasks(UInt32).0.num\ + to_unsigned(1, 32);
                             \ParallelCases::ObjectUsingTasks(UInt32).0.num\ := \ParallelCases::ObjectUsingTasks(UInt32).0.binaryOperationResult.1\;
                         else 
@@ -3815,6 +4664,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \ParallelCases::ObjectUsingTasks(UInt32).0._State_4\ => 
                         -- State after the while loop which was started in state \ParallelCases::ObjectUsingTasks(UInt32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task.WhenAll<bool> (array).Wait ();
+                        -- 
                         \ParallelCases::ObjectUsingTasks(UInt32).0._State\ := \ParallelCases::ObjectUsingTasks(UInt32).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ParallelCases::ObjectUsingTasks(UInt32).0._State_5\ => 
@@ -3882,9 +4734,29 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \UnaryCases::IncrementDecrement(Int32).0._State_2\ => 
                         \UnaryCases::IncrementDecrement(Int32).0.input\ := \UnaryCases::IncrementDecrement(Int32).0.input.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- array = new int[5];
+                        -- 
                         \UnaryCases::IncrementDecrement(Int32).0.array\ := (others => to_signed(0, 32));
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = input < 10;
+                        -- 
                         \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.0\ := \UnaryCases::IncrementDecrement(Int32).0.input\ < to_signed(10, 32);
                         \UnaryCases::IncrementDecrement(Int32).0.flag\ := \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.0\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	array [input] = 3;
+                        -- 	input = input + 1;
+                        -- 	array [input] = 3;
+                        -- 	input = input - 1;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \UnaryCases::IncrementDecrement(Int32).0._State_4\ and ends in state \UnaryCases::IncrementDecrement(Int32).0._State_4\.
@@ -3903,10 +4775,30 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \UnaryCases::IncrementDecrement(Int32).0._State_4\ => 
                         -- True branch of the if-else started in state \UnaryCases::IncrementDecrement(Int32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	array [input] = 3;
+                        -- 	input = input + 1;
+                        -- 	array [input] = 3;
+                        -- 	input = input - 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- array [input] = 3;
+                        -- 
                         \UnaryCases::IncrementDecrement(Int32).0.array\(to_integer(\UnaryCases::IncrementDecrement(Int32).0.input\)) := to_signed(3, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- input = input + 1;
+                        -- 
                         \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.1\ := \UnaryCases::IncrementDecrement(Int32).0.input\ + to_signed(1, 32);
                         \UnaryCases::IncrementDecrement(Int32).0.input\ := \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.1\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- array [input] = 3;
+                        -- 
                         \UnaryCases::IncrementDecrement(Int32).0.array\(to_integer(\UnaryCases::IncrementDecrement(Int32).0.input\)) := to_signed(3, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- input = input - 1;
+                        -- 
                         \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.2\ := \UnaryCases::IncrementDecrement(Int32).0.input\ - to_signed(1, 32);
                         \UnaryCases::IncrementDecrement(Int32).0.input\ := \UnaryCases::IncrementDecrement(Int32).0.binaryOperationResult.2\;
                         -- Going to the state after the if-else which was started in state \UnaryCases::IncrementDecrement(Int32).0._State_2\.
