@@ -211,19 +211,7 @@ architecture Imp of Hast_IP is
         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\, 
         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\, 
         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_17\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_19\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_20\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_21\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_22\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_23\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_24\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_25\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_26\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_27\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_28\);
+        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\);
     -- Signals:
     Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._Finished\: boolean := false;
     Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -2591,34 +2579,17 @@ begin
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\: \Lombiq.Unum.Unum\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\: \Lombiq.Unum.Unum\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.j\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.k\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.l\: signed(31 downto 0) := to_signed(0, 32);
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.m\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.0\: \Lombiq.Unum.UnumEnvironment\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.1\: \Lombiq.Unum.Unum\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.2\: \Lombiq.Unum.Unum\;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.14\: boolean := false;
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2635,30 +2606,13 @@ begin
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_0\;
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.j\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.k\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.l\ := to_signed(0, 32);
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.m\ := to_signed(0, 32);
+                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := to_signed(0, 32);
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.6\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.7\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.10\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\ := (others => to_unsigned(0, 32));
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.14\ := false;
-                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
+                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := false;
+                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
             else 
                 case \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ is 
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_0\ => 
@@ -2695,25 +2649,10 @@ begin
                         -- int num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int i;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int j;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int k;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int l;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- uint[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int m;
+                        -- int i;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num = memory.ReadUInt32 (0);
@@ -2785,18 +2724,14 @@ begin
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).this.parameter.In.0\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.environment\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).environment.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = 5;
+                            -- num2 = 1;
                             -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := to_signed(5, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := to_signed(1, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- i = 0;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := to_signed(0, 32);
-                            -- The following section was transformed from the .NET statement below:
-                            -- while (i < 2) {
-                            -- 	memory.WriteUInt32 (num2, unum.UnumBits.Segments [i]);
+                            -- while ((long)num2 <= (long)((ulong)num)) {
+                            -- 	left = Unum.op_Addition (left, unum);
+                            -- 	unum = Unum.op_Addition (unum, unum);
                             -- 	num2 = num2 + 1;
-                            -- 	i = i + 1;
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -2806,159 +2741,13 @@ begin
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\.
                         -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ < to_signed(2, 32);
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 64) <= signed((SmartResize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num\, 64)));
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	memory.WriteUInt32 (num2, unum.UnumBits.Segments [i]);
-                            -- 	num2 = num2 + 1;
-                            -- 	i = i + 1;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (num2, unum.UnumBits.Segments [i]);
-                            -- 
-                            -- Begin SimpleMemory write.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\.\UnumBits\.\Segments\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\)));
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\;
-                        else 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\ => 
-                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- j = 0;
-                        -- 
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.j\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while (j < 2) {
-                        -- 	memory.WriteUInt32 (num2, left.UnumBits.Segments [j]);
-                        -- 	num2 = num2 + 1;
-                        -- 	j = j + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\WritesDone\ = true) then 
-                            -- SimpleMemory write finished.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num2 = num2 + 1;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- i = i + 1;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\;
-                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\ => 
-                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\.
-                        -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.j\ < to_signed(2, 32);
-                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	memory.WriteUInt32 (num2, left.UnumBits.Segments [j]);
-                            -- 	num2 = num2 + 1;
-                            -- 	j = j + 1;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (num2, left.UnumBits.Segments [j]);
-                            -- 
-                            -- Begin SimpleMemory write.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\.\UnumBits\.\Segments\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.j\)));
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\;
-                        else 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\ => 
-                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = 1;
-                        -- 
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\ := to_signed(1, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while ((long)num3 <= (long)((ulong)num)) {
-                        -- 	left = Unum.op_Addition (left, unum);
-                        -- 	unum = Unum.op_Addition (unum, unum);
-                        -- 	k = 0;
-                        -- 	while (k < 2) {
-                        -- 		memory.WriteUInt32 (num2, unum.UnumBits.Segments [k]);
-                        -- 		num2 = num2 + 1;
-                        -- 		k = k + 1;
-                        -- 	}
-                        -- 	l = 0;
-                        -- 	while (l < 2) {
-                        -- 		memory.WriteUInt32 (num2, left.UnumBits.Segments [l]);
-                        -- 		num2 = num2 + 1;
-                        -- 		l = l + 1;
-                        -- 	}
-                        -- 	num3 = num3 + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\WritesDone\ = true) then 
-                            -- SimpleMemory write finished.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num2 = num2 + 1;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.4\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.4\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- j = j + 1;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.5\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.j\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.j\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.5\;
-                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\ if the loop wasn't exited with a state change.
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\ => 
-                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\.
-                        -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\, 64) <= signed((SmartResize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num\, 64)));
-                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	left = Unum.op_Addition (left, unum);
                             -- 	unum = Unum.op_Addition (unum, unum);
-                            -- 	k = 0;
-                            -- 	while (k < 2) {
-                            -- 		memory.WriteUInt32 (num2, unum.UnumBits.Segments [k]);
-                            -- 		num2 = num2 + 1;
-                            -- 		k = k + 1;
-                            -- 	}
-                            -- 	l = 0;
-                            -- 	while (l < 2) {
-                            -- 		memory.WriteUInt32 (num2, left.UnumBits.Segments [l]);
-                            -- 		num2 = num2 + 1;
-                            -- 		l = l + 1;
-                            -- 	}
-                            -- 	num3 = num3 + 1;
+                            -- 	num2 = num2 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
@@ -2968,22 +2757,22 @@ begin
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).left.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).right.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= true;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\;
                         else 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\ => 
-                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\.
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\ => 
+                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- array = Lombiq.Unum.Unum.FractionToUintArray (left);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray()
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray().this.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\;
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Started.0\ <= true;
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_25\;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.Unum Lombiq.Unum.Unum::op_Addition(Lombiq.Unum.Unum,Lombiq.Unum.Unum)
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Finished.0\) then 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= false;
@@ -2993,219 +2782,97 @@ begin
                             -- unum = Unum.op_Addition (unum, unum);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_17\;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_17\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.Unum Lombiq.Unum.Unum::op_Addition(Lombiq.Unum.Unum,Lombiq.Unum.Unum)
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).left.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\;
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).right.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\;
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= true;
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.Unum Lombiq.Unum.Unum::op_Addition(Lombiq.Unum.Unum,Lombiq.Unum.Unum)
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Finished.0\) then 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= false;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).return.0\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- k = 0;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.k\ := to_signed(0, 32);
-                            -- The following section was transformed from the .NET statement below:
-                            -- while (k < 2) {
-                            -- 	memory.WriteUInt32 (num2, unum.UnumBits.Segments [k]);
-                            -- 	num2 = num2 + 1;
-                            -- 	k = k + 1;
-                            -- }
-                            -- 
-                            -- Starting a while loop.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_19\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_19\ => 
-                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\.
-                        -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.7\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.k\ < to_signed(2, 32);
-                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.7\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	memory.WriteUInt32 (num2, unum.UnumBits.Segments [k]);
-                            -- 	num2 = num2 + 1;
-                            -- 	k = k + 1;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (num2, unum.UnumBits.Segments [k]);
-                            -- 
-                            -- Begin SimpleMemory write.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\.\UnumBits\.\Segments\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.k\)));
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_21\;
-                        else 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_20\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_20\ => 
-                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- l = 0;
-                        -- 
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.l\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while (l < 2) {
-                        -- 	memory.WriteUInt32 (num2, left.UnumBits.Segments [l]);
-                        -- 	num2 = num2 + 1;
-                        -- 	l = l + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_22\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_21\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\WritesDone\ = true) then 
-                            -- SimpleMemory write finished.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            -- The following section was transformed from the .NET statement below:
                             -- num2 = num2 + 1;
                             -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.8\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.8\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- k = k + 1;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.9\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.k\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.k\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.9\;
-                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\ if the loop wasn't exited with a state change.
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_21\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_19\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ + to_signed(1, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\;
+                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
+                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\) then 
+                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_22\ => 
-                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_20\.
-                        -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.10\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.l\ < to_signed(2, 32);
-                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.10\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	memory.WriteUInt32 (num2, left.UnumBits.Segments [l]);
-                            -- 	num2 = num2 + 1;
-                            -- 	l = l + 1;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (num2, left.UnumBits.Segments [l]);
-                            -- 
-                            -- Begin SimpleMemory write.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\.\UnumBits\.\Segments\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.l\)));
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_24\;
-                        else 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_23\;
-                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_23\ => 
-                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_20\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = num3 + 1;
-                        -- 
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.13\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\ + to_signed(1, 32);
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.13\;
-                        -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\ if the loop wasn't exited with a state change.
-                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_23\) then 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_24\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\WritesDone\ = true) then 
-                            -- SimpleMemory write finished.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num2 = num2 + 1;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.11\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.11\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- l = l + 1;
-                            -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.12\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.l\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.l\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.12\;
-                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_20\ if the loop wasn't exited with a state change.
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_24\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_22\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_25\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray()
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Started.0\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Finished.0\) then 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Started.0\ <= false;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray().return.0\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- m = 0;
+                            -- i = 0;
                             -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.m\ := to_signed(0, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (m < 2) {
-                            -- 	memory.WriteUInt32 (m, array [m]);
-                            -- 	m = m + 1;
+                            -- while (i < 2) {
+                            -- 	memory.WriteUInt32 (i, array [i]);
+                            -- 	i = i + 1;
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_26\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_26\ => 
-                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_25\.
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\ => 
+                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\.
                         -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.14\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.m\ < to_signed(2, 32);
-                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.14\) then 
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ < to_signed(2, 32);
+                        if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	memory.WriteUInt32 (m, array [m]);
-                            -- 	m = m + 1;
+                            -- 	memory.WriteUInt32 (i, array [i]);
+                            -- 	i = i + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (m, array [m]);
+                            -- memory.WriteUInt32 (i, array [i]);
                             -- 
                             -- Begin SimpleMemory write.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.m\, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\, 32);
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.m\)));
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_28\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\)));
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\;
                         else 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_27\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_27\ => 
-                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_25\.
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\ => 
+                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\.
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_28\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- m = m + 1;
+                            -- i = i + 1;
                             -- 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.15\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.m\ + to_signed(1, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.m\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.15\;
-                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_25\ if the loop wasn't exited with a state change.
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_28\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_26\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ + to_signed(1, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\;
+                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\ if the loop wasn't exited with a state change.
+                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\) then 
+                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
