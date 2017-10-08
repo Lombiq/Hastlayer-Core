@@ -45,6 +45,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             Func<int, IVhdlGenerationOptions, string> stateNameGenerator = (index, vhdlGenerationOptions) =>
                 vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
 
+            currentBlock.Add(new LineComment("The following section was transformed from the .NET statement below:"));
+            currentBlock.Add(new BlockComment(statement.ToString()));
+
             if (statement is VariableDeclarationStatement)
             {
                 var variableStatement = statement as VariableDeclarationStatement;

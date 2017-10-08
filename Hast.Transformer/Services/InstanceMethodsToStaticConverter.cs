@@ -119,9 +119,12 @@ namespace Hast.Transformer.Services
 
                     if (targetMemberReference == null) return;
 
+                    var targetTypeReference = targetMemberReference.Target.GetActualTypeReference();
                     var isAffectedMethodCall =
-                        targetMemberReference.Target.GetActualTypeReference() != null &&
-                        targetMemberReference.Target.GetActualTypeReference().FullName == _methodParentFullName &&
+                        (targetMemberReference.Target is ThisReferenceExpression ||
+                            targetTypeReference != null &&
+                            targetTypeReference.FullName == _methodParentFullName)
+                        &&
                         targetMemberReference.MemberName == _methodName;
 
                     if (!isAffectedMethodCall) return;
