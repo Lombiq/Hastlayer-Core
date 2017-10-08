@@ -72,9 +72,6 @@ package SimpleMemory is
 		
 	function ConvertInt32ToStdLogicVector(input: signed(31 downto 0)) return std_logic_vector;
 	function ConvertStdLogicVectorToInt32(input : std_logic_vector) return signed;
-		
-	function ConvertCharToStdLogicVector(input: character) return std_logic_vector;
-	function ConvertStdLogicVectorToChar(input : std_logic_vector) return character;
 end SimpleMemory;
 		
 package body SimpleMemory is
@@ -113,98 +110,6 @@ package body SimpleMemory is
 	begin
 		return signed(input);
 	end ConvertStdLogicVectorToInt32;
-
-	function ConvertCharToStdLogicVector(input: character) return std_logic_vector is
-		variable characterIndex : integer;
-	begin
-		case input is
-			when '0' => characterIndex :=  0;
-			when '1' => characterIndex :=  1;
-			when '2' => characterIndex :=  2;
-			when '3' => characterIndex :=  3;
-			when '4' => characterIndex :=  4;
-			when '5' => characterIndex :=  5;
-			when '6' => characterIndex :=  6;
-			when '7' => characterIndex :=  7;
-			when '8' => characterIndex :=  8;
-			when '9' => characterIndex :=  9;
-			when 'A' => characterIndex := 10;
-			when 'B' => characterIndex := 11;
-			when 'C' => characterIndex := 12;
-			when 'D' => characterIndex := 13;
-			when 'E' => characterIndex := 14;
-			when 'F' => characterIndex := 15;
-			when 'G' => characterIndex := 16;
-			when 'H' => characterIndex := 17;
-			when 'I' => characterIndex := 18;
-			when 'J' => characterIndex := 19;
-			when 'K' => characterIndex := 20;
-			when 'L' => characterIndex := 21;
-			when 'M' => characterIndex := 22;
-			when 'N' => characterIndex := 23;
-			when 'O' => characterIndex := 24;
-			when 'P' => characterIndex := 25;
-			when 'Q' => characterIndex := 26;
-			when 'R' => characterIndex := 27;
-			when 'S' => characterIndex := 28;
-			when 'T' => characterIndex := 29;
-			when 'U' => characterIndex := 30;
-			when 'V' => characterIndex := 31;
-			when 'W' => characterIndex := 32;
-			when 'X' => characterIndex := 33;
-			when 'Y' => characterIndex := 34;
-			when 'Z' => characterIndex := 35;
-			when others => characterIndex := 0;
-		end case;
-			
-		return std_logic_vector(to_signed(characterIndex, 32));
-	end ConvertCharToStdLogicVector;
-
-	function ConvertStdLogicVectorToChar(input : std_logic_vector) return character is
-		variable characterIndex     : integer;
-	begin
-		characterIndex := to_integer(unsigned(input));
-		
-		case characterIndex is
-			when  0 => return '0';
-			when  1 => return '1';
-			when  2 => return '2';
-			when  3 => return '3';
-			when  4 => return '4';
-			when  5 => return '5';
-			when  6 => return '6';
-			when  7 => return '7';
-			when  8 => return '8';
-			when  9 => return '9';
-			when 10 => return 'A';
-			when 11 => return 'B';
-			when 12 => return 'C';
-			when 13 => return 'D';
-			when 14 => return 'E';
-			when 15 => return 'F';
-			when 16 => return 'G';
-			when 17 => return 'H';
-			when 18 => return 'I';
-			when 19 => return 'J';
-			when 20 => return 'K';
-			when 21 => return 'L';
-			when 22 => return 'M';
-			when 23 => return 'N';
-			when 24 => return 'O';
-			when 25 => return 'P';
-			when 26 => return 'Q';
-			when 27 => return 'R';
-			when 28 => return 'S';
-			when 29 => return 'T';
-			when 30 => return 'U';
-			when 31 => return 'V';
-			when 32 => return 'W';
-			when 33 => return 'X';
-			when 34 => return 'Y';
-			when 35 => return 'Z';
-			when others => return '?';
-		end case;
-	end ConvertStdLogicVectorToChar;
 
 end SimpleMemory;
 
@@ -846,6 +751,21 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- KpzKernels kpzKernels;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernels = new KpzKernels ();
+                        -- 
                         -- Initializing record fields to their defaults.
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\IsNull\ := false;
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\gridRaw\ := (others => to_unsigned(0, 32));
@@ -855,6 +775,9 @@ begin
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\ := to_unsigned(1, 32);
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\randomState1\ := to_unsigned(0, 64);
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\randomState2\ := to_unsigned(0, 64);
+                        -- The following section was transformed from the .NET statement below:
+                        -- Hast.Samples.Kpz.KpzKernels.CopyFromSimpleMemoryToRawGrid (kpzKernels, memory);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::CopyFromSimpleMemoryToRawGrid(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ <= true;
@@ -865,6 +788,9 @@ begin
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Finished.0\) then 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory)._Started.0\ <= false;
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.Samples.Kpz.KpzKernels.InitializeParametersFromMemory (kpzKernels, memory);
+                            -- 
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::InitializeParametersFromMemory(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ <= true;
@@ -876,6 +802,14 @@ begin
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Finished.0\) then 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory)._Started.0\ <= false;
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::InitializeParametersFromMemory(SimpleMemory).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (kpzKernels.TestMode) {
+                            -- 	num = 1;
+                            -- }
+                            -- else {
+                            -- 	num = 64;
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\ and ends in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\.
@@ -891,12 +825,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\ => 
                         -- State after the if-else which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 0;
+                        -- 
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((long)num2 < (long)((ulong)kpzKernels.NumberOfIterations)) {
+                        -- 	i = 0;
+                        -- 	while (i < num) {
+                        -- 		Hast.Samples.Kpz.KpzKernels.RandomlySwitchFourCells (kpzKernels, kpzKernels.TestMode);
+                        -- 		i = i + 1;
+                        -- 	}
+                        -- 	num2 = num2 + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\ => 
                         -- True branch of the if-else started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 1;
+                        -- 
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\ := to_signed(1, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_6\) then 
@@ -905,6 +860,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_7\ => 
                         -- False branch of the if-else started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num = 64;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 64;
+                        -- 
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\ := to_signed(64, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_4\.
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_7\) then 
@@ -916,7 +879,26 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\, 64) < signed((SmartResize(\KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\, 64)));
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	i = 0;
+                            -- 	while (i < num) {
+                            -- 		Hast.Samples.Kpz.KpzKernels.RandomlySwitchFourCells (kpzKernels, kpzKernels.TestMode);
+                            -- 		i = i + 1;
+                            -- 	}
+                            -- 	num2 = num2 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = 0;
+                            -- 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (i < num) {
+                            -- 	Hast.Samples.Kpz.KpzKernels.RandomlySwitchFourCells (kpzKernels, kpzKernels.TestMode);
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0._State\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_10\;
                         else 
@@ -925,6 +907,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_9\ => 
                         -- State after the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- Hast.Samples.Kpz.KpzKernels.CopyToSimpleMemoryFromRawGrid (kpzKernels, memory);
+                        -- 
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::CopyToSimpleMemoryFromRawGrid(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory)._Started.0\ <= true;
@@ -935,6 +920,15 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ < \KpzKernelsInterface::DoIterations(SimpleMemory).0.num\;
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	Hast.Samples.Kpz.KpzKernels.RandomlySwitchFourCells (kpzKernels, kpzKernels.TestMode);
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.Samples.Kpz.KpzKernels.RandomlySwitchFourCells (kpzKernels, kpzKernels.TestMode);
+                            -- 
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.Kpz.KpzKernels::RandomlySwitchFourCells(System.Boolean)
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\;
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).forceSwitch.parameter.Out.0\ <= \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\;
@@ -946,6 +940,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_11\ => 
                         -- State after the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = num2 + 1;
+                        -- 
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ + to_signed(1, 32);
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.num2\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.3\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_5\ if the loop wasn't exited with a state change.
@@ -958,6 +955,9 @@ begin
                         if (\KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ = \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Finished.0\) then 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean)._Started.0\ <= false;
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.KpzKernels::RandomlySwitchFourCells(Boolean).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = i + 1;
+                            -- 
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ + to_signed(1, 32);
                             \KpzKernelsInterface::DoIterations(SimpleMemory).0.i\ := \KpzKernelsInterface::DoIterations(SimpleMemory).0.binaryOperationResult.2\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernelsInterface::DoIterations(SimpleMemory).0._State_8\ if the loop wasn't exited with a state change.
@@ -1017,6 +1017,9 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (2, memory.ReadUInt32 (0) + memory.ReadUInt32 (1));
+                        -- 
                         -- Begin SimpleMemory read.
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -1121,6 +1124,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_2\ => 
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.randomState1 = (ulong)memory.ReadUInt32 (64) << 32 | (ulong)memory.ReadUInt32 (65);
+                        -- 
                         -- Begin SimpleMemory read.
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(64, 32), 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -1151,6 +1157,9 @@ begin
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.1\), 64), 64);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState1\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- @this.randomState2 = (ulong)memory.ReadUInt32 (66) << 32 | (ulong)memory.ReadUInt32 (67);
+                            -- 
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\;
                         end if;
@@ -1186,6 +1195,9 @@ begin
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\ := resize(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ or SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.3\), 64), 64);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\randomState2\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- @this.TestMode = memory.ReadUInt32 (68) & 1u == 1u;
+                            -- 
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\;
                         end if;
@@ -1205,6 +1217,9 @@ begin
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ := ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.4\) and to_unsigned(1, 32);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.4\ = to_unsigned(1, 32);
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.this\.\TestMode\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.5\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- @this.NumberOfIterations = memory.ReadUInt32 (69);
+                            -- 
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\;
                         end if;
@@ -1280,15 +1295,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::GetNextRandom1().0._State_2\ => 
                         \KpzKernels::GetNextRandom1().0.this\ := \KpzKernels::GetNextRandom1().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)(@this.randomState1 >> 32);
+                        -- 
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom1().0.this\.\randomState1\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                         \KpzKernels::GetNextRandom1().0.num\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (uint)(@this.randomState1 & 18446744073709551615uL);
+                        -- 
                         -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.1\ := SmartResize(\KpzKernels::GetNextRandom1().0.this\.\randomState1\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
                         \KpzKernels::GetNextRandom1().0.num2\ := (\KpzKernels::GetNextRandom1().0.binaryOperationResult.1\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.randomState1 = (ulong)num2 * 18446744073709467675uL + (ulong)num;
+                        -- 
                         -- Since the integer literal 18446744073709467675 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111101011100000011011).
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ := resize(SmartResize(\KpzKernels::GetNextRandom1().0.num2\, 64) * "1111111111111111111111111111111111111111111111101011100000011011", 64);
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\ := resize(\KpzKernels::GetNextRandom1().0.binaryOperationResult.2\ + SmartResize(\KpzKernels::GetNextRandom1().0.num\, 64), 64);
                         \KpzKernels::GetNextRandom1().0.this\.\randomState1\ := \KpzKernels::GetNextRandom1().0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2 ^ num;
+                        -- 
                         \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom1().0.num2\ xor \KpzKernels::GetNextRandom1().0.num\;
                         \KpzKernels::GetNextRandom1().0.return\ <= \KpzKernels::GetNextRandom1().0.binaryOperationResult.4\;
                         \KpzKernels::GetNextRandom1().0._State\ := \KpzKernels::GetNextRandom1().0._State_1\;
@@ -1348,15 +1381,33 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::GetNextRandom2().0._State_2\ => 
                         \KpzKernels::GetNextRandom2().0.this\ := \KpzKernels::GetNextRandom2().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (uint)(@this.randomState2 >> 32);
+                        -- 
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.0\ := SmartResize(shift_right(\KpzKernels::GetNextRandom2().0.this\.\randomState2\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                         \KpzKernels::GetNextRandom2().0.num\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.0\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (uint)(@this.randomState2 & 18446744073709551615uL);
+                        -- 
                         -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.1\ := SmartResize(\KpzKernels::GetNextRandom2().0.this\.\randomState2\ and "1111111111111111111111111111111111111111111111111111111111111111", 32);
                         \KpzKernels::GetNextRandom2().0.num2\ := (\KpzKernels::GetNextRandom2().0.binaryOperationResult.1\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.randomState2 = (ulong)num2 * 18446744073709467675uL + (ulong)num;
+                        -- 
                         -- Since the integer literal 18446744073709467675 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111101011100000011011).
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ := resize(SmartResize(\KpzKernels::GetNextRandom2().0.num2\, 64) * "1111111111111111111111111111111111111111111111101011100000011011", 64);
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\ := resize(\KpzKernels::GetNextRandom2().0.binaryOperationResult.2\ + SmartResize(\KpzKernels::GetNextRandom2().0.num\, 64), 64);
                         \KpzKernels::GetNextRandom2().0.this\.\randomState2\ := \KpzKernels::GetNextRandom2().0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return num2 ^ num;
+                        -- 
                         \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\ := \KpzKernels::GetNextRandom2().0.num2\ xor \KpzKernels::GetNextRandom2().0.num\;
                         \KpzKernels::GetNextRandom2().0.return\ <= \KpzKernels::GetNextRandom2().0.binaryOperationResult.4\;
                         \KpzKernels::GetNextRandom2().0._State\ := \KpzKernels::GetNextRandom2().0._State_1\;
@@ -1412,6 +1463,9 @@ begin
                         \KpzKernels::getIndexFromXY(Int32,Int32).0.this\ := \KpzKernels::getIndexFromXY(Int32,Int32).0.this.parameter.In\;
                         \KpzKernels::getIndexFromXY(Int32,Int32).0.x\ := \KpzKernels::getIndexFromXY(Int32,Int32).0.x.parameter.In\;
                         \KpzKernels::getIndexFromXY(Int32,Int32).0.y\ := \KpzKernels::getIndexFromXY(Int32,Int32).0.y.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return x + y * 8;
+                        -- 
                         \KpzKernels::getIndexFromXY(Int32,Int32).0.binaryOperationResult.0\ := resize(\KpzKernels::getIndexFromXY(Int32,Int32).0.y\ * to_signed(8, 32), 32);
                         \KpzKernels::getIndexFromXY(Int32,Int32).0.binaryOperationResult.1\ := \KpzKernels::getIndexFromXY(Int32,Int32).0.x\ + \KpzKernels::getIndexFromXY(Int32,Int32).0.binaryOperationResult.0\;
                         \KpzKernels::getIndexFromXY(Int32,Int32).0.return\ <= \KpzKernels::getIndexFromXY(Int32,Int32).0.binaryOperationResult.1\;
@@ -1465,6 +1519,9 @@ begin
                     when \KpzKernels::getGridDx(Int32).0._State_2\ => 
                         \KpzKernels::getGridDx(Int32).0.this\ := \KpzKernels::getGridDx(Int32).0.this.parameter.In\;
                         \KpzKernels::getGridDx(Int32).0.index\ := \KpzKernels::getGridDx(Int32).0.index.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this.gridRaw [index] & 1u > 0u;
+                        -- 
                         \KpzKernels::getGridDx(Int32).0.binaryOperationResult.0\ := \KpzKernels::getGridDx(Int32).0.this\.\gridRaw\(to_integer(\KpzKernels::getGridDx(Int32).0.index\)) and to_unsigned(1, 32);
                         \KpzKernels::getGridDx(Int32).0.binaryOperationResult.1\ := \KpzKernels::getGridDx(Int32).0.binaryOperationResult.0\ > to_unsigned(0, 32);
                         \KpzKernels::getGridDx(Int32).0.return\ <= \KpzKernels::getGridDx(Int32).0.binaryOperationResult.1\;
@@ -1518,6 +1575,9 @@ begin
                     when \KpzKernels::getGridDy(Int32).0._State_2\ => 
                         \KpzKernels::getGridDy(Int32).0.this\ := \KpzKernels::getGridDy(Int32).0.this.parameter.In\;
                         \KpzKernels::getGridDy(Int32).0.index\ := \KpzKernels::getGridDy(Int32).0.index.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return @this.gridRaw [index] & 2u > 0u;
+                        -- 
                         \KpzKernels::getGridDy(Int32).0.binaryOperationResult.0\ := \KpzKernels::getGridDy(Int32).0.this\.\gridRaw\(to_integer(\KpzKernels::getGridDy(Int32).0.index\)) and to_unsigned(2, 32);
                         \KpzKernels::getGridDy(Int32).0.binaryOperationResult.1\ := \KpzKernels::getGridDy(Int32).0.binaryOperationResult.0\ > to_unsigned(0, 32);
                         \KpzKernels::getGridDy(Int32).0.return\ <= \KpzKernels::getGridDy(Int32).0.binaryOperationResult.1\;
@@ -1575,6 +1635,17 @@ begin
                         \KpzKernels::setGridDx(Int32,Boolean).0.this\ := \KpzKernels::setGridDx(Int32,Boolean).0.this.parameter.In\;
                         \KpzKernels::setGridDx(Int32,Boolean).0.index\ := \KpzKernels::setGridDx(Int32,Boolean).0.index.parameter.In\;
                         \KpzKernels::setGridDx(Int32,Boolean).0.value\ := \KpzKernels::setGridDx(Int32,Boolean).0.value.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (value) {
+                        -- 	conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e = 1u;
+                        -- }
+                        -- else {
+                        -- 	conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e = 0u;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \KpzKernels::setGridDx(Int32,Boolean).0._State_4\ and ends in state \KpzKernels::setGridDx(Int32,Boolean).0._State_4\.
@@ -1589,6 +1660,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::setGridDx(Int32,Boolean).0._State_3\ => 
                         -- State after the if-else which was started in state \KpzKernels::setGridDx(Int32,Boolean).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.gridRaw [index] = @this.gridRaw [index] & 4294967294u | conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e;
+                        -- 
                         -- Since the integer literal 4294967294 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111110).
                         \KpzKernels::setGridDx(Int32,Boolean).0.binaryOperationResult.0\ := \KpzKernels::setGridDx(Int32,Boolean).0.this\.\gridRaw\(to_integer(\KpzKernels::setGridDx(Int32,Boolean).0.index\)) and "11111111111111111111111111111110";
                         \KpzKernels::setGridDx(Int32,Boolean).0.binaryOperationResult.1\ := \KpzKernels::setGridDx(Int32,Boolean).0.binaryOperationResult.0\ or \KpzKernels::setGridDx(Int32,Boolean).0.conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e\;
@@ -1597,6 +1671,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernels::setGridDx(Int32,Boolean).0._State_4\ => 
                         -- True branch of the if-else started in state \KpzKernels::setGridDx(Int32,Boolean).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e = 1u;
+                        -- 
                         \KpzKernels::setGridDx(Int32,Boolean).0.conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::setGridDx(Int32,Boolean).0._State_2\.
                         if (\KpzKernels::setGridDx(Int32,Boolean).0._State\ = \KpzKernels::setGridDx(Int32,Boolean).0._State_4\) then 
@@ -1605,6 +1687,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::setGridDx(Int32,Boolean).0._State_5\ => 
                         -- False branch of the if-else started in state \KpzKernels::setGridDx(Int32,Boolean).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e = 0u;
+                        -- 
                         \KpzKernels::setGridDx(Int32,Boolean).0.conditional8967f26a659a1ddcbabf9fc3ff6f8f89ca99389e2d9f85e3bbeaa263145b233e\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::setGridDx(Int32,Boolean).0._State_2\.
                         if (\KpzKernels::setGridDx(Int32,Boolean).0._State\ = \KpzKernels::setGridDx(Int32,Boolean).0._State_5\) then 
@@ -1663,6 +1753,17 @@ begin
                         \KpzKernels::setGridDy(Int32,Boolean).0.this\ := \KpzKernels::setGridDy(Int32,Boolean).0.this.parameter.In\;
                         \KpzKernels::setGridDy(Int32,Boolean).0.index\ := \KpzKernels::setGridDy(Int32,Boolean).0.index.parameter.In\;
                         \KpzKernels::setGridDy(Int32,Boolean).0.value\ := \KpzKernels::setGridDy(Int32,Boolean).0.value.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (value) {
+                        -- 	conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae = 2u;
+                        -- }
+                        -- else {
+                        -- 	conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae = 0u;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \KpzKernels::setGridDy(Int32,Boolean).0._State_4\ and ends in state \KpzKernels::setGridDy(Int32,Boolean).0._State_4\.
@@ -1677,6 +1778,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::setGridDy(Int32,Boolean).0._State_3\ => 
                         -- State after the if-else which was started in state \KpzKernels::setGridDy(Int32,Boolean).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- @this.gridRaw [index] = @this.gridRaw [index] & 4294967293u | conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae;
+                        -- 
                         -- Since the integer literal 4294967293 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111101).
                         \KpzKernels::setGridDy(Int32,Boolean).0.binaryOperationResult.0\ := \KpzKernels::setGridDy(Int32,Boolean).0.this\.\gridRaw\(to_integer(\KpzKernels::setGridDy(Int32,Boolean).0.index\)) and "11111111111111111111111111111101";
                         \KpzKernels::setGridDy(Int32,Boolean).0.binaryOperationResult.1\ := \KpzKernels::setGridDy(Int32,Boolean).0.binaryOperationResult.0\ or \KpzKernels::setGridDy(Int32,Boolean).0.conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae\;
@@ -1685,6 +1789,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernels::setGridDy(Int32,Boolean).0._State_4\ => 
                         -- True branch of the if-else started in state \KpzKernels::setGridDy(Int32,Boolean).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae = 2u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae = 2u;
+                        -- 
                         \KpzKernels::setGridDy(Int32,Boolean).0.conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae\ := to_unsigned(2, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::setGridDy(Int32,Boolean).0._State_2\.
                         if (\KpzKernels::setGridDy(Int32,Boolean).0._State\ = \KpzKernels::setGridDy(Int32,Boolean).0._State_4\) then 
@@ -1693,6 +1805,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::setGridDy(Int32,Boolean).0._State_5\ => 
                         -- False branch of the if-else started in state \KpzKernels::setGridDy(Int32,Boolean).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae = 0u;
+                        -- 
                         \KpzKernels::setGridDy(Int32,Boolean).0.conditional09e94246096be15388e56e58b4b26eae49dbb4d4f1e9fbfb5ee72677a60c13ae\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::setGridDy(Int32,Boolean).0._State_2\.
                         if (\KpzKernels::setGridDy(Int32,Boolean).0._State\ = \KpzKernels::setGridDy(Int32,Boolean).0._State_5\) then 
@@ -1760,7 +1880,30 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_2\ => 
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int j;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 8) {
+                        -- 	j = 0;
+                        -- 	while (j < 8) {
+                        -- 		num = i * 8 + j;
+                        -- 		memory.WriteUInt32 (num, @this.gridRaw [num]);
+                        -- 		j = j + 1;
+                        -- 	}
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1769,7 +1912,28 @@ begin
                         -- The while loop's condition:
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.0\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ < to_signed(8, 32);
                         if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	j = 0;
+                            -- 	while (j < 8) {
+                            -- 		num = i * 8 + j;
+                            -- 		memory.WriteUInt32 (num, @this.gridRaw [num]);
+                            -- 		j = j + 1;
+                            -- 	}
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = 0;
+                            -- 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (j < 8) {
+                            -- 	num = i * 8 + j;
+                            -- 	memory.WriteUInt32 (num, @this.gridRaw [num]);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_5\;
                         else 
@@ -1785,9 +1949,22 @@ begin
                         -- The while loop's condition:
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ < to_signed(8, 32);
                         if (\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num = i * 8 + j;
+                            -- 	memory.WriteUInt32 (num, @this.gridRaw [num]);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = i * 8 + j;
+                            -- 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ := resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ * to_signed(8, 32), 32);
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.2\ + \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\;
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 (num, @this.gridRaw [num]);
+                            -- 
                             -- Begin SimpleMemory write.
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num\, 32);
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -1799,6 +1976,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ + to_signed(1, 32);
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.i\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_2\ if the loop wasn't exited with a state change.
@@ -1811,6 +1991,9 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = j + 1;
+                            -- 
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ + to_signed(1, 32);
                             \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.j\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
@@ -1881,7 +2064,30 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_2\ => 
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int j;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 8) {
+                        -- 	j = 0;
+                        -- 	while (j < 8) {
+                        -- 		num = j * 8 + i;
+                        -- 		@this.gridRaw [num] = memory.ReadUInt32 (num);
+                        -- 		j = j + 1;
+                        -- 	}
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1890,7 +2096,28 @@ begin
                         -- The while loop's condition:
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.0\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ < to_signed(8, 32);
                         if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	j = 0;
+                            -- 	while (j < 8) {
+                            -- 		num = j * 8 + i;
+                            -- 		@this.gridRaw [num] = memory.ReadUInt32 (num);
+                            -- 		j = j + 1;
+                            -- 	}
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = 0;
+                            -- 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (j < 8) {
+                            -- 	num = j * 8 + i;
+                            -- 	@this.gridRaw [num] = memory.ReadUInt32 (num);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_5\;
                         else 
@@ -1906,9 +2133,22 @@ begin
                         -- The while loop's condition:
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ < to_signed(8, 32);
                         if (\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num = j * 8 + i;
+                            -- 	@this.gridRaw [num] = memory.ReadUInt32 (num);
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = j * 8 + i;
+                            -- 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ := resize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ * to_signed(8, 32), 32);
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.2\ + \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\;
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- @this.gridRaw [num] = memory.ReadUInt32 (num);
+                            -- 
                             -- Begin SimpleMemory read.
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\, 32);
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -1919,6 +2159,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_6\ => 
                         -- State after the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ + to_signed(1, 32);
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.i\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.5\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_2\ if the loop wasn't exited with a state change.
@@ -1933,6 +2176,9 @@ begin
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.this\.\gridRaw\(to_integer(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num\)) := ConvertStdLogicVectorToUInt32(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = j + 1;
+                            -- 
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ + to_signed(1, 32);
                             \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.j\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
@@ -2111,6 +2357,51 @@ begin
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_2\ => 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.In\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint nextRandom;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int indexFromXY;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint nextRandom2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num6;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num8;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int index;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int index2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- nextRandom = Hast.Samples.Kpz.KpzKernels.GetNextRandom1 (@this);
+                        -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom1()
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1()._Started.0\ <= true;
@@ -2123,11 +2414,20 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom1().this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = (int)(nextRandom & 7u);
+                            -- 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.0\ := signed(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\ and to_unsigned(7, 32));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = (int)(nextRandom >> 16 & 7u);
+                            -- 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.1\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.2\ := signed(\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.1\ and to_unsigned(7, 32));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.2\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- indexFromXY = Hast.Samples.Kpz.KpzKernels.getIndexFromXY (@this, num, num2);
+                            -- 
                             -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.KpzKernels::getIndexFromXY(System.Int32,System.Int32)
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).x.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\;
@@ -2143,6 +2443,9 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.1\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getIndexFromXY(Int32,Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.1\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- nextRandom2 = Hast.Samples.Kpz.KpzKernels.GetNextRandom2 (@this);
+                            -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.Kpz.KpzKernels::GetNextRandom2()
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2()._Started.0\ <= true;
@@ -2156,11 +2459,25 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().return.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetNextRandom2().this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = nextRandom2 & 65535u;
+                            -- 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\ and to_unsigned(65535, 32);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = nextRandom2 >> 16 & 65535u;
+                            -- 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ := shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.nextRandom2\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ and to_unsigned(65535, 32);
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (num < 7) {
+                            -- 	num5 = num + 1;
+                            -- }
+                            -- else {
+                            -- 	num5 = 0;
+                            -- }
+                            -- 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ < to_signed(7, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -2177,8 +2494,22 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.5
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = num2;
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num7 = num;
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (num2 < 7) {
+                        -- 	num8 = num2 + 1;
+                        -- }
+                        -- else {
+                        -- 	num8 = 0;
+                        -- }
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ < to_signed(7, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -2194,6 +2525,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\ => 
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num5 = num + 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = num + 1;
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num\ + to_signed(1, 32);
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\;
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
@@ -2203,6 +2542,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\ => 
                         -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num5 = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = 0;
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_5\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\) then 
@@ -2211,12 +2558,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- index = num6 * 8 + num5;
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ := resize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num6\ * to_signed(8, 32), 32);
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.11\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ + \KpzKernels::RandomlySwitchFourCells(Boolean).0.num5\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.11\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- index2 = num8 * 8 + num7;
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ := resize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ * to_signed(8, 32), 32);
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ + \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index) && Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY) && !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2) && forceSwitch || num3 < @this.integerProbabilityP || !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index) && !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY) && Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2) && forceSwitch || num4 < @this.integerProbabilityQ;
+                        -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
@@ -2225,6 +2581,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\ => 
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num8 = num2 + 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num8 = num2 + 1;
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ + to_signed(1, 32);
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\;
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
@@ -2234,6 +2598,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\ => 
                         -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num8 = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num8 = 0;
+                        -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\) then 
@@ -2383,6 +2755,14 @@ begin
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.25\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.22\ and \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.24\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.26\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.19\ or \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.25\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.flag\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.26\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (flag) {
+                            -- 	Hast.Samples.Kpz.KpzKernels.setGridDx (@this, indexFromXY, !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY));
+                            -- 	Hast.Samples.Kpz.KpzKernels.setGridDy (@this, indexFromXY, !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY));
+                            -- 	Hast.Samples.Kpz.KpzKernels.setGridDx (@this, index, !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index));
+                            -- 	Hast.Samples.Kpz.KpzKernels.setGridDy (@this, index2, !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2));
+                            -- }
+                            -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\ and ends in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_37\.
@@ -2402,6 +2782,17 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_29\ => 
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_27\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	Hast.Samples.Kpz.KpzKernels.setGridDx (@this, indexFromXY, !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY));
+                        -- 	Hast.Samples.Kpz.KpzKernels.setGridDy (@this, indexFromXY, !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY));
+                        -- 	Hast.Samples.Kpz.KpzKernels.setGridDx (@this, index, !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index));
+                        -- 	Hast.Samples.Kpz.KpzKernels.setGridDy (@this, index2, !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Hast.Samples.Kpz.KpzKernels.setGridDx (@this, indexFromXY, !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, indexFromXY));
+                        -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
@@ -2427,6 +2818,9 @@ begin
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.Samples.Kpz.KpzKernels.setGridDy (@this, indexFromXY, !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, indexFromXY));
+                            -- 
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\;
@@ -2453,6 +2847,9 @@ begin
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDy(Int32,Boolean).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.Samples.Kpz.KpzKernels.setGridDx (@this, index, !Hast.Samples.Kpz.KpzKernels.getGridDx (@this, index));
+                            -- 
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDx(System.Int32)
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDx(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\;
@@ -2479,6 +2876,9 @@ begin
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::setGridDx(Int32,Boolean).this.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- Hast.Samples.Kpz.KpzKernels.setGridDy (@this, index2, !Hast.Samples.Kpz.KpzKernels.getGridDy (@this, index2));
+                            -- 
                             -- Starting state machine invocation for the following method: System.Boolean Hast.Samples.Kpz.KpzKernels::getGridDy(System.Int32)
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::getGridDy(Int32).index.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.index2\;
@@ -2692,8 +3092,135 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_2\ => 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.rawIndexObject\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.rawIndexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- KpzKernelsIndexObject kpzKernelsIndexObject;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num6;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num8;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num9;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num10;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num11;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num12;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num13;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num14;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num15;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num16;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num17;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num18;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num19;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num21;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num22;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num23;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject = rawIndexObject;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.rawIndexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 32) {
+                        -- 	num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                        -- 	num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                        -- 	num3 = 65534u;
+                        -- 	num4 = 47131u;
+                        -- 	num5 = 0u | num3 << 16 | num4;
+                        -- 	kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                        -- 	num6 = num2 ^ num;
+                        -- 	num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                        -- 	num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                        -- 	num9 = 65534u;
+                        -- 	num10 = 47131u;
+                        -- 	num11 = 0u | num9 << 16 | num10;
+                        -- 	kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                        -- 	num12 = num8 ^ num7;
+                        -- 	num13 = (int)(num6 & 7u);
+                        -- 	num14 = (int)(num6 >> 16 & 7u);
+                        -- 	num15 = num13 + num14 * 8;
+                        -- 	num16 = num12 & 65535u;
+                        -- 	num17 = num12 >> 16 & 65535u;
+                        -- 	flag = num13 >= 7 || num14 >= 7;
+                        -- 	if (!flag) {
+                        -- 		num18 = num13 + 1;
+                        -- 		num19 = num14;
+                        -- 		num20 = num13;
+                        -- 		num21 = num14 + 1;
+                        -- 		num22 = num19 * 8 + num18;
+                        -- 		num23 = num21 * 8 + num20;
+                        -- 		flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 		if (flag2) {
+                        -- 			kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 			kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 			kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 			kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 		}
+                        -- 	}
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2702,20 +3229,84 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.0\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.i\ < to_signed(32, 32);
                         if (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                            -- 	num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                            -- 	num3 = 65534u;
+                            -- 	num4 = 47131u;
+                            -- 	num5 = 0u | num3 << 16 | num4;
+                            -- 	kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                            -- 	num6 = num2 ^ num;
+                            -- 	num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                            -- 	num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                            -- 	num9 = 65534u;
+                            -- 	num10 = 47131u;
+                            -- 	num11 = 0u | num9 << 16 | num10;
+                            -- 	kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                            -- 	num12 = num8 ^ num7;
+                            -- 	num13 = (int)(num6 & 7u);
+                            -- 	num14 = (int)(num6 >> 16 & 7u);
+                            -- 	num15 = num13 + num14 * 8;
+                            -- 	num16 = num12 & 65535u;
+                            -- 	num17 = num12 >> 16 & 65535u;
+                            -- 	flag = num13 >= 7 || num14 >= 7;
+                            -- 	if (!flag) {
+                            -- 		num18 = num13 + 1;
+                            -- 		num19 = num14;
+                            -- 		num20 = num13;
+                            -- 		num21 = num14 + 1;
+                            -- 		num22 = num19 * 8 + num18;
+                            -- 		num23 = num21 * 8 + num20;
+                            -- 		flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                            -- 		if (flag2) {
+                            -- 			kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                            -- 			kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                            -- 			kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                            -- 			kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                            -- 		}
+                            -- 	}
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.1\ := SmartResize(shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\taskRandomState1\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.1\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num2\ := SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\taskRandomState1\, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = 65534u;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num3\ := to_unsigned(65534, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = 47131u;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num4\ := to_unsigned(47131, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = 0u | num3 << 16 | num4;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.2\ := shift_left(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num3\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5))));
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.3\ := to_unsigned(0, 32) or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.2\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.4\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.3\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num4\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num5\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.4\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.5\ := resize(SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num2\, 64) * SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num5\, 64), 64);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.6\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.5\ + SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num\, 64), 64);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\taskRandomState1\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.6\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num6 = num2 ^ num;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.7\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num2\ xor \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num6\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.7\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_5\;
                         else 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_4\;
@@ -2723,6 +3314,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_4\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return kpzKernelsIndexObject;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.return\ <= \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2730,20 +3324,44 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.8\ := SmartResize(shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\taskRandomState2\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num7\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.8\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num8\ := SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\taskRandomState2\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num9 = 65534u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num9\ := to_unsigned(65534, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num10 = 47131u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num10\ := to_unsigned(47131, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num11 = 0u | num9 << 16 | num10;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.9\ := shift_left(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num9\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5))));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.10\ := to_unsigned(0, 32) or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.9\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.11\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.10\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num10\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num11\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.11\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.12\ := resize(SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num8\, 64) * SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num11\, 64), 64);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.13\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.12\ + SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num7\, 64), 64);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\taskRandomState2\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.13\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num12 = num8 ^ num7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.14\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num8\ xor \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num7\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num12\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.14\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num13 = (int)(num6 & 7u);
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.15\ := signed(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num6\ and to_unsigned(7, 32));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num13\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.15\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num14 = (int)(num6 >> 16 & 7u);
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_6\ => 
@@ -2751,14 +3369,26 @@ begin
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.16\ := shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num6\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.17\ := signed(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.16\ and to_unsigned(7, 32));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num14\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.17\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num15 = num13 + num14 * 8;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.18\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num14\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.19\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num13\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.18\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num15\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.19\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num16 = num12 & 65535u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.20\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num12\ and to_unsigned(65535, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num16\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.20\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num17 = num12 >> 16 & 65535u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.21\ := shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num12\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.22\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.21\ and to_unsigned(65535, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num17\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.22\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num13 >= 7 || num14 >= 7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.23\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num13\ >= to_signed(7, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 1.0
@@ -2767,6 +3397,23 @@ begin
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.24\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num14\ >= to_signed(7, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.25\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.23\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.24\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.flag\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.25\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (!flag) {
+                        -- 	num18 = num13 + 1;
+                        -- 	num19 = num14;
+                        -- 	num20 = num13;
+                        -- 	num21 = num14 + 1;
+                        -- 	num22 = num19 * 8 + num18;
+                        -- 	num23 = num21 * 8 + num20;
+                        -- 	flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 	if (flag2) {
+                        -- 		kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 		kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 		kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 		kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 	}
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_9\ and ends in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_12\.
@@ -2781,6 +3428,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_8\ => 
                         -- State after the if-else which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.43\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.i\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.i\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.43\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_2\ if the loop wasn't exited with a state change.
@@ -2790,18 +3440,56 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_9\ => 
                         -- True branch of the if-else started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num18 = num13 + 1;
+                        -- 	num19 = num14;
+                        -- 	num20 = num13;
+                        -- 	num21 = num14 + 1;
+                        -- 	num22 = num19 * 8 + num18;
+                        -- 	num23 = num21 * 8 + num20;
+                        -- 	flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 	if (flag2) {
+                        -- 		kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 		kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 		kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 		kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = num13 + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.26\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num13\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num18\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.26\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num19 = num14;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num19\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num14\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num20 = num13;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num20\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num13\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num21 = num14 + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.27\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num14\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num21\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.27\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num22 = num19 * 8 + num18;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.28\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num19\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.29\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.28\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num18\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num22\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.29\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num23 = num21 * 8 + num20;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.30\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num21\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.31\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.30\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num20\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num23\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.31\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.32\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num15\)) and not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num22\)));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.33\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.32\ and \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num15\));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_10\;
@@ -2822,6 +3510,14 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.42\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.36\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.41\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.flag2\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.binaryOperationResult.42\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 	kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 	kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 	kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_13\ and ends in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_13\.
@@ -2843,9 +3539,29 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_13\ => 
                         -- True branch of the if-else started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 	kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 	kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 	kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num15\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num15\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num15\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num15\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num22\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num22\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num23\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0.num23\)));
                         -- Going to the state after the if-else which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_11\.
                         if (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State\ = \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).0._State_13\) then 
@@ -3033,8 +3749,135 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_2\ => 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.rawIndexObject\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.rawIndexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- KpzKernelsIndexObject kpzKernelsIndexObject;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num6;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num8;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num9;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num10;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num11;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num12;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num13;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num14;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num15;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num16;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num17;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num18;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num19;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num21;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num22;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num23;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject = rawIndexObject;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.rawIndexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 32) {
+                        -- 	num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                        -- 	num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                        -- 	num3 = 65534u;
+                        -- 	num4 = 47131u;
+                        -- 	num5 = 0u | num3 << 16 | num4;
+                        -- 	kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                        -- 	num6 = num2 ^ num;
+                        -- 	num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                        -- 	num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                        -- 	num9 = 65534u;
+                        -- 	num10 = 47131u;
+                        -- 	num11 = 0u | num9 << 16 | num10;
+                        -- 	kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                        -- 	num12 = num8 ^ num7;
+                        -- 	num13 = (int)(num6 & 7u);
+                        -- 	num14 = (int)(num6 >> 16 & 7u);
+                        -- 	num15 = num13 + num14 * 8;
+                        -- 	num16 = num12 & 65535u;
+                        -- 	num17 = num12 >> 16 & 65535u;
+                        -- 	flag = num13 >= 7 || num14 >= 7;
+                        -- 	if (!flag) {
+                        -- 		num18 = num13 + 1;
+                        -- 		num19 = num14;
+                        -- 		num20 = num13;
+                        -- 		num21 = num14 + 1;
+                        -- 		num22 = num19 * 8 + num18;
+                        -- 		num23 = num21 * 8 + num20;
+                        -- 		flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 		if (flag2) {
+                        -- 			kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 			kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 			kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 			kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 		}
+                        -- 	}
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3043,20 +3886,84 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.0\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.i\ < to_signed(32, 32);
                         if (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                            -- 	num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                            -- 	num3 = 65534u;
+                            -- 	num4 = 47131u;
+                            -- 	num5 = 0u | num3 << 16 | num4;
+                            -- 	kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                            -- 	num6 = num2 ^ num;
+                            -- 	num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                            -- 	num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                            -- 	num9 = 65534u;
+                            -- 	num10 = 47131u;
+                            -- 	num11 = 0u | num9 << 16 | num10;
+                            -- 	kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                            -- 	num12 = num8 ^ num7;
+                            -- 	num13 = (int)(num6 & 7u);
+                            -- 	num14 = (int)(num6 >> 16 & 7u);
+                            -- 	num15 = num13 + num14 * 8;
+                            -- 	num16 = num12 & 65535u;
+                            -- 	num17 = num12 >> 16 & 65535u;
+                            -- 	flag = num13 >= 7 || num14 >= 7;
+                            -- 	if (!flag) {
+                            -- 		num18 = num13 + 1;
+                            -- 		num19 = num14;
+                            -- 		num20 = num13;
+                            -- 		num21 = num14 + 1;
+                            -- 		num22 = num19 * 8 + num18;
+                            -- 		num23 = num21 * 8 + num20;
+                            -- 		flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                            -- 		if (flag2) {
+                            -- 			kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                            -- 			kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                            -- 			kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                            -- 			kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                            -- 		}
+                            -- 	}
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.1\ := SmartResize(shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\taskRandomState1\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.1\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num2\ := SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\taskRandomState1\, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = 65534u;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num3\ := to_unsigned(65534, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = 47131u;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num4\ := to_unsigned(47131, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = 0u | num3 << 16 | num4;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.2\ := shift_left(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num3\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5))));
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.3\ := to_unsigned(0, 32) or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.2\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.4\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.3\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num4\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num5\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.4\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.5\ := resize(SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num2\, 64) * SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num5\, 64), 64);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.6\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.5\ + SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num\, 64), 64);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\taskRandomState1\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.6\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num6 = num2 ^ num;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.7\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num2\ xor \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num6\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.7\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_5\;
                         else 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_4\;
@@ -3064,6 +3971,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_4\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return kpzKernelsIndexObject;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.return\ <= \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3071,20 +3981,44 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.8\ := SmartResize(shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\taskRandomState2\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num7\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.8\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num8\ := SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\taskRandomState2\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num9 = 65534u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num9\ := to_unsigned(65534, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num10 = 47131u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num10\ := to_unsigned(47131, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num11 = 0u | num9 << 16 | num10;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.9\ := shift_left(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num9\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5))));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.10\ := to_unsigned(0, 32) or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.9\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.11\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.10\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num10\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num11\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.11\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.12\ := resize(SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num8\, 64) * SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num11\, 64), 64);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.13\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.12\ + SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num7\, 64), 64);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\taskRandomState2\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.13\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num12 = num8 ^ num7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.14\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num8\ xor \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num7\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num12\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.14\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num13 = (int)(num6 & 7u);
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.15\ := signed(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num6\ and to_unsigned(7, 32));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num13\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.15\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num14 = (int)(num6 >> 16 & 7u);
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_6\ => 
@@ -3092,14 +4026,26 @@ begin
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.16\ := shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num6\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.17\ := signed(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.16\ and to_unsigned(7, 32));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num14\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.17\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num15 = num13 + num14 * 8;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.18\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num14\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.19\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num13\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.18\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num15\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.19\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num16 = num12 & 65535u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.20\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num12\ and to_unsigned(65535, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num16\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.20\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num17 = num12 >> 16 & 65535u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.21\ := shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num12\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.22\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.21\ and to_unsigned(65535, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num17\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.22\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num13 >= 7 || num14 >= 7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.23\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num13\ >= to_signed(7, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 1.0
@@ -3108,6 +4054,23 @@ begin
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.24\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num14\ >= to_signed(7, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.25\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.23\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.24\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.flag\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.25\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (!flag) {
+                        -- 	num18 = num13 + 1;
+                        -- 	num19 = num14;
+                        -- 	num20 = num13;
+                        -- 	num21 = num14 + 1;
+                        -- 	num22 = num19 * 8 + num18;
+                        -- 	num23 = num21 * 8 + num20;
+                        -- 	flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 	if (flag2) {
+                        -- 		kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 		kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 		kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 		kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 	}
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_9\ and ends in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_12\.
@@ -3122,6 +4085,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_8\ => 
                         -- State after the if-else which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.43\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.i\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.i\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.43\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_2\ if the loop wasn't exited with a state change.
@@ -3131,18 +4097,56 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_9\ => 
                         -- True branch of the if-else started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num18 = num13 + 1;
+                        -- 	num19 = num14;
+                        -- 	num20 = num13;
+                        -- 	num21 = num14 + 1;
+                        -- 	num22 = num19 * 8 + num18;
+                        -- 	num23 = num21 * 8 + num20;
+                        -- 	flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 	if (flag2) {
+                        -- 		kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 		kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 		kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 		kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = num13 + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.26\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num13\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num18\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.26\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num19 = num14;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num19\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num14\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num20 = num13;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num20\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num13\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num21 = num14 + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.27\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num14\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num21\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.27\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num22 = num19 * 8 + num18;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.28\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num19\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.29\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.28\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num18\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num22\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.29\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num23 = num21 * 8 + num20;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.30\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num21\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.31\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.30\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num20\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num23\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.31\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.32\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num15\)) and not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num22\)));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.33\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.32\ and \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num15\));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_10\;
@@ -3163,6 +4167,14 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.42\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.36\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.41\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.flag2\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.binaryOperationResult.42\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 	kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 	kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 	kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_13\ and ends in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_13\.
@@ -3184,9 +4196,29 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_13\ => 
                         -- True branch of the if-else started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 	kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 	kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 	kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num15\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num15\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num15\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num15\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num22\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num22\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num23\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1.num23\)));
                         -- Going to the state after the if-else which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_11\.
                         if (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State\ = \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).1._State_13\) then 
@@ -3374,8 +4406,135 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_2\ => 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.rawIndexObject\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.rawIndexObject.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- KpzKernelsIndexObject kpzKernelsIndexObject;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num6;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num8;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num9;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num10;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num11;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num12;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num13;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num14;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num15;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num16;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num17;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num18;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num19;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num21;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num22;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num23;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject = rawIndexObject;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.rawIndexObject\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = 0;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.i\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (i < 32) {
+                        -- 	num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                        -- 	num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                        -- 	num3 = 65534u;
+                        -- 	num4 = 47131u;
+                        -- 	num5 = 0u | num3 << 16 | num4;
+                        -- 	kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                        -- 	num6 = num2 ^ num;
+                        -- 	num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                        -- 	num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                        -- 	num9 = 65534u;
+                        -- 	num10 = 47131u;
+                        -- 	num11 = 0u | num9 << 16 | num10;
+                        -- 	kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                        -- 	num12 = num8 ^ num7;
+                        -- 	num13 = (int)(num6 & 7u);
+                        -- 	num14 = (int)(num6 >> 16 & 7u);
+                        -- 	num15 = num13 + num14 * 8;
+                        -- 	num16 = num12 & 65535u;
+                        -- 	num17 = num12 >> 16 & 65535u;
+                        -- 	flag = num13 >= 7 || num14 >= 7;
+                        -- 	if (!flag) {
+                        -- 		num18 = num13 + 1;
+                        -- 		num19 = num14;
+                        -- 		num20 = num13;
+                        -- 		num21 = num14 + 1;
+                        -- 		num22 = num19 * 8 + num18;
+                        -- 		num23 = num21 * 8 + num20;
+                        -- 		flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 		if (flag2) {
+                        -- 			kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 			kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 			kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 			kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 		}
+                        -- 	}
+                        -- 	i = i + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3384,20 +4543,84 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.0\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.i\ < to_signed(32, 32);
                         if (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.0\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                            -- 	num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                            -- 	num3 = 65534u;
+                            -- 	num4 = 47131u;
+                            -- 	num5 = 0u | num3 << 16 | num4;
+                            -- 	kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                            -- 	num6 = num2 ^ num;
+                            -- 	num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                            -- 	num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                            -- 	num9 = 65534u;
+                            -- 	num10 = 47131u;
+                            -- 	num11 = 0u | num9 << 16 | num10;
+                            -- 	kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                            -- 	num12 = num8 ^ num7;
+                            -- 	num13 = (int)(num6 & 7u);
+                            -- 	num14 = (int)(num6 >> 16 & 7u);
+                            -- 	num15 = num13 + num14 * 8;
+                            -- 	num16 = num12 & 65535u;
+                            -- 	num17 = num12 >> 16 & 65535u;
+                            -- 	flag = num13 >= 7 || num14 >= 7;
+                            -- 	if (!flag) {
+                            -- 		num18 = num13 + 1;
+                            -- 		num19 = num14;
+                            -- 		num20 = num13;
+                            -- 		num21 = num14 + 1;
+                            -- 		num22 = num19 * 8 + num18;
+                            -- 		num23 = num21 * 8 + num20;
+                            -- 		flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                            -- 		if (flag2) {
+                            -- 			kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                            -- 			kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                            -- 			kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                            -- 			kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                            -- 		}
+                            -- 	}
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = (uint)(kpzKernelsIndexObject.taskRandomState1 >> 32);
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.1\ := SmartResize(shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\taskRandomState1\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.1\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = (uint)kpzKernelsIndexObject.taskRandomState1;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num2\ := SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\taskRandomState1\, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = 65534u;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num3\ := to_unsigned(65534, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = 47131u;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num4\ := to_unsigned(47131, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = 0u | num3 << 16 | num4;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.2\ := shift_left(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num3\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5))));
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.3\ := to_unsigned(0, 32) or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.2\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.4\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.3\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num4\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num5\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.4\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- kpzKernelsIndexObject.taskRandomState1 = (ulong)num2 * (ulong)num5 + (ulong)num;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.5\ := resize(SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num2\, 64) * SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num5\, 64), 64);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.6\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.5\ + SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num\, 64), 64);
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\taskRandomState1\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.6\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num6 = num2 ^ num;
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.7\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num2\ xor \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num\;
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num6\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.7\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num7 = (uint)(kpzKernelsIndexObject.taskRandomState2 >> 32);
+                            -- 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_5\;
                         else 
                             \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_4\;
@@ -3405,6 +4628,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_4\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return kpzKernelsIndexObject;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.return\ <= \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -3412,20 +4638,44 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.8\ := SmartResize(shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\taskRandomState2\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num7\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.8\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num8 = (uint)kpzKernelsIndexObject.taskRandomState2;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num8\ := SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\taskRandomState2\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num9 = 65534u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num9\ := to_unsigned(65534, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num10 = 47131u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num10\ := to_unsigned(47131, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num11 = 0u | num9 << 16 | num10;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.9\ := shift_left(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num9\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5))));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.10\ := to_unsigned(0, 32) or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.9\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.11\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.10\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num10\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num11\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.11\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.taskRandomState2 = (ulong)num8 * (ulong)num11 + (ulong)num7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.12\ := resize(SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num8\, 64) * SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num11\, 64), 64);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.13\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.12\ + SmartResize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num7\, 64), 64);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\taskRandomState2\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.13\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num12 = num8 ^ num7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.14\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num8\ xor \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num7\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num12\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.14\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num13 = (int)(num6 & 7u);
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.15\ := signed(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num6\ and to_unsigned(7, 32));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num13\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.15\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num14 = (int)(num6 >> 16 & 7u);
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.9
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_6\ => 
@@ -3433,14 +4683,26 @@ begin
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.16\ := shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num6\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.17\ := signed(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.16\ and to_unsigned(7, 32));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num14\ := (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.17\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num15 = num13 + num14 * 8;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.18\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num14\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.19\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num13\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.18\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num15\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.19\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num16 = num12 & 65535u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.20\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num12\ and to_unsigned(65535, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num16\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.20\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num17 = num12 >> 16 & 65535u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.21\ := shift_right(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num12\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.22\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.21\ and to_unsigned(65535, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num17\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.22\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = num13 >= 7 || num14 >= 7;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.23\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num13\ >= to_signed(7, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 1.0
@@ -3449,6 +4711,23 @@ begin
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.24\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num14\ >= to_signed(7, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.25\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.23\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.24\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.flag\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.25\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (!flag) {
+                        -- 	num18 = num13 + 1;
+                        -- 	num19 = num14;
+                        -- 	num20 = num13;
+                        -- 	num21 = num14 + 1;
+                        -- 	num22 = num19 * 8 + num18;
+                        -- 	num23 = num21 * 8 + num20;
+                        -- 	flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 	if (flag2) {
+                        -- 		kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 		kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 		kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 		kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 	}
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_9\ and ends in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_12\.
@@ -3463,6 +4742,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_8\ => 
                         -- State after the if-else which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- i = i + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.43\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.i\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.i\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.43\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_2\ if the loop wasn't exited with a state change.
@@ -3472,18 +4754,56 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_9\ => 
                         -- True branch of the if-else started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num18 = num13 + 1;
+                        -- 	num19 = num14;
+                        -- 	num20 = num13;
+                        -- 	num21 = num14 + 1;
+                        -- 	num22 = num19 * 8 + num18;
+                        -- 	num23 = num21 * 8 + num20;
+                        -- 	flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 	if (flag2) {
+                        -- 		kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 		kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 		kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 		kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = num13 + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.26\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num13\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num18\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.26\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num19 = num14;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num19\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num14\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num20 = num13;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num20\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num13\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num21 = num14 + 1;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.27\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num14\ + to_signed(1, 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num21\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.27\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num22 = num19 * 8 + num18;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.28\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num19\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.29\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.28\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num18\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num22\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.29\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num23 = num21 * 8 + num20;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.30\ := resize(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num21\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.31\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.30\ + \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num20\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num23\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.31\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = kpzKernelsIndexObject.bramDx [num15] && !kpzKernelsIndexObject.bramDx [num22] && kpzKernelsIndexObject.bramDy [num15] && !kpzKernelsIndexObject.bramDy [num23] && num16 < 32767u || !kpzKernelsIndexObject.bramDx [num15] && kpzKernelsIndexObject.bramDx [num22] && !kpzKernelsIndexObject.bramDy [num15] && kpzKernelsIndexObject.bramDy [num23] && num17 < 32767u;
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.32\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num15\)) and not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num22\)));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.33\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.32\ and \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num15\));
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_10\;
@@ -3504,6 +4824,14 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.42\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.36\ or \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.41\;
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.flag2\ := \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.binaryOperationResult.42\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 	kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 	kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 	kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_13\ and ends in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_13\.
@@ -3525,9 +4853,29 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_13\ => 
                         -- True branch of the if-else started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 	kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 	kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 	kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDx [num15] = !kpzKernelsIndexObject.bramDx [num15];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num15\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num15\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDy [num15] = !kpzKernelsIndexObject.bramDy [num15];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num15\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num15\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDx [num22] = !kpzKernelsIndexObject.bramDx [num22];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num22\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDx\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num22\)));
+                        -- The following section was transformed from the .NET statement below:
+                        -- kpzKernelsIndexObject.bramDy [num23] = !kpzKernelsIndexObject.bramDy [num23];
+                        -- 
                         \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num23\)) := not(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.kpzKernelsIndexObject\.\bramDy\(to_integer(\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2.num23\)));
                         -- Going to the state after the if-else which was started in state \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_11\.
                         if (\KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State\ = \KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).2._State_13\) then 
@@ -3861,6 +5209,138 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- KpzKernelsIndexObject[] array;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int i;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int j;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num6;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num8;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num9;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num10;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num11;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num12;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num13;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int k;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task<KpzKernelsIndexObject>[] array2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int l;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num14;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num15;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num16;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num17;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num18;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int m;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int n;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num19;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num21;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int arg_27B_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- TaskFactory arg_276_0;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Func<object, KpzKernelsIndexObject> arg_276_1;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num22;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num23;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num24;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num25;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num26;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num27;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num28;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num29;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num30;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num31;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint number;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = memory.ReadInt32 (65536);
+                        -- 
                         -- Begin SimpleMemory read.
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(65536, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -3873,10 +5353,40 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num\ := ConvertStdLogicVectorToInt32(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = num * 2;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.0\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num\ * to_signed(2, 32), 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num2\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := to_signed(1, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array = new KpzKernelsIndexObject[16];
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = 0;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (i < 16) {
+                            -- 	array [i] = new KpzKernelsIndexObject ();
+                            -- 	array [i].bramDx = new bool[64];
+                            -- 	array [i].bramDy = new bool[64];
+                            -- 	array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (65536 + num3);
+                            -- 	num3 = num3 + 1;
+                            -- 	num4 = memory.ReadUInt32 (65536 + num3);
+                            -- 	num3 = num3 + 1;
+                            -- 	array [i].taskRandomState1 = array [i].taskRandomState1 | (ulong)num4 << 32;
+                            -- 	array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (65536 + num3);
+                            -- 	num3 = num3 + 1;
+                            -- 	num4 = memory.ReadUInt32 (65536 + num3);
+                            -- 	num3 = num3 + 1;
+                            -- 	array [i].taskRandomState2 = array [i].taskRandomState2 | (ulong)num4 << 32;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_4\;
                         end if;
@@ -3886,14 +5396,44 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\ < to_signed(16, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	array [i] = new KpzKernelsIndexObject ();
+                            -- 	array [i].bramDx = new bool[64];
+                            -- 	array [i].bramDy = new bool[64];
+                            -- 	array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (65536 + num3);
+                            -- 	num3 = num3 + 1;
+                            -- 	num4 = memory.ReadUInt32 (65536 + num3);
+                            -- 	num3 = num3 + 1;
+                            -- 	array [i].taskRandomState1 = array [i].taskRandomState1 | (ulong)num4 << 32;
+                            -- 	array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (65536 + num3);
+                            -- 	num3 = num3 + 1;
+                            -- 	num4 = memory.ReadUInt32 (65536 + num3);
+                            -- 	num3 = num3 + 1;
+                            -- 	array [i].taskRandomState2 = array [i].taskRandomState2 | (ulong)num4 << 32;
+                            -- 	i = i + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i] = new KpzKernelsIndexObject ();
+                            -- 
                             -- Initializing record fields to their defaults.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\IsNull\ := false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDx\ := (others => false);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDy\ := (others => false);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState1\ := to_unsigned(0, 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState2\ := to_unsigned(0, 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].bramDx = new bool[64];
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDx\ := (others => false);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].bramDy = new bool[64];
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDy\ := (others => false);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (65536 + num3);
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(65536, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- Begin SimpleMemory read.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\, 32);
@@ -3905,6 +5445,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = (ulong)memory.ReadUInt32 (65536 + num3);
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(65536, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                         -- Begin SimpleMemory read.
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\, 32);
@@ -3918,8 +5461,14 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState1\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\), 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num3 + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = memory.ReadUInt32 (65536 + num3);
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(65536, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_7\;
@@ -3938,11 +5487,20 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\ := \DataIn\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.2\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num3 + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].taskRandomState1 = array [i].taskRandomState1 | (ulong)num4 << 32;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState1\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState1\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (65536 + num3);
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\ := to_signed(65536, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_9\;
@@ -3961,8 +5519,14 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState2\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.3\), 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num3 + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = memory.ReadUInt32 (65536 + num3);
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.10\ := to_signed(65536, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_11\;
@@ -3981,11 +5545,20 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\ := \DataIn\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.4\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num3 + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [i].taskRandomState2 = array [i].taskRandomState2 | (ulong)num4 << 32;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.13\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState2\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState2\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.13\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- i = i + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.14\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.14\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
@@ -4001,8 +5574,14 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\ := \DataIn\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num5\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.5\), 64);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num3 + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = memory.ReadUInt32 (65536 + num3);
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.17\ := to_signed(65536, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_14\;
@@ -4021,12 +5600,104 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\ := \DataIn\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\ := ConvertStdLogicVectorToUInt32(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.6\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num3 = num3 + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = num5 | (ulong)num4 << 32;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.20\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num5\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num5\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.20\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- j = 0;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.j\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (j < num2) {
+                            -- 	num6 = (uint)(num5 >> 32);
+                            -- 	num7 = (uint)num5;
+                            -- 	num8 = 65534u;
+                            -- 	num9 = 47131u;
+                            -- 	num10 = 0u | num8 << 16 | num9;
+                            -- 	num5 = (ulong)num7 * (ulong)num10 + (ulong)num6;
+                            -- 	num11 = num7 ^ num6;
+                            -- 	num12 = (int)(7u & num11);
+                            -- 	num13 = (int)(7u & num11 >> 16);
+                            -- 	k = 0;
+                            -- 	while (k < 64) {
+                            -- 		array2 = new Task<KpzKernelsIndexObject>[16];
+                            -- 		l = 0;
+                            -- 		while (l < 16) {
+                            -- 			num14 = l + k * 16;
+                            -- 			num15 = num14 % 32;
+                            -- 			num16 = num14 / 32;
+                            -- 			num17 = num15 * 8 + num12;
+                            -- 			num18 = num16 * 8 + num13;
+                            -- 			m = 0;
+                            -- 			while (m < 8) {
+                            -- 				n = 0;
+                            -- 				while (n < 8) {
+                            -- 					num19 = num17 + m % 256;
+                            -- 					num20 = num18 + n % 256;
+                            -- 					num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                            -- 					array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 					array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 					n = n + 1;
+                            -- 				}
+                            -- 				m = m + 1;
+                            -- 			}
+                            -- 			arg_27B_1 = l;
+                            -- 			arg_276_0 = Task.Factory;
+                            -- 			if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 				arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 			}
+                            -- 			array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 			l = l + 1;
+                            -- 		}
+                            -- 		Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
+                            -- 		num22 = 0;
+                            -- 		while (num22 < 16) {
+                            -- 			num23 = num22 + k * 16;
+                            -- 			num24 = num23 % 32;
+                            -- 			num25 = num23 / 32;
+                            -- 			num26 = num24 * 8 + num12;
+                            -- 			num27 = num25 * 8 + num13;
+                            -- 			num28 = 0;
+                            -- 			while (num28 < 8) {
+                            -- 				num29 = 0;
+                            -- 				while (num29 < 8) {
+                            -- 					num30 = num26 + num28 % 256;
+                            -- 					num31 = num27 + num29 % 256;
+                            -- 					uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                            -- 					if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                            -- 						conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                            -- 					}
+                            -- 					else {
+                            -- 						conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                            -- 					}
+                            -- 					uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 					if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                            -- 						conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                            -- 					}
+                            -- 					else {
+                            -- 						conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                            -- 					}
+                            -- 					number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 					memory.WriteUInt32 (num30 + num31 * 256, number);
+                            -- 					num29 = num29 + 1;
+                            -- 				}
+                            -- 				num28 = num28 + 1;
+                            -- 			}
+                            -- 			num22 = num22 + 1;
+                            -- 		}
+                            -- 		k = k + 1;
+                            -- 	}
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_16\;
                         end if;
@@ -4036,22 +5707,132 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.21\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.j\ < \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num2\;
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.21\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num6 = (uint)(num5 >> 32);
+                            -- 	num7 = (uint)num5;
+                            -- 	num8 = 65534u;
+                            -- 	num9 = 47131u;
+                            -- 	num10 = 0u | num8 << 16 | num9;
+                            -- 	num5 = (ulong)num7 * (ulong)num10 + (ulong)num6;
+                            -- 	num11 = num7 ^ num6;
+                            -- 	num12 = (int)(7u & num11);
+                            -- 	num13 = (int)(7u & num11 >> 16);
+                            -- 	k = 0;
+                            -- 	while (k < 64) {
+                            -- 		array2 = new Task<KpzKernelsIndexObject>[16];
+                            -- 		l = 0;
+                            -- 		while (l < 16) {
+                            -- 			num14 = l + k * 16;
+                            -- 			num15 = num14 % 32;
+                            -- 			num16 = num14 / 32;
+                            -- 			num17 = num15 * 8 + num12;
+                            -- 			num18 = num16 * 8 + num13;
+                            -- 			m = 0;
+                            -- 			while (m < 8) {
+                            -- 				n = 0;
+                            -- 				while (n < 8) {
+                            -- 					num19 = num17 + m % 256;
+                            -- 					num20 = num18 + n % 256;
+                            -- 					num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                            -- 					array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 					array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 					n = n + 1;
+                            -- 				}
+                            -- 				m = m + 1;
+                            -- 			}
+                            -- 			arg_27B_1 = l;
+                            -- 			arg_276_0 = Task.Factory;
+                            -- 			if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 				arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 			}
+                            -- 			array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 			l = l + 1;
+                            -- 		}
+                            -- 		Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
+                            -- 		num22 = 0;
+                            -- 		while (num22 < 16) {
+                            -- 			num23 = num22 + k * 16;
+                            -- 			num24 = num23 % 32;
+                            -- 			num25 = num23 / 32;
+                            -- 			num26 = num24 * 8 + num12;
+                            -- 			num27 = num25 * 8 + num13;
+                            -- 			num28 = 0;
+                            -- 			while (num28 < 8) {
+                            -- 				num29 = 0;
+                            -- 				while (num29 < 8) {
+                            -- 					num30 = num26 + num28 % 256;
+                            -- 					num31 = num27 + num29 % 256;
+                            -- 					uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                            -- 					if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                            -- 						conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                            -- 					}
+                            -- 					else {
+                            -- 						conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                            -- 					}
+                            -- 					uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 					if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                            -- 						conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                            -- 					}
+                            -- 					else {
+                            -- 						conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                            -- 					}
+                            -- 					number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 					memory.WriteUInt32 (num30 + num31 * 256, number);
+                            -- 					num29 = num29 + 1;
+                            -- 				}
+                            -- 				num28 = num28 + 1;
+                            -- 			}
+                            -- 			num22 = num22 + 1;
+                            -- 		}
+                            -- 		k = k + 1;
+                            -- 	}
+                            -- 	j = j + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num6 = (uint)(num5 >> 32);
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.22\ := SmartResize(shift_right(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num5\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num6\ := (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.22\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num7 = (uint)num5;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num7\ := SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num5\, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num8 = 65534u;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num8\ := to_unsigned(65534, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num9 = 47131u;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num9\ := to_unsigned(47131, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num10 = 0u | num8 << 16 | num9;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.23\ := shift_left(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num8\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5))));
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.24\ := to_unsigned(0, 32) or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.23\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.25\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.24\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num9\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num10\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.25\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = (ulong)num7 * (ulong)num10 + (ulong)num6;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.26\ := resize(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num7\, 64) * SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num10\, 64), 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.27\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.26\ + SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num6\, 64), 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num5\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.27\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num11 = num7 ^ num6;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.28\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num7\ xor \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num6\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num11\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.28\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num12 = (int)(7u & num11);
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.29\ := signed(to_unsigned(7, 32) and \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num11\);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num12\ := (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.29\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num13 = (int)(7u & num11 >> 16);
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_18\;
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_17\;
@@ -4066,7 +5847,80 @@ begin
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.30\ := shift_right(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num11\, to_integer(unsigned(SmartResize(to_signed(16, 32), 5) and "11111")));
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.31\ := signed(to_unsigned(7, 32) and \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.30\);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num13\ := (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.31\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- k = 0;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (k < 64) {
+                        -- 	array2 = new Task<KpzKernelsIndexObject>[16];
+                        -- 	l = 0;
+                        -- 	while (l < 16) {
+                        -- 		num14 = l + k * 16;
+                        -- 		num15 = num14 % 32;
+                        -- 		num16 = num14 / 32;
+                        -- 		num17 = num15 * 8 + num12;
+                        -- 		num18 = num16 * 8 + num13;
+                        -- 		m = 0;
+                        -- 		while (m < 8) {
+                        -- 			n = 0;
+                        -- 			while (n < 8) {
+                        -- 				num19 = num17 + m % 256;
+                        -- 				num20 = num18 + n % 256;
+                        -- 				num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                        -- 				array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                        -- 				array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                        -- 				n = n + 1;
+                        -- 			}
+                        -- 			m = m + 1;
+                        -- 		}
+                        -- 		arg_27B_1 = l;
+                        -- 		arg_276_0 = Task.Factory;
+                        -- 		if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                        -- 			arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                        -- 		}
+                        -- 		array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                        -- 		l = l + 1;
+                        -- 	}
+                        -- 	Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
+                        -- 	num22 = 0;
+                        -- 	while (num22 < 16) {
+                        -- 		num23 = num22 + k * 16;
+                        -- 		num24 = num23 % 32;
+                        -- 		num25 = num23 / 32;
+                        -- 		num26 = num24 * 8 + num12;
+                        -- 		num27 = num25 * 8 + num13;
+                        -- 		num28 = 0;
+                        -- 		while (num28 < 8) {
+                        -- 			num29 = 0;
+                        -- 			while (num29 < 8) {
+                        -- 				num30 = num26 + num28 % 256;
+                        -- 				num31 = num27 + num29 % 256;
+                        -- 				uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                        -- 				if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                        -- 					conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                        -- 				}
+                        -- 				else {
+                        -- 					conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                        -- 				}
+                        -- 				uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                        -- 				if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                        -- 					conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                        -- 				}
+                        -- 				else {
+                        -- 					conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                        -- 				}
+                        -- 				number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                        -- 				memory.WriteUInt32 (num30 + num31 * 256, number);
+                        -- 				num29 = num29 + 1;
+                        -- 			}
+                        -- 			num28 = num28 + 1;
+                        -- 		}
+                        -- 		num22 = num22 + 1;
+                        -- 	}
+                        -- 	k = k + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_19\;
                         -- Clock cycles needed to complete this state (approximation): 0.3
@@ -4075,7 +5929,112 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ < to_signed(64, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	array2 = new Task<KpzKernelsIndexObject>[16];
+                            -- 	l = 0;
+                            -- 	while (l < 16) {
+                            -- 		num14 = l + k * 16;
+                            -- 		num15 = num14 % 32;
+                            -- 		num16 = num14 / 32;
+                            -- 		num17 = num15 * 8 + num12;
+                            -- 		num18 = num16 * 8 + num13;
+                            -- 		m = 0;
+                            -- 		while (m < 8) {
+                            -- 			n = 0;
+                            -- 			while (n < 8) {
+                            -- 				num19 = num17 + m % 256;
+                            -- 				num20 = num18 + n % 256;
+                            -- 				num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                            -- 				array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 				array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 				n = n + 1;
+                            -- 			}
+                            -- 			m = m + 1;
+                            -- 		}
+                            -- 		arg_27B_1 = l;
+                            -- 		arg_276_0 = Task.Factory;
+                            -- 		if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 			arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 		}
+                            -- 		array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 		l = l + 1;
+                            -- 	}
+                            -- 	Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
+                            -- 	num22 = 0;
+                            -- 	while (num22 < 16) {
+                            -- 		num23 = num22 + k * 16;
+                            -- 		num24 = num23 % 32;
+                            -- 		num25 = num23 / 32;
+                            -- 		num26 = num24 * 8 + num12;
+                            -- 		num27 = num25 * 8 + num13;
+                            -- 		num28 = 0;
+                            -- 		while (num28 < 8) {
+                            -- 			num29 = 0;
+                            -- 			while (num29 < 8) {
+                            -- 				num30 = num26 + num28 % 256;
+                            -- 				num31 = num27 + num29 % 256;
+                            -- 				uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                            -- 				if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                            -- 					conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                            -- 				}
+                            -- 				else {
+                            -- 					conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                            -- 				}
+                            -- 				uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 				if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                            -- 					conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                            -- 				}
+                            -- 				else {
+                            -- 					conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                            -- 				}
+                            -- 				number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 				memory.WriteUInt32 (num30 + num31 * 256, number);
+                            -- 				num29 = num29 + 1;
+                            -- 			}
+                            -- 			num28 = num28 + 1;
+                            -- 		}
+                            -- 		num22 = num22 + 1;
+                            -- 	}
+                            -- 	k = k + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- array2 = new Task<KpzKernelsIndexObject>[16];
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- l = 0;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (l < 16) {
+                            -- 	num14 = l + k * 16;
+                            -- 	num15 = num14 % 32;
+                            -- 	num16 = num14 / 32;
+                            -- 	num17 = num15 * 8 + num12;
+                            -- 	num18 = num16 * 8 + num13;
+                            -- 	m = 0;
+                            -- 	while (m < 8) {
+                            -- 		n = 0;
+                            -- 		while (n < 8) {
+                            -- 			num19 = num17 + m % 256;
+                            -- 			num20 = num18 + n % 256;
+                            -- 			num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                            -- 			array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 			array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 			n = n + 1;
+                            -- 		}
+                            -- 		m = m + 1;
+                            -- 	}
+                            -- 	arg_27B_1 = l;
+                            -- 	arg_276_0 = Task.Factory;
+                            -- 	if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 		arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 	}
+                            -- 	array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 	l = l + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_21\;
                         else 
@@ -4084,6 +6043,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_20\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_18\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- j = j + 1;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.87\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.j\ + to_signed(1, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.j\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.87\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_15\ if the loop wasn't exited with a state change.
@@ -4096,9 +6058,44 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.33\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\ < to_signed(16, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.33\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num14 = l + k * 16;
+                            -- 	num15 = num14 % 32;
+                            -- 	num16 = num14 / 32;
+                            -- 	num17 = num15 * 8 + num12;
+                            -- 	num18 = num16 * 8 + num13;
+                            -- 	m = 0;
+                            -- 	while (m < 8) {
+                            -- 		n = 0;
+                            -- 		while (n < 8) {
+                            -- 			num19 = num17 + m % 256;
+                            -- 			num20 = num18 + n % 256;
+                            -- 			num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                            -- 			array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 			array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 			n = n + 1;
+                            -- 		}
+                            -- 		m = m + 1;
+                            -- 	}
+                            -- 	arg_27B_1 = l;
+                            -- 	arg_276_0 = Task.Factory;
+                            -- 	if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 		arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 	}
+                            -- 	array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 	l = l + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num14 = l + k * 16;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ * to_signed(16, 32), 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num14\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num15 = num14 % 32;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_23\;
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_22\;
@@ -4106,6 +6103,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_22\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_19\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_34\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_23\ => 
@@ -4121,15 +6121,41 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_24\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num15\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num16 = num14 / 32;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num14\ / to_signed(32, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num16\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num17 = num15 * 8 + num12;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num15\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.38\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num12\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num17\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.39\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = num16 * 8 + num13;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num16\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.40\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num13\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num18\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.41\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- m = 0;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.m\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (m < 8) {
+                        -- 	n = 0;
+                        -- 	while (n < 8) {
+                        -- 		num19 = num17 + m % 256;
+                        -- 		num20 = num18 + n % 256;
+                        -- 		num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                        -- 		array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                        -- 		array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                        -- 		n = n + 1;
+                        -- 	}
+                        -- 	m = m + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_25\;
                         -- Clock cycles needed to complete this state (approximation): 0.5
@@ -4138,7 +6164,34 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.m\ < to_signed(8, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.42\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	n = 0;
+                            -- 	while (n < 8) {
+                            -- 		num19 = num17 + m % 256;
+                            -- 		num20 = num18 + n % 256;
+                            -- 		num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                            -- 		array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 		array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 		n = n + 1;
+                            -- 	}
+                            -- 	m = m + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- n = 0;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (n < 8) {
+                            -- 	num19 = num17 + m % 256;
+                            -- 	num20 = num18 + n % 256;
+                            -- 	num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                            -- 	array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 	array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 	n = n + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_27\;
                         else 
@@ -4147,7 +6200,21 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_26\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_24\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- arg_27B_1 = l;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.arg_27B_1\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- arg_276_0 = Task.Factory;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                        -- 	arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                        -- 
                         -- Starting state machine invocation for the following method: Hast.Samples.Kpz.KpzKernelsIndexObject Hast.Samples.Kpz.KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(Hast.Samples.Kpz.KpzKernelsIndexObject)
                         case \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).invocationIndex\ is 
                             when 0 => 
@@ -4161,6 +6228,9 @@ begin
                                 \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject)._Started.2\ <= true;
                         end case;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).invocationIndex\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).invocationIndex\ + 1;
+                        -- The following section was transformed from the .NET statement below:
+                        -- l = l + 1;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\ + to_signed(1, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.60\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_19\ if the loop wasn't exited with a state change.
@@ -4173,6 +6243,19 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\ < to_signed(8, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num19 = num17 + m % 256;
+                            -- 	num20 = num18 + n % 256;
+                            -- 	num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                            -- 	array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 	array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 	n = n + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num19 = num17 + m % 256;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num17\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.m\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_29\;
                         else 
@@ -4181,6 +6264,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_28\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_25\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- m = m + 1;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.m\ + to_signed(1, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.m\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.59\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_24\ if the loop wasn't exited with a state change.
@@ -4201,6 +6287,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_30\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num19\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num20 = num18 + n % 256;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num18\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_31\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -4217,6 +6306,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_32\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num20\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num21 = memory.ReadUInt32 (num19 + num20 * 256);
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num20\ * to_signed(256, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num19\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\;
                         -- Begin SimpleMemory read.
@@ -4231,16 +6323,25 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\ := \DataIn\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num21\ := ConvertStdLogicVectorToUInt32(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.dataIn.7\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\ * to_signed(8, 32), 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.m\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.50\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num21\ and to_unsigned(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\ = to_unsigned(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\)).\bramDx\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\)) := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\ * to_signed(8, 32), 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.m\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.54\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num21\ and to_unsigned(2, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.56\ = to_unsigned(2, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\)).\bramDy\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.55\)) := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.57\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- n = n + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.58\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_25\ if the loop wasn't exited with a state change.
@@ -4262,7 +6363,46 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array2\(0) := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.return.0\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array2\(1) := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.return.1\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array2\(2) := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.return.2\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num22 = 0;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num22\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (num22 < 16) {
+                            -- 	num23 = num22 + k * 16;
+                            -- 	num24 = num23 % 32;
+                            -- 	num25 = num23 / 32;
+                            -- 	num26 = num24 * 8 + num12;
+                            -- 	num27 = num25 * 8 + num13;
+                            -- 	num28 = 0;
+                            -- 	while (num28 < 8) {
+                            -- 		num29 = 0;
+                            -- 		while (num29 < 8) {
+                            -- 			num30 = num26 + num28 % 256;
+                            -- 			num31 = num27 + num29 % 256;
+                            -- 			uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                            -- 			if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                            -- 				conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                            -- 			}
+                            -- 			else {
+                            -- 				conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                            -- 			}
+                            -- 			uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 			if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                            -- 				conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                            -- 			}
+                            -- 			else {
+                            -- 				conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                            -- 			}
+                            -- 			number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 			memory.WriteUInt32 (num30 + num31 * 256, number);
+                            -- 			num29 = num29 + 1;
+                            -- 		}
+                            -- 		num28 = num28 + 1;
+                            -- 	}
+                            -- 	num22 = num22 + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_35\;
                         end if;
@@ -4272,9 +6412,51 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num22\ < to_signed(16, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.61\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num23 = num22 + k * 16;
+                            -- 	num24 = num23 % 32;
+                            -- 	num25 = num23 / 32;
+                            -- 	num26 = num24 * 8 + num12;
+                            -- 	num27 = num25 * 8 + num13;
+                            -- 	num28 = 0;
+                            -- 	while (num28 < 8) {
+                            -- 		num29 = 0;
+                            -- 		while (num29 < 8) {
+                            -- 			num30 = num26 + num28 % 256;
+                            -- 			num31 = num27 + num29 % 256;
+                            -- 			uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                            -- 			if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                            -- 				conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                            -- 			}
+                            -- 			else {
+                            -- 				conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                            -- 			}
+                            -- 			uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 			if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                            -- 				conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                            -- 			}
+                            -- 			else {
+                            -- 				conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                            -- 			}
+                            -- 			number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 			memory.WriteUInt32 (num30 + num31 * 256, number);
+                            -- 			num29 = num29 + 1;
+                            -- 		}
+                            -- 		num28 = num28 + 1;
+                            -- 	}
+                            -- 	num22 = num22 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num23 = num22 + k * 16;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ * to_signed(16, 32), 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num22\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num24 = num23 % 32;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_37\;
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_36\;
@@ -4282,6 +6464,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_36\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_34\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- k = k + 1;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.86\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ + to_signed(1, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.86\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_18\ if the loop wasn't exited with a state change.
@@ -4302,15 +6487,54 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_38\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num24\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num25 = num23 / 32;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\ / to_signed(32, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num25\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num26 = num24 * 8 + num12;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.66\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num24\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.66\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num12\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num26\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.67\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num27 = num25 * 8 + num13;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.68\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num25\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.68\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num13\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num27\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.69\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num28 = 0;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num28\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num28 < 8) {
+                        -- 	num29 = 0;
+                        -- 	while (num29 < 8) {
+                        -- 		num30 = num26 + num28 % 256;
+                        -- 		num31 = num27 + num29 % 256;
+                        -- 		uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                        -- 		if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                        -- 			conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                        -- 		}
+                        -- 		else {
+                        -- 			conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                        -- 		}
+                        -- 		uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                        -- 		if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                        -- 			conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                        -- 		}
+                        -- 		else {
+                        -- 			conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                        -- 		}
+                        -- 		number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                        -- 		memory.WriteUInt32 (num30 + num31 * 256, number);
+                        -- 		num29 = num29 + 1;
+                        -- 	}
+                        -- 	num28 = num28 + 1;
+                        -- }
+                        -- 
                         -- Starting a while loop.
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_39\;
                         -- Clock cycles needed to complete this state (approximation): 0.5
@@ -4319,7 +6543,60 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.70\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num28\ < to_signed(8, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.70\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num29 = 0;
+                            -- 	while (num29 < 8) {
+                            -- 		num30 = num26 + num28 % 256;
+                            -- 		num31 = num27 + num29 % 256;
+                            -- 		uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                            -- 		if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                            -- 			conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                            -- 		}
+                            -- 		else {
+                            -- 			conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                            -- 		}
+                            -- 		uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 		if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                            -- 			conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                            -- 		}
+                            -- 		else {
+                            -- 			conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                            -- 		}
+                            -- 		number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 		memory.WriteUInt32 (num30 + num31 * 256, number);
+                            -- 		num29 = num29 + 1;
+                            -- 	}
+                            -- 	num28 = num28 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num29 = 0;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\ := to_signed(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (num29 < 8) {
+                            -- 	num30 = num26 + num28 % 256;
+                            -- 	num31 = num27 + num29 % 256;
+                            -- 	uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                            -- 	if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                            -- 		conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                            -- 	}
+                            -- 	else {
+                            -- 		conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                            -- 	}
+                            -- 	uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 	if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                            -- 		conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                            -- 	}
+                            -- 	else {
+                            -- 		conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                            -- 	}
+                            -- 	number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 	memory.WriteUInt32 (num30 + num31 * 256, number);
+                            -- 	num29 = num29 + 1;
+                            -- }
+                            -- 
                             -- Starting a while loop.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_41\;
                         else 
@@ -4328,6 +6605,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_40\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_38\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num22 = num22 + 1;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.85\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num22\ + to_signed(1, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num22\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.85\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_34\ if the loop wasn't exited with a state change.
@@ -4340,6 +6620,32 @@ begin
                         -- The while loop's condition:
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\ < to_signed(8, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num30 = num26 + num28 % 256;
+                            -- 	num31 = num27 + num29 % 256;
+                            -- 	uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                            -- 	if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                            -- 		conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                            -- 	}
+                            -- 	else {
+                            -- 		conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                            -- 	}
+                            -- 	uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 	if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                            -- 		conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                            -- 	}
+                            -- 	else {
+                            -- 		conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                            -- 	}
+                            -- 	number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                            -- 	memory.WriteUInt32 (num30 + num31 * 256, number);
+                            -- 	num29 = num29 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num30 = num26 + num28 % 256;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num26\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num28\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_43\;
                         else 
@@ -4348,6 +6654,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_42\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_39\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num28 = num28 + 1;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.84\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num28\ + to_signed(1, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num28\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.84\;
                         -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_38\ if the loop wasn't exited with a state change.
@@ -4368,6 +6677,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_44\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num30\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num31 = num27 + num29 % 256;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num27\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_45\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -4384,6 +6696,17 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_46\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num31\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
+                        -- 	conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                        -- }
+                        -- else {
+                        -- 	conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                        -- }
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.77\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num28\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.76\;
 
@@ -4400,6 +6723,17 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_47\ => 
                         -- State after the if-else which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_46\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (array2 [num22].Result.bramDy [num28 + num29 * 8]) {
+                        -- 	conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                        -- }
+                        -- else {
+                        -- 	conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                        -- }
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\ * to_signed(8, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.79\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num28\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.78\;
 
@@ -4416,6 +6750,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_48\ => 
                         -- True branch of the if-else started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_46\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_46\.
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_48\) then 
@@ -4424,6 +6766,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_49\ => 
                         -- False branch of the if-else started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_46\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 0u;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_46\.
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_49\) then 
@@ -4432,8 +6782,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_50\ => 
                         -- State after the if-else which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_47\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.number\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (num30 + num31 * 256, number);
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\ := resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num31\ * to_signed(256, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num30\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\;
                         -- Begin SimpleMemory write.
@@ -4444,6 +6800,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_51\ => 
                         -- True branch of the if-else started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_47\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 2u;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22\ := to_unsigned(2, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_47\.
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_51\) then 
@@ -4452,6 +6816,14 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_52\ => 
                         -- False branch of the if-else started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_47\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
+                        -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_47\.
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ = \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_52\) then 
@@ -4463,6 +6835,9 @@ begin
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num29 = num29 + 1;
+                            -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.83\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.83\;
                             -- Returning to the repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_39\ if the loop wasn't exited with a state change.
