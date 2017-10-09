@@ -211,7 +211,9 @@ architecture Imp of Hast_IP is
         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\, 
         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\, 
         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\, 
-        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\);
+        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\, 
+        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_17\, 
+        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\);
     -- Signals:
     Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._Finished\: boolean := false;
     Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -1189,7 +1191,8 @@ architecture Imp of Hast_IP is
         \Unum::.ctor(UnumEnvironment,Int32).0._State_4\, 
         \Unum::.ctor(UnumEnvironment,Int32).0._State_5\, 
         \Unum::.ctor(UnumEnvironment,Int32).0._State_6\, 
-        \Unum::.ctor(UnumEnvironment,Int32).0._State_7\);
+        \Unum::.ctor(UnumEnvironment,Int32).0._State_7\, 
+        \Unum::.ctor(UnumEnvironment,Int32).0._State_8\);
     -- Signals:
     Signal \Unum::.ctor(UnumEnvironment,Int32).0._Finished\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.this.parameter.Out\: \Lombiq.Unum.Unum\;
@@ -2502,7 +2505,9 @@ architecture Imp of Hast_IP is
         \UnumEnvironment::.ctor(Byte,Byte).0._State_38\, 
         \UnumEnvironment::.ctor(Byte,Byte).0._State_39\, 
         \UnumEnvironment::.ctor(Byte,Byte).0._State_40\, 
-        \UnumEnvironment::.ctor(Byte,Byte).0._State_41\);
+        \UnumEnvironment::.ctor(Byte,Byte).0._State_41\, 
+        \UnumEnvironment::.ctor(Byte,Byte).0._State_42\, 
+        \UnumEnvironment::.ctor(Byte,Byte).0._State_43\);
     -- Signals:
     Signal \UnumEnvironment::.ctor(Byte,Byte).0._Finished\: boolean := false;
     Signal \UnumEnvironment::.ctor(Byte,Byte).0.this.parameter.Out\: \Lombiq.Unum.UnumEnvironment\;
@@ -2709,15 +2714,23 @@ begin
                             -- Initializing record fields to their defaults.
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\.\IsNull\ := false;
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.Int32)
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).this.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).environment.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.environment\;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).value.parameter.Out.0\ <= to_signed(0, 32);
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32)._Started.0\ <= true;
+                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\ => 
+                        -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.Int32)
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).this.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).environment.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.environment\;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32).value.parameter.Out.0\ <= to_signed(0, 32);
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32)._Started.0\ <= true;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.Int32)
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32)._Started.0\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32)._Finished.0\) then 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::.ctor(UnumEnvironment,Int32)._Started.0\ <= false;
@@ -2735,11 +2748,11 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\ => 
-                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\.
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\ => 
+                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\.
                         -- The while loop's condition:
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\, 64) <= signed((SmartResize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num\, 64)));
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.0\) then 
@@ -2757,22 +2770,22 @@ begin
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).left.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).right.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= true;
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\;
                         else 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\ => 
-                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\.
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\ => 
+                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- array = Lombiq.Unum.Unum.FractionToUintArray (left);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray()
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray().this.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\;
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Started.0\ <= true;
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.Unum Lombiq.Unum.Unum::op_Addition(Lombiq.Unum.Unum,Lombiq.Unum.Unum)
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Finished.0\) then 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= false;
@@ -2782,21 +2795,21 @@ begin
                             -- unum = Unum.op_Addition (unum, unum);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_10\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_11\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.Unum Lombiq.Unum.Unum::op_Addition(Lombiq.Unum.Unum,Lombiq.Unum.Unum)
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).left.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\;
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).right.parameter.Out.0\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\;
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= true;
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\;
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.Unum Lombiq.Unum.Unum::op_Addition(Lombiq.Unum.Unum,Lombiq.Unum.Unum)
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Finished.0\) then 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Started.0\ <= false;
@@ -2807,13 +2820,13 @@ begin
                             -- 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ + to_signed(1, 32);
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\;
-                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_12\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_7\;
+                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_8\ if the loop wasn't exited with a state change.
+                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\) then 
+                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_9\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray()
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Started.0\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Finished.0\) then 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Started.0\ <= false;
@@ -2830,11 +2843,11 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\ => 
-                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\.
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\ => 
+                        -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\.
                         -- The while loop's condition:
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ < to_signed(2, 32);
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\) then 
@@ -2851,16 +2864,16 @@ begin
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\, 32);
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\)));
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\;
                         else 
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\;
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_17\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\ => 
-                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\.
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_17\ => 
+                        -- State after the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\.
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\ => 
+                    when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -2870,9 +2883,9 @@ begin
                             -- 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ + to_signed(1, 32);
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\;
-                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_13\ if the loop wasn't exited with a state change.
-                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\) then 
-                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_14\;
+                            -- Returning to the repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\ if the loop wasn't exited with a state change.
+                            if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ = \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\) then 
+                                \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
@@ -11123,7 +11136,7 @@ begin
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Unum::.ctor(UnumEnvironment,Int32).0._State_4\ and ends in state \Unum::.ctor(UnumEnvironment,Int32).0._State_5\.
-                        --     * The false branch starts in state \Unum::.ctor(UnumEnvironment,Int32).0._State_6\ and ends in state \Unum::.ctor(UnumEnvironment,Int32).0._State_7\.
+                        --     * The false branch starts in state \Unum::.ctor(UnumEnvironment,Int32).0._State_6\ and ends in state \Unum::.ctor(UnumEnvironment,Int32).0._State_8\.
                         --     * Execution after either branch will continue in the following state: \Unum::.ctor(UnumEnvironment,Int32).0._State_3\.
 
                         if (\Unum::.ctor(UnumEnvironment,Int32).0.flag\) then 
@@ -11207,15 +11220,19 @@ begin
                         -- Initializing record fields to their defaults.
                         \Unum::.ctor(UnumEnvironment,Int32).0.objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf\.\IsNull\ := false;
                         -- Invoking the target's constructor.
+                        -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
+                        \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.1
+                    when \Unum::.ctor(UnumEnvironment,Int32).0._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean)
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf\;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).environment.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.environment\;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.array\;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).negative.parameter.Out.0\ <= True;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\ <= true;
-                        \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::.ctor(UnumEnvironment,Int32).0._State_7\ => 
+                        \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_8\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Unum::.ctor(UnumEnvironment,Int32).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean)
                         if (\Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\ = \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Finished.0\) then 
                             \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\ <= false;
@@ -11227,7 +11244,7 @@ begin
                             -- 
                             \Unum::.ctor(UnumEnvironment,Int32).0.this\.\UnumBits\ := \Unum::.ctor(UnumEnvironment,Int32).0.objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf\.\UnumBits\;
                             -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,Int32).0._State_2\.
-                            if (\Unum::.ctor(UnumEnvironment,Int32).0._State\ = \Unum::.ctor(UnumEnvironment,Int32).0._State_7\) then 
+                            if (\Unum::.ctor(UnumEnvironment,Int32).0._State\ = \Unum::.ctor(UnumEnvironment,Int32).0._State_8\) then 
                                 \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_3\;
                             end if;
                         end if;
@@ -18381,15 +18398,23 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0\.\SegmentCount\ := to_unsigned(0, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0\.\Segments\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
+                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \UnumEnvironment::.ctor(Byte,Byte).0._State_8\ => 
+                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_9\ => 
+                        -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
@@ -18401,10 +18426,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(9, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_9\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_9\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
@@ -18422,15 +18447,19 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3\.\SegmentCount\ := to_unsigned(0, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3\.\Segments\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_10\;
+                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_10\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_12\ => 
+                        -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
@@ -18438,18 +18467,14 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- @this.FractionSizeMask = BitMask.op_Subtraction (Lombiq.Unum.BitMask.SetOne (object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3, 5), 1u);
                             -- 
-                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_11\;
+                            -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(5, 16);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_11\ => 
-                        -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3\;
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(5, 16);
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
-                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_12\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_12\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_14\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
@@ -18458,10 +18483,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.return.3\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(1, 32);
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_13\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_15\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_13\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_15\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,System.UInt32)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= false;
@@ -18471,21 +18496,21 @@ begin
                             -- @this.ExponentSizeMask = BitMask.op_Subtraction (BitMask.op_Subtraction (@this.UncertaintyBitMask, 1u), @this.FractionSizeMask);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_14\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_16\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_14\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_16\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_15\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_17\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_15\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_17\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,System.UInt32)
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\UncertaintyBitMask\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(1, 32);
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= true;
-                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_16\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_18\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_16\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_18\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,System.UInt32)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= false;
@@ -18494,10 +18519,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.return.5\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\FractionSizeMask\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_17\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_19\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_17\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_19\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= false;
@@ -18510,10 +18535,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_BitwiseOr(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeMask\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_BitwiseOr(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\FractionSizeMask\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_BitwiseOr(BitMask,BitMask)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_18\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_20\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_18\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_20\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_BitwiseOr(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_BitwiseOr(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_BitwiseOr(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_BitwiseOr(BitMask,BitMask)._Started.0\ <= false;
@@ -18526,10 +18551,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\UncertaintyBitMask\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentAndFractionSizeMask\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_19\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_21\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_19\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_21\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
@@ -18552,10 +18577,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_20\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_22\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_20\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_22\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
@@ -18568,10 +18593,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object7f34fefc400743c5659b915282ee58959b74703089d82e84e8d6c948e4b443d7\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.3\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_21\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_23\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_21\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_23\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
@@ -18589,15 +18614,19 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864\.\SegmentCount\ := to_unsigned(0, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864\.\Segments\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_22\;
+                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_24\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_22\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_24\ => 
+                        -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_25\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_25\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
@@ -18605,18 +18634,14 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- @this.ULP = Lombiq.Unum.BitMask.SetOne (objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864, 10);
                             -- 
-                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_23\;
+                            -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(10, 16);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_26\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_23\ => 
-                        -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864\;
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(10, 16);
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
-                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_24\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_24\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_26\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
@@ -18634,15 +18659,19 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.object479fe084fa4366b617a7eeccf1cdebf1ed267e764cb62ef8fe9d94f131cbeab7\.\SegmentCount\ := to_unsigned(0, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.object479fe084fa4366b617a7eeccf1cdebf1ed267e764cb62ef8fe9d94f131cbeab7\.\Segments\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object479fe084fa4366b617a7eeccf1cdebf1ed267e764cb62ef8fe9d94f131cbeab7\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_25\;
+                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_27\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_25\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_27\ => 
+                        -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object479fe084fa4366b617a7eeccf1cdebf1ed267e764cb62ef8fe9d94f131cbeab7\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_28\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_28\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
@@ -18651,18 +18680,14 @@ begin
                             -- @this.PositiveInfinity = BitMask.op_Subtraction (BitMask.op_Subtraction (Lombiq.Unum.BitMask.SetOne (object479fe084fa4366b617a7eeccf1cdebf1ed267e764cb62ef8fe9d94f131cbeab7, @this.Size - 1), 1u), @this.UncertaintyBitMask);
                             -- 
                             \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.4\ := \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\ - to_unsigned(1, 16);
-                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_26\;
+                            -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object479fe084fa4366b617a7eeccf1cdebf1ed267e764cb62ef8fe9d94f131cbeab7\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.4\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_29\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_26\ => 
-                        -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object479fe084fa4366b617a7eeccf1cdebf1ed267e764cb62ef8fe9d94f131cbeab7\;
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.4\;
-                        \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
-                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_27\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_27\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_29\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
@@ -18671,10 +18696,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.return.11\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(1, 32);
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_28\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_30\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_28\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_30\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,System.UInt32)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= false;
@@ -18683,10 +18708,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.return.12\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\UncertaintyBitMask\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_29\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_31\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_29\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_31\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= false;
@@ -18709,10 +18734,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_30\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_32\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_30\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_32\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
@@ -18725,10 +18750,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objectf4f045d4d2f66a18d2b9627940ae5ecef55676a7cd16373be4c2abd2bc60efc2\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.5\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_31\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_33\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_31\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_33\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
@@ -18737,10 +18762,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.return.14\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\PositiveInfinity\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_32\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_34\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_32\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_34\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
@@ -18753,10 +18778,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\PositiveInfinity\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ULP\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_33\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_35\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_33\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_35\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= false;
@@ -18766,17 +18791,17 @@ begin
                             -- @this.SmallestPositive = BitMask.op_Addition (@this.ExponentAndFractionSizeMask, @this.ULP);
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_34\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_36\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_34\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_36\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentAndFractionSizeMask\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ULP\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_35\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_37\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_35\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_37\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
@@ -18789,10 +18814,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\NegativeInfinity\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ULP\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_36\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_38\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_36\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_38\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Subtraction(BitMask,BitMask)._Started.0\ <= false;
@@ -18807,10 +18832,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\LargestPositive\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.7\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_37\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_39\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_37\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_39\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,System.UInt32)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= false;
@@ -18823,10 +18848,10 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\PositiveInfinity\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\UncertaintyBitMask\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_38\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_40\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_38\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_40\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
@@ -18836,21 +18861,21 @@ begin
                             -- @this.SignalingNotANumber = BitMask.op_Addition (@this.NegativeInfinity, @this.UncertaintyBitMask);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_39\;
+                            \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_41\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_39\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_41\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_40\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_42\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_40\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_42\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\NegativeInfinity\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.this\.\UncertaintyBitMask\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_41\;
+                        \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_43\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_41\ => 
+                    when \UnumEnvironment::.ctor(Byte,Byte).0._State_43\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
