@@ -348,38 +348,36 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var returnType = _declarableTypeCreator
                 .CreateDeclarableType(targetDeclaration, targetDeclaration.ReturnType, context.TransformationContext);
 
-            if (returnType == KnownDataTypes.Void)
-            {
-                return Enumerable.Repeat<IVhdlElement>(Empty.Instance, instanceCount);
-            }
-
             var returnVariableReferences = new List<IDataObject>();
 
             Action<int> buildInvocationWaitBlock = targetIndex =>
             {
-                // Creating the return signal if it doesn't exist.
-                var returnSignalReference = stateMachine.CreateReturnSignalReferenceForTargetComponent(targetMethodName, targetIndex);
-
-                stateMachine.ExternallyDrivenSignals.AddIfNew(new Signal
+                if (returnType != KnownDataTypes.Void)
                 {
-                    DataType = returnType,
-                    Name = returnSignalReference.Name
-                });
+                    // Creating the return signal if it doesn't exist.
+                    var returnSignalReference = stateMachine.CreateReturnSignalReferenceForTargetComponent(targetMethodName, targetIndex);
 
-                // The return signal's value needs to be copied over to a local variable. Otherwise if we'd re-use the
-                // signal with multiple invocations the last invocation's value would be present in all references.
-                var returnVariableReference = stateMachine
-                    .CreateVariableWithNextUnusedIndexedName(NameSuffixes.Return, returnType)
-                    .ToReference();
+                    stateMachine.ExternallyDrivenSignals.AddIfNew(new Signal
+                    {
+                        DataType = returnType,
+                        Name = returnSignalReference.Name
+                    });
 
-                currentBlock.Add(new Assignment
-                {
-                    AssignTo = returnVariableReference,
-                    Expression = returnSignalReference
-                });
+                    // The return signal's value needs to be copied over to a local variable. Otherwise if we'd re-use the
+                    // signal with multiple invocations the last invocation's value would be present in all references.
+                    var returnVariableReference = stateMachine
+                        .CreateVariableWithNextUnusedIndexedName(NameSuffixes.Return, returnType)
+                        .ToReference();
 
-                // Using the reference of the state machine's return value in place of the original method call.
-                returnVariableReferences.Add(returnVariableReference);
+                    currentBlock.Add(new Assignment
+                    {
+                        AssignTo = returnVariableReference,
+                        Expression = returnSignalReference
+                    });
+
+                    // Using the reference of the state machine's return value in place of the original method call.
+                    returnVariableReferences.Add(returnVariableReference);
+                }
 
 
                 // Noting that this component was finished in this state.
@@ -406,7 +404,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 buildInvocationWaitBlock(index);
             }
 
-            return returnVariableReferences;
+            if (returnType == KnownDataTypes.Void)
+            {
+                return Enumerable.Repeat<IVhdlElement>(Empty.Instance, instanceCount);
+            }
+            else
+            {
+                return returnVariableReferences;
+            }
         }
 
 
