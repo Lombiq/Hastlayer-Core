@@ -157,7 +157,7 @@ architecture Imp of Hast_IP is
         \IsNull\: boolean;
         \Size\: unsigned(15 downto 0);
         \SegmentCount\: unsigned(15 downto 0);
-        \Segments\: \unsigned32_Array\(0 to 0);
+        \Segments\: \unsigned32_Array\(0 to 1);
     end record;
     type \Lombiq.Unum.UnumEnvironment\ is record 
         \IsNull\: boolean;
@@ -239,7 +239,7 @@ architecture Imp of Hast_IP is
     Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum)._Finished.0\: boolean := false;
     Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::op_Addition(Unum,Unum).return.0\: \Lombiq.Unum.Unum\;
     Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray()._Finished.0\: boolean := false;
-    Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray().return.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.Unum::FractionToUintArray().return.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     -- System.Void Hast.Samples.SampleAssembly.UnumCalculator::CalculateSumOfPowersofTwo(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -307,10 +307,10 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \BitMask::.ctor(UInt32[],UInt16).0._Finished\: boolean := false;
     Signal \BitMask::.ctor(UInt32[],UInt16).0.this.parameter.Out\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::.ctor(UInt32[],UInt16).0.segments.parameter.Out\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::.ctor(UInt32[],UInt16).0.segments.parameter.Out\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::.ctor(UInt32[],UInt16).0._Started\: boolean := false;
     Signal \BitMask::.ctor(UInt32[],UInt16).0.this.parameter.In\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::.ctor(UInt32[],UInt16).0.segments.parameter.In\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::.ctor(UInt32[],UInt16).0.segments.parameter.In\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::.ctor(UInt32[],UInt16).0.size.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
     -- System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32[],System.UInt16).0 declarations end
 
@@ -362,16 +362,16 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0._Finished\: boolean := false;
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.return\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.segments.parameter.Out\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.segments.parameter.Out\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0._Started\: boolean := false;
-    Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.segments.parameter.In\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.segments.parameter.In\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.size.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::FromImmutableArray(UInt32[],UInt16).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\: boolean := false;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::FromImmutableArray(System.UInt32[],System.UInt16).0 declarations end
 
@@ -401,7 +401,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::SetOne(UInt16).0.BitMask::.ctor(BitMask).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::SetOne(UInt16).0.BitMask::.ctor(BitMask).source.parameter.Out.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::SetOne(UInt16).0.BitMask::.ctor(BitMask)._Started.0\: boolean := false;
-    Signal \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::SetOne(UInt16).0._Started\: boolean := false;
@@ -410,7 +410,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::SetOne(UInt16).0.BitMask::.ctor(BitMask).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::SetOne(UInt16).0.BitMask::.ctor(BitMask).source.parameter.In.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::SetOne(UInt16).0.BitMask::.ctor(BitMask)._Finished.0\: boolean := false;
-    Signal \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Finished.0\: boolean := false;
     Signal \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).return.0\: \Lombiq.Unum.BitMask\;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16).0 declarations end
@@ -441,7 +441,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::SetZero(UInt16).0.BitMask::.ctor(BitMask).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::SetZero(UInt16).0.BitMask::.ctor(BitMask).source.parameter.Out.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::SetZero(UInt16).0.BitMask::.ctor(BitMask)._Started.0\: boolean := false;
-    Signal \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::SetZero(UInt16).0._Started\: boolean := false;
@@ -450,7 +450,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::SetZero(UInt16).0.BitMask::.ctor(BitMask).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::SetZero(UInt16).0.BitMask::.ctor(BitMask).source.parameter.In.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::SetZero(UInt16).0.BitMask::.ctor(BitMask)._Finished.0\: boolean := false;
-    Signal \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Finished.0\: boolean := false;
     Signal \BitMask::SetZero(UInt16).0.BitMask::FromImmutableArray(UInt32[],UInt16).return.0\: \Lombiq.Unum.BitMask\;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetZero(System.UInt16).0 declarations end
@@ -687,14 +687,14 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_Addition(BitMask,BitMask).0._Finished\: boolean := false;
     Signal \BitMask::op_Addition(BitMask,BitMask).0.return\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::op_Addition(BitMask,BitMask).0._Started\: boolean := false;
     Signal \BitMask::op_Addition(BitMask,BitMask).0.left.parameter.In\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_Addition(BitMask,BitMask).0.right.parameter.In\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_Addition(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\: boolean := false;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).0 declarations end
 
@@ -737,14 +737,14 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0._Finished\: boolean := false;
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.return\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0._Started\: boolean := false;
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.left.parameter.In\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.right.parameter.In\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_Subtraction(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\: boolean := false;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).0 declarations end
 
@@ -770,7 +770,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\: boolean := false;
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0._Started\: boolean := false;
@@ -779,7 +779,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\: boolean := false;
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\: boolean := false;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_BitwiseOr(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).0 declarations end
 
@@ -805,7 +805,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\: boolean := false;
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0._Started\: boolean := false;
@@ -814,7 +814,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\: boolean := false;
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\: boolean := false;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_BitwiseAnd(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).0 declarations end
 
@@ -845,7 +845,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\: boolean := false;
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::op_RightShift(BitMask,Int32).0._Started\: boolean := false;
@@ -854,7 +854,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\: boolean := false;
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::op_LeftShift(BitMask,Int32).return.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_RightShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\: boolean := false;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32).0 declarations end
 
@@ -883,7 +883,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\: boolean := false;
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \BitMask::op_LeftShift(BitMask,Int32).0._Started\: boolean := false;
@@ -892,7 +892,7 @@ architecture Imp of Hast_IP is
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::op_RightShift(BitMask,Int32)._Finished.0\: boolean := false;
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::op_RightShift(BitMask,Int32).return.0\: \Lombiq.Unum.BitMask\;
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \BitMask::op_LeftShift(BitMask,Int32).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\: boolean := false;
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32).0 declarations end
 
@@ -958,29 +958,6 @@ architecture Imp of Hast_IP is
     -- System.UInt32 Lombiq.Unum.BitMask::GetLowest32Bits().0 declarations end
 
 
-    -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment).0 declarations start
-    -- State machine states:
-    type \Unum::.ctor(UnumEnvironment).0._States\ is (
-        \Unum::.ctor(UnumEnvironment).0._State_0\, 
-        \Unum::.ctor(UnumEnvironment).0._State_1\, 
-        \Unum::.ctor(UnumEnvironment).0._State_2\, 
-        \Unum::.ctor(UnumEnvironment).0._State_3\);
-    -- Signals:
-    Signal \Unum::.ctor(UnumEnvironment).0._Finished\: boolean := false;
-    Signal \Unum::.ctor(UnumEnvironment).0.this.parameter.Out\: \Lombiq.Unum.Unum\;
-    Signal \Unum::.ctor(UnumEnvironment).0.environment.parameter.Out\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\: boolean := false;
-    Signal \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Started.0\: boolean := false;
-    Signal \Unum::.ctor(UnumEnvironment).0._Started\: boolean := false;
-    Signal \Unum::.ctor(UnumEnvironment).0.this.parameter.In\: \Lombiq.Unum.Unum\;
-    Signal \Unum::.ctor(UnumEnvironment).0.environment.parameter.In\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\: boolean := false;
-    -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment).0 declarations end
-
-
     -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,Lombiq.Unum.BitMask).0 declarations start
     -- State machine states:
     type \Unum::.ctor(UnumEnvironment,BitMask).0._States\ is (
@@ -992,14 +969,14 @@ architecture Imp of Hast_IP is
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0._Finished\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.this.parameter.Out\: \Lombiq.Unum.Unum\;
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.environment.parameter.Out\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::.ctor(UnumEnvironment,BitMask).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::.ctor(UnumEnvironment,BitMask).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.BitMask::FromImmutableArray(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0._Started\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.this.parameter.In\: \Lombiq.Unum.Unum\;
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.environment.parameter.In\: \Lombiq.Unum.UnumEnvironment\;
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.bits.parameter.In\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::.ctor(UnumEnvironment,BitMask).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::.ctor(UnumEnvironment,BitMask).0.BitMask::FromImmutableArray(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.BitMask::FromImmutableArray(UInt32[],UInt16)._Finished.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,BitMask).0.BitMask::FromImmutableArray(UInt32[],UInt16).return.0\: \Lombiq.Unum.BitMask\;
     -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,Lombiq.Unum.BitMask).0 declarations end
@@ -1080,9 +1057,9 @@ architecture Imp of Hast_IP is
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._Finished\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.this.parameter.Out\: \Lombiq.Unum.Unum\;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.environment.parameter.Out\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.value.parameter.Out\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.value.parameter.Out\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16)._Started.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_Equality(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Unum.BitMask\;
@@ -1127,21 +1104,21 @@ architecture Imp of Hast_IP is
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Unum.BitMask\;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\: boolean := false;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\: \Lombiq.Unum.Unum\;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\: boolean := false;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\: boolean := false;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\: boolean := false;
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\: \Lombiq.Unum.Unum\;
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\: boolean := false;
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\: boolean := false;
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._Started\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.this.parameter.In\: \Lombiq.Unum.Unum\;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.environment.parameter.In\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.value.parameter.In\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.value.parameter.In\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.negative.parameter.In\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16).segments.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32[],UInt16)._Finished.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_Equality(BitMask,BitMask)._Finished.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_Equality(BitMask,BitMask).return.0\: boolean := false;
@@ -1176,8 +1153,8 @@ architecture Imp of Hast_IP is
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::get_FractionSizeMax().return.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32)._Finished.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32).return.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\: boolean := false;
-    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\: boolean := false;
+    Signal \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\: \Lombiq.Unum.BitMask\;
     -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean).0 declarations end
 
 
@@ -1199,7 +1176,7 @@ architecture Imp of Hast_IP is
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.environment.parameter.Out\: \Lombiq.Unum.UnumEnvironment\;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.Out.0\: \Lombiq.Unum.Unum\;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).environment.parameter.Out.0\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.Out.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.Out.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).negative.parameter.Out.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\: boolean := false;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0._Started\: boolean := false;
@@ -1208,80 +1185,80 @@ architecture Imp of Hast_IP is
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.value.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.In.0\: \Lombiq.Unum.Unum\;
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).environment.parameter.In.0\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.In.0\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.In.0\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Finished.0\: boolean := false;
     -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.Int32).0 declarations end
 
 
-    -- Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0 declarations start
+    -- Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0 declarations start
     -- State machine states:
-    type \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._States\ is (
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_1\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_2\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_3\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_4\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_5\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_8\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_9\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_11\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_12\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_13\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_14\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_15\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_18\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_19\, 
-        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\);
+    type \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._States\ is (
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_1\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_2\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_3\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_4\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_5\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_8\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_9\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_11\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_12\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_13\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_14\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_15\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_18\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_19\, 
+        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\);
     -- Signals:
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this.parameter.In\: \Lombiq.Unum.Unum\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit.parameter.In\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent.parameter.In\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction.parameter.In\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit.parameter.In\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().return.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).return.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().return.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\: boolean := false;
-    Signal \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().return.0\: \Lombiq.Unum.BitMask\;
-    -- Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0 declarations end
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this.parameter.In\: \Lombiq.Unum.Unum\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit.parameter.In\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent.parameter.In\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction.parameter.In\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit.parameter.In\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().return.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).return.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().return.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\: boolean := false;
+    Signal \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().return.0\: \Lombiq.Unum.BitMask\;
+    -- Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0 declarations end
 
 
     -- System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray().0 declarations start
@@ -1302,7 +1279,7 @@ architecture Imp of Hast_IP is
         \Unum::FractionToUintArray().0._State_12\);
     -- Signals:
     Signal \Unum::FractionToUintArray().0._Finished\: boolean := false;
-    Signal \Unum::FractionToUintArray().0.return\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+    Signal \Unum::FractionToUintArray().0.return\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
     Signal \Unum::FractionToUintArray().0.Unum::FractionWithHiddenBit().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
     Signal \Unum::FractionToUintArray().0.Unum::FractionWithHiddenBit()._Started.0\: boolean := false;
     Signal \Unum::FractionToUintArray().0.Unum::ExponentValueWithBias().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
@@ -2013,9 +1990,6 @@ architecture Imp of Hast_IP is
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::get_PositiveInfinity()._Started.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::get_NegativeInfinity().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::get_NegativeInfinity()._Started.0\: boolean := false;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).this.parameter.Out.0\: \Lombiq.Unum.Unum\;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).environment.parameter.Out.0\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Started.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
@@ -2057,14 +2031,14 @@ architecture Imp of Hast_IP is
     Signal \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Started.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact().this.parameter.Out.0\: \Lombiq.Unum.Unum\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\: boolean := false;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\: \Lombiq.Unum.Unum\;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\: boolean := false;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\: boolean := false;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\: boolean := false;
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\: \Lombiq.Unum.Unum\;
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\: boolean := false;
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\: boolean := false;
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0._Started\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.left.parameter.In\: \Lombiq.Unum.Unum\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.right.parameter.In\: \Lombiq.Unum.Unum\;
@@ -2085,9 +2059,6 @@ architecture Imp of Hast_IP is
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::get_PositiveInfinity().return.0\: \Lombiq.Unum.BitMask\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::get_NegativeInfinity()._Finished.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::get_NegativeInfinity().return.0\: \Lombiq.Unum.BitMask\;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).this.parameter.In.0\: \Lombiq.Unum.Unum\;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).environment.parameter.In.0\: \Lombiq.Unum.UnumEnvironment\;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Finished.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Finished.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\: boolean := false;
@@ -2122,8 +2093,8 @@ architecture Imp of Hast_IP is
     Signal \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16).return.0\: \Lombiq.Unum.BitMask\;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Finished.0\: boolean := false;
     Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact().return.0\: boolean := false;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\: boolean := false;
-    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\: \Lombiq.Unum.BitMask\;
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\: boolean := false;
+    Signal \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\: \Lombiq.Unum.BitMask\;
     -- Lombiq.Unum.Unum Lombiq.Unum.Unum::AddExactUnums(Lombiq.Unum.Unum,Lombiq.Unum.Unum).0 declarations end
 
 
@@ -2584,7 +2555,7 @@ begin
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.unum\: \Lombiq.Unum.Unum\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.left\: \Lombiq.Unum.Unum\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0);
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.0\: \Lombiq.Unum.UnumEnvironment\;
@@ -2592,7 +2563,7 @@ begin
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.1\: \Lombiq.Unum.Unum\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.2\: \Lombiq.Unum.Unum\;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.return.3\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\: boolean := false;
         Variable \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -2837,7 +2808,7 @@ begin
                             -- 
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (i < 1) {
+                            -- while (i < 2) {
                             -- 	memory.WriteUInt32 (i, array [i]);
                             -- 	i = i + 1;
                             -- }
@@ -2849,7 +2820,7 @@ begin
                     when \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_16\ => 
                         -- Repeated state of the while loop which was started in state \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_15\.
                         -- The while loop's condition:
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ < to_signed(1, 32);
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.i\ < to_signed(2, 32);
                         if (\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -2899,7 +2870,7 @@ begin
     -- Lombiq.Unum.UnumEnvironment Hast.Samples.SampleAssembly.UnumCalculator::EnvironmentFactory().0 state machine start
     \UnumCalculator::EnvironmentFactory().0._StateMachine\: process (\Clock\) 
         Variable \UnumCalculator::EnvironmentFactory().0._State\: \UnumCalculator::EnvironmentFactory().0._States\ := \UnumCalculator::EnvironmentFactory().0._State_0\;
-        Variable \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\: \Lombiq.Unum.UnumEnvironment\;
+        Variable \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\: \Lombiq.Unum.UnumEnvironment\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2930,24 +2901,24 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \UnumCalculator::EnvironmentFactory().0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- UnumEnvironment object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa;
+                        -- UnumEnvironment object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa = new UnumEnvironment (2, 4);
+                        -- object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9 = new UnumEnvironment (4, 5);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\.\IsNull\ := false;
-                        \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\.\ExponentSizeSize\ := to_unsigned(0, 8);
-                        \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\.\FractionSizeSize\ := to_unsigned(0, 8);
-                        \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\.\ExponentSizeMax\ := to_unsigned(0, 8);
-                        \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\.\FractionSizeMax\ := to_unsigned(0, 16);
-                        \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\.\UnumTagSize\ := to_unsigned(0, 8);
-                        \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\.\Size\ := to_unsigned(0, 16);
+                        \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\.\IsNull\ := false;
+                        \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\.\ExponentSizeSize\ := to_unsigned(0, 8);
+                        \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\.\FractionSizeSize\ := to_unsigned(0, 8);
+                        \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\.\ExponentSizeMax\ := to_unsigned(0, 8);
+                        \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\.\FractionSizeMax\ := to_unsigned(0, 16);
+                        \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\.\UnumTagSize\ := to_unsigned(0, 8);
+                        \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\.\Size\ := to_unsigned(0, 16);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.UnumEnvironment::.ctor(System.Byte,System.Byte)
-                        \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte).this.parameter.Out.0\ <= \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\;
-                        \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte).exponentSizeSize.parameter.Out.0\ <= to_unsigned(2, 8);
-                        \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte).fractionSizeSize.parameter.Out.0\ <= to_unsigned(4, 8);
+                        \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte).this.parameter.Out.0\ <= \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\;
+                        \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte).exponentSizeSize.parameter.Out.0\ <= to_unsigned(4, 8);
+                        \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte).fractionSizeSize.parameter.Out.0\ <= to_unsigned(5, 8);
                         \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte)._Started.0\ <= true;
                         \UnumCalculator::EnvironmentFactory().0._State\ := \UnumCalculator::EnvironmentFactory().0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2955,11 +2926,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.UnumEnvironment::.ctor(System.Byte,System.Byte)
                         if (\UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte)._Started.0\ = \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte)._Finished.0\) then 
                             \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte)._Started.0\ <= false;
-                            \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\ := \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte).this.parameter.In.0\;
+                            \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\ := \UnumCalculator::EnvironmentFactory().0.UnumEnvironment::.ctor(Byte,Byte).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa;
+                            -- return object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9;
                             -- 
-                            \UnumCalculator::EnvironmentFactory().0.return\ <= \UnumCalculator::EnvironmentFactory().0.object3901843a0dba49cdc9347299c2e950cde388ae68c9422e22cc81bacc022ff4aa\;
+                            \UnumCalculator::EnvironmentFactory().0.return\ <= \UnumCalculator::EnvironmentFactory().0.object7f717a2c0d63965ebc1514434e79309d70c553066806119f6b00651659bb80b9\;
                             \UnumCalculator::EnvironmentFactory().0._State\ := \UnumCalculator::EnvironmentFactory().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2976,7 +2947,7 @@ begin
         Variable \BitMask::.ctor(UInt32,UInt16).0.this\: \Lombiq.Unum.BitMask\;
         Variable \BitMask::.ctor(UInt32,UInt16).0.segment\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::.ctor(UInt32,UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::.ctor(UInt32,UInt16).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::.ctor(UInt32,UInt16).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::.ctor(UInt32,UInt16).0.conditional93d0384e1e256fd728e80c772ac32f7836cc8471edbcd4a0afb4c8bc9bb86ec2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::.ctor(UInt32,UInt16).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -3077,7 +3048,7 @@ begin
                         \BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.3\ := SmartResize(unsigned(\BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ + \BitMask::.ctor(UInt32,UInt16).0.conditional93d0384e1e256fd728e80c772ac32f7836cc8471edbcd4a0afb4c8bc9bb86ec2\), 16);
                         \BitMask::.ctor(UInt32,UInt16).0.this\.\SegmentCount\ := (\BitMask::.ctor(UInt32,UInt16).0.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::.ctor(UInt32,UInt16).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -3133,11 +3104,11 @@ begin
     \BitMask::.ctor(UInt32[],UInt16).0._StateMachine\: process (\Clock\) 
         Variable \BitMask::.ctor(UInt32[],UInt16).0._State\: \BitMask::.ctor(UInt32[],UInt16).0._States\ := \BitMask::.ctor(UInt32[],UInt16).0._State_0\;
         Variable \BitMask::.ctor(UInt32[],UInt16).0.this\: \Lombiq.Unum.BitMask\;
-        Variable \BitMask::.ctor(UInt32[],UInt16).0.segments\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::.ctor(UInt32[],UInt16).0.segments\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::.ctor(UInt32[],UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::.ctor(UInt32[],UInt16).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::.ctor(UInt32[],UInt16).0.flag\: boolean := false;
-        Variable \BitMask::.ctor(UInt32[],UInt16).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::.ctor(UInt32[],UInt16).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::.ctor(UInt32[],UInt16).0.conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.0\: boolean := false;
         Variable \BitMask::.ctor(UInt32[],UInt16).0.conditional93d0384e1e256fd728e80c772ac32f7836cc8471edbcd4a0afb4c8bc9bb86ec2\: signed(31 downto 0) := to_signed(0, 32);
@@ -3208,21 +3179,21 @@ begin
                         -- uint[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = 32;
+                        -- num = 64;
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.num\ := to_unsigned(32, 16);
+                        \BitMask::.ctor(UInt32[],UInt16).0.num\ := to_unsigned(64, 16);
                         -- The following section was transformed from the .NET statement below:
                         -- ushort conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (size < 32) {
-                        -- 	conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018 = 32;
+                        -- if (size < 64) {
+                        -- 	conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018 = 64;
                         -- }
                         -- else {
                         -- 	conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018 = size;
                         -- }
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.0\ := \BitMask::.ctor(UInt32[],UInt16).0.size\ < to_unsigned(32, 16);
+                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.0\ := \BitMask::.ctor(UInt32[],UInt16).0.size\ < to_unsigned(64, 16);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::.ctor(UInt32[],UInt16).0._State_4\ and ends in state \BitMask::.ctor(UInt32[],UInt16).0._State_4\.
@@ -3258,13 +3229,13 @@ begin
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018 = 32;
+                        -- 	conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018 = 64;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018 = 32;
+                        -- conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018 = 64;
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018\ := to_unsigned(32, 16);
+                        \BitMask::.ctor(UInt32[],UInt16).0.conditionalc3a7314574e5cf5b60b9437fa75a8e8b23417040c5c46d12edec97fe2eb66018\ := to_unsigned(64, 16);
                         -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_2\.
                         if (\BitMask::.ctor(UInt32[],UInt16).0._State\ = \BitMask::.ctor(UInt32[],UInt16).0._State_4\) then 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_3\;
@@ -3317,14 +3288,14 @@ begin
                         -- ushort conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (size > 32) {
+                        -- if (size > 64) {
                         -- 	conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac = (ushort)(size >> 5 + conditional93d0384e1e256fd728e80c772ac32f7836cc8471edbcd4a0afb4c8bc9bb86ec2);
                         -- }
                         -- else {
-                        -- 	conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac = 1;
+                        -- 	conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac = 2;
                         -- }
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.3\ := \BitMask::.ctor(UInt32[],UInt16).0.size\ > to_unsigned(32, 16);
+                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.3\ := \BitMask::.ctor(UInt32[],UInt16).0.size\ > to_unsigned(64, 16);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::.ctor(UInt32[],UInt16).0._State_12\ and ends in state \BitMask::.ctor(UInt32[],UInt16).0._State_12\.
@@ -3376,14 +3347,14 @@ begin
                         -- 
                         \BitMask::.ctor(UInt32[],UInt16).0.this\.\SegmentCount\ := \BitMask::.ctor(UInt32[],UInt16).0.conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac\;
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = (int)@this.SegmentCount > 1;
+                        -- flag = (int)@this.SegmentCount > 2;
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\ := signed(SmartResize(\BitMask::.ctor(UInt32[],UInt16).0.this\.\SegmentCount\, 32)) > to_signed(1, 32);
+                        \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\ := signed(SmartResize(\BitMask::.ctor(UInt32[],UInt16).0.this\.\SegmentCount\, 32)) > to_signed(2, 32);
                         \BitMask::.ctor(UInt32[],UInt16).0.flag\ := \BitMask::.ctor(UInt32[],UInt16).0.binaryOperationResult.6\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	array = new uint[1];
-                        -- 	Array.Copy (segments, array, 1);
+                        -- 	array = new uint[2];
+                        -- 	Array.Copy (segments, array, 2);
                         -- 	@this.Segments = array;
                         -- }
                         -- else {
@@ -3424,13 +3395,13 @@ begin
                         -- False branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_8\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac = 1;
+                        -- 	conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac = 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac = 1;
+                        -- conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac = 2;
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac\ := to_unsigned(1, 16);
+                        \BitMask::.ctor(UInt32[],UInt16).0.conditionalb63e6b911b0b9623cc84e1b95d8ef143c98867889a1ec5a3ac70836cafbf43ac\ := to_unsigned(2, 16);
                         -- Going to the state after the if-else which was started in state \BitMask::.ctor(UInt32[],UInt16).0._State_8\.
                         if (\BitMask::.ctor(UInt32[],UInt16).0._State\ = \BitMask::.ctor(UInt32[],UInt16).0._State_13\) then 
                             \BitMask::.ctor(UInt32[],UInt16).0._State\ := \BitMask::.ctor(UInt32[],UInt16).0._State_11\;
@@ -3444,19 +3415,19 @@ begin
                         -- True branch of the if-else started in state \BitMask::.ctor(UInt32[],UInt16).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array = new uint[1];
-                        -- 	Array.Copy (segments, array, 1);
+                        -- 	array = new uint[2];
+                        -- 	Array.Copy (segments, array, 2);
                         -- 	@this.Segments = array;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::.ctor(UInt32[],UInt16).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- Array.Copy (segments, array, 1);
+                        -- Array.Copy (segments, array, 2);
                         -- 
-                        \BitMask::.ctor(UInt32[],UInt16).0.array\ := \BitMask::.ctor(UInt32[],UInt16).0.segments\(0 to 0);
+                        \BitMask::.ctor(UInt32[],UInt16).0.array\ := \BitMask::.ctor(UInt32[],UInt16).0.segments\(0 to 1);
                         -- The following section was transformed from the .NET statement below:
                         -- @this.Segments = array;
                         -- 
@@ -3496,7 +3467,7 @@ begin
         Variable \BitMask::.ctor(UInt16,Boolean).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::.ctor(UInt16,Boolean).0.allOne\: boolean := false;
         Variable \BitMask::.ctor(UInt16,Boolean).0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::.ctor(UInt16,Boolean).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::.ctor(UInt16,Boolean).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::.ctor(UInt16,Boolean).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::.ctor(UInt16,Boolean).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -3610,7 +3581,7 @@ begin
                         -- 
                         \BitMask::.ctor(UInt16,Boolean).0.this\.\Size\ := \BitMask::.ctor(UInt16,Boolean).0.size\;
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::.ctor(UInt16,Boolean).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -3718,9 +3689,9 @@ begin
     -- Lombiq.Unum.BitMask Lombiq.Unum.BitMask::FromImmutableArray(System.UInt32[],System.UInt16).0 state machine start
     \BitMask::FromImmutableArray(UInt32[],UInt16).0._StateMachine\: process (\Clock\) 
         Variable \BitMask::FromImmutableArray(UInt32[],UInt16).0._State\: \BitMask::FromImmutableArray(UInt32[],UInt16).0._States\ := \BitMask::FromImmutableArray(UInt32[],UInt16).0._State_0\;
-        Variable \BitMask::FromImmutableArray(UInt32[],UInt16).0.segments\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::FromImmutableArray(UInt32[],UInt16).0.segments\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::FromImmutableArray(UInt32[],UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::FromImmutableArray(UInt32[],UInt16).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::FromImmutableArray(UInt32[],UInt16).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::FromImmutableArray(UInt32[],UInt16).0.object2fe313ea47a5c88e5364ea75f59651d95bb221efab0dda850bcb112321cfbdac\: \Lombiq.Unum.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3763,13 +3734,13 @@ begin
                         -- uint[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::FromImmutableArray(UInt32[],UInt16).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Array.Copy (segments, array, 1);
+                        -- System.Array.Copy (segments, array, 2);
                         -- 
-                        \BitMask::FromImmutableArray(UInt32[],UInt16).0.array\ := \BitMask::FromImmutableArray(UInt32[],UInt16).0.segments\(0 to 0);
+                        \BitMask::FromImmutableArray(UInt32[],UInt16).0.array\ := \BitMask::FromImmutableArray(UInt32[],UInt16).0.segments\(0 to 1);
                         -- The following section was transformed from the .NET statement below:
                         -- BitMask object2fe313ea47a5c88e5364ea75f59651d95bb221efab0dda850bcb112321cfbdac;
                         -- 
@@ -3827,7 +3798,7 @@ begin
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.5\: boolean := false;
-        Variable \BitMask::SetOne(UInt16).0.arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::SetOne(UInt16).0.arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.return.0\: \Lombiq.Unum.BitMask\;
@@ -3909,8 +3880,8 @@ begin
                         -- 	flag2 = @this.Segments [index2] >> num % 2u == 0u;
                         -- 	if (flag2) {
                         -- 		uint[] arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c;
-                        -- 		arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[1];
-                        -- 		System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 1);
+                        -- 		arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[2];
+                        -- 		System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 2);
                         -- 		arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c [index2] = @this.Segments [index2] | 1u << num;
                         -- 		result = BitMask.FromImmutableArray (arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, @this.Size);
                         -- 	}
@@ -3982,8 +3953,8 @@ begin
                         -- 	flag2 = @this.Segments [index2] >> num % 2u == 0u;
                         -- 	if (flag2) {
                         -- 		uint[] arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c;
-                        -- 		arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[1];
-                        -- 		System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 1);
+                        -- 		arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[2];
+                        -- 		System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 2);
                         -- 		arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c [index2] = @this.Segments [index2] | 1u << num;
                         -- 		result = BitMask.FromImmutableArray (arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, @this.Size);
                         -- 	}
@@ -4038,8 +4009,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag2) {
                         -- 	uint[] arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c;
-                        -- 	arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[1];
-                        -- 	System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 1);
+                        -- 	arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[2];
+                        -- 	System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 2);
                         -- 	arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c [index2] = @this.Segments [index2] | 1u << num;
                         -- 	result = BitMask.FromImmutableArray (arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, @this.Size);
                         -- }
@@ -4071,8 +4042,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uint[] arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c;
-                        -- 	arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[1];
-                        -- 	System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 1);
+                        -- 	arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[2];
+                        -- 	System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 2);
                         -- 	arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c [index2] = @this.Segments [index2] | 1u << num;
                         -- 	result = BitMask.FromImmutableArray (arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, @this.Size);
                         -- }
@@ -4081,13 +4052,13 @@ begin
                         -- uint[] arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[1];
+                        -- arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c = new uint[2];
                         -- 
                         \BitMask::SetOne(UInt16).0.arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 1);
+                        -- System.Array.Copy (@this.Segments, arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c, 2);
                         -- 
-                        \BitMask::SetOne(UInt16).0.arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c\ := \BitMask::SetOne(UInt16).0.this\.\Segments\(0 to 0);
+                        \BitMask::SetOne(UInt16).0.arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c\ := \BitMask::SetOne(UInt16).0.this\.\Segments\(0 to 1);
                         -- The following section was transformed from the .NET statement below:
                         -- arraya674cb90f8197922d5e1ac95ff9cb374a98401cf0158bcfad208496fd1c9c68c [index2] = @this.Segments [index2] | 1u << num;
                         -- 
@@ -4175,7 +4146,7 @@ begin
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetZero(UInt16).0.clockCyclesWaitedForBinaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.5\: boolean := false;
-        Variable \BitMask::SetZero(UInt16).0.array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::SetZero(UInt16).0.array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetZero(UInt16).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetZero(UInt16).0.return.0\: \Lombiq.Unum.BitMask\;
@@ -4257,8 +4228,8 @@ begin
                         -- 	flag2 = @this.Segments [index2] >> num % 2u == 1u;
                         -- 	if (flag2) {
                         -- 		uint[] array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5;
-                        -- 		array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[1];
-                        -- 		System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 1);
+                        -- 		array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[2];
+                        -- 		System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 2);
                         -- 		array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 [index2] = @this.Segments [index2] & ~1u << num;
                         -- 		result = BitMask.FromImmutableArray (array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, @this.Size);
                         -- 	}
@@ -4330,8 +4301,8 @@ begin
                         -- 	flag2 = @this.Segments [index2] >> num % 2u == 1u;
                         -- 	if (flag2) {
                         -- 		uint[] array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5;
-                        -- 		array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[1];
-                        -- 		System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 1);
+                        -- 		array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[2];
+                        -- 		System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 2);
                         -- 		array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 [index2] = @this.Segments [index2] & ~1u << num;
                         -- 		result = BitMask.FromImmutableArray (array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, @this.Size);
                         -- 	}
@@ -4386,8 +4357,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag2) {
                         -- 	uint[] array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5;
-                        -- 	array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[1];
-                        -- 	System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 1);
+                        -- 	array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[2];
+                        -- 	System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 2);
                         -- 	array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 [index2] = @this.Segments [index2] & ~1u << num;
                         -- 	result = BitMask.FromImmutableArray (array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, @this.Size);
                         -- }
@@ -4419,8 +4390,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uint[] array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5;
-                        -- 	array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[1];
-                        -- 	System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 1);
+                        -- 	array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[2];
+                        -- 	System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 2);
                         -- 	array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 [index2] = @this.Segments [index2] & ~1u << num;
                         -- 	result = BitMask.FromImmutableArray (array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, @this.Size);
                         -- }
@@ -4429,13 +4400,13 @@ begin
                         -- uint[] array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[1];
+                        -- array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 = new uint[2];
                         -- 
                         \BitMask::SetZero(UInt16).0.array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 1);
+                        -- System.Array.Copy (@this.Segments, array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5, 2);
                         -- 
-                        \BitMask::SetZero(UInt16).0.array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5\ := \BitMask::SetZero(UInt16).0.this\.\Segments\(0 to 0);
+                        \BitMask::SetZero(UInt16).0.array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5\ := \BitMask::SetZero(UInt16).0.this\.\Segments\(0 to 1);
                         -- The following section was transformed from the .NET statement below:
                         -- array3d06f98f2942194f65130a81f3bd43f7302c3ca1bd92e1393a1cf0bfd23292c5 [index2] = @this.Segments [index2] & ~1u << num;
                         -- 
@@ -5591,7 +5562,7 @@ begin
         Variable \BitMask::op_Addition(BitMask,BitMask).0.flag2\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_Addition(BitMask,BitMask).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::op_Addition(BitMask,BitMask).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::op_Addition(BitMask,BitMask).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Addition(BitMask,BitMask).0.flag3\: boolean := false;
         Variable \BitMask::op_Addition(BitMask,BitMask).0.flag4\: boolean := false;
@@ -5757,7 +5728,7 @@ begin
                         -- 	flag2 = false;
                         -- 	num = 0;
                         -- 	num2 = 0;
-                        -- 	array = new uint[1];
+                        -- 	array = new uint[2];
                         -- 	num3 = 0;
                         -- 	ushort conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904;
                         -- 	if (left.Size > right.Size) {
@@ -5850,7 +5821,7 @@ begin
                         -- 	flag2 = false;
                         -- 	num = 0;
                         -- 	num2 = 0;
-                        -- 	array = new uint[1];
+                        -- 	array = new uint[2];
                         -- 	num3 = 0;
                         -- 	ushort conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904;
                         -- 	if (left.Size > right.Size) {
@@ -5913,7 +5884,7 @@ begin
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.num2\ := to_unsigned(0, 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::op_Addition(BitMask,BitMask).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -6460,7 +6431,7 @@ begin
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.flag2\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::op_Subtraction(BitMask,BitMask).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.flag3\: boolean := false;
         Variable \BitMask::op_Subtraction(BitMask,BitMask).0.flag4\: boolean := false;
@@ -6628,7 +6599,7 @@ begin
                         -- 	flag2 = false;
                         -- 	num = 0;
                         -- 	num2 = 0;
-                        -- 	array = new uint[1];
+                        -- 	array = new uint[2];
                         -- 	num3 = 0;
                         -- 	ushort conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904;
                         -- 	if (left.Size > right.Size) {
@@ -6721,7 +6692,7 @@ begin
                         -- 	flag2 = false;
                         -- 	num = 0;
                         -- 	num2 = 0;
-                        -- 	array = new uint[1];
+                        -- 	array = new uint[2];
                         -- 	num3 = 0;
                         -- 	ushort conditional634a6c6c4335747fbb3127d03ed2dabb2d062c45b344366ead52f18db6080904;
                         -- 	if (left.Size > right.Size) {
@@ -6784,7 +6755,7 @@ begin
                         -- 
                         \BitMask::op_Subtraction(BitMask,BitMask).0.num2\ := to_unsigned(0, 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::op_Subtraction(BitMask,BitMask).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -7329,7 +7300,7 @@ begin
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.right\: \Lombiq.Unum.BitMask\;
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.flag\: boolean := false;
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.result\: \Lombiq.Unum.BitMask\;
-        Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
         Variable \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
@@ -7398,9 +7369,9 @@ begin
                         -- 	result = new BitMask (left.Size, false);
                         -- }
                         -- else {
-                        -- 	array = new uint[1];
+                        -- 	array = new uint[2];
                         -- 	num = 0;
-                        -- 	while ((int)num < 1) {
+                        -- 	while ((int)num < 2) {
                         -- 		array [(int)num] = left.Segments [(int)num] | right.Segments [(int)num];
                         -- 		num = num + 1;
                         -- 	}
@@ -7465,9 +7436,9 @@ begin
                         -- False branch of the if-else started in state \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array = new uint[1];
+                        -- 	array = new uint[2];
                         -- 	num = 0;
-                        -- 	while ((int)num < 1) {
+                        -- 	while ((int)num < 2) {
                         -- 		array [(int)num] = left.Segments [(int)num] | right.Segments [(int)num];
                         -- 		num = num + 1;
                         -- 	}
@@ -7475,7 +7446,7 @@ begin
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::op_BitwiseOr(BitMask,BitMask).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -7483,7 +7454,7 @@ begin
                         -- 
                         \BitMask::op_BitwiseOr(BitMask,BitMask).0.num\ := to_unsigned(0, 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)num < 1) {
+                        -- while ((int)num < 2) {
                         -- 	array [(int)num] = left.Segments [(int)num] | right.Segments [(int)num];
                         -- 	num = num + 1;
                         -- }
@@ -7494,7 +7465,7 @@ begin
                     when \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_BitwiseOr(BitMask,BitMask).0._State_6\.
                         -- The while loop's condition:
-                        \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\, 32)) < to_signed(1, 32);
+                        \BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_BitwiseOr(BitMask,BitMask).0.num\, 32)) < to_signed(2, 32);
                         if (\BitMask::op_BitwiseOr(BitMask,BitMask).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -7560,7 +7531,7 @@ begin
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.right\: \Lombiq.Unum.BitMask\;
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.flag\: boolean := false;
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.result\: \Lombiq.Unum.BitMask\;
-        Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.0\: boolean := false;
         Variable \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\: boolean := false;
@@ -7629,9 +7600,9 @@ begin
                         -- 	result = new BitMask (left.Size, false);
                         -- }
                         -- else {
-                        -- 	array = new uint[1];
+                        -- 	array = new uint[2];
                         -- 	num = 0;
-                        -- 	while ((int)num < 1) {
+                        -- 	while ((int)num < 2) {
                         -- 		array [(int)num] = left.Segments [(int)num] & right.Segments [(int)num];
                         -- 		num = num + 1;
                         -- 	}
@@ -7696,9 +7667,9 @@ begin
                         -- False branch of the if-else started in state \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array = new uint[1];
+                        -- 	array = new uint[2];
                         -- 	num = 0;
-                        -- 	while ((int)num < 1) {
+                        -- 	while ((int)num < 2) {
                         -- 		array [(int)num] = left.Segments [(int)num] & right.Segments [(int)num];
                         -- 		num = num + 1;
                         -- 	}
@@ -7706,7 +7677,7 @@ begin
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -7714,7 +7685,7 @@ begin
                         -- 
                         \BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\ := to_unsigned(0, 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)num < 1) {
+                        -- while ((int)num < 2) {
                         -- 	array [(int)num] = left.Segments [(int)num] & right.Segments [(int)num];
                         -- 	num = num + 1;
                         -- }
@@ -7725,7 +7696,7 @@ begin
                     when \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_6\.
                         -- The while loop's condition:
-                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\, 32)) < to_signed(1, 32);
+                        \BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize(\BitMask::op_BitwiseAnd(BitMask,BitMask).0.num\, 32)) < to_signed(2, 32);
                         if (\BitMask::op_BitwiseAnd(BitMask,BitMask).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -7792,7 +7763,7 @@ begin
         Variable \BitMask::op_RightShift(BitMask,Int32).0.flag\: boolean := false;
         Variable \BitMask::op_RightShift(BitMask,Int32).0.result\: \Lombiq.Unum.BitMask\;
         Variable \BitMask::op_RightShift(BitMask,Int32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_RightShift(BitMask,Int32).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::op_RightShift(BitMask,Int32).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::op_RightShift(BitMask,Int32).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_RightShift(BitMask,Int32).0.flag2\: boolean := false;
         Variable \BitMask::op_RightShift(BitMask,Int32).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -7906,14 +7877,14 @@ begin
                         -- }
                         -- else {
                         -- 	num = 2147483648u;
-                        -- 	array = new uint[1];
-                        -- 	System.Array.Copy (left.Segments, array, 1);
+                        -- 	array = new uint[2];
+                        -- 	System.Array.Copy (left.Segments, array, 2);
                         -- 	num2 = 0;
                         -- 	while ((int)num2 < right) {
                         -- 		flag2 = false;
                         -- 		num3 = 1;
-                        -- 		while ((int)num3 <= 1) {
-                        -- 			num4 = (ushort)(1 - (int)num3);
+                        -- 		while ((int)num3 <= 2) {
+                        -- 			num4 = (ushort)(2 - (int)num3);
                         -- 			flag3 = array [(int)num4] % 2u == 1u;
                         -- 			array [(int)num4] = array [(int)num4] >> 1;
                         -- 			flag4 = flag2;
@@ -7981,14 +7952,14 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num = 2147483648u;
-                        -- 	array = new uint[1];
-                        -- 	System.Array.Copy (left.Segments, array, 1);
+                        -- 	array = new uint[2];
+                        -- 	System.Array.Copy (left.Segments, array, 2);
                         -- 	num2 = 0;
                         -- 	while ((int)num2 < right) {
                         -- 		flag2 = false;
                         -- 		num3 = 1;
-                        -- 		while ((int)num3 <= 1) {
-                        -- 			num4 = (ushort)(1 - (int)num3);
+                        -- 		while ((int)num3 <= 2) {
+                        -- 			num4 = (ushort)(2 - (int)num3);
                         -- 			flag3 = array [(int)num4] % 2u == 1u;
                         -- 			array [(int)num4] = array [(int)num4] >> 1;
                         -- 			flag4 = flag2;
@@ -8009,13 +7980,13 @@ begin
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
                         \BitMask::op_RightShift(BitMask,Int32).0.num\ := "10000000000000000000000000000000";
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::op_RightShift(BitMask,Int32).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Array.Copy (left.Segments, array, 1);
+                        -- System.Array.Copy (left.Segments, array, 2);
                         -- 
-                        \BitMask::op_RightShift(BitMask,Int32).0.array\ := \BitMask::op_RightShift(BitMask,Int32).0.left\.\Segments\(0 to 0);
+                        \BitMask::op_RightShift(BitMask,Int32).0.array\ := \BitMask::op_RightShift(BitMask,Int32).0.left\.\Segments\(0 to 1);
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = 0;
                         -- 
@@ -8024,8 +7995,8 @@ begin
                         -- while ((int)num2 < right) {
                         -- 	flag2 = false;
                         -- 	num3 = 1;
-                        -- 	while ((int)num3 <= 1) {
-                        -- 		num4 = (ushort)(1 - (int)num3);
+                        -- 	while ((int)num3 <= 2) {
+                        -- 		num4 = (ushort)(2 - (int)num3);
                         -- 		flag3 = array [(int)num4] % 2u == 1u;
                         -- 		array [(int)num4] = array [(int)num4] >> 1;
                         -- 		flag4 = flag2;
@@ -8050,8 +8021,8 @@ begin
                             -- {
                             -- 	flag2 = false;
                             -- 	num3 = 1;
-                            -- 	while ((int)num3 <= 1) {
-                            -- 		num4 = (ushort)(1 - (int)num3);
+                            -- 	while ((int)num3 <= 2) {
+                            -- 		num4 = (ushort)(2 - (int)num3);
                             -- 		flag3 = array [(int)num4] % 2u == 1u;
                             -- 		array [(int)num4] = array [(int)num4] >> 1;
                             -- 		flag4 = flag2;
@@ -8073,8 +8044,8 @@ begin
                             -- 
                             \BitMask::op_RightShift(BitMask,Int32).0.num3\ := to_unsigned(1, 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- while ((int)num3 <= 1) {
-                            -- 	num4 = (ushort)(1 - (int)num3);
+                            -- while ((int)num3 <= 2) {
+                            -- 	num4 = (ushort)(2 - (int)num3);
                             -- 	flag3 = array [(int)num4] % 2u == 1u;
                             -- 	array [(int)num4] = array [(int)num4] >> 1;
                             -- 	flag4 = flag2;
@@ -8112,11 +8083,11 @@ begin
                     when \BitMask::op_RightShift(BitMask,Int32).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_RightShift(BitMask,Int32).0._State_7\.
                         -- The while loop's condition:
-                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\ := signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num3\, 32)) <= to_signed(1, 32);
+                        \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\ := signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num3\, 32)) <= to_signed(2, 32);
                         if (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num4 = (ushort)(1 - (int)num3);
+                            -- 	num4 = (ushort)(2 - (int)num3);
                             -- 	flag3 = array [(int)num4] % 2u == 1u;
                             -- 	array [(int)num4] = array [(int)num4] >> 1;
                             -- 	flag4 = flag2;
@@ -8128,9 +8099,9 @@ begin
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = (ushort)(1 - (int)num3);
+                            -- num4 = (ushort)(2 - (int)num3);
                             -- 
-                            \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\ := SmartResize(unsigned(to_signed(1, 32) - signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num3\, 32))), 16);
+                            \BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\ := SmartResize(unsigned(to_signed(2, 32) - signed(SmartResize(\BitMask::op_RightShift(BitMask,Int32).0.num3\, 32))), 16);
                             \BitMask::op_RightShift(BitMask,Int32).0.num4\ := (\BitMask::op_RightShift(BitMask,Int32).0.binaryOperationResult.3\);
                             -- The following section was transformed from the .NET statement below:
                             -- flag3 = array [(int)num4] % 2u == 1u;
@@ -8253,7 +8224,7 @@ begin
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.result\: \Lombiq.Unum.BitMask\;
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::op_LeftShift(BitMask,Int32).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \BitMask::op_LeftShift(BitMask,Int32).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.flag2\: boolean := false;
         Variable \BitMask::op_LeftShift(BitMask,Int32).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -8363,13 +8334,13 @@ begin
                         -- else {
                         -- 	num = 2147483648u;
                         -- 	num2 = 1u;
-                        -- 	array = new uint[1];
-                        -- 	System.Array.Copy (left.Segments, array, 1);
+                        -- 	array = new uint[2];
+                        -- 	System.Array.Copy (left.Segments, array, 2);
                         -- 	num3 = 0;
                         -- 	while ((int)num3 < right) {
                         -- 		flag2 = false;
                         -- 		num4 = 0;
-                        -- 		while ((int)num4 < 1) {
+                        -- 		while ((int)num4 < 2) {
                         -- 			flag3 = array [(int)num4] & num == num;
                         -- 			array [(int)num4] = array [(int)num4] << 1;
                         -- 			flag4 = flag2;
@@ -8438,13 +8409,13 @@ begin
                         -- {
                         -- 	num = 2147483648u;
                         -- 	num2 = 1u;
-                        -- 	array = new uint[1];
-                        -- 	System.Array.Copy (left.Segments, array, 1);
+                        -- 	array = new uint[2];
+                        -- 	System.Array.Copy (left.Segments, array, 2);
                         -- 	num3 = 0;
                         -- 	while ((int)num3 < right) {
                         -- 		flag2 = false;
                         -- 		num4 = 0;
-                        -- 		while ((int)num4 < 1) {
+                        -- 		while ((int)num4 < 2) {
                         -- 			flag3 = array [(int)num4] & num == num;
                         -- 			array [(int)num4] = array [(int)num4] << 1;
                         -- 			flag4 = flag2;
@@ -8469,13 +8440,13 @@ begin
                         -- 
                         \BitMask::op_LeftShift(BitMask,Int32).0.num2\ := to_unsigned(1, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \BitMask::op_LeftShift(BitMask,Int32).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- System.Array.Copy (left.Segments, array, 1);
+                        -- System.Array.Copy (left.Segments, array, 2);
                         -- 
-                        \BitMask::op_LeftShift(BitMask,Int32).0.array\ := \BitMask::op_LeftShift(BitMask,Int32).0.left\.\Segments\(0 to 0);
+                        \BitMask::op_LeftShift(BitMask,Int32).0.array\ := \BitMask::op_LeftShift(BitMask,Int32).0.left\.\Segments\(0 to 1);
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = 0;
                         -- 
@@ -8484,7 +8455,7 @@ begin
                         -- while ((int)num3 < right) {
                         -- 	flag2 = false;
                         -- 	num4 = 0;
-                        -- 	while ((int)num4 < 1) {
+                        -- 	while ((int)num4 < 2) {
                         -- 		flag3 = array [(int)num4] & num == num;
                         -- 		array [(int)num4] = array [(int)num4] << 1;
                         -- 		flag4 = flag2;
@@ -8509,7 +8480,7 @@ begin
                             -- {
                             -- 	flag2 = false;
                             -- 	num4 = 0;
-                            -- 	while ((int)num4 < 1) {
+                            -- 	while ((int)num4 < 2) {
                             -- 		flag3 = array [(int)num4] & num == num;
                             -- 		array [(int)num4] = array [(int)num4] << 1;
                             -- 		flag4 = flag2;
@@ -8531,7 +8502,7 @@ begin
                             -- 
                             \BitMask::op_LeftShift(BitMask,Int32).0.num4\ := to_unsigned(0, 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- while ((int)num4 < 1) {
+                            -- while ((int)num4 < 2) {
                             -- 	flag3 = array [(int)num4] & num == num;
                             -- 	array [(int)num4] = array [(int)num4] << 1;
                             -- 	flag4 = flag2;
@@ -8569,7 +8540,7 @@ begin
                     when \BitMask::op_LeftShift(BitMask,Int32).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::op_LeftShift(BitMask,Int32).0._State_7\.
                         -- The while loop's condition:
-                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\ := signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num4\, 32)) < to_signed(1, 32);
+                        \BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\ := signed(SmartResize(\BitMask::op_LeftShift(BitMask,Int32).0.num4\, 32)) < to_signed(2, 32);
                         if (\BitMask::op_LeftShift(BitMask,Int32).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -9354,80 +9325,6 @@ begin
     -- System.UInt32 Lombiq.Unum.BitMask::GetLowest32Bits().0 state machine end
 
 
-    -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment).0 state machine start
-    \Unum::.ctor(UnumEnvironment).0._StateMachine\: process (\Clock\) 
-        Variable \Unum::.ctor(UnumEnvironment).0._State\: \Unum::.ctor(UnumEnvironment).0._States\ := \Unum::.ctor(UnumEnvironment).0._State_0\;
-        Variable \Unum::.ctor(UnumEnvironment).0.this\: \Lombiq.Unum.Unum\;
-        Variable \Unum::.ctor(UnumEnvironment).0.environment\: \Lombiq.Unum.UnumEnvironment\;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Unum::.ctor(UnumEnvironment).0._Finished\ <= false;
-                \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= to_unsigned(0, 16);
-                \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
-                \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
-                \Unum::.ctor(UnumEnvironment).0._State\ := \Unum::.ctor(UnumEnvironment).0._State_0\;
-            else 
-                case \Unum::.ctor(UnumEnvironment).0._State\ is 
-                    when \Unum::.ctor(UnumEnvironment).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\Unum::.ctor(UnumEnvironment).0._Started\ = true) then 
-                            \Unum::.ctor(UnumEnvironment).0._State\ := \Unum::.ctor(UnumEnvironment).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::.ctor(UnumEnvironment).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Unum::.ctor(UnumEnvironment).0._Started\ = true) then 
-                            \Unum::.ctor(UnumEnvironment).0._Finished\ <= true;
-                        else 
-                            \Unum::.ctor(UnumEnvironment).0._Finished\ <= false;
-                            \Unum::.ctor(UnumEnvironment).0._State\ := \Unum::.ctor(UnumEnvironment).0._State_0\;
-                        end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \Unum::.ctor(UnumEnvironment).0.this.parameter.Out\ <= \Unum::.ctor(UnumEnvironment).0.this\;
-                        \Unum::.ctor(UnumEnvironment).0.environment.parameter.Out\ <= \Unum::.ctor(UnumEnvironment).0.environment\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::.ctor(UnumEnvironment).0._State_2\ => 
-                        \Unum::.ctor(UnumEnvironment).0.this\ := \Unum::.ctor(UnumEnvironment).0.this.parameter.In\;
-                        \Unum::.ctor(UnumEnvironment).0.environment\ := \Unum::.ctor(UnumEnvironment).0.environment.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- @this._environment = environment;
-                        -- 
-                        \Unum::.ctor(UnumEnvironment).0.this\.\_environment\ := \Unum::.ctor(UnumEnvironment).0.environment\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- @this.UnumBits = new BitMask (@this._environment.Size, false);
-                        -- 
-                        -- Initializing record fields to their defaults.
-                        \Unum::.ctor(UnumEnvironment).0.this\.\UnumBits\.\IsNull\ := false;
-                        \Unum::.ctor(UnumEnvironment).0.this\.\UnumBits\.\Size\ := to_unsigned(0, 16);
-                        \Unum::.ctor(UnumEnvironment).0.this\.\UnumBits\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Unum::.ctor(UnumEnvironment).0.this\.\UnumBits\.\Segments\ := (others => to_unsigned(0, 32));
-                        -- Invoking the target's constructor.
-                        -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
-                        \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment).0.this\.\UnumBits\;
-                        \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment).0.this\.\_environment\.\Size\;
-                        \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
-                        \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
-                        \Unum::.ctor(UnumEnvironment).0._State\ := \Unum::.ctor(UnumEnvironment).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::.ctor(UnumEnvironment).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
-                        if (\Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
-                            \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
-                            \Unum::.ctor(UnumEnvironment).0.this\.\UnumBits\ := \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
-                            \Unum::.ctor(UnumEnvironment).0._State\ := \Unum::.ctor(UnumEnvironment).0._State_1\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment).0 state machine end
-
-
     -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,Lombiq.Unum.BitMask).0 state machine start
     \Unum::.ctor(UnumEnvironment,BitMask).0._StateMachine\: process (\Clock\) 
         Variable \Unum::.ctor(UnumEnvironment,BitMask).0._State\: \Unum::.ctor(UnumEnvironment,BitMask).0._States\ := \Unum::.ctor(UnumEnvironment,BitMask).0._State_0\;
@@ -9505,7 +9402,7 @@ begin
         Variable \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\: \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._States\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_0\;
         Variable \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.this\: \Lombiq.Unum.Unum\;
         Variable \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.environment\: \Lombiq.Unum.UnumEnvironment\;
-        Variable \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.value\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.value\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.negative\: boolean := false;
         Variable \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.flag\: boolean := false;
         Variable \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.flag2\: boolean := false;
@@ -9602,11 +9499,11 @@ begin
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= false;
-                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= false;
-                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= false;
-                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= to_unsigned(0, 8);
-                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= to_unsigned(0, 16);
-                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
+                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= false;
+                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= false;
+                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= to_unsigned(0, 8);
+                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= to_unsigned(0, 16);
+                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_0\;
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.value\ := (others => to_unsigned(0, 32));
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.negative\ := false;
@@ -9839,7 +9736,7 @@ begin
                             -- 		else {
                             -- 			conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700 = 0;
                             -- 		}
-                            -- 		@this.UnumBits = Lombiq.Unum.Unum.SetUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
+                            -- 		@this.UnumBits = Lombiq.Unum.Unum.AssembleUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
                             -- 	}
                             -- }
                             -- 
@@ -9933,7 +9830,7 @@ begin
                         -- 		else {
                         -- 			conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700 = 0;
                         -- 		}
-                        -- 		@this.UnumBits = Lombiq.Unum.Unum.SetUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
+                        -- 		@this.UnumBits = Lombiq.Unum.Unum.AssembleUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
                         -- 	}
                         -- }
                         -- 
@@ -10418,7 +10315,7 @@ begin
                             -- 	else {
                             -- 		conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700 = 0;
                             -- 	}
-                            -- 	@this.UnumBits = Lombiq.Unum.Unum.SetUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
+                            -- 	@this.UnumBits = Lombiq.Unum.Unum.AssembleUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
                             -- }
                             -- 
 
@@ -10607,7 +10504,7 @@ begin
                         -- 	else {
                         -- 		conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700 = 0;
                         -- 	}
-                        -- 	@this.UnumBits = Lombiq.Unum.Unum.SetUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
+                        -- 	@this.UnumBits = Lombiq.Unum.Unum.AssembleUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -10985,17 +10882,17 @@ begin
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_64\ => 
                         -- State after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_61\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.UnumBits = Lombiq.Unum.Unum.SetUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
+                        -- @this.UnumBits = Lombiq.Unum.Unum.AssembleUnumBits (@this, negative, exponent, bitMask, uncertainityBit, (byte)(conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b), conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700);
                         -- 
-                        -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.this\;
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.negative\;
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.exponent\;
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.bitMask\;
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.uncertainityBit\;
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= SmartResize((\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\), 8);
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\;
-                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.this\;
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.negative\;
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.exponent\;
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.bitMask\;
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.uncertainityBit\;
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= SmartResize((\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.conditional1059d8789965c7346ddefe992fa75edc6265395c1804dfe1295a035696e9157b\), 8);
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.conditional11166ff980773138629b8148bc5ab3129946c943a4d67b94f55ae0052361c700\;
+                        \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= true;
                         \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_67\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_65\ => 
@@ -11032,10 +10929,10 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_67\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
-                        if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
-                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.return.27\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\;
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
+                        if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\) then 
+                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
+                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.return.27\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\;
                             \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.this\.\UnumBits\ := \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.return.27\;
                             -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_33\.
                             if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State\ = \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0._State_67\) then 
@@ -11056,11 +10953,11 @@ begin
         Variable \Unum::.ctor(UnumEnvironment,Int32).0.this\: \Lombiq.Unum.Unum\;
         Variable \Unum::.ctor(UnumEnvironment,Int32).0.environment\: \Lombiq.Unum.UnumEnvironment\;
         Variable \Unum::.ctor(UnumEnvironment,Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::.ctor(UnumEnvironment,Int32).0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \Unum::.ctor(UnumEnvironment,Int32).0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \Unum::.ctor(UnumEnvironment,Int32).0.flag\: boolean := false;
         Variable \Unum::.ctor(UnumEnvironment,Int32).0.binaryOperationResult.0\: boolean := false;
         Variable \Unum::.ctor(UnumEnvironment,Int32).0.objecta843b89834a77736a58b93b6570b693a8180f09fa9e67db6b2980c18d8c044b5\: \Lombiq.Unum.Unum\;
-        Variable \Unum::.ctor(UnumEnvironment,Int32).0.objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf\: \Lombiq.Unum.Unum\;
+        Variable \Unum::.ctor(UnumEnvironment,Int32).0.objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579\: \Lombiq.Unum.Unum\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -11111,7 +11008,7 @@ begin
                         -- 
                         \Unum::.ctor(UnumEnvironment,Int32).0.this\.\_environment\ := \Unum::.ctor(UnumEnvironment,Int32).0.environment\;
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new uint[1];
+                        -- array = new uint[2];
                         -- 
                         \Unum::.ctor(UnumEnvironment,Int32).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -11128,9 +11025,9 @@ begin
                         -- }
                         -- else {
                         -- 	array [0] = (uint)-(uint)value;
-                        -- 	Unum objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf;
-                        -- 	objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf = new Unum (environment, array, true);
-                        -- 	@this.UnumBits = objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf.UnumBits;
+                        -- 	Unum objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579;
+                        -- 	objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579 = new Unum (environment, array, true);
+                        -- 	@this.UnumBits = objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579.UnumBits;
                         -- }
                         -- 
 
@@ -11202,9 +11099,9 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	array [0] = (uint)-(uint)value;
-                        -- 	Unum objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf;
-                        -- 	objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf = new Unum (environment, array, true);
-                        -- 	@this.UnumBits = objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf.UnumBits;
+                        -- 	Unum objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579;
+                        -- 	objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579 = new Unum (environment, array, true);
+                        -- 	@this.UnumBits = objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579.UnumBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -11212,20 +11109,20 @@ begin
                         -- 
                         \Unum::.ctor(UnumEnvironment,Int32).0.array\(to_integer(to_signed(0, 32))) := unsigned(signed(0 - unsigned(\Unum::.ctor(UnumEnvironment,Int32).0.value\)));
                         -- The following section was transformed from the .NET statement below:
-                        -- Unum objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf;
+                        -- Unum objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf = new Unum (environment, array, true);
+                        -- objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579 = new Unum (environment, array, true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Unum::.ctor(UnumEnvironment,Int32).0.objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf\.\IsNull\ := false;
+                        \Unum::.ctor(UnumEnvironment,Int32).0.objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579\.\IsNull\ := false;
                         -- Invoking the target's constructor.
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                         \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
                     when \Unum::.ctor(UnumEnvironment,Int32).0._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean)
-                        \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf\;
+                        \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579\;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).environment.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.environment\;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.Out.0\ <= \Unum::.ctor(UnumEnvironment,Int32).0.array\;
                         \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).negative.parameter.Out.0\ <= True;
@@ -11236,13 +11133,13 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean)
                         if (\Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\ = \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Finished.0\) then 
                             \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean)._Started.0\ <= false;
-                            \Unum::.ctor(UnumEnvironment,Int32).0.objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf\ := \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.In.0\;
+                            \Unum::.ctor(UnumEnvironment,Int32).0.objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579\ := \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).this.parameter.In.0\;
                             \Unum::.ctor(UnumEnvironment,Int32).0.environment\ := \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).environment.parameter.In.0\;
                             \Unum::.ctor(UnumEnvironment,Int32).0.array\ := \Unum::.ctor(UnumEnvironment,Int32).0.Unum::.ctor(UnumEnvironment,UInt32[],Boolean).value.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.UnumBits = objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf.UnumBits;
+                            -- @this.UnumBits = objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579.UnumBits;
                             -- 
-                            \Unum::.ctor(UnumEnvironment,Int32).0.this\.\UnumBits\ := \Unum::.ctor(UnumEnvironment,Int32).0.objectcde89fd505eafd1bc30d300137a244b35ad64182529f48eea6d80152b0b59ddf\.\UnumBits\;
+                            \Unum::.ctor(UnumEnvironment,Int32).0.this\.\UnumBits\ := \Unum::.ctor(UnumEnvironment,Int32).0.objecta66f43c7c8037c6ef6a2634fd1187b61d7d17dd18fa5d6835499ef4359a8c579\.\UnumBits\;
                             -- Going to the state after the if-else which was started in state \Unum::.ctor(UnumEnvironment,Int32).0._State_2\.
                             if (\Unum::.ctor(UnumEnvironment,Int32).0._State\ = \Unum::.ctor(UnumEnvironment,Int32).0._State_8\) then 
                                 \Unum::.ctor(UnumEnvironment,Int32).0._State\ := \Unum::.ctor(UnumEnvironment,Int32).0._State_3\;
@@ -11256,152 +11153,152 @@ begin
     -- System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.Int32).0 state machine end
 
 
-    -- Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0 state machine start
-    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._StateMachine\: process (\Clock\) 
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\: \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._States\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\: \Lombiq.Unum.Unum\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit\: boolean := false;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit\: boolean := false;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.1\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.2\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.3\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.4\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.5\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.6\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.7\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.8\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.9\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.10\: \Lombiq.Unum.BitMask\;
+    -- Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0 state machine start
+    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._StateMachine\: process (\Clock\) 
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\: \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._States\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\: \Lombiq.Unum.Unum\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit\: boolean := false;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit\: boolean := false;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.1\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.2\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.3\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.4\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.5\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.6\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.7\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.8\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.9\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.10\: \Lombiq.Unum.BitMask\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= to_unsigned(0, 32);
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(0, 32);
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit\ := false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit\ := false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\ := to_unsigned(0, 8);
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\ := to_unsigned(0, 16);
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.0\ := to_unsigned(0, 16);
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 16);
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit\ := false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit\ := false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\ := to_unsigned(0, 8);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\ := to_unsigned(0, 16);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.0\ := to_unsigned(0, 16);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 16);
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
-                case \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ is 
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\ => 
+                case \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ is 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ = true) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_2\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ = true) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_1\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ = true) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\ <= true;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ = true) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\ <= true;
                         else 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_2\ => 
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this.parameter.In\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit.parameter.In\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent.parameter.In\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction.parameter.In\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit.parameter.In\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\;
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_2\ => 
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this.parameter.In\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit.parameter.In\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent.parameter.In\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction.parameter.In\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit.parameter.In\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- BitMask bitMask;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- BitMask object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64;
+                        -- BitMask object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64 = new BitMask ((uint)exponentSize, Lombiq.Unum.Unum.get_Size (@this));
+                        -- object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8 = new BitMask ((uint)exponentSize, Lombiq.Unum.Unum.get_Size (@this));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64\.\IsNull\ := false;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64\.\Size\ := to_unsigned(0, 16);
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64\.\Segments\ := (others => to_unsigned(0, 32));
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8\.\IsNull\ := false;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8\.\Size\ := to_unsigned(0, 16);
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8\.\Segments\ := (others => to_unsigned(0, 32));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_Size()
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().this.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ <= true;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_3\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().this.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ <= true;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_3\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_Size()
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.0\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().return.0\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.0\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().return.0\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32,System.UInt16)
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= SmartResize(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\, 32);
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= true;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_4\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= SmartResize(\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize\, 32);
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= true;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_4\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_4\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32,System.UInt16)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- bitMask = BitMask.op_LeftShift (object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64, 4);
+                            -- bitMask = BitMask.op_LeftShift (object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8, 5);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object19f4f516eeb2fd0b2477255633be700cf235da7cfadf713a5259a84fcb31bc64\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(4, 32);
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_5\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.object4e95e708ad937a2fa678521ac6d63dc908790f6f61bc2dfdb18d2e8d1a56b7a8\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(5, 32);
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_5\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_5\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.1\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.1\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.1\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- bitMask = BitMask.op_Addition (bitMask, (uint)fractionSize);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,System.UInt32)
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= SmartResize(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\, 32);
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= true;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\ <= SmartResize(\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\, 32);
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= true;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,System.UInt32)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.2\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).return.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.2\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.2\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).return.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.2\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (uncertainityBit) {
                             -- 	bitMask = BitMask.op_Addition (bitMask, Lombiq.Unum.Unum.get_UncertaintyBitMask (@this));
@@ -11409,30 +11306,30 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_8\ and ends in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\.
-                            --     * Execution after either branch will continue in the following state: \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\.
+                            --     * The true branch starts in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_8\ and ends in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\.
 
-                            if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit\) then 
-                                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_8\;
+                            if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit\) then 
+                                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_8\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\;
+                                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\ => 
-                        -- State after the if-else which was started in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\.
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\ => 
+                        -- State after the if-else which was started in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
-                        -- bitMask = BitMask.op_Addition (bitMask, BitMask.op_LeftShift (fraction, 7));
+                        -- bitMask = BitMask.op_Addition (bitMask, BitMask.op_LeftShift (fraction, 10));
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(7, 32);
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_11\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(10, 32);
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_8\ => 
-                        -- True branch of the if-else started in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\.
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_8\ => 
+                        -- True branch of the if-else started in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	bitMask = BitMask.op_Addition (bitMask, Lombiq.Unum.Unum.get_UncertaintyBitMask (@this));
@@ -11442,90 +11339,90 @@ begin
                         -- bitMask = BitMask.op_Addition (bitMask, Lombiq.Unum.Unum.get_UncertaintyBitMask (@this));
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::get_UncertaintyBitMask()
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().this.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ <= true;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_9\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().this.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ <= true;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_9\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::get_UncertaintyBitMask()
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.3\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().return.0\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.3\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.3\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.3\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.4\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.4\;
-                            -- Going to the state after the if-else which was started in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\.
-                            if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\) then 
-                                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.4\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.4\;
+                            -- Going to the state after the if-else which was started in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_6\.
+                            if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_10\) then 
+                                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_7\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_11\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.5\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.5\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_12\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_12\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_12\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.5\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_13\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.5\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_13\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.6\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.6\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.6\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.6\;
                             -- The following section was transformed from the .NET statement below:
-                            -- bitMask = BitMask.op_Addition (bitMask, BitMask.op_LeftShift (exponent, (int)(7 + fractionSize + 1)));
+                            -- bitMask = BitMask.op_Addition (bitMask, BitMask.op_LeftShift (exponent, (int)(10 + fractionSize + 1)));
                             -- 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ := to_unsigned(7, 16) + \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\ := signed(SmartResize(\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ + to_unsigned(1, 16), 32));
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ := to_unsigned(10, 16) + \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\ := signed(SmartResize(\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.0\ + to_unsigned(1, 16), 32));
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\);
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_14\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.binaryOperationResult.1\);
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_14\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_14\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_14\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.7\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.7\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_15\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_15\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_15\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_15\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.7\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.7\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.8\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.8\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.8\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.8\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (signBit) {
                             -- 	bitMask = BitMask.op_Addition (bitMask, Lombiq.Unum.Unum.get_SignBitMask (@this));
@@ -11533,27 +11430,27 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_18\ and ends in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\.
-                            --     * Execution after either branch will continue in the following state: \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\.
+                            --     * The true branch starts in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_18\ and ends in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\.
 
-                            if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit\) then 
-                                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_18\;
+                            if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit\) then 
+                                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_18\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\;
+                                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\ => 
-                        -- State after the if-else which was started in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\.
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\ => 
+                        -- State after the if-else which was started in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\.
                         -- The following section was transformed from the .NET statement below:
                         -- return bitMask;
                         -- 
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_1\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_18\ => 
-                        -- True branch of the if-else started in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\.
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_18\ => 
+                        -- True branch of the if-else started in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	bitMask = BitMask.op_Addition (bitMask, Lombiq.Unum.Unum.get_SignBitMask (@this));
@@ -11563,31 +11460,31 @@ begin
                         -- bitMask = BitMask.op_Addition (bitMask, Lombiq.Unum.Unum.get_SignBitMask (@this));
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::get_SignBitMask()
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().this.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ <= true;
-                        \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_19\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().this.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this\;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ <= true;
+                        \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_19\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_19\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_19\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::get_SignBitMask()
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.9\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().return.0\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.9\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.9\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.9\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\ => 
+                    when \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.10\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.10\;
-                            -- Going to the state after the if-else which was started in state \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\.
-                            if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ = \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\) then 
-                                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.10\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.bitMask\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return.10\;
+                            -- Going to the state after the if-else which was started in state \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_16\.
+                            if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ = \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_20\) then 
+                                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State\ := \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._State_17\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11595,7 +11492,7 @@ begin
             end if;
         end if;
     end process;
-    -- Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0 state machine end
+    -- Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0 state machine end
 
 
     -- System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray().0 state machine start
@@ -11603,7 +11500,7 @@ begin
         Variable \Unum::FractionToUintArray().0._State\: \Unum::FractionToUintArray().0._States\ := \Unum::FractionToUintArray().0._State_0\;
         Variable \Unum::FractionToUintArray().0.this\: \Lombiq.Unum.Unum\;
         Variable \Unum::FractionToUintArray().0.bitMask\: \Lombiq.Unum.BitMask\;
-        Variable \Unum::FractionToUintArray().0.array\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
+        Variable \Unum::FractionToUintArray().0.array\: \unsigned32_Array\(0 to 1) := (others => to_unsigned(0, 32));
         Variable \Unum::FractionToUintArray().0.i\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::FractionToUintArray().0.flag\: boolean := false;
         Variable \Unum::FractionToUintArray().0.return.0\: \Lombiq.Unum.BitMask\;
@@ -11737,7 +11634,7 @@ begin
                             \Unum::FractionToUintArray().0.return.3\ := \Unum::FractionToUintArray().0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
                             \Unum::FractionToUintArray().0.bitMask\ := \Unum::FractionToUintArray().0.return.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- array = new uint[1];
+                            -- array = new uint[2];
                             -- 
                             \Unum::FractionToUintArray().0.array\ := (others => to_unsigned(0, 32));
                             -- The following section was transformed from the .NET statement below:
@@ -12098,7 +11995,7 @@ begin
                     when \Unum::ExponentSize().0._State_2\ => 
                         \Unum::ExponentSize().0.this\ := \Unum::ExponentSize().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (byte)Lombiq.Unum.BitMask.GetLowest32Bits (BitMask.op_Addition (BitMask.op_RightShift (BitMask.op_BitwiseAnd (@this.UnumBits, Lombiq.Unum.Unum.get_ExponentSizeMask (@this)), 4), 1u));
+                        -- return (byte)Lombiq.Unum.BitMask.GetLowest32Bits (BitMask.op_Addition (BitMask.op_RightShift (BitMask.op_BitwiseAnd (@this.UnumBits, Lombiq.Unum.Unum.get_ExponentSizeMask (@this)), 5), 1u));
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::get_ExponentSizeMask()
                         \Unum::ExponentSize().0.Unum::get_ExponentSizeMask().this.parameter.Out.0\ <= \Unum::ExponentSize().0.this\;
@@ -12124,7 +12021,7 @@ begin
                             \Unum::ExponentSize().0.return.1\ := \Unum::ExponentSize().0.BitMask::op_BitwiseAnd(BitMask,BitMask).return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::ExponentSize().0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::ExponentSize().0.return.1\;
-                            \Unum::ExponentSize().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(4, 32);
+                            \Unum::ExponentSize().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(5, 32);
                             \Unum::ExponentSize().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::ExponentSize().0._State\ := \Unum::ExponentSize().0._State_5\;
                         end if;
@@ -12353,7 +12250,7 @@ begin
                             \Unum::FractionMask().0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
                             \Unum::FractionMask().0.left\ := \Unum::FractionMask().0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return BitMask.op_LeftShift (BitMask.op_Subtraction (BitMask.op_LeftShift (left, (int)Lombiq.Unum.Unum.FractionSize (@this)), 1u), 7);
+                            -- return BitMask.op_LeftShift (BitMask.op_Subtraction (BitMask.op_LeftShift (left, (int)Lombiq.Unum.Unum.FractionSize (@this)), 1u), 10);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                             \Unum::FractionMask().0.Unum::FractionSize().this.parameter.Out.0\ <= \Unum::FractionMask().0.this\;
@@ -12397,7 +12294,7 @@ begin
                     when \Unum::FractionMask().0._State_8\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                         \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::FractionMask().0.return.3\;
-                        \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(7, 32);
+                        \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(10, 32);
                         \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
                         \Unum::FractionMask().0._State\ := \Unum::FractionMask().0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12506,7 +12403,7 @@ begin
                             \Unum::ExponentMask().0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
                             \Unum::ExponentMask().0.left\ := \Unum::ExponentMask().0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return BitMask.op_LeftShift (BitMask.op_Subtraction (BitMask.op_LeftShift (left, (int)Lombiq.Unum.Unum.ExponentSize (@this)), 1u), (int)(Lombiq.Unum.Unum.FractionSize (@this) + 7));
+                            -- return BitMask.op_LeftShift (BitMask.op_Subtraction (BitMask.op_LeftShift (left, (int)Lombiq.Unum.Unum.ExponentSize (@this)), 1u), (int)(Lombiq.Unum.Unum.FractionSize (@this) + 10));
                             -- 
                             -- Starting state machine invocation for the following method: System.Byte Lombiq.Unum.Unum::ExponentSize()
                             \Unum::ExponentMask().0.Unum::ExponentSize().this.parameter.Out.0\ <= \Unum::ExponentMask().0.this\;
@@ -12554,7 +12451,7 @@ begin
                         if (\Unum::ExponentMask().0.Unum::FractionSize()._Started.0\ = \Unum::ExponentMask().0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::ExponentMask().0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::ExponentMask().0.return.4\ := \Unum::ExponentMask().0.Unum::FractionSize().return.0\;
-                            \Unum::ExponentMask().0.binaryOperationResult.0\ := signed(SmartResize(\Unum::ExponentMask().0.return.4\ + to_unsigned(7, 16), 32));
+                            \Unum::ExponentMask().0.binaryOperationResult.0\ := signed(SmartResize(\Unum::ExponentMask().0.return.4\ + to_unsigned(10, 16), 32));
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::ExponentMask().0.return.3\;
                             \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Unum::ExponentMask().0.binaryOperationResult.0\);
@@ -12622,7 +12519,7 @@ begin
                     when \Unum::Exponent().0._State_2\ => 
                         \Unum::Exponent().0.this\ := \Unum::Exponent().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return BitMask.op_RightShift (BitMask.op_BitwiseAnd (Lombiq.Unum.Unum.ExponentMask (@this), @this.UnumBits), (int)(7 + Lombiq.Unum.Unum.FractionSize (@this)));
+                        -- return BitMask.op_RightShift (BitMask.op_BitwiseAnd (Lombiq.Unum.Unum.ExponentMask (@this), @this.UnumBits), (int)(10 + Lombiq.Unum.Unum.FractionSize (@this)));
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::ExponentMask()
                         \Unum::Exponent().0.Unum::ExponentMask().this.parameter.Out.0\ <= \Unum::Exponent().0.this\;
@@ -12657,7 +12554,7 @@ begin
                         if (\Unum::Exponent().0.Unum::FractionSize()._Started.0\ = \Unum::Exponent().0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::Exponent().0.Unum::FractionSize()._Started.0\ <= false;
                             \Unum::Exponent().0.return.2\ := \Unum::Exponent().0.Unum::FractionSize().return.0\;
-                            \Unum::Exponent().0.binaryOperationResult.0\ := signed(SmartResize(to_unsigned(7, 16) + \Unum::Exponent().0.return.2\, 32));
+                            \Unum::Exponent().0.binaryOperationResult.0\ := signed(SmartResize(to_unsigned(10, 16) + \Unum::Exponent().0.return.2\, 32));
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::Exponent().0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::Exponent().0.return.1\;
                             \Unum::Exponent().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\Unum::Exponent().0.binaryOperationResult.0\);
@@ -12720,7 +12617,7 @@ begin
                     when \Unum::Fraction().0._State_2\ => 
                         \Unum::Fraction().0.this\ := \Unum::Fraction().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return BitMask.op_RightShift (BitMask.op_BitwiseAnd (Lombiq.Unum.Unum.FractionMask (@this), @this.UnumBits), 7);
+                        -- return BitMask.op_RightShift (BitMask.op_BitwiseAnd (Lombiq.Unum.Unum.FractionMask (@this), @this.UnumBits), 10);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionMask()
                         \Unum::Fraction().0.Unum::FractionMask().this.parameter.Out.0\ <= \Unum::Fraction().0.this\;
@@ -12746,7 +12643,7 @@ begin
                             \Unum::Fraction().0.return.1\ := \Unum::Fraction().0.BitMask::op_BitwiseAnd(BitMask,BitMask).return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32)
                             \Unum::Fraction().0.BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::Fraction().0.return.1\;
-                            \Unum::Fraction().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(7, 32);
+                            \Unum::Fraction().0.BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(10, 32);
                             \Unum::Fraction().0.BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \Unum::Fraction().0._State\ := \Unum::Fraction().0._State_5\;
                         end if;
@@ -13509,7 +13406,6 @@ begin
         Variable \Unum::AddExactUnums(Unum,Unum).0.flag2\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.flag3\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.flag4\: boolean := false;
-        Variable \Unum::AddExactUnums(Unum,Unum).0.unum\: \Lombiq.Unum.Unum\;
         Variable \Unum::AddExactUnums(Unum,Unum).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::AddExactUnums(Unum,Unum).0.flag5\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.flag6\: boolean := false;
@@ -13529,6 +13425,7 @@ begin
         Variable \Unum::AddExactUnums(Unum,Unum).0.flag11\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.flag12\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.flag13\: boolean := false;
+        Variable \Unum::AddExactUnums(Unum,Unum).0.bits\: \Lombiq.Unum.BitMask\;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.0\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.1\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.0\: boolean := false;
@@ -13625,7 +13522,7 @@ begin
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.62\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.31\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\: \Lombiq.Unum.BitMask\;
+        Variable \Unum::AddExactUnums(Unum,Unum).0.object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252\: \Lombiq.Unum.BitMask\;
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.63\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.64\: \Lombiq.Unum.BitMask\;
@@ -13662,7 +13559,6 @@ begin
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::IsNegativeInfinity()._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::get_PositiveInfinity()._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::get_NegativeInfinity()._Started.0\ <= false;
-                \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
@@ -13685,11 +13581,11 @@ begin
                 \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16).index.parameter.Out.0\ <= to_unsigned(0, 16);
                 \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ <= false;
-                \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= false;
-                \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= false;
-                \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= to_unsigned(0, 8);
-                \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= to_unsigned(0, 16);
-                \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
+                \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= false;
+                \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= false;
+                \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= to_unsigned(0, 8);
+                \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= to_unsigned(0, 16);
+                \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_0\;
                 \Unum::AddExactUnums(Unum,Unum).0.flag\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.flag2\ := false;
@@ -13845,9 +13741,6 @@ begin
                         -- bool flag4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Unum unum;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -13903,6 +13796,9 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- bool flag13;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- BitMask bits;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- bitMask = new BitMask (left._environment.Size, false);
@@ -13980,14 +13876,13 @@ begin
                             -- 				result = new Unum (left._environment, Lombiq.Unum.Unum.get_NegativeInfinity (left));
                             -- 			}
                             -- 			else {
-                            -- 				unum = new Unum (left._environment);
                             -- 				num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                             -- 				flag5 = Lombiq.Unum.Unum.IsPositive (left) == Lombiq.Unum.Unum.IsPositive (right);
                             -- 				flag6 = num == 0;
                             -- 				if (flag6) {
                             -- 					num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                             -- 					bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 					flag7 = !flag5;
                             -- 					if (flag7) {
@@ -14018,24 +13913,24 @@ begin
                             -- 					if (flag9) {
                             -- 						signBit = !Lombiq.Unum.Unum.IsPositive (left);
                             -- 						num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 						right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 						num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                            -- 						right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 						num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                             -- 						bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                             -- 						bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 					}
                             -- 					else {
                             -- 						signBit = !Lombiq.Unum.Unum.IsPositive (right);
                             -- 						num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                            -- 						right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                            -- 						num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                            -- 						right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 						num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                             -- 						bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                             -- 						bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                             -- 					}
                             -- 				}
-                            -- 				num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
-                            -- 				BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
-                            -- 				objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
-                            -- 				exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                            -- 				num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
+                            -- 				BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
+                            -- 				object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
+                            -- 				exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                             -- 				exponentSize = 0;
                             -- 				uncertainityBit = false;
                             -- 				flag10 = num3 < 0;
@@ -14068,8 +13963,8 @@ begin
                             -- 				if (flag13) {
                             -- 					uncertainityBit = true;
                             -- 				}
-                            -- 				unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
-                            -- 				result = unum;
+                            -- 				bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                            -- 				result = new Unum (left._environment, bits);
                             -- 			}
                             -- 		}
                             -- 	}
@@ -14158,14 +14053,13 @@ begin
                         -- 				result = new Unum (left._environment, Lombiq.Unum.Unum.get_NegativeInfinity (left));
                         -- 			}
                         -- 			else {
-                        -- 				unum = new Unum (left._environment);
                         -- 				num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                         -- 				flag5 = Lombiq.Unum.Unum.IsPositive (left) == Lombiq.Unum.Unum.IsPositive (right);
                         -- 				flag6 = num == 0;
                         -- 				if (flag6) {
                         -- 					num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                         -- 					bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 					flag7 = !flag5;
                         -- 					if (flag7) {
@@ -14196,24 +14090,24 @@ begin
                         -- 					if (flag9) {
                         -- 						signBit = !Lombiq.Unum.Unum.IsPositive (left);
                         -- 						num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 						right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 						num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                        -- 						right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 						num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                         -- 						bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                         -- 						bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 					}
                         -- 					else {
                         -- 						signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 						num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                        -- 						right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                        -- 						num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                        -- 						right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 						num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                         -- 						bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                         -- 						bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                         -- 					}
                         -- 				}
-                        -- 				num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
-                        -- 				BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
-                        -- 				objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
-                        -- 				exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                        -- 				num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
+                        -- 				BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
+                        -- 				object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
+                        -- 				exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                         -- 				exponentSize = 0;
                         -- 				uncertainityBit = false;
                         -- 				flag10 = num3 < 0;
@@ -14246,8 +14140,8 @@ begin
                         -- 				if (flag13) {
                         -- 					uncertainityBit = true;
                         -- 				}
-                        -- 				unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
-                        -- 				result = unum;
+                        -- 				bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                        -- 				result = new Unum (left._environment, bits);
                         -- 			}
                         -- 		}
                         -- 	}
@@ -14326,14 +14220,13 @@ begin
                             -- 			result = new Unum (left._environment, Lombiq.Unum.Unum.get_NegativeInfinity (left));
                             -- 		}
                             -- 		else {
-                            -- 			unum = new Unum (left._environment);
                             -- 			num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                             -- 			flag5 = Lombiq.Unum.Unum.IsPositive (left) == Lombiq.Unum.Unum.IsPositive (right);
                             -- 			flag6 = num == 0;
                             -- 			if (flag6) {
                             -- 				num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                             -- 				bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 				flag7 = !flag5;
                             -- 				if (flag7) {
@@ -14364,24 +14257,24 @@ begin
                             -- 				if (flag9) {
                             -- 					signBit = !Lombiq.Unum.Unum.IsPositive (left);
                             -- 					num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                            -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                             -- 					bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                             -- 					bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 				}
                             -- 				else {
                             -- 					signBit = !Lombiq.Unum.Unum.IsPositive (right);
                             -- 					num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                            -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                            -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                            -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                             -- 					bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                             -- 					bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                             -- 				}
                             -- 			}
-                            -- 			num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
-                            -- 			BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
-                            -- 			objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
-                            -- 			exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                            -- 			num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
+                            -- 			BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
+                            -- 			object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
+                            -- 			exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                             -- 			exponentSize = 0;
                             -- 			uncertainityBit = false;
                             -- 			flag10 = num3 < 0;
@@ -14414,8 +14307,8 @@ begin
                             -- 			if (flag13) {
                             -- 				uncertainityBit = true;
                             -- 			}
-                            -- 			unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
-                            -- 			result = unum;
+                            -- 			bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                            -- 			result = new Unum (left._environment, bits);
                             -- 		}
                             -- 	}
                             -- }
@@ -14497,14 +14390,13 @@ begin
                         -- 			result = new Unum (left._environment, Lombiq.Unum.Unum.get_NegativeInfinity (left));
                         -- 		}
                         -- 		else {
-                        -- 			unum = new Unum (left._environment);
                         -- 			num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                         -- 			flag5 = Lombiq.Unum.Unum.IsPositive (left) == Lombiq.Unum.Unum.IsPositive (right);
                         -- 			flag6 = num == 0;
                         -- 			if (flag6) {
                         -- 				num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                         -- 				bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 				flag7 = !flag5;
                         -- 				if (flag7) {
@@ -14535,24 +14427,24 @@ begin
                         -- 				if (flag9) {
                         -- 					signBit = !Lombiq.Unum.Unum.IsPositive (left);
                         -- 					num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                        -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                         -- 					bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                         -- 					bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 				}
                         -- 				else {
                         -- 					signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 					num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                        -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                        -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                        -- 					right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 					num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                         -- 					bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                         -- 					bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                         -- 				}
                         -- 			}
-                        -- 			num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
-                        -- 			BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
-                        -- 			objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
-                        -- 			exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                        -- 			num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
+                        -- 			BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
+                        -- 			object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
+                        -- 			exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                         -- 			exponentSize = 0;
                         -- 			uncertainityBit = false;
                         -- 			flag10 = num3 < 0;
@@ -14585,8 +14477,8 @@ begin
                         -- 			if (flag13) {
                         -- 				uncertainityBit = true;
                         -- 			}
-                        -- 			unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
-                        -- 			result = unum;
+                        -- 			bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                        -- 			result = new Unum (left._environment, bits);
                         -- 		}
                         -- 	}
                         -- }
@@ -14635,14 +14527,13 @@ begin
                             -- 		result = new Unum (left._environment, Lombiq.Unum.Unum.get_NegativeInfinity (left));
                             -- 	}
                             -- 	else {
-                            -- 		unum = new Unum (left._environment);
                             -- 		num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                             -- 		flag5 = Lombiq.Unum.Unum.IsPositive (left) == Lombiq.Unum.Unum.IsPositive (right);
                             -- 		flag6 = num == 0;
                             -- 		if (flag6) {
                             -- 			num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                             -- 			bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 			flag7 = !flag5;
                             -- 			if (flag7) {
@@ -14673,24 +14564,24 @@ begin
                             -- 			if (flag9) {
                             -- 				signBit = !Lombiq.Unum.Unum.IsPositive (left);
                             -- 				num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                            -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                             -- 				bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                             -- 				bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 			}
                             -- 			else {
                             -- 				signBit = !Lombiq.Unum.Unum.IsPositive (right);
                             -- 				num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                            -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                            -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                            -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                             -- 				bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                             -- 				bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                             -- 			}
                             -- 		}
-                            -- 		num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
-                            -- 		BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
-                            -- 		objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
-                            -- 		exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                            -- 		num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
+                            -- 		BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
+                            -- 		object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
+                            -- 		exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                             -- 		exponentSize = 0;
                             -- 		uncertainityBit = false;
                             -- 		flag10 = num3 < 0;
@@ -14723,8 +14614,8 @@ begin
                             -- 		if (flag13) {
                             -- 			uncertainityBit = true;
                             -- 		}
-                            -- 		unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
-                            -- 		result = unum;
+                            -- 		bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                            -- 		result = new Unum (left._environment, bits);
                             -- 	}
                             -- }
                             -- 
@@ -14800,14 +14691,13 @@ begin
                         -- 		result = new Unum (left._environment, Lombiq.Unum.Unum.get_NegativeInfinity (left));
                         -- 	}
                         -- 	else {
-                        -- 		unum = new Unum (left._environment);
                         -- 		num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                         -- 		flag5 = Lombiq.Unum.Unum.IsPositive (left) == Lombiq.Unum.Unum.IsPositive (right);
                         -- 		flag6 = num == 0;
                         -- 		if (flag6) {
                         -- 			num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                         -- 			bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 			flag7 = !flag5;
                         -- 			if (flag7) {
@@ -14838,24 +14728,24 @@ begin
                         -- 			if (flag9) {
                         -- 				signBit = !Lombiq.Unum.Unum.IsPositive (left);
                         -- 				num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                        -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                         -- 				bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                         -- 				bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 			}
                         -- 			else {
                         -- 				signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 				num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                        -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                        -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                        -- 				right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 				num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                         -- 				bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                         -- 				bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                         -- 			}
                         -- 		}
-                        -- 		num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
-                        -- 		BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
-                        -- 		objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
-                        -- 		exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                        -- 		num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
+                        -- 		BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
+                        -- 		object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
+                        -- 		exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                         -- 		exponentSize = 0;
                         -- 		uncertainityBit = false;
                         -- 		flag10 = num3 < 0;
@@ -14888,8 +14778,8 @@ begin
                         -- 		if (flag13) {
                         -- 			uncertainityBit = true;
                         -- 		}
-                        -- 		unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
-                        -- 		result = unum;
+                        -- 		bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                        -- 		result = new Unum (left._environment, bits);
                         -- 	}
                         -- }
                         -- 
@@ -14932,14 +14822,13 @@ begin
                             -- 	result = new Unum (left._environment, Lombiq.Unum.Unum.get_NegativeInfinity (left));
                             -- }
                             -- else {
-                            -- 	unum = new Unum (left._environment);
                             -- 	num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                             -- 	flag5 = Lombiq.Unum.Unum.IsPositive (left) == Lombiq.Unum.Unum.IsPositive (right);
                             -- 	flag6 = num == 0;
                             -- 	if (flag6) {
                             -- 		num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                             -- 		bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 		flag7 = !flag5;
                             -- 		if (flag7) {
@@ -14970,24 +14859,24 @@ begin
                             -- 		if (flag9) {
                             -- 			signBit = !Lombiq.Unum.Unum.IsPositive (left);
                             -- 			num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                            -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                             -- 			bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                             -- 			bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 		}
                             -- 		else {
                             -- 			signBit = !Lombiq.Unum.Unum.IsPositive (right);
                             -- 			num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                            -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                            -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                            -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                             -- 			bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                             -- 			bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                             -- 		}
                             -- 	}
-                            -- 	num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
-                            -- 	BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
-                            -- 	objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
-                            -- 	exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                            -- 	num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
+                            -- 	BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
+                            -- 	object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
+                            -- 	exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                             -- 	exponentSize = 0;
                             -- 	uncertainityBit = false;
                             -- 	flag10 = num3 < 0;
@@ -15020,8 +14909,8 @@ begin
                             -- 	if (flag13) {
                             -- 		uncertainityBit = true;
                             -- 	}
-                            -- 	unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
-                            -- 	result = unum;
+                            -- 	bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                            -- 	result = new Unum (left._environment, bits);
                             -- }
                             -- 
 
@@ -15091,14 +14980,13 @@ begin
                         -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_36\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	unum = new Unum (left._environment);
                         -- 	num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                         -- 	flag5 = Lombiq.Unum.Unum.IsPositive (left) == Lombiq.Unum.Unum.IsPositive (right);
                         -- 	flag6 = num == 0;
                         -- 	if (flag6) {
                         -- 		num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                         -- 		bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 		flag7 = !flag5;
                         -- 		if (flag7) {
@@ -15129,24 +15017,24 @@ begin
                         -- 		if (flag9) {
                         -- 			signBit = !Lombiq.Unum.Unum.IsPositive (left);
                         -- 			num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                        -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                         -- 			bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                         -- 			bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 		}
                         -- 		else {
                         -- 			signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 			num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                        -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                        -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                        -- 			right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 			num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                         -- 			bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                         -- 			bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                         -- 		}
                         -- 	}
-                        -- 	num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
-                        -- 	BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
-                        -- 	objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
-                        -- 	exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                        -- 	num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
+                        -- 	BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
+                        -- 	object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
+                        -- 	exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                         -- 	exponentSize = 0;
                         -- 	uncertainityBit = false;
                         -- 	flag10 = num3 < 0;
@@ -15179,57 +15067,38 @@ begin
                         -- 	if (flag13) {
                         -- 		uncertainityBit = true;
                         -- 	}
-                        -- 	unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
-                        -- 	result = unum;
+                        -- 	bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                        -- 	result = new Unum (left._environment, bits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- unum = new Unum (left._environment);
+                        -- num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
                         -- 
-                        -- Initializing record fields to their defaults.
-                        \Unum::AddExactUnums(Unum,Unum).0.unum\.\IsNull\ := false;
-                        -- Invoking the target's constructor.
-                        -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment)
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).environment.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= true;
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_42\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::AddExactUnums(Unum,Unum).0._State_42\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment)
-                        if (\Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Finished.0\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Started.0\ <= false;
-                            \Unum::AddExactUnums(Unum,Unum).0.unum\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).this.parameter.In.0\;
-                            \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).environment.parameter.In.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num = Lombiq.Unum.Unum.ExponentValueWithBias (left) - Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                            -- 
-                            -- Starting state machine invocation for the following method: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_43\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_43\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.14\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().return.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_44\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_43\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_44\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_43\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_45\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_44\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_45\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_44\ => 
                         -- Starting state machine invocation for the following method: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_46\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_45\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_46\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_45\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= false;
@@ -15242,29 +15111,29 @@ begin
                             -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_47\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_46\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_47\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_46\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.16\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_48\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_47\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_48\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_47\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_49\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_48\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_49\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_48\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_50\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_49\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_50\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_49\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
@@ -15279,8 +15148,8 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- if (flag6) {
                             -- 	num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                             -- 	bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 	flag7 = !flag5;
                             -- 	if (flag7) {
@@ -15311,16 +15180,16 @@ begin
                             -- 	if (flag9) {
                             -- 		signBit = !Lombiq.Unum.Unum.IsPositive (left);
                             -- 		num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                            -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                            -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                            -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                             -- 		bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                             -- 		bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 	}
                             -- 	else {
                             -- 		signBit = !Lombiq.Unum.Unum.IsPositive (right);
                             -- 		num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                            -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                            -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                            -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                             -- 		bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                             -- 		bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                             -- 	}
@@ -15328,34 +15197,34 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_52\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_65\.
-                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_95\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_96\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_51\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_51\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_64\.
+                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_94\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_95\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_50\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.flag6\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_52\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_51\;
                             else 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_95\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_94\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_51\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_50\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_50\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_49\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1);
+                        -- num4 = (int)(Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_125\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_124\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_52\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_50\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_51\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                         -- 	bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2), BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 	flag7 = !flag5;
                         -- 	if (flag7) {
@@ -15388,24 +15257,24 @@ begin
                         -- Starting state machine invocation for the following method: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_53\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_52\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_53\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_52\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.18\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.num2\ := \Unum::AddExactUnums(Unum,Unum).0.return.18\;
                             -- The following section was transformed from the .NET statement below:
-                            -- right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_54\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_53\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_54\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_53\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
@@ -15414,10 +15283,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_55\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_54\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_55\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_54\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
@@ -15426,19 +15295,19 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.11\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.9\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.10\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.right2\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.11\);
                             -- The following section was transformed from the .NET statement below:
-                            -- num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_56\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_55\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_56\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_55\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_57\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_56\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_57\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_56\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
@@ -15447,10 +15316,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_58\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_57\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_58\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_57\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
@@ -15464,10 +15333,10 @@ begin
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_59\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_58\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_59\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_58\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= false;
@@ -15476,25 +15345,25 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.23\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right2\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_60\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_59\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_60\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_59\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.24\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).return.0\;
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_61\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_60\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_61\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_60\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_62\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_61\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_62\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_61\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= false;
@@ -15503,10 +15372,10 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.25\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.num3\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_63\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_62\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_63\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_62\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
@@ -15516,10 +15385,10 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.26\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).signBitsMatch.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.flag5\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_64\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_63\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_64\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_63\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::AddAlignedFractions(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean)
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ <= false;
@@ -15555,26 +15424,26 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_66\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_71\.
-                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_92\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_94\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_65\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_65\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_70\.
+                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_91\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_93\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_64\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.flag7\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_66\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_65\;
                             else 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_92\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_91\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_65\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_64\.
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_50\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_65\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_51\;
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_64\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_63\.
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_49\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_64\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_50\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_66\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_64\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_65\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_63\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag8 = Lombiq.Unum.Unum.HiddenBitIsOne (left) == Lombiq.Unum.Unum.HiddenBitIsOne (right);
@@ -15602,28 +15471,28 @@ begin
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::HiddenBitIsOne()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_67\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_66\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_67\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_66\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::HiddenBitIsOne()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.28\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne().return.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_68\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_67\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_68\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_67\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_69\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_68\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_69\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_68\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::HiddenBitIsOne()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_70\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_69\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_70\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_69\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::HiddenBitIsOne()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ <= false;
@@ -15650,26 +15519,26 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_72\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_78\.
-                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_84\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_86\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_71\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_71\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_77\.
+                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_83\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_85\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_70\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.flag8\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_72\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_71\;
                             else 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_84\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_83\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_71\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_70\.
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_64\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_71\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_65\;
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_70\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_69\.
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_63\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_70\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_64\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_72\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_70\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_71\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_69\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	if (BitMask.op_GreaterThanOrEqual (Lombiq.Unum.Unum.Fraction (left), Lombiq.Unum.Unum.Fraction (right))) {
@@ -15691,28 +15560,28 @@ begin
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::Fraction()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_73\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_72\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_73\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_72\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::Fraction()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.30\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction().return.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_74\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_73\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_74\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_73\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_75\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_74\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_75\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_74\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::Fraction()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_76\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_75\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_76\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_75\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::Fraction()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::Fraction()._Started.0\ <= false;
@@ -15721,36 +15590,36 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_GreaterThanOrEqual(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.30\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_GreaterThanOrEqual(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.31\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_GreaterThanOrEqual(BitMask,BitMask)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_77\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_76\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_77\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_76\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.BitMask::op_GreaterThanOrEqual(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::op_GreaterThanOrEqual(BitMask,BitMask)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_GreaterThanOrEqual(BitMask,BitMask)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_GreaterThanOrEqual(BitMask,BitMask)._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.32\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_GreaterThanOrEqual(BitMask,BitMask).return.0\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_79\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_80\.
-                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_81\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_83\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_78\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_78\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_79\.
+                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_80\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_82\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_77\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.return.32\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_79\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_78\;
                             else 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_81\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_80\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_78\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_77\.
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_70\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_78\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_71\;
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_77\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_76\.
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_69\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_77\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_70\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_79\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_77\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_78\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_76\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (left);
@@ -15762,22 +15631,22 @@ begin
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_80\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_79\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_80\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_79\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.33\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.signBit\ := not(\Unum::AddExactUnums(Unum,Unum).0.return.33\);
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_77\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_80\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_78\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_76\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_79\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_77\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_81\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_77\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_80\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_76\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (right);
@@ -15787,28 +15656,28 @@ begin
                         -- signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_82\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_81\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_82\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_81\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_83\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_82\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_83\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_82\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.34\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.signBit\ := not(\Unum::AddExactUnums(Unum,Unum).0.return.34\);
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_77\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_83\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_78\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_76\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_82\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_77\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_84\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_70\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_83\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_69\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	if (Lombiq.Unum.Unum.HiddenBitIsOne (left)) {
@@ -15830,35 +15699,35 @@ begin
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::HiddenBitIsOne()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_85\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_84\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_85\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_84\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::HiddenBitIsOne()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.35\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::HiddenBitIsOne().return.0\;
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_87\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_88\.
-                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_89\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_91\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_86\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_86\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_87\.
+                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_88\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_90\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_85\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.return.35\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_87\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_86\;
                             else 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_89\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_88\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_86\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_85\.
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_70\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_86\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_71\;
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_85\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_84\.
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_69\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_85\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_70\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_87\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_85\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_86\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_84\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (left);
@@ -15870,22 +15739,22 @@ begin
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_88\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_87\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_88\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_87\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.36\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.signBit\ := not(\Unum::AddExactUnums(Unum,Unum).0.return.36\);
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_85\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_88\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_86\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_84\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_87\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_85\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_89\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_85\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_88\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_84\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (right);
@@ -15895,28 +15764,28 @@ begin
                         -- signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_90\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_89\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_90\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_89\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_91\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_90\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_91\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_90\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.37\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.signBit\ := not(\Unum::AddExactUnums(Unum,Unum).0.return.37\);
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_85\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_91\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_86\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_84\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_90\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_85\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_92\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_64\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_91\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_63\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (left);
@@ -15926,44 +15795,44 @@ begin
                         -- signBit = !Lombiq.Unum.Unum.IsPositive (left);
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_93\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_92\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_93\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_92\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_94\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_93\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_94\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_93\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.38\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.signBit\ := not(\Unum::AddExactUnums(Unum,Unum).0.return.38\);
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_64\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_94\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_65\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_63\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_93\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_64\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_95\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_50\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_94\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	flag9 = num > 0;
                         -- 	if (flag9) {
                         -- 		signBit = !Lombiq.Unum.Unum.IsPositive (left);
                         -- 		num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                        -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                         -- 		bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                         -- 		bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- 	}
                         -- 	else {
                         -- 		signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 		num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                        -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                        -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                        -- 		right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 		num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                         -- 		bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                         -- 		bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                         -- 	}
@@ -15978,47 +15847,47 @@ begin
                         -- if (flag9) {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (left);
                         -- 	num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                         -- 	bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                         -- 	bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- }
                         -- else {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 	num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                         -- 	bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                         -- 	bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_97\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_110\.
-                        --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_111\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_124\.
-                        --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_96\.
+                        --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_96\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_109\.
+                        --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_110\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_123\.
+                        --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_95\.
 
                         if (\Unum::AddExactUnums(Unum,Unum).0.flag9\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_97\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_96\;
                         else 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_111\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_110\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_96\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_95\.
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_50\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_96\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_51\;
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_95\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_94\.
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_49\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_95\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_50\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_97\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_95\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_96\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_94\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (left);
                         -- 	num2 = Lombiq.Unum.Unum.ExponentValueWithBias (left);
-                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
-                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                         -- 	bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), right2);
                         -- 	bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                         -- }
@@ -16029,9 +15898,9 @@ begin
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_98\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_98\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_97\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
@@ -16043,25 +15912,25 @@ begin
                             -- Starting state machine invocation for the following method: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_99\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_98\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_99\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_98\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.40\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.num2\ := \Unum::AddExactUnums(Unum,Unum).0.return.40\;
                             -- The following section was transformed from the .NET statement below:
-                            -- right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
+                            -- right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_100\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_99\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_100\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_99\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
@@ -16070,10 +15939,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_101\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_100\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_101\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_100\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
@@ -16082,19 +15951,19 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.19\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.17\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.18\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.right2\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.19\);
                             -- The following section was transformed from the .NET statement below:
-                            -- num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
+                            -- num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1) - num;
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_102\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_101\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_102\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_101\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_103\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_102\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_103\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_102\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
@@ -16103,10 +15972,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_104\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_103\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_104\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_103\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
@@ -16121,10 +15990,10 @@ begin
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_105\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_104\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_105\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_104\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= false;
@@ -16133,10 +16002,10 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.45\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right2\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_106\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_105\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_106\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_105\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
@@ -16146,16 +16015,16 @@ begin
                             -- bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), num3), flag5);
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_107\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_106\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_107\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_106\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_108\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_107\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_108\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_107\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= false;
@@ -16164,10 +16033,10 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.47\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.num3\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_109\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_108\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_109\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_108\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
@@ -16177,29 +16046,29 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.48\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).signBitsMatch.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.flag5\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_110\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_109\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_110\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_109\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::AddAlignedFractions(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean)
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.49\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.bitMask\ := \Unum::AddExactUnums(Unum,Unum).0.return.49\;
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_95\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_110\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_96\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_94\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_109\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_95\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_111\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_95\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_110\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_94\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	signBit = !Lombiq.Unum.Unum.IsPositive (right);
                         -- 	num2 = Lombiq.Unum.Unum.ExponentValueWithBias (right);
-                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
-                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                        -- 	right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                        -- 	num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                         -- 	bitMask = BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (right), right2);
                         -- 	bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                         -- }
@@ -16210,9 +16079,9 @@ begin
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_112\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_111\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_112\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_111\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsPositive()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
@@ -16224,25 +16093,25 @@ begin
                             -- Starting state machine invocation for the following method: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_113\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_112\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_113\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_112\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Unum.Unum::ExponentValueWithBias()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.51\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueWithBias().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.num2\ := \Unum::AddExactUnums(Unum,Unum).0.return.51\;
                             -- The following section was transformed from the .NET statement below:
-                            -- right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
+                            -- right2 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (right) + 1);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_114\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_113\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_114\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_113\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
@@ -16251,10 +16120,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_115\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_114\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_115\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_114\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
@@ -16263,19 +16132,19 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.26\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.24\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.25\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.right2\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.26\);
                             -- The following section was transformed from the .NET statement below:
-                            -- num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (unum) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
+                            -- num3 = (int)(Lombiq.Unum.Unum.get_FractionSizeMax (left) + 1 - Lombiq.Unum.Unum.FractionSize (left) + 1) + num;
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_116\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_115\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_116\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_115\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_117\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_116\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_117\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_116\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
@@ -16284,10 +16153,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_118\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_117\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_118\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_117\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::FractionSize()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionSize()._Started.0\ <= false;
@@ -16302,10 +16171,10 @@ begin
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_119\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_118\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_119\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_118\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= false;
@@ -16314,10 +16183,10 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.56\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right2\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_120\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_119\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_120\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_119\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
@@ -16327,16 +16196,16 @@ begin
                             -- bitMask = Unum.AddAlignedFractions (bitMask, BitMask.op_LeftShift (Lombiq.Unum.Unum.FractionWithHiddenBit (left), num3), flag5);
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_121\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_120\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_121\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_120\ => 
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_122\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_121\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_122\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_121\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::FractionWithHiddenBit()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::FractionWithHiddenBit()._Started.0\ <= false;
@@ -16345,10 +16214,10 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.58\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.num3\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_123\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_122\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_123\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_122\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
@@ -16358,33 +16227,33 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.59\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).signBitsMatch.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.flag5\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_124\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_123\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_124\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_123\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::AddAlignedFractions(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean)
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean)._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.60\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.bitMask\ := \Unum::AddExactUnums(Unum,Unum).0.return.60\;
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_95\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_124\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_96\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_94\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_123\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_95\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_125\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_124\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.61\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition().return.0\;
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_126\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_125\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_126\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_125\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_FractionSizeMax()._Started.0\ <= false;
@@ -16393,41 +16262,41 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.32\ := signed(SmartResize(\Unum::AddExactUnums(Unum,Unum).0.return.61\ - \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.31\, 32));
                             \Unum::AddExactUnums(Unum,Unum).0.num4\ := (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.32\);
                             -- The following section was transformed from the .NET statement below:
-                            -- BitMask objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc;
+                            -- BitMask object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc = new BitMask (left._environment.Size, false);
+                            -- object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252 = new BitMask (left._environment.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\.\IsNull\ := false;
-                            \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\.\Size\ := to_unsigned(0, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\.\SegmentCount\ := to_unsigned(0, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\.\Segments\ := (others => to_unsigned(0, 32));
+                            \Unum::AddExactUnums(Unum,Unum).0.object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252\.\IsNull\ := false;
+                            \Unum::AddExactUnums(Unum,Unum).0.object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252\.\Size\ := to_unsigned(0, 16);
+                            \Unum::AddExactUnums(Unum,Unum).0.object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252\.\SegmentCount\ := to_unsigned(0, 16);
+                            \Unum::AddExactUnums(Unum,Unum).0.object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252\.\Segments\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
-                            \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\;
+                            \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\.\Size\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_127\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_126\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_127\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_126\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
-                            \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
+                            \Unum::AddExactUnums(Unum,Unum).0.object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- exponent = BitMask.op_Addition (objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
+                            -- exponent = BitMask.op_Addition (object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252, Unum.ExponentValueToExponentBits (num2 + num4, Lombiq.Unum.Unum.get_Size (left)));
                             -- 
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.33\ := \Unum::AddExactUnums(Unum,Unum).0.num2\ + \Unum::AddExactUnums(Unum,Unum).0.num4\;
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.Unum::get_Size()
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size()._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_128\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_127\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_128\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_127\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.Unum::get_Size()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size()._Started.0\ <= false;
@@ -16436,22 +16305,22 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16).value.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.33\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16).size.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.63\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_129\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_128\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_129\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_128\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::ExponentValueToExponentBits(System.Int32,System.UInt16)
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16)._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.64\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16).return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
-                            \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.objectb27a734c21885631ebb68e1234fb9c8390b7e1444b1d60f27d01ade0c7b5d9bc\;
+                            \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.object337465ced5aaa2f637813df6bc84ecb23f96aefe2dd0ae178652ac75d70aa252\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.64\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_130\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_129\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_130\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_129\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= false;
@@ -16480,19 +16349,19 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_132\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_132\.
-                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_133\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_134\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_131\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_131\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_131\.
+                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_132\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_133\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_130\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.flag10\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_132\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_131\;
                             else 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_133\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_132\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_131\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_130\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_130\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_129\.
                         -- The following section was transformed from the .NET statement below:
                         -- num5 = 0;
                         -- 
@@ -16503,10 +16372,10 @@ begin
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_135\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_134\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_132\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_130\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_131\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_129\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uncertainityBit = true;
@@ -16516,13 +16385,13 @@ begin
                         -- uncertainityBit = true;
                         -- 
                         \Unum::AddExactUnums(Unum,Unum).0.uncertainityBit\ := True;
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_130\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_132\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_131\;
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_129\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_131\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_130\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_133\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_130\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_132\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_129\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	bitMask = Lombiq.Unum.BitMask.ShiftOutLeastSignificantZeros (bitMask);
@@ -16534,21 +16403,21 @@ begin
                         -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::ShiftOutLeastSignificantZeros()
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::ShiftOutLeastSignificantZeros().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::ShiftOutLeastSignificantZeros()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_134\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_133\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_134\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_133\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::ShiftOutLeastSignificantZeros()
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::ShiftOutLeastSignificantZeros()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::ShiftOutLeastSignificantZeros()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::ShiftOutLeastSignificantZeros()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.66\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::ShiftOutLeastSignificantZeros().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.bitMask\ := \Unum::AddExactUnums(Unum,Unum).0.return.66\;
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_130\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_134\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_131\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_129\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_133\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_130\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_135\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_134\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
@@ -16566,27 +16435,27 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_137\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_137\.
-                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_138\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_139\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_136\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_136\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_136\.
+                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_137\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_138\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_135\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.flag11\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_137\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_136\;
                             else 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_138\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_137\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_136\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_135\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_135\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_134\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag12 = Lombiq.Unum.BitMask.GetMostSignificantOnePosition (exponent) > 0;
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_140\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_139\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_137\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_135\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_136\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_134\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	exponent = bitMask;
@@ -16601,13 +16470,13 @@ begin
                         -- exponentSize = 0;
                         -- 
                         \Unum::AddExactUnums(Unum,Unum).0.exponentSize\ := to_unsigned(0, 8);
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_135\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_137\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_136\;
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_134\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_136\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_135\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_138\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_135\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_137\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_134\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num5 = Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - 1;
@@ -16619,28 +16488,28 @@ begin
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_139\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_138\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_139\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_138\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.68\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.36\ := \Unum::AddExactUnums(Unum,Unum).0.return.68\ - to_unsigned(1, 16);
                             \Unum::AddExactUnums(Unum,Unum).0.num5\ := \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.36\;
-                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_135\.
-                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_139\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_136\;
+                            -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_134\.
+                            if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_138\) then 
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_135\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_140\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_139\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.exponent\;
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_141\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_140\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_141\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_140\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
@@ -16660,29 +16529,29 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_143\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_146\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_142\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_142\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_145\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_141\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.flag12\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_143\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_142\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_142\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_141\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_142\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_141\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_140\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag13 = !Lombiq.Unum.Unum.IsExact (left) || !Lombiq.Unum.Unum.IsExact (right);
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsExact()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_149\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_148\;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_143\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_142\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_140\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	bitMask = Lombiq.Unum.BitMask.SetZero (bitMask, Lombiq.Unum.BitMask.GetMostSignificantOnePosition (bitMask) - 1);
@@ -16700,9 +16569,9 @@ begin
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
                         \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_144\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_143\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_144\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_143\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt16 Lombiq.Unum.BitMask::GetMostSignificantOnePosition()
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::GetMostSignificantOnePosition()._Started.0\ <= false;
@@ -16712,10 +16581,10 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16).index.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.38\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Started.0\ <= true;
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_145\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_144\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_145\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_144\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetZero(System.UInt16)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16)._Started.0\ <= false;
@@ -16732,26 +16601,26 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.39\ := \Unum::AddExactUnums(Unum,Unum).0.num5\ = to_unsigned(0, 16);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_147\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_147\.
-                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_148\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_148\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_146\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_146\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_146\.
+                            --     * The false branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_147\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_147\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_145\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.39\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_147\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_146\;
                             else 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_148\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_147\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_146\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_145\.
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_146\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_142\;
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_145\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_144\.
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_140\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_145\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_141\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_147\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_145\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_146\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_144\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num5 = 0;
@@ -16761,13 +16630,13 @@ begin
                         -- num5 = 0;
                         -- 
                         \Unum::AddExactUnums(Unum,Unum).0.num5\ := to_unsigned(0, 16);
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_145\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_147\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_146\;
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_144\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_146\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_145\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_148\ => 
-                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_145\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_147\ => 
+                        -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_144\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num5 = num5 - 1;
@@ -16778,31 +16647,31 @@ begin
                         -- 
                         \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.40\ := \Unum::AddExactUnums(Unum,Unum).0.num5\ - to_unsigned(1, 16);
                         \Unum::AddExactUnums(Unum,Unum).0.num5\ := \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.40\;
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_145\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_148\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_146\;
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_144\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_147\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_145\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_149\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_148\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsExact()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.72\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact().return.0\;
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_150\;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_149\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_150\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_149\ => 
                         -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_151\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_150\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_151\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_150\ => 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Unum.Unum::IsExact()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.right\;
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_152\;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_151\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_152\ => 
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_151\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Unum.Unum::IsExact()
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsExact()._Started.0\ <= false;
@@ -16816,35 +16685,35 @@ begin
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_154\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_154\.
-                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_153\.
+                            --     * The true branch starts in state \Unum::AddExactUnums(Unum,Unum).0._State_153\ and ends in state \Unum::AddExactUnums(Unum,Unum).0._State_153\.
+                            --     * Execution after either branch will continue in the following state: \Unum::AddExactUnums(Unum,Unum).0._State_152\.
 
                             if (\Unum::AddExactUnums(Unum,Unum).0.flag13\) then 
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_154\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_153\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_153\;
+                                \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_152\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_153\ => 
-                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_152\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_152\ => 
+                        -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_151\.
                         -- The following section was transformed from the .NET statement below:
-                        -- unum.UnumBits = Lombiq.Unum.Unum.SetUnumBits (unum, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
+                        -- bits = Lombiq.Unum.Unum.AssembleUnumBits (left, signBit, exponent, bitMask, uncertainityBit, exponentSize, num5);
                         -- 
-                        -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.unum\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.signBit\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.exponent\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.uncertainityBit\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.exponentSize\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.num5\;
-                        \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= true;
-                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_155\;
+                        -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.signBit\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.exponent\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bitMask\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.uncertainityBit\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.exponentSize\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.num5\;
+                        \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= true;
+                        \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_154\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Unum::AddExactUnums(Unum,Unum).0._State_154\ => 
-                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_152\.
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_153\ => 
+                        -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_151\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uncertainityBit = true;
@@ -16854,21 +16723,37 @@ begin
                         -- uncertainityBit = true;
                         -- 
                         \Unum::AddExactUnums(Unum,Unum).0.uncertainityBit\ := True;
-                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_152\.
-                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_154\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_153\;
+                        -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_151\.
+                        if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_153\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_152\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Unum::AddExactUnums(Unum,Unum).0._State_154\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
+                        if (\Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
+                            \Unum::AddExactUnums(Unum,Unum).0.return.74\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\;
+                            \Unum::AddExactUnums(Unum,Unum).0.bits\ := \Unum::AddExactUnums(Unum,Unum).0.return.74\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- result = new Unum (left._environment, bits);
+                            -- 
+                            -- Initializing record fields to their defaults.
+                            \Unum::AddExactUnums(Unum,Unum).0.result\.\IsNull\ := false;
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,Lombiq.Unum.BitMask)
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.result\;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).environment.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).bits.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bits\;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask)._Started.0\ <= true;
+                            \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_155\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Unum::AddExactUnums(Unum,Unum).0._State_155\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16)
-                        if (\Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ <= false;
-                            \Unum::AddExactUnums(Unum,Unum).0.return.74\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\;
-                            \Unum::AddExactUnums(Unum,Unum).0.unum\.\UnumBits\ := \Unum::AddExactUnums(Unum,Unum).0.return.74\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- result = unum;
-                            -- 
-                            \Unum::AddExactUnums(Unum,Unum).0.result\ := \Unum::AddExactUnums(Unum,Unum).0.unum\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,Lombiq.Unum.BitMask)
+                        if (\Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask)._Finished.0\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask)._Started.0\ <= false;
+                            \Unum::AddExactUnums(Unum,Unum).0.result\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).this.parameter.In.0\;
+                            \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).environment.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_36\.
                             if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_155\) then 
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_37\;
@@ -18309,18 +18194,18 @@ begin
                         \UnumEnvironment::.ctor(Byte,Byte).0.exponentSizeSize\ := \UnumEnvironment::.ctor(Byte,Byte).0.exponentSizeSize.parameter.In\;
                         \UnumEnvironment::.ctor(Byte,Byte).0.fractionSizeSize\ := \UnumEnvironment::.ctor(Byte,Byte).0.fractionSizeSize.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.ExponentSizeSize = 2;
+                        -- @this.ExponentSizeSize = 4;
                         -- 
-                        \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeSize\ := to_unsigned(2, 8);
+                        \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeSize\ := to_unsigned(4, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.FractionSizeSize = 4;
+                        -- @this.FractionSizeSize = 5;
                         -- 
-                        \UnumEnvironment::.ctor(Byte,Byte).0.this\.\FractionSizeSize\ := to_unsigned(4, 8);
+                        \UnumEnvironment::.ctor(Byte,Byte).0.this\.\FractionSizeSize\ := to_unsigned(5, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.ExponentSizeMax = (byte)UnumHelper.SegmentSizeSizeToSegmentSize (2);
+                        -- @this.ExponentSizeMax = (byte)UnumHelper.SegmentSizeSizeToSegmentSize (4);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte)
-                        \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).segmentSizeSize.parameter.Out.0\ <= to_unsigned(2, 8);
+                        \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).segmentSizeSize.parameter.Out.0\ <= to_unsigned(4, 8);
                         \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Started.0\ <= true;
                         \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18331,7 +18216,7 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.return.0\ := \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).return.0\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeMax\ := SmartResize(\UnumEnvironment::.ctor(Byte,Byte).0.return.0\, 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.FractionSizeMax = UnumHelper.SegmentSizeSizeToSegmentSize (4);
+                            -- @this.FractionSizeMax = UnumHelper.SegmentSizeSizeToSegmentSize (5);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_4\;
@@ -18343,7 +18228,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \UnumEnvironment::.ctor(Byte,Byte).0._State_5\ => 
                         -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Unum.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte)
-                        \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).segmentSizeSize.parameter.Out.0\ <= to_unsigned(4, 8);
+                        \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).segmentSizeSize.parameter.Out.0\ <= to_unsigned(5, 8);
                         \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Started.0\ <= true;
                         \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18354,15 +18239,15 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.return.1\ := \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).return.0\;
                             \UnumEnvironment::.ctor(Byte,Byte).0.this\.\FractionSizeMax\ := \UnumEnvironment::.ctor(Byte,Byte).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.UnumTagSize = 7;
+                            -- @this.UnumTagSize = 10;
                             -- 
-                            \UnumEnvironment::.ctor(Byte,Byte).0.this\.\UnumTagSize\ := to_unsigned(7, 8);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.this\.\UnumTagSize\ := to_unsigned(10, 8);
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.Size = (ushort)(1 + @this.ExponentSizeMax) + @this.FractionSizeMax + 7;
+                            -- @this.Size = (ushort)(1 + @this.ExponentSizeMax) + @this.FractionSizeMax + 10;
                             -- 
                             \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.0\ := SmartResize(to_unsigned(1, 8) + \UnumEnvironment::.ctor(Byte,Byte).0.this\.\ExponentSizeMax\, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.1\ := resize((\UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.0\) + \UnumEnvironment::.ctor(Byte,Byte).0.this\.\FractionSizeMax\, 16);
-                            \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.2\ := \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.1\ + to_unsigned(7, 16);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.2\ := \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.1\ + to_unsigned(10, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.this\.\Size\ := \UnumEnvironment::.ctor(Byte,Byte).0.binaryOperationResult.2\;
                             -- The following section was transformed from the .NET statement below:
                             -- @this.EmptyBitMask = new BitMask (@this.Size, false);
@@ -18420,11 +18305,11 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                             \UnumEnvironment::.ctor(Byte,Byte).0.objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0\ := \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.UncertaintyBitMask = Lombiq.Unum.BitMask.SetOne (objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0, 6);
+                            -- @this.UncertaintyBitMask = Lombiq.Unum.BitMask.SetOne (objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0, 9);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecta4c70e00f2ec2975ffd03b87442e75fb219dd43f089d457c217e1f67cffbf4a0\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(6, 16);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(9, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_11\;
                         end if;
@@ -18465,11 +18350,11 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                             \UnumEnvironment::.ctor(Byte,Byte).0.object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3\ := \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.FractionSizeMask = BitMask.op_Subtraction (Lombiq.Unum.BitMask.SetOne (object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3, 4), 1u);
+                            -- @this.FractionSizeMask = BitMask.op_Subtraction (Lombiq.Unum.BitMask.SetOne (object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3, 5), 1u);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.object1af8c7e1413e2da44291e3b4786150cb23fed68c0d70afe08a2e21d86ea1dbf3\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(4, 16);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(5, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_14\;
                         end if;
@@ -18632,11 +18517,11 @@ begin
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
                             \UnumEnvironment::.ctor(Byte,Byte).0.objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864\ := \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.ULP = Lombiq.Unum.BitMask.SetOne (objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864, 7);
+                            -- @this.ULP = Lombiq.Unum.BitMask.SetOne (objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864, 10);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Unum.BitMask Lombiq.Unum.BitMask::SetOne(System.UInt16)
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumEnvironment::.ctor(Byte,Byte).0.objecte438b2d1e01c6422c441d4244fd563f19ddf9cd04a02503bb4f07fbb1fcf4864\;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(7, 16);
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(10, 16);
                             \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
                             \UnumEnvironment::.ctor(Byte,Byte).0._State\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_26\;
                         end if;
@@ -20035,8 +19920,8 @@ begin
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).BitMask::op_Subtraction(BitMask,UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::FractionMask().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::FractionMask().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::ExponentMask().0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -20053,8 +19938,8 @@ begin
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).BitMask::op_Subtraction(BitMask,UInt32).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::FractionMask().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::FractionMask().0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::ExponentMask().0.runningIndex.0\ := 0;
@@ -20064,7 +19949,7 @@ begin
                 \BitMask::op_Addition(BitMask,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \BitMask::op_Subtraction(BitMask,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Unum::FractionMask().0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Unum::ExponentMask().0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
@@ -20163,33 +20048,33 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
-                case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
+                case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
                             \BitMask::.ctor(UInt32,UInt16).0._Started\ <= true;
-                            \BitMask::.ctor(UInt32,UInt16).0.this.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\;
-                            \BitMask::.ctor(UInt32,UInt16).0.segment.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\;
-                            \BitMask::.ctor(UInt32,UInt16).0.size.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\;
+                            \BitMask::.ctor(UInt32,UInt16).0.this.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.Out.0\;
+                            \BitMask::.ctor(UInt32,UInt16).0.segment.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\;
+                            \BitMask::.ctor(UInt32,UInt16).0.size.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
                             when 0 => 
                                 if (\BitMask::.ctor(UInt32,UInt16).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= true;
+                                    \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= true;
                                     \BitMask::.ctor(UInt32,UInt16).0._Started\ <= false;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\ <= \BitMask::.ctor(UInt32,UInt16).0.this.parameter.Out\;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16).this.parameter.In.0\ <= \BitMask::.ctor(UInt32,UInt16).0.this.parameter.Out\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt32,UInt16).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -20296,8 +20181,8 @@ begin
     \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).BitMask::op_Addition(BitMask,UInt32).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).BitMask::op_Addition(BitMask,UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AddExactUnums(Unum,Unum).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -20310,8 +20195,8 @@ begin
                 -- Synchronous reset
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).BitMask::op_Addition(BitMask,UInt32).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).BitMask::op_Addition(BitMask,UInt32).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.runningIndex.0\ := 0;
@@ -20319,7 +20204,7 @@ begin
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \BitMask::op_Addition(BitMask,UInt32).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
                 \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
                 \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
@@ -20355,32 +20240,32 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
-                case \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
+                case \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
                             \BitMask::op_Addition(BitMask,BitMask).0._Started\ <= true;
-                            \BitMask::op_Addition(BitMask,BitMask).0.left.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\;
-                            \BitMask::op_Addition(BitMask,BitMask).0.right.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\;
+                            \BitMask::op_Addition(BitMask,BitMask).0.left.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\;
+                            \BitMask::op_Addition(BitMask,BitMask).0.right.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
                             when 0 => 
                                 if (\BitMask::op_Addition(BitMask,BitMask).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= true;
+                                    \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= true;
                                     \BitMask::op_Addition(BitMask,BitMask).0._Started\ <= false;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\ <= \BitMask::op_Addition(BitMask,BitMask).0.return\;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask).return.0\ <= \BitMask::op_Addition(BitMask,BitMask).0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,BitMask).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,BitMask)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -20604,8 +20489,6 @@ begin
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask::op_BitwiseOr(BitMask,BitMask).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask::op_BitwiseAnd(BitMask,BitMask).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask::op_BitwiseAnd(BitMask,BitMask).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::AddExactUnums(Unum,Unum).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -20620,8 +20503,6 @@ begin
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask::op_BitwiseOr(BitMask,BitMask).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask::op_BitwiseAnd(BitMask,BitMask).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask::op_BitwiseAnd(BitMask,BitMask).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.runningIndex.0\ := 0;
@@ -20630,7 +20511,6 @@ begin
                 \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \BitMask::op_BitwiseOr(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
                 \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
-                \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
                 \Unum::AddAlignedFractions(BitMask,BitMask,Boolean).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
                 \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
@@ -20694,37 +20574,6 @@ begin
                         if (\BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).BitMask::op_BitwiseAnd(BitMask,BitMask).0.runningState.0\ := WaitingForStarted;
                             \BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment).0
-                case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Started.0\) then 
-                            \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningIndex.0\ := 0;
-                            \BitMask::.ctor(UInt16,Boolean).0._Started\ <= true;
-                            \BitMask::.ctor(UInt16,Boolean).0.this.parameter.In\ <= \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\;
-                            \BitMask::.ctor(UInt16,Boolean).0.size.parameter.In\ <= \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\;
-                            \BitMask::.ctor(UInt16,Boolean).0.allOne.parameter.In\ <= \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\BitMask::.ctor(UInt16,Boolean).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningState.0\ := AfterFinished;
-                                    \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= true;
-                                    \BitMask::.ctor(UInt16,Boolean).0._Started\ <= false;
-                                    \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\ <= \BitMask::.ctor(UInt16,Boolean).0.this.parameter.Out\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BitMask::.ctor(UInt16,Boolean).Unum::.ctor(UnumEnvironment).0.runningState.0\ := WaitingForStarted;
-                            \Unum::.ctor(UnumEnvironment).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -20831,8 +20680,8 @@ begin
     \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).BitMask::op_RightShift(BitMask,Int32).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).BitMask::op_RightShift(BitMask,Int32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::FractionToUintArray().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::FractionToUintArray().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::FractionMask().0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -20849,8 +20698,8 @@ begin
                 -- Synchronous reset
                 \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).BitMask::op_RightShift(BitMask,Int32).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).BitMask::op_RightShift(BitMask,Int32).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::FractionToUintArray().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::FractionToUintArray().0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::FractionMask().0.runningIndex.0\ := 0;
@@ -20862,7 +20711,7 @@ begin
                 \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\ := WaitingForStarted;
                 \BitMask::op_RightShift(BitMask,Int32).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
                 \Unum::FractionToUintArray().0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
                 \Unum::FractionMask().0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
                 \Unum::ExponentMask().0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
@@ -20900,32 +20749,32 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
-                case \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
+                case \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
                             \BitMask::op_LeftShift(BitMask,Int32).0._Started\ <= true;
-                            \BitMask::op_LeftShift(BitMask,Int32).0.left.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\;
-                            \BitMask::op_LeftShift(BitMask,Int32).0.right.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\;
+                            \BitMask::op_LeftShift(BitMask,Int32).0.left.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\;
+                            \BitMask::op_LeftShift(BitMask,Int32).0.right.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
                             when 0 => 
                                 if (\BitMask::op_LeftShift(BitMask,Int32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= true;
+                                    \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= true;
                                     \BitMask::op_LeftShift(BitMask,Int32).0._Started\ <= false;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\ <= \BitMask::op_LeftShift(BitMask,Int32).0.return\;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32).return.0\ <= \BitMask::op_LeftShift(BitMask,Int32).0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().BitMask::op_LeftShift(BitMask,Int32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_LeftShift(BitMask,Int32)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -21275,8 +21124,8 @@ begin
     \Hast::InternalInvocationProxy().Unum::get_Size()\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::FractionMask().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::FractionMask().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Unum::get_Size().Unum::ExponentMask().0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -21289,8 +21138,8 @@ begin
                 -- Synchronous reset
                 \Hast::InternalInvocationProxy().Unum::get_Size().Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Unum::get_Size().Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Unum::get_Size().Unum::FractionMask().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Unum::get_Size().Unum::FractionMask().0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Unum::get_Size().Unum::ExponentMask().0.runningIndex.0\ := 0;
@@ -21298,7 +21147,7 @@ begin
                 \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForStarted;
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::get_Size()._Finished.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\ <= false;
                 \Unum::FractionMask().0.Unum::get_Size()._Finished.0\ <= false;
                 \Unum::ExponentMask().0.Unum::get_Size()._Finished.0\ <= false;
                 \Unum::AddExactUnums(Unum,Unum).0.Unum::get_Size()._Finished.0\ <= false;
@@ -21333,31 +21182,31 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
-                case \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
+                case \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
                             \Unum::get_Size().0._Started\ <= true;
-                            \Unum::get_Size().0.this.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().this.parameter.Out.0\;
+                            \Unum::get_Size().0.this.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().this.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
                             when 0 => 
                                 if (\Unum::get_Size().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\ <= true;
+                                    \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\ <= true;
                                     \Unum::get_Size().0._Started\ <= false;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().return.0\ <= \Unum::get_Size().0.return\;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size().return.0\ <= \Unum::get_Size().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Unum::get_Size().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\ <= false;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Unum::get_Size().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_Size()._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -21954,8 +21803,8 @@ begin
     \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::ExponentSize().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::ExponentSize().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::FractionSize().0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -21970,8 +21819,8 @@ begin
                 -- Synchronous reset
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::ExponentSize().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::ExponentSize().0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::FractionSize().0.runningIndex.0\ := 0;
@@ -21981,7 +21830,7 @@ begin
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
                 \Unum::ExponentSize().0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
                 \Unum::FractionSize().0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
                 \Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
@@ -22018,32 +21867,32 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
-                case \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
+                case \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
                             \BitMask::op_Addition(BitMask,UInt32).0._Started\ <= true;
-                            \BitMask::op_Addition(BitMask,UInt32).0.left.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\;
-                            \BitMask::op_Addition(BitMask,UInt32).0.right.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\;
+                            \BitMask::op_Addition(BitMask,UInt32).0.left.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).left.parameter.Out.0\;
+                            \BitMask::op_Addition(BitMask,UInt32).0.right.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).right.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
                             when 0 => 
                                 if (\BitMask::op_Addition(BitMask,UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= true;
+                                    \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= true;
                                     \BitMask::op_Addition(BitMask,UInt32).0._Started\ <= false;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).return.0\ <= \BitMask::op_Addition(BitMask,UInt32).0.return\;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32).return.0\ <= \BitMask::op_Addition(BitMask,UInt32).0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().BitMask::op_Addition(BitMask,UInt32).Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.BitMask::op_Addition(BitMask,UInt32)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -22418,97 +22267,97 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.UInt16 Lombiq.Unum.Unum::get_FractionSizeMax() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16) start
-    \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16) start
+    \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)\: process (\Clock\) 
+        Variable \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForStarted;
-                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
-                \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
+                \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForStarted;
+                \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
+                \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean).0
-                case \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ is 
+                case \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\) then 
-                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ := 0;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ <= true;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\;
+                        if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\) then 
+                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ := 0;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ <= true;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\ <= \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningIndex.0\ is 
                             when 0 => 
-                                if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := AfterFinished;
-                                    \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= true;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ <= false;
-                                    \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return\;
+                                if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := AfterFinished;
+                                    \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= true;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ <= false;
+                                    \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForStarted;
-                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
+                        if (\Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.runningState.0\ := WaitingForStarted;
+                            \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
                         end if;
                 end case;
 
 
                 -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.Unum Lombiq.Unum.Unum::AddExactUnums(Lombiq.Unum.Unum,Lombiq.Unum.Unum).0
-                case \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ is 
+                case \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\) then 
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ := 0;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ <= true;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\;
+                        if (\Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\) then 
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ := 0;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ <= true;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.this.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).this.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.signBit.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).signBit.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponent.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponent.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fraction.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fraction.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.uncertainityBit.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).uncertainityBit.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.exponentSize.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).exponentSize.parameter.Out.0\;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.fractionSize.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).fractionSize.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningIndex.0\ is 
                             when 0 => 
-                                if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := AfterFinished;
-                                    \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= true;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ <= false;
-                                    \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return\;
+                                if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := AfterFinished;
+                                    \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= true;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0._Started\ <= false;
+                                    \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForStarted;
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
+                        if (\Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).Unum::AddExactUnums(Unum,Unum).0.runningState.0\ := WaitingForStarted;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16)._Finished.0\ <= false;
                         end if;
                 end case;
 
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16) end
+    -- System.Void Hast::InternalInvocationProxy().Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean) start
@@ -22527,47 +22376,47 @@ begin
 
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Unum.BitMask Lombiq.Unum.Unum::get_UncertaintyBitMask() start
     \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask()\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::IsExact().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::IsExact().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::IsExact().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::IsExact().0.runningState.0\ := WaitingForStarted;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\ <= false;
                 \Unum::IsExact().0.Unum::get_UncertaintyBitMask()._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
-                case \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
+                case \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
                             \Unum::get_UncertaintyBitMask().0._Started\ <= true;
-                            \Unum::get_UncertaintyBitMask().0.this.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().this.parameter.Out.0\;
+                            \Unum::get_UncertaintyBitMask().0.this.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().this.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
                             when 0 => 
                                 if (\Unum::get_UncertaintyBitMask().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\ <= true;
+                                    \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\ <= true;
                                     \Unum::get_UncertaintyBitMask().0._Started\ <= false;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().return.0\ <= \Unum::get_UncertaintyBitMask().0.return\;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask().return.0\ <= \Unum::get_UncertaintyBitMask().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\ <= false;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Unum::get_UncertaintyBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_UncertaintyBitMask()._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -22608,47 +22457,47 @@ begin
 
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Unum.BitMask Lombiq.Unum.Unum::get_SignBitMask() start
     \Hast::InternalInvocationProxy().Unum::get_SignBitMask()\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::IsPositive().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::IsPositive().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::IsPositive().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::IsPositive().0.runningState.0\ := WaitingForStarted;
-                \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\ <= false;
+                \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\ <= false;
                 \Unum::IsPositive().0.Unum::get_SignBitMask()._Finished.0\ <= false;
             else 
 
-                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::SetUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
-                case \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Unum.BitMask Lombiq.Unum.Unum::AssembleUnumBits(System.Boolean,Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean,System.Byte,System.UInt16).0
+                case \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\) then 
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\) then 
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ := 0;
                             \Unum::get_SignBitMask().0._Started\ <= true;
-                            \Unum::get_SignBitMask().0.this.parameter.In\ <= \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().this.parameter.Out.0\;
+                            \Unum::get_SignBitMask().0.this.parameter.In\ <= \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().this.parameter.Out.0\;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningIndex.0\ is 
                             when 0 => 
                                 if (\Unum::get_SignBitMask().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\ <= true;
+                                    \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := AfterFinished;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\ <= true;
                                     \Unum::get_SignBitMask().0._Started\ <= false;
-                                    \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().return.0\ <= \Unum::get_SignBitMask().0.return\;
+                                    \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask().return.0\ <= \Unum::get_SignBitMask().0.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
-                            \Unum::SetUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\ <= false;
+                        if (\Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Unum::get_SignBitMask().Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.runningState.0\ := WaitingForStarted;
+                            \Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).0.Unum::get_SignBitMask()._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -24180,17 +24029,6 @@ begin
     \Unum::AddExactUnums(Unum,Unum).0.Unum::IsNegativeInfinity()._Finished.0\ <= \Unum::IsNegativeInfinity().0._Finished\;
     \Unum::AddExactUnums(Unum,Unum).0.Unum::IsNegativeInfinity().return.0\ <= \Unum::IsNegativeInfinity().0.return\;
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Lombiq.Unum.Unum::IsNegativeInfinity() end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment) start
-    -- Signal connections for Lombiq.Unum.Unum Lombiq.Unum.Unum::AddExactUnums(Lombiq.Unum.Unum,Lombiq.Unum.Unum).0 (#0):
-    \Unum::.ctor(UnumEnvironment).0._Started\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Started.0\;
-    \Unum::.ctor(UnumEnvironment).0.this.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).this.parameter.Out.0\;
-    \Unum::.ctor(UnumEnvironment).0.environment.parameter.In\ <= \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).environment.parameter.Out.0\;
-    \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment)._Finished.0\ <= \Unum::.ctor(UnumEnvironment).0._Finished\;
-    \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).this.parameter.In.0\ <= \Unum::.ctor(UnumEnvironment).0.this.parameter.Out\;
-    \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment).environment.parameter.In.0\ <= \Unum::.ctor(UnumEnvironment).0.environment.parameter.Out\;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment) end
 
 
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Unum.BitMask Lombiq.Unum.Unum::AddAlignedFractions(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask,System.Boolean) start
