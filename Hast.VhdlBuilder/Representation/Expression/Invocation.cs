@@ -41,14 +41,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public static Invocation Resize(IVhdlElement value, int size) => InvokeSizingFunction("resize", value, size);
 
-        public static Invocation SmartResize(IVhdlElement value, int size) => InvokeSizingFunction("SmartResize", value, size);
-
         public static Invocation ToSigned(IVhdlElement value, int size) => InvokeSizingFunction("to_signed", value, size);
 
         public static Invocation ToUnsigned(IVhdlElement value, int size) => InvokeSizingFunction("to_unsigned", value, size);
 
-
-        private static Invocation InvokeSizingFunction(string functionName, IVhdlElement value, int size) =>
+        public static Invocation InvokeSizingFunction(string functionName, IVhdlElement value, int size) =>
             new Invocation(functionName.ToVhdlIdValue(), value, size.ToVhdlValue(KnownDataTypes.UnrangedInt));
     }
 
