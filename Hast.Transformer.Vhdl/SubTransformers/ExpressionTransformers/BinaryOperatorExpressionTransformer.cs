@@ -4,6 +4,7 @@ using System.Linq;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -186,20 +187,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var resultTypeReference = expression.GetResultTypeReference();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
 
-            // Is the result type smaller than it should be? It seems that (u)short * (u)short which results in an int 
-            // in .NET can be (u)short in the AST, if it's adjacent to another binary operation (maybe just division).
-            // The same is with (s)byte. This is wrong and we need to work around that.
+            // Is the result type smaller than it should be? It seems that (u)short +-*/ (u)short which results in an 
+            // int in .NET can be (u)short in the AST. The same is with (s)byte.
+            // This is wrong and we need to force the int type for the result.
             Predicate<TypeReference> isAnyShort = typeReference =>
                 typeReference.FullName == typeof(ushort).FullName || typeReference.FullName == typeof(short).FullName;
             Predicate<TypeReference> isAnyByte = typeReference =>
                 typeReference.FullName == typeof(byte).FullName || typeReference.FullName == typeof(sbyte).FullName;
             var resultNeedsForcedIntCast =
-                isMultiplication &&
                 (isAnyShort(resultTypeReference) && (isAnyShort(leftTypeReference) || isAnyShort(rightTypeReference))) ||
                 (isAnyByte(resultTypeReference) && (isAnyByte(leftTypeReference) || isAnyByte(rightTypeReference)));
             var forcedResultIntCastIsSigned = false;
             if (resultNeedsForcedIntCast)
             {
+                // Sign information is needed so if the result can be cast if necessary if there was also a cast expression.
                 forcedResultIntCastIsSigned =
                     new[] { typeof(short).FullName, typeof(sbyte).FullName }.Contains(resultTypeReference.FullName);
                 var intTypeInformation = forcedResultIntCastIsSigned ?
@@ -334,7 +335,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/right-shift-operator
 
                 var countSize = leftTypeSize <= 32 ? 5 : 6;
-                IVhdlElement resize = Invocation.SmartResize(binary.Right, countSize);
+                IVhdlElement resize = ResizeHelper.SmartResize(binary.Right, countSize);
 
                 if (expression.Operator == BinaryOperatorType.ShiftRight)
                 {
@@ -395,7 +396,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 binaryElement = new Invocation
                 {
-                    Target = "resize".ToVhdlIdValue(),
+                    Target = ResizeHelper.SmartResizeName.ToVhdlIdValue(),
                     Parameters = new List<IVhdlElement>
                     {
                         binaryElement,
@@ -502,6 +503,24 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     // It should be the last state added above.
                     currentBlock.ChangeBlockToDifferentState(stateMachine.States.Last().Body, stateMachine.States.Count - 1);
+                }
+            }
+
+            if (resultNeedsForcedIntCast)
+            {
+                // If the parent is not a cast or anything else but an assignment despite having needed a forced int
+                // cast then this was most possibly decompiled from a unary variable increment/decrement where this 
+                // can happen:
+                // ushort = ushort + 1
+                // In this case let's cast the result to the type of the assignment's left.
+                AssignmentExpression parentAssignment;
+                if (expression.Parent.Is<AssignmentExpression>(out parentAssignment))
+                {
+                    return _typeConversionTransformer.ImplementTypeConversion(
+                        resultType,
+                        _typeConverter.ConvertTypeReference(parentAssignment.Left.GetActualTypeReference(), context.TransformationContext),
+                        operationResultDataObjectReference)
+                        .ConvertedFromExpression;
                 }
             }
 

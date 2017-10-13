@@ -99,6 +99,7 @@
     <Compile Include="Extensions\TransformationWarningEnumerableExtensions.cs" />
     <Compile Include="Helpers\BinaryChainBuilder.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\ResizeHelper.cs" />
     <Compile Include="Helpers\RecordHelper.cs" />
     <Compile Include="Helpers\TaskParallelizationHelper.cs" />
     <Compile Include="Helpers\TopologicalSortHelper.cs" />

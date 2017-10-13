@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -190,7 +191,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 // There needs to be some decision logic on size in SmartResize() because sometimes the sizes in VHDL
                 // won't be the same as in .NET due to type handling.
-                return Invocation.SmartResize(parameter, toSize);
+                return ResizeHelper.SmartResize(parameter, toSize);
             };
 
 
