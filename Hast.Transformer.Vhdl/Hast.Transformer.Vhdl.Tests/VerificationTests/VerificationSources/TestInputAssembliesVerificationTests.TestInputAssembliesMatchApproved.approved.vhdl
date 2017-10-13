@@ -1844,12 +1844,12 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = a * b;
                         -- 
-                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := signed(resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32));
-                        \CastingCases::NumberCasting(Int16,Int16).0.num\ := \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\;
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\ := signed(SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32));
+                        \CastingCases::NumberCasting(Int16,Int16).0.num\ := SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.0\, 16);
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (int)(a * b);
                         -- 
-                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := resize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\ := SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\ * \CastingCases::NumberCasting(Int16,Int16).0.b\, 32);
                         \CastingCases::NumberCasting(Int16,Int16).0.num2\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.1\);
                         -- The following section was transformed from the .NET statement below:
                         -- b2 = (byte)a;
@@ -1866,7 +1866,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num4 = (long)((ulong)a * (ulong)((long)a));
                         -- 
-                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := resize(signed(ToUnsignedAndExpand(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64) * unsigned((SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64)))), 64);
+                        \CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\ := SmartResize(signed(ToUnsignedAndExpand(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64) * unsigned((SmartResize(\CastingCases::NumberCasting(Int16,Int16).0.a\, 64)))), 64);
                         \CastingCases::NumberCasting(Int16,Int16).0.num4\ := (\CastingCases::NumberCasting(Int16,Int16).0.binaryOperationResult.2\);
                         \CastingCases::NumberCasting(Int16,Int16).0._State\ := \CastingCases::NumberCasting(Int16,Int16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.3
@@ -3558,7 +3558,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- myClass.MyProperty = myClass.MyProperty * 10;
                         -- 
-                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\ := resize(\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ * to_signed(10, 32), 32);
+                        \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\ := SmartResize(\ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ * to_signed(10, 32), 32);
                         \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.myClass\.\MyProperty\ := \ObjectUsingCases::VoidMethod(ObjectUsingCases/MyClass).0.binaryOperationResult.1\;
                         -- The following section was transformed from the .NET statement below:
                         -- flag2 = myClass.MyProperty == 10;
