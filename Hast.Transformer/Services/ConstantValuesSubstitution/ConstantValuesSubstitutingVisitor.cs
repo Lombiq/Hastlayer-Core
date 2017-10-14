@@ -31,12 +31,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // Assignments should be handled here because those should only take effect "after this line" ("after this" 
             // works because the visitor visits nodes in topological order and thus possible substitutions will come 
             // after this method).
+
+            var parentBlock = assignmentExpression.FindFirstParentBlockStatement();
+
             // Indexed assignments with a constant index could also be handled eventually, but not really needed
             // now.
             if (assignmentExpression.Right is PrimitiveExpression && !(assignmentExpression.Left is IndexerExpression))
             {
                 // There won't be a parent block for attributes for example.
-                var parentBlock = assignmentExpression.FindFirstParentBlockStatement();
                 if (parentBlock != null)
                 {
                     _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
@@ -53,10 +55,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
             {
-                _constantValuesTable.MarkAsNonConstant(
-                    assignmentExpression.Left,
-                    // The first block will be the if-else or the while statement.
-                    assignmentExpression.FindFirstParentBlockStatement().FindFirstParentBlockStatement());
+                // Finding all outer scopes. The current parentBlock block will be the if-else or the while statement itself.
+
+                var currentParentBlock = parentBlock.FindFirstParentBlockStatement();
+
+                while (currentParentBlock != null)
+                {
+                    _constantValuesTable.MarkAsNonConstant(assignmentExpression.Left, currentParentBlock);
+                    currentParentBlock = currentParentBlock.FindFirstParentBlockStatement();
+                }
             }
             else if (!(assignmentExpression.Right is PrimitiveExpression) &&
                 !assignmentExpression.Right.Is<BinaryOperatorExpression>(binary =>
@@ -67,7 +74,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 _constantValuesTable.MarkAsNonConstant(
                     assignmentExpression.Left,
-                    assignmentExpression.FindFirstParentBlockStatement());
+                    parentBlock);
             }
         }
 
