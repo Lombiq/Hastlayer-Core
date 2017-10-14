@@ -7,7 +7,7 @@
     {
         // The strange formatting is so the output will be well formatted and e.g. have appropriate indentations.
         public const string Libraries =
-@"VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware framework so they can be more easily updated.";
+@"VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.";
 
         /// <summary>
         /// Stores an overview comment that is inserted into the generated VHDL code to help understand it.
