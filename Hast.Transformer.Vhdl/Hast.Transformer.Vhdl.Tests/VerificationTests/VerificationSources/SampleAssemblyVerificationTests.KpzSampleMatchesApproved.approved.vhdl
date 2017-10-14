@@ -3,7 +3,7 @@
 -- * System.Void Hast.Samples.Kpz.KpzKernelsInterface::TestAdd(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.Kpz.KpzKernelsGInterface::ScheduleIterations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 
--- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware framework so they can be more easily updated.
+-- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.
 
 library ieee;
 use ieee.std_logic_1164.all;
