@@ -4921,7 +4921,7 @@ begin
         Variable \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num20\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num21\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.arg_27B_1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.arg_270_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num22\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num24\: signed(31 downto 0) := to_signed(0, 32);
@@ -5080,7 +5080,7 @@ begin
                 \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num19\ := to_signed(0, 32);
                 \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num20\ := to_signed(0, 32);
                 \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num21\ := to_unsigned(0, 32);
-                \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.arg_27B_1\ := to_signed(0, 32);
+                \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.arg_270_1\ := to_signed(0, 32);
                 \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num22\ := to_signed(0, 32);
                 \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\ := to_signed(0, 32);
                 \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num24\ := to_signed(0, 32);
@@ -5297,13 +5297,13 @@ begin
                         -- uint num21;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int arg_27B_1;
+                        -- int arg_270_1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- TaskFactory arg_276_0;
+                        -- TaskFactory arg_26B_0;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Func<object, KpzKernelsIndexObject> arg_276_1;
+                        -- Func<object, KpzKernelsIndexObject> arg_26B_1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- int num22;
@@ -5339,10 +5339,10 @@ begin
                         -- uint number;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = memory.ReadInt32 (262144);
+                        -- num = memory.ReadInt32 (4096);
                         -- 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(262144, 32), 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4096, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5374,14 +5374,14 @@ begin
                             -- 	array [i] = new KpzKernelsIndexObject ();
                             -- 	array [i].bramDx = new bool[64];
                             -- 	array [i].bramDy = new bool[64];
-                            -- 	array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (262144 + num3);
+                            -- 	array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (4096 + num3);
                             -- 	num3 = num3 + 1;
-                            -- 	num4 = memory.ReadUInt32 (262144 + num3);
+                            -- 	num4 = memory.ReadUInt32 (4096 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	array [i].taskRandomState1 = array [i].taskRandomState1 | (ulong)num4 << 32;
-                            -- 	array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (262144 + num3);
+                            -- 	array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (4096 + num3);
                             -- 	num3 = num3 + 1;
-                            -- 	num4 = memory.ReadUInt32 (262144 + num3);
+                            -- 	num4 = memory.ReadUInt32 (4096 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	array [i].taskRandomState2 = array [i].taskRandomState2 | (ulong)num4 << 32;
                             -- 	i = i + 1;
@@ -5401,14 +5401,14 @@ begin
                             -- 	array [i] = new KpzKernelsIndexObject ();
                             -- 	array [i].bramDx = new bool[64];
                             -- 	array [i].bramDy = new bool[64];
-                            -- 	array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (262144 + num3);
+                            -- 	array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (4096 + num3);
                             -- 	num3 = num3 + 1;
-                            -- 	num4 = memory.ReadUInt32 (262144 + num3);
+                            -- 	num4 = memory.ReadUInt32 (4096 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	array [i].taskRandomState1 = array [i].taskRandomState1 | (ulong)num4 << 32;
-                            -- 	array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (262144 + num3);
+                            -- 	array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (4096 + num3);
                             -- 	num3 = num3 + 1;
-                            -- 	num4 = memory.ReadUInt32 (262144 + num3);
+                            -- 	num4 = memory.ReadUInt32 (4096 + num3);
                             -- 	num3 = num3 + 1;
                             -- 	array [i].taskRandomState2 = array [i].taskRandomState2 | (ulong)num4 << 32;
                             -- 	i = i + 1;
@@ -5432,9 +5432,9 @@ begin
                             -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\bramDy\ := (others => false);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (262144 + num3);
+                            -- array [i].taskRandomState1 = (ulong)memory.ReadUInt32 (4096 + num3);
                             -- 
-                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(262144, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
+                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(4096, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- Begin SimpleMemory read.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -5446,9 +5446,9 @@ begin
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = (ulong)memory.ReadUInt32 (262144 + num3);
+                        -- num5 = (ulong)memory.ReadUInt32 (4096 + num3);
                         -- 
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(262144, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(4096, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                         -- Begin SimpleMemory read.
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.15\, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -5467,9 +5467,9 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = memory.ReadUInt32 (262144 + num3);
+                            -- num4 = memory.ReadUInt32 (4096 + num3);
                             -- 
-                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(262144, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
+                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(4096, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_7\;
                         end if;
@@ -5499,9 +5499,9 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState1\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState1\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\;
                             -- The following section was transformed from the .NET statement below:
-                            -- array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (262144 + num3);
+                            -- array [i].taskRandomState2 = (ulong)memory.ReadUInt32 (4096 + num3);
                             -- 
-                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\ := to_signed(262144, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
+                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.8\ := to_signed(4096, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_9\;
                         end if;
@@ -5525,9 +5525,9 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = memory.ReadUInt32 (262144 + num3);
+                            -- num4 = memory.ReadUInt32 (4096 + num3);
                             -- 
-                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.10\ := to_signed(262144, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
+                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.10\ := to_signed(4096, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_11\;
                         end if;
@@ -5580,9 +5580,9 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = memory.ReadUInt32 (262144 + num3);
+                            -- num4 = memory.ReadUInt32 (4096 + num3);
                             -- 
-                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.17\ := to_signed(262144, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
+                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.17\ := to_signed(4096, 32) + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_14\;
                         end if;
@@ -5627,50 +5627,50 @@ begin
                             -- 	num12 = (int)(7u & num11);
                             -- 	num13 = (int)(7u & num11 >> 16);
                             -- 	k = 0;
-                            -- 	while (k < 256) {
+                            -- 	while (k < 4) {
                             -- 		array2 = new Task<KpzKernelsIndexObject>[16];
                             -- 		l = 0;
                             -- 		while (l < 16) {
                             -- 			num14 = l + k * 16;
-                            -- 			num15 = num14 % 64;
-                            -- 			num16 = num14 / 64;
+                            -- 			num15 = num14 % 8;
+                            -- 			num16 = num14 / 8;
                             -- 			num17 = num15 * 8 + num12;
                             -- 			num18 = num16 * 8 + num13;
                             -- 			m = 0;
                             -- 			while (m < 8) {
                             -- 				n = 0;
                             -- 				while (n < 8) {
-                            -- 					num19 = num17 + m % 512;
-                            -- 					num20 = num18 + n % 512;
-                            -- 					num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                            -- 					num19 = num17 + m % 64;
+                            -- 					num20 = num18 + n % 64;
+                            -- 					num21 = memory.ReadUInt32 (num19 + num20 * 64);
                             -- 					array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                             -- 					array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                             -- 					n = n + 1;
                             -- 				}
                             -- 				m = m + 1;
                             -- 			}
-                            -- 			arg_27B_1 = l;
-                            -- 			arg_276_0 = Task.Factory;
-                            -- 			if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
-                            -- 				arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 			arg_270_1 = l;
+                            -- 			arg_26B_0 = Task.Factory;
+                            -- 			if (arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 				arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
                             -- 			}
-                            -- 			array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 			array2 [arg_270_1] = arg_26B_0.StartNew<KpzKernelsIndexObject> (arg_26B_1, array [l]);
                             -- 			l = l + 1;
                             -- 		}
                             -- 		Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
                             -- 		num22 = 0;
                             -- 		while (num22 < 16) {
                             -- 			num23 = num22 + k * 16;
-                            -- 			num24 = num23 % 64;
-                            -- 			num25 = num23 / 64;
+                            -- 			num24 = num23 % 8;
+                            -- 			num25 = num23 / 8;
                             -- 			num26 = num24 * 8 + num12;
                             -- 			num27 = num25 * 8 + num13;
                             -- 			num28 = 0;
                             -- 			while (num28 < 8) {
                             -- 				num29 = 0;
                             -- 				while (num29 < 8) {
-                            -- 					num30 = num26 + num28 % 512;
-                            -- 					num31 = num27 + num29 % 512;
+                            -- 					num30 = num26 + num28 % 64;
+                            -- 					num31 = num27 + num29 % 64;
                             -- 					uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                             -- 					if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                             -- 						conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -5686,7 +5686,7 @@ begin
                             -- 						conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                             -- 					}
                             -- 					number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                            -- 					memory.WriteUInt32 (num30 + num31 * 512, number);
+                            -- 					memory.WriteUInt32 (num30 + num31 * 64, number);
                             -- 					num29 = num29 + 1;
                             -- 				}
                             -- 				num28 = num28 + 1;
@@ -5721,50 +5721,50 @@ begin
                             -- 	num12 = (int)(7u & num11);
                             -- 	num13 = (int)(7u & num11 >> 16);
                             -- 	k = 0;
-                            -- 	while (k < 256) {
+                            -- 	while (k < 4) {
                             -- 		array2 = new Task<KpzKernelsIndexObject>[16];
                             -- 		l = 0;
                             -- 		while (l < 16) {
                             -- 			num14 = l + k * 16;
-                            -- 			num15 = num14 % 64;
-                            -- 			num16 = num14 / 64;
+                            -- 			num15 = num14 % 8;
+                            -- 			num16 = num14 / 8;
                             -- 			num17 = num15 * 8 + num12;
                             -- 			num18 = num16 * 8 + num13;
                             -- 			m = 0;
                             -- 			while (m < 8) {
                             -- 				n = 0;
                             -- 				while (n < 8) {
-                            -- 					num19 = num17 + m % 512;
-                            -- 					num20 = num18 + n % 512;
-                            -- 					num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                            -- 					num19 = num17 + m % 64;
+                            -- 					num20 = num18 + n % 64;
+                            -- 					num21 = memory.ReadUInt32 (num19 + num20 * 64);
                             -- 					array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                             -- 					array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                             -- 					n = n + 1;
                             -- 				}
                             -- 				m = m + 1;
                             -- 			}
-                            -- 			arg_27B_1 = l;
-                            -- 			arg_276_0 = Task.Factory;
-                            -- 			if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
-                            -- 				arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 			arg_270_1 = l;
+                            -- 			arg_26B_0 = Task.Factory;
+                            -- 			if (arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 				arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
                             -- 			}
-                            -- 			array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 			array2 [arg_270_1] = arg_26B_0.StartNew<KpzKernelsIndexObject> (arg_26B_1, array [l]);
                             -- 			l = l + 1;
                             -- 		}
                             -- 		Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
                             -- 		num22 = 0;
                             -- 		while (num22 < 16) {
                             -- 			num23 = num22 + k * 16;
-                            -- 			num24 = num23 % 64;
-                            -- 			num25 = num23 / 64;
+                            -- 			num24 = num23 % 8;
+                            -- 			num25 = num23 / 8;
                             -- 			num26 = num24 * 8 + num12;
                             -- 			num27 = num25 * 8 + num13;
                             -- 			num28 = 0;
                             -- 			while (num28 < 8) {
                             -- 				num29 = 0;
                             -- 				while (num29 < 8) {
-                            -- 					num30 = num26 + num28 % 512;
-                            -- 					num31 = num27 + num29 % 512;
+                            -- 					num30 = num26 + num28 % 64;
+                            -- 					num31 = num27 + num29 % 64;
                             -- 					uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                             -- 					if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                             -- 						conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -5780,7 +5780,7 @@ begin
                             -- 						conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                             -- 					}
                             -- 					number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                            -- 					memory.WriteUInt32 (num30 + num31 * 512, number);
+                            -- 					memory.WriteUInt32 (num30 + num31 * 64, number);
                             -- 					num29 = num29 + 1;
                             -- 				}
                             -- 				num28 = num28 + 1;
@@ -5856,50 +5856,50 @@ begin
                         -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (k < 256) {
+                        -- while (k < 4) {
                         -- 	array2 = new Task<KpzKernelsIndexObject>[16];
                         -- 	l = 0;
                         -- 	while (l < 16) {
                         -- 		num14 = l + k * 16;
-                        -- 		num15 = num14 % 64;
-                        -- 		num16 = num14 / 64;
+                        -- 		num15 = num14 % 8;
+                        -- 		num16 = num14 / 8;
                         -- 		num17 = num15 * 8 + num12;
                         -- 		num18 = num16 * 8 + num13;
                         -- 		m = 0;
                         -- 		while (m < 8) {
                         -- 			n = 0;
                         -- 			while (n < 8) {
-                        -- 				num19 = num17 + m % 512;
-                        -- 				num20 = num18 + n % 512;
-                        -- 				num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                        -- 				num19 = num17 + m % 64;
+                        -- 				num20 = num18 + n % 64;
+                        -- 				num21 = memory.ReadUInt32 (num19 + num20 * 64);
                         -- 				array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                         -- 				array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                         -- 				n = n + 1;
                         -- 			}
                         -- 			m = m + 1;
                         -- 		}
-                        -- 		arg_27B_1 = l;
-                        -- 		arg_276_0 = Task.Factory;
-                        -- 		if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
-                        -- 			arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                        -- 		arg_270_1 = l;
+                        -- 		arg_26B_0 = Task.Factory;
+                        -- 		if (arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                        -- 			arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
                         -- 		}
-                        -- 		array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                        -- 		array2 [arg_270_1] = arg_26B_0.StartNew<KpzKernelsIndexObject> (arg_26B_1, array [l]);
                         -- 		l = l + 1;
                         -- 	}
                         -- 	Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
                         -- 	num22 = 0;
                         -- 	while (num22 < 16) {
                         -- 		num23 = num22 + k * 16;
-                        -- 		num24 = num23 % 64;
-                        -- 		num25 = num23 / 64;
+                        -- 		num24 = num23 % 8;
+                        -- 		num25 = num23 / 8;
                         -- 		num26 = num24 * 8 + num12;
                         -- 		num27 = num25 * 8 + num13;
                         -- 		num28 = 0;
                         -- 		while (num28 < 8) {
                         -- 			num29 = 0;
                         -- 			while (num29 < 8) {
-                        -- 				num30 = num26 + num28 % 512;
-                        -- 				num31 = num27 + num29 % 512;
+                        -- 				num30 = num26 + num28 % 64;
+                        -- 				num31 = num27 + num29 % 64;
                         -- 				uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                         -- 				if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                         -- 					conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -5915,7 +5915,7 @@ begin
                         -- 					conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                         -- 				}
                         -- 				number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                        -- 				memory.WriteUInt32 (num30 + num31 * 512, number);
+                        -- 				memory.WriteUInt32 (num30 + num31 * 64, number);
                         -- 				num29 = num29 + 1;
                         -- 			}
                         -- 			num28 = num28 + 1;
@@ -5933,7 +5933,7 @@ begin
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_19\ => 
                         -- Repeated state of the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_18\.
                         -- The while loop's condition:
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ < to_signed(256, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.k\ < to_signed(4, 32);
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.32\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -5941,45 +5941,45 @@ begin
                             -- 	l = 0;
                             -- 	while (l < 16) {
                             -- 		num14 = l + k * 16;
-                            -- 		num15 = num14 % 64;
-                            -- 		num16 = num14 / 64;
+                            -- 		num15 = num14 % 8;
+                            -- 		num16 = num14 / 8;
                             -- 		num17 = num15 * 8 + num12;
                             -- 		num18 = num16 * 8 + num13;
                             -- 		m = 0;
                             -- 		while (m < 8) {
                             -- 			n = 0;
                             -- 			while (n < 8) {
-                            -- 				num19 = num17 + m % 512;
-                            -- 				num20 = num18 + n % 512;
-                            -- 				num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                            -- 				num19 = num17 + m % 64;
+                            -- 				num20 = num18 + n % 64;
+                            -- 				num21 = memory.ReadUInt32 (num19 + num20 * 64);
                             -- 				array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                             -- 				array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                             -- 				n = n + 1;
                             -- 			}
                             -- 			m = m + 1;
                             -- 		}
-                            -- 		arg_27B_1 = l;
-                            -- 		arg_276_0 = Task.Factory;
-                            -- 		if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
-                            -- 			arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 		arg_270_1 = l;
+                            -- 		arg_26B_0 = Task.Factory;
+                            -- 		if (arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 			arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
                             -- 		}
-                            -- 		array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 		array2 [arg_270_1] = arg_26B_0.StartNew<KpzKernelsIndexObject> (arg_26B_1, array [l]);
                             -- 		l = l + 1;
                             -- 	}
                             -- 	Task.WhenAll<KpzKernelsIndexObject> (array2).Wait ();
                             -- 	num22 = 0;
                             -- 	while (num22 < 16) {
                             -- 		num23 = num22 + k * 16;
-                            -- 		num24 = num23 % 64;
-                            -- 		num25 = num23 / 64;
+                            -- 		num24 = num23 % 8;
+                            -- 		num25 = num23 / 8;
                             -- 		num26 = num24 * 8 + num12;
                             -- 		num27 = num25 * 8 + num13;
                             -- 		num28 = 0;
                             -- 		while (num28 < 8) {
                             -- 			num29 = 0;
                             -- 			while (num29 < 8) {
-                            -- 				num30 = num26 + num28 % 512;
-                            -- 				num31 = num27 + num29 % 512;
+                            -- 				num30 = num26 + num28 % 64;
+                            -- 				num31 = num27 + num29 % 64;
                             -- 				uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                             -- 				if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                             -- 					conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -5995,7 +5995,7 @@ begin
                             -- 					conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                             -- 				}
                             -- 				number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                            -- 				memory.WriteUInt32 (num30 + num31 * 512, number);
+                            -- 				memory.WriteUInt32 (num30 + num31 * 64, number);
                             -- 				num29 = num29 + 1;
                             -- 			}
                             -- 			num28 = num28 + 1;
@@ -6017,29 +6017,29 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while (l < 16) {
                             -- 	num14 = l + k * 16;
-                            -- 	num15 = num14 % 64;
-                            -- 	num16 = num14 / 64;
+                            -- 	num15 = num14 % 8;
+                            -- 	num16 = num14 / 8;
                             -- 	num17 = num15 * 8 + num12;
                             -- 	num18 = num16 * 8 + num13;
                             -- 	m = 0;
                             -- 	while (m < 8) {
                             -- 		n = 0;
                             -- 		while (n < 8) {
-                            -- 			num19 = num17 + m % 512;
-                            -- 			num20 = num18 + n % 512;
-                            -- 			num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                            -- 			num19 = num17 + m % 64;
+                            -- 			num20 = num18 + n % 64;
+                            -- 			num21 = memory.ReadUInt32 (num19 + num20 * 64);
                             -- 			array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                             -- 			array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                             -- 			n = n + 1;
                             -- 		}
                             -- 		m = m + 1;
                             -- 	}
-                            -- 	arg_27B_1 = l;
-                            -- 	arg_276_0 = Task.Factory;
-                            -- 	if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
-                            -- 		arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 	arg_270_1 = l;
+                            -- 	arg_26B_0 = Task.Factory;
+                            -- 	if (arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 		arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
                             -- 	}
-                            -- 	array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 	array2 [arg_270_1] = arg_26B_0.StartNew<KpzKernelsIndexObject> (arg_26B_1, array [l]);
                             -- 	l = l + 1;
                             -- }
                             -- 
@@ -6069,29 +6069,29 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num14 = l + k * 16;
-                            -- 	num15 = num14 % 64;
-                            -- 	num16 = num14 / 64;
+                            -- 	num15 = num14 % 8;
+                            -- 	num16 = num14 / 8;
                             -- 	num17 = num15 * 8 + num12;
                             -- 	num18 = num16 * 8 + num13;
                             -- 	m = 0;
                             -- 	while (m < 8) {
                             -- 		n = 0;
                             -- 		while (n < 8) {
-                            -- 			num19 = num17 + m % 512;
-                            -- 			num20 = num18 + n % 512;
-                            -- 			num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                            -- 			num19 = num17 + m % 64;
+                            -- 			num20 = num18 + n % 64;
+                            -- 			num21 = memory.ReadUInt32 (num19 + num20 * 64);
                             -- 			array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                             -- 			array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                             -- 			n = n + 1;
                             -- 		}
                             -- 		m = m + 1;
                             -- 	}
-                            -- 	arg_27B_1 = l;
-                            -- 	arg_276_0 = Task.Factory;
-                            -- 	if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
-                            -- 		arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                            -- 	arg_270_1 = l;
+                            -- 	arg_26B_0 = Task.Factory;
+                            -- 	if (arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                            -- 		arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
                             -- 	}
-                            -- 	array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                            -- 	array2 [arg_270_1] = arg_26B_0.StartNew<KpzKernelsIndexObject> (arg_26B_1, array [l]);
                             -- 	l = l + 1;
                             -- }
                             -- 
@@ -6102,7 +6102,7 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.34\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num14\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.35\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num15 = num14 % 64;
+                            -- num15 = num14 % 8;
                             -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_23\;
                         else 
@@ -6125,14 +6125,14 @@ begin
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num14\ mod to_signed(64, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num14\ mod to_signed(8, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_24\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num15\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.36\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num16 = num14 / 64;
+                        -- num16 = num14 / 8;
                         -- 
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num14\ / to_signed(64, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num14\ / to_signed(8, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num16\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.37\;
                         -- The following section was transformed from the .NET statement below:
                         -- num17 = num15 * 8 + num12;
@@ -6154,9 +6154,9 @@ begin
                         -- while (m < 8) {
                         -- 	n = 0;
                         -- 	while (n < 8) {
-                        -- 		num19 = num17 + m % 512;
-                        -- 		num20 = num18 + n % 512;
-                        -- 		num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                        -- 		num19 = num17 + m % 64;
+                        -- 		num20 = num18 + n % 64;
+                        -- 		num21 = memory.ReadUInt32 (num19 + num20 * 64);
                         -- 		array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                         -- 		array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                         -- 		n = n + 1;
@@ -6176,9 +6176,9 @@ begin
                             -- {
                             -- 	n = 0;
                             -- 	while (n < 8) {
-                            -- 		num19 = num17 + m % 512;
-                            -- 		num20 = num18 + n % 512;
-                            -- 		num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                            -- 		num19 = num17 + m % 64;
+                            -- 		num20 = num18 + n % 64;
+                            -- 		num21 = memory.ReadUInt32 (num19 + num20 * 64);
                             -- 		array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                             -- 		array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                             -- 		n = n + 1;
@@ -6192,9 +6192,9 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (n < 8) {
-                            -- 	num19 = num17 + m % 512;
-                            -- 	num20 = num18 + n % 512;
-                            -- 	num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                            -- 	num19 = num17 + m % 64;
+                            -- 	num20 = num18 + n % 64;
+                            -- 	num21 = memory.ReadUInt32 (num19 + num20 * 64);
                             -- 	array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                             -- 	array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                             -- 	n = n + 1;
@@ -6209,19 +6209,19 @@ begin
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_26\ => 
                         -- State after the while loop which was started in state \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_24\.
                         -- The following section was transformed from the .NET statement below:
-                        -- arg_27B_1 = l;
+                        -- arg_270_1 = l;
                         -- 
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.arg_27B_1\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\;
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.arg_270_1\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.l\;
                         -- The following section was transformed from the .NET statement below:
-                        -- arg_276_0 = Task.Factory;
+                        -- arg_26B_0 = Task.Factory;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
-                        -- 	arg_276_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
+                        -- if (arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 == null) {
+                        -- 	arg_26B_1 = KpzKernelsGInterface.<>c.<>9__5_0 = new Func<object, KpzKernelsIndexObject> (KpzKernelsGInterface.<>c.<>9.<ScheduleIterations>b__5_0);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array2 [arg_27B_1] = arg_276_0.StartNew<KpzKernelsIndexObject> (arg_276_1, array [l]);
+                        -- array2 [arg_270_1] = arg_26B_0.StartNew<KpzKernelsIndexObject> (arg_26B_1, array [l]);
                         -- 
                         -- Starting state machine invocation for the following method: Hast.Samples.Kpz.KpzKernelsIndexObject Hast.Samples.Kpz.KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(Hast.Samples.Kpz.KpzKernelsIndexObject)
                         case \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.KpzKernelsGInterface/<>c::<ScheduleIterations>b__5_0(KpzKernelsIndexObject).invocationIndex\ is 
@@ -6253,16 +6253,16 @@ begin
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.43\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num19 = num17 + m % 512;
-                            -- 	num20 = num18 + n % 512;
-                            -- 	num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                            -- 	num19 = num17 + m % 64;
+                            -- 	num20 = num18 + n % 64;
+                            -- 	num21 = memory.ReadUInt32 (num19 + num20 * 64);
                             -- 	array [l].bramDx [m + n * 8] = num21 & 1u == 1u;
                             -- 	array [l].bramDy [m + n * 8] = num21 & 2u == 2u;
                             -- 	n = n + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num19 = num17 + m % 512;
+                            -- num19 = num17 + m % 64;
                             -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num17\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.m\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_29\;
@@ -6291,12 +6291,12 @@ begin
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ mod to_signed(512, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.44\ mod to_signed(64, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_30\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num19\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.45\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num20 = num18 + n % 512;
+                        -- num20 = num18 + n % 64;
                         -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num18\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.n\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_31\;
@@ -6310,14 +6310,14 @@ begin
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.2\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ mod to_signed(512, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.46\ mod to_signed(64, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_32\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num20\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num21 = memory.ReadUInt32 (num19 + num20 * 512);
+                        -- num21 = memory.ReadUInt32 (num19 + num20 * 64);
                         -- 
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\ := SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num20\ * to_signed(512, 32), 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\ := SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num20\ * to_signed(64, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num19\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\;
                         -- Begin SimpleMemory read.
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\, 32);
@@ -6378,16 +6378,16 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while (num22 < 16) {
                             -- 	num23 = num22 + k * 16;
-                            -- 	num24 = num23 % 64;
-                            -- 	num25 = num23 / 64;
+                            -- 	num24 = num23 % 8;
+                            -- 	num25 = num23 / 8;
                             -- 	num26 = num24 * 8 + num12;
                             -- 	num27 = num25 * 8 + num13;
                             -- 	num28 = 0;
                             -- 	while (num28 < 8) {
                             -- 		num29 = 0;
                             -- 		while (num29 < 8) {
-                            -- 			num30 = num26 + num28 % 512;
-                            -- 			num31 = num27 + num29 % 512;
+                            -- 			num30 = num26 + num28 % 64;
+                            -- 			num31 = num27 + num29 % 64;
                             -- 			uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                             -- 			if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                             -- 				conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -6403,7 +6403,7 @@ begin
                             -- 				conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                             -- 			}
                             -- 			number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                            -- 			memory.WriteUInt32 (num30 + num31 * 512, number);
+                            -- 			memory.WriteUInt32 (num30 + num31 * 64, number);
                             -- 			num29 = num29 + 1;
                             -- 		}
                             -- 		num28 = num28 + 1;
@@ -6425,16 +6425,16 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num23 = num22 + k * 16;
-                            -- 	num24 = num23 % 64;
-                            -- 	num25 = num23 / 64;
+                            -- 	num24 = num23 % 8;
+                            -- 	num25 = num23 / 8;
                             -- 	num26 = num24 * 8 + num12;
                             -- 	num27 = num25 * 8 + num13;
                             -- 	num28 = 0;
                             -- 	while (num28 < 8) {
                             -- 		num29 = 0;
                             -- 		while (num29 < 8) {
-                            -- 			num30 = num26 + num28 % 512;
-                            -- 			num31 = num27 + num29 % 512;
+                            -- 			num30 = num26 + num28 % 64;
+                            -- 			num31 = num27 + num29 % 64;
                             -- 			uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                             -- 			if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                             -- 				conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -6450,7 +6450,7 @@ begin
                             -- 				conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                             -- 			}
                             -- 			number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                            -- 			memory.WriteUInt32 (num30 + num31 * 512, number);
+                            -- 			memory.WriteUInt32 (num30 + num31 * 64, number);
                             -- 			num29 = num29 + 1;
                             -- 		}
                             -- 		num28 = num28 + 1;
@@ -6467,7 +6467,7 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num22\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.62\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.63\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num24 = num23 % 64;
+                            -- num24 = num23 % 8;
                             -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_37\;
                         else 
@@ -6495,14 +6495,14 @@ begin
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\ mod to_signed(64, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\ mod to_signed(8, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_38\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num24\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.64\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num25 = num23 / 64;
+                        -- num25 = num23 / 8;
                         -- 
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\ / to_signed(64, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num23\ / to_signed(8, 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num25\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.65\;
                         -- The following section was transformed from the .NET statement below:
                         -- num26 = num24 * 8 + num12;
@@ -6524,8 +6524,8 @@ begin
                         -- while (num28 < 8) {
                         -- 	num29 = 0;
                         -- 	while (num29 < 8) {
-                        -- 		num30 = num26 + num28 % 512;
-                        -- 		num31 = num27 + num29 % 512;
+                        -- 		num30 = num26 + num28 % 64;
+                        -- 		num31 = num27 + num29 % 64;
                         -- 		uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                         -- 		if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                         -- 			conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -6541,7 +6541,7 @@ begin
                         -- 			conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                         -- 		}
                         -- 		number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                        -- 		memory.WriteUInt32 (num30 + num31 * 512, number);
+                        -- 		memory.WriteUInt32 (num30 + num31 * 64, number);
                         -- 		num29 = num29 + 1;
                         -- 	}
                         -- 	num28 = num28 + 1;
@@ -6559,8 +6559,8 @@ begin
                             -- {
                             -- 	num29 = 0;
                             -- 	while (num29 < 8) {
-                            -- 		num30 = num26 + num28 % 512;
-                            -- 		num31 = num27 + num29 % 512;
+                            -- 		num30 = num26 + num28 % 64;
+                            -- 		num31 = num27 + num29 % 64;
                             -- 		uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                             -- 		if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                             -- 			conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -6576,7 +6576,7 @@ begin
                             -- 			conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                             -- 		}
                             -- 		number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                            -- 		memory.WriteUInt32 (num30 + num31 * 512, number);
+                            -- 		memory.WriteUInt32 (num30 + num31 * 64, number);
                             -- 		num29 = num29 + 1;
                             -- 	}
                             -- 	num28 = num28 + 1;
@@ -6588,8 +6588,8 @@ begin
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num29 < 8) {
-                            -- 	num30 = num26 + num28 % 512;
-                            -- 	num31 = num27 + num29 % 512;
+                            -- 	num30 = num26 + num28 % 64;
+                            -- 	num31 = num27 + num29 % 64;
                             -- 	uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                             -- 	if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                             -- 		conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -6605,7 +6605,7 @@ begin
                             -- 		conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                             -- 	}
                             -- 	number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                            -- 	memory.WriteUInt32 (num30 + num31 * 512, number);
+                            -- 	memory.WriteUInt32 (num30 + num31 * 64, number);
                             -- 	num29 = num29 + 1;
                             -- }
                             -- 
@@ -6642,8 +6642,8 @@ begin
                         if (\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.71\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num30 = num26 + num28 % 512;
-                            -- 	num31 = num27 + num29 % 512;
+                            -- 	num30 = num26 + num28 % 64;
+                            -- 	num31 = num27 + num29 % 64;
                             -- 	uint conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8;
                             -- 	if (array2 [num22].Result.bramDx [num28 + num29 * 8]) {
                             -- 		conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 = 1u;
@@ -6659,12 +6659,12 @@ begin
                             -- 		conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22 = 0u;
                             -- 	}
                             -- 	number = conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8 | conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22;
-                            -- 	memory.WriteUInt32 (num30 + num31 * 512, number);
+                            -- 	memory.WriteUInt32 (num30 + num31 * 64, number);
                             -- 	num29 = num29 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num30 = num26 + num28 % 512;
+                            -- num30 = num26 + num28 % 64;
                             -- 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num26\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num28\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_43\;
@@ -6693,12 +6693,12 @@ begin
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.4\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ mod to_signed(512, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.72\ mod to_signed(64, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_44\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num30\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.73\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num31 = num27 + num29 % 512;
+                        -- num31 = num27 + num29 % 64;
                         -- 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num27\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num29\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_45\;
@@ -6712,7 +6712,7 @@ begin
                         else 
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ mod to_signed(512, 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.74\ mod to_signed(64, 32);
                         -- Clock cycles needed to complete this state (approximation): 7
                     when \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0._State_46\ => 
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num31\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.75\;
@@ -6808,9 +6808,9 @@ begin
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.conditional082a153a3c0255a94a7de0adff83284bacad1b1814ae3f19d1c4996e3cef81c8\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.conditionale37b8da96c7c2d29f3890e429a4757d51236c4e704fe6c74ee158736136acf22\;
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.number\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.80\;
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteUInt32 (num30 + num31 * 512, number);
+                        -- memory.WriteUInt32 (num30 + num31 * 64, number);
                         -- 
-                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\ := SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num31\ * to_signed(512, 32), 32);
+                        \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\ := SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num31\ * to_signed(64, 32), 32);
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num30\ + \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.81\;
                         -- Begin SimpleMemory write.
                         \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.82\, 32);
