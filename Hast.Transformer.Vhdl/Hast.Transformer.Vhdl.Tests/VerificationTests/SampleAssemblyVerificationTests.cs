@@ -4,7 +4,7 @@ using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Lombiq.OrchardAppHost;
-using Lombiq.Unum;
+using Lombiq.Arithmetics;
 using NUnit.Framework;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
