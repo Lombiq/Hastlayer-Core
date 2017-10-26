@@ -1138,7 +1138,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.0\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\;
                         end if;
@@ -1176,7 +1176,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
+                            \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(shift_left(SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.dataIn.2\), 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\;
                         end if;
@@ -5495,7 +5495,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- array [i].taskRandomState1 = array [i].taskRandomState1 | (ulong)num4 << 32;
                             -- 
-                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
+                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState1\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.6\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState1\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.7\;
                             -- The following section was transformed from the .NET statement below:
@@ -5553,7 +5553,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- array [i].taskRandomState2 = array [i].taskRandomState2 | (ulong)num4 << 32;
                             -- 
-                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
+                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.13\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState2\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.12\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.i\)).\taskRandomState2\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.13\;
                             -- The following section was transformed from the .NET statement below:
@@ -5608,7 +5608,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num5 = num5 | (ulong)num4 << 32;
                             -- 
-                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 5)))), 64);
+                            \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(shift_left(SmartResize(\KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(32, 32), 6)))), 64);
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.20\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num5\ or \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.19\;
                             \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.num5\ := \KpzKernelsGInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.20\;
                             -- The following section was transformed from the .NET statement below:
