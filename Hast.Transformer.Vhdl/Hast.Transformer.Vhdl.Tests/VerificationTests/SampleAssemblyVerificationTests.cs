@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Hast.Algorithms;
 using Hast.Layer;
 using Hast.Samples.Kpz;
 using Hast.Samples.SampleAssembly;
@@ -73,7 +74,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
-                    new[] { typeof(KpzKernelsInterface).Assembly },
+                    new[] { typeof(KpzKernelsInterface).Assembly, typeof(PrngMWC64X).Assembly },
                     configuration =>
                     {
                         configuration.AddHardwareEntryPointType<KpzKernelsInterface>();

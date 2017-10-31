@@ -119,6 +119,10 @@
       <Project>{0D13986F-FA33-4898-A0DE-C173764663F0}</Project>
       <Name>Hast.Transformer.Vhdl.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Hast.Algorithms\Hast.Algorithms.csproj">
+      <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
+      <Name>Hast.Algorithms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz\Hast.Samples.Kpz.csproj">
       <Project>{0dd555f3-b472-422b-8cfb-63cb494cbb5a}</Project>
       <Name>Hast.Samples.Kpz</Name>
