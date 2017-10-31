@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Hast.Common.Configuration;
 using Hast.Synthesis.Services;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -16,7 +17,6 @@ using Hast.VhdlBuilder.Testing;
 using ICSharpCode.Decompiler.Ast;
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
-using Orchard.Logging;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
