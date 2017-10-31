@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Hast.Transformer.Helpers;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -34,9 +35,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (string.IsNullOrEmpty(constructorName)) return;
 
-                var constructorDeclaration =
+                var createdTypeName = objectCreateExpression.Type.GetFullName();
+
+                var constructorType =
                     _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable
-                    .Lookup(objectCreateExpression.Type.GetFullName())
+                    .Lookup(createdTypeName);
+
+                if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName);
+
+                var constructorDeclaration = constructorType
                     .Members
                     .SingleOrDefault(member => member.GetFullName() == constructorName);
 
