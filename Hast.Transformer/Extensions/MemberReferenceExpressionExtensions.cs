@@ -60,14 +60,14 @@ namespace ICSharpCode.NRefactory.CSharp
             }
             else
             {
-                // A FieldDefinition annotation is present if the expression is about accessing a field.
-                var fieldDefinition = memberReferenceExpression.Annotation<FieldDefinition>();
-                if (fieldDefinition != null)
+                // A FieldReference annotation is present if the expression is about accessing a field.
+                var fieldReference = memberReferenceExpression.Annotation<FieldReference>();
+                if (fieldReference != null)
                 {
-                    if (!fieldDefinition.FullName.IsBackingFieldName())
+                    if (!fieldReference.FullName.IsBackingFieldName())
                     {
                         return type.Members
-                            .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldDefinition.FullName);
+                            .SingleOrDefault(member => member.Annotation<IMemberDefinition>().FullName == fieldReference.FullName);
                     }
                     else
                     {
@@ -145,6 +145,10 @@ namespace ICSharpCode.NRefactory.CSharp
         {
             var memberDefinition = memberReferenceExpression.Annotation<IMemberDefinition>();
             if (memberDefinition != null) return memberDefinition.FullName;
+
+            var memberReference = memberReferenceExpression.Annotation<MemberReference>();
+            if (memberReference != null) return memberReference.FullName;
+
             return null;
         }
 
