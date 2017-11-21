@@ -50,10 +50,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             var primitiveExpressionParent = primitiveExpression.Parent;
 
 
-            // The unnecessary type arguments for the Is<T> calls are left in because they'll be needed after
-            // migrating to C# 7 and using out variables.
-            ParenthesizedExpression parenthesizedExpression;
-            if (primitiveExpressionParent.Is<ParenthesizedExpression>(out parenthesizedExpression) &&
+            if (primitiveExpressionParent.Is<ParenthesizedExpression>(out var parenthesizedExpression) &&
                 parenthesizedExpression.Expression == primitiveExpression)
             {
                 var newExpression = (PrimitiveExpression)primitiveExpression.Clone();
@@ -62,8 +59,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 primitiveExpressionParent = newExpression.Parent;
             }
 
-            CastExpression castExpression;
-            if (primitiveExpressionParent.Is<CastExpression>(out castExpression))
+            if (primitiveExpressionParent.Is<CastExpression>(out var castExpression))
             {
                 var newExpression = new PrimitiveExpression(_astExpressionEvaluator.EvaluateCastExpression(castExpression));
                 newExpression.AddAnnotation(primitiveExpressionParent.GetActualTypeReference(true));
@@ -73,17 +69,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 primitiveExpression = newExpression;
             }
 
-            ArrayCreateExpression arrayCreateExpression;
-            BinaryOperatorExpression binaryOperatorExpression;
-
             // Assignments shouldn't be handled here, see ConstantValuesSubstitutingVisitor.
 
-            if (primitiveExpressionParent.Is<ArrayCreateExpression>(out arrayCreateExpression) &&
+            if (primitiveExpressionParent.Is<ArrayCreateExpression>(out var arrayCreateExpression) &&
                 arrayCreateExpression.Arguments.Single() == primitiveExpression)
             {
                 PassLengthOfArrayHolderToParent(arrayCreateExpression, Convert.ToInt32(primitiveExpression.Value));
             }
-            else if (primitiveExpressionParent.Is<BinaryOperatorExpression>(out binaryOperatorExpression))
+            else if (primitiveExpressionParent.Is<BinaryOperatorExpression>(out var binaryOperatorExpression))
             {
                 var left = binaryOperatorExpression.Left;
                 var right = binaryOperatorExpression.Right;
@@ -137,10 +130,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 // Passing on constructor mappings.
 
-                MethodDeclaration constructorDeclaration;
-
                 if (!_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                    .TryGetValue(node.GetFullName(), out constructorDeclaration))
+                    .TryGetValue(node.GetFullName(), out var constructorDeclaration))
                 {
                     return;
                 }
@@ -229,10 +220,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             Action<AstNode> updateHiddenlyUpdatedNodesUpdated = n => HiddenlyUpdatedNodesUpdated.Add(n.GetFullName());
 
-            AssignmentExpression assignmentExpression;
-
-            if (parent.Is<AssignmentExpression>(assignment => assignment.Right == node, out assignmentExpression) ||
-                parent.Is<InvocationExpression>(invocation => invocation.Target == node && invocation.Parent.Is<AssignmentExpression>(out assignmentExpression)))
+            if (parent.Is<AssignmentExpression>(assignment => assignment.Right == node, out var assignmentExpression) ||
+                parent.Is<InvocationExpression>(invocation => invocation.Target == node && invocation.Parent.Is(out assignmentExpression)))
             {
                 assignmentHandler(assignmentExpression);
                 updateHiddenlyUpdatedNodesUpdated(assignmentExpression.Left);

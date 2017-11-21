@@ -33,9 +33,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 {
                     var targetMember = memberInvocationCount.Key;
 
-                    List<KeyValuePair<string, int>> invokedFromList;
-
-                    if (!invokedMembers.TryGetValue(targetMember, out invokedFromList))
+                    if (!invokedMembers.TryGetValue(targetMember, out var invokedFromList))
                     {
                         invokedMembers[targetMember] = invokedFromList = new List<KeyValuePair<string, int>>();
                     }

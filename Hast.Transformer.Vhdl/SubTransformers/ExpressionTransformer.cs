@@ -416,8 +416,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var targetIdentifier = (memberReference.Target as IdentifierExpression)?.Identifier;
                 if (targetIdentifier != null)
                 {
-                    string displayClassName;
-                    if (scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out displayClassName))
+                    if (scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out var displayClassName))
                     {
                         // This is an assignment like: <>c__DisplayClass9_.<>4__this = this; This can be omitted.
                         if (memberReference.MemberName.EndsWith("__this"))

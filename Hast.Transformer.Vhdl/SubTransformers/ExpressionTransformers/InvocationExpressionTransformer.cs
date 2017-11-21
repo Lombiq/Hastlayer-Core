@@ -312,8 +312,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                         // This array originally stored the Task<T> objects but now is just for the results, so we have 
                         // to move the results to its elements.
-                        MethodDeclaration targetMethod;
-                        if (!context.Scope.TaskVariableNameToDisplayClassMethodMappings.TryGetValue(taskArrayIdentifier, out targetMethod))
+                        if (!context.Scope.TaskVariableNameToDisplayClassMethodMappings.TryGetValue(taskArrayIdentifier, out var targetMethod))
                         {
                             throw new InvalidOperationException(
                                 "You declared a Task array with the name \"" + taskArrayIdentifier +
